@@ -89,7 +89,7 @@ class Quadbatch {
     return cast null;
   }
 
-  public static function iterateQuadBatchInstances(source:QuadBatch, visitor:Dynamic):Void {
+  public static function iterateQuadBatchInstances(source:QuadBatch, visitor:Float->Float->flighthq._internal._Float32Array->Void):Void {
     Facade_Quadbatch_flighthq_quadbatch_QuadBatch.iterateQuadBatchInstances(source, visitor);
   }
 

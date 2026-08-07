@@ -5,13 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _TextureAtlasFormatKindValues {
-  public static final TextureAtlasFormatKindTexturePacker:Dynamic = 'texturePacker';
+  public static final TextureAtlasFormatKindTexturePacker:String = 'texturePacker';
 
-  public static final TextureAtlasFormatKindAseprite:Dynamic = 'aseprite';
+  public static final TextureAtlasFormatKindAseprite:String = 'aseprite';
 
-  public static final TextureAtlasFormatKindStarling:Dynamic = 'starling';
+  public static final TextureAtlasFormatKindStarling:String = 'starling';
 
-  public static final TextureAtlasFormatKindLibgdxAtlas:Dynamic = 'libgdxAtlas';
+  public static final TextureAtlasFormatKindLibgdxAtlas:String = 'libgdxAtlas';
 
-  public static final TextureAtlasFormatKindCocosPlist:Dynamic = 'cocosPlist';
+  public static final TextureAtlasFormatKindCocosPlist:String = 'cocosPlist';
 }

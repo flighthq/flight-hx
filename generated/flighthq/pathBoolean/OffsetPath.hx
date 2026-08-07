@@ -12,51 +12,51 @@ import flighthq.types.PathOffsetOptions;
 
 class OffsetPath {
   public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
-    var join:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var miterLimit:Dynamic = cast _Runtime.UNDEFINED;
-    var arcTolerance:Dynamic = cast _Runtime.UNDEFINED;
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var pointEpsSq:Dynamic = cast _Runtime.UNDEFINED;
+    var join:PathOffsetJoin = cast _Runtime.UNDEFINED;
+    var end:PathOffsetEnd = cast _Runtime.UNDEFINED;
+    var miterLimit:Float = cast _Runtime.UNDEFINED;
+    var arcTolerance:Float = cast _Runtime.UNDEFINED;
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var pointEpsSq:Float = cast _Runtime.UNDEFINED;
     var rawRings:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     join = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.join; }), function():Dynamic return cast 'miter');
     end = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.end; }), function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.miterLimit; }), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
     arcTolerance = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.arcTolerance; }), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
-    contours = _Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; })] : Array<Dynamic>));
-    pointEpsSq = HxMath.pow(_Runtime.callValue(OffsetPath.getContourPointEps__offsetPath, cast ([contours] : Array<Dynamic>)), 2.0);
+    contours = (cast flattenPath((cast path : Path), (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float)) : Array<Array<Float>>);
+    pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath((cast contours : Array<Array<Float>>)) : Float), 2.0);
     rawRings = cast ([] : Array<Dynamic>);
     for (contour in _Runtime.iterable(contours)) {
-      var closed:Dynamic = _Runtime.callValue(OffsetPath.isClosedContour__offsetPath, cast ([contour, pointEpsSq] : Array<Dynamic>));
-      var vertices:Dynamic = _Runtime.callValue(OffsetPath.getCleanContourVertices__offsetPath, cast ([contour, closed, pointEpsSq] : Array<Dynamic>));
+      var closed:Bool = (cast OffsetPath.isClosedContour__offsetPath((cast contour : Array<Float>), (cast pointEpsSq : Float)) : Bool);
+      var vertices:Array<Float> = (cast OffsetPath.getCleanContourVertices__offsetPath((cast contour : Array<Float>), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
       if ((cast closed : Bool)) {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var orientation:Dynamic = _Runtime.callValue(OffsetPath.getRingOrientationSign__offsetPath, cast ([vertices] : Array<Dynamic>));
-        var ring:Dynamic = _Runtime.callValue(OffsetPath.buildOffsetRing__offsetPath, cast ([vertices, (delta * orientation), OffsetPath.NO_CAPS__offsetPath, join, end, miterLimit, arcTolerance] : Array<Dynamic>));
+        var orientation:Float = (cast OffsetPath.getRingOrientationSign__offsetPath((cast vertices : Array<Float>)) : Float);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast vertices : Array<Float>), (cast (delta * orientation) : Float), (cast OffsetPath.NO_CAPS__offsetPath : flighthq._internal._Set<Float>), (cast join : PathOffsetJoin), (cast end : PathOffsetEnd), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
         if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var offsetArea:Dynamic = _Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([ring] : Array<Dynamic>));
-        var inverted:Dynamic = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
-        var notReduced:Dynamic = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs(_Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([vertices] : Array<Dynamic>))) : Float)) : Bool));
+        var offsetArea:Float = (cast OffsetPath.getRingSignedArea__offsetPath((cast ring : Array<Float>)) : Float);
+        var inverted:Bool = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
+        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices : Array<Float>)) : Float)) : Float)) : Bool));
         if ((cast ((cast inverted : Bool) || (cast notReduced : Bool)) : Bool)) { continue; }
-        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring : Array<Float>)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
       } else {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { continue; }
-        var caps:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
-        var loop:Dynamic = _Runtime.callValue(OffsetPath.getOpenContourLoop__offsetPath, cast ([vertices] : Array<Dynamic>));
-        var ring:Dynamic = _Runtime.callValue(OffsetPath.buildOffsetRing__offsetPath, cast ([loop, HxMath.abs(delta), caps, join, end, miterLimit, arcTolerance] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast _Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([ring] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
+        var caps:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
+        var loop:Array<Float> = (cast OffsetPath.getOpenContourLoop__offsetPath((cast vertices : Array<Float>)) : Array<Float>);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast loop : Array<Float>), (cast HxMath.abs(delta) : Float), (cast caps : flighthq._internal._Set<Float>), (cast join : PathOffsetJoin), (cast end : PathOffsetEnd), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast OffsetPath.getRingSignedArea__offsetPath((cast ring : Array<Float>)) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring : Array<Float>)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
       }
     }
-    return cast _Runtime.callValue(resolvePathRegions, cast ([rawRings, 'positive'] : Array<Dynamic>));
+    return cast (cast resolvePathRegions(rawRings, 'positive') : Path);
     return cast null;
   }
 
-  public static function buildOffsetRing__offsetPath(vertices:Array<Float>, signedDelta:Float, capIndices:Dynamic, join:PathOffsetJoin, end:PathOffsetEnd, miterLimit:Float, arcTolerance:Float):Array<Float> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var dirX:Dynamic = cast _Runtime.UNDEFINED;
-    var dirY:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildOffsetRing__offsetPath(vertices:Array<Float>, signedDelta:Float, capIndices:flighthq._internal._Set<Float>, join:PathOffsetJoin, end:PathOffsetEnd, miterLimit:Float, arcTolerance:Float):Array<Float> {
+    var count:Float = cast _Runtime.UNDEFINED;
+    var dirX:Array<Float> = cast _Runtime.UNDEFINED;
+    var dirY:Array<Float> = cast _Runtime.UNDEFINED;
+    var normalX:Array<Float> = cast _Runtime.UNDEFINED;
+    var normalY:Array<Float> = cast _Runtime.UNDEFINED;
     var ring:Array<Float> = cast _Runtime.UNDEFINED;
     count = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0);
     dirX = _Runtime.createArray(count);
@@ -64,13 +64,13 @@ class OffsetPath {
     normalX = _Runtime.createArray(count);
     normalY = _Runtime.createArray(count);
     {
-      var k:Dynamic = 0.0;
+      var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
-        var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)));
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0)));
-        var length:Dynamic = _Runtime.hypot(dx, dy);
-        var inverse:Dynamic = ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / length) : Dynamic) : (cast 0.0 : Dynamic));
+        var kn:Float = _Runtime.fmod((k + 1.0), count);
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)));
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0)));
+        var length:Float = _Runtime.hypot(dx, dy);
+        var inverse:Float = ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / length) : Dynamic) : (cast 0.0 : Dynamic));
         flighthq._internal._StaticIndex.writeArray(dirX, k, (dx * inverse));
         flighthq._internal._StaticIndex.writeArray(dirY, k, (dy * inverse));
         flighthq._internal._StaticIndex.writeArray(normalX, k, flighthq._internal._StaticIndex.readArray(dirY, k));
@@ -80,19 +80,19 @@ class OffsetPath {
     }
     ring = cast ([] : Array<Dynamic>);
     {
-      var k:Dynamic = 0.0;
+      var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
-        var previous:Dynamic = _Runtime.fmod(((k - 1.0) + count), count);
-        var vx:Dynamic = flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k));
-        var vy:Dynamic = flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0));
-        var previousEndX:Dynamic = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, previous)));
-        var previousEndY:Dynamic = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, previous)));
-        var thisStartX:Dynamic = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, k)));
-        var thisStartY:Dynamic = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, k)));
-        if ((cast ((cast capIndices : flighthq._internal._Set).has(k)) : Bool)) {
-          _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, flighthq._internal._StaticIndex.readArray(dirX, previous), flighthq._internal._StaticIndex.readArray(dirY, previous), flighthq._internal._StaticIndex.readArray(dirX, k), flighthq._internal._StaticIndex.readArray(dirY, k), HxMath.abs(signedDelta), end, arcTolerance] : Array<Dynamic>));
+        var previous:Float = _Runtime.fmod(((k - 1.0) + count), count);
+        var vx:Float = flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k));
+        var vy:Float = flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0));
+        var previousEndX:Float = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, previous)));
+        var previousEndY:Float = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, previous)));
+        var thisStartX:Float = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, k)));
+        var thisStartY:Float = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, k)));
+        if ((cast ((cast capIndices : flighthq._internal._Set<Float>).has(k)) : Bool)) {
+          OffsetPath.emitOffsetEndCap__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast HxMath.abs(signedDelta) : Float), (cast end : PathOffsetEnd), (cast arcTolerance : Float));
         } else {
-          _Runtime.callValue(OffsetPath.emitOffsetJoin__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, flighthq._internal._StaticIndex.readArray(dirX, previous), flighthq._internal._StaticIndex.readArray(dirY, previous), flighthq._internal._StaticIndex.readArray(dirX, k), flighthq._internal._StaticIndex.readArray(dirY, k), signedDelta, join, miterLimit, arcTolerance] : Array<Dynamic>));
+          OffsetPath.emitOffsetJoin__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast signedDelta : Float), (cast join : PathOffsetJoin), (cast miterLimit : Float), (cast arcTolerance : Float));
         }
         k++;
       }
@@ -107,44 +107,44 @@ class OffsetPath {
       _Runtime.pushMany(ring, cast ([(previousEndX + (radius * previousDirX)), (previousEndY + (radius * previousDirY))] : Array<Dynamic>));
       _Runtime.pushMany(ring, cast ([(thisStartX - (radius * thisDirX)), (thisStartY - (radius * thisDirY))] : Array<Dynamic>));
     } else { if ((cast _Runtime.strictEquals(end, 'round') : Bool)) {
-      var startAngle:Dynamic = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
-      var midX:Dynamic = HxMath.cos((startAngle + OffsetPath.HALF_PI__offsetPath));
-      var midY:Dynamic = HxMath.sin((startAngle + OffsetPath.HALF_PI__offsetPath));
-      var sweep:Dynamic = _Runtime.multiplyNumbers(((cast ((cast ((midX * previousDirX) + (midY * previousDirY)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)), HxMath.PI);
-      _Runtime.callValue(OffsetPath.pushOffsetArc__offsetPath, cast ([ring, vx, vy, radius, startAngle, sweep, arcTolerance] : Array<Dynamic>));
+      var startAngle:Float = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
+      var midX:Float = HxMath.cos((startAngle + OffsetPath.HALF_PI__offsetPath));
+      var midY:Float = HxMath.sin((startAngle + OffsetPath.HALF_PI__offsetPath));
+      var sweep:Float = _Runtime.multiplyNumbers(((cast ((cast ((midX * previousDirX) + (midY * previousDirY)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)), HxMath.PI);
+      OffsetPath.pushOffsetArc__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
     } }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
   }
 
   public static function emitOffsetJoin__offsetPath(ring:Array<Float>, vx:Float, vy:Float, previousEndX:Float, previousEndY:Float, thisStartX:Float, thisStartY:Float, previousDirX:Float, previousDirY:Float, thisDirX:Float, thisDirY:Float, signedDelta:Float, join:PathOffsetJoin, miterLimit:Float, arcTolerance:Float):Void {
-    var turn:Dynamic = cast _Runtime.UNDEFINED;
-    var convex:Dynamic = cast _Runtime.UNDEFINED;
+    var turn:Float = cast _Runtime.UNDEFINED;
+    var convex:Bool = cast _Runtime.UNDEFINED;
     _Runtime.pushMany(ring, cast ([previousEndX, previousEndY] : Array<Dynamic>));
     turn = ((previousDirX * thisDirY) - (previousDirY * thisDirX));
     convex = ((cast (turn * signedDelta) : Float) > (cast 0.0 : Float));
     if ((cast !(cast convex : Bool) : Bool)) {
       if ((cast ((cast HxMath.abs(turn) : Float) > (cast OffsetPath.PARALLEL_EPS__offsetPath : Float)) : Bool)) {
-        var advance:Dynamic = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
+        var advance:Float = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
         _Runtime.pushMany(ring, cast ([(previousEndX + (advance * previousDirX)), (previousEndY + (advance * previousDirY))] : Array<Dynamic>));
       }
     } else {
       if ((cast _Runtime.strictEquals(join, 'miter') : Bool)) {
         if ((cast ((cast HxMath.abs(turn) : Float) > (cast OffsetPath.PARALLEL_EPS__offsetPath : Float)) : Bool)) {
-          var advance:Dynamic = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
-          var apexX:Dynamic = (previousEndX + (advance * previousDirX));
-          var apexY:Dynamic = (previousEndY + (advance * previousDirY));
-          var miterLength:Dynamic = _Runtime.hypot((apexX - vx), (apexY - vy));
+          var advance:Float = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
+          var apexX:Float = (previousEndX + (advance * previousDirX));
+          var apexY:Float = (previousEndY + (advance * previousDirY));
+          var miterLength:Float = _Runtime.hypot((apexX - vx), (apexY - vy));
           if ((cast ((cast miterLength : Float) <= (cast _Runtime.multiplyNumbers(miterLimit, HxMath.abs(signedDelta)) : Float)) : Bool)) { _Runtime.pushMany(ring, cast ([apexX, apexY] : Array<Dynamic>)); }
         }
       } else { if ((cast _Runtime.strictEquals(join, 'square') : Bool)) {
-        var radius:Dynamic = HxMath.abs(signedDelta);
+        var radius:Float = HxMath.abs(signedDelta);
         _Runtime.pushMany(ring, cast ([(previousEndX + (radius * previousDirX)), (previousEndY + (radius * previousDirY))] : Array<Dynamic>));
         _Runtime.pushMany(ring, cast ([(thisStartX - (radius * thisDirX)), (thisStartY - (radius * thisDirY))] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
-        var radius:Dynamic = HxMath.abs(signedDelta);
-        var startAngle:Dynamic = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
-        var endAngle:Dynamic = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
-        _Runtime.callValue(OffsetPath.pushOffsetArc__offsetPath, cast ([ring, vx, vy, radius, startAngle, _Runtime.callValue(OffsetPath.getShortSweep__offsetPath, cast ([startAngle, endAngle] : Array<Dynamic>)), arcTolerance] : Array<Dynamic>));
+        var radius:Float = HxMath.abs(signedDelta);
+        var startAngle:Float = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
+        var endAngle:Float = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
+        OffsetPath.pushOffsetArc__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast OffsetPath.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
       } } }
     }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
@@ -154,13 +154,13 @@ class OffsetPath {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var x:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
-        var y:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
+        var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
         if ((cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 2.0 : Float)) : Bool)) {
-          var dx:Dynamic = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
-          var dy:Dynamic = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
+          var dx:Float = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
+          var dy:Float = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
           if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         }
         _Runtime.pushMany(out, cast ([x, y] : Array<Dynamic>));
@@ -168,8 +168,8 @@ class OffsetPath {
       }
     }
     if ((cast ((cast closed : Bool) && (cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
-      var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
+      var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
+      var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
       if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { _Runtime.setLength(out, (out.length - 2.0)); }
     }
     return cast out;
@@ -177,21 +177,21 @@ class OffsetPath {
   }
 
   public static function getContourPointEps__offsetPath(contours:Array<Array<Float>>):Float {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var extent:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var extent:Float = cast _Runtime.UNDEFINED;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     for (contour in _Runtime.iterable(contours)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+          var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
+          var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
           if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
           if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
           if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
@@ -206,12 +206,12 @@ class OffsetPath {
   }
 
   public static function getOpenContourLoop__offsetPath(vertices:Array<Float>):Array<Float> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var loop:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var loop:Array<Float> = cast _Runtime.UNDEFINED;
     count = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0);
     loop = _Runtime.slice(vertices, 0, null);
     {
-      var k:Dynamic = (count - 2.0);
+      var k:Float = (count - 2.0);
       while ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) {
         _Runtime.pushMany(loop, cast ([flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))] : Array<Dynamic>));
         k--;
@@ -222,21 +222,21 @@ class OffsetPath {
   }
 
   public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
-    var sign:Dynamic = cast _Runtime.UNDEFINED;
-    sign = _Runtime.sign(_Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([vertices] : Array<Dynamic>)));
+    var sign:Float = cast _Runtime.UNDEFINED;
+    sign = _Runtime.sign((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices : Array<Float>)) : Float));
     return cast ((cast _Runtime.strictEquals(sign, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sign : Dynamic));
     return cast null;
   }
 
   public static function getRingSignedArea__offsetPath(vertices:Array<Float>):Float {
-    var area:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var area:Float = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     area = 0.0;
     count = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0);
     {
-      var k:Dynamic = 0.0;
+      var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
-        var kn:Dynamic = _Runtime.fmod((k + 1.0), count);
+        var kn:Float = _Runtime.fmod((k + 1.0), count);
         (area = cast ((area + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0))) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))))) : Dynamic));
         k++;
       }
@@ -246,7 +246,7 @@ class OffsetPath {
   }
 
   public static function getShortSweep__offsetPath(startAngle:Float, endAngle:Float):Float {
-    var sweep:Dynamic = cast _Runtime.UNDEFINED;
+    var sweep:Float = cast _Runtime.UNDEFINED;
     sweep = (endAngle - startAngle);
     while ((cast ((cast sweep : Float) <= (cast -HxMath.PI : Float)) : Bool)) { (sweep = cast ((sweep + OffsetPath.TWO_PI__offsetPath) : Dynamic)); }
     while ((cast ((cast sweep : Float) > (cast HxMath.PI : Float)) : Bool)) { (sweep = cast ((sweep - OffsetPath.TWO_PI__offsetPath) : Dynamic)); }
@@ -255,9 +255,9 @@ class OffsetPath {
   }
 
   public static function isClosedContour__offsetPath(contour:Array<Float>, pointEpsSq:Float):Bool {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     n = _Runtime.field(contour, 'length');
     if ((cast ((cast n : Float) < (cast 6.0 : Float)) : Bool)) { return cast false; }
     dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, (n - 2.0)));
@@ -267,14 +267,14 @@ class OffsetPath {
   }
 
   public static function pushOffsetArc__offsetPath(ring:Array<Float>, cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, arcTolerance:Float):Void {
-    var maxAngle:Dynamic = cast _Runtime.UNDEFINED;
-    var steps:Dynamic = cast _Runtime.UNDEFINED;
+    var maxAngle:Float = cast _Runtime.UNDEFINED;
+    var steps:Float = cast _Runtime.UNDEFINED;
     maxAngle = ((cast ((cast ((cast arcTolerance : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast arcTolerance : Float) < (cast radius : Float)) : Bool)) : Bool) ? (cast _Runtime.multiplyNumbers(2.0, HxMath.acos((1.0 - (arcTolerance / radius)))) : Dynamic) : (cast HxMath.PI : Dynamic));
     steps = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), maxAngle)));
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast steps : Float)) : Bool)) {
-        var angle:Dynamic = (startAngle + (sweep * (i / steps)));
+        var angle:Float = (startAngle + (sweep * (i / steps)));
         _Runtime.pushMany(ring, cast ([(cx + _Runtime.multiplyNumbers(radius, HxMath.cos(angle))), (cy + _Runtime.multiplyNumbers(radius, HxMath.sin(angle)))] : Array<Dynamic>));
         i++;
       }
@@ -282,16 +282,16 @@ class OffsetPath {
   }
 
   public static function reverseVertexLoop__offsetPath(vertices:Array<Float>):Array<Float> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var out:Array<Float> = cast _Runtime.UNDEFINED;
     count = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0);
     out = _Runtime.createArray(_Runtime.field(vertices, 'length'));
     flighthq._internal._StaticIndex.writeArray(out, 0.0, flighthq._internal._StaticIndex.readArray(vertices, 0.0));
     flighthq._internal._StaticIndex.writeArray(out, 1.0, flighthq._internal._StaticIndex.readArray(vertices, 1.0));
     {
-      var k:Dynamic = 1.0;
+      var k:Float = 1.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
-        var source:Dynamic = (count - k);
+        var source:Float = (count - k);
         flighthq._internal._StaticIndex.writeArray(out, (2.0 * k), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * source)));
         flighthq._internal._StaticIndex.writeArray(out, ((2.0 * k) + 1.0), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * source) + 1.0)));
         k++;
@@ -301,19 +301,19 @@ class OffsetPath {
     return cast null;
   }
 
-  public static final DEFAULT_ARC_TOLERANCE__offsetPath:Dynamic = 0.25;
+  public static final DEFAULT_ARC_TOLERANCE__offsetPath:Float = 0.25;
 
-  public static final DEFAULT_MITER_LIMIT__offsetPath:Dynamic = 2.0;
+  public static final DEFAULT_MITER_LIMIT__offsetPath:Float = 2.0;
 
-  public static final HALF_PI__offsetPath:Dynamic = (HxMath.PI / 2.0);
+  public static final HALF_PI__offsetPath:Float = (HxMath.PI / 2.0);
 
-  public static final NO_CAPS__offsetPath:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+  public static final NO_CAPS__offsetPath:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
-  public static final POINT_EPS__offsetPath:Dynamic = 1e-9;
+  public static final POINT_EPS__offsetPath:Float = 1e-9;
 
-  public static final POINT_EPS_RELATIVE__offsetPath:Dynamic = 1e-9;
+  public static final POINT_EPS_RELATIVE__offsetPath:Float = 1e-9;
 
-  public static final PARALLEL_EPS__offsetPath:Dynamic = 1e-12;
+  public static final PARALLEL_EPS__offsetPath:Float = 1e-12;
 
-  public static final TWO_PI__offsetPath:Dynamic = (HxMath.PI * 2.0);
+  public static final TWO_PI__offsetPath:Float = (HxMath.PI * 2.0);
 }

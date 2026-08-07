@@ -11,9 +11,9 @@ import flighthq.types.Spatial.SpatialIndex;
 
 typedef InteractionSignalName = InteractionSignals;
 
-typedef AnyInteractionSignalSlot = Dynamic;
+typedef AnyInteractionSignalSlot = flighthq._internal._Union2<flighthq._internal._Union2<PointerEventData, KeyboardEventData>, FocusEventData>->Void;
 
-typedef InteractionManager<N> = { var cursorBackend:Null<CursorBackend>; var doubleClickDelay:Float; var enabled:Bool; var pointerCaptures:Dynamic; var pointerStates:Dynamic; var precise:Bool; var root:Dynamic; var spatialIndex:Null<SpatialIndex>; var signalSubscriberCounts:Dynamic; var trackedSignalSlots:Dynamic; var trackedSubscribersOnly:Bool; };
+typedef InteractionManager<N> = { var cursorBackend:Null<CursorBackend>; var doubleClickDelay:Float; var enabled:Bool; var pointerCaptures:flighthq._internal._Map<Float, N>; var pointerStates:flighthq._internal._Map<Float, InteractionPointerState<N>>; var precise:Bool; var root:N; var spatialIndex:Null<SpatialIndex>; var signalSubscriberCounts:flighthq._internal._Map<InteractionSignalName, Float>; var trackedSignalSlots:flighthq._internal._Map<N, flighthq._internal._Map<InteractionSignalName, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>; var trackedSubscribersOnly:Bool; };
 
 typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex>; @:optional var trackedSubscribersOnly:Bool; };
 
@@ -21,4 +21,4 @@ typedef InteractionInputSource = Dynamic;
 
 typedef InteractionPointerOptions = { @:optional var altKey:Bool; @:optional var buttons:Float; @:optional var ctrlKey:Bool; @:optional var metaKey:Bool; @:optional var pointerId:Float; @:optional var pointerType:PointerType; @:optional var shiftKey:Bool; };
 
-typedef InteractionPointerState<N> = { var lastClickTarget:Null<Dynamic>; var lastClickTime:Float; var pointerDownTarget:Null<Dynamic>; var pointerOverTarget:Null<Dynamic>; };
+typedef InteractionPointerState<N> = { var lastClickTarget:Null<N>; var lastClickTime:Float; var pointerDownTarget:Null<N>; var pointerOverTarget:Null<N>; };

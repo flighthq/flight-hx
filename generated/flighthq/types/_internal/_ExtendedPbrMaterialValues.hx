@@ -8,5 +8,5 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
 
 class _ExtendedPbrMaterialValues {
-  public static final ExtendedPbrMaterialKind:Dynamic = 'ExtendedPbrMaterial';
+  public static final ExtendedPbrMaterialKind:String = 'ExtendedPbrMaterial';
 }

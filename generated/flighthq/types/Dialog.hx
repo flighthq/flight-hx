@@ -24,4 +24,4 @@ typedef MessageDialogOptions = { @:optional var title:String; var message:String
 
 typedef MessageDialogResult = { var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; };
 
-typedef DialogBackend = { var confirm:Dynamic; var message:Dynamic; var openDirectory:Dynamic; var openFile:Dynamic; var prompt:Dynamic; var saveFile:Dynamic; };
+typedef DialogBackend = { var confirm:MessageDialogOptions->flighthq._internal._Promise<Bool>; var message:MessageDialogOptions->flighthq._internal._Promise<MessageDialogResult>; var openDirectory:OpenDirectoryDialogOptions->flighthq._internal._Promise<Array<FileDialogHandle>>; var openFile:OpenFileDialogOptions->flighthq._internal._Promise<Array<FileDialogHandle>>; var prompt:PromptDialogOptions->flighthq._internal._Promise<Null<String>>; var saveFile:SaveFileDialogOptions->flighthq._internal._Promise<Null<FileDialogHandle>>; };

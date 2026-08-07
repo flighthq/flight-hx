@@ -17,18 +17,18 @@ class Vector4 {
   }
 
   public static function clampVector4(out:Vector4Like, value:Vector4Like, min:Vector4Like, max:Vector4Like):Void {
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var vz:Dynamic = cast _Runtime.UNDEFINED;
-    var vw:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var minW:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxW:Dynamic = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var vz:Float = cast _Runtime.UNDEFINED;
+    var vw:Float = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var minW:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
+    var maxW:Float = cast _Runtime.UNDEFINED;
     vx = _Runtime.field(value, 'x');
     vy = _Runtime.field(value, 'y');
     vz = _Runtime.field(value, 'z');
@@ -48,7 +48,7 @@ class Vector4 {
   }
 
   public static function cloneVector4(source:Vector4Like):flighthq.types.Vector4 {
-    return cast _Runtime.callValue(createVector4, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z'), _Runtime.field(source, 'w')] : Array<Dynamic>));
+    return cast (cast createVector4((cast _Runtime.field(source, 'x') : Null<Float>), (cast _Runtime.field(source, 'y') : Null<Float>), (cast _Runtime.field(source, 'z') : Null<Float>), (cast _Runtime.field(source, 'w') : Null<Float>)) : flighthq.types.Vector4);
     return cast null;
   }
 
@@ -60,19 +60,19 @@ class Vector4 {
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Vector4 {
-    return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) } : Null<{ var x:Float; var y:Float; var z:Float; var w:Float; }>)) : flighthq.types.Vector4);
     return cast null;
   }
 
   public static function divideVector4(out:Vector4Like, source:Vector4Like, divisor:Vector4Like):Void {
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var dw:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var dw:Float = cast _Runtime.UNDEFINED;
     sx = _Runtime.field(source, 'x');
     sy = _Runtime.field(source, 'y');
     sz = _Runtime.field(source, 'z');
@@ -94,13 +94,13 @@ class Vector4 {
   }
 
   public static function getVector4AngleBetween(a:Vector4Like, b:Vector4Like):Float {
-    var la:Dynamic = cast _Runtime.UNDEFINED;
-    var lb:Dynamic = cast _Runtime.UNDEFINED;
-    var _dot:Dynamic = cast _Runtime.UNDEFINED;
-    la = _Runtime.callValue(getVector4Length, cast ([a] : Array<Dynamic>));
-    lb = _Runtime.callValue(getVector4Length, cast ([b] : Array<Dynamic>));
+    var la:Float = cast _Runtime.UNDEFINED;
+    var lb:Float = cast _Runtime.UNDEFINED;
+    var _dot:Float = cast _Runtime.UNDEFINED;
+    la = (cast getVector4Length((cast a : Vector4Like)) : Float);
+    lb = (cast getVector4Length((cast b : Vector4Like)) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = _Runtime.divideNumbers(_Runtime.callValue(getVector4Dot, cast ([a, b] : Array<Dynamic>)), (la * lb));
+    _dot = ((cast getVector4Dot((cast a : Vector4Like), (cast b : Vector4Like)) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -147,10 +147,10 @@ class Vector4 {
   }
 
   public static function interpolateVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like, t:Float):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var aw:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var aw:Float = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
     az = _Runtime.field(a, 'z');
@@ -195,8 +195,8 @@ class Vector4 {
   }
 
   public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    l = _Runtime.callValue(getVector4Length, cast ([source] : Array<Dynamic>));
+    var l:Float = cast _Runtime.UNDEFINED;
+    l = (cast getVector4Length((cast source : Vector4Like)) : Float);
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       _Runtime.setField(out, 'x', _Runtime.divideNumbers(_Runtime.field(source, 'x'), l));
       _Runtime.setField(out, 'y', _Runtime.divideNumbers(_Runtime.field(source, 'y'), l));
@@ -226,15 +226,15 @@ class Vector4 {
   }
 
   public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
-    var ix:Dynamic = cast _Runtime.UNDEFINED;
-    var iy:Dynamic = cast _Runtime.UNDEFINED;
-    var iz:Dynamic = cast _Runtime.UNDEFINED;
-    var iw:Dynamic = cast _Runtime.UNDEFINED;
-    var nx:Dynamic = cast _Runtime.UNDEFINED;
-    var ny:Dynamic = cast _Runtime.UNDEFINED;
-    var nz:Dynamic = cast _Runtime.UNDEFINED;
-    var nw:Dynamic = cast _Runtime.UNDEFINED;
-    var twoDot:Dynamic = cast _Runtime.UNDEFINED;
+    var ix:Float = cast _Runtime.UNDEFINED;
+    var iy:Float = cast _Runtime.UNDEFINED;
+    var iz:Float = cast _Runtime.UNDEFINED;
+    var iw:Float = cast _Runtime.UNDEFINED;
+    var nx:Float = cast _Runtime.UNDEFINED;
+    var ny:Float = cast _Runtime.UNDEFINED;
+    var nz:Float = cast _Runtime.UNDEFINED;
+    var nw:Float = cast _Runtime.UNDEFINED;
+    var twoDot:Float = cast _Runtime.UNDEFINED;
     ix = _Runtime.field(incident, 'x');
     iy = _Runtime.field(incident, 'y');
     iz = _Runtime.field(incident, 'z');
@@ -271,10 +271,10 @@ class Vector4 {
     _Runtime.setField(out, 'w', flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 3.0)));
   }
 
-  public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, w:Dynamic = 0.0):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
+  public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, w:Float = 0.0):Void {
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
     x = source.x;
     y = source.y;
     z = source.z;
@@ -298,11 +298,11 @@ class Vector4 {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), _Runtime.field(source, 'w'));
   }
 
-  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = _Runtime.callValue(createVector4, cast ([1.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
 }

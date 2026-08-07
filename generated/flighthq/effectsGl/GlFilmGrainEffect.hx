@@ -7,35 +7,38 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.FilmGrainEffect;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderEffect;
 
 class GlFilmGrainEffect {
   @:noCompletion
   public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var seed:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var seed:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.1);
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.filmGrain', GlFilmGrainEffect.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.filmGrain' : String), (cast GlFilmGrainEffect.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(0.0001, size));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlFilmGrainEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyFilmGrainEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FilmGrainEffect)] : Array<Dynamic>));
+  public static final defaultGlFilmGrainEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyFilmGrainEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : FilmGrainEffect) : FilmGrainEffect));
   };
 
   public static function registerGlFilmGrainEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'FilmGrainEffect', defaultGlFilmGrainEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'FilmGrainEffect' : String), (cast defaultGlFilmGrainEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_size;\nuniform float u_seed;\nout vec4 o_color;\nfloat hash(vec2 p) {\n  p = floor(p / u_size);\n  return fract(sin(dot(p, vec2(127.1, 311.7)) + u_seed) * 43758.5453123);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float n = hash(v_texCoord * 1024.0) - 0.5;\n  o_color = vec4(c.rgb + n * u_intensity, c.a);\n}';
+  public static final FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_size;\nuniform float u_seed;\nout vec4 o_color;\nfloat hash(vec2 p) {\n  p = floor(p / u_size);\n  return fract(sin(dot(p, vec2(127.1, 311.7)) + u_seed) * 43758.5453123);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float n = hash(v_texCoord * 1024.0) - 0.5;\n  o_color = vec4(c.rgb + n * u_intensity, c.a);\n}';
 }

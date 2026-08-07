@@ -8,12 +8,12 @@ import flighthq.types.Rectangle;
 
 class RectanglePool {
   public static function acquireEmptyRectangle():Rectangle {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callValue(acquireRectangle, cast ([] : Array<Dynamic>));
-    _Runtime.setField(r, 'x', 0.0);
-    _Runtime.setField(r, 'y', 0.0);
-    _Runtime.setField(r, 'width', 0.0);
-    _Runtime.setField(r, 'height', 0.0);
+    var r:Rectangle = cast _Runtime.UNDEFINED;
+    r = (cast acquireRectangle() : Rectangle);
+    ((cast r : Rectangle).x = 0.0);
+    ((cast r : Rectangle).y = 0.0);
+    ((cast r : Rectangle).width = 0.0);
+    ((cast r : Rectangle).height = 0.0);
     return cast r;
     return cast null;
   }
@@ -23,7 +23,7 @@ class RectanglePool {
     if ((cast ((cast _Runtime.field(RectanglePool.pool__rectanglePool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (r = cast ((cast _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Rectangle) : Dynamic));
     } else {
-      (r = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic));
+      (r = cast ((cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle) : Dynamic));
     }
     return cast r;
     return cast null;

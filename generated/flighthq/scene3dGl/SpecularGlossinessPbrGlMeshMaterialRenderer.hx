@@ -15,66 +15,78 @@ import flighthq.scene3dGl.GlPbrStandardBlock.bindGlPbrStandardBlock;
 import flighthq.scene3dGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrProgram;
+import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
 class SpecularGlossinessPbrGlMeshMaterialRenderer {
   @:noCompletion
-  public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var specGloss:Dynamic = cast _Runtime.UNDEFINED;
-    var standard:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+  public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var specGloss:Null<SpecularGlossinessPbrMaterial> = cast _Runtime.UNDEFINED;
+    var standard:Null<StandardPbrMaterialProperties> = cast _Runtime.UNDEFINED;
+    var program:GlPbrProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
-    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer, cast ([specGloss] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([state, standard, specGloss] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) && (cast _Runtime.field(specGloss, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
-    _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
-    _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast (cast SpecularGlossinessPbrGlMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer((cast specGloss : SpecularGlossinessPbrMaterial)) : StandardPbrMaterialProperties) : Dynamic) : (cast null : Dynamic));
+    program = (cast ensureGlPbrProgram((cast state : GlRenderState), (cast buildGlPbrStandardDefineKey((cast state : GlRenderState), (cast standard : Null<StandardPbrMaterialProperties>), specGloss) : GlPbrDefineKey), _Runtime.field(_Runtime, 'UNDEFINED')) : GlPbrProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(specGloss, null) : Bool) && (cast _Runtime.field(specGloss, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlPbrProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    setGlMeshCameraPosition((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast program : GlPbrProgram).locCameraPosition : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    bindGlMeshLightBlock((cast state : GlRenderState), program, (cast lights : Scene3DLightBlock));
+    bindGlPbrStandardBlock((cast state : GlRenderState), program, (cast standard : Null<StandardPbrMaterialProperties>));
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerGlSpecularGlossinessPbrMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, SpecularGlossinessPbrMaterialKind, specularGlossinessPbrGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast SpecularGlossinessPbrMaterialKind : String), (cast specularGlossinessPbrGlMeshMaterialRenderer : GlMeshMaterialRenderer));
   }
 
   public static function convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer(material:SpecularGlossinessPbrMaterial):StandardPbrMaterialProperties {
-    var specularBrightness:Dynamic = cast _Runtime.UNDEFINED;
-    var oneMinusSpecularStrength:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuseBrightness:Dynamic = cast _Runtime.UNDEFINED;
-    var metallic:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(unpackColorToLinear, cast ([SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, _Runtime.field(material, 'diffuse')] : Array<Dynamic>));
-    _Runtime.callValue(unpackColorToLinear, cast ([SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, _Runtime.field(material, 'specular')] : Array<Dynamic>));
+    var specularBrightness:Float = cast _Runtime.UNDEFINED;
+    var oneMinusSpecularStrength:Float = cast _Runtime.UNDEFINED;
+    var diffuseBrightness:Float = cast _Runtime.UNDEFINED;
+    var metallic:Float = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    (cast unpackColorToLinear((cast SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
+    (cast unpackColorToLinear((cast SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(material, 'specular') : Float)) : LinearColor);
     specularBrightness = HxMath.max(HxMath.max(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 1.0)), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 2.0));
     oneMinusSpecularStrength = (1.0 - specularBrightness);
     diffuseBrightness = HxMath.max(HxMath.max(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 1.0)), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 2.0));
-    metallic = _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.solveMetallic__specularGlossinessPbrGlMeshMaterialRenderer, cast ([diffuseBrightness, specularBrightness, oneMinusSpecularStrength] : Array<Dynamic>));
+    metallic = (cast SpecularGlossinessPbrGlMeshMaterialRenderer.solveMetallic__specularGlossinessPbrGlMeshMaterialRenderer((cast diffuseBrightness : Float), (cast specularBrightness : Float), (cast oneMinusSpecularStrength : Float)) : Float);
     denom = HxMath.max((1.0 - SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer), 0.0001);
-    r = _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer, cast ([(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 0.0), oneMinusSpecularStrength) / denom), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 0.0), metallic] : Array<Dynamic>));
-    g = _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer, cast ([(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 1.0), oneMinusSpecularStrength) / denom), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 1.0), metallic] : Array<Dynamic>));
-    b = _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer, cast ([(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 2.0), oneMinusSpecularStrength) / denom), flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 2.0), metallic] : Array<Dynamic>));
-    return cast { alphaMap: null, baseColor: _Runtime.callValue(SpecularGlossinessPbrGlMeshMaterialRenderer.packLinearRgba__specularGlossinessPbrGlMeshMaterialRenderer, cast ([r, g, b, flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>)), baseColorMap: _Runtime.field(material, 'diffuseMap'), emissive: _Runtime.field(material, 'emissive'), emissiveMap: _Runtime.field(material, 'emissiveMap'), emissiveStrength: _Runtime.field(material, 'emissiveStrength'), metallic: metallic, metallicRoughnessMap: null, normalMap: _Runtime.field(material, 'normalMap'), normalScale: _Runtime.field(material, 'normalScale'), occlusionMap: _Runtime.field(material, 'occlusionMap'), occlusionStrength: _Runtime.field(material, 'occlusionStrength'), roughness: _Runtime.subtractNumbers(1.0, _Runtime.field(material, 'glossiness')) };
+    r = (cast SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer((cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 0.0), oneMinusSpecularStrength) / denom) : Float), (cast flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 0.0) : Float), (cast metallic : Float)) : Float);
+    g = (cast SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer((cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 1.0), oneMinusSpecularStrength) / denom) : Float), (cast flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 1.0) : Float), (cast metallic : Float)) : Float);
+    b = (cast SpecularGlossinessPbrGlMeshMaterialRenderer.lerp__specularGlossinessPbrGlMeshMaterialRenderer((cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 2.0), oneMinusSpecularStrength) / denom) : Float), (cast flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchSpecular__specularGlossinessPbrGlMeshMaterialRenderer, 2.0) : Float), (cast metallic : Float)) : Float);
+    return cast { alphaMap: null, baseColor: (cast SpecularGlossinessPbrGlMeshMaterialRenderer.packLinearRgba__specularGlossinessPbrGlMeshMaterialRenderer((cast r : Float), (cast g : Float), (cast b : Float), (cast flighthq._internal._StaticIndex.readArray(SpecularGlossinessPbrGlMeshMaterialRenderer.scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer, 3.0) : Float)) : Float), baseColorMap: _Runtime.field(material, 'diffuseMap'), emissive: _Runtime.field(material, 'emissive'), emissiveMap: _Runtime.field(material, 'emissiveMap'), emissiveStrength: _Runtime.field(material, 'emissiveStrength'), metallic: metallic, metallicRoughnessMap: null, normalMap: _Runtime.field(material, 'normalMap'), normalScale: _Runtime.field(material, 'normalScale'), occlusionMap: _Runtime.field(material, 'occlusionMap'), occlusionStrength: _Runtime.field(material, 'occlusionStrength'), roughness: _Runtime.subtractNumbers(1.0, _Runtime.field(material, 'glossiness')) };
     return cast null;
   }
 
@@ -84,25 +96,25 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
   }
 
   public static function packLinearRgba__specularGlossinessPbrGlMeshMaterialRenderer(r:Float, g:Float, b:Float, a:Float):Float {
-    var toByte:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    toByte = function(linear:Float) {
-      var clamped:Dynamic = cast _Runtime.UNDEFINED;
-      var srgb:Dynamic = cast _Runtime.UNDEFINED;
+    var toByte:Float->Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    toByte = (cast function(linear:Float):Float {
+      var clamped:Float = cast _Runtime.UNDEFINED;
+      var srgb:Float = cast _Runtime.UNDEFINED;
       clamped = HxMath.min(HxMath.max(linear, 0.0), 1.0);
       srgb = ((cast ((cast clamped : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (clamped * 12.92) : Dynamic) : (cast (_Runtime.multiplyNumbers(1.055, HxMath.pow(clamped, (1.0 / 2.4))) - 0.055) : Dynamic));
       return cast (_Runtime.toInt32(HxMath.round((srgb * 255.0))) & 255);
-    };
+    } : Float->Float);
     alpha = (_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(HxMath.min(HxMath.max(a, 0.0), 1.0), 255.0))) & 255);
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([r] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([g] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(toByte, cast ([b] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(alpha))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast toByte((cast r : Float)) : Float)) << 24)) | _Runtime.toInt32((_Runtime.toInt32((cast toByte((cast g : Float)) : Float)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32((cast toByte((cast b : Float)) : Float)) << 8)))) | _Runtime.toInt32(alpha))), 0);
     return cast null;
   }
 
   public static function solveMetallic__specularGlossinessPbrGlMeshMaterialRenderer(diffuse:Float, specular:Float, oneMinusSpecularStrength:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var discriminant:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var discriminant:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast specular : Float) < (cast SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer : Float)) : Bool)) { return cast 0.0; }
     a = SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer;
     b = ((((diffuse * oneMinusSpecularStrength) / (1.0 - SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer)) + specular) - (2.0 * SpecularGlossinessPbrGlMeshMaterialRenderer.DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer));
@@ -112,7 +124,7 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
     return cast null;
   }
 
-  public static final DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer:Dynamic = 0.04;
+  public static final DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer:Float = 0.04;
 
   public static final scratchDiffuse__specularGlossinessPbrGlMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 

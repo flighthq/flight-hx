@@ -3,11 +3,12 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ClipRegion;
 import flighthq.types.HasClip;
 
 class HasClip {
   @:noCompletion
   public static function initClipTrait(target:flighthq.types.HasClip, ?obj:Dynamic):Void {
-    _Runtime.setField(target, 'clip', _Runtime.coalesce(_Runtime.optionalField(obj, 'clip'), function():Dynamic return cast null));
+    ((cast target : flighthq.types.HasClip).clip = _Runtime.coalesce(_Runtime.optionalField(obj, 'clip'), function():Dynamic return cast null));
   }
 }

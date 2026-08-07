@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial;
 
 class _VertexColorMaterialValues {
-  public static final VertexColorMaterialKind:Dynamic = 'VertexColorMaterial';
+  public static final VertexColorMaterialKind:String = 'VertexColorMaterial';
 }

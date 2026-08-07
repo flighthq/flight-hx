@@ -22,11 +22,11 @@ class ContactShadowsEffect {
   }
 
   public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'ContactShadowsEffect', ContactShadowsEffect.resolveContactShadowsEffectPadding__contactShadowsEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'ContactShadowsEffect' : String), ContactShadowsEffect.resolveContactShadowsEffectPadding__contactShadowsEffect);
   }
 
   public static function resolveContactShadowsEffectPadding__contactShadowsEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getContactShadowsEffectPadding, cast ([(cast effect : flighthq.types.ContactShadowsEffect)] : Array<Dynamic>));
+    return cast (cast getContactShadowsEffectPadding((cast (cast effect : flighthq.types.ContactShadowsEffect) : flighthq.types.ContactShadowsEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

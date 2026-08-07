@@ -4,18 +4,21 @@ package flighthq.textshaper;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaperRun.shapeTextRun;
+import flighthq.types.FontVariation;
 import flighthq.types.ShapedRun;
+import flighthq.types.TextDirection;
+import flighthq.types.TextFeature;
 import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaperOptions;
 
 class TextShaperItemize {
   public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
-    var baseDirection:Dynamic = cast _Runtime.UNDEFINED;
+    var baseDirection:TextDirection = cast _Runtime.UNDEFINED;
     var items:Array<TextItem> = cast _Runtime.UNDEFINED;
-    var runStart:Dynamic = cast _Runtime.UNDEFINED;
-    var runScript:Dynamic = cast _Runtime.UNDEFINED;
-    var runDirection:Dynamic = cast _Runtime.UNDEFINED;
+    var runStart:Float = cast _Runtime.UNDEFINED;
+    var runScript:String = cast _Runtime.UNDEFINED;
+    var runDirection:TextDirection = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     baseDirection = _Runtime.coalesce(_Runtime.optionalField(options, 'direction'), function():Dynamic return cast 'LeftToRight');
     items = cast ([] : Array<Dynamic>);
@@ -23,13 +26,13 @@ class TextShaperItemize {
     runScript = '';
     runDirection = baseDirection;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
-        var codePoint:Dynamic = _Runtime.coalesce(_Runtime.codePointAt(text, i), function():Dynamic return cast 0.0);
-        var charLen:Dynamic = ((cast ((cast codePoint : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
-        var charScript:Dynamic = _Runtime.callValue(TextShaperItemize.getCodePointScript__textShaperItemize, cast ([codePoint] : Array<Dynamic>));
-        var charBidi:Dynamic = _Runtime.callValue(TextShaperItemize.getCodePointBidiClass__textShaperItemize, cast ([codePoint] : Array<Dynamic>));
-        var charDirection:Dynamic = cast _Runtime.UNDEFINED;
+        var codePoint:Float = _Runtime.coalesce(_Runtime.codePointAt(text, i), function():Dynamic return cast 0.0);
+        var charLen:Float = ((cast ((cast codePoint : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
+        var charScript:String = (cast TextShaperItemize.getCodePointScript__textShaperItemize((cast codePoint : Float)) : String);
+        var charBidi:String = (cast TextShaperItemize.getCodePointBidiClass__textShaperItemize((cast codePoint : Float)) : String);
+        var charDirection:flighthq._internal._IndexedAccess<TextItem, String> = cast _Runtime.UNDEFINED;
         if ((cast _Runtime.strictEquals(charBidi, 'rtl') : Bool)) {
           (charDirection = cast ('RightToLeft' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(charBidi, 'ltr') : Bool)) {
@@ -37,7 +40,7 @@ class TextShaperItemize {
         } else {
           (charDirection = cast (runDirection : Dynamic));
         } }
-        var effectiveScript:Dynamic = ((cast _Runtime.strictEquals(charScript, 'Zyyy') : Bool) ? (cast _Runtime.orValue(runScript, function():Dynamic return cast 'Latn') : Dynamic) : (cast charScript : Dynamic));
+        var effectiveScript:String = ((cast _Runtime.strictEquals(charScript, 'Zyyy') : Bool) ? (cast _Runtime.orValue(runScript, function():Dynamic return cast 'Latn') : Dynamic) : (cast charScript : Dynamic));
         if ((cast _Runtime.strictEquals(i, 0.0) : Bool)) {
           (runScript = cast (effectiveScript : Dynamic));
           (runDirection = cast (charDirection : Dynamic));
@@ -60,15 +63,15 @@ class TextShaperItemize {
   }
 
   public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
-    var items:Dynamic = cast _Runtime.UNDEFINED;
+    var items:Array<TextItem> = cast _Runtime.UNDEFINED;
     var result:Array<ShapedRun> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    items = _Runtime.callValue(itemizeText, cast ([text, format, options] : Array<Dynamic>));
+    items = (cast itemizeText((cast text : String), (cast format : TextFormat), (cast options : Null<TextShaperOptions>)) : Array<TextItem>);
     result = cast ([] : Array<Dynamic>);
     for (item in _Runtime.iterable(items)) {
-      var sub:Dynamic = _Runtime.slice(text, _Runtime.field(item, 'start'), _Runtime.field(item, 'end'));
-      var runOptions:Dynamic = _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals(_Runtime.field(item, 'direction'), 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.field(item, 'direction') : Dynamic)) }, { script: _Runtime.field(item, 'script') }]);
-      var run:Dynamic = _Runtime.callValue(shapeTextRun, cast ([sub, format, runOptions] : Array<Dynamic>));
+      var sub:String = _Runtime.slice(text, (cast item : TextItem).start, (cast item : TextItem).end);
+      var runOptions:{ var direction:Null<String>; var script:String; @:optional var features:Null<Array<TextFeature>>; @:optional var language:Null<String>; @:optional var variations:Null<Array<FontVariation>>; } = _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals((cast item : TextItem).direction, 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast (cast item : TextItem).direction : Dynamic)) }, { script: (cast item : TextItem).script }]);
+      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), (cast format : TextFormat), runOptions) : Null<ShapedRun>);
       if ((cast !_Runtime.strictEquals(run, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
     }
     return cast result;

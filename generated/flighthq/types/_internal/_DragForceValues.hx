@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _DragForceValues {
-  public static final DragForceKind:Dynamic = 'DragForce';
+  public static final DragForceKind:String = 'DragForce';
 }

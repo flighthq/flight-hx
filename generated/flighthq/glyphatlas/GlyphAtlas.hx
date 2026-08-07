@@ -8,19 +8,23 @@ import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
 import flighthq.types.Bitmap;
 import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
+import flighthq.types.GlyphSource.GlyphAtlasRuntime;
+import flighthq.types.GlyphSource.GlyphAtlasShelf;
+import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.GlyphSource.GlyphRasterizeOptions;
+import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class GlyphAtlas {
   public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
-    var padding:Dynamic = cast _Runtime.UNDEFINED;
-    var rasterizerBackend:Dynamic = cast _Runtime.UNDEFINED;
+    var padding:Float = cast _Runtime.UNDEFINED;
+    var rasterizerBackend:GlyphRasterizerBackend = cast _Runtime.UNDEFINED;
     var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
     padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
-    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast _Runtime.callValue(getGlyphRasterizerBackend, cast ([] : Array<Dynamic>)));
+    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast (cast getGlyphRasterizerBackend() : Null<GlyphRasterizerBackend>));
     rasterizeOptions = _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]);
-    return cast { runtime: { bitmaps: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), lru: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: _Runtime.callValue(GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas, cast ([rasterizerBackend, rasterizeOptions] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: _Runtime.callValue(createBitmap, cast ([options.width, options.height] : Array<Dynamic>)) } };
+    return cast { runtime: { bitmaps: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), lru: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: (cast GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas((cast rasterizerBackend : GlyphRasterizerBackend), (cast rasterizeOptions : GlyphRasterizeOptions)) : GlyphMetrics), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: (cast createBitmap((cast options.width : Float), (cast options.height : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bitmap) } };
     return cast null;
   }
 
@@ -30,13 +34,13 @@ class GlyphAtlas {
   }
 
   public static function disposeGlyphAtlas(atlas:flighthq.types.GlyphSource.GlyphAtlas):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
-    ((cast runtime.entries : flighthq._internal._Map).clear());
-    ((cast runtime.bitmaps : flighthq._internal._Map).clear());
+    ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).clear());
+    ((cast runtime.bitmaps : flighthq._internal._Map<Float, GlyphRasterizedBitmap>).clear());
     (runtime.occupiedArea = cast (0.0 : Dynamic));
     (runtime.retainedBytes = cast (0.0 : Dynamic));
-    ((cast runtime.lru : flighthq._internal._Map).clear());
+    ((cast runtime.lru : flighthq._internal._Map<Float, Bool>).clear());
     _Runtime.setLength(runtime.shelves, 0.0);
     (runtime.packBottom = cast (runtime.padding : Dynamic));
     (runtime.dirty = cast (false : Dynamic));
@@ -48,9 +52,9 @@ class GlyphAtlas {
   }
 
   public static function _resolveGlyphAtlasMetrics__glyphAtlas(backend:GlyphRasterizerBackend, rasterizeOptions:GlyphRasterizeOptions):GlyphMetrics {
-    var measured:Dynamic = cast _Runtime.UNDEFINED;
+    var measured:Null<GlyphMetrics> = cast _Runtime.UNDEFINED;
     measured = _Runtime.coalesce(_Runtime.callOptionalProperty(backend, 'measureMetrics', cast ([rasterizeOptions] : Array<Dynamic>)), function():Dynamic return cast null);
-    return cast _Runtime.coalesce(measured, function():Dynamic return cast _Runtime.callValue(deriveGlyphMetricsFromFontSize, cast ([rasterizeOptions.fontSize] : Array<Dynamic>)));
+    return cast _Runtime.coalesce(measured, function():Dynamic return cast (cast deriveGlyphMetricsFromFontSize((cast rasterizeOptions.fontSize : Float)) : GlyphMetrics));
     return cast null;
   }
 }

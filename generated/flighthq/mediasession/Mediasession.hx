@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MediaSession.MediaSessionAction;
 import flighthq.types.MediaSession.MediaSessionActionDetails;
+import flighthq.types.MediaSession.MediaSessionArtwork;
 import flighthq.types.MediaSession.MediaSessionBackend;
 import flighthq.types.MediaSession.MediaSessionMetadata;
 import flighthq.types.MediaSession.MediaSessionPlaybackState;
@@ -14,45 +15,45 @@ class Mediasession {
   public static var _backend__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
 
   public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setActionHandler', cast ([action, null] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(action, null);
   }
 
   public static function clearMediaSessionMetadata():Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setMetadata', cast ([null] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(null);
   }
 
   public static function clearMediaSessionPositionState():Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPositionState', cast ([null] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(null);
   }
 
   @:noCompletion
   public static function createWebMediaSessionBackend():MediaSessionBackend {
-    return cast { setMetadata: function(metadata:Dynamic) {
-      var session:Dynamic = cast _Runtime.UNDEFINED;
-      session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
+    return cast { setMetadata: function(metadata:Null<MediaSessionMetadata>):Void {
+      var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       if ((cast _Runtime.strictEquals(metadata, null) : Bool)) {
         ((cast session : flighthq._internal.dom.MediaSession).metadata = null);
         return;
       }
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('MediaMetadata'), 'undefined') : Bool)) { return; }
-      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(flighthq._internal._HostValueLut.get('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }]));
-    }, setPlaybackState: function(state:Dynamic) {
-      var session:Dynamic = cast _Runtime.UNDEFINED;
-      session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
+      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(flighthq._internal._HostValueLut.get('MediaMetadata'), [{ title: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).title, artist: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).artist, album: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).album, artwork: _Runtime.concatArrays([_Runtime.toArray((cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).artwork)]) }]));
+    }, setPlaybackState: function(state:MediaSessionPlaybackState):Void {
+      var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       ((cast session : flighthq._internal.dom.MediaSession).playbackState = state);
-    }, setPositionState: function(state:Dynamic) {
-      var session:Dynamic = cast _Runtime.UNDEFINED;
-      session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
+    }, setPositionState: function(state:Null<MediaSessionPositionState>):Void {
+      var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flighthq._internal.dom.MediaSession).setPositionState), 'function') : Bool)) : Bool)) { return; }
       (cast session : flighthq._internal.dom.MediaSession).setPositionState(_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    }, setActionHandler: function(action:Dynamic, handler:Dynamic) {
-      var session:Dynamic = cast _Runtime.UNDEFINED;
-      session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
+    }, setActionHandler: function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
+      var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null));
+        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void return handler((cast (cast details : MediaSessionActionDetails) : MediaSessionActionDetails)), function():Dynamic return cast null));
       } catch (__error:Dynamic) {
       }
     } };
@@ -61,7 +62,7 @@ class Mediasession {
 
   @:noCompletion
   public static function getMediaSessionBackend():MediaSessionBackend {
-    if ((cast _Runtime.strictEquals(Mediasession._backend__mediasession, null) : Bool)) { (Mediasession._backend__mediasession = cast (_Runtime.callValue(createWebMediaSessionBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Mediasession._backend__mediasession, null) : Bool)) { (Mediasession._backend__mediasession = cast ((cast createWebMediaSessionBackend() : Null<MediaSessionBackend>) : Dynamic)); }
     return cast Mediasession._backend__mediasession;
     return cast null;
   }
@@ -72,8 +73,8 @@ class Mediasession {
     return cast null;
   }
 
-  public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:Dynamic):Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setActionHandler', cast ([action, handler] : Array<Dynamic>));
+  public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(action, handler);
   }
 
   @:noCompletion
@@ -82,14 +83,14 @@ class Mediasession {
   }
 
   public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setMetadata', cast ([metadata] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(metadata);
   }
 
   public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPlaybackState', cast ([state] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState(state);
   }
 
   public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    _Runtime.callProperty(_Runtime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPositionState', cast ([state] : Array<Dynamic>));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(state);
   }
 }

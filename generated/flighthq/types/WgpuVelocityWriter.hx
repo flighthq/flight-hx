@@ -7,4 +7,4 @@ import flighthq.types.Velocity.VelocityField;
 
 typedef WgpuVelocityContext = { var state:WgpuRenderState; var field:VelocityField; var width:Float; var height:Float; var pixelRatio:Float; };
 
-typedef WgpuVelocityWriter = Dynamic;
+typedef WgpuVelocityWriter = WgpuVelocityContext->flighthq._internal._Object->Void;

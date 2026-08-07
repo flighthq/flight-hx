@@ -6,162 +6,172 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
+import flighthq.types.ApplicationWindow.WindowBounds;
+import flighthq.types.ApplicationWindow.WindowOptions;
+import flighthq.types.Signal;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriCloseRequestedEvent;
+import flighthq.types.TauriApi.TauriLogicalPositionConstructor;
+import flighthq.types.TauriApi.TauriLogicalSizeConstructor;
+import flighthq.types.TauriApi.TauriLogicalSizeLike;
+import flighthq.types.TauriApi.TauriPhysicalPositionLike;
+import flighthq.types.TauriApi.TauriUnlisten;
 import flighthq.types.TauriApi.TauriWindow;
+import flighthq.types.TauriApi.TauriWindowModule;
 
 class TauriWindow {
   public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
-    var windowModule:Dynamic = cast _Runtime.UNDEFINED;
-    var windows:Dynamic = cast _Runtime.UNDEFINED;
-    var run:Dynamic = cast _Runtime.UNDEFINED;
-    windowModule = _Runtime.field(tauri, 'window');
+    var windowModule:TauriWindowModule = cast _Runtime.UNDEFINED;
+    var windows:flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow> = cast _Runtime.UNDEFINED;
+    var run:ApplicationWindow->flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+    windowModule = (cast tauri : TauriApi).window;
     windows = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-    run = function(win:ApplicationWindow, fn:Dynamic) {
-      var w:Dynamic = cast _Runtime.UNDEFINED;
-      w = ((cast windows : flighthq._internal._WeakMap).get(win));
+    run = (cast function(win:ApplicationWindow, fn:flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>):Void {
+      var w:Null<flighthq.types.TauriApi.TauriWindow> = cast _Runtime.UNDEFINED;
+      w = ((cast windows : flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow>).get(win));
       if ((cast _Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      flighthq._internal._Async.recover(_Runtime.callValue(fn, cast ([w] : Array<Dynamic>)), function() {
+      flighthq._internal._Async.recover((cast fn((cast w : flighthq.types.TauriApi.TauriWindow)) : flighthq._internal._Promise<flighthq._internal._Any>), function():Void {
 
       });
-    };
-    return cast { open: function(win:Dynamic, options:Dynamic) {
-      var w:Dynamic = cast _Runtime.UNDEFINED;
-      w = _Runtime.callProperty(windowModule, 'getCurrentWindow', cast ([] : Array<Dynamic>));
-      ((cast windows : flighthq._internal._WeakMap).set(win, w));
-      if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setTitle', cast ([options.title] : Array<Dynamic>)), function() {
+    } : ApplicationWindow->flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>->Void);
+    return cast { open: function(win:ApplicationWindow, options:WindowOptions):Bool {
+      var w:flighthq.types.TauriApi.TauriWindow = cast _Runtime.UNDEFINED;
+      w = (cast windowModule : TauriWindowModule).getCurrentWindow();
+      ((cast windows : flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow>).set(win, w));
+      if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setTitle(options.title), function():Void {
 
       }); }
       if ((cast ((cast !_Runtime.strictEquals(options.width, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(options.height, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [options.width, options.height])] : Array<Dynamic>)), function() {
+        flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [options.width, options.height])), function():Void {
 
         });
       }
       if ((cast ((cast !_Runtime.strictEquals(options.x, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(options.y, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setPosition', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalPosition'), [options.x, options.y])] : Array<Dynamic>)), function() {
+        flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setPosition(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalPosition, [options.x, options.y])), function():Void {
 
         });
       }
-      if ((cast !_Runtime.strictEquals(options.resizable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setResizable', cast ([options.resizable] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(options.resizable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setResizable(options.resizable), function():Void {
 
       }); }
-      if ((cast !_Runtime.strictEquals(options.alwaysOnTop, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setAlwaysOnTop', cast ([options.alwaysOnTop] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(options.alwaysOnTop, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setAlwaysOnTop(options.alwaysOnTop), function():Void {
 
       }); }
-      if ((cast !_Runtime.strictEquals(options.fullscreen, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setFullscreen', cast ([options.fullscreen] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(options.fullscreen, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setFullscreen(options.fullscreen), function():Void {
 
       }); }
       if ((cast ((cast !_Runtime.strictEquals(options.minWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(options.minHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setMinSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [options.minWidth, options.minHeight])] : Array<Dynamic>)), function() {
+        flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setMinSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [options.minWidth, options.minHeight])), function():Void {
 
         });
       }
       if ((cast ((cast ((cast !_Runtime.strictEquals(options.maxWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast options.maxWidth : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(options.maxHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        flighthq._internal._Async.recover(_Runtime.callProperty(w, 'setMaxSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [options.maxWidth, options.maxHeight])] : Array<Dynamic>)), function() {
+        flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).setMaxSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [options.maxWidth, options.maxHeight])), function():Void {
 
         });
       }
-      if (_Runtime.truthy(options.center)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'center', cast ([] : Array<Dynamic>)), function() {
+      if (_Runtime.truthy(options.center)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).center(), function():Void {
 
       }); }
-      if (_Runtime.truthy(options.maximized)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'maximize', cast ([] : Array<Dynamic>)), function() {
+      if (_Runtime.truthy(options.maximized)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).maximize(), function():Void {
 
       }); }
-      if (_Runtime.truthy(options.minimized)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'minimize', cast ([] : Array<Dynamic>)), function() {
+      if (_Runtime.truthy(options.minimized)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).minimize(), function():Void {
 
       }); }
-      if ((cast _Runtime.strictEquals(options.visible, false) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'hide', cast ([] : Array<Dynamic>)), function() {
+      if ((cast _Runtime.strictEquals(options.visible, false) : Bool)) { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).hide(), function():Void {
 
-      }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(w, 'show', cast ([] : Array<Dynamic>)), function() {
+      }); } else { flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).show(), function():Void {
 
       }); }
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onMoved', cast ([function(event:Dynamic) {
-        (win.x = cast (_Runtime.field(_Runtime.field(event, 'payload'), 'x') : Dynamic));
-        (win.y = cast (_Runtime.field(_Runtime.field(event, 'payload'), 'y') : Dynamic));
+      flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onMoved(function(event:{ var payload:TauriPhysicalPositionLike; }):Void {
+        (win.x = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).x : Dynamic));
+        (win.y = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).y : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
-      }] : Array<Dynamic>)), function() {
+      }), function():Void {
 
       });
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onResized', cast ([function(event:Dynamic) {
-        (win.width = cast (_Runtime.field(_Runtime.field(event, 'payload'), 'width') : Dynamic));
-        (win.height = cast (_Runtime.field(_Runtime.field(event, 'payload'), 'height') : Dynamic));
+      flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onResized(function(event:{ var payload:TauriLogicalSizeLike; }):Void {
+        (win.width = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).width : Dynamic));
+        (win.height = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).height : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
-      }] : Array<Dynamic>)), function() {
+      }), function():Void {
 
       });
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onFocusChanged', cast ([function(event:Dynamic) {
-        (win.focused = cast (_Runtime.field(event, 'payload') : Dynamic));
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast _Runtime.field(event, 'payload') : Bool) ? (cast win.onFocusIn : Dynamic) : (cast win.onFocusOut : Dynamic))]]), 1);
-      }] : Array<Dynamic>)), function() {
+      flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onFocusChanged(function(event:{ var payload:Bool; }):Void {
+        (win.focused = cast ((cast event : { var payload:Bool; }).payload : Dynamic));
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast (cast event : { var payload:Bool; }).payload : Bool) ? (cast win.onFocusIn : Dynamic) : (cast win.onFocusOut : Dynamic))]]), 1);
+      }), function():Void {
 
       });
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'onCloseRequested', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1)] : Array<Dynamic>)), function() {
+      flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onCloseRequested(function(__unused0:TauriCloseRequestedEvent):Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1)), function():Void {
 
       });
       return cast true;
-    }, close: function(win:Dynamic) {
-      var w:Dynamic = cast _Runtime.UNDEFINED;
-      w = ((cast windows : flighthq._internal._WeakMap).get(win));
+    }, close: function(win:ApplicationWindow):Void {
+      var w:Null<flighthq.types.TauriApi.TauriWindow> = cast _Runtime.UNDEFINED;
+      w = ((cast windows : flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow>).get(win));
       if ((cast _Runtime.strictEquals(w, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      flighthq._internal._Async.recover(_Runtime.callProperty(w, 'close', cast ([] : Array<Dynamic>)), function() {
+      flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).close(), function():Void {
 
       });
-      ((cast windows : flighthq._internal._WeakMap).delete_(win));
-    }, setTitle: function(win:Dynamic, title:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setTitle', cast ([title] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setPosition: function(win:Dynamic, x:Dynamic, y:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setPosition', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalPosition'), [x, y])] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [width, height])] : Array<Dynamic>))] : Array<Dynamic>));
-    }, getBounds: function(win:Dynamic, out:Dynamic) {
+      ((cast windows : flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow>).delete_(win));
+    }, setTitle: function(win:ApplicationWindow, title:String):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setTitle(title) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setPosition(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalPosition, [x, y])) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
       (out.x = cast (win.x : Dynamic));
       (out.y = cast (win.y : Dynamic));
       (out.width = cast (win.width : Dynamic));
       (out.height = cast (win.height : Dynamic));
       return cast out;
-    }, minimize: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'minimize', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, maximize: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'maximize', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, restore: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'unmaximize', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, focus: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setFocus', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, show: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'show', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, hide: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'hide', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, center: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'center', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setResizable: function(win:Dynamic, resizable:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setResizable', cast ([resizable] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setAlwaysOnTop: function(win:Dynamic, alwaysOnTop:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setAlwaysOnTop', cast ([alwaysOnTop] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setMinimumSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setMinSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [width, height])] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setMaximumSize: function(win:Dynamic, width:Dynamic, height:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setMaxSize', cast ([_Runtime.construct(_Runtime.field(windowModule, 'LogicalSize'), [width, height])] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setFullscreen: function(win:Dynamic, fullscreen:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setFullscreen', cast ([fullscreen] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setIcon: function(win:Dynamic, icon:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setIcon', cast ([icon] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setOpacity: function() {
+    }, minimize: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).minimize() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, maximize: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).maximize() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, restore: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).unmaximize() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, focus: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setFocus() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, show: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).show() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, hide: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).hide() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, center: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).center() : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setResizable: function(win:ApplicationWindow, resizable:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setResizable(resizable) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setAlwaysOnTop(alwaysOnTop) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setMinSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setMaxSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setFullscreen(fullscreen) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setIcon: function(win:ApplicationWindow, icon:String):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setIcon(icon) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setOpacity: function():Void {
 
-    }, setSkipTaskbar: function(win:Dynamic, skip:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setSkipTaskbar', cast ([skip] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setMenuBarVisible: function() {
+    }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setSkipTaskbar(skip) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setMenuBarVisible: function():Void {
 
-    }, setParent: function() {
+    }, setParent: function():Void {
 
-    }, setProgress: function() {
+    }, setProgress: function():Void {
 
-    }, requestAttention: function(win:Dynamic, attention:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'requestUserAttention', cast ([((cast attention : Bool) ? (cast 1.0 : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setContentProtection: function(win:Dynamic, enabled:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setContentProtected', cast ([enabled] : Array<Dynamic>))] : Array<Dynamic>));
-    }, flashWindowFrame: function(win:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'requestUserAttention', cast ([2.0] : Array<Dynamic>))] : Array<Dynamic>));
-    }, setHasShadow: function(win:Dynamic, hasShadow:Dynamic) {
-      _Runtime.callValue(run, cast ([win, function(w:Dynamic) return _Runtime.callProperty(w, 'setShadow', cast ([hasShadow] : Array<Dynamic>))] : Array<Dynamic>));
+    }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).requestUserAttention(((cast attention : Bool) ? (cast 1.0 : Dynamic) : (cast null : Dynamic))) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setContentProtected(enabled) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, flashWindowFrame: function(win:ApplicationWindow):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).requestUserAttention(2.0) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
+    }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
+      run((cast win : ApplicationWindow), (cast function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Nothing> return (cast w : flighthq.types.TauriApi.TauriWindow).setShadow(hasShadow) : flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>));
     } };
     return cast null;
   }

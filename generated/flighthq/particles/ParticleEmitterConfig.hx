@@ -3,6 +3,7 @@ package flighthq.particles;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
 
 class ParticleEmitterConfig {

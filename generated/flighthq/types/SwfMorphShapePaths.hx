@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SwfMorphShapePaths = { var fills:Dynamic; var lines:Dynamic; };
+typedef SwfMorphShapePaths = { var fills:flighthq._internal._Map<Float, { var end:Path; var start:Path; }>; var lines:flighthq._internal._Map<Float, { var end:Path; var start:Path; }>; };

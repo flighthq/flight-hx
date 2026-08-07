@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Skeleton2DAnimationTargetBinder = Dynamic;
+typedef Skeleton2DAnimationTargetBinder = AnimationChannel->Skeleton2D->Skeleton2D->flighthq._internal._Any->Float->Void;

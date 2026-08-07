@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlPbrExtensionShaderContext = { var hasTransmissionSceneColor:Dynamic; var isTextureReady:Dynamic; };
+typedef GlPbrExtensionShaderContext = { var hasTransmissionSceneColor:Void->Bool; var isTextureReady:Null<Texture>->Bool; };

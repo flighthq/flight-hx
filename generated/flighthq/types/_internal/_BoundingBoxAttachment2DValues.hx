@@ -7,5 +7,5 @@ import flighthq.types.Attachment2D;
 import flighthq.types.Skin2D;
 
 class _BoundingBoxAttachment2DValues {
-  public static final BoundingBoxAttachment2DKind:Dynamic = 'BoundingBoxAttachment2D';
+  public static final BoundingBoxAttachment2DKind:String = 'BoundingBoxAttachment2D';
 }

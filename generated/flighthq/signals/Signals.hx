@@ -12,52 +12,52 @@ import flighthq.types.SignalConnectOptions;
 import flighthq.types.SignalThrottleOptions;
 
 class Signals {
-  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function cancelSignal<T>(signal:Signal<T>):Void {
     Facade_Signals_flighthq_signals_Emitter.cancelSignal(signal);
   }
 
-  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function clearSignal<T>(signal:Signal<T>):Void {
     Facade_Signals_flighthq_signals_Slot.clearSignal(signal);
   }
 
-  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
+  public static function connectSignal<T>(signal:Signal<T>, slot:T, ?options:SignalConnectOptions):Void {
     Facade_Signals_flighthq_signals_Slot.connectSignal(signal, slot, options);
   }
 
-  public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
+  public static function connectSignalAtFrameRate(source:Signal<Float->Void>, fps:Float, slot:Float->Void):Void->Void {
     return cast Facade_Signals_flighthq_signals_Throttle.connectSignalAtFrameRate(source, fps, slot);
     return cast null;
   }
 
-  public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalDebounced<T>(source:Signal<T>, delayMs:Float, slot:T, ?options:SignalThrottleOptions):Void->Void {
     return cast Facade_Signals_flighthq_signals_Throttle.connectSignalDebounced(source, delayMs, slot, options);
     return cast null;
   }
 
-  public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalThrottled<T>(source:Signal<T>, intervalMs:Float, slot:T, ?options:SignalThrottleOptions):Void->Void {
     return cast Facade_Signals_flighthq_signals_Throttle.connectSignalThrottled(source, intervalMs, slot, options);
     return cast null;
   }
 
-  public static function createSignal<T>():Signal<Dynamic> {
+  public static function createSignal<T>():Signal<T> {
     return cast Facade_Signals_flighthq_signals_Signal.createSignal();
     return cast null;
   }
 
-  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
+  public static function disconnectSignal<T>(signal:Signal<T>, slot:T):Void {
     Facade_Signals_flighthq_signals_Slot.disconnectSignal(signal, slot);
   }
 
-  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
+  public static function emitSignal<T>(signal:Signal<T>, ...args:Dynamic):Void {
     _Runtime.callHaxeRestValue(Facade_Signals_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
   }
 
-  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
+  public static function hasSignalSlots<T>(signal:Signal<T>):Bool {
     return cast Facade_Signals_flighthq_signals_Slot.hasSignalSlots(signal);
     return cast null;
   }
 
-  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {
     return cast Facade_Signals_flighthq_signals_Slot.isSlotConnected(signal, slot);
     return cast null;
   }

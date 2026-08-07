@@ -12,9 +12,9 @@ class HslColor {
   }
 
   public static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
-    var q:Dynamic = cast _Runtime.UNDEFINED;
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    var hn:Dynamic = cast _Runtime.UNDEFINED;
+    var q:Float = cast _Runtime.UNDEFINED;
+    var p:Float = cast _Runtime.UNDEFINED;
+    var hn:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(out, 0.0, l);
       flighthq._internal._StaticIndex.writeArray(out, 1.0, l);
@@ -24,21 +24,21 @@ class HslColor {
     q = ((cast ((cast l : Float) < (cast 0.5 : Float)) : Bool) ? (cast (l * (1.0 + s)) : Dynamic) : (cast ((l + s) - (l * s)) : Dynamic));
     p = ((2.0 * l) - q);
     hn = (h / 360.0);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(HslColor.hueToRgbChannel__hslColor, cast ([p, q, (hn + (1.0 / 3.0))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(HslColor.hueToRgbChannel__hslColor, cast ([p, q, hn] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(HslColor.hueToRgbChannel__hslColor, cast ([p, q, (hn - (1.0 / 3.0))] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn + (1.0 / 3.0)) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast hn : Float)) : Float));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn - (1.0 / 3.0)) : Float)) : Float));
   }
 
   public static function rgbToHsl(out:flighthq.types.HslColor, color:Float):flighthq.types.HslColor {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var max:Float = cast _Runtime.UNDEFINED;
+    var min:Float = cast _Runtime.UNDEFINED;
+    var l:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var h:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
@@ -68,7 +68,7 @@ class HslColor {
   }
 
   public static function hueToRgbChannel__hslColor(p:Float, q:Float, t:Float):Float {
-    var tn:Dynamic = cast _Runtime.UNDEFINED;
+    var tn:Float = cast _Runtime.UNDEFINED;
     tn = _Runtime.fmod((_Runtime.fmod(t, 1.0) + 1.0), 1.0);
     if ((cast ((cast tn : Float) < (cast (1.0 / 6.0) : Float)) : Bool)) { return cast (p + (((q - p) * 6.0) * tn)); }
     if ((cast ((cast tn : Float) < (cast (1.0 / 2.0) : Float)) : Bool)) { return cast q; }

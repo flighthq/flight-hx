@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:Dynamic; @:optional var staggerEase:EasingFunction; };
+typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:flighthq._internal._Union2<String, Float>; @:optional var staggerEase:EasingFunction; };

@@ -10,14 +10,14 @@ import flighthq.types.ShapedRun;
 
 class EnableTextShaperGuards {
   public static function disableTextShaperGuards():Void {
-    _Runtime.callValue(setShapedRunReleaseGuard, cast ([null] : Array<Dynamic>));
+    setShapedRunReleaseGuard((cast null : Null<ShapedRun->Void>));
   }
 
   public static function enableTextShaperGuards():Void {
-    _Runtime.callValue(setShapedRunReleaseGuard, cast ([EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards] : Array<Dynamic>));
+    setShapedRunReleaseGuard((cast EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards : Null<ShapedRun->Void>));
   }
 
   public static function warnOnDoubleRelease__enableTextShaperGuards(_run:ShapedRun):Void {
-    _Runtime.callValue(logOnce, cast (['textshaper:double-release', LogLevel.Warn, { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' }, 'textshaper'] : Array<Dynamic>));
+    (cast logOnce((cast 'textshaper:double-release' : String), (cast LogLevel.Warn : LogLevel), { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' }, (cast 'textshaper' : Null<String>)) : Bool);
   }
 }

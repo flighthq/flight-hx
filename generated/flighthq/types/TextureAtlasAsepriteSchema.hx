@@ -16,10 +16,10 @@ typedef TextureAtlasAsepriteHashFrame = TextureAtlasAsepriteBaseFrame;
 
 typedef TextureAtlasAsepriteArrayFrame = { var duration:Float; var frame:TextureAtlasAsepriteRect; var rotated:Bool; var sourceSize:TextureAtlasAsepriteSize; var spriteSourceSize:TextureAtlasAsepriteRect; var trimmed:Bool; var filename:String; };
 
-typedef TextureAtlasAsepriteMeta = { var app:String; var format:String; @:optional var frameTags:Array<TextureAtlasAsepriteFrameTag>; var image:String; var scale:Dynamic; var size:TextureAtlasAsepriteSize; var version:String; };
+typedef TextureAtlasAsepriteMeta = { var app:String; var format:String; @:optional var frameTags:Array<TextureAtlasAsepriteFrameTag>; var image:String; var scale:flighthq._internal._Union2<Float, String>; var size:TextureAtlasAsepriteSize; var version:String; };
 
-typedef TextureAtlasAsepriteHashDocument = { var frames:Dynamic; var meta:TextureAtlasAsepriteMeta; };
+typedef TextureAtlasAsepriteHashDocument = { var frames:flighthq._internal._Record<String, TextureAtlasAsepriteHashFrame>; var meta:TextureAtlasAsepriteMeta; };
 
 typedef TextureAtlasAsepriteArrayDocument = { var frames:Array<TextureAtlasAsepriteArrayFrame>; var meta:TextureAtlasAsepriteMeta; };
 
-typedef TextureAtlasAsepriteDocument = Dynamic;
+typedef TextureAtlasAsepriteDocument = flighthq._internal._Union2<TextureAtlasAsepriteArrayDocument, TextureAtlasAsepriteHashDocument>;

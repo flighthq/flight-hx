@@ -10,5 +10,5 @@ import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Timeline;
 
 class _MovieClipValues {
-  public static final MovieClipKind:Dynamic = 'MovieClip';
+  public static final MovieClipKind:String = 'MovieClip';
 }

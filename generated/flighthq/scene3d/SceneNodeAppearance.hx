@@ -6,47 +6,50 @@ import flighthq._internal._Runtime;
 import flighthq.node.Revision.getNodeAppearanceRevision;
 import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3D.Node3DTraits;
 
 class SceneNodeAppearance {
   @:noCompletion
   public static function ensureNode3DWorldAlpha(source:Node3D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
-    var parentWorldAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var parentWorldAppearanceId:Dynamic = cast _Runtime.UNDEFINED;
-    var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>));
-    parent = (cast _Runtime.field(runtime, 'parent') : Null<Node3D>);
+    var runtime:Node3DRuntime = cast _Runtime.UNDEFINED;
+    var parent:Null<Node3D> = cast _Runtime.UNDEFINED;
+    var parentWorldAlpha:Float = cast _Runtime.UNDEFINED;
+    var parentWorldAppearanceId:Float = cast _Runtime.UNDEFINED;
+    var appearanceId:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getNode3DRuntime((cast source : Node3D)) : Node3DRuntime);
+    parent = (cast (cast runtime : { var parent:Null<Node<Node3DTraits>>; }).parent : Null<Node3D>);
     parentWorldAlpha = 1.0;
     parentWorldAppearanceId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      _Runtime.callValue(ensureNode3DWorldAlpha, cast ([parent] : Array<Dynamic>));
-      var parentRuntime:Dynamic = _Runtime.callValue(getNode3DRuntime, cast ([parent] : Array<Dynamic>));
-      (parentWorldAlpha = cast (_Runtime.field(parentRuntime, 'worldAlpha') : Dynamic));
-      (parentWorldAppearanceId = cast (_Runtime.field(parentRuntime, 'worldAppearanceId') : Dynamic));
+      ensureNode3DWorldAlpha((cast parent : Node3D));
+      var parentRuntime:Node3DRuntime = (cast getNode3DRuntime((cast parent : Node3D)) : Node3DRuntime);
+      (parentWorldAlpha = cast ((cast parentRuntime : { var worldAlpha:Null<Float>; }).worldAlpha : Dynamic));
+      (parentWorldAppearanceId = cast ((cast parentRuntime : { var worldAppearanceId:Float; }).worldAppearanceId : Dynamic));
     }
-    appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([source] : Array<Dynamic>));
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'worldAlpha'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingAppearanceId'), appearanceId) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(runtime, 'worldAlphaUsingParentAppearanceId'), parentWorldAppearanceId) : Bool)) : Bool)) {
-      _Runtime.setField(runtime, 'worldAlpha', (parentWorldAlpha * source.alpha));
-      _Runtime.setField(runtime, 'worldAlphaUsingAppearanceId', appearanceId);
-      _Runtime.setField(runtime, 'worldAlphaUsingParentAppearanceId', parentWorldAppearanceId);
+    appearanceId = (cast getNodeAppearanceRevision(source) : Float);
+    if ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : { var worldAlpha:Null<Float>; }).worldAlpha, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId, appearanceId) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId, parentWorldAppearanceId) : Bool)) : Bool)) {
+      ((cast runtime : { var worldAlpha:Null<Float>; }).worldAlpha = (parentWorldAlpha * source.alpha));
+      ((cast runtime : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = appearanceId);
+      ((cast runtime : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId = parentWorldAppearanceId);
       (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance + 1.0)), 0) : Dynamic));
       if ((cast _Runtime.strictEquals(SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance, 0.0) : Bool)) { (SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance = cast (1.0 : Dynamic)); }
-      _Runtime.setField(runtime, 'worldAppearanceId', SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance);
+      ((cast runtime : { var worldAppearanceId:Float; }).worldAppearanceId = SceneNodeAppearance._worldAppearanceRevisionCounter__sceneNodeAppearance);
     }
   }
 
   public static function getNode3DWorldAlpha(source:Node3D):Float {
-    _Runtime.callValue(ensureNode3DWorldAlpha, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>)), 'worldAlpha'), function():Dynamic return cast 1.0);
+    ensureNode3DWorldAlpha((cast source : Node3D));
+    return cast _Runtime.coalesce((cast (cast getNode3DRuntime((cast source : Node3D)) : Node3DRuntime) : { var worldAlpha:Null<Float>; }).worldAlpha, function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static function setNode3DAlpha(source:Node3D, alpha:Float):Void {
     (source.alpha = cast (alpha : Dynamic));
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    invalidateNodeAppearance(source);
   }
 
-  public static var _worldAppearanceRevisionCounter__sceneNodeAppearance:Dynamic = 0.0;
+  public static var _worldAppearanceRevisionCounter__sceneNodeAppearance:Float = 0.0;
 }

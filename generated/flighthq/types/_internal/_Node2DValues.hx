@@ -20,7 +20,7 @@ import flighthq.types.Node.NodeTraits;
 import flighthq.types.Scene2D;
 
 class _Node2DValues {
-  public static final DisplayObjectKind:Dynamic = 'DisplayObject';
+  public static final DisplayObjectKind:String = 'DisplayObject';
 
-  public static final Node2DTraitsKey:Dynamic = _Runtime.symbol('Node2DTraits');
+  public static final Node2DTraitsKey:flighthq._internal._Symbol = _Runtime.symbol('Node2DTraits');
 }

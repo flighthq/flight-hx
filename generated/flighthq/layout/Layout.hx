@@ -46,7 +46,7 @@ class Layout {
     Facade_Layout_flighthq_layout_LayoutState.registerLayoutResolver(state, kind, resolver);
   }
 
-  public static function resolveLayoutTree(out:flighthq._internal._Float32Array, state:LayoutState, tree:LayoutTree, intrinsicSizes:Dynamic, availableWidth:Float, availableHeight:Float):Bool {
+  public static function resolveLayoutTree(out:flighthq._internal._Float32Array, state:LayoutState, tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, availableWidth:Float, availableHeight:Float):Bool {
     return cast Facade_Layout_flighthq_layout_ResolveLayoutTree.resolveLayoutTree(out, state, tree, intrinsicSizes, availableWidth, availableHeight);
     return cast null;
   }

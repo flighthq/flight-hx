@@ -12,5 +12,5 @@ import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
 class _QuadBatchValues {
-  public static final QuadBatchKind:Dynamic = 'QuadBatch';
+  public static final QuadBatchKind:String = 'QuadBatch';
 }

@@ -8,6 +8,6 @@ typedef Velocity2D = { var x:Float; var y:Float; };
 
 typedef VelocitySample = { var previousWorldTransform:Null<Matrix>; var velocity:Velocity2D; var lastFrameId:Float; var explicitFrameId:Float; };
 
-typedef VelocityField = { var samples:Dynamic; var frameId:Float; };
+typedef VelocityField = { var samples:flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>; var frameId:Float; };
 
-typedef VelocityContributor = Dynamic;
+typedef VelocityContributor = VelocityField->flighthq._internal._Object->Void;

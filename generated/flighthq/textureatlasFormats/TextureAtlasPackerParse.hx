@@ -9,10 +9,14 @@ import flighthq.types.TextureAtlasPackerParseOptions;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerPivot;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerRect;
+import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerSize;
+import flighthq.types.TextureAtlasRegion;
 
 class TextureAtlasPackerParse {
   public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
+    TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse((cast atlas : TextureAtlas), (cast doc : TextureAtlasPackerDocument), (cast _Runtime.coalesce(options, function():Dynamic return cast {  }) : TextureAtlasPackerParseOptions));
     return cast atlas;
     return cast null;
   }
@@ -24,45 +28,45 @@ class TextureAtlasPackerParse {
     } catch (__error:Dynamic) {
       return cast atlas;
     }
-    _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
+    TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse((cast atlas : TextureAtlas), (cast doc : TextureAtlasPackerDocument), (cast _Runtime.coalesce(options, function():Dynamic return cast {  }) : TextureAtlasPackerParseOptions));
     return cast atlas;
     return cast null;
   }
 
   public static function applyDocument__textureAtlasPackerParse(atlas:TextureAtlas, doc:TextureAtlasPackerDocument, options:TextureAtlasPackerParseOptions):Void {
     _Runtime.setLength(atlas.regions, 0.0);
-    if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
-      for (entry in _Runtime.iterable(_Runtime.field(doc, 'frames'))) {
-        _Runtime.callValue(TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse, cast ([atlas, entry.filename, entry, options] : Array<Dynamic>));
+    if ((cast _Runtime.isArray((cast doc : { var frames:flighthq._internal._Union2<Array<TextureAtlasPackerArrayFrame>, flighthq._internal._Record<String, TextureAtlasPackerHashFrame>>; }).frames) : Bool)) {
+      for (entry in _Runtime.iterable((cast doc : { var frames:flighthq._internal._Union2<Array<TextureAtlasPackerArrayFrame>, flighthq._internal._Record<String, TextureAtlasPackerHashFrame>>; }).frames)) {
+        TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse((cast atlas : TextureAtlas), (cast entry.filename : String), (cast entry : flighthq._internal._Union2<TextureAtlasPackerArrayFrame, TextureAtlasPackerHashFrame>), (cast options : TextureAtlasPackerParseOptions));
       }
     } else {
-      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
-        var frameName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-        _Runtime.callValue(TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse, cast ([atlas, frameName, entry, options] : Array<Dynamic>));
+      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast doc : { var frames:flighthq._internal._Union2<Array<TextureAtlasPackerArrayFrame>, flighthq._internal._Record<String, TextureAtlasPackerHashFrame>>; }).frames))) {
+        var frameName:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var entry:TextureAtlasPackerHashFrame = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+        TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse((cast atlas : TextureAtlas), (cast frameName : String), (cast entry : flighthq._internal._Union2<TextureAtlasPackerArrayFrame, TextureAtlasPackerHashFrame>), (cast options : TextureAtlasPackerParseOptions));
       }
     }
   }
 
-  public static function applyFrame__textureAtlasPackerParse(atlas:TextureAtlas, name:String, entry:Dynamic, options:TextureAtlasPackerParseOptions):Void {
-    var frame:Dynamic = cast _Runtime.UNDEFINED;
-    var normalized:Dynamic = cast _Runtime.UNDEFINED;
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceSize:Dynamic = cast _Runtime.UNDEFINED;
-    var spriteSourceSize:Dynamic = cast _Runtime.UNDEFINED;
-    var region:Dynamic = cast _Runtime.UNDEFINED;
-    frame = _Runtime.field(entry, 'frame');
+  public static function applyFrame__textureAtlasPackerParse(atlas:TextureAtlas, name:String, entry:flighthq._internal._Union2<TextureAtlasPackerArrayFrame, TextureAtlasPackerHashFrame>, options:TextureAtlasPackerParseOptions):Void {
+    var frame:TextureAtlasPackerRect = cast _Runtime.UNDEFINED;
+    var normalized:String = cast _Runtime.UNDEFINED;
+    var trimmed:Bool = cast _Runtime.UNDEFINED;
+    var sourceSize:TextureAtlasPackerSize = cast _Runtime.UNDEFINED;
+    var spriteSourceSize:TextureAtlasPackerRect = cast _Runtime.UNDEFINED;
+    var region:TextureAtlasRegion = cast _Runtime.UNDEFINED;
+    frame = (cast entry : { var frame:TextureAtlasPackerRect; }).frame;
     if ((cast ((cast _Runtime.strictEquals(frame, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool)) { return; }
-    normalized = _Runtime.callValue(TextureAtlasPackerParse.normalizeFrameName__textureAtlasPackerParse, cast ([name, _Runtime.coalesce(options.stripPathPrefix, function():Dynamic return cast false)] : Array<Dynamic>));
-    trimmed = _Runtime.strictEquals(_Runtime.field(entry, 'trimmed'), true);
-    sourceSize = _Runtime.field(entry, 'sourceSize');
-    spriteSourceSize = _Runtime.field(entry, 'spriteSourceSize');
-    region = _Runtime.callValue(createTextureAtlasRegion, cast ([{ height: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast frame.w : Dynamic) : (cast frame.h : Dynamic)), id: _Runtime.field(atlas.regions, 'length'), name: normalized, originalHeight: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.h : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.w : Dynamic) : (cast null : Dynamic)), pivotX: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').x : Dynamic) : (cast null : Dynamic)), pivotY: ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'pivot'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(entry, 'pivot').y : Dynamic) : (cast null : Dynamic)), rotated: _Runtime.field(entry, 'rotated'), sourceX: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.x : Dynamic) : (cast 0.0 : Dynamic)), sourceY: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.y : Dynamic) : (cast 0.0 : Dynamic)), trimmed: trimmed, width: ((cast _Runtime.field(entry, 'rotated') : Bool) ? (cast frame.h : Dynamic) : (cast frame.w : Dynamic)), x: frame.x, y: frame.y }] : Array<Dynamic>));
+    normalized = (cast TextureAtlasPackerParse.normalizeFrameName__textureAtlasPackerParse((cast name : String), (cast _Runtime.coalesce(options.stripPathPrefix, function():Dynamic return cast false) : Bool)) : String);
+    trimmed = _Runtime.strictEquals((cast entry : { var trimmed:Bool; }).trimmed, true);
+    sourceSize = (cast entry : { var sourceSize:TextureAtlasPackerSize; }).sourceSize;
+    spriteSourceSize = (cast entry : { var spriteSourceSize:TextureAtlasPackerRect; }).spriteSourceSize;
+    region = (cast createTextureAtlasRegion((cast { height: ((cast (cast entry : { var rotated:Bool; }).rotated : Bool) ? (cast frame.w : Dynamic) : (cast frame.h : Dynamic)), id: _Runtime.field(atlas.regions, 'length'), name: normalized, originalHeight: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.h : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast ((cast trimmed : Bool) && (cast !_Runtime.strictEquals(sourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast sourceSize.w : Dynamic) : (cast null : Dynamic)), pivotX: ((cast !_Runtime.strictEquals((cast entry : { @:optional var pivot:Null<TextureAtlasPackerPivot>; }).pivot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast entry : { @:optional var pivot:Null<TextureAtlasPackerPivot>; }).pivot.x : Dynamic) : (cast null : Dynamic)), pivotY: ((cast !_Runtime.strictEquals((cast entry : { @:optional var pivot:Null<TextureAtlasPackerPivot>; }).pivot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast entry : { @:optional var pivot:Null<TextureAtlasPackerPivot>; }).pivot.y : Dynamic) : (cast null : Dynamic)), rotated: (cast entry : { var rotated:Bool; }).rotated, sourceX: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.x : Dynamic) : (cast 0.0 : Dynamic)), sourceY: ((cast !_Runtime.strictEquals(spriteSourceSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast spriteSourceSize.y : Dynamic) : (cast 0.0 : Dynamic)), trimmed: trimmed, width: ((cast (cast entry : { var rotated:Bool; }).rotated : Bool) ? (cast frame.h : Dynamic) : (cast frame.w : Dynamic)), x: frame.x, y: frame.y } : Null<flighthq._internal._Any>)) : TextureAtlasRegion);
     _Runtime.callProperty(atlas.regions, 'push', cast ([region] : Array<Dynamic>));
   }
 
   public static function normalizeFrameName__textureAtlasPackerParse(name:String, strip:Bool):String {
-    var slash:Dynamic = cast _Runtime.UNDEFINED;
+    var slash:Float = cast _Runtime.UNDEFINED;
     if ((cast !(cast strip : Bool) : Bool)) { return cast name; }
     slash = HxMath.max(_Runtime.callProperty(name, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(name, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
     return cast ((cast ((cast slash : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.slice(name, (slash + 1.0), null) : Dynamic) : (cast name : Dynamic));

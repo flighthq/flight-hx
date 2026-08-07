@@ -8,31 +8,35 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.texture.Texture.setTextureSource;
 import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.LoadScene2DImageResourcesOptions;
+import flighthq.types.Scene2DResources.Scene2DImageResourceLoadProgress;
 import flighthq.types.Scene2DResources.Scene2DImageResources;
+import flighthq.types.Signal;
+import flighthq.types.Texture;
 
 class LoadScene2DImageResources {
   public static function loadScene2DImageResources(document:Scene2DDocument, ?options:LoadScene2DImageResourcesOptions):flighthq._internal._Promise<Scene2DImageResources> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var selected:Dynamic = cast _Runtime.UNDEFINED;
-        var signal:Dynamic = cast _Runtime.UNDEFINED;
-        var fetch:Dynamic = cast _Runtime.UNDEFINED;
-        var loaded:Dynamic = cast _Runtime.UNDEFINED;
-        var images:Dynamic = cast _Runtime.UNDEFINED;
+        var selected:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
+        var signal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
+        var fetch:ImageResourceFetch = cast _Runtime.UNDEFINED;
+        var loaded:Float = cast _Runtime.UNDEFINED;
+        var images:Array<Null<Image>> = cast _Runtime.UNDEFINED;
         var resolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
         var unresolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
-        selected = _Runtime.callProperty(_Runtime.field(document, 'imageResources'), 'filter', cast ([function(reference:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
+        selected = _Runtime.callProperty((cast document : Scene2DDocument).imageResources, 'filter', cast ([function(reference:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
         signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
         fetch = _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast LoadScene2DImageResources.rejectExternalImageResource__loadScene2DImageResources);
         loaded = 0.0;
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(selected, 'map', cast ([function(reference:Dynamic):flighthq._internal._Promise<Null<Image>> {
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(selected, 'map', cast ([function(reference:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):flighthq._internal._Promise<Null<Image>> {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callValue(resolveImageResourceReference, cast ([reference, fetch, signal] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast resolveImageResourceReference((cast reference : ImageResourceReference), (cast fetch : ImageResourceFetch), (cast signal : flighthq._internal.dom.AbortSignal)) : Null<flighthq._internal._Any>), function(__awaitValue3:Dynamic):Dynamic {
                   return flighthq._internal._Async.flowReturn(__awaitValue3);
                 });
               }), function():Dynamic {
@@ -59,16 +63,16 @@ class LoadScene2DImageResources {
           resolved = cast ([] : Array<Dynamic>);
           unresolved = cast ([] : Array<Dynamic>);
           {
-            var i:Dynamic = 0.0;
+            var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(selected, 'length') : Float)) : Bool)) {
-              var reference:Dynamic = flighthq._internal._StaticIndex.readArray(selected, i);
-              var image:Dynamic = flighthq._internal._StaticIndex.readArray(images, i);
+              var reference:ImageResourceReference = flighthq._internal._StaticIndex.readArray(selected, i);
+              var image:Null<Image> = flighthq._internal._StaticIndex.readArray(images, i);
               if ((cast _Runtime.strictEquals(image, null) : Bool)) {
                 _Runtime.callProperty(unresolved, 'push', cast ([reference] : Array<Dynamic>));
                 i++;
                 continue;
               }
-              _Runtime.callValue(LoadScene2DImageResources.bindScene2DImageResourceTextures__loadScene2DImageResources, cast ([reference, image] : Array<Dynamic>));
+              LoadScene2DImageResources.bindScene2DImageResourceTextures__loadScene2DImageResources((cast reference : ImageResourceReference), (cast image : Image));
               _Runtime.callProperty(resolved, 'push', cast ([reference] : Array<Dynamic>));
               i++;
             }
@@ -80,17 +84,17 @@ class LoadScene2DImageResources {
   }
 
   public static function bindScene2DImageResourceTextures__loadScene2DImageResources(reference:ImageResourceReference, image:Image):Void {
-    var textures:Dynamic = cast _Runtime.UNDEFINED;
-    textures = _Runtime.field(reference, 'textures');
+    var textures:Null<Array<Texture>> = cast _Runtime.UNDEFINED;
+    textures = (cast reference : { @:optional var textures:Null<Array<Texture>>; }).textures;
     if ((cast _Runtime.strictEquals(textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(setTextureSource, cast ([flighthq._internal._StaticIndex.readArray(textures, i), image] : Array<Dynamic>));
+        setTextureSource(flighthq._internal._StaticIndex.readArray(textures, i), image);
         i++;
       }
     }
   }
 
-  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = function() return flighthq._internal._Async.resolve(null);
+  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = function(__unused4:ExternalImageResourceReference, __unused5:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq._internal._Any> return flighthq._internal._Async.resolve(null);
 }

@@ -8,5 +8,5 @@ import flighthq.types.Node2D.Node2DData;
 import flighthq.types.Node2D.Node2DRuntime;
 
 class _HtmlViewValues {
-  public static final HtmlViewKind:Dynamic = 'HtmlView';
+  public static final HtmlViewKind:String = 'HtmlView';
 }

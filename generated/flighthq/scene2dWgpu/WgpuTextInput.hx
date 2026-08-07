@@ -12,51 +12,53 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionEndIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
+import flighthq.types.TextInputState;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
 class WgpuTextInput {
   @:noCompletion
   public static function drawWgpuTextInputOverlay(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
-    var input:Dynamic = cast _Runtime.UNDEFINED;
-    var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
-    input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(input, null) : Bool) || (cast _Runtime.andValue(!(cast _Runtime.field(input, 'focused') : Bool), function():Dynamic return cast !(cast _Runtime.field(input, 'alwaysShowSelection') : Bool)) : Bool)) : Bool)) { return; }
-    firstVisibleLine = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    scrollXOffset = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
+    var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
+    var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
+    var scrollYOffset:Float = cast _Runtime.UNDEFINED;
+    var scrollXOffset:Float = cast _Runtime.UNDEFINED;
+    input = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
+    if ((cast ((cast _Runtime.strictEquals(input, null) : Bool) || (cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool)) : Bool)) { return; }
+    firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast result : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    _Runtime.callValue(getTextInputSelectionRectangles, cast ([WgpuTextInput.selectionRectangles__wgpuTextInput, source, result] : Array<Dynamic>));
+    getTextInputSelectionRectangles((cast WgpuTextInput.selectionRectangles__wgpuTextInput : Array<TextSelectionRectangle>), (cast source : RichText), (cast result : TextLayoutResult));
     if ((cast ((cast _Runtime.field(WgpuTextInput.selectionRectangles__wgpuTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'selectionColor')] : Array<Dynamic>)));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(input, 'selectionAlpha'));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast input : TextInputState).selectionAlpha);
       for (rect in _Runtime.iterable(WgpuTextInput.selectionRectangles__wgpuTextInput)) {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([_Runtime.subtractNumbers(_Runtime.field(rect, 'x'), scrollXOffset), _Runtime.subtractNumbers(_Runtime.field(rect, 'y'), scrollYOffset), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height')] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast rect : TextSelectionRectangle).x - scrollXOffset), ((cast rect : TextSelectionRectangle).y - scrollYOffset), (cast rect : TextSelectionRectangle).width, (cast rect : TextSelectionRectangle).height] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast _Runtime.field(input, 'focused') : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>))) : Bool)) : Bool)) {
-      _Runtime.callValue(getTextInputCaretRectangle, cast ([WgpuTextInput.caretRectangle__wgpuTextInput, source, result] : Array<Dynamic>));
+    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle((cast WgpuTextInput.caretRectangle__wgpuTextInput : TextSelectionRectangle), (cast source : RichText), (cast result : TextLayoutResult));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', WgpuTextInput.CARET_COLOR__wgpuTextInput);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
-      flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([_Runtime.subtractNumbers(_Runtime.field(WgpuTextInput.caretRectangle__wgpuTextInput, 'x'), scrollXOffset), _Runtime.subtractNumbers(_Runtime.field(WgpuTextInput.caretRectangle__wgpuTextInput, 'y'), scrollYOffset), WgpuTextInput.CARET_WIDTH__wgpuTextInput, _Runtime.field(WgpuTextInput.caretRectangle__wgpuTextInput, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset), ((cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset), WgpuTextInput.CARET_WIDTH__wgpuTextInput, (cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height] : Array<Dynamic>));
     }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static function enableWgpuTextInput():Void {
-    _Runtime.callValue(registerWgpuTextInputOverlay, cast ([drawWgpuTextInputOverlay] : Array<Dynamic>));
+    registerWgpuTextInputOverlay(drawWgpuTextInputOverlay);
   }
 
-  public static final CARET_COLOR__wgpuTextInput:Dynamic = '#000000';
+  public static final CARET_COLOR__wgpuTextInput:String = '#000000';
 
-  public static final CARET_WIDTH__wgpuTextInput:Dynamic = 1.0;
+  public static final CARET_WIDTH__wgpuTextInput:Float = 1.0;
 
-  public static final caretRectangle__wgpuTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
+  public static final caretRectangle__wgpuTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
 
   public static final selectionRectangles__wgpuTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 }

@@ -27,31 +27,54 @@ import flighthq.scene3dFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.scene3dFormats.Shared.SKINNED_FLOATS_PER_VERTEX;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.AnimationInterpolation;
+import flighthq.types.AnimationTrack;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfDraco.GltfDracoDecoder;
 import flighthq.types.GltfDraco.GltfDracoMesh;
 import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfExtension.GltfImportOptions;
 import flighthq.types.GltfSchema.GltfAccessor;
+import flighthq.types.GltfSchema.GltfAccessorSparse;
+import flighthq.types.GltfSchema.GltfAnimation;
+import flighthq.types.GltfSchema.GltfAnimationChannel;
+import flighthq.types.GltfSchema.GltfAnimationSampler;
 import flighthq.types.GltfSchema.GltfBuffer;
 import flighthq.types.GltfSchema.GltfBufferView;
+import flighthq.types.GltfSchema.GltfCamera;
 import flighthq.types.GltfSchema.GltfComponentType;
 import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfDracoMeshCompression;
 import flighthq.types.GltfSchema.GltfImage;
 import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMesh;
 import flighthq.types.GltfSchema.GltfMorphTarget;
 import flighthq.types.GltfSchema.GltfNode;
+import flighthq.types.GltfSchema.GltfNormalTextureInfo;
+import flighthq.types.GltfSchema.GltfOcclusionTextureInfo;
+import flighthq.types.GltfSchema.GltfPbrMetallicRoughness;
 import flighthq.types.GltfSchema.GltfPrimitive;
 import flighthq.types.GltfSchema.GltfSampler;
+import flighthq.types.GltfSchema.GltfScene3D;
+import flighthq.types.GltfSchema.GltfSkin;
+import flighthq.types.GltfSchema.GltfTexture;
 import flighthq.types.GltfSchema.GltfTextureInfo;
+import flighthq.types.GltfSchema.GltfTextureTransform;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialLike;
+import flighthq.types.Matrix4;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.PrimitiveTopology;
+import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Quaternion;
+import flighthq.types.Sampler;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.Scene3D;
@@ -63,15 +86,25 @@ import flighthq.types.Scene3DDocument.Scene3DDocumentCamera;
 import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
 import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
 import flighthq.types.Scene3DDocument.Scene3DDocumentSkin;
+import flighthq.types.Scene3DMetadata;
+import flighthq.types.StandardPbrMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Transform3D;
+import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Types.Node3DKind;
 import flighthq.types.Types.Scene3DAnimationPathRotation;
 import flighthq.types.Types.Scene3DAnimationPathScale;
 import flighthq.types.Types.Scene3DAnimationPathTranslation;
 import flighthq.types.Types.Scene3DAnimationPathWeights;
+import flighthq.types.Vector2;
+import flighthq.types.Vector3;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._Node3DValues.Node3DKind;
@@ -80,71 +113,71 @@ import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPath
 import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathTranslation;
 import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
 
-typedef GltfAccessorResult__gltfParse = { var count:Float; var data:Dynamic; var fault:Null<GltfAccessorFault__gltfParse>; };
+typedef GltfAccessorResult__gltfParse = { var count:Float; var data:flighthq._internal._ArrayLike<Float>; var fault:Null<GltfAccessorFault__gltfParse>; };
 
-typedef GltfAccessorFault__gltfParse = { var detail:Dynamic; var kind:String; };
+typedef GltfAccessorFault__gltfParse = { var detail:flighthq._internal._Record<String, Float>; var kind:String; };
 
-typedef ComponentArray__gltfParse = Dynamic;
+typedef ComponentArray__gltfParse = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Float32Array, flighthq._internal._Int8Array>, flighthq._internal._Int16Array>, flighthq._internal._UInt8Array>, flighthq._internal._UInt16Array>, flighthq._internal._UInt32Array>;
 
-typedef GltfDropTally__gltfParse = { var count:Float; var detail:Dynamic; var kind:String; var severity:ImportDiagnosticSeverity; };
+typedef GltfDropTally__gltfParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class GltfParse {
   public static function createScene3DFromGlb(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(GltfParse.createEmptyGltfDocument__gltfParse, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(GltfParse.buildGltfDocument__gltfParse, cast ([_Runtime.field(container, 'document'), _Runtime.field(container, 'binary'), options, diagnostics] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(container, 'document').scene, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    var container:Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }> = cast _Runtime.UNDEFINED;
+    container = (cast GltfParse.readGlbContainer__gltfParse((cast bytes : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }>);
+    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument) : Scene3DDocument), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D); }
+    return cast (cast createScene3DFromDocument((cast (cast GltfParse.buildGltfDocument__gltfParse((cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).document : GltfDocument), (cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).binary : Null<flighthq._internal._UInt8Array>), (cast options : Null<GltfImportOptions>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument) : Scene3DDocument), (cast _Runtime.coalesce((cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).document.scene, function():Dynamic return cast 0.0) : Float)) : Scene3D);
     return cast null;
   }
 
-  public static function createScene3DFromGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
-    doc = _Runtime.callValue(GltfParse.parseGltfSource__gltfParse, cast ([source, diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(GltfParse.createEmptyGltfDocument__gltfParse, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(GltfParse.buildGltfDocument__gltfParse, cast ([doc, null, options, diagnostics] : Array<Dynamic>)), _Runtime.coalesce(doc.scene, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+  public static function createScene3DFromGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
+    var doc:Null<GltfDocument> = cast _Runtime.UNDEFINED;
+    doc = (cast GltfParse.parseGltfSource__gltfParse((cast source : flighthq._internal._Union2<String, GltfDocument>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<GltfDocument>);
+    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument) : Scene3DDocument), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D); }
+    return cast (cast createScene3DFromDocument((cast (cast GltfParse.buildGltfDocument__gltfParse((cast doc : GltfDocument), (cast null : Null<flighthq._internal._UInt8Array>), (cast options : Null<GltfImportOptions>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument) : Scene3DDocument), (cast _Runtime.coalesce((cast doc : flighthq.types.GltfSchema.GltfDocument).scene, function():Dynamic return cast 0.0) : Float)) : Scene3D);
     return cast null;
   }
 
   public static function createScene3DsFromGlb(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Array<Scene3D> {
-    return cast _Runtime.callValue(createScene3DsFromDocument, cast ([_Runtime.callValue(parseGlb, cast ([bytes, diagnostics, options] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast createScene3DsFromDocument((cast (cast parseGlb((cast bytes : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>), (cast options : Null<GltfImportOptions>)) : Scene3DDocument) : Scene3DDocument)) : Array<Scene3D>);
     return cast null;
   }
 
-  public static function createScene3DsFromGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Array<Scene3D> {
-    return cast _Runtime.callValue(createScene3DsFromDocument, cast ([_Runtime.callValue(parseGltf, cast ([source, diagnostics, options] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function createScene3DsFromGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Array<Scene3D> {
+    return cast (cast createScene3DsFromDocument((cast (cast parseGltf((cast source : flighthq._internal._Union2<String, GltfDocument>), (cast diagnostics : Null<Array<ImportDiagnostic>>), (cast options : Null<GltfImportOptions>)) : Scene3DDocument) : Scene3DDocument)) : Array<Scene3D>);
     return cast null;
   }
 
   public static function parseGlb(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3DDocument {
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast _Runtime.callValue(GltfParse.createEmptyGltfDocument__gltfParse, cast ([] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(GltfParse.buildGltfDocument__gltfParse, cast ([_Runtime.field(container, 'document'), _Runtime.field(container, 'binary'), options, diagnostics] : Array<Dynamic>));
+    var container:Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }> = cast _Runtime.UNDEFINED;
+    container = (cast GltfParse.readGlbContainer__gltfParse((cast bytes : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }>);
+    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument); }
+    return cast (cast GltfParse.buildGltfDocument__gltfParse((cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).document : GltfDocument), (cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).binary : Null<flighthq._internal._UInt8Array>), (cast options : Null<GltfImportOptions>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument);
     return cast null;
   }
 
-  public static function parseGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3DDocument {
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
-    doc = _Runtime.callValue(GltfParse.parseGltfSource__gltfParse, cast ([source, diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast _Runtime.callValue(GltfParse.createEmptyGltfDocument__gltfParse, cast ([] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(GltfParse.buildGltfDocument__gltfParse, cast ([doc, null, options, diagnostics] : Array<Dynamic>));
+  public static function parseGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3DDocument {
+    var doc:Null<GltfDocument> = cast _Runtime.UNDEFINED;
+    doc = (cast GltfParse.parseGltfSource__gltfParse((cast source : flighthq._internal._Union2<String, GltfDocument>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<GltfDocument>);
+    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument); }
+    return cast (cast GltfParse.buildGltfDocument__gltfParse((cast doc : GltfDocument), (cast null : Null<flighthq._internal._UInt8Array>), (cast options : Null<GltfImportOptions>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument);
     return cast null;
   }
 
-  public static function parseGltfSource__gltfParse(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>):Null<GltfDocument> {
+  public static function parseGltfSource__gltfParse(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>):Null<GltfDocument> {
     var doc:GltfDocument = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'string') : Bool)) {
       try {
         (doc = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
       } catch (__error:Dynamic) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'gltf.invalid-json', 'parseGltfSource'] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'gltf.invalid-json' : String), (cast 'parseGltfSource' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         return cast null;
       }
     } else {
       (doc = cast (source : Dynamic));
     }
     if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'gltf.not-an-object', 'parseGltfSource'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'gltf.not-an-object' : String), (cast 'parseGltfSource' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     return cast doc;
@@ -157,52 +190,52 @@ class GltfParse {
   }
 
   public static function buildGltfDocument__gltfParse(doc:GltfDocument, binary:Null<flighthq._internal._UInt8Array>, options:Null<GltfImportOptions>, ?diagnostics:Array<ImportDiagnostic>):Scene3DDocument {
-    var gltfDrops:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var buffers:Dynamic = cast _Runtime.UNDEFINED;
-    var imageResources:Dynamic = cast _Runtime.UNDEFINED;
-    var resources:Dynamic = cast _Runtime.UNDEFINED;
+    var gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>> = cast _Runtime.UNDEFINED;
+    var version:Null<String> = cast _Runtime.UNDEFINED;
+    var buffers:Array<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+    var imageResources:Array<Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>> = cast _Runtime.UNDEFINED;
+    var resources:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
     var materials:Array<MaterialLike> = cast _Runtime.UNDEFINED;
     var meshes:Array<Scene3DDocumentMesh> = cast _Runtime.UNDEFINED;
     var gltfMeshToDocMeshes:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    var gltfNodes:Dynamic = cast _Runtime.UNDEFINED;
+    var gltfNodes:Array<GltfNode> = cast _Runtime.UNDEFINED;
     var nodes:Array<Scene3DDocumentNode> = cast _Runtime.UNDEFINED;
     var gltfNodeToDocNode:Array<Float> = cast _Runtime.UNDEFINED;
     var gltfNodePrimitiveNodes:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    var skins:Dynamic = cast _Runtime.UNDEFINED;
-    var scenes:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeWorldTransforms:Dynamic = cast _Runtime.UNDEFINED;
-    var cameras:Dynamic = cast _Runtime.UNDEFINED;
+    var skins:Array<Scene3DDocumentSkin> = cast _Runtime.UNDEFINED;
+    var scenes:Array<{ var name:Null<String>; var rootNodes:Array<Float>; }> = cast _Runtime.UNDEFINED;
+    var animations:Array<Scene3DDocumentAnimation> = cast _Runtime.UNDEFINED;
+    var nodeWorldTransforms:Array<Transform3D> = cast _Runtime.UNDEFINED;
+    var cameras:Array<Scene3DDocumentCamera> = cast _Runtime.UNDEFINED;
     var document:Scene3DDocument = cast _Runtime.UNDEFINED;
     gltfDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     version = _Runtime.optionalField(doc.asset, 'version');
-    if ((cast ((cast _Runtime.strictEquals(version, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isSupportedGltfVersion__gltfParse, cast ([version] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.unsupported-version', '', { version: _Runtime.coalesce(version, function():Dynamic return cast '(missing)') }] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(version, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast GltfParse.isSupportedGltfVersion__gltfParse((cast version : String)) : Bool) : Bool) : Bool)) : Bool)) {
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.unsupported-version' : String), (cast '' : String), (cast { version: _Runtime.coalesce(version, function():Dynamic return cast '(missing)') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
     if ((cast !_Runtime.strictEquals(doc.extensionsRequired, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (extension in _Runtime.iterable(doc.extensionsRequired)) {
-        if ((cast _Runtime.callValue(GltfParse.isSupportedGltfExtension__gltfParse, cast ([extension, ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.extensionHandlers; })] : Array<Dynamic>)) : Bool)) { continue; }
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Skip, 'gltf.unsupported-required-extension', '', { firstExtension: extension }] : Array<Dynamic>));
+        if ((cast (cast GltfParse.isSupportedGltfExtension__gltfParse((cast extension : String), (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : flighthq.types.GltfExtension.GltfImportOptions).extensionHandlers; }) : Null<Array<GltfExtensionHandler>>)) : Bool) : Bool)) { continue; }
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'gltf.unsupported-required-extension' : String), (cast '' : String), (cast { firstExtension: extension } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       }
     }
-    buffers = _Runtime.callProperty(_Runtime.coalesce(doc.buffers, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(buffer:Dynamic) return _Runtime.callValue(GltfParse.decodeGltfBuffer__gltfParse, cast ([buffer, binary, options, gltfDrops] : Array<Dynamic>))] : Array<Dynamic>));
-    imageResources = _Runtime.callProperty(_Runtime.coalesce(doc.images, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(image:Dynamic, i:Dynamic) return _Runtime.callValue(GltfParse.buildGltfImageResourceReference__gltfParse, cast ([doc, buffers, image, options, i, gltfDrops] : Array<Dynamic>))] : Array<Dynamic>));
-    resources = _Runtime.callProperty(imageResources, 'filter', cast ([function(resource:Dynamic) return !_Runtime.strictEquals(resource, null)] : Array<Dynamic>));
-    materials = _Runtime.callProperty(_Runtime.coalesce(doc.materials, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(material:Dynamic) return (cast _Runtime.callValue(GltfParse.gltfMaterialToPbr__gltfParse, cast ([doc, imageResources, material, gltfDrops] : Array<Dynamic>)) : MaterialLike)] : Array<Dynamic>));
+    buffers = _Runtime.callProperty(_Runtime.coalesce(doc.buffers, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(buffer:GltfBuffer, __unused0:Float, __unused1:Array<GltfBuffer>):flighthq._internal._UInt8Array return (cast GltfParse.decodeGltfBuffer__gltfParse((cast buffer : GltfBuffer), (cast binary : Null<flighthq._internal._UInt8Array>), (cast options : Null<GltfImportOptions>), gltfDrops) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
+    imageResources = _Runtime.callProperty(_Runtime.coalesce(doc.images, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(image:GltfImage, i:Float, __unused2:Array<GltfImage>):Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> return (cast GltfParse.buildGltfImageResourceReference__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast image : GltfImage), (cast options : Null<GltfImportOptions>), (cast i : Float), gltfDrops) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>)] : Array<Dynamic>));
+    resources = _Runtime.callProperty(imageResources, 'filter', cast ([function(resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>, __unused3:Float, __unused4:Array<Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>>):Bool return !_Runtime.strictEquals(resource, null)] : Array<Dynamic>));
+    materials = _Runtime.callProperty(_Runtime.coalesce(doc.materials, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(material:GltfMaterial, __unused5:Float, __unused6:Array<GltfMaterial>):MaterialLike return (cast (cast GltfParse.gltfMaterialToPbr__gltfParse((cast doc : GltfDocument), imageResources, (cast material : GltfMaterial), gltfDrops) : MaterialLike) : MaterialLike)] : Array<Dynamic>));
     meshes = cast ([] : Array<Dynamic>);
-    gltfMeshToDocMeshes = _Runtime.callProperty(_Runtime.coalesce(doc.meshes, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(gltfMesh:Dynamic) {
+    gltfMeshToDocMeshes = _Runtime.callProperty(_Runtime.coalesce(doc.meshes, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(gltfMesh:GltfMesh, __unused7:Float, __unused8:Array<GltfMesh>):Array<Float> {
       var docMeshIndices:Array<Float> = cast _Runtime.UNDEFINED;
       docMeshIndices = cast ([] : Array<Dynamic>);
       {
-        var p:Dynamic = 0.0;
+        var p:Float = 0.0;
         while ((cast ((cast p : Float) < (cast _Runtime.field(gltfMesh.primitives, 'length') : Float)) : Bool)) {
-          var primitive:Dynamic = flighthq._internal._StaticIndex.readArray(gltfMesh.primitives, p);
-          var geometry:Dynamic = _Runtime.callValue(GltfParse.primitiveToGeometry__gltfParse, cast ([doc, buffers, primitive, gltfDrops] : Array<Dynamic>));
+          var primitive:GltfPrimitive = flighthq._internal._StaticIndex.readArray(gltfMesh.primitives, p);
+          var geometry:Null<MeshGeometry> = (cast GltfParse.primitiveToGeometry__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast primitive : GltfPrimitive), gltfDrops) : Null<MeshGeometry>);
           if ((cast _Runtime.strictEquals(geometry, null) : Bool)) { p++; continue; }
-          var morph:Dynamic = _Runtime.callValue(GltfParse.buildGltfMorph__gltfParse, cast ([doc, buffers, primitive, gltfMesh.weights, _Runtime.callValue(getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>)), gltfDrops] : Array<Dynamic>));
+          var morph:Null<MeshMorph> = (cast GltfParse.buildGltfMorph__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast primitive : GltfPrimitive), (cast gltfMesh.weights : Null<Array<Float>>), (cast (cast getMeshGeometryVertexCount((cast geometry : MeshGeometry)) : Float) : Float), gltfDrops) : Null<MeshMorph>);
           var documentMesh:Scene3DDocumentMesh = { geometry: geometry, materials: ((cast !_Runtime.strictEquals(primitive.material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast cast ([primitive.material] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) };
-          if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(documentMesh, 'morph', morph); }
+          if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).morph = morph); }
           _Runtime.callProperty(docMeshIndices, 'push', cast ([_Runtime.field(meshes, 'length')] : Array<Dynamic>));
           _Runtime.callProperty(meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
           p++;
@@ -213,14 +246,14 @@ class GltfParse {
     gltfNodes = _Runtime.coalesce(doc.nodes, function():Dynamic return cast cast ([] : Array<Dynamic>));
     nodes = cast ([] : Array<Dynamic>);
     gltfNodeToDocNode = _Runtime.createArray(_Runtime.field(gltfNodes, 'length'));
-    gltfNodePrimitiveNodes = _Runtime.callProperty(gltfNodes, 'map', cast ([function() return cast ([] : Array<Dynamic>)] : Array<Dynamic>));
+    gltfNodePrimitiveNodes = _Runtime.callProperty(gltfNodes, 'map', cast ([function(__unused9:GltfNode, __unused10:Float, __unused11:Array<GltfNode>):Array<flighthq._internal._Any> return cast ([] : Array<Dynamic>)] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(gltfNodes, 'length') : Float)) : Bool)) {
-        var gltfNode:Dynamic = flighthq._internal._StaticIndex.readArray(gltfNodes, i);
-        var transform:Dynamic = _Runtime.callValue(GltfParse.gltfNodeTransform__gltfParse, cast ([gltfNode] : Array<Dynamic>));
-        var docMeshes:Dynamic = ((cast !_Runtime.strictEquals(gltfNode.mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(gltfMeshToDocMeshes, gltfNode.mesh) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-        var nodeIndex:Dynamic = _Runtime.field(nodes, 'length');
+        var gltfNode:GltfNode = flighthq._internal._StaticIndex.readArray(gltfNodes, i);
+        var transform:Transform3D = (cast GltfParse.gltfNodeTransform__gltfParse((cast gltfNode : GltfNode)) : Transform3D);
+        var docMeshes:Null<Array<Float>> = ((cast !_Runtime.strictEquals(gltfNode.mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(gltfMeshToDocMeshes, gltfNode.mesh) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+        var nodeIndex:Float = _Runtime.field(nodes, 'length');
         flighthq._internal._StaticIndex.writeArray(gltfNodeToDocNode, i, nodeIndex);
         if ((cast ((cast !_Runtime.strictEquals(docMeshes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(docMeshes, 'length'), 1.0) : Bool)) : Bool)) {
           _Runtime.callProperty(nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: flighthq._internal._StaticIndex.readArray(docMeshes, 0.0), name: gltfNode.name, transform: transform }] : Array<Dynamic>));
@@ -228,12 +261,12 @@ class GltfParse {
           var group:Scene3DDocumentNode = { children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: gltfNode.name, transform: transform };
           _Runtime.callProperty(nodes, 'push', cast ([group] : Array<Dynamic>));
           {
-            var m:Dynamic = 0.0;
+            var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(docMeshes, 'length') : Float)) : Bool)) {
-              var childIndex:Dynamic = _Runtime.field(nodes, 'length');
-              _Runtime.callProperty(_Runtime.field(group, 'children'), 'push', cast ([childIndex] : Array<Dynamic>));
+              var childIndex:Float = _Runtime.field(nodes, 'length');
+              _Runtime.callProperty((cast group : Scene3DDocumentNode).children, 'push', cast ([childIndex] : Array<Dynamic>));
               _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, i), 'push', cast ([childIndex] : Array<Dynamic>));
-              _Runtime.callProperty(nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: flighthq._internal._StaticIndex.readArray(docMeshes, m), transform: _Runtime.callValue(GltfParse.createIdentityTransform__gltfParse, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+              _Runtime.callProperty(nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: flighthq._internal._StaticIndex.readArray(docMeshes, m), transform: (cast GltfParse.createIdentityTransform__gltfParse() : Transform3D) }] : Array<Dynamic>));
               m++;
             }
           }
@@ -244,92 +277,92 @@ class GltfParse {
       }
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(gltfNodes, 'length') : Float)) : Bool)) {
-        var children:Dynamic = flighthq._internal._StaticIndex.readArray(gltfNodes, i).children;
+        var children:Null<Array<Float>> = flighthq._internal._StaticIndex.readArray(gltfNodes, i).children;
         if ((cast _Runtime.strictEquals(children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var parent:Dynamic = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, i));
+        var parent:Scene3DDocumentNode = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, i));
         {
-          var c:Dynamic = 0.0;
+          var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(_Runtime.field(parent, 'children'), 'push', cast ([flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, flighthq._internal._StaticIndex.readArray(children, c))] : Array<Dynamic>));
+            _Runtime.callProperty((cast parent : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, flighthq._internal._StaticIndex.readArray(children, c))] : Array<Dynamic>));
             c++;
           }
         }
         i++;
       }
     }
-    skins = _Runtime.callValue(GltfParse.buildGltfSkins__gltfParse, cast ([doc, buffers, gltfNodeToDocNode, gltfDrops] : Array<Dynamic>));
+    skins = (cast GltfParse.buildGltfSkins__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast gltfNodeToDocNode : Array<Float>), gltfDrops) : Array<Scene3DDocumentSkin>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(gltfNodes, 'length') : Float)) : Bool)) {
-        var skinIndex:Dynamic = flighthq._internal._StaticIndex.readArray(gltfNodes, i).skin;
+        var skinIndex:Null<Float> = flighthq._internal._StaticIndex.readArray(gltfNodes, i).skin;
         if ((cast ((cast _Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(gltfNodes, i).mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
-        var meshIndicesForNode:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(gltfMeshToDocMeshes, (cast flighthq._internal._StaticIndex.readArray(gltfNodes, i).mesh : Float)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+        var meshIndicesForNode:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(gltfMeshToDocMeshes, (cast flighthq._internal._StaticIndex.readArray(gltfNodes, i).mesh : Float)), function():Dynamic return cast cast ([] : Array<Dynamic>));
         {
-          var m:Dynamic = 0.0;
+          var m:Float = 0.0;
           while ((cast ((cast m : Float) < (cast _Runtime.field(meshIndicesForNode, 'length') : Float)) : Bool)) {
-            _Runtime.setField(flighthq._internal._StaticIndex.readArray(meshes, flighthq._internal._StaticIndex.readArray(meshIndicesForNode, m)), 'skin', skinIndex);
+            ((cast flighthq._internal._StaticIndex.readArray(meshes, flighthq._internal._StaticIndex.readArray(meshIndicesForNode, m)) : Scene3DDocumentMesh).skin = skinIndex);
             m++;
           }
         }
         i++;
       }
     }
-    scenes = _Runtime.callProperty(_Runtime.coalesce(doc.scenes, function():Dynamic return cast cast ([{ nodes: _Runtime.callValue(GltfParse.topLevelNodeIndices__gltfParse, cast ([gltfNodes] : Array<Dynamic>)) }] : Array<Dynamic>)), 'map', cast ([function(scene:Dynamic) return { name: scene.name, rootNodes: _Runtime.callProperty(_Runtime.coalesce(scene.nodes, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(n:Dynamic) return flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, n)] : Array<Dynamic>)) }] : Array<Dynamic>));
-    animations = _Runtime.callValue(GltfParse.buildGltfAnimations__gltfParse, cast ([doc, buffers, gltfNodeToDocNode, gltfNodePrimitiveNodes, nodes, meshes, gltfDrops] : Array<Dynamic>));
-    nodeWorldTransforms = _Runtime.callValue(GltfParse.buildGltfNodeWorldTransforms__gltfParse, cast ([gltfNodes, gltfDrops] : Array<Dynamic>));
-    cameras = _Runtime.callValue(GltfParse.buildGltfCameras__gltfParse, cast ([doc, gltfNodes, gltfNodeToDocNode, nodeWorldTransforms, gltfDrops] : Array<Dynamic>));
-    document = { animations: animations, cameras: cameras, lights: cast ([] : Array<Dynamic>), materials: materials, meshes: meshes, metadata: _Runtime.callValue(GltfParse.buildGltfMetadata__gltfParse, cast ([doc] : Array<Dynamic>)), nodes: nodes, resources: resources, scenes: scenes, skins: skins };
-    _Runtime.callValue(GltfParse.applyGltfExtensionHandlers__gltfParse, cast ([document, doc, imageResources, gltfNodeToDocNode, nodeWorldTransforms, ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.extensionHandlers; }), gltfDrops, diagnostics] : Array<Dynamic>));
+    scenes = _Runtime.callProperty(_Runtime.coalesce(doc.scenes, function():Dynamic return cast cast ([{ nodes: (cast GltfParse.topLevelNodeIndices__gltfParse((cast gltfNodes : Array<GltfNode>)) : Null<Array<Float>>) }] : Array<Dynamic>)), 'map', cast ([function(scene:GltfScene3D, __unused12:Float, __unused13:Array<GltfScene3D>):{ var name:Null<String>; var rootNodes:Array<Float>; } return { name: scene.name, rootNodes: _Runtime.callProperty(_Runtime.coalesce(scene.nodes, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(n:Float, __unused14:Float, __unused15:Array<Float>):Float return flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, n)] : Array<Dynamic>)) }] : Array<Dynamic>));
+    animations = (cast GltfParse.buildGltfAnimations__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast gltfNodeToDocNode : Array<Float>), (cast gltfNodePrimitiveNodes : Array<Array<Float>>), (cast nodes : Array<Scene3DDocumentNode>), (cast meshes : Array<Scene3DDocumentMesh>), gltfDrops) : Array<Scene3DDocumentAnimation>);
+    nodeWorldTransforms = (cast GltfParse.buildGltfNodeWorldTransforms__gltfParse((cast gltfNodes : Array<GltfNode>), gltfDrops) : Array<Transform3D>);
+    cameras = (cast GltfParse.buildGltfCameras__gltfParse((cast doc : GltfDocument), (cast gltfNodes : Array<GltfNode>), (cast gltfNodeToDocNode : Array<Float>), (cast nodeWorldTransforms : Array<Transform3D>), gltfDrops) : Array<Scene3DDocumentCamera>);
+    document = { animations: animations, cameras: cameras, lights: cast ([] : Array<Dynamic>), materials: materials, meshes: meshes, metadata: (cast GltfParse.buildGltfMetadata__gltfParse((cast doc : GltfDocument)) : Null<Scene3DMetadata>), nodes: nodes, resources: resources, scenes: scenes, skins: skins };
+    GltfParse.applyGltfExtensionHandlers__gltfParse((cast document : Scene3DDocument), (cast doc : GltfDocument), imageResources, (cast gltfNodeToDocNode : Array<Float>), (cast nodeWorldTransforms : Array<Transform3D>), (cast ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : flighthq.types.GltfExtension.GltfImportOptions).extensionHandlers; }) : Null<Array<GltfExtensionHandler>>), gltfDrops, (cast diagnostics : Null<Array<ImportDiagnostic>>));
     if ((cast !_Runtime.strictEquals(gltfDrops, null) : Bool)) {
-      for (tally in _Runtime.iterable(((cast gltfDrops : flighthq._internal._Map).values()))) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, _Runtime.field(tally, 'severity'), _Runtime.field(tally, 'kind'), 'buildGltfDocument', _Runtime.mergeObjects([_Runtime.field(tally, 'detail'), { count: _Runtime.field(tally, 'count') }])] : Array<Dynamic>));
+      for (tally in _Runtime.iterable(((cast gltfDrops : flighthq._internal._Map<String, GltfDropTally__gltfParse>).values()))) {
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast tally : GltfDropTally__gltfParse).severity : ImportDiagnosticSeverity), (cast (cast tally : GltfDropTally__gltfParse).kind : String), (cast 'buildGltfDocument' : String), (cast _Runtime.mergeObjects([(cast tally : GltfDropTally__gltfParse).detail, { count: (cast tally : GltfDropTally__gltfParse).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     }
     return cast document;
     return cast null;
   }
 
-  public static function buildGltfCameras__gltfParse(doc:GltfDocument, nodes:Array<GltfNode>, nodeIndices:Array<Float>, nodeWorldTransforms:Array<Transform3D>, gltfDrops:Null<Dynamic>):Array<Scene3DDocumentCamera> {
+  public static function buildGltfCameras__gltfParse(doc:GltfDocument, nodes:Array<GltfNode>, nodeIndices:Array<Float>, nodeWorldTransforms:Array<Transform3D>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Array<Scene3DDocumentCamera> {
     var cameras:Array<Scene3DDocumentCamera> = cast _Runtime.UNDEFINED;
-    var definitions:Dynamic = cast _Runtime.UNDEFINED;
+    var definitions:Array<GltfCamera> = cast _Runtime.UNDEFINED;
     cameras = cast ([] : Array<Dynamic>);
     definitions = _Runtime.coalesce(doc.cameras, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var node:Dynamic = 0.0;
+      var node:Float = 0.0;
       while ((cast ((cast node : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        var cameraIndex:Dynamic = flighthq._internal._StaticIndex.readArray(nodes, node).camera;
+        var cameraIndex:Null<Float> = flighthq._internal._StaticIndex.readArray(nodes, node).camera;
         if ((cast _Runtime.strictEquals(cameraIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { node++; continue; }
-        var definition:Dynamic = flighthq._internal._StaticIndex.readArray(definitions, cameraIndex);
+        var definition:GltfCamera = flighthq._internal._StaticIndex.readArray(definitions, cameraIndex);
         if ((cast _Runtime.strictEquals(definition, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.camera-missing', '', { firstCamera: cameraIndex, firstNode: node }] : Array<Dynamic>));
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.camera-missing' : String), (cast '' : String), (cast { firstCamera: cameraIndex, firstNode: node } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           node++;
           continue;
         }
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(definition, 'type'), 'perspective') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(definition, 'perspective'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-          var perspective:Dynamic = _Runtime.field(definition, 'perspective');
-          if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.compare(_Runtime.field(perspective, 'yfov'), 0.0, '>') : Bool) : Bool) || (cast ((cast _Runtime.field(perspective, 'yfov') : Float) >= (cast HxMath.PI : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(perspective, 'znear'), 0.0, '>') : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(perspective, 'zfar'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !(cast _Runtime.compare(_Runtime.field(perspective, 'zfar'), _Runtime.field(perspective, 'znear'), '>') : Bool)) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(perspective, 'aspectRatio'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !(cast _Runtime.compare(_Runtime.field(perspective, 'aspectRatio'), 0.0, '>') : Bool)) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.camera-invalid-perspective', '', { firstCamera: cameraIndex }] : Array<Dynamic>));
+        if ((cast ((cast _Runtime.strictEquals((cast definition : GltfCamera).type, 'perspective') : Bool) && (cast !_Runtime.strictEquals((cast definition : GltfCamera).perspective, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          var perspective:{ @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; } = (cast definition : GltfCamera).perspective;
+          if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.compare((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).yfov, 0.0, '>') : Bool) : Bool) || (cast ((cast (cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).yfov : Float) >= (cast HxMath.PI : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).znear, 0.0, '>') : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).zfar, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !(cast _Runtime.compare((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).zfar, (cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).znear, '>') : Bool)) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).aspectRatio, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !(cast _Runtime.compare((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).aspectRatio, 0.0, '>') : Bool)) : Bool)) : Bool)) {
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.camera-invalid-perspective' : String), (cast '' : String), (cast { firstCamera: cameraIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             node++;
             continue;
           }
-          _Runtime.callProperty(cameras, 'push', cast ([{ far: _Runtime.coalesce(_Runtime.field(perspective, 'zfar'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), name: _Runtime.field(definition, 'name'), near: _Runtime.field(perspective, 'znear'), node: flighthq._internal._StaticIndex.readArray(nodeIndices, node), projection: { aspect: _Runtime.coalesce(_Runtime.field(perspective, 'aspectRatio'), function():Dynamic return cast 1.0), fovY: _Runtime.field(perspective, 'yfov'), kind: 'perspective' }, transform: _Runtime.callValue(GltfParse.cloneGltfTransform__gltfParse, cast ([flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node)] : Array<Dynamic>)) }] : Array<Dynamic>));
+          _Runtime.callProperty(cameras, 'push', cast ([{ far: _Runtime.coalesce((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).zfar, function():Dynamic return cast HxMath.POSITIVE_INFINITY), name: (cast definition : GltfCamera).name, near: (cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).znear, node: flighthq._internal._StaticIndex.readArray(nodeIndices, node), projection: { aspect: _Runtime.coalesce((cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).aspectRatio, function():Dynamic return cast 1.0), fovY: (cast perspective : { @:optional var aspectRatio:Null<Float>; var yfov:Float; @:optional var zfar:Null<Float>; var znear:Float; }).yfov, kind: 'perspective' }, transform: (cast GltfParse.cloneGltfTransform__gltfParse((cast flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node) : Transform3D)) : Transform3D) }] : Array<Dynamic>));
           node++;
           continue;
         }
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(definition, 'type'), 'orthographic') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(definition, 'orthographic'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-          var orthographic:Dynamic = _Runtime.field(definition, 'orthographic');
-          if ((cast ((cast ((cast ((cast !(cast _Runtime.compare(_Runtime.field(orthographic, 'xmag'), 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(orthographic, 'ymag'), 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(orthographic, 'znear'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(orthographic, 'zfar'), _Runtime.field(orthographic, 'znear'), '>') : Bool) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.camera-invalid-orthographic', '', { firstCamera: cameraIndex }] : Array<Dynamic>));
+        if ((cast ((cast _Runtime.strictEquals((cast definition : GltfCamera).type, 'orthographic') : Bool) && (cast !_Runtime.strictEquals((cast definition : GltfCamera).orthographic, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          var orthographic:{ var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; } = (cast definition : GltfCamera).orthographic;
+          if ((cast ((cast ((cast ((cast !(cast _Runtime.compare((cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).xmag, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare((cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).ymag, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).znear, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).zfar, (cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).znear, '>') : Bool) : Bool)) : Bool)) {
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.camera-invalid-orthographic' : String), (cast '' : String), (cast { firstCamera: cameraIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             node++;
             continue;
           }
-          _Runtime.callProperty(cameras, 'push', cast ([{ far: _Runtime.field(orthographic, 'zfar'), name: _Runtime.field(definition, 'name'), near: _Runtime.field(orthographic, 'znear'), node: flighthq._internal._StaticIndex.readArray(nodeIndices, node), projection: { halfHeight: _Runtime.field(orthographic, 'ymag'), halfWidth: _Runtime.field(orthographic, 'xmag'), kind: 'orthographic' }, transform: _Runtime.callValue(GltfParse.cloneGltfTransform__gltfParse, cast ([flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node)] : Array<Dynamic>)) }] : Array<Dynamic>));
+          _Runtime.callProperty(cameras, 'push', cast ([{ far: (cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).zfar, name: (cast definition : GltfCamera).name, near: (cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).znear, node: flighthq._internal._StaticIndex.readArray(nodeIndices, node), projection: { halfHeight: (cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).ymag, halfWidth: (cast orthographic : { var xmag:Float; var ymag:Float; var zfar:Float; var znear:Float; }).xmag, kind: 'orthographic' }, transform: (cast GltfParse.cloneGltfTransform__gltfParse((cast flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node) : Transform3D)) : Transform3D) }] : Array<Dynamic>));
           node++;
           continue;
         }
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.camera-missing-descriptor', '', { firstCamera: cameraIndex, firstType: _Runtime.field(definition, 'type') }] : Array<Dynamic>));
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.camera-missing-descriptor' : String), (cast '' : String), (cast { firstCamera: cameraIndex, firstType: (cast definition : GltfCamera).type } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         node++;
       }
     }
@@ -337,46 +370,46 @@ class GltfParse {
     return cast null;
   }
 
-  public static function applyGltfExtensionHandlers__gltfParse(document:Scene3DDocument, source:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, nodeIndices:Array<Float>, nodeWorldTransforms:Array<Transform3D>, handlers:Null<Array<GltfExtensionHandler>>, gltfDrops:Null<Dynamic>, diagnostics:Null<Array<ImportDiagnostic>>):Void {
-    var selected:Dynamic = cast _Runtime.UNDEFINED;
+  public static function applyGltfExtensionHandlers__gltfParse(document:Scene3DDocument, source:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, nodeIndices:Array<Float>, nodeWorldTransforms:Array<Transform3D>, handlers:Null<Array<GltfExtensionHandler>>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>, diagnostics:Null<Array<ImportDiagnostic>>):Void {
+    var selected:flighthq._internal._Map<String, GltfExtensionHandler> = cast _Runtime.UNDEFINED;
     var context:GltfExtensionContext = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(handlers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(handlers, 'length'), 0.0) : Bool)) : Bool)) { return; }
     selected = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (handler in _Runtime.iterable(handlers)) {
-      if ((cast ((cast selected : flighthq._internal._Map).has(_Runtime.field(handler, 'kind'))) : Bool)) {
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.duplicate-extension-handler', '', { firstKind: _Runtime.field(handler, 'kind') }] : Array<Dynamic>));
+      if ((cast ((cast selected : flighthq._internal._Map<String, GltfExtensionHandler>).has((cast handler : GltfExtensionHandler).kind)) : Bool)) {
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.duplicate-extension-handler' : String), (cast '' : String), (cast { firstKind: (cast handler : GltfExtensionHandler).kind } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       }
-      ((cast selected : flighthq._internal._Map).set(_Runtime.field(handler, 'kind'), handler));
+      ((cast selected : flighthq._internal._Map<String, GltfExtensionHandler>).set((cast handler : GltfExtensionHandler).kind, handler));
     }
-    context = { buildNodeTransform: function(node:Dynamic) {
-      return cast _Runtime.callValue(GltfParse.cloneGltfTransform__gltfParse, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node), function():Dynamic return cast _Runtime.callValue(GltfParse.createIdentityTransform__gltfParse, cast ([] : Array<Dynamic>)))] : Array<Dynamic>));
-    }, diagnostics: diagnostics, document: document, nodeIndices: nodeIndices, resolveTexture: function(info:Dynamic, colorSpace:Dynamic) {
-      return cast _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([source, imageResources, info, colorSpace, gltfDrops] : Array<Dynamic>));
+    context = { buildNodeTransform: function(node:Float):Transform3D {
+      return cast (cast GltfParse.cloneGltfTransform__gltfParse((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(nodeWorldTransforms, node), function():Dynamic return cast (cast GltfParse.createIdentityTransform__gltfParse() : Transform3D)) : Transform3D)) : Transform3D);
+    }, diagnostics: diagnostics, document: document, nodeIndices: nodeIndices, resolveTexture: function(info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace):Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> {
+      return cast (cast GltfParse.resolveGltfTexture__gltfParse((cast source : GltfDocument), imageResources, (cast info : Null<GltfTextureInfo>), (cast colorSpace : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>);
     }, source: source };
-    for (handler in _Runtime.iterable(((cast selected : flighthq._internal._Map).values()))) {
-      _Runtime.callProperty(handler, 'apply', cast ([context] : Array<Dynamic>));
+    for (handler in _Runtime.iterable(((cast selected : flighthq._internal._Map<String, GltfExtensionHandler>).values()))) {
+      (cast handler : GltfExtensionHandler).apply(context);
     }
   }
 
-  public static function buildGltfNodeWorldTransforms__gltfParse(nodes:Array<GltfNode>, gltfDrops:Null<Dynamic>):Array<Transform3D> {
-    var parents:Dynamic = cast _Runtime.UNDEFINED;
-    var localMatrices:Dynamic = cast _Runtime.UNDEFINED;
-    var worldMatrices:Dynamic = cast _Runtime.UNDEFINED;
-    var state:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildGltfNodeWorldTransforms__gltfParse(nodes:Array<GltfNode>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Array<Transform3D> {
+    var parents:flighthq._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var localMatrices:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var worldMatrices:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var state:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
     var transforms:Array<Transform3D> = cast _Runtime.UNDEFINED;
     parents = new flighthq._internal._Int32Array(_Runtime.field(nodes, 'length'));
     _Runtime.fill(parents, -1.0, 0, null, 1);
     {
-      var parent:Dynamic = 0.0;
+      var parent:Float = 0.0;
       while ((cast ((cast parent : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         for (child in _Runtime.iterable(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(nodes, parent).children, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
           if ((cast ((cast ((cast child : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast child : Float) >= (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.node-child-out-of-range', '', { firstChild: child }] : Array<Dynamic>));
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.node-child-out-of-range' : String), (cast '' : String), (cast { firstChild: child } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
           if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32Array(parents, child), -1.0) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.node-multiple-parents', '', { firstChild: child, firstParent: flighthq._internal._StaticIndex.readInt32Array(parents, child) }] : Array<Dynamic>));
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.node-multiple-parents' : String), (cast '' : String), (cast { firstChild: child, firstParent: flighthq._internal._StaticIndex.readInt32Array(parents, child) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
           flighthq._internal._StaticIndex.writeInt32Array(parents, child, parent);
@@ -384,29 +417,29 @@ class GltfParse {
         parent++;
       }
     }
-    localMatrices = _Runtime.callProperty(nodes, 'map', cast ([function(node:Dynamic) {
-      var matrix:Dynamic = cast _Runtime.UNDEFINED;
-      matrix = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(composeMatrix4FromTransform3D, cast ([matrix, _Runtime.callValue(GltfParse.gltfNodeTransform__gltfParse, cast ([node] : Array<Dynamic>))] : Array<Dynamic>));
+    localMatrices = _Runtime.callProperty(nodes, 'map', cast ([function(node:GltfNode, __unused16:Float, __unused17:Array<GltfNode>):Matrix4 {
+      var matrix:Matrix4 = cast _Runtime.UNDEFINED;
+      matrix = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+      composeMatrix4FromTransform3D(matrix, (cast GltfParse.gltfNodeTransform__gltfParse((cast node : GltfNode)) : Transform3DLike));
       return cast matrix;
     }] : Array<Dynamic>));
-    worldMatrices = _Runtime.callProperty(nodes, 'map', cast ([function() return _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    worldMatrices = _Runtime.callProperty(nodes, 'map', cast ([function(__unused18:GltfNode, __unused19:Float, __unused20:Array<GltfNode>):Matrix4 return (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4)] : Array<Dynamic>));
     state = new flighthq._internal._UInt8Array(_Runtime.field(nodes, 'length'));
     stack = cast ([] : Array<Dynamic>);
     transforms = cast ([] : Array<Dynamic>);
     {
-      var start:Dynamic = 0.0;
+      var start:Float = 0.0;
       while ((cast ((cast start : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         while ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(state, start), 2.0) : Bool)) {
           _Runtime.setLength(stack, 0.0);
-          var node:Dynamic = start;
-          var cycle:Dynamic = false;
+          var node:Float = start;
+          var cycle:Bool = false;
           while ((cast ((cast ((cast node : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(state, node), 2.0) : Bool)) : Bool)) {
             if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(state, node), 1.0) : Bool)) {
-              _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.node-hierarchy-cycle', '', { firstNode: node }] : Array<Dynamic>));
+              GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.node-hierarchy-cycle' : String), (cast '' : String), (cast { firstNode: node } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
               flighthq._internal._StaticIndex.writeInt32Array(parents, node, -1.0);
               {
-                var i:Dynamic = 0.0;
+                var i:Float = 0.0;
                 while ((cast ((cast i : Float) < (cast _Runtime.field(stack, 'length') : Float)) : Bool)) {
                   flighthq._internal._StaticIndex.writeUint8Array(state, flighthq._internal._StaticIndex.readArray(stack, i), 0.0);
                   i++;
@@ -422,9 +455,9 @@ class GltfParse {
           if ((cast cycle : Bool)) { continue; }
           while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             (node = cast (_Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)) : Dynamic));
-            var parent:Dynamic = flighthq._internal._StaticIndex.readInt32Array(parents, node);
+            var parent:Float = flighthq._internal._StaticIndex.readInt32Array(parents, node);
             if ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool)) {
-              _Runtime.callValue(multiplyMatrix4, cast ([flighthq._internal._StaticIndex.readArray(worldMatrices, node), flighthq._internal._StaticIndex.readArray(worldMatrices, parent), flighthq._internal._StaticIndex.readArray(localMatrices, node)] : Array<Dynamic>));
+              multiplyMatrix4(flighthq._internal._StaticIndex.readArray(worldMatrices, node), flighthq._internal._StaticIndex.readArray(worldMatrices, parent), flighthq._internal._StaticIndex.readArray(localMatrices, node));
             } else {
               (cast flighthq._internal._StaticIndex.readArray(worldMatrices, node).m : flighthq._internal._Float32Array).set(flighthq._internal._StaticIndex.readArray(localMatrices, node).m);
             }
@@ -435,10 +468,10 @@ class GltfParse {
       }
     }
     {
-      var node:Dynamic = 0.0;
+      var node:Float = 0.0;
       while ((cast ((cast node : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        var transform:Dynamic = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([transform, flighthq._internal._StaticIndex.readArray(worldMatrices, node)] : Array<Dynamic>));
+        var transform:Transform3D = (cast createTransform3D() : Transform3D);
+        decomposeMatrix4ToTransform3D(transform, flighthq._internal._StaticIndex.readArray(worldMatrices, node));
         _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>));
         node++;
       }
@@ -448,52 +481,52 @@ class GltfParse {
   }
 
   public static function cloneGltfTransform__gltfParse(source:Transform3D):Transform3D {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
-    (_Runtime.field(transform, 'position').x = cast (_Runtime.field(source, 'position').x : Dynamic));
-    (_Runtime.field(transform, 'position').y = cast (_Runtime.field(source, 'position').y : Dynamic));
-    (_Runtime.field(transform, 'position').z = cast (_Runtime.field(source, 'position').z : Dynamic));
-    (_Runtime.field(transform, 'rotation').x = cast (_Runtime.field(source, 'rotation').x : Dynamic));
-    (_Runtime.field(transform, 'rotation').y = cast (_Runtime.field(source, 'rotation').y : Dynamic));
-    (_Runtime.field(transform, 'rotation').z = cast (_Runtime.field(source, 'rotation').z : Dynamic));
-    (_Runtime.field(transform, 'rotation').w = cast (_Runtime.field(source, 'rotation').w : Dynamic));
-    (_Runtime.field(transform, 'scale').x = cast (_Runtime.field(source, 'scale').x : Dynamic));
-    (_Runtime.field(transform, 'scale').y = cast (_Runtime.field(source, 'scale').y : Dynamic));
-    (_Runtime.field(transform, 'scale').z = cast (_Runtime.field(source, 'scale').z : Dynamic));
+    var transform:Transform3D = cast _Runtime.UNDEFINED;
+    transform = (cast createTransform3D() : Transform3D);
+    ((cast transform : Transform3D).position.x = cast (_Runtime.field(source, 'position').x : Dynamic));
+    ((cast transform : Transform3D).position.y = cast (_Runtime.field(source, 'position').y : Dynamic));
+    ((cast transform : Transform3D).position.z = cast (_Runtime.field(source, 'position').z : Dynamic));
+    ((cast transform : Transform3D).rotation.x = cast (_Runtime.field(source, 'rotation').x : Dynamic));
+    ((cast transform : Transform3D).rotation.y = cast (_Runtime.field(source, 'rotation').y : Dynamic));
+    ((cast transform : Transform3D).rotation.z = cast (_Runtime.field(source, 'rotation').z : Dynamic));
+    ((cast transform : Transform3D).rotation.w = cast (_Runtime.field(source, 'rotation').w : Dynamic));
+    ((cast transform : Transform3D).scale.x = cast (_Runtime.field(source, 'scale').x : Dynamic));
+    ((cast transform : Transform3D).scale.y = cast (_Runtime.field(source, 'scale').y : Dynamic));
+    ((cast transform : Transform3D).scale.z = cast (_Runtime.field(source, 'scale').z : Dynamic));
     return cast transform;
     return cast null;
   }
 
-  public static function buildGltfSkins__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, gltfNodeToDocNode:Array<Float>, gltfDrops:Null<Dynamic>):Array<Scene3DDocumentSkin> {
-    return cast _Runtime.callProperty(_Runtime.coalesce(doc.skins, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(gltfSkin:Dynamic) {
-      var joints:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildGltfSkins__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, gltfNodeToDocNode:Array<Float>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Array<Scene3DDocumentSkin> {
+    return cast _Runtime.callProperty(_Runtime.coalesce(doc.skins, function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(gltfSkin:GltfSkin, __unused21:Float, __unused22:Array<GltfSkin>):{ var inverseBind:Array<{ var m:flighthq._internal._Float32Array; }>; var joints:Array<Float>; } {
+      var joints:Array<Float> = cast _Runtime.UNDEFINED;
       var inverseBind:Array<{ var m:flighthq._internal._Float32Array; }> = cast _Runtime.UNDEFINED;
-      joints = _Runtime.callProperty(gltfSkin.joints, 'map', cast ([function(jointNodeIndex:Dynamic) return flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, jointNodeIndex)] : Array<Dynamic>));
+      joints = _Runtime.callProperty(gltfSkin.joints, 'map', cast ([function(jointNodeIndex:Float, __unused23:Float, __unused24:Array<Float>):Float return flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, jointNodeIndex)] : Array<Dynamic>));
       inverseBind = cast ([] : Array<Dynamic>);
       if ((cast !_Runtime.strictEquals(gltfSkin.inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var ibm:Dynamic = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, gltfSkin.inverseBindMatrices, gltfDrops, 'MAT4'] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(_Runtime.field(ibm, 'fault'), null) : Bool)) {
-          _Runtime.callValue(GltfParse.reportGltfAccessorFault__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, _Runtime.field(ibm, 'fault')] : Array<Dynamic>));
+        var ibm:GltfAccessorResult__gltfParse = (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast gltfSkin.inverseBindMatrices : Float), gltfDrops, (cast 'MAT4' : Null<String>)) : GltfAccessorResult__gltfParse);
+        if ((cast !_Runtime.strictEquals((cast ibm : GltfAccessorResult__gltfParse).fault, null) : Bool)) {
+          GltfParse.reportGltfAccessorFault__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast ibm : GltfAccessorResult__gltfParse).fault);
           {
-            var j:Dynamic = 0.0;
+            var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-              _Runtime.callProperty(inverseBind, 'push', cast ([{ m: _Runtime.callValue(GltfParse.identityMatrix16__gltfParse, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+              _Runtime.callProperty(inverseBind, 'push', cast ([{ m: (cast GltfParse.identityMatrix16__gltfParse() : flighthq._internal._Float32Array) }] : Array<Dynamic>));
               j++;
             }
           }
-        } else { if ((cast ((cast _Runtime.field(ibm, 'count') : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.skin-ibm-count-mismatch', '', { firstActual: _Runtime.field(ibm, 'count'), firstExpected: _Runtime.field(joints, 'length') }] : Array<Dynamic>));
+        } else { if ((cast ((cast (cast ibm : GltfAccessorResult__gltfParse).count : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.skin-ibm-count-mismatch' : String), (cast '' : String), (cast { firstActual: (cast ibm : GltfAccessorResult__gltfParse).count, firstExpected: _Runtime.field(joints, 'length') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           {
-            var j:Dynamic = 0.0;
+            var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-              _Runtime.callProperty(inverseBind, 'push', cast ([{ m: _Runtime.callValue(GltfParse.identityMatrix16__gltfParse, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+              _Runtime.callProperty(inverseBind, 'push', cast ([{ m: (cast GltfParse.identityMatrix16__gltfParse() : flighthq._internal._Float32Array) }] : Array<Dynamic>));
               j++;
             }
           }
         } else {
-          var flat:Dynamic = _Runtime.field(ibm, 'data');
+          var flat:flighthq._internal._ArrayLike<Float> = (cast ibm : GltfAccessorResult__gltfParse).data;
           {
-            var j:Dynamic = 0.0;
+            var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
               _Runtime.callProperty(inverseBind, 'push', cast ([{ m: new flighthq._internal._Float32Array({ length: 16.0 }) }] : Array<Dynamic>));
               j++;
@@ -502,9 +535,9 @@ class GltfParse {
         } }
       } else {
         {
-          var j:Dynamic = 0.0;
+          var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(inverseBind, 'push', cast ([{ m: _Runtime.callValue(GltfParse.identityMatrix16__gltfParse, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+            _Runtime.callProperty(inverseBind, 'push', cast ([{ m: (cast GltfParse.identityMatrix16__gltfParse() : flighthq._internal._Float32Array) }] : Array<Dynamic>));
             j++;
           }
         }
@@ -514,58 +547,58 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildGltfAnimations__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, gltfNodeToDocNode:Array<Float>, gltfNodePrimitiveNodes:Array<Array<Float>>, nodes:Array<Scene3DDocumentNode>, meshes:Array<Scene3DDocumentMesh>, gltfDrops:Null<Dynamic>):Array<Scene3DDocumentAnimation> {
+  public static function buildGltfAnimations__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, gltfNodeToDocNode:Array<Float>, gltfNodePrimitiveNodes:Array<Array<Float>>, nodes:Array<Scene3DDocumentNode>, meshes:Array<Scene3DDocumentMesh>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Array<Scene3DDocumentAnimation> {
     var animations:Array<Scene3DDocumentAnimation> = cast _Runtime.UNDEFINED;
-    var gltfAnimations:Dynamic = cast _Runtime.UNDEFINED;
+    var gltfAnimations:Array<GltfAnimation> = cast _Runtime.UNDEFINED;
     animations = cast ([] : Array<Dynamic>);
     gltfAnimations = _Runtime.coalesce(doc.animations, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var a:Dynamic = 0.0;
+      var a:Float = 0.0;
       while ((cast ((cast a : Float) < (cast _Runtime.field(gltfAnimations, 'length') : Float)) : Bool)) {
-        var animation:Dynamic = flighthq._internal._StaticIndex.readArray(gltfAnimations, a);
+        var animation:GltfAnimation = flighthq._internal._StaticIndex.readArray(gltfAnimations, a);
         var channels:Array<Scene3DDocumentAnimationChannel> = cast ([] : Array<Dynamic>);
-        var duration:Dynamic = 0.0;
+        var duration:Float = 0.0;
         for (channel in _Runtime.iterable(animation.channels)) {
-          var targetNodeIndex:Dynamic = _Runtime.field(channel.target, 'node');
+          var targetNodeIndex:Null<Float> = (cast channel.target : { @:optional var node:Null<Float>; var path:String; }).node;
           if ((cast ((cast _Runtime.strictEquals(targetNodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, targetNodeIndex), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.animation-target-unresolved', '', { firstTarget: _Runtime.coalesce(targetNodeIndex, function():Dynamic return cast -1.0) }] : Array<Dynamic>));
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.animation-target-unresolved' : String), (cast '' : String), (cast { firstTarget: _Runtime.coalesce(targetNodeIndex, function():Dynamic return cast -1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
-          var sampler:Dynamic = flighthq._internal._StaticIndex.readArray(animation.samplers, channel.sampler);
+          var sampler:GltfAnimationSampler = flighthq._internal._StaticIndex.readArray(animation.samplers, channel.sampler);
           if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.animation-missing-sampler', '', { firstSampler: channel.sampler }] : Array<Dynamic>));
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.animation-missing-sampler' : String), (cast '' : String), (cast { firstSampler: channel.sampler } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
-          var inputResult:Dynamic = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, sampler.input, gltfDrops, 'SCALAR'] : Array<Dynamic>));
-          var outputResult:Dynamic = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, sampler.output, gltfDrops, _Runtime.getIndex(GltfParse.GLTF_ANIMATION_OUTPUT_TYPES__gltfParse, _Runtime.field(channel.target, 'path'))] : Array<Dynamic>));
-          if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(inputResult, 'fault'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(outputResult, 'fault'), null) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.reportGltfAccessorFault__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, _Runtime.coalesce(_Runtime.field(inputResult, 'fault'), function():Dynamic return cast _Runtime.field(outputResult, 'fault'))] : Array<Dynamic>));
+          var inputResult:GltfAccessorResult__gltfParse = (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast sampler.input : Float), gltfDrops, (cast 'SCALAR' : Null<String>)) : GltfAccessorResult__gltfParse);
+          var outputResult:GltfAccessorResult__gltfParse = (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast sampler.output : Float), gltfDrops, (cast _Runtime.getIndex(GltfParse.GLTF_ANIMATION_OUTPUT_TYPES__gltfParse, (cast channel.target : { @:optional var node:Null<Float>; var path:String; }).path) : Null<String>)) : GltfAccessorResult__gltfParse);
+          if ((cast ((cast !_Runtime.strictEquals((cast inputResult : GltfAccessorResult__gltfParse).fault, null) : Bool) || (cast !_Runtime.strictEquals((cast outputResult : GltfAccessorResult__gltfParse).fault, null) : Bool)) : Bool)) {
+            GltfParse.reportGltfAccessorFault__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), _Runtime.coalesce((cast inputResult : GltfAccessorResult__gltfParse).fault, function():Dynamic return cast (cast outputResult : GltfAccessorResult__gltfParse).fault));
             continue;
           }
-          var times:Dynamic = _Runtime.field(inputResult, 'data');
-          var values:Dynamic = _Runtime.field(outputResult, 'data');
-          if ((cast ((cast _Runtime.strictEquals(_Runtime.field(inputResult, 'count'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(outputResult, 'count'), 0.0) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.animation-sampler-empty', '', { firstSampler: channel.sampler }] : Array<Dynamic>));
+          var times:flighthq._internal._ArrayLike<Float> = (cast inputResult : GltfAccessorResult__gltfParse).data;
+          var values:flighthq._internal._ArrayLike<Float> = (cast outputResult : GltfAccessorResult__gltfParse).data;
+          if ((cast ((cast _Runtime.strictEquals((cast inputResult : GltfAccessorResult__gltfParse).count, 0.0) : Bool) || (cast _Runtime.strictEquals((cast outputResult : GltfAccessorResult__gltfParse).count, 0.0) : Bool)) : Bool)) {
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.animation-sampler-empty' : String), (cast '' : String), (cast { firstSampler: channel.sampler } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
-          var cubic:Dynamic = _Runtime.strictEquals(sampler.interpolation, 'CUBICSPLINE');
-          if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(channel.target, 'path'), 'weights') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(outputResult, 'count'), _Runtime.multiplyNumbers(((cast cubic : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic)), _Runtime.field(inputResult, 'count'))) : Bool)) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.animation-sampler-cardinality', '', { firstSampler: channel.sampler }] : Array<Dynamic>));
+          var cubic:Bool = _Runtime.strictEquals(sampler.interpolation, 'CUBICSPLINE');
+          if ((cast ((cast !_Runtime.strictEquals((cast channel.target : { @:optional var node:Null<Float>; var path:String; }).path, 'weights') : Bool) && (cast !_Runtime.strictEquals((cast outputResult : GltfAccessorResult__gltfParse).count, _Runtime.multiplyNumbers(((cast cubic : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic)), (cast inputResult : GltfAccessorResult__gltfParse).count)) : Bool)) : Bool)) {
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.animation-sampler-cardinality' : String), (cast '' : String), (cast { firstSampler: channel.sampler } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
           (duration = cast (HxMath.max(duration, ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.getIndex(times, _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0)) : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic));
-          if ((cast _Runtime.strictEquals(_Runtime.field(channel.target, 'path'), 'weights') : Bool)) {
-            var meshNodeIndices:Dynamic = ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex) : Dynamic) : (cast cast ([flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, targetNodeIndex)] : Array<Dynamic>) : Dynamic));
-            _Runtime.callValue(GltfParse.appendGltfWeightsChannels__gltfParse, cast ([channels, meshNodeIndices, nodes, meshes, times, values, sampler.interpolation, gltfDrops] : Array<Dynamic>));
+          if ((cast _Runtime.strictEquals((cast channel.target : { @:optional var node:Null<Float>; var path:String; }).path, 'weights') : Bool)) {
+            var meshNodeIndices:Array<Float> = ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, targetNodeIndex) : Dynamic) : (cast cast ([flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, targetNodeIndex)] : Array<Dynamic>) : Dynamic));
+            GltfParse.appendGltfWeightsChannels__gltfParse((cast channels : Array<Scene3DDocumentAnimationChannel>), (cast meshNodeIndices : Array<Float>), (cast nodes : Array<Scene3DDocumentNode>), (cast meshes : Array<Scene3DDocumentMesh>), (cast times : flighthq._internal._ArrayLike<Float>), (cast values : flighthq._internal._ArrayLike<Float>), (cast sampler.interpolation : Null<String>), gltfDrops);
             continue;
           }
-          var path:Dynamic = _Runtime.getIndex(GltfParse.GLTF_ANIMATION_PATHS__gltfParse, _Runtime.field(channel.target, 'path'));
+          var path:Null<String> = _Runtime.getIndex(GltfParse.GLTF_ANIMATION_PATHS__gltfParse, (cast channel.target : { @:optional var node:Null<Float>; var path:String; }).path);
           if ((cast _Runtime.strictEquals(path, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Skip, 'gltf.animation-unsupported-path', '', { firstPath: _Runtime.field(channel.target, 'path') }] : Array<Dynamic>));
+            GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'gltf.animation-unsupported-path' : String), (cast '' : String), (cast { firstPath: (cast channel.target : { @:optional var node:Null<Float>; var path:String; }).path } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
             continue;
           }
-          var quaternion:Dynamic = _Runtime.strictEquals(path, Scene3DAnimationPathRotation);
-          var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: ((cast quaternion : Bool) ? (cast 4.0 : Dynamic) : (cast 3.0 : Dynamic)), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(sampler.interpolation, function():Dynamic return cast 'LINEAR')), quaternion: quaternion, times: times, values: values }] : Array<Dynamic>));
+          var quaternion:Bool = _Runtime.strictEquals(path, Scene3DAnimationPathRotation);
+          var track:AnimationTrack = (cast createAnimationTrack({ components: ((cast quaternion : Bool) ? (cast 4.0 : Dynamic) : (cast 3.0 : Dynamic)), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(sampler.interpolation, function():Dynamic return cast 'LINEAR')), quaternion: quaternion, times: times, values: values }) : AnimationTrack);
           _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(gltfNodeToDocNode, targetNodeIndex), path: path, track: track }] : Array<Dynamic>));
         }
         if ((cast ((cast _Runtime.field(channels, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(animations, 'push', cast ([{ channels: channels, duration: duration, name: _Runtime.coalesce(animation.name, function():Dynamic return cast 'animation' + Std.string(a) + '') }] : Array<Dynamic>)); }
@@ -576,33 +609,33 @@ class GltfParse {
     return cast null;
   }
 
-  public static function appendGltfWeightsChannels__gltfParse(channels:Array<Scene3DDocumentAnimationChannel>, meshNodeIndices:Array<Float>, nodes:Array<Scene3DDocumentNode>, meshes:Array<Scene3DDocumentMesh>, times:Dynamic, values:Dynamic, interpolation:Null<String>, gltfDrops:Null<Dynamic>):Void {
-    var perKey:Dynamic = cast _Runtime.UNDEFINED;
-    var bound:Dynamic = cast _Runtime.UNDEFINED;
-    var cardinalityDropped:Dynamic = cast _Runtime.UNDEFINED;
+  public static function appendGltfWeightsChannels__gltfParse(channels:Array<Scene3DDocumentAnimationChannel>, meshNodeIndices:Array<Float>, nodes:Array<Scene3DDocumentNode>, meshes:Array<Scene3DDocumentMesh>, times:flighthq._internal._ArrayLike<Float>, values:flighthq._internal._ArrayLike<Float>, interpolation:Null<String>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Void {
+    var perKey:Float = cast _Runtime.UNDEFINED;
+    var bound:Float = cast _Runtime.UNDEFINED;
+    var cardinalityDropped:Bool = cast _Runtime.UNDEFINED;
     perKey = ((cast _Runtime.strictEquals(interpolation, 'CUBICSPLINE') : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic));
     bound = 0.0;
     cardinalityDropped = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshNodeIndices, 'length') : Float)) : Bool)) {
-        var meshIndex:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(meshNodeIndices, i)), 'mesh');
-        var morph:Dynamic = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(meshes, meshIndex), 'morph') : Dynamic) : (cast null : Dynamic));
-        if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(morph, 'targets'), 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field(_Runtime.field(morph, 'targets'), 'length'))) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.weights-cardinality-mismatch', '', { firstExpected: _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field(_Runtime.field(morph, 'targets'), 'length')), firstActual: _Runtime.field(values, 'length') }] : Array<Dynamic>));
+        var meshIndex:Null<Float> = ({ final __structural14 = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(meshNodeIndices, i)); __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : Scene3DDocumentNode).mesh; });
+        var morph:Null<MeshMorph> = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ({ final __structural15 = flighthq._internal._StaticIndex.readArray(meshes, meshIndex); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : Scene3DDocumentMesh).morph; }) : Dynamic) : (cast null : Dynamic));
+        if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast morph : MeshMorph).targets, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : MeshMorph).targets, 'length'))) : Bool)) {
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.weights-cardinality-mismatch' : String), (cast '' : String), (cast { firstExpected: _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : MeshMorph).targets, 'length')), firstActual: _Runtime.field(values, 'length') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           (cardinalityDropped = cast (true : Dynamic));
           i++;
           continue;
         }
-        var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: _Runtime.field(_Runtime.field(morph, 'targets'), 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values }] : Array<Dynamic>));
+        var track:AnimationTrack = (cast createAnimationTrack({ components: _Runtime.field((cast morph : MeshMorph).targets, 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values }) : AnimationTrack);
         _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(meshNodeIndices, i), path: Scene3DAnimationPathWeights, track: track }] : Array<Dynamic>));
         bound++;
         i++;
       }
     }
     if ((cast ((cast _Runtime.strictEquals(bound, 0.0) : Bool) && (cast !(cast cardinalityDropped : Bool) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.weights-no-morphable-mesh', '', {  }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.weights-no-morphable-mesh' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
   }
 
@@ -612,45 +645,45 @@ class GltfParse {
   }
 
   public static function createIdentityTransform__gltfParse():Transform3D {
-    return cast _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    return cast (cast createTransform3D() : Transform3D);
     return cast null;
   }
 
   public static function gltfNodeTransform__gltfParse(gltfNode:GltfNode):Transform3D {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    var transform:Transform3D = cast _Runtime.UNDEFINED;
+    var t:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    var r:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    var s:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    transform = (cast createTransform3D() : Transform3D);
     if ((cast !_Runtime.strictEquals(gltfNode.matrix, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([transform, { m: new flighthq._internal._Float32Array(gltfNode.matrix) }] : Array<Dynamic>));
+      decomposeMatrix4ToTransform3D(transform, { m: new flighthq._internal._Float32Array(gltfNode.matrix) });
       return cast transform;
     }
     t = gltfNode.translation;
     r = gltfNode.rotation;
     s = gltfNode.scale;
     if ((cast !_Runtime.strictEquals(t, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(transform, 'position').x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-      (_Runtime.field(transform, 'position').y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 1.0), function():Dynamic return cast 0.0) : Dynamic));
-      (_Runtime.field(transform, 'position').z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 2.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).position.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 0.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).position.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 1.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).position.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(t, 2.0), function():Dynamic return cast 0.0) : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(r, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(transform, 'rotation').x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-      (_Runtime.field(transform, 'rotation').y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 1.0), function():Dynamic return cast 0.0) : Dynamic));
-      (_Runtime.field(transform, 'rotation').z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 2.0), function():Dynamic return cast 0.0) : Dynamic));
-      (_Runtime.field(transform, 'rotation').w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 3.0), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast transform : Transform3D).rotation.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 0.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).rotation.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 1.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).rotation.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 2.0), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast transform : Transform3D).rotation.w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(r, 3.0), function():Dynamic return cast 1.0) : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(transform, 'scale').x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 0.0), function():Dynamic return cast 1.0) : Dynamic));
-      (_Runtime.field(transform, 'scale').y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 1.0), function():Dynamic return cast 1.0) : Dynamic));
-      (_Runtime.field(transform, 'scale').z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 2.0), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast transform : Transform3D).scale.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 0.0), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast transform : Transform3D).scale.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 1.0), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast transform : Transform3D).scale.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(s, 2.0), function():Dynamic return cast 1.0) : Dynamic));
     }
     return cast transform;
     return cast null;
   }
 
   public static function identityMatrix16__gltfParse():flighthq._internal._Float32Array {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(16.0);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 1.0);
@@ -660,147 +693,147 @@ class GltfParse {
     return cast null;
   }
 
-  public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, material:GltfMaterial, gltfDrops:Null<Dynamic>):Material {
-    var pbr:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+  public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, material:GltfMaterial, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Material {
+    var pbr:GltfPbrMetallicRoughness = cast _Runtime.UNDEFINED;
+    var result:StandardPbrMaterial = cast _Runtime.UNDEFINED;
     pbr = _Runtime.coalesce(material.pbrMetallicRoughness, function():Dynamic return cast {  });
-    result = _Runtime.callValue(createStandardPbrMaterial, cast ([{ baseColor: _Runtime.callValue(GltfParse.packGltfLinearColor__gltfParse, cast ([_Runtime.coalesce(pbr.baseColorFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)), 4.0] : Array<Dynamic>)), baseColorMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, imageResources, pbr.baseColorTexture, 'srgb', gltfDrops] : Array<Dynamic>)), emissive: _Runtime.callValue(GltfParse.packGltfLinearColor__gltfParse, cast ([_Runtime.coalesce(material.emissiveFactor, function():Dynamic return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>)), 3.0] : Array<Dynamic>)), emissiveMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, imageResources, material.emissiveTexture, 'srgb', gltfDrops] : Array<Dynamic>)), metallic: _Runtime.coalesce(pbr.metallicFactor, function():Dynamic return cast 1.0), metallicRoughnessMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, imageResources, pbr.metallicRoughnessTexture, 'linear', gltfDrops] : Array<Dynamic>)), normalMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, imageResources, material.normalTexture, 'linear', gltfDrops] : Array<Dynamic>)), normalScale: _Runtime.coalesce(({ final __typedStruct14 = material.normalTexture; __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.scale; }), function():Dynamic return cast 1.0), occlusionMap: _Runtime.callValue(GltfParse.resolveGltfTexture__gltfParse, cast ([doc, imageResources, material.occlusionTexture, 'linear', gltfDrops] : Array<Dynamic>)), occlusionStrength: _Runtime.coalesce(({ final __typedStruct15 = material.occlusionTexture; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.strength; }), function():Dynamic return cast 1.0), roughness: _Runtime.coalesce(pbr.roughnessFactor, function():Dynamic return cast 1.0) }] : Array<Dynamic>));
-    _Runtime.setField(result, 'alphaMode', ((cast _Runtime.strictEquals(material.alphaMode, 'MASK') : Bool) ? (cast 'mask' : Dynamic) : (cast ((cast _Runtime.strictEquals(material.alphaMode, 'BLEND') : Bool) ? (cast 'blend' : Dynamic) : (cast 'opaque' : Dynamic)) : Dynamic)));
-    _Runtime.setField(result, 'alphaCutoff', _Runtime.coalesce(material.alphaCutoff, function():Dynamic return cast 0.5));
-    _Runtime.setField(result, 'doubleSided', _Runtime.coalesce(material.doubleSided, function():Dynamic return cast false));
-    _Runtime.setField(result, 'name', _Runtime.coalesce(material.name, function():Dynamic return cast null));
-    return cast (cast (cast result : Dynamic) : Material);
+    result = (cast createStandardPbrMaterial((cast { baseColor: (cast GltfParse.packGltfLinearColor__gltfParse((cast _Runtime.coalesce(pbr.baseColorFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)) : Array<Float>), (cast 4.0 : Float)) : Null<Float>), baseColorMap: (cast GltfParse.resolveGltfTexture__gltfParse((cast doc : GltfDocument), imageResources, (cast pbr.baseColorTexture : Null<GltfTextureInfo>), (cast 'srgb' : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), emissive: (cast GltfParse.packGltfLinearColor__gltfParse((cast _Runtime.coalesce(material.emissiveFactor, function():Dynamic return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>)) : Array<Float>), (cast 3.0 : Float)) : Null<Float>), emissiveMap: (cast GltfParse.resolveGltfTexture__gltfParse((cast doc : GltfDocument), imageResources, (cast material.emissiveTexture : Null<GltfTextureInfo>), (cast 'srgb' : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), metallic: _Runtime.coalesce(pbr.metallicFactor, function():Dynamic return cast 1.0), metallicRoughnessMap: (cast GltfParse.resolveGltfTexture__gltfParse((cast doc : GltfDocument), imageResources, (cast pbr.metallicRoughnessTexture : Null<GltfTextureInfo>), (cast 'linear' : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), normalMap: (cast GltfParse.resolveGltfTexture__gltfParse((cast doc : GltfDocument), imageResources, (cast material.normalTexture : Null<GltfTextureInfo>), (cast 'linear' : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), normalScale: _Runtime.coalesce(({ final __typedStruct16 = material.normalTexture; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.scale; }), function():Dynamic return cast 1.0), occlusionMap: (cast GltfParse.resolveGltfTexture__gltfParse((cast doc : GltfDocument), imageResources, (cast material.occlusionTexture : Null<GltfTextureInfo>), (cast 'linear' : TextureColorSpace), gltfDrops) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), occlusionStrength: _Runtime.coalesce(({ final __typedStruct17 = material.occlusionTexture; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.strength; }), function():Dynamic return cast 1.0), roughness: _Runtime.coalesce(pbr.roughnessFactor, function():Dynamic return cast 1.0) } : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+    ((cast result : StandardPbrMaterial).alphaMode = ((cast _Runtime.strictEquals(material.alphaMode, 'MASK') : Bool) ? (cast 'mask' : Dynamic) : (cast ((cast _Runtime.strictEquals(material.alphaMode, 'BLEND') : Bool) ? (cast 'blend' : Dynamic) : (cast 'opaque' : Dynamic)) : Dynamic)));
+    ((cast result : StandardPbrMaterial).alphaCutoff = _Runtime.coalesce(material.alphaCutoff, function():Dynamic return cast 0.5));
+    ((cast result : StandardPbrMaterial).doubleSided = _Runtime.coalesce(material.doubleSided, function():Dynamic return cast false));
+    ((cast result : StandardPbrMaterial).name = _Runtime.coalesce(material.name, function():Dynamic return cast null));
+    return cast (cast (cast result : flighthq._internal._Any) : Material);
     return cast null;
   }
 
-  public static function resolveGltfTexture__gltfParse(doc:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, gltfDrops:Null<Dynamic>):Null<Texture> {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var requestedUvSet:Dynamic = cast _Runtime.UNDEFINED;
+  public static function resolveGltfTexture__gltfParse(doc:GltfDocument, imageResources:Array<Null<ImageResourceReference>>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<Texture> {
+    var texture:Null<GltfTexture> = cast _Runtime.UNDEFINED;
+    var source:Null<Float> = cast _Runtime.UNDEFINED;
+    var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = cast _Runtime.UNDEFINED;
+    var result:Texture2D = cast _Runtime.UNDEFINED;
+    var requestedUvSet:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(info, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    texture = _Runtime.optionalIndex(doc.textures, info.index);
-    source = _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(({ final __typedStruct16 = texture; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.extensions; }), 'KHR_texture_basisu'), 'source'), function():Dynamic return cast ({ final __typedStruct17 = texture; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.source; }));
+    texture = _Runtime.optionalIndex(doc.textures, (cast info : flighthq.types.GltfSchema.GltfTextureInfo).index);
+    source = _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(({ final __typedStruct18 = texture; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : flighthq.types.GltfSchema.GltfTexture).extensions; }), 'KHR_texture_basisu'), 'source'), function():Dynamic return cast ({ final __typedStruct19 = texture; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : flighthq.types.GltfSchema.GltfTexture).source; }));
     if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.texture-source-missing', '', { firstTexture: info.index }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.texture-source-missing' : String), (cast '' : String), (cast { firstTexture: (cast info : flighthq.types.GltfSchema.GltfTextureInfo).index } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     resource = flighthq._internal._StaticIndex.readArray(imageResources, source);
     if ((cast _Runtime.looseEquals(resource, null) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.texture-image-unresolved', '', { firstImage: source }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.texture-image-unresolved' : String), (cast '' : String), (cast { firstImage: source } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
-    result = _Runtime.callValue(createTexture, cast ([{ resource: resource }] : Array<Dynamic>));
-    requestedUvSet = _Runtime.coalesce(_Runtime.coalesce(({ final __typedStruct18 = _Runtime.optionalField(info.extensions, 'KHR_texture_transform'); __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.texCoord; }), function():Dynamic return cast info.texCoord), function():Dynamic return cast 0.0);
+    result = (cast createTexture({ resource: resource }) : Texture2D);
+    requestedUvSet = _Runtime.coalesce(_Runtime.coalesce(({ final __typedStruct20 = _Runtime.optionalField((cast info : flighthq.types.GltfSchema.GltfTextureInfo).extensions, 'KHR_texture_transform'); __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.texCoord; }), function():Dynamic return cast (cast info : flighthq.types.GltfSchema.GltfTextureInfo).texCoord), function():Dynamic return cast 0.0);
     if ((cast !_Runtime.strictEquals(requestedUvSet, 0.0) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.texcoord-set-unsupported', '', { firstTexture: info.index, firstUvSet: requestedUvSet }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.texcoord-set-unsupported' : String), (cast '' : String), (cast { firstTexture: (cast info : flighthq.types.GltfSchema.GltfTextureInfo).index, firstUvSet: requestedUvSet } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
-    _Runtime.setField(result, 'colorSpace', colorSpace);
-    _Runtime.callValue(GltfParse.applyGltfSampler__gltfParse, cast ([result, ((cast !_Runtime.strictEquals(({ final __typedStruct19 = texture; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.sampler; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalIndex(doc.samplers, texture.sampler) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>));
-    _Runtime.callValue(GltfParse.applyGltfTextureTransform__gltfParse, cast ([result, _Runtime.optionalField(info.extensions, 'KHR_texture_transform')] : Array<Dynamic>));
+    ((cast result : Texture2D).colorSpace = colorSpace);
+    GltfParse.applyGltfSampler__gltfParse((cast result : Texture), (cast ((cast !_Runtime.strictEquals(({ final __typedStruct21 = texture; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : flighthq.types.GltfSchema.GltfTexture).sampler; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.optionalIndex(doc.samplers, (cast texture : flighthq.types.GltfSchema.GltfTexture).sampler) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Null<GltfSampler>));
+    GltfParse.applyGltfTextureTransform__gltfParse((cast result : Texture), _Runtime.optionalField((cast info : flighthq.types.GltfSchema.GltfTextureInfo).extensions, 'KHR_texture_transform'));
     return cast result;
     return cast null;
   }
 
   public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals(sampler.wrapS, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (_Runtime.field(texture, 'sampler').wrapU = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, sampler.wrapS) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(sampler.wrapT, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (_Runtime.field(texture, 'sampler').wrapV = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, sampler.wrapT) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(sampler.magFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (_Runtime.field(texture, 'sampler').magFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, sampler.magFilter) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(sampler.minFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(texture, 'sampler').minFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, sampler.minFilter) : Dynamic));
-      (_Runtime.field(texture, 'sampler').mipmaps = cast (_Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, sampler.minFilter) : Dynamic));
+    if ((cast !_Runtime.strictEquals((cast sampler : flighthq.types.GltfSchema.GltfSampler).wrapS, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast texture : { var sampler:Sampler; }).sampler.wrapU = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : flighthq.types.GltfSchema.GltfSampler).wrapS) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : flighthq.types.GltfSchema.GltfSampler).wrapT, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast texture : { var sampler:Sampler; }).sampler.wrapV = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : flighthq.types.GltfSchema.GltfSampler).wrapT) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : flighthq.types.GltfSchema.GltfSampler).magFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast texture : { var sampler:Sampler; }).sampler.magFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : flighthq.types.GltfSchema.GltfSampler).magFilter) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : flighthq.types.GltfSchema.GltfSampler).minFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast texture : { var sampler:Sampler; }).sampler.minFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : flighthq.types.GltfSchema.GltfSampler).minFilter) : Dynamic));
+      ((cast texture : { var sampler:Sampler; }).sampler.mipmaps = cast (_Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, (cast sampler : flighthq.types.GltfSchema.GltfSampler).minFilter) : Dynamic));
     }
   }
 
-  public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
+  public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<GltfTextureInfo, String>, String>>):Void {
     if ((cast _Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    (_Runtime.field(texture, 'uvOffset').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(transform.offset, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-    (_Runtime.field(texture, 'uvOffset').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(transform.offset, 1.0), function():Dynamic return cast 0.0) : Dynamic));
-    _Runtime.setField(texture, 'uvRotation', _Runtime.coalesce(transform.rotation, function():Dynamic return cast 0.0));
-    (_Runtime.field(texture, 'uvScale').x = cast (_Runtime.coalesce(_Runtime.optionalIndex(transform.scale, 0.0), function():Dynamic return cast 1.0) : Dynamic));
-    (_Runtime.field(texture, 'uvScale').y = cast (_Runtime.coalesce(_Runtime.optionalIndex(transform.scale, 1.0), function():Dynamic return cast 1.0) : Dynamic));
+    ((cast texture : { var uvOffset:Vector2; }).uvOffset.x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : flighthq.types.GltfSchema.GltfTextureTransform).offset, 0.0), function():Dynamic return cast 0.0) : Dynamic));
+    ((cast texture : { var uvOffset:Vector2; }).uvOffset.y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : flighthq.types.GltfSchema.GltfTextureTransform).offset, 1.0), function():Dynamic return cast 0.0) : Dynamic));
+    ((cast texture : { var uvRotation:Float; }).uvRotation = _Runtime.coalesce((cast transform : flighthq.types.GltfSchema.GltfTextureTransform).rotation, function():Dynamic return cast 0.0));
+    ((cast texture : { var uvScale:Vector2; }).uvScale.x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : flighthq.types.GltfSchema.GltfTextureTransform).scale, 0.0), function():Dynamic return cast 1.0) : Dynamic));
+    ((cast texture : { var uvScale:Vector2; }).uvScale.y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : flighthq.types.GltfSchema.GltfTextureTransform).scale, 1.0), function():Dynamic return cast 1.0) : Dynamic));
   }
 
-  public static function buildGltfImageResourceReference__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>, imageIndex:Float, gltfDrops:Null<Dynamic>):Null<ImageResourceReference> {
+  public static function buildGltfImageResourceReference__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>, imageIndex:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<ImageResourceReference> {
     if ((cast !_Runtime.strictEquals(image.uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast StringTools.startsWith(image.uri, 'data:') : Bool)) {
-        var comma:Dynamic = _Runtime.callProperty(image.uri, 'indexOf', cast ([','] : Array<Dynamic>));
+        var comma:Float = _Runtime.callProperty(image.uri, 'indexOf', cast ([','] : Array<Dynamic>));
         if ((cast ((cast comma : Float) < (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.image-malformed-uri', '', { firstImage: imageIndex }] : Array<Dynamic>));
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.image-malformed-uri' : String), (cast '' : String), (cast { firstImage: imageIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           return cast null;
         }
-        var semicolon:Dynamic = _Runtime.callProperty(image.uri, 'indexOf', cast ([';'] : Array<Dynamic>));
-        var declared:Dynamic = ((cast ((cast semicolon : Float) > (cast 5.0 : Float)) : Bool) ? (cast _Runtime.slice(image.uri, 5.0, semicolon) : Dynamic) : (cast _Runtime.coalesce(image.mimeType, function():Dynamic return cast null) : Dynamic));
-        var bytes:Dynamic = _Runtime.callValue(GltfParse.decodeBase64__gltfParse, cast ([_Runtime.slice(image.uri, (comma + 1.0), null)] : Array<Dynamic>));
-        return cast _Runtime.callValue(createEmbeddedImageResourceReference, cast ([bytes, _Runtime.coalesce(declared, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)))] : Array<Dynamic>));
+        var semicolon:Float = _Runtime.callProperty(image.uri, 'indexOf', cast ([';'] : Array<Dynamic>));
+        var declared:Null<String> = ((cast ((cast semicolon : Float) > (cast 5.0 : Float)) : Bool) ? (cast _Runtime.slice(image.uri, 5.0, semicolon) : Dynamic) : (cast _Runtime.coalesce(image.mimeType, function():Dynamic return cast null) : Dynamic));
+        var bytes:flighthq._internal._UInt8Array = (cast GltfParse.decodeBase64__gltfParse((cast _Runtime.slice(image.uri, (comma + 1.0), null) : String)) : flighthq._internal._UInt8Array);
+        return cast (cast createEmbeddedImageResourceReference((cast bytes : flighthq._internal._UInt8Array), (cast _Runtime.coalesce(declared, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>)) : Null<String>)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
       }
-      return cast _Runtime.callValue(createExternalImageResourceReference, cast ([image.uri, _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.basePath; }), function():Dynamic return cast null)] : Array<Dynamic>));
+      return cast (cast createExternalImageResourceReference((cast image.uri : String), (cast _Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : flighthq.types.GltfExtension.GltfImportOptions).basePath; }), function():Dynamic return cast null) : Null<String>)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
     }
     if ((cast !_Runtime.strictEquals(image.bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var bufferView:Dynamic = _Runtime.optionalIndex(doc.bufferViews, image.bufferView);
-      var buffer:Dynamic = ((cast !_Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(buffers, bufferView.buffer) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+      var bufferView:Null<GltfBufferView> = _Runtime.optionalIndex(doc.bufferViews, image.bufferView);
+      var buffer:Null<flighthq._internal._UInt8Array> = ((cast !_Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(buffers, (cast bufferView : flighthq.types.GltfSchema.GltfBufferView).buffer) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       if ((cast ((cast _Runtime.strictEquals(bufferView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.image-bufferview-out-of-range', '', { firstBufferView: image.bufferView, firstImage: imageIndex }] : Array<Dynamic>));
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.image-bufferview-out-of-range' : String), (cast '' : String), (cast { firstBufferView: image.bufferView, firstImage: imageIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         return cast null;
       }
-      var start:Dynamic = _Runtime.coalesce(bufferView.byteOffset, function():Dynamic return cast 0.0);
-      if ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([start] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([bufferView.byteLength] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.image-bufferview-out-of-range', '', { firstBufferView: image.bufferView, firstImage: imageIndex }] : Array<Dynamic>));
+      var start:Float = _Runtime.coalesce((cast bufferView : flighthq.types.GltfSchema.GltfBufferView).byteOffset, function():Dynamic return cast 0.0);
+      if ((cast ((cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast start : Null<Float>)) : Bool) : Bool) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast (cast bufferView : flighthq.types.GltfSchema.GltfBufferView).byteLength : Null<Float>)) : Bool) : Bool) : Bool)) : Bool)) {
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.image-bufferview-out-of-range' : String), (cast '' : String), (cast { firstBufferView: image.bufferView, firstImage: imageIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         return cast null;
       }
-      var bytes:Dynamic = _Runtime.slice(buffer, start, (start + bufferView.byteLength));
-      return cast _Runtime.callValue(createEmbeddedImageResourceReference, cast ([bytes, _Runtime.coalesce(image.mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)))] : Array<Dynamic>));
+      var bytes:flighthq._internal._UInt8Array = _Runtime.slice(buffer, start, (start + (cast bufferView : flighthq.types.GltfSchema.GltfBufferView).byteLength));
+      return cast (cast createEmbeddedImageResourceReference((cast bytes : flighthq._internal._UInt8Array), (cast _Runtime.coalesce(image.mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>)) : Null<String>)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
     }
-    _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.image-no-source', '', { firstImage: imageIndex }] : Array<Dynamic>));
+    GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.image-no-source' : String), (cast '' : String), (cast { firstImage: imageIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     return cast null;
     return cast null;
   }
 
   public static function packGltfLinearColor__gltfParse(factor:Array<Float>, channels:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     a = ((cast _Runtime.strictEquals(channels, 4.0) : Bool) ? (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 3.0), function():Dynamic return cast 0.0) : Dynamic) : (cast 1.0 : Dynamic));
-    return cast _Runtime.callValue(packLinearToColor, cast ([cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 2.0), function():Dynamic return cast 0.0), a] : Array<Dynamic>)] : Array<Dynamic>));
+    return cast (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(factor, 2.0), function():Dynamic return cast 0.0), a] : Array<Dynamic>) : Array<Float>)) : Float);
     return cast null;
   }
 
-  public static function decodeGltfBuffer__gltfParse(buffer:GltfBuffer, binary:Null<flighthq._internal._UInt8Array>, options:Null<GltfImportOptions>, gltfDrops:Null<Dynamic>):flighthq._internal._UInt8Array {
-    var uri:Dynamic = cast _Runtime.UNDEFINED;
-    var comma:Dynamic = cast _Runtime.UNDEFINED;
-    var supplied:Dynamic = cast _Runtime.UNDEFINED;
+  public static function decodeGltfBuffer__gltfParse(buffer:GltfBuffer, binary:Null<flighthq._internal._UInt8Array>, options:Null<GltfImportOptions>, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):flighthq._internal._UInt8Array {
+    var uri:Null<String> = cast _Runtime.UNDEFINED;
+    var comma:Float = cast _Runtime.UNDEFINED;
+    var supplied:Null<flighthq._internal._ArrayLike<Float>> = cast _Runtime.UNDEFINED;
     uri = buffer.uri;
     if ((cast _Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast !_Runtime.strictEquals(binary, null) : Bool)) { return cast (cast binary : flighthq._internal._UInt8Array); }
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.buffer-empty', 'no-uri', { reason: 'no-uri-no-binary' }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.buffer-empty' : String), (cast 'no-uri' : String), (cast { reason: 'no-uri-no-binary' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast new flighthq._internal._UInt8Array(0.0);
     }
     comma = _Runtime.callProperty(uri, 'indexOf', cast ([','] : Array<Dynamic>));
     if ((cast ((cast StringTools.startsWith(uri, 'data:') : Bool) && (cast ((cast comma : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(GltfParse.decodeBase64__gltfParse, cast ([_Runtime.slice(uri, (comma + 1.0), null)] : Array<Dynamic>));
+      return cast (cast GltfParse.decodeBase64__gltfParse((cast _Runtime.slice(uri, (comma + 1.0), null) : String)) : flighthq._internal._UInt8Array);
     }
-    supplied = _Runtime.optionalIndex(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.externalBuffers; }), uri);
+    supplied = _Runtime.optionalIndex(({ final __typedStruct24 = options; __typedStruct24 == null ? _Runtime.UNDEFINED : (cast __typedStruct24 : flighthq.types.GltfExtension.GltfImportOptions).externalBuffers; }), uri);
     if ((cast !_Runtime.strictEquals(supplied, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast new flighthq._internal._UInt8Array(supplied); }
-    _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.buffer-empty', 'external-missing', { firstUri: uri, reason: 'external-not-supplied' }] : Array<Dynamic>));
+    GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.buffer-empty' : String), (cast 'external-missing' : String), (cast { firstUri: uri, reason: 'external-not-supplied' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     return cast new flighthq._internal._UInt8Array(0.0);
     return cast null;
   }
 
   public static function decodeBase64__gltfParse(s:String):flighthq._internal._UInt8Array {
-    var table:Dynamic = cast _Runtime.UNDEFINED;
-    var stripped:Dynamic = cast _Runtime.UNDEFINED;
+    var table:String = cast _Runtime.UNDEFINED;
+    var stripped:String = cast _Runtime.UNDEFINED;
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     stripped = _Runtime.replace(s, _Runtime.regexp('[^A-Za-z0-9+/]', 'g'), '', false);
     out = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool)) {
-        var c0:Dynamic = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, i)] : Array<Dynamic>));
-        var c1:Dynamic = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 1.0))] : Array<Dynamic>));
-        var c2:Dynamic = ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
-        var c3:Dynamic = ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
-        var n:Dynamic = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(((cast ((cast c2 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c2 : Dynamic))) << 6)))) | _Runtime.toInt32(((cast ((cast c3 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c3 : Dynamic))));
+        var c0:Float = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, i)] : Array<Dynamic>));
+        var c1:Float = _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 1.0))] : Array<Dynamic>));
+        var c2:Float = ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 2.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var c3:Float = ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool) ? (cast _Runtime.callProperty(table, 'indexOf', cast ([_Runtime.getIndex(stripped, (i + 3.0))] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+        var n:Float = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(c0) << 18)) | _Runtime.toInt32((_Runtime.toInt32(c1) << 12)))) | _Runtime.toInt32((_Runtime.toInt32(((cast ((cast c2 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c2 : Dynamic))) << 6)))) | _Runtime.toInt32(((cast ((cast c3 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast c3 : Dynamic))));
         _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 16)) & 255)] : Array<Dynamic>));
         if ((cast ((cast c2 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32((_Runtime.toInt32(n) >> 8)) & 255)] : Array<Dynamic>)); }
         if ((cast ((cast c3 : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([(_Runtime.toInt32(n) & 255)] : Array<Dynamic>)); }
@@ -817,12 +850,12 @@ class GltfParse {
   }
 
   public static function isSupportedGltfExtension__gltfParse(extension:String, handlers:Null<Array<GltfExtensionHandler>>):Bool {
-    if ((cast _Runtime.strictEquals(extension, 'KHR_draco_mesh_compression') : Bool)) { return cast _Runtime.callValue(hasGltfDracoDecoder, cast ([] : Array<Dynamic>)); }
-    return cast ((cast ((cast GltfParse.CORE_GLTF_EXTENSIONS__gltfParse : flighthq._internal._Set).has(extension)) : Bool) || (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(handlers, 'some', cast ([function(handler:Dynamic) return _Runtime.strictEquals(_Runtime.field(handler, 'kind'), extension)] : Array<Dynamic>)), true) : Bool));
+    if ((cast _Runtime.strictEquals(extension, 'KHR_draco_mesh_compression') : Bool)) { return cast (cast hasGltfDracoDecoder() : Bool); }
+    return cast ((cast ((cast GltfParse.CORE_GLTF_EXTENSIONS__gltfParse : flighthq._internal._Set<String>).has(extension)) : Bool) || (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(handlers, 'some', cast ([function(handler:GltfExtensionHandler, __unused25:Float, __unused26:Array<GltfExtensionHandler>):Bool return _Runtime.strictEquals((cast handler : GltfExtensionHandler).kind, extension)] : Array<Dynamic>)), true) : Bool));
     return cast null;
   }
 
-  public static final CORE_GLTF_EXTENSIONS__gltfParse:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['KHR_mesh_quantization', 'KHR_texture_transform'] : Array<Dynamic>)]);
+  public static final CORE_GLTF_EXTENSIONS__gltfParse:flighthq._internal._Set<String> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['KHR_mesh_quantization', 'KHR_texture_transform'] : Array<Dynamic>)]);
 
   public static function normalizeComponent__gltfParse(componentType:GltfComponentType, value:Float):Float {
     {
@@ -849,74 +882,74 @@ class GltfParse {
     return cast null;
   }
 
-  public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, gltfDrops:Null<Dynamic>):Null<MeshGeometry> {
-    var draco:Dynamic = cast _Runtime.UNDEFINED;
-    var positionIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var position:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var normal:Dynamic = cast _Runtime.UNDEFINED;
-    var tangent:Dynamic = cast _Runtime.UNDEFINED;
-    var uv:Dynamic = cast _Runtime.UNDEFINED;
-    var joints:Dynamic = cast _Runtime.UNDEFINED;
-    var weights:Dynamic = cast _Runtime.UNDEFINED;
-    var skinned:Dynamic = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
+  public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<MeshGeometry> {
+    var draco:Null<GltfDracoMesh> = cast _Runtime.UNDEFINED;
+    var positionIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    var position:GltfAccessorResult__gltfParse = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var normal:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = cast _Runtime.UNDEFINED;
+    var tangent:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = cast _Runtime.UNDEFINED;
+    var uv:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = cast _Runtime.UNDEFINED;
+    var joints:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = cast _Runtime.UNDEFINED;
+    var weights:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = cast _Runtime.UNDEFINED;
+    var skinned:Bool = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
+    var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var sourceIndices:Null<flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
-    var primitiveElements:Dynamic = cast _Runtime.UNDEFINED;
-    draco = _Runtime.callValue(GltfParse.resolveGltfDracoMesh__gltfParse, cast ([doc, buffers, primitive, gltfDrops] : Array<Dynamic>));
-    positionIndex = _Runtime.field(primitive.attributes, 'POSITION');
+    var primitiveElements:Null<{ var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }> = cast _Runtime.UNDEFINED;
+    draco = (cast GltfParse.resolveGltfDracoMesh__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast primitive : GltfPrimitive), gltfDrops) : Null<GltfDracoMesh>);
+    positionIndex = (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).POSITION;
     if ((cast _Runtime.strictEquals(positionIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.primitive-no-position', '', {  }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.primitive-no-position' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
-    position = _Runtime.callValue(GltfParse.readGltfAttribute__gltfParse, cast ([draco, 'POSITION', doc, buffers, positionIndex, gltfDrops, 'VEC3'] : Array<Dynamic>));
-    vertexCount = _Runtime.field(position, 'count');
+    position = (cast GltfParse.readGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'POSITION' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast positionIndex : Float), gltfDrops, (cast 'VEC3' : String)) : GltfAccessorResult__gltfParse);
+    vertexCount = (cast position : GltfAccessorResult__gltfParse).count;
     if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.primitive-no-position', '', { firstAccessor: positionIndex }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.primitive-no-position' : String), (cast '' : String), (cast { firstAccessor: positionIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
-    normal = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([draco, 'NORMAL', doc, buffers, _Runtime.field(primitive.attributes, 'NORMAL'), vertexCount, 'VEC3', gltfDrops] : Array<Dynamic>));
-    tangent = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([draco, 'TANGENT', doc, buffers, _Runtime.field(primitive.attributes, 'TANGENT'), vertexCount, 'VEC4', gltfDrops] : Array<Dynamic>));
-    uv = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([draco, 'TEXCOORD_0', doc, buffers, _Runtime.field(primitive.attributes, 'TEXCOORD_0'), vertexCount, 'VEC2', gltfDrops] : Array<Dynamic>));
-    joints = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([draco, 'JOINTS_0', doc, buffers, _Runtime.field(primitive.attributes, 'JOINTS_0'), vertexCount, 'VEC4', gltfDrops] : Array<Dynamic>));
-    weights = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([draco, 'WEIGHTS_0', doc, buffers, _Runtime.field(primitive.attributes, 'WEIGHTS_0'), vertexCount, 'VEC4', gltfDrops] : Array<Dynamic>));
+    normal = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'NORMAL' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).NORMAL : Null<Float>), (cast vertexCount : Float), (cast 'VEC3' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+    tangent = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'TANGENT' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).TANGENT : Null<Float>), (cast vertexCount : Float), (cast 'VEC4' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+    uv = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'TEXCOORD_0' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).TEXCOORD_0 : Null<Float>), (cast vertexCount : Float), (cast 'VEC2' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+    joints = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'JOINTS_0' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).JOINTS_0 : Null<Float>), (cast vertexCount : Float), (cast 'VEC4' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+    weights = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast 'WEIGHTS_0' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast (cast primitive.attributes : { @:optional var JOINTS_0:Null<Float>; @:optional var NORMAL:Null<Float>; @:optional var POSITION:Null<Float>; @:optional var TANGENT:Null<Float>; @:optional var TEXCOORD_0:Null<Float>; @:optional var WEIGHTS_0:Null<Float>; }).WEIGHTS_0 : Null<Float>), (cast vertexCount : Float), (cast 'VEC4' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
     skinned = ((cast !_Runtime.strictEquals(joints, null) : Bool) && (cast !_Runtime.strictEquals(weights, null) : Bool));
     floatsPerVertex = ((cast skinned : Bool) ? (cast SKINNED_FLOATS_PER_VERTEX : Dynamic) : (cast CANONICAL_FLOATS_PER_VERTEX : Dynamic));
     vertices = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-        var o:Dynamic = (v * floatsPerVertex);
-        flighthq._internal._StaticIndex.writeFloat32Array(vertices, o, _Runtime.getIndex(_Runtime.field(position, 'data'), (v * 3.0)));
-        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 1.0), _Runtime.getIndex(_Runtime.field(position, 'data'), ((v * 3.0) + 1.0)));
-        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 2.0), _Runtime.getIndex(_Runtime.field(position, 'data'), ((v * 3.0) + 2.0)));
+        var o:Float = (v * floatsPerVertex);
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, o, _Runtime.getIndex((cast position : GltfAccessorResult__gltfParse).data, (v * 3.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 1.0), _Runtime.getIndex((cast position : GltfAccessorResult__gltfParse).data, ((v * 3.0) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 2.0), _Runtime.getIndex((cast position : GltfAccessorResult__gltfParse).data, ((v * 3.0) + 2.0)));
         if ((cast !_Runtime.strictEquals(normal, null) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 3.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), (v * 3.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 4.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), ((v * 3.0) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 5.0), _Runtime.getIndex(_Runtime.field(normal, 'data'), ((v * 3.0) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 3.0), _Runtime.getIndex((cast normal : { var data:flighthq._internal._ArrayLike<Float>; }).data, (v * 3.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 4.0), _Runtime.getIndex((cast normal : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 3.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 5.0), _Runtime.getIndex((cast normal : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 3.0) + 2.0)));
         }
         if ((cast !_Runtime.strictEquals(tangent, null) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 6.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), (v * 4.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 7.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 8.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 9.0), _Runtime.getIndex(_Runtime.field(tangent, 'data'), ((v * 4.0) + 3.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 6.0), _Runtime.getIndex((cast tangent : { var data:flighthq._internal._ArrayLike<Float>; }).data, (v * 4.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 7.0), _Runtime.getIndex((cast tangent : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 8.0), _Runtime.getIndex((cast tangent : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 9.0), _Runtime.getIndex((cast tangent : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 3.0)));
         }
         if ((cast !_Runtime.strictEquals(uv, null) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), _Runtime.getIndex(_Runtime.field(uv, 'data'), (v * 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), _Runtime.getIndex(_Runtime.field(uv, 'data'), ((v * 2.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), _Runtime.getIndex((cast uv : { var data:flighthq._internal._ArrayLike<Float>; }).data, (v * 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), _Runtime.getIndex((cast uv : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 2.0) + 1.0)));
         }
         if ((cast skinned : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 12.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), (v * 4.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 13.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), ((v * 4.0) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 14.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), ((v * 4.0) + 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 15.0), _Runtime.getIndex(_Runtime.field(joints, 'data'), ((v * 4.0) + 3.0)));
-          var w0:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), (v * 4.0));
-          var w1:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), ((v * 4.0) + 1.0));
-          var w2:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), ((v * 4.0) + 2.0));
-          var w3:Dynamic = _Runtime.getIndex(_Runtime.field(weights, 'data'), ((v * 4.0) + 3.0));
-          var sum:Dynamic = (((w0 + w1) + w2) + w3);
-          var inv:Dynamic = ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / sum) : Dynamic) : (cast 0.0 : Dynamic));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 12.0), _Runtime.getIndex((cast joints : { var data:flighthq._internal._ArrayLike<Float>; }).data, (v * 4.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 13.0), _Runtime.getIndex((cast joints : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 1.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 14.0), _Runtime.getIndex((cast joints : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 15.0), _Runtime.getIndex((cast joints : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 3.0)));
+          var w0:Float = _Runtime.getIndex((cast weights : { var data:flighthq._internal._ArrayLike<Float>; }).data, (v * 4.0));
+          var w1:Float = _Runtime.getIndex((cast weights : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 1.0));
+          var w2:Float = _Runtime.getIndex((cast weights : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 2.0));
+          var w3:Float = _Runtime.getIndex((cast weights : { var data:flighthq._internal._ArrayLike<Float>; }).data, ((v * 4.0) + 3.0));
+          var sum:Float = (((w0 + w1) + w2) + w3);
+          var inv:Float = ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / sum) : Dynamic) : (cast 0.0 : Dynamic));
           flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 16.0), (w0 * inv));
           flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 17.0), (w1 * inv));
           flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 18.0), (w2 * inv));
@@ -926,26 +959,26 @@ class GltfParse {
       }
     }
     if ((cast !_Runtime.looseEquals(_Runtime.optionalField(draco, 'indices'), null) : Bool)) {
-      (sourceIndices = cast (new flighthq._internal._UInt32Array(_Runtime.field(draco, 'indices')) : Dynamic));
+      (sourceIndices = cast (new flighthq._internal._UInt32Array((cast draco : GltfDracoMesh).indices) : Dynamic));
     } else { if ((cast !_Runtime.strictEquals(primitive.indices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var indexResult:Dynamic = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, primitive.indices, gltfDrops, 'SCALAR'] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(indexResult, 'fault'), null) : Bool)) {
-        _Runtime.callValue(GltfParse.reportGltfAccessorFault__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, _Runtime.field(indexResult, 'fault')] : Array<Dynamic>));
+      var indexResult:GltfAccessorResult__gltfParse = (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast primitive.indices : Float), gltfDrops, (cast 'SCALAR' : Null<String>)) : GltfAccessorResult__gltfParse);
+      if ((cast !_Runtime.strictEquals((cast indexResult : GltfAccessorResult__gltfParse).fault, null) : Bool)) {
+        GltfParse.reportGltfAccessorFault__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast indexResult : GltfAccessorResult__gltfParse).fault);
         return cast null;
       }
-      if ((cast _Runtime.strictEquals(_Runtime.field(indexResult, 'count'), 0.0) : Bool)) {
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.primitive-empty-indices', '', { firstAccessor: primitive.indices }] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals((cast indexResult : GltfAccessorResult__gltfParse).count, 0.0) : Bool)) {
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.primitive-empty-indices' : String), (cast '' : String), (cast { firstAccessor: primitive.indices } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         return cast null;
       }
-      (sourceIndices = cast (new flighthq._internal._UInt32Array(_Runtime.field(indexResult, 'data')) : Dynamic));
+      (sourceIndices = cast (new flighthq._internal._UInt32Array((cast indexResult : GltfAccessorResult__gltfParse).data) : Dynamic));
     } }
-    primitiveElements = _Runtime.callValue(GltfParse.buildGltfPrimitiveElements__gltfParse, cast ([_Runtime.coalesce(primitive.mode, function():Dynamic return cast 4.0), sourceIndices, vertexCount, gltfDrops] : Array<Dynamic>));
+    primitiveElements = (cast GltfParse.buildGltfPrimitiveElements__gltfParse((cast _Runtime.coalesce(primitive.mode, function():Dynamic return cast 4.0) : Float), (cast sourceIndices : Null<flighthq._internal._UInt32Array>), (cast vertexCount : Float), gltfDrops) : Null<{ var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }>);
     if ((cast _Runtime.strictEquals(primitiveElements, null) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.field(primitiveElements, 'indices'), layout: ((cast skinned : Bool) ? (cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT : Dynamic) : (cast CANONICAL_LAYOUT : Dynamic)), topology: _Runtime.field(primitiveElements, 'topology'), vertices: vertices }] : Array<Dynamic>));
+    return cast (cast createMeshGeometry({ indices: (cast primitiveElements : { var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }).indices, layout: ((cast skinned : Bool) ? (cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT : Dynamic) : (cast CANONICAL_LAYOUT : Dynamic)), topology: (cast primitiveElements : { var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }).topology, vertices: vertices }) : Null<MeshGeometry>);
     return cast null;
   }
 
-  public static function buildGltfPrimitiveElements__gltfParse(mode:Float, source:Null<flighthq._internal._UInt32Array>, vertexCount:Float, gltfDrops:Null<Dynamic>):Null<{ var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }> {
+  public static function buildGltfPrimitiveElements__gltfParse(mode:Float, source:Null<flighthq._internal._UInt32Array>, vertexCount:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<{ var indices:Null<flighthq._internal._UInt32Array>; var topology:PrimitiveTopology; }> {
     {
       var __switchValue = mode;
       if (__switchValue == 0.0) {
@@ -955,7 +988,7 @@ class GltfParse {
         return cast { indices: source, topology: 'line-list' };
       }
       else if (__switchValue == 2.0) {
-        return cast { indices: _Runtime.callValue(GltfParse.buildGltfLineLoopIndices__gltfParse, cast ([source, vertexCount] : Array<Dynamic>)), topology: 'line-list' };
+        return cast { indices: (cast GltfParse.buildGltfLineLoopIndices__gltfParse((cast source : Null<flighthq._internal._UInt32Array>), (cast vertexCount : Float)) : Null<flighthq._internal._UInt32Array>), topology: 'line-list' };
       }
       else if (__switchValue == 3.0) {
         return cast { indices: source, topology: 'line-strip' };
@@ -967,10 +1000,10 @@ class GltfParse {
         return cast { indices: source, topology: 'triangle-strip' };
       }
       else if (__switchValue == 6.0) {
-        return cast { indices: _Runtime.callValue(GltfParse.buildGltfTriangleFanIndices__gltfParse, cast ([source, vertexCount] : Array<Dynamic>)), topology: 'triangle-list' };
+        return cast { indices: (cast GltfParse.buildGltfTriangleFanIndices__gltfParse((cast source : Null<flighthq._internal._UInt32Array>), (cast vertexCount : Float)) : Null<flighthq._internal._UInt32Array>), topology: 'triangle-list' };
       }
       else  {
-        _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.primitive-unsupported-mode', '', { firstMode: mode }] : Array<Dynamic>));
+        GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.primitive-unsupported-mode' : String), (cast '' : String), (cast { firstMode: mode } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         return cast null;
       }
     }
@@ -978,13 +1011,13 @@ class GltfParse {
   }
 
   public static function buildGltfLineLoopIndices__gltfParse(source:Null<flighthq._internal._UInt32Array>, vertexCount:Float):flighthq._internal._UInt32Array {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.optionalField(source, 'length'), function():Dynamic return cast vertexCount);
     if ((cast ((cast count : Float) < (cast 2.0 : Float)) : Bool)) { return cast new flighthq._internal._UInt32Array(0.0); }
     out = new flighthq._internal._UInt32Array((count * 2.0));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeUint32Array(out, (i * 2.0), _Runtime.coalesce(_Runtime.optionalIndex(source, i), function():Dynamic return cast i));
         flighthq._internal._StaticIndex.writeUint32Array(out, ((i * 2.0) + 1.0), _Runtime.coalesce(_Runtime.optionalIndex(source, _Runtime.fmod((i + 1.0), count)), function():Dynamic return cast _Runtime.fmod((i + 1.0), count)));
@@ -996,17 +1029,17 @@ class GltfParse {
   }
 
   public static function buildGltfTriangleFanIndices__gltfParse(source:Null<flighthq._internal._UInt32Array>, vertexCount:Float):flighthq._internal._UInt32Array {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var first:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var first:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.optionalField(source, 'length'), function():Dynamic return cast vertexCount);
     if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { return cast new flighthq._internal._UInt32Array(0.0); }
     out = new flighthq._internal._UInt32Array(((count - 2.0) * 3.0));
     first = _Runtime.coalesce(_Runtime.optionalIndex(source, 0.0), function():Dynamic return cast 0.0);
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast (i + 1.0) : Float) < (cast count : Float)) : Bool)) {
-        var offset:Dynamic = ((i - 1.0) * 3.0);
+        var offset:Float = ((i - 1.0) * 3.0);
         flighthq._internal._StaticIndex.writeUint32Array(out, offset, first);
         flighthq._internal._StaticIndex.writeUint32Array(out, (offset + 1.0), _Runtime.coalesce(_Runtime.optionalIndex(source, i), function():Dynamic return cast i));
         flighthq._internal._StaticIndex.writeUint32Array(out, (offset + 2.0), _Runtime.coalesce(_Runtime.optionalIndex(source, (i + 1.0)), function():Dynamic return cast (i + 1.0)));
@@ -1017,35 +1050,35 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildGltfMorph__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, meshWeights:Null<Array<Float>>, baseVertexCount:Float, gltfDrops:Null<Dynamic>):Null<MeshMorph> {
-    var gltfTargets:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildGltfMorph__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, meshWeights:Null<Array<Float>>, baseVertexCount:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<MeshMorph> {
+    var gltfTargets:Null<Array<GltfMorphTarget>> = cast _Runtime.UNDEFINED;
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
-    var weights:Dynamic = cast _Runtime.UNDEFINED;
+    var weights:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     gltfTargets = primitive.targets;
     if ((cast ((cast _Runtime.strictEquals(gltfTargets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(gltfTargets, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     targets = cast ([] : Array<Dynamic>);
     {
-      var t:Dynamic = 0.0;
+      var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast _Runtime.field(gltfTargets, 'length') : Float)) : Bool)) {
         var target:GltfMorphTarget = flighthq._internal._StaticIndex.readArray(gltfTargets, t);
         if ((cast _Runtime.strictEquals(target.POSITION, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.morph-target-no-position', '', { firstTarget: t }] : Array<Dynamic>));
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.morph-target-no-position' : String), (cast '' : String), (cast { firstTarget: t } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           return cast null;
         }
-        var positionResult:Dynamic = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, target.POSITION, gltfDrops, 'VEC3'] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(_Runtime.field(positionResult, 'fault'), null) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.morph-target-no-position', '', { firstTarget: t }] : Array<Dynamic>));
+        var positionResult:GltfAccessorResult__gltfParse = (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast target.POSITION : Float), gltfDrops, (cast 'VEC3' : Null<String>)) : GltfAccessorResult__gltfParse);
+        if ((cast !_Runtime.strictEquals((cast positionResult : GltfAccessorResult__gltfParse).fault, null) : Bool)) {
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.morph-target-no-position' : String), (cast '' : String), (cast { firstTarget: t } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           return cast null;
         }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(positionResult, 'count'), baseVertexCount) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.morph-target-count-mismatch', '', { firstActual: _Runtime.field(positionResult, 'count'), firstExpected: baseVertexCount, firstTarget: t }] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals((cast positionResult : GltfAccessorResult__gltfParse).count, baseVertexCount) : Bool)) {
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.morph-target-count-mismatch' : String), (cast '' : String), (cast { firstActual: (cast positionResult : GltfAccessorResult__gltfParse).count, firstExpected: baseVertexCount, firstTarget: t } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           return cast null;
         }
-        var positionDeltas:Dynamic = new flighthq._internal._Float32Array(_Runtime.field(positionResult, 'data'));
-        var normal:Dynamic = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([null, 'NORMAL', doc, buffers, target.NORMAL, baseVertexCount, 'VEC3', gltfDrops] : Array<Dynamic>));
-        var tangent:Dynamic = _Runtime.callValue(GltfParse.readOptionalGltfAttribute__gltfParse, cast ([null, 'TANGENT', doc, buffers, target.TANGENT, baseVertexCount, 'VEC3', gltfDrops] : Array<Dynamic>));
-        var normalDeltas:Dynamic = ((cast !_Runtime.strictEquals(normal, null) : Bool) ? (cast new flighthq._internal._Float32Array(_Runtime.field(normal, 'data')) : Dynamic) : (cast null : Dynamic));
-        var tangentDeltas:Dynamic = ((cast !_Runtime.strictEquals(tangent, null) : Bool) ? (cast new flighthq._internal._Float32Array(_Runtime.field(tangent, 'data')) : Dynamic) : (cast null : Dynamic));
+        var positionDeltas:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((cast positionResult : GltfAccessorResult__gltfParse).data);
+        var normal:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast null : Null<GltfDracoMesh>), (cast 'NORMAL' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast target.NORMAL : Null<Float>), (cast baseVertexCount : Float), (cast 'VEC3' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+        var tangent:Null<{ var data:flighthq._internal._ArrayLike<Float>; }> = (cast GltfParse.readOptionalGltfAttribute__gltfParse((cast null : Null<GltfDracoMesh>), (cast 'TANGENT' : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast target.TANGENT : Null<Float>), (cast baseVertexCount : Float), (cast 'VEC3' : String), gltfDrops) : Null<{ var data:flighthq._internal._ArrayLike<Float>; }>);
+        var normalDeltas:Null<flighthq._internal._Float32Array> = ((cast !_Runtime.strictEquals(normal, null) : Bool) ? (cast new flighthq._internal._Float32Array((cast normal : { var data:flighthq._internal._ArrayLike<Float>; }).data) : Dynamic) : (cast null : Dynamic));
+        var tangentDeltas:Null<flighthq._internal._Float32Array> = ((cast !_Runtime.strictEquals(tangent, null) : Bool) ? (cast new flighthq._internal._Float32Array((cast tangent : { var data:flighthq._internal._ArrayLike<Float>; }).data) : Dynamic) : (cast null : Dynamic));
         _Runtime.callProperty(targets, 'push', cast ([{ normalDeltas: normalDeltas, positionDeltas: positionDeltas, tangentDeltas: tangentDeltas }] : Array<Dynamic>));
         t++;
       }
@@ -1053,7 +1086,7 @@ class GltfParse {
     weights = new flighthq._internal._Float32Array(_Runtime.field(targets, 'length'));
     if ((cast !_Runtime.strictEquals(meshWeights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool) && (cast ((cast i : Float) < (cast _Runtime.field(meshWeights, 'length') : Float)) : Bool)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(weights, i, flighthq._internal._StaticIndex.readArray(meshWeights, i));
           i++;
@@ -1064,190 +1097,190 @@ class GltfParse {
     return cast null;
   }
 
-  public static function reportGltfAccessorFault__gltfParse(gltfDrops:Null<Dynamic>, severity:ImportDiagnosticSeverity, fault:GltfAccessorFault__gltfParse):Void {
-    _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, severity, _Runtime.field(fault, 'kind'), '', _Runtime.field(fault, 'detail')] : Array<Dynamic>));
+  public static function reportGltfAccessorFault__gltfParse(gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>, severity:ImportDiagnosticSeverity, fault:GltfAccessorFault__gltfParse):Void {
+    GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast severity : ImportDiagnosticSeverity), (cast _Runtime.field(fault, 'kind') : String), (cast '' : String), (cast _Runtime.field(fault, 'detail') : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
   }
 
-  public static function resolveGltfDracoMesh__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, gltfDrops:Null<Dynamic>):Null<GltfDracoMesh> {
-    var block:Dynamic = cast _Runtime.UNDEFINED;
-    var decoder:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var payload:Dynamic = cast _Runtime.UNDEFINED;
+  public static function resolveGltfDracoMesh__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, primitive:GltfPrimitive, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<GltfDracoMesh> {
+    var block:Null<GltfDracoMeshCompression> = cast _Runtime.UNDEFINED;
+    var decoder:Null<GltfDracoDecoder> = cast _Runtime.UNDEFINED;
+    var view:Null<GltfBufferView> = cast _Runtime.UNDEFINED;
+    var bytes:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var payload:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var decoded:Null<GltfDracoMesh> = cast _Runtime.UNDEFINED;
     block = _Runtime.optionalField(primitive.extensions, 'KHR_draco_mesh_compression');
     if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    decoder = _Runtime.callValue(getGltfDracoDecoder, cast ([] : Array<Dynamic>));
+    decoder = (cast getGltfDracoDecoder() : Null<GltfDracoDecoder>);
     if ((cast _Runtime.strictEquals(decoder, null) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.draco-decoder-missing', '', {  }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.draco-decoder-missing' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
-    view = _Runtime.optionalIndex(doc.bufferViews, _Runtime.field(block, 'bufferView'));
-    bytes = ((cast !_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(buffers, view.buffer) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    view = _Runtime.optionalIndex(doc.bufferViews, (cast block : GltfDracoMeshCompression).bufferView);
+    bytes = ((cast !_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(buffers, (cast view : flighthq.types.GltfSchema.GltfBufferView).buffer) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.draco-payload-missing', '', { firstBufferView: _Runtime.field(block, 'bufferView') }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.draco-payload-missing' : String), (cast '' : String), (cast { firstBufferView: (cast block : GltfDracoMeshCompression).bufferView } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
-    start = _Runtime.coalesce(view.byteOffset, function():Dynamic return cast 0.0);
-    payload = (cast bytes : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int((start + view.byteLength)));
+    start = _Runtime.coalesce((cast view : flighthq.types.GltfSchema.GltfBufferView).byteOffset, function():Dynamic return cast 0.0);
+    payload = (cast bytes : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int((start + (cast view : flighthq.types.GltfSchema.GltfBufferView).byteLength)));
     decoded = null;
     try {
-      (decoded = cast (_Runtime.callValue(decoder, cast ([payload, _Runtime.field(block, 'attributes')] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast ((cast decoder((cast payload : flighthq._internal._UInt8Array), (cast (cast block : GltfDracoMeshCompression).attributes : flighthq._internal._Record<String, Float>)) : Null<GltfDracoMesh>) : Dynamic));
     } catch (__error:Dynamic) {
       (decoded = cast (null : Dynamic));
     }
     if ((cast _Runtime.strictEquals(decoded, null) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Drop, 'gltf.draco-decode-failed', '', { firstBufferView: _Runtime.field(block, 'bufferView') }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.draco-decode-failed' : String), (cast '' : String), (cast { firstBufferView: (cast block : GltfDracoMeshCompression).bufferView } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
     return cast decoded;
     return cast null;
   }
 
-  public static function readGltfAttribute__gltfParse(draco:Null<GltfDracoMesh>, semantic:String, doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, index:Float, gltfDrops:Null<Dynamic>, expectedType:String):GltfAccessorResult__gltfParse {
-    var decoded:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readGltfAttribute__gltfParse(draco:Null<GltfDracoMesh>, semantic:String, doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, index:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>, expectedType:String):GltfAccessorResult__gltfParse {
+    var decoded:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     decoded = _Runtime.optionalIndex(_Runtime.optionalField(draco, 'attributes'), semantic);
     if ((cast !_Runtime.strictEquals(decoded, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { count: _Runtime.coalesce(_Runtime.optionalField(draco, 'vertexCount'), function():Dynamic return cast 0.0), data: decoded, fault: null };
     }
-    return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, index, gltfDrops, expectedType] : Array<Dynamic>));
+    return cast (cast GltfParse.readAccessor__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast index : Float), gltfDrops, (cast expectedType : Null<String>)) : GltfAccessorResult__gltfParse);
     return cast null;
   }
 
-  public static function readOptionalGltfAttribute__gltfParse(draco:Null<GltfDracoMesh>, semantic:String, doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, index:Null<Float>, vertexCount:Float, expectedType:String, gltfDrops:Null<Dynamic>):Null<{ var data:Dynamic; }> {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readOptionalGltfAttribute__gltfParse(draco:Null<GltfDracoMesh>, semantic:String, doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, index:Null<Float>, vertexCount:Float, expectedType:String, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<{ var data:flighthq._internal._ArrayLike<Float>; }> {
+    var result:GltfAccessorResult__gltfParse = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    result = _Runtime.callValue(GltfParse.readGltfAttribute__gltfParse, cast ([draco, semantic, doc, buffers, index, gltfDrops, expectedType] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(result, 'fault'), null) : Bool)) {
-      _Runtime.callValue(GltfParse.reportGltfAccessorFault__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, _Runtime.field(result, 'fault')] : Array<Dynamic>));
+    result = (cast GltfParse.readGltfAttribute__gltfParse((cast draco : Null<GltfDracoMesh>), (cast semantic : String), (cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast index : Float), gltfDrops, (cast expectedType : String)) : GltfAccessorResult__gltfParse);
+    if ((cast !_Runtime.strictEquals((cast result : GltfAccessorResult__gltfParse).fault, null) : Bool)) {
+      GltfParse.reportGltfAccessorFault__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast result : GltfAccessorResult__gltfParse).fault);
       return cast null;
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(result, 'count'), vertexCount) : Bool)) {
-      _Runtime.callValue(GltfParse.reportGltfAccessorFault__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, { detail: { firstAccessor: index, firstActual: _Runtime.field(result, 'count'), firstExpected: vertexCount }, kind: 'gltf.accessor-count-mismatch' }] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast result : GltfAccessorResult__gltfParse).count, vertexCount) : Bool)) {
+      GltfParse.reportGltfAccessorFault__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), { detail: { firstAccessor: index, firstActual: (cast result : GltfAccessorResult__gltfParse).count, firstExpected: vertexCount }, kind: 'gltf.accessor-count-mismatch' });
       return cast null;
     }
-    return cast { data: _Runtime.field(result, 'data') };
+    return cast { data: (cast result : GltfAccessorResult__gltfParse).data };
     return cast null;
   }
 
-  public static function readAccessor__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, accessorIndex:Float, gltfDrops:Null<Dynamic>, ?expectedType:String):GltfAccessorResult__gltfParse {
-    var accessor:Dynamic = cast _Runtime.UNDEFINED;
-    var componentCount:Dynamic = cast _Runtime.UNDEFINED;
-    var componentByteSize:Dynamic = cast _Runtime.UNDEFINED;
-    var normalize:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var bufferViewIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readAccessor__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, accessorIndex:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>, ?expectedType:String):GltfAccessorResult__gltfParse {
+    var accessor:Null<GltfAccessor> = cast _Runtime.UNDEFINED;
+    var componentCount:Float = cast _Runtime.UNDEFINED;
+    var componentByteSize:Float = cast _Runtime.UNDEFINED;
+    var normalize:Bool = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    var out:ComponentArray__gltfParse = cast _Runtime.UNDEFINED;
+    var bufferViewIndex:Float = cast _Runtime.UNDEFINED;
+    var view:Null<GltfBufferView> = cast _Runtime.UNDEFINED;
     accessor = _Runtime.optionalIndex(doc.accessors, accessorIndex);
     if ((cast _Runtime.strictEquals(accessor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex }, kind: 'gltf.accessor-not-found' } };
     }
-    if ((cast ((cast !_Runtime.strictEquals(expectedType, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(accessor.type, expectedType) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(expectedType, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast accessor : flighthq.types.GltfSchema.GltfAccessor).type, expectedType) : Bool)) : Bool)) {
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex }, kind: 'gltf.accessor-type-mismatch' } };
     }
-    componentCount = _Runtime.getIndex(GltfParse.TYPE_COMPONENTS__gltfParse, accessor.type);
-    componentByteSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, accessor.componentType);
-    if ((cast ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([componentCount] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([componentByteSize] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([accessor.count] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    componentCount = _Runtime.getIndex(GltfParse.TYPE_COMPONENTS__gltfParse, (cast accessor : flighthq.types.GltfSchema.GltfAccessor).type);
+    componentByteSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, (cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType);
+    if ((cast ((cast ((cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast componentCount : Null<Float>)) : Bool) : Bool) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast componentByteSize : Null<Float>)) : Bool) : Bool) : Bool)) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).count : Null<Float>)) : Bool) : Bool) : Bool)) : Bool)) {
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex }, kind: 'gltf.accessor-invalid-read' } };
     }
-    normalize = ((cast _Runtime.strictEquals(accessor.normalized, true) : Bool) && (cast !_Runtime.strictEquals(accessor.componentType, 5126.0) : Bool));
-    total = (accessor.count * componentCount);
-    out = ((cast normalize : Bool) ? (cast new flighthq._internal._Float32Array(total) : Dynamic) : (cast _Runtime.callValue(GltfParse.createComponentArray__gltfParse, cast ([accessor.componentType, total] : Array<Dynamic>)) : Dynamic));
-    bufferViewIndex = _Runtime.coalesce(accessor.bufferView, function():Dynamic return cast -1.0);
+    normalize = ((cast _Runtime.strictEquals((cast accessor : flighthq.types.GltfSchema.GltfAccessor).normalized, true) : Bool) && (cast !_Runtime.strictEquals((cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType, 5126.0) : Bool));
+    total = ((cast accessor : flighthq.types.GltfSchema.GltfAccessor).count * componentCount);
+    out = ((cast normalize : Bool) ? (cast new flighthq._internal._Float32Array(total) : Dynamic) : (cast (cast GltfParse.createComponentArray__gltfParse((cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType : GltfComponentType), (cast total : Float)) : ComponentArray__gltfParse) : Dynamic));
+    bufferViewIndex = _Runtime.coalesce((cast accessor : flighthq.types.GltfSchema.GltfAccessor).bufferView, function():Dynamic return cast -1.0);
     view = ((cast ((cast bufferViewIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.optionalIndex(doc.bufferViews, bufferViewIndex) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast !_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var bytes:Dynamic = flighthq._internal._StaticIndex.readArray(buffers, view.buffer);
+      var bytes:flighthq._internal._UInt8Array = flighthq._internal._StaticIndex.readArray(buffers, (cast view : flighthq.types.GltfSchema.GltfBufferView).buffer);
       if ((cast _Runtime.strictEquals(bytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex, firstBuffer: view.buffer }, kind: 'gltf.accessor-buffer-not-found' } };
+        return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex, firstBuffer: (cast view : flighthq.types.GltfSchema.GltfBufferView).buffer }, kind: 'gltf.accessor-buffer-not-found' } };
       }
-      var elementByteSize:Dynamic = (componentCount * componentByteSize);
-      var stride:Dynamic = ((cast ((cast _Runtime.strictEquals(view.byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(view.byteStride, 0.0) : Bool)) : Bool) ? (cast elementByteSize : Dynamic) : (cast view.byteStride : Dynamic));
-      var baseOffset:Dynamic = _Runtime.callValue(GltfParse.resolveGltfReadOffset__gltfParse, cast ([bytes, view, _Runtime.coalesce(accessor.byteOffset, function():Dynamic return cast 0.0), elementByteSize, stride, accessor.count] : Array<Dynamic>));
+      var elementByteSize:Float = (componentCount * componentByteSize);
+      var stride:Float = ((cast ((cast _Runtime.strictEquals((cast view : flighthq.types.GltfSchema.GltfBufferView).byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast view : flighthq.types.GltfSchema.GltfBufferView).byteStride, 0.0) : Bool)) : Bool) ? (cast elementByteSize : Dynamic) : (cast (cast view : flighthq.types.GltfSchema.GltfBufferView).byteStride : Dynamic));
+      var baseOffset:Float = (cast GltfParse.resolveGltfReadOffset__gltfParse((cast bytes : flighthq._internal._UInt8Array), (cast view : GltfBufferView), (cast _Runtime.coalesce((cast accessor : flighthq.types.GltfSchema.GltfAccessor).byteOffset, function():Dynamic return cast 0.0) : Float), (cast elementByteSize : Float), (cast stride : Float), (cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).count : Float)) : Float);
       if ((cast ((cast baseOffset : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex }, kind: 'gltf.accessor-invalid-read' } };
       }
-      var dataView:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer')]);
+      var dataView:flighthq._internal._Any = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer')]);
       {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast accessor.count : Float)) : Bool)) {
-          var elementOffset:Dynamic = (baseOffset + (i * stride));
+        var i:Float = 0.0;
+        while ((cast ((cast i : Float) < (cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).count : Float)) : Bool)) {
+          var elementOffset:Float = (baseOffset + (i * stride));
           {
-            var c:Dynamic = 0.0;
+            var c:Float = 0.0;
             while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
-              var raw:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([dataView, accessor.componentType, (elementOffset + (c * componentByteSize))] : Array<Dynamic>));
-              _Runtime.setIndex(out, ((i * componentCount) + c), ((cast normalize : Bool) ? (cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([accessor.componentType, raw] : Array<Dynamic>)) : Dynamic) : (cast raw : Dynamic)));
+              var raw:Float = (cast GltfParse.readComponent__gltfParse((cast dataView : flighthq._internal._Any), (cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType : GltfComponentType), (cast (elementOffset + (c * componentByteSize)) : Float)) : Float);
+              _Runtime.setIndex(out, ((i * componentCount) + c), ((cast normalize : Bool) ? (cast (cast GltfParse.normalizeComponent__gltfParse((cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType : GltfComponentType), (cast raw : Float)) : Float) : Dynamic) : (cast raw : Dynamic)));
               c++;
             }
           }
           i++;
         }
       }
-    } else { if ((cast _Runtime.strictEquals(accessor.sparse, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+    } else { if ((cast _Runtime.strictEquals((cast accessor : flighthq.types.GltfSchema.GltfAccessor).sparse, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex, firstBufferView: bufferViewIndex }, kind: 'gltf.accessor-bufferview-not-found' } };
     } }
-    if ((cast !_Runtime.strictEquals(accessor.sparse, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(GltfParse.applyAccessorSparse__gltfParse, cast ([doc, buffers, accessor.sparse, accessor.count, accessor.componentType, componentCount, normalize, out, gltfDrops] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast accessor : flighthq.types.GltfSchema.GltfAccessor).sparse, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      GltfParse.applyAccessorSparse__gltfParse((cast doc : GltfDocument), (cast buffers : Array<flighthq._internal._UInt8Array>), (cast accessor : flighthq.types.GltfSchema.GltfAccessor).sparse, (cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).count : Float), (cast (cast accessor : flighthq.types.GltfSchema.GltfAccessor).componentType : GltfComponentType), (cast componentCount : Float), (cast normalize : Bool), (cast out : {  }), gltfDrops);
     }
-    return cast { count: accessor.count, data: out, fault: null };
+    return cast { count: (cast accessor : flighthq.types.GltfSchema.GltfAccessor).count, data: out, fault: null };
     return cast null;
   }
 
-  public static function applyAccessorSparse__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, sparse:Dynamic, accessorCount:Float, valueComponentType:GltfComponentType, componentCount:Float, normalize:Bool, out:{  }, gltfDrops:Null<Dynamic>):Void {
-    var indicesView:Dynamic = cast _Runtime.UNDEFINED;
-    var valuesView:Dynamic = cast _Runtime.UNDEFINED;
-    var indexBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var valueBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var indexView:Dynamic = cast _Runtime.UNDEFINED;
-    var valueView:Dynamic = cast _Runtime.UNDEFINED;
-    var indexSize:Dynamic = cast _Runtime.UNDEFINED;
-    var valueSize:Dynamic = cast _Runtime.UNDEFINED;
-    var indexBase:Dynamic = cast _Runtime.UNDEFINED;
-    var valueElementSize:Dynamic = cast _Runtime.UNDEFINED;
-    var valueBase:Dynamic = cast _Runtime.UNDEFINED;
-    indicesView = _Runtime.optionalIndex(doc.bufferViews, _Runtime.field(sparse.indices, 'bufferView'));
-    valuesView = _Runtime.optionalIndex(doc.bufferViews, _Runtime.field(sparse.values, 'bufferView'));
+  public static function applyAccessorSparse__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, sparse:flighthq._internal._IndexedAccess<GltfAccessor, String>, accessorCount:Float, valueComponentType:GltfComponentType, componentCount:Float, normalize:Bool, out:{  }, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Void {
+    var indicesView:Null<GltfBufferView> = cast _Runtime.UNDEFINED;
+    var valuesView:Null<GltfBufferView> = cast _Runtime.UNDEFINED;
+    var indexBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var valueBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var indexView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var valueView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var indexSize:Float = cast _Runtime.UNDEFINED;
+    var valueSize:Float = cast _Runtime.UNDEFINED;
+    var indexBase:Float = cast _Runtime.UNDEFINED;
+    var valueElementSize:Float = cast _Runtime.UNDEFINED;
+    var valueBase:Float = cast _Runtime.UNDEFINED;
+    indicesView = _Runtime.optionalIndex(doc.bufferViews, (cast sparse.indices : { var bufferView:Float; @:optional var byteOffset:Null<Float>; var componentType:Float; }).bufferView);
+    valuesView = _Runtime.optionalIndex(doc.bufferViews, (cast sparse.values : { var bufferView:Float; @:optional var byteOffset:Null<Float>; }).bufferView);
     if ((cast ((cast _Runtime.strictEquals(indicesView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(valuesView, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.sparse-bufferview-not-found', '', {  }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.sparse-bufferview-not-found' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return;
     }
-    indexBytes = flighthq._internal._StaticIndex.readArray(buffers, indicesView.buffer);
-    valueBytes = flighthq._internal._StaticIndex.readArray(buffers, valuesView.buffer);
+    indexBytes = flighthq._internal._StaticIndex.readArray(buffers, (cast indicesView : flighthq.types.GltfSchema.GltfBufferView).buffer);
+    valueBytes = flighthq._internal._StaticIndex.readArray(buffers, (cast valuesView : flighthq.types.GltfSchema.GltfBufferView).buffer);
     if ((cast ((cast _Runtime.strictEquals(indexBytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(valueBytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.sparse-buffer-not-found', '', {  }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.sparse-buffer-not-found' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return;
     }
     indexView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(indexBytes, 'buffer')]);
     valueView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(valueBytes, 'buffer')]);
-    indexSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, _Runtime.field(sparse.indices, 'componentType'));
+    indexSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, (cast sparse.indices : { var bufferView:Float; @:optional var byteOffset:Null<Float>; var componentType:Float; }).componentType);
     valueSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, valueComponentType);
-    indexBase = ((cast _Runtime.strictEquals(indicesView.byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.resolveGltfReadOffset__gltfParse, cast ([indexBytes, indicesView, _Runtime.coalesce(_Runtime.field(sparse.indices, 'byteOffset'), function():Dynamic return cast 0.0), indexSize, indexSize, sparse.count] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+    indexBase = ((cast _Runtime.strictEquals((cast indicesView : flighthq.types.GltfSchema.GltfBufferView).byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast GltfParse.resolveGltfReadOffset__gltfParse((cast indexBytes : flighthq._internal._UInt8Array), (cast indicesView : GltfBufferView), (cast _Runtime.coalesce((cast sparse.indices : { var bufferView:Float; @:optional var byteOffset:Null<Float>; var componentType:Float; }).byteOffset, function():Dynamic return cast 0.0) : Float), (cast indexSize : Float), (cast indexSize : Float), (cast sparse.count : Float)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
     valueElementSize = (componentCount * valueSize);
-    valueBase = ((cast _Runtime.strictEquals(valuesView.byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.resolveGltfReadOffset__gltfParse, cast ([valueBytes, valuesView, _Runtime.coalesce(_Runtime.field(sparse.values, 'byteOffset'), function():Dynamic return cast 0.0), valueElementSize, valueElementSize, sparse.count] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
+    valueBase = ((cast _Runtime.strictEquals((cast valuesView : flighthq.types.GltfSchema.GltfBufferView).byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast GltfParse.resolveGltfReadOffset__gltfParse((cast valueBytes : flighthq._internal._UInt8Array), (cast valuesView : GltfBufferView), (cast _Runtime.coalesce((cast sparse.values : { var bufferView:Float; @:optional var byteOffset:Null<Float>; }).byteOffset, function():Dynamic return cast 0.0) : Float), (cast valueElementSize : Float), (cast valueElementSize : Float), (cast sparse.count : Float)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
     if ((cast ((cast ((cast indexBase : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast valueBase : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.sparse-invalid-read', '', { firstCount: sparse.count }] : Array<Dynamic>));
+      GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.sparse-invalid-read' : String), (cast '' : String), (cast { firstCount: sparse.count } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return;
     }
     {
-      var s:Dynamic = 0.0;
+      var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast sparse.count : Float)) : Bool)) {
-        var targetIndex:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([indexView, _Runtime.field(sparse.indices, 'componentType'), (indexBase + (s * indexSize))] : Array<Dynamic>));
+        var targetIndex:Float = (cast GltfParse.readComponent__gltfParse((cast indexView : flighthq._internal._Any), (cast (cast sparse.indices : { var bufferView:Float; @:optional var byteOffset:Null<Float>; var componentType:Float; }).componentType : GltfComponentType), (cast (indexBase + (s * indexSize)) : Float)) : Float);
         if ((cast ((cast ((cast targetIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast targetIndex : Float) >= (cast accessorCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.sparse-index-out-of-range', '', { firstCount: accessorCount, firstIndex: targetIndex }] : Array<Dynamic>));
+          GltfParse.tallyGltfDrop__gltfParse(gltfDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'gltf.sparse-index-out-of-range' : String), (cast '' : String), (cast { firstCount: accessorCount, firstIndex: targetIndex } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           return;
         }
         s++;
       }
     }
     {
-      var s:Dynamic = 0.0;
+      var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast sparse.count : Float)) : Bool)) {
-        var targetIndex:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([indexView, _Runtime.field(sparse.indices, 'componentType'), (indexBase + (s * indexSize))] : Array<Dynamic>));
+        var targetIndex:Float = (cast GltfParse.readComponent__gltfParse((cast indexView : flighthq._internal._Any), (cast (cast sparse.indices : { var bufferView:Float; @:optional var byteOffset:Null<Float>; var componentType:Float; }).componentType : GltfComponentType), (cast (indexBase + (s * indexSize)) : Float)) : Float);
         {
-          var c:Dynamic = 0.0;
+          var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast componentCount : Float)) : Bool)) {
-            var raw:Dynamic = _Runtime.callValue(GltfParse.readComponent__gltfParse, cast ([valueView, valueComponentType, (valueBase + (((s * componentCount) + c) * valueSize))] : Array<Dynamic>));
-            _Runtime.setIndex(out, ((targetIndex * componentCount) + c), ((cast normalize : Bool) ? (cast _Runtime.callValue(GltfParse.normalizeComponent__gltfParse, cast ([valueComponentType, raw] : Array<Dynamic>)) : Dynamic) : (cast raw : Dynamic)));
+            var raw:Float = (cast GltfParse.readComponent__gltfParse((cast valueView : flighthq._internal._Any), (cast valueComponentType : GltfComponentType), (cast (valueBase + (((s * componentCount) + c) * valueSize)) : Float)) : Float);
+            _Runtime.setIndex(out, ((targetIndex * componentCount) + c), ((cast normalize : Bool) ? (cast (cast GltfParse.normalizeComponent__gltfParse((cast valueComponentType : GltfComponentType), (cast raw : Float)) : Float) : Dynamic) : (cast raw : Dynamic)));
             c++;
           }
         }
@@ -1262,14 +1295,14 @@ class GltfParse {
   }
 
   public static function resolveGltfReadOffset__gltfParse(bytes:flighthq._internal._UInt8Array, view:GltfBufferView, byteOffset:Float, elementByteSize:Float, stride:Float, count:Float):Float {
-    var viewOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var limit:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var viewOffset:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var limit:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
     viewOffset = _Runtime.coalesce(view.byteOffset, function():Dynamic return cast 0.0);
-    if ((cast ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([viewOffset] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([view.byteLength] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([byteOffset] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast -1.0; }
-    if ((cast ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([elementByteSize] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(elementByteSize, 0.0) : Bool)) : Bool)) { return cast -1.0; }
-    if ((cast ((cast !(cast _Runtime.callValue(GltfParse.isGltfByteCount__gltfParse, cast ([stride] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast stride : Float) < (cast elementByteSize : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast ((cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast viewOffset : Null<Float>)) : Bool) : Bool) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast view.byteLength : Null<Float>)) : Bool) : Bool) : Bool)) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast byteOffset : Null<Float>)) : Bool) : Bool) : Bool)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast ((cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast count : Null<Float>)) : Bool) : Bool) : Bool) || (cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast elementByteSize : Null<Float>)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(elementByteSize, 0.0) : Bool)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast !(cast (cast GltfParse.isGltfByteCount__gltfParse((cast stride : Null<Float>)) : Bool) : Bool) : Bool) || (cast ((cast stride : Float) < (cast elementByteSize : Float)) : Bool)) : Bool)) { return cast -1.0; }
     start = (_Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), viewOffset) + byteOffset);
     limit = HxMath.min((_Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), viewOffset) + view.byteLength), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
     end = ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((start + ((count - 1.0) * stride)) + elementByteSize) : Dynamic) : (cast start : Dynamic));
@@ -1304,27 +1337,27 @@ class GltfParse {
   }
 
   public static function readGlbContainer__gltfParse(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }> {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var declaredLength:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var declaredLength:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
     var document:Null<GltfDocument> = cast _Runtime.UNDEFINED;
     var binary:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast GltfParse.GLB_HEADER_BYTES__gltfParse : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.header-too-small', 'readGlbContainer'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'glb.header-too-small' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if ((cast !_Runtime.strictEquals(_Runtime.callProperty(view, 'getUint32', cast ([0.0, true] : Array<Dynamic>)), GltfParse.GLB_MAGIC__gltfParse) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.wrong-magic', 'readGlbContainer'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'glb.wrong-magic' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     version = _Runtime.callProperty(view, 'getUint32', cast ([4.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(version, 2.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.unsupported-version', 'readGlbContainer', { version: version }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'glb.unsupported-version' : String), (cast 'readGlbContainer' : String), (cast { version: version } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     declaredLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
@@ -1333,20 +1366,20 @@ class GltfParse {
     binary = null;
     offset = GltfParse.GLB_HEADER_BYTES__gltfParse;
     while ((cast ((cast (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse) : Float) <= (cast end : Float)) : Bool)) {
-      var chunkLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var chunkType:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 4.0), true] : Array<Dynamic>));
-      var dataStart:Dynamic = (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse);
+      var chunkLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var chunkType:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 4.0), true] : Array<Dynamic>));
+      var dataStart:Float = (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse);
       if ((cast ((cast (dataStart + chunkLength) : Float) > (cast end : Float)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'glb.chunk-past-end', 'readGlbContainer'] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'glb.chunk-past-end' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         break;
       }
-      var chunkData:Dynamic = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
+      var chunkData:flighthq._internal._UInt8Array = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
       if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(document, null) : Bool)) : Bool)) {
-        var json:Dynamic = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(chunkData);
+        var json:String = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(chunkData);
         try {
           (document = cast ((cast _Runtime.jsonParse(json) : GltfDocument) : Dynamic));
         } catch (__error:Dynamic) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.json-chunk-invalid', 'readGlbContainer'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'glb.json-chunk-invalid' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
       } else { if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_BIN_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(binary, null) : Bool)) : Bool)) {
@@ -1355,7 +1388,7 @@ class GltfParse {
       (offset = cast ((dataStart + chunkLength) : Dynamic));
     }
     if ((cast _Runtime.strictEquals(document, null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.no-json-chunk', 'readGlbContainer'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'glb.no-json-chunk' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     return cast { binary: binary, document: document };
@@ -1363,17 +1396,17 @@ class GltfParse {
   }
 
   public static function topLevelNodeIndices__gltfParse(nodes:Array<GltfNode>):Array<Float> {
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
+    var referenced:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     referenced = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (node in _Runtime.iterable(nodes)) {
-      if ((cast !_Runtime.strictEquals(node.children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(node.children)) {   ((cast referenced : flighthq._internal._Set).add(c)); } }
+      if ((cast !_Runtime.strictEquals(node.children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(node.children)) {   ((cast referenced : flighthq._internal._Set<Float>).add(c)); } }
     }
     roots = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast referenced : flighthq._internal._Set).has(i)) : Bool) : Bool)) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
+        if ((cast !(cast ((cast referenced : flighthq._internal._Set<Float>).has(i)) : Bool) : Bool)) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -1406,38 +1439,38 @@ class GltfParse {
     return cast null;
   }
 
-  public static final COMPONENT_BYTE_SIZE__gltfParse:Dynamic = _Runtime.objectFromPairs([{ key: '5120', value: 1.0 }, { key: '5121', value: 1.0 }, { key: '5122', value: 2.0 }, { key: '5123', value: 2.0 }, { key: '5125', value: 4.0 }, { key: '5126', value: 4.0 }]);
+  public static final COMPONENT_BYTE_SIZE__gltfParse:flighthq._internal._Record<GltfComponentType, Float> = _Runtime.objectFromPairs([{ key: '5120', value: 1.0 }, { key: '5121', value: 1.0 }, { key: '5122', value: 2.0 }, { key: '5123', value: 2.0 }, { key: '5125', value: 4.0 }, { key: '5126', value: 4.0 }]);
 
-  public static final TYPE_COMPONENTS__gltfParse:Dynamic = { MAT2: 4.0, MAT3: 9.0, MAT4: 16.0, SCALAR: 1.0, VEC2: 2.0, VEC3: 3.0, VEC4: 4.0 };
+  public static final TYPE_COMPONENTS__gltfParse:flighthq._internal._Record<String, Float> = { MAT2: 4.0, MAT3: 9.0, MAT4: 16.0, SCALAR: 1.0, VEC2: 2.0, VEC3: 3.0, VEC4: 4.0 };
 
-  public static final GLTF_ANIMATION_PATHS__gltfParse:Dynamic = { rotation: Scene3DAnimationPathRotation, scale: Scene3DAnimationPathScale, translation: Scene3DAnimationPathTranslation };
+  public static final GLTF_ANIMATION_PATHS__gltfParse:flighthq._internal._Record<String, Null<Scene3DAnimationPath>> = { rotation: Scene3DAnimationPathRotation, scale: Scene3DAnimationPathScale, translation: Scene3DAnimationPathTranslation };
 
-  public static final GLTF_ANIMATION_OUTPUT_TYPES__gltfParse:Dynamic = { rotation: 'VEC4', scale: 'VEC3', translation: 'VEC3', weights: 'SCALAR' };
+  public static final GLTF_ANIMATION_OUTPUT_TYPES__gltfParse:flighthq._internal._Record<String, Null<String>> = { rotation: 'VEC4', scale: 'VEC3', translation: 'VEC3', weights: 'SCALAR' };
 
-  public static final GLTF_SAMPLER_INTERPOLATIONS__gltfParse:Dynamic = { CUBICSPLINE: 'Cubic', LINEAR: 'Linear', STEP: 'Step' };
+  public static final GLTF_SAMPLER_INTERPOLATIONS__gltfParse:flighthq._internal._Record<String, AnimationInterpolation> = { CUBICSPLINE: 'Cubic', LINEAR: 'Linear', STEP: 'Step' };
 
-  public static final GLTF_TEXTURE_FILTER__gltfParse:Dynamic = _Runtime.objectFromPairs([{ key: '9728', value: 'nearest' }, { key: '9729', value: 'linear' }, { key: '9984', value: 'nearest-mipmap-nearest' }, { key: '9985', value: 'linear-mipmap-nearest' }, { key: '9986', value: 'nearest-mipmap-linear' }, { key: '9987', value: 'linear-mipmap-linear' }]);
+  public static final GLTF_TEXTURE_FILTER__gltfParse:flighthq._internal._Record<Float, TextureFilter> = _Runtime.objectFromPairs([{ key: '9728', value: 'nearest' }, { key: '9729', value: 'linear' }, { key: '9984', value: 'nearest-mipmap-nearest' }, { key: '9985', value: 'linear-mipmap-nearest' }, { key: '9986', value: 'nearest-mipmap-linear' }, { key: '9987', value: 'linear-mipmap-linear' }]);
 
-  public static final GLTF_MIN_FILTER_MIPMAPS__gltfParse:Dynamic = _Runtime.objectFromPairs([{ key: '9728', value: false }, { key: '9729', value: false }, { key: '9984', value: true }, { key: '9985', value: true }, { key: '9986', value: true }, { key: '9987', value: true }]);
+  public static final GLTF_MIN_FILTER_MIPMAPS__gltfParse:flighthq._internal._Record<Float, Bool> = _Runtime.objectFromPairs([{ key: '9728', value: false }, { key: '9729', value: false }, { key: '9984', value: true }, { key: '9985', value: true }, { key: '9986', value: true }, { key: '9987', value: true }]);
 
-  public static final GLTF_TEXTURE_WRAP__gltfParse:Dynamic = _Runtime.objectFromPairs([{ key: '10497', value: 'repeat' }, { key: '33071', value: 'clamp-to-edge' }, { key: '33648', value: 'mirror-repeat' }]);
+  public static final GLTF_TEXTURE_WRAP__gltfParse:flighthq._internal._Record<Float, TextureWrap> = _Runtime.objectFromPairs([{ key: '10497', value: 'repeat' }, { key: '33071', value: 'clamp-to-edge' }, { key: '33648', value: 'mirror-repeat' }]);
 
-  public static final GLB_MAGIC__gltfParse:Dynamic = 1179937895.0;
+  public static final GLB_MAGIC__gltfParse:Float = 1179937895.0;
 
-  public static final GLB_JSON_CHUNK__gltfParse:Dynamic = 1313821514.0;
+  public static final GLB_JSON_CHUNK__gltfParse:Float = 1313821514.0;
 
-  public static final GLB_BIN_CHUNK__gltfParse:Dynamic = 5130562.0;
+  public static final GLB_BIN_CHUNK__gltfParse:Float = 5130562.0;
 
-  public static final GLB_HEADER_BYTES__gltfParse:Dynamic = 12.0;
+  public static final GLB_HEADER_BYTES__gltfParse:Float = 12.0;
 
-  public static final GLB_CHUNK_HEADER_BYTES__gltfParse:Dynamic = 8.0;
+  public static final GLB_CHUNK_HEADER_BYTES__gltfParse:Float = 8.0;
 
-  public static function tallyGltfDrop__gltfParse(tallies:Null<Dynamic>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tallyGltfDrop__gltfParse(tallies:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
+    var key:String = cast _Runtime.UNDEFINED;
+    var existing:Null<GltfDropTally__gltfParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flighthq._internal._Map).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { _Runtime.incrementField(existing, 'count', 1, true); }
+    existing = ((cast tallies : flighthq._internal._Map<String, GltfDropTally__gltfParse>).get(key));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, GltfDropTally__gltfParse>).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : GltfDropTally__gltfParse).count++; }
   }
 }

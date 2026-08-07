@@ -17,39 +17,39 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Matrix4 {
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    _Runtime.callValue(multiplyMatrix4, cast ([out, source, other] : Array<Dynamic>));
+    multiplyMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast other : Matrix4Like));
   }
 
   public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__getAxisRotation__matrix4, cast ([m, _Runtime.field(axis, 'x'), _Runtime.field(axis, 'y'), _Runtime.field(axis, 'z'), radians] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+    Matrix4.__getAxisRotation__matrix4((cast m : Matrix4Like), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
     if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var p:Dynamic = pivotPoint;
-      var t1:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-      var t2:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(appendTranslationMatrix4, cast ([t1, t1, -_Runtime.field(p, 'x'), -_Runtime.field(p, 'y'), -_Runtime.field(p, 'z')] : Array<Dynamic>));
-      _Runtime.callValue(appendTranslationMatrix4, cast ([t2, t2, _Runtime.field(p, 'x'), _Runtime.field(p, 'y'), _Runtime.field(p, 'z')] : Array<Dynamic>));
-      _Runtime.callValue(multiplyMatrix4, cast ([m, t1, m] : Array<Dynamic>));
-      _Runtime.callValue(multiplyMatrix4, cast ([m, m, t2] : Array<Dynamic>));
-      _Runtime.callValue(releaseMatrix4, cast ([t1] : Array<Dynamic>));
-      _Runtime.callValue(releaseMatrix4, cast ([t2] : Array<Dynamic>));
+      var p:Vector4Like = pivotPoint;
+      var t1:flighthq.types.Matrix4 = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+      var t2:flighthq.types.Matrix4 = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+      appendTranslationMatrix4((cast t1 : Matrix4Like), (cast t1 : Matrix4Like), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
+      appendTranslationMatrix4((cast t2 : Matrix4Like), (cast t2 : Matrix4Like), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
+      multiplyMatrix4((cast m : Matrix4Like), (cast t1 : Matrix4Like), (cast m : Matrix4Like));
+      multiplyMatrix4((cast m : Matrix4Like), (cast m : Matrix4Like), (cast t2 : Matrix4Like));
+      releaseMatrix4((cast t1 : flighthq.types.Matrix4));
+      releaseMatrix4((cast t2 : flighthq.types.Matrix4));
     }
-    _Runtime.callValue(appendMatrix4, cast ([out, source, m] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    appendMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast m : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function appendScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrix4, cast ([m, xScale, 0.0, 0.0, 0.0, 0.0, yScale, 0.0, 0.0, 0.0, 0.0, zScale, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
-    _Runtime.callValue(appendMatrix4, cast ([out, source, m] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireMatrix4() : flighthq.types.Matrix4);
+    setMatrix4((cast m : Matrix4Like), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    appendMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast m : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
@@ -59,34 +59,34 @@ class Matrix4 {
   }
 
   public static function cloneMatrix4(source:Matrix4Like):flighthq.types.Matrix4 {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(copyMatrix4, cast ([m, source] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix4);
+    copyMatrix4((cast m : Matrix4Like), (cast source : Matrix4Like));
     return cast m;
     return cast null;
   }
 
   public static function composeMatrix4(out:Matrix4Like, position:Vector3Like, rotation:QuaternionLike, scale:Vector3Like):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var z2:Dynamic = cast _Runtime.UNDEFINED;
-    var xx:Dynamic = cast _Runtime.UNDEFINED;
-    var xy:Dynamic = cast _Runtime.UNDEFINED;
-    var xz:Dynamic = cast _Runtime.UNDEFINED;
-    var yy:Dynamic = cast _Runtime.UNDEFINED;
-    var yz:Dynamic = cast _Runtime.UNDEFINED;
-    var zz:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    var wz:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var z2:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     x = rotation.x;
     y = rotation.y;
     z = rotation.z;
@@ -130,7 +130,7 @@ class Matrix4 {
   }
 
   public static function copyMatrix4ColumnFromVector4(out:Matrix4Like, column:Float, source:Vector4Like):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     {
       var __switchValue = column;
@@ -165,7 +165,7 @@ class Matrix4 {
   }
 
   public static function copyMatrix4ColumnToVector4(out:Vector4Like, column:Float, source:Matrix4Like):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
     {
       var __switchValue = column;
@@ -200,7 +200,7 @@ class Matrix4 {
   }
 
   public static function copyMatrix4RowFromVector4(out:Matrix4Like, row:Float, source:Vector4Like):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     {
       var __switchValue = row;
@@ -235,7 +235,7 @@ class Matrix4 {
   }
 
   public static function copyMatrix4RowToVector4(out:Vector4Like, row:Float, source:Matrix4Like):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
     {
       var __switchValue = row;
@@ -270,10 +270,10 @@ class Matrix4 {
   }
 
   public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):flighthq.types.Matrix4 {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix4.__identity__matrix4);
-    out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
+    out = (cast createEntity((cast { m: m } : Null<{ var m:flighthq._internal._Float32Array; }>)) : flighthq.types.Matrix4);
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, m00); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, m01); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, m02); }
@@ -295,60 +295,60 @@ class Matrix4 {
   }
 
   public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):flighthq.types.Matrix4 {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrix4From2D, cast ([out, a, b, c, d, tx, ty] : Array<Dynamic>));
+    var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    out = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix4);
+    setMatrix4From2D((cast out : Matrix4Like), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Null<Float>), (cast ty : Null<Float>));
     return cast out;
     return cast null;
   }
 
   public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):flighthq.types.Matrix4 {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setOrthographicMatrix4, cast ([out, left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
+    var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    out = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix4);
+    setOrthographicMatrix4((cast out : Matrix4Like), (cast left : Float), (cast right : Float), (cast bottom : Float), (cast top : Float), (cast zNear : Float), (cast zFar : Float));
     return cast out;
     return cast null;
   }
 
   public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):flighthq.types.Matrix4 {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setPerspectiveMatrix4, cast ([out, fov, aspect, zNear, zFar] : Array<Dynamic>));
+    var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    out = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix4);
+    setPerspectiveMatrix4((cast out : Matrix4Like), (cast fov : Float), (cast aspect : Float), (cast zNear : Float), (cast zFar : Float));
     return cast out;
     return cast null;
   }
 
   public static function decomposeMatrix4(outPosition:Vector3Like, outRotation:QuaternionLike, outScale:Vector3Like, m:Matrix4Like):Void {
-    var _m:Dynamic = cast _Runtime.UNDEFINED;
-    var m00:Dynamic = cast _Runtime.UNDEFINED;
-    var m01:Dynamic = cast _Runtime.UNDEFINED;
-    var m02:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m20:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var tz:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
-    var det:Dynamic = cast _Runtime.UNDEFINED;
-    var invSx:Dynamic = cast _Runtime.UNDEFINED;
-    var invSy:Dynamic = cast _Runtime.UNDEFINED;
-    var invSz:Dynamic = cast _Runtime.UNDEFINED;
-    var r00:Dynamic = cast _Runtime.UNDEFINED;
-    var r01:Dynamic = cast _Runtime.UNDEFINED;
-    var r02:Dynamic = cast _Runtime.UNDEFINED;
-    var r10:Dynamic = cast _Runtime.UNDEFINED;
-    var r11:Dynamic = cast _Runtime.UNDEFINED;
-    var r12:Dynamic = cast _Runtime.UNDEFINED;
-    var r20:Dynamic = cast _Runtime.UNDEFINED;
-    var r21:Dynamic = cast _Runtime.UNDEFINED;
-    var r22:Dynamic = cast _Runtime.UNDEFINED;
-    var trace:Dynamic = cast _Runtime.UNDEFINED;
+    var _m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var m00:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m20:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var tz:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var det:Float = cast _Runtime.UNDEFINED;
+    var invSx:Float = cast _Runtime.UNDEFINED;
+    var invSy:Float = cast _Runtime.UNDEFINED;
+    var invSz:Float = cast _Runtime.UNDEFINED;
+    var r00:Float = cast _Runtime.UNDEFINED;
+    var r01:Float = cast _Runtime.UNDEFINED;
+    var r02:Float = cast _Runtime.UNDEFINED;
+    var r10:Float = cast _Runtime.UNDEFINED;
+    var r11:Float = cast _Runtime.UNDEFINED;
+    var r12:Float = cast _Runtime.UNDEFINED;
+    var r20:Float = cast _Runtime.UNDEFINED;
+    var r21:Float = cast _Runtime.UNDEFINED;
+    var r22:Float = cast _Runtime.UNDEFINED;
+    var trace:Float = cast _Runtime.UNDEFINED;
     _m = m.m;
     m00 = flighthq._internal._StaticIndex.readFloat32Array(_m, 0.0);
     m01 = flighthq._internal._StaticIndex.readFloat32Array(_m, 1.0);
@@ -387,25 +387,25 @@ class Matrix4 {
     r22 = (m22 * invSz);
     trace = ((r00 + r11) + r22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
+      var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
       (outRotation.w = cast ((0.25 / s) : Dynamic));
       (outRotation.x = cast (((r12 - r21) * s) : Dynamic));
       (outRotation.y = cast (((r20 - r02) * s) : Dynamic));
       (outRotation.z = cast (((r01 - r10) * s) : Dynamic));
     } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r00) - r11) - r22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r00) - r11) - r22)));
       (outRotation.w = cast (((r12 - r21) / s) : Dynamic));
       (outRotation.x = cast ((0.25 * s) : Dynamic));
       (outRotation.y = cast (((r10 + r01) / s) : Dynamic));
       (outRotation.z = cast (((r20 + r02) / s) : Dynamic));
     } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r11) - r00) - r22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r11) - r00) - r22)));
       (outRotation.w = cast (((r20 - r02) / s) : Dynamic));
       (outRotation.x = cast (((r10 + r01) / s) : Dynamic));
       (outRotation.y = cast ((0.25 * s) : Dynamic));
       (outRotation.z = cast (((r21 + r12) / s) : Dynamic));
     } else {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r22) - r00) - r11)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r22) - r00) - r11)));
       (outRotation.w = cast (((r01 - r10) / s) : Dynamic));
       (outRotation.x = cast (((r20 + r02) / s) : Dynamic));
       (outRotation.y = cast (((r21 + r12) / s) : Dynamic));
@@ -417,9 +417,9 @@ class Matrix4 {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(a.m, i), flighthq._internal._StaticIndex.readFloat32Array(b.m, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array((cast a : flighthq.types.Matrix4).m, i), flighthq._internal._StaticIndex.readFloat32Array((cast b : flighthq.types.Matrix4).m, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -428,7 +428,7 @@ class Matrix4 {
   }
 
   public static function getMatrix4Determinant(source:Matrix4Like):Float {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
     return cast (1.0 * (((((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 5.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 10.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 14.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 11.0)))) - ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 9.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 8.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 14.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0))))) + ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 13.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 12.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 11.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 10.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0))))) + ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 9.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 8.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 5.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 2.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 14.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0))))) - ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 13.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 12.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 5.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 2.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 11.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 10.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0))))) + ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 8.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 13.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 12.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 9.0))) * (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 2.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0)) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0))))));
     return cast null;
@@ -440,7 +440,7 @@ class Matrix4 {
   }
 
   public static function getMatrix4Position(out:Vector3Like, source:Matrix4Like):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(_source, 12.0) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(_source, 13.0) : Dynamic));
@@ -448,14 +448,14 @@ class Matrix4 {
   }
 
   public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var _a:Dynamic = cast _Runtime.UNDEFINED;
-    var _b:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _a:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _b:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     _a = a.m;
     _b = b.m;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32Array(_out, i, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(_a, i), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_b, i), flighthq._internal._StaticIndex.readFloat32Array(_a, i)) * t)));
         i++;
@@ -464,30 +464,30 @@ class Matrix4 {
   }
 
   public static function inverseMatrix4(out:Matrix4Like, source:Matrix4Like):Bool {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var EPS:Dynamic = cast _Runtime.UNDEFINED;
-    var invertable:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m31:Dynamic = cast _Runtime.UNDEFINED;
-    var m41:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
-    var m32:Dynamic = cast _Runtime.UNDEFINED;
-    var m42:Dynamic = cast _Runtime.UNDEFINED;
-    var m13:Dynamic = cast _Runtime.UNDEFINED;
-    var m23:Dynamic = cast _Runtime.UNDEFINED;
-    var m33:Dynamic = cast _Runtime.UNDEFINED;
-    var m43:Dynamic = cast _Runtime.UNDEFINED;
-    var m14:Dynamic = cast _Runtime.UNDEFINED;
-    var m24:Dynamic = cast _Runtime.UNDEFINED;
-    var m34:Dynamic = cast _Runtime.UNDEFINED;
-    var m44:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var EPS:Float = cast _Runtime.UNDEFINED;
+    var invertable:Bool = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m31:Float = cast _Runtime.UNDEFINED;
+    var m41:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
+    var m32:Float = cast _Runtime.UNDEFINED;
+    var m42:Float = cast _Runtime.UNDEFINED;
+    var m13:Float = cast _Runtime.UNDEFINED;
+    var m23:Float = cast _Runtime.UNDEFINED;
+    var m33:Float = cast _Runtime.UNDEFINED;
+    var m43:Float = cast _Runtime.UNDEFINED;
+    var m14:Float = cast _Runtime.UNDEFINED;
+    var m24:Float = cast _Runtime.UNDEFINED;
+    var m34:Float = cast _Runtime.UNDEFINED;
+    var m44:Float = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    d = _Runtime.callValue(getMatrix4Determinant, cast ([source] : Array<Dynamic>));
+    d = (cast getMatrix4Determinant((cast source : Matrix4Like)) : Float);
     EPS = 0.000001;
     invertable = ((cast HxMath.abs(d) : Float) > (cast EPS : Float));
     if ((cast !(cast invertable : Bool) : Bool)) {
@@ -532,17 +532,17 @@ class Matrix4 {
   }
 
   public static function isAffineMatrix4(source:Matrix4Like):Bool {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
     return cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(_source, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(_source, 15.0), 1.0) : Bool));
     return cast null;
   }
 
   public static function matrix4TransformPoint(out:Vector3Like, source:Matrix4Like, point:Vector3Like):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
     _source = source.m;
     x = point.x;
     y = point.y;
@@ -553,11 +553,11 @@ class Matrix4 {
   }
 
   public static function matrix4TransformVector(out:Vector4Like, source:Matrix4Like, vector:Vector4Like):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
     _source = source.m;
     x = _Runtime.field(vector, 'x');
     y = _Runtime.field(vector, 'y');
@@ -570,8 +570,8 @@ class Matrix4 {
   }
 
   public static function matrix4TransformVectors(out:flighthq._internal._Float32Array, source:Matrix4Like, vectors:flighthq._internal._Float32Array):Void {
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
@@ -589,41 +589,41 @@ class Matrix4 {
   }
 
   public static function multiplyMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like):Void {
-    var _a:Dynamic = cast _Runtime.UNDEFINED;
-    var _b:Dynamic = cast _Runtime.UNDEFINED;
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var m111:Dynamic = cast _Runtime.UNDEFINED;
-    var m121:Dynamic = cast _Runtime.UNDEFINED;
-    var m131:Dynamic = cast _Runtime.UNDEFINED;
-    var m141:Dynamic = cast _Runtime.UNDEFINED;
-    var m112:Dynamic = cast _Runtime.UNDEFINED;
-    var m122:Dynamic = cast _Runtime.UNDEFINED;
-    var m132:Dynamic = cast _Runtime.UNDEFINED;
-    var m142:Dynamic = cast _Runtime.UNDEFINED;
-    var m113:Dynamic = cast _Runtime.UNDEFINED;
-    var m123:Dynamic = cast _Runtime.UNDEFINED;
-    var m133:Dynamic = cast _Runtime.UNDEFINED;
-    var m143:Dynamic = cast _Runtime.UNDEFINED;
-    var m114:Dynamic = cast _Runtime.UNDEFINED;
-    var m124:Dynamic = cast _Runtime.UNDEFINED;
-    var m134:Dynamic = cast _Runtime.UNDEFINED;
-    var m144:Dynamic = cast _Runtime.UNDEFINED;
-    var m211:Dynamic = cast _Runtime.UNDEFINED;
-    var m221:Dynamic = cast _Runtime.UNDEFINED;
-    var m231:Dynamic = cast _Runtime.UNDEFINED;
-    var m241:Dynamic = cast _Runtime.UNDEFINED;
-    var m212:Dynamic = cast _Runtime.UNDEFINED;
-    var m222:Dynamic = cast _Runtime.UNDEFINED;
-    var m232:Dynamic = cast _Runtime.UNDEFINED;
-    var m242:Dynamic = cast _Runtime.UNDEFINED;
-    var m213:Dynamic = cast _Runtime.UNDEFINED;
-    var m223:Dynamic = cast _Runtime.UNDEFINED;
-    var m233:Dynamic = cast _Runtime.UNDEFINED;
-    var m243:Dynamic = cast _Runtime.UNDEFINED;
-    var m214:Dynamic = cast _Runtime.UNDEFINED;
-    var m224:Dynamic = cast _Runtime.UNDEFINED;
-    var m234:Dynamic = cast _Runtime.UNDEFINED;
-    var m244:Dynamic = cast _Runtime.UNDEFINED;
+    var _a:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _b:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var m111:Float = cast _Runtime.UNDEFINED;
+    var m121:Float = cast _Runtime.UNDEFINED;
+    var m131:Float = cast _Runtime.UNDEFINED;
+    var m141:Float = cast _Runtime.UNDEFINED;
+    var m112:Float = cast _Runtime.UNDEFINED;
+    var m122:Float = cast _Runtime.UNDEFINED;
+    var m132:Float = cast _Runtime.UNDEFINED;
+    var m142:Float = cast _Runtime.UNDEFINED;
+    var m113:Float = cast _Runtime.UNDEFINED;
+    var m123:Float = cast _Runtime.UNDEFINED;
+    var m133:Float = cast _Runtime.UNDEFINED;
+    var m143:Float = cast _Runtime.UNDEFINED;
+    var m114:Float = cast _Runtime.UNDEFINED;
+    var m124:Float = cast _Runtime.UNDEFINED;
+    var m134:Float = cast _Runtime.UNDEFINED;
+    var m144:Float = cast _Runtime.UNDEFINED;
+    var m211:Float = cast _Runtime.UNDEFINED;
+    var m221:Float = cast _Runtime.UNDEFINED;
+    var m231:Float = cast _Runtime.UNDEFINED;
+    var m241:Float = cast _Runtime.UNDEFINED;
+    var m212:Float = cast _Runtime.UNDEFINED;
+    var m222:Float = cast _Runtime.UNDEFINED;
+    var m232:Float = cast _Runtime.UNDEFINED;
+    var m242:Float = cast _Runtime.UNDEFINED;
+    var m213:Float = cast _Runtime.UNDEFINED;
+    var m223:Float = cast _Runtime.UNDEFINED;
+    var m233:Float = cast _Runtime.UNDEFINED;
+    var m243:Float = cast _Runtime.UNDEFINED;
+    var m214:Float = cast _Runtime.UNDEFINED;
+    var m224:Float = cast _Runtime.UNDEFINED;
+    var m234:Float = cast _Runtime.UNDEFINED;
+    var m244:Float = cast _Runtime.UNDEFINED;
     _a = a.m;
     _b = b.m;
     _out = out.m;
@@ -678,55 +678,55 @@ class Matrix4 {
   }
 
   public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    _Runtime.callValue(multiplyMatrix4, cast ([out, other, source] : Array<Dynamic>));
+    multiplyMatrix4((cast out : Matrix4Like), (cast other : Matrix4Like), (cast source : Matrix4Like));
   }
 
   public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__getAxisRotation__matrix4, cast ([m, _Runtime.field(axis, 'x'), _Runtime.field(axis, 'y'), _Runtime.field(axis, 'z'), radians] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+    Matrix4.__getAxisRotation__matrix4((cast m : Matrix4Like), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
     if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var p:Dynamic = pivotPoint;
-      var t1:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-      var t2:Dynamic = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(appendTranslationMatrix4, cast ([t1, t1, -_Runtime.field(p, 'x'), -_Runtime.field(p, 'y'), -_Runtime.field(p, 'z')] : Array<Dynamic>));
-      _Runtime.callValue(appendTranslationMatrix4, cast ([t2, t2, _Runtime.field(p, 'x'), _Runtime.field(p, 'y'), _Runtime.field(p, 'z')] : Array<Dynamic>));
-      _Runtime.callValue(multiplyMatrix4, cast ([m, m, t1] : Array<Dynamic>));
-      _Runtime.callValue(multiplyMatrix4, cast ([m, t2, m] : Array<Dynamic>));
-      _Runtime.callValue(releaseMatrix4, cast ([t1] : Array<Dynamic>));
-      _Runtime.callValue(releaseMatrix4, cast ([t2] : Array<Dynamic>));
+      var p:Vector4Like = pivotPoint;
+      var t1:flighthq.types.Matrix4 = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+      var t2:flighthq.types.Matrix4 = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+      appendTranslationMatrix4((cast t1 : Matrix4Like), (cast t1 : Matrix4Like), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
+      appendTranslationMatrix4((cast t2 : Matrix4Like), (cast t2 : Matrix4Like), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
+      multiplyMatrix4((cast m : Matrix4Like), (cast m : Matrix4Like), (cast t1 : Matrix4Like));
+      multiplyMatrix4((cast m : Matrix4Like), (cast t2 : Matrix4Like), (cast m : Matrix4Like));
+      releaseMatrix4((cast t1 : flighthq.types.Matrix4));
+      releaseMatrix4((cast t2 : flighthq.types.Matrix4));
     }
-    _Runtime.callValue(prependMatrix4, cast ([out, source, m] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    prependMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast m : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function prependScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrix4, cast ([m, xScale, 0.0, 0.0, 0.0, 0.0, yScale, 0.0, 0.0, 0.0, 0.0, zScale, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
-    _Runtime.callValue(prependMatrix4, cast ([out, source, m] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireMatrix4() : flighthq.types.Matrix4);
+    setMatrix4((cast m : Matrix4Like), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    prependMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast m : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function prependTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(translateMatrix4, cast ([m, m, x, y, z] : Array<Dynamic>));
-    _Runtime.callValue(multiplyMatrix4, cast ([out, m, source] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+    translateMatrix4((cast m : Matrix4Like), (cast m : Matrix4Like), (cast x : Float), (cast y : Float), (cast z : Float));
+    multiplyMatrix4((cast out : Matrix4Like), (cast m : Matrix4Like), (cast source : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function rotateMatrix4(out:Matrix4Like, source:Matrix4Like, axis:Vector3Like, radians:Float):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__getAxisRotation__matrix4, cast ([m, axis.x, axis.y, axis.z, radians] : Array<Dynamic>));
-    _Runtime.callValue(multiplyMatrix4, cast ([out, source, m] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
+    var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
+    Matrix4.__getAxisRotation__matrix4((cast m : Matrix4Like), (cast axis.x : Float), (cast axis.y : Float), (cast axis.z : Float), (cast radians : Float));
+    multiplyMatrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast m : Matrix4Like));
+    releaseMatrix4((cast m : flighthq.types.Matrix4));
   }
 
   public static function scaleMatrix4(out:Matrix4Like, source:Matrix4Like, sx:Float, sy:Float, sz:Float):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+    var a:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
@@ -748,7 +748,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4(out:Matrix4Like, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, m00);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, m01);
@@ -773,7 +773,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4From2D(out:Matrix4Like, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     (tx = cast (_Runtime.coalesce(tx, function():Dynamic return cast 0.0) : Dynamic));
     (ty = cast (_Runtime.coalesce(ty, function():Dynamic return cast 0.0) : Dynamic));
@@ -800,38 +800,38 @@ class Matrix4 {
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
-    _Runtime.callValue(setMatrix4From2D, cast ([out, source.a, source.b, source.c, source.d, source.tx, source.ty] : Array<Dynamic>));
+    setMatrix4From2D((cast out : Matrix4Like), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), (cast source.tx : Null<Float>), (cast source.ty : Null<Float>));
   }
 
   public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var _source:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    _Runtime.callValue(setMatrix4From2D, cast ([out, flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0), flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0)] : Array<Dynamic>));
+    setMatrix4From2D((cast out : Matrix4Like), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readFloat32Array(_source, 7.0) : Null<Float>));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 2.0));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 5.0));
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 10.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 8.0));
   }
 
   public static function setMatrix4FromQuaternion(out:Matrix4Like, source:QuaternionLike):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var z2:Dynamic = cast _Runtime.UNDEFINED;
-    var xx:Dynamic = cast _Runtime.UNDEFINED;
-    var xy:Dynamic = cast _Runtime.UNDEFINED;
-    var xz:Dynamic = cast _Runtime.UNDEFINED;
-    var yy:Dynamic = cast _Runtime.UNDEFINED;
-    var yz:Dynamic = cast _Runtime.UNDEFINED;
-    var zz:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    var wz:Dynamic = cast _Runtime.UNDEFINED;
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var z2:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     x = source.x;
     y = source.y;
     z = source.z;
@@ -868,25 +868,25 @@ class Matrix4 {
   }
 
   public static function setMatrix4Identity(out:Matrix4Like):Void {
-    _Runtime.callValue(setMatrix4, cast ([out, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+    setMatrix4((cast out : Matrix4Like), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
   }
 
   public static function setMatrix4LookAt(out:Matrix4Like, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    var eyeX:Dynamic = cast _Runtime.UNDEFINED;
-    var eyeY:Dynamic = cast _Runtime.UNDEFINED;
-    var eyeZ:Dynamic = cast _Runtime.UNDEFINED;
-    var zx:Dynamic = cast _Runtime.UNDEFINED;
-    var zy:Dynamic = cast _Runtime.UNDEFINED;
-    var zz:Dynamic = cast _Runtime.UNDEFINED;
-    var zl:Dynamic = cast _Runtime.UNDEFINED;
-    var xx:Dynamic = cast _Runtime.UNDEFINED;
-    var xy:Dynamic = cast _Runtime.UNDEFINED;
-    var xz:Dynamic = cast _Runtime.UNDEFINED;
-    var xl:Dynamic = cast _Runtime.UNDEFINED;
-    var yx:Dynamic = cast _Runtime.UNDEFINED;
-    var yy:Dynamic = cast _Runtime.UNDEFINED;
-    var yz:Dynamic = cast _Runtime.UNDEFINED;
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var eyeX:Float = cast _Runtime.UNDEFINED;
+    var eyeY:Float = cast _Runtime.UNDEFINED;
+    var eyeZ:Float = cast _Runtime.UNDEFINED;
+    var zx:Float = cast _Runtime.UNDEFINED;
+    var zy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var zl:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var xl:Float = cast _Runtime.UNDEFINED;
+    var yx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     eyeX = eye.x;
     eyeY = eye.y;
     eyeZ = eye.z;
@@ -937,7 +937,7 @@ class Matrix4 {
   }
 
   public static function setMatrix4Position(out:Matrix4Like, source:Vector3Like):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 12.0, source.x);
     flighthq._internal._StaticIndex.writeFloat32Array(_out, 13.0, source.y);
@@ -945,10 +945,10 @@ class Matrix4 {
   }
 
   public static function setOrthographicMatrix4(out:Matrix4Like, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
     _out = out.m;
     sx = (1.0 / (right - left));
     sy = (1.0 / (top - bottom));
@@ -972,11 +972,11 @@ class Matrix4 {
   }
 
   public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var left:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var left:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast aspect : Float) > (cast -1e-7 : Float)) : Bool) && (cast ((cast aspect : Float) < (cast 1e-7 : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Aspect ratio may not be 0'));
     }
@@ -1004,8 +1004,8 @@ class Matrix4 {
   }
 
   public static function translateMatrix4(out:Matrix4Like, source:Matrix4Like, tx:Float, ty:Float, tz:Float):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+    var a:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
@@ -1016,12 +1016,12 @@ class Matrix4 {
 
   public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 1.0, 4.0] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 2.0, 8.0] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 3.0, 12.0] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 6.0, 9.0] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 7.0, 13.0] : Array<Dynamic>));
-    _Runtime.callValue(Matrix4.__swap__matrix4, cast ([out, source, 11.0, 14.0] : Array<Dynamic>));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 1.0 : Float), (cast 4.0 : Float));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 2.0 : Float), (cast 8.0 : Float));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 3.0 : Float), (cast 12.0 : Float));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 6.0 : Float), (cast 9.0 : Float));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 7.0 : Float), (cast 13.0 : Float));
+    Matrix4.__swap__matrix4((cast out : Matrix4Like), (cast source : Matrix4Like), (cast 11.0 : Float), (cast 14.0 : Float));
   }
 
   public static function writeMatrix4ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Matrix4Like):Void {
@@ -1029,16 +1029,16 @@ class Matrix4 {
   }
 
   public static function __getAxisRotation__matrix4(out:Matrix4Like, x:Float, y:Float, z:Float, radians:Float):Void {
-    var _out:Dynamic = cast _Runtime.UNDEFINED;
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var rad:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var tmp1:Dynamic = cast _Runtime.UNDEFINED;
-    var tmp2:Dynamic = cast _Runtime.UNDEFINED;
+    var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var rad:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var tmp1:Float = cast _Runtime.UNDEFINED;
+    var tmp2:Float = cast _Runtime.UNDEFINED;
     _out = out.m;
     ax = x;
     ay = y;
@@ -1065,7 +1065,7 @@ class Matrix4 {
   }
 
   public static function __swap__matrix4(out:Matrix4Like, source:Matrix4Like, a:Float, b:Float):Void {
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
+    var temp:Float = cast _Runtime.UNDEFINED;
     temp = flighthq._internal._StaticIndex.readFloat32Array(source.m, a);
     flighthq._internal._StaticIndex.writeFloat32Array(out.m, a, flighthq._internal._StaticIndex.readFloat32Array(source.m, b));
     flighthq._internal._StaticIndex.writeFloat32Array(out.m, b, temp);

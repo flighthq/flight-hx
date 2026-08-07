@@ -13,12 +13,12 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 class SurfaceMaterial {
   public static function createSurfaceMaterial(kind:Kind, ?opts:SurfaceMaterialOptions):flighthq.types.SurfaceMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createMaterial, cast ([kind] : Array<Dynamic>)) : flighthq.types.SurfaceMaterial);
-    _Runtime.setField(material, 'alphaCutoff', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaCutoff'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial));
-    _Runtime.setField(material, 'alphaMode', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMode'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial));
-    _Runtime.setField(material, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(opts, 'blendMode'), function():Dynamic return cast BlendModeValue.Normal));
-    _Runtime.setField(material, 'doubleSided', _Runtime.coalesce(_Runtime.optionalField(opts, 'doubleSided'), function():Dynamic return cast SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial));
+    var material:flighthq.types.SurfaceMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createMaterial((cast kind : String)) : flighthq.types.SurfaceMaterial) : flighthq.types.SurfaceMaterial);
+    ((cast material : flighthq.types.SurfaceMaterial).alphaCutoff = _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaCutoff'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial));
+    ((cast material : flighthq.types.SurfaceMaterial).alphaMode = _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMode'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial));
+    ((cast material : flighthq.types.SurfaceMaterial).blendMode = _Runtime.coalesce(_Runtime.optionalField(opts, 'blendMode'), function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal));
+    ((cast material : flighthq.types.SurfaceMaterial).doubleSided = _Runtime.coalesce(_Runtime.optionalField(opts, 'doubleSided'), function():Dynamic return cast SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial));
     return cast material;
     return cast null;
   }
@@ -43,9 +43,9 @@ class SurfaceMaterial {
     return cast null;
   }
 
-  public static final DEFAULT_ALPHA_CUTOFF__surfaceMaterial:Dynamic = 0.5;
+  public static final DEFAULT_ALPHA_CUTOFF__surfaceMaterial:Float = 0.5;
 
   public static final DEFAULT_ALPHA_MODE__surfaceMaterial:MaterialAlphaMode = 'opaque';
 
-  public static final DEFAULT_DOUBLE_SIDED__surfaceMaterial:Dynamic = false;
+  public static final DEFAULT_DOUBLE_SIDED__surfaceMaterial:Bool = false;
 }

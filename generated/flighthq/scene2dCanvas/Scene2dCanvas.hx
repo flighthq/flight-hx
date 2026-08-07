@@ -146,7 +146,7 @@ class Scene2dCanvas {
 
   public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasScale9Shape.defaultCanvasScale9ShapeRenderer;
 
-  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShape.defaultCanvasShapeRenderer;
 
@@ -154,7 +154,7 @@ class Scene2dCanvas {
 
   public static final defaultCanvasTextLabelRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTextLabel.defaultCanvasTextLabelRenderer;
 
-  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultCanvasTilemapRenderer:SpriteRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap.defaultCanvasTilemapRenderer;
 
@@ -242,7 +242,7 @@ class Scene2dCanvas {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasNode2D.renderCanvasScene2D(state, source);
   }
 
-  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:Dynamic):Void {
+  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTexture.renderIntoCanvasRenderTexture(state, renderTexture, callback);
   }
 
@@ -250,7 +250,7 @@ class Scene2dCanvas {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTarget.setCanvasRenderTransform2D(state, transform);
   }
 
-  public static function withCanvasRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
+  public static function withCanvasRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     return cast Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTexturePool.withCanvasRenderTextures(state, pool, descriptors, callback);
     return cast null;
   }

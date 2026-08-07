@@ -13,34 +13,36 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Camera3D;
+import flighthq.types.Frustum;
 import flighthq.types.Frustum.FrustumLike;
+import flighthq.types.Matrix4;
 import flighthq.types.Vector3.Vector3Like;
 
 class Culling {
   public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
-    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([Culling.__scratchViewProjection__culling, camera, aspect] : Array<Dynamic>));
-    _Runtime.callValue(setFrustumFromMatrix4, cast ([out, Culling.__scratchViewProjection__culling] : Array<Dynamic>));
+    getCamera3DViewProjectionMatrix4(Culling.__scratchViewProjection__culling, (cast camera : Camera3D), (cast aspect : Float));
+    setFrustumFromMatrix4((cast out : FrustumLike), Culling.__scratchViewProjection__culling);
   }
 
   public static function isBoxInCamera3DFrustum(camera:Camera3D, aabb:AabbLike, aspect:Float):Bool {
-    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
-    return cast _Runtime.callValue(isFrustumIntersectingAabb, cast ([Culling.__scratchFrustum__culling, aabb] : Array<Dynamic>));
+    getCamera3DFrustum((cast Culling.__scratchFrustum__culling : FrustumLike), (cast camera : Camera3D), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingAabb((cast Culling.__scratchFrustum__culling : FrustumLike), (cast aabb : AabbLike)) : Bool);
     return cast null;
   }
 
   public static function isPointInCamera3DFrustum(camera:Camera3D, point:Vector3Like, aspect:Float):Bool {
-    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
-    return cast _Runtime.callValue(isFrustumContainingPoint, cast ([Culling.__scratchFrustum__culling, point] : Array<Dynamic>));
+    getCamera3DFrustum((cast Culling.__scratchFrustum__culling : FrustumLike), (cast camera : Camera3D), (cast aspect : Float));
+    return cast (cast isFrustumContainingPoint((cast Culling.__scratchFrustum__culling : FrustumLike), (cast point : Vector3Like)) : Bool);
     return cast null;
   }
 
   public static function isSphereInCamera3DFrustum(camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
-    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
-    return cast _Runtime.callValue(isFrustumIntersectingSphere, cast ([Culling.__scratchFrustum__culling, sphere] : Array<Dynamic>));
+    getCamera3DFrustum((cast Culling.__scratchFrustum__culling : FrustumLike), (cast camera : Camera3D), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingSphere((cast Culling.__scratchFrustum__culling : FrustumLike), (cast sphere : BoundingSphereLike)) : Bool);
     return cast null;
   }
 
-  public static final __scratchViewProjection__culling:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final __scratchViewProjection__culling:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final __scratchFrustum__culling:Dynamic = _Runtime.callValue(createFrustum, cast ([] : Array<Dynamic>));
+  public static final __scratchFrustum__culling:Frustum = (cast createFrustum() : Frustum);
 }

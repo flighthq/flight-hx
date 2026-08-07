@@ -6,45 +6,50 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
+import flighthq.types.ColorScaleBias;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlViewportRect;
 import flighthq.types.GlShapeMesh;
 import flighthq.types.GlShapeMeshBinding;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 
 class GlShapeMesh {
   @:noCompletion
-  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeAlpha:Dynamic = cast _Runtime.UNDEFINED;
+  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:GlRenderState->Void):Void {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var nodeAlpha:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter((cast state : GlRenderState));
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(binding, 'program'));
-    _Runtime.setField(runtime, 'currentProgram', _Runtime.field(binding, 'program'));
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, _Runtime.callValue(GlShapeMesh.shapeMeshMatrix__glShapeMesh, cast ([state, renderProxy] : Array<Dynamic>)));
+    ((cast runtime : GlRenderStateRuntime).currentProgram = _Runtime.field(binding, 'program'));
+    _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, GlShapeMesh.shapeMeshMatrix__glShapeMesh((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(binding, 'vertexBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(binding, 'positionLocation'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(binding, 'indexBuffer'));
-    nodeAlpha = _Runtime.field(renderProxy, 'alpha');
+    nodeAlpha = (cast renderProxy : RenderProxy2D).alpha;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        var mesh:Dynamic = flighthq._internal._StaticIndex.readArray(meshes, i);
-        if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 0.0) : Bool)) { i++; continue; }
-        var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(mesh, 'alpha'), nodeAlpha);
+        var mesh:flighthq.types.GlShapeMesh = flighthq._internal._StaticIndex.readArray(meshes, i);
+        if ((cast _Runtime.strictEquals(_Runtime.field((cast mesh : flighthq.types.GlShapeMesh).indices, 'length'), 0.0) : Bool)) { i++; continue; }
+        var a:Float = ((cast mesh : flighthq.types.GlShapeMesh).alpha * nodeAlpha);
         if ((cast ((cast a : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
-        var r:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 16)) & 255) / 255.0);
-        var g:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(mesh, 'color')) >> 8)) & 255) / 255.0);
-        var b:Dynamic = ((_Runtime.toInt32(_Runtime.field(mesh, 'color')) & 255) / 255.0);
+        var r:Float = ((_Runtime.toInt32((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) >> 16)) & 255) / 255.0);
+        var g:Float = ((_Runtime.toInt32((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) >> 8)) & 255) / 255.0);
+        var b:Float = ((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) & 255) / 255.0);
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a);
-        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(mesh, 'vertices'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
-        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(mesh, 'indices'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
-        flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), _Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
+        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast mesh : flighthq.types.GlShapeMesh).vertices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
+        flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast mesh : flighthq.types.GlShapeMesh).indices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
+        flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), _Runtime.field((cast mesh : flighthq.types.GlShapeMesh).indices, 'length'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
         i++;
       }
     }
@@ -53,52 +58,52 @@ class GlShapeMesh {
 
   @:noCompletion
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
-    var fold:Dynamic = cast _Runtime.UNDEFINED;
+    var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
-    fold = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentMaterialFeature');
-    if ((cast ((cast !_Runtime.looseEquals(fold, null) : Bool) && (cast _Runtime.orValue(!_Runtime.looseEquals(_Runtime.field(renderProxy, 'colorMatrix'), null), function():Dynamic return cast !_Runtime.looseEquals(_Runtime.field(renderProxy, 'colorScaleBias'), null)) : Bool)) : Bool)) {
-      _Runtime.callProperty(fold, 'drawShapeMeshes', cast ([state, renderProxy, meshes] : Array<Dynamic>));
+    fold = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature;
+    if ((cast ((cast !_Runtime.looseEquals(fold, null) : Bool) && (cast _Runtime.orValue(!_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorMatrix, null), function():Dynamic return cast !_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorScaleBias, null)) : Bool)) : Bool)) {
+      (cast fold : GlColorAdjustmentMaterialFeature).drawShapeMeshes(state, renderProxy, meshes);
       return;
     }
-    _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, _Runtime.callValue(ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+    drawGlShapeMeshBatch((cast state : GlRenderState), (cast renderProxy : RenderProxy2D), (cast meshes : Array<flighthq.types.GlShapeMesh>), (cast (cast ensureGlShapeMeshProgram((cast state : GlRenderState)) : GlShapeMeshBinding) : GlShapeMeshBinding), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<GlRenderState->Void>));
   }
 
   @:noCompletion
   public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var existing:Null<GlShapeMeshBinding> = cast _Runtime.UNDEFINED;
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     var created:GlShapeMeshBinding = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).get(gl));
+    gl = (cast state : GlRenderState).gl;
+    existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).get(gl));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    program = _Runtime.callValue(GlShapeMesh.compileShapeMeshProgram__glShapeMesh, cast ([gl] : Array<Dynamic>));
+    program = (cast GlShapeMesh.compileShapeMeshProgram__glShapeMesh((cast gl : flighthq._internal.dom.WebGL2RenderingContext)) : flighthq._internal.dom.WebGLProgram);
     created = { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') };
-    ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap).set(gl, created));
+    ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).set(gl, created));
     return cast created;
     return cast null;
   }
 
-  public static final VERTEX_SOURCE__glShapeMesh:Dynamic = '\nattribute vec2 a_position;\nuniform mat3 u_matrix;\nvoid main() {\n  vec3 p = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(p.xy, 0.0, 1.0);\n}\n';
+  public static final VERTEX_SOURCE__glShapeMesh:String = '\nattribute vec2 a_position;\nuniform mat3 u_matrix;\nvoid main() {\n  vec3 p = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(p.xy, 0.0, 1.0);\n}\n';
 
-  public static final FRAGMENT_SOURCE__glShapeMesh:Dynamic = '\nprecision mediump float;\nuniform vec4 u_color;\nvoid main() { gl_FragColor = u_color; }\n';
+  public static final FRAGMENT_SOURCE__glShapeMesh:String = '\nprecision mediump float;\nuniform vec4 u_color;\nvoid main() { gl_FragColor = u_color; }\n';
 
-  public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final shapeMeshPrograms__glShapeMesh:flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function compileShapeMeshProgram__glShapeMesh(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
-    return cast _Runtime.callValue(createGlProgram, cast ([gl, GlShapeMesh.VERTEX_SOURCE__glShapeMesh, GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh, 'Shape-mesh'] : Array<Dynamic>));
+    return cast (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlShapeMesh.VERTEX_SOURCE__glShapeMesh : String), (cast GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh : String), (cast 'Shape-mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
   public static function shapeMeshMatrix__glShapeMesh(state:GlRenderState, renderProxy:RenderProxy2D):flighthq._internal._Float32Array {
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var iw:Dynamic = cast _Runtime.UNDEFINED;
-    var ih:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    viewport = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
+    var viewport:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, GlViewportRect> = cast _Runtime.UNDEFINED;
+    var iw:Float = cast _Runtime.UNDEFINED;
+    var ih:Float = cast _Runtime.UNDEFINED;
+    var t:Matrix = cast _Runtime.UNDEFINED;
+    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
     iw = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), function():Dynamic return cast 1.0));
     ih = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'), function():Dynamic return cast 1.0));
-    t = _Runtime.field(renderProxy, 'transform2D');
+    t = (cast renderProxy : RenderProxy2D).transform2D;
     return cast new flighthq._internal._Float32Array(cast ([(t.a * iw), (-t.b * ih), 0.0, (t.c * iw), (-t.d * ih), 0.0, ((t.tx * iw) - 1.0), ((-t.ty * ih) + 1.0), 1.0] : Array<Dynamic>));
     return cast null;
   }

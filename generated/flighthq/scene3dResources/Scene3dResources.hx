@@ -61,7 +61,7 @@ class Scene3dResources {
     Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver.disposeScene3DResourceResolver(resolver);
   }
 
-  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Dynamic {
+  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void->Void {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_EnableScene3DResourceFailureGuards.enableScene3DResourceFailureGuards(resolver);
     return cast null;
   }
@@ -160,7 +160,7 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function revealScene3DResourcesOnResolve(resolver:Scene3DResourceResolver, scene:Scene3D, tweenManager:TweenManager, ?options:Scene3DResourceRevealOptions):Dynamic {
+  public static function revealScene3DResourcesOnResolve(resolver:Scene3DResourceResolver, scene:Scene3D, tweenManager:TweenManager, ?options:Scene3DResourceRevealOptions):Void->Void {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_RevealScene3DResourcesOnResolve.revealScene3DResourcesOnResolve(resolver, scene, tweenManager, options);
     return cast null;
   }

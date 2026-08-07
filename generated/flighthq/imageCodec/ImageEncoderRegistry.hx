@@ -7,31 +7,31 @@ import flighthq.types.ImageEncoder;
 
 class ImageEncoderRegistry {
   public static function clearImageEncoders():Void {
-    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).clear());
+    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).clear());
   }
 
   public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
-    return cast _Runtime.coalesce(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).get(mimeType)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).get(mimeType)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getImageEncoderMimeTypes():Array<String> {
-    return cast _Runtime.toArray(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).keys()));
+    return cast _Runtime.toArray(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).keys()));
     return cast null;
   }
 
   public static function hasImageEncoder(mimeType:String):Bool {
-    return cast ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).has(mimeType));
+    return cast ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).has(mimeType));
     return cast null;
   }
 
   public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
-    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).set(mimeType, encoder));
+    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).set(mimeType, encoder));
   }
 
   public static function unregisterImageEncoder(mimeType:String):Void {
-    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).delete_(mimeType));
+    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).delete_(mimeType));
   }
 
-  public static final encoders__imageEncoderRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final encoders__imageEncoderRegistry:flighthq._internal._Map<String, ImageEncoder> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

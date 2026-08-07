@@ -7,5 +7,5 @@ import flighthq.types.Attachment2D;
 import flighthq.types.Skeleton2DAnimationTargetKind;
 
 class _Skeleton2DSlotAnimationTargetValues {
-  public static final Skeleton2DSlotAnimationPathValue:Dynamic = { Attachment: 'Attachment', Color: 'Color' };
+  public static final Skeleton2DSlotAnimationPathValue:{ var Attachment:String; var Color:String; } = { Attachment: 'Attachment', Color: 'Color' };
 }

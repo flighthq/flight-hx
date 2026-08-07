@@ -8,36 +8,37 @@ import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
 import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class Capsule {
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flighthq.types.Capsule {
-    return cast _Runtime.callValue(createEntity, cast ([{ endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ } : Null<{ var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; }>)) : flighthq.types.Capsule);
     return cast null;
   }
 
   public static function getClosestPointOnCapsule(out:Vector3Like, capsule:CapsuleLike, point:Vector3Like):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var bz:Dynamic = cast _Runtime.UNDEFINED;
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var abx:Dynamic = cast _Runtime.UNDEFINED;
-    var aby:Dynamic = cast _Runtime.UNDEFINED;
-    var abz:Dynamic = cast _Runtime.UNDEFINED;
-    var abLen2:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var abx:Float = cast _Runtime.UNDEFINED;
+    var aby:Float = cast _Runtime.UNDEFINED;
+    var abz:Float = cast _Runtime.UNDEFINED;
+    var abLen2:Float = cast _Runtime.UNDEFINED;
     var closestX:Float = cast _Runtime.UNDEFINED;
     var closestY:Float = cast _Runtime.UNDEFINED;
     var closestZ:Float = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
     ax = capsule.startX;
     ay = capsule.startY;
     az = capsule.startZ;
@@ -57,7 +58,7 @@ class Capsule {
       (closestY = cast (ay : Dynamic));
       (closestZ = cast (az : Dynamic));
     } else {
-      var t:Dynamic = HxMath.min(HxMath.max((((((px - ax) * abx) + ((py - ay) * aby)) + ((pz - az) * abz)) / abLen2), 0.0), 1.0);
+      var t:Float = HxMath.min(HxMath.max((((((px - ax) * abx) + ((py - ay) * aby)) + ((pz - az) * abz)) / abLen2), 0.0), 1.0);
       (closestX = cast ((ax + (t * abx)) : Dynamic));
       (closestY = cast ((ay + (t * aby)) : Dynamic));
       (closestZ = cast ((az + (t * abz)) : Dynamic));
@@ -71,7 +72,7 @@ class Capsule {
       (out.y = cast (closestY : Dynamic));
       (out.z = cast (closestZ : Dynamic));
     } else {
-      var inv:Dynamic = (r / dist);
+      var inv:Float = (r / dist);
       (out.x = cast ((closestX + (dx * inv)) : Dynamic));
       (out.y = cast ((closestY + (dy * inv)) : Dynamic));
       (out.z = cast ((closestZ + (dz * inv)) : Dynamic));
@@ -79,42 +80,42 @@ class Capsule {
   }
 
   public static function intersectRay3DCapsule(ray:Ray3DLike, capsule:CapsuleLike):Float {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var bz:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var abx:Dynamic = cast _Runtime.UNDEFINED;
-    var aby:Dynamic = cast _Runtime.UNDEFINED;
-    var abz:Dynamic = cast _Runtime.UNDEFINED;
-    var abLen2:Dynamic = cast _Runtime.UNDEFINED;
-    var sphereHit:Dynamic = cast _Runtime.UNDEFINED;
-    var tBest:Dynamic = cast _Runtime.UNDEFINED;
-    var invAb2:Dynamic = cast _Runtime.UNDEFINED;
-    var aox:Dynamic = cast _Runtime.UNDEFINED;
-    var aoy:Dynamic = cast _Runtime.UNDEFINED;
-    var aoz:Dynamic = cast _Runtime.UNDEFINED;
-    var dab:Dynamic = cast _Runtime.UNDEFINED;
-    var aoab:Dynamic = cast _Runtime.UNDEFINED;
-    var dpx:Dynamic = cast _Runtime.UNDEFINED;
-    var dpy:Dynamic = cast _Runtime.UNDEFINED;
-    var dpz:Dynamic = cast _Runtime.UNDEFINED;
-    var apx:Dynamic = cast _Runtime.UNDEFINED;
-    var apy:Dynamic = cast _Runtime.UNDEFINED;
-    var apz:Dynamic = cast _Runtime.UNDEFINED;
-    var qa:Dynamic = cast _Runtime.UNDEFINED;
-    var qb:Dynamic = cast _Runtime.UNDEFINED;
-    var qc:Dynamic = cast _Runtime.UNDEFINED;
-    var tA:Dynamic = cast _Runtime.UNDEFINED;
-    var tB:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var abx:Float = cast _Runtime.UNDEFINED;
+    var aby:Float = cast _Runtime.UNDEFINED;
+    var abz:Float = cast _Runtime.UNDEFINED;
+    var abLen2:Float = cast _Runtime.UNDEFINED;
+    var sphereHit:Float->Float->Float->Float = cast _Runtime.UNDEFINED;
+    var tBest:Float = cast _Runtime.UNDEFINED;
+    var invAb2:Float = cast _Runtime.UNDEFINED;
+    var aox:Float = cast _Runtime.UNDEFINED;
+    var aoy:Float = cast _Runtime.UNDEFINED;
+    var aoz:Float = cast _Runtime.UNDEFINED;
+    var dab:Float = cast _Runtime.UNDEFINED;
+    var aoab:Float = cast _Runtime.UNDEFINED;
+    var dpx:Float = cast _Runtime.UNDEFINED;
+    var dpy:Float = cast _Runtime.UNDEFINED;
+    var dpz:Float = cast _Runtime.UNDEFINED;
+    var apx:Float = cast _Runtime.UNDEFINED;
+    var apy:Float = cast _Runtime.UNDEFINED;
+    var apz:Float = cast _Runtime.UNDEFINED;
+    var qa:Float = cast _Runtime.UNDEFINED;
+    var qb:Float = cast _Runtime.UNDEFINED;
+    var qc:Float = cast _Runtime.UNDEFINED;
+    var tA:Float = cast _Runtime.UNDEFINED;
+    var tB:Float = cast _Runtime.UNDEFINED;
     ox = ray.origin.x;
     oy = ray.origin.y;
     oz = ray.origin.z;
@@ -132,17 +133,17 @@ class Capsule {
     aby = (by - ay);
     abz = (bz - az);
     abLen2 = (((abx * abx) + (aby * aby)) + (abz * abz));
-    sphereHit = function(cx:Float, cy:Float, cz:Float) {
-      var mx:Dynamic = cast _Runtime.UNDEFINED;
-      var my:Dynamic = cast _Runtime.UNDEFINED;
-      var mz:Dynamic = cast _Runtime.UNDEFINED;
-      var lenD2:Dynamic = cast _Runtime.UNDEFINED;
-      var b:Dynamic = cast _Runtime.UNDEFINED;
-      var c:Dynamic = cast _Runtime.UNDEFINED;
-      var disc:Dynamic = cast _Runtime.UNDEFINED;
-      var sqrtD:Dynamic = cast _Runtime.UNDEFINED;
-      var t1:Dynamic = cast _Runtime.UNDEFINED;
-      var t2:Dynamic = cast _Runtime.UNDEFINED;
+    sphereHit = (cast function(cx:Float, cy:Float, cz:Float):Float {
+      var mx:Float = cast _Runtime.UNDEFINED;
+      var my:Float = cast _Runtime.UNDEFINED;
+      var mz:Float = cast _Runtime.UNDEFINED;
+      var lenD2:Float = cast _Runtime.UNDEFINED;
+      var b:Float = cast _Runtime.UNDEFINED;
+      var c:Float = cast _Runtime.UNDEFINED;
+      var disc:Float = cast _Runtime.UNDEFINED;
+      var sqrtD:Float = cast _Runtime.UNDEFINED;
+      var t1:Float = cast _Runtime.UNDEFINED;
+      var t2:Float = cast _Runtime.UNDEFINED;
       mx = (ox - cx);
       my = (oy - cy);
       mz = (oz - cz);
@@ -157,8 +158,8 @@ class Capsule {
       if ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool)) { return cast t1; }
       t2 = ((-b + sqrtD) / lenD2);
       return cast ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
-    };
-    if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) { return cast _Runtime.callValue(sphereHit, cast ([ax, ay, az] : Array<Dynamic>)); }
+    } : Float->Float->Float->Float);
+    if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) { return cast (cast sphereHit((cast ax : Float), (cast ay : Float), (cast az : Float)) : Float); }
     tBest = -1.0;
     invAb2 = (1.0 / abLen2);
     aox = (ox - ax);
@@ -176,45 +177,45 @@ class Capsule {
     qb = (((apx * dpx) + (apy * dpy)) + (apz * dpz));
     qc = ((((apx * apx) + (apy * apy)) + (apz * apz)) - (r * r));
     if ((cast ((cast qa : Float) > (cast 1e-20 : Float)) : Bool)) {
-      var disc:Dynamic = ((qb * qb) - (qa * qc));
+      var disc:Float = ((qb * qb) - (qa * qc));
       if ((cast ((cast disc : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var sqrtD:Dynamic = HxMath.sqrt(disc);
-        var t1:Dynamic = ((-qb - sqrtD) / qa);
-        var s1:Dynamic = ((aoab + (t1 * dab)) * invAb2);
+        var sqrtD:Float = HxMath.sqrt(disc);
+        var t1:Float = ((-qb - sqrtD) / qa);
+        var s1:Float = ((aoab + (t1 * dab)) * invAb2);
         if ((cast ((cast ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast s1 : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast s1 : Float) <= (cast 1.0 : Float)) : Bool)) : Bool)) {
           (tBest = cast (t1 : Dynamic));
         } else { if ((cast ((cast t1 : Float) < (cast 0.0 : Float)) : Bool)) {
-          var t2:Dynamic = ((-qb + sqrtD) / qa);
+          var t2:Float = ((-qb + sqrtD) / qa);
           if ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool)) {
-            var s0:Dynamic = (aoab * invAb2);
+            var s0:Float = (aoab * invAb2);
             if ((cast ((cast ((cast s0 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast s0 : Float) <= (cast 1.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
           }
         } }
       }
     }
-    tA = _Runtime.callValue(sphereHit, cast ([ax, ay, az] : Array<Dynamic>));
+    tA = (cast sphereHit((cast ax : Float), (cast ay : Float), (cast az : Float)) : Float);
     if ((cast ((cast ((cast tA : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast tBest : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast tA : Float) < (cast tBest : Float))) : Bool)) : Bool)) { (tBest = cast (tA : Dynamic)); }
-    tB = _Runtime.callValue(sphereHit, cast ([bx, by, bz] : Array<Dynamic>));
+    tB = (cast sphereHit((cast bx : Float), (cast by : Float), (cast bz : Float)) : Float);
     if ((cast ((cast ((cast tB : Float) >= (cast 0.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast tBest : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast tB : Float) < (cast tBest : Float))) : Bool)) : Bool)) { (tBest = cast (tB : Dynamic)); }
     return cast tBest;
     return cast null;
   }
 
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
-    var sumR:Dynamic = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
+    var sumR:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    dist = _Runtime.callValue(Capsule.segmentToSegmentDistanceSq__capsule, cast ([a.startX, a.startY, a.startZ, a.endX, a.endY, a.endZ, b.startX, b.startY, b.startZ, b.endX, b.endY, b.endZ] : Array<Dynamic>));
+    dist = (cast Capsule.segmentToSegmentDistanceSq__capsule((cast a.startX : Float), (cast a.startY : Float), (cast a.startZ : Float), (cast a.endX : Float), (cast a.endY : Float), (cast a.endZ : Float), (cast b.startX : Float), (cast b.startY : Float), (cast b.startZ : Float), (cast b.endX : Float), (cast b.endY : Float), (cast b.endZ : Float)) : Float);
     sumR = (a.radius + b.radius);
     return cast ((cast dist : Float) <= (cast (sumR * sumR) : Float));
     return cast null;
   }
 
   public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
-    var dist2:Dynamic = cast _Runtime.UNDEFINED;
-    var sumR:Dynamic = cast _Runtime.UNDEFINED;
+    var dist2:Float = cast _Runtime.UNDEFINED;
+    var sumR:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast capsule.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    dist2 = _Runtime.callValue(Capsule.pointToSegmentDistanceSq__capsule, cast ([sphere.center.x, sphere.center.y, sphere.center.z, capsule.startX, capsule.startY, capsule.startZ, capsule.endX, capsule.endY, capsule.endZ] : Array<Dynamic>));
+    dist2 = (cast Capsule.pointToSegmentDistanceSq__capsule((cast sphere.center.x : Float), (cast sphere.center.y : Float), (cast sphere.center.z : Float), (cast capsule.startX : Float), (cast capsule.startY : Float), (cast capsule.startZ : Float), (cast capsule.endX : Float), (cast capsule.endY : Float), (cast capsule.endZ : Float)) : Float);
     sumR = (capsule.radius + sphere.radius);
     return cast ((cast dist2 : Float) <= (cast (sumR * sumR) : Float));
     return cast null;
@@ -231,17 +232,17 @@ class Capsule {
   }
 
   public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {
-    var abx:Dynamic = cast _Runtime.UNDEFINED;
-    var aby:Dynamic = cast _Runtime.UNDEFINED;
-    var abz:Dynamic = cast _Runtime.UNDEFINED;
-    var apx:Dynamic = cast _Runtime.UNDEFINED;
-    var apy:Dynamic = cast _Runtime.UNDEFINED;
-    var apz:Dynamic = cast _Runtime.UNDEFINED;
-    var len2:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
+    var abx:Float = cast _Runtime.UNDEFINED;
+    var aby:Float = cast _Runtime.UNDEFINED;
+    var abz:Float = cast _Runtime.UNDEFINED;
+    var apx:Float = cast _Runtime.UNDEFINED;
+    var apy:Float = cast _Runtime.UNDEFINED;
+    var apz:Float = cast _Runtime.UNDEFINED;
+    var len2:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
     abx = (bx - ax);
     aby = (by - ay);
     abz = (bz - az);
@@ -259,23 +260,23 @@ class Capsule {
   }
 
   public static function segmentToSegmentDistanceSq__capsule(ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float, cx:Float, cy:Float, cz:Float, dx:Float, dy:Float, dz:Float):Float {
-    var d1x:Dynamic = cast _Runtime.UNDEFINED;
-    var d1y:Dynamic = cast _Runtime.UNDEFINED;
-    var d1z:Dynamic = cast _Runtime.UNDEFINED;
-    var d2x:Dynamic = cast _Runtime.UNDEFINED;
-    var d2y:Dynamic = cast _Runtime.UNDEFINED;
-    var d2z:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rz:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var e:Dynamic = cast _Runtime.UNDEFINED;
-    var f:Dynamic = cast _Runtime.UNDEFINED;
+    var d1x:Float = cast _Runtime.UNDEFINED;
+    var d1y:Float = cast _Runtime.UNDEFINED;
+    var d1z:Float = cast _Runtime.UNDEFINED;
+    var d2x:Float = cast _Runtime.UNDEFINED;
+    var d2y:Float = cast _Runtime.UNDEFINED;
+    var d2z:Float = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rz:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var e:Float = cast _Runtime.UNDEFINED;
+    var f:Float = cast _Runtime.UNDEFINED;
     var s:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
-    var qx:Dynamic = cast _Runtime.UNDEFINED;
-    var qy:Dynamic = cast _Runtime.UNDEFINED;
-    var qz:Dynamic = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
     d1x = (bx - ax);
     d1y = (by - ay);
     d1z = (bz - az);
@@ -295,13 +296,13 @@ class Capsule {
       (s = cast (0.0 : Dynamic));
       (t = cast (HxMath.min(HxMath.max((f / e), 0.0), 1.0) : Dynamic));
     } else {
-      var c:Dynamic = (((d1x * rx) + (d1y * ry)) + (d1z * rz));
+      var c:Float = (((d1x * rx) + (d1y * ry)) + (d1z * rz));
       if ((cast ((cast e : Float) < (cast 1e-20 : Float)) : Bool)) {
         (t = cast (0.0 : Dynamic));
         (s = cast (HxMath.min(HxMath.max((-c / a), 0.0), 1.0) : Dynamic));
       } else {
-        var b:Dynamic = (((d1x * d2x) + (d1y * d2y)) + (d1z * d2z));
-        var denom:Dynamic = ((a * e) - (b * b));
+        var b:Float = (((d1x * d2x) + (d1y * d2y)) + (d1z * d2z));
+        var denom:Float = ((a * e) - (b * b));
         if ((cast ((cast denom : Float) > (cast 1e-20 : Float)) : Bool)) {
           (s = cast (HxMath.min(HxMath.max((((b * f) - (c * e)) / denom), 0.0), 1.0) : Dynamic));
         } else {

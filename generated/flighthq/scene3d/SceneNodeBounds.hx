@@ -12,37 +12,45 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene3d.Mesh.isMesh;
+import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
+import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
+import flighthq.types.Node;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Vector3;
 
 class SceneNodeBounds {
   public static function getNode3DWorldBounds(out:AabbLike, node:Node3D):Void {
-    _Runtime.callValue(setAabb, cast ([out, HxMath.POSITIVE_INFINITY, HxMath.POSITIVE_INFINITY, HxMath.POSITIVE_INFINITY, HxMath.NEGATIVE_INFINITY, HxMath.NEGATIVE_INFINITY, HxMath.NEGATIVE_INFINITY] : Array<Dynamic>));
-    _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, node] : Array<Dynamic>));
+    setAabb((cast out : AabbLike), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float));
+    SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out : AabbLike), (cast node : Node3D));
   }
 
   public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:Node3D):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
-      var localBounds:Dynamic = _Runtime.callValue(ensureMeshGeometryBounds, cast ([(cast node : flighthq.types.Mesh).geometry] : Array<Dynamic>));
-      if ((cast ((cast !_Runtime.strictEquals(localBounds, null) : Bool) && (cast ((cast localBounds.min.x : Float) <= (cast localBounds.max.x : Float)) : Bool)) : Bool)) {
-        _Runtime.callValue(ensureNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
-        var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
-        _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeBounds._scratchWorldAabb__sceneNodeBounds, localBounds, worldMatrix] : Array<Dynamic>));
-        _Runtime.callValue(unionAabb, cast ([out, out, SceneNodeBounds._scratchWorldAabb__sceneNodeBounds] : Array<Dynamic>));
+    var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
+    if ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool)) {
+      var localBounds:Null<Aabb> = (cast ensureMeshGeometryBounds(node.geometry) : Null<Aabb>);
+      if ((cast ((cast !_Runtime.strictEquals(localBounds, null) : Bool) && (cast ((cast (cast localBounds : flighthq.types.Aabb).min.x : Float) <= (cast (cast localBounds : flighthq.types.Aabb).max.x : Float)) : Bool)) : Bool)) {
+        ensureNodeWorldMatrix4(node);
+        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4(node) : Matrix4Like);
+        transformAabbByMatrix4((cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds : AabbLike), (cast localBounds : AabbLike), worldMatrix);
+        unionAabb((cast out : AabbLike), (cast out : AabbLike), (cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds : AabbLike));
       }
     }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D)] : Array<Dynamic>));
+          SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out : AabbLike), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D) : Node3D));
           i++;
         }
       }
     }
   }
 
-  public static final _scratchWorldAabb__sceneNodeBounds:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
+  public static final _scratchWorldAabb__sceneNodeBounds:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
 }

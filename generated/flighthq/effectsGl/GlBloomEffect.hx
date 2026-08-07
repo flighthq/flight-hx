@@ -13,53 +13,57 @@ import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.BloomEffect;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
 class GlBloomEffect {
   @:noCompletion
   public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var bright:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
-    var brightProgram:Dynamic = cast _Runtime.UNDEFINED;
-    var compositeProgram:Dynamic = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.callValue(computeBloomThreshold, cast ([effect] : Array<Dynamic>));
-    intensity = _Runtime.callValue(computeBloomIntensity, cast ([effect] : Array<Dynamic>));
-    radius = _Runtime.callValue(computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var bright:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var brightProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    var compositeProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    threshold = (cast computeBloomThreshold((cast effect : BloomEffect)) : Float);
+    intensity = (cast computeBloomIntensity((cast effect : BloomEffect)) : Float);
+    radius = (cast computeBloomBlurRadius((cast effect : BloomEffect)) : Float);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    bright = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    blurred = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    temp = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    brightProgram = _Runtime.callValue(getGlEffectProgram, cast ([state, 'bloom.bright', GlBloomEffect.BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, brightProgram, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), bright, function(gl:Dynamic, program:Dynamic) {
+    bright = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    blurred = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    temp = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    brightProgram = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'bloom.bright' : String), (cast GlBloomEffect.BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), brightProgram, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast bright : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_threshold'), threshold);
-    }] : Array<Dynamic>));
-    _Runtime.callValue(applyGaussianBlurToGl, cast ([state, bright, blurred, temp, { blurX: radius, blurY: radius }] : Array<Dynamic>));
-    compositeProgram = _Runtime.callValue(getGlEffectProgram, cast ([state, 'bloom.composite', GlBloomEffect.BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, compositeProgram, cast ([_Runtime.field(source, 'texture'), _Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, program:Dynamic) {
+    });
+    applyGaussianBlurToGl((cast state : GlRenderState), (cast bright : GlRenderTarget), (cast blurred : GlRenderTarget), (cast temp : GlRenderTarget), (cast { blurX: radius, blurY: radius } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
+    compositeProgram = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'bloom.composite' : String), (cast GlBloomEffect.BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), compositeProgram, (cast cast ([_Runtime.field(source, 'texture'), (cast blurred : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_intensity'), intensity);
-    }] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, bright] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, temp] : Array<Dynamic>));
+    });
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast bright : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast blurred : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast temp : GlRenderTarget));
   }
 
-  public static final defaultGlBloomEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBloomEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
+  public static final defaultGlBloomEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyBloomEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : BloomEffect) : BloomEffect));
   };
 
   public static function registerGlBloomEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BloomEffect', defaultGlBloomEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'BloomEffect' : String), (cast defaultGlBloomEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  float k = step(u_threshold, l);\n  o_color = vec4(c.rgb * k, c.a);\n}';
+  public static final BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  float k = step(u_threshold, l);\n  o_color = vec4(c.rgb * k, c.a);\n}';
 
-  public static final BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  vec4 bloom = texture(u_texture1, v_texCoord);\n  o_color = vec4(scene.rgb + bloom.rgb * u_intensity, scene.a);\n}';
+  public static final BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  vec4 bloom = texture(u_texture1, v_texCoord);\n  o_color = vec4(scene.rgb + bloom.rgb * u_intensity, scene.a);\n}';
 }

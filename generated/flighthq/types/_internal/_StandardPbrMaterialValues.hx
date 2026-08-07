@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _StandardPbrMaterialValues {
-  public static final StandardPbrMaterialKind:Dynamic = 'StandardPbrMaterial';
+  public static final StandardPbrMaterialKind:String = 'StandardPbrMaterial';
 }

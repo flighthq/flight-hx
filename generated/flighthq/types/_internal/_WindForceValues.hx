@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _WindForceValues {
-  public static final WindForceKind:Dynamic = 'WindForce';
+  public static final WindForceKind:String = 'WindForce';
 }

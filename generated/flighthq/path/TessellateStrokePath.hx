@@ -10,16 +10,16 @@ import flighthq.types.PathMesh;
 import flighthq.types.StrokeStyle;
 
 class TessellateStrokePath {
-  public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Null<PathMesh> {
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Null<PathMesh> {
+    var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
-    geometry = _Runtime.callValue(buildStrokePathGeometry, cast ([path, style, tolerance] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'issue'), StrokePathTessellationIssueNone) : Bool)) { return cast null; }
+    geometry = (cast buildStrokePathGeometry((cast path : Path), (cast style : StrokeStyle), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
+    if ((cast !_Runtime.strictEquals((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue, StrokePathTessellationIssueNone) : Bool)) { return cast null; }
     mesh = { indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) };
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(geometry, 'pieces'), 'length') : Float)) : Bool)) {
-        _Runtime.callValue(TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath, cast ([mesh, flighthq._internal._StaticIndex.readArray(_Runtime.field(geometry, 'pieces'), i)] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, 'length') : Float)) : Bool)) {
+        TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath((cast mesh : PathMesh), (cast flighthq._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i) : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }));
         i++;
       }
     }
@@ -28,80 +28,80 @@ class TessellateStrokePath {
   }
 
   public static function appendStrokePieceMesh__tessellateStrokePath(mesh:PathMesh, piece:{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }):Void {
-    var sectionCount:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var connectionCount:Dynamic = cast _Runtime.UNDEFINED;
-    sectionCount = (_Runtime.toInt32(_Runtime.field(_Runtime.field(piece, 'left'), 'length')) >> 1);
+    var sectionCount:Float = cast _Runtime.UNDEFINED;
+    var base:Float = cast _Runtime.UNDEFINED;
+    var connectionCount:Float = cast _Runtime.UNDEFINED;
+    sectionCount = (_Runtime.toInt32(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length')) >> 1);
     if ((cast ((cast sectionCount : Float) < (cast 2.0 : Float)) : Bool)) { return; }
-    base = (_Runtime.toInt32(_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length')) >> 1);
+    base = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sectionCount : Float)) : Bool)) {
-        _Runtime.pushMany(_Runtime.field(mesh, 'vertices'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), (i * 2.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), (i * 2.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), ((i * 2.0) + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany((cast mesh : PathMesh).vertices, cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (i * 2.0)), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (i * 2.0)), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         i++;
       }
     }
-    connectionCount = ((cast _Runtime.field(piece, 'closed') : Bool) ? (cast sectionCount : Dynamic) : (cast (sectionCount - 1.0) : Dynamic));
+    connectionCount = ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) ? (cast sectionCount : Dynamic) : (cast (sectionCount - 1.0) : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast connectionCount : Float)) : Bool)) {
-        var next:Dynamic = _Runtime.fmod((i + 1.0), sectionCount);
-        var left:Dynamic = (base + (i * 2.0));
-        var right:Dynamic = (left + 1.0);
-        var nextLeft:Dynamic = (base + (next * 2.0));
-        var nextRight:Dynamic = (nextLeft + 1.0);
-        _Runtime.callValue(TessellateStrokePath.appendTriangle__tessellateStrokePath, cast ([mesh, left, right, nextLeft] : Array<Dynamic>));
-        _Runtime.callValue(TessellateStrokePath.appendTriangle__tessellateStrokePath, cast ([mesh, nextLeft, right, nextRight] : Array<Dynamic>));
+        var next:Float = _Runtime.fmod((i + 1.0), sectionCount);
+        var left:Float = (base + (i * 2.0));
+        var right:Float = (left + 1.0);
+        var nextLeft:Float = (base + (next * 2.0));
+        var nextRight:Float = (nextLeft + 1.0);
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
         i++;
       }
     }
-    if ((cast ((cast !(cast _Runtime.field(piece, 'closed') : Bool) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(piece, 'startCap'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var right:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), 0.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), 1.0)] : Array<Dynamic>);
-      var left:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), 0.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), 1.0)] : Array<Dynamic>);
-      _Runtime.callValue(TessellateStrokePath.appendRoundCap__tessellateStrokePath, cast ([mesh, right, _Runtime.field(piece, 'startCap'), left] : Array<Dynamic>));
+    if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var right:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 1.0)] : Array<Dynamic>);
+      var left:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 1.0)] : Array<Dynamic>);
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh : PathMesh), (cast right : Array<Float>), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap : Array<Float>), (cast left : Array<Float>));
     }
-    if ((cast ((cast !(cast _Runtime.field(piece, 'closed') : Bool) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(piece, 'endCap'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var end:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(piece, 'left'), 'length'), 2.0);
-      var left:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), end), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'left'), (end + 1.0))] : Array<Dynamic>);
-      var right:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), end), flighthq._internal._StaticIndex.readArray(_Runtime.field(piece, 'right'), (end + 1.0))] : Array<Dynamic>);
-      _Runtime.callValue(TessellateStrokePath.appendRoundCap__tessellateStrokePath, cast ([mesh, left, _Runtime.field(piece, 'endCap'), right] : Array<Dynamic>));
+    if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var end:Float = _Runtime.subtractNumbers(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length'), 2.0);
+      var left:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (end + 1.0))] : Array<Dynamic>);
+      var right:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (end + 1.0))] : Array<Dynamic>);
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh : PathMesh), (cast left : Array<Float>), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap : Array<Float>), (cast right : Array<Float>));
     }
   }
 
   public static function appendRoundCap__tessellateStrokePath(mesh:PathMesh, start:Array<Float>, interior:Array<Float>, end:Array<Float>):Void {
-    var center:Dynamic = cast _Runtime.UNDEFINED;
-    var arcBase:Dynamic = cast _Runtime.UNDEFINED;
-    var arcCount:Dynamic = cast _Runtime.UNDEFINED;
-    center = (_Runtime.toInt32(_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length')) >> 1);
-    _Runtime.pushMany(_Runtime.field(mesh, 'vertices'), cast ([(_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 0.0), flighthq._internal._StaticIndex.readArray(end, 0.0)) / 2.0), (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 1.0), flighthq._internal._StaticIndex.readArray(end, 1.0)) / 2.0)] : Array<Dynamic>));
-    arcBase = (_Runtime.toInt32(_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length')) >> 1);
-    _Runtime.callProperty(_Runtime.field(mesh, 'vertices'), 'push', _Runtime.concatArrays([[flighthq._internal._StaticIndex.readArray(start, 0.0)], [flighthq._internal._StaticIndex.readArray(start, 1.0)], _Runtime.toArray(interior), [flighthq._internal._StaticIndex.readArray(end, 0.0)], [flighthq._internal._StaticIndex.readArray(end, 1.0)]]));
+    var center:Float = cast _Runtime.UNDEFINED;
+    var arcBase:Float = cast _Runtime.UNDEFINED;
+    var arcCount:Float = cast _Runtime.UNDEFINED;
+    center = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
+    _Runtime.pushMany((cast mesh : PathMesh).vertices, cast ([(_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 0.0), flighthq._internal._StaticIndex.readArray(end, 0.0)) / 2.0), (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 1.0), flighthq._internal._StaticIndex.readArray(end, 1.0)) / 2.0)] : Array<Dynamic>));
+    arcBase = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
+    _Runtime.callProperty((cast mesh : PathMesh).vertices, 'push', _Runtime.concatArrays([[flighthq._internal._StaticIndex.readArray(start, 0.0)], [flighthq._internal._StaticIndex.readArray(start, 1.0)], _Runtime.toArray(interior), [flighthq._internal._StaticIndex.readArray(end, 0.0)], [flighthq._internal._StaticIndex.readArray(end, 1.0)]]));
     arcCount = ((_Runtime.toInt32(_Runtime.field(interior, 'length')) >> 1) + 2.0);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (arcCount - 1.0) : Float)) : Bool)) {
-        _Runtime.callValue(TessellateStrokePath.appendTriangle__tessellateStrokePath, cast ([mesh, center, (arcBase + i), ((arcBase + i) + 1.0)] : Array<Dynamic>));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
         i++;
       }
     }
   }
 
   public static function appendTriangle__tessellateStrokePath(mesh:PathMesh, a:Float, b:Float, c:Float):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    ax = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), (a * 2.0));
-    ay = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), ((a * 2.0) + 1.0));
-    bx = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), (b * 2.0));
-    by = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), ((b * 2.0) + 1.0));
-    cx = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), (c * 2.0));
-    cy = flighthq._internal._StaticIndex.readArray(_Runtime.field(mesh, 'vertices'), ((c * 2.0) + 1.0));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    ax = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, (a * 2.0));
+    ay = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, ((a * 2.0) + 1.0));
+    bx = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, (b * 2.0));
+    by = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, ((b * 2.0) + 1.0));
+    cx = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, (c * 2.0));
+    cy = flighthq._internal._StaticIndex.readArray((cast mesh : PathMesh).vertices, ((c * 2.0) + 1.0));
     if ((cast ((cast HxMath.abs((((bx - ax) * (cy - ay)) - ((by - ay) * (cx - ax)))) : Float) <= (cast TessellateStrokePath.TRIANGLE_EPSILON__tessellateStrokePath : Float)) : Bool)) { return; }
-    _Runtime.pushMany(_Runtime.field(mesh, 'indices'), cast ([a, b, c] : Array<Dynamic>));
+    _Runtime.pushMany((cast mesh : PathMesh).indices, cast ([a, b, c] : Array<Dynamic>));
   }
 
-  public static final TRIANGLE_EPSILON__tessellateStrokePath:Dynamic = 1e-10;
+  public static final TRIANGLE_EPSILON__tessellateStrokePath:Float = 1e-10;
 }

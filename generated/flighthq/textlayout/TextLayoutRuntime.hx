@@ -9,14 +9,14 @@ import flighthq.types.TextLayout.TextLayoutResult;
 
 class TextLayoutRuntime {
   public static function clearTextLayoutResult(runtime:TextLabelRuntime):Void {
-    _Runtime.setField(runtime, 'textLayout', null);
+    ((cast runtime : TextLabelRuntime).textLayout = null);
   }
 
   public static function getTextLayoutResult(runtime:TextLabelRuntime):TextLayoutResult {
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null) : Bool)) {
-      _Runtime.setField(runtime, 'textLayout', _Runtime.callValue(createTextLayoutResult, cast ([] : Array<Dynamic>)));
+    if ((cast _Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayout, null) : Bool)) {
+      ((cast runtime : TextLabelRuntime).textLayout = (cast createTextLayoutResult() : Null<TextLayoutResult>));
     }
-    return cast _Runtime.field(runtime, 'textLayout');
+    return cast (cast runtime : TextLabelRuntime).textLayout;
     return cast null;
   }
 }

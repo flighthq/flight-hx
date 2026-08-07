@@ -23,25 +23,25 @@ import flighthq.types._internal._NativeTextValues.NativeTextKind;
 
 class NativeText {
   public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
-    var native:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var native:flighthq.types.NativeText = cast _Runtime.UNDEFINED;
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    var runtime:NativeTextRuntime = cast _Runtime.UNDEFINED;
     native = (cast source : flighthq.types.NativeText);
-    data = _Runtime.field(native, 'data');
-    _Runtime.setField(out, 'x', 0.0);
-    _Runtime.setField(out, 'y', 0.0);
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool)) {
-      _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(data, 'height'));
+    data = (cast native : flighthq.types.NativeText).data;
+    ((cast out : Rectangle).x = 0.0);
+    ((cast out : Rectangle).y = 0.0);
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).autoSize, 'none') : Bool)) {
+      ((cast out : Rectangle).width = (cast data : NativeTextData).width);
+      ((cast out : Rectangle).height = (cast data : NativeTextData).height);
       return;
     }
-    runtime = _Runtime.callValue(getNativeTextRuntime, cast ([native] : Array<Dynamic>));
-    _Runtime.setField(out, 'width', ((cast ((cast _Runtime.field(runtime, 'measuredWidth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredWidth') : Dynamic) : (cast _Runtime.field(data, 'width') : Dynamic)));
-    _Runtime.setField(out, 'height', ((cast ((cast _Runtime.field(runtime, 'measuredHeight') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredHeight') : Dynamic) : (cast _Runtime.field(data, 'height') : Dynamic)));
+    runtime = (cast getNativeTextRuntime((cast native : flighthq.types.NativeText)) : NativeTextRuntime);
+    ((cast out : Rectangle).width = ((cast ((cast _Runtime.field(runtime, 'measuredWidth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredWidth') : Dynamic) : (cast (cast data : NativeTextData).width : Dynamic)));
+    ((cast out : Rectangle).height = ((cast ((cast _Runtime.field(runtime, 'measuredHeight') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredHeight') : Dynamic) : (cast (cast data : NativeTextData).height : Dynamic)));
   }
 
   public static function createNativeText(?obj:PartialNode<flighthq.types.NativeText>):flighthq.types.NativeText {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([NativeTextKind, obj, createNativeTextData, createNativeTextRuntime] : Array<Dynamic>)) : flighthq.types.NativeText);
+    return cast (cast (cast createNode2D((cast NativeTextKind : String), obj, createNativeTextData, function(__unused0:Dynamic):NativeTextRuntime return createNativeTextRuntime()) : flighthq.types.NativeText) : flighthq.types.NativeText);
     return cast null;
   }
 
@@ -53,95 +53,95 @@ class NativeText {
 
   @:noCompletion
   public static function createNativeTextRuntime():NativeTextRuntime {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createNode2DRuntime, cast ([NativeText.defaultMethods__nativeText] : Array<Dynamic>)) : NativeTextRuntime);
-    _Runtime.setField(out, 'element', null);
-    _Runtime.setField(out, 'measuredHeight', 0.0);
-    _Runtime.setField(out, 'measuredWidth', 0.0);
+    var out:NativeTextRuntime = cast _Runtime.UNDEFINED;
+    out = (cast (cast createNode2DRuntime((cast NativeText.defaultMethods__nativeText : Null<flighthq._internal._Any>)) : NativeTextRuntime) : NativeTextRuntime);
+    ((cast out : NativeTextRuntime).element = null);
+    ((cast out : NativeTextRuntime).measuredHeight = 0.0);
+    ((cast out : NativeTextRuntime).measuredWidth = 0.0);
     return cast out;
     return cast null;
   }
 
   public static function getNativeTextMeasuredHeight(source:flighthq.types.NativeText):Float {
-    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredHeight');
+    return cast (cast (cast (cast getNode2DRuntime(source) : NativeTextRuntime) : NativeTextRuntime) : NativeTextRuntime).measuredHeight;
     return cast null;
   }
 
   public static function getNativeTextMeasuredWidth(source:flighthq.types.NativeText):Float {
-    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredWidth');
+    return cast (cast (cast (cast getNode2DRuntime(source) : NativeTextRuntime) : NativeTextRuntime) : NativeTextRuntime).measuredWidth;
     return cast null;
   }
 
   @:noCompletion
   public static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : NativeTextRuntime) : NativeTextRuntime);
     return cast null;
   }
 
   public static function getNativeTextString(source:flighthq.types.NativeText):String {
-    return cast _Runtime.field(_Runtime.field(source, 'data'), 'text');
+    return cast (cast _Runtime.field(source, 'data') : NativeTextData).text;
     return cast null;
   }
 
   public static function getNativeTextStyle(source:flighthq.types.NativeText):NativeTextStyle {
-    return cast _Runtime.field(_Runtime.field(source, 'data'), 'style');
+    return cast (cast _Runtime.field(source, 'data') : NativeTextData).style;
     return cast null;
   }
 
   public static function patchNativeTextStyle(source:flighthq.types.NativeText, patch:Dynamic):Void {
-    _Runtime.setField(_Runtime.field(source, 'data'), 'style', _Runtime.mergeObjects([_Runtime.field(_Runtime.field(source, 'data'), 'style'), patch]));
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    ((cast (cast source : flighthq.types.NativeText).data : NativeTextData).style = _Runtime.mergeObjects([(cast (cast source : flighthq.types.NativeText).data : NativeTextData).style, patch]));
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static function setNativeTextAutoSize(source:flighthq.types.NativeText, value:TextAutoSize):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), value) : Bool)) { return; }
-    _Runtime.setField(data, 'autoSize', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    data = (cast source : flighthq.types.NativeText).data;
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).autoSize, value) : Bool)) { return; }
+    ((cast data : NativeTextData).autoSize = value);
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static function setNativeTextHeight(source:flighthq.types.NativeText, value:Float):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'height'), value) : Bool)) { return; }
-    _Runtime.setField(data, 'height', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    data = (cast source : flighthq.types.NativeText).data;
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).height, value) : Bool)) { return; }
+    ((cast data : NativeTextData).height = value);
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static function setNativeTextString(source:flighthq.types.NativeText, value:String):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'text'), value) : Bool)) { return; }
-    _Runtime.setField(data, 'text', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    data = (cast source : flighthq.types.NativeText).data;
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).text, value) : Bool)) { return; }
+    ((cast data : NativeTextData).text = value);
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static function setNativeTextStyle(source:flighthq.types.NativeText, value:NativeTextStyle):Void {
-    _Runtime.setField(_Runtime.field(source, 'data'), 'style', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    ((cast (cast source : flighthq.types.NativeText).data : NativeTextData).style = value);
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static function setNativeTextVerticalAlign(source:flighthq.types.NativeText, value:TextVerticalAlign):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'verticalAlign'), value) : Bool)) { return; }
-    _Runtime.setField(data, 'verticalAlign', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    data = (cast source : flighthq.types.NativeText).data;
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).verticalAlign, value) : Bool)) { return; }
+    ((cast data : NativeTextData).verticalAlign = value);
+    invalidateNodeLocalContent(source);
   }
 
   public static function setNativeTextWidth(source:flighthq.types.NativeText, value:Float):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'width'), value) : Bool)) { return; }
-    _Runtime.setField(data, 'width', value);
-    _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    var data:NativeTextData = cast _Runtime.UNDEFINED;
+    data = (cast source : flighthq.types.NativeText).data;
+    if ((cast _Runtime.strictEquals((cast data : NativeTextData).width, value) : Bool)) { return; }
+    ((cast data : NativeTextData).width = value);
+    invalidateNodeLocalContent(source);
+    invalidateNodeLocalBounds(source);
   }
 
   public static final defaultMethods__nativeText:Dynamic = { computeLocalBoundsRectangle: computeNativeTextLocalBoundsRectangle };

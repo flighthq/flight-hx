@@ -6,8 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.types.EmissiveModifier;
 import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
 import flighthq.types.EmissiveModifierOptions;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Sampler;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.EmissiveModifierKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
@@ -15,8 +24,8 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 class CreateEmissiveModifier {
   public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
     var modifier:EmissiveModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: EmissiveModifierKind, slot: ModifierSlotValue.Emissive, color: _Runtime.field(options, 'color'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0), facing: _Runtime.coalesce(_Runtime.field(options, 'facing'), function():Dynamic return cast EmissiveModifierFacingValue.Ignore), facingSoftness: _Runtime.coalesce(_Runtime.field(options, 'facingSoftness'), function():Dynamic return cast 0.0) };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'mask', _Runtime.field(options, 'mask')); }
+    modifier = { kind: EmissiveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive, color: _Runtime.field(options, 'color'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0), facing: _Runtime.coalesce(_Runtime.field(options, 'facing'), function():Dynamic return cast (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore), facingSoftness: _Runtime.coalesce(_Runtime.field(options, 'facingSoftness'), function():Dynamic return cast 0.0) };
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast modifier : EmissiveModifier).mask = _Runtime.field(options, 'mask')); }
     return cast modifier;
     return cast null;
   }

@@ -23,18 +23,32 @@ import flighthq.scene3dFormats.Md2Schema.MD2_VERSION;
 import flighthq.scene3dFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.scene3dFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.scene3dFormats.Shared.createExternalTextureRef;
+import flighthq.types.AnimationTrack;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialLike;
+import flighthq.types.MeshGeometry;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentAnimation;
 import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
+import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Types.Scene3DAnimationPathWeights;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
@@ -43,67 +57,67 @@ typedef Md2Frame__md2Parse = { var name:String; var normals:flighthq._internal._
 
 class Md2Parse {
   public static function createScene3DFromMd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(parseMd2, cast ([bytes, diagnostics] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast createScene3DFromDocument((cast (cast parseMd2((cast bytes : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument) : Scene3DDocument), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
     return cast null;
   }
 
   public static function parseMd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3DDocument {
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var magic:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var skinWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var skinHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var declaredFrameSize:Dynamic = cast _Runtime.UNDEFINED;
-    var numSkins:Dynamic = cast _Runtime.UNDEFINED;
-    var numVertices:Dynamic = cast _Runtime.UNDEFINED;
-    var numTexCoords:Dynamic = cast _Runtime.UNDEFINED;
-    var numTriangles:Dynamic = cast _Runtime.UNDEFINED;
-    var numFrames:Dynamic = cast _Runtime.UNDEFINED;
-    var offSkins:Dynamic = cast _Runtime.UNDEFINED;
-    var offTexCoords:Dynamic = cast _Runtime.UNDEFINED;
-    var offTriangles:Dynamic = cast _Runtime.UNDEFINED;
-    var offFrames:Dynamic = cast _Runtime.UNDEFINED;
-    var declaredEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var frameStride:Dynamic = cast _Runtime.UNDEFINED;
-    var skinsEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var texCoordsEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var trianglesEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var allFramesEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var uvScaleS:Dynamic = cast _Runtime.UNDEFINED;
-    var uvScaleT:Dynamic = cast _Runtime.UNDEFINED;
-    var texS:Dynamic = cast _Runtime.UNDEFINED;
-    var texT:Dynamic = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var magic:Float = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var skinWidth:Float = cast _Runtime.UNDEFINED;
+    var skinHeight:Float = cast _Runtime.UNDEFINED;
+    var declaredFrameSize:Float = cast _Runtime.UNDEFINED;
+    var numSkins:Float = cast _Runtime.UNDEFINED;
+    var numVertices:Float = cast _Runtime.UNDEFINED;
+    var numTexCoords:Float = cast _Runtime.UNDEFINED;
+    var numTriangles:Float = cast _Runtime.UNDEFINED;
+    var numFrames:Float = cast _Runtime.UNDEFINED;
+    var offSkins:Float = cast _Runtime.UNDEFINED;
+    var offTexCoords:Float = cast _Runtime.UNDEFINED;
+    var offTriangles:Float = cast _Runtime.UNDEFINED;
+    var offFrames:Float = cast _Runtime.UNDEFINED;
+    var declaredEnd:Float = cast _Runtime.UNDEFINED;
+    var frameStride:Float = cast _Runtime.UNDEFINED;
+    var skinsEnd:Float = cast _Runtime.UNDEFINED;
+    var texCoordsEnd:Float = cast _Runtime.UNDEFINED;
+    var trianglesEnd:Float = cast _Runtime.UNDEFINED;
+    var allFramesEnd:Float = cast _Runtime.UNDEFINED;
+    var uvScaleS:Float = cast _Runtime.UNDEFINED;
+    var uvScaleT:Float = cast _Runtime.UNDEFINED;
+    var texS:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var texT:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var frames:Array<Md2Frame__md2Parse> = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var dedup:Dynamic = cast _Runtime.UNDEFINED;
+    var base:Md2Frame__md2Parse = cast _Runtime.UNDEFINED;
+    var dedup:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     var interleavedVertices:Array<Float> = cast _Runtime.UNDEFINED;
     var sourceVertexIndices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    var outOfRangeVertexCorners:Dynamic = cast _Runtime.UNDEFINED;
-    var outOfRangeTexCoordCorners:Dynamic = cast _Runtime.UNDEFINED;
-    var document:Dynamic = cast _Runtime.UNDEFINED;
+    var outOfRangeVertexCorners:Float = cast _Runtime.UNDEFINED;
+    var outOfRangeTexCoordCorners:Float = cast _Runtime.UNDEFINED;
+    var document:Scene3DDocument = cast _Runtime.UNDEFINED;
     var meshMaterials:Array<Float> = cast _Runtime.UNDEFINED;
-    var emptySkinCount:Dynamic = cast _Runtime.UNDEFINED;
-    var firstEmptySkin:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var indexArray:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var morph:Dynamic = cast _Runtime.UNDEFINED;
+    var emptySkinCount:Float = cast _Runtime.UNDEFINED;
+    var firstEmptySkin:Float = cast _Runtime.UNDEFINED;
+    var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var indexArray:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
+    var morph:Null<MeshMorph> = cast _Runtime.UNDEFINED;
     var documentMesh:Scene3DDocumentMesh = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(bytes, 'length') : Float) < (cast MD2_HEADER_SIZE : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.header-too-short', 'parseMd2', { byteLength: _Runtime.field(bytes, 'length') }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.header-too-short' : String), (cast 'parseMd2' : String), (cast { byteLength: _Runtime.field(bytes, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
     magic = _Runtime.callProperty(view, 'getInt32', cast ([0.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(magic, MD2_MAGIC) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.bad-magic', 'parseMd2', { magic: _Runtime.numberToString(_Runtime.unsignedShiftRight(_Runtime.toInt32(magic), 0), 16.0) }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.bad-magic' : String), (cast 'parseMd2' : String), (cast { magic: _Runtime.numberToString(_Runtime.unsignedShiftRight(_Runtime.toInt32(magic), 0), 16.0) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     version = _Runtime.callProperty(view, 'getInt32', cast ([4.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(version, MD2_VERSION) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.unsupported-version', 'parseMd2', { version: version }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.unsupported-version' : String), (cast 'parseMd2' : String), (cast { version: version } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     skinWidth = _Runtime.callProperty(view, 'getInt32', cast ([8.0, true] : Array<Dynamic>));
     skinHeight = _Runtime.callProperty(view, 'getInt32', cast ([12.0, true] : Array<Dynamic>));
@@ -119,48 +133,48 @@ class Md2Parse {
     offFrames = _Runtime.callProperty(view, 'getInt32', cast ([56.0, true] : Array<Dynamic>));
     declaredEnd = _Runtime.callProperty(view, 'getInt32', cast ([64.0, true] : Array<Dynamic>));
     if ((cast ((cast numFrames : Float) < (cast 1.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.no-frames', 'parseMd2'] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.no-frames' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     if ((cast ((cast numTriangles : Float) < (cast 1.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.no-triangles', 'parseMd2'] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.no-triangles' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast numVertices : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast numTexCoords : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast numSkins : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offSkins : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offTexCoords : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offTriangles : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offFrames : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.negative-header-field', 'parseMd2', { byteLength: _Runtime.field(bytes, 'length') }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.negative-header-field' : String), (cast 'parseMd2' : String), (cast { byteLength: _Runtime.field(bytes, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     frameStride = (MD2_FRAME_HEADER_SIZE + (numVertices * MD2_COMPRESSED_VERTEX_SIZE));
     if ((cast ((cast ((cast declaredFrameSize : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(declaredFrameSize, frameStride) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.frame-size-mismatch', 'parseMd2', { actual: frameStride, expected: declaredFrameSize }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.frame-size-mismatch' : String), (cast 'parseMd2' : String), (cast { actual: frameStride, expected: declaredFrameSize } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     skinsEnd = (offSkins + (numSkins * MD2_SKIN_SIZE));
     texCoordsEnd = (offTexCoords + (numTexCoords * MD2_TEXCOORD_SIZE));
     trianglesEnd = (offTriangles + (numTriangles * MD2_TRIANGLE_SIZE));
     allFramesEnd = (offFrames + (numFrames * frameStride));
     if ((cast ((cast ((cast ((cast texCoordsEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool) || (cast ((cast trianglesEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) : Bool) || (cast ((cast allFramesEnd : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.truncated-data-region', 'parseMd2', { byteLength: _Runtime.field(bytes, 'length') }] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.truncated-data-region' : String), (cast 'parseMd2' : String), (cast { byteLength: _Runtime.field(bytes, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     if ((cast ((cast ((cast declaredEnd : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(declaredEnd, _Runtime.field(bytes, 'length')) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md2.file-size-mismatch', 'parseMd2', { actual: _Runtime.field(bytes, 'length'), expected: declaredEnd }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md2.file-size-mismatch' : String), (cast 'parseMd2' : String), (cast { actual: _Runtime.field(bytes, 'length'), expected: declaredEnd } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    _Runtime.callValue(Md2Parse.reportMd2SectionOverlap__md2Parse, cast ([diagnostics, cast ([{ end: skinsEnd, name: 0.0, start: offSkins }, { end: texCoordsEnd, name: 1.0, start: offTexCoords }, { end: trianglesEnd, name: 2.0, start: offTriangles }, { end: allFramesEnd, name: 3.0, start: offFrames }] : Array<Dynamic>)] : Array<Dynamic>));
+    Md2Parse.reportMd2SectionOverlap__md2Parse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast cast ([{ end: skinsEnd, name: 0.0, start: offSkins }, { end: texCoordsEnd, name: 1.0, start: offTexCoords }, { end: trianglesEnd, name: 2.0, start: offTriangles }, { end: allFramesEnd, name: 3.0, start: offFrames }] : Array<Dynamic>) : Array<{ var end:Float; var name:Float; var start:Float; }>));
     uvScaleS = ((cast ((cast skinWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / skinWidth) : Dynamic) : (cast 0.0 : Dynamic));
     uvScaleT = ((cast ((cast skinHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / skinHeight) : Dynamic) : (cast 0.0 : Dynamic));
     texS = new flighthq._internal._Float32Array(numTexCoords);
     texT = new flighthq._internal._Float32Array(numTexCoords);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast numTexCoords : Float)) : Bool)) {
-        var base:Dynamic = (offTexCoords + (i * MD2_TEXCOORD_SIZE));
+        var base:Float = (offTexCoords + (i * MD2_TEXCOORD_SIZE));
         flighthq._internal._StaticIndex.writeFloat32Array(texS, i, _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getInt16', cast ([base, true] : Array<Dynamic>)), uvScaleS));
         flighthq._internal._StaticIndex.writeFloat32Array(texT, i, _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getInt16', cast ([(base + 2.0), true] : Array<Dynamic>)), uvScaleT));
         i++;
       }
     }
-    frames = _Runtime.callValue(Md2Parse.readMd2Frames__md2Parse, cast ([bytes, view, offFrames, numFrames, numVertices, frameStride, diagnostics] : Array<Dynamic>));
+    frames = (cast Md2Parse.readMd2Frames__md2Parse((cast bytes : flighthq._internal._UInt8Array), (cast view : flighthq._internal._Any), (cast offFrames : Float), (cast numFrames : Float), (cast numVertices : Float), (cast frameStride : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Md2Frame__md2Parse>);
     base = flighthq._internal._StaticIndex.readArray(frames, 0.0);
     dedup = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     interleavedVertices = cast ([] : Array<Dynamic>);
@@ -169,14 +183,14 @@ class Md2Parse {
     outOfRangeVertexCorners = 0.0;
     outOfRangeTexCoordCorners = 0.0;
     {
-      var t:Dynamic = 0.0;
+      var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast numTriangles : Float)) : Bool)) {
-        var triBase:Dynamic = (offTriangles + (t * MD2_TRIANGLE_SIZE));
+        var triBase:Float = (offTriangles + (t * MD2_TRIANGLE_SIZE));
         {
-          var c:Dynamic = 0.0;
+          var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
-            var vertIdx:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([(triBase + (c * 2.0)), true] : Array<Dynamic>));
-            var texIdx:Dynamic = _Runtime.callProperty(view, 'getUint16', cast ([((triBase + 6.0) + (c * 2.0)), true] : Array<Dynamic>));
+            var vertIdx:Float = _Runtime.callProperty(view, 'getUint16', cast ([(triBase + (c * 2.0)), true] : Array<Dynamic>));
+            var texIdx:Float = _Runtime.callProperty(view, 'getUint16', cast ([((triBase + 6.0) + (c * 2.0)), true] : Array<Dynamic>));
             if ((cast ((cast vertIdx : Float) >= (cast numVertices : Float)) : Bool)) {
               outOfRangeVertexCorners++;
               c++;
@@ -187,17 +201,17 @@ class Md2Parse {
               c++;
               continue;
             }
-            var key:Dynamic = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
-            var idx:Dynamic = ((cast dedup : flighthq._internal._Map).get(key));
+            var key:String = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
+            var idx:Null<Float> = ((cast dedup : flighthq._internal._Map<String, Float>).get(key));
             if ((cast _Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               (idx = cast (_Runtime.divideNumbers(_Runtime.field(interleavedVertices, 'length'), CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
-              var p:Dynamic = (vertIdx * 3.0);
-              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (p + 2.0))] : Array<Dynamic>));
-              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), p), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (p + 2.0))] : Array<Dynamic>));
+              var p:Float = (vertIdx * 3.0);
+              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, p), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, (p + 2.0))] : Array<Dynamic>));
+              _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, p), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, (p + 1.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, (p + 2.0))] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([flighthq._internal._StaticIndex.readFloat32Array(texS, texIdx), flighthq._internal._StaticIndex.readFloat32Array(texT, texIdx)] : Array<Dynamic>));
               _Runtime.callProperty(sourceVertexIndices, 'push', cast ([vertIdx] : Array<Dynamic>));
-              ((cast dedup : flighthq._internal._Map).set(key, idx));
+              ((cast dedup : flighthq._internal._Map<String, Float>).set(key, idx));
             }
             _Runtime.callProperty(indices, 'push', cast ([idx] : Array<Dynamic>));
             c++;
@@ -207,97 +221,97 @@ class Md2Parse {
       }
     }
     if ((cast ((cast outOfRangeVertexCorners : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'md2.triangle-vertex-index-out-of-range', 'parseMd2', { corners: outOfRangeVertexCorners }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md2.triangle-vertex-index-out-of-range' : String), (cast 'parseMd2' : String), (cast { corners: outOfRangeVertexCorners } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast ((cast outOfRangeTexCoordCorners : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'md2.triangle-texcoord-index-out-of-range', 'parseMd2', { corners: outOfRangeTexCoordCorners }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md2.triangle-texcoord-index-out-of-range' : String), (cast 'parseMd2' : String), (cast { corners: outOfRangeTexCoordCorners } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(indices, 'length'), 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.no-valid-triangles', 'parseMd2'] : Array<Dynamic>));
-      return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md2.no-valid-triangles' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
-    document = _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
+    document = (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     meshMaterials = cast ([] : Array<Dynamic>);
     emptySkinCount = 0.0;
     firstEmptySkin = -1.0;
     {
-      var s:Dynamic = 0.0;
+      var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast numSkins : Float)) : Bool)) {
-        var skinOffset:Dynamic = (offSkins + (s * MD2_SKIN_SIZE));
+        var skinOffset:Float = (offSkins + (s * MD2_SKIN_SIZE));
         if ((cast ((cast (skinOffset + MD2_SKIN_SIZE) : Float) > (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'md2.skin-record-truncated', 'parseMd2', { skin: s }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md2.skin-record-truncated' : String), (cast 'parseMd2' : String), (cast { skin: s } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           break;
         }
-        var skinName:Dynamic = _Runtime.callValue(Md2Parse.readMd2SkinName__md2Parse, cast ([bytes, skinOffset] : Array<Dynamic>));
+        var skinName:String = (cast Md2Parse.readMd2SkinName__md2Parse((cast bytes : flighthq._internal._UInt8Array), (cast skinOffset : Float)) : String);
         if ((cast _Runtime.strictEquals(_Runtime.field(skinName, 'length'), 0.0) : Bool)) {
           if ((cast _Runtime.strictEquals(emptySkinCount, 0.0) : Bool)) { (firstEmptySkin = cast (s : Dynamic)); }
           emptySkinCount++;
           s++;
           continue;
         }
-        var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([skinName, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
-        _Runtime.setField(material, 'name', skinName);
-        var index:Dynamic = _Runtime.field(_Runtime.field(document, 'materials'), 'length');
-        _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast material : Dynamic) : MaterialLike)] : Array<Dynamic>));
+        var material:Material = (cast (cast createBlinnPhongMaterial((cast { diffuseMap: (cast createExternalTextureRef((cast skinName : String), (cast null : Null<String>), (cast document : Scene3DDocument).resources) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) } : Null<flighthq._internal._Any>)) : flighthq._internal._Any) : Material);
+        ((cast material : Material).name = skinName);
+        var index:Float = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
+        _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(_Runtime.field(meshMaterials, 'length'), 0.0) : Bool)) { _Runtime.callProperty(meshMaterials, 'push', cast ([index] : Array<Dynamic>)); }
         s++;
       }
     }
     if ((cast ((cast emptySkinCount : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'md2.skin-empty-path', 'parseMd2', { count: emptySkinCount, firstSkin: firstEmptySkin }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md2.skin-empty-path' : String), (cast 'parseMd2' : String), (cast { count: emptySkinCount, firstSkin: firstEmptySkin } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     vertices = new flighthq._internal._Float32Array(interleavedVertices);
     indexArray = new flighthq._internal._UInt32Array(indices);
-    geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
-    morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
+    geometry = (cast createMeshGeometry({ indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }) : MeshGeometry);
+    morph = (cast Md2Parse.buildMd2Morph__md2Parse(frames, (cast sourceVertexIndices : Array<Float>)) : Null<MeshMorph>);
     documentMesh = { geometry: geometry, materials: meshMaterials };
-    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { _Runtime.setField(documentMesh, 'morph', morph); }
-    _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([documentMesh] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([0.0] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(document, 'animations'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(Md2Parse.buildMd2MorphAnimations__md2Parse, cast ([frames, morph] : Array<Dynamic>)))]));
+    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).morph = morph); }
+    _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
+    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
+    _Runtime.callProperty((cast document : Scene3DDocument).animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Md2Parse.buildMd2MorphAnimations__md2Parse(frames, (cast morph : Null<MeshMorph>)) : Array<Scene3DDocumentAnimation>))]));
     return cast document;
     return cast null;
   }
 
   public static function readMd2Frames__md2Parse(bytes:flighthq._internal._UInt8Array, view:Dynamic, offFrames:Float, numFrames:Float, numVertices:Float, frameStride:Float, ?diagnostics:Array<ImportDiagnostic>):Array<Md2Frame__md2Parse> {
     var frames:Array<Md2Frame__md2Parse> = cast _Runtime.UNDEFINED;
-    var outOfRangeNormals:Dynamic = cast _Runtime.UNDEFINED;
+    var outOfRangeNormals:Null<flighthq._internal._Set<Float>> = cast _Runtime.UNDEFINED;
     frames = cast ([] : Array<Dynamic>);
     outOfRangeNormals = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), function():Dynamic return cast null);
     {
-      var f:Dynamic = 0.0;
+      var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast numFrames : Float)) : Bool)) {
-        var frameBase:Dynamic = (offFrames + (f * frameStride));
-        var scaleX:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([frameBase, true] : Array<Dynamic>));
-        var scaleY:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 4.0), true] : Array<Dynamic>));
-        var scaleZ:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 8.0), true] : Array<Dynamic>));
-        var translateX:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 12.0), true] : Array<Dynamic>));
-        var translateY:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 16.0), true] : Array<Dynamic>));
-        var translateZ:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 20.0), true] : Array<Dynamic>));
-        var name:Dynamic = _Runtime.callValue(Md2Parse.readMd2FrameName__md2Parse, cast ([bytes, (frameBase + 24.0)] : Array<Dynamic>));
-        var verticesBase:Dynamic = (frameBase + MD2_FRAME_HEADER_SIZE);
-        var positions:Dynamic = new flighthq._internal._Float32Array((numVertices * 3.0));
-        var normals:Dynamic = new flighthq._internal._Float32Array((numVertices * 3.0));
+        var frameBase:Float = (offFrames + (f * frameStride));
+        var scaleX:Float = _Runtime.callProperty(view, 'getFloat32', cast ([frameBase, true] : Array<Dynamic>));
+        var scaleY:Float = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 4.0), true] : Array<Dynamic>));
+        var scaleZ:Float = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 8.0), true] : Array<Dynamic>));
+        var translateX:Float = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 12.0), true] : Array<Dynamic>));
+        var translateY:Float = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 16.0), true] : Array<Dynamic>));
+        var translateZ:Float = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 20.0), true] : Array<Dynamic>));
+        var name:String = (cast Md2Parse.readMd2FrameName__md2Parse((cast bytes : flighthq._internal._UInt8Array), (cast (frameBase + 24.0) : Float)) : String);
+        var verticesBase:Float = (frameBase + MD2_FRAME_HEADER_SIZE);
+        var positions:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((numVertices * 3.0));
+        var normals:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((numVertices * 3.0));
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast numVertices : Float)) : Bool)) {
-            var b:Dynamic = (verticesBase + (i * MD2_COMPRESSED_VERTEX_SIZE));
-            var px:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, b), scaleX) + translateX);
-            var py:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 1.0)), scaleY) + translateY);
-            var pz:Dynamic = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 2.0)), scaleZ) + translateZ);
-            var p:Dynamic = (i * 3.0);
+            var b:Float = (verticesBase + (i * MD2_COMPRESSED_VERTEX_SIZE));
+            var px:Float = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, b), scaleX) + translateX);
+            var py:Float = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 1.0)), scaleY) + translateY);
+            var pz:Float = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 2.0)), scaleZ) + translateZ);
+            var p:Float = (i * 3.0);
             flighthq._internal._StaticIndex.writeFloat32Array(positions, p, px);
             flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), pz);
             flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 2.0), -py);
-            var ni:Dynamic = flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 3.0));
+            var ni:Float = flighthq._internal._StaticIndex.readUint8Array(bytes, (b + 3.0));
             if ((cast ((cast ni : Float) < (cast MD2_ANORMS.length : Float)) : Bool)) {
-              var n:Dynamic = flighthq._internal._StaticIndex.readArray(MD2_ANORMS, ni);
+              var n:Array<Float> = flighthq._internal._StaticIndex.readArray(MD2_ANORMS, ni);
               flighthq._internal._StaticIndex.writeFloat32Array(normals, p, flighthq._internal._StaticIndex.readArray(n, 0.0));
               flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readArray(n, 2.0));
               flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), -flighthq._internal._StaticIndex.readArray(n, 1.0));
             } else { if ((cast !_Runtime.strictEquals(outOfRangeNormals, null) : Bool)) {
-              ((cast outOfRangeNormals : flighthq._internal._Set).add(ni));
+              ((cast outOfRangeNormals : flighthq._internal._Set<Float>).add(ni));
             } }
             i++;
           }
@@ -306,38 +320,38 @@ class Md2Parse {
         f++;
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(outOfRangeNormals, null) : Bool) && (cast ((cast (cast outOfRangeNormals : flighthq._internal._Set).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md2.normal-index-out-of-range', 'readMd2Frames', { distinctIndices: (cast outOfRangeNormals : flighthq._internal._Set).size, firstIndex: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(outOfRangeNormals)])) }] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(outOfRangeNormals, null) : Bool) && (cast ((cast (cast outOfRangeNormals : flighthq._internal._Set<Float>).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md2.normal-index-out-of-range' : String), (cast 'readMd2Frames' : String), (cast { distinctIndices: (cast outOfRangeNormals : flighthq._internal._Set<Float>).size, firstIndex: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(outOfRangeNormals)])) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast frames;
     return cast null;
   }
 
   public static function buildMd2Morph__md2Parse(frames:Array<Md2Frame__md2Parse>, sourceVertexIndices:Array<Float>):Null<MeshMorph> {
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
+    var base:Md2Frame__md2Parse = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(frames, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
     base = flighthq._internal._StaticIndex.readArray(frames, 0.0);
     vertexCount = _Runtime.field(sourceVertexIndices, 'length');
     targets = cast ([] : Array<Dynamic>);
     {
-      var f:Dynamic = 1.0;
+      var f:Float = 1.0;
       while ((cast ((cast f : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-        var frame:Dynamic = flighthq._internal._StaticIndex.readArray(frames, f);
-        var positionDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
-        var normalDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
+        var frame:Md2Frame__md2Parse = flighthq._internal._StaticIndex.readArray(frames, f);
+        var positionDeltas:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((vertexCount * 3.0));
+        var normalDeltas:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((vertexCount * 3.0));
         {
-          var v:Dynamic = 0.0;
+          var v:Float = 0.0;
           while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-            var src:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(sourceVertexIndices, v), 3.0);
-            var dst:Dynamic = (v * 3.0);
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), src), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), src)));
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 1.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'positions'), (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'positions'), (src + 2.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), src), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), src)));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 1.0))));
-            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(frame, 'normals'), (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(base, 'normals'), (src + 2.0))));
+            var src:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(sourceVertexIndices, v), 3.0);
+            var dst:Float = (v * 3.0);
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).positions, src), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).positions, (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(positionDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).positions, (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).positions, (src + 2.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, dst, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).normals, src), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, src)));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).normals, (src + 1.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, (src + 1.0))));
+            flighthq._internal._StaticIndex.writeFloat32Array(normalDeltas, (dst + 2.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast frame : Md2Frame__md2Parse).normals, (src + 2.0)), flighthq._internal._StaticIndex.readFloat32Array((cast base : Md2Frame__md2Parse).normals, (src + 2.0))));
             v++;
           }
         }
@@ -350,22 +364,22 @@ class Md2Parse {
   }
 
   public static function buildMd2MorphAnimations__md2Parse(frames:Array<Md2Frame__md2Parse>, morph:Null<MeshMorph>):Array<Scene3DDocumentAnimation> {
-    var targetCount:Dynamic = cast _Runtime.UNDEFINED;
+    var targetCount:Float = cast _Runtime.UNDEFINED;
     var animations:Array<Scene3DDocumentAnimation> = cast _Runtime.UNDEFINED;
-    var usedNames:Dynamic = cast _Runtime.UNDEFINED;
-    var runStart:Dynamic = cast _Runtime.UNDEFINED;
+    var usedNames:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var runStart:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(morph, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    targetCount = _Runtime.field(_Runtime.field(morph, 'targets'), 'length');
+    targetCount = _Runtime.field((cast morph : MeshMorph).targets, 'length');
     if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     animations = cast ([] : Array<Dynamic>);
     usedNames = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     runStart = 0.0;
     {
-      var k:Dynamic = 1.0;
+      var k:Float = 1.0;
       while ((cast ((cast k : Float) <= (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-        var runAction:Dynamic = _Runtime.callValue(Md2Parse.md2FrameActionName__md2Parse, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, runStart), 'name')] : Array<Dynamic>));
-        if ((cast ((cast ((cast k : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(Md2Parse.md2FrameActionName__md2Parse, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, k), 'name')] : Array<Dynamic>)), runAction) : Bool)) : Bool)) { k++; continue; }
-        _Runtime.callProperty(animations, 'push', cast ([_Runtime.callValue(Md2Parse.buildMd2ActionClip__md2Parse, cast ([runAction, runStart, (k - 1.0), targetCount, usedNames] : Array<Dynamic>))] : Array<Dynamic>));
+        var runAction:String = (cast Md2Parse.md2FrameActionName__md2Parse((cast (cast flighthq._internal._StaticIndex.readArray(frames, runStart) : Md2Frame__md2Parse).name : String)) : String);
+        if ((cast ((cast ((cast k : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals((cast Md2Parse.md2FrameActionName__md2Parse((cast (cast flighthq._internal._StaticIndex.readArray(frames, k) : Md2Frame__md2Parse).name : String)) : String), runAction) : Bool)) : Bool)) { k++; continue; }
+        _Runtime.callProperty(animations, 'push', cast ([(cast Md2Parse.buildMd2ActionClip__md2Parse((cast runAction : String), (cast runStart : Float), (cast (k - 1.0) : Float), (cast targetCount : Float), (cast usedNames : flighthq._internal._Set<String>)) : Scene3DDocumentAnimation)] : Array<Dynamic>));
         (runStart = cast (k : Dynamic));
         k++;
       }
@@ -374,25 +388,25 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function buildMd2ActionClip__md2Parse(action:String, startFrame:Float, endFrame:Float, targetCount:Float, usedNames:Dynamic):Scene3DDocumentAnimation {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var times:Dynamic = cast _Runtime.UNDEFINED;
-    var values:Dynamic = cast _Runtime.UNDEFINED;
-    var track:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildMd2ActionClip__md2Parse(action:String, startFrame:Float, endFrame:Float, targetCount:Float, usedNames:flighthq._internal._Set<String>):Scene3DDocumentAnimation {
+    var count:Float = cast _Runtime.UNDEFINED;
+    var times:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var values:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var track:AnimationTrack = cast _Runtime.UNDEFINED;
     count = ((endFrame - startFrame) + 1.0);
     times = new flighthq._internal._Float32Array(count);
     values = new flighthq._internal._Float32Array((count * targetCount));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var frame:Dynamic = (startFrame + i);
+        var frame:Float = (startFrame + i);
         flighthq._internal._StaticIndex.writeFloat32Array(times, i, (i / MD2_FRAME_FPS));
         if ((cast ((cast frame : Float) >= (cast 1.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(values, ((i * targetCount) + (frame - 1.0)), 1.0); }
         i++;
       }
     }
-    track = _Runtime.callValue(createAnimationTrack, cast ([{ components: targetCount, interpolation: 'Linear', times: times, values: values }] : Array<Dynamic>));
-    return cast { channels: cast ([{ node: 0.0, path: Scene3DAnimationPathWeights, track: track }] : Array<Dynamic>), duration: flighthq._internal._StaticIndex.readFloat32Array(times, (count - 1.0)), name: _Runtime.callValue(Md2Parse.uniqueMd2ClipName__md2Parse, cast ([action, usedNames] : Array<Dynamic>)) };
+    track = (cast createAnimationTrack({ components: targetCount, interpolation: 'Linear', times: times, values: values }) : AnimationTrack);
+    return cast { channels: cast ([{ node: 0.0, path: Scene3DAnimationPathWeights, track: track }] : Array<Dynamic>), duration: flighthq._internal._StaticIndex.readFloat32Array(times, (count - 1.0)), name: (cast Md2Parse.uniqueMd2ClipName__md2Parse((cast action : String), (cast usedNames : flighthq._internal._Set<String>)) : Null<String>) };
     return cast null;
   }
 
@@ -401,19 +415,19 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function uniqueMd2ClipName__md2Parse(action:String, usedNames:Dynamic):String {
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
+  public static function uniqueMd2ClipName__md2Parse(action:String, usedNames:flighthq._internal._Set<String>):String {
+    var base:String = cast _Runtime.UNDEFINED;
+    var name:String = cast _Runtime.UNDEFINED;
     base = ((cast ((cast _Runtime.field(action, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast action : Dynamic) : (cast 'default' : Dynamic));
     name = base;
     {
-      var n:Dynamic = 2.0;
-      while ((cast ((cast usedNames : flighthq._internal._Set).has(name)) : Bool)) {
+      var n:Float = 2.0;
+      while ((cast ((cast usedNames : flighthq._internal._Set<String>).has(name)) : Bool)) {
         (name = cast ('' + Std.string(base) + '.' + Std.string(n) + '' : Dynamic));
         n++;
       }
     }
-    ((cast usedNames : flighthq._internal._Set).add(name));
+    ((cast usedNames : flighthq._internal._Set<String>).add(name));
     return cast name;
     return cast null;
   }
@@ -424,15 +438,15 @@ class Md2Parse {
   }
 
   public static function readMd2FrameName__md2Parse(bytes:flighthq._internal._UInt8Array, offset:Float):String {
-    var limit:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
+    var limit:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var name:String = cast _Runtime.UNDEFINED;
     limit = (offset + MD2_FRAME_NAME_SIZE);
     end = offset;
     while ((cast ((cast ((cast end : Float) < (cast limit : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, end), 0.0) : Bool)) : Bool)) { end++; }
     name = '';
     {
-      var i:Dynamic = offset;
+      var i:Float = offset;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
         (name = cast ((name + _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
@@ -443,15 +457,15 @@ class Md2Parse {
   }
 
   public static function readMd2SkinName__md2Parse(bytes:flighthq._internal._UInt8Array, offset:Float):String {
-    var limit:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
+    var limit:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var name:String = cast _Runtime.UNDEFINED;
     limit = (offset + MD2_SKIN_SIZE);
     end = offset;
     while ((cast ((cast ((cast end : Float) < (cast limit : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, end), 0.0) : Bool)) : Bool)) { end++; }
     name = '';
     {
-      var i:Dynamic = offset;
+      var i:Float = offset;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
         (name = cast ((name + _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;
@@ -463,17 +477,17 @@ class Md2Parse {
 
   public static function reportMd2SectionOverlap__md2Parse(diagnostics:Null<Array<ImportDiagnostic>>, sections:Array<{ var end:Float; var name:Float; var start:Float; }>):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(sections, 'length') : Float)) : Bool)) {
-        var first:Dynamic = flighthq._internal._StaticIndex.readArray(sections, i);
-        if ((cast ((cast _Runtime.field(first, 'end') : Float) <= (cast _Runtime.field(first, 'start') : Float)) : Bool)) { i++; continue; }
+        var first:{ var end:Float; var name:Float; var start:Float; } = flighthq._internal._StaticIndex.readArray(sections, i);
+        if ((cast ((cast (cast first : { var end:Float; var name:Float; var start:Float; }).end : Float) <= (cast (cast first : { var end:Float; var name:Float; var start:Float; }).start : Float)) : Bool)) { i++; continue; }
         {
-          var j:Dynamic = (i + 1.0);
+          var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast _Runtime.field(sections, 'length') : Float)) : Bool)) {
-            var second:Dynamic = flighthq._internal._StaticIndex.readArray(sections, j);
-            if ((cast ((cast _Runtime.field(second, 'end') : Float) <= (cast _Runtime.field(second, 'start') : Float)) : Bool)) { j++; continue; }
-            if ((cast ((cast ((cast _Runtime.field(first, 'start') : Float) < (cast _Runtime.field(second, 'end') : Float)) : Bool) && (cast ((cast _Runtime.field(second, 'start') : Float) < (cast _Runtime.field(first, 'end') : Float)) : Bool)) : Bool)) {
-              _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md2.section-overlap', 'parseMd2', { first: _Runtime.field(first, 'name'), second: _Runtime.field(second, 'name') }] : Array<Dynamic>));
+            var second:{ var end:Float; var name:Float; var start:Float; } = flighthq._internal._StaticIndex.readArray(sections, j);
+            if ((cast ((cast (cast second : { var end:Float; var name:Float; var start:Float; }).end : Float) <= (cast (cast second : { var end:Float; var name:Float; var start:Float; }).start : Float)) : Bool)) { j++; continue; }
+            if ((cast ((cast ((cast (cast first : { var end:Float; var name:Float; var start:Float; }).start : Float) < (cast (cast second : { var end:Float; var name:Float; var start:Float; }).end : Float)) : Bool) && (cast ((cast (cast second : { var end:Float; var name:Float; var start:Float; }).start : Float) < (cast (cast first : { var end:Float; var name:Float; var start:Float; }).end : Float)) : Bool)) : Bool)) {
+              reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md2.section-overlap' : String), (cast 'parseMd2' : String), (cast { first: (cast first : { var end:Float; var name:Float; var start:Float; }).name, second: (cast second : { var end:Float; var name:Float; var start:Float; }).name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
               return;
             }
             j++;

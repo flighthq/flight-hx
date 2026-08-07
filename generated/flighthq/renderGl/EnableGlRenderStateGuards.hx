@@ -7,41 +7,45 @@ import flighthq.log.Log.logOnce;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.Node.NodeAny;
+import flighthq.types.RenderCache;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
 
 class EnableGlRenderStateGuards {
   @:noCompletion
   public static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderRootGuard'), EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
+    return cast _Runtime.strictEquals((cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderRootGuard, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
     return cast null;
   }
 
   public static function enableGlRenderStateGuards(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderRootGuard', EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
-    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'bindingCacheGuard', EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards);
+    ((cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderRootGuard = EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
+    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).bindingCacheGuard = EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards);
   }
 
   public static function warnOnForeignGlBinding__enableGlRenderStateGuards(state:GlRenderState, expectedProgram:flighthq._internal.dom.WebGLProgram):Void {
-    var actual:Dynamic = cast _Runtime.UNDEFINED;
-    actual = (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(state, 'gl'), 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>);
+    var actual:Null<flighthq._internal.dom.WebGLProgram> = cast _Runtime.UNDEFINED;
+    actual = (cast flighthq._internal.backend.WebGl2Backend.getParameter((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>);
     if ((cast _Runtime.strictEquals(actual, expectedProgram) : Bool)) { return; }
-    _Runtime.callValue(logOnce, cast (['render-gl:foreign-gl-binding', LogLevel.Warn, { message: (('useGlProgram: the GL program actually bound is not the one render-gl cached, so a guest renderer ' + 'wrote GL state without restoring it. Call invalidateGlRenderStateCache(state) before returning ') + 'control to render-gl, or the next draw skips a bind it needs and GL rejects a later uniform.'), state: state }, 'render-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'render-gl:foreign-gl-binding' : String), (cast LogLevel.Warn : LogLevel), { message: (('useGlProgram: the GL program actually bound is not the one render-gl cached, so a guest renderer ' + 'wrote GL state without restoring it. Call invalidateGlRenderStateCache(state) before returning ') + 'control to render-gl, or the next draw skips a bind it needs and GL rejects a later uniform.'), state: state }, (cast 'render-gl' : Null<String>)) : Bool);
   }
 
   public static function warnOnSecondRenderRoot__enableGlRenderStateGuards(state:RenderState, root:Renderable):Void {
-    var glState:Dynamic = cast _Runtime.UNDEFINED;
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
+    var glState:GlRenderState = cast _Runtime.UNDEFINED;
+    var previous:Null<flighthq._internal._Union2<NodeAny, RenderCache>> = cast _Runtime.UNDEFINED;
     glState = (cast state : GlRenderState);
-    previous = ((cast EnableGlRenderStateGuards._firstRoots__enableGlRenderStateGuards : flighthq._internal._WeakMap).get(glState));
+    previous = ((cast EnableGlRenderStateGuards._firstRoots__enableGlRenderStateGuards : flighthq._internal._WeakMap<GlRenderState, Renderable>).get(glState));
     if ((cast _Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast EnableGlRenderStateGuards._firstRoots__enableGlRenderStateGuards : flighthq._internal._WeakMap).set(glState, root));
+      ((cast EnableGlRenderStateGuards._firstRoots__enableGlRenderStateGuards : flighthq._internal._WeakMap<GlRenderState, Renderable>).set(glState, root));
       return;
     }
     if ((cast _Runtime.strictEquals(previous, root) : Bool)) { return; }
-    _Runtime.callValue(logOnce, cast (['render-gl:multiple-roots-one-state', LogLevel.Warn, { firstRoot: previous, message: 'prepareScene2DRender: one GlRenderState was used for multiple roots — derive a dedicated pipeline with createGlOffscreenRenderState(screenState)', root: root, state: state }, 'render-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'render-gl:multiple-roots-one-state' : String), (cast LogLevel.Warn : LogLevel), { firstRoot: previous, message: 'prepareScene2DRender: one GlRenderState was used for multiple roots — derive a dedicated pipeline with createGlOffscreenRenderState(screenState)', root: root, state: state }, (cast 'render-gl' : Null<String>)) : Bool);
   }
 
-  public static final _firstRoots__enableGlRenderStateGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _firstRoots__enableGlRenderStateGuards:flighthq._internal._WeakMap<GlRenderState, Renderable> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

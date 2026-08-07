@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef GlyphOutlineMetrics = { var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; };
 
-typedef GlyphOutlineSource = { var getGlyphOutline:Dynamic; var getGlyphOutlineAdvance:Dynamic; var getGlyphOutlineIndexForCodePoint:Dynamic; var getGlyphOutlineMetrics:Dynamic; };
+typedef GlyphOutlineSource = { var getGlyphOutline:Path->Float->Bool; var getGlyphOutlineAdvance:Float->Float; var getGlyphOutlineIndexForCodePoint:Float->Float; var getGlyphOutlineMetrics:Void->GlyphOutlineMetrics; };

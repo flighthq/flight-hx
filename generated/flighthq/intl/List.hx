@@ -9,10 +9,10 @@ import flighthq.types.LocaleInput;
 
 class List {
   public static function formatList(items:Array<String>, locale:LocaleInput, ?options:Dynamic):String {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var formatter:Dynamic = cast _Runtime.UNDEFINED;
-    key = _Runtime.callValue(getCacheKey, cast (['list', locale, options] : Array<Dynamic>));
-    formatter = _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'ListFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    var key:String = cast _Runtime.UNDEFINED;
+    var formatter:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    key = (cast getCacheKey((cast 'list' : String), (cast locale : LocaleInput), (cast options : Null<flighthq._internal._Object>)) : String);
+    formatter = getCached((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'ListFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]) : Void->flighthq._internal._Any));
     return cast _Runtime.callProperty(formatter, 'format', cast ([(cast items : Array<String>)] : Array<Dynamic>));
     return cast null;
   }

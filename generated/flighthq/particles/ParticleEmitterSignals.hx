@@ -5,25 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.ParticleEmitterSignals;
+import flighthq.types.Signal;
 
 class ParticleEmitterSignals {
   @:noCompletion
   public static function createParticleEmitterSignals():flighthq.types.ParticleEmitterSignals {
-    return cast { onEmitterComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleDeath: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleSpawn: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onEmitterComplete: (cast createSignal() : Signal<Void->Void>), onParticleDeath: (cast createSignal() : Signal<Float->Float->Float->Void>), onParticleSpawn: (cast createSignal() : Signal<Float->Float->Float->Float->Float->Float->Void>) };
     return cast null;
   }
 
-  public static function enableParticleEmitterSignals(state:Dynamic):flighthq.types.ParticleEmitterSignals {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    s = (cast state : Dynamic);
-    return cast _Runtime.setIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals, (_Runtime.getIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals) ?? _Runtime.callValue(createParticleEmitterSignals, cast ([] : Array<Dynamic>))));
+  public static function enableParticleEmitterSignals(state:flighthq._internal._Object):flighthq.types.ParticleEmitterSignals {
+    var s:flighthq._internal._Record<flighthq._internal._Symbol, Null<flighthq.types.ParticleEmitterSignals>> = cast _Runtime.UNDEFINED;
+    s = (cast state : flighthq._internal._Record<flighthq._internal._Symbol, Null<flighthq.types.ParticleEmitterSignals>>);
+    return cast _Runtime.setIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals, (_Runtime.getIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals) ?? (cast createParticleEmitterSignals() : Null<flighthq.types.ParticleEmitterSignals>)));
     return cast null;
   }
 
-  public static function getParticleEmitterSignals(state:Dynamic):Null<flighthq.types.ParticleEmitterSignals> {
-    return cast _Runtime.coalesce(_Runtime.getIndex((cast state : Dynamic), ParticleEmitterSignals.signalsSlot__particleEmitterSignals), function():Dynamic return cast null);
+  public static function getParticleEmitterSignals(state:flighthq._internal._Object):Null<flighthq.types.ParticleEmitterSignals> {
+    return cast _Runtime.coalesce(_Runtime.getIndex((cast state : flighthq._internal._Record<flighthq._internal._Symbol, Null<flighthq.types.ParticleEmitterSignals>>), ParticleEmitterSignals.signalsSlot__particleEmitterSignals), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static final signalsSlot__particleEmitterSignals:Dynamic = _Runtime.symbol('particleEmitterSignals');
+  public static final signalsSlot__particleEmitterSignals:flighthq._internal._Symbol = _Runtime.symbol('particleEmitterSignals');
 }

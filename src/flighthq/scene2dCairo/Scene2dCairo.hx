@@ -84,9 +84,9 @@ class Scene2dCairo {
   public static inline function releaseCairoRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, renderTexture:RenderTexture):Void { flighthq.scene2dCanvas.Scene2dCanvas.releaseCanvasRenderTexture(state, pool, renderTexture); }
   public static inline function renderCairoBackground(state:CanvasRenderState):Void { flighthq.scene2dCanvas.Scene2dCanvas.renderCanvasBackground(state); }
   public static inline function renderCairoScene2D(state:CanvasRenderState, source:Node2D):Void { flighthq.scene2dCanvas.Scene2dCanvas.renderCanvasScene2D(state, source); }
-  public static inline function renderIntoCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:Dynamic):Void { flighthq.scene2dCanvas.Scene2dCanvas.renderIntoCanvasRenderTexture(state, renderTexture, callback); }
+  public static inline function renderIntoCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void { flighthq.scene2dCanvas.Scene2dCanvas.renderIntoCanvasRenderTexture(state, renderTexture, callback); }
   public static inline function setCairoRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void { flighthq.scene2dCanvas.Scene2dCanvas.setCanvasRenderTransform2D(state, transform); }
-  public static inline function withCairoRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic { return flighthq.scene2dCanvas.Scene2dCanvas.withCanvasRenderTextures(state, pool, descriptors, callback); }
+  public static inline function withCairoRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T { return flighthq.scene2dCanvas.Scene2dCanvas.withCanvasRenderTextures(state, pool, descriptors, callback); }
   public static var defaultCairoBeginFill(get, never):CanvasShapeCommand<String>;
   static inline function get_defaultCairoBeginFill():CanvasShapeCommand<String> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasBeginFill;
   public static var defaultCairoBeginGradientFill(get, never):CanvasShapeCommand<String>;
@@ -127,16 +127,16 @@ class Scene2dCairo {
   static inline function get_defaultCairoRichTextRenderer():Scene2DRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasRichTextRenderer;
   public static var defaultCairoScale9ShapeRenderer(get, never):Scene2DRenderer;
   static inline function get_defaultCairoScale9ShapeRenderer():Scene2DRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasScale9ShapeRenderer;
-  public static var defaultCairoShapeCommands(get, never):Array<CanvasShapeCommand<Dynamic>>;
-  static inline function get_defaultCairoShapeCommands():Array<CanvasShapeCommand<Dynamic>> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands;
+  public static var defaultCairoShapeCommands(get, never):Array<CanvasShapeCommand<flighthq._internal._Any>>;
+  static inline function get_defaultCairoShapeCommands():Array<CanvasShapeCommand<flighthq._internal._Any>> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands;
   public static var defaultCairoShapeRenderer(get, never):Scene2DRenderer;
   static inline function get_defaultCairoShapeRenderer():Scene2DRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeRenderer;
   public static var defaultCairoSpriteRenderer(get, never):Scene2DRenderer;
   static inline function get_defaultCairoSpriteRenderer():Scene2DRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasSpriteRenderer;
   public static var defaultCairoTextLabelRenderer(get, never):Scene2DRenderer;
   static inline function get_defaultCairoTextLabelRenderer():Scene2DRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextLabelRenderer;
-  public static var defaultCairoTextureShapeCommands(get, never):Array<CanvasShapeCommand<Dynamic>>;
-  static inline function get_defaultCairoTextureShapeCommands():Array<CanvasShapeCommand<Dynamic>> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextureShapeCommands;
+  public static var defaultCairoTextureShapeCommands(get, never):Array<CanvasShapeCommand<flighthq._internal._Any>>;
+  static inline function get_defaultCairoTextureShapeCommands():Array<CanvasShapeCommand<flighthq._internal._Any>> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextureShapeCommands;
   public static var defaultCairoTilemapRenderer(get, never):SpriteRenderer;
   static inline function get_defaultCairoTilemapRenderer():SpriteRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTilemapRenderer;
   #if lime

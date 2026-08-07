@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.types.StatechartSignals;
 
 class _StatechartValues {
-  public static final StatechartInputKindValue:Dynamic = { Boolean: 'Boolean', Number: 'Number', Trigger: 'Trigger' };
+  public static final StatechartInputKindValue:{ var Boolean:String; var Number:String; var Trigger:String; } = { Boolean: 'Boolean', Number: 'Number', Trigger: 'Trigger' };
 
-  public static final StatechartComparisonValue:Dynamic = { Equal: 'Equal', GreaterThan: 'GreaterThan', GreaterThanOrEqual: 'GreaterThanOrEqual', LessThan: 'LessThan', LessThanOrEqual: 'LessThanOrEqual', NotEqual: 'NotEqual' };
+  public static final StatechartComparisonValue:{ var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; } = { Equal: 'Equal', GreaterThan: 'GreaterThan', GreaterThanOrEqual: 'GreaterThanOrEqual', LessThan: 'LessThan', LessThanOrEqual: 'LessThanOrEqual', NotEqual: 'NotEqual' };
 
-  public static final StatechartAtomicStateKind:Dynamic = 'Statechart.Atomic';
+  public static final StatechartAtomicStateKind:String = 'Statechart.Atomic';
 
-  public static final StatechartNestedStateKind:Dynamic = 'Statechart.Nested';
+  public static final StatechartNestedStateKind:String = 'Statechart.Nested';
 
-  public static final StatechartTransitionStatusValue:Dynamic = { ConditionsUnmet: 'ConditionsUnmet', ExitTimePending: 'ExitTimePending', InvalidRegion: 'InvalidRegion', MissingRegionDuration: 'MissingRegionDuration', NoTransitions: 'NoTransitions', Ready: 'Ready', Transitioning: 'Transitioning' };
+  public static final StatechartTransitionStatusValue:{ var ConditionsUnmet:String; var ExitTimePending:String; var InvalidRegion:String; var MissingRegionDuration:String; var NoTransitions:String; var Ready:String; var Transitioning:String; } = { ConditionsUnmet: 'ConditionsUnmet', ExitTimePending: 'ExitTimePending', InvalidRegion: 'InvalidRegion', MissingRegionDuration: 'MissingRegionDuration', NoTransitions: 'NoTransitions', Ready: 'Ready', Transitioning: 'Transitioning' };
 }

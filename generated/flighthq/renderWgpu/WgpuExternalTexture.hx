@@ -10,61 +10,69 @@ import flighthq.renderWgpu.WgpuTextureResolver.registerWgpuTextureResolver;
 import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateExternalTextureOptions;
+import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.ExternalTexture;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.Sampler.TextureFilter;
+import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.ExternalTextureSourceKind;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
 class WgpuExternalTexture {
   public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    var bindGroup:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.callValue(createEntity, cast ([{ height: _Runtime.field(options, 'height'), kind: ExternalTextureSourceKind, version: 0.0, width: _Runtime.field(options, 'width') }] : Array<Dynamic>)) : ExternalTexture);
-    texture = _Runtime.callValue(createTexture, cast ([{ colorSpace: _Runtime.field(options, 'colorSpace'), sampler: _Runtime.select(_Runtime.field(options, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(options, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: '2d', source: source }] : Array<Dynamic>));
+    var source:ExternalTexture = cast _Runtime.UNDEFINED;
+    var texture:Texture2D = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    var sampler:flighthq._internal.dom.GPUSampler = cast _Runtime.UNDEFINED;
+    var bindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    source = (cast (cast createEntity((cast { height: _Runtime.field(options, 'height'), kind: ExternalTextureSourceKind, version: 0.0, width: _Runtime.field(options, 'width') } : Null<{ var height:Float; var kind:String; var version:Float; var width:Float; }>)) : ExternalTexture) : ExternalTexture);
+    texture = (cast createTexture({ colorSpace: _Runtime.field(options, 'colorSpace'), sampler: _Runtime.select(_Runtime.field(options, 'sampler'), function():Dynamic return cast (cast cloneSampler(_Runtime.field(options, 'sampler')) : Null<Sampler>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: '2d', source: source }) : Texture2D);
     view = handle.createView();
-    sampler = _Runtime.callValue(WgpuExternalTexture.getExternalWgpuSampler__wgpuExternalTexture, cast ([state, texture] : Array<Dynamic>));
-    bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-    ((cast _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuExternalTextureCache', (_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuExternalTextureCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []))) : flighthq._internal._WeakMap).set(source, { bindGroup: bindGroup, texture: handle, view: view }));
-    _Runtime.callValue(registerWgpuTextureResolver, cast ([state, ExternalTextureSourceKind, WgpuExternalTexture.resolveExternalWgpuTexture__wgpuExternalTexture] : Array<Dynamic>));
+    sampler = (cast WgpuExternalTexture.getExternalWgpuSampler__wgpuExternalTexture((cast state : WgpuRenderState), (cast texture : Texture)) : flighthq._internal.dom.GPUSampler);
+    bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    ((cast ((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])) : flighthq._internal._WeakMap<Dynamic, Dynamic>).set(source, { bindGroup: bindGroup, texture: handle, view: view }));
+    registerWgpuTextureResolver((cast state : WgpuRenderState), (cast ExternalTextureSourceKind : String), function(__unused0:WgpuRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:Dynamic):Null<WgpuTextureEntry> return WgpuExternalTexture.resolveExternalWgpuTexture__wgpuExternalTexture(__unused0, __unused1));
     return cast texture;
     return cast null;
   }
 
   public static function disposeExternalWgpuTexture(state:WgpuRenderState, texture:Texture):Bool {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    source = _Runtime.callValue(WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture, cast ([texture] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuExternalTextureCache'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
+    var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
+    source = (cast WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture((cast texture : TextureLike)) : Null<ExternalTexture>);
+    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
     return cast null;
   }
 
   public static function getExternalWgpuSampler__wgpuExternalTexture(state:WgpuRenderState, texture:Texture):flighthq._internal.dom.GPUSampler {
-    var sampler:Dynamic = cast _Runtime.UNDEFINED;
+    var sampler:Sampler = cast _Runtime.UNDEFINED;
     var minFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var magFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<flighthq._internal.dom.GPUMipmapFilterMode> = cast _Runtime.UNDEFINED;
-    sampler = _Runtime.field(texture, 'sampler');
-    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    mipmapFilter = ((cast sampler.mipmaps : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-linear') : Bool) ? (cast 'linear' : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast _Runtime.callValue(getWgpuSampler, cast ([state, minFilter, magFilter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>));
+    sampler = (cast texture : { var sampler:Sampler; }).sampler;
+    minFilter = ((cast (cast sampler.minFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast (cast sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    mipmapFilter = ((cast sampler.mipmaps : Bool) ? (cast ((cast (cast sampler.minFilter : { var endsWith:flighthq._internal._Any; }).endsWith('mipmap-nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast ((cast (cast sampler.minFilter : { var endsWith:flighthq._internal._Any; }).endsWith('mipmap-linear') : Bool) ? (cast 'linear' : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    return cast (cast getWgpuSampler((cast state : WgpuRenderState), (cast minFilter : String), (cast magFilter : String), sampler.wrapU, sampler.wrapV, (cast mipmapFilter : Null<String>), (cast sampler.anisotropy : Float)) : flighthq._internal.dom.GPUSampler);
     return cast null;
   }
 
   public static function resolveExternalWgpuTexture__wgpuExternalTexture(state:WgpuRenderState, texture:TextureLike):Null<WgpuTextureEntry> {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    source = _Runtime.callValue(WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture, cast ([texture] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuExternalTextureCache'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._WeakMap).get(source)); }), function():Dynamic return cast null) : Dynamic));
+    var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
+    source = (cast WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture((cast texture : TextureLike)) : Null<ExternalTexture>);
+    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).get(source)); }), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }
 
   public static function getExternalTextureSource__wgpuExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool) || (cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(texture, 'source'), 'kind'), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(texture, 'source'), 'kind'), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
     return cast (cast _Runtime.field(texture, 'source') : ExternalTexture);
     return cast null;
   }

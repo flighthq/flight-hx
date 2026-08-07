@@ -26,17 +26,17 @@ class TestCollision {
   }
 
   public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
-    var rankA:Dynamic = cast _Runtime.UNDEFINED;
-    var rankB:Dynamic = cast _Runtime.UNDEFINED;
-    var swapped:Dynamic = cast _Runtime.UNDEFINED;
-    var lo:Dynamic = cast _Runtime.UNDEFINED;
-    var hi:Dynamic = cast _Runtime.UNDEFINED;
-    var overlapping:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { _Runtime.callValue(TestCollision.collisionTestGuard__testCollision, cast ([a, b] : Array<Dynamic>)); }
-    rankA = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(a, 'kind')] : Array<Dynamic>));
-    rankB = _Runtime.callValue(TestCollision.shapeKindRank__testCollision, cast ([_Runtime.field(b, 'kind')] : Array<Dynamic>));
+    var rankA:Float = cast _Runtime.UNDEFINED;
+    var rankB:Float = cast _Runtime.UNDEFINED;
+    var swapped:Bool = cast _Runtime.UNDEFINED;
+    var lo:CollisionShape = cast _Runtime.UNDEFINED;
+    var hi:CollisionShape = cast _Runtime.UNDEFINED;
+    var overlapping:Bool = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { (cast TestCollision.collisionTestGuard__testCollision : CollisionShape->CollisionShape->Void)((cast a : CollisionShape), (cast b : CollisionShape)); }
+    rankA = (cast TestCollision.shapeKindRank__testCollision((cast (cast a : { var kind:String; }).kind : CollisionShapeKind)) : Float);
+    rankB = (cast TestCollision.shapeKindRank__testCollision((cast (cast b : { var kind:String; }).kind : CollisionShapeKind)) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionManifold((cast out : CollisionManifold));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -44,58 +44,58 @@ class TestCollision {
     hi = ((cast swapped : Bool) ? (cast a : Dynamic) : (cast b : Dynamic));
     overlapping = false;
     {
-      var __switchValue = _Runtime.field(lo, 'kind');
+      var __switchValue = (cast lo : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast (_Runtime.callValue(testCircleCircleCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testCircleCircleCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast (_Runtime.callValue(testCircleAabbCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testCircleAabbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(testCircleObbCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testCircleObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(testCirclePolygonCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testCirclePolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'aabb') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast (_Runtime.callValue(testAabbAabbCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testAabbAabbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(testAabbObbCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testAabbObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(testAabbPolygonCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testAabbPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'obb') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(testObbObbCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testObbObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(testObbPolygonCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast testObbPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
-        if ((cast _Runtime.strictEquals(_Runtime.field(hi, 'kind'), 'polygon') : Bool)) {
-          (overlapping = cast (_Runtime.callValue(testPolygonPolygonCollision, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+        if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
+          (overlapping = cast ((cast testPolygonPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
         }
       }
     }
     if ((cast ((cast overlapping : Bool) && (cast swapped : Bool)) : Bool)) {
-      _Runtime.setField(out, 'normalX', -_Runtime.field(out, 'normalX'));
-      _Runtime.setField(out, 'normalY', -_Runtime.field(out, 'normalY'));
+      ((cast out : CollisionManifold).normalX = -(cast out : CollisionManifold).normalX);
+      ((cast out : CollisionManifold).normalY = -(cast out : CollisionManifold).normalY);
     }
     return cast overlapping;
     return cast null;

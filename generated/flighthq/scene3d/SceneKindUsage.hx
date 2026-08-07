@@ -5,11 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.scene3d.Mesh.isMesh;
+import flighthq.types.ImageResourceReference;
 import flighthq.types.Material;
+import flighthq.types.Mesh;
 import flighthq.types.Modifier;
+import flighthq.types.Node;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.Texture;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
@@ -20,58 +25,58 @@ class SceneKindUsage {
   }
 
   public static function getScene3DKindUsage(out:Scene3DKindUsage, scene:Scene3D):Void {
-    var visit:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setLength(_Runtime.field(out, 'materialKinds'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'modifierKinds'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'nodeKinds'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'resourceMimeTypes'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'textureSourceKinds'), 0.0);
-    visit = function(node:Node3D) {
-      var materials:Dynamic = cast _Runtime.UNDEFINED;
-      _Runtime.callValue(SceneKindUsage.addScene3DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'nodeKinds'), _Runtime.field(node, 'kind')] : Array<Dynamic>));
-      if ((cast !(cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-      materials = (cast node : flighthq.types.Mesh).materials;
+    var visit:Node3D->Void = cast _Runtime.UNDEFINED;
+    _Runtime.setLength((cast out : Scene3DKindUsage).materialKinds, 0.0);
+    _Runtime.setLength((cast out : Scene3DKindUsage).modifierKinds, 0.0);
+    _Runtime.setLength((cast out : Scene3DKindUsage).nodeKinds, 0.0);
+    _Runtime.setLength((cast out : Scene3DKindUsage).resourceMimeTypes, 0.0);
+    _Runtime.setLength((cast out : Scene3DKindUsage).textureSourceKinds, 0.0);
+    visit = (cast function(node:Node3D):Void {
+      var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
+      SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).nodeKinds : Array<String>), (cast _Runtime.field(node, 'kind') : String));
+      if ((cast !(cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return; }
+      materials = node.materials;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-          var material:Dynamic = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
+          var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
-          _Runtime.callValue(SceneKindUsage.addScene3DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'materialKinds'), _Runtime.field(material, 'kind')] : Array<Dynamic>));
-          var modifiers:Dynamic = _Runtime.field((cast material : Dynamic), 'modifiers');
+          SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).materialKinds : Array<String>), (cast (cast material : Material).kind : String));
+          var modifiers:Null<Array<Modifier>> = _Runtime.field((cast material : Dynamic), 'modifiers');
           if ((cast _Runtime.strictEquals(modifiers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
           {
-            var m:Dynamic = 0.0;
+            var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(modifiers, 'length') : Float)) : Bool)) {
-              _Runtime.callValue(SceneKindUsage.addScene3DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'modifierKinds'), _Runtime.field(flighthq._internal._StaticIndex.readArray(modifiers, m), 'kind')] : Array<Dynamic>));
+              SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).modifierKinds : Array<String>), (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
               m++;
             }
           }
           i++;
         }
       }
-    };
-    _Runtime.callValue(visit, cast ([scene.root] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([scene.root, function(node:Dynamic) return _Runtime.callValue(visit, cast ([(cast node : Node3D)] : Array<Dynamic>))] : Array<Dynamic>));
+    } : Node3D->Void);
+    visit((cast scene.root : Node3D));
+    forEachNodeDescendant(scene.root, function(node:Node<Node3DTraits>):Void return visit((cast (cast node : Node3D) : Node3D)));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(scene.resources, 'length') : Float)) : Bool)) {
-        var resource:Dynamic = flighthq._internal._StaticIndex.readArray(scene.resources, i);
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(resource, 'textures'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(resource, 'textures'), 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        _Runtime.callValue(SceneKindUsage.addScene3DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'textureSourceKinds'), ImageTextureSourceKind] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(_Runtime.field(resource, 'mimeType'), null) : Bool)) { _Runtime.callValue(SceneKindUsage.addScene3DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'resourceMimeTypes'), _Runtime.field(resource, 'mimeType')] : Array<Dynamic>)); }
+        var resource:ImageResourceReference = flighthq._internal._StaticIndex.readArray(scene.resources, i);
+        if ((cast ((cast _Runtime.strictEquals((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
+        SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).textureSourceKinds : Array<String>), (cast ImageTextureSourceKind : String));
+        if ((cast !_Runtime.strictEquals((cast resource : { var mimeType:Null<String>; }).mimeType, null) : Bool)) { SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).resourceMimeTypes : Array<String>), (cast (cast resource : { var mimeType:Null<String>; }).mimeType : String)); }
         i++;
       }
     }
-    _Runtime.callProperty(_Runtime.field(out, 'materialKinds'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'modifierKinds'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'nodeKinds'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'resourceMimeTypes'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'textureSourceKinds'), 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene3DKindUsage).materialKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene3DKindUsage).modifierKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene3DKindUsage).nodeKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene3DKindUsage).resourceMimeTypes, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene3DKindUsage).textureSourceKinds, 'sort', cast ([] : Array<Dynamic>));
   }
 
   public static function addScene3DUsedKind__sceneKindUsage(kinds:Array<String>, kind:String):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(kinds, 'length') : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(kinds, i), kind) : Bool)) { return; }
         i++;

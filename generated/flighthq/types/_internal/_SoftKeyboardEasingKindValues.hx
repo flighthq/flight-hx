@@ -5,13 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _SoftKeyboardEasingKindValues {
-  public static final SoftKeyboardEasingDefaultKindValue:Dynamic = 'ease';
+  public static final SoftKeyboardEasingDefaultKindValue:String = 'ease';
 
-  public static final SoftKeyboardEasingEaseInKindValue:Dynamic = 'easeIn';
+  public static final SoftKeyboardEasingEaseInKindValue:String = 'easeIn';
 
-  public static final SoftKeyboardEasingEaseOutKindValue:Dynamic = 'easeOut';
+  public static final SoftKeyboardEasingEaseOutKindValue:String = 'easeOut';
 
-  public static final SoftKeyboardEasingLinearKindValue:Dynamic = 'linear';
+  public static final SoftKeyboardEasingLinearKindValue:String = 'linear';
 
-  public static final SoftKeyboardEasingKeyboardDefaultKindValue:Dynamic = 'keyboardDefault';
+  public static final SoftKeyboardEasingKeyboardDefaultKindValue:String = 'keyboardDefault';
 }

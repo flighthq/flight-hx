@@ -16,11 +16,11 @@ class CaptureBaseline {
     var sorted:flighthq.types.CaptureBaseline = cast _Runtime.UNDEFINED;
     sorted = {  };
     for (column in _Runtime.iterable(_Runtime.callProperty(flighthq._internal.DynamicObject.keys(baseline), 'sort', cast ([] : Array<Dynamic>)))) {
-      var entry:Dynamic = _Runtime.getIndex(baseline, column);
+      var entry:CaptureColumnBaseline = _Runtime.getIndex(baseline, column);
       var out:CaptureColumnBaseline = {  };
-      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'sourceHash'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'sourceHash', _Runtime.field(entry, 'sourceHash')); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(entry, 'sha256'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'sha256', _Runtime.field(entry, 'sha256')); }
+      if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).fingerprint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).fingerprint = (cast entry : CaptureColumnBaseline).fingerprint); }
+      if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sourceHash, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sourceHash = (cast entry : CaptureColumnBaseline).sourceHash); }
+      if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sha256, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sha256 = (cast entry : CaptureColumnBaseline).sha256); }
       _Runtime.setIndex(sorted, column, out);
     }
     return cast (_Runtime.jsonStringify(sorted, null, 2.0) + '\n');
@@ -33,7 +33,7 @@ class CaptureBaseline {
   }
 
   public static function parseCaptureBaseline(text:String):Null<flighthq.types.CaptureBaseline> {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     try {
       (parsed = cast (_Runtime.jsonParse(text) : Dynamic));
     } catch (__error:Dynamic) {

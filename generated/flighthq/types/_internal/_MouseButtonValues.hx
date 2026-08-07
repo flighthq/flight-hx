@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _MouseButtonValues {
-  public static final MouseButtonValue:Dynamic = { LEFT: 0.0, MIDDLE: 1.0, RIGHT: 2.0 };
+  public static final MouseButtonValue:{ var LEFT:Float; var MIDDLE:Float; var RIGHT:Float; } = { LEFT: 0.0, MIDDLE: 1.0, RIGHT: 2.0 };
 }

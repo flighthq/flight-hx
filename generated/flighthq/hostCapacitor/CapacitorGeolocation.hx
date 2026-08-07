@@ -4,26 +4,33 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorGeolocationOptions;
+import flighthq.types.CapacitorApi.CapacitorGeolocationPermissionOptions;
+import flighthq.types.CapacitorApi.CapacitorGeolocationPermissionStatus;
+import flighthq.types.CapacitorApi.CapacitorGeolocationPlugin;
 import flighthq.types.CapacitorApi.CapacitorPosition;
+import flighthq.types.CapacitorApi.CapacitorPositionCoords;
 import flighthq.types.Geolocation.GeoPosition;
 import flighthq.types.Geolocation.GeoPositionResult;
 import flighthq.types.Geolocation.GeolocationBackend;
+import flighthq.types.Geolocation.GeolocationErrorReason;
 import flighthq.types.Geolocation.GeolocationPermissionState;
+import flighthq.types.Geolocation.GeolocationRequestOptions;
 
 class CapacitorGeolocation {
   public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
-    var geolocation:Dynamic = cast _Runtime.UNDEFINED;
-    var nextWatchId:Dynamic = cast _Runtime.UNDEFINED;
-    var watchIds:Dynamic = cast _Runtime.UNDEFINED;
-    geolocation = _Runtime.field(capacitor, 'geolocation');
+    var geolocation:CapacitorGeolocationPlugin = cast _Runtime.UNDEFINED;
+    var nextWatchId:Float = cast _Runtime.UNDEFINED;
+    var watchIds:flighthq._internal._Map<Float, Null<String>> = cast _Runtime.UNDEFINED;
+    geolocation = (cast capacitor : CapacitorApi).geolocation;
     nextWatchId = 1.0;
     watchIds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    return cast { getCurrentPosition: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    return cast { getCurrentPosition: function(options:GeolocationRequestOptions):flighthq._internal._Promise<Null<GeoPosition>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([__awaitValue0] : Array<Dynamic>)));
+            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).getCurrentPosition(options), function(__awaitValue0:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn((cast CapacitorGeolocation.toGeoPosition__capacitorGeolocation((cast __awaitValue0 : CapacitorPosition)) : Null<flighthq._internal._Any>));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -35,12 +42,12 @@ class CapacitorGeolocation {
           });
         })
       );
-    }, getCurrentPositionResult: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flighthq._internal._Promise<GeoPositionResult> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'getCurrentPosition', cast ([options] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn({ position: _Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([__awaitValue1] : Array<Dynamic>)), reason: null });
+            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).getCurrentPosition(options), function(__awaitValue1:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn({ position: (cast CapacitorGeolocation.toGeoPosition__capacitorGeolocation((cast __awaitValue1 : CapacitorPosition)) : Null<GeoPosition>), reason: null });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -58,8 +65,8 @@ class CapacitorGeolocation {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'checkPermissions', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callValue(CapacitorGeolocation.toPermissionState__capacitorGeolocation, cast ([_Runtime.field(__awaitValue2, 'location')] : Array<Dynamic>)));
+            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).checkPermissions(), function(__awaitValue2:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(CapacitorGeolocation.toPermissionState__capacitorGeolocation((cast (cast __awaitValue2 : CapacitorGeolocationPermissionStatus).location : String)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -71,33 +78,33 @@ class CapacitorGeolocation {
           });
         })
       );
-    }, watchPosition: function(listener:Dynamic, options:Dynamic, onError:Dynamic) {
-      var numericId:Dynamic = cast _Runtime.UNDEFINED;
+    }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
+      var numericId:Float = cast _Runtime.UNDEFINED;
       numericId = nextWatchId++;
-      ((cast watchIds : flighthq._internal._Map).set(numericId, null));
-      flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(geolocation, 'watchPosition', cast ([options, function(position:Dynamic, err:Dynamic) {
-        if ((cast ((cast !_Runtime.strictEquals(position, null) : Bool) && (cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(listener, cast ([_Runtime.callValue(CapacitorGeolocation.toGeoPosition__capacitorGeolocation, cast ([position] : Array<Dynamic>))] : Array<Dynamic>)); } else { if ((cast ((cast !_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(onError, cast (['unavailable'] : Array<Dynamic>)); } }
-      }] : Array<Dynamic>)), 'then', cast ([function(stringId:Dynamic) {
-        if ((cast ((cast watchIds : flighthq._internal._Map).has(numericId)) : Bool)) { ((cast watchIds : flighthq._internal._Map).set(numericId, stringId)); } else { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
+      ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).set(numericId, null));
+      flighthq._internal._Async.recover(_Runtime.callProperty((cast geolocation : CapacitorGeolocationPlugin).watchPosition(options, function(position:Null<CapacitorPosition>, err:flighthq._internal._Any):Void {
+        if ((cast ((cast !_Runtime.strictEquals(position, null) : Bool) && (cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { listener((cast (cast CapacitorGeolocation.toGeoPosition__capacitorGeolocation((cast position : CapacitorPosition)) : GeoPosition) : GeoPosition)); } else { if ((cast ((cast !_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { onError('unavailable'); } }
+      }), 'then', cast ([function(stringId:String):Void {
+        if ((cast ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).has(numericId)) : Bool)) { ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).set(numericId, stringId)); } else { flighthq._internal._Async.recover((cast geolocation : CapacitorGeolocationPlugin).clearWatch({ id: stringId }), function():Void {
 
         }); }
-      }] : Array<Dynamic>)), function() {
-        ((cast watchIds : flighthq._internal._Map).delete_(numericId));
+      }] : Array<Dynamic>)), function():Void {
+        ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).delete_(numericId));
       });
       return cast numericId;
-    }, clearWatch: function(id:Dynamic) {
-      var stringId:Dynamic = cast _Runtime.UNDEFINED;
-      stringId = ((cast watchIds : flighthq._internal._Map).get(id));
-      ((cast watchIds : flighthq._internal._Map).delete_(id));
-      if ((cast ((cast !_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(stringId, null) : Bool)) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(geolocation, 'clearWatch', cast ([{ id: stringId }] : Array<Dynamic>)), function() {
+    }, clearWatch: function(id:Float):Void {
+      var stringId:Null<String> = cast _Runtime.UNDEFINED;
+      stringId = ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).get(id));
+      ((cast watchIds : flighthq._internal._Map<Float, Null<String>>).delete_(id));
+      if ((cast ((cast !_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(stringId, null) : Bool)) : Bool)) { flighthq._internal._Async.recover((cast geolocation : CapacitorGeolocationPlugin).clearWatch({ id: stringId }), function():Void {
 
       }); }
-    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+    }, requestPermission: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(geolocation, 'requestPermissions', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(_Runtime.field(__awaitValue3, 'location'), 'granted'));
+            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).requestPermissions(), function(__awaitValue3:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.strictEquals((cast __awaitValue3 : CapacitorGeolocationPermissionStatus).location, 'granted'));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -109,8 +116,8 @@ class CapacitorGeolocation {
           });
         })
       );
-    }, subscribePermission: function() {
-      return cast function() {
+    }, subscribePermission: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
@@ -118,9 +125,9 @@ class CapacitorGeolocation {
   }
 
   public static function toGeoPosition__capacitorGeolocation(position:CapacitorPosition):GeoPosition {
-    var coords:Dynamic = cast _Runtime.UNDEFINED;
+    var coords:CapacitorPositionCoords = cast _Runtime.UNDEFINED;
     coords = _Runtime.field(position, 'coords');
-    return cast { latitude: _Runtime.field(coords, 'latitude'), longitude: _Runtime.field(coords, 'longitude'), accuracy: _Runtime.field(coords, 'accuracy'), altitude: _Runtime.coalesce(_Runtime.field(coords, 'altitude'), function():Dynamic return cast 0.0), altitudeAccuracy: _Runtime.coalesce(_Runtime.field(coords, 'altitudeAccuracy'), function():Dynamic return cast 0.0), floorLevel: 0.0, heading: _Runtime.coalesce(_Runtime.field(coords, 'heading'), function():Dynamic return cast 0.0), speed: _Runtime.coalesce(_Runtime.field(coords, 'speed'), function():Dynamic return cast 0.0), timestamp: _Runtime.field(position, 'timestamp') };
+    return cast { latitude: (cast coords : CapacitorPositionCoords).latitude, longitude: (cast coords : CapacitorPositionCoords).longitude, accuracy: (cast coords : CapacitorPositionCoords).accuracy, altitude: _Runtime.coalesce((cast coords : CapacitorPositionCoords).altitude, function():Dynamic return cast 0.0), altitudeAccuracy: _Runtime.coalesce((cast coords : CapacitorPositionCoords).altitudeAccuracy, function():Dynamic return cast 0.0), floorLevel: 0.0, heading: _Runtime.coalesce((cast coords : CapacitorPositionCoords).heading, function():Dynamic return cast 0.0), speed: _Runtime.coalesce((cast coords : CapacitorPositionCoords).speed, function():Dynamic return cast 0.0), timestamp: _Runtime.field(position, 'timestamp') };
     return cast null;
   }
 

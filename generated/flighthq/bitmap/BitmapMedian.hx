@@ -3,21 +3,22 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapMedian {
   public static function medianBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var area:Dynamic = cast _Runtime.UNDEFINED;
-    var rs:Dynamic = cast _Runtime.UNDEFINED;
-    var gs:Dynamic = cast _Runtime.UNDEFINED;
-    var bs:Dynamic = cast _Runtime.UNDEFINED;
-    var as:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var area:Float = cast _Runtime.UNDEFINED;
+    var rs:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var gs:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var bs:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var as:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
@@ -36,21 +37,21 @@ class BitmapMedian {
     bs = (cast BitmapMedian._windowBlue__bitmapMedian : flighthq._internal._UInt8Array);
     as = (cast BitmapMedian._windowAlpha__bitmapMedian : flighthq._internal._UInt8Array);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var n:Dynamic = 0.0;
+            var n:Float = 0.0;
             {
-              var ky:Dynamic = -r;
+              var ky:Float = -r;
               while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
-                var sy:Dynamic = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
+                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
                 {
-                  var kx:Dynamic = -r;
+                  var kx:Float = -r;
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
-                    var sx:Dynamic = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
-                    var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
+                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
+                    var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     flighthq._internal._StaticIndex.writeUint8Array(rs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, si));
                     flighthq._internal._StaticIndex.writeUint8Array(gs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0)));
                     flighthq._internal._StaticIndex.writeUint8Array(bs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0)));
@@ -62,12 +63,12 @@ class BitmapMedian {
                 ky++;
               }
             }
-            var mid:Dynamic = (_Runtime.toInt32(n) >> 1);
-            var di:Dynamic = (((py * w) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(BitmapMedian.medianOf__bitmapMedian, cast ([rs, n, mid] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(BitmapMedian.medianOf__bitmapMedian, cast ([gs, n, mid] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(BitmapMedian.medianOf__bitmapMedian, cast ([bs, n, mid] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(BitmapMedian.medianOf__bitmapMedian, cast ([as, n, mid] : Array<Dynamic>)));
+            var mid:Float = (_Runtime.toInt32(n) >> 1);
+            var di:Float = (((py * w) + px) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapMedian.medianOf__bitmapMedian((cast rs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapMedian.medianOf__bitmapMedian((cast gs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapMedian.medianOf__bitmapMedian((cast bs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapMedian.medianOf__bitmapMedian((cast as : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
             px++;
           }
         }
@@ -78,10 +79,10 @@ class BitmapMedian {
 
   public static function medianOf__bitmapMedian(values:flighthq._internal._UInt8Array, n:Float, mid:Float):Float {
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var v:Dynamic = flighthq._internal._StaticIndex.readUint8Array(values, i);
-        var j:Dynamic = (i - 1.0);
+        var v:Float = flighthq._internal._StaticIndex.readUint8Array(values, i);
+        var j:Float = (i - 1.0);
         while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8Array(values, j) : Float) > (cast v : Float)) : Bool)) : Bool)) {
           flighthq._internal._StaticIndex.writeUint8Array(values, (j + 1.0), flighthq._internal._StaticIndex.readUint8Array(values, j));
           j--;

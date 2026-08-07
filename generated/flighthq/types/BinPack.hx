@@ -4,7 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef RectangleId = Dynamic;
+typedef RectangleId = flighthq._internal._Union2<String, Float>;
 
 typedef PackableRectangle = { var id:RectangleId; var width:Float; var height:Float; };
 

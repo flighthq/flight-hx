@@ -21,19 +21,19 @@ class GaussianMath {
   }
 
   public static function createGaussianKernelWeights(radius:Float, sigma:Float, out:flighthq._internal._Float32Array):Float {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var twoSigmaSq:Dynamic = cast _Runtime.UNDEFINED;
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
-    var invSum:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var twoSigmaSq:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var invSum:Float = cast _Runtime.UNDEFINED;
     r = HxMath.max(0.0, HxMath.ceil(radius));
     s = HxMath.max(0.000001, sigma);
     twoSigmaSq = ((2.0 * s) * s);
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
-        var w:Dynamic = HxMath.exp((-(i * i) / twoSigmaSq));
+        var w:Float = HxMath.exp((-(i * i) / twoSigmaSq));
         flighthq._internal._StaticIndex.writeFloat32Array(out, i, w);
         (sum = cast ((sum + ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast w : Dynamic) : (cast (2.0 * w) : Dynamic))) : Dynamic));
         i++;
@@ -41,7 +41,7 @@ class GaussianMath {
     }
     invSum = (1.0 / sum);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
         ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), invSum)); });
         i++;

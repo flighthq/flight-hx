@@ -13,77 +13,82 @@ import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
 import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.BlurEffect;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTexture;
 
 class GlBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
-    _Runtime.callValue(applyGaussianBlurToGl, cast ([state, source, dest, temp, { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }] : Array<Dynamic>));
+    applyGaussianBlurToGl((cast state : GlRenderState), (cast source : GlRenderTarget), (cast dest : GlRenderTarget), (cast temp : GlRenderTarget), (cast { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
   }
 
   public static function applyBlurEffectToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, effect:BlurEffect):Bool {
-    return cast _Runtime.callValue(applyGaussianBlurToGlRenderTextures, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
+    return cast (cast applyGaussianBlurToGlRenderTextures((cast state : GlRenderState), (cast source : RenderTexture), (cast dest : RenderTexture), (cast temp : RenderTexture), (cast effect : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; })) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
-    var sigmaX:Dynamic = cast _Runtime.UNDEFINED;
-    var sigmaY:Dynamic = cast _Runtime.UNDEFINED;
-    var radiusX:Dynamic = cast _Runtime.UNDEFINED;
-    var radiusY:Dynamic = cast _Runtime.UNDEFINED;
-    sigmaX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
-    sigmaY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
+    var sigmaX:Float = cast _Runtime.UNDEFINED;
+    var sigmaY:Float = cast _Runtime.UNDEFINED;
+    var radiusX:Float = cast _Runtime.UNDEFINED;
+    var radiusY:Float = cast _Runtime.UNDEFINED;
+    sigmaX = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurX, function():Dynamic return cast 4.0);
+    sigmaY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY, function():Dynamic return cast 4.0);
     radiusX = ((cast ((cast sigmaX : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaX * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     radiusY = ((cast ((cast sigmaY : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaY * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, source, temp, sigmaX, radiusX, 1.0, 0.0] : Array<Dynamic>));
-    _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
+    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect((cast state : GlRenderState), (cast source : GlRenderTarget), (cast temp : GlRenderTarget), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
+    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect((cast state : GlRenderState), (cast temp : GlRenderTarget), (cast dest : GlRenderTarget), (cast sigmaY : Float), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float));
   }
 
   public static function applyGaussianBlurToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Bool {
-    var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceTarget:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, temp) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, temp) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyGaussianBlurToGlRenderTextures: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = _Runtime.callValue(getGlRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
+    sourceTarget = (cast getGlRenderTextureTarget((cast state : GlRenderState), (cast source : RenderTexture)) : Null<GlRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    _Runtime.callValue(withGlRenderState, cast ([state, function() {
-      _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, temp, function(tempTarget:Dynamic) {
-        _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, dest, function(destTarget:Dynamic) {
-          _Runtime.callValue(applyGaussianBlurToGl, cast ([state, sourceTarget, destTarget, tempTarget, options] : Array<Dynamic>));
-        }] : Array<Dynamic>));
-      }] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    withGlRenderState((cast state : GlRenderState), (cast function():Void {
+      writeGlRenderTextureTarget((cast state : GlRenderState), (cast temp : RenderTexture), (cast function(tempTarget:GlRenderTarget):Void {
+        writeGlRenderTextureTarget((cast state : GlRenderState), (cast dest : RenderTexture), (cast function(destTarget:GlRenderTarget):Void {
+          applyGaussianBlurToGl((cast state : GlRenderState), (cast sourceTarget : GlRenderTarget), (cast destTarget : GlRenderTarget), (cast tempTarget : GlRenderTarget), (cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
+        } : GlRenderTarget->Void));
+      } : GlRenderTarget->Void));
+    } : Void->Void));
     return cast true;
     return cast null;
   }
 
-  public static final defaultGlBlurEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
+  public static final defaultGlBlurEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') };
-    temp = _Runtime.callValue(acquireGlRenderTarget, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'pool'), descriptor] : Array<Dynamic>));
-    _Runtime.callValue(applyBlurEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), temp, (cast effect : BlurEffect)] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(ctx, 'pool'), temp] : Array<Dynamic>));
+    temp = (cast acquireGlRenderTarget((cast _Runtime.field(ctx, 'state') : GlRenderState), _Runtime.field(ctx, 'pool'), descriptor) : GlRenderTarget);
+    applyBlurEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast temp : GlRenderTarget), (cast (cast effect : BlurEffect) : BlurEffect));
+    releaseGlRenderTarget(_Runtime.field(ctx, 'pool'), (cast temp : GlRenderTarget));
   };
 
   public static function registerGlBlurEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlurEffect', defaultGlBlurEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'BlurEffect' : String), (cast defaultGlBlurEffectRunner : GlRenderEffectRunner));
   }
 
   public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'blur.gaussian', GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_texelSize'] : Array<Dynamic>)), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_sigma'] : Array<Dynamic>)), sigma);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_radius'] : Array<Dynamic>)), radius);
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_direction'] : Array<Dynamic>)), dirX, dirY);
-    }] : Array<Dynamic>));
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'blur.gaussian' : String), (cast GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation((cast state : GlRenderState), p, (cast 'u_texelSize' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation((cast state : GlRenderState), p, (cast 'u_sigma' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), sigma);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation((cast state : GlRenderState), p, (cast 'u_radius' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), radius);
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation((cast state : GlRenderState), p, (cast 'u_direction' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), dirX, dirY);
+    });
   }
 
-  public static final GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform float u_sigma;\nuniform float u_radius;\nuniform vec2 u_direction;\nout vec4 o_color;\nvoid main() {\n  int r = max(0, int(u_radius));\n  if (r == 0) {\n    o_color = texture(u_texture0, v_texCoord);\n    return;\n  }\n  float twoSigmaSq = 2.0 * u_sigma * u_sigma;\n  vec4 sum = vec4(0.0);\n  float weightSum = 0.0;\n  for (int i = -r; i <= r; i++) {\n    float w = exp(-float(i * i) / twoSigmaSq);\n    sum += w * texture(u_texture0, v_texCoord + float(i) * u_texelSize * u_direction);\n    weightSum += w;\n  }\n  o_color = sum / weightSum;\n}';
+  public static final GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform float u_sigma;\nuniform float u_radius;\nuniform vec2 u_direction;\nout vec4 o_color;\nvoid main() {\n  int r = max(0, int(u_radius));\n  if (r == 0) {\n    o_color = texture(u_texture0, v_texCoord);\n    return;\n  }\n  float twoSigmaSq = 2.0 * u_sigma * u_sigma;\n  vec4 sum = vec4(0.0);\n  float weightSum = 0.0;\n  for (int i = -r; i <= r; i++) {\n    float w = exp(-float(i * i) / twoSigmaSq);\n    sum += w * texture(u_texture0, v_texCoord + float(i) * u_texelSize * u_direction);\n    weightSum += w;\n  }\n  o_color = sum / weightSum;\n}';
 }

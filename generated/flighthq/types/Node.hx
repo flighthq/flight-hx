@@ -10,20 +10,20 @@ import flighthq.types._internal._NodeValues.NodeKind;
 import flighthq.types._internal._NodeValues.NodeTraitsKey__Node;
 import flighthq.types._internal._NodeValues.NullScene3D;
 
-typedef NodeTraitsKey<T> = { @:optional var __NodeTraitsKey:Dynamic; };
+typedef NodeTraitsKey<T> = flighthq._internal._Intersection2<flighthq._internal._Symbol, { @:optional var __NodeTraitsKey:T; }>;
 
-typedef NodeData = Dynamic;
+typedef NodeData = flighthq._internal._Object;
 
-typedef NodeDataFactory<D> = Dynamic;
+typedef NodeDataFactory<D> = Dynamic->D;
 
-typedef NodeRuntimeFactory<R> = Dynamic;
+typedef NodeRuntimeFactory<R> = Dynamic->R;
 
 typedef NodeTraits = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; };
 
 typedef Node<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; };
 
-typedef NodeRuntime<Traits> = { var binding:Null<Dynamic>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Dynamic; var children:Null<Array<flighthq.types.Node<Traits>>>; var childrenId:Float; @:optional var traits:NodeTraitsKey<Traits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<flighthq.types.Node<Traits>>; var parentReferenceId:Float; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; };
+typedef NodeRuntime<Traits> = { var binding:Null<flighthq._internal._Object>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:flighthq.types.Node<Traits>->flighthq.types.Node<Traits>->Bool; var children:Null<Array<flighthq.types.Node<Traits>>>; var childrenId:Float; @:optional var traits:NodeTraitsKey<Traits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<flighthq.types.Node<Traits>>; var parentReferenceId:Float; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; };
 
 typedef NodeOf<Traits> = flighthq.types.Node<Traits>;
 
-typedef NodeAny = flighthq.types.Node<Dynamic>;
+typedef NodeAny = flighthq.types.Node<flighthq._internal._Any>;

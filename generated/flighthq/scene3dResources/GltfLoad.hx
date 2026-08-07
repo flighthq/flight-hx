@@ -8,6 +8,7 @@ import flighthq.scene3dFormats.GltfParse.parseGltf;
 import flighthq.scene3dResources.SceneDocumentSource.getScene3DDocumentBasePathFromUrl;
 import flighthq.scene3dResources.SceneDocumentSource.loadScene3DDocumentBytesFromUrl;
 import flighthq.scene3dResources.SceneDocumentSource.loadScene3DDocumentTextFromUrl;
+import flighthq.types.GltfSchema.GltfBuffer;
 import flighthq.types.GltfSchema.GltfDocument;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
@@ -16,8 +17,8 @@ class GltfLoad {
   public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var bytes:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadScene3DDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        var bytes:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue0:Dynamic):Dynamic {
           bytes = __awaitValue0;
           var __flowBranch1:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
@@ -28,7 +29,7 @@ class GltfLoad {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callValue(parseGlb, cast ([bytes, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: _Runtime.callValue(getScene3DDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>)) }] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn((cast parseGlb((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>) }) : Null<flighthq._internal._Any>));
           });
         });
       })
@@ -38,11 +39,11 @@ class GltfLoad {
   public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var source:Dynamic = cast _Runtime.UNDEFINED;
+        var source:Null<String> = cast _Runtime.UNDEFINED;
         var gltf:GltfDocument = cast _Runtime.UNDEFINED;
-        var basePath:Dynamic = cast _Runtime.UNDEFINED;
-        var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadScene3DDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+        var basePath:Null<String> = cast _Runtime.UNDEFINED;
+        var externalBuffers:Null<flighthq._internal._Record<String, flighthq._internal._UInt8Array>> = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<String>>), function(__awaitValue2:Dynamic):Dynamic {
           source = __awaitValue2;
           var __flowBranch3:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
@@ -71,8 +72,8 @@ class GltfLoad {
                 __flowBranch4 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
-                basePath = _Runtime.callValue(getScene3DDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>));
-                return flighthq._internal._Async.flatMap(_Runtime.callValue(GltfLoad.loadGltfExternalBuffers__gltfLoad, cast ([gltf, basePath, options] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                basePath = (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>);
+                return flighthq._internal._Async.flatMap((cast GltfLoad.loadGltfExternalBuffers__gltfLoad((cast gltf : GltfDocument), (cast basePath : Null<String>), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<flighthq._internal._Record<String, flighthq._internal._UInt8Array>>>), function(__awaitValue5:Dynamic):Dynamic {
                   externalBuffers = __awaitValue5;
                   var __flowBranch6:Dynamic;
                   if ((cast _Runtime.strictEquals(externalBuffers, null) : Bool)) {
@@ -83,7 +84,7 @@ class GltfLoad {
                     __flowBranch6 = flighthq._internal._Async.flowNormal();
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-                    return flighthq._internal._Async.flowReturn(_Runtime.callValue(parseGltf, cast ([gltf, _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: basePath, externalBuffers: externalBuffers }] : Array<Dynamic>)));
+                    return flighthq._internal._Async.flowReturn((cast parseGltf((cast gltf : flighthq._internal._Union2<String, GltfDocument>), _Runtime.field(_Runtime, 'UNDEFINED'), { basePath: basePath, externalBuffers: externalBuffers }) : Null<flighthq._internal._Any>));
                   });
                 });
               });
@@ -94,29 +95,29 @@ class GltfLoad {
     );
   }
 
-  public static function loadGltfExternalBuffers__gltfLoad(gltf:GltfDocument, basePath:Null<String>, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function loadGltfExternalBuffers__gltfLoad(gltf:GltfDocument, basePath:Null<String>, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._Record<String, flighthq._internal._UInt8Array>>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var uris:Dynamic = cast _Runtime.UNDEFINED;
-        var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
-        var entries:Dynamic = cast _Runtime.UNDEFINED;
-        var bytes:Dynamic = cast _Runtime.UNDEFINED;
+        var uris:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+        var externalBuffers:flighthq._internal._Record<String, flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+        var entries:Array<String> = cast _Runtime.UNDEFINED;
+        var bytes:Array<Null<flighthq._internal._UInt8Array>> = cast _Runtime.UNDEFINED;
         uris = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         for (buffer in _Runtime.iterable(_Runtime.coalesce(gltf.buffers, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-          var uri:Dynamic = buffer.uri;
-          if ((cast ((cast !_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast StringTools.startsWith(uri, 'data:') : Bool) : Bool)) : Bool)) { ((cast uris : flighthq._internal._Set).add(uri)); }
+          var uri:Null<String> = buffer.uri;
+          if ((cast ((cast !_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast StringTools.startsWith(uri, 'data:') : Bool) : Bool)) : Bool)) { ((cast uris : flighthq._internal._Set<String>).add(uri)); }
         }
         externalBuffers = {  };
         entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadScene3DDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(entries, 'map', cast ([function(uri:String, __unused0:Float, __unused1:Array<String>):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> return (cast loadScene3DDocumentBytesFromUrl((cast (cast GltfLoad.resolveGltfBufferUrl__gltfLoad((cast uri : String), (cast basePath : Null<String>)) : String) : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>)] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
           bytes = __awaitValue11;
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.protect(function():Dynamic {
-            var i:Dynamic = cast _Runtime.UNDEFINED;
+            var i:Float = cast _Runtime.UNDEFINED;
             i = 0.0;
             return flighthq._internal._Async.repeatFlow(function():Dynamic {
               if (!(cast ((cast i : Float) < (cast _Runtime.field(entries, 'length') : Float)) : Bool)) return flighthq._internal._Async.flowBreak();
               return flighthq._internal._Async.continueIteration(flighthq._internal._Async.protect(function():Dynamic {
-                var value:Dynamic = cast _Runtime.UNDEFINED;
+                var value:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
                 value = flighthq._internal._StaticIndex.readArray(bytes, i);
                 var __flowBranch12:Dynamic;
                 if ((cast _Runtime.strictEquals(value, null) : Bool)) {

@@ -14,5 +14,5 @@ import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
 class _RichTextValues {
-  public static final RichTextKind:Dynamic = 'RichText';
+  public static final RichTextKind:String = 'RichText';
 }

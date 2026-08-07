@@ -118,29 +118,46 @@ import flighthq.types.AnimationTrack;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.Compression;
 import flighthq.types.Compression.Decompressor;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Light;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialLike;
 import flighthq.types.Matrix4;
+import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.Node3D;
+import flighthq.types.Quaternion;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentAnimation;
 import flighthq.types.Scene3DDocument.Scene3DDocumentAnimationChannel;
+import flighthq.types.Scene3DDocument.Scene3DDocumentCamera;
+import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
 import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
 import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
 import flighthq.types.Scene3DDocument.Scene3DDocumentSkin;
 import flighthq.types.SkinInfluence;
 import flighthq.types.SurfaceMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Types.Node3DKind;
 import flighthq.types.Types.Scene3DAnimationPathRotation;
 import flighthq.types.Types.Scene3DAnimationPathScale;
 import flighthq.types.Types.Scene3DAnimationPathTranslation;
+import flighthq.types.Vector2;
+import flighthq.types.Vector3;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
@@ -173,54 +190,54 @@ typedef ParsedSkeletonAnimation__awd2Parse = { var name:String; var poses:Array<
 
 typedef ParsedSkeletonPose__awd2Parse = { var jointTransforms:Array<Null<flighthq._internal._Float64Array>>; var name:String; };
 
-typedef AwdLightDropTally__awd2Parse = { var count:Float; var detail:Dynamic; var kind:String; var severity:ImportDiagnosticSeverity; };
+typedef AwdLightDropTally__awd2Parse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class Awd2Parse {
   public static function createScene3DFromAwd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast _Runtime.callValue(createScene3DFromDocument, cast ([_Runtime.callValue(parseAwd2, cast ([bytes, diagnostics] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast createScene3DFromDocument((cast (cast parseAwd2((cast bytes : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument) : Scene3DDocument), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
     return cast null;
   }
 
   public static function parseAwd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3DDocument {
-    var input:Dynamic = cast _Runtime.UNDEFINED;
-    var rehydrated:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyLength:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var geometryBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var containerBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var meshInstanceBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var materialBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var textureBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var lightBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var lightPickerBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var cameraBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var unhandledBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var document:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeIndexForBlock:Dynamic = cast _Runtime.UNDEFINED;
+    var input:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var rehydrated:Null<{ var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }> = cast _Runtime.UNDEFINED;
+    var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var bodyLength:Float = cast _Runtime.UNDEFINED;
+    var bodyEnd:Float = cast _Runtime.UNDEFINED;
+    var geometryBlocks:flighthq._internal._Map<Float, Array<ParsedGeometry__awd2Parse>> = cast _Runtime.UNDEFINED;
+    var containerBlocks:flighthq._internal._Map<Float, ParsedContainer__awd2Parse> = cast _Runtime.UNDEFINED;
+    var meshInstanceBlocks:flighthq._internal._Map<Float, ParsedMeshInstance__awd2Parse> = cast _Runtime.UNDEFINED;
+    var materialBlocks:flighthq._internal._Map<Float, ParsedMaterial__awd2Parse> = cast _Runtime.UNDEFINED;
+    var textureBlocks:flighthq._internal._Map<Float, ParsedTexture__awd2Parse> = cast _Runtime.UNDEFINED;
+    var skeletonBlocks:flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse> = cast _Runtime.UNDEFINED;
+    var lightBlocks:flighthq._internal._Map<Float, ParsedLight__awd2Parse> = cast _Runtime.UNDEFINED;
+    var lightPickerBlocks:flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse> = cast _Runtime.UNDEFINED;
+    var cameraBlocks:flighthq._internal._Map<Float, ParsedCamera__awd2Parse> = cast _Runtime.UNDEFINED;
+    var unhandledBlocks:flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }> = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var document:Scene3DDocument = cast _Runtime.UNDEFINED;
+    var nodeIndexForBlock:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     var skinIndex:Null<Float> = cast _Runtime.UNDEFINED;
     var skeletonJointNodeIndices:Array<Float> = cast _Runtime.UNDEFINED;
-    var resolvedMaterials:Dynamic = cast _Runtime.UNDEFINED;
-    var materialForSubset:Dynamic = cast _Runtime.UNDEFINED;
-    var parented:Dynamic = cast _Runtime.UNDEFINED;
-    var lightDrops:Dynamic = cast _Runtime.UNDEFINED;
+    var resolvedMaterials:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
+    var materialForSubset:ParsedMeshInstance__awd2Parse->Float->Array<Float> = cast _Runtime.UNDEFINED;
+    var parented:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
+    var lightDrops:flighthq._internal._Map<String, AwdLightDropTally__awd2Parse> = cast _Runtime.UNDEFINED;
     input = (cast bytes : flighthq._internal._UInt8Array);
     if ((cast ((cast _Runtime.field(input, 'byteLength') : Float) < (cast AWD2_HEADER_BYTES : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.header-too-short', 'parseAwd2'] : Array<Dynamic>));
-      return cast _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.header-too-short' : String), (cast 'parseAwd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument);
     }
     if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 0.0), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 1.0), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 2.0), AWD2_MAGIC_2) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.bad-magic', 'parseAwd2'] : Array<Dynamic>));
-      return cast _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.bad-magic' : String), (cast 'parseAwd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument);
     }
-    if ((cast !(cast _Runtime.callValue(Awd2Parse.isAwd2Version__awd2Parse, cast ([input, diagnostics] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>)); }
-    rehydrated = _Runtime.callValue(Awd2Parse.rehydrateAwdBody__awd2Parse, cast ([input, diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(rehydrated, null) : Bool)) { return cast _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>)); }
-    source = _Runtime.field(rehydrated, 'source');
-    view = _Runtime.field(rehydrated, 'view');
+    if ((cast !(cast (cast Awd2Parse.isAwd2Version__awd2Parse((cast input : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Bool) : Bool) : Bool)) { return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument); }
+    rehydrated = (cast Awd2Parse.rehydrateAwdBody__awd2Parse((cast input : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<{ var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }>);
+    if ((cast _Runtime.strictEquals(rehydrated, null) : Bool)) { return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument); }
+    source = (cast rehydrated : { var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }).source;
+    view = (cast rehydrated : { var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }).view;
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
     bodyEnd = HxMath.min((AWD2_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
     geometryBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -235,207 +252,207 @@ class Awd2Parse {
     unhandledBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
-      var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var namespace:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
-      var blockLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
-      var blockDataStart:Dynamic = (offset + AWD2_BLOCK_HEADER_BYTES);
+      var blockId:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
+      var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.block-length-past-end', 'parseAwd2'] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.block-length-past-end' : String), (cast 'parseAwd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         break;
       }
-      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
-      var geometryWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 2), 0.0);
+      var matrixWide:Bool = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
+      var geometryWide:Bool = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 2), 0.0);
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_TRIANGLE_GEOMETRY) : Bool)) {
-          var geoms:Dynamic = _Runtime.callValue(Awd2Parse.parseTriangleGeometryBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), geometryWide, diagnostics] : Array<Dynamic>));
-          ((cast geometryBlocks : flighthq._internal._Map).set(blockId, geoms));
+          var geoms:Array<ParsedGeometry__awd2Parse> = (cast Awd2Parse.parseTriangleGeometryBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast geometryWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<ParsedGeometry__awd2Parse>);
+          ((cast geometryBlocks : flighthq._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).set(blockId, geoms));
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_CONTAINER) : Bool)) {
-          var container:Dynamic = _Runtime.callValue(Awd2Parse.parseContainerBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(container, null) : Bool)) { ((cast containerBlocks : flighthq._internal._Map).set(blockId, container)); }
+          var container:Null<ParsedContainer__awd2Parse> = (cast Awd2Parse.parseContainerBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedContainer__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(container, null) : Bool)) { ((cast containerBlocks : flighthq._internal._Map<Float, ParsedContainer__awd2Parse>).set(blockId, container)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MESH_INSTANCE) : Bool)) {
-          var meshInst:Dynamic = _Runtime.callValue(Awd2Parse.parseMeshInstanceBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(meshInst, null) : Bool)) { ((cast meshInstanceBlocks : flighthq._internal._Map).set(blockId, meshInst)); }
+          var meshInst:Null<ParsedMeshInstance__awd2Parse> = (cast Awd2Parse.parseMeshInstanceBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedMeshInstance__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(meshInst, null) : Bool)) { ((cast meshInstanceBlocks : flighthq._internal._Map<Float, ParsedMeshInstance__awd2Parse>).set(blockId, meshInst)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT) : Bool)) {
-          var light:Dynamic = _Runtime.callValue(Awd2Parse.parseLightBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(light, null) : Bool)) { ((cast lightBlocks : flighthq._internal._Map).set(blockId, light)); }
+          var light:Null<ParsedLight__awd2Parse> = (cast Awd2Parse.parseLightBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedLight__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(light, null) : Bool)) { ((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).set(blockId, light)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_CAMERA) : Bool)) {
-          var camera:Dynamic = _Runtime.callValue(Awd2Parse.parseCameraBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(camera, null) : Bool)) { ((cast cameraBlocks : flighthq._internal._Map).set(blockId, camera)); }
+          var camera:Null<ParsedCamera__awd2Parse> = (cast Awd2Parse.parseCameraBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedCamera__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(camera, null) : Bool)) { ((cast cameraBlocks : flighthq._internal._Map<Float, ParsedCamera__awd2Parse>).set(blockId, camera)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT_PICKER) : Bool)) {
-          var picker:Dynamic = _Runtime.callValue(Awd2Parse.parseLightPickerBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(picker, null) : Bool)) { ((cast lightPickerBlocks : flighthq._internal._Map).set(blockId, picker)); }
+          var picker:Null<ParsedLightPicker__awd2Parse> = (cast Awd2Parse.parseLightPickerBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedLightPicker__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(picker, null) : Bool)) { ((cast lightPickerBlocks : flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse>).set(blockId, picker)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MATERIAL) : Bool)) {
-          var material:Dynamic = _Runtime.callValue(Awd2Parse.parseMaterialBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(material, null) : Bool)) { ((cast materialBlocks : flighthq._internal._Map).set(blockId, material)); }
+          var material:Null<ParsedMaterial__awd2Parse> = (cast Awd2Parse.parseMaterialBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedMaterial__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(material, null) : Bool)) { ((cast materialBlocks : flighthq._internal._Map<Float, ParsedMaterial__awd2Parse>).set(blockId, material)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_TEXTURE) : Bool)) {
-          var texture:Dynamic = _Runtime.callValue(Awd2Parse.parseTextureBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { ((cast textureBlocks : flighthq._internal._Map).set(blockId, texture)); }
+          var texture:Null<ParsedTexture__awd2Parse> = (cast Awd2Parse.parseTextureBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedTexture__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { ((cast textureBlocks : flighthq._internal._Map<Float, ParsedTexture__awd2Parse>).set(blockId, texture)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
-          var skeleton:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
-        } else { if ((cast !(cast _Runtime.callValue(Awd2Parse.isAwdBlockHandledLater__awd2Parse, cast ([blockType] : Array<Dynamic>)) : Bool) : Bool)) {
-          _Runtime.callValue(Awd2Parse.tallyUnhandledAwdBlock__awd2Parse, cast ([unhandledBlocks, namespace, blockType, blockId] : Array<Dynamic>));
+          var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast Awd2Parse.parseSkeletonBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeleton__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, skeleton)); }
+        } else { if ((cast !(cast (cast Awd2Parse.isAwdBlockHandledLater__awd2Parse((cast blockType : Float)) : Bool) : Bool) : Bool)) {
+          Awd2Parse.tallyUnhandledAwdBlock__awd2Parse((cast unhandledBlocks : flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>), (cast namespace : Float), (cast blockType : Float), (cast blockId : Float));
         } } } } } } } } } }
       } else {
-        _Runtime.callValue(Awd2Parse.tallyUnhandledAwdBlock__awd2Parse, cast ([unhandledBlocks, namespace, blockType, blockId] : Array<Dynamic>));
+        Awd2Parse.tallyUnhandledAwdBlock__awd2Parse((cast unhandledBlocks : flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>), (cast namespace : Float), (cast blockType : Float), (cast blockId : Float));
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
-    for (entry in _Runtime.iterable(((cast unhandledBlocks : flighthq._internal._Map).values()))) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.block-unhandled', 'parseAwd2', { blockType: _Runtime.field(entry, 'blockType'), count: _Runtime.field(entry, 'count'), firstBlockId: _Runtime.field(entry, 'firstBlockId'), namespace: _Runtime.field(entry, 'namespace') }] : Array<Dynamic>));
+    for (entry in _Runtime.iterable(((cast unhandledBlocks : flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).values()))) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.block-unhandled' : String), (cast 'parseAwd2' : String), (cast { blockType: (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).blockType, count: (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).count, firstBlockId: (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).firstBlockId, namespace: (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).namespace } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    document = _Runtime.callValue(Awd2Parse.emptyAwdDocument__awd2Parse, cast ([] : Array<Dynamic>));
+    document = (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument);
     nodeIndexForBlock = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     skeletonJointNodeIndices = cast ([] : Array<Dynamic>);
-    if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map).size : Float) > (cast 0.0 : Float)) : Bool)) {
-      var built:Dynamic = _Runtime.callValue(Awd2Parse.buildAwdSkeletonDocument__awd2Parse, cast ([_Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value'), document] : Array<Dynamic>));
-      (skeletonJointNodeIndices = cast (_Runtime.field(built, 'jointNodeIndices') : Dynamic));
-      (skinIndex = cast (_Runtime.field(_Runtime.field(document, 'skins'), 'length') : Dynamic));
-      _Runtime.callProperty(_Runtime.field(document, 'skins'), 'push', cast ([_Runtime.field(built, 'skin')] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([_Runtime.field(built, 'skeletonRootIndex')] : Array<Dynamic>));
-      if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map).size : Float) > (cast 1.0 : Float)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.multiple-skeletons', 'parseAwd2', { skeletons: (cast skeletonBlocks : flighthq._internal._Map).size }] : Array<Dynamic>));
+    if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size : Float) > (cast 0.0 : Float)) : Bool)) {
+      var built:{ var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; } = (cast Awd2Parse.buildAwdSkeletonDocument__awd2Parse((cast _Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).values()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<ParsedSkeleton__awd2Parse>; }).value, (cast document : Scene3DDocument)) : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; });
+      (skeletonJointNodeIndices = cast ((cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).jointNodeIndices : Dynamic));
+      (skinIndex = cast (_Runtime.field((cast document : Scene3DDocument).skins, 'length') : Dynamic));
+      _Runtime.callProperty((cast document : Scene3DDocument).skins, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skin] : Array<Dynamic>));
+      _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skeletonRootIndex] : Array<Dynamic>));
+      if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size : Float) > (cast 1.0 : Float)) : Bool)) {
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.multiple-skeletons' : String), (cast 'parseAwd2' : String), (cast { skeletons: (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     }
     for (__iteration0 in _Runtime.iterable(containerBlocks)) {
-      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var container:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var nodeIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
-      _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: _Runtime.callValue(Awd2Parse.awdTransformToTransform3D__awd2Parse, cast ([_Runtime.field(container, 'transform')] : Array<Dynamic>)) }] : Array<Dynamic>));
-      ((cast nodeIndexForBlock : flighthq._internal._Map).set(blockId, nodeIndex));
+      var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var container:ParsedContainer__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var nodeIndex:Float = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
+      _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast container : ParsedContainer__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast (cast container : ParsedContainer__awd2Parse).transform : flighthq._internal._Float64Array)) : Transform3D) }] : Array<Dynamic>));
+      ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).set(blockId, nodeIndex));
     }
     resolvedMaterials = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    materialForSubset = function(meshInst:ParsedMeshInstance__awd2Parse, subsetIndex:Float) {
-      var materialId:Dynamic = cast _Runtime.UNDEFINED;
-      var index:Dynamic = cast _Runtime.UNDEFINED;
-      materialId = ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(_Runtime.field(meshInst, 'materialIds'), 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(meshInst, 'materialIds'), subsetIndex) : Dynamic) : (cast 0.0 : Dynamic));
-      index = _Runtime.callValue(Awd2Parse.resolveAwdMaterial__awd2Parse, cast ([materialId, materialBlocks, textureBlocks, resolvedMaterials, document, diagnostics] : Array<Dynamic>));
+    materialForSubset = (cast function(meshInst:ParsedMeshInstance__awd2Parse, subsetIndex:Float):Array<Float> {
+      var materialId:Float = cast _Runtime.UNDEFINED;
+      var index:Float = cast _Runtime.UNDEFINED;
+      materialId = ((cast ((cast subsetIndex : Float) < (cast _Runtime.field((cast meshInst : ParsedMeshInstance__awd2Parse).materialIds, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast meshInst : ParsedMeshInstance__awd2Parse).materialIds, subsetIndex) : Dynamic) : (cast 0.0 : Dynamic));
+      index = (cast Awd2Parse.resolveAwdMaterial__awd2Parse((cast materialId : Float), materialBlocks, textureBlocks, (cast resolvedMaterials : flighthq._internal._Map<Float, Float>), (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Float);
       return cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast cast ([index] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    };
+    } : ParsedMeshInstance__awd2Parse->Float->Array<Float>);
     for (__iteration1 in _Runtime.iterable(meshInstanceBlocks)) {
-      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-      var meshInst:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      var geometries:Dynamic = ((cast geometryBlocks : flighthq._internal._Map).get(_Runtime.field(meshInst, 'geometryId')));
-      var transform:Dynamic = _Runtime.callValue(Awd2Parse.awdTransformToTransform3D__awd2Parse, cast ([_Runtime.field(meshInst, 'transform')] : Array<Dynamic>));
+      var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var meshInst:ParsedMeshInstance__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+      var geometries:Null<Array<ParsedGeometry__awd2Parse>> = ((cast geometryBlocks : flighthq._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).get((cast meshInst : ParsedMeshInstance__awd2Parse).geometryId));
+      var transform:Transform3D = (cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast (cast meshInst : ParsedMeshInstance__awd2Parse).transform : flighthq._internal._Float64Array)) : Transform3D);
       var nodeIndex:Float = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(geometries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) {
-          var meshIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
-          var mesh:Scene3DDocumentMesh = { geometry: _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, 0.0), 'geometry'), materials: _Runtime.callValue(materialForSubset, cast ([meshInst, 0.0] : Array<Dynamic>)) };
-          if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, 0.0), 'skinned') : Bool)) : Bool)) { _Runtime.setField(mesh, 'skin', skinIndex); }
-          _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));
-          (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
-          _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
+          var meshIndex:Float = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
+          var mesh:Scene3DDocumentMesh = { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset(meshInst, (cast 0.0 : Float)) : Array<Float>) };
+          if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
+          _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
+          (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
+          _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
         } else {
-          (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
-          var group:Scene3DDocumentNode = { children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform };
-          _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([group] : Array<Dynamic>));
+          (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
+          var group:Scene3DDocumentNode = { children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform };
+          _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([group] : Array<Dynamic>));
           {
-            var i:Dynamic = 0.0;
+            var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
-              var meshIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
-              var mesh:Scene3DDocumentMesh = { geometry: _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'geometry'), materials: _Runtime.callValue(materialForSubset, cast ([meshInst, i] : Array<Dynamic>)) };
-              if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(geometries, i), 'skinned') : Bool)) : Bool)) { _Runtime.setField(mesh, 'skin', skinIndex); }
-              _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));
-              var childIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
-              _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
-              _Runtime.callProperty(_Runtime.field(group, 'children'), 'push', cast ([childIndex] : Array<Dynamic>));
+              var meshIndex:Float = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
+              var mesh:Scene3DDocumentMesh = { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset(meshInst, (cast i : Float)) : Array<Float>) };
+              if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
+              _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
+              var childIndex:Float = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
+              _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+              _Runtime.callProperty((cast group : Scene3DDocumentNode).children, 'push', cast ([childIndex] : Array<Dynamic>));
               i++;
             }
           }
         }
       } else {
-        (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
-        _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(_Runtime.field(meshInst, 'geometryId'), 0.0) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.mesh-instance-missing-geometry', 'parseAwd2', { block: blockId, geometry: _Runtime.field(meshInst, 'geometryId') }] : Array<Dynamic>));
+        (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
+        _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).geometryId, 0.0) : Bool)) {
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.mesh-instance-missing-geometry' : String), (cast 'parseAwd2' : String), (cast { block: blockId, geometry: (cast meshInst : ParsedMeshInstance__awd2Parse).geometryId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         }
       }
-      ((cast nodeIndexForBlock : flighthq._internal._Map).set(blockId, nodeIndex));
+      ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).set(blockId, nodeIndex));
     }
     parented = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
-      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
-      var container:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(container, 'parentId'), 0.0) : Bool)) {
-        var parentIndex:Dynamic = ((cast nodeIndexForBlock : flighthq._internal._Map).get(_Runtime.field(container, 'parentId')));
+      var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var container:ParsedContainer__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+      if ((cast !_Runtime.strictEquals((cast container : ParsedContainer__awd2Parse).parentId, 0.0) : Bool)) {
+        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast container : ParsedContainer__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), parentIndex), 'children'), 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map).get(blockId))] : Array<Dynamic>));
-          ((cast parented : flighthq._internal._Set).add(blockId));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
     }
     for (__iteration3 in _Runtime.iterable(meshInstanceBlocks)) {
-      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
-      var meshInst:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(meshInst, 'parentId'), 0.0) : Bool)) {
-        var parentIndex:Dynamic = ((cast nodeIndexForBlock : flighthq._internal._Map).get(_Runtime.field(meshInst, 'parentId')));
+      var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var meshInst:ParsedMeshInstance__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
+      if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).parentId, 0.0) : Bool)) {
+        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast meshInst : ParsedMeshInstance__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), parentIndex), 'children'), 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map).get(blockId))] : Array<Dynamic>));
-          ((cast parented : flighthq._internal._Set).add(blockId));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
     }
-    for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flighthq._internal._Map).keys()))) {
-      if ((cast !(cast ((cast parented : flighthq._internal._Set).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map).get(blockId))] : Array<Dynamic>)); }
+    for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).keys()))) {
+      if ((cast !(cast ((cast parented : flighthq._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
     }
     lightDrops = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    for (light in _Runtime.iterable(((cast lightBlocks : flighthq._internal._Map).values()))) {
-      _Runtime.callValue(Awd2Parse.buildAwdDocumentLights__awd2Parse, cast ([light, ((cast nodeIndexForBlock : flighthq._internal._Map).get(_Runtime.field(light, 'parentId'))), document, lightDrops] : Array<Dynamic>));
+    for (light in _Runtime.iterable(((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).values()))) {
+      Awd2Parse.buildAwdDocumentLights__awd2Parse(light, (cast ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast light : ParsedLight__awd2Parse).parentId)) : Null<Float>), (cast document : Scene3DDocument), lightDrops);
     }
-    _Runtime.callValue(Awd2Parse.flushAwdLightDrops__awd2Parse, cast ([lightDrops, diagnostics] : Array<Dynamic>));
-    for (camera in _Runtime.iterable(((cast cameraBlocks : flighthq._internal._Map).values()))) {
-      _Runtime.callValue(Awd2Parse.buildAwdDocumentCamera__awd2Parse, cast ([camera, ((cast nodeIndexForBlock : flighthq._internal._Map).get(_Runtime.field(camera, 'parentId'))), document, diagnostics] : Array<Dynamic>));
+    Awd2Parse.flushAwdLightDrops__awd2Parse(lightDrops, (cast diagnostics : Null<Array<ImportDiagnostic>>));
+    for (camera in _Runtime.iterable(((cast cameraBlocks : flighthq._internal._Map<Float, ParsedCamera__awd2Parse>).values()))) {
+      Awd2Parse.buildAwdDocumentCamera__awd2Parse(camera, (cast ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast camera : ParsedCamera__awd2Parse).parentId)) : Null<Float>), (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>));
     }
     for (__iteration4 in _Runtime.iterable(lightPickerBlocks)) {
-      var blockId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
-      var picker:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
-      for (lightId in _Runtime.iterable(_Runtime.field(picker, 'lightIds'))) {
-        if ((cast !(cast ((cast lightBlocks : flighthq._internal._Map).has(lightId)) : Bool) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-missing-light', 'parseAwd2', { block: blockId, light: lightId }] : Array<Dynamic>));
+      var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var picker:ParsedLightPicker__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
+      for (lightId in _Runtime.iterable((cast picker : ParsedLightPicker__awd2Parse).lightIds)) {
+        if ((cast !(cast ((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).has(lightId)) : Bool) : Bool)) {
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-picker-missing-light' : String), (cast 'parseAwd2' : String), (cast { block: blockId, light: lightId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         }
       }
     }
-    if ((cast _Runtime.callValue(Awd2Parse.isAwdLightScopeDropped__awd2Parse, cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [((cast lightBlocks : flighthq._internal._Map).keys())]), lightPickerBlocks] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.light-scope-dropped', 'parseAwd2', { lights: (cast lightBlocks : flighthq._internal._Map).size, pickers: (cast lightPickerBlocks : flighthq._internal._Map).size }] : Array<Dynamic>));
+    if ((cast (cast Awd2Parse.isAwdLightScopeDropped__awd2Parse((cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).keys())]) : flighthq._internal._Set<Float>), lightPickerBlocks) : Bool) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.light-scope-dropped' : String), (cast 'parseAwd2' : String), (cast { lights: (cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).size, pickers: (cast lightPickerBlocks : flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse>).size } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast ((cast _Runtime.field(skeletonJointNodeIndices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(document, 'animations'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(Awd2Parse.buildAwdDocumentAnimations__awd2Parse, cast ([source, skeletonJointNodeIndices, diagnostics] : Array<Dynamic>)))]));
+      _Runtime.callProperty((cast document : Scene3DDocument).animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Awd2Parse.buildAwdDocumentAnimations__awd2Parse((cast source : flighthq._internal._UInt8Array), (cast skeletonJointNodeIndices : Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Scene3DDocumentAnimation>))]));
     }
     return cast document;
     return cast null;
   }
 
-  public static function parseAwd2SkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Dynamic {
-    var input:Dynamic = cast _Runtime.UNDEFINED;
-    var rehydrated:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyLength:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var poseBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var animationBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parsedSkeleton:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseAwd2SkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):flighthq._internal._Record<String, AnimationClip> {
+    var input:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var rehydrated:Null<{ var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }> = cast _Runtime.UNDEFINED;
+    var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var bodyLength:Float = cast _Runtime.UNDEFINED;
+    var bodyEnd:Float = cast _Runtime.UNDEFINED;
+    var skeletonBlocks:flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse> = cast _Runtime.UNDEFINED;
+    var poseBlocks:flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse> = cast _Runtime.UNDEFINED;
+    var animationBlocks:flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse> = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parsedSkeleton:ParsedSkeleton__awd2Parse = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._Record<String, AnimationClip> = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     input = (cast bytes : flighthq._internal._UInt8Array);
     if ((cast ((cast _Runtime.field(input, 'byteLength') : Float) < (cast AWD2_HEADER_BYTES : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.header-too-short', 'parseAwd2SkeletonAnimations'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.header-too-short' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast {  };
     }
     if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 0.0), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 1.0), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 2.0), AWD2_MAGIC_2) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.bad-magic', 'parseAwd2SkeletonAnimations'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.bad-magic' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast {  };
     }
-    if ((cast !(cast _Runtime.callValue(Awd2Parse.isAwd2Version__awd2Parse, cast ([input, diagnostics] : Array<Dynamic>)) : Bool) : Bool)) { return cast {  }; }
-    rehydrated = _Runtime.callValue(Awd2Parse.rehydrateAwdBody__awd2Parse, cast ([input, diagnostics] : Array<Dynamic>));
+    if ((cast !(cast (cast Awd2Parse.isAwd2Version__awd2Parse((cast input : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Bool) : Bool) : Bool)) { return cast {  }; }
+    rehydrated = (cast Awd2Parse.rehydrateAwdBody__awd2Parse((cast input : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<{ var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }>);
     if ((cast _Runtime.strictEquals(rehydrated, null) : Bool)) { return cast {  }; }
-    source = _Runtime.field(rehydrated, 'source');
-    view = _Runtime.field(rehydrated, 'view');
+    source = (cast rehydrated : { var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }).source;
+    view = (cast rehydrated : { var source:flighthq._internal._UInt8Array; var view:flighthq._internal._Any; }).view;
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
     bodyEnd = HxMath.min((AWD2_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
     skeletonBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -443,107 +460,107 @@ class Awd2Parse {
     animationBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
-      var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var namespace:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
-      var blockLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
-      var blockDataStart:Dynamic = (offset + AWD2_BLOCK_HEADER_BYTES);
+      var blockId:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
+      var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.block-length-past-end', 'parseAwd2SkeletonAnimations'] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.block-length-past-end' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         break;
       }
-      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
+      var matrixWide:Bool = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
-          var skeleton:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
+          var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast Awd2Parse.parseSkeletonBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeleton__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, skeleton)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_POSE) : Bool)) {
-          var pose:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonPoseBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flighthq._internal._Map).set(blockId, pose)); }
+          var pose:Null<ParsedSkeletonPose__awd2Parse> = (cast Awd2Parse.parseSkeletonPoseBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeletonPose__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set(blockId, pose)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_ANIMATION) : Bool)) {
-          var anim:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonAnimationBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flighthq._internal._Map).set(blockId, anim)); }
+          var anim:Null<ParsedSkeletonAnimation__awd2Parse> = (cast Awd2Parse.parseSkeletonAnimationBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeletonAnimation__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set(blockId, anim)); }
         } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
-    if ((cast _Runtime.strictEquals((cast skeletonBlocks : flighthq._internal._Map).size, 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.no-skeleton-blocks', 'parseAwd2SkeletonAnimations'] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size, 0.0) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.no-skeleton-blocks' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast {  };
     }
-    if ((cast _Runtime.strictEquals((cast animationBlocks : flighthq._internal._Map).size, 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.no-skeleton-animation-blocks', 'parseAwd2SkeletonAnimations'] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).size, 0.0) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.no-skeleton-animation-blocks' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast {  };
     }
-    parsedSkeleton = _Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value');
-    if ((cast ((cast _Runtime.field(joints, 'length') : Float) < (cast _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length') : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.joint-count-mismatch', 'parseAwd2SkeletonAnimations', { jointNodes: _Runtime.field(joints, 'length'), skeletonJoints: _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length') }] : Array<Dynamic>));
+    parsedSkeleton = (cast _Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).values()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<ParsedSkeleton__awd2Parse>; }).value;
+    if ((cast ((cast _Runtime.field(joints, 'length') : Float) < (cast _Runtime.field((cast parsedSkeleton : ParsedSkeleton__awd2Parse).joints, 'length') : Float)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.joint-count-mismatch' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast { jointNodes: _Runtime.field(joints, 'length'), skeletonJoints: _Runtime.field((cast parsedSkeleton : ParsedSkeleton__awd2Parse).joints, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast {  };
     }
     out = {  };
     index = 0.0;
-    for (parsedAnimation in _Runtime.iterable(((cast animationBlocks : flighthq._internal._Map).values()))) {
-      var clip:Dynamic = _Runtime.callValue(Awd2Parse.buildAwdSkeletonAnimationClip__awd2Parse, cast ([parsedAnimation, _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length'), poseBlocks, joints, diagnostics] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setIndex(out, _Runtime.orValue(_Runtime.field(parsedAnimation, 'name'), function():Dynamic return cast 'animation' + Std.string(index) + ''), clip); }
+    for (parsedAnimation in _Runtime.iterable(((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).values()))) {
+      var clip:Null<AnimationClip> = (cast Awd2Parse.buildAwdSkeletonAnimationClip__awd2Parse(parsedAnimation, (cast _Runtime.field((cast parsedSkeleton : ParsedSkeleton__awd2Parse).joints, 'length') : Float), poseBlocks, (cast joints : Array<Node3D>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<AnimationClip>);
+      if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setIndex(out, _Runtime.orValue((cast parsedAnimation : ParsedSkeletonAnimation__awd2Parse).name, function():Dynamic return cast 'animation' + Std.string(index) + ''), clip); }
       index++;
     }
     return cast out;
     return cast null;
   }
 
-  public static function buildAwdSkeletonAnimationClip__awd2Parse(parsedAnimation:ParsedSkeletonAnimation__awd2Parse, jointCount:Float, poseBlocks:Dynamic, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Null<AnimationClip> {
-    var poseCount:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildAwdSkeletonAnimationClip__awd2Parse(parsedAnimation:ParsedSkeletonAnimation__awd2Parse, jointCount:Float, poseBlocks:flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Null<AnimationClip> {
+    var poseCount:Float = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
-    var timeAccumulator:Dynamic = cast _Runtime.UNDEFINED;
-    var poseMatrix:Dynamic = cast _Runtime.UNDEFINED;
-    var poseTransform:Dynamic = cast _Runtime.UNDEFINED;
-    var channels:Dynamic = cast _Runtime.UNDEFINED;
-    var missingPoseBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var timeAccumulator:Float = cast _Runtime.UNDEFINED;
+    var poseMatrix:Matrix4 = cast _Runtime.UNDEFINED;
+    var poseTransform:Transform3D = cast _Runtime.UNDEFINED;
+    var channels:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var missingPoseBlocks:Null<flighthq._internal._Set<Float>> = cast _Runtime.UNDEFINED;
     poseCount = _Runtime.field(_Runtime.field(parsedAnimation, 'poses'), 'length');
     if ((cast _Runtime.strictEquals(poseCount, 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.animation-no-poses', 'buildAwdSkeletonAnimationClip'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.animation-no-poses' : String), (cast 'buildAwdSkeletonAnimationClip' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     times = cast ([] : Array<Dynamic>);
     timeAccumulator = 0.0;
     {
-      var p:Dynamic = 0.0;
+      var p:Float = 0.0;
       while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([timeAccumulator] : Array<Dynamic>));
-        (timeAccumulator = cast ((timeAccumulator + _Runtime.divideNumbers(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration'), 1000.0)) : Dynamic));
+        (timeAccumulator = cast ((timeAccumulator + ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).duration / 1000.0)) : Dynamic));
         p++;
       }
     }
-    poseMatrix = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    poseTransform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    poseMatrix = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+    poseTransform = (cast createTransform3D() : Transform3D);
     channels = cast ([] : Array<Dynamic>);
     missingPoseBlocks = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), function():Dynamic return cast null);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var scaleValues:Array<Float> = cast ([] : Array<Dynamic>);
-        var hasScale:Dynamic = false;
+        var hasScale:Bool = false;
         {
-          var p:Dynamic = 0.0;
+          var p:Float = 0.0;
           while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
-            var poseBlockId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
-            var pose:Dynamic = ((cast poseBlocks : flighthq._internal._Map).get(poseBlockId));
+            var poseBlockId:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).poseBlockId;
+            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get(poseBlockId));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection22:Dynamic = missingPoseBlocks; __collection22 == null ? _Runtime.UNDEFINED : ((cast __collection22 : flighthq._internal._Set).add(poseBlockId)); });
+              ({ final __collection22:Dynamic = missingPoseBlocks; __collection22 == null ? _Runtime.UNDEFINED : ((cast __collection22 : flighthq._internal._Set<Float>).add(poseBlockId)); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-            } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field(_Runtime.field(pose, 'jointTransforms'), 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(pose, 'jointTransforms'), j), null) : Bool)) : Bool)) {
-              var transform:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pose, 'jointTransforms'), j);
+            } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j), null) : Bool)) : Bool)) {
+              var transform:flighthq._internal._Float64Array = flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j);
               _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64Array(transform, 9.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 10.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0)] : Array<Dynamic>));
-              _Runtime.callValue(Awd2Parse.awdTransformToMatrix4__awd2Parse, cast ([poseMatrix, transform] : Array<Dynamic>));
-              _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([poseTransform, poseMatrix] : Array<Dynamic>));
-              _Runtime.pushMany(rotationValues, cast ([_Runtime.field(poseTransform, 'rotation').x, _Runtime.field(poseTransform, 'rotation').y, _Runtime.field(poseTransform, 'rotation').z, _Runtime.field(poseTransform, 'rotation').w] : Array<Dynamic>));
-              _Runtime.pushMany(scaleValues, cast ([_Runtime.field(poseTransform, 'scale').x, _Runtime.field(poseTransform, 'scale').y, _Runtime.field(poseTransform, 'scale').z] : Array<Dynamic>));
-              if ((cast _Runtime.callValue(Awd2Parse.hasNonUnitScale__awd2Parse, cast ([_Runtime.field(poseTransform, 'scale').x, _Runtime.field(poseTransform, 'scale').y, _Runtime.field(poseTransform, 'scale').z] : Array<Dynamic>)) : Bool)) { (hasScale = cast (true : Dynamic)); }
+              Awd2Parse.awdTransformToMatrix4__awd2Parse((cast poseMatrix : Matrix4), (cast transform : flighthq._internal._Float64Array));
+              decomposeMatrix4ToTransform3D(poseTransform, poseMatrix);
+              _Runtime.pushMany(rotationValues, cast ([(cast poseTransform : Transform3D).rotation.x, (cast poseTransform : Transform3D).rotation.y, (cast poseTransform : Transform3D).rotation.z, (cast poseTransform : Transform3D).rotation.w] : Array<Dynamic>));
+              _Runtime.pushMany(scaleValues, cast ([(cast poseTransform : Transform3D).scale.x, (cast poseTransform : Transform3D).scale.y, (cast poseTransform : Transform3D).scale.z] : Array<Dynamic>));
+              if ((cast (cast Awd2Parse.hasNonUnitScale__awd2Parse((cast (cast poseTransform : Transform3D).scale.x : Float), (cast (cast poseTransform : Transform3D).scale.y : Float), (cast (cast poseTransform : Transform3D).scale.z : Float)) : Bool) : Bool)) { (hasScale = cast (true : Dynamic)); }
             } else {
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
@@ -552,37 +569,37 @@ class Awd2Parse {
             p++;
           }
         }
-        var translationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
-        _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([translationTrack, { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathTranslation }] : Array<Dynamic>))] : Array<Dynamic>));
-        var rotationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));
-        _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([rotationTrack, { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathRotation }] : Array<Dynamic>))] : Array<Dynamic>));
+        var translationTrack:AnimationTrack = (cast createAnimationTrack({ components: 3.0, times: times, values: translationValues }) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([createAnimationChannel((cast translationTrack : AnimationTrack), (cast { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathTranslation } : flighthq._internal._Any))] : Array<Dynamic>));
+        var rotationTrack:AnimationTrack = (cast createAnimationTrack({ components: 4.0, quaternion: true, times: times, values: rotationValues }) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([createAnimationChannel((cast rotationTrack : AnimationTrack), (cast { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathRotation } : flighthq._internal._Any))] : Array<Dynamic>));
         if ((cast hasScale : Bool)) {
-          var scaleTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: scaleValues }] : Array<Dynamic>));
-          _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([scaleTrack, { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathScale }] : Array<Dynamic>))] : Array<Dynamic>));
+          var scaleTrack:AnimationTrack = (cast createAnimationTrack({ components: 3.0, times: times, values: scaleValues }) : AnimationTrack);
+          _Runtime.callProperty(channels, 'push', cast ([createAnimationChannel((cast scaleTrack : AnimationTrack), (cast { node: flighthq._internal._StaticIndex.readArray(joints, j), path: Scene3DAnimationPathScale } : flighthq._internal._Any))] : Array<Dynamic>));
         }
         j++;
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(missingPoseBlocks, null) : Bool) && (cast ((cast (cast missingPoseBlocks : flighthq._internal._Set).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.pose-block-missing', 'buildAwdSkeletonAnimationClip', { distinctPoseBlocks: (cast missingPoseBlocks : flighthq._internal._Set).size, firstPoseBlock: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(missingPoseBlocks)])) }] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(missingPoseBlocks, null) : Bool) && (cast ((cast (cast missingPoseBlocks : flighthq._internal._Set<Float>).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.pose-block-missing' : String), (cast 'buildAwdSkeletonAnimationClip' : String), (cast { distinctPoseBlocks: (cast missingPoseBlocks : flighthq._internal._Set<Float>).size, firstPoseBlock: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(missingPoseBlocks)])) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    return cast _Runtime.callValue(createAnimationClip, cast ([channels, timeAccumulator] : Array<Dynamic>));
+    return cast (cast createAnimationClip(channels, (cast timeAccumulator : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<AnimationClip>);
     return cast null;
   }
 
   public static function buildAwdDocumentAnimations__awd2Parse(bytes:flighthq._internal._UInt8Array, jointNodeIndices:Array<Float>, ?diagnostics:Array<ImportDiagnostic>):Array<Scene3DDocumentAnimation> {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyLength:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var poseBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var animationBlocks:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parsedSkeleton:Dynamic = cast _Runtime.UNDEFINED;
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
+    var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var bodyLength:Float = cast _Runtime.UNDEFINED;
+    var bodyEnd:Float = cast _Runtime.UNDEFINED;
+    var skeletonBlocks:flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse> = cast _Runtime.UNDEFINED;
+    var poseBlocks:flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse> = cast _Runtime.UNDEFINED;
+    var animationBlocks:flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse> = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parsedSkeleton:ParsedSkeleton__awd2Parse = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
     var animations:Array<Scene3DDocumentAnimation> = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
@@ -592,37 +609,37 @@ class Awd2Parse {
     animationBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
-      var namespace:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Dynamic = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
-      var blockLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
-      var blockDataStart:Dynamic = (offset + AWD2_BLOCK_HEADER_BYTES);
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
+      var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) { break; }
-      var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var matrixWide:Dynamic = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
+      var blockId:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var matrixWide:Bool = !_Runtime.strictEquals((_Runtime.toInt32(blockFlags) & 1), 0.0);
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
-          var skeleton:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map).set(blockId, skeleton)); }
+          var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast Awd2Parse.parseSkeletonBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeleton__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, skeleton)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_POSE) : Bool)) {
-          var pose:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonPoseBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide, diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flighthq._internal._Map).set(blockId, pose)); }
+          var pose:Null<ParsedSkeletonPose__awd2Parse> = (cast Awd2Parse.parseSkeletonPoseBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeletonPose__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set(blockId, pose)); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_ANIMATION) : Bool)) {
-          var anim:Dynamic = _Runtime.callValue(Awd2Parse.parseSkeletonAnimationBlock__awd2Parse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), diagnostics] : Array<Dynamic>));
-          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flighthq._internal._Map).set(blockId, anim)); }
+          var anim:Null<ParsedSkeletonAnimation__awd2Parse> = (cast Awd2Parse.parseSkeletonAnimationBlock__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<ParsedSkeletonAnimation__awd2Parse>);
+          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set(blockId, anim)); }
         } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
-    if ((cast ((cast _Runtime.strictEquals((cast skeletonBlocks : flighthq._internal._Map).size, 0.0) : Bool) || (cast _Runtime.strictEquals((cast animationBlocks : flighthq._internal._Map).size, 0.0) : Bool)) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    parsedSkeleton = _Runtime.field(_Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map).values()), 'next', cast ([] : Array<Dynamic>)), 'value');
-    jointCount = _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length');
+    if ((cast ((cast _Runtime.strictEquals((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size, 0.0) : Bool) || (cast _Runtime.strictEquals((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).size, 0.0) : Bool)) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    parsedSkeleton = (cast _Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).values()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<ParsedSkeleton__awd2Parse>; }).value;
+    jointCount = _Runtime.field((cast parsedSkeleton : ParsedSkeleton__awd2Parse).joints, 'length');
     animations = cast ([] : Array<Dynamic>);
     index = 0.0;
-    for (parsedAnimation in _Runtime.iterable(((cast animationBlocks : flighthq._internal._Map).values()))) {
-      var built:Dynamic = _Runtime.callValue(Awd2Parse.buildAwdDocumentAnimation__awd2Parse, cast ([parsedAnimation, jointCount, poseBlocks, jointNodeIndices, diagnostics] : Array<Dynamic>));
+    for (parsedAnimation in _Runtime.iterable(((cast animationBlocks : flighthq._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).values()))) {
+      var built:Null<Scene3DDocumentAnimation> = (cast Awd2Parse.buildAwdDocumentAnimation__awd2Parse(parsedAnimation, (cast jointCount : Float), poseBlocks, (cast jointNodeIndices : Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Scene3DDocumentAnimation>);
       if ((cast !_Runtime.strictEquals(built, null) : Bool)) {
-        _Runtime.setField(built, 'name', _Runtime.orValue(_Runtime.field(parsedAnimation, 'name'), function():Dynamic return cast 'animation' + Std.string(index) + ''));
+        ((cast built : Scene3DDocumentAnimation).name = _Runtime.orValue((cast parsedAnimation : ParsedSkeletonAnimation__awd2Parse).name, function():Dynamic return cast 'animation' + Std.string(index) + ''));
         _Runtime.callProperty(animations, 'push', cast ([built] : Array<Dynamic>));
       }
       index++;
@@ -631,59 +648,59 @@ class Awd2Parse {
     return cast null;
   }
 
-  public static function buildAwdDocumentAnimation__awd2Parse(parsedAnimation:ParsedSkeletonAnimation__awd2Parse, jointCount:Float, poseBlocks:Dynamic, jointNodeIndices:Array<Float>, ?diagnostics:Array<ImportDiagnostic>):Null<Scene3DDocumentAnimation> {
-    var poseCount:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildAwdDocumentAnimation__awd2Parse(parsedAnimation:ParsedSkeletonAnimation__awd2Parse, jointCount:Float, poseBlocks:flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>, jointNodeIndices:Array<Float>, ?diagnostics:Array<ImportDiagnostic>):Null<Scene3DDocumentAnimation> {
+    var poseCount:Float = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
-    var timeAccumulator:Dynamic = cast _Runtime.UNDEFINED;
-    var poseMatrix:Dynamic = cast _Runtime.UNDEFINED;
-    var poseTransform:Dynamic = cast _Runtime.UNDEFINED;
+    var timeAccumulator:Float = cast _Runtime.UNDEFINED;
+    var poseMatrix:Matrix4 = cast _Runtime.UNDEFINED;
+    var poseTransform:Transform3D = cast _Runtime.UNDEFINED;
     var channels:Array<Scene3DDocumentAnimationChannel> = cast _Runtime.UNDEFINED;
-    var missingPoseBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var missingPoseBlocks:Null<flighthq._internal._Set<Float>> = cast _Runtime.UNDEFINED;
     poseCount = _Runtime.field(_Runtime.field(parsedAnimation, 'poses'), 'length');
     if ((cast _Runtime.strictEquals(poseCount, 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.animation-no-poses', 'buildAwdDocumentAnimation'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.animation-no-poses' : String), (cast 'buildAwdDocumentAnimation' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     times = cast ([] : Array<Dynamic>);
     timeAccumulator = 0.0;
     {
-      var p:Dynamic = 0.0;
+      var p:Float = 0.0;
       while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([timeAccumulator] : Array<Dynamic>));
-        (timeAccumulator = cast ((timeAccumulator + _Runtime.divideNumbers(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'duration'), 1000.0)) : Dynamic));
+        (timeAccumulator = cast ((timeAccumulator + ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).duration / 1000.0)) : Dynamic));
         p++;
       }
     }
-    poseMatrix = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    poseTransform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    poseMatrix = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+    poseTransform = (cast createTransform3D() : Transform3D);
     channels = cast ([] : Array<Dynamic>);
     missingPoseBlocks = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), function():Dynamic return cast null);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         if ((cast ((cast j : Float) >= (cast _Runtime.field(jointNodeIndices, 'length') : Float)) : Bool)) { break; }
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var scaleValues:Array<Float> = cast ([] : Array<Dynamic>);
-        var hasScale:Dynamic = false;
+        var hasScale:Bool = false;
         {
-          var p:Dynamic = 0.0;
+          var p:Float = 0.0;
           while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
-            var poseBlockId:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
-            var pose:Dynamic = ((cast poseBlocks : flighthq._internal._Map).get(poseBlockId));
+            var poseBlockId:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).poseBlockId;
+            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flighthq._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get(poseBlockId));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection25:Dynamic = missingPoseBlocks; __collection25 == null ? _Runtime.UNDEFINED : ((cast __collection25 : flighthq._internal._Set).add(poseBlockId)); });
+              ({ final __collection25:Dynamic = missingPoseBlocks; __collection25 == null ? _Runtime.UNDEFINED : ((cast __collection25 : flighthq._internal._Set<Float>).add(poseBlockId)); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-            } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field(_Runtime.field(pose, 'jointTransforms'), 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(pose, 'jointTransforms'), j), null) : Bool)) : Bool)) {
-              var transform:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pose, 'jointTransforms'), j);
+            } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j), null) : Bool)) : Bool)) {
+              var transform:flighthq._internal._Float64Array = flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j);
               _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64Array(transform, 9.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 10.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0)] : Array<Dynamic>));
-              _Runtime.callValue(Awd2Parse.awdTransformToMatrix4__awd2Parse, cast ([poseMatrix, transform] : Array<Dynamic>));
-              _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([poseTransform, poseMatrix] : Array<Dynamic>));
-              _Runtime.pushMany(rotationValues, cast ([_Runtime.field(poseTransform, 'rotation').x, _Runtime.field(poseTransform, 'rotation').y, _Runtime.field(poseTransform, 'rotation').z, _Runtime.field(poseTransform, 'rotation').w] : Array<Dynamic>));
-              _Runtime.pushMany(scaleValues, cast ([_Runtime.field(poseTransform, 'scale').x, _Runtime.field(poseTransform, 'scale').y, _Runtime.field(poseTransform, 'scale').z] : Array<Dynamic>));
-              if ((cast _Runtime.callValue(Awd2Parse.hasNonUnitScale__awd2Parse, cast ([_Runtime.field(poseTransform, 'scale').x, _Runtime.field(poseTransform, 'scale').y, _Runtime.field(poseTransform, 'scale').z] : Array<Dynamic>)) : Bool)) { (hasScale = cast (true : Dynamic)); }
+              Awd2Parse.awdTransformToMatrix4__awd2Parse((cast poseMatrix : Matrix4), (cast transform : flighthq._internal._Float64Array));
+              decomposeMatrix4ToTransform3D(poseTransform, poseMatrix);
+              _Runtime.pushMany(rotationValues, cast ([(cast poseTransform : Transform3D).rotation.x, (cast poseTransform : Transform3D).rotation.y, (cast poseTransform : Transform3D).rotation.z, (cast poseTransform : Transform3D).rotation.w] : Array<Dynamic>));
+              _Runtime.pushMany(scaleValues, cast ([(cast poseTransform : Transform3D).scale.x, (cast poseTransform : Transform3D).scale.y, (cast poseTransform : Transform3D).scale.z] : Array<Dynamic>));
+              if ((cast (cast Awd2Parse.hasNonUnitScale__awd2Parse((cast (cast poseTransform : Transform3D).scale.x : Float), (cast (cast poseTransform : Transform3D).scale.y : Float), (cast (cast poseTransform : Transform3D).scale.z : Float)) : Bool) : Bool)) { (hasScale = cast (true : Dynamic)); }
             } else {
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
@@ -692,29 +709,29 @@ class Awd2Parse {
             p++;
           }
         }
-        var translationTrack:AnimationTrack = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
+        var translationTrack:AnimationTrack = (cast createAnimationTrack({ components: 3.0, times: times, values: translationValues }) : AnimationTrack);
         _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathTranslation, track: translationTrack }] : Array<Dynamic>));
-        var rotationTrack:AnimationTrack = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));
+        var rotationTrack:AnimationTrack = (cast createAnimationTrack({ components: 4.0, quaternion: true, times: times, values: rotationValues }) : AnimationTrack);
         _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathRotation, track: rotationTrack }] : Array<Dynamic>));
         if ((cast hasScale : Bool)) {
-          var scaleTrack:AnimationTrack = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: scaleValues }] : Array<Dynamic>));
+          var scaleTrack:AnimationTrack = (cast createAnimationTrack({ components: 3.0, times: times, values: scaleValues }) : AnimationTrack);
           _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathScale, track: scaleTrack }] : Array<Dynamic>));
         }
         j++;
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(missingPoseBlocks, null) : Bool) && (cast ((cast (cast missingPoseBlocks : flighthq._internal._Set).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.pose-block-missing', 'buildAwdDocumentAnimation', { distinctPoseBlocks: (cast missingPoseBlocks : flighthq._internal._Set).size, firstPoseBlock: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(missingPoseBlocks)])) }] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(missingPoseBlocks, null) : Bool) && (cast ((cast (cast missingPoseBlocks : flighthq._internal._Set<Float>).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.pose-block-missing' : String), (cast 'buildAwdDocumentAnimation' : String), (cast { distinctPoseBlocks: (cast missingPoseBlocks : flighthq._internal._Set<Float>).size, firstPoseBlock: _Runtime.callProperty(HxMath, 'min', _Runtime.concatArrays([_Runtime.toArray(missingPoseBlocks)])) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast { channels: channels, duration: timeAccumulator, name: _Runtime.field(parsedAnimation, 'name') };
     return cast null;
   }
 
   public static function isAwd2Version__awd2Parse(input:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Bool {
-    var versionMajor:Dynamic = cast _Runtime.UNDEFINED;
+    var versionMajor:Float = cast _Runtime.UNDEFINED;
     versionMajor = flighthq._internal._StaticIndex.readUint8Array(input, AWD2_VERSION_MAJOR_OFFSET);
     if ((cast _Runtime.strictEquals(versionMajor, AWD2_FORMAT_VERSION) : Bool)) { return cast true; }
-    _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.unsupported-version', 'isAwd2Version', { version: versionMajor }] : Array<Dynamic>));
+    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.unsupported-version' : String), (cast 'isAwd2Version' : String), (cast { version: versionMajor } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     return cast false;
     return cast null;
   }
@@ -725,34 +742,34 @@ class Awd2Parse {
   }
 
   public static function buildAwdSkeletonDocument__awd2Parse(parsedSkeleton:ParsedSkeleton__awd2Parse, document:Scene3DDocument):{ var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; } {
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var skeletonRootIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
+    var skeletonRootIndex:Float = cast _Runtime.UNDEFINED;
     var jointNodeIndices:Array<Float> = cast _Runtime.UNDEFINED;
     var inverseBind:Array<Matrix4> = cast _Runtime.UNDEFINED;
     var bindWorld:Array<Matrix4> = cast _Runtime.UNDEFINED;
-    var invParent:Dynamic = cast _Runtime.UNDEFINED;
-    var local:Dynamic = cast _Runtime.UNDEFINED;
+    var invParent:Matrix4 = cast _Runtime.UNDEFINED;
+    var local:Matrix4 = cast _Runtime.UNDEFINED;
     var skin:Scene3DDocumentSkin = cast _Runtime.UNDEFINED;
     jointCount = _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length');
-    skeletonRootIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
-    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    skeletonRootIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
+    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
     jointNodeIndices = cast ([] : Array<Dynamic>);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field(_Runtime.field(document, 'nodes'), 'length')] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j), 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field((cast document : Scene3DDocument).nodes, 'length')] : Array<Dynamic>));
+        _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
         j++;
       }
     }
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        var parentIndex1:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j), 'parentIndex');
+        var parentIndex1:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).parentIndex;
         if ((cast ((cast ((cast parentIndex1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (parentIndex1 - 1.0) : Float) < (cast jointCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), flighthq._internal._StaticIndex.readArray(jointNodeIndices, (parentIndex1 - 1.0))), 'children'), 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readArray(jointNodeIndices, (parentIndex1 - 1.0))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), skeletonRootIndex), 'children'), 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
         }
         j++;
       }
@@ -760,30 +777,30 @@ class Awd2Parse {
     inverseBind = cast ([] : Array<Dynamic>);
     bindWorld = cast ([] : Array<Dynamic>);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        var invBind:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(Awd2Parse.awdTransformToMatrix4__awd2Parse, cast ([invBind, _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j), 'transform')] : Array<Dynamic>));
+        var invBind:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+        Awd2Parse.awdTransformToMatrix4__awd2Parse((cast invBind : Matrix4), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).transform : flighthq._internal._Float64Array));
         _Runtime.callProperty(inverseBind, 'push', cast ([invBind] : Array<Dynamic>));
-        var bw:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(inverseMatrix4, cast ([bw, invBind] : Array<Dynamic>));
+        var bw:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+        (cast inverseMatrix4(bw, invBind) : Bool);
         _Runtime.callProperty(bindWorld, 'push', cast ([bw] : Array<Dynamic>));
         j++;
       }
     }
-    invParent = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-    local = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+    invParent = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+    local = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        var parentIndex1:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j), 'parentIndex');
+        var parentIndex1:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).parentIndex;
         if ((cast ((cast ((cast parentIndex1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (parentIndex1 - 1.0) : Float) < (cast jointCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callValue(inverseMatrix4, cast ([invParent, flighthq._internal._StaticIndex.readArray(bindWorld, (parentIndex1 - 1.0))] : Array<Dynamic>));
-          _Runtime.callValue(multiplyMatrix4, cast ([local, invParent, flighthq._internal._StaticIndex.readArray(bindWorld, j)] : Array<Dynamic>));
+          (cast inverseMatrix4(invParent, flighthq._internal._StaticIndex.readArray(bindWorld, (parentIndex1 - 1.0))) : Bool);
+          multiplyMatrix4(local, invParent, flighthq._internal._StaticIndex.readArray(bindWorld, j));
         } else {
-          _Runtime.callValue(copyMatrix4, cast ([local, flighthq._internal._StaticIndex.readArray(bindWorld, j)] : Array<Dynamic>));
+          copyMatrix4(local, flighthq._internal._StaticIndex.readArray(bindWorld, j));
         }
-        _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)), 'transform'), local] : Array<Dynamic>));
+        decomposeMatrix4ToTransform3D((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)) : Scene3DDocumentNode).transform, local);
         j++;
       }
     }
@@ -793,9 +810,9 @@ class Awd2Parse {
   }
 
   public static function readAwdString__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, offset:Float):{ var end:Float; var value:String; } {
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var stringBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
+    var stringBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var value:String = cast _Runtime.UNDEFINED;
     length = _Runtime.callProperty((cast view : Dynamic), 'getUint16', cast ([offset, true] : Array<Dynamic>));
     stringBytes = (cast (cast source : flighthq._internal._UInt8Array) : flighthq._internal._UInt8Array).subarray(Std.int((offset + 2.0)), Std.int(((offset + 2.0) + length)));
     value = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(stringBytes);
@@ -804,37 +821,37 @@ class Awd2Parse {
   }
 
   public static function readAwdTransform__awd2Parse(view:Dynamic, offset:Float, widePrecision:Bool):{ var end:Float; var transform:flighthq._internal._Float64Array; } {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var transform:flighthq._internal._Float64Array = cast _Runtime.UNDEFINED;
+    var floatSize:Float = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     transform = new flighthq._internal._Float64Array(12.0);
     floatSize = ((cast widePrecision : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat64Array(transform, i, ((cast widePrecision : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic)));
         i++;
       }
     }
-    _Runtime.callValue(convertTransformLhToRh, cast ([transform] : Array<Dynamic>));
+    convertTransformLhToRh((cast transform : flighthq._internal._Float64Array));
     return cast { end: (offset + (12.0 * floatSize)), transform: transform };
     return cast null;
   }
 
   public static function awdTransformToTransform3D__awd2Parse(transform:flighthq._internal._Float64Array):Transform3D {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(Awd2Parse.awdTransformToMatrix4__awd2Parse, cast ([Awd2Parse._awdTransformScratch__awd2Parse, transform] : Array<Dynamic>));
-    out = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([out, Awd2Parse._awdTransformScratch__awd2Parse] : Array<Dynamic>));
+    var out:Transform3D = cast _Runtime.UNDEFINED;
+    Awd2Parse.awdTransformToMatrix4__awd2Parse((cast Awd2Parse._awdTransformScratch__awd2Parse : Matrix4), (cast transform : flighthq._internal._Float64Array));
+    out = (cast createTransform3D() : Transform3D);
+    decomposeMatrix4ToTransform3D(out, Awd2Parse._awdTransformScratch__awd2Parse);
     return cast out;
     return cast null;
   }
 
-  public static final _awdTransformScratch__awd2Parse:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _awdTransformScratch__awd2Parse:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
   public static function awdTransformToMatrix4__awd2Parse(out:Matrix4, transform:flighthq._internal._Float64Array):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = out.m;
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 0.0));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 1.0));
@@ -877,7 +894,7 @@ class Awd2Parse {
   }
 
   public static function readAwdDataValue__awd2Parse(view:Dynamic, offset:Float, dataType:Float):Float {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     {
       var __switchValue = dataType;
@@ -913,7 +930,7 @@ class Awd2Parse {
   }
 
   public static function skipAwdAttrList__awd2Parse(view:Dynamic, offset:Float, end:Float):Float {
-    var byteLength:Dynamic = cast _Runtime.UNDEFINED;
+    var byteLength:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) { return cast offset; }
     byteLength = _Runtime.callProperty((cast view : Dynamic), 'getUint32', cast ([offset, true] : Array<Dynamic>));
     return cast ((offset + 4.0) + byteLength);
@@ -921,38 +938,38 @@ class Awd2Parse {
   }
 
   public static function parseTriangleGeometryBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, geometryWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Array<ParsedGeometry__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var numSubMeshes:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var numSubMeshes:Float = cast _Runtime.UNDEFINED;
     var geometries:Array<ParsedGeometry__awd2Parse> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.geometry-truncated', 'parseTriangleGeometryBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.geometry-truncated' : String), (cast 'parseTriangleGeometryBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast cast ([] : Array<Dynamic>);
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.geometry-truncated', 'parseTriangleGeometryBlock', { field: 'num-submeshes' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.geometry-truncated' : String), (cast 'parseTriangleGeometryBlock' : String), (cast { field: 'num-submeshes' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast cast ([] : Array<Dynamic>);
     }
     numSubMeshes = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
     geometries = cast ([] : Array<Dynamic>);
     {
-      var s:Dynamic = 0.0;
+      var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast numSubMeshes : Float)) : Bool)) {
         if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.submesh-truncated', 'parseTriangleGeometryBlock', { firstSubMesh: s }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.submesh-truncated' : String), (cast 'parseTriangleGeometryBlock' : String), (cast { firstSubMesh: s } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           break;
         }
-        var subMeshByteLen:Dynamic = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-        var subMeshEnd:Dynamic = ((offset + 4.0) + subMeshByteLen);
+        var subMeshByteLen:Float = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+        var subMeshEnd:Float = ((offset + 4.0) + subMeshByteLen);
         (offset = cast ((offset + 4.0) : Dynamic));
-        (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+        (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
         var positions:Null<Array<Float>> = null;
         var indices:Null<Array<Float>> = null;
         var uvs:Null<Array<Float>> = null;
@@ -961,21 +978,21 @@ class Awd2Parse {
         var jointIndices:Null<Array<Float>> = null;
         var jointWeights:Null<Array<Float>> = null;
         while ((cast ((cast (offset + 6.0) : Float) <= (cast subMeshEnd : Float)) : Bool)) {
-          var streamType:Dynamic = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
+          var streamType:Float = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
           (offset = cast ((offset + 1.0) : Dynamic));
-          var dataType:Dynamic = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
+          var dataType:Float = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
           (offset = cast ((offset + 1.0) : Dynamic));
-          var streamByteLength:Dynamic = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+          var streamByteLength:Float = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
           (offset = cast ((offset + 4.0) : Dynamic));
           if ((cast ((cast (offset + streamByteLength) : Float) > (cast end : Float)) : Bool)) {
-            _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.stream-data-past-end', 'parseTriangleGeometryBlock'] : Array<Dynamic>));
+            reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.stream-data-past-end' : String), (cast 'parseTriangleGeometryBlock' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
             break;
           }
           if ((cast _Runtime.strictEquals(streamType, AWD2_STREAM_JOINT_INDICES) : Bool)) {
-            var jointCount:Dynamic = HxMath.floor((streamByteLength / 2.0));
+            var jointCount:Float = HxMath.floor((streamByteLength / 2.0));
             var values:Array<Float> = cast ([] : Array<Dynamic>);
             {
-              var i:Dynamic = 0.0;
+              var i:Float = 0.0;
               while ((cast ((cast i : Float) < (cast jointCount : Float)) : Bool)) {
                 _Runtime.callProperty(values, 'push', cast ([_Runtime.callProperty(dv, 'getUint16', cast ([(offset + (i * 2.0)), true] : Array<Dynamic>))] : Array<Dynamic>));
                 i++;
@@ -985,13 +1002,13 @@ class Awd2Parse {
             (offset = cast ((offset + streamByteLength) : Dynamic));
             continue;
           }
-          var elementSize:Dynamic = _Runtime.callValue(Awd2Parse.awdDataTypeByteSize__awd2Parse, cast ([dataType] : Array<Dynamic>));
-          var count:Dynamic = HxMath.floor((streamByteLength / elementSize));
+          var elementSize:Float = (cast Awd2Parse.awdDataTypeByteSize__awd2Parse((cast dataType : Float)) : Float);
+          var count:Float = HxMath.floor((streamByteLength / elementSize));
           var values:Array<Float> = cast ([] : Array<Dynamic>);
           {
-            var i:Dynamic = 0.0;
+            var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-              _Runtime.callProperty(values, 'push', cast ([_Runtime.callValue(Awd2Parse.readAwdDataValue__awd2Parse, cast ([view, (offset + (i * elementSize)), dataType] : Array<Dynamic>))] : Array<Dynamic>));
+              _Runtime.callProperty(values, 'push', cast ([(cast Awd2Parse.readAwdDataValue__awd2Parse((cast view : flighthq._internal._Any), (cast (offset + (i * elementSize)) : Float), (cast dataType : Float)) : Float)] : Array<Dynamic>));
               i++;
             }
           }
@@ -1020,34 +1037,34 @@ class Awd2Parse {
             }
           }
         }
-        (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+        (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
         if ((cast ((cast _Runtime.strictEquals(positions, null) : Bool) || (cast ((cast _Runtime.field(positions, 'length') : Float) < (cast 3.0 : Float)) : Bool)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.submesh-no-positions', 'parseTriangleGeometryBlock'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.submesh-no-positions' : String), (cast 'parseTriangleGeometryBlock' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           s++;
           continue;
         }
-        _Runtime.callValue(negateVec3Z, cast ([positions] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(normals, null) : Bool)) { _Runtime.callValue(negateVec3Z, cast ([normals] : Array<Dynamic>)); }
-        if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) { _Runtime.callValue(negateVec3Z, cast ([tangents] : Array<Dynamic>)); }
-        if ((cast !_Runtime.strictEquals(indices, null) : Bool)) { _Runtime.callValue(reverseTriangleWinding, cast ([indices] : Array<Dynamic>)); }
-        var vertexCount:Dynamic = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
-        var jointsPerVertex:Dynamic = 0.0;
+        negateVec3Z((cast positions : Array<Float>));
+        if ((cast !_Runtime.strictEquals(normals, null) : Bool)) { negateVec3Z((cast normals : Array<Float>)); }
+        if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) { negateVec3Z((cast tangents : Array<Float>)); }
+        if ((cast !_Runtime.strictEquals(indices, null) : Bool)) { reverseTriangleWinding((cast indices : Array<Float>)); }
+        var vertexCount:Float = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
+        var jointsPerVertex:Float = 0.0;
         if ((cast ((cast ((cast !_Runtime.strictEquals(jointIndices, null) : Bool) && (cast !_Runtime.strictEquals(jointWeights, null) : Bool)) : Bool) && (cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           (jointsPerVertex = cast (HxMath.floor(_Runtime.divideNumbers(_Runtime.field(jointWeights, 'length'), vertexCount)) : Dynamic));
           if ((cast ((cast ((cast jointsPerVertex : Float) < (cast 1.0 : Float)) : Bool) || (cast ((cast _Runtime.field(jointIndices, 'length') : Float) < (cast (vertexCount * jointsPerVertex) : Float)) : Bool)) : Bool)) {
-            _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.skin-streams-mismatch', 'parseTriangleGeometryBlock'] : Array<Dynamic>));
+            reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.skin-streams-mismatch' : String), (cast 'parseTriangleGeometryBlock' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
             (jointsPerVertex = cast (0.0 : Dynamic));
           }
         }
-        var skinned:Dynamic = ((cast jointsPerVertex : Float) > (cast 0.0 : Float));
-        var floatsPerVertex:Dynamic = ((cast skinned : Bool) ? (cast SKINNED_FLOATS_PER_VERTEX : Dynamic) : (cast CANONICAL_FLOATS_PER_VERTEX : Dynamic));
-        var vertices:Dynamic = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
-        var jointScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
-        var weightScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+        var skinned:Bool = ((cast jointsPerVertex : Float) > (cast 0.0 : Float));
+        var floatsPerVertex:Float = ((cast skinned : Bool) ? (cast SKINNED_FLOATS_PER_VERTEX : Dynamic) : (cast CANONICAL_FLOATS_PER_VERTEX : Dynamic));
+        var vertices:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
+        var jointScratch:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+        var weightScratch:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         {
-          var v:Dynamic = 0.0;
+          var v:Float = 0.0;
           while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-            var o:Dynamic = (v * floatsPerVertex);
+            var o:Float = (v * floatsPerVertex);
             flighthq._internal._StaticIndex.writeFloat32Array(vertices, o, flighthq._internal._StaticIndex.readArray(positions, (v * 3.0)));
             flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 1.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 1.0)));
             flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 2.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 2.0)));
@@ -1069,14 +1086,14 @@ class Awd2Parse {
             if ((cast skinned : Bool)) {
               var influences:Array<SkinInfluence> = cast ([] : Array<Dynamic>);
               {
-                var k:Dynamic = 0.0;
+                var k:Float = 0.0;
                 while ((cast ((cast k : Float) < (cast jointsPerVertex : Float)) : Bool)) {
-                  var weight:Dynamic = flighthq._internal._StaticIndex.readArray(jointWeights, ((v * jointsPerVertex) + k));
+                  var weight:Float = flighthq._internal._StaticIndex.readArray(jointWeights, ((v * jointsPerVertex) + k));
                   if ((cast ((cast weight : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(influences, 'push', cast ([{ jointIndex: flighthq._internal._StaticIndex.readArray(jointIndices, ((v * jointsPerVertex) + k)), weight: weight }] : Array<Dynamic>)); }
                   k++;
                 }
               }
-              _Runtime.callValue(packSkinInfluences, cast ([influences, jointScratch, weightScratch] : Array<Dynamic>));
+              packSkinInfluences((cast influences : Array<SkinInfluence>), (cast jointScratch : Array<Float>), (cast weightScratch : Array<Float>));
               flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 12.0), flighthq._internal._StaticIndex.readArray(jointScratch, 0.0));
               flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 13.0), flighthq._internal._StaticIndex.readArray(jointScratch, 1.0));
               flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 14.0), flighthq._internal._StaticIndex.readArray(jointScratch, 2.0));
@@ -1089,11 +1106,11 @@ class Awd2Parse {
             v++;
           }
         }
-        var indexArray:Dynamic = ((cast !_Runtime.strictEquals(indices, null) : Bool) ? (cast new flighthq._internal._UInt32Array(indices) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-        var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: ((cast skinned : Bool) ? (cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT : Dynamic) : (cast CANONICAL_LAYOUT : Dynamic)), vertices: vertices }] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.strictEquals(normals, null) : Bool) && (cast !_Runtime.strictEquals(indexArray, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>)); }
+        var indexArray:Null<flighthq._internal._UInt32Array> = ((cast !_Runtime.strictEquals(indices, null) : Bool) ? (cast new flighthq._internal._UInt32Array(indices) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+        var geometry:MeshGeometry = (cast createMeshGeometry({ indices: indexArray, layout: ((cast skinned : Bool) ? (cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT : Dynamic) : (cast CANONICAL_LAYOUT : Dynamic)), vertices: vertices }) : MeshGeometry);
+        if ((cast ((cast _Runtime.strictEquals(normals, null) : Bool) && (cast !_Runtime.strictEquals(indexArray, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { computeMeshGeometryNormals(geometry, geometry); }
         if ((cast ((cast ((cast _Runtime.strictEquals(tangents, null) : Bool) && (cast !_Runtime.strictEquals(uvs, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(indexArray, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-          _Runtime.callValue(computeMeshGeometryTangents, cast ([geometry, geometry] : Array<Dynamic>));
+          computeMeshGeometryTangents(geometry, geometry);
         }
         _Runtime.callProperty(geometries, 'push', cast ([{ geometry: geometry, skinned: skinned }] : Array<Dynamic>));
         s++;
@@ -1104,81 +1121,81 @@ class Awd2Parse {
   }
 
   public static function parseContainerBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedContainer__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parentId:Dynamic = cast _Runtime.UNDEFINED;
-    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
-    var transformResult:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parentId:Float = cast _Runtime.UNDEFINED;
+    var floatSize:Float = cast _Runtime.UNDEFINED;
+    var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.container-truncated', 'parseContainerBlock', { field: 'parentId' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.container-truncated' : String), (cast 'parseContainerBlock' : String), (cast { field: 'parentId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     parentId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     floatSize = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
     if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.container-truncated', 'parseContainerBlock', { field: 'transform' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.container-truncated' : String), (cast 'parseContainerBlock' : String), (cast { field: 'transform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
+    transformResult = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+    (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.container-truncated', 'parseContainerBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.container-truncated' : String), (cast 'parseContainerBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-    return cast { name: _Runtime.field(nameResult, 'value'), parentId: parentId, transform: _Runtime.field(transformResult, 'transform') };
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+    return cast { name: (cast nameResult : { var end:Float; var value:String; }).value, parentId: parentId, transform: (cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform };
     return cast null;
   }
 
   public static function parseMeshInstanceBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedMeshInstance__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parentId:Dynamic = cast _Runtime.UNDEFINED;
-    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
-    var transformResult:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var geometryId:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parentId:Float = cast _Runtime.UNDEFINED;
+    var floatSize:Float = cast _Runtime.UNDEFINED;
+    var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var geometryId:Float = cast _Runtime.UNDEFINED;
     var materialIds:Array<Float> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.mesh-instance-truncated', 'parseMeshInstanceBlock', { field: 'parentId' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.mesh-instance-truncated' : String), (cast 'parseMeshInstanceBlock' : String), (cast { field: 'parentId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     parentId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     floatSize = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
     if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.mesh-instance-truncated', 'parseMeshInstanceBlock', { field: 'transform' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.mesh-instance-truncated' : String), (cast 'parseMeshInstanceBlock' : String), (cast { field: 'transform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
+    transformResult = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+    (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.mesh-instance-truncated', 'parseMeshInstanceBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.mesh-instance-truncated' : String), (cast 'parseMeshInstanceBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.mesh-instance-truncated', 'parseMeshInstanceBlock', { field: 'geometryId' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.mesh-instance-truncated' : String), (cast 'parseMeshInstanceBlock' : String), (cast { field: 'geometryId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     geometryId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     materialIds = cast ([] : Array<Dynamic>);
     if ((cast ((cast (offset + 2.0) : Float) <= (cast end : Float)) : Bool)) {
-      var numMaterials:Dynamic = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
+      var numMaterials:Float = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 2.0) : Dynamic));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast ((cast i : Float) < (cast numMaterials : Float)) : Bool) && (cast ((cast (offset + 4.0) : Float) <= (cast end : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(materialIds, 'push', cast ([_Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>))] : Array<Dynamic>));
           (offset = cast ((offset + 4.0) : Dynamic));
@@ -1186,91 +1203,91 @@ class Awd2Parse {
         }
       }
     }
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-    return cast { geometryId: geometryId, materialIds: materialIds, name: _Runtime.field(nameResult, 'value'), parentId: parentId, transform: _Runtime.field(transformResult, 'transform') };
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+    return cast { geometryId: geometryId, materialIds: materialIds, name: (cast nameResult : { var end:Float; var value:String; }).value, parentId: parentId, transform: (cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform };
     return cast null;
   }
 
   public static function parseMaterialBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedMaterial__awd2Parse> {
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var numMethods:Dynamic = cast _Runtime.UNDEFINED;
-    var props:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuseTextureId:Dynamic = cast _Runtime.UNDEFINED;
-    var normalTextureId:Dynamic = cast _Runtime.UNDEFINED;
-    var specularTextureId:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var gloss:Dynamic = cast _Runtime.UNDEFINED;
-    var specularColor:Dynamic = cast _Runtime.UNDEFINED;
-    var specularStrength:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var numMethods:Float = cast _Runtime.UNDEFINED;
+    var props:{ var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; } = cast _Runtime.UNDEFINED;
+    var diffuseTextureId:Float = cast _Runtime.UNDEFINED;
+    var normalTextureId:Float = cast _Runtime.UNDEFINED;
+    var specularTextureId:Float = cast _Runtime.UNDEFINED;
+    var color:Null<Float> = cast _Runtime.UNDEFINED;
+    var alpha:Null<Float> = cast _Runtime.UNDEFINED;
+    var gloss:Null<Float> = cast _Runtime.UNDEFINED;
+    var specularColor:Null<Float> = cast _Runtime.UNDEFINED;
+    var specularStrength:Null<Float> = cast _Runtime.UNDEFINED;
     offset = start;
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.material-truncated', 'parseMaterialBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.material-truncated' : String), (cast 'parseMaterialBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.material-truncated', 'parseMaterialBlock', { field: 'type' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.material-truncated' : String), (cast 'parseMaterialBlock' : String), (cast { field: 'type' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     (offset = cast ((offset + 1.0) : Dynamic));
     numMethods = flighthq._internal._StaticIndex.readUint8Array(source, offset);
     (offset = cast ((offset + 1.0) : Dynamic));
-    props = _Runtime.callValue(Awd2Parse.readAwdProperties__awd2Parse, cast ([view, offset, end] : Array<Dynamic>));
-    diffuseTextureId = _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_DIFFUSE_TEXTURE] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    normalTextureId = _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_NORMAL_TEXTURE] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    specularTextureId = _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_SPECULAR_TEXTURE] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    color = _Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_COLOR] : Array<Dynamic>));
-    alpha = _Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_ALPHA] : Array<Dynamic>));
-    gloss = _Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_GLOSS] : Array<Dynamic>));
-    specularColor = _Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_SPECULAR_COLOR] : Array<Dynamic>));
-    specularStrength = _Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_MATERIAL_PROP_SPECULAR_STRENGTH] : Array<Dynamic>));
-    return cast { alpha: alpha, color: color, diffuseTextureId: diffuseTextureId, gloss: gloss, name: _Runtime.field(nameResult, 'value'), normalTextureId: normalTextureId, numMethods: numMethods, specularColor: specularColor, specularStrength: specularStrength, specularTextureId: specularTextureId };
+    props = (cast Awd2Parse.readAwdProperties__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; });
+    diffuseTextureId = _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_DIFFUSE_TEXTURE : Float)) : Null<Float>), function():Dynamic return cast 0.0);
+    normalTextureId = _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_NORMAL_TEXTURE : Float)) : Null<Float>), function():Dynamic return cast 0.0);
+    specularTextureId = _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_SPECULAR_TEXTURE : Float)) : Null<Float>), function():Dynamic return cast 0.0);
+    color = (cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_COLOR : Float)) : Null<Float>);
+    alpha = (cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_ALPHA : Float)) : Null<Float>);
+    gloss = (cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_GLOSS : Float)) : Null<Float>);
+    specularColor = (cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_SPECULAR_COLOR : Float)) : Null<Float>);
+    specularStrength = (cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_MATERIAL_PROP_SPECULAR_STRENGTH : Float)) : Null<Float>);
+    return cast { alpha: alpha, color: color, diffuseTextureId: diffuseTextureId, gloss: gloss, name: (cast nameResult : { var end:Float; var value:String; }).value, normalTextureId: normalTextureId, numMethods: numMethods, specularColor: specularColor, specularStrength: specularStrength, specularTextureId: specularTextureId };
     return cast null;
   }
 
   public static function parseCameraBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedCamera__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parentId:Dynamic = cast _Runtime.UNDEFINED;
-    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
-    var transformResult:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var projectionType:Dynamic = cast _Runtime.UNDEFINED;
-    var props:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parentId:Float = cast _Runtime.UNDEFINED;
+    var floatSize:Float = cast _Runtime.UNDEFINED;
+    var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var projectionType:Float = cast _Runtime.UNDEFINED;
+    var props:{ var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; } = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.camera-truncated', 'parseCameraBlock', { field: 'parentId' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.camera-truncated' : String), (cast 'parseCameraBlock' : String), (cast { field: 'parentId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     parentId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     floatSize = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
     if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.camera-truncated', 'parseCameraBlock', { field: 'transform' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.camera-truncated' : String), (cast 'parseCameraBlock' : String), (cast { field: 'transform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
+    transformResult = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+    (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
     if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.camera-truncated', 'parseCameraBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.camera-truncated' : String), (cast 'parseCameraBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 5.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.camera-truncated', 'parseCameraBlock', { field: 'projectionType' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.camera-truncated' : String), (cast 'parseCameraBlock' : String), (cast { field: 'projectionType' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     (offset = cast ((offset + 3.0) : Dynamic));
     projectionType = _Runtime.callProperty(dv, 'getInt16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
-    props = _Runtime.callValue(Awd2Parse.readAwdProperties__awd2Parse, cast ([view, offset, end] : Array<Dynamic>));
-    return cast { bottom: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_CAMERA_PROP_ORTHO_BOTTOM] : Array<Dynamic>)), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_BOTTOM__awd2Parse), fov: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_CAMERA_PROP_FOV] : Array<Dynamic>)), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_FOV_DEGREES__awd2Parse), left: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_CAMERA_PROP_ORTHO_LEFT] : Array<Dynamic>)), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_LEFT__awd2Parse), name: _Runtime.field(nameResult, 'value'), parentId: parentId, projectionType: projectionType, right: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_CAMERA_PROP_ORTHO_RIGHT] : Array<Dynamic>)), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_RIGHT__awd2Parse), top: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyFloat32__awd2Parse, cast ([view, _Runtime.field(props, 'values'), AWD2_CAMERA_PROP_ORTHO_TOP] : Array<Dynamic>)), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_TOP__awd2Parse), transform: _Runtime.field(transformResult, 'transform') };
+    props = (cast Awd2Parse.readAwdProperties__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; });
+    return cast { bottom: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_CAMERA_PROP_ORTHO_BOTTOM : Float)) : Float), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_BOTTOM__awd2Parse), fov: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_CAMERA_PROP_FOV : Float)) : Float), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_FOV_DEGREES__awd2Parse), left: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_CAMERA_PROP_ORTHO_LEFT : Float)) : Float), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_LEFT__awd2Parse), name: (cast nameResult : { var end:Float; var value:String; }).value, parentId: parentId, projectionType: projectionType, right: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_CAMERA_PROP_ORTHO_RIGHT : Float)) : Float), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_RIGHT__awd2Parse), top: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyFloat32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_CAMERA_PROP_ORTHO_TOP : Float)) : Float), function():Dynamic return cast Awd2Parse.AWD2_CAMERA_DEFAULT_TOP__awd2Parse), transform: (cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform };
     return cast null;
   }
 
@@ -1283,115 +1300,115 @@ class Awd2Parse {
     } else { if ((cast _Runtime.strictEquals(_Runtime.field(camera, 'projectionType'), AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC_OFFCENTER) : Bool)) {
       (projection = cast ({ halfHeight: _Runtime.divideNumbers(HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(camera, 'top'), _Runtime.field(camera, 'bottom'))), 2.0), halfWidth: _Runtime.divideNumbers(HxMath.abs(_Runtime.subtractNumbers(_Runtime.field(camera, 'right'), _Runtime.field(camera, 'left'))), 2.0), kind: 'orthographic' } : Dynamic));
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.addNumbers(_Runtime.field(camera, 'right'), _Runtime.field(camera, 'left')), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.addNumbers(_Runtime.field(camera, 'top'), _Runtime.field(camera, 'bottom')), 0.0) : Bool)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.camera-offcenter-dropped', 'parseAwd2', { name: _Runtime.field(camera, 'name') }] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.camera-offcenter-dropped' : String), (cast 'parseAwd2' : String), (cast { name: _Runtime.field(camera, 'name') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     } else {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.camera-unsupported-projection', 'parseAwd2', { name: _Runtime.field(camera, 'name'), projectionType: _Runtime.field(camera, 'projectionType') }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.camera-unsupported-projection' : String), (cast 'parseAwd2' : String), (cast { name: _Runtime.field(camera, 'name'), projectionType: _Runtime.field(camera, 'projectionType') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return;
     } } }
-    _Runtime.callProperty(_Runtime.field(document, 'cameras'), 'push', cast ([_Runtime.mergeObjects([{ far: Awd2Parse.AWD2_CAMERA_DEFAULT_FAR__awd2Parse }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: Awd2Parse.AWD2_CAMERA_DEFAULT_NEAR__awd2Parse }, ((cast !_Runtime.strictEquals(nodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { node: nodeIndex } : Dynamic) : (cast {  } : Dynamic)), { projection: projection }, { transform: _Runtime.callValue(Awd2Parse.awdTransformToTransform3D__awd2Parse, cast ([_Runtime.field(camera, 'transform')] : Array<Dynamic>)) }])] : Array<Dynamic>));
+    _Runtime.callProperty((cast document : Scene3DDocument).cameras, 'push', cast ([_Runtime.mergeObjects([{ far: Awd2Parse.AWD2_CAMERA_DEFAULT_FAR__awd2Parse }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: Awd2Parse.AWD2_CAMERA_DEFAULT_NEAR__awd2Parse }, ((cast !_Runtime.strictEquals(nodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { node: nodeIndex } : Dynamic) : (cast {  } : Dynamic)), { projection: projection }, { transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast _Runtime.field(camera, 'transform') : flighthq._internal._Float64Array)) : Transform3D) }])] : Array<Dynamic>));
   }
 
   public static function parseLightBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedLight__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var parentId:Dynamic = cast _Runtime.UNDEFINED;
-    var floatSize:Dynamic = cast _Runtime.UNDEFINED;
-    var transformResult:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var lightType:Dynamic = cast _Runtime.UNDEFINED;
-    var props:Dynamic = cast _Runtime.UNDEFINED;
-    var values:Dynamic = cast _Runtime.UNDEFINED;
-    var hasRadius:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var parentId:Float = cast _Runtime.UNDEFINED;
+    var floatSize:Float = cast _Runtime.UNDEFINED;
+    var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var lightType:Float = cast _Runtime.UNDEFINED;
+    var props:{ var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; } = cast _Runtime.UNDEFINED;
+    var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    var hasRadius:Bool = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'parentId' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-truncated' : String), (cast 'parseLightBlock' : String), (cast { field: 'parentId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     parentId = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     floatSize = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
     if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'transform' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-truncated' : String), (cast 'parseLightBlock' : String), (cast { field: 'transform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    transformResult = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
+    transformResult = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+    (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
     if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-truncated' : String), (cast 'parseLightBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 1.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-truncated', 'parseLightBlock', { field: 'lightType' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-truncated' : String), (cast 'parseLightBlock' : String), (cast { field: 'lightType' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     lightType = flighthq._internal._StaticIndex.readUint8Array((cast source : flighthq._internal._UInt8Array), offset);
     (offset = cast ((offset + 1.0) : Dynamic));
-    props = _Runtime.callValue(Awd2Parse.readAwdProperties__awd2Parse, cast ([view, offset, end] : Array<Dynamic>));
-    values = _Runtime.field(props, 'values');
-    hasRadius = ((cast values : flighthq._internal._Map).has(AWD2_LIGHT_PROP_RADIUS));
-    return cast { ambient: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_AMBIENT] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_AMBIENT), ambientRgb: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_AMBIENT_COLOR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), castsShadow: ((cast _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint8__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_SHADOW_MAPPER] : Array<Dynamic>)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)), diffuse: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIFFUSE] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_DIFFUSE), directionX: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_X] : Array<Dynamic>)), function():Dynamic return cast 0.0), directionY: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_Y] : Array<Dynamic>)), function():Dynamic return cast -1.0), directionZ: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_DIRECTION_Z] : Array<Dynamic>)), function():Dynamic return cast 1.0), fallOff: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_FALLOFF] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_FALLOFF), hasRadius: hasRadius, lightType: lightType, name: _Runtime.field(nameResult, 'value'), parentId: parentId, radius: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_RADIUS] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RADIUS), rgb: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyUint32__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_COLOR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), specular: _Runtime.coalesce(_Runtime.callValue(Awd2Parse.readAwdPropertyNumber__awd2Parse, cast ([view, values, AWD2_LIGHT_PROP_SPECULAR] : Array<Dynamic>)), function():Dynamic return cast AWD2_LIGHT_DEFAULT_SPECULAR), transform: _Runtime.field(transformResult, 'transform') };
+    props = (cast Awd2Parse.readAwdProperties__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; });
+    values = (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values;
+    hasRadius = ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).has(AWD2_LIGHT_PROP_RADIUS));
+    return cast { ambient: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_AMBIENT : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_AMBIENT), ambientRgb: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_AMBIENT_COLOR : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), castsShadow: ((cast _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint8__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_SHADOW_MAPPER : Float)) : Null<Float>), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)), diffuse: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_DIFFUSE : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_DIFFUSE), directionX: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_DIRECTION_X : Float)) : Float), function():Dynamic return cast 0.0), directionY: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_DIRECTION_Y : Float)) : Float), function():Dynamic return cast -1.0), directionZ: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_DIRECTION_Z : Float)) : Float), function():Dynamic return cast 1.0), fallOff: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_FALLOFF : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_FALLOFF), hasRadius: hasRadius, lightType: lightType, name: (cast nameResult : { var end:Float; var value:String; }).value, parentId: parentId, radius: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_RADIUS : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RADIUS), rgb: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_COLOR : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), specular: _Runtime.coalesce((cast Awd2Parse.readAwdPropertyNumber__awd2Parse((cast view : flighthq._internal._Any), (cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>), (cast AWD2_LIGHT_PROP_SPECULAR : Float)) : Float), function():Dynamic return cast AWD2_LIGHT_DEFAULT_SPECULAR), transform: (cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform };
     return cast null;
   }
 
   public static function parseLightPickerBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedLightPicker__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var numLights:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var numLights:Float = cast _Runtime.UNDEFINED;
     var lightIds:Array<Float> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool) || (cast ((cast _Runtime.addNumbers((offset + 2.0), _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>))) : Float) > (cast end : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-picker-truncated' : String), (cast 'parseLightPickerBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'numLights' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-picker-truncated' : String), (cast 'parseLightPickerBlock' : String), (cast { field: 'numLights' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     numLights = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
     if ((cast ((cast (offset + (numLights * 4.0)) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.light-picker-truncated', 'parseLightPickerBlock', { field: 'lightIds', lights: numLights }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.light-picker-truncated' : String), (cast 'parseLightPickerBlock' : String), (cast { field: 'lightIds', lights: numLights } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     lightIds = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast numLights : Float)) : Bool)) {
         _Runtime.callProperty(lightIds, 'push', cast ([_Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>))] : Array<Dynamic>));
         (offset = cast ((offset + 4.0) : Dynamic));
         i++;
       }
     }
-    return cast { lightIds: lightIds, name: _Runtime.field(nameResult, 'value') };
+    return cast { lightIds: lightIds, name: (cast nameResult : { var end:Float; var value:String; }).value };
     return cast null;
   }
 
   public static function parseTextureBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedTexture__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var texType:Dynamic = cast _Runtime.UNDEFINED;
-    var dataLen:Dynamic = cast _Runtime.UNDEFINED;
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    var mimeType:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var texType:Float = cast _Runtime.UNDEFINED;
+    var dataLen:Float = cast _Runtime.UNDEFINED;
+    var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var mimeType:Null<String> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.texture-truncated', 'parseTextureBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.texture-truncated' : String), (cast 'parseTextureBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 5.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.texture-truncated', 'parseTextureBlock', { field: 'payload' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.texture-truncated' : String), (cast 'parseTextureBlock' : String), (cast { field: 'payload' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     texType = flighthq._internal._StaticIndex.readUint8Array((cast source : flighthq._internal._UInt8Array), offset);
@@ -1399,27 +1416,27 @@ class Awd2Parse {
     dataLen = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
     if ((cast ((cast (offset + dataLen) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.texture-truncated', 'parseTextureBlock', { bytes: dataLen, field: 'data' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.texture-truncated' : String), (cast 'parseTextureBlock' : String), (cast { bytes: dataLen, field: 'data' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     if ((cast !_Runtime.strictEquals(texType, AWD2_TEXTURE_TYPE_EMBEDDED) : Bool)) {
-      return cast { bytes: null, mimeType: null, name: _Runtime.field(nameResult, 'value'), url: _Runtime.field(nameResult, 'value') };
+      return cast { bytes: null, mimeType: null, name: (cast nameResult : { var end:Float; var value:String; }).value, url: (cast nameResult : { var end:Float; var value:String; }).value };
     }
     bytes = _Runtime.slice((cast source : flighthq._internal._UInt8Array), offset, (offset + dataLen));
-    mimeType = _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>));
+    mimeType = (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>);
     if ((cast _Runtime.strictEquals(mimeType, null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'awd2.texture-unrecognized-format', 'parseTextureBlock'] : Array<Dynamic>));
-      return cast { bytes: null, mimeType: null, name: _Runtime.field(nameResult, 'value'), url: null };
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'awd2.texture-unrecognized-format' : String), (cast 'parseTextureBlock' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast { bytes: null, mimeType: null, name: (cast nameResult : { var end:Float; var value:String; }).value, url: null };
     }
-    return cast { bytes: bytes, mimeType: mimeType, name: _Runtime.field(nameResult, 'value'), url: null };
+    return cast { bytes: bytes, mimeType: mimeType, name: (cast nameResult : { var end:Float; var value:String; }).value, url: null };
     return cast null;
   }
 
-  public static function readAwdProperties__awd2Parse(view:Dynamic, offset:Float, end:Float):{ var end:Float; var values:Dynamic; } {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var values:Dynamic = cast _Runtime.UNDEFINED;
-    var listLength:Dynamic = cast _Runtime.UNDEFINED;
-    var listEnd:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readAwdProperties__awd2Parse(view:Dynamic, offset:Float, end:Float):{ var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; } {
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    var listLength:Float = cast _Runtime.UNDEFINED;
+    var listEnd:Float = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     values = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) { return cast { end: offset, values: values }; }
@@ -1427,155 +1444,155 @@ class Awd2Parse {
     (offset = cast ((offset + 4.0) : Dynamic));
     listEnd = HxMath.min((offset + listLength), end);
     while ((cast ((cast (offset + 6.0) : Float) <= (cast listEnd : Float)) : Bool)) {
-      var key:Dynamic = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
+      var key:Float = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 2.0) : Dynamic));
-      var fieldLength:Dynamic = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var fieldLength:Float = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 4.0) : Dynamic));
       if ((cast ((cast (offset + fieldLength) : Float) > (cast listEnd : Float)) : Bool)) { break; }
-      ((cast values : flighthq._internal._Map).set(key, { length: fieldLength, offset: offset }));
+      ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).set(key, { length: fieldLength, offset: offset }));
       (offset = cast ((offset + fieldLength) : Dynamic));
     }
     return cast { end: listEnd, values: values };
     return cast null;
   }
 
-  public static function readAwdPropertyFloat32__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flighthq._internal._Map).get(key));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty((cast view : Dynamic), 'getFloat32', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>));
+  public static function readAwdPropertyFloat32__awd2Parse(view:Dynamic, values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
+    var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    return cast _Runtime.callProperty((cast view : Dynamic), 'getFloat32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function readAwdPropertyNumber__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flighthq._internal._Map).get(key));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+  public static function readAwdPropertyNumber__awd2Parse(view:Dynamic, values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
+    var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     dv = (cast view : Dynamic);
-    return cast ((cast ((cast _Runtime.field(entry, 'length') : Float) >= (cast 8.0 : Float)) : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) >= (cast 8.0 : Float)) : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
-  public static function readAwdPropertyUint8__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flighthq._internal._Map).get(key));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty((cast view : Dynamic), 'getUint8', cast ([_Runtime.field(entry, 'offset')] : Array<Dynamic>));
+  public static function readAwdPropertyUint8__awd2Parse(view:Dynamic, values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
+    var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    return cast _Runtime.callProperty((cast view : Dynamic), 'getUint8', cast ([(cast entry : { var length:Float; var offset:Float; }).offset] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function readAwdPropertyUint32__awd2Parse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flighthq._internal._Map).get(key));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(entry, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty((cast view : Dynamic), 'getUint32', cast ([_Runtime.field(entry, 'offset'), true] : Array<Dynamic>));
+  public static function readAwdPropertyUint32__awd2Parse(view:Dynamic, values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
+    var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
+    entry = ((cast values : flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    return cast _Runtime.callProperty((cast view : Dynamic), 'getUint32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveAwdMaterial__awd2Parse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, document:Scene3DDocument, ?diagnostics:Array<ImportDiagnostic>):Float {
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuseTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var normalTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var specularTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuse:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+  public static function resolveAwdMaterial__awd2Parse(materialId:Float, materialBlocks:flighthq._internal._Map<Float, ParsedMaterial__awd2Parse>, textureBlocks:flighthq._internal._Map<Float, ParsedTexture__awd2Parse>, cache:flighthq._internal._Map<Float, Float>, document:Scene3DDocument, ?diagnostics:Array<ImportDiagnostic>):Float {
+    var cached:Null<Float> = cast _Runtime.UNDEFINED;
+    var parsed:Null<ParsedMaterial__awd2Parse> = cast _Runtime.UNDEFINED;
+    var diffuseTexture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var normalTexture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var specularTexture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var diffuse:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var material:Material = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(materialId, 0.0) : Bool)) { return cast -1.0; }
-    cached = ((cast cache : flighthq._internal._Map).get(materialId));
+    cached = ((cast cache : flighthq._internal._Map<Float, Float>).get(materialId));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parsed = ((cast materialBlocks : flighthq._internal._Map).get(materialId));
+    parsed = ((cast materialBlocks : flighthq._internal._Map<Float, ParsedMaterial__awd2Parse>).get(materialId));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.material-missing', 'resolveAwdMaterial', { material: materialId }] : Array<Dynamic>));
-      ((cast cache : flighthq._internal._Map).set(materialId, -1.0));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.material-missing' : String), (cast 'resolveAwdMaterial' : String), (cast { material: materialId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      ((cast cache : flighthq._internal._Map<Float, Float>).set(materialId, -1.0));
       return cast -1.0;
     }
-    diffuseTexture = ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0) : Bool) ? (cast _Runtime.callValue(Awd2Parse.resolveAwdTexture__awd2Parse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, document, diagnostics] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    normalTexture = ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'normalTextureId'), 0.0) : Bool) ? (cast _Runtime.callValue(Awd2Parse.resolveAwdTexture__awd2Parse, cast ([_Runtime.field(parsed, 'normalTextureId'), textureBlocks, document, diagnostics] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    if ((cast !_Runtime.strictEquals(normalTexture, null) : Bool)) { _Runtime.setField(normalTexture, 'colorSpace', 'linear'); }
-    specularTexture = ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'specularTextureId'), 0.0) : Bool) ? (cast _Runtime.callValue(Awd2Parse.resolveAwdTexture__awd2Parse, cast ([_Runtime.field(parsed, 'specularTextureId'), textureBlocks, document, diagnostics] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast _Runtime.field(parsed, 'numMethods') : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.material-methods-unsupported', 'resolveAwdMaterial', { methods: _Runtime.field(parsed, 'numMethods') }] : Array<Dynamic>));
+    diffuseTexture = ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).diffuseTextureId, 0.0) : Bool) ? (cast (cast Awd2Parse.resolveAwdTexture__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).diffuseTextureId : Float), textureBlocks, (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) : Dynamic) : (cast null : Dynamic));
+    normalTexture = ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).normalTextureId, 0.0) : Bool) ? (cast (cast Awd2Parse.resolveAwdTexture__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).normalTextureId : Float), textureBlocks, (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) : Dynamic) : (cast null : Dynamic));
+    if ((cast !_Runtime.strictEquals(normalTexture, null) : Bool)) { ((cast normalTexture : { var colorSpace:TextureColorSpace; }).colorSpace = 'linear'); }
+    specularTexture = ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).specularTextureId, 0.0) : Bool) ? (cast (cast Awd2Parse.resolveAwdTexture__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).specularTextureId : Float), textureBlocks, (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) : Dynamic) : (cast null : Dynamic));
+    if ((cast ((cast (cast parsed : ParsedMaterial__awd2Parse).numMethods : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.material-methods-unsupported' : String), (cast 'resolveAwdMaterial' : String), (cast { methods: (cast parsed : ParsedMaterial__awd2Parse).numMethods } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    diffuse = _Runtime.callValue(Awd2Parse.getAwdDiffuseRgba__awd2Parse, cast ([_Runtime.field(parsed, 'color'), _Runtime.field(parsed, 'alpha')] : Array<Dynamic>));
-    strength = _Runtime.coalesce(_Runtime.field(parsed, 'specularStrength'), function():Dynamic return cast AWD2_MATERIAL_DEFAULT_SPECULAR_STRENGTH);
+    diffuse = (cast Awd2Parse.getAwdDiffuseRgba__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).color : Null<Float>), (cast (cast parsed : ParsedMaterial__awd2Parse).alpha : Null<Float>)) : Float);
+    strength = _Runtime.coalesce((cast parsed : ParsedMaterial__awd2Parse).specularStrength, function():Dynamic return cast AWD2_MATERIAL_DEFAULT_SPECULAR_STRENGTH);
     if ((cast ((cast strength : Float) > (cast 1.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'awd2.material-specular-strength-clamped', 'resolveAwdMaterial', { strength: strength }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.material-specular-strength-clamped' : String), (cast 'resolveAwdMaterial' : String), (cast { strength: strength } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    material = (cast (cast _Runtime.callValue(createShadedMaterial, cast ([{ diffuse: diffuse, diffuseMap: diffuseTexture, normalMap: normalTexture, shininess: _Runtime.coalesce(_Runtime.field(parsed, 'gloss'), function():Dynamic return cast AWD2_MATERIAL_DEFAULT_GLOSS), specular: _Runtime.callValue(Awd2Parse.getAwdSpecularRgba__awd2Parse, cast ([_Runtime.field(parsed, 'specularColor'), strength] : Array<Dynamic>)), specularMap: specularTexture }] : Array<Dynamic>)) : Dynamic) : Material);
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'alpha'), null) : Bool) && (cast ((cast _Runtime.field(parsed, 'alpha') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.setField((cast (cast material : Dynamic) : SurfaceMaterial), 'alphaMode', 'blend'); }
-    _Runtime.setField(material, 'name', ((cast ((cast _Runtime.field(_Runtime.field(parsed, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(parsed, 'name') : Dynamic) : (cast null : Dynamic)));
-    index = _Runtime.field(_Runtime.field(document, 'materials'), 'length');
-    _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast material : Dynamic) : MaterialLike)] : Array<Dynamic>));
-    ((cast cache : flighthq._internal._Map).set(materialId, index));
+    material = (cast (cast createShadedMaterial({ diffuse: diffuse, diffuseMap: diffuseTexture, normalMap: normalTexture, shininess: _Runtime.coalesce((cast parsed : ParsedMaterial__awd2Parse).gloss, function():Dynamic return cast AWD2_MATERIAL_DEFAULT_GLOSS), specular: (cast Awd2Parse.getAwdSpecularRgba__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).specularColor : Null<Float>), (cast strength : Float)) : Null<Float>), specularMap: specularTexture }) : flighthq._internal._Any) : Material);
+    if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).alpha, null) : Bool) && (cast ((cast (cast parsed : ParsedMaterial__awd2Parse).alpha : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { ((cast (cast (cast material : flighthq._internal._Any) : SurfaceMaterial) : SurfaceMaterial).alphaMode = 'blend'); }
+    ((cast material : Material).name = ((cast ((cast _Runtime.field((cast parsed : ParsedMaterial__awd2Parse).name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast parsed : ParsedMaterial__awd2Parse).name : Dynamic) : (cast null : Dynamic)));
+    index = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
+    _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+    ((cast cache : flighthq._internal._Map<Float, Float>).set(materialId, index));
     return cast index;
     return cast null;
   }
 
-  public static function resolveAwdTexture__awd2Parse(textureId:Float, textureBlocks:Dynamic, document:Scene3DDocument, ?diagnostics:Array<ImportDiagnostic>):Null<Texture> {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = ((cast textureBlocks : flighthq._internal._Map).get(textureId));
+  public static function resolveAwdTexture__awd2Parse(textureId:Float, textureBlocks:flighthq._internal._Map<Float, ParsedTexture__awd2Parse>, document:Scene3DDocument, ?diagnostics:Array<ImportDiagnostic>):Null<Texture> {
+    var parsed:Null<ParsedTexture__awd2Parse> = cast _Runtime.UNDEFINED;
+    parsed = ((cast textureBlocks : flighthq._internal._Map<Float, ParsedTexture__awd2Parse>).get(textureId));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.texture-missing', 'resolveAwdTexture', { texture: textureId }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.texture-missing' : String), (cast 'resolveAwdTexture' : String), (cast { texture: textureId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'bytes'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(parsed, 'mimeType'), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(createEmbeddedTextureRef, cast ([_Runtime.field(parsed, 'bytes'), _Runtime.field(parsed, 'mimeType'), _Runtime.field(document, 'resources')] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).bytes, null) : Bool) && (cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).mimeType, null) : Bool)) : Bool)) {
+      return cast (cast createEmbeddedTextureRef((cast (cast parsed : ParsedTexture__awd2Parse).bytes : flighthq._internal._UInt8Array), (cast (cast parsed : ParsedTexture__awd2Parse).mimeType : Null<String>), (cast document : Scene3DDocument).resources) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>);
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(parsed, 'url'), null) : Bool)) {
-      return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(parsed, 'url'), null, _Runtime.field(document, 'resources')] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).url, null) : Bool)) {
+      return cast (cast createExternalTextureRef((cast (cast parsed : ParsedTexture__awd2Parse).url : String), (cast null : Null<String>), (cast document : Scene3DDocument).resources) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>);
     }
     return cast null;
     return cast null;
   }
 
-  public static function buildAwdDocumentLights__awd2Parse(light:ParsedLight__awd2Parse, nodeIndex:Null<Float>, document:Scene3DDocument, drops:Dynamic):Void {
+  public static function buildAwdDocumentLights__awd2Parse(light:ParsedLight__awd2Parse, nodeIndex:Null<Float>, document:Scene3DDocument, drops:flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>):Void {
     var descriptor:Light = cast _Runtime.UNDEFINED;
     var transform:Transform3D = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(light, 'lightType'), AWD2_LIGHT_TYPE_DIRECTIONAL) : Bool)) {
-      var aim:Dynamic = _Runtime.callValue(createVector3, cast ([_Runtime.field(light, 'directionX'), _Runtime.field(light, 'directionY'), -_Runtime.field(light, 'directionZ')] : Array<Dynamic>));
-      _Runtime.callValue(normalizeVector3, cast ([aim, aim] : Array<Dynamic>));
-      (transform = cast (_Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callValue(setQuaternionFromUnitVectors, cast ([_Runtime.field(transform, 'rotation'), Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, aim] : Array<Dynamic>));
-      (descriptor = cast (_Runtime.callValue(createDirectionalLight, cast ([{ castsShadow: _Runtime.field(light, 'castsShadow'), color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'rgb')] : Array<Dynamic>)), direction: Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, intensity: _Runtime.field(light, 'diffuse') }] : Array<Dynamic>)) : Dynamic));
+      var aim:Vector3 = (cast createVector3((cast _Runtime.field(light, 'directionX') : Null<Float>), (cast _Runtime.field(light, 'directionY') : Null<Float>), (cast -_Runtime.field(light, 'directionZ') : Null<Float>)) : Vector3);
+      (cast normalizeVector3(aim, aim) : Float);
+      (transform = cast ((cast createTransform3D() : Transform3D) : Dynamic));
+      setQuaternionFromUnitVectors((cast transform : Transform3D).rotation, Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, aim);
+      (descriptor = cast ((cast createDirectionalLight({ castsShadow: _Runtime.field(light, 'castsShadow'), color: (cast Awd2Parse.getAwdLightRgba__awd2Parse((cast _Runtime.field(light, 'rgb') : Float)) : Null<Float>), direction: Awd2Parse.DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse, intensity: _Runtime.field(light, 'diffuse') }) : Light) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(_Runtime.field(light, 'lightType'), AWD2_LIGHT_TYPE_POINT) : Bool)) {
-      (transform = cast (_Runtime.callValue(Awd2Parse.awdTransformToTransform3D__awd2Parse, cast ([_Runtime.field(light, 'transform')] : Array<Dynamic>)) : Dynamic));
-      (descriptor = cast (_Runtime.callValue(createPointLight, cast ([{ castsShadow: _Runtime.field(light, 'castsShadow'), color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'rgb')] : Array<Dynamic>)), intensity: _Runtime.field(light, 'diffuse'), range: _Runtime.field(light, 'fallOff') }] : Array<Dynamic>)) : Dynamic));
+      (transform = cast ((cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast _Runtime.field(light, 'transform') : flighthq._internal._Float64Array)) : Transform3D) : Dynamic));
+      (descriptor = cast ((cast createPointLight({ castsShadow: _Runtime.field(light, 'castsShadow'), color: (cast Awd2Parse.getAwdLightRgba__awd2Parse((cast _Runtime.field(light, 'rgb') : Float)) : Null<Float>), intensity: _Runtime.field(light, 'diffuse'), range: _Runtime.field(light, 'fallOff') }) : Light) : Dynamic));
       if ((cast _Runtime.field(light, 'hasRadius') : Bool)) {
-        _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-radius-dropped', { firstLight: _Runtime.field(light, 'name') }] : Array<Dynamic>));
+        Awd2Parse.tallyAwdLightDrop__awd2Parse(drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.light-radius-dropped' : String), (cast { firstLight: _Runtime.field(light, 'name') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       }
     } else {
-      _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-unsupported-type', { firstLight: _Runtime.field(light, 'name'), firstType: _Runtime.field(light, 'lightType') }] : Array<Dynamic>));
+      Awd2Parse.tallyAwdLightDrop__awd2Parse(drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.light-unsupported-type' : String), (cast { firstLight: _Runtime.field(light, 'name'), firstType: _Runtime.field(light, 'lightType') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return;
     } }
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'specular'), AWD2_LIGHT_DEFAULT_SPECULAR) : Bool)) {
-      _Runtime.callValue(Awd2Parse.tallyAwdLightDrop__awd2Parse, cast ([drops, ImportDiagnosticSeverityValue.Skip, 'awd2.light-specular-dropped', { firstLight: _Runtime.field(light, 'name'), firstSpecular: _Runtime.field(light, 'specular') }] : Array<Dynamic>));
+      Awd2Parse.tallyAwdLightDrop__awd2Parse(drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'awd2.light-specular-dropped' : String), (cast { firstLight: _Runtime.field(light, 'name'), firstSpecular: _Runtime.field(light, 'specular') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
-    _Runtime.callProperty(_Runtime.field(document, 'lights'), 'push', cast ([{ descriptor: descriptor, name: _Runtime.orValue(_Runtime.field(light, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: transform }] : Array<Dynamic>));
+    _Runtime.callProperty((cast document : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: _Runtime.orValue(_Runtime.field(light, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: transform }] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'ambient'), 0.0) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(document, 'lights'), 'push', cast ([{ descriptor: _Runtime.callValue(createAmbientLight, cast ([{ color: _Runtime.callValue(Awd2Parse.getAwdLightRgba__awd2Parse, cast ([_Runtime.field(light, 'ambientRgb')] : Array<Dynamic>)), intensity: _Runtime.field(light, 'ambient') }] : Array<Dynamic>)), name: _Runtime.select(_Runtime.field(light, 'name'), function():Dynamic return cast '' + Std.string(_Runtime.field(light, 'name')) + ' Ambient', function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+      _Runtime.callProperty((cast document : Scene3DDocument).lights, 'push', cast ([{ descriptor: (cast createAmbientLight({ color: (cast Awd2Parse.getAwdLightRgba__awd2Parse((cast _Runtime.field(light, 'ambientRgb') : Float)) : Null<Float>), intensity: _Runtime.field(light, 'ambient') }) : Light), name: _Runtime.select(_Runtime.field(light, 'name'), function():Dynamic return cast '' + Std.string(_Runtime.field(light, 'name')) + ' Ambient', function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
     }
   }
 
-  public static final DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse:Dynamic = _Runtime.callValue(createVector3, cast ([0.0, 0.0, -1.0] : Array<Dynamic>));
+  public static final DOCUMENT_LIGHT_LOCAL_AXIS__awd2Parse:Vector3 = (cast createVector3((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast -1.0 : Null<Float>)) : Vector3);
 
-  public static final AWD2_CAMERA_DEFAULT_BOTTOM__awd2Parse:Dynamic = -300.0;
+  public static final AWD2_CAMERA_DEFAULT_BOTTOM__awd2Parse:Float = -300.0;
 
-  public static final AWD2_CAMERA_DEFAULT_FAR__awd2Parse:Dynamic = 3000.0;
+  public static final AWD2_CAMERA_DEFAULT_FAR__awd2Parse:Float = 3000.0;
 
-  public static final AWD2_CAMERA_DEFAULT_FOV_DEGREES__awd2Parse:Dynamic = 60.0;
+  public static final AWD2_CAMERA_DEFAULT_FOV_DEGREES__awd2Parse:Float = 60.0;
 
-  public static final AWD2_CAMERA_DEFAULT_LEFT__awd2Parse:Dynamic = -400.0;
+  public static final AWD2_CAMERA_DEFAULT_LEFT__awd2Parse:Float = -400.0;
 
-  public static final AWD2_CAMERA_DEFAULT_NEAR__awd2Parse:Dynamic = 20.0;
+  public static final AWD2_CAMERA_DEFAULT_NEAR__awd2Parse:Float = 20.0;
 
-  public static final AWD2_CAMERA_DEFAULT_ORTHO_HALF_EXTENT__awd2Parse:Dynamic = 0.5;
+  public static final AWD2_CAMERA_DEFAULT_ORTHO_HALF_EXTENT__awd2Parse:Float = 0.5;
 
-  public static final AWD2_CAMERA_DEFAULT_RIGHT__awd2Parse:Dynamic = 400.0;
+  public static final AWD2_CAMERA_DEFAULT_RIGHT__awd2Parse:Float = 400.0;
 
-  public static final AWD2_CAMERA_DEFAULT_TOP__awd2Parse:Dynamic = 300.0;
+  public static final AWD2_CAMERA_DEFAULT_TOP__awd2Parse:Float = 300.0;
 
   public static function getAwdLightRgba__awd2Parse(rgb:Float):Float {
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)), 0)) | 255)), 0);
@@ -1583,8 +1600,8 @@ class Awd2Parse {
   }
 
   public static function getAwdDiffuseRgba__awd2Parse(color:Null<Float>, alpha:Null<Float>):Float {
-    var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaByte:Dynamic = cast _Runtime.UNDEFINED;
+    var rgb:Float = cast _Runtime.UNDEFINED;
+    var alphaByte:Float = cast _Runtime.UNDEFINED;
     rgb = _Runtime.coalesce(color, function():Dynamic return cast 16777215.0);
     alphaByte = ((cast !_Runtime.strictEquals(alpha, null) : Bool) ? (cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round((alpha * 255.0)))) : Dynamic) : (cast 255.0 : Dynamic));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)), 0)) | _Runtime.toInt32(alphaByte))), 0);
@@ -1592,11 +1609,11 @@ class Awd2Parse {
   }
 
   public static function getAwdSpecularRgba__awd2Parse(color:Null<Float>, strength:Float):Float {
-    var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var red:Dynamic = cast _Runtime.UNDEFINED;
-    var green:Dynamic = cast _Runtime.UNDEFINED;
-    var blue:Dynamic = cast _Runtime.UNDEFINED;
+    var rgb:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var red:Float = cast _Runtime.UNDEFINED;
+    var green:Float = cast _Runtime.UNDEFINED;
+    var blue:Float = cast _Runtime.UNDEFINED;
     rgb = _Runtime.coalesce(color, function():Dynamic return cast AWD2_MATERIAL_DEFAULT_SPECULAR_RGB);
     scale = HxMath.max(0.0, HxMath.min(1.0, strength));
     red = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgb), 16)) & 255) * scale));
@@ -1607,175 +1624,175 @@ class Awd2Parse {
   }
 
   public static function parseSkeletonBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedSkeleton__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
     var joints:Array<ParsedJoint__awd2Parse> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-truncated', 'parseSkeletonBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-truncated' : String), (cast 'parseSkeletonBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-truncated', 'parseSkeletonBlock', { field: 'jointCount' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-truncated' : String), (cast 'parseSkeletonBlock' : String), (cast { field: 'jointCount' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     jointCount = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
     joints = cast ([] : Array<Dynamic>);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-truncated', 'parseSkeletonBlock', { field: 'jointFields' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-truncated' : String), (cast 'parseSkeletonBlock' : String), (cast { field: 'jointFields' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
         (offset = cast ((offset + 2.0) : Dynamic));
-        var parentIndex:Dynamic = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
+        var parentIndex:Float = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
         (offset = cast ((offset + 2.0) : Dynamic));
         if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-truncated', 'parseSkeletonBlock', { field: 'jointName' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-truncated' : String), (cast 'parseSkeletonBlock' : String), (cast { field: 'jointName' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
-        var jointNameResult:Dynamic = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-        (offset = cast (_Runtime.field(jointNameResult, 'end') : Dynamic));
-        var floatSize:Dynamic = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
+        var jointNameResult:{ var end:Float; var value:String; } = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+        (offset = cast ((cast jointNameResult : { var end:Float; var value:String; }).end : Dynamic));
+        var floatSize:Float = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
         if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-truncated', 'parseSkeletonBlock', { field: 'jointTransform' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-truncated' : String), (cast 'parseSkeletonBlock' : String), (cast { field: 'jointTransform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
-        var transformResult:Dynamic = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-        (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
-        (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-        (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
-        _Runtime.callProperty(joints, 'push', cast ([{ name: _Runtime.field(jointNameResult, 'value'), parentIndex: parentIndex, transform: _Runtime.field(transformResult, 'transform') }] : Array<Dynamic>));
+        var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+        (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
+        (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+        (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
+        _Runtime.callProperty(joints, 'push', cast ([{ name: (cast jointNameResult : { var end:Float; var value:String; }).value, parentIndex: parentIndex, transform: (cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform }] : Array<Dynamic>));
         j++;
       }
     }
-    return cast { joints: joints, name: _Runtime.field(nameResult, 'value') };
+    return cast { joints: joints, name: (cast nameResult : { var end:Float; var value:String; }).value };
     return cast null;
   }
 
   public static function parseSkeletonPoseBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedSkeletonPose__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
     var jointTransforms:Array<Null<flighthq._internal._Float64Array>> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-pose-truncated', 'parseSkeletonPoseBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-pose-truncated' : String), (cast 'parseSkeletonPoseBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-pose-truncated', 'parseSkeletonPoseBlock', { field: 'jointCount' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-pose-truncated' : String), (cast 'parseSkeletonPoseBlock' : String), (cast { field: 'jointCount' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     jointCount = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
     jointTransforms = cast ([] : Array<Dynamic>);
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         if ((cast ((cast (offset + 1.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-pose-truncated', 'parseSkeletonPoseBlock', { field: 'hasTransform' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-pose-truncated' : String), (cast 'parseSkeletonPoseBlock' : String), (cast { field: 'hasTransform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
-        var hasTransform:Dynamic = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
+        var hasTransform:Float = _Runtime.callProperty(dv, 'getUint8', cast ([offset] : Array<Dynamic>));
         (offset = cast ((offset + 1.0) : Dynamic));
         if ((cast !_Runtime.strictEquals(hasTransform, 0.0) : Bool)) {
-          var floatSize:Dynamic = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
+          var floatSize:Float = ((cast matrixWide : Bool) ? (cast 8.0 : Dynamic) : (cast 4.0 : Dynamic));
           if ((cast ((cast (offset + (12.0 * floatSize)) : Float) > (cast end : Float)) : Bool)) {
-            _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-pose-truncated', 'parseSkeletonPoseBlock', { field: 'jointTransform' }] : Array<Dynamic>));
+            reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-pose-truncated' : String), (cast 'parseSkeletonPoseBlock' : String), (cast { field: 'jointTransform' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
             return cast null;
           }
-          var transformResult:Dynamic = _Runtime.callValue(Awd2Parse.readAwdTransform__awd2Parse, cast ([view, offset, matrixWide] : Array<Dynamic>));
-          (offset = cast (_Runtime.field(transformResult, 'end') : Dynamic));
-          _Runtime.callProperty(jointTransforms, 'push', cast ([_Runtime.field(transformResult, 'transform')] : Array<Dynamic>));
+          var transformResult:{ var end:Float; var transform:flighthq._internal._Float64Array; } = (cast Awd2Parse.readAwdTransform__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast matrixWide : Bool)) : { var end:Float; var transform:flighthq._internal._Float64Array; });
+          (offset = cast ((cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).end : Dynamic));
+          _Runtime.callProperty(jointTransforms, 'push', cast ([(cast transformResult : { var end:Float; var transform:flighthq._internal._Float64Array; }).transform] : Array<Dynamic>));
         } else {
           _Runtime.callProperty(jointTransforms, 'push', cast ([null] : Array<Dynamic>));
         }
         j++;
       }
     }
-    return cast { jointTransforms: jointTransforms, name: _Runtime.field(nameResult, 'value') };
+    return cast { jointTransforms: jointTransforms, name: (cast nameResult : { var end:Float; var value:String; }).value };
     return cast null;
   }
 
   public static function parseSkeletonAnimationBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedSkeletonAnimation__awd2Parse> {
-    var dv:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var nameResult:Dynamic = cast _Runtime.UNDEFINED;
-    var poseCount:Dynamic = cast _Runtime.UNDEFINED;
+    var dv:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var nameResult:{ var end:Float; var value:String; } = cast _Runtime.UNDEFINED;
+    var poseCount:Float = cast _Runtime.UNDEFINED;
     var poses:Array<{ var duration:Float; var poseBlockId:Float; }> = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
     offset = start;
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-animation-truncated', 'parseSkeletonAnimationBlock', { field: 'name' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-animation-truncated' : String), (cast 'parseSkeletonAnimationBlock' : String), (cast { field: 'name' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    nameResult = _Runtime.callValue(Awd2Parse.readAwdString__awd2Parse, cast ([view, source, offset] : Array<Dynamic>));
-    (offset = cast (_Runtime.field(nameResult, 'end') : Dynamic));
+    nameResult = (cast Awd2Parse.readAwdString__awd2Parse((cast view : flighthq._internal._Any), (cast source : flighthq._internal._UInt8Array), (cast offset : Float)) : { var end:Float; var value:String; });
+    (offset = cast ((cast nameResult : { var end:Float; var value:String; }).end : Dynamic));
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-animation-truncated', 'parseSkeletonAnimationBlock', { field: 'frameCount' }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-animation-truncated' : String), (cast 'parseSkeletonAnimationBlock' : String), (cast { field: 'frameCount' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     poseCount = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
-    (offset = cast (_Runtime.callValue(Awd2Parse.skipAwdAttrList__awd2Parse, cast ([view, offset, end] : Array<Dynamic>)) : Dynamic));
+    (offset = cast ((cast Awd2Parse.skipAwdAttrList__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : Float) : Dynamic));
     poses = cast ([] : Array<Dynamic>);
     {
-      var p:Dynamic = 0.0;
+      var p:Float = 0.0;
       while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
         if ((cast ((cast (offset + 4.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-animation-truncated', 'parseSkeletonAnimationBlock', { field: 'poseBlockId' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-animation-truncated' : String), (cast 'parseSkeletonAnimationBlock' : String), (cast { field: 'poseBlockId' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
-        var poseBlockId:Dynamic = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+        var poseBlockId:Float = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
         (offset = cast ((offset + 4.0) : Dynamic));
         if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'awd2.skeleton-animation-truncated', 'parseSkeletonAnimationBlock', { field: 'poseDuration' }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'awd2.skeleton-animation-truncated' : String), (cast 'parseSkeletonAnimationBlock' : String), (cast { field: 'poseDuration' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           return cast null;
         }
-        var duration:Dynamic = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
+        var duration:Float = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
         (offset = cast ((offset + 2.0) : Dynamic));
         _Runtime.callProperty(poses, 'push', cast ([{ duration: duration, poseBlockId: poseBlockId }] : Array<Dynamic>));
         p++;
       }
     }
-    return cast { name: _Runtime.field(nameResult, 'value'), poses: poses };
+    return cast { name: (cast nameResult : { var end:Float; var value:String; }).value, poses: poses };
     return cast null;
   }
 
   public static function rehydrateAwdBody__awd2Parse(input:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<{ var source:flighthq._internal._UInt8Array; var view:Dynamic; }> {
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var compression:Dynamic = cast _Runtime.UNDEFINED;
-    var decompressor:Dynamic = cast _Runtime.UNDEFINED;
-    var compressedEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var inflated:Dynamic = cast _Runtime.UNDEFINED;
-    var rehydrated:Dynamic = cast _Runtime.UNDEFINED;
-    var rehydratedView:Dynamic = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var compression:Float = cast _Runtime.UNDEFINED;
+    var decompressor:Null<Decompressor> = cast _Runtime.UNDEFINED;
+    var compressedEnd:Float = cast _Runtime.UNDEFINED;
+    var inflated:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+    var rehydrated:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var rehydratedView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(input, 'buffer'), _Runtime.field(input, 'byteOffset'), _Runtime.field(input, 'byteLength')]);
     compression = flighthq._internal._StaticIndex.readUint8Array(input, 7.0);
     if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_NONE) : Bool)) { return cast { source: input, view: view }; }
-    decompressor = _Runtime.callValue(Awd2Parse.resolveAwdDecompressor__awd2Parse, cast ([compression] : Array<Dynamic>));
+    decompressor = (cast Awd2Parse.resolveAwdDecompressor__awd2Parse((cast compression : Float)) : Null<Decompressor>);
     if ((cast _Runtime.strictEquals(decompressor, null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.compression-no-decompressor', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.compression-no-decompressor' : String), (cast 'rehydrateAwdBody' : String), (cast { compression: compression } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     compressedEnd = HxMath.min(_Runtime.addNumbers(AWD2_HEADER_BYTES, _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>))), _Runtime.field(input, 'byteLength'));
-    inflated = _Runtime.callValue(decompressor, cast ([(cast input : flighthq._internal._UInt8Array).subarray(Std.int(AWD2_HEADER_BYTES), Std.int(compressedEnd)), 0.0] : Array<Dynamic>));
+    inflated = (cast decompressor((cast (cast input : flighthq._internal._UInt8Array).subarray(Std.int(AWD2_HEADER_BYTES), Std.int(compressedEnd)) : flighthq._internal._UInt8Array), (cast 0.0 : Float)) : Null<flighthq._internal._UInt8Array>);
     if ((cast _Runtime.strictEquals(inflated, null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'awd2.decompression-failed', 'rehydrateAwdBody', { compression: compression }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'awd2.decompression-failed' : String), (cast 'rehydrateAwdBody' : String), (cast { compression: compression } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
     rehydrated = new flighthq._internal._UInt8Array(_Runtime.addNumbers(AWD2_HEADER_BYTES, _Runtime.field(inflated, 'byteLength')));
@@ -1788,11 +1805,11 @@ class Awd2Parse {
     return cast null;
   }
 
-  public static final AWD2_TANGENT_HANDEDNESS__awd2Parse:Dynamic = -1.0;
+  public static final AWD2_TANGENT_HANDEDNESS__awd2Parse:Float = -1.0;
 
   public static function resolveAwdDecompressor__awd2Parse(compression:Float):Null<Decompressor> {
-    if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_DEFLATE) : Bool)) { return cast _Runtime.callValue(getDecompressor, cast ([CompressionValue.Deflate] : Array<Dynamic>)); }
-    return cast ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_LZMA) : Bool) ? (cast _Runtime.callValue(getDecompressor, cast ([CompressionValue.Lzma] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_DEFLATE) : Bool)) { return cast (cast getDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate : Compression)) : Null<Decompressor>); }
+    return cast ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_LZMA) : Bool) ? (cast (cast getDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Lzma : Compression)) : Null<Decompressor>) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -1806,40 +1823,40 @@ class Awd2Parse {
     return cast null;
   }
 
-  public static function tallyAwdLightDrop__awd2Parse(tallies:Dynamic, severity:ImportDiagnosticSeverity, kind:String, firstDetail:Dynamic):Void {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    existing = ((cast tallies : flighthq._internal._Map).get(kind));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map).set(kind, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { _Runtime.incrementField(existing, 'count', 1, true); }
+  public static function tallyAwdLightDrop__awd2Parse(tallies:flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>, severity:ImportDiagnosticSeverity, kind:String, firstDetail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
+    var existing:Null<AwdLightDropTally__awd2Parse> = cast _Runtime.UNDEFINED;
+    existing = ((cast tallies : flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>).get(kind));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>).set(kind, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : AwdLightDropTally__awd2Parse).count++; }
   }
 
-  public static function flushAwdLightDrops__awd2Parse(tallies:Dynamic, ?diagnostics:Array<ImportDiagnostic>):Void {
-    for (tally in _Runtime.iterable(((cast tallies : flighthq._internal._Map).values()))) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, _Runtime.field(tally, 'severity'), _Runtime.field(tally, 'kind'), 'buildAwdDocumentLights', _Runtime.mergeObjects([_Runtime.field(tally, 'detail'), { count: _Runtime.field(tally, 'count') }])] : Array<Dynamic>));
+  public static function flushAwdLightDrops__awd2Parse(tallies:flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>, ?diagnostics:Array<ImportDiagnostic>):Void {
+    for (tally in _Runtime.iterable(((cast tallies : flighthq._internal._Map<String, AwdLightDropTally__awd2Parse>).values()))) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast tally : AwdLightDropTally__awd2Parse).severity : ImportDiagnosticSeverity), (cast (cast tally : AwdLightDropTally__awd2Parse).kind : String), (cast 'buildAwdDocumentLights' : String), (cast _Runtime.mergeObjects([(cast tally : AwdLightDropTally__awd2Parse).detail, { count: (cast tally : AwdLightDropTally__awd2Parse).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
   }
 
-  public static function isAwdLightScopeDropped__awd2Parse(lightBlockIds:Dynamic, pickers:Dynamic):Bool {
-    if ((cast _Runtime.strictEquals((cast lightBlockIds : flighthq._internal._Set).size, 0.0) : Bool)) { return cast false; }
-    for (picker in _Runtime.iterable(((cast pickers : flighthq._internal._Map).values()))) {
-      var picked:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.field(picker, 'lightIds')]);
-      if ((cast !_Runtime.strictEquals((cast picked : flighthq._internal._Set).size, (cast lightBlockIds : flighthq._internal._Set).size) : Bool)) { return cast true; }
+  public static function isAwdLightScopeDropped__awd2Parse(lightBlockIds:flighthq._internal._Set<Float>, pickers:flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse>):Bool {
+    if ((cast _Runtime.strictEquals((cast lightBlockIds : flighthq._internal._Set<Float>).size, 0.0) : Bool)) { return cast false; }
+    for (picker in _Runtime.iterable(((cast pickers : flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse>).values()))) {
+      var picked:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [(cast picker : ParsedLightPicker__awd2Parse).lightIds]);
+      if ((cast !_Runtime.strictEquals((cast picked : flighthq._internal._Set<Float>).size, (cast lightBlockIds : flighthq._internal._Set<Float>).size) : Bool)) { return cast true; }
       for (id in _Runtime.iterable(lightBlockIds)) {
-        if ((cast !(cast ((cast picked : flighthq._internal._Set).has(id)) : Bool) : Bool)) { return cast true; }
+        if ((cast !(cast ((cast picked : flighthq._internal._Set<Float>).has(id)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
     return cast null;
   }
 
-  public static function tallyUnhandledAwdBlock__awd2Parse(tally:Dynamic, namespace:Float, blockType:Float, blockId:Float):Void {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tallyUnhandledAwdBlock__awd2Parse(tally:flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>, namespace:Float, blockType:Float, blockId:Float):Void {
+    var key:String = cast _Runtime.UNDEFINED;
+    var entry:Null<{ var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }> = cast _Runtime.UNDEFINED;
     key = '' + Std.string(namespace) + ':' + Std.string(blockType) + '';
-    entry = ((cast tally : flighthq._internal._Map).get(key));
+    entry = ((cast tally : flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).get(key));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast tally : flighthq._internal._Map).set(key, { blockType: blockType, count: 1.0, firstBlockId: blockId, namespace: namespace }));
+      ((cast tally : flighthq._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).set(key, { blockType: blockType, count: 1.0, firstBlockId: blockId, namespace: namespace }));
       return;
     }
-    _Runtime.incrementField(entry, 'count', 1, true);
+    (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).count++;
   }
 }

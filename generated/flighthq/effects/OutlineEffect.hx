@@ -17,18 +17,18 @@ class OutlineEffect {
   }
 
   public static function getOutlineEffectPadding(effect:flighthq.types.OutlineEffect):RenderEffectPadding {
-    var thickness:Dynamic = cast _Runtime.UNDEFINED;
+    var thickness:Float = cast _Runtime.UNDEFINED;
     thickness = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)));
     return cast { bottom: thickness, left: thickness, right: thickness, top: thickness };
     return cast null;
   }
 
   public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'OutlineEffect', OutlineEffect.resolveOutlineEffectPadding__outlineEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'OutlineEffect' : String), OutlineEffect.resolveOutlineEffectPadding__outlineEffect);
   }
 
   public static function resolveOutlineEffectPadding__outlineEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getOutlineEffectPadding, cast ([(cast effect : flighthq.types.OutlineEffect)] : Array<Dynamic>));
+    return cast (cast getOutlineEffectPadding((cast (cast effect : flighthq.types.OutlineEffect) : flighthq.types.OutlineEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

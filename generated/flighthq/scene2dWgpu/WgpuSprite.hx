@@ -19,60 +19,79 @@ import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Sprite;
+import flighthq.types.Sprite.SpriteData;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
+import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuBitmapShader;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 class WgpuSprite {
   public static function drawWgpuSprite(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var shader:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var materialRenderer:Dynamic = cast _Runtime.UNDEFINED;
-    var textureEntry:Dynamic = cast _Runtime.UNDEFINED;
-    var u0:Dynamic = cast _Runtime.UNDEFINED;
-    var v0:Dynamic = cast _Runtime.UNDEFINED;
-    var u1:Dynamic = cast _Runtime.UNDEFINED;
-    var v1:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
-    texture = _Runtime.field(_Runtime.field((cast _Runtime.field(renderProxy, 'source') : Sprite), 'data'), 'texture');
-    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool) || (cast !(cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
-    shader = _Runtime.callValue(resolveWgpuShader, cast ([state, renderProxy] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var shader:Null<WgpuBitmapShader> = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var material:Null<Material> = cast _Runtime.UNDEFINED;
+    var materialRenderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var textureEntry:Null<WgpuTextureEntry> = cast _Runtime.UNDEFINED;
+    var u0:Float = cast _Runtime.UNDEFINED;
+    var v0:Float = cast _Runtime.UNDEFINED;
+    var u1:Float = cast _Runtime.UNDEFINED;
+    var v1:Float = cast _Runtime.UNDEFINED;
+    var instanceIndex:Float = cast _Runtime.UNDEFINED;
+    var base:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var transform:Matrix = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(texture) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    shader = (cast resolveWgpuShader((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D)) : Null<WgpuBitmapShader>);
     if ((cast !_Runtime.strictEquals(shader, null) : Bool)) {
-      _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
-      _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>)), null) : Bool)) { return; }
-      _Runtime.callProperty(shader, 'bind', cast ([state, renderProxy] : Array<Dynamic>));
+      flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
+      _Runtime.callOptionalValue((cast state : WgpuRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals((cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>), null) : Bool)) { return; }
+      (cast shader : WgpuBitmapShader).bind(state, renderProxy);
       return;
     }
-    width = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').x));
-    height = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').y));
+    width = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(texture) : Float)), HxMath.abs((cast texture : Texture2D).uvScale.x));
+    height = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(texture) : Float)), HxMath.abs((cast texture : Texture2D).uvScale.y));
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    material = _Runtime.field(renderProxy, 'material');
-    materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
+    material = (cast renderProxy : RenderProxy2D).material;
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    textureEntry = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
+    textureEntry = (cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
-    _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
-    u0 = _Runtime.field(texture, 'uvOffset').x;
-    v0 = _Runtime.field(texture, 'uvOffset').y;
-    u1 = _Runtime.addNumbers(u0, _Runtime.field(texture, 'uvScale').x);
-    v1 = _Runtime.addNumbers(v0, _Runtime.field(texture, 'uvScale').y);
-    if ((cast _Runtime.field(texture, 'flipX') : Bool)) { ({ var __destructure0:Dynamic = cast ([u1, u0] : Array<Dynamic>); u0 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 0); u1 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 1); __destructure0; }); }
-    if ((cast _Runtime.field(texture, 'flipY') : Bool)) { ({ var __destructure1:Dynamic = cast ([v1, v0] : Array<Dynamic>); v0 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 0); v1 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 1); __destructure1; }); }
-    instanceIndex = _Runtime.field(runtime, 'quadBatchWriterCount');
-    base = _Runtime.callValue(prepareWgpuQuadBatchWrite, cast ([state, textureEntry, _Runtime.field(texture, 'sampler'), _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
-    data = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
-    transform = _Runtime.field(renderProxy, 'transform2D');
+    (cast ensureWgpuQuadBatchResources((cast state : WgpuRenderState)) : WgpuQuadBatchResources);
+    u0 = (cast texture : Texture2D).uvOffset.x;
+    v0 = (cast texture : Texture2D).uvOffset.y;
+    u1 = (u0 + (cast texture : Texture2D).uvScale.x);
+    v1 = (v0 + (cast texture : Texture2D).uvScale.y);
+    if ((cast (cast texture : Texture2D).flipX : Bool)) { ({ var __destructure0:Dynamic = cast ([u1, u0] : Array<Dynamic>); u0 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 0); u1 = cast flighthq._internal._StaticIndex.readArray(__destructure0, 1); __destructure0; }); }
+    if ((cast (cast texture : Texture2D).flipY : Bool)) { ({ var __destructure1:Dynamic = cast ([v1, v0] : Array<Dynamic>); v0 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 0); v1 = cast flighthq._internal._StaticIndex.readArray(__destructure1, 1); __destructure1; }); }
+    instanceIndex = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
+    base = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, (cast texture : Texture2D).sampler, (cast (cast renderProxy : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    data = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
+    transform = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32Array(data, base, transform.a);
     flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 1.0), transform.b);
     flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 2.0), transform.c);
@@ -85,10 +104,10 @@ class WgpuSprite {
     flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 9.0), v0);
     flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 10.0), u1);
     flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 11.0), v1);
-    flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 12.0), _Runtime.field(renderProxy, 'alpha'));
-    _Runtime.callValue(packWgpuQuadBatchMaterialInstance, cast ([state, _Runtime.field(renderProxy, 'materialData'), instanceIndex] : Array<Dynamic>));
-    _Runtime.callValue(recordWgpuQuadBatchColorScaleBias, cast ([state, _Runtime.coalesce(_Runtime.field(renderProxy, 'colorMatrix'), function():Dynamic return cast _Runtime.field(renderProxy, 'colorScaleBias')), instanceIndex] : Array<Dynamic>));
-    _Runtime.incrementField(runtime, 'quadBatchWriterCount', 1, true);
+    flighthq._internal._StaticIndex.writeFloat32Array(data, (base + 12.0), (cast renderProxy : RenderProxy2D).alpha);
+    packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast (cast renderProxy : RenderProxy2D).materialData : Null<flighthq._internal._Object>), (cast instanceIndex : Float));
+    recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias), (cast instanceIndex : Float));
+    (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount++;
   }
 
   public static final defaultWgpuSpriteRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createSpriteRendererData, isDirty: isSpriteRendererDirty, submit: drawWgpuSprite };

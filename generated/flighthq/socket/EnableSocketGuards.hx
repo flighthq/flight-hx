@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.socket.Socket.setSocketGuard;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.Socket;
 import flighthq.types.Socket.SocketGuardNotice;
 
 class EnableSocketGuards {
@@ -15,22 +16,22 @@ class EnableSocketGuards {
   }
 
   public static function disableSocketGuards():Void {
-    _Runtime.callValue(setSocketGuard, cast ([null] : Array<Dynamic>));
+    setSocketGuard(null);
     (EnableSocketGuards._enabled__enableSocketGuards = cast (false : Dynamic));
   }
 
   public static function enableSocketGuards():Void {
-    _Runtime.callValue(setSocketGuard, cast ([EnableSocketGuards.warnOnSocketMisuse__enableSocketGuards] : Array<Dynamic>));
+    setSocketGuard(EnableSocketGuards.warnOnSocketMisuse__enableSocketGuards);
     (EnableSocketGuards._enabled__enableSocketGuards = cast (true : Dynamic));
   }
 
   public static function warnOnSocketMisuse__enableSocketGuards(notice:SocketGuardNotice):Void {
-    var url:Dynamic = cast _Runtime.UNDEFINED;
-    var message:Dynamic = cast _Runtime.UNDEFINED;
-    url = _Runtime.field(_Runtime.field(notice, 'socket'), 'url');
-    message = ((cast _Runtime.strictEquals(_Runtime.field(notice, 'reason'), 'no-connection') : Bool) ? (cast 'createSocket: active backend returned no connection — call setSocketBackend(...) with a backend that supports this transport' : Dynamic) : (cast '' + Std.string(_Runtime.field(notice, 'operation')) + ': socket is already disposed — call createSocket(...) to create a new socket' : Dynamic));
-    _Runtime.callValue(logOnce, cast (['socket:' + Std.string(_Runtime.field(notice, 'operation')) + ':' + Std.string(_Runtime.field(notice, 'reason')) + '', LogLevel.Warn, { message: message, operation: _Runtime.field(notice, 'operation'), reason: _Runtime.field(notice, 'reason'), url: url }, 'socket'] : Array<Dynamic>));
+    var url:String = cast _Runtime.UNDEFINED;
+    var message:String = cast _Runtime.UNDEFINED;
+    url = _Runtime.field((cast notice : { var socket:Socket; }).socket, 'url');
+    message = ((cast _Runtime.strictEquals((cast notice : { var reason:String; }).reason, 'no-connection') : Bool) ? (cast 'createSocket: active backend returned no connection — call setSocketBackend(...) with a backend that supports this transport' : Dynamic) : (cast '' + Std.string((cast notice : { var operation:String; var reason:String; var socket:Socket; }).operation) + ': socket is already disposed — call createSocket(...) to create a new socket' : Dynamic));
+    (cast logOnce((cast 'socket:' + Std.string((cast notice : { var operation:String; }).operation) + ':' + Std.string((cast notice : { var reason:String; }).reason) + '' : String), (cast LogLevel.Warn : LogLevel), { message: message, operation: (cast notice : { var operation:String; }).operation, reason: (cast notice : { var reason:String; }).reason, url: url }, (cast 'socket' : Null<String>)) : Bool);
   }
 
-  public static var _enabled__enableSocketGuards:Dynamic = false;
+  public static var _enabled__enableSocketGuards:Bool = false;
 }

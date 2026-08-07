@@ -29,16 +29,24 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextContent;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
+import flighthq.types.TextFormatRange;
+import flighthq.types.TextInputState;
 import flighthq.types.TextLabel.TextLabelRuntime;
+import flighthq.types.TextLayout.TextLayoutGroup;
+import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextVerticalAlign;
 
-typedef DomRichTextData__domRichText = Dynamic;
+typedef DomRichTextData__domRichText = { >RendererData, var div:Null<flighthq._internal.dom.HTMLDivElement>; };
 
 class DomRichText {
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
-    return cast _Runtime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { div: null } : Null<{ var div:flighthq._internal._Any; }>)) : DomRichTextData__domRichText);
     return cast null;
   }
 
@@ -54,48 +62,48 @@ class DomRichText {
 
   @:noCompletion
   public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(DomRichText.drawDomRichTextField__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool)) {
-      _Runtime.callValue(DomRichText._domTextInputOverlay__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
+    DomRichText.drawDomRichTextField__domRichText((cast state : DomRenderState), (cast renderProxy : RenderProxy2D));
+    if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast (cast (cast renderProxy : RenderProxy2D).source : RichText) : RichText)) : RichTextRuntime), 'input'), null) : Bool)) : Bool)) {
+      (cast DomRichText._domTextInputOverlay__domRichText : DomRenderState->RenderProxy2D->Void)((cast state : DomRenderState), (cast renderProxy : RenderProxy2D));
     }
   }
 
   @:noCompletion
   public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
+    drawDomRichText((cast state : DomRenderState), (cast renderProxy : RenderProxy2D));
   }
 
   public static function drawDomRichTextField__domRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var data:Null<DomRichTextData__domRichText> = cast _Runtime.UNDEFINED;
+    var source:RichText = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var background:Dynamic = cast _Runtime.UNDEFINED;
-    var backgroundColor:Dynamic = cast _Runtime.UNDEFINED;
-    var border:Dynamic = cast _Runtime.UNDEFINED;
-    var borderColor:Dynamic = cast _Runtime.UNDEFINED;
-    var wordWrap:Dynamic = cast _Runtime.UNDEFINED;
-    var multiline:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollH:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollV:Dynamic = cast _Runtime.UNDEFINED;
-    var richTextRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var content:Dynamic = cast _Runtime.UNDEFINED;
+    var background:Bool = cast _Runtime.UNDEFINED;
+    var backgroundColor:Float = cast _Runtime.UNDEFINED;
+    var border:Bool = cast _Runtime.UNDEFINED;
+    var borderColor:Float = cast _Runtime.UNDEFINED;
+    var wordWrap:Bool = cast _Runtime.UNDEFINED;
+    var multiline:Bool = cast _Runtime.UNDEFINED;
+    var scrollH:Float = cast _Runtime.UNDEFINED;
+    var scrollV:Float = cast _Runtime.UNDEFINED;
+    var richTextRuntime:RichTextRuntime = cast _Runtime.UNDEFINED;
+    var content:RichTextContent = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var measure:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var fieldW:Dynamic = cast _Runtime.UNDEFINED;
-    var fieldH:Dynamic = cast _Runtime.UNDEFINED;
-    var div:Dynamic = cast _Runtime.UNDEFINED;
-    var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var html:Dynamic = cast _Runtime.UNDEFINED;
-    var bulletLines:Dynamic = cast _Runtime.UNDEFINED;
-    data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomRichTextData__domRichText>);
+    var text:String = cast _Runtime.UNDEFINED;
+    var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
+    var measure:String->TextFormat->Float = cast _Runtime.UNDEFINED;
+    var result:TextLayoutResult = cast _Runtime.UNDEFINED;
+    var fieldW:Float = cast _Runtime.UNDEFINED;
+    var fieldH:Float = cast _Runtime.UNDEFINED;
+    var div:flighthq._internal.dom.HTMLDivElement = cast _Runtime.UNDEFINED;
+    var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
+    var scrollYOffset:Float = cast _Runtime.UNDEFINED;
+    var scrollXOffset:Float = cast _Runtime.UNDEFINED;
+    var html:String = cast _Runtime.UNDEFINED;
+    var bulletLines:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
+    data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomRichTextData__domRichText>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
-    __destructure0 = _Runtime.field(source, 'data');
+    source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
+    __destructure0 = (cast source : RichText).data;
     background = _Runtime.field(__destructure0, 'background');
     backgroundColor = _Runtime.field(__destructure0, 'backgroundColor');
     border = _Runtime.field(__destructure0, 'border');
@@ -104,73 +112,73 @@ class DomRichText {
     multiline = _Runtime.field(__destructure0, 'multiline');
     scrollH = _Runtime.field(__destructure0, 'scrollH');
     scrollV = _Runtime.field(__destructure0, 'scrollV');
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'div'), null) : Bool)) {
-      _Runtime.setField(data, 'div', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
-      _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
-      ((cast (cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
+    if ((cast _Runtime.strictEquals((cast data : DomRichTextData__domRichText).div, null) : Bool)) {
+      ((cast data : DomRichTextData__domRichText).div = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
+      prepareDomElement((cast (cast data : DomRichTextData__domRichText).div : flighthq._internal.dom.HTMLElement));
+      ((cast (cast (cast data : DomRichTextData__domRichText).div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     }
-    richTextRuntime = (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
-    content = _Runtime.callValue(getRichTextContent, cast ([richTextRuntime] : Array<Dynamic>));
-    _Runtime.callValue(computeRichTextContent, cast ([content, _Runtime.field(source, 'data'), _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
+    richTextRuntime = (cast (cast getRichTextRuntime((cast source : RichText)) : RichTextRuntime) : RichTextRuntime);
+    content = (cast getRichTextContent((cast richTextRuntime : RichTextRuntime)) : RichTextContent);
+    computeRichTextContent(content, (cast source : RichText).data, (cast (cast getRichTextPasswordCharacter((cast source : RichText)) : Null<String>) : Null<String>));
     __destructure1 = content;
     text = _Runtime.field(__destructure1, 'text');
-    ctx = _Runtime.callValue(DomRichText.getMeasureCtx__domRichText, cast ([] : Array<Dynamic>));
+    ctx = (cast DomRichText.getMeasureCtx__domRichText() : Null<flighthq._internal.dom.CanvasRenderingContext2D>);
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
-    measure = function(t:String, fmt:TextFormat) {
-      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
+    measure = (cast function(t:String, fmt:TextFormat):Float {
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast fmt : TextFormat)) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
-    };
-    result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: _Runtime.field(content, 'formatRanges'), width: ((cast wordWrap : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'width') : Dynamic) : (cast 10000.0 : Dynamic)), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, multiline: multiline, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: wordWrap }] : Array<Dynamic>));
-    fieldW = _Runtime.callValue(computeTextBoundsWidth, cast ([_Runtime.field(source, 'data'), result] : Array<Dynamic>));
-    fieldH = _Runtime.callValue(computeTextBoundsHeight, cast ([_Runtime.field(source, 'data'), result] : Array<Dynamic>));
-    div = _Runtime.field(data, 'div');
+    } : String->TextFormat->Float);
+    result = (cast getTextLayoutResult((cast (cast richTextRuntime : TextLabelRuntime) : TextLabelRuntime)) : TextLayoutResult);
+    computeTextLayout(result, { text: text, formatRanges: (cast content : RichTextContent).formatRanges, width: ((cast wordWrap : Bool) ? (cast (cast (cast source : RichText).data : RichTextData).width : Dynamic) : (cast 10000.0 : Dynamic)), height: (cast (cast source : RichText).data : RichTextData).height, measure: measure, multiline: multiline, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : RichText).data : RichTextData).autoSize, 'none') : Bool) ? (cast (cast (cast source : RichText).data : RichTextData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: wordWrap });
+    fieldW = (cast computeTextBoundsWidth((cast source : RichText).data, result) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast source : RichText).data, result) : Float);
+    div = (cast data : DomRichTextData__domRichText).div;
     ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(fieldW) + 'px');
     ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(fieldH) + 'px');
-    ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = ((cast background : Bool) ? (cast _Runtime.callValue(computeRgbHexString, cast ([backgroundColor] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic)));
-    ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).border = ((cast border : Bool) ? (cast '1px solid ' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([borderColor] : Array<Dynamic>))) + '' : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = ((cast background : Bool) ? (cast (cast computeRgbHexString((cast backgroundColor : Float)) : String) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).border = ((cast border : Bool) ? (cast '1px solid ' + Std.string((cast computeRgbHexString((cast borderColor : Float)) : String)) + '' : Dynamic) : (cast '' : Dynamic)));
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) {
       ((cast div : flighthq._internal.dom.HTMLDivElement).innerHTML = '');
-      _Runtime.callValue(applyDomStyle, cast ([state, div, renderProxy] : Array<Dynamic>));
-      _Runtime.callValue(setDomRendererElement, cast ([state, div] : Array<Dynamic>));
+      applyDomStyle((cast state : DomRenderState), (cast div : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
+      setDomRendererElement((cast state : DomRenderState), (cast div : flighthq._internal.dom.HTMLElement));
       return;
     }
     firstVisibleLine = (scrollV - 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast result : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = scrollH;
     html = '';
-    if ((cast ((cast _Runtime.field(_Runtime.field(source, 'data'), 'selectable') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex')) : Bool)) : Bool)) {
-      _Runtime.callValue(getRichTextSelectionRectangles, cast ([DomRichText._richTextSelectionRectangles__domRichText, _Runtime.field(richTextRuntime, 'selectionBeginIndex'), _Runtime.field(richTextRuntime, 'selectionEndIndex'), result] : Array<Dynamic>));
+    if ((cast ((cast (cast (cast source : RichText).data : RichTextData).selectable : Bool) && (cast !_Runtime.strictEquals((cast richTextRuntime : RichTextRuntime).selectionBeginIndex, (cast richTextRuntime : RichTextRuntime).selectionEndIndex) : Bool)) : Bool)) {
+      getRichTextSelectionRectangles(DomRichText._richTextSelectionRectangles__domRichText, (cast (cast richTextRuntime : RichTextRuntime).selectionBeginIndex : Float), (cast (cast richTextRuntime : RichTextRuntime).selectionEndIndex : Float), result);
       for (rectangle in _Runtime.iterable(DomRichText._richTextSelectionRectangles__domRichText)) {
-        (html = cast ((html + '<div style="position:absolute;left:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rectangle, 'x'), scrollXOffset)) + 'px;top:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rectangle, 'y'), scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rectangle, 'width')) + 'px;height:' + Std.string(_Runtime.field(rectangle, 'height')) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
+        (html = cast ((html + '<div style="position:absolute;left:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width) + 'px;height:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
       }
     }
     bulletLines = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      if ((cast ((cast _Runtime.field(group, 'lineIndex') : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
-      var fmt:Dynamic = _Runtime.field(group, 'format');
-      var slice:Dynamic = _Runtime.callValue(escapeDomHtmlString, cast ([_Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'))] : Array<Dynamic>));
-      var x:Dynamic = _Runtime.subtractNumbers(_Runtime.field(group, 'offsetX'), scrollXOffset);
-      var fontStr:Dynamic = _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>));
-      var fontAscent:Dynamic = _Runtime.callValue(DomRichText.getDomFontAscent__domRichText, cast ([ctx, fontStr] : Array<Dynamic>));
-      var y:Dynamic = ((_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')) - fontAscent) - scrollYOffset);
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(fmt, 'bullet'), function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))) : Bool)))) {
-        ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
-        var bulletSize:Dynamic = _Runtime.coalesce(_Runtime.field(fmt, 'size'), function():Dynamic return cast 12.0);
-        var bulletX:Dynamic = ((x - (bulletSize * 0.7)) - DomRichText.DOM_BULLET_GAP__domRichText);
-        var bulletStyle:Dynamic = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(fmt, 'color'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'textColor'))] : Array<Dynamic>))) + ';white-space:nowrap;';
+    for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
+      if ((cast ((cast (cast group : TextLayoutGroup).lineIndex : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
+      var fmt:TextFormat = (cast group : TextLayoutGroup).format;
+      var slice:String = (cast escapeDomHtmlString((cast _Runtime.substring(text, (cast group : TextLayoutGroup).startIndex, (cast group : TextLayoutGroup).endIndex) : String)) : String);
+      var x:Float = ((cast group : TextLayoutGroup).offsetX - scrollXOffset);
+      var fontStr:String = (cast computeTextFormatFontString((cast fmt : TextFormat)) : String);
+      var fontAscent:Float = (cast DomRichText.getDomFontAscent__domRichText((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast fontStr : String)) : Float);
+      var y:Float = ((((cast group : TextLayoutGroup).offsetY + (cast group : TextLayoutGroup).ascent) - fontAscent) - scrollYOffset);
+      if (_Runtime.truthy(_Runtime.andValue((cast fmt : TextFormat).bullet, function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set<Float>).has((cast group : TextLayoutGroup).lineIndex)) : Bool)))) {
+        ((cast bulletLines : flighthq._internal._Set<Float>).add((cast group : TextLayoutGroup).lineIndex));
+        var bulletSize:Float = _Runtime.coalesce((cast fmt : TextFormat).size, function():Dynamic return cast 12.0);
+        var bulletX:Float = ((x - (bulletSize * 0.7)) - DomRichText.DOM_BULLET_GAP__domRichText);
+        var bulletStyle:String = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast (cast source : RichText).data : RichTextData).textColor) : Float)) : String)) + ';white-space:nowrap;';
         (html = cast ((html + '<div style="' + Std.string(bulletStyle) + '">Ã¢â‚¬Â¢</div>') : Dynamic));
       }
-      var style:Dynamic = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;';
-      (style = cast ((style + 'color:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(fmt, 'color'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'textColor'))] : Array<Dynamic>))) + ';white-space:nowrap;') : Dynamic));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(fmt, 'underline'), function():Dynamic return cast _Runtime.field(fmt, 'strikethrough')))) {
-        var decorations:Dynamic = cast ([] : Array<Dynamic>);
-        if (_Runtime.truthy(_Runtime.field(fmt, 'underline'))) { _Runtime.callProperty(decorations, 'push', cast (['underline'] : Array<Dynamic>)); }
-        if (_Runtime.truthy(_Runtime.field(fmt, 'strikethrough'))) { _Runtime.callProperty(decorations, 'push', cast (['line-through'] : Array<Dynamic>)); }
+      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;';
+      (style = cast ((style + 'color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast (cast source : RichText).data : RichTextData).textColor) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
+      if (_Runtime.truthy(_Runtime.orValue((cast fmt : TextFormat).underline, function():Dynamic return cast (cast fmt : TextFormat).strikethrough))) {
+        var decorations:Array<flighthq._internal._Any> = cast ([] : Array<Dynamic>);
+        if (_Runtime.truthy((cast fmt : TextFormat).underline)) { _Runtime.callProperty(decorations, 'push', cast (['underline'] : Array<Dynamic>)); }
+        if (_Runtime.truthy((cast fmt : TextFormat).strikethrough)) { _Runtime.callProperty(decorations, 'push', cast (['line-through'] : Array<Dynamic>)); }
         (style = cast ((style + 'text-decoration:' + Std.string(_Runtime.join(decorations, ' ')) + ';') : Dynamic));
       }
       {
-        var __switchValue = _Runtime.field(fmt, 'align');
+        var __switchValue = (cast fmt : TextFormat).align;
         if (__switchValue == 'center') {
           (style = cast ((style + 'text-align:center;') : Dynamic));
         }
@@ -181,34 +189,34 @@ class DomRichText {
           (style = cast ((style + 'text-align:justify;') : Dynamic));
         }
       }
-      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'leftMargin'), null) : Bool)) { (style = cast ((style + 'padding-left:' + Std.string(_Runtime.field(fmt, 'leftMargin')) + 'px;') : Dynamic)); }
-      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'rightMargin'), null) : Bool)) { (style = cast ((style + 'padding-right:' + Std.string(_Runtime.field(fmt, 'rightMargin')) + 'px;') : Dynamic)); }
-      if ((cast !_Runtime.looseEquals(_Runtime.field(fmt, 'indent'), null) : Bool)) { (style = cast ((style + 'text-indent:' + Std.string(_Runtime.field(fmt, 'indent')) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals((cast fmt : TextFormat).leftMargin, null) : Bool)) { (style = cast ((style + 'padding-left:' + Std.string((cast fmt : TextFormat).leftMargin) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals((cast fmt : TextFormat).rightMargin, null) : Bool)) { (style = cast ((style + 'padding-right:' + Std.string((cast fmt : TextFormat).rightMargin) + 'px;') : Dynamic)); }
+      if ((cast !_Runtime.looseEquals((cast fmt : TextFormat).indent, null) : Bool)) { (style = cast ((style + 'text-indent:' + Std.string((cast fmt : TextFormat).indent) + 'px;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     ((cast div : flighthq._internal.dom.HTMLDivElement).innerHTML = html);
-    _Runtime.callValue(applyDomStyle, cast ([state, div, renderProxy] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([state, div] : Array<Dynamic>));
+    applyDomStyle((cast state : DomRenderState), (cast div : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
+    setDomRendererElement((cast state : DomRenderState), (cast div : flighthq._internal.dom.HTMLElement));
   }
 
-  public static final DOM_BULLET_GAP__domRichText:Dynamic = 4.0;
+  public static final DOM_BULLET_GAP__domRichText:Float = 4.0;
 
   public static function getDomFontAscent__domRichText(ctx:flighthq._internal.dom.CanvasRenderingContext2D, font:String):Float {
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
-    var ascent:Dynamic = cast _Runtime.UNDEFINED;
-    cached = _Runtime.callValue(getDomFontAscentCached, cast ([font] : Array<Dynamic>));
+    var cached:Null<Float> = cast _Runtime.UNDEFINED;
+    var ascent:Float = cast _Runtime.UNDEFINED;
+    cached = (cast getDomFontAscentCached((cast font : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body')), function():Dynamic return cast _Runtime.callValue(DomRichText.probeCssFontAscent__domRichText, cast ([font] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DomRichText.canvasFontAscentFallback__domRichText, cast ([ctx, font] : Array<Dynamic>)));
-    _Runtime.callValue(setDomFontAscentCached, cast ([font, ascent] : Array<Dynamic>));
+    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body')), function():Dynamic return cast (cast DomRichText.probeCssFontAscent__domRichText((cast font : String)) : Float), function():Dynamic return cast (cast DomRichText.canvasFontAscentFallback__domRichText((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast font : String)) : Float));
+    setDomFontAscentCached((cast font : String), (cast ascent : Float));
     return cast ascent;
     return cast null;
   }
 
   public static function probeCssFontAscent__domRichText(font:String):Float {
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    var probe:Dynamic = cast _Runtime.UNDEFINED;
-    var containerTop:Dynamic = cast _Runtime.UNDEFINED;
-    var probeTop:Dynamic = cast _Runtime.UNDEFINED;
+    var container:flighthq._internal.dom.HTMLDivElement = cast _Runtime.UNDEFINED;
+    var probe:flighthq._internal.dom.HTMLSpanElement = cast _Runtime.UNDEFINED;
+    var containerTop:Float = cast _Runtime.UNDEFINED;
+    var probeTop:Float = cast _Runtime.UNDEFINED;
     container = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
     ((cast (cast container : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'font:' + Std.string(font) + ';line-height:1;position:fixed;top:0;left:0;visibility:hidden;pointer-events:none;white-space:nowrap');
     probe = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
@@ -224,20 +232,20 @@ class DomRichText {
   }
 
   public static function canvasFontAscentFallback__domRichText(ctx:flighthq._internal.dom.CanvasRenderingContext2D, font:String):Float {
-    var metrics:Dynamic = cast _Runtime.UNDEFINED;
-    var sizeMatch:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
+    var metrics:flighthq._internal._Intersection2<flighthq._internal.dom.TextMetrics, { @:optional var fontBoundingBoxAscent:Null<Float>; }> = cast _Runtime.UNDEFINED;
+    var sizeMatch:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', font);
-    metrics = (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>)) : Dynamic);
+    metrics = (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>)) : flighthq._internal._Intersection2<flighthq._internal.dom.TextMetrics, { @:optional var fontBoundingBoxAscent:Float; }>);
     sizeMatch = _Runtime.callProperty(_Runtime.regexp('(\\d+(?:\\.\\d+)?)px', ''), 'exec', cast ([font] : Array<Dynamic>));
     size = _Runtime.select(sizeMatch, function():Dynamic return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(sizeMatch, 1.0)] : Array<Dynamic>)), function():Dynamic return cast 12.0);
     return cast _Runtime.coalesce((cast metrics : flighthq._internal.dom.TextMetrics).fontBoundingBoxAscent, function():Dynamic return cast (size * 0.85));
     return cast null;
   }
 
-  public static final DOM_SELECTION_ALPHA__domRichText:Dynamic = 0.35;
+  public static final DOM_SELECTION_ALPHA__domRichText:Float = 0.35;
 
-  public static final DOM_SELECTION_COLOR__domRichText:Dynamic = '#0078d7';
+  public static final DOM_SELECTION_COLOR__domRichText:String = '#0078d7';
 
   public static final _richTextSelectionRectangles__domRichText:Array<{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }> = cast ([] : Array<Dynamic>);
 

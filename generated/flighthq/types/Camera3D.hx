@@ -10,7 +10,7 @@ typedef Camera3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var 
 
 typedef Camera3DLike = EntityWithoutRuntime<Camera3D>;
 
-typedef Projection = Dynamic;
+typedef Projection = flighthq._internal._Union2<OrthographicProjection, PerspectiveProjection>;
 
 typedef PerspectiveProjection = { var aspect:Float; var fovY:Float; var kind:String; };
 

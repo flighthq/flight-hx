@@ -18,7 +18,7 @@ typedef CollisionSegment = { var x0:Float; var y0:Float; var x1:Float; var y1:Fl
 
 typedef CollisionPoint = { var x:Float; var y:Float; };
 
-typedef CollisionShape = Dynamic;
+typedef CollisionShape = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<{ >CollisionCircle, var kind:String; }, { >CollisionAabb, var kind:String; }>, { >CollisionObb, var kind:String; }>, { >CollisionPolygon, var kind:String; }>, { >CollisionSegment, var kind:String; }>, { >CollisionPoint, var kind:String; }>;
 
 typedef CollisionManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; };
 
@@ -30,7 +30,7 @@ typedef CollisionTestExplanation = { var kind:Null<CollisionShapeKind>; var over
 
 typedef CollisionTestStatus = String;
 
-typedef CollisionTestGuard = Dynamic;
+typedef CollisionTestGuard = CollisionShape->CollisionShape->Void;
 
 typedef CollisionContactPoint = { var x:Float; var y:Float; var depth:Float; var featureId:Float; };
 

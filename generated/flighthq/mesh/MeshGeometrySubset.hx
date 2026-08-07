@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshGeometry.PrimitiveTopology;
 
 class MeshGeometrySubset {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(geometry.subsets, 'length') : Float)) : Bool)) {
         _Runtime.callProperty(next, 'push', cast ([{ indexCount: flighthq._internal._StaticIndex.readArray(geometry.subsets, i).indexCount, indexOffset: flighthq._internal._StaticIndex.readArray(geometry.subsets, i).indexOffset }] : Array<Dynamic>));
         i++;
@@ -22,7 +23,7 @@ class MeshGeometrySubset {
   }
 
   public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
-    var indexCount:Dynamic = cast _Runtime.UNDEFINED;
+    var indexCount:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast subsetIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast subsetIndex : Float) >= (cast _Runtime.field(geometry.subsets, 'length') : Float)) : Bool)) : Bool)) { return cast 0.0; }
     indexCount = flighthq._internal._StaticIndex.readArray(geometry.subsets, subsetIndex).indexCount;
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) { return cast HxMath.floor((indexCount / 3.0)); }
@@ -33,14 +34,14 @@ class MeshGeometrySubset {
 
   public static function getMeshGeometryTriangleSubsetIndex(geometry:MeshGeometry, triangleIndex:Float):Float {
     var firstElement:Float = cast _Runtime.UNDEFINED;
-    var subsets:Dynamic = cast _Runtime.UNDEFINED;
+    var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     if ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) { (firstElement = cast ((triangleIndex * 3.0) : Dynamic)); } else { if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) { (firstElement = cast (triangleIndex : Dynamic)); } else { return cast -1.0; } }
     subsets = geometry.subsets;
     {
-      var subsetIndex:Dynamic = 0.0;
+      var subsetIndex:Float = 0.0;
       while ((cast ((cast subsetIndex : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
-        var subset:Dynamic = flighthq._internal._StaticIndex.readArray(subsets, subsetIndex);
+        var subset:MeshSubset = flighthq._internal._StaticIndex.readArray(subsets, subsetIndex);
         if ((cast ((cast ((cast firstElement : Float) >= (cast subset.indexOffset : Float)) : Bool) && (cast ((cast (firstElement + 3.0) : Float) <= (cast (subset.indexOffset + subset.indexCount) : Float)) : Bool)) : Bool)) {
           return cast subsetIndex;
         }
@@ -55,7 +56,7 @@ class MeshGeometrySubset {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
         _Runtime.callProperty(next, 'push', cast ([{ indexCount: flighthq._internal._StaticIndex.readArray(subsets, i).indexCount, indexOffset: flighthq._internal._StaticIndex.readArray(subsets, i).indexOffset }] : Array<Dynamic>));
         i++;

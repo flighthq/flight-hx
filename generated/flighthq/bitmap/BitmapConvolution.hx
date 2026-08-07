@@ -3,32 +3,34 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapConvolutionOptions;
+import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 
 class BitmapConvolution {
   public static function convolveBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, options:BitmapConvolutionOptions):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixX:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixY:Dynamic = cast _Runtime.UNDEFINED;
-    var rawDivisor:Dynamic = cast _Runtime.UNDEFINED;
-    var divisor:Dynamic = cast _Runtime.UNDEFINED;
-    var bias:Dynamic = cast _Runtime.UNDEFINED;
-    var edge:Dynamic = cast _Runtime.UNDEFINED;
-    var preserveAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var matrix:Array<Float> = cast _Runtime.UNDEFINED;
+    var matrixX:Float = cast _Runtime.UNDEFINED;
+    var matrixY:Float = cast _Runtime.UNDEFINED;
+    var rawDivisor:Float = cast _Runtime.UNDEFINED;
+    var divisor:Float = cast _Runtime.UNDEFINED;
+    var bias:Float = cast _Runtime.UNDEFINED;
+    var edge:BitmapEdgeMode = cast _Runtime.UNDEFINED;
+    var preserveAlpha:Bool = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     __destructure0 = options;
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
     matrixY = _Runtime.field(__destructure0, 'matrixY');
     if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix dimensions must be positive')); }
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix does not match its dimensions')); }
-    rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast _Runtime.callValue(BitmapConvolution.getConvolutionDivisor__bitmapConvolution, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
+    rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast (cast BitmapConvolution.getConvolutionDivisor__bitmapConvolution((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
     divisor = ((cast _Runtime.strictEquals(rawDivisor, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast rawDivisor : Dynamic));
     bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);
     edge = _Runtime.coalesce(_Runtime.field(options, 'edge'), function():Dynamic return cast 'clamp');
@@ -39,25 +41,25 @@ class BitmapConvolution {
     bitmapHeight = _Runtime.field(source, 'bitmap').height;
     data = _Runtime.field(source, 'bitmap').data;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var r:Dynamic = 0.0;
-            var g:Dynamic = 0.0;
-            var b:Dynamic = 0.0;
-            var a:Dynamic = 0.0;
+            var r:Float = 0.0;
+            var g:Float = 0.0;
+            var b:Float = 0.0;
+            var a:Float = 0.0;
             {
-              var ky:Dynamic = 0.0;
+              var ky:Float = 0.0;
               while ((cast ((cast ky : Float) < (cast matrixY : Float)) : Bool)) {
-                var rawSampleY:Dynamic = ((_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky) - offsetY);
-                var weight_row_start:Dynamic = (ky * matrixX);
+                var rawSampleY:Float = ((_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky) - offsetY);
+                var weight_row_start:Float = (ky * matrixX);
                 {
-                  var kx:Dynamic = 0.0;
+                  var kx:Float = 0.0;
                   while ((cast ((cast kx : Float) < (cast matrixX : Float)) : Bool)) {
-                    var rawSampleX:Dynamic = ((_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx) - offsetX);
-                    var weight:Dynamic = flighthq._internal._StaticIndex.readArray(matrix, (weight_row_start + kx));
+                    var rawSampleX:Float = ((_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx) - offsetX);
+                    var weight:Float = flighthq._internal._StaticIndex.readArray(matrix, (weight_row_start + kx));
                     var sampleX:Float = cast _Runtime.UNDEFINED;
                     var sampleY:Float = cast _Runtime.UNDEFINED;
                     if ((cast ((cast ((cast ((cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rawSampleY : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast rawSampleX : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) {
@@ -68,8 +70,8 @@ class BitmapConvolution {
                         (sampleX = cast (_Runtime.fmod((_Runtime.fmod(rawSampleX, bitmapWidth) + bitmapWidth), bitmapWidth) : Dynamic));
                         (sampleY = cast (_Runtime.fmod((_Runtime.fmod(rawSampleY, bitmapHeight) + bitmapHeight), bitmapHeight) : Dynamic));
                       } else { if ((cast _Runtime.strictEquals(edge, 'mirror') : Bool)) {
-                        (sampleX = cast (_Runtime.callValue(BitmapConvolution.resolveConvolutionMirror__bitmapConvolution, cast ([rawSampleX, bitmapWidth] : Array<Dynamic>)) : Dynamic));
-                        (sampleY = cast (_Runtime.callValue(BitmapConvolution.resolveConvolutionMirror__bitmapConvolution, cast ([rawSampleY, bitmapHeight] : Array<Dynamic>)) : Dynamic));
+                        (sampleX = cast ((cast BitmapConvolution.resolveConvolutionMirror__bitmapConvolution((cast rawSampleX : Float), (cast bitmapWidth : Float)) : Float) : Dynamic));
+                        (sampleY = cast ((cast BitmapConvolution.resolveConvolutionMirror__bitmapConvolution((cast rawSampleY : Float), (cast bitmapHeight : Float)) : Float) : Dynamic));
                       } else {
                         (sampleX = cast (((cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast rawSampleX : Float) >= (cast bitmapWidth : Float)) : Bool) ? (cast (bitmapWidth - 1.0) : Dynamic) : (cast rawSampleX : Dynamic)) : Dynamic)) : Dynamic));
                         (sampleY = cast (((cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast rawSampleY : Float) >= (cast bitmapHeight : Float)) : Bool) ? (cast (bitmapHeight - 1.0) : Dynamic) : (cast rawSampleY : Dynamic)) : Dynamic)) : Dynamic));
@@ -78,7 +80,7 @@ class BitmapConvolution {
                       (sampleX = cast (rawSampleX : Dynamic));
                       (sampleY = cast (rawSampleY : Dynamic));
                     }
-                    var i:Dynamic = (((sampleY * bitmapWidth) + sampleX) * 4.0);
+                    var i:Float = (((sampleY * bitmapWidth) + sampleX) * 4.0);
                     (r = cast ((r + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), weight)) : Dynamic));
                     (g = cast ((g + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), weight)) : Dynamic));
                     (b = cast ((b + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), weight)) : Dynamic));
@@ -89,16 +91,16 @@ class BitmapConvolution {
                 ky++;
               }
             }
-            var di:Dynamic = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(BitmapConvolution.clampByte__bitmapConvolution, cast ([((r / divisor) + bias)] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(BitmapConvolution.clampByte__bitmapConvolution, cast ([((g / divisor) + bias)] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(BitmapConvolution.clampByte__bitmapConvolution, cast ([((b / divisor) + bias)] : Array<Dynamic>)));
+            var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((r / divisor) + bias) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((g / divisor) + bias) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((b / divisor) + bias) : Float)) : Float));
             if ((cast preserveAlpha : Bool)) {
-              var cy:Dynamic = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'y'), py)));
-              var cx:Dynamic = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'x'), px)));
+              var cy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'y'), py)));
+              var cx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'x'), px)));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(data, ((((cy * bitmapWidth) + cx) * 4.0) + 3.0)));
             } else {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(BitmapConvolution.clampByte__bitmapConvolution, cast ([((a / divisor) + bias)] : Array<Dynamic>)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((a / divisor) + bias) : Float)) : Float));
             }
             px++;
           }
@@ -114,10 +116,10 @@ class BitmapConvolution {
   }
 
   public static function getConvolutionDivisor__bitmapConvolution(matrix:Array<Float>, length:Float):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
@@ -128,8 +130,8 @@ class BitmapConvolution {
   }
 
   public static function resolveConvolutionMirror__bitmapConvolution(v:Float, size:Float):Float {
-    var period:Dynamic = cast _Runtime.UNDEFINED;
-    var wrapped:Dynamic = cast _Runtime.UNDEFINED;
+    var period:Float = cast _Runtime.UNDEFINED;
+    var wrapped:Float = cast _Runtime.UNDEFINED;
     period = (2.0 * size);
     wrapped = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
     return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));

@@ -33,6 +33,7 @@ import type {
   IrTypedArraySetReceiver,
   IrTypedStructBinding,
   IrType,
+  IrTypeField,
   IrVariable,
   LoweringDiagnostic,
   LoweringResult,
@@ -75,8 +76,23 @@ const typedArrayBindings = Object.keys(typedArrayTypeReferenceMap) as TypedArray
 
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
+  ArrayBufferLike: 'flighthq._internal._ArrayBufferLike',
   ArrayBufferView: 'haxe.io.ArrayBufferView',
   ...typedArrayTypeReferenceMap,
+};
+
+const standardGenericTypeReferenceMap: Readonly<Record<string, { arity: number; haxeType: string }>> = {
+  ArrayLike: { arity: 1, haxeType: 'flighthq._internal._ArrayLike' },
+  Record: { arity: 2, haxeType: 'flighthq._internal._Record' },
+};
+
+const collectionTypeReferenceMap: Readonly<Record<string, { arity: number; haxeType: string }>> = {
+  Map: { arity: 2, haxeType: 'flighthq._internal._Map' },
+  ReadonlyMap: { arity: 2, haxeType: 'flighthq._internal._Map' },
+  ReadonlySet: { arity: 1, haxeType: 'flighthq._internal._Set' },
+  Set: { arity: 1, haxeType: 'flighthq._internal._Set' },
+  WeakMap: { arity: 2, haxeType: 'flighthq._internal._WeakMap' },
+  WeakSet: { arity: 1, haxeType: 'flighthq._internal._WeakSet' },
 };
 
 const standardDynamicTypes = new Set([
@@ -86,14 +102,8 @@ const standardDynamicTypes = new Set([
   'Iterable',
   'IterableIterator',
   'Iterator',
-  'Map',
   'RegExp',
-  'ReadonlyMap',
-  'ReadonlySet',
-  'Set',
-  'WeakMap',
   'WeakRef',
-  'WeakSet',
 ]);
 
 const standardGlobalValues = new Set(['DataView', 'Map', 'RegExp', 'Set', 'WeakMap', 'WeakRef', 'WeakSet']);
@@ -171,6 +181,7 @@ export function lowerTypeScriptSource(
   workspaceDirectory: string,
   checker?: ts.TypeChecker,
   typedStructs?: TypedStructRegistry,
+  options: { expressionTypes?: boolean; inferredTypes?: boolean } = {},
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
@@ -184,15 +195,42 @@ export function lowerTypeScriptSource(
   collectLocalTypes(sourceFile);
   const externalTypes = new Set<string>();
   const externalValues = new Map<string, { imported: string; specifier: string }>();
+  const directTypeNames = new Set<string>();
+  const visibleTypeNames = new Set<string>();
+  for (const statement of sourceFile.statements) {
+    if (
+      (ts.isTypeAliasDeclaration(statement) ||
+        ts.isInterfaceDeclaration(statement) ||
+        ts.isClassDeclaration(statement) ||
+        ts.isEnumDeclaration(statement)) &&
+      statement.name
+    ) {
+      visibleTypeNames.add(statement.name.text);
+      if (hasModifier(statement, ts.SyntaxKind.ExportKeyword)) directTypeNames.add(statement.name.text);
+    }
+  }
   for (const statement of sourceFile.statements) {
     if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier)) continue;
     const specifier = statement.moduleSpecifier.text;
+    const bindings = statement.importClause?.namedBindings;
+    if (bindings && ts.isNamedImports(bindings)) {
+      for (const element of bindings.elements) {
+        let symbol = checker?.getSymbolAtLocation(element.name);
+        if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker?.getAliasedSymbol(symbol);
+        if (
+          (symbol && (symbol.flags & ts.SymbolFlags.Type) !== 0) ||
+          (!checker && (statement.importClause?.isTypeOnly || element.isTypeOnly))
+        ) {
+          visibleTypeNames.add(element.name.text);
+          directTypeNames.add(element.name.text);
+        }
+      }
+    }
     if (specifier.startsWith('.') || specifier.startsWith('@flighthq/')) continue;
     if (statement.importClause?.name) {
       externalTypes.add(statement.importClause.name.text);
       externalValues.set(statement.importClause.name.text, { imported: 'default', specifier });
     }
-    const bindings = statement.importClause?.namedBindings;
     if (bindings && ts.isNamedImports(bindings)) {
       for (const element of bindings.elements) {
         externalTypes.add(element.name.text);
@@ -235,11 +273,15 @@ export function lowerTypeScriptSource(
   const domDocumentBindingNames = collectGlobalRootNames(sourceFile, 'document');
   const domNavigatorBindingNames = collectGlobalRootNames(sourceFile, 'navigator');
   const context: LoweringContext = {
+    checkerTypeCache: new Map(),
+    preserveExpressionTypes: options.expressionTypes ?? true,
+    preserveInferredTypes: options.inferredTypes ?? true,
     canvasBindingNames,
     canvasElementBindingNames,
     classThis: false,
     checker,
     diagnostics,
+    directTypeNames,
     domDocumentBindingNames,
     domNavigatorBindingNames,
     domWindowBindingNames,
@@ -253,6 +295,7 @@ export function lowerTypeScriptSource(
     sourceFile,
     temporaryIndex: 0,
     typedStructs,
+    visibleTypeNames,
     webGpuCanvasContextBindingNames,
     webGpuDeviceBindingNames,
     webGpuLimitsBindingNames,
@@ -331,7 +374,7 @@ export function lowerTypeScriptSource(
             mutable,
             name: declaration.name.text,
             origin: origin(statement, context),
-            type: declaration.type ? lowerType(declaration.type, context) : undefined,
+            type: declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context),
           });
         }
         accountedDeclarations += 1;
@@ -681,6 +724,54 @@ function generatedClassBinding(node: ts.Expression, context: LoweringContext): s
   return names.size === 1 ? [...names][0] : undefined;
 }
 
+/** A source-defined structural receiver whose field is statically present. */
+function structuralReceiverType(node: ts.PropertyAccessExpression, context: LoweringContext): IrType | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const receiver = checker.getTypeAtLocation(node.expression);
+  if (
+    (receiver.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0 ||
+    !checker.getPropertyOfType(receiver, node.name.text)
+  ) {
+    return undefined;
+  }
+  if (receiver.isUnionOrIntersection()) {
+    const property = checker.getPropertyOfType(receiver, node.name.text);
+    const declaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
+    const fieldType = property
+      ? lowerCheckerType(checker.getTypeOfSymbolAtLocation(property, declaration), node, context, new Set())
+      : undefined;
+    return fieldType
+      ? {
+          extends: [],
+          fields: [
+            {
+              name: node.name.text,
+              optional: Boolean(property && (property.flags & ts.SymbolFlags.Optional) !== 0),
+              type: fieldType,
+            },
+          ],
+          kind: 'anonymous',
+        }
+      : undefined;
+  }
+  const lowered = lowerCheckerType(receiver, node.expression, context, new Set());
+  if (!lowered || lowered.kind === 'dynamic' || lowered.kind === 'union') return undefined;
+  if (lowered.kind === 'anonymous') return lowered;
+  if (lowered.kind !== 'named') return undefined;
+  const symbol = receiver.aliasSymbol ?? receiver.getSymbol();
+  const declarations = symbol?.declarations ?? [];
+  return declarations.some(
+    (declaration) =>
+      !declaration.getSourceFile().isDeclarationFile &&
+      (ts.isInterfaceDeclaration(declaration) ||
+        (ts.isTypeAliasDeclaration(declaration) &&
+          (ts.isTypeLiteralNode(declaration.type) || ts.isIntersectionTypeNode(declaration.type)))),
+  )
+    ? lowered
+    : undefined;
+}
+
 function variadicCallConvention(
   node: ts.CallExpression,
   context: LoweringContext,
@@ -749,11 +840,15 @@ function findEnclosingParameter(identifier: ts.Identifier): ts.ParameterDeclarat
 }
 
 interface LoweringContext {
+  checkerTypeCache: Map<ts.Type, IrType | null>;
+  preserveExpressionTypes: boolean;
+  preserveInferredTypes: boolean;
   canvasBindingNames: ReadonlySet<string>;
   canvasElementBindingNames: ReadonlySet<string>;
   classThis: boolean;
   checker?: ts.TypeChecker | undefined;
   diagnostics: LoweringDiagnostic[];
+  directTypeNames: ReadonlySet<string>;
   domDocumentBindingNames: ReadonlySet<string>;
   domNavigatorBindingNames: ReadonlySet<string>;
   domWindowBindingNames: ReadonlySet<string>;
@@ -767,6 +862,7 @@ interface LoweringContext {
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
   typedStructs?: TypedStructRegistry | undefined;
+  visibleTypeNames: ReadonlySet<string>;
   webGpuCanvasContextBindingNames: ReadonlySet<string>;
   webGpuDeviceBindingNames: ReadonlySet<string>;
   webGpuLimitsBindingNames: ReadonlySet<string>;
@@ -789,7 +885,7 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
       name: propertyName(field.name, context),
       public: !hasModifier(field, ts.SyntaxKind.PrivateKeyword) && !hasModifier(field, ts.SyntaxKind.ProtectedKeyword),
       static: hasModifier(field, ts.SyntaxKind.StaticKeyword),
-      type: field.type ? lowerType(field.type, context) : { kind: 'dynamic' as const },
+      type: field.type ? lowerType(field.type, context) : (inferredType(field.name, context) ?? { kind: 'dynamic' }),
     };
   });
   for (const parameter of parameterProperties) {
@@ -802,7 +898,9 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
         !hasModifier(parameter, ts.SyntaxKind.PrivateKeyword) &&
         !hasModifier(parameter, ts.SyntaxKind.ProtectedKeyword),
       static: false,
-      type: parameter.type ? lowerType(parameter.type, context) : { kind: 'dynamic' as const },
+      type: parameter.type
+        ? lowerType(parameter.type, context)
+        : (inferredType(parameter.name, context) ?? { kind: 'dynamic' }),
     });
   }
   const heritage = node.heritageClauses?.find((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)?.types.at(0);
@@ -869,13 +967,13 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
         parameters: loweredParameters.parameters,
         public:
           !hasModifier(method, ts.SyntaxKind.PrivateKeyword) && !hasModifier(method, ts.SyntaxKind.ProtectedKeyword),
-        returns: method.type
-          ? lowerType(method.type, context)
-          : hasModifier(method, ts.SyntaxKind.AsyncKeyword)
+        returns:
+          (method.type ? lowerType(method.type, context) : inferredReturnType(method, context)) ??
+          (hasModifier(method, ts.SyntaxKind.AsyncKeyword)
             ? promiseOfDynamic()
             : hasReturnValue(method.body)
               ? ({ kind: 'dynamic' } satisfies IrType)
-              : ({ kind: 'primitive', name: 'Void' } satisfies IrType),
+              : ({ kind: 'primitive', name: 'Void' } satisfies IrType)),
         static: hasModifier(method, ts.SyntaxKind.StaticKeyword),
         typeParameters: method.typeParameters?.map((parameter) => parameter.name.text) ?? [],
       };
@@ -926,13 +1024,13 @@ function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): 
       name: node.name.text,
       origin: origin(node, context),
       parameters: loweredParameters.parameters,
-      returns: node.type
-        ? lowerType(node.type, context)
-        : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
+      returns:
+        (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
+        (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
           ? promiseOfDynamic()
           : hasReturnValue(node.body)
             ? { kind: 'dynamic' }
-            : { kind: 'primitive', name: 'Void' },
+            : { kind: 'primitive', name: 'Void' }),
       ...(thisCapture ? { thisCapture } : {}),
       typeParameters: node.typeParameters?.map((parameter) => parameter.name.text) ?? [],
     };
@@ -973,7 +1071,7 @@ function lowerParameter(node: ts.ParameterDeclaration, context: LoweringContext)
     name: node.name.text,
     optional: Boolean(node.questionToken),
     rest: Boolean(node.dotDotDotToken),
-    type: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
+    type: node.type ? lowerType(node.type, context) : (inferredType(node.name, context) ?? { kind: 'dynamic' }),
   };
 }
 
@@ -995,7 +1093,7 @@ function lowerParameterList(
       name,
       optional: Boolean(node.questionToken),
       rest: Boolean(node.dotDotDotToken),
-      type: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
+      type: node.type ? lowerType(node.type, context) : (inferredType(node.name, context) ?? { kind: 'dynamic' }),
     });
     const declarations: IrVariable[] = [];
     lowerBindingPattern(node.name, { kind: 'identifier', name }, false, declarations, context, {
@@ -1091,19 +1189,21 @@ function hostTypeMemberBinding(
 function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
   switch (node.kind) {
     case ts.SyntaxKind.AnyKeyword:
-    case ts.SyntaxKind.NeverKeyword:
+      return { kind: 'dynamic', reason: 'source-any' };
     case ts.SyntaxKind.UnknownKeyword:
-      return { kind: 'dynamic' };
+      return { kind: 'dynamic', reason: 'source-unknown' };
+    case ts.SyntaxKind.NeverKeyword:
+      return { kind: 'dynamic', reason: 'source-never' };
     case ts.SyntaxKind.UndefinedKeyword:
-      return { kind: 'dynamic' };
+      return { kind: 'dynamic', reason: 'source-undefined' };
     case ts.SyntaxKind.ObjectKeyword:
-      return { kind: 'dynamic' };
+      return { arguments: [], kind: 'named', name: 'flighthq._internal._Object' };
     case ts.SyntaxKind.BooleanKeyword:
       return { kind: 'primitive', name: 'Bool' };
     case ts.SyntaxKind.NumberKeyword:
       return { kind: 'primitive', name: 'Float' };
     case ts.SyntaxKind.SymbolKeyword:
-      return { kind: 'dynamic' };
+      return { arguments: [], kind: 'named', name: 'flighthq._internal._Symbol' };
     case ts.SyntaxKind.StringKeyword:
       return { kind: 'primitive', name: 'String' };
     case ts.SyntaxKind.VoidKeyword:
@@ -1122,7 +1222,14 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     return { element: commonType(elements), kind: 'array' };
   }
   if (ts.isParenthesizedTypeNode(node)) return lowerType(node.type, context);
-  if (ts.isFunctionTypeNode(node)) return { kind: 'dynamic' };
+  if (ts.isFunctionTypeNode(node)) {
+    const parameters = lowerParameterList(node.parameters, context).parameters;
+    return {
+      kind: 'function',
+      parameters: parameters.map((parameter) => parameter.type),
+      returns: lowerType(node.type, context),
+    };
+  }
   if (ts.isConstructorTypeNode(node)) return { kind: 'dynamic' };
   if (ts.isTypePredicateNode(node)) return { kind: 'primitive', name: 'Bool' };
   if (ts.isTypeReferenceNode(node)) {
@@ -1131,13 +1238,30 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (context.erasedLocalTypes.has(name)) return { kind: 'dynamic' };
     if (name === 'Error') return { arguments: [], kind: 'named', name: 'haxe.Exception' };
     const portableType = portableTypeReferenceMap[name];
-    if (portableType) return { arguments: [], kind: 'named', name: portableType };
+    const standardType =
+      !context.checker ||
+      standardLibraryType(context.checker.getTypeFromTypeNode(node), name) ||
+      standardLibraryTypeSymbol(context.checker.getSymbolAtLocation(node.typeName), name, context.checker);
+    if (portableType && standardType) return { arguments: [], kind: 'named', name: portableType };
+    const standardGenericType = standardGenericTypeReferenceMap[name];
+    if (standardGenericType && standardType) {
+      const genericArguments = [...arguments_];
+      while (genericArguments.length < standardGenericType.arity) {
+        genericArguments.push({ kind: 'dynamic', reason: 'source-unknown' });
+      }
+      return { arguments: genericArguments, kind: 'named', name: standardGenericType.haxeType };
+    }
+    const collectionType = collectionTypeReferenceMap[name];
+    if (collectionType && standardType) {
+      const collectionArguments = [...arguments_];
+      while (collectionArguments.length < collectionType.arity) collectionArguments.push({ kind: 'dynamic' });
+      return { arguments: collectionArguments, kind: 'named', name: collectionType.haxeType };
+    }
     if (context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
     if (
       standardDynamicTypes.has(name) ||
       name.startsWith('Intl.') ||
       name.startsWith('globalThis.') ||
-      /^[A-Z]$/u.test(name) ||
       name === 'RegExpExecArray'
     ) {
       return { kind: 'dynamic' };
@@ -1157,11 +1281,9 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
           : (arguments_[0] ?? { kind: 'dynamic' as const });
       return { arguments: [promiseType], kind: 'named', name: 'flighthq._internal._Promise' };
     }
-    if (name === 'ArrayLike') return { kind: 'dynamic' };
     if (name === 'Array' || name === 'ReadonlyArray') {
       return { element: arguments_[0] ?? { kind: 'dynamic' }, kind: 'array' };
     }
-    if (name === 'Record') return { kind: 'dynamic' };
     const hostType = hostTypeIdentityForTypeNode(node, context.checker);
     if (hostType) {
       const hostArguments = [...arguments_];
@@ -1196,13 +1318,16 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     const concrete = types.filter((item) => item.kind !== 'dynamic');
     if (concrete.length === 0) return { kind: 'dynamic' };
     if (concrete.length === 1) return concrete[0]!;
+    return lowerIntersection(concrete);
+  }
+  if (ts.isIndexedAccessTypeNode(node)) {
     return {
-      extends: concrete.flatMap((item) => (item.kind === 'anonymous' ? item.extends : [item])),
-      fields: concrete.flatMap((item) => (item.kind === 'anonymous' ? item.fields : [])),
-      kind: 'anonymous',
+      arguments: [lowerType(node.objectType, context), lowerType(node.indexType, context)],
+      kind: 'named',
+      name: 'flighthq._internal._IndexedAccess',
     };
   }
-  if (ts.isIndexedAccessTypeNode(node) || ts.isConditionalTypeNode(node) || ts.isMappedTypeNode(node)) {
+  if (ts.isConditionalTypeNode(node) || ts.isMappedTypeNode(node)) {
     return { kind: 'dynamic' };
   }
   if (ts.isLiteralTypeNode(node)) {
@@ -1221,6 +1346,257 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     }
   }
   return unsupported(node, context, `type ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function inferredType(node: ts.Node, context: LoweringContext): IrType | undefined {
+  if (!context.preserveInferredTypes) return undefined;
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const type = checker.getTypeAtLocation(node);
+  return lowerCheckerType(type, node, context, new Set()) ?? checkerKnownUnrepresentable(type, checker);
+}
+
+function inferredReturnType(node: ts.SignatureDeclaration, context: LoweringContext): IrType | undefined {
+  if (!context.preserveInferredTypes) return undefined;
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const signature = checker.getSignatureFromDeclaration(node);
+  if (!signature) return undefined;
+  const type = checker.getReturnTypeOfSignature(signature);
+  return lowerCheckerType(type, node, context, new Set()) ?? checkerKnownUnrepresentable(type, checker);
+}
+
+function checkerKnownUnrepresentable(type: ts.Type, checker: ts.TypeChecker): IrType {
+  return {
+    detail: checker.typeToString(type, undefined, ts.TypeFormatFlags.NoTruncation),
+    kind: 'dynamic',
+    reason: 'checker-known-unrepresentable',
+  };
+}
+
+function lowerCheckerType(
+  type: ts.Type,
+  node: ts.Node,
+  context: LoweringContext,
+  seen: Set<ts.Type>,
+): IrType | undefined {
+  const cacheable = seen.size === 0;
+  if (cacheable && context.checkerTypeCache.has(type)) {
+    return context.checkerTypeCache.get(type) ?? undefined;
+  }
+  const lowered = lowerCheckerTypeUncached(type, node, context, seen);
+  if (cacheable) context.checkerTypeCache.set(type, lowered ?? null);
+  return lowered;
+}
+
+function lowerCheckerTypeUncached(
+  type: ts.Type,
+  node: ts.Node,
+  context: LoweringContext,
+  seen: Set<ts.Type>,
+): IrType | undefined {
+  const checker = context.checker;
+  if (!checker || seen.has(type)) return undefined;
+  const nextSeen = new Set(seen).add(type);
+  if ((type.flags & ts.TypeFlags.Any) !== 0) return { kind: 'dynamic', reason: 'source-any' };
+  if ((type.flags & ts.TypeFlags.Unknown) !== 0) return { kind: 'dynamic', reason: 'source-unknown' };
+  if ((type.flags & ts.TypeFlags.Never) !== 0) return { kind: 'dynamic', reason: 'source-never' };
+  if ((type.flags & ts.TypeFlags.Undefined) !== 0) return { kind: 'dynamic', reason: 'source-undefined' };
+  if ((type.flags & ts.TypeFlags.BooleanLike) !== 0) return { kind: 'primitive', name: 'Bool' };
+  if ((type.flags & ts.TypeFlags.NumberLike) !== 0) return { kind: 'primitive', name: 'Float' };
+  if ((type.flags & ts.TypeFlags.StringLike) !== 0) return { kind: 'primitive', name: 'String' };
+  if ((type.flags & ts.TypeFlags.ESSymbolLike) !== 0) {
+    return { arguments: [], kind: 'named', name: 'flighthq._internal._Symbol' };
+  }
+  if ((type.flags & ts.TypeFlags.NonPrimitive) !== 0) {
+    return { arguments: [], kind: 'named', name: 'flighthq._internal._Object' };
+  }
+  if ((type.flags & ts.TypeFlags.IndexedAccess) !== 0) {
+    const indexed = type as ts.IndexedAccessType;
+    const objectType = lowerCheckerType(indexed.objectType, node, context, nextSeen);
+    const indexType = lowerCheckerType(indexed.indexType, node, context, nextSeen);
+    return objectType && indexType
+      ? {
+          arguments: [objectType, indexType],
+          kind: 'named',
+          name: 'flighthq._internal._IndexedAccess',
+        }
+      : undefined;
+  }
+  if ((type.flags & ts.TypeFlags.Void) !== 0) return { kind: 'primitive', name: 'Void' };
+  if ((type.flags & ts.TypeFlags.Null) !== 0) return { kind: 'dynamic', reason: 'source-null' };
+  const symbol = type.aliasSymbol ?? type.getSymbol();
+  const name = symbol?.getName();
+  const rawArguments = checkerTypeArguments(type, checker);
+  const arguments_ = rawArguments.map(
+    (argument) => lowerCheckerType(argument, node, context, nextSeen) ?? ({ kind: 'dynamic' } as const),
+  );
+  if (name === 'Readonly' && rawArguments[0]) {
+    return lowerCheckerType(rawArguments[0], node, context, nextSeen);
+  }
+  const standardGenericType =
+    name && standardLibraryType(type, name) ? standardGenericTypeReferenceMap[name] : undefined;
+  if (standardGenericType) {
+    const genericArguments = [...arguments_];
+    while (genericArguments.length < standardGenericType.arity) {
+      genericArguments.push({ kind: 'dynamic', reason: 'source-unknown' });
+    }
+    return { arguments: genericArguments, kind: 'named', name: standardGenericType.haxeType };
+  }
+  // Preserve a source-visible alias before decomposing its union or
+  // intersection. The alias is the portable identity; its implementation is
+  // not a request to inline a potentially recursive structural graph.
+  if (name && context.visibleTypeNames.has(name)) return { arguments: arguments_, kind: 'named', name };
+  if (name && sourceDefinedNamedType(symbol)) return { arguments: arguments_, kind: 'named', name };
+  if (name && context.externalTypes.has(name)) {
+    return { kind: 'dynamic', reason: 'external-toolkit-boundary' };
+  }
+  if (name && standardLibraryType(type, name) && type.aliasSymbol) {
+    return { kind: 'dynamic', reason: 'standard-toolkit-boundary' };
+  }
+  if (type.isUnion()) {
+    const concrete = type.types.filter((item) => (item.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)) === 0);
+    const lowered = concrete.map((item) => lowerCheckerType(item, node, context, nextSeen));
+    if (lowered.some((item) => !item)) return undefined;
+    const inner = commonType(lowered as IrType[]);
+    return concrete.length === type.types.length ? inner : { inner, kind: 'nullable' };
+  }
+  if (type.isIntersection()) {
+    const lowered = type.types.map((item) => lowerCheckerType(item, node, context, nextSeen));
+    if (lowered.some((item) => !item)) return undefined;
+    const concrete = (lowered as IrType[]).filter((item) => item.kind !== 'dynamic');
+    if (concrete.length === 0) return commonType(lowered as IrType[]);
+    if (concrete.length === 1) return concrete[0];
+    return lowerIntersection(
+      concrete,
+      type.types.some((item) => (item.flags & ts.TypeFlags.TypeParameter) !== 0),
+    );
+  }
+  const hostType = hostTypeIdentity(type, checker);
+  if (hostType) {
+    const arguments_ = checkerTypeArguments(type, checker).map(
+      (argument) => lowerCheckerType(argument, node, context, nextSeen) ?? ({ kind: 'dynamic' } as const),
+    );
+    while (arguments_.length < hostType.arity) arguments_.push({ kind: 'dynamic' });
+    recordHostType(hostType, node, context, { arity: arguments_.length, kind: 'type-reference' });
+    return { arguments: arguments_, kind: 'named', name: hostType.haxeType };
+  }
+  if (checker.isArrayType(type) || checker.isTupleType(type)) {
+    const elements = checkerTypeArguments(type, checker).map((item) => lowerCheckerType(item, node, context, nextSeen));
+    if (elements.length === 0 || elements.some((item) => !item)) return undefined;
+    return { element: commonType(elements as IrType[]), kind: 'array' };
+  }
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) {
+    const name = type.getSymbol()?.getName();
+    return name ? { arguments: [], kind: 'named', name } : undefined;
+  }
+  if (name === 'Promise') {
+    const promised = arguments_[0] ?? ({ kind: 'dynamic' } as const);
+    return {
+      arguments: [
+        promised.kind === 'primitive' && promised.name === 'Void'
+          ? { arguments: [], kind: 'named', name: 'flighthq._internal._Nothing' }
+          : promised,
+      ],
+      kind: 'named',
+      name: 'flighthq._internal._Promise',
+    };
+  }
+  const portableType = name && standardLibraryType(type, name) ? portableTypeReferenceMap[name] : undefined;
+  // TypeScript's ES library models typed-array backing buffers as a generic
+  // implementation detail. The portable Haxe wrappers deliberately own that
+  // storage choice and are not generic, so do not leak the lib.d.ts argument
+  // into generated source.
+  if (portableType) return { arguments: [], kind: 'named', name: portableType };
+  const collectionType = name && standardLibraryType(type, name) ? collectionTypeReferenceMap[name] : undefined;
+  if (collectionType) {
+    const collectionArguments = [...arguments_];
+    while (collectionArguments.length < collectionType.arity) collectionArguments.push({ kind: 'dynamic' });
+    return { arguments: collectionArguments, kind: 'named', name: collectionType.haxeType };
+  }
+  if (name && standardDynamicTypes.has(name)) return { kind: 'dynamic', reason: 'standard-toolkit-boundary' };
+  if (name && context.externalTypes.has(name)) return { kind: 'dynamic', reason: 'external-toolkit-boundary' };
+  if (name && context.visibleTypeNames.has(name)) return { arguments: arguments_, kind: 'named', name };
+  const declarationBoundary = checkerTypeDeclarationBoundary(type);
+  if (declarationBoundary) return { kind: 'dynamic', reason: declarationBoundary };
+  const signatures = checker.getSignaturesOfType(type, ts.SignatureKind.Call);
+  if (signatures.length === 1) {
+    const signature = signatures[0]!;
+    const parameters = signature.getParameters().map((parameter) => {
+      const declaration = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node;
+      return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, declaration), node, context, nextSeen);
+    });
+    const returns = lowerCheckerType(checker.getReturnTypeOfSignature(signature), node, context, nextSeen);
+    if (returns && parameters.every((parameter) => parameter)) {
+      return { kind: 'function', parameters: parameters as IrType[], returns };
+    }
+  }
+  if ((type.flags & ts.TypeFlags.Object) !== 0) {
+    const sourceDefined = (symbol?.declarations ?? []).some(
+      (declaration) => !declaration.getSourceFile().isDeclarationFile,
+    );
+    const fields = checker.getPropertiesOfType(type).flatMap((property): IrTypeField[] => {
+      const declaration = property.valueDeclaration ?? property.declarations?.[0];
+      if (!declaration || declaration.getSourceFile().isDeclarationFile) return [];
+      const fieldType = lowerCheckerType(
+        checker.getTypeOfSymbolAtLocation(property, declaration),
+        node,
+        context,
+        nextSeen,
+      );
+      return fieldType
+        ? [
+            {
+              name: property.getName(),
+              optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
+              type: fieldType,
+            },
+          ]
+        : [];
+    });
+    if (fields.length > 0 || sourceDefined || checker.typeToString(type) === '{}') {
+      return { extends: [], fields, kind: 'anonymous' };
+    }
+  }
+  return undefined;
+}
+
+function sourceDefinedNamedType(symbol: ts.Symbol | undefined): boolean {
+  return (symbol?.declarations ?? []).some(
+    (declaration) =>
+      !declaration.getSourceFile().isDeclarationFile &&
+      hasModifier(declaration, ts.SyntaxKind.ExportKeyword) &&
+      (ts.isClassDeclaration(declaration) ||
+        ts.isEnumDeclaration(declaration) ||
+        ts.isInterfaceDeclaration(declaration) ||
+        ts.isTypeAliasDeclaration(declaration)),
+  );
+}
+
+function checkerTypeDeclarationBoundary(
+  type: ts.Type,
+): 'external-toolkit-boundary' | 'standard-toolkit-boundary' | undefined {
+  const declarations = [
+    ...(type.aliasSymbol?.declarations ?? []),
+    ...(type.getSymbol()?.declarations ?? []),
+    ...type.getCallSignatures().flatMap((signature) => (signature.declaration ? [signature.declaration] : [])),
+    ...type.getProperties().flatMap((property) => property.declarations ?? []),
+  ];
+  const declarationFiles = declarations.filter((declaration) => declaration.getSourceFile().isDeclarationFile);
+  if (declarationFiles.length === 0) return undefined;
+  return declarationFiles.every((declaration) =>
+    /^lib\..*\.d\.ts$/u.test(path.basename(declaration.getSourceFile().fileName)),
+  )
+    ? 'standard-toolkit-boundary'
+    : 'external-toolkit-boundary';
+}
+
+function checkerTypeArguments(type: ts.Type, checker: ts.TypeChecker): readonly ts.Type[] {
+  if (type.aliasSymbol) return type.aliasTypeArguments ?? [];
+  return (type.flags & ts.TypeFlags.Object) !== 0 &&
+    ((type as ts.ObjectType).objectFlags & ts.ObjectFlags.Reference) !== 0
+    ? checker.getTypeArguments(type as ts.TypeReference)
+    : [];
 }
 
 function isNullishType(node: ts.TypeNode): boolean {
@@ -1280,11 +1656,18 @@ function lowerTypeMember(node: ts.TypeElement, context: LoweringContext) {
     };
   }
   if (ts.isMethodSignature(node)) {
+    const parameters = lowerParameterList(node.parameters, context).parameters;
     return {
-      contextualParameters: lowerParameterList(node.parameters, context).parameters,
+      contextualParameters: parameters,
       name: propertyName(node.name, context),
       optional: Boolean(node.questionToken),
-      type: { kind: 'dynamic' as const },
+      type: {
+        kind: 'function' as const,
+        parameters: parameters.map((parameter) => parameter.type),
+        returns: (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ?? {
+          kind: 'dynamic' as const,
+        },
+      },
     };
   }
   if (ts.isIndexSignatureDeclaration(node)) return undefined;
@@ -1299,9 +1682,41 @@ function lowerTypeMember(node: ts.TypeElement, context: LoweringContext) {
 }
 
 function commonType(types: IrType[]): IrType {
-  const first = types[0];
+  const flattened = types.flatMap((type) => (type.kind === 'union' ? type.alternatives : [type]));
+  const dynamic = flattened.find((type): type is Extract<IrType, { kind: 'dynamic' }> => type.kind === 'dynamic');
+  if (dynamic) return dynamic;
+  const unique = [...new Map(flattened.map((type) => [JSON.stringify(type), type])).values()];
+  const first = unique[0];
   if (!first) return { kind: 'dynamic' };
-  return types.every((item) => JSON.stringify(item) === JSON.stringify(first)) ? first : { kind: 'dynamic' };
+  return unique.length === 1 ? first : { alternatives: unique, kind: 'union' };
+}
+
+function lowerIntersection(types: IrType[], forceNominal = false): IrType {
+  const concrete = types.filter(
+    (type) => !(type.kind === 'named' && type.name === 'flighthq._internal._Object' && types.length > 1),
+  );
+  if (concrete.length === 0) return types[0] ?? { kind: 'dynamic', reason: 'source-unknown' };
+  if (concrete.length === 1) return concrete[0]!;
+  if (
+    !forceNominal &&
+    concrete.every(
+      (type) => type.kind === 'anonymous' || (type.kind === 'named' && !type.name.startsWith('flighthq._internal.')),
+    )
+  ) {
+    return {
+      extends: concrete.flatMap((type) => (type.kind === 'anonymous' ? type.extends : [type])),
+      fields: concrete.flatMap((type) => (type.kind === 'anonymous' ? type.fields : [])),
+      kind: 'anonymous',
+    };
+  }
+  return concrete.slice(1).reduce<IrType>(
+    (left, right) => ({
+      arguments: [left, right],
+      kind: 'named',
+      name: 'flighthq._internal._Intersection2',
+    }),
+    concrete[0] ?? { kind: 'dynamic', reason: 'source-unknown' },
+  );
 }
 
 function hasReturnValue(body: ts.Block): boolean {
@@ -1462,13 +1877,13 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
               kind: 'function',
               name: node.name.text,
               parameters,
-              returns: node.type
-                ? lowerType(node.type, context)
-                : hasModifier(node, ts.SyntaxKind.AsyncKeyword)
+              returns:
+                (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
+                (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
                   ? promiseOfDynamic()
                   : hasReturnValue(node.body)
                     ? { kind: 'dynamic' }
-                    : { kind: 'primitive', name: 'Void' },
+                    : { kind: 'primitive', name: 'Void' }),
               ...(thisCapture ? { thisCapture } : {}),
             },
             mutable: false,
@@ -1476,7 +1891,9 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
             type: {
               kind: 'function',
               parameters: parameters.map((parameter) => parameter.type),
-              returns: node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
+              returns: (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ?? {
+                kind: 'dynamic',
+              },
             },
           },
         ],
@@ -1753,13 +2170,18 @@ function indexedReceiver(
 }
 
 function standardLibraryType(type: ts.Type, name: string): boolean {
-  return [type.aliasSymbol, type.getSymbol()].some(
-    (symbol) =>
-      symbol?.getName() === name &&
-      symbol.declarations?.some((declaration) => {
-        const source = declaration.getSourceFile();
-        return source.isDeclarationFile && /^lib\..*\.d\.ts$/u.test(path.basename(source.fileName));
-      }),
+  return [type.aliasSymbol, type.getSymbol()].some((symbol) => standardLibraryTypeSymbol(symbol, name));
+}
+
+function standardLibraryTypeSymbol(symbol: ts.Symbol | undefined, name: string, checker?: ts.TypeChecker): boolean {
+  const resolved =
+    symbol && checker && (symbol.flags & ts.SymbolFlags.Alias) !== 0 ? checker.getAliasedSymbol(symbol) : symbol;
+  return (
+    resolved?.getName() === name &&
+    (resolved.declarations ?? []).some((declaration) => {
+      const source = declaration.getSourceFile();
+      return source.isDeclarationFile && /^lib\..*\.d\.ts$/u.test(path.basename(source.fileName));
+    })
   );
 }
 
@@ -1788,7 +2210,7 @@ function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, cont
         initializer: declaration.initializer ? lowerExpression(declaration.initializer, context) : undefined,
         mutable,
         name: declaration.name.text,
-        type: declaration.type ? lowerType(declaration.type, context) : undefined,
+        type: declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context),
       };
     }
     if (!declaration.initializer) unsupported(declaration.name, context, 'uninitialized binding pattern variable');
@@ -1836,7 +2258,12 @@ function lowerBindingPattern(
         };
       }
       if (ts.isIdentifier(element.name)) {
-        variables.push({ initializer: value, mutable, name: element.name.text });
+        variables.push({
+          initializer: value,
+          mutable,
+          name: element.name.text,
+          type: inferredType(element.name, context),
+        });
       } else {
         lowerBindingPattern(element.name, value, mutable, variables, context, options);
       }
@@ -1868,7 +2295,12 @@ function lowerBindingPattern(
       };
     }
     if (ts.isIdentifier(element.name)) {
-      variables.push({ initializer: value, mutable, name: element.name.text });
+      variables.push({
+        initializer: value,
+        mutable,
+        name: element.name.text,
+        type: inferredType(element.name, context),
+      });
     } else {
       lowerBindingPattern(element.name, value, mutable, variables, context, options);
     }
@@ -1943,13 +2375,24 @@ function typedStructReceiverCast(
     (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
       ? declaration.type
       : undefined;
-  if (!declaredTypeNode) return undefined;
-  const declaredType = context.checker.getTypeFromTypeNode(declaredTypeNode);
-  // Union aliases already lower to Dynamic, so their narrowed fields do not need a Haxe cast.
-  if (declaredType.isUnion()) return undefined;
+  const declaredType = declaredTypeNode
+    ? context.checker.getTypeFromTypeNode(declaredTypeNode)
+    : declaration &&
+        (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
+      ? context.checker.getTypeAtLocation(declaration.name)
+      : undefined;
+  if (!declaredType) return undefined;
+  // A schema-only cast would erase generic storage such as SignalData<T>. Concrete
+  // utility wrappers (for example Readonly<Projection>) are safe to narrow.
+  if (checkerTypeContainsTypeParameter(declaredType, context.checker)) return undefined;
+  if (declaredType.isUnion()) return schemaHaxeType;
+  if (declaredTypeNode && ts.isTypeReferenceNode(declaredTypeNode) && declaredTypeNode.typeArguments?.length) {
+    return undefined;
+  }
   const declaredResolution = context.typedStructs.resolveDirect(declaredType);
   if (declaredResolution.kind === 'matched' && declaredResolution.schemas[0]?.id === schemaId) return undefined;
   try {
+    if (!declaredTypeNode) return schemaHaxeType;
     const storageType = lowerType(declaredTypeNode, context);
     const concreteStorageType = storageType.kind === 'nullable' ? storageType.inner : storageType;
     return concreteStorageType.kind === 'named' ? schemaHaxeType : undefined;
@@ -1957,6 +2400,21 @@ function typedStructReceiverCast(
     if (error instanceof UnsupportedSyntaxError) return undefined;
     throw error;
   }
+}
+
+function checkerTypeContainsTypeParameter(type: ts.Type, checker: ts.TypeChecker, seen = new Set<ts.Type>()): boolean {
+  if (seen.has(type)) return false;
+  seen.add(type);
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) return true;
+  if (
+    type.isUnionOrIntersection() &&
+    type.types.some((member) => checkerTypeContainsTypeParameter(member, checker, seen))
+  ) {
+    return true;
+  }
+  return checkerTypeArguments(type, checker).some((argument) =>
+    checkerTypeContainsTypeParameter(argument, checker, seen),
+  );
 }
 
 function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
@@ -1979,7 +2437,39 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
   const expression = lowerExpressionNode(node, context);
   const staticFacts = expressionStaticFacts(node, context);
   if (staticFacts) expression.staticFacts = staticFacts;
+  const contextualType =
+    context.preserveExpressionTypes && ts.isCallExpression(node) ? context.checker?.getContextualType(node) : undefined;
+  const loweredContextualType = contextualType ? lowerCheckerType(contextualType, node, context, new Set()) : undefined;
+  const type =
+    context.preserveExpressionTypes && preservesExpressionType(node)
+      ? loweredContextualType
+        ? loweredContextualType
+        : inferredType(node, context)
+      : undefined;
+  // Anonymous object shapes are already explicit in object-expression IR and
+  // on each structural member binding. Repeating their full field graph on
+  // every intermediate expression makes module transforms quadratic without
+  // adding backend information.
+  if (type && (type.kind !== 'anonymous' || ts.isCallExpression(node))) expression.type = type;
   return expression;
+}
+
+function preservesExpressionType(node: ts.Expression): boolean {
+  if (
+    ts.isCallExpression(node) ||
+    ts.isNewExpression(node) ||
+    ts.isPropertyAccessExpression(node) ||
+    ts.isElementAccessExpression(node) ||
+    ts.isConditionalExpression(node) ||
+    ts.isArrowFunction(node) ||
+    ts.isFunctionExpression(node) ||
+    ts.isAwaitExpression(node)
+  ) {
+    return true;
+  }
+  if (!ts.isIdentifier(node)) return false;
+  const parent = node.parent;
+  return (ts.isPropertyAccessExpression(parent) || ts.isElementAccessExpression(parent)) && parent.expression === node;
 }
 
 function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrExpression {
@@ -2094,11 +2584,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
               parameters: property.parameters
                 .filter((parameter) => !isThisParameter(parameter))
                 .map((parameter) => lowerParameter(parameter, context)),
-              returns: hasModifier(property, ts.SyntaxKind.AsyncKeyword)
-                ? property.type
-                  ? lowerType(property.type, context)
-                  : promiseOfDynamic()
-                : undefined,
+              returns:
+                (property.type ? lowerType(property.type, context) : inferredReturnType(property, context)) ??
+                (hasModifier(property, ts.SyntaxKind.AsyncKeyword) ? promiseOfDynamic() : undefined),
               ...(thisCapture ? { thisCapture } : {}),
             };
           } finally {
@@ -2151,6 +2639,10 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const generatedClass = generatedClassBinding(node.expression, context);
     const hostTypeBinding = hostTypeMemberBinding(node, context);
     const typedStructBinding = typedStructPropertyBinding(node, context);
+    const structuralType =
+      !context.preserveExpressionTypes || generatedClass || hostTypeBinding || typedStructBinding
+        ? undefined
+        : structuralReceiverType(node, context);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
@@ -2163,6 +2655,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         ? { kind: 'literal', value: webGpuConstantNamespace }
         : lowerExpression(node.expression, context),
       optional: ts.isOptionalChain(node),
+      ...(structuralType ? { structuralReceiverType: structuralType } : {}),
       typedStructBinding,
     };
   }
@@ -2181,9 +2674,25 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
   }
   if (ts.isCallExpression(node)) {
     const variadic = variadicCallConvention(node, context);
+    const callee = lowerExpression(node.expression, context);
+    const direct =
+      callee.kind === 'identifier' &&
+      !node.questionDotToken &&
+      !variadic &&
+      !node.arguments.some(ts.isSpreadElement) &&
+      checkerCallIsTyped(node.expression, context);
+    const directCalleeType = direct ? directCallReceiverCast(node, context) : undefined;
+    const directCall = direct ? directCallArguments(node, context) : undefined;
     return {
-      arguments: node.arguments.map((argument) => lowerExpression(argument, context)),
-      callee: lowerExpression(node.expression, context),
+      arguments: directCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)),
+      callee,
+      ...(direct
+        ? {
+            direct: true,
+            ...(directCall?.types ? { directArgumentTypes: directCall.types } : {}),
+            ...(directCalleeType ? { directCalleeType } : {}),
+          }
+        : {}),
       kind: 'call',
       optional: Boolean(node.questionDotToken),
       ...variadic,
@@ -2263,6 +2772,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
     try {
       const loweredParameters = lowerParameterList(node.parameters, context);
+      const parameters = padContextualFunctionParameters(node, loweredParameters.parameters, context);
       const expression = ts.isBlock(node.body) ? undefined : lowerExpression(node.body, context);
       return {
         async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
@@ -2274,12 +2784,10 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         expression: loweredParameters.prefix.length > 0 ? undefined : expression,
         kind: 'function',
         name: ts.isFunctionExpression(node) ? node.name?.text : undefined,
-        parameters: loweredParameters.parameters,
-        returns: hasModifier(node, ts.SyntaxKind.AsyncKeyword)
-          ? node.type
-            ? lowerType(node.type, context)
-            : promiseOfDynamic()
-          : undefined,
+        parameters,
+        returns:
+          (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
+          (hasModifier(node, ts.SyntaxKind.AsyncKeyword) ? promiseOfDynamic() : undefined),
         ...(thisCapture ? { thisCapture } : {}),
       };
     } finally {
@@ -2288,6 +2796,239 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function checkerCallIsTyped(node: ts.Expression, context: LoweringContext): boolean {
+  const checker = context.checker;
+  if (!checker) return false;
+  const type = checker.getTypeAtLocation(unwrapCallTargetAssertions(node));
+  if ((type.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0) return false;
+  return checker.getSignaturesOfType(type, ts.SignatureKind.Call).length > 0;
+}
+
+function directCallArguments(
+  node: ts.CallExpression,
+  context: LoweringContext,
+): { arguments: IrExpression[]; types?: Array<IrType | undefined> } {
+  const arguments_ = node.arguments.map((argument) => lowerExpression(argument, context));
+  const checker = context.checker;
+  const signature = checker?.getResolvedSignature(node);
+  if (!checker || !signature) return { arguments: arguments_ };
+  const symbols = signature.getParameters();
+  if (symbols.some(signatureParameterIsRest)) return { arguments: arguments_ };
+  for (let index = 0; index < arguments_.length && index < symbols.length; index++) {
+    arguments_[index] = adaptDirectFunctionArgument(
+      node.arguments[index]!,
+      arguments_[index]!,
+      symbols[index]!,
+      context,
+    );
+  }
+  const types = symbols.map((parameter) => {
+    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node.expression;
+    return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
+  });
+  for (let index = arguments_.length; index < symbols.length; index++) {
+    if (!signatureParameterIsOptional(symbols[index]!)) break;
+    arguments_.push({
+      kind: 'property',
+      name: 'UNDEFINED',
+      object: { kind: 'identifier', name: '_Runtime' },
+    });
+  }
+  const usedTypes = types.slice(0, arguments_.length);
+  const visibleTypes = usedTypes.map((type) => (type && directArgumentTypeIsVisible(type, context) ? type : undefined));
+  return visibleTypes.some((type) => type) ? { arguments: arguments_, types: visibleTypes } : { arguments: arguments_ };
+}
+
+function adaptDirectFunctionArgument(
+  node: ts.Expression,
+  lowered: IrExpression,
+  expectedParameter: ts.Symbol,
+  context: LoweringContext,
+): IrExpression {
+  const checker = context.checker;
+  if (!checker) return lowered;
+  const expectedLocation = expectedParameter.valueDeclaration ?? expectedParameter.declarations?.[0] ?? node;
+  const expectedType = checker.getNonNullableType(
+    checker.getTypeOfSymbolAtLocation(expectedParameter, expectedLocation),
+  );
+  const expectedSignature = checker.getSignaturesOfType(expectedType, ts.SignatureKind.Call)[0];
+  const actualSignature = checker.getSignaturesOfType(checker.getTypeAtLocation(node), ts.SignatureKind.Call)[0];
+  if (!expectedSignature || !actualSignature) return lowered;
+  const expectedParameters = expectedSignature.getParameters();
+  const actualParameters = actualSignature.getParameters();
+  if (
+    actualParameters.length >= expectedParameters.length ||
+    expectedParameters.some(signatureParameterIsRest) ||
+    actualParameters.some(signatureParameterIsRest)
+  ) {
+    return lowered;
+  }
+  const parameters: IrParameter[] = [];
+  for (const parameter of expectedParameters) {
+    const declaration = parameter.valueDeclaration ?? parameter.declarations?.[0];
+    const checkerType = lowerCheckerType(
+      checker.getTypeOfSymbolAtLocation(parameter, declaration ?? node),
+      node,
+      context,
+      new Set(),
+    );
+    const type =
+      declaration &&
+      ts.isParameter(declaration) &&
+      declaration.type &&
+      declaration.getSourceFile() === context.sourceFile
+        ? lowerType(declaration.type, context)
+        : declaration &&
+            ts.isParameter(declaration) &&
+            declaration.type &&
+            typeNodeIncludesErasedUtility(declaration.type)
+          ? ({ kind: 'dynamic' } as const)
+          : checkerType && directArgumentTypeIsVisible(checkerType, context)
+            ? checkerType
+            : ({ kind: 'dynamic' } as const);
+    if (!type) return lowered;
+    parameters.push({
+      name: `__unused${String(context.temporaryIndex++)}`,
+      optional: false,
+      rest: false,
+      type,
+    });
+  }
+  const returns = lowerCheckerType(checker.getReturnTypeOfSignature(actualSignature), node, context, new Set());
+  if (!returns) return lowered;
+  return {
+    body: [],
+    expression: {
+      arguments: parameters
+        .slice(0, actualParameters.length)
+        .map((parameter) => ({ kind: 'identifier', name: parameter.name })),
+      callee: lowered,
+      ...(lowered.kind === 'identifier' ? { direct: true } : {}),
+      kind: 'call',
+      typeArguments: [],
+    },
+    kind: 'function',
+    parameters,
+    returns,
+  };
+}
+
+function typeNodeIncludesErasedUtility(node: ts.TypeNode): boolean {
+  let found = false;
+  const visit = (current: ts.Node): void => {
+    if (found) return;
+    if (
+      ts.isTypeReferenceNode(current) &&
+      ts.isIdentifier(current.typeName) &&
+      ['Omit', 'Partial', 'Pick'].includes(current.typeName.text)
+    ) {
+      found = true;
+      return;
+    }
+    ts.forEachChild(current, visit);
+  };
+  visit(node);
+  return found;
+}
+
+function directArgumentTypeIsVisible(type: IrType, context: LoweringContext): boolean {
+  switch (type.kind) {
+    case 'anonymous':
+      return (
+        type.extends.every((item) => directArgumentTypeIsVisible(item, context)) &&
+        type.fields.every((field) => directArgumentTypeIsVisible(field.type, context))
+      );
+    case 'array':
+      return directArgumentTypeIsVisible(type.element, context);
+    case 'function':
+      return (
+        type.parameters.every((parameter) => directArgumentTypeIsVisible(parameter, context)) &&
+        directArgumentTypeIsVisible(type.returns, context)
+      );
+    case 'named':
+      return (
+        (type.name.includes('.') || context.directTypeNames.has(type.name)) &&
+        type.arguments.every((argument) => directArgumentTypeIsVisible(argument, context))
+      );
+    case 'nullable':
+      return directArgumentTypeIsVisible(type.inner, context);
+    case 'union':
+      return type.alternatives.every((alternative) => directArgumentTypeIsVisible(alternative, context));
+    case 'dynamic':
+    case 'primitive':
+      return true;
+  }
+}
+
+function signatureParameterIsOptional(parameter: ts.Symbol): boolean {
+  if ((parameter.flags & ts.SymbolFlags.Optional) !== 0) return true;
+  return Boolean(
+    parameter.declarations?.some(
+      (declaration) => ts.isParameter(declaration) && Boolean(declaration.questionToken || declaration.initializer),
+    ),
+  );
+}
+
+function signatureParameterIsRest(parameter: ts.Symbol): boolean {
+  return Boolean(
+    parameter.declarations?.some((declaration) => ts.isParameter(declaration) && Boolean(declaration.dotDotDotToken)),
+  );
+}
+
+function padContextualFunctionParameters(
+  node: ts.ArrowFunction | ts.FunctionExpression,
+  parameters: IrParameter[],
+  context: LoweringContext,
+): IrParameter[] {
+  const checker = context.checker;
+  const contextualType = checker?.getContextualType(node);
+  const signature = contextualType && checker?.getSignaturesOfType(contextualType, ts.SignatureKind.Call)[0];
+  if (!checker || !signature) return parameters;
+  const contextualParameters = signature.getParameters();
+  if (contextualParameters.length <= parameters.length || contextualParameters.some(signatureParameterIsRest)) {
+    return parameters;
+  }
+  const padded = [...parameters];
+  for (let index = parameters.length; index < contextualParameters.length; index++) {
+    const parameter = contextualParameters[index]!;
+    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node;
+    const type = lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
+    if (!type) return parameters;
+    padded.push({
+      name: `__unused${String(context.temporaryIndex++)}`,
+      optional: false,
+      rest: false,
+      type,
+    });
+  }
+  return padded;
+}
+
+function directCallReceiverCast(node: ts.CallExpression, context: LoweringContext): IrType | undefined {
+  const checker = context.checker;
+  if (!checker || !ts.isIdentifier(node.expression)) return undefined;
+  const symbol = checker.getSymbolAtLocation(node.expression);
+  const declaration = symbol?.valueDeclaration;
+  const declaredTypeNode =
+    declaration &&
+    (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
+      ? declaration.type
+      : undefined;
+  if (!declaredTypeNode) return undefined;
+  const declaredType = checker.getTypeFromTypeNode(declaredTypeNode);
+  if (!declaredType.isUnionOrIntersection()) return undefined;
+  const signature = checker.getResolvedSignature(node);
+  if (!signature) return undefined;
+  const parameters = signature.getParameters().map((parameter) => {
+    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node;
+    return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
+  });
+  const returns = lowerCheckerType(checker.getReturnTypeOfSignature(signature), node, context, new Set());
+  return returns && parameters.every((parameter) => parameter)
+    ? { kind: 'function', parameters: parameters as IrType[], returns }
+    : undefined;
 }
 
 function isThisParameter(node: ts.ParameterDeclaration): boolean {

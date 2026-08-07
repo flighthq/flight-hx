@@ -74,7 +74,7 @@ class Scene2dWgpu {
 
   public static final defaultWgpuScene2DRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuNode2D.defaultWgpuScene2DRenderer;
 
-  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShape.defaultWgpuShapeRenderer;
 
@@ -82,7 +82,7 @@ class Scene2dWgpu {
 
   public static final defaultWgpuTextLabelRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTextLabel.defaultWgpuTextLabelRenderer;
 
-  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultWgpuTilemapRenderer:SpriteRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTilemap.defaultWgpuTilemapRenderer;
 

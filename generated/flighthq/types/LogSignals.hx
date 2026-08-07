@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Log.LogEntry;
 
-typedef LogSignals = { var onLogEntry:Signal<Dynamic>; var onLogError:Signal<Dynamic>; };
+typedef LogSignals = { var onLogEntry:Signal<LogEntry->Void>; var onLogError:Signal<LogEntry->Void>; };

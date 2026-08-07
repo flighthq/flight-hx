@@ -8,43 +8,43 @@ import flighthq.types.ColorTransformFunction;
 
 class ColorLut {
   @:noCompletion
-  public static final COLOR_LUT_DEFAULT_SIZE:Dynamic = 32.0;
+  public static final COLOR_LUT_DEFAULT_SIZE:Float = 32.0;
 
   public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):flighthq.types.ColorLut {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var samples:Array<Float> = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
     var cell:Array<Float> = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     n = HxMath.max(2.0, HxMath.floor(size));
     samples = _Runtime.createArray((((n * n) * n) * 3.0));
     denom = (n - 1.0);
     cell = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     i = 0.0;
     {
-      var bi:Dynamic = 0.0;
+      var bi:Float = 0.0;
       while ((cast ((cast bi : Float) < (cast n : Float)) : Bool)) {
-        var b:Dynamic = (bi / denom);
+        var b:Float = (bi / denom);
         {
-          var gi:Dynamic = 0.0;
+          var gi:Float = 0.0;
           while ((cast ((cast gi : Float) < (cast n : Float)) : Bool)) {
-            var g:Dynamic = (gi / denom);
+            var g:Float = (gi / denom);
             {
-              var ri:Dynamic = 0.0;
+              var ri:Float = 0.0;
               while ((cast ((cast ri : Float) < (cast n : Float)) : Bool)) {
                 flighthq._internal._StaticIndex.writeArray(cell, 0.0, (ri / denom));
                 flighthq._internal._StaticIndex.writeArray(cell, 1.0, g);
                 flighthq._internal._StaticIndex.writeArray(cell, 2.0, b);
                 {
-                  var k:Dynamic = 0.0;
+                  var k:Float = 0.0;
                   while ((cast ((cast k : Float) < (cast _Runtime.field(transforms, 'length') : Float)) : Bool)) {
                     _Runtime.callValue(flighthq._internal._StaticIndex.readArray(transforms, k), cast ([cell, flighthq._internal._StaticIndex.readArray(cell, 0.0), flighthq._internal._StaticIndex.readArray(cell, 1.0), flighthq._internal._StaticIndex.readArray(cell, 2.0)] : Array<Dynamic>));
                     k++;
                   }
                 }
-                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 0.0)] : Array<Dynamic>)));
-                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 1.0)] : Array<Dynamic>)));
-                flighthq._internal._StaticIndex.writeArray(samples, i++, _Runtime.callValue(ColorLut.clamp01__colorLut, cast ([flighthq._internal._StaticIndex.readArray(cell, 2.0)] : Array<Dynamic>)));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 0.0) : Float)) : Float));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 1.0) : Float)) : Float));
+                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 2.0) : Float)) : Float));
                 ri++;
               }
             }
@@ -59,27 +59,27 @@ class ColorLut {
   }
 
   public static function sampleColorLut(lut:flighthq.types.ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var fr:Dynamic = cast _Runtime.UNDEFINED;
-    var fg:Dynamic = cast _Runtime.UNDEFINED;
-    var fb:Dynamic = cast _Runtime.UNDEFINED;
-    var r0:Dynamic = cast _Runtime.UNDEFINED;
-    var g0:Dynamic = cast _Runtime.UNDEFINED;
-    var b0:Dynamic = cast _Runtime.UNDEFINED;
-    var r1:Dynamic = cast _Runtime.UNDEFINED;
-    var g1:Dynamic = cast _Runtime.UNDEFINED;
-    var b1:Dynamic = cast _Runtime.UNDEFINED;
-    var dr:Dynamic = cast _Runtime.UNDEFINED;
-    var dg:Dynamic = cast _Runtime.UNDEFINED;
-    var db:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var s:Array<Float> = cast _Runtime.UNDEFINED;
+    var max:Float = cast _Runtime.UNDEFINED;
+    var fr:Float = cast _Runtime.UNDEFINED;
+    var fg:Float = cast _Runtime.UNDEFINED;
+    var fb:Float = cast _Runtime.UNDEFINED;
+    var r0:Float = cast _Runtime.UNDEFINED;
+    var g0:Float = cast _Runtime.UNDEFINED;
+    var b0:Float = cast _Runtime.UNDEFINED;
+    var r1:Float = cast _Runtime.UNDEFINED;
+    var g1:Float = cast _Runtime.UNDEFINED;
+    var b1:Float = cast _Runtime.UNDEFINED;
+    var dr:Float = cast _Runtime.UNDEFINED;
+    var dg:Float = cast _Runtime.UNDEFINED;
+    var db:Float = cast _Runtime.UNDEFINED;
     n = _Runtime.field(lut, 'size');
     s = _Runtime.field(lut, 'samples');
     max = (n - 1.0);
-    fr = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([r] : Array<Dynamic>)), max);
-    fg = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([g] : Array<Dynamic>)), max);
-    fb = _Runtime.multiplyNumbers(_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([b] : Array<Dynamic>)), max);
+    fr = ((cast ColorLut.clamp01__colorLut((cast r : Float)) : Float) * max);
+    fg = ((cast ColorLut.clamp01__colorLut((cast g : Float)) : Float) * max);
+    fb = ((cast ColorLut.clamp01__colorLut((cast b : Float)) : Float) * max);
     r0 = HxMath.floor(fr);
     g0 = HxMath.floor(fg);
     b0 = HxMath.floor(fb);
@@ -90,22 +90,22 @@ class ColorLut {
     dg = (fg - g0);
     db = (fb - b0);
     {
-      var c:Dynamic = 0.0;
+      var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
-        var c000:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
-        var c100:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
-        var c010:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
-        var c110:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r1) * 3.0) + c));
-        var c001:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r0) * 3.0) + c));
-        var c101:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r1) * 3.0) + c));
-        var c011:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r0) * 3.0) + c));
-        var c111:Dynamic = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r1) * 3.0) + c));
-        var c00:Dynamic = (c000 + ((c100 - c000) * dr));
-        var c10:Dynamic = (c010 + ((c110 - c010) * dr));
-        var c01:Dynamic = (c001 + ((c101 - c001) * dr));
-        var c11:Dynamic = (c011 + ((c111 - c011) * dr));
-        var c0:Dynamic = (c00 + ((c10 - c00) * dg));
-        var c1:Dynamic = (c01 + ((c11 - c01) * dg));
+        var c000:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
+        var c100:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
+        var c010:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
+        var c110:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r1) * 3.0) + c));
+        var c001:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r0) * 3.0) + c));
+        var c101:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r1) * 3.0) + c));
+        var c011:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r0) * 3.0) + c));
+        var c111:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r1) * 3.0) + c));
+        var c00:Float = (c000 + ((c100 - c000) * dr));
+        var c10:Float = (c010 + ((c110 - c010) * dr));
+        var c01:Float = (c001 + ((c101 - c001) * dr));
+        var c11:Float = (c011 + ((c111 - c011) * dr));
+        var c0:Float = (c00 + ((c10 - c00) * dg));
+        var c1:Float = (c01 + ((c11 - c01) * dg));
         flighthq._internal._StaticIndex.writeArray(out, c, (c0 + ((c1 - c0) * db)));
         c++;
       }

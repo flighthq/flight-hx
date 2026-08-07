@@ -12,7 +12,7 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 class CreateEnvReflectModifier {
   public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
-    return cast { kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect, tint: _Runtime.coalesce(_Runtime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(_Runtime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(_Runtime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };
+    return cast { kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, tint: _Runtime.coalesce(_Runtime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(_Runtime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(_Runtime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 }

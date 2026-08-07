@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
 class _RectangleColliderValues {
-  public static final RectangleColliderKind:Dynamic = 'RectangleCollider';
+  public static final RectangleColliderKind:String = 'RectangleCollider';
 }

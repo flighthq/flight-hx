@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 
-typedef RenderBatchKey = { var blend:Null<BlendMode>; var format:BatchFormat; var material:Null<Material>; var rendererKind:Kind; var texture:Null<Dynamic>; };
+typedef RenderBatchKey = { var blend:Null<BlendMode>; var format:BatchFormat; var material:Null<Material>; var rendererKind:Kind; var texture:Null<flighthq._internal._Object>; };
 
 typedef RenderDrawContext = { var drawCallCount:Float; var flushCount:Float; var openBatchKey:Null<RenderBatchKey>; var proxyVisitedCount:Float; };

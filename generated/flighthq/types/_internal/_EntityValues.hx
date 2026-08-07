@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _EntityValues {
-  public static final EntityRuntimeKey:Dynamic = _Runtime.symbolFor('EntityRuntime');
+  public static final EntityRuntimeKey:flighthq._internal._Symbol = _Runtime.symbolFor('EntityRuntime');
 }

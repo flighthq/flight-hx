@@ -12,6 +12,7 @@ import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
 import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlUnlitProgram;
 import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
@@ -20,14 +21,14 @@ import flighthq.types.Texture;
 class GlUnlitPrelude {
   @:noCompletion
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColor'), flighthq._internal._StaticIndex.readArray(color, 0.0), flighthq._internal._StaticIndex.readArray(color, 1.0), flighthq._internal._StaticIndex.readArray(color, 2.0), flighthq._internal._StaticIndex.readArray(color, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIntensity'), intensity);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast !_Runtime.strictEquals(colorMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, colorMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), colorMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
     }
   }
 
@@ -39,8 +40,8 @@ class GlUnlitPrelude {
 
   @:noCompletion
   public static function compileGlUnlitProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlUnlitDefineKey):GlUnlitProgram {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlUnlitVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlUnlitFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlUnlitVertexSourceForKey((cast key : GlUnlitDefineKey)) : String) : String), (cast (cast getGlUnlitFragmentSourceForKey((cast key : GlUnlitDefineKey)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorMap'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
@@ -48,25 +49,25 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
-    return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'unlit:' + Std.string(_Runtime.callValue(buildGlUnlitDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlUnlitProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));
+    fullKey = _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]);
+    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey((cast fullKey : GlUnlitDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fullKey : GlUnlitDefineKey)) : GlUnlitProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)) : GlUnlitProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
-    return cast (_Runtime.callValue(GlUnlitPrelude.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
+    return cast ((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key : GlUnlitDefineKey)) : String) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
-    return cast ((_Runtime.callValue(GlUnlitPrelude.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
+    return cast (((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key : GlUnlitDefineKey)) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
     return cast null;
   }
 
   public static function buildDefineSource__glUnlitPrelude(key:GlUnlitDefineKey):String {
-    var defines:Dynamic = cast _Runtime.UNDEFINED;
+    var defines:String = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n';
     if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'hasColorMap') : Bool)) { (defines = cast ((defines + '#define HAS_COLOR_MAP\n') : Dynamic)); }
@@ -77,7 +78,7 @@ class GlUnlitPrelude {
     return cast null;
   }
 
-  public static final UNLIT_VERTEX_BODY__glUnlitPrelude:Dynamic = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 3) in vec2 a_uv0;\n#ifdef VERTEX_COLOR\nlayout(location = 4) in vec4 a_color0;\nout vec4 v_color0;\n#endif\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\n' + Std.string(GL_UV_TRANSFORM_VERTEX_GLSL) + '\nout vec2 v_uv0;\n\nvoid main() {\n  v_uv0 = applyUvTransform(a_uv0);\n#ifdef VERTEX_COLOR\n  v_color0 = a_color0;\n#endif\n#ifdef HAS_SKIN\n  gl_Position = u_viewProjection * u_model * skinMatrix() * vec4(a_position, 1.0);\n#else\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n#endif\n}\n';
+  public static final UNLIT_VERTEX_BODY__glUnlitPrelude:String = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 3) in vec2 a_uv0;\n#ifdef VERTEX_COLOR\nlayout(location = 4) in vec4 a_color0;\nout vec4 v_color0;\n#endif\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\n' + Std.string(GL_UV_TRANSFORM_VERTEX_GLSL) + '\nout vec2 v_uv0;\n\nvoid main() {\n  v_uv0 = applyUvTransform(a_uv0);\n#ifdef VERTEX_COLOR\n  v_color0 = a_color0;\n#endif\n#ifdef HAS_SKIN\n  gl_Position = u_viewProjection * u_model * skinMatrix() * vec4(a_position, 1.0);\n#else\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n#endif\n}\n';
 
-  public static final UNLIT_FRAGMENT_BODY__glUnlitPrelude:Dynamic = '\nprecision highp float;\n\nin vec2 v_uv0;\n#ifdef VERTEX_COLOR\nin vec4 v_color0;\n#endif\n\nuniform vec4 u_color;\nuniform float u_intensity;\n#ifdef HAS_COLOR_MAP\nuniform sampler2D u_colorMap;\n#endif\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\n// Texture.colorSpace selects the GPU format, so sampled color is already linear here.\nvoid main() {\n  vec4 color = u_color;\n#ifdef VERTEX_COLOR\n  color *= v_color0;\n#endif\n#ifdef HAS_COLOR_MAP\n  vec4 sampled = texture(u_colorMap, v_uv0);\n  color.rgb *= sampled.rgb;\n  color.a *= sampled.a;\n#endif\n#ifdef ALPHA_MASK\n  if (color.a < u_alphaCutoff) discard;\n  color.a = 1.0;\n#endif\n  fragColor = vec4(color.rgb * u_intensity, color.a);\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
+  public static final UNLIT_FRAGMENT_BODY__glUnlitPrelude:String = '\nprecision highp float;\n\nin vec2 v_uv0;\n#ifdef VERTEX_COLOR\nin vec4 v_color0;\n#endif\n\nuniform vec4 u_color;\nuniform float u_intensity;\n#ifdef HAS_COLOR_MAP\nuniform sampler2D u_colorMap;\n#endif\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\n// Texture.colorSpace selects the GPU format, so sampled color is already linear here.\nvoid main() {\n  vec4 color = u_color;\n#ifdef VERTEX_COLOR\n  color *= v_color0;\n#endif\n#ifdef HAS_COLOR_MAP\n  vec4 sampled = texture(u_colorMap, v_uv0);\n  color.rgb *= sampled.rgb;\n  color.a *= sampled.a;\n#endif\n#ifdef ALPHA_MASK\n  if (color.a < u_alphaCutoff) discard;\n  color.a = 1.0;\n#endif\n  fragColor = vec4(color.rgb * u_intensity, color.a);\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
 }

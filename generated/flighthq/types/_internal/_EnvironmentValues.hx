@@ -7,5 +7,5 @@ import flighthq.types.Light;
 import flighthq.types.Texture;
 
 class _EnvironmentValues {
-  public static final EnvironmentKind:Dynamic = 'Environment';
+  public static final EnvironmentKind:String = 'Environment';
 }

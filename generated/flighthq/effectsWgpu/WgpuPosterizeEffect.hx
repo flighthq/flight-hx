@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.PosterizeEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,22 +17,22 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuPosterizeEffect {
   @:noCompletion
   public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
-    var levels:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var levels:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'colorGrade.posterize', WgpuPosterizeEffect.POSTERIZE_FRAGMENT_WGSL__wgpuPosterizeEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'colorGrade.posterize' : String), (cast WgpuPosterizeEffect.POSTERIZE_FRAGMENT_WGSL__wgpuPosterizeEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, levels);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuPosterizeEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyPosterizeEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PosterizeEffect)] : Array<Dynamic>));
+  public static final defaultWgpuPosterizeEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyPosterizeEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : PosterizeEffect) : PosterizeEffect));
   };
 
   public static function registerWgpuPosterizeEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'PosterizeEffect', defaultWgpuPosterizeEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'PosterizeEffect' : String), (cast defaultWgpuPosterizeEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final POSTERIZE_FRAGMENT_WGSL__wgpuPosterizeEffect:Dynamic = '\nstruct Uniforms { u_levels : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let rgb = floor(c.rgb * uni.u_levels) / (uni.u_levels - 1.0);\n  return vec4f(clamp(rgb, vec3f(0.0), vec3f(1.0)), c.a);\n}';
+  public static final POSTERIZE_FRAGMENT_WGSL__wgpuPosterizeEffect:String = '\nstruct Uniforms { u_levels : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let rgb = floor(c.rgb * uni.u_levels) / (uni.u_levels - 1.0);\n  return vec4f(clamp(rgb, vec3f(0.0), vec3f(1.0)), c.a);\n}';
 }

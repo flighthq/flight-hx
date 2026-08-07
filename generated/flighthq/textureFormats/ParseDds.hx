@@ -8,8 +8,10 @@ import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
 import flighthq.textureFormats.ByteReader.readByteReaderU32;
 import flighthq.textureFormats.ByteReader.skipByteReader;
 import flighthq.textureFormats.TextureLevelLayout.computeTextureContainerLevels;
+import flighthq.types.ByteReader;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerLevel;
 import flighthq.types.TextureContainerParseFailureReason;
 
 typedef ParseFailure__parseDds = { var reason:Null<TextureContainerParseFailureReason>; };
@@ -17,76 +19,76 @@ typedef ParseFailure__parseDds = { var reason:Null<TextureContainerParseFailureR
 class ParseDds {
   public static function getDdsParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseDds = cast _Runtime.UNDEFINED;
-    var container:Dynamic = cast _Runtime.UNDEFINED;
+    var container:Null<TextureContainer> = cast _Runtime.UNDEFINED;
     failure = { reason: null };
-    container = _Runtime.callValue(ParseDds.parseDdsInternal__parseDds, cast ([bytes, failure] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast _Runtime.field(failure, 'reason') : Dynamic) : (cast null : Dynamic));
+    container = (cast ParseDds.parseDdsInternal__parseDds((cast bytes : flighthq._internal._UInt8Array), failure) : Null<TextureContainer>);
+    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast (cast failure : ParseFailure__parseDds).reason : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(ParseDds.parseDdsInternal__parseDds, cast ([bytes] : Array<Dynamic>));
+    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<TextureContainer>);
     return cast null;
   }
 
   public static function parseDdsInternal__parseDds(bytes:flighthq._internal._UInt8Array, ?failure:ParseFailure__parseDds):Null<TextureContainer> {
-    var reader:Dynamic = cast _Runtime.UNDEFINED;
-    var dwHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var dwWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var dwDepth:Dynamic = cast _Runtime.UNDEFINED;
-    var dwMipMapCount:Dynamic = cast _Runtime.UNDEFINED;
-    var pfFlags:Dynamic = cast _Runtime.UNDEFINED;
-    var fourCC:Dynamic = cast _Runtime.UNDEFINED;
-    var rgbBitCount:Dynamic = cast _Runtime.UNDEFINED;
-    var rMask:Dynamic = cast _Runtime.UNDEFINED;
-    var gMask:Dynamic = cast _Runtime.UNDEFINED;
-    var bMask:Dynamic = cast _Runtime.UNDEFINED;
-    var aMask:Dynamic = cast _Runtime.UNDEFINED;
-    var caps2:Dynamic = cast _Runtime.UNDEFINED;
+    var reader:ByteReader = cast _Runtime.UNDEFINED;
+    var dwHeight:Float = cast _Runtime.UNDEFINED;
+    var dwWidth:Float = cast _Runtime.UNDEFINED;
+    var dwDepth:Float = cast _Runtime.UNDEFINED;
+    var dwMipMapCount:Float = cast _Runtime.UNDEFINED;
+    var pfFlags:Float = cast _Runtime.UNDEFINED;
+    var fourCC:Float = cast _Runtime.UNDEFINED;
+    var rgbBitCount:Float = cast _Runtime.UNDEFINED;
+    var rMask:Float = cast _Runtime.UNDEFINED;
+    var gMask:Float = cast _Runtime.UNDEFINED;
+    var bMask:Float = cast _Runtime.UNDEFINED;
+    var aMask:Float = cast _Runtime.UNDEFINED;
+    var caps2:Float = cast _Runtime.UNDEFINED;
     var format:Null<TextureContainerFormat> = cast _Runtime.UNDEFINED;
-    var cube:Dynamic = cast _Runtime.UNDEFINED;
-    var layers:Dynamic = cast _Runtime.UNDEFINED;
-    var dataOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var faces:Dynamic = cast _Runtime.UNDEFINED;
-    var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(ParseDds.hasDdsMagic__parseDds, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'container-unrecognized'] : Array<Dynamic>)); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'header-truncated'] : Array<Dynamic>)); }
-    reader = _Runtime.callValue(createByteReader, cast ([bytes, 4.0] : Array<Dynamic>));
-    _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
-    _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
-    dwHeight = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    dwWidth = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
-    dwDepth = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    dwMipMapCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
+    var cube:Bool = cast _Runtime.UNDEFINED;
+    var layers:Float = cast _Runtime.UNDEFINED;
+    var dataOffset:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var faces:Float = cast _Runtime.UNDEFINED;
+    var mipLevels:Float = cast _Runtime.UNDEFINED;
+    var layout:Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast ParseDds.hasDdsMagic__parseDds((cast bytes : flighthq._internal._UInt8Array)) : Bool) : Bool) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'container-unrecognized' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    reader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast 4.0 : Float)) : ByteReader);
+    skipByteReader(reader, (cast 4.0 : Float));
+    skipByteReader(reader, (cast 4.0 : Float));
+    dwHeight = (cast readByteReaderU32(reader) : Float);
+    dwWidth = (cast readByteReaderU32(reader) : Float);
+    skipByteReader(reader, (cast 4.0 : Float));
+    dwDepth = (cast readByteReaderU32(reader) : Float);
+    dwMipMapCount = (cast readByteReaderU32(reader) : Float);
     (reader.offset = cast (80.0 : Dynamic));
-    pfFlags = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    fourCC = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    rgbBitCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    rMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    gMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    bMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    aMask = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
+    pfFlags = (cast readByteReaderU32(reader) : Float);
+    fourCC = (cast readByteReaderU32(reader) : Float);
+    rgbBitCount = (cast readByteReaderU32(reader) : Float);
+    rMask = (cast readByteReaderU32(reader) : Float);
+    gMask = (cast readByteReaderU32(reader) : Float);
+    bMask = (cast readByteReaderU32(reader) : Float);
+    aMask = (cast readByteReaderU32(reader) : Float);
     (reader.offset = cast (112.0 : Dynamic));
-    caps2 = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
+    caps2 = (cast readByteReaderU32(reader) : Float);
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'format-unsupported'] : Array<Dynamic>));
+      return cast (cast ParseDds.reject__parseDds(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
     }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool) && (cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds) : Bool)) : Bool)) {
-      if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([_Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>)), 20.0] : Array<Dynamic>)) : Bool) : Bool)) {
-        return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'header-truncated'] : Array<Dynamic>));
+      if ((cast !(cast (cast hasByteReaderBytes((cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader), (cast 20.0 : Float)) : Bool) : Bool) : Bool)) {
+        return cast (cast ParseDds.reject__parseDds(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
       }
-      var dx10:Dynamic = _Runtime.callValue(createByteReader, cast ([bytes, ParseDds.ddsDataOffset__parseDds] : Array<Dynamic>));
-      var dxgiFormat:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
-      _Runtime.callValue(skipByteReader, cast ([dx10, 4.0] : Array<Dynamic>));
-      var miscFlag:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
-      var arraySize:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
+      var dx10:ByteReader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader);
+      var dxgiFormat:Float = (cast readByteReaderU32(dx10) : Float);
+      skipByteReader(dx10, (cast 4.0 : Float));
+      var miscFlag:Float = (cast readByteReaderU32(dx10) : Float);
+      var arraySize:Float = (cast readByteReaderU32(dx10) : Float);
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
       (cube = cast (((cast cube : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0) : Bool)) : Dynamic));
       (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
@@ -94,25 +96,25 @@ class ParseDds {
     } else { if ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool)) {
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsFourCcFormat__parseDds, fourCC), function():Dynamic return cast null) : Dynamic));
     } else { if ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfRgb__parseDds)), 0.0) : Bool)) {
-      (format = cast (_Runtime.callValue(ParseDds.mapDdsUncompressed__parseDds, cast ([rgbBitCount, rMask, gMask, bMask, aMask] : Array<Dynamic>)) : Dynamic));
+      (format = cast ((cast ParseDds.mapDdsUncompressed__parseDds((cast rgbBitCount : Float), (cast rMask : Float), (cast gMask : Float), (cast bMask : Float), (cast aMask : Float)) : Null<String>) : Dynamic));
     } else {
       (format = cast (null : Dynamic));
     } } }
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
     width = HxMath.max(1.0, dwWidth);
     height = HxMath.max(1.0, dwHeight);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     mipLevels = HxMath.max(1.0, dwMipMapCount);
-    layout = _Runtime.callValue(computeTextureContainerLevels, cast ([format, width, height, mipLevels, layers, faces, dataOffset] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast _Runtime.field(layout, 'endOffset') : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ParseDds.reject__parseDds, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>));
+    layout = (cast computeTextureContainerLevels((cast format : TextureContainerFormat), (cast width : Float), (cast height : Float), (cast mipLevels : Float), (cast layers : Float), (cast faces : Float), (cast dataOffset : Float)) : Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }>);
+    if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).endOffset : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) {
+      return cast (cast ParseDds.reject__parseDds(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
     }
-    return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: _Runtime.field(layout, 'levels'), mipLevels: mipLevels, supercompression: 'None', width: width };
+    return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).levels, mipLevels: mipLevels, supercompression: 'None', width: width };
     return cast null;
   }
 
   public static function reject__parseDds(failure:Null<ParseFailure__parseDds>, reason:TextureContainerParseFailureReason):Dynamic {
-    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(failure, 'reason', reason); }
+    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast failure : ParseFailure__parseDds).reason = reason); }
     return cast null;
     return cast null;
   }
@@ -134,21 +136,21 @@ class ParseDds {
     return cast null;
   }
 
-  public static final ddsDataOffset__parseDds:Dynamic = 128.0;
+  public static final ddsDataOffset__parseDds:Float = 128.0;
 
-  public static final ddsCaps2Cubemap__parseDds:Dynamic = 512.0;
+  public static final ddsCaps2Cubemap__parseDds:Float = 512.0;
 
-  public static final ddsCaps2Volume__parseDds:Dynamic = 2097152.0;
+  public static final ddsCaps2Volume__parseDds:Float = 2097152.0;
 
-  public static final ddsDx10MiscCube__parseDds:Dynamic = 4.0;
+  public static final ddsDx10MiscCube__parseDds:Float = 4.0;
 
-  public static final ddsFourCcDx10__parseDds:Dynamic = 808540228.0;
+  public static final ddsFourCcDx10__parseDds:Float = 808540228.0;
 
-  public static final ddsPfFourCC__parseDds:Dynamic = 4.0;
+  public static final ddsPfFourCC__parseDds:Float = 4.0;
 
-  public static final ddsPfRgb__parseDds:Dynamic = 64.0;
+  public static final ddsPfRgb__parseDds:Float = 64.0;
 
-  public static final ddsDxgiFormat__parseDds:Dynamic = _Runtime.objectFromPairs([{ key: '2', value: 'rgba32f' }, { key: '10', value: 'rgba16f' }, { key: '28', value: 'rgba8unorm' }, { key: '29', value: 'rgba8Srgb' }, { key: '49', value: 'rg8unorm' }, { key: '61', value: 'r8unorm' }, { key: '71', value: 'bc1' }, { key: '72', value: 'bc1Srgb' }, { key: '74', value: 'bc2' }, { key: '75', value: 'bc2Srgb' }, { key: '77', value: 'bc3' }, { key: '78', value: 'bc3Srgb' }, { key: '80', value: 'bc4' }, { key: '81', value: 'bc4Snorm' }, { key: '83', value: 'bc5' }, { key: '84', value: 'bc5Snorm' }, { key: '87', value: 'bgra8unorm' }, { key: '91', value: 'bgra8Srgb' }, { key: '95', value: 'bc6hUfloat' }, { key: '96', value: 'bc6hSfloat' }, { key: '98', value: 'bc7' }, { key: '99', value: 'bc7Srgb' }]);
+  public static final ddsDxgiFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '2', value: 'rgba32f' }, { key: '10', value: 'rgba16f' }, { key: '28', value: 'rgba8unorm' }, { key: '29', value: 'rgba8Srgb' }, { key: '49', value: 'rg8unorm' }, { key: '61', value: 'r8unorm' }, { key: '71', value: 'bc1' }, { key: '72', value: 'bc1Srgb' }, { key: '74', value: 'bc2' }, { key: '75', value: 'bc2Srgb' }, { key: '77', value: 'bc3' }, { key: '78', value: 'bc3Srgb' }, { key: '80', value: 'bc4' }, { key: '81', value: 'bc4Snorm' }, { key: '83', value: 'bc5' }, { key: '84', value: 'bc5Snorm' }, { key: '87', value: 'bgra8unorm' }, { key: '91', value: 'bgra8Srgb' }, { key: '95', value: 'bc6hUfloat' }, { key: '96', value: 'bc6hSfloat' }, { key: '98', value: 'bc7' }, { key: '99', value: 'bc7Srgb' }]);
 
-  public static final ddsFourCcFormat__parseDds:Dynamic = _Runtime.objectFromPairs([{ key: '113', value: 'rgba16f' }, { key: '116', value: 'rgba32f' }, { key: '827611204', value: 'bc1' }, { key: '844388420', value: 'bc2' }, { key: '861165636', value: 'bc2' }, { key: '877942852', value: 'bc3' }, { key: '894720068', value: 'bc3' }, { key: '826889281', value: 'bc4' }, { key: '1429488450', value: 'bc4' }, { key: '1395934018', value: 'bc4Snorm' }, { key: '843666497', value: 'bc5' }, { key: '1429553986', value: 'bc5' }, { key: '1395999554', value: 'bc5Snorm' }]);
+  public static final ddsFourCcFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '113', value: 'rgba16f' }, { key: '116', value: 'rgba32f' }, { key: '827611204', value: 'bc1' }, { key: '844388420', value: 'bc2' }, { key: '861165636', value: 'bc2' }, { key: '877942852', value: 'bc3' }, { key: '894720068', value: 'bc3' }, { key: '826889281', value: 'bc4' }, { key: '1429488450', value: 'bc4' }, { key: '1395934018', value: 'bc4Snorm' }, { key: '843666497', value: 'bc5' }, { key: '1429553986', value: 'bc5' }, { key: '1395999554', value: 'bc5Snorm' }]);
 }

@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
 class _ToonModifierValues {
-  public static final ToonModifierKind:Dynamic = 'ToonModifier';
+  public static final ToonModifierKind:String = 'ToonModifier';
 }

@@ -4,11 +4,12 @@ package flighthq.camera;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
+import flighthq.types.Matrix4;
 import flighthq.types.Vector3.Vector3Like;
 
 class Basis {
   public static function getCamera3DForward(out:Vector3Like, camera:Camera3D):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = camera.view.m;
     (out.x = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) : Dynamic));
     (out.y = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Dynamic));
@@ -16,19 +17,19 @@ class Basis {
   }
 
   public static function getCamera3DPosition(out:Vector3Like, camera:Camera3D):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var m00:Dynamic = cast _Runtime.UNDEFINED;
-    var m01:Dynamic = cast _Runtime.UNDEFINED;
-    var m02:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m20:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var tz:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var m00:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m20:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var tz:Float = cast _Runtime.UNDEFINED;
     m = camera.view.m;
     m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
     m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
@@ -48,7 +49,7 @@ class Basis {
   }
 
   public static function getCamera3DRight(out:Vector3Like, camera:Camera3D):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = camera.view.m;
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Dynamic));
@@ -56,7 +57,7 @@ class Basis {
   }
 
   public static function getCamera3DUp(out:Vector3Like, camera:Camera3D):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = camera.view.m;
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) : Dynamic));

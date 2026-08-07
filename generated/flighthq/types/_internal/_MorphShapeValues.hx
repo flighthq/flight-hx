@@ -11,5 +11,5 @@ import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 
 class _MorphShapeValues {
-  public static final MorphShapeKind:Dynamic = 'MorphShape';
+  public static final MorphShapeKind:String = 'MorphShape';
 }

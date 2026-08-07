@@ -8,11 +8,11 @@ import flighthq.types.BrightnessContrastAdjustment;
 class BrightnessContrastAdjustment {
   public static function createBrightnessContrastAdjustment(?options:Dynamic):flighthq.types.BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var brightness:Dynamic = cast _Runtime.UNDEFINED;
-    var contrast:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var brightness:Float = cast _Runtime.UNDEFINED;
+    var contrast:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var o:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     brightness = _Runtime.coalesce(_Runtime.field(options, 'brightness'), function():Dynamic return cast 0.0);
     contrast = _Runtime.coalesce(_Runtime.field(options, 'contrast'), function():Dynamic return cast 1.0);
     s = contrast;

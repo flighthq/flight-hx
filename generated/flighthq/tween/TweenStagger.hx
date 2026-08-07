@@ -12,13 +12,13 @@ import flighthq.types.TweenOptions;
 import flighthq.types.TweenStaggerOptions;
 
 class TweenStagger {
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {
-    var each:Dynamic = cast _Runtime.UNDEFINED;
-    var from:Dynamic = cast _Runtime.UNDEFINED;
-    var staggerEase:Dynamic = cast _Runtime.UNDEFINED;
-    var baseDelay:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var tweens:Array<Tween<Dynamic>> = cast _Runtime.UNDEFINED;
+  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<T>> {
+    var each:Float = cast _Runtime.UNDEFINED;
+    var from:flighthq._internal._Union2<Float, String> = cast _Runtime.UNDEFINED;
+    var staggerEase:Null<EasingFunction> = cast _Runtime.UNDEFINED;
+    var baseDelay:Float = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var tweens:Array<Tween<T>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     each = _Runtime.coalesce(_Runtime.optionalField(stagger, 'each'), function():Dynamic return cast 0.1);
     from = _Runtime.coalesce(_Runtime.optionalField(stagger, 'from'), function():Dynamic return cast 'start');
@@ -27,10 +27,10 @@ class TweenStagger {
     count = _Runtime.field(targets, 'length');
     tweens = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var staggerOffset:Dynamic = _Runtime.callValue(TweenStagger.computeStaggerDelay__tweenStagger, cast ([i, count, each, from, staggerEase] : Array<Dynamic>));
-        var tween:Dynamic = _Runtime.callValue(createTween, cast ([manager, flighthq._internal._StaticIndex.readArray(targets, i), duration, propertyMap, _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }])] : Array<Dynamic>));
+        var staggerOffset:Float = (cast TweenStagger.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), (cast from : flighthq._internal._Union2<Float, String>), (cast staggerEase : Null<EasingFunction>)) : Float);
+        var tween:Tween<T> = (cast createTween((cast manager : TweenManager), flighthq._internal._StaticIndex.readArray(targets, i), (cast duration : Float), propertyMap, (cast _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]) : Null<TweenOptions>)) : Tween<T>);
         _Runtime.callProperty(tweens, 'push', cast ([tween] : Array<Dynamic>));
         i++;
       }
@@ -39,23 +39,23 @@ class TweenStagger {
     return cast null;
   }
 
-  public static function computeStaggerDelay__tweenStagger(index:Float, count:Float, each:Float, from:Dynamic, ?staggerEase:EasingFunction):Float {
+  public static function computeStaggerDelay__tweenStagger(index:Float, count:Float, each:Float, from:flighthq._internal._Union2<String, Float>, ?staggerEase:EasingFunction):Float {
     var normalizedPosition:Float = cast _Runtime.UNDEFINED;
-    var eased:Dynamic = cast _Runtime.UNDEFINED;
+    var eased:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast count : Float) <= (cast 1.0 : Float)) : Bool)) { return cast 0.0; }
     if ((cast _Runtime.strictEquals(from, 'start') : Bool)) {
       (normalizedPosition = cast ((index / (count - 1.0)) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(from, 'end') : Bool)) {
       (normalizedPosition = cast ((((count - 1.0) - index) / (count - 1.0)) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(from, 'center') : Bool)) {
-      var center:Dynamic = ((count - 1.0) / 2.0);
+      var center:Float = ((count - 1.0) / 2.0);
       (normalizedPosition = cast (_Runtime.divideNumbers(HxMath.abs((index - center)), center) : Dynamic));
     } else {
-      var origin:Dynamic = HxMath.max(0.0, HxMath.min(from, (count - 1.0)));
-      var maxDistance:Dynamic = HxMath.max(origin, ((count - 1.0) - origin));
+      var origin:Float = HxMath.max(0.0, HxMath.min(from, (count - 1.0)));
+      var maxDistance:Float = HxMath.max(origin, ((count - 1.0) - origin));
       (normalizedPosition = cast (((cast ((cast maxDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(HxMath.abs((index - origin)), maxDistance) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     } } }
-    eased = ((cast !_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(staggerEase, cast ([normalizedPosition] : Array<Dynamic>)) : Dynamic) : (cast normalizedPosition : Dynamic));
+    eased = ((cast !_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast staggerEase((cast normalizedPosition : Float)) : Float) : Dynamic) : (cast normalizedPosition : Dynamic));
     return cast ((eased * each) * (count - 1.0));
     return cast null;
   }

@@ -4,24 +4,26 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronApp;
+import flighthq.types.ElectronApi.ElectronFs;
 import flighthq.types.Storage.StorageBackend;
 
 class ElectronStorage {
-  public static function createElectronStorageBackend(electron:ElectronApi, fileName:Dynamic = 'storage.json'):StorageBackend {
-    var load:Void->Dynamic = cast _Runtime.UNDEFINED;
+  public static function createElectronStorageBackend(electron:ElectronApi, fileName:String = 'storage.json'):StorageBackend {
+    var load:Void->flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     var save:Void->Bool = cast _Runtime.UNDEFINED;
-    var fs:Dynamic = cast _Runtime.UNDEFINED;
-    var store:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    load = function load():Dynamic {
+    var fs:ElectronFs = cast _Runtime.UNDEFINED;
+    var store:Null<flighthq._internal._Record<String, String>> = cast _Runtime.UNDEFINED;
+    load = (cast function load():flighthq._internal._Record<String, String> {
       if ((cast !_Runtime.strictEquals(store, null) : Bool)) { return cast store; }
       try {
-        var dir:Dynamic = _Runtime.callProperty(_Runtime.field(electron, 'app'), 'getPath', cast (['userData'] : Array<Dynamic>));
-        var path:Dynamic = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
-        if ((cast _Runtime.callProperty(fs, 'existsSync', cast ([path] : Array<Dynamic>)) : Bool)) {
-          var raw:Dynamic = _Runtime.callProperty(fs, 'readFileSync', cast ([path, 'utf-8'] : Array<Dynamic>));
-          var parsed:Dynamic = _Runtime.jsonParse(raw);
+        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath('userData');
+        var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
+        if ((cast (cast fs : ElectronFs).existsSync(path) : Bool)) {
+          var raw:String = (cast fs : ElectronFs).readFileSync(path, 'utf-8');
+          var parsed:flighthq._internal._Any = _Runtime.jsonParse(raw);
           if ((cast ((cast ((cast !_Runtime.strictEquals(parsed, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object') : Bool)) : Bool) && (cast !(cast _Runtime.isArray(parsed) : Bool) : Bool)) : Bool)) {
-            (store = cast ((cast parsed : Dynamic) : Dynamic));
+            (store = cast ((cast parsed : flighthq._internal._Record<String, String>) : Dynamic));
             return cast store;
           }
         }
@@ -29,37 +31,37 @@ class ElectronStorage {
       }
       (store = cast ({  } : Dynamic));
       return cast store;
-    };
-    save = function save():Bool {
+    } : Void->flighthq._internal._Record<String, String>);
+    save = (cast function save():Bool {
       try {
-        var dir:Dynamic = _Runtime.callProperty(_Runtime.field(electron, 'app'), 'getPath', cast (['userData'] : Array<Dynamic>));
-        var path:Dynamic = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
-        _Runtime.callProperty(fs, 'writeFileSync', cast ([path, _Runtime.jsonStringify(_Runtime.callValue(load, cast ([] : Array<Dynamic>)))] : Array<Dynamic>));
+        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath('userData');
+        var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
+        (cast fs : ElectronFs).writeFileSync(path, _Runtime.jsonStringify(load()));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
-    };
-    fs = _Runtime.field(electron, 'fs');
+    } : Void->Bool);
+    fs = (cast electron : ElectronApi).fs;
     store = null;
-    return cast { clear: function() {
+    return cast { clear: function():Bool {
       (store = cast ({  } : Dynamic));
-      return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));
-    }, getItem: function(key:Dynamic) {
-      var s:Dynamic = cast _Runtime.UNDEFINED;
-      s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
+      return cast (cast save() : Bool);
+    }, getItem: function(key:String):Null<String> {
+      var s:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
+      s = (cast load() : flighthq._internal._Record<String, String>);
       return cast ((cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) ? (cast _Runtime.getIndex(s, key) : Dynamic) : (cast null : Dynamic));
-    }, keys: function() {
-      return cast flighthq._internal.DynamicObject.keys(_Runtime.callValue(load, cast ([] : Array<Dynamic>)));
-    }, removeItem: function(key:Dynamic) {
-      var s:Dynamic = cast _Runtime.UNDEFINED;
-      s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
+    }, keys: function():Array<String> {
+      return cast flighthq._internal.DynamicObject.keys((cast load() : {  }));
+    }, removeItem: function(key:String):Bool {
+      var s:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
+      s = (cast load() : flighthq._internal._Record<String, String>);
       if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       _Runtime.deleteIndex(s, key);
-      return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));
-    }, setItem: function(key:Dynamic, value:Dynamic) {
-      _Runtime.setIndex(_Runtime.callValue(load, cast ([] : Array<Dynamic>)), key, value);
-      return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));
+      return cast (cast save() : Bool);
+    }, setItem: function(key:String, value:String):Bool {
+      _Runtime.setIndex((cast load() : flighthq._internal._Record<String, String>), key, value);
+      return cast (cast save() : Bool);
     } };
     return cast null;
   }

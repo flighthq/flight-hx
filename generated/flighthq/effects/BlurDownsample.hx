@@ -17,5 +17,5 @@ class BlurDownsample {
     return cast null;
   }
 
-  public static final BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample:Dynamic = 4.0;
+  public static final BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample:Float = 4.0;
 }

@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasMaterialRenderer;
+import flighthq.types.CanvasMaterialState;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
@@ -14,44 +16,44 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class CanvasMaterialRegistry {
   @:noCompletion
   public static function applyCanvasMaterial(state:CanvasRenderState, material:Null<Material>):Bool {
-    var renderer:Dynamic = cast _Runtime.UNDEFINED;
-    var drawState:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
+    var renderer:Null<CanvasMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var drawState:CanvasMaterialState = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(material, null) : Bool)) { return cast false; }
-    renderer = _Runtime.callValue(resolveCanvasMaterialRenderer, cast ([state, material] : Array<Dynamic>));
+    renderer = (cast resolveCanvasMaterialRenderer((cast state : CanvasRenderState), (cast material : Null<Material>)) : Null<CanvasMaterialRenderer>);
     if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { return cast false; }
-    drawState = _Runtime.callProperty(renderer, 'getState', cast ([material] : Array<Dynamic>));
-    context = _Runtime.field(state, 'context');
+    drawState = (cast renderer : CanvasMaterialRenderer).getState(material);
+    context = (cast state : CanvasRenderState).context;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(drawState, 'composite'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', _Runtime.field(drawState, 'composite')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(drawState, 'filter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', _Runtime.field(drawState, 'filter')); }
+    if ((cast !_Runtime.strictEquals((cast drawState : CanvasMaterialState).composite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', (cast drawState : CanvasMaterialState).composite); }
+    if ((cast !_Runtime.strictEquals((cast drawState : CanvasMaterialState).filter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', (cast drawState : CanvasMaterialState).filter); }
     return cast true;
     return cast null;
   }
 
   @:noCompletion
   public static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).materialRendererMap; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
+    var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime);
+    ((cast ((cast runtime : CanvasRenderStateRuntime).materialRendererMap ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, renderer));
   }
 
   @:noCompletion
   public static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
-    var map:Dynamic = cast _Runtime.UNDEFINED;
-    map = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
+    var map:Null<flighthq._internal._Map<String, CanvasMaterialRenderer>> = cast _Runtime.UNDEFINED;
+    map = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).materialRendererMap;
     if ((cast _Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var renderer:Dynamic = ((cast map : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
+      var renderer:Null<CanvasMaterialRenderer> = ((cast map : flighthq._internal._Map<String, CanvasMaterialRenderer>).get((cast material : Material).kind));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map).get(StandardMaterialKindValue)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast map : flighthq._internal._Map<String, CanvasMaterialRenderer>).get(StandardMaterialKindValue)), function():Dynamic return cast null);
     return cast null;
   }
 }

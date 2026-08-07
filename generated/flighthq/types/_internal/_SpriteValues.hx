@@ -9,5 +9,5 @@ import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Texture;
 
 class _SpriteValues {
-  public static final SpriteKind:Dynamic = 'Sprite';
+  public static final SpriteKind:String = 'Sprite';
 }

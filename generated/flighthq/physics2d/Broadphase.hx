@@ -5,75 +5,79 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.ColliderTransform.updatePhysics2DColliderWorldShape;
 import flighthq.physics2d.ColliderTransform.writePhysics2DColliderBounds;
+import flighthq.types.Physics2D.Physics2DBodyType;
+import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2D.RigidBody2D;
 import flighthq.types.Spatial.SpatialAabb;
+import flighthq.types.Spatial.SpatialIndexBackend;
 
 class Broadphase {
   public static function synchronizePhysics2DBroadphase(world:Physics2DWorld):Void {
-    _Runtime.callValue(Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase, cast ([world, 0.0] : Array<Dynamic>));
+    Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase((cast world : Physics2DWorld), (cast 0.0 : Float));
   }
 
   public static function synchronizePhysics2DSweptBroadphase(world:Physics2DWorld, dt:Float):Void {
-    _Runtime.callValue(Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase, cast ([world, dt] : Array<Dynamic>));
+    Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase((cast world : Physics2DWorld), (cast dt : Float));
   }
 
   public static function synchronizePhysics2DBroadphaseBounds__broadphase(world:Physics2DWorld, dt:Float):Void {
-    for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-      var minX:Dynamic = HxMath.POSITIVE_INFINITY;
-      var minY:Dynamic = HxMath.POSITIVE_INFINITY;
-      var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
-      var maxY:Dynamic = -HxMath.POSITIVE_INFINITY;
-      var rotationRadiusSquared:Dynamic = 0.0;
-      for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
-        _Runtime.callValue(updatePhysics2DColliderWorldShape, cast ([collider, body] : Array<Dynamic>));
-        _Runtime.callValue(writePhysics2DColliderBounds, cast ([collider, Broadphase.boundsScratch__broadphase] : Array<Dynamic>));
+    for (body in _Runtime.iterable((cast world : Physics2DWorld).bodies)) {
+      var minX:Float = HxMath.POSITIVE_INFINITY;
+      var minY:Float = HxMath.POSITIVE_INFINITY;
+      var maxX:Float = -HxMath.POSITIVE_INFINITY;
+      var maxY:Float = -HxMath.POSITIVE_INFINITY;
+      var rotationRadiusSquared:Float = 0.0;
+      for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
+        updatePhysics2DColliderWorldShape(collider, body);
+        writePhysics2DColliderBounds(collider, (cast Broadphase.boundsScratch__broadphase : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }));
         if ((cast ((cast Broadphase.boundsScratch__broadphase.minX : Float) < (cast minX : Float)) : Bool)) { (minX = cast (Broadphase.boundsScratch__broadphase.minX : Dynamic)); }
         if ((cast ((cast Broadphase.boundsScratch__broadphase.minY : Float) < (cast minY : Float)) : Bool)) { (minY = cast (Broadphase.boundsScratch__broadphase.minY : Dynamic)); }
         if ((cast ((cast Broadphase.boundsScratch__broadphase.maxX : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (Broadphase.boundsScratch__broadphase.maxX : Dynamic)); }
         if ((cast ((cast Broadphase.boundsScratch__broadphase.maxY : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (Broadphase.boundsScratch__broadphase.maxY : Dynamic)); }
-        var radiusX:Dynamic = HxMath.max(HxMath.abs(_Runtime.subtractNumbers(Broadphase.boundsScratch__broadphase.minX, _Runtime.field(body, 'x'))), HxMath.abs(_Runtime.subtractNumbers(Broadphase.boundsScratch__broadphase.maxX, _Runtime.field(body, 'x'))));
-        var radiusY:Dynamic = HxMath.max(HxMath.abs(_Runtime.subtractNumbers(Broadphase.boundsScratch__broadphase.minY, _Runtime.field(body, 'y'))), HxMath.abs(_Runtime.subtractNumbers(Broadphase.boundsScratch__broadphase.maxY, _Runtime.field(body, 'y'))));
-        var radiusSquared:Dynamic = ((radiusX * radiusX) + (radiusY * radiusY));
+        var radiusX:Float = HxMath.max(HxMath.abs((Broadphase.boundsScratch__broadphase.minX - (cast body : RigidBody2D).x)), HxMath.abs((Broadphase.boundsScratch__broadphase.maxX - (cast body : RigidBody2D).x)));
+        var radiusY:Float = HxMath.max(HxMath.abs((Broadphase.boundsScratch__broadphase.minY - (cast body : RigidBody2D).y)), HxMath.abs((Broadphase.boundsScratch__broadphase.maxY - (cast body : RigidBody2D).y)));
+        var radiusSquared:Float = ((radiusX * radiusX) + (radiusY * radiusY));
         if ((cast ((cast radiusSquared : Float) > (cast rotationRadiusSquared : Float)) : Bool)) { (rotationRadiusSquared = cast (radiusSquared : Dynamic)); }
       }
       if ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
+        (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).removeSpatialObject((cast body : RigidBody2D).index);
         continue;
       }
-      if ((cast ((cast ((cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(body, 'type'), 'static') : Bool)) : Bool) && (cast !(cast _Runtime.field(body, 'sleeping') : Bool) : Bool)) : Bool)) {
-        var translationX:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityX'), dt);
-        var translationY:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(body, 'velocityY'), dt);
-        if ((cast !_Runtime.strictEquals(_Runtime.field(body, 'angularVelocity'), 0.0) : Bool)) {
-          var radius:Dynamic = HxMath.sqrt(rotationRadiusSquared);
-          (minX = cast (HxMath.min(HxMath.min(minX, _Runtime.subtractNumbers(_Runtime.field(body, 'x'), radius)), (_Runtime.addNumbers(_Runtime.field(body, 'x'), translationX) - radius)) : Dynamic));
-          (minY = cast (HxMath.min(HxMath.min(minY, _Runtime.subtractNumbers(_Runtime.field(body, 'y'), radius)), (_Runtime.addNumbers(_Runtime.field(body, 'y'), translationY) - radius)) : Dynamic));
-          (maxX = cast (HxMath.max(HxMath.max(maxX, _Runtime.addNumbers(_Runtime.field(body, 'x'), radius)), (_Runtime.addNumbers(_Runtime.field(body, 'x'), translationX) + radius)) : Dynamic));
-          (maxY = cast (HxMath.max(HxMath.max(maxY, _Runtime.addNumbers(_Runtime.field(body, 'y'), radius)), (_Runtime.addNumbers(_Runtime.field(body, 'y'), translationY) + radius)) : Dynamic));
+      if ((cast ((cast ((cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool)) : Bool) && (cast !(cast (cast body : RigidBody2D).sleeping : Bool) : Bool)) : Bool)) {
+        var translationX:Float = ((cast body : RigidBody2D).velocityX * dt);
+        var translationY:Float = ((cast body : RigidBody2D).velocityY * dt);
+        if ((cast !_Runtime.strictEquals((cast body : RigidBody2D).angularVelocity, 0.0) : Bool)) {
+          var radius:Float = HxMath.sqrt(rotationRadiusSquared);
+          (minX = cast (HxMath.min(HxMath.min(minX, ((cast body : RigidBody2D).x - radius)), (((cast body : RigidBody2D).x + translationX) - radius)) : Dynamic));
+          (minY = cast (HxMath.min(HxMath.min(minY, ((cast body : RigidBody2D).y - radius)), (((cast body : RigidBody2D).y + translationY) - radius)) : Dynamic));
+          (maxX = cast (HxMath.max(HxMath.max(maxX, ((cast body : RigidBody2D).x + radius)), (((cast body : RigidBody2D).x + translationX) + radius)) : Dynamic));
+          (maxY = cast (HxMath.max(HxMath.max(maxY, ((cast body : RigidBody2D).y + radius)), (((cast body : RigidBody2D).y + translationY) + radius)) : Dynamic));
         } else {
           if ((cast ((cast translationX : Float) < (cast 0.0 : Float)) : Bool)) { (minX = cast ((minX + translationX) : Dynamic)); } else { (maxX = cast ((maxX + translationX) : Dynamic)); }
           if ((cast ((cast translationY : Float) < (cast 0.0 : Float)) : Bool)) { (minY = cast ((minY + translationY) : Dynamic)); } else { (maxY = cast ((maxY + translationY) : Dynamic)); }
         }
       }
       if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast (maxX - minX) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool) || (cast ((cast (maxY - minY) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
+        (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).removeSpatialObject((cast body : RigidBody2D).index);
         continue;
       }
       (Broadphase.bodyBounds__broadphase.minX = cast (minX : Dynamic));
       (Broadphase.bodyBounds__broadphase.minY = cast (minY : Dynamic));
-      (Broadphase.bodyBounds__broadphase.maxX = cast (_Runtime.callValue(Broadphase.paddedUpperBound__broadphase, cast ([maxX] : Array<Dynamic>)) : Dynamic));
-      (Broadphase.bodyBounds__broadphase.maxY = cast (_Runtime.callValue(Broadphase.paddedUpperBound__broadphase, cast ([maxY] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(world, 'index'), 'updateSpatialObject', cast ([_Runtime.field(body, 'index'), Broadphase.bodyBounds__broadphase] : Array<Dynamic>));
+      (Broadphase.bodyBounds__broadphase.maxX = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxX : Float)) : Float) : Dynamic));
+      (Broadphase.bodyBounds__broadphase.maxY = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxY : Float)) : Float) : Dynamic));
+      (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).updateSpatialObject((cast body : RigidBody2D).index, Broadphase.bodyBounds__broadphase);
     }
   }
 
   public static function paddedUpperBound__broadphase(value:Float):Float {
-    var padded:Dynamic = cast _Runtime.UNDEFINED;
+    var padded:Float = cast _Runtime.UNDEFINED;
     padded = (value + (_Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.abs(value)), _Runtime.NUMBER_EPSILON) * 4.0));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([padded] : Array<Dynamic>)) : Bool) ? (cast padded : Dynamic) : (cast value : Dynamic));
     return cast null;
   }
 
-  public static final MAX_SIMULATED_EXTENT__broadphase:Dynamic = 10000000.0;
+  public static final MAX_SIMULATED_EXTENT__broadphase:Float = 10000000.0;
 
   public static final boundsScratch__broadphase:SpatialAabb = { minX: 0.0, minY: 0.0, maxX: 0.0, maxY: 0.0 };
 

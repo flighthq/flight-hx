@@ -7,7 +7,7 @@ import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 
 typedef CanvasRenderEffectContext = { var state:CanvasRenderState; var source:CanvasRenderTarget; var dest:CanvasRenderTarget; var pool:CanvasRenderTargetPool; };
 
-typedef CanvasRenderEffectRunner = Dynamic;
+typedef CanvasRenderEffectRunner = CanvasRenderEffectContext->RenderEffect->Void;
 
 typedef CanvasRenderTargetPool = { var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
 

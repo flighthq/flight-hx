@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlPbrTransmissionSceneColor;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 
 class GlPbrTransmissionSceneColor {
   public static function setGlPbrTransmissionSceneColor(state:GlRenderState, sceneColor:Null<flighthq.types.GlPbrTransmissionSceneColor>):Void {
-    _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrTransmissionSceneColor', sceneColor);
+    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor = sceneColor);
   }
 }

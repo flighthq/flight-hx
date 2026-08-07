@@ -16,54 +16,65 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuUnlitPrelude.bindWgpuUnlitSurface;
 import flighthq.scene3dWgpu.WgpuUnlitPrelude.ensureWgpuUnlitPipeline;
 import flighthq.types.Camera3D;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuUnlitPipeline;
 import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 class UnlitWgpuMeshMaterialRenderer {
-  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    var unlit:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var unlit:Null<UnlitMaterial> = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuUnlitPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.field(stateRuntime, 'renderPass');
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     unlit = (cast material : Null<UnlitMaterial>);
-    format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuUnlitPipeline, cast ([state, _Runtime.callValue(UnlitWgpuMeshMaterialRenderer.defineKeyForMaterial__unlitWgpuMeshMaterialRenderer, cast ([unlit] : Array<Dynamic>)), format] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
+    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    pipeline = (cast ensureWgpuUnlitPipeline((cast state : WgpuRenderState), (cast (cast UnlitWgpuMeshMaterialRenderer.defineKeyForMaterial__unlitWgpuMeshMaterialRenderer((cast unlit : Null<UnlitMaterial>)) : WgpuUnlitDefineKey) : WgpuUnlitDefineKey), (cast format : String)) : WgpuUnlitPipeline);
+    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast _lights : Scene3DLightBlock));
     if ((cast _Runtime.strictEquals(unlit, null) : Bool)) {
-      (group = cast (_Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, UnlitWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer, UnlitWgpuMeshMaterialRenderer.WHITE__unlitWgpuMeshMaterialRenderer, 1.0, 0.5, null] : Array<Dynamic>)) : Dynamic));
+      (group = cast ((cast bindWgpuUnlitSurface((cast state : WgpuRenderState), pipeline, (cast UnlitWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast UnlitWgpuMeshMaterialRenderer.WHITE__unlitWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), (cast 0.5 : Float), null) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      _Runtime.callValue(unpackColorToLinear, cast ([UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer, _Runtime.field(unlit, 'baseColor')] : Array<Dynamic>));
-      (group = cast (_Runtime.callValue(bindWgpuUnlitSurface, cast ([state, pipeline, unlit, UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer, 1.0, _Runtime.field(unlit, 'alphaCutoff'), _Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)) : Dynamic));
+      (cast unpackColorToLinear((cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(unlit, 'baseColor') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuUnlitSurface((cast state : WgpuRenderState), pipeline, (cast unlit : flighthq._internal._Object), (cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(unlit, 'alphaCutoff') : Float), _Runtime.field(unlit, 'baseColorMap')) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
+    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
-  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
+  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerWgpuUnlitMaterial(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuBitmapTextureResolver, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerWgpuImageTextureResolver, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerWgpuRenderTextureResolver, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, UnlitMaterialKind, unlitWgpuMeshMaterialRenderer] : Array<Dynamic>));
+    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
+    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
+    registerWgpuRenderTextureResolver((cast state : WgpuRenderState));
+    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast UnlitMaterialKind : String), (cast unlitWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__unlitWgpuMeshMaterialRenderer(material:Null<UnlitMaterial>):WgpuUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(material, 'baseColorMap')] : Array<Dynamic>)) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(material, 'baseColorMap')) : Bool) : Bool)) };
     return cast null;
   }
 
@@ -71,5 +82,5 @@ class UnlitWgpuMeshMaterialRenderer {
 
   public static final WHITE__unlitWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
 
-  public static final FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer:Dynamic = (cast {  } : UnlitMaterial);
+  public static final FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer:UnlitMaterial = (cast {  } : UnlitMaterial);
 }

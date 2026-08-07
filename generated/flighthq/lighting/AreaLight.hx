@@ -11,52 +11,53 @@ import flighthq.geometry.Vector3.setVector3;
 import flighthq.types.AreaLight;
 import flighthq.types.AreaLightOptions;
 import flighthq.types.Types.AreaLightKind;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
 
 class AreaLight {
   public static function cloneAreaLight(source:flighthq.types.AreaLight):flighthq.types.AreaLight {
-    return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), intensity: _Runtime.field(source, 'intensity'), kind: AreaLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), right: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'right')] : Array<Dynamic>)), shadowBias: _Runtime.field(source, 'shadowBias'), up: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'up')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3((cast _Runtime.field(source, 'direction') : Vector3Like)) : Vector3), intensity: _Runtime.field(source, 'intensity'), kind: AreaLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: (cast cloneVector3((cast _Runtime.field(source, 'position') : Vector3Like)) : Vector3), range: _Runtime.field(source, 'range'), right: (cast cloneVector3((cast _Runtime.field(source, 'right') : Vector3Like)) : Vector3), shadowBias: _Runtime.field(source, 'shadowBias'), up: (cast cloneVector3((cast _Runtime.field(source, 'up') : Vector3Like)) : Vector3) }) : flighthq.types.AreaLight);
     return cast null;
   }
 
   public static function createAreaLight(?options:AreaLightOptions):flighthq.types.AreaLight {
-    var position:Dynamic = cast _Runtime.UNDEFINED;
-    var direction:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var up:Dynamic = cast _Runtime.UNDEFINED;
+    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    var right:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    var up:Null<Vector3Like> = cast _Runtime.UNDEFINED;
     position = _Runtime.optionalField(options, 'position');
     direction = _Runtime.optionalField(options, 'direction');
     right = _Runtime.optionalField(options, 'right');
     up = _Runtime.optionalField(options, 'up');
-    return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([direction] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, -1.0, 0.0] : Array<Dynamic>))), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: AreaLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([position] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>))), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), right: _Runtime.select(right, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([right] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([1.0, 0.0, 0.0] : Array<Dynamic>))), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0), up: _Runtime.select(up, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([up] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, 0.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
+    return cast (cast createEntity({ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3((cast direction : Vector3Like)) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast -1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: AreaLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast (cast cloneVector3((cast position : Vector3Like)) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), right: _Runtime.select(right, function():Dynamic return cast (cast cloneVector3((cast right : Vector3Like)) : Vector3), function():Dynamic return cast (cast createVector3((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0), up: _Runtime.select(up, function():Dynamic return cast (cast cloneVector3((cast up : Vector3Like)) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Vector3)) }) : flighthq.types.AreaLight);
     return cast null;
   }
 
   public static function setAreaLightOrientation(out:flighthq.types.AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
-    var rightLen:Dynamic = cast _Runtime.UNDEFINED;
-    var upLen:Dynamic = cast _Runtime.UNDEFINED;
-    var dirLen:Dynamic = cast _Runtime.UNDEFINED;
-    var existingRightLen:Dynamic = cast _Runtime.UNDEFINED;
-    var existingUpLen:Dynamic = cast _Runtime.UNDEFINED;
+    var rightLen:Float = cast _Runtime.UNDEFINED;
+    var upLen:Float = cast _Runtime.UNDEFINED;
+    var dirLen:Float = cast _Runtime.UNDEFINED;
+    var existingRightLen:Float = cast _Runtime.UNDEFINED;
+    var existingUpLen:Float = cast _Runtime.UNDEFINED;
     rightLen = HxMath.sqrt((((right.x * right.x) + (right.y * right.y)) + (right.z * right.z)));
     upLen = HxMath.sqrt((((up.x * up.x) + (up.y * up.y)) + (up.z * up.z)));
     dirLen = HxMath.sqrt((((direction.x * direction.x) + (direction.y * direction.y)) + (direction.z * direction.z)));
-    existingRightLen = HxMath.sqrt(((_Runtime.multiplyNumbers(_Runtime.field(out, 'right').x, _Runtime.field(out, 'right').x) + _Runtime.multiplyNumbers(_Runtime.field(out, 'right').y, _Runtime.field(out, 'right').y)) + _Runtime.multiplyNumbers(_Runtime.field(out, 'right').z, _Runtime.field(out, 'right').z)));
-    existingUpLen = HxMath.sqrt(((_Runtime.multiplyNumbers(_Runtime.field(out, 'up').x, _Runtime.field(out, 'up').x) + _Runtime.multiplyNumbers(_Runtime.field(out, 'up').y, _Runtime.field(out, 'up').y)) + _Runtime.multiplyNumbers(_Runtime.field(out, 'up').z, _Runtime.field(out, 'up').z)));
+    existingRightLen = HxMath.sqrt(((((cast out : flighthq.types.AreaLight).right.x * (cast out : flighthq.types.AreaLight).right.x) + ((cast out : flighthq.types.AreaLight).right.y * (cast out : flighthq.types.AreaLight).right.y)) + ((cast out : flighthq.types.AreaLight).right.z * (cast out : flighthq.types.AreaLight).right.z)));
+    existingUpLen = HxMath.sqrt(((((cast out : flighthq.types.AreaLight).up.x * (cast out : flighthq.types.AreaLight).up.x) + ((cast out : flighthq.types.AreaLight).up.y * (cast out : flighthq.types.AreaLight).up.y)) + ((cast out : flighthq.types.AreaLight).up.z * (cast out : flighthq.types.AreaLight).up.z)));
     if ((cast ((cast dirLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(normalizeVector3, cast ([_Runtime.field(out, 'direction'), direction] : Array<Dynamic>));
+      (cast normalizeVector3((cast (cast out : flighthq.types.AreaLight).direction : Vector3Like), (cast direction : Vector3Like)) : Float);
     }
     if ((cast ((cast rightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'right'), (right.x / rightLen), (right.y / rightLen), (right.z / rightLen)] : Array<Dynamic>));
+      setVector3((cast (cast out : flighthq.types.AreaLight).right : Vector3Like), (cast (right.x / rightLen) : Float), (cast (right.y / rightLen) : Float), (cast (right.z / rightLen) : Float));
       if ((cast ((cast existingRightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'right'), _Runtime.multiplyNumbers(_Runtime.field(out, 'right').x, existingRightLen), _Runtime.multiplyNumbers(_Runtime.field(out, 'right').y, existingRightLen), _Runtime.multiplyNumbers(_Runtime.field(out, 'right').z, existingRightLen)] : Array<Dynamic>));
+        setVector3((cast (cast out : flighthq.types.AreaLight).right : Vector3Like), (cast ((cast out : flighthq.types.AreaLight).right.x * existingRightLen) : Float), (cast ((cast out : flighthq.types.AreaLight).right.y * existingRightLen) : Float), (cast ((cast out : flighthq.types.AreaLight).right.z * existingRightLen) : Float));
       }
     }
     if ((cast ((cast upLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'up'), (up.x / upLen), (up.y / upLen), (up.z / upLen)] : Array<Dynamic>));
+      setVector3((cast (cast out : flighthq.types.AreaLight).up : Vector3Like), (cast (up.x / upLen) : Float), (cast (up.y / upLen) : Float), (cast (up.z / upLen) : Float));
       if ((cast ((cast existingUpLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'up'), _Runtime.multiplyNumbers(_Runtime.field(out, 'up').x, existingUpLen), _Runtime.multiplyNumbers(_Runtime.field(out, 'up').y, existingUpLen), _Runtime.multiplyNumbers(_Runtime.field(out, 'up').z, existingUpLen)] : Array<Dynamic>));
+        setVector3((cast (cast out : flighthq.types.AreaLight).up : Vector3Like), (cast ((cast out : flighthq.types.AreaLight).up.x * existingUpLen) : Float), (cast ((cast out : flighthq.types.AreaLight).up.y * existingUpLen) : Float), (cast ((cast out : flighthq.types.AreaLight).up.z * existingUpLen) : Float));
       }
     }
   }

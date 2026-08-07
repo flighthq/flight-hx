@@ -5,33 +5,33 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _Node2DAnimationPathValues {
-  public static final Node2DAnimationPathAlpha:Dynamic = 'Alpha';
+  public static final Node2DAnimationPathAlpha:String = 'Alpha';
 
-  public static final Node2DAnimationPathPivot:Dynamic = 'Pivot';
+  public static final Node2DAnimationPathPivot:String = 'Pivot';
 
-  public static final Node2DAnimationPathPivotX:Dynamic = 'PivotX';
+  public static final Node2DAnimationPathPivotX:String = 'PivotX';
 
-  public static final Node2DAnimationPathPivotY:Dynamic = 'PivotY';
+  public static final Node2DAnimationPathPivotY:String = 'PivotY';
 
-  public static final Node2DAnimationPathPosition:Dynamic = 'Position';
+  public static final Node2DAnimationPathPosition:String = 'Position';
 
-  public static final Node2DAnimationPathRotation:Dynamic = 'Rotation';
+  public static final Node2DAnimationPathRotation:String = 'Rotation';
 
-  public static final Node2DAnimationPathScale:Dynamic = 'Scale';
+  public static final Node2DAnimationPathScale:String = 'Scale';
 
-  public static final Node2DAnimationPathScaleX:Dynamic = 'ScaleX';
+  public static final Node2DAnimationPathScaleX:String = 'ScaleX';
 
-  public static final Node2DAnimationPathScaleY:Dynamic = 'ScaleY';
+  public static final Node2DAnimationPathScaleY:String = 'ScaleY';
 
-  public static final Node2DAnimationPathSkew:Dynamic = 'Skew';
+  public static final Node2DAnimationPathSkew:String = 'Skew';
 
-  public static final Node2DAnimationPathSkewX:Dynamic = 'SkewX';
+  public static final Node2DAnimationPathSkewX:String = 'SkewX';
 
-  public static final Node2DAnimationPathSkewY:Dynamic = 'SkewY';
+  public static final Node2DAnimationPathSkewY:String = 'SkewY';
 
-  public static final Node2DAnimationPathVisible:Dynamic = 'Visible';
+  public static final Node2DAnimationPathVisible:String = 'Visible';
 
-  public static final Node2DAnimationPathX:Dynamic = 'X';
+  public static final Node2DAnimationPathX:String = 'X';
 
-  public static final Node2DAnimationPathY:Dynamic = 'Y';
+  public static final Node2DAnimationPathY:String = 'Y';
 }

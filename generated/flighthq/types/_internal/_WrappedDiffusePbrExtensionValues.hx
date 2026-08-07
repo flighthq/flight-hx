@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _WrappedDiffusePbrExtensionValues {
-  public static final WrappedDiffusePbrExtensionKind:Dynamic = 'WrappedDiffusePbrExtension';
+  public static final WrappedDiffusePbrExtensionKind:String = 'WrappedDiffusePbrExtension';
 }

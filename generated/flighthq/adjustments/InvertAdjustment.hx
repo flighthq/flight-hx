@@ -8,10 +8,10 @@ import flighthq.types.InvertAdjustment;
 class InvertAdjustment {
   public static function createInvertAdjustment(?options:Dynamic):flighthq.types.InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var o:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     s = (1.0 - (2.0 * intensity));
     o = intensity;

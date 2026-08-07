@@ -4,43 +4,49 @@ package flighthq.spritesheet;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Spritesheet;
+import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
+import flighthq.types.SpritesheetFrame;
+import flighthq.types.SpritesheetFrameData;
 import flighthq.types.SpritesheetValidationDiagnostic;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class SpritesheetValidation {
   public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var animations:flighthq._internal._Record<String, SpritesheetAnimation> = cast _Runtime.UNDEFINED;
+    var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
     __destructure0 = spritesheet;
     atlas = _Runtime.field(__destructure0, 'atlas');
     animations = _Runtime.field(__destructure0, 'animations');
     frames = _Runtime.field(__destructure0, 'frames');
     if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-      var regionIds:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.callProperty(atlas.regions, 'map', cast ([function(r:Dynamic) return r.id] : Array<Dynamic>))]);
+      var regionIds:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.callProperty(atlas.regions, 'map', cast ([function(r:TextureAtlasRegion, __unused1:Float, __unused2:Array<TextureAtlasRegion>):Float return r.id] : Array<Dynamic>))]);
       {
-        var fi:Dynamic = 0.0;
+        var fi:Float = 0.0;
         while ((cast ((cast fi : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-          if ((cast !(cast ((cast regionIds : flighthq._internal._Set).has(flighthq._internal._StaticIndex.readArray(frames, fi).id)) : Bool) : Bool)) {
+          if ((cast !(cast ((cast regionIds : flighthq._internal._Set<Float>).has(flighthq._internal._StaticIndex.readArray(frames, fi).id)) : Bool) : Bool)) {
             _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string(flighthq._internal._StaticIndex.readArray(frames, fi).id) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
           }
           fi++;
         }
       }
     }
-    for (__iteration1 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(animations))) {
-      var animName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-      var anim:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+    for (__iteration3 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(animations))) {
+      var animName:String = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var anim:SpritesheetAnimation = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
       if ((cast _Runtime.strictEquals(_Runtime.field(anim.frames, 'length'), 0.0) : Bool)) {
         _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: null, message: 'Animation "' + Std.string(animName) + '" has no frames.', severity: 'warning' }] : Array<Dynamic>));
       }
       {
-        var ai:Dynamic = 0.0;
+        var ai:Float = 0.0;
         while ((cast ((cast ai : Float) < (cast _Runtime.field(anim.frames, 'length') : Float)) : Bool)) {
-          var frameRef:Dynamic = flighthq._internal._StaticIndex.readArray(anim.frames, ai);
+          var frameRef:Float = flighthq._internal._StaticIndex.readArray(anim.frames, ai);
           if ((cast ((cast ((cast frameRef : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast frameRef : Float) >= (cast _Runtime.field(frames, 'length') : Float)) : Bool)) : Bool)) {
             _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: ai, message: 'Animation "' + Std.string(animName) + '" references frame index ' + Std.string(frameRef) + ' which is out of range (sheet has ' + Std.string(_Runtime.field(frames, 'length')) + ' frames).', severity: 'error' }] : Array<Dynamic>));
           }
@@ -54,18 +60,18 @@ class SpritesheetValidation {
 
   public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    var frameNameSet:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
+    var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
+    var frameNameSet:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
-    __destructure2 = data;
-    animations = _Runtime.field(__destructure2, 'animations');
-    frames = _Runtime.field(__destructure2, 'frames');
+    __destructure4 = data;
+    animations = _Runtime.field(__destructure4, 'animations');
+    frames = _Runtime.field(__destructure4, 'frames');
     frameNameSet = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (fd in _Runtime.iterable(frames)) {
       if ((cast !_Runtime.strictEquals(fd.name, '') : Bool)) {
-        ((cast frameNameSet : flighthq._internal._Set).add(fd.name));
+        ((cast frameNameSet : flighthq._internal._Set<String>).add(fd.name));
       }
     }
     for (ad in _Runtime.iterable(animations)) {
@@ -73,10 +79,10 @@ class SpritesheetValidation {
         _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: ad.name, frameIndex: null, message: 'Animation "' + Std.string(ad.name) + '" has no frameNames — all sheet frames will be used as the frame list.', severity: 'warning' }] : Array<Dynamic>));
       } else {
         {
-          var ai:Dynamic = 0.0;
+          var ai:Float = 0.0;
           while ((cast ((cast ai : Float) < (cast _Runtime.field(ad.frameNames, 'length') : Float)) : Bool)) {
-            var fname:Dynamic = flighthq._internal._StaticIndex.readArray(ad.frameNames, ai);
-            if ((cast !(cast ((cast frameNameSet : flighthq._internal._Set).has(fname)) : Bool) : Bool)) {
+            var fname:String = flighthq._internal._StaticIndex.readArray(ad.frameNames, ai);
+            if ((cast !(cast ((cast frameNameSet : flighthq._internal._Set<String>).has(fname)) : Bool) : Bool)) {
               _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: ad.name, frameIndex: ai, message: 'Animation "' + Std.string(ad.name) + '" references frame name "' + Std.string(fname) + '" which is not present in the data frame list.', severity: 'error' }] : Array<Dynamic>));
             }
             ai++;

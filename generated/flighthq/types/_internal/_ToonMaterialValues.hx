@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _ToonMaterialValues {
-  public static final ToonMaterialKind:Dynamic = 'ToonMaterial';
+  public static final ToonMaterialKind:String = 'ToonMaterial';
 }

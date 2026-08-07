@@ -16,48 +16,61 @@ import flighthq.scene3dGl.GlUnlitPrelude.bindGlUnlitSurface;
 import flighthq.scene3dGl.GlUnlitPrelude.ensureGlUnlitProgram;
 import flighthq.types.Camera3D;
 import flighthq.types.EmissiveMaterial;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlUnlitProgram;
 import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.EmissiveMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
 class EmissiveGlMeshMaterialRenderer {
   @:noCompletion
-  public static final emissiveGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var emissive:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+  public static final emissiveGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var emissive:Null<EmissiveMaterial> = cast _Runtime.UNDEFINED;
+    var program:GlUnlitProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     emissive = (cast material : Null<EmissiveMaterial>);
-    program = _Runtime.callValue(ensureGlUnlitProgram, cast ([state, _Runtime.callValue(EmissiveGlMeshMaterialRenderer.defineKeyForMaterial__emissiveGlMeshMaterialRenderer, cast ([state, emissive] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(emissive, null) : Bool) && (cast _Runtime.field(emissive, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
+    program = (cast ensureGlUnlitProgram((cast state : GlRenderState), (cast (cast EmissiveGlMeshMaterialRenderer.defineKeyForMaterial__emissiveGlMeshMaterialRenderer((cast state : GlRenderState), (cast emissive : Null<EmissiveMaterial>)) : GlUnlitDefineKey) : GlUnlitDefineKey)) : GlUnlitProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(emissive, null) : Bool) && (cast _Runtime.field(emissive, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlUnlitProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
     if ((cast _Runtime.strictEquals(emissive, null) : Bool)) {
-      _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, EmissiveGlMeshMaterialRenderer.WHITE__emissiveGlMeshMaterialRenderer, 1.0, null, 0.5] : Array<Dynamic>));
+      bindGlUnlitSurface((cast state : GlRenderState), program, (cast EmissiveGlMeshMaterialRenderer.WHITE__emissiveGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), null, (cast 0.5 : Float));
       return;
     }
-    _Runtime.callValue(unpackColorToLinear, cast ([EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer, _Runtime.field(emissive, 'emissive')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer, _Runtime.field(emissive, 'emissiveStrength'), _Runtime.field(emissive, 'emissiveMap'), _Runtime.field(emissive, 'alphaCutoff')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlUvTransform, cast ([gl, program, _Runtime.field(emissive, 'emissiveMap')] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    (cast unpackColorToLinear((cast EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(emissive, 'emissive') : Float)) : LinearColor);
+    bindGlUnlitSurface((cast state : GlRenderState), program, (cast EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(emissive, 'emissiveStrength') : Float), _Runtime.field(emissive, 'emissiveMap'), (cast _Runtime.field(emissive, 'alphaCutoff') : Float));
+    bindGlUvTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, _Runtime.field(emissive, 'emissiveMap'));
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerGlEmissiveMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, EmissiveMaterialKind, emissiveGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast EmissiveMaterialKind : String), (cast emissiveGlMeshMaterialRenderer : GlMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__emissiveGlMeshMaterialRenderer(state:GlRenderState, material:Null<EmissiveMaterial>):GlUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'emissiveMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, _Runtime.field(material, 'emissiveMap')] : Array<Dynamic>)), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'emissiveMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)), vertexColor: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'emissiveMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(material, 'emissiveMap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasUvTransform: (cast hasGlUvTransform(((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'emissiveMap') : Dynamic) : (cast null : Dynamic))) : Bool), vertexColor: false };
     return cast null;
   }
 

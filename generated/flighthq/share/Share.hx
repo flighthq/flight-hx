@@ -11,34 +11,35 @@ import flighthq.types.Share.ShareOptions;
 import flighthq.types.Share.ShareResult;
 import flighthq.types.ShareFile;
 import flighthq.types.ShareSignals;
+import flighthq.types.Signal;
 
 class Share {
-  public static final _attachedSignals__share:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+  public static final _attachedSignals__share:flighthq._internal._Set<ShareSignals> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static var _backend__share:Null<ShareBackend> = _Runtime.explicitNull();
 
   public static function attachShareSignals(signals:ShareSignals):Void {
-    ((cast Share._attachedSignals__share : flighthq._internal._Set).add(signals));
+    ((cast Share._attachedSignals__share : flighthq._internal._Set<ShareSignals>).add(signals));
   }
 
   public static function canShareContent(content:ShareContent):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'canShare', cast ([content] : Array<Dynamic>));
+    return cast (cast (cast getShareBackend() : ShareBackend) : ShareBackend).canShare(content);
     return cast null;
   }
 
   @:noCompletion
   public static function createWebShareBackend():ShareBackend {
-    return cast { isAvailable: function() {
+    return cast { isAvailable: function():Bool {
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
-    }, canShare: function(content:Dynamic) {
+    }, canShare: function(content:ShareContent):Bool {
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
-        var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
+        var data:flighthq._internal.dom.ShareData = (cast Share.shareContentToNavigatorData__share((cast content : ShareContent)) : flighthq._internal.dom.ShareData);
         return cast _Runtime.coalesce(({ final __hostTypeCall0 = flighthq._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare(data); }), function():Dynamic return cast false);
       } catch (__error:Dynamic) {
         return cast false;
       }
-    }, share: function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, share: function(content:ShareContent, ?_options:Null<ShareOptions>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch1:Dynamic;
@@ -51,8 +52,8 @@ class Share {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              var data:Dynamic = cast _Runtime.UNDEFINED;
-              data = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
+              var data:flighthq._internal.dom.ShareData = cast _Runtime.UNDEFINED;
+              data = (cast Share.shareContentToNavigatorData__share((cast content : ShareContent)) : flighthq._internal.dom.ShareData);
               return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
                 __awaitValue2;
                 return flighthq._internal._Async.flowReturn(true);
@@ -68,7 +69,7 @@ class Share {
           });
         })
       );
-    }, shareWithResult: function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, shareWithResult: function(content:ShareContent, ?_options:Null<ShareOptions>):flighthq._internal._Promise<{ var completed:Bool; var activityType:flighthq._internal._Any; var dismissed:Bool; }> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch3:Dynamic;
@@ -81,8 +82,8 @@ class Share {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              var data:Dynamic = cast _Runtime.UNDEFINED;
-              data = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
+              var data:flighthq._internal.dom.ShareData = cast _Runtime.UNDEFINED;
+              data = (cast Share.shareContentToNavigatorData__share((cast content : ShareContent)) : flighthq._internal.dom.ShareData);
               return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
                 __awaitValue4;
                 return flighthq._internal._Async.flowReturn({ completed: true, activityType: null, dismissed: false });
@@ -90,7 +91,7 @@ class Share {
             }), function(__caughtError:Dynamic):Dynamic {
               var err:Dynamic = __caughtError;
               return flighthq._internal._Async.protect(function():Dynamic {
-                var dismissed:Dynamic = cast _Runtime.UNDEFINED;
+                var dismissed:Bool = cast _Runtime.UNDEFINED;
                 dismissed = ((cast _Runtime.isError(err) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(err, 'name'), 'AbortError') : Bool));
                 return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: dismissed });
               });
@@ -105,21 +106,21 @@ class Share {
   }
 
   public static function detachShareSignals(signals:ShareSignals):Void {
-    ((cast Share._attachedSignals__share : flighthq._internal._Set).delete_(signals));
+    ((cast Share._attachedSignals__share : flighthq._internal._Set<ShareSignals>).delete_(signals));
   }
 
   public static function disposeShareSignals(signals:ShareSignals):Void {
-    _Runtime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
+    detachShareSignals((cast signals : ShareSignals));
   }
 
   public static function enableShareSignals():ShareSignals {
-    return cast { onShareResult: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onShareResult: (cast createSignal() : Signal<ShareResult->Void>) };
     return cast null;
   }
 
   @:noCompletion
   public static function getShareBackend():ShareBackend {
-    if ((cast _Runtime.strictEquals(Share._backend__share, null) : Bool)) { (Share._backend__share = cast (_Runtime.callValue(createWebShareBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Share._backend__share, null) : Bool)) { (Share._backend__share = cast ((cast createWebShareBackend() : Null<ShareBackend>) : Dynamic)); }
     return cast Share._backend__share;
     return cast null;
   }
@@ -134,7 +135,7 @@ class Share {
   }
 
   public static function isShareAvailable():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'isAvailable', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getShareBackend() : ShareBackend) : ShareBackend).isAvailable();
     return cast null;
   }
 
@@ -144,8 +145,8 @@ class Share {
   }
 
   public static function shareContent(content:ShareContent, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
-    if ((cast !(cast _Runtime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) { return cast flighthq._internal._Async.resolve(false); }
-    return cast _Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'share', cast ([content, options] : Array<Dynamic>));
+    if ((cast !(cast (cast hasShareContentFields((cast content : ShareContent)) : Bool) : Bool) : Bool)) { return cast flighthq._internal._Async.resolve(false); }
+    return cast (cast (cast getShareBackend() : ShareBackend) : ShareBackend).share(content, options);
     return cast null;
   }
 
@@ -156,7 +157,7 @@ class Share {
     if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.text = content.text); }
     if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.url = content.url); }
     if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>)));
+      (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:ShareFile, __unused0:Float, __unused1:Array<ShareFile>):flighthq._internal.dom.File return (cast Share.shareFileToDomFile__share((cast f : ShareFile)) : flighthq._internal.dom.File)] : Array<Dynamic>)));
     }
     return cast data;
     return cast null;
@@ -165,9 +166,9 @@ class Share {
   public static function shareContentWithResult(content:ShareContent, ?options:ShareOptions):flighthq._internal._Promise<ShareResult> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var result:Dynamic = cast _Runtime.UNDEFINED;
+        var result:ShareResult = cast _Runtime.UNDEFINED;
         var __flowBranch7:Dynamic;
-        if ((cast !(cast _Runtime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
+        if ((cast !(cast (cast hasShareContentFields((cast content : ShareContent)) : Bool) : Bool) : Bool)) {
           __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
           });
@@ -175,7 +176,7 @@ class Share {
           __flowBranch7 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'shareWithResult', cast ([content, options] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast (cast getShareBackend() : ShareBackend) : ShareBackend).shareWithResult(content, options), function(__awaitValue8:Dynamic):Dynamic {
             result = __awaitValue8;
             for (signals in _Runtime.iterable(Share._attachedSignals__share)) {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onShareResult], [result]]), 1);
@@ -188,15 +189,15 @@ class Share {
   }
 
   public static function shareFiles(files:Array<ShareFile>, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
-    return cast _Runtime.callValue(shareContent, cast ([{ files: files }, options] : Array<Dynamic>));
+    return cast (cast shareContent((cast { files: files } : ShareContent), (cast options : Null<ShareOptions>)) : flighthq._internal._Promise<Bool>);
     return cast null;
   }
 
   public static function shareFileToDomFile__share(file:ShareFile):flighthq._internal.dom.File {
-    var comma:Dynamic = cast _Runtime.UNDEFINED;
-    var header:Dynamic = cast _Runtime.UNDEFINED;
-    var body:Dynamic = cast _Runtime.UNDEFINED;
-    var isBase64:Dynamic = cast _Runtime.UNDEFINED;
+    var comma:Float = cast _Runtime.UNDEFINED;
+    var header:String = cast _Runtime.UNDEFINED;
+    var body:String = cast _Runtime.UNDEFINED;
+    var isBase64:Bool = cast _Runtime.UNDEFINED;
     var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     comma = _Runtime.callProperty(_Runtime.field(file, 'dataUrl'), 'indexOf', cast ([','] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(comma, -1.0) : Bool)) { _Runtime.throwValue(_Runtime.error('share: dataUrl is not a data URL (no comma)')); }
@@ -204,18 +205,18 @@ class Share {
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');
     if ((cast isBase64 : Bool)) {
-      var binary:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([body] : Array<Dynamic>));
+      var binary:String = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([body] : Array<Dynamic>));
       (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [_Runtime.field(binary, 'length')])) : Dynamic));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
           i++;
         }
       }
     } else {
-      var decoded:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('decodeURIComponent'), cast ([body] : Array<Dynamic>));
-      var encoded:Dynamic = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded);
+      var decoded:String = _Runtime.callValue(flighthq._internal._HostValueLut.get('decodeURIComponent'), cast ([body] : Array<Dynamic>));
+      var encoded:flighthq._internal._UInt8Array = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded);
       (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
       (cast bytes : flighthq._internal._UInt8Array).set(encoded);
     }
@@ -224,12 +225,12 @@ class Share {
   }
 
   public static function shareText(text:String, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
-    return cast _Runtime.callValue(shareContent, cast ([{ text: text }, options] : Array<Dynamic>));
+    return cast (cast shareContent((cast { text: text } : ShareContent), (cast options : Null<ShareOptions>)) : flighthq._internal._Promise<Bool>);
     return cast null;
   }
 
   public static function shareUrl(url:String, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
-    return cast _Runtime.callValue(shareContent, cast ([{ url: url }, options] : Array<Dynamic>));
+    return cast (cast shareContent((cast { url: url } : ShareContent), (cast options : Null<ShareOptions>)) : flighthq._internal._Promise<Bool>);
     return cast null;
   }
 }

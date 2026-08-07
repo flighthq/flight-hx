@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuRenderStateSignals = { var onDeviceLost:Signal<Dynamic>; var onContextResize:Signal<Dynamic>; };
+typedef WgpuRenderStateSignals = { var onDeviceLost:Signal<flighthq._internal.dom.GPUDeviceLostInfo->Void>; var onContextResize:Signal<Float->Float->Void>; };

@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial;
 
 class _WireframeMaterialValues {
-  public static final WireframeMaterialKind:Dynamic = 'WireframeMaterial';
+  public static final WireframeMaterialKind:String = 'WireframeMaterial';
 }

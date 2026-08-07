@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.SketchEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,24 +17,24 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuSketchEffect {
   @:noCompletion
   public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.sketch', WgpuSketchEffect.SKETCH_FRAGMENT_WGSL__wgpuSketchEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.sketch' : String), (cast WgpuSketchEffect.SKETCH_FRAGMENT_WGSL__wgpuSketchEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, strength);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuSketchEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applySketchEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SketchEffect)] : Array<Dynamic>));
+  public static final defaultWgpuSketchEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applySketchEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : SketchEffect) : SketchEffect));
   };
 
   public static function registerWgpuSketchEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SketchEffect', defaultWgpuSketchEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'SketchEffect' : String), (cast defaultWgpuSketchEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final SKETCH_FRAGMENT_WGSL__wgpuSketchEffect:Dynamic = '\nstruct Uniforms {\n  u_strength : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let pencil = clamp(1.0 - edge * uni.u_strength, 0.0, 1.0);\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(vec3f(pencil), a);\n}';
+  public static final SKETCH_FRAGMENT_WGSL__wgpuSketchEffect:String = '\nstruct Uniforms {\n  u_strength : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let pencil = clamp(1.0 - edge * uni.u_strength, 0.0, 1.0);\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(vec3f(pencil), a);\n}';
 }

@@ -15,12 +15,12 @@ class Vector2 {
   }
 
   public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     vx = value.x;
     vy = value.y;
     minX = min.x;
@@ -32,7 +32,7 @@ class Vector2 {
   }
 
   public static function cloneVector2(source:Vector2Like):flighthq.types.Vector2 {
-    return cast _Runtime.callValue(createVector2, cast ([source.x, source.y] : Array<Dynamic>));
+    return cast (cast createVector2((cast source.x : Null<Float>), (cast source.y : Null<Float>)) : flighthq.types.Vector2);
     return cast null;
   }
 
@@ -42,23 +42,23 @@ class Vector2 {
   }
 
   public static function createVector2(?x:Float, ?y:Float):flighthq.types.Vector2 {
-    return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) } : Null<{ var x:Float; var y:Float; }>)) : flighthq.types.Vector2);
     return cast null;
   }
 
   public static function createVector2FromPolar(length:Float, angle:Float):flighthq.types.Vector2 {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setVector2FromPolar, cast ([out, length, angle] : Array<Dynamic>));
+    var out:flighthq.types.Vector2 = cast _Runtime.UNDEFINED;
+    out = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Vector2);
+    setVector2FromPolar((cast out : Vector2Like), (cast length : Float), (cast angle : Float));
     return cast out;
     return cast null;
   }
 
   public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     sx = source.x;
     sy = source.y;
     dx = divisor.x;
@@ -69,25 +69,25 @@ class Vector2 {
 
   public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(a.x, b.x), function():Dynamic return cast _Runtime.strictEquals(a.y, b.y)) : Bool));
+    return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals((cast a : flighthq.types.Vector2).x, (cast b : flighthq.types.Vector2).x), function():Dynamic return cast _Runtime.strictEquals((cast a : flighthq.types.Vector2).y, (cast b : flighthq.types.Vector2).y)) : Bool));
     return cast null;
   }
 
   public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
-    var la:Dynamic = cast _Runtime.UNDEFINED;
-    var lb:Dynamic = cast _Runtime.UNDEFINED;
-    var _dot:Dynamic = cast _Runtime.UNDEFINED;
-    la = _Runtime.callValue(getVector2Length, cast ([a] : Array<Dynamic>));
-    lb = _Runtime.callValue(getVector2Length, cast ([b] : Array<Dynamic>));
+    var la:Float = cast _Runtime.UNDEFINED;
+    var lb:Float = cast _Runtime.UNDEFINED;
+    var _dot:Float = cast _Runtime.UNDEFINED;
+    la = (cast getVector2Length((cast a : Vector2Like)) : Float);
+    lb = (cast getVector2Length((cast b : Vector2Like)) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = _Runtime.divideNumbers(_Runtime.callValue(getVector2Dot, cast ([a, b] : Array<Dynamic>)), (la * lb));
+    _dot = ((cast getVector2Dot((cast a : Vector2Like), (cast b : Vector2Like)) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
 
   public static function getVector2Distance(a:Vector2Like, b:Vector2Like):Float {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     dx = (a.x - b.x);
     dy = (a.y - b.y);
     return cast HxMath.sqrt(((dx * dx) + (dy * dy)));
@@ -95,8 +95,8 @@ class Vector2 {
   }
 
   public static function getVector2DistanceSquared(a:Vector2Like, b:Vector2Like):Float {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     dx = (a.x - b.x);
     dy = (a.y - b.y);
     return cast (HxMath.pow(dx, 2.0) + HxMath.pow(dy, 2.0));
@@ -149,8 +149,8 @@ class Vector2 {
   }
 
   public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    l = _Runtime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
+    var l:Float = cast _Runtime.UNDEFINED;
+    l = (cast getVector2Length((cast source : Vector2Like)) : Float);
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       (out.x = cast ((source.x / l) : Dynamic));
       (out.y = cast ((source.y / l) : Dynamic));
@@ -168,11 +168,11 @@ class Vector2 {
   }
 
   public static function reflectVector2(out:Vector2Like, incident:Vector2Like, normal:Vector2Like):Void {
-    var ix:Dynamic = cast _Runtime.UNDEFINED;
-    var iy:Dynamic = cast _Runtime.UNDEFINED;
-    var nx:Dynamic = cast _Runtime.UNDEFINED;
-    var ny:Dynamic = cast _Runtime.UNDEFINED;
-    var twoDot:Dynamic = cast _Runtime.UNDEFINED;
+    var ix:Float = cast _Runtime.UNDEFINED;
+    var iy:Float = cast _Runtime.UNDEFINED;
+    var nx:Float = cast _Runtime.UNDEFINED;
+    var ny:Float = cast _Runtime.UNDEFINED;
+    var twoDot:Float = cast _Runtime.UNDEFINED;
     ix = incident.x;
     iy = incident.y;
     nx = normal.x;
@@ -188,13 +188,13 @@ class Vector2 {
   }
 
   public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
-    var currentLength:Dynamic = cast _Runtime.UNDEFINED;
-    currentLength = _Runtime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
+    var currentLength:Float = cast _Runtime.UNDEFINED;
+    currentLength = (cast getVector2Length((cast source : Vector2Like)) : Float);
     if ((cast _Runtime.strictEquals(currentLength, 0.0) : Bool)) {
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
     } else {
-      var scale:Dynamic = (length / currentLength);
+      var scale:Float = (length / currentLength);
       (out.x = cast ((source.x * scale) : Dynamic));
       (out.y = cast ((source.y * scale) : Dynamic));
     }
@@ -230,7 +230,7 @@ class Vector2 {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.y);
   }
 
-  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = _Runtime.callValue(createVector2, cast ([1.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector2);
 
-  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = _Runtime.callValue(createVector2, cast ([0.0, 1.0] : Array<Dynamic>));
+  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = (cast createVector2((cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : flighthq.types.Vector2);
 }

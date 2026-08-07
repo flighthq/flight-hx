@@ -7,6 +7,10 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlScene3DRuntime.GlScene3DIbl;
+import flighthq.types.GlScene3DRuntime.GlScene3DShadow;
+import flighthq.types.Matrix4;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
@@ -28,29 +32,29 @@ import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE
 typedef GlIblPlaceholders__glLitProgram = { var cube:flighthq._internal.dom.WebGLTexture; var lut:flighthq._internal.dom.WebGLTexture; };
 
 class GlLitProgram {
-  public static final SHADOW_MAP_TEXTURE_UNIT__glLitProgram:Dynamic = 8.0;
+  public static final SHADOW_MAP_TEXTURE_UNIT__glLitProgram:Float = 8.0;
 
-  public static final IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram:Dynamic = 9.0;
+  public static final IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram:Float = 9.0;
 
-  public static final IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram:Dynamic = 10.0;
+  public static final IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram:Float = 10.0;
 
-  public static final IBL_BRDF_TEXTURE_UNIT__glLitProgram:Dynamic = 11.0;
+  public static final IBL_BRDF_TEXTURE_UNIT__glLitProgram:Float = 11.0;
 
-  public static final _iblPlaceholders__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _iblPlaceholders__glLitProgram:flighthq._internal._WeakMap<GlRenderState, GlIblPlaceholders__glLitProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uploadedLightVersion__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _uploadedLightVersion__glLitProgram:flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uploadedLightBlock__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _uploadedLightBlock__glLitProgram:flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function bindGlMeshLightBlock(state:GlRenderState, program:flighthq.types.GlLitProgram, lights:Scene3DLightBlock):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var shadow:Dynamic = cast _Runtime.UNDEFINED;
-    var ibl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    if ((cast ((cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap).get(program)), lights) : Bool) || (cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).get(program)), _Runtime.field(lights, 'version')) : Bool)) : Bool)) {
-      var data:Dynamic = _Runtime.field(lights, 'data');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
+    var shadow:Null<GlScene3DShadow> = cast _Runtime.UNDEFINED;
+    var ibl:Null<GlScene3DIbl> = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    if ((cast ((cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).get(program)), lights) : Bool) || (cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).get(program)), _Runtime.field(lights, 'version')) : Bool)) : Bool)) {
+      var data:flighthq._internal._Float32Array = _Runtime.field(lights, 'data');
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), flighthq._internal._StaticIndex.readFloat32Array(data, 0.0), flighthq._internal._StaticIndex.readFloat32Array(data, 1.0), flighthq._internal._StaticIndex.readFloat32Array(data, 2.0), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), flighthq._internal._StaticIndex.readFloat32Array(data, 4.0), flighthq._internal._StaticIndex.readFloat32Array(data, 5.0), flighthq._internal._StaticIndex.readFloat32Array(data, 6.0), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locAmbientRadiance'), flighthq._internal._StaticIndex.readFloat32Array(data, 8.0), flighthq._internal._StaticIndex.readFloat32Array(data, 9.0), flighthq._internal._StaticIndex.readFloat32Array(data, 10.0));
@@ -62,48 +66,48 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount'));
-      ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap).set(program, lights));
-      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap).set(program, _Runtime.field(lights, 'version')));
+      ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, lights));
+      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, _Runtime.field(lights, 'version')));
     }
-    runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
-    shadow = _Runtime.field(runtime, 'shadow');
-    if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast _Runtime.field(shadow, 'enabled') : Bool)) : Bool)) {
+    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    shadow = (cast runtime : GlScene3DRuntime).shadow;
+    if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast (cast shadow : GlScene3DShadow).enabled : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(shadow, 'texture'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowBias'), _Runtime.field(shadow, 'shadowBias'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shadow : GlScene3DShadow).texture);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowBias'), (cast shadow : GlScene3DShadow).shadowBias);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowMap'), GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
-      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, _Runtime.field(shadow, 'matrix').m);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowNormalBiasWorld'), _Runtime.field(shadow, 'normalBiasWorld'));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowPcfRadius'), _Runtime.field(shadow, 'pcfRadius'));
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, (cast shadow : GlScene3DShadow).matrix.m);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowNormalBiasWorld'), (cast shadow : GlScene3DShadow).normalBiasWorld);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowPcfRadius'), (cast shadow : GlScene3DShadow).pcfRadius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 1.0);
     } else {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 0.0);
     }
-    ibl = _Runtime.field(runtime, 'ibl');
+    ibl = (cast runtime : GlScene3DRuntime).ibl;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), _Runtime.field(ibl, 'irradianceCube'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).irradianceCube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), _Runtime.field(ibl, 'prefilteredCube'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).prefilteredCube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(ibl, 'brdfLut'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ibl : GlScene3DIbl).brdfLut);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 1.0);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblIntensity'), _Runtime.field(ibl, 'intensity'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), _Runtime.subtractNumbers(_Runtime.field(ibl, 'prefilteredMipCount'), 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblIntensity'), (cast ibl : GlScene3DIbl).intensity);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
-      var placeholders:Dynamic = _Runtime.callValue(GlLitProgram.ensureGlIblPlaceholders__glLitProgram, cast ([state] : Array<Dynamic>));
+      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram((cast state : GlRenderState)) : GlIblPlaceholders__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), _Runtime.field(placeholders, 'cube'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), _Runtime.field(placeholders, 'cube'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(placeholders, 'lut'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast placeholders : GlIblPlaceholders__glLitProgram).lut);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 0.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
@@ -111,20 +115,20 @@ class GlLitProgram {
   }
 
   public static function ensureGlIblPlaceholders__glLitProgram(state:GlRenderState):GlIblPlaceholders__glLitProgram {
-    var placeholders:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var black:Dynamic = cast _Runtime.UNDEFINED;
-    var cube:Dynamic = cast _Runtime.UNDEFINED;
-    var lut:Dynamic = cast _Runtime.UNDEFINED;
-    placeholders = ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap).get(state));
+    var placeholders:Null<GlIblPlaceholders__glLitProgram> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var black:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var cube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var lut:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    placeholders = ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap<GlRenderState, GlIblPlaceholders__glLitProgram>).get(state));
     if ((cast !_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast placeholders; }
-    gl = _Runtime.field(state, 'gl');
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
     black = new flighthq._internal._UInt8Array(cast ([0.0, 0.0, 0.0, 255.0] : Array<Dynamic>));
     cube = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), cube);
     {
-      var face:Dynamic = 0.0;
+      var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X) + face), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), 1.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), black);
         face++;
@@ -138,7 +142,7 @@ class GlLitProgram {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MIN_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     (placeholders = cast ({ cube: cube, lut: lut } : Dynamic));
-    ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap).set(state, placeholders));
+    ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap<GlRenderState, GlIblPlaceholders__glLitProgram>).set(state, placeholders));
     return cast placeholders;
     return cast null;
   }
@@ -150,8 +154,8 @@ class GlLitProgram {
   }
 
   @:noCompletion
-  public static final GL_DIRECTIONAL_SHADOW_GLSL:Dynamic = '\nuniform sampler2D u_shadowMap;       // directional shadow depth map\nuniform mat4 u_shadowMatrix;         // world -> shadow light-clip\nuniform float u_shadowEnabled;       // 0 or 1 — gates shadow sampling\nuniform int u_shadowPcfRadius;       // integer kernel radius: 0 = one tap, 1 = 3x3\nuniform float u_shadowBias;          // normalized depth-compare bias\nuniform float u_shadowNormalBiasWorld; // receiver offset along the geometric normal in world units\n\n// Directional shadow factor at a world position: 1.0 fully lit, 0.0 fully shadowed. The compile-time\n// radius cap bounds fragment cost. Radius 0 and 1 take dedicated one-tap and 3x3 paths, so the default\n// does not execute the maximum kernel; radius 2 takes the bounded 5x5 path. Fragments outside the\n// shadow frustum are treated as lit.\nfloat compareDirectionalShadow(vec2 uv, float current) {\n  float closest = texture(u_shadowMap, uv).r;\n  return current <= closest ? 1.0 : 0.0;\n}\n\nfloat sampleDirectionalShadow(vec3 worldPos, vec3 geometricNormal) {\n  if (u_shadowEnabled < 0.5) return 1.0;\n  vec3 biasedWorldPos = worldPos + geometricNormal * u_shadowNormalBiasWorld;\n  vec4 clip = u_shadowMatrix * vec4(biasedWorldPos, 1.0);\n  vec3 ndc = clip.xyz / clip.w;\n  vec3 uvz = ndc * 0.5 + 0.5;\n  if (uvz.x < 0.0 || uvz.x > 1.0 || uvz.y < 0.0 || uvz.y > 1.0 || uvz.z > 1.0) return 1.0;\n  float current = uvz.z - u_shadowBias;\n  vec2 texel = 1.0 / vec2(textureSize(u_shadowMap, 0));\n  int radius = clamp(u_shadowPcfRadius, 0, ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ');\n  if (radius == 0) return compareDirectionalShadow(uvz.xy, current);\n\n  float sum = 0.0;\n  if (radius == 1) {\n    for (int x = -1; x <= 1; ++x) {\n      for (int y = -1; y <= 1; ++y) {\n        sum += compareDirectionalShadow(uvz.xy + vec2(float(x), float(y)) * texel, current);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (int x = -' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; x <= ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; ++x) {\n    for (int y = -' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; y <= ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; ++y) {\n      sum += compareDirectionalShadow(uvz.xy + vec2(float(x), float(y)) * texel, current);\n    }\n  }\n  float diameter = float(' + Std.string(((MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2.0) + 1.0)) + ');\n  return sum / (diameter * diameter);\n}\n';
+  public static final GL_DIRECTIONAL_SHADOW_GLSL:String = '\nuniform sampler2D u_shadowMap;       // directional shadow depth map\nuniform mat4 u_shadowMatrix;         // world -> shadow light-clip\nuniform float u_shadowEnabled;       // 0 or 1 — gates shadow sampling\nuniform int u_shadowPcfRadius;       // integer kernel radius: 0 = one tap, 1 = 3x3\nuniform float u_shadowBias;          // normalized depth-compare bias\nuniform float u_shadowNormalBiasWorld; // receiver offset along the geometric normal in world units\n\n// Directional shadow factor at a world position: 1.0 fully lit, 0.0 fully shadowed. The compile-time\n// radius cap bounds fragment cost. Radius 0 and 1 take dedicated one-tap and 3x3 paths, so the default\n// does not execute the maximum kernel; radius 2 takes the bounded 5x5 path. Fragments outside the\n// shadow frustum are treated as lit.\nfloat compareDirectionalShadow(vec2 uv, float current) {\n  float closest = texture(u_shadowMap, uv).r;\n  return current <= closest ? 1.0 : 0.0;\n}\n\nfloat sampleDirectionalShadow(vec3 worldPos, vec3 geometricNormal) {\n  if (u_shadowEnabled < 0.5) return 1.0;\n  vec3 biasedWorldPos = worldPos + geometricNormal * u_shadowNormalBiasWorld;\n  vec4 clip = u_shadowMatrix * vec4(biasedWorldPos, 1.0);\n  vec3 ndc = clip.xyz / clip.w;\n  vec3 uvz = ndc * 0.5 + 0.5;\n  if (uvz.x < 0.0 || uvz.x > 1.0 || uvz.y < 0.0 || uvz.y > 1.0 || uvz.z > 1.0) return 1.0;\n  float current = uvz.z - u_shadowBias;\n  vec2 texel = 1.0 / vec2(textureSize(u_shadowMap, 0));\n  int radius = clamp(u_shadowPcfRadius, 0, ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ');\n  if (radius == 0) return compareDirectionalShadow(uvz.xy, current);\n\n  float sum = 0.0;\n  if (radius == 1) {\n    for (int x = -1; x <= 1; ++x) {\n      for (int y = -1; y <= 1; ++y) {\n        sum += compareDirectionalShadow(uvz.xy + vec2(float(x), float(y)) * texel, current);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (int x = -' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; x <= ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; ++x) {\n    for (int y = -' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; y <= ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + '; ++y) {\n      sum += compareDirectionalShadow(uvz.xy + vec2(float(x), float(y)) * texel, current);\n    }\n  }\n  float diameter = float(' + Std.string(((MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2.0) + 1.0)) + ');\n  return sum / (diameter * diameter);\n}\n';
 
   @:noCompletion
-  public static final GL_MESH_LIGHT_BLOCK_GLSL:Dynamic = '\nuniform vec4 u_directional;          // xyz = light travel direction (surface->light is -xyz)\nuniform vec4 u_directionalRadiance;  // rgb = linear radiance, premultiplied by intensity\nuniform vec3 u_ambientRadiance;      // linear ambient irradiance\nuniform float u_directionalCount;    // 0 or 1 — gates the directional term\nuniform float u_ambientCount;        // 0 or 1 — gates the ambient term\nuniform vec3 u_cameraPosition;       // world-space camera position for view-dependent terms\n\n// Punctual (point/spot/hemisphere) forward-light arrays. Fixed MAX_FORWARD_LIGHTS-wide; each count\n// uniform bounds its loop. Layout matches Scene3DLightBlock.data (packScene3DLightBlock) byte-for-byte:\n//   point[i]      = u_pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n//   spot[i]       = u_spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n//   hemisphere[i] = u_hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\nuniform vec4 u_pointLights[MAX_FORWARD_LIGHTS * 2];\nuniform vec4 u_spotLights[MAX_FORWARD_LIGHTS * 4];\nuniform vec4 u_hemisphereLights[MAX_FORWARD_LIGHTS * 3];\nuniform int u_pointCount;\nuniform int u_spotCount;\nuniform int u_hemisphereCount;\n\n// Smooth inverse-square range window (glTF/UE4): 1 near the light, eased to 0 at the range. invSqrRange\n// is 1/range^2 (0 = infinite range, no cutoff). dist2 is the squared surface->light distance.\nfloat rangeWindow(float dist2, float invSqrRange) {\n  float factor = dist2 * invSqrRange;\n  float windowed = clamp(1.0 - factor * factor, 0.0, 1.0);\n  return windowed * windowed;\n}\n' + Std.string(GL_DIRECTIONAL_SHADOW_GLSL) + '\n';
+  public static final GL_MESH_LIGHT_BLOCK_GLSL:String = '\nuniform vec4 u_directional;          // xyz = light travel direction (surface->light is -xyz)\nuniform vec4 u_directionalRadiance;  // rgb = linear radiance, premultiplied by intensity\nuniform vec3 u_ambientRadiance;      // linear ambient irradiance\nuniform float u_directionalCount;    // 0 or 1 — gates the directional term\nuniform float u_ambientCount;        // 0 or 1 — gates the ambient term\nuniform vec3 u_cameraPosition;       // world-space camera position for view-dependent terms\n\n// Punctual (point/spot/hemisphere) forward-light arrays. Fixed MAX_FORWARD_LIGHTS-wide; each count\n// uniform bounds its loop. Layout matches Scene3DLightBlock.data (packScene3DLightBlock) byte-for-byte:\n//   point[i]      = u_pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n//   spot[i]       = u_spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n//   hemisphere[i] = u_hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\nuniform vec4 u_pointLights[MAX_FORWARD_LIGHTS * 2];\nuniform vec4 u_spotLights[MAX_FORWARD_LIGHTS * 4];\nuniform vec4 u_hemisphereLights[MAX_FORWARD_LIGHTS * 3];\nuniform int u_pointCount;\nuniform int u_spotCount;\nuniform int u_hemisphereCount;\n\n// Smooth inverse-square range window (glTF/UE4): 1 near the light, eased to 0 at the range. invSqrRange\n// is 1/range^2 (0 = infinite range, no cutoff). dist2 is the squared surface->light distance.\nfloat rangeWindow(float dist2, float invSqrRange) {\n  float factor = dist2 * invSqrRange;\n  float windowed = clamp(1.0 - factor * factor, 0.0, 1.0);\n  return windowed * windowed;\n}\n' + Std.string(GL_DIRECTIONAL_SHADOW_GLSL) + '\n';
 }

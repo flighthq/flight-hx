@@ -7,7 +7,7 @@ import flighthq.types.Modifier;
 import flighthq.types.Texture;
 
 class _EmissiveModifierValues {
-  public static final EmissiveModifierFacingValue:Dynamic = { AwayFromLight: 'AwayFromLight', Ignore: 'Ignore', TowardLight: 'TowardLight' };
+  public static final EmissiveModifierFacingValue:{ var AwayFromLight:String; var Ignore:String; var TowardLight:String; } = { AwayFromLight: 'AwayFromLight', Ignore: 'Ignore', TowardLight: 'TowardLight' };
 
-  public static final EmissiveModifierKind:Dynamic = 'EmissiveModifier';
+  public static final EmissiveModifierKind:String = 'EmissiveModifier';
 }

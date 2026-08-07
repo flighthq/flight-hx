@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Attachment2D;
 
 class _PointAttachment2DValues {
-  public static final PointAttachment2DKind:Dynamic = 'PointAttachment2D';
+  public static final PointAttachment2DKind:String = 'PointAttachment2D';
 }

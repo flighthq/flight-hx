@@ -9,33 +9,33 @@ import flighthq.types.Material;
 
 class Material {
   public static function cloneMaterial(source:flighthq.types.Material):flighthq.types.Material {
-    var clone:Dynamic = cast _Runtime.UNDEFINED;
-    clone = (cast _Runtime.callValue(createEntity, cast ([{ kind: _Runtime.field(source, 'kind') }] : Array<Dynamic>)) : flighthq.types.Material);
-    _Runtime.callValue(Material.copyMaterialFields__material, cast ([clone, source, _Runtime.field(source, 'kind')] : Array<Dynamic>));
+    var clone:flighthq.types.Material = cast _Runtime.UNDEFINED;
+    clone = (cast (cast createEntity((cast { kind: _Runtime.field(source, 'kind') } : Null<{ var kind:String; }>)) : flighthq.types.Material) : flighthq.types.Material);
+    Material.copyMaterialFields__material((cast clone : flighthq.types.Material), (cast source : flighthq.types.Material), (cast _Runtime.field(source, 'kind') : String));
     return cast clone;
     return cast null;
   }
 
   public static function copyMaterial(out:flighthq.types.Material, source:flighthq.types.Material):Void {
     if ((cast _Runtime.strictEquals(out, source) : Bool)) { return; }
-    _Runtime.callValue(Material.copyMaterialFields__material, cast ([out, source, _Runtime.field(source, 'kind')] : Array<Dynamic>));
+    Material.copyMaterialFields__material((cast out : flighthq.types.Material), (cast source : flighthq.types.Material), (cast _Runtime.field(source, 'kind') : String));
   }
 
   public static function createMaterial(kind:Kind):flighthq.types.Material {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createEntity, cast ([{ kind: kind }] : Array<Dynamic>)) : flighthq.types.Material);
-    _Runtime.setField(material, 'name', null);
+    var material:flighthq.types.Material = cast _Runtime.UNDEFINED;
+    material = (cast (cast createEntity((cast { kind: kind } : Null<{ var kind:String; }>)) : flighthq.types.Material) : flighthq.types.Material);
+    ((cast material : flighthq.types.Material).name = null);
     return cast material;
     return cast null;
   }
 
   public static function equalsMaterial(a:flighthq.types.Material, b:flighthq.types.Material):Bool {
-    var aFields:Dynamic = cast _Runtime.UNDEFINED;
-    var bFields:Dynamic = cast _Runtime.UNDEFINED;
+    var aFields:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var bFields:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
-    aFields = (cast (cast a : Dynamic) : Dynamic);
-    bFields = (cast (cast b : Dynamic) : Dynamic);
+    aFields = (cast (cast a : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>);
+    bFields = (cast (cast b : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aFields))) {
       if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
       if ((cast !_Runtime.strictEquals(_Runtime.getIndex(aFields, key), _Runtime.getIndex(bFields, key)) : Bool)) { return cast false; }
@@ -44,21 +44,21 @@ class Material {
     return cast null;
   }
 
-  public static function getMaterialOfKind<T>(material:Null<flighthq.types.Material>, kind:Kind):Null<Dynamic> {
-    return cast ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), kind) : Bool)) : Bool) ? (cast (cast material : Dynamic) : Dynamic) : (cast null : Dynamic));
+  public static function getMaterialOfKind<T>(material:Null<flighthq.types.Material>, kind:Kind):Null<T> {
+    return cast ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), kind) : Bool)) : Bool) ? (cast (cast material : T) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function copyMaterialFields__material(dst:flighthq.types.Material, src:flighthq.types.Material, kind:Kind):Void {
-    var dstFields:Dynamic = cast _Runtime.UNDEFINED;
-    var srcFields:Dynamic = cast _Runtime.UNDEFINED;
-    dstFields = (cast (cast dst : Dynamic) : Dynamic);
-    srcFields = (cast (cast src : Dynamic) : Dynamic);
+    var dstFields:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var srcFields:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    dstFields = (cast (cast dst : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>);
+    srcFields = (cast (cast src : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(srcFields))) {
       if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
-      var value:Dynamic = _Runtime.getIndex(srcFields, key);
+      var value:flighthq._internal._Any = _Runtime.getIndex(srcFields, key);
       if ((cast ((cast ((cast _Runtime.strictEquals(key, 'standard') : Bool) && (cast !_Runtime.looseEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
-        _Runtime.setIndex(dstFields, key, _Runtime.mergeObjects([(cast value : Dynamic)]));
+        _Runtime.setIndex(dstFields, key, _Runtime.mergeObjects([(cast value : flighthq._internal._Object)]));
       } else {
         _Runtime.setIndex(dstFields, key, value);
       }

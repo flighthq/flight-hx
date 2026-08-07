@@ -8,32 +8,35 @@ import flighthq.animation.AnimationPlayer.advanceAnimationPlayer;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationClip;
 import flighthq.types.AnimationCrossfade;
 import flighthq.types.AnimationCrossfade.AnimationCrossfadeChannel;
 import flighthq.types.AnimationCrossfade.AnimationCrossfadeOptions;
 import flighthq.types.AnimationPlayer;
+import flighthq.types.AnimationTrack;
+import flighthq.types.EasingFunction;
 
 class AnimationCrossfade {
   public static function advanceAnimationCrossfade(state:flighthq.types.AnimationCrossfade, dt:Float):Void {
-    _Runtime.callValue(advanceAnimationPlayer, cast ([_Runtime.field(state, 'from'), dt] : Array<Dynamic>));
-    _Runtime.callValue(advanceAnimationPlayer, cast ([_Runtime.field(state, 'to'), dt] : Array<Dynamic>));
-    _Runtime.setField(state, 'elapsed', _Runtime.addNumbers(_Runtime.field(state, 'elapsed'), dt));
-    _Runtime.setField(state, 'weight', _Runtime.callProperty(state, 'curve', cast ([_Runtime.callValue(AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade, cast ([_Runtime.field(state, 'elapsed'), _Runtime.field(state, 'duration')] : Array<Dynamic>))] : Array<Dynamic>)));
+    advanceAnimationPlayer((cast (cast state : flighthq.types.AnimationCrossfade).from : AnimationPlayer), (cast dt : Float));
+    advanceAnimationPlayer((cast (cast state : flighthq.types.AnimationCrossfade).to : AnimationPlayer), (cast dt : Float));
+    ((cast state : flighthq.types.AnimationCrossfade).elapsed += dt);
+    ((cast state : flighthq.types.AnimationCrossfade).weight = (cast state : flighthq.types.AnimationCrossfade).curve((cast AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade((cast (cast state : flighthq.types.AnimationCrossfade).elapsed : Float), (cast (cast state : flighthq.types.AnimationCrossfade).duration : Float)) : Float)));
   }
 
   public static function createAnimationCrossfade(from:AnimationPlayer, to:AnimationPlayer, duration:Float, ?opts:AnimationCrossfadeOptions):flighthq.types.AnimationCrossfade {
-    var resolvedDuration:Dynamic = cast _Runtime.UNDEFINED;
-    var curve:Dynamic = cast _Runtime.UNDEFINED;
-    var channels:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleWidth:Dynamic = cast _Runtime.UNDEFINED;
+    var resolvedDuration:Float = cast _Runtime.UNDEFINED;
+    var curve:EasingFunction = cast _Runtime.UNDEFINED;
+    var channels:Array<AnimationCrossfadeChannel> = cast _Runtime.UNDEFINED;
+    var sampleWidth:Float = cast _Runtime.UNDEFINED;
     resolvedDuration = HxMath.max(0.0, duration);
     curve = _Runtime.coalesce(_Runtime.optionalField(opts, 'curve'), function():Dynamic return cast AnimationCrossfade.linearAnimationCrossfadeCurve__animationCrossfade);
-    channels = _Runtime.callValue(AnimationCrossfade.createAnimationCrossfadeChannels__animationCrossfade, cast ([from, to] : Array<Dynamic>));
+    channels = (cast AnimationCrossfade.createAnimationCrossfadeChannels__animationCrossfade((cast from : AnimationPlayer), (cast to : AnimationPlayer)) : Array<AnimationCrossfadeChannel>);
     sampleWidth = 0.0;
     for (entry in _Runtime.iterable(channels)) {
-      (sampleWidth = cast (HxMath.max(sampleWidth, _Runtime.field(_Runtime.field(_Runtime.field(entry, 'channel'), 'track'), 'components')) : Dynamic));
+      (sampleWidth = cast (HxMath.max(sampleWidth, (cast _Runtime.field((cast entry : AnimationCrossfadeChannel).channel, 'track') : AnimationTrack).components) : Dynamic));
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ channels: channels, curve: curve, duration: resolvedDuration, elapsed: 0.0, from: from, fromSample: new flighthq._internal._Float32Array(sampleWidth), to: to, toSample: new flighthq._internal._Float32Array(sampleWidth), weight: _Runtime.callValue(curve, cast ([_Runtime.callValue(AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade, cast ([0.0, resolvedDuration] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ channels: channels, curve: curve, duration: resolvedDuration, elapsed: 0.0, from: from, fromSample: new flighthq._internal._Float32Array(sampleWidth), to: to, toSample: new flighthq._internal._Float32Array(sampleWidth), weight: (cast curve((cast (cast AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade((cast 0.0 : Float), (cast resolvedDuration : Float)) : Float) : Float)) : Float) }) : flighthq.types.AnimationCrossfade);
     return cast null;
   }
 
@@ -42,78 +45,78 @@ class AnimationCrossfade {
     return cast null;
   }
 
-  public static function sampleAnimationCrossfade(out:Dynamic, state:flighthq.types.AnimationCrossfade, visit:Dynamic):Void {
-    var fromChannels:Dynamic = cast _Runtime.UNDEFINED;
-    var toChannels:Dynamic = cast _Runtime.UNDEFINED;
-    fromChannels = _Runtime.field(_Runtime.field(state, 'from'), 'clip').channels;
-    toChannels = _Runtime.field(_Runtime.field(state, 'to'), 'clip').channels;
+  public static function sampleAnimationCrossfade(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, state:flighthq.types.AnimationCrossfade, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
+    var fromChannels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
+    var toChannels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
+    fromChannels = (cast _Runtime.field(state, 'from') : AnimationPlayer).clip.channels;
+    toChannels = (cast _Runtime.field(state, 'to') : AnimationPlayer).clip.channels;
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(state, 'channels'), 'length') : Float)) : Bool)) {
-        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'channels'), index);
+        var entry:AnimationCrossfadeChannel = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'channels'), index);
         if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'fromIndex'), null) : Bool)) {
-          _Runtime.callValue(sampleAnimationTrack, cast ([out, _Runtime.field(flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')), 'track'), _Runtime.field(_Runtime.field(state, 'to'), 'time')] : Array<Dynamic>));
+          sampleAnimationTrack((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')) : AnimationChannel).track, (cast (cast _Runtime.field(state, 'to') : AnimationPlayer).time : Float));
         } else { if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'toIndex'), null) : Bool)) {
-          _Runtime.callValue(sampleAnimationTrack, cast ([out, _Runtime.field(flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')), 'track'), _Runtime.field(_Runtime.field(state, 'from'), 'time')] : Array<Dynamic>));
+          sampleAnimationTrack((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')) : AnimationChannel).track, (cast (cast _Runtime.field(state, 'from') : AnimationPlayer).time : Float));
         } else {
-          var fromTrack:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')), 'track');
-          var toTrack:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')), 'track');
-          _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(state, 'fromSample'), fromTrack, _Runtime.field(_Runtime.field(state, 'from'), 'time')] : Array<Dynamic>));
-          _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(state, 'toSample'), toTrack, _Runtime.field(_Runtime.field(state, 'to'), 'time')] : Array<Dynamic>));
-          _Runtime.callValue(blendAnimationSamples, cast ([out, _Runtime.field(state, 'fromSample'), _Runtime.field(state, 'toSample'), _Runtime.field(state, 'weight'), _Runtime.field(fromTrack, 'quaternion')] : Array<Dynamic>));
+          var fromTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')) : AnimationChannel).track;
+          var toTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')) : AnimationChannel).track;
+          sampleAnimationTrack((cast _Runtime.field(state, 'fromSample') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), fromTrack, (cast (cast _Runtime.field(state, 'from') : AnimationPlayer).time : Float));
+          sampleAnimationTrack((cast _Runtime.field(state, 'toSample') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), toTrack, (cast (cast _Runtime.field(state, 'to') : AnimationPlayer).time : Float));
+          blendAnimationSamples((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast _Runtime.field(state, 'fromSample') : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(state, 'toSample') : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(state, 'weight') : Float), (cast (cast fromTrack : AnimationTrack).quaternion : Bool));
         } }
-        _Runtime.callValue(visit, cast ([out, _Runtime.field(entry, 'channel'), index] : Array<Dynamic>));
+        visit((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast _Runtime.field(entry, 'channel') : AnimationChannel), (cast index : Float));
         index++;
       }
     }
   }
 
   public static function createAnimationCrossfadeChannels__animationCrossfade(from:AnimationPlayer, to:AnimationPlayer):Array<AnimationCrossfadeChannel> {
-    var fromChannels:Dynamic = cast _Runtime.UNDEFINED;
-    var toChannels:Dynamic = cast _Runtime.UNDEFINED;
-    var toByTarget:Dynamic = cast _Runtime.UNDEFINED;
+    var fromChannels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
+    var toChannels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
+    var toByTarget:flighthq._internal._Map<flighthq._internal._Any, Float> = cast _Runtime.UNDEFINED;
     var channels:Array<AnimationCrossfadeChannel> = cast _Runtime.UNDEFINED;
-    var matchedTo:Dynamic = cast _Runtime.UNDEFINED;
+    var matchedTo:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
     fromChannels = _Runtime.field(from, 'clip').channels;
     toChannels = _Runtime.field(to, 'clip').channels;
-    _Runtime.callValue(AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade, cast ([fromChannels, 'source'] : Array<Dynamic>));
-    _Runtime.callValue(AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade, cast ([toChannels, 'destination'] : Array<Dynamic>));
+    AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade((cast fromChannels : Array<AnimationChannel>), (cast 'source' : String));
+    AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade((cast toChannels : Array<AnimationChannel>), (cast 'destination' : String));
     toByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(toChannels, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast toByTarget : flighthq._internal._Map).has(_Runtime.field(flighthq._internal._StaticIndex.readArray(toChannels, index), 'targetRef'))) : Bool) : Bool)) { ((cast toByTarget : flighthq._internal._Map).set(_Runtime.field(flighthq._internal._StaticIndex.readArray(toChannels, index), 'targetRef'), index)); }
+        if ((cast !(cast ((cast toByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).has((cast flighthq._internal._StaticIndex.readArray(toChannels, index) : AnimationChannel).targetRef)) : Bool) : Bool)) { ((cast toByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set((cast flighthq._internal._StaticIndex.readArray(toChannels, index) : AnimationChannel).targetRef, index)); }
         index++;
       }
     }
     channels = cast ([] : Array<Dynamic>);
     matchedTo = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
-      var fromIndex:Dynamic = 0.0;
+      var fromIndex:Float = 0.0;
       while ((cast ((cast fromIndex : Float) < (cast _Runtime.field(fromChannels, 'length') : Float)) : Bool)) {
-        var fromChannel:Dynamic = flighthq._internal._StaticIndex.readArray(fromChannels, fromIndex);
-        var toIndex:Dynamic = ((cast toByTarget : flighthq._internal._Map).get(_Runtime.field(fromChannel, 'targetRef')));
+        var fromChannel:AnimationChannel = flighthq._internal._StaticIndex.readArray(fromChannels, fromIndex);
+        var toIndex:Null<Float> = ((cast toByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).get((cast fromChannel : AnimationChannel).targetRef));
         if ((cast _Runtime.strictEquals(toIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           _Runtime.callProperty(channels, 'push', cast ([{ channel: fromChannel, fromIndex: fromIndex, toIndex: null }] : Array<Dynamic>));
           fromIndex++;
           continue;
         }
-        var toChannel:Dynamic = flighthq._internal._StaticIndex.readArray(toChannels, toIndex);
-        if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'components'), _Runtime.field(_Runtime.field(toChannel, 'track'), 'components')) : Bool)) {
-          _Runtime.throwValue(_Runtime.rangeError('AnimationCrossfade target has different component widths (' + Std.string(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'components')) + ' and ' + Std.string(_Runtime.field(_Runtime.field(toChannel, 'track'), 'components')) + ').'));
+        var toChannel:AnimationChannel = flighthq._internal._StaticIndex.readArray(toChannels, toIndex);
+        if ((cast !_Runtime.strictEquals((cast (cast fromChannel : AnimationChannel).track : AnimationTrack).components, (cast (cast toChannel : AnimationChannel).track : AnimationTrack).components) : Bool)) {
+          _Runtime.throwValue(_Runtime.rangeError('AnimationCrossfade target has different component widths (' + Std.string((cast (cast fromChannel : AnimationChannel).track : AnimationTrack).components) + ' and ' + Std.string((cast (cast toChannel : AnimationChannel).track : AnimationTrack).components) + ').'));
         }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(fromChannel, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(toChannel, 'track'), 'quaternion')) : Bool)) {
+        if ((cast !_Runtime.strictEquals((cast (cast fromChannel : AnimationChannel).track : AnimationTrack).quaternion, (cast (cast toChannel : AnimationChannel).track : AnimationTrack).quaternion) : Bool)) {
           _Runtime.throwValue(_Runtime.typeError('AnimationCrossfade target has incompatible quaternion flags.'));
         }
         _Runtime.callProperty(channels, 'push', cast ([{ channel: toChannel, fromIndex: fromIndex, toIndex: toIndex }] : Array<Dynamic>));
-        ((cast matchedTo : flighthq._internal._Set).add(toIndex));
+        ((cast matchedTo : flighthq._internal._Set<Float>).add(toIndex));
         fromIndex++;
       }
     }
     {
-      var toIndex:Dynamic = 0.0;
+      var toIndex:Float = 0.0;
       while ((cast ((cast toIndex : Float) < (cast _Runtime.field(toChannels, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast matchedTo : flighthq._internal._Set).has(toIndex)) : Bool) : Bool)) {
+        if ((cast !(cast ((cast matchedTo : flighthq._internal._Set<Float>).has(toIndex)) : Bool) : Bool)) {
           _Runtime.callProperty(channels, 'push', cast ([{ channel: flighthq._internal._StaticIndex.readArray(toChannels, toIndex), fromIndex: null, toIndex: toIndex }] : Array<Dynamic>));
         }
         toIndex++;
@@ -124,18 +127,18 @@ class AnimationCrossfade {
   }
 
   public static function assertUniqueAnimationCrossfadeTargets__animationCrossfade(channels:Array<AnimationChannel>, clipLabel:String):Void {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
+    var targets:flighthq._internal._Set<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     targets = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (channel in _Runtime.iterable(channels)) {
-      if ((cast ((cast targets : flighthq._internal._Set).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
+      if ((cast ((cast targets : flighthq._internal._Set<flighthq._internal._Any>).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
         _Runtime.throwValue(_Runtime.typeError('AnimationCrossfade ' + Std.string(clipLabel) + ' clip contains a duplicate targetRef.'));
       }
-      ((cast targets : flighthq._internal._Set).add(_Runtime.field(channel, 'targetRef')));
+      ((cast targets : flighthq._internal._Set<flighthq._internal._Any>).add(_Runtime.field(channel, 'targetRef')));
     }
   }
 
   public static function getLinearAnimationCrossfadeWeight__animationCrossfade(elapsed:Float, duration:Float):Float {
-    var normalized:Dynamic = cast _Runtime.UNDEFINED;
+    var normalized:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 1.0; }
     normalized = (elapsed / duration);
     return cast ((cast ((cast normalized : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast normalized : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast normalized : Dynamic)) : Dynamic));

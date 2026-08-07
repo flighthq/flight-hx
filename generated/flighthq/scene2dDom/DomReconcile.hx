@@ -9,11 +9,11 @@ import flighthq.types.RenderProxy2D;
 class DomReconcile {
   public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
     if ((cast needsReconcile : Bool)) { return cast true; }
-    if ((cast !_Runtime.strictEquals(newLength, _Runtime.field(runtime, 'domOrderLength')) : Bool)) { return cast true; }
+    if ((cast !_Runtime.strictEquals(newLength, (cast runtime : DomRenderStateRuntime).domOrderLength) : Bool)) { return cast true; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast newLength : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i), flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domOrderList'), i)) : Bool)) { return cast true; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast runtime : DomRenderStateRuntime).domNextOrderList, i), flighthq._internal._StaticIndex.readArray((cast runtime : DomRenderStateRuntime).domOrderList, i)) : Bool)) { return cast true; }
         i++;
       }
     }
@@ -21,60 +21,60 @@ class DomReconcile {
     return cast null;
   }
 
-  public static function processDomNode(runtime:DomRenderStateRuntime, data:RenderProxy2D, currentFrameId:Float, drawFn:Dynamic, newLength:Float, forceDraw:Dynamic = false):{ var newLength:Float; var needsReconcile:Bool; } {
-    var isNew:Dynamic = cast _Runtime.UNDEFINED;
-    var appearanceDirty:Dynamic = cast _Runtime.UNDEFINED;
-    var transformDirty:Dynamic = cast _Runtime.UNDEFINED;
-    var needsReconcile:Dynamic = cast _Runtime.UNDEFINED;
-    isNew = !(cast ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).has(data)) : Bool);
-    appearanceDirty = _Runtime.strictEquals(_Runtime.field(data, 'appearanceFrameId'), currentFrameId);
-    transformDirty = _Runtime.strictEquals(_Runtime.field(data, 'transformFrameId'), currentFrameId);
+  public static function processDomNode(runtime:DomRenderStateRuntime, data:RenderProxy2D, currentFrameId:Float, drawFn:Void->Void, newLength:Float, forceDraw:Bool = false):{ var newLength:Float; var needsReconcile:Bool; } {
+    var isNew:Bool = cast _Runtime.UNDEFINED;
+    var appearanceDirty:Bool = cast _Runtime.UNDEFINED;
+    var transformDirty:Bool = cast _Runtime.UNDEFINED;
+    var needsReconcile:Bool = cast _Runtime.UNDEFINED;
+    isNew = !(cast ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).has(data)) : Bool);
+    appearanceDirty = _Runtime.strictEquals((cast data : RenderProxy2D).appearanceFrameId, currentFrameId);
+    transformDirty = _Runtime.strictEquals((cast data : RenderProxy2D).transformFrameId, currentFrameId);
     needsReconcile = false;
     if ((cast ((cast ((cast ((cast isNew : Bool) || (cast appearanceDirty : Bool)) : Bool) || (cast transformDirty : Bool)) : Bool) || (cast forceDraw : Bool)) : Bool)) {
-      var prevElement:Dynamic = ((cast isNew : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(data)) : Dynamic));
-      _Runtime.setField(runtime, 'domCurrentElement', null);
-      _Runtime.callValue(drawFn, cast ([] : Array<Dynamic>));
-      var newElement:Dynamic = _Runtime.field(runtime, 'domCurrentElement');
+      var prevElement:Null<flighthq._internal.dom.HTMLElement> = ((cast isNew : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(data)) : Dynamic));
+      ((cast runtime : DomRenderStateRuntime).domCurrentElement = null);
+      drawFn();
+      var newElement:flighthq._internal._Any = (cast runtime : DomRenderStateRuntime).domCurrentElement;
       if ((cast !_Runtime.strictEquals(newElement, null) : Bool)) {
-        ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).set(data, newElement));
+        ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).set(data, newElement));
         if ((cast !_Runtime.strictEquals(newElement, prevElement) : Bool)) { (needsReconcile = cast (true : Dynamic)); }
       } else { if ((cast !_Runtime.strictEquals(prevElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).delete_(data));
+        ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).delete_(data));
         (needsReconcile = cast (true : Dynamic));
       } }
     }
-    if ((cast ((cast newLength : Float) >= (cast _Runtime.field(_Runtime.field(runtime, 'domNextOrderList'), 'length') : Float)) : Bool)) {
-      _Runtime.setLength(_Runtime.field(runtime, 'domNextOrderList'), (newLength + 16.0));
+    if ((cast ((cast newLength : Float) >= (cast _Runtime.field((cast runtime : DomRenderStateRuntime).domNextOrderList, 'length') : Float)) : Bool)) {
+      _Runtime.setLength((cast runtime : DomRenderStateRuntime).domNextOrderList, (newLength + 16.0));
     }
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(runtime, 'domNextOrderList'), newLength, data);
+    flighthq._internal._StaticIndex.writeArray((cast runtime : DomRenderStateRuntime).domNextOrderList, newLength, data);
     return cast { newLength: (newLength + 1.0), needsReconcile: needsReconcile };
     return cast null;
   }
 
   public static function reconcileDomContainer(container:flighthq._internal.dom.HTMLElement, runtime:DomRenderStateRuntime, newLength:Float):Void {
-    var keepSet:Dynamic = cast _Runtime.UNDEFINED;
-    var child:Dynamic = cast _Runtime.UNDEFINED;
+    var keepSet:flighthq._internal._Set<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
+    var child:Null<flighthq._internal.dom.ChildNode> = cast _Runtime.UNDEFINED;
     var nextSibling:Null<flighthq._internal.dom.Node> = cast _Runtime.UNDEFINED;
     keepSet = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast newLength : Float)) : Bool)) {
-        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i)));
-        if ((cast !_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast keepSet : flighthq._internal._Set).add(el)); }
+        var el:Null<flighthq._internal.dom.HTMLElement> = ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(flighthq._internal._StaticIndex.readArray((cast runtime : DomRenderStateRuntime).domNextOrderList, i)));
+        if ((cast !_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast keepSet : flighthq._internal._Set<flighthq._internal.dom.HTMLElement>).add(el)); }
         i++;
       }
     }
     child = container.firstChild;
     while ((cast !_Runtime.strictEquals(child, null) : Bool)) {
-      var next:Dynamic = (cast child : flighthq._internal.dom.ChildNode).nextSibling;
-      if ((cast !(cast ((cast keepSet : flighthq._internal._Set).has((cast child : flighthq._internal.dom.HTMLElement))) : Bool) : Bool)) { container.removeChild(child); }
+      var next:Null<flighthq._internal.dom.ChildNode> = (cast child : flighthq._internal.dom.ChildNode).nextSibling;
+      if ((cast !(cast ((cast keepSet : flighthq._internal._Set<flighthq._internal.dom.HTMLElement>).has((cast child : flighthq._internal.dom.HTMLElement))) : Bool) : Bool)) { container.removeChild(child); }
       (child = cast (next : Dynamic));
     }
     nextSibling = null;
     {
-      var i:Dynamic = (newLength - 1.0);
+      var i:Float = (newLength - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var el:Dynamic = ((cast _Runtime.field(runtime, 'domElementMap') : flighthq._internal._WeakMap).get(flighthq._internal._StaticIndex.readArray(_Runtime.field(runtime, 'domNextOrderList'), i)));
+        var el:Null<flighthq._internal.dom.HTMLElement> = ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(flighthq._internal._StaticIndex.readArray((cast runtime : DomRenderStateRuntime).domNextOrderList, i)));
         if ((cast _Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i--; continue; }
         if ((cast ((cast !_Runtime.strictEquals((cast el : flighthq._internal.dom.HTMLElement).nextSibling, nextSibling) : Bool) || (cast !_Runtime.strictEquals((cast el : flighthq._internal.dom.HTMLElement).parentNode, container) : Bool)) : Bool)) {
           container.insertBefore(el, nextSibling);
@@ -86,10 +86,10 @@ class DomReconcile {
   }
 
   public static function swapDomOrderLists(runtime:DomRenderStateRuntime, newLength:Float):Void {
-    var prevList:Dynamic = cast _Runtime.UNDEFINED;
-    prevList = _Runtime.field(runtime, 'domOrderList');
-    _Runtime.setField(runtime, 'domOrderList', _Runtime.field(runtime, 'domNextOrderList'));
-    _Runtime.setField(runtime, 'domOrderLength', newLength);
-    _Runtime.setField(runtime, 'domNextOrderList', prevList);
+    var prevList:Array<RenderProxy2D> = cast _Runtime.UNDEFINED;
+    prevList = (cast runtime : DomRenderStateRuntime).domOrderList;
+    ((cast runtime : DomRenderStateRuntime).domOrderList = (cast runtime : DomRenderStateRuntime).domNextOrderList);
+    ((cast runtime : DomRenderStateRuntime).domOrderLength = newLength);
+    ((cast runtime : DomRenderStateRuntime).domNextOrderList = prevList);
   }
 }

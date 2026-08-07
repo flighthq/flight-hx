@@ -5,17 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.AnimatedNormalModifierOptions;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Sampler;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.AnimatedNormalModifierKind;
+import flighthq.types.Vector2;
+import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 class CreateAnimatedNormalModifier {
   public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
     var modifier:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: AnimatedNormalModifierKind, slot: ModifierSlotValue.Normal, map: _Runtime.field(options, 'map'), scroll: _Runtime.field(options, 'scroll'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0) };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'secondaryMap', _Runtime.field(options, 'secondaryMap')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryScroll'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(modifier, 'secondaryScroll', _Runtime.field(options, 'secondaryScroll')); }
+    modifier = { kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, map: _Runtime.field(options, 'map'), scroll: _Runtime.field(options, 'scroll'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0) };
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast modifier : AnimatedNormalModifier).secondaryMap = _Runtime.field(options, 'secondaryMap')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'secondaryScroll'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast modifier : AnimatedNormalModifier).secondaryScroll = _Runtime.field(options, 'secondaryScroll')); }
     return cast modifier;
     return cast null;
   }

@@ -5,10 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.TessellateStrokePath.tessellateStrokePath;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.Path;
+import flighthq.types.PathMesh;
+import flighthq.types.StrokeStyle;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class EnableWgpuStrokePathTessellation {
   public static function enableWgpuStrokePathTessellation(state:WgpuRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'strokeTessellator', tessellateStrokePath);
+    ((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).strokeTessellator = tessellateStrokePath);
   }
 }

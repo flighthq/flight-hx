@@ -8,10 +8,10 @@ typedef PermissionName = String;
 
 typedef PermissionState = String;
 
-typedef PermissionBackend = { var getState:Dynamic; var request:Dynamic; };
+typedef PermissionBackend = { var getState:PermissionName->flighthq._internal._Promise<PermissionState>; var request:PermissionName->flighthq._internal._Promise<PermissionState>; };
 
 typedef PermissionStateSource = String;
 
 typedef PermissionStateExplanation = { var name:PermissionName; var source:PermissionStateSource; var state:PermissionState; };
 
-typedef PermissionRequestFallbackGuard = Dynamic;
+typedef PermissionRequestFallbackGuard = PermissionName->PermissionState->Void;

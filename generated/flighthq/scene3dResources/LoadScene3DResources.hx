@@ -8,9 +8,16 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.Scene3D;
+import flighthq.types.Scene3DResources;
 import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
+import flighthq.types.Scene3DResources.Scene3DResourceInFlight;
+import flighthq.types.Scene3DResources.Scene3DResourceLoadProgress;
+import flighthq.types.Scene3DResources.Scene3DResourceResolution;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
+import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Scene3DResources.Scene3DResourceWorkingSet;
+import flighthq.types.Signal;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
@@ -19,42 +26,42 @@ class LoadScene3DResources {
   public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:LoadScene3DResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var resources:Dynamic = cast _Runtime.UNDEFINED;
-        var refs:Dynamic = cast _Runtime.UNDEFINED;
-        var runtime:Dynamic = cast _Runtime.UNDEFINED;
-        var total:Dynamic = cast _Runtime.UNDEFINED;
-        var loaded:Dynamic = cast _Runtime.UNDEFINED;
+        var resources:Scene3DResources = cast _Runtime.UNDEFINED;
+        var refs:flighthq._internal._Set<ImageResourceReference> = cast _Runtime.UNDEFINED;
+        var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
+        var total:Float = cast _Runtime.UNDEFINED;
+        var loaded:Float = cast _Runtime.UNDEFINED;
         var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
-        var progress:Dynamic = cast _Runtime.UNDEFINED;
-        resources = _Runtime.callValue(updateScene3DResourceStreaming, cast ([scene, resolver, options] : Array<Dynamic>));
+        var progress:Null<Signal<Scene3DResourceLoadProgress->Void>> = cast _Runtime.UNDEFINED;
+        resources = (cast updateScene3DResourceStreaming((cast scene : Scene3D), (cast resolver : Scene3DResourceResolver), options) : Scene3DResources);
         refs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         {
-          var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(resources, 'resolved'), 'length') : Float)) : Bool)) {
-            ((cast refs : flighthq._internal._Set).add(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(resources, 'resolved'), i), 'ref')));
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast _Runtime.field((cast resources : Scene3DResources).resolved, 'length') : Float)) : Bool)) {
+            ((cast refs : flighthq._internal._Set<ImageResourceReference>).add((cast flighthq._internal._StaticIndex.readArray((cast resources : Scene3DResources).resolved, i) : Scene3DResourceResolution).ref));
             i++;
           }
         }
         {
-          var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(resources, 'unresolved'), 'length') : Float)) : Bool)) {
-            ((cast refs : flighthq._internal._Set).add(_Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(resources, 'unresolved'), i), 'ref')));
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast _Runtime.field((cast resources : Scene3DResources).unresolved, 'length') : Float)) : Bool)) {
+            ((cast refs : flighthq._internal._Set<ImageResourceReference>).add((cast flighthq._internal._StaticIndex.readArray((cast resources : Scene3DResources).unresolved, i) : Scene3DResourceWorkingSet).ref));
             i++;
           }
         }
         runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-        total = (cast refs : flighthq._internal._Set).size;
+        total = (cast refs : flighthq._internal._Set<ImageResourceReference>).size;
         loaded = 0.0;
         pending = cast ([] : Array<Dynamic>);
         progress = ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.progress; });
         for (ref in _Runtime.iterable(refs)) {
-          if ((cast ((cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Resolved) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed) : Bool)) : Bool)) {
+          if ((cast ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) {
             loaded++;
             continue;
           }
-          var entry:Dynamic = ((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).get(ref));
+          var entry:Null<Scene3DResourceInFlight> = ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
           if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty(entry.promise, 'then', cast ([function() {
+          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : flighthq.types.Scene3DResources.Scene3DResourceInFlight).promise, 'then', cast ([function():Void {
             loaded++;
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));
@@ -81,11 +88,11 @@ class LoadScene3DResources {
   public static function waitForScene3DResourceResolver(resolver:Scene3DResourceResolver):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var runtime:Dynamic = cast _Runtime.UNDEFINED;
+        var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
         var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
         promises = cast ([] : Array<Dynamic>);
-        for (entry in _Runtime.iterable(((cast _Runtime.field(runtime, 'inFlight') : flighthq._internal._Map).values()))) {
+        for (entry in _Runtime.iterable(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
           _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue12:Dynamic):Dynamic {

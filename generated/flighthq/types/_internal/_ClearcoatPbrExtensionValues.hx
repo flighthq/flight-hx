@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _ClearcoatPbrExtensionValues {
-  public static final ClearcoatPbrExtensionKind:Dynamic = 'ClearcoatPbrExtension';
+  public static final ClearcoatPbrExtensionKind:String = 'ClearcoatPbrExtension';
 }

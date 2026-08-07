@@ -4,19 +4,23 @@ package flighthq.hostTauri;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Platform.PlatformBackend;
+import flighthq.types.Platform.PlatformInfo;
+import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
+import flighthq.types.Platform.PlatformRuntime;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriOsModule;
 
 class TauriPlatform {
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
-    var os:Dynamic = cast _Runtime.UNDEFINED;
-    os = _Runtime.field(tauri, 'os');
-    return cast { getInfo: function(out:Dynamic) {
-      (out.name = cast (_Runtime.callValue(TauriPlatform.toPlatformName__tauriPlatform, cast ([_Runtime.callProperty(os, 'platform', cast ([] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+    var os:TauriOsModule = cast _Runtime.UNDEFINED;
+    os = (cast tauri : TauriApi).os;
+    return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
+      (out.name = cast ((cast TauriPlatform.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : Dynamic));
       (out.kind = cast ('desktop' : Dynamic));
-      (out.version = cast (_Runtime.callProperty(os, 'version', cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.arch = cast (_Runtime.callProperty(os, 'arch', cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.locale = cast (_Runtime.coalesce(_Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));
+      (out.version = cast ((cast os : TauriOsModule).version() : Dynamic));
+      (out.arch = cast ((cast os : TauriOsModule).arch() : Dynamic));
+      (out.locale = cast (_Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '') : Dynamic));
       (out.isTouch = cast (false : Dynamic));
       (out.runtime = cast ('tauri' : Dynamic));
       return cast out;

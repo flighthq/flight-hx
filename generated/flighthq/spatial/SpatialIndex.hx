@@ -7,48 +7,49 @@ import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialIndex;
 import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Spatial.SpatialIndexRuntime;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 
 class SpatialIndex {
   public static function clearSpatialIndex(index:flighthq.types.Spatial.SpatialIndex):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'clearSpatialIndex', cast ([] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).clearSpatialIndex();
   }
 
   public static function createSpatialIndex(?backend:SpatialIndexBackend):flighthq.types.Spatial.SpatialIndex {
-    return cast { runtime: { backend: _Runtime.coalesce(backend, function():Dynamic return cast _Runtime.callValue(createUniformGridSpatialBackend, cast ([SpatialIndex.DEFAULT_SPATIAL_CELL_SIZE__spatialIndex] : Array<Dynamic>))) } };
+    return cast { runtime: { backend: _Runtime.coalesce(backend, function():Dynamic return cast (cast createUniformGridSpatialBackend((cast SpatialIndex.DEFAULT_SPATIAL_CELL_SIZE__spatialIndex : Float)) : SpatialIndexBackend)) } };
     return cast null;
   }
 
   public static function insertSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'insertSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).insertSpatialObject(id, bounds);
     return cast null;
   }
 
   public static function querySpatialPairs(index:flighthq.types.Spatial.SpatialIndex, out:Array<SpatialPair>):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'querySpatialPairs', cast ([out] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPairs(out);
   }
 
   public static function querySpatialPoint(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'querySpatialPoint', cast ([x, y, out] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPoint(x, y, out);
   }
 
   public static function querySpatialRay(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'querySpatialRay', cast ([x, y, dx, dy, out] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRay(x, y, dx, dy, out);
   }
 
   public static function querySpatialRegion(index:flighthq.types.Spatial.SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'querySpatialRegion', cast ([region, out] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRegion(region, out);
   }
 
   public static function removeSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId):Void {
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'removeSpatialObject', cast ([id] : Array<Dynamic>));
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).removeSpatialObject(id);
   }
 
   public static function updateSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'updateSpatialObject', cast ([id, bounds] : Array<Dynamic>));
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).updateSpatialObject(id, bounds);
     return cast null;
   }
 
-  public static final DEFAULT_SPATIAL_CELL_SIZE__spatialIndex:Dynamic = 128.0;
+  public static final DEFAULT_SPATIAL_CELL_SIZE__spatialIndex:Float = 128.0;
 }

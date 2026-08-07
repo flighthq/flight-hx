@@ -7,4 +7,4 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 
 typedef ShapeRunOptions = { @:optional var direction:TextDirection; @:optional var script:String; };
 
-typedef TextShaperBackend = { @:optional var getCodePointForGlyph:Dynamic; @:optional var getFontMetrics:Dynamic; @:optional var getGlyphExtents:Dynamic; @:optional var getGlyphIndexForCodePoint:Dynamic; @:optional var getGlyphName:Dynamic; var measureText:TextMeasureFunction; @:optional var shapeRun:Dynamic; };
+typedef TextShaperBackend = { @:optional var getCodePointForGlyph:Float->Float; @:optional var getFontMetrics:TextFormat->Null<FontMetrics>; @:optional var getGlyphExtents:Float->Null<GlyphExtents>; @:optional var getGlyphIndexForCodePoint:Float->Float; @:optional var getGlyphName:Float->String; var measureText:TextMeasureFunction; @:optional var shapeRun:String->TextFormat->ShapeRunOptions->ShapedRun; };

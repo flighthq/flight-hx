@@ -34,7 +34,7 @@ class Audio {
     return cast null;
   }
 
-  public static function createAudioResourceFailure(cause:Dynamic):AudioResourceFailure {
+  public static function createAudioResourceFailure(cause:flighthq._internal._Any):AudioResourceFailure {
     return cast Facade_Audio_flighthq_audio_AudioResourceReference.createAudioResourceFailure(cause);
     return cast null;
   }
@@ -54,7 +54,7 @@ class Audio {
     return cast null;
   }
 
-  public static function detectAudioMimeType(data:Dynamic):Null<String> {
+  public static function detectAudioMimeType(data:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
     return cast Facade_Audio_flighthq_audio_AudioFormat.detectAudioMimeType(data);
     return cast null;
   }

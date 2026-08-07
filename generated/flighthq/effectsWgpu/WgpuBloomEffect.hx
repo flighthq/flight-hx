@@ -15,7 +15,10 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.BloomEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -24,58 +27,58 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuBloomEffect {
   @:noCompletion
   public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var bright:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
-    var brightPipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var compositePipeline:Dynamic = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.callValue(computeBloomThreshold, cast ([effect] : Array<Dynamic>));
-    intensity = _Runtime.callValue(computeBloomIntensity, cast ([effect] : Array<Dynamic>));
-    radius = _Runtime.callValue(computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var bright:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var brightPipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    var compositePipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    threshold = (cast computeBloomThreshold((cast effect : BloomEffect)) : Float);
+    intensity = (cast computeBloomIntensity((cast effect : BloomEffect)) : Float);
+    radius = (cast computeBloomBlurRadius((cast effect : BloomEffect)) : Float);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    bright = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    blurred = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    temp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    brightPipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'bloom.bright', WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), bright, brightPipeline, function(f32:Dynamic) {
+    bright = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    temp = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    brightPipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'bloom.bright' : String), (cast WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast bright : Null<WgpuRenderTarget>), brightPipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
-    }] : Array<Dynamic>));
-    _Runtime.callValue(applyGaussianBlurToWgpu, cast ([state, bright, blurred, temp, { blurX: radius, blurY: radius }] : Array<Dynamic>));
-    compositePipeline = _Runtime.callValue(WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), blurred, (cast dest : WgpuRenderTarget), compositePipeline, function(f32:Dynamic) {
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    applyGaussianBlurToWgpu((cast state : WgpuRenderState), (cast bright : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast temp : WgpuRenderTarget), (cast { blurX: radius, blurY: radius } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
+    compositePipeline = (cast WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
+    drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), compositePipeline, (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
-    }] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, bright] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, temp] : Array<Dynamic>));
+    }, cast ([__unused4] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast bright : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurred : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast temp : WgpuRenderTarget));
   }
 
-  public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBloomEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
+  public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyBloomEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : BloomEffect) : BloomEffect));
   };
 
   public static function registerWgpuBloomEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BloomEffect', defaultWgpuBloomEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'BloomEffect' : String), (cast defaultWgpuBloomEffectRunner : WgpuRenderEffectRunner));
   }
 
   public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    pipeline = ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap).get(state));
+    var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    pipeline = ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuBloomEffect.BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect, 'replace'] : Array<Dynamic>)) : Dynamic));
-      ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap).set(state, pipeline));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state : WgpuRenderState), (cast WgpuBloomEffect.BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect : String), 'replace') : Null<WgpuEffectPipeline>) : Dynamic));
+      ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, pipeline));
     }
     return cast pipeline;
     return cast null;
   }
 
-  public static final _compositePipelines__wgpuBloomEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _compositePipelines__wgpuBloomEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect:Dynamic = '\nstruct Uniforms { u_threshold : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let l = dot(c.rgb, vec3f(0.2126, 0.7152, 0.0722));\n  let k = step(uni.u_threshold, l);\n  return vec4f(c.rgb * k, c.a);\n}';
+  public static final BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect:String = '\nstruct Uniforms { u_threshold : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let l = dot(c.rgb, vec3f(0.2126, 0.7152, 0.0722));\n  let k = step(uni.u_threshold, l);\n  return vec4f(c.rgb * k, c.a);\n}';
 
-  public static final BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect:Dynamic = '\nstruct Uniforms { u_intensity : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex0 : texture_2d<f32>;\n@group(1) @binding(1) var smp0 : sampler;\n@group(2) @binding(0) var tex1 : texture_2d<f32>;\n@group(2) @binding(1) var smp1 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let scene = textureSampleLevel(tex0, smp0, uv, 0.0);\n  let bloom = textureSampleLevel(tex1, smp1, uv, 0.0);\n  return vec4f(scene.rgb + bloom.rgb * uni.u_intensity, scene.a);\n}';
+  public static final BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect:String = '\nstruct Uniforms { u_intensity : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex0 : texture_2d<f32>;\n@group(1) @binding(1) var smp0 : sampler;\n@group(2) @binding(0) var tex1 : texture_2d<f32>;\n@group(2) @binding(1) var smp1 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let scene = textureSampleLevel(tex0, smp0, uv, 0.0);\n  let bloom = textureSampleLevel(tex1, smp1, uv, 0.0);\n  return vec4f(scene.rgb + bloom.rgb * uni.u_intensity, scene.a);\n}';
 }

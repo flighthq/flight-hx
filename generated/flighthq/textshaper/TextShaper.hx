@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper._TextShaperHooks._textShaperBackendHook;
 import flighthq.types.TextFormat;
+import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextShaper.TextShaperBackend;
 
 class TextShaper {
@@ -16,7 +17,7 @@ class TextShaper {
 
   public static function measureText(text:String, format:TextFormat):Float {
     if ((cast _Runtime.strictEquals(TextShaper._backend__textShaper, null) : Bool)) { return cast -1.0; }
-    return cast _Runtime.callProperty(TextShaper._backend__textShaper, 'measureText', cast ([text, format] : Array<Dynamic>));
+    return cast (cast TextShaper._backend__textShaper : TextShaperBackend).measureText(text, format);
     return cast null;
   }
 

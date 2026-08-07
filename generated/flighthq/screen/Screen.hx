@@ -9,30 +9,32 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Screen.ScreenBackend;
 import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenChangeEvent;
+import flighthq.types.ScreenChangeEvent.ScreenChangeKind;
 import flighthq.types.ScreenChangeEvent.ScreenChangedMetrics;
 import flighthq.types.ScreenColorSpace;
 import flighthq.types.ScreenMode;
 import flighthq.types.ScreenOrientation;
 import flighthq.types.ScreenSignals;
+import flighthq.types.Signal;
 import flighthq.types.Vector2.Vector2Like;
 
 typedef ScreenDetailed__screen = { var availLeft:Float; var availTop:Float; var availWidth:Float; var availHeight:Float; var colorDepth:Float; var devicePixelRatio:Float; var height:Float; @:optional var isExtended:Bool; @:optional var isInternal:Bool; @:optional var isPrimary:Bool; var label:String; var left:Float; var pixelDepth:Float; @:optional var refreshRate:Float; var top:Float; var width:Float; };
 
-typedef ScreenDetails__screen = { var currentScreen:ScreenDetailed__screen; var screens:Array<ScreenDetailed__screen>; var addEventListener:Dynamic; var removeEventListener:Dynamic; };
+typedef ScreenDetails__screen = { var currentScreen:ScreenDetailed__screen; var screens:Array<ScreenDetailed__screen>; var addEventListener:String->Void->Void->Void; var removeEventListener:String->Void->Void->Void; };
 
-typedef WebScreenOrientationObject__screen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:Dynamic; @:optional var removeEventListener:Dynamic; };
+typedef WebScreenOrientationObject__screen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:String->Void->Void->Void; @:optional var removeEventListener:String->Void->Void->Void; };
 
 class Screen {
   public static var _backend__screen:Null<ScreenBackend> = _Runtime.explicitNull();
 
-  public static final _scratchPoint__screen:Dynamic = { x: 0.0, y: 0.0 };
+  public static final _scratchPoint__screen:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
 
-  public static final _signalSubscriptions__screen:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _signalSubscriptions__screen:flighthq._internal._WeakMap<ScreenSignals, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachScreenSignals(signals:ScreenSignals):Void {
-    var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
-    unsubscribe = _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([function(event:Dynamic) {
+    var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
+    detachScreenSignals((cast signals : ScreenSignals));
+    unsubscribe = (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).subscribe(function(event:ScreenChangeEvent):Void {
       if ((cast _Runtime.strictEquals(event.kind, 'ScreenAdded') : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenAdded], [event.screen]]), 1);
       } else { if ((cast _Runtime.strictEquals(event.kind, 'ScreenRemoved') : Bool)) {
@@ -40,8 +42,8 @@ class Screen {
       } else {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenMetricsChanged], [event]]), 1);
       } }
-    }] : Array<Dynamic>));
-    ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).set(signals, unsubscribe));
+    });
+    ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap<ScreenSignals, Void->Void>).set(signals, unsubscribe));
   }
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
@@ -85,7 +87,7 @@ class Screen {
 
   @:noCompletion
   public static function createScreenSignals():ScreenSignals {
-    return cast { onScreenAdded: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenMetricsChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenRemoved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onScreenAdded: (cast createSignal() : Signal<ScreenInfo->Void>), onScreenMetricsChanged: (cast createSignal() : Signal<ScreenChangeEvent->Void>), onScreenRemoved: (cast createSignal() : Signal<ScreenInfo->Void>) };
     return cast null;
   }
 
@@ -95,63 +97,63 @@ class Screen {
     var upgradeToScreenDetails:ScreenDetails__screen->Void = cast _Runtime.UNDEFINED;
     var buildScreenInfoFromDetailed:ScreenDetailed__screen->Float->Float->ScreenInfo->Void = cast _Runtime.UNDEFINED;
     var buildCurrentScreenInfo:ScreenInfo->Void = cast _Runtime.UNDEFINED;
-    var _cursorX:Dynamic = cast _Runtime.UNDEFINED;
-    var _cursorY:Dynamic = cast _Runtime.UNDEFINED;
-    var _cursorTracking:Dynamic = cast _Runtime.UNDEFINED;
+    var _cursorX:Float = cast _Runtime.UNDEFINED;
+    var _cursorY:Float = cast _Runtime.UNDEFINED;
+    var _cursorTracking:Bool = cast _Runtime.UNDEFINED;
     var _cachedScreens:Null<Array<ScreenInfo>> = cast _Runtime.UNDEFINED;
     var _screenDetails:Null<ScreenDetails__screen> = cast _Runtime.UNDEFINED;
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    ensureCursorTracking = function ensureCursorTracking():Void {
+    var backend:{ >ScreenBackend, var _upgrade:ScreenDetails__screen->Void; } = cast _Runtime.UNDEFINED;
+    ensureCursorTracking = (cast function ensureCursorTracking():Void {
       if ((cast ((cast _cursorTracking : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) : Bool)) { return; }
       (_cursorTracking = cast (true : Dynamic));
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pointermove', function(e:flighthq._internal.dom.PointerEvent) {
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pointermove', function(e:flighthq._internal.dom.PointerEvent):Void {
         (_cursorX = cast (e.screenX : Dynamic));
         (_cursorY = cast (e.screenY : Dynamic));
       }] : Array<Dynamic>));
-    };
-    upgradeToScreenDetails = function upgradeToScreenDetails(details:ScreenDetails__screen):Void {
+    } : Void->Void);
+    upgradeToScreenDetails = (cast function upgradeToScreenDetails(details:ScreenDetails__screen):Void {
       (_screenDetails = cast (details : Dynamic));
       (_cachedScreens = cast (null : Dynamic));
-    };
-    buildScreenInfoFromDetailed = function buildScreenInfoFromDetailed(sd:ScreenDetailed__screen, index:Float, primaryIndex:Float, out:ScreenInfo):Void {
+    } : ScreenDetails__screen->Void);
+    buildScreenInfoFromDetailed = (cast function buildScreenInfoFromDetailed(sd:ScreenDetailed__screen, index:Float, primaryIndex:Float, out:ScreenInfo):Void {
       (out.id = cast (index : Dynamic));
-      (out.x = cast (_Runtime.field(sd, 'left') : Dynamic));
-      (out.y = cast (_Runtime.field(sd, 'top') : Dynamic));
-      (out.width = cast (_Runtime.field(sd, 'width') : Dynamic));
-      (out.height = cast (_Runtime.field(sd, 'height') : Dynamic));
-      (out.workWidth = cast (_Runtime.field(sd, 'availWidth') : Dynamic));
-      (out.workHeight = cast (_Runtime.field(sd, 'availHeight') : Dynamic));
-      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'devicePixelRatio')), 'number') : Bool) ? (cast _Runtime.field(sd, 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-      (out.isPrimary = cast (((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce(_Runtime.field(sd, 'isPrimary'), function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)) : Dynamic));
-      (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.refreshRate = cast (((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'refreshRate')), 'number') : Bool) && (cast ((cast _Runtime.field(sd, 'refreshRate') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(sd, 'refreshRate') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(sd, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.x = cast ((cast sd : ScreenDetailed__screen).left : Dynamic));
+      (out.y = cast ((cast sd : ScreenDetailed__screen).top : Dynamic));
+      (out.width = cast ((cast sd : ScreenDetailed__screen).width : Dynamic));
+      (out.height = cast ((cast sd : ScreenDetailed__screen).height : Dynamic));
+      (out.workWidth = cast ((cast sd : ScreenDetailed__screen).availWidth : Dynamic));
+      (out.workHeight = cast ((cast sd : ScreenDetailed__screen).availHeight : Dynamic));
+      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).devicePixelRatio), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).devicePixelRatio : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+      (out.isPrimary = cast (((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce((cast sd : ScreenDetailed__screen).isPrimary, function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)) : Dynamic));
+      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Dynamic));
+      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : Dynamic));
+      (out.refreshRate = cast (((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).refreshRate), 'number') : Bool) && (cast ((cast (cast sd : ScreenDetailed__screen).refreshRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast sd : ScreenDetailed__screen).refreshRate : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).colorDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).pixelDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
       (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
-      (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.colorSpace = cast (_Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Dynamic));
+      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : Dynamic));
       (out.maxLuminance = cast (-1.0 : Dynamic));
       (out.depthPerComponent = cast (-1.0 : Dynamic));
       (out.dpi = cast (-1.0 : Dynamic));
-      (out.label = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'label')), 'string') : Bool) ? (cast _Runtime.field(sd, 'label') : Dynamic) : (cast '' : Dynamic)) : Dynamic));
-      (out.internal = cast (_Runtime.coalesce(_Runtime.field(sd, 'isInternal'), function():Dynamic return cast false) : Dynamic));
+      (out.label = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).label), 'string') : Bool) ? (cast (cast sd : ScreenDetailed__screen).label : Dynamic) : (cast '' : Dynamic)) : Dynamic));
+      (out.internal = cast (_Runtime.coalesce((cast sd : ScreenDetailed__screen).isInternal, function():Dynamic return cast false) : Dynamic));
       (out.touchSupport = cast ('unknown' : Dynamic));
       (out.monochrome = cast (false : Dynamic));
-    };
-    buildCurrentScreenInfo = function buildCurrentScreenInfo(out:ScreenInfo):Void {
-      var s:Dynamic = cast _Runtime.UNDEFINED;
+    } : ScreenDetailed__screen->Float->Float->ScreenInfo->Void);
+    buildCurrentScreenInfo = (cast function buildCurrentScreenInfo(out:ScreenInfo):Void {
+      var s:flighthq._internal.dom.Screen = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
-        _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
+        Screen.fillDefaultScreenInfo__screen((cast out : ScreenInfo));
         return;
       }
       if ((cast !_Runtime.strictEquals(_screenDetails, null) : Bool)) {
-        var screens:Dynamic = _Runtime.field(_screenDetails, 'screens');
-        var primaryIndex:Dynamic = _Runtime.findIndex(screens, function(s:Dynamic) return _Runtime.coalesce(_Runtime.field(s, 'isPrimary'), function():Dynamic return cast false));
-        var current:Dynamic = _Runtime.field(_screenDetails, 'currentScreen');
-        var currentIndex:Dynamic = _Runtime.callProperty(screens, 'indexOf', cast ([current] : Array<Dynamic>));
-        _Runtime.callValue(buildScreenInfoFromDetailed, cast ([current, ((cast ((cast currentIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast currentIndex : Dynamic) : (cast 0.0 : Dynamic)), primaryIndex, out] : Array<Dynamic>));
+        var screens:Array<ScreenDetailed__screen> = (cast _screenDetails : ScreenDetails__screen).screens;
+        var primaryIndex:Float = _Runtime.findIndex(screens, function(s:ScreenDetailed__screen, __unused0:Float, __unused1:Array<ScreenDetailed__screen>):Bool return _Runtime.coalesce((cast s : ScreenDetailed__screen).isPrimary, function():Dynamic return cast false));
+        var current:ScreenDetailed__screen = (cast _screenDetails : ScreenDetails__screen).currentScreen;
+        var currentIndex:Float = _Runtime.callProperty(screens, 'indexOf', cast ([current] : Array<Dynamic>));
+        buildScreenInfoFromDetailed(current, (cast ((cast ((cast currentIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast currentIndex : Dynamic) : (cast 0.0 : Dynamic)) : Float), (cast primaryIndex : Float), (cast out : ScreenInfo));
         return;
       }
       s = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen');
@@ -164,15 +166,15 @@ class Screen {
       (out.workHeight = cast ((cast s : flighthq._internal.dom.Screen).availHeight : Dynamic));
       (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
       (out.isPrimary = cast (true : Dynamic));
-      (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Dynamic));
+      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : Dynamic));
       (out.refreshRate = cast (-1.0 : Dynamic));
       (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).colorDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).pixelDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
       (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
-      (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
-      (out.colorSpace = cast (_Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Dynamic));
+      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : Dynamic));
       (out.maxLuminance = cast (-1.0 : Dynamic));
       (out.depthPerComponent = cast (-1.0 : Dynamic));
       (out.dpi = cast (-1.0 : Dynamic));
@@ -180,132 +182,132 @@ class Screen {
       (out.internal = cast (false : Dynamic));
       (out.touchSupport = cast ('unknown' : Dynamic));
       (out.monochrome = cast (false : Dynamic));
-    };
+    } : ScreenInfo->Void);
     _cursorX = 0.0;
     _cursorY = 0.0;
     _cursorTracking = false;
     _cachedScreens = null;
     _screenDetails = null;
-    backend = { _upgrade: upgradeToScreenDetails, getScreens: function(out:Dynamic) {
+    backend = { _upgrade: upgradeToScreenDetails, getScreens: function(out:Array<ScreenInfo>):Array<ScreenInfo> {
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
         _Runtime.setLength(out, 0.0);
         return cast out;
       }
       if ((cast !_Runtime.strictEquals(_screenDetails, null) : Bool)) {
-        var screens:Dynamic = _Runtime.field(_screenDetails, 'screens');
-        var primaryIndex:Dynamic = _Runtime.findIndex(screens, function(s:Dynamic) return _Runtime.coalesce(_Runtime.field(s, 'isPrimary'), function():Dynamic return cast false));
+        var screens:Array<ScreenDetailed__screen> = (cast _screenDetails : ScreenDetails__screen).screens;
+        var primaryIndex:Float = _Runtime.findIndex(screens, function(s:ScreenDetailed__screen, __unused2:Float, __unused3:Array<ScreenDetailed__screen>):Bool return _Runtime.coalesce((cast s : ScreenDetailed__screen).isPrimary, function():Dynamic return cast false));
         _Runtime.setLength(out, _Runtime.field(screens, 'length'));
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(screens, 'length') : Float)) : Bool)) {
-            if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, i), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
-            _Runtime.callValue(buildScreenInfoFromDetailed, cast ([flighthq._internal._StaticIndex.readArray(screens, i), i, primaryIndex, flighthq._internal._StaticIndex.readArray(out, i)] : Array<Dynamic>));
+            if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, i), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, i, (cast createScreenInfo() : ScreenInfo)); }
+            buildScreenInfoFromDetailed(flighthq._internal._StaticIndex.readArray(screens, i), (cast i : Float), (cast primaryIndex : Float), (cast flighthq._internal._StaticIndex.readArray(out, i) : ScreenInfo));
             i++;
           }
         }
-        (_cachedScreens = cast (_Runtime.callProperty(_Runtime.slice(out, 0.0, _Runtime.field(screens, 'length')), 'map', cast ([function(s:Dynamic) return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
+        (_cachedScreens = cast (_Runtime.callProperty(_Runtime.slice(out, 0.0, _Runtime.field(screens, 'length')), 'map', cast ([function(s:ScreenInfo, __unused4:Float, __unused5:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
         return cast out;
       }
       _Runtime.setLength(out, 1.0);
-      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>))); }
-      _Runtime.callValue(buildCurrentScreenInfo, cast ([flighthq._internal._StaticIndex.readArray(out, 0.0)] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenInfo() : ScreenInfo)); }
+      buildCurrentScreenInfo((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : ScreenInfo));
       (_cachedScreens = cast (cast ([_Runtime.mergeObjects([flighthq._internal._StaticIndex.readArray(out, 0.0)])] : Array<Dynamic>) : Dynamic));
       return cast out;
-    }, getPrimaryScreen: function(out:Dynamic) {
+    }, getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
-        _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
+        Screen.fillDefaultScreenInfo__screen((cast out : ScreenInfo));
         return cast out;
       }
       if ((cast !_Runtime.strictEquals(_screenDetails, null) : Bool)) {
-        var screens:Dynamic = _Runtime.field(_screenDetails, 'screens');
-        var primaryIndex:Dynamic = _Runtime.findIndex(screens, function(s:Dynamic) return _Runtime.coalesce(_Runtime.field(s, 'isPrimary'), function():Dynamic return cast false));
-        var idx:Dynamic = ((cast ((cast primaryIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast primaryIndex : Dynamic) : (cast 0.0 : Dynamic));
+        var screens:Array<ScreenDetailed__screen> = (cast _screenDetails : ScreenDetails__screen).screens;
+        var primaryIndex:Float = _Runtime.findIndex(screens, function(s:ScreenDetailed__screen, __unused6:Float, __unused7:Array<ScreenDetailed__screen>):Bool return _Runtime.coalesce((cast s : ScreenDetailed__screen).isPrimary, function():Dynamic return cast false));
+        var idx:Float = ((cast ((cast primaryIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast primaryIndex : Dynamic) : (cast 0.0 : Dynamic));
         if ((cast ((cast _Runtime.field(screens, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(buildScreenInfoFromDetailed, cast ([flighthq._internal._StaticIndex.readArray(screens, idx), idx, idx, out] : Array<Dynamic>));
+          buildScreenInfoFromDetailed(flighthq._internal._StaticIndex.readArray(screens, idx), (cast idx : Float), (cast idx : Float), (cast out : ScreenInfo));
           return cast out;
         }
       }
-      _Runtime.callValue(buildCurrentScreenInfo, cast ([out] : Array<Dynamic>));
+      buildCurrentScreenInfo((cast out : ScreenInfo));
       return cast out;
-    }, subscribe: function(listener:Dynamic) {
-      var handleChange:Dynamic = cast _Runtime.UNDEFINED;
-      var orientation:Dynamic = cast _Runtime.UNDEFINED;
-      var detailsRef:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function() {
+    }, subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
+      var handleChange:Void->Void = cast _Runtime.UNDEFINED;
+      var orientation:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
+      var detailsRef:Null<ScreenDetails__screen> = cast _Runtime.UNDEFINED;
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
       }; }
       if ((cast _Runtime.strictEquals(_cachedScreens, null) : Bool)) {
-        var scratch:Dynamic = _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(buildCurrentScreenInfo, cast ([scratch] : Array<Dynamic>));
+        var scratch:ScreenInfo = (cast createScreenInfo() : ScreenInfo);
+        buildCurrentScreenInfo((cast scratch : ScreenInfo));
         (_cachedScreens = cast (cast ([_Runtime.mergeObjects([scratch])] : Array<Dynamic>) : Dynamic));
       }
-      handleChange = function() {
-        var scratch:Dynamic = cast _Runtime.UNDEFINED;
-        var prev:Dynamic = cast _Runtime.UNDEFINED;
-        var changed:Dynamic = cast _Runtime.UNDEFINED;
+      handleChange = (cast function():Void {
+        var scratch:ScreenInfo = cast _Runtime.UNDEFINED;
+        var prev:Null<ScreenInfo> = cast _Runtime.UNDEFINED;
+        var changed:Null<ScreenChangedMetrics> = cast _Runtime.UNDEFINED;
         if ((cast !_Runtime.strictEquals(_screenDetails, null) : Bool)) {
-          var details:Dynamic = _screenDetails;
-          var screens:Dynamic = _Runtime.field(details, 'screens');
-          var primaryIndex:Dynamic = _Runtime.findIndex(screens, function(s:Dynamic) return _Runtime.coalesce(_Runtime.field(s, 'isPrimary'), function():Dynamic return cast false));
-          var newInfos:Array<ScreenInfo> = _Runtime.callProperty(screens, 'map', cast ([function(sd:Dynamic, i:Dynamic) {
-            var info:Dynamic = cast _Runtime.UNDEFINED;
-            info = _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>));
-            _Runtime.callValue(buildScreenInfoFromDetailed, cast ([sd, i, primaryIndex, info] : Array<Dynamic>));
+          var details:ScreenDetails__screen = _screenDetails;
+          var screens:Array<ScreenDetailed__screen> = (cast details : ScreenDetails__screen).screens;
+          var primaryIndex:Float = _Runtime.findIndex(screens, function(s:ScreenDetailed__screen, __unused8:Float, __unused9:Array<ScreenDetailed__screen>):Bool return _Runtime.coalesce((cast s : ScreenDetailed__screen).isPrimary, function():Dynamic return cast false));
+          var newInfos:Array<ScreenInfo> = _Runtime.callProperty(screens, 'map', cast ([function(sd:ScreenDetailed__screen, i:Float, __unused10:Array<ScreenDetailed__screen>):ScreenInfo {
+            var info:ScreenInfo = cast _Runtime.UNDEFINED;
+            info = (cast createScreenInfo() : ScreenInfo);
+            buildScreenInfoFromDetailed(sd, (cast i : Float), (cast primaryIndex : Float), (cast info : ScreenInfo));
             return cast info;
           }] : Array<Dynamic>));
-          var prevCache:Dynamic = _Runtime.coalesce(_cachedScreens, function():Dynamic return cast cast ([] : Array<Dynamic>));
+          var prevCache:Array<ScreenInfo> = _Runtime.coalesce(_cachedScreens, function():Dynamic return cast cast ([] : Array<Dynamic>));
           for (prev in _Runtime.iterable(prevCache)) {
-            var stillPresent:Dynamic = _Runtime.callProperty(newInfos, 'some', cast ([function(n:Dynamic) return _Runtime.strictEquals(n.id, prev.id)] : Array<Dynamic>));
+            var stillPresent:Bool = _Runtime.callProperty(newInfos, 'some', cast ([function(n:ScreenInfo, __unused11:Float, __unused12:Array<ScreenInfo>):Bool return _Runtime.strictEquals(n.id, prev.id)] : Array<Dynamic>));
             if ((cast !(cast stillPresent : Bool) : Bool)) {
-              _Runtime.callValue(listener, cast ([{ kind: 'ScreenRemoved', screen: prev, changedMetrics: null }] : Array<Dynamic>));
+              listener((cast { kind: 'ScreenRemoved', screen: prev, changedMetrics: null } : ScreenChangeEvent));
             }
           }
           for (curr in _Runtime.iterable(newInfos)) {
-            var prev:Dynamic = _Runtime.find(prevCache, function(p:Dynamic) return _Runtime.strictEquals(p.id, curr.id));
+            var prev:Null<ScreenInfo> = _Runtime.find(prevCache, function(p:ScreenInfo, __unused13:Float, __unused14:Array<ScreenInfo>):Bool return _Runtime.strictEquals(p.id, curr.id));
             if ((cast _Runtime.strictEquals(prev, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              _Runtime.callValue(listener, cast ([{ kind: 'ScreenAdded', screen: curr, changedMetrics: null }] : Array<Dynamic>));
+              listener((cast { kind: 'ScreenAdded', screen: curr, changedMetrics: null } : ScreenChangeEvent));
             } else {
-              var changed:Dynamic = _Runtime.callValue(Screen.diffScreenInfo__screen, cast ([prev, curr] : Array<Dynamic>));
+              var changed:Null<ScreenChangedMetrics> = (cast Screen.diffScreenInfo__screen((cast prev : ScreenInfo), (cast curr : ScreenInfo)) : Null<ScreenChangedMetrics>);
               if ((cast !_Runtime.strictEquals(changed, null) : Bool)) {
-                _Runtime.callValue(listener, cast ([{ kind: 'ScreenMetricsChanged', screen: curr, changedMetrics: changed }] : Array<Dynamic>));
+                listener((cast { kind: 'ScreenMetricsChanged', screen: curr, changedMetrics: changed } : ScreenChangeEvent));
               }
             }
           }
-          (_cachedScreens = cast (_Runtime.callProperty(newInfos, 'map', cast ([function(s:Dynamic) return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
+          (_cachedScreens = cast (_Runtime.callProperty(newInfos, 'map', cast ([function(s:ScreenInfo, __unused15:Float, __unused16:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
           return;
         }
-        scratch = _Runtime.callValue(createScreenInfo, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(buildCurrentScreenInfo, cast ([scratch] : Array<Dynamic>));
+        scratch = (cast createScreenInfo() : ScreenInfo);
+        buildCurrentScreenInfo((cast scratch : ScreenInfo));
         prev = _Runtime.optionalIndex(_cachedScreens, 0.0);
         if ((cast _Runtime.strictEquals(prev, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (_cachedScreens = cast (cast ([_Runtime.mergeObjects([scratch])] : Array<Dynamic>) : Dynamic));
-          _Runtime.callValue(listener, cast ([{ kind: 'ScreenAdded', screen: scratch, changedMetrics: null }] : Array<Dynamic>));
+          listener((cast { kind: 'ScreenAdded', screen: scratch, changedMetrics: null } : ScreenChangeEvent));
           return;
         }
-        changed = _Runtime.callValue(Screen.diffScreenInfo__screen, cast ([prev, scratch] : Array<Dynamic>));
+        changed = (cast Screen.diffScreenInfo__screen((cast prev : ScreenInfo), (cast scratch : ScreenInfo)) : Null<ScreenChangedMetrics>);
         if ((cast !_Runtime.strictEquals(changed, null) : Bool)) {
           flighthq._internal.DynamicObject.assign(prev, scratch);
-          _Runtime.callValue(listener, cast ([{ kind: 'ScreenMetricsChanged', screen: scratch, changedMetrics: changed }] : Array<Dynamic>));
+          listener((cast { kind: 'ScreenMetricsChanged', screen: scratch, changedMetrics: changed } : ScreenChangeEvent));
         }
-      };
+      } : Void->Void);
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['resize', handleChange] : Array<Dynamic>));
-      orientation = _Runtime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
+      orientation = (cast Screen.getWebScreenOrientationObject__screen() : Null<WebScreenOrientationObject__screen>);
       _Runtime.callOptionalProperty(orientation, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
       detailsRef = _screenDetails;
       _Runtime.callOptionalProperty(detailsRef, 'addEventListener', cast (['screenschange', handleChange] : Array<Dynamic>));
-      return cast function() {
+      return cast function():Void {
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['resize', handleChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(orientation, 'removeEventListener', cast (['change', handleChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(detailsRef, 'removeEventListener', cast (['screenschange', handleChange] : Array<Dynamic>));
       };
-    }, getCursorPosition: function(out:Dynamic) {
-      _Runtime.callValue(ensureCursorTracking, cast ([] : Array<Dynamic>));
-      _Runtime.setField(out, 'x', _cursorX);
-      _Runtime.setField(out, 'y', _cursorY);
+    }, getCursorPosition: function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+      ensureCursorTracking();
+      ((cast out : { var x:Float; var y:Float; }).x = _cursorX);
+      ((cast out : { var x:Float; var y:Float; }).y = _cursorY);
       return cast out;
-    }, getModes: function(screen:Dynamic, out:Dynamic) {
+    }, getModes: function(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
       _Runtime.setLength(out, 1.0);
-      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenMode() : ScreenMode)); }
       (flighthq._internal._StaticIndex.readArray(out, 0.0).width = cast (screen.width : Dynamic));
       (flighthq._internal._StaticIndex.readArray(out, 0.0).height = cast (screen.height : Dynamic));
       (flighthq._internal._StaticIndex.readArray(out, 0.0).refreshRate = cast (screen.refreshRate : Dynamic));
@@ -318,19 +320,19 @@ class Screen {
   }
 
   public static function detachScreenSignals(signals:ScreenSignals):Void {
-    var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).get(signals));
+    var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
+    unsubscribe = ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap<ScreenSignals, Void->Void>).get(signals));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap).delete_(signals));
+      unsubscribe();
+      ((cast Screen._signalSubscriptions__screen : flighthq._internal._WeakMap<ScreenSignals, Void->Void>).delete_(signals));
     }
   }
 
   public static function diffScreenInfo__screen(prev:ScreenInfo, curr:ScreenInfo):Null<ScreenChangedMetrics> {
-    var boundsChanged:Dynamic = cast _Runtime.UNDEFINED;
-    var workAreaChanged:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleChanged:Dynamic = cast _Runtime.UNDEFINED;
-    var orientationChanged:Dynamic = cast _Runtime.UNDEFINED;
+    var boundsChanged:Bool = cast _Runtime.UNDEFINED;
+    var workAreaChanged:Bool = cast _Runtime.UNDEFINED;
+    var scaleChanged:Bool = cast _Runtime.UNDEFINED;
+    var orientationChanged:Bool = cast _Runtime.UNDEFINED;
     boundsChanged = ((cast ((cast ((cast !_Runtime.strictEquals(prev.x, curr.x) : Bool) || (cast !_Runtime.strictEquals(prev.y, curr.y) : Bool)) : Bool) || (cast !_Runtime.strictEquals(prev.width, curr.width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(prev.height, curr.height) : Bool));
     workAreaChanged = ((cast !_Runtime.strictEquals(prev.workWidth, curr.workWidth) : Bool) || (cast !_Runtime.strictEquals(prev.workHeight, curr.workHeight) : Bool));
     scaleChanged = !_Runtime.strictEquals(prev.scaleFactor, curr.scaleFactor);
@@ -341,41 +343,41 @@ class Screen {
   }
 
   public static function dipToScreenPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
-    _Runtime.setField(out, 'x', ((px - screen.x) * screen.scaleFactor));
-    _Runtime.setField(out, 'y', ((py - screen.y) * screen.scaleFactor));
+    ((cast out : { var x:Float; var y:Float; }).x = ((px - screen.x) * screen.scaleFactor));
+    ((cast out : { var x:Float; var y:Float; }).y = ((py - screen.y) * screen.scaleFactor));
     return cast out;
     return cast null;
   }
 
   public static function dipToScreenRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rw:Dynamic = cast _Runtime.UNDEFINED;
-    var rh:Dynamic = cast _Runtime.UNDEFINED;
-    var sf:Dynamic = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rw:Float = cast _Runtime.UNDEFINED;
+    var rh:Float = cast _Runtime.UNDEFINED;
+    var sf:Float = cast _Runtime.UNDEFINED;
     rx = _Runtime.field(rect, 'x');
     ry = _Runtime.field(rect, 'y');
     rw = _Runtime.field(rect, 'width');
     rh = _Runtime.field(rect, 'height');
     sf = screen.scaleFactor;
-    _Runtime.setField(out, 'x', ((rx - screen.x) * sf));
-    _Runtime.setField(out, 'y', ((ry - screen.y) * sf));
-    _Runtime.setField(out, 'width', (rw * sf));
-    _Runtime.setField(out, 'height', (rh * sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = ((rx - screen.x) * sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = ((ry - screen.y) * sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).width = (rw * sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = (rh * sf));
     return cast out;
     return cast null;
   }
 
   public static function disposeScreenSignals(signals:ScreenSignals):Void {
-    _Runtime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
+    detachScreenSignals((cast signals : ScreenSignals));
   }
 
   public static function enableScreenSignals():ScreenSignals {
-    return cast _Runtime.callValue(createScreenSignals, cast ([] : Array<Dynamic>));
+    return cast (cast createScreenSignals() : ScreenSignals);
     return cast null;
   }
 
@@ -408,22 +410,22 @@ class Screen {
   }
 
   public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
-    return cast _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getPrimaryScreen', cast ([out] : Array<Dynamic>));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getPrimaryScreen(out);
     return cast null;
   }
 
   @:noCompletion
   public static function getScreenBackend():ScreenBackend {
-    if ((cast _Runtime.strictEquals(Screen._backend__screen, null) : Bool)) { (Screen._backend__screen = cast (_Runtime.callValue(createWebScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Screen._backend__screen, null) : Bool)) { (Screen._backend__screen = cast ((cast createWebScreenBackend() : Null<ScreenBackend>) : Dynamic)); }
     return cast Screen._backend__screen;
     return cast null;
   }
 
   public static function getScreenBounds(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    _Runtime.setField(out, 'x', screen.x);
-    _Runtime.setField(out, 'y', screen.y);
-    _Runtime.setField(out, 'width', screen.width);
-    _Runtime.setField(out, 'height', screen.height);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = screen.x);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = screen.y);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).width = screen.width);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = screen.height);
     return cast out;
     return cast null;
   }
@@ -431,10 +433,10 @@ class Screen {
   public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
     screens = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
+    (cast getScreens((cast screens : Array<ScreenInfo>)) : Array<ScreenInfo>);
     for (screen in _Runtime.iterable(screens)) {
       if ((cast _Runtime.strictEquals(screen.id, id) : Bool)) {
-        _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
+        Screen.copyScreenInfo__screen((cast screen : ScreenInfo), (cast out : ScreenInfo));
         return cast out;
       }
     }
@@ -444,42 +446,42 @@ class Screen {
 
   public static function getScreenContainingRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
-    var bestScreen:Dynamic = cast _Runtime.UNDEFINED;
-    var bestOverlap:Dynamic = cast _Runtime.UNDEFINED;
+    var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
+    var bestOverlap:Float = cast _Runtime.UNDEFINED;
     screens = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
+    (cast getScreens((cast screens : Array<ScreenInfo>)) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
+      Screen.fillDefaultScreenInfo__screen((cast out : ScreenInfo));
       return cast out;
     }
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
-      var ox:Dynamic = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width')), (screen.x + screen.width)), HxMath.max(_Runtime.field(rect, 'x'), screen.x)));
-      var oy:Dynamic = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')), (screen.y + screen.height)), HxMath.max(_Runtime.field(rect, 'y'), screen.y)));
-      var overlap:Dynamic = (ox * oy);
+      var ox:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width')), (screen.x + screen.width)), HxMath.max(_Runtime.field(rect, 'x'), screen.x)));
+      var oy:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')), (screen.y + screen.height)), HxMath.max(_Runtime.field(rect, 'y'), screen.y)));
+      var overlap:Float = (ox * oy);
       if ((cast ((cast overlap : Float) > (cast bestOverlap : Float)) : Bool)) {
         (bestOverlap = cast (overlap : Dynamic));
         (bestScreen = cast (screen : Dynamic));
       }
     }
     if ((cast ((cast bestOverlap : Float) <= (cast 0.0 : Float)) : Bool)) {
-      var cx:Dynamic = _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.divideNumbers(_Runtime.field(rect, 'width'), 2.0));
-      var cy:Dynamic = _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.divideNumbers(_Runtime.field(rect, 'height'), 2.0));
-      var bestDist:Dynamic = HxMath.POSITIVE_INFINITY;
+      var cx:Float = _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.divideNumbers(_Runtime.field(rect, 'width'), 2.0));
+      var cy:Float = _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.divideNumbers(_Runtime.field(rect, 'height'), 2.0));
+      var bestDist:Float = HxMath.POSITIVE_INFINITY;
       for (screen in _Runtime.iterable(screens)) {
-        var scx:Dynamic = (screen.x + (screen.width / 2.0));
-        var scy:Dynamic = (screen.y + (screen.height / 2.0));
-        var dx:Dynamic = (cx - scx);
-        var dy:Dynamic = (cy - scy);
-        var dist:Dynamic = ((dx * dx) + (dy * dy));
+        var scx:Float = (screen.x + (screen.width / 2.0));
+        var scy:Float = (screen.y + (screen.height / 2.0));
+        var dx:Float = (cx - scx);
+        var dy:Float = (cy - scy);
+        var dist:Float = ((dx * dx) + (dy * dy));
         if ((cast ((cast dist : Float) < (cast bestDist : Float)) : Bool)) {
           (bestDist = cast (dist : Dynamic));
           (bestScreen = cast (screen : Dynamic));
         }
       }
     }
-    _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([bestScreen, out] : Array<Dynamic>));
+    Screen.copyScreenInfo__screen((cast bestScreen : ScreenInfo), (cast out : ScreenInfo));
     return cast out;
     return cast null;
   }
@@ -495,15 +497,15 @@ class Screen {
   }
 
   public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    return cast _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getCursorPosition', cast ([out] : Array<Dynamic>));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getCursorPosition(out);
     return cast null;
   }
 
   public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
-    var pos:Dynamic = cast _Runtime.UNDEFINED;
+    var pos:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
     pos = Screen._scratchPoint__screen;
-    _Runtime.callValue(getScreenCursorPosition, cast ([pos] : Array<Dynamic>));
-    return cast _Runtime.callValue(getScreenNearestPoint, cast ([pos, out] : Array<Dynamic>));
+    (cast getScreenCursorPosition((cast pos : { var x:Float; var y:Float; })) : { var x:Float; var y:Float; });
+    return cast (cast getScreenNearestPoint((cast pos : Vector2Like), (cast out : ScreenInfo)) : ScreenInfo);
     return cast null;
   }
 
@@ -520,7 +522,7 @@ class Screen {
         }
         return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            var status:Dynamic = cast _Runtime.UNDEFINED;
+            var status:flighthq._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), function(__awaitValue11:Dynamic):Dynamic {
               status = __awaitValue11;
               return flighthq._internal._Async.flowReturn((cast (cast status : flighthq._internal.dom.PermissionStatus).state : String));
@@ -539,67 +541,67 @@ class Screen {
   }
 
   public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'getModes'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast _Runtime.callProperty(backend, 'getModes', cast ([screen, out] : Array<Dynamic>));
+    var backend:ScreenBackend = cast _Runtime.UNDEFINED;
+    backend = (cast getScreenBackend() : ScreenBackend);
+    if ((cast !_Runtime.strictEquals((cast backend : ScreenBackend).getModes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      return cast (cast backend : ScreenBackend).getModes(screen, out);
     }
     _Runtime.setLength(out, 1.0);
-    if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(createScreenMode, cast ([] : Array<Dynamic>))); }
-    _Runtime.callValue(getScreenCurrentMode, cast ([screen, flighthq._internal._StaticIndex.readArray(out, 0.0)] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenMode() : ScreenMode)); }
+    (cast getScreenCurrentMode((cast screen : ScreenInfo), (cast flighthq._internal._StaticIndex.readArray(out, 0.0) : ScreenMode)) : ScreenMode);
     return cast out;
     return cast null;
   }
 
   public static function getScreenNearestPoint(point:Vector2Like, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
-    var bestScreen:Dynamic = cast _Runtime.UNDEFINED;
-    var bestDist:Dynamic = cast _Runtime.UNDEFINED;
+    var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
+    var bestDist:Float = cast _Runtime.UNDEFINED;
     screens = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
+    (cast getScreens((cast screens : Array<ScreenInfo>)) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
+      Screen.fillDefaultScreenInfo__screen((cast out : ScreenInfo));
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
       if ((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast point.x : Float) < (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) < (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
-        _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
+        Screen.copyScreenInfo__screen((cast screen : ScreenInfo), (cast out : ScreenInfo));
         return cast out;
       }
     }
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
-      var cx:Dynamic = (screen.x + (screen.width / 2.0));
-      var cy:Dynamic = (screen.y + (screen.height / 2.0));
-      var dx:Dynamic = (point.x - cx);
-      var dy:Dynamic = (point.y - cy);
-      var dist:Dynamic = ((dx * dx) + (dy * dy));
+      var cx:Float = (screen.x + (screen.width / 2.0));
+      var cy:Float = (screen.y + (screen.height / 2.0));
+      var dx:Float = (point.x - cx);
+      var dy:Float = (point.y - cy);
+      var dist:Float = ((dx * dx) + (dy * dy));
       if ((cast ((cast dist : Float) < (cast bestDist : Float)) : Bool)) {
         (bestDist = cast (dist : Dynamic));
         (bestScreen = cast (screen : Dynamic));
       }
     }
-    _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([bestScreen, out] : Array<Dynamic>));
+    Screen.copyScreenInfo__screen((cast bestScreen : ScreenInfo), (cast out : ScreenInfo));
     return cast out;
     return cast null;
   }
 
   public static function getScreenNearestRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var bestScreen:Dynamic = cast _Runtime.UNDEFINED;
-    var bestDist:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
+    var bestDist:Float = cast _Runtime.UNDEFINED;
     screens = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
+    (cast getScreens((cast screens : Array<ScreenInfo>)) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
+      Screen.fillDefaultScreenInfo__screen((cast out : ScreenInfo));
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
       if ((cast ((cast ((cast ((cast ((cast _Runtime.field(rect, 'x') : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast _Runtime.field(rect, 'y') : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width')) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
-        _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([screen, out] : Array<Dynamic>));
+        Screen.copyScreenInfo__screen((cast screen : ScreenInfo), (cast out : ScreenInfo));
         return cast out;
       }
     }
@@ -608,31 +610,31 @@ class Screen {
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
-      var scx:Dynamic = (screen.x + (screen.width / 2.0));
-      var scy:Dynamic = (screen.y + (screen.height / 2.0));
-      var dx:Dynamic = (cx - scx);
-      var dy:Dynamic = (cy - scy);
-      var dist:Dynamic = ((dx * dx) + (dy * dy));
+      var scx:Float = (screen.x + (screen.width / 2.0));
+      var scy:Float = (screen.y + (screen.height / 2.0));
+      var dx:Float = (cx - scx);
+      var dy:Float = (cy - scy);
+      var dist:Float = ((dx * dx) + (dy * dy));
       if ((cast ((cast dist : Float) < (cast bestDist : Float)) : Bool)) {
         (bestDist = cast (dist : Dynamic));
         (bestScreen = cast (screen : Dynamic));
       }
     }
-    _Runtime.callValue(Screen.copyScreenInfo__screen, cast ([bestScreen, out] : Array<Dynamic>));
+    Screen.copyScreenInfo__screen((cast bestScreen : ScreenInfo), (cast out : ScreenInfo));
     return cast out;
     return cast null;
   }
 
   public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getScreens', cast ([out] : Array<Dynamic>));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getScreens(out);
     return cast null;
   }
 
   public static function getScreenWorkArea(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    _Runtime.setField(out, 'x', screen.x);
-    _Runtime.setField(out, 'y', screen.y);
-    _Runtime.setField(out, 'width', screen.workWidth);
-    _Runtime.setField(out, 'height', screen.workHeight);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = screen.x);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = screen.y);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).width = screen.workWidth);
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = screen.workHeight);
     return cast out;
     return cast null;
   }
@@ -652,9 +654,9 @@ class Screen {
   }
 
   public static function getWebOrientation__screen():ScreenOrientation {
-    var obj:Dynamic = cast _Runtime.UNDEFINED;
-    var type:Dynamic = cast _Runtime.UNDEFINED;
-    obj = _Runtime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
+    var obj:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
+    var type:String = cast _Runtime.UNDEFINED;
+    obj = (cast Screen.getWebScreenOrientationObject__screen() : Null<WebScreenOrientationObject__screen>);
     type = _Runtime.coalesce(_Runtime.optionalField(obj, 'type'), function():Dynamic return cast '');
     if ((cast StringTools.startsWith(type, 'portrait-primary') : Bool)) { return cast 'Portrait'; }
     if ((cast StringTools.startsWith(type, 'portrait-secondary') : Bool)) { return cast 'PortraitFlipped'; }
@@ -664,9 +666,9 @@ class Screen {
   }
 
   public static function getWebRotation__screen():Float {
-    var obj:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    obj = _Runtime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
+    var obj:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
+    var angle:Null<Float> = cast _Runtime.UNDEFINED;
+    obj = (cast Screen.getWebScreenOrientationObject__screen() : Null<WebScreenOrientationObject__screen>);
     angle = _Runtime.optionalField(obj, 'angle');
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(angle), 'number') : Bool)) { return cast angle; }
     return cast -1.0;
@@ -674,38 +676,38 @@ class Screen {
   }
 
   public static function getWebScreenOrientationObject__screen():Null<WebScreenOrientationObject__screen> {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var s:flighthq._internal._Intersection2<flighthq._internal.dom.Screen, { @:optional var orientation:Null<WebScreenOrientationObject__screen>; }> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) { return cast null; }
-    s = (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen') : Dynamic);
+    s = (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen') : flighthq._internal._Intersection2<flighthq._internal.dom.Screen, { @:optional var orientation:WebScreenOrientationObject__screen; }>);
     return cast _Runtime.coalesce((cast s : flighthq._internal.dom.Screen).orientation, function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function onScreenChange(listener:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(_Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([listener] : Array<Dynamic>));
+  public static function onScreenChange(listener:ScreenChangeEvent->Void):Void->Void {
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).subscribe(listener);
     return cast null;
   }
 
-  public static function onScreenDetailPermissionChange(listener:Dynamic):Dynamic {
+  public static function onScreenDetailPermissionChange(listener:String->Void):Void->Void {
     var status:Null<flighthq._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
-    var cancelled:Dynamic = cast _Runtime.UNDEFINED;
-    var handleChange:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) { return cast function() {
+    var cancelled:Bool = cast _Runtime.UNDEFINED;
+    var handleChange:Void->Void = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) { return cast function():Void {
 
     }; }
     status = null;
     cancelled = false;
-    handleChange = function() {
-      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { _Runtime.callValue(listener, cast ([(cast status.state : String)] : Array<Dynamic>)); }
-    };
-    flighthq._internal._Async.recover(_Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), 'then', cast ([function(s:Dynamic) {
+    handleChange = (cast function():Void {
+      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { listener((cast (cast status.state : String) : String)); }
+    } : Void->Void);
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), 'then', cast ([function(s:flighthq._internal.dom.PermissionStatus):Void {
       if ((cast cancelled : Bool)) { return; }
       (status = cast (s : Dynamic));
       (cast s : flighthq._internal.dom.PermissionStatus).addEventListener('change', handleChange);
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast function() {
+    return cast function():Void {
       (cancelled = cast (true : Dynamic));
       ({ final __hostTypeCall20 = status; __hostTypeCall20 == null ? _Runtime.UNDEFINED : __hostTypeCall20.removeEventListener('change', handleChange); });
     };
@@ -718,7 +720,7 @@ class Screen {
   public static function requestScreenDetails():flighthq._internal._Promise<Bool> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var win:Dynamic = cast _Runtime.UNDEFINED;
+        var win:flighthq._internal._Intersection2<flighthq._internal.dom.Window, { @:optional var getScreenDetails:Null<Void->flighthq._internal._Promise<flighthq._internal._Any>>; }> = cast _Runtime.UNDEFINED;
         var __flowBranch21:Dynamic;
         if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
           __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
@@ -728,7 +730,7 @@ class Screen {
           __flowBranch21 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
-          win = (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic);
+          win = (cast flighthq._internal.backend.DomWindowBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Window, { @:optional var getScreenDetails:Void->flighthq._internal._Promise<flighthq._internal._Any>; }>);
           var __flowBranch22:Dynamic;
           if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(win, 'getScreenDetails')), 'function') : Bool)) {
             __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
@@ -739,12 +741,12 @@ class Screen {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch22, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              var details:Dynamic = cast _Runtime.UNDEFINED;
-              var b:Dynamic = cast _Runtime.UNDEFINED;
+              var details:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+              var b:{ >ScreenBackend, @:optional var _upgrade:Null<flighthq._internal._Any->Void>; } = cast _Runtime.UNDEFINED;
               return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue23:Dynamic):Dynamic {
                 details = __awaitValue23;
-                b = (cast _Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic);
-                _Runtime.callOptionalProperty(b, '_upgrade', cast ([details] : Array<Dynamic>));
+                b = (cast (cast getScreenBackend() : { >ScreenBackend, @:optional var _upgrade:Null<flighthq._internal._Any->Void>; }) : { >ScreenBackend, @:optional var _upgrade:flighthq._internal._Any->Void; });
+                _Runtime.callOptionalValue((cast b : { @:optional var _upgrade:Null<flighthq._internal._Any->Void>; })._upgrade, cast ([details] : Array<Dynamic>));
                 return flighthq._internal._Async.flowReturn(true);
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -762,31 +764,31 @@ class Screen {
   }
 
   public static function screenToDipPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
-    _Runtime.setField(out, 'x', ((px / screen.scaleFactor) + screen.x));
-    _Runtime.setField(out, 'y', ((py / screen.scaleFactor) + screen.y));
+    ((cast out : { var x:Float; var y:Float; }).x = ((px / screen.scaleFactor) + screen.x));
+    ((cast out : { var x:Float; var y:Float; }).y = ((py / screen.scaleFactor) + screen.y));
     return cast out;
     return cast null;
   }
 
   public static function screenToDipRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rw:Dynamic = cast _Runtime.UNDEFINED;
-    var rh:Dynamic = cast _Runtime.UNDEFINED;
-    var sf:Dynamic = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rw:Float = cast _Runtime.UNDEFINED;
+    var rh:Float = cast _Runtime.UNDEFINED;
+    var sf:Float = cast _Runtime.UNDEFINED;
     rx = _Runtime.field(rect, 'x');
     ry = _Runtime.field(rect, 'y');
     rw = _Runtime.field(rect, 'width');
     rh = _Runtime.field(rect, 'height');
     sf = screen.scaleFactor;
-    _Runtime.setField(out, 'x', ((rx / sf) + screen.x));
-    _Runtime.setField(out, 'y', ((ry / sf) + screen.y));
-    _Runtime.setField(out, 'width', (rw / sf));
-    _Runtime.setField(out, 'height', (rh / sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = ((rx / sf) + screen.x));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = ((ry / sf) + screen.y));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).width = (rw / sf));
+    ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = (rh / sf));
     return cast out;
     return cast null;
   }

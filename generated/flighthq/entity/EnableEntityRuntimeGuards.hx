@@ -12,21 +12,21 @@ import flighthq.types.Log.LogLevel;
 class EnableEntityRuntimeGuards {
   @:noCompletion
   public static function disableEntityRuntimeGuards():Void {
-    _Runtime.callValue(setEntityRuntimeGuardMode, cast ([false] : Array<Dynamic>));
-    _Runtime.callValue(setEntityRuntimeWriteGuard, cast ([null] : Array<Dynamic>));
+    setEntityRuntimeGuardMode((cast false : Bool));
+    setEntityRuntimeWriteGuard(null);
   }
 
   @:noCompletion
   public static function enableEntityRuntimeGuards():Void {
-    _Runtime.callValue(setEntityRuntimeGuardMode, cast ([true] : Array<Dynamic>));
-    _Runtime.callValue(setEntityRuntimeWriteGuard, cast ([EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards] : Array<Dynamic>));
+    setEntityRuntimeGuardMode((cast true : Bool));
+    setEntityRuntimeWriteGuard(EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards);
   }
 
   public static function warnOnDirectWrite__enableEntityRuntimeGuards(slot:EntityRuntimeWriteSlot):Void {
     if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
-      _Runtime.callValue(logOnce, cast (['entity:direct-binding-write', LogLevel.Warn, { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' }, 'entity'] : Array<Dynamic>));
+      (cast logOnce((cast 'entity:direct-binding-write' : String), (cast LogLevel.Warn : LogLevel), { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' }, (cast 'entity' : Null<String>)) : Bool);
       return;
     }
-    _Runtime.callValue(logOnce, cast (['entity:direct-runtime-write', LogLevel.Warn, { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' }, 'entity'] : Array<Dynamic>));
+    (cast logOnce((cast 'entity:direct-runtime-write' : String), (cast LogLevel.Warn : LogLevel), { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' }, (cast 'entity' : Null<String>)) : Bool);
   }
 }

@@ -6,7 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
+import flighthq.types.CompressedImageData;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.CompressedImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
@@ -14,7 +18,7 @@ import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureS
 
 class TextureAtlas {
   public static function createTextureAtlas(?obj:Dynamic):flighthq.types.TextureAtlas {
-    return cast _Runtime.callValue(createEntity, cast ([{ regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.optionalField(obj, 'texture'), function():Dynamic return cast null) }] : Array<Dynamic>));
+    return cast (cast createEntity({ regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.optionalField(obj, 'texture'), function():Dynamic return cast null) }) : flighthq.types.TextureAtlas);
     return cast null;
   }
 
@@ -24,13 +28,13 @@ class TextureAtlas {
   }
 
   public static function getTextureAtlasByteSize(atlas:flighthq.types.TextureAtlas):Float {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
+    var texture:Null<Texture2D> = cast _Runtime.UNDEFINED;
+    var image:TextureSource = cast _Runtime.UNDEFINED;
     texture = atlas.texture;
-    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(texture, 'source'), null) : Bool)) : Bool)) { return cast 0.0; }
-    image = _Runtime.field(texture, 'source');
-    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast image : Bitmap).data, 'byteLength'); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), CompressedImageTextureSourceKind) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : Texture2D).dimension, '2d') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast texture : Texture2D).source, null) : Bool)) : Bool)) { return cast 0.0; }
+    image = (cast texture : Texture2D).source;
+    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast image : Bitmap).data, 'byteLength'); }
+    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, CompressedImageTextureSourceKind) : Bool)) {
       return cast _Runtime.field(_Runtime.field((cast image : CompressedImage), 'compressed').payload, 'byteLength');
     }
     return cast 0.0;

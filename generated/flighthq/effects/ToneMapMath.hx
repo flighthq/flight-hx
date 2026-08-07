@@ -8,11 +8,11 @@ import flighthq.types.FilmicToneMapOptions;
 
 class ToneMapMath {
   public static function computeAcesToneMap(x:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var e:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var e:Float = cast _Runtime.UNDEFINED;
     a = 2.51;
     b = 0.03;
     c = 2.43;
@@ -23,17 +23,17 @@ class ToneMapMath {
   }
 
   public static function computeAgxToneMap(x:Float, ?options:AgxToneMapOptions):Float {
-    var min_ev:Dynamic = cast _Runtime.UNDEFINED;
-    var max_ev:Dynamic = cast _Runtime.UNDEFINED;
-    var val:Dynamic = cast _Runtime.UNDEFINED;
-    var log:Dynamic = cast _Runtime.UNDEFINED;
-    var normalized:Dynamic = cast _Runtime.UNDEFINED;
+    var min_ev:Float = cast _Runtime.UNDEFINED;
+    var max_ev:Float = cast _Runtime.UNDEFINED;
+    var val:Float = cast _Runtime.UNDEFINED;
+    var log:Float = cast _Runtime.UNDEFINED;
+    var normalized:Float = cast _Runtime.UNDEFINED;
     min_ev = _Runtime.coalesce(_Runtime.optionalField(options, 'minEv'), function():Dynamic return cast -12.47393);
     max_ev = _Runtime.coalesce(_Runtime.optionalField(options, 'maxEv'), function():Dynamic return cast 4.026069);
     val = HxMath.max(1e-10, x);
     log = HxMath.max(min_ev, HxMath.min(max_ev, _Runtime.log2(val)));
     normalized = ((log - min_ev) / (max_ev - min_ev));
-    return cast _Runtime.callValue(ToneMapMath.agxDefaultContrastApprox__toneMapMath, cast ([normalized] : Array<Dynamic>));
+    return cast (cast ToneMapMath.agxDefaultContrastApprox__toneMapMath((cast normalized : Float)) : Float);
     return cast null;
   }
 
@@ -43,23 +43,23 @@ class ToneMapMath {
   }
 
   public static function computeFilmicToneMap(x:Float, ?options:FilmicToneMapOptions):Float {
-    var maxBrightness:Dynamic = cast _Runtime.UNDEFINED;
-    var contrast:Dynamic = cast _Runtime.UNDEFINED;
-    var linearStart:Dynamic = cast _Runtime.UNDEFINED;
-    var linearLength:Dynamic = cast _Runtime.UNDEFINED;
-    var blackTighten:Dynamic = cast _Runtime.UNDEFINED;
-    var pedestal:Dynamic = cast _Runtime.UNDEFINED;
-    var l0:Dynamic = cast _Runtime.UNDEFINED;
-    var L0:Dynamic = cast _Runtime.UNDEFINED;
-    var L1:Dynamic = cast _Runtime.UNDEFINED;
-    var S0:Dynamic = cast _Runtime.UNDEFINED;
-    var S1:Dynamic = cast _Runtime.UNDEFINED;
-    var C2:Dynamic = cast _Runtime.UNDEFINED;
-    var CP:Dynamic = cast _Runtime.UNDEFINED;
-    var w0:Dynamic = cast _Runtime.UNDEFINED;
-    var T:Dynamic = cast _Runtime.UNDEFINED;
-    var L:Dynamic = cast _Runtime.UNDEFINED;
-    var S:Dynamic = cast _Runtime.UNDEFINED;
+    var maxBrightness:Float = cast _Runtime.UNDEFINED;
+    var contrast:Float = cast _Runtime.UNDEFINED;
+    var linearStart:Float = cast _Runtime.UNDEFINED;
+    var linearLength:Float = cast _Runtime.UNDEFINED;
+    var blackTighten:Float = cast _Runtime.UNDEFINED;
+    var pedestal:Float = cast _Runtime.UNDEFINED;
+    var l0:Float = cast _Runtime.UNDEFINED;
+    var L0:Float = cast _Runtime.UNDEFINED;
+    var L1:Float = cast _Runtime.UNDEFINED;
+    var S0:Float = cast _Runtime.UNDEFINED;
+    var S1:Float = cast _Runtime.UNDEFINED;
+    var C2:Float = cast _Runtime.UNDEFINED;
+    var CP:Float = cast _Runtime.UNDEFINED;
+    var w0:Float = cast _Runtime.UNDEFINED;
+    var T:Float = cast _Runtime.UNDEFINED;
+    var L:Float = cast _Runtime.UNDEFINED;
+    var S:Float = cast _Runtime.UNDEFINED;
     maxBrightness = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.maxBrightness; }), function():Dynamic return cast 1.0);
     contrast = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.contrast; }), function():Dynamic return cast 1.0);
     linearStart = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.linearStart; }), function():Dynamic return cast 0.22);
@@ -73,16 +73,16 @@ class ToneMapMath {
     S1 = (linearStart + (contrast * l0));
     C2 = (contrast / (maxBrightness - S1));
     CP = _Runtime.divideNumbers(-C2, HxMath.log(2.0));
-    w0 = _Runtime.subtractNumbers(1.0, _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([linearStart, S0, x] : Array<Dynamic>)));
+    w0 = (1.0 - (cast ToneMapMath.smoothstep01__toneMapMath((cast linearStart : Float), (cast S0 : Float), (cast x : Float)) : Float));
     T = (_Runtime.multiplyNumbers(linearStart, HxMath.pow((x / linearStart), blackTighten)) + pedestal);
     L = (linearStart + (contrast * (x - linearStart)));
     S = (maxBrightness - _Runtime.multiplyNumbers((maxBrightness - S1), HxMath.exp((CP * (x - S0)))));
-    return cast HxMath.max(0.0, ((((w0 * _Runtime.subtractNumbers(1.0, _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)))) * T) + _Runtime.multiplyNumbers(_Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)), L)) + ((1.0 - w0) * S)));
+    return cast HxMath.max(0.0, ((((w0 * (1.0 - (cast ToneMapMath.smoothstep01__toneMapMath((cast L0 : Float), (cast L1 : Float), (cast x : Float)) : Float))) * T) + ((cast ToneMapMath.smoothstep01__toneMapMath((cast L0 : Float), (cast L1 : Float), (cast x : Float)) : Float) * L)) + ((1.0 - w0) * S)));
     return cast null;
   }
 
   public static function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
-    var w2:Dynamic = cast _Runtime.UNDEFINED;
+    var w2:Float = cast _Runtime.UNDEFINED;
     w2 = (white * white);
     return cast ((x * (1.0 + (x / w2))) / (1.0 + x));
     return cast null;
@@ -94,12 +94,12 @@ class ToneMapMath {
   }
 
   public static function computeUncharted2ToneMap(x:Float):Float {
-    var A:Dynamic = cast _Runtime.UNDEFINED;
-    var B:Dynamic = cast _Runtime.UNDEFINED;
-    var C:Dynamic = cast _Runtime.UNDEFINED;
-    var D:Dynamic = cast _Runtime.UNDEFINED;
-    var E:Dynamic = cast _Runtime.UNDEFINED;
-    var F:Dynamic = cast _Runtime.UNDEFINED;
+    var A:Float = cast _Runtime.UNDEFINED;
+    var B:Float = cast _Runtime.UNDEFINED;
+    var C:Float = cast _Runtime.UNDEFINED;
+    var D:Float = cast _Runtime.UNDEFINED;
+    var E:Float = cast _Runtime.UNDEFINED;
+    var F:Float = cast _Runtime.UNDEFINED;
     A = 0.15;
     B = 0.5;
     C = 0.1;
@@ -135,8 +135,8 @@ class ToneMapMath {
   }
 
   public static function agxDefaultContrastApprox__toneMapMath(x:Float):Float {
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var x4:Dynamic = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var x4:Float = cast _Runtime.UNDEFINED;
     x2 = (x * x);
     x4 = (x2 * x2);
     return cast ((((((((15.5 * x4) * x2) - ((40.14 * x4) * x)) + (31.96 * x4)) - ((6.868 * x2) * x)) + (0.4298 * x2)) + (0.1191 * x)) - 0.00232);
@@ -144,7 +144,7 @@ class ToneMapMath {
   }
 
   public static function smoothstep01__toneMapMath(edge0:Float, edge1:Float, x:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     t = HxMath.max(0.0, HxMath.min(1.0, ((x - edge0) / (edge1 - edge0))));
     return cast ((t * t) * (3.0 - (2.0 * t)));
     return cast null;

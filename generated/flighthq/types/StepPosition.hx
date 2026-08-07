@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef StepPosition = String;
 
-typedef EasingStepsGuard = Dynamic;
+typedef EasingStepsGuard = Float->StepPosition->Void;

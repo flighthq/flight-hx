@@ -14,45 +14,49 @@ import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.BevelEffect;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
-typedef BevelCompositeLocations__glBevelEffect = Dynamic;
+typedef BevelCompositeLocations__glBevelEffect = { >GlFullscreenProgram, var locHighlight:flighthq._internal.dom.WebGLUniformLocation; var locShadow:flighthq._internal.dom.WebGLUniformLocation; var locOffset:flighthq._internal.dom.WebGLUniformLocation; var locIntensity:flighthq._internal.dom.WebGLUniformLocation; var locClipMode:flighthq._internal.dom.WebGLUniformLocation; };
 
 typedef BevelCompositeParams__glBevelEffect = { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; };
 
 class GlBevelEffect {
   @:noCompletion
   public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var s0:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var shadowColor:Dynamic = cast _Runtime.UNDEFINED;
-    var shadowAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var highlightColor:Dynamic = cast _Runtime.UNDEFINED;
-    var highlightAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
-    var bevelType:Dynamic = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s1:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s2:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var src:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var shadowColor:Float = cast _Runtime.UNDEFINED;
+    var shadowAlpha:Float = cast _Runtime.UNDEFINED;
+    var highlightColor:Float = cast _Runtime.UNDEFINED;
+    var highlightAlpha:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
+    var bevelType:String = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var tinted:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var blurTemp:Dynamic = cast _Runtime.UNDEFINED;
+    var tinted:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurTemp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -71,49 +75,49 @@ class GlBevelEffect {
     tinted = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-    _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, tinted, 16777215.0, 1.0, 1.0] : Array<Dynamic>));
-    _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, tinted, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
-    _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(GlBevelEffect.applyGlBevelCompositePass__glBevelEffect, cast ([state, blurred, src, dst, { offsetX: _Runtime.divideNumbers(offsetX, _Runtime.field(src, 'width')), offsetY: _Runtime.divideNumbers(-offsetY, _Runtime.field(src, 'height')), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) }] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyGlEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s0] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s1] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
+    applyGlEffectTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast tinted : GlRenderTarget), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    applyGlEffectBoxBlur((cast state : GlRenderState), (cast tinted : GlRenderTarget), (cast blurred : GlRenderTarget), (cast blurTemp : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget)); }
+    GlBevelEffect.applyGlBevelCompositePass__glBevelEffect((cast state : GlRenderState), (cast blurred : GlRenderTarget), (cast src : GlRenderTarget), (cast dst : GlRenderTarget), (cast { offsetX: (offsetX / (cast src : GlRenderTarget).width), offsetY: (-offsetY / (cast src : GlRenderTarget).height), highlightColor: highlightColor, highlightAlpha: highlightAlpha, shadowColor: shadowColor, shadowAlpha: shadowAlpha, intensity: strength, clipMode: ((cast _Runtime.strictEquals(bevelType, 'inner') : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool) ? (cast 2.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) } : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }));
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { applyGlEffectErasePass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget)); }
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
   }
 
-  public static final defaultGlBevelEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBevelEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect)] : Array<Dynamic>));
+  public static final defaultGlBevelEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyBevelEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : BevelEffect) : BevelEffect));
   };
 
   public static function registerGlBevelEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BevelEffect', defaultGlBevelEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'BevelEffect' : String), (cast defaultGlBevelEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';
+  public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';
 
-  public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final bevelCompositeShaders__glBevelEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelCompositeLocations__glBevelEffect> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function applyGlBevelCompositePass__glBevelEffect(state:GlRenderState, field:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget, params:BevelCompositeParams__glBevelEffect):Void {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callValue(GlBevelEffect.getGlBevelCompositeShader__glBevelEffect, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(field, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(loc, 'locHighlight'), ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.field(params, 'highlightColor')) & 255) / 255.0), _Runtime.field(params, 'highlightAlpha'));
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(loc, 'locShadow'), ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.field(params, 'shadowColor')) & 255) / 255.0), _Runtime.field(params, 'shadowAlpha'));
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(loc, 'locOffset'), _Runtime.field(params, 'offsetX'), _Runtime.field(params, 'offsetY'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locIntensity'), _Runtime.field(params, 'intensity'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locClipMode'), _Runtime.field(params, 'clipMode'));
-    }] : Array<Dynamic>));
+    var loc:BevelCompositeLocations__glBevelEffect = cast _Runtime.UNDEFINED;
+    loc = (cast GlBevelEffect.getGlBevelCompositeShader__glBevelEffect((cast state : GlRenderState)) : BevelCompositeLocations__glBevelEffect);
+    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast field : GlRenderTarget).texture, (cast source : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused2:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast loc : { var locHighlight:flighthq._internal.dom.WebGLUniformLocation; }).locHighlight, ((_Runtime.toInt32((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).highlightColor) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).highlightColor) >> 8)) & 255) / 255.0), ((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).highlightColor) & 255) / 255.0), (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).highlightAlpha);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast loc : { var locShadow:flighthq._internal.dom.WebGLUniformLocation; }).locShadow, ((_Runtime.toInt32((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).shadowColor) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).shadowColor) >> 8)) & 255) / 255.0), ((_Runtime.toInt32((cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).shadowColor) & 255) / 255.0), (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).shadowAlpha);
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flighthq._internal.dom.WebGLUniformLocation; }).locOffset, (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).offsetX, (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).offsetY);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locIntensity:flighthq._internal.dom.WebGLUniformLocation; }).locIntensity, (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).intensity);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locClipMode:flighthq._internal.dom.WebGLUniformLocation; }).locClipMode, (cast params : { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; }).clipMode);
+    }, cast ([__unused2] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var loc:Null<BevelCompositeLocations__glBevelEffect> = cast _Runtime.UNDEFINED;
+    loc = ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelCompositeLocations__glBevelEffect>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var gl:Dynamic = _Runtime.field(state, 'gl');
-      var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_highlight') }, { locShadow: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_shadow') }, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_offset') }, { locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_intensity') }, { locClipMode: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_clipMode') }]) : Dynamic));
-      ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
+      var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect : String)) : GlFullscreenProgram);
+      (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_highlight') }, { locShadow: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_shadow') }, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }, { locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_intensity') }, { locClipMode: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_clipMode') }]) : Dynamic));
+      ((cast GlBevelEffect.bevelCompositeShaders__glBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelCompositeLocations__glBevelEffect>).set((cast state : GlRenderState).gl, loc));
     }
     return cast loc;
     return cast null;

@@ -6,35 +6,37 @@ import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.cloneMeshGeometry;
 import flighthq.mesh.MeshGeometry.getMeshGeometryVertexCount;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.PrimitiveTopology;
+import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
 class MeshGeometryIndex {
   public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var sourceIndices:Dynamic = cast _Runtime.UNDEFINED;
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceByteLength:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceToCompact:Dynamic = cast _Runtime.UNDEFINED;
-    var compactCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var compactBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    var compactBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceIndices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
+    var stride:Float = cast _Runtime.UNDEFINED;
+    var sourceByteLength:Float = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var sourceToCompact:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var compactCount:Float = cast _Runtime.UNDEFINED;
+    var sourceBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var compactBuffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
+    var compactBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var indices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    var out:MeshGeometry = cast _Runtime.UNDEFINED;
     sourceIndices = geometry.indices;
     stride = geometry.layout.stride;
     sourceByteLength = _Runtime.field(geometry.vertices, 'byteLength');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sourceIndices, null) : Bool) || (cast ((cast stride : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(stride, 4.0), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(sourceByteLength, stride), 0.0) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
+      return cast (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry);
     }
     vertexCount = (sourceByteLength / stride);
     sourceToCompact = new flighthq._internal._UInt32Array(vertexCount);
     _Runtime.fill(sourceToCompact, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex, 0, null, 1);
     compactCount = 0.0;
     {
-      var element:Dynamic = 0.0;
-      while ((cast ((cast element : Float) < (cast _Runtime.field(sourceIndices, 'length') : Float)) : Bool)) {
-        var sourceIndex:Dynamic = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(sourceIndices, element);
-        if ((cast ((cast sourceIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
+      var element:Float = 0.0;
+      while ((cast ((cast element : Float) < (cast (cast sourceIndices : { var length:Float; }).length : Float)) : Bool)) {
+        var sourceIndex:Float = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(sourceIndices, element);
+        if ((cast ((cast sourceIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry); }
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint32Array(sourceToCompact, sourceIndex), MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex) : Bool)) { flighthq._internal._StaticIndex.writeUint32Array(sourceToCompact, sourceIndex, compactCount++); }
         element++;
       }
@@ -43,38 +45,38 @@ class MeshGeometryIndex {
     compactBuffer = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [(compactCount * stride)]);
     compactBytes = new flighthq._internal._UInt8Array(compactBuffer);
     {
-      var sourceIndex:Dynamic = 0.0;
+      var sourceIndex:Float = 0.0;
       while ((cast ((cast sourceIndex : Float) < (cast vertexCount : Float)) : Bool)) {
-        var compactIndex:Dynamic = flighthq._internal._StaticIndex.readUint32Array(sourceToCompact, sourceIndex);
+        var compactIndex:Float = flighthq._internal._StaticIndex.readUint32Array(sourceToCompact, sourceIndex);
         if ((cast _Runtime.strictEquals(compactIndex, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex) : Bool)) { sourceIndex++; continue; }
-        var sourceOffset:Dynamic = (sourceIndex * stride);
+        var sourceOffset:Float = (sourceIndex * stride);
         (cast compactBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), Std.int((compactIndex * stride)));
         sourceIndex++;
       }
     }
-    indices = ((cast ((cast compactCount : Float) > (cast MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex : Float)) : Bool) ? (cast new flighthq._internal._UInt32Array(_Runtime.field(sourceIndices, 'length')) : Dynamic) : (cast new flighthq._internal._UInt16Array(_Runtime.field(sourceIndices, 'length')) : Dynamic));
+    indices = ((cast ((cast compactCount : Float) > (cast MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex : Float)) : Bool) ? (cast new flighthq._internal._UInt32Array((cast sourceIndices : { var length:Float; }).length) : Dynamic) : (cast new flighthq._internal._UInt16Array((cast sourceIndices : { var length:Float; }).length) : Dynamic));
     {
-      var element:Dynamic = 0.0;
-      while ((cast ((cast element : Float) < (cast _Runtime.field(sourceIndices, 'length') : Float)) : Bool)) {
+      var element:Float = 0.0;
+      while ((cast ((cast element : Float) < (cast (cast sourceIndices : { var length:Float; }).length : Float)) : Bool)) {
         _Runtime.setIndex(indices, element, flighthq._internal._StaticIndex.readUint32Array(sourceToCompact, flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(sourceIndices, element)));
         element++;
       }
     }
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    out = (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry);
     (out.vertices = cast (new flighthq._internal._Float32Array(compactBuffer) : Dynamic));
     (out.indices = cast (indices : Dynamic));
     return cast out;
     return cast null;
   }
 
-  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
-    var useUint32:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var indexCount:Dynamic = cast _Runtime.UNDEFINED;
+  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> {
+    var useUint32:Bool = cast _Runtime.UNDEFINED;
+    var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var indexCount:Float = cast _Runtime.UNDEFINED;
     var lines:Array<Float> = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     useUint32 = _Runtime.select(geometry.indices, function():Dynamic return cast _Runtime.isInstanceOfName(geometry.indices, 'Uint32Array'), function():Dynamic return cast true);
     if ((cast ((cast !_Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool) && (cast !_Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) : Bool)) {
       return cast ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(0.0) : Dynamic) : (cast new flighthq._internal._UInt16Array(0.0) : Dynamic));
@@ -82,33 +84,33 @@ class MeshGeometryIndex {
     indices = geometry.indices;
     floatsPerVertex = (geometry.layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
+    indexCount = _Runtime.select(indices, function():Dynamic return cast (cast indices : { var length:Float; }).length, function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
       {
-        var t:Dynamic = 0.0;
+        var t:Float = 0.0;
         while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
-          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+          var a:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+          var b:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+          var c:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
           _Runtime.pushMany(lines, cast ([a, b, b, c, c, a] : Array<Dynamic>));
           (t = cast ((t + 3.0) : Dynamic));
         }
       }
     } else {
       {
-        var t:Dynamic = 0.0;
+        var t:Float = 0.0;
         while ((cast ((cast (t + 2.0) : Float) < (cast indexCount : Float)) : Bool)) {
-          var a:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
-          var b:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
-          var c:Dynamic = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
+          var a:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, t), function():Dynamic return cast t);
+          var b:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 1.0)), function():Dynamic return cast (t + 1.0));
+          var c:Float = _Runtime.select(indices, function():Dynamic return cast flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, (t + 2.0)), function():Dynamic return cast (t + 2.0));
           _Runtime.pushMany(lines, cast ([a, b, b, c, c, a] : Array<Dynamic>));
           t++;
         }
       }
     }
     if ((cast useUint32 : Bool)) {
-      var out:Dynamic = new flighthq._internal._UInt32Array(_Runtime.field(lines, 'length'));
+      var out:flighthq._internal._UInt32Array = new flighthq._internal._UInt32Array(_Runtime.field(lines, 'length'));
       (cast out : flighthq._internal._UInt32Array).set(lines);
       return cast out;
     }
@@ -119,23 +121,23 @@ class MeshGeometryIndex {
   }
 
   public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceVertices:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
+    var sourceVertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var out:MeshGeometry = cast _Runtime.UNDEFINED;
     indices = geometry.indices;
     floatsPerVertex = (geometry.layout.stride / 4.0);
     sourceVertices = geometry.vertices;
-    if ((cast !_Runtime.truthy(indices) : Bool)) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-    vertices = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(indices, 'length'), floatsPerVertex));
+    if ((cast !_Runtime.truthy(indices) : Bool)) { return cast (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry); }
+    vertices = new flighthq._internal._Float32Array(((cast indices : { var length:Float; }).length * floatsPerVertex));
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        var src:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, i), floatsPerVertex);
-        var dst:Dynamic = (i * floatsPerVertex);
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast (cast indices : { var length:Float; }).length : Float)) : Bool)) {
+        var src:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(indices, i), floatsPerVertex);
+        var dst:Float = (i * floatsPerVertex);
         {
-          var f:Dynamic = 0.0;
+          var f:Float = 0.0;
           while ((cast ((cast f : Float) < (cast floatsPerVertex : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + f), flighthq._internal._StaticIndex.readFloat32Array(sourceVertices, (src + f)));
             f++;
@@ -144,7 +146,7 @@ class MeshGeometryIndex {
         i++;
       }
     }
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    out = (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry);
     (out.indices = cast (null : Dynamic));
     (out.vertices = cast (vertices : Dynamic));
     return cast out;
@@ -152,15 +154,15 @@ class MeshGeometryIndex {
   }
 
   public static function indexMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    var out:MeshGeometry = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var indices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    out = (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry);
     if ((cast !_Runtime.strictEquals(out.indices, null) : Bool)) { return cast out; }
-    vertexCount = _Runtime.callValue(getMeshGeometryVertexCount, cast ([out] : Array<Dynamic>));
+    vertexCount = (cast getMeshGeometryVertexCount((cast out : MeshGeometry)) : Float);
     indices = ((cast ((cast vertexCount : Float) > (cast MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex : Float)) : Bool) ? (cast new flighthq._internal._UInt32Array(vertexCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(vertexCount) : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         _Runtime.setIndex(indices, i, i);
         i++;
@@ -172,21 +174,21 @@ class MeshGeometryIndex {
   }
 
   public static function weldMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceByteLength:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var uniqueBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceToUnique:Dynamic = cast _Runtime.UNDEFINED;
-    var candidatesByHash:Dynamic = cast _Runtime.UNDEFINED;
-    var uniqueCount:Dynamic = cast _Runtime.UNDEFINED;
-    var elementCount:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
-    var weldedBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var stride:Float = cast _Runtime.UNDEFINED;
+    var sourceByteLength:Float = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var sourceBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var uniqueBytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var sourceToUnique:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var candidatesByHash:flighthq._internal._Map<Float, Array<Float>> = cast _Runtime.UNDEFINED;
+    var uniqueCount:Float = cast _Runtime.UNDEFINED;
+    var elementCount:Float = cast _Runtime.UNDEFINED;
+    var indices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    var weldedBuffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
+    var out:MeshGeometry = cast _Runtime.UNDEFINED;
     stride = geometry.layout.stride;
     sourceByteLength = _Runtime.field(geometry.vertices, 'byteLength');
-    if ((cast ((cast ((cast ((cast stride : Float) <= (cast 0.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(stride, 4.0), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(sourceByteLength, stride), 0.0) : Bool)) : Bool)) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
+    if ((cast ((cast ((cast ((cast stride : Float) <= (cast 0.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(stride, 4.0), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(sourceByteLength, stride), 0.0) : Bool)) : Bool)) { return cast (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry); }
     vertexCount = (sourceByteLength / stride);
     sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength'));
     uniqueBytes = new flighthq._internal._UInt8Array(sourceByteLength);
@@ -194,18 +196,18 @@ class MeshGeometryIndex {
     candidatesByHash = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     uniqueCount = 0.0;
     {
-      var vertex:Dynamic = 0.0;
+      var vertex:Float = 0.0;
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
-        var sourceOffset:Dynamic = (vertex * stride);
-        var hash:Dynamic = _Runtime.callValue(MeshGeometryIndex.hashVertexRecord__meshGeometryIndex, cast ([sourceBytes, sourceOffset, stride] : Array<Dynamic>));
-        var candidates:Dynamic = ((cast candidatesByHash : flighthq._internal._Map).get(hash));
-        var uniqueIndex:Dynamic = -1.0;
+        var sourceOffset:Float = (vertex * stride);
+        var hash:Float = (cast MeshGeometryIndex.hashVertexRecord__meshGeometryIndex((cast sourceBytes : flighthq._internal._UInt8Array), (cast sourceOffset : Float), (cast stride : Float)) : Float);
+        var candidates:Null<Array<Float>> = ((cast candidatesByHash : flighthq._internal._Map<Float, Array<Float>>).get(hash));
+        var uniqueIndex:Float = -1.0;
         if ((cast !_Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           {
-            var i:Dynamic = 0.0;
+            var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(candidates, 'length') : Float)) : Bool)) {
-              var candidate:Dynamic = flighthq._internal._StaticIndex.readArray(candidates, i);
-              if ((cast _Runtime.callValue(MeshGeometryIndex.equalVertexRecord__meshGeometryIndex, cast ([sourceBytes, sourceOffset, uniqueBytes, (candidate * stride), stride] : Array<Dynamic>)) : Bool)) {
+              var candidate:Float = flighthq._internal._StaticIndex.readArray(candidates, i);
+              if ((cast (cast MeshGeometryIndex.equalVertexRecord__meshGeometryIndex((cast sourceBytes : flighthq._internal._UInt8Array), (cast sourceOffset : Float), (cast uniqueBytes : flighthq._internal._UInt8Array), (cast (candidate * stride) : Float), (cast stride : Float)) : Bool) : Bool)) {
                 (uniqueIndex = cast (candidate : Dynamic));
                 break;
               }
@@ -216,7 +218,7 @@ class MeshGeometryIndex {
         if ((cast ((cast uniqueIndex : Float) < (cast 0.0 : Float)) : Bool)) {
           (uniqueIndex = cast (uniqueCount++ : Dynamic));
           (cast uniqueBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), Std.int((uniqueIndex * stride)));
-          if ((cast _Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast candidatesByHash : flighthq._internal._Map).set(hash, cast ([uniqueIndex] : Array<Dynamic>))); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
+          if ((cast _Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast candidatesByHash : flighthq._internal._Map<Float, Array<Float>>).set(hash, cast ([uniqueIndex] : Array<Dynamic>))); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
         }
         flighthq._internal._StaticIndex.writeUint32Array(sourceToUnique, vertex, uniqueIndex);
         vertex++;
@@ -225,16 +227,16 @@ class MeshGeometryIndex {
     elementCount = _Runtime.coalesce(_Runtime.optionalField(geometry.indices, 'length'), function():Dynamic return cast vertexCount);
     indices = ((cast ((cast uniqueCount : Float) > (cast MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex : Float)) : Bool) ? (cast new flighthq._internal._UInt32Array(elementCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(elementCount) : Dynamic));
     {
-      var element:Dynamic = 0.0;
+      var element:Float = 0.0;
       while ((cast ((cast element : Float) < (cast elementCount : Float)) : Bool)) {
-        var sourceIndex:Dynamic = _Runtime.coalesce(_Runtime.optionalIndex(geometry.indices, element), function():Dynamic return cast element);
-        if ((cast ((cast sourceIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
+        var sourceIndex:Float = _Runtime.coalesce(_Runtime.optionalIndex(geometry.indices, element), function():Dynamic return cast element);
+        if ((cast ((cast sourceIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry); }
         _Runtime.setIndex(indices, element, flighthq._internal._StaticIndex.readUint32Array(sourceToUnique, sourceIndex));
         element++;
       }
     }
     weldedBuffer = _Runtime.slice(_Runtime.field(uniqueBytes, 'buffer'), 0.0, (uniqueCount * stride));
-    out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    out = (cast cloneMeshGeometry((cast geometry : MeshGeometry)) : MeshGeometry);
     (out.vertices = cast (new flighthq._internal._Float32Array(weldedBuffer) : Dynamic));
     (out.indices = cast (indices : Dynamic));
     return cast out;
@@ -243,7 +245,7 @@ class MeshGeometryIndex {
 
   public static function equalVertexRecord__meshGeometryIndex(a:flighthq._internal._UInt8Array, aOffset:Float, b:flighthq._internal._UInt8Array, bOffset:Float, byteLength:Float):Bool {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast byteLength : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(a, (aOffset + i)), flighthq._internal._StaticIndex.readUint8Array(b, (bOffset + i))) : Bool)) { return cast false; }
         i++;
@@ -254,10 +256,10 @@ class MeshGeometryIndex {
   }
 
   public static function hashVertexRecord__meshGeometryIndex(bytes:flighthq._internal._UInt8Array, offset:Float, byteLength:Float):Float {
-    var hash:Dynamic = cast _Runtime.UNDEFINED;
+    var hash:Float = cast _Runtime.UNDEFINED;
     hash = 2166136261.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast byteLength : Float)) : Bool)) {
         (hash = (_Runtime.toInt32(hash) ^ _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (offset + i)))));
         (hash = cast (_Runtime.imul(_Runtime.toInt32(hash), 16777619) : Dynamic));
@@ -268,7 +270,7 @@ class MeshGeometryIndex {
     return cast null;
   }
 
-  public static final UINT16_INDEX_CEILING__meshGeometryIndex:Dynamic = 65535.0;
+  public static final UINT16_INDEX_CEILING__meshGeometryIndex:Float = 65535.0;
 
-  public static final UINT32_UNMAPPED__meshGeometryIndex:Dynamic = 4294967295.0;
+  public static final UINT32_UNMAPPED__meshGeometryIndex:Float = 4294967295.0;
 }

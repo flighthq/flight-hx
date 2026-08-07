@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
+import flighthq.types.Matrix;
 import flighthq.types.MethodsOf;
 
 class HasTransform2d {

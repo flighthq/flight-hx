@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class FontFormat {
-  public static function detectFontFormat(bytes:Dynamic):Null<String> {
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+  public static function detectFontFormat(bytes:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
+    var b:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     b = ((cast _Runtime.isInstanceOf(bytes, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) ? (cast bytes : Dynamic) : (cast new flighthq._internal._UInt8Array(bytes) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 1.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 0.0) : Bool)) : Bool)) { return cast 'truetype'; }
@@ -20,7 +20,7 @@ class FontFormat {
   }
 
   public static function inferFontFormatFromUrl(url:String):Null<String> {
-    var ext:Dynamic = cast _Runtime.UNDEFINED;
+    var ext:Null<String> = cast _Runtime.UNDEFINED;
     ext = _Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
       var __switchValue = ext;

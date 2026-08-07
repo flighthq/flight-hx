@@ -4,19 +4,29 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
 import flighthq.types.SpecularPbrExtension;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpecularPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
 class SpecularPbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, SpecularPbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
-      var specular:Dynamic = cast _Runtime.UNDEFINED;
+    registerScene3DPbrExtensionTextures((cast registry : Scene3DMaterialTextureRegistry), (cast SpecularPbrExtensionKind : String), function(extension:PbrExtension, out:Array<Texture>):Void {
+      var specular:SpecularPbrExtension = cast _Runtime.UNDEFINED;
       specular = (cast extension : SpecularPbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularColorMap')] : Array<Dynamic>)); }
-    }] : Array<Dynamic>));
+    });
   }
 }

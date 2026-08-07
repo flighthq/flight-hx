@@ -19,50 +19,55 @@ import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
+import flighthq.types.Node;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Quaternion;
+import flighthq.types.Vector3;
 
 class BillboardCamera {
   public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
-    _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
-    _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([billboard] : Array<Dynamic>));
+    BillboardCamera.setBillboardCameraBasis__billboardCamera((cast camera : Camera3D));
+    BillboardCamera.applyBillboardFacing__billboardCamera((cast billboard : Billboard));
   }
 
   public static function orientScene3DBillboardsToCamera(scene:Node3D, camera:Camera3D):Void {
-    _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
-    _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([scene] : Array<Dynamic>));
+    BillboardCamera.setBillboardCameraBasis__billboardCamera((cast camera : Camera3D));
+    BillboardCamera.orientBillboardSubtree__billboardCamera((cast scene : Node3D));
   }
 
   public static function applyBillboardFacing__billboardCamera(billboard:Billboard):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
-    world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([billboard] : Array<Dynamic>)) : Matrix4);
-    _Runtime.callValue(decomposeMatrix4, cast ([BillboardCamera._position__billboardCamera, BillboardCamera._rotationScratch__billboardCamera, BillboardCamera._scale__billboardCamera, world] : Array<Dynamic>));
-    _Runtime.callValue(BillboardCamera.writeBillboardFacingMatrix__billboardCamera, cast ([BillboardCamera._facingWorld__billboardCamera, billboard.mode] : Array<Dynamic>));
-    parent = (cast _Runtime.callValue(getNodeParent, cast ([(cast billboard : Node3D)] : Array<Dynamic>)) : Null<Node3D>);
+    var world:Matrix4 = cast _Runtime.UNDEFINED;
+    var parent:Null<Node3D> = cast _Runtime.UNDEFINED;
+    world = (cast (cast getNodeWorldMatrix4(billboard) : Matrix4) : Matrix4);
+    decomposeMatrix4(BillboardCamera._position__billboardCamera, BillboardCamera._rotationScratch__billboardCamera, BillboardCamera._scale__billboardCamera, world);
+    BillboardCamera.writeBillboardFacingMatrix__billboardCamera((cast BillboardCamera._facingWorld__billboardCamera : Matrix4), (cast billboard.mode : BillboardMode));
+    parent = (cast (cast getNodeParent((cast billboard : Node3D)) : Null<Node3D>) : Null<Node3D>);
     if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
-      _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
+      copyMatrix4(BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera);
     } else {
-      var parentWorld:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([parent] : Array<Dynamic>)) : Matrix4);
-      if ((cast _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._inverseParentWorld__billboardCamera, parentWorld] : Array<Dynamic>)) : Bool)) {
-        _Runtime.callValue(multiplyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._inverseParentWorld__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
+      var parentWorld:Matrix4 = (cast (cast getNodeWorldMatrix4(parent) : Matrix4) : Matrix4);
+      if ((cast (cast inverseMatrix4(BillboardCamera._inverseParentWorld__billboardCamera, parentWorld) : Bool) : Bool)) {
+        multiplyMatrix4(BillboardCamera._localScratch__billboardCamera, BillboardCamera._inverseParentWorld__billboardCamera, BillboardCamera._facingWorld__billboardCamera);
       } else {
-        _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
+        copyMatrix4(BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera);
       }
     }
-    _Runtime.callValue(setNodeLocalMatrix4, cast ([billboard, BillboardCamera._localScratch__billboardCamera] : Array<Dynamic>));
+    setNodeLocalMatrix4(billboard, BillboardCamera._localScratch__billboardCamera);
   }
 
   public static function orientBillboardSubtree__billboardCamera(node:Node3D):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(isBillboard, cast ([node] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([node] : Array<Dynamic>));
+    var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
+    if ((cast (cast isBillboard((cast node : Node3D)) : Bool) : Bool)) {
+      BillboardCamera.applyBillboardFacing__billboardCamera((cast node : Billboard));
     }
-    children = _Runtime.field(_Runtime.callValue(getNode3DRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    children = (cast (cast getNode3DRuntime((cast node : Node3D)) : Node3DRuntime) : { var children:Null<Array<Node<Node3DTraits>>>; }).children;
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D)] : Array<Dynamic>));
+          BillboardCamera.orientBillboardSubtree__billboardCamera((cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D) : Node3D));
           i++;
         }
       }
@@ -70,11 +75,11 @@ class BillboardCamera {
   }
 
   public static function setBillboardCameraBasis__billboardCamera(camera:Camera3D):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var rl:Dynamic = cast _Runtime.UNDEFINED;
-    var ul:Dynamic = cast _Runtime.UNDEFINED;
-    var bl:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._cameraWorld__billboardCamera, camera.view] : Array<Dynamic>));
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var rl:Float = cast _Runtime.UNDEFINED;
+    var ul:Float = cast _Runtime.UNDEFINED;
+    var bl:Float = cast _Runtime.UNDEFINED;
+    (cast inverseMatrix4(BillboardCamera._cameraWorld__billboardCamera, camera.view) : Bool);
     m = BillboardCamera._cameraWorld__billboardCamera.m;
     (BillboardCamera._cameraEyeX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 12.0) : Dynamic));
     (BillboardCamera._cameraEyeY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 13.0) : Dynamic));
@@ -103,12 +108,12 @@ class BillboardCamera {
   }
 
   public static function writeBillboardFacingMatrix__billboardCamera(out:Matrix4, mode:BillboardMode):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
     var rx:Float = cast _Runtime.UNDEFINED;
     var ry:Float = cast _Runtime.UNDEFINED;
     var rz:Float = cast _Runtime.UNDEFINED;
@@ -118,7 +123,7 @@ class BillboardCamera {
     var nx:Float = cast _Runtime.UNDEFINED;
     var ny:Float = cast _Runtime.UNDEFINED;
     var nz:Float = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     px = BillboardCamera._position__billboardCamera.x;
     py = BillboardCamera._position__billboardCamera.y;
     pz = BillboardCamera._position__billboardCamera.z;
@@ -136,9 +141,9 @@ class BillboardCamera {
       (ny = cast (BillboardCamera._cameraBackY__billboardCamera : Dynamic));
       (nz = cast (BillboardCamera._cameraBackZ__billboardCamera : Dynamic));
     } else { if ((cast _Runtime.strictEquals(mode, 'axisY') : Bool)) {
-      var dx:Dynamic = (BillboardCamera._cameraEyeX__billboardCamera - px);
-      var dz:Dynamic = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
-      var dl:Dynamic = _Runtime.hypot(dx, dz);
+      var dx:Float = (BillboardCamera._cameraEyeX__billboardCamera - px);
+      var dz:Float = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
+      var dl:Float = _Runtime.hypot(dx, dz);
       if ((cast ((cast dl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
         (dx = cast (BillboardCamera._cameraBackX__billboardCamera : Dynamic));
         (dz = cast (BillboardCamera._cameraBackZ__billboardCamera : Dynamic));
@@ -159,10 +164,10 @@ class BillboardCamera {
       (uy = cast (1.0 : Dynamic));
       (uz = cast (0.0 : Dynamic));
     } else {
-      var dnx:Dynamic = (BillboardCamera._cameraEyeX__billboardCamera - px);
-      var dny:Dynamic = (BillboardCamera._cameraEyeY__billboardCamera - py);
-      var dnz:Dynamic = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
-      var dnl:Dynamic = _Runtime.hypot(dnx, dny, dnz);
+      var dnx:Float = (BillboardCamera._cameraEyeX__billboardCamera - px);
+      var dny:Float = (BillboardCamera._cameraEyeY__billboardCamera - py);
+      var dnz:Float = (BillboardCamera._cameraEyeZ__billboardCamera - pz);
+      var dnl:Float = _Runtime.hypot(dnx, dny, dnz);
       if ((cast ((cast dnl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
         (dnx = cast (BillboardCamera._cameraBackX__billboardCamera : Dynamic));
         (dny = cast (BillboardCamera._cameraBackY__billboardCamera : Dynamic));
@@ -175,9 +180,9 @@ class BillboardCamera {
       (rx = cast (((BillboardCamera._cameraUpY__billboardCamera * nz) - (BillboardCamera._cameraUpZ__billboardCamera * ny)) : Dynamic));
       (ry = cast (((BillboardCamera._cameraUpZ__billboardCamera * nx) - (BillboardCamera._cameraUpX__billboardCamera * nz)) : Dynamic));
       (rz = cast (((BillboardCamera._cameraUpX__billboardCamera * ny) - (BillboardCamera._cameraUpY__billboardCamera * nx)) : Dynamic));
-      var rl:Dynamic = _Runtime.hypot(rx, ry, rz);
+      var rl:Float = _Runtime.hypot(rx, ry, rz);
       if ((cast ((cast rl : Float) < (cast BillboardCamera.FACING_EPSILON__billboardCamera : Float)) : Bool)) {
-        var d:Dynamic = (((BillboardCamera._cameraRightX__billboardCamera * nx) + (BillboardCamera._cameraRightY__billboardCamera * ny)) + (BillboardCamera._cameraRightZ__billboardCamera * nz));
+        var d:Float = (((BillboardCamera._cameraRightX__billboardCamera * nx) + (BillboardCamera._cameraRightY__billboardCamera * ny)) + (BillboardCamera._cameraRightZ__billboardCamera * nz));
         (rx = cast ((BillboardCamera._cameraRightX__billboardCamera - (d * nx)) : Dynamic));
         (ry = cast ((BillboardCamera._cameraRightY__billboardCamera - (d * ny)) : Dynamic));
         (rz = cast ((BillboardCamera._cameraRightZ__billboardCamera - (d * nz)) : Dynamic));
@@ -215,43 +220,43 @@ class BillboardCamera {
     flighthq._internal._StaticIndex.writeFloat32Array(m, 15.0, 1.0);
   }
 
-  public static final FACING_EPSILON__billboardCamera:Dynamic = 0.000001;
+  public static final FACING_EPSILON__billboardCamera:Float = 0.000001;
 
-  public static final _cameraWorld__billboardCamera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _cameraWorld__billboardCamera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final _inverseParentWorld__billboardCamera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _inverseParentWorld__billboardCamera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final _facingWorld__billboardCamera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _facingWorld__billboardCamera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final _localScratch__billboardCamera:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _localScratch__billboardCamera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final _position__billboardCamera:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _position__billboardCamera:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _scale__billboardCamera:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _scale__billboardCamera:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _rotationScratch__billboardCamera:Dynamic = _Runtime.callValue(createQuaternion, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+  public static final _rotationScratch__billboardCamera:Quaternion = (cast createQuaternion((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Quaternion);
 
-  public static var _cameraEyeX__billboardCamera:Dynamic = 0.0;
+  public static var _cameraEyeX__billboardCamera:Float = 0.0;
 
-  public static var _cameraEyeY__billboardCamera:Dynamic = 0.0;
+  public static var _cameraEyeY__billboardCamera:Float = 0.0;
 
-  public static var _cameraEyeZ__billboardCamera:Dynamic = 0.0;
+  public static var _cameraEyeZ__billboardCamera:Float = 0.0;
 
-  public static var _cameraRightX__billboardCamera:Dynamic = 1.0;
+  public static var _cameraRightX__billboardCamera:Float = 1.0;
 
-  public static var _cameraRightY__billboardCamera:Dynamic = 0.0;
+  public static var _cameraRightY__billboardCamera:Float = 0.0;
 
-  public static var _cameraRightZ__billboardCamera:Dynamic = 0.0;
+  public static var _cameraRightZ__billboardCamera:Float = 0.0;
 
-  public static var _cameraUpX__billboardCamera:Dynamic = 0.0;
+  public static var _cameraUpX__billboardCamera:Float = 0.0;
 
-  public static var _cameraUpY__billboardCamera:Dynamic = 1.0;
+  public static var _cameraUpY__billboardCamera:Float = 1.0;
 
-  public static var _cameraUpZ__billboardCamera:Dynamic = 0.0;
+  public static var _cameraUpZ__billboardCamera:Float = 0.0;
 
-  public static var _cameraBackX__billboardCamera:Dynamic = 0.0;
+  public static var _cameraBackX__billboardCamera:Float = 0.0;
 
-  public static var _cameraBackY__billboardCamera:Dynamic = 0.0;
+  public static var _cameraBackY__billboardCamera:Float = 0.0;
 
-  public static var _cameraBackZ__billboardCamera:Dynamic = 1.0;
+  public static var _cameraBackZ__billboardCamera:Float = 1.0;
 }

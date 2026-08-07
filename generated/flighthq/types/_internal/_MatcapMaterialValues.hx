@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _MatcapMaterialValues {
-  public static final MatcapMaterialKind:Dynamic = 'MatcapMaterial';
+  public static final MatcapMaterialKind:String = 'MatcapMaterial';
 }

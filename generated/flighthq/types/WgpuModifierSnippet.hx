@@ -4,8 +4,8 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuModifierCompileContext = { var acquireTexture:Dynamic; var uniformBase:Float; };
+typedef WgpuModifierCompileContext = { var acquireTexture:Texture->Float; var uniformBase:Float; };
 
 typedef WgpuModifierContribution = { @:optional var declarations:String; var source:String; };
 
-typedef WgpuModifierSnippet = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Dynamic; @:optional var bind:Dynamic; var contribution:Dynamic; @:optional var textures:Dynamic; };
+typedef WgpuModifierSnippet = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Modifier->String; @:optional var bind:Modifier->flighthq._internal._Float32Array->Float->Void; var contribution:Modifier->Float->WgpuModifierCompileContext->WgpuModifierContribution; @:optional var textures:Modifier->Array<Null<Texture>>->Float->Float; };

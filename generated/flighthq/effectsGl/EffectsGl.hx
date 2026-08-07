@@ -53,6 +53,7 @@ import flighthq.effectsGl.GlTiltShiftEffect as Facade_EffectsGl_flighthq_effects
 import flighthq.effectsGl.GlToneMapEffect as Facade_EffectsGl_flighthq_effectsGl_GlToneMapEffect;
 import flighthq.effectsGl.GlVignetteEffect as Facade_EffectsGl_flighthq_effectsGl_GlVignetteEffect;
 import flighthq.effectsGl.GlWhiteBalanceEffect as Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect;
+import flighthq.types.Adjustment;
 import flighthq.types.BlurEffect;
 import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
@@ -189,11 +190,11 @@ class EffectsGl {
     Facade_EffectsGl_flighthq_effectsGl_EnableGlRenderEffectGuards.enableGlRenderEffectGuards(state);
   }
 
-  public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline(state, pipeline, operations);
   }
 
-  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, ?destinationAvailable:Dynamic):GlRenderEffectApplicationExplanation {
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, ?destinationAvailable:Bool):GlRenderEffectApplicationExplanation {
     return cast Facade_EffectsGl_flighthq_effectsGl_GlRenderTextureEffect.explainGlRenderEffectApplication(state, effects, sourceAvailable, destinationAvailable);
     return cast null;
   }

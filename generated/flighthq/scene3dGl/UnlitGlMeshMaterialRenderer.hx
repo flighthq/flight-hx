@@ -15,52 +15,64 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.scene3dGl.GlUnlitPrelude.bindGlUnlitSurface;
 import flighthq.scene3dGl.GlUnlitPrelude.ensureGlUnlitProgram;
 import flighthq.types.Camera3D;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlUnlitProgram;
 import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 class UnlitGlMeshMaterialRenderer {
-  public static final unlitGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var unlit:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+  public static final unlitGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var unlit:Null<UnlitMaterial> = cast _Runtime.UNDEFINED;
+    var program:GlUnlitProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     unlit = (cast material : Null<UnlitMaterial>);
-    program = _Runtime.callValue(ensureGlUnlitProgram, cast ([state, _Runtime.callValue(UnlitGlMeshMaterialRenderer.defineKeyForMaterial__unlitGlMeshMaterialRenderer, cast ([state, unlit] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(unlit, null) : Bool) && (cast _Runtime.field(unlit, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
+    program = (cast ensureGlUnlitProgram((cast state : GlRenderState), (cast (cast UnlitGlMeshMaterialRenderer.defineKeyForMaterial__unlitGlMeshMaterialRenderer((cast state : GlRenderState), (cast unlit : Null<UnlitMaterial>)) : GlUnlitDefineKey) : GlUnlitDefineKey)) : GlUnlitProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(unlit, null) : Bool) && (cast _Runtime.field(unlit, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlUnlitProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
     if ((cast _Runtime.strictEquals(unlit, null) : Bool)) {
-      _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, UnlitGlMeshMaterialRenderer.WHITE__unlitGlMeshMaterialRenderer, 1.0, null, 0.5] : Array<Dynamic>));
+      bindGlUnlitSurface((cast state : GlRenderState), program, (cast UnlitGlMeshMaterialRenderer.WHITE__unlitGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), null, (cast 0.5 : Float));
       return;
     }
-    _Runtime.callValue(unpackColorToLinear, cast ([UnlitGlMeshMaterialRenderer.scratchRgba__unlitGlMeshMaterialRenderer, _Runtime.field(unlit, 'baseColor')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, UnlitGlMeshMaterialRenderer.scratchRgba__unlitGlMeshMaterialRenderer, 1.0, _Runtime.field(unlit, 'baseColorMap'), _Runtime.field(unlit, 'alphaCutoff')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlUvTransform, cast ([gl, program, _Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    (cast unpackColorToLinear((cast UnlitGlMeshMaterialRenderer.scratchRgba__unlitGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(unlit, 'baseColor') : Float)) : LinearColor);
+    bindGlUnlitSurface((cast state : GlRenderState), program, (cast UnlitGlMeshMaterialRenderer.scratchRgba__unlitGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), _Runtime.field(unlit, 'baseColorMap'), (cast _Runtime.field(unlit, 'alphaCutoff') : Float));
+    bindGlUvTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, _Runtime.field(unlit, 'baseColorMap'));
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerGlUnlitMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, UnlitMaterialKind, unlitGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast UnlitMaterialKind : String), (cast unlitGlMeshMaterialRenderer : GlMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(state:GlRenderState, material:Null<UnlitMaterial>):GlUnlitDefineKey {
-    var colorMap:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMapReady:Dynamic = cast _Runtime.UNDEFINED;
+    var colorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var colorMapReady:Bool = cast _Runtime.UNDEFINED;
     colorMap = _Runtime.coalesce(_Runtime.optionalField(material, 'baseColorMap'), function():Dynamic return cast null);
-    colorMapReady = ((cast !_Runtime.strictEquals(colorMap, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, colorMap] : Array<Dynamic>)), null) : Bool));
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: colorMapReady, hasUvTransform: ((cast colorMapReady : Bool) && (cast _Runtime.callValue(hasGlUvTransform, cast ([colorMap] : Array<Dynamic>)) : Bool)), vertexColor: false };
+    colorMapReady = ((cast !_Runtime.strictEquals(colorMap, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), colorMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: colorMapReady, hasUvTransform: ((cast colorMapReady : Bool) && (cast (cast hasGlUvTransform(colorMap) : Bool) : Bool)), vertexColor: false };
     return cast null;
   }
 

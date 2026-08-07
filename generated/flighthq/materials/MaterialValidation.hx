@@ -7,11 +7,11 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 
 class MaterialValidation {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
-    _Runtime.setField(out, 'metallic', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'metallic'))));
-    _Runtime.setField(out, 'roughness', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'roughness'))));
-    _Runtime.setField(out, 'occlusionStrength', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'occlusionStrength'))));
-    _Runtime.setField(out, 'emissiveStrength', HxMath.max(0.0, _Runtime.field(out, 'emissiveStrength')));
-    _Runtime.setField(out, 'normalScale', HxMath.max(0.0, _Runtime.field(out, 'normalScale')));
+    ((cast out : StandardPbrMaterialProperties).metallic = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).metallic)));
+    ((cast out : StandardPbrMaterialProperties).roughness = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).roughness)));
+    ((cast out : StandardPbrMaterialProperties).occlusionStrength = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).occlusionStrength)));
+    ((cast out : StandardPbrMaterialProperties).emissiveStrength = HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).emissiveStrength));
+    ((cast out : StandardPbrMaterialProperties).normalScale = HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).normalScale));
     return cast out;
     return cast null;
   }
@@ -36,7 +36,7 @@ class MaterialValidation {
     return cast null;
   }
 
-  public static final MIN_MATERIAL_IOR__materialValidation:Dynamic = 1.0;
+  public static final MIN_MATERIAL_IOR__materialValidation:Float = 1.0;
 
-  public static final MAX_MATERIAL_IOR__materialValidation:Dynamic = 5.0;
+  public static final MAX_MATERIAL_IOR__materialValidation:Float = 5.0;
 }

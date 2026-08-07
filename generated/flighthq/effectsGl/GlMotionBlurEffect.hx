@@ -6,37 +6,40 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.MotionBlurEffect;
+import flighthq.types.RenderEffect;
 
 class GlMotionBlurEffect {
   @:noCompletion
   public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:MotionBlurEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var inputs:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    var inputs:Array<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'motionBlur', GlMotionBlurEffect.MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect] : Array<Dynamic>));
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'motionBlur' : String), (cast GlMotionBlurEffect.MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect : String)) : GlFullscreenProgram);
     inputs = _Runtime.select(velocityTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), velocityTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast inputs : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_samples'), samples);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_hasVelocity'), _Runtime.select(velocityTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlMotionBlurEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyMotionBlurEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect)] : Array<Dynamic>));
+  public static final defaultGlMotionBlurEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyMotionBlurEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'sceneVelocityTexture') : Null<flighthq._internal.dom.WebGLTexture>), (cast (cast effect : MotionBlurEffect) : MotionBlurEffect));
   };
 
   public static function registerGlMotionBlurEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'MotionBlurEffect', defaultGlMotionBlurEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'MotionBlurEffect' : String), (cast defaultGlMotionBlurEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nuniform float u_samples;\nuniform vec2 u_resolution;\nuniform float u_hasVelocity;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec4 base = texture(u_texture0, v_texCoord);\n  if (u_hasVelocity < 0.5) {\n    // Sentinel path: no velocity buffer written — passthrough copy.\n    o_color = base;\n    return;\n  }\n  // Velocity decode: rgba16f buffer stores screen-space velocity in pixels in the RG channels. Convert\n  // to a UV-space smear vector via u_resolution and scale by intensity.\n  vec2 velocityPixels = texture(u_texture1, v_texCoord).rg;\n  vec2 smear = (velocityPixels / u_resolution) * u_intensity;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    // Center the taps on the fragment: t in [-0.5, 0.5] spreads the accumulation along the motion vector.\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + smear * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
+  public static final MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nuniform float u_samples;\nuniform vec2 u_resolution;\nuniform float u_hasVelocity;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec4 base = texture(u_texture0, v_texCoord);\n  if (u_hasVelocity < 0.5) {\n    // Sentinel path: no velocity buffer written — passthrough copy.\n    o_color = base;\n    return;\n  }\n  // Velocity decode: rgba16f buffer stores screen-space velocity in pixels in the RG channels. Convert\n  // to a UV-space smear vector via u_resolution and scale by intensity.\n  vec2 velocityPixels = texture(u_texture1, v_texCoord).rg;\n  vec2 smear = (velocityPixels / u_resolution) * u_intensity;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    // Center the taps on the fragment: t in [-0.5, 0.5] spreads the accumulation along the motion vector.\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + smear * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
 }

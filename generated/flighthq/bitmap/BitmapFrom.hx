@@ -11,35 +11,35 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 
 class BitmapFrom {
   public static function captureBitmapFromImageResource(resource:Image):Bitmap {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var raw:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(resource, 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(resource, 'height'));
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(resource, 'source'), 0.0, 0.0] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, _Runtime.field(resource, 'width'), _Runtime.field(resource, 'height')] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
     return cast null;
   }
 
   public static function createBitmapFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Bitmap {
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var raw:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     w = _Runtime.coalesce(width, function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width'));
     h = _Runtime.coalesce(height, function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'));
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([x, y, w, h] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flighthq._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flighthq._internal.dom.ImageData).width }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flighthq._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flighthq._internal.dom.ImageData).width } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
     return cast null;
   }
 
   public static function createBitmapFromImageSource(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
     var raw:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     var bitmap:Bitmap = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
@@ -55,7 +55,7 @@ class BitmapFrom {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    bitmap = _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
+    bitmap = (cast createEntity((cast { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
     return cast bitmap;
     return cast null;
   }

@@ -12,26 +12,26 @@ import flighthq.types.GlRenderTarget;
 class GlLinearToSrgbPass {
   @:noCompletion
   public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, _Runtime.callValue(GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass, cast ([state] : Array<Dynamic>)), cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, GlLinearToSrgbPass.NOOP__glLinearToSrgbPass] : Array<Dynamic>));
+    drawGlFullscreenPass((cast state : GlRenderState), (cast (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass((cast state : GlRenderState)) : GlFullscreenProgram) : GlFullscreenProgram), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void return GlLinearToSrgbPass.NOOP__glLinearToSrgbPass() : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:GlRenderState):GlFullscreenProgram {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var program:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
+    program = ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), LINEAR_TO_SRGB_FRAGMENT_SRC] : Array<Dynamic>)) : Dynamic));
-      ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), program));
+      (program = cast ((cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast LINEAR_TO_SRGB_FRAGMENT_SRC : String)) : Null<GlFullscreenProgram>) : Dynamic));
+      ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, program));
     }
     return cast program;
     return cast null;
   }
 
-  public static final NOOP__glLinearToSrgbPass:Dynamic = function() {
+  public static final NOOP__glLinearToSrgbPass:Void->Void = function():Void {
 
   };
 
-  public static final _programs__glLinearToSrgbPass:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _programs__glLinearToSrgbPass:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
-  public static final LINEAR_TO_SRGB_FRAGMENT_SRC:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvec3 linearToSrgb(vec3 c) {\n  c = max(c, vec3(0.0));\n  vec3 low = c * 12.92;\n  vec3 high = 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3(0.0031308), c));\n}\nvoid main() {\n  vec4 linear = texture(u_texture0, v_texCoord);\n  fragColor = vec4(linearToSrgb(linear.rgb), linear.a);\n}';
+  public static final LINEAR_TO_SRGB_FRAGMENT_SRC:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvec3 linearToSrgb(vec3 c) {\n  c = max(c, vec3(0.0));\n  vec3 low = c * 12.92;\n  vec3 high = 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3(0.0031308), c));\n}\nvoid main() {\n  vec4 linear = texture(u_texture0, v_texCoord);\n  fragColor = vec4(linearToSrgb(linear.rgb), linear.a);\n}';
 }

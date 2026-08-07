@@ -12,102 +12,113 @@ import flighthq.scene2dDom.DomTextureResolver.resolveDomTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.types.DomRenderState;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Sprite;
+import flighthq.types.Sprite.SpriteData;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
-typedef DomSpriteData__domSprite = Dynamic;
+typedef DomSpriteData__domSprite = { >RendererData, var canvas:Null<flighthq._internal.dom.HTMLCanvasElement>; var context:Null<flighthq._internal.dom.CanvasRenderingContext2D>; var image:Null<flighthq._internal.dom.HTMLImageElement>; var video:Null<flighthq._internal.dom.HTMLVideoElement>; };
 
 class DomSprite {
   public static function createDomSpriteData__domSprite(state:RenderState, source:Renderable):DomSpriteData__domSprite {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = (cast _Runtime.callValue(createSpriteRendererData, cast ([state, source] : Array<Dynamic>)) : DomSpriteData__domSprite);
-    _Runtime.setField(data, 'canvas', null);
-    _Runtime.setField(data, 'context', null);
-    _Runtime.setField(data, 'image', null);
-    _Runtime.setField(data, 'video', null);
+    var data:DomSpriteData__domSprite = cast _Runtime.UNDEFINED;
+    data = (cast (cast createSpriteRendererData((cast state : RenderState), (cast source : Renderable)) : DomSpriteData__domSprite) : DomSpriteData__domSprite);
+    ((cast data : DomSpriteData__domSprite).canvas = null);
+    ((cast data : DomSpriteData__domSprite).context = null);
+    ((cast data : DomSpriteData__domSprite).image = null);
+    ((cast data : DomSpriteData__domSprite).video = null);
     return cast data;
     return cast null;
   }
 
   @:noCompletion
   public static function drawDomSprite(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var textureWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var textureHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceRectangle:Dynamic = cast _Runtime.UNDEFINED;
-    var isFullTexture:Dynamic = cast _Runtime.UNDEFINED;
-    data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomSpriteData__domSprite>);
+    var data:Null<DomSpriteData__domSprite> = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var textureWidth:Float = cast _Runtime.UNDEFINED;
+    var textureHeight:Float = cast _Runtime.UNDEFINED;
+    var sourceRectangle:{ var height:Float; var width:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+    var isFullTexture:Bool = cast _Runtime.UNDEFINED;
+    data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomSpriteData__domSprite>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
-    texture = _Runtime.field(_Runtime.field((cast _Runtime.field(renderProxy, 'source') : Sprite), 'data'), 'texture');
-    if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool)) { return; }
-    source = _Runtime.callValue(resolveDomTexture, cast ([state, texture] : Array<Dynamic>));
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
+    source = (cast resolveDomTexture((cast state : DomRenderState), texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
-    textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
-    textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
-    sourceRectangle = { height: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, textureHeight)), width: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, textureWidth)), x: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, textureWidth), y: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, textureHeight) };
-    isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'y'), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'width'), textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'height'), textureHeight) : Bool));
+    textureWidth = (cast getTextureWidth(texture) : Float);
+    textureHeight = (cast getTextureHeight(texture) : Float);
+    sourceRectangle = { height: HxMath.abs(((cast texture : Texture2D).uvScale.y * textureHeight)), width: HxMath.abs(((cast texture : Texture2D).uvScale.x * textureWidth)), x: ((cast texture : Texture2D).uvOffset.x * textureWidth), y: ((cast texture : Texture2D).uvOffset.y * textureHeight) };
+    isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).y, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).width, textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).height, textureHeight) : Bool));
     if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) : Bool)) {
-      _Runtime.callValue(DomSprite.renderSpriteAsVideo__domSprite, cast ([state, renderProxy, data, source] : Array<Dynamic>));
+      DomSprite.renderSpriteAsVideo__domSprite((cast state : DomRenderState), (cast renderProxy : RenderProxy2D), data, (cast source : flighthq._internal.dom.HTMLVideoElement));
     } else { if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLImageElement')) : Bool)) : Bool)) {
-      _Runtime.callValue(DomSprite.renderSpriteAsImage__domSprite, cast ([state, renderProxy, data, source] : Array<Dynamic>));
+      DomSprite.renderSpriteAsImage__domSprite((cast state : DomRenderState), (cast renderProxy : RenderProxy2D), data, (cast source : flighthq._internal.dom.HTMLImageElement));
     } else {
-      _Runtime.callValue(DomSprite.renderSpriteAsCanvas__domSprite, cast ([state, renderProxy, data, source, sourceRectangle] : Array<Dynamic>));
+      DomSprite.renderSpriteAsCanvas__domSprite((cast state : DomRenderState), (cast renderProxy : RenderProxy2D), data, (cast source : flighthq._internal._Any), (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }));
     } }
   }
 
   public static function renderSpriteAsCanvas__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.CanvasImageSource, sourceRectangle:{ var x:Float; var y:Float; var width:Float; var height:Float; }):Void {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setField(data, 'image', null);
-    _Runtime.setField(data, 'video', null);
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'canvas'), null) : Bool)) {
-      _Runtime.setField(data, 'canvas', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
-      _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
-      _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
+    var texture:Texture = cast _Runtime.UNDEFINED;
+    var pixelRatio:Float = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    ((cast data : DomSpriteData__domSprite).image = null);
+    ((cast data : DomSpriteData__domSprite).video = null);
+    if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).canvas, null) : Bool)) {
+      ((cast data : DomSpriteData__domSprite).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
+      ((cast data : DomSpriteData__domSprite).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomSpriteData__domSprite).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
+      prepareDomElement((cast (cast data : DomSpriteData__domSprite).canvas : flighthq._internal.dom.HTMLElement));
     }
-    texture = _Runtime.field(_Runtime.field((cast _Runtime.field(renderProxy, 'source') : Sprite), 'data'), 'texture');
-    pixelRatio = _Runtime.field(state, 'pixelRatio');
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'width'), pixelRatio));
-    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'height'), pixelRatio));
-    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px');
-    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px');
-    context = _Runtime.field(data, 'context');
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    pixelRatio = (cast state : DomRenderState).pixelRatio;
+    flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'width', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'height', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height * pixelRatio));
+    ((cast (cast (cast data : DomSpriteData__domSprite).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width) + 'px');
+    ((cast (cast (cast data : DomSpriteData__domSprite).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height) + 'px');
+    context = (cast data : DomSpriteData__domSprite).context;
     if ((cast !_Runtime.strictEquals(pixelRatio, 1.0) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool)));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, _Runtime.field(sourceRectangle, 'x'), _Runtime.field(sourceRectangle, 'y'), _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height'), 0.0, 0.0, _Runtime.field(sourceRectangle, 'width'), _Runtime.field(sourceRectangle, 'height')] : Array<Dynamic>));
-    _Runtime.callValue(applyDomStyle, cast ([state, _Runtime.field(data, 'canvas'), renderProxy] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'canvas')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast (cast state : DomRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast texture : { var sampler:Sampler; }).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool)));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).x, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).y, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, 0.0, 0.0, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height] : Array<Dynamic>));
+    applyDomStyle((cast state : DomRenderState), (cast (cast data : DomSpriteData__domSprite).canvas : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
+    setDomRendererElement((cast state : DomRenderState), (cast (cast data : DomSpriteData__domSprite).canvas : flighthq._internal.dom.HTMLElement));
   }
 
   public static function renderSpriteAsImage__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLImageElement):Void {
-    _Runtime.setField(data, 'canvas', null);
-    _Runtime.setField(data, 'context', null);
-    _Runtime.setField(data, 'video', null);
-    if ((cast _Runtime.strictEquals(_Runtime.field(data, 'image'), null) : Bool)) {
-      _Runtime.setField(data, 'image', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
-      ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
-      _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'image')] : Array<Dynamic>));
+    ((cast data : DomSpriteData__domSprite).canvas = null);
+    ((cast data : DomSpriteData__domSprite).context = null);
+    ((cast data : DomSpriteData__domSprite).video = null);
+    if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).image, null) : Bool)) {
+      ((cast data : DomSpriteData__domSprite).image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
+      ((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
+      prepareDomElement((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLElement));
     }
-    if ((cast !_Runtime.strictEquals((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src = source.src); }
-    _Runtime.callValue(applyDomStyle, cast ([state, _Runtime.field(data, 'image'), renderProxy] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'image')] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).src = source.src); }
+    applyDomStyle((cast state : DomRenderState), (cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
+    setDomRendererElement((cast state : DomRenderState), (cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLElement));
   }
 
   public static function renderSpriteAsVideo__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLVideoElement):Void {
-    _Runtime.setField(data, 'canvas', null);
-    _Runtime.setField(data, 'context', null);
-    _Runtime.setField(data, 'image', null);
-    _Runtime.setField(data, 'video', source);
-    _Runtime.callValue(prepareDomElement, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(applyDomStyle, cast ([state, source, renderProxy] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([state, source] : Array<Dynamic>));
+    ((cast data : DomSpriteData__domSprite).canvas = null);
+    ((cast data : DomSpriteData__domSprite).context = null);
+    ((cast data : DomSpriteData__domSprite).image = null);
+    ((cast data : DomSpriteData__domSprite).video = source);
+    prepareDomElement((cast source : flighthq._internal.dom.HTMLElement));
+    applyDomStyle((cast state : DomRenderState), (cast source : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
+    setDomRendererElement((cast state : DomRenderState), (cast source : flighthq._internal.dom.HTMLElement));
   }
 
   public static final defaultDomSpriteRenderer:Scene2DRenderer = { createData: DomSprite.createDomSpriteData__domSprite, isDirty: isSpriteRendererDirty, submit: drawDomSprite };

@@ -12,12 +12,12 @@ class HsvColor {
   }
 
   public static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
-    var hn:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    var f:Dynamic = cast _Runtime.UNDEFINED;
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    var q:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var hn:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    var f:Float = cast _Runtime.UNDEFINED;
+    var p:Float = cast _Runtime.UNDEFINED;
+    var q:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
       flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
@@ -66,15 +66,15 @@ class HsvColor {
   }
 
   public static function rgbToHsv(out:flighthq.types.HsvColor, color:Float):flighthq.types.HsvColor {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var max:Float = cast _Runtime.UNDEFINED;
+    var min:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var v:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var h:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);

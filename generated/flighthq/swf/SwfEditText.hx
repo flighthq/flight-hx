@@ -6,26 +6,29 @@ import flighthq._internal._Runtime;
 import flighthq.text.RichText.createRichText;
 import flighthq.textMarkup.TextMarkup.parseTextMarkup;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
+import flighthq.types.RichTextContent;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormat.TextFormatAlign;
+import flighthq.types.TextFormatRange;
 
 typedef SwfEditTextField__swfEditText = { var align:TextFormatAlign; var border:Bool; var color:Float; var fontHeight:Float; var fontId:Float; var hasColor:Bool; var height:Float; var html:Bool; var indent:Float; var leading:Float; var leftMargin:Float; var maxChars:Float; var multiline:Bool; var readOnly:Bool; var rightMargin:Float; var selectable:Bool; var text:String; var width:Float; var wordWrap:Bool; };
 
 class SwfEditText {
-  public static function readSwfEditTextFactory(reader:SwfReader, width:Float, height:Float):Null<Dynamic> {
-    var flags:Dynamic = cast _Runtime.UNDEFINED;
-    var layoutFlags:Dynamic = cast _Runtime.UNDEFINED;
-    var fontId:Dynamic = cast _Runtime.UNDEFINED;
-    var fontHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var hasColor:Dynamic = cast _Runtime.UNDEFINED;
-    var maxChars:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readSwfEditTextFactory(reader:SwfReader, width:Float, height:Float):Null<Float->String->RichText> {
+    var flags:Float = cast _Runtime.UNDEFINED;
+    var layoutFlags:Float = cast _Runtime.UNDEFINED;
+    var fontId:Float = cast _Runtime.UNDEFINED;
+    var fontHeight:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var hasColor:Bool = cast _Runtime.UNDEFINED;
+    var maxChars:Float = cast _Runtime.UNDEFINED;
     var align:TextFormatAlign = cast _Runtime.UNDEFINED;
-    var leftMargin:Dynamic = cast _Runtime.UNDEFINED;
-    var rightMargin:Dynamic = cast _Runtime.UNDEFINED;
-    var indent:Dynamic = cast _Runtime.UNDEFINED;
-    var leading:Dynamic = cast _Runtime.UNDEFINED;
-    var text:Dynamic = cast _Runtime.UNDEFINED;
+    var leftMargin:Float = cast _Runtime.UNDEFINED;
+    var rightMargin:Float = cast _Runtime.UNDEFINED;
+    var indent:Float = cast _Runtime.UNDEFINED;
+    var leading:Float = cast _Runtime.UNDEFINED;
+    var text:String = cast _Runtime.UNDEFINED;
     var field:SwfEditTextField__swfEditText = cast _Runtime.UNDEFINED;
     flags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     layoutFlags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
@@ -36,9 +39,9 @@ class SwfEditText {
     color = 0.0;
     hasColor = false;
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT_COLOR__swfEditText)), 0.0) : Bool)) {
-      var red:Dynamic = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-      var green:Dynamic = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-      var blue:Dynamic = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+      var red:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+      var green:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+      var blue:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
       (color = cast ((((red * 65536.0) + (green * 256.0)) + blue) : Dynamic));
       (hasColor = cast (true : Dynamic));
@@ -50,47 +53,47 @@ class SwfEditText {
     indent = 0.0;
     leading = 0.0;
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_LAYOUT__swfEditText)), 0.0) : Bool)) {
-      (align = cast (_Runtime.callValue(SwfEditText.resolveSwfEditTextAlign__swfEditText, cast ([_Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (align = cast ((cast SwfEditText.resolveSwfEditTextAlign__swfEditText((cast _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)) : Float)) : TextFormatAlign) : Dynamic));
       (leftMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
       (rightMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
       (indent = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
-      (leading = cast (_Runtime.divideNumbers(_Runtime.callValue(SwfEditText.readSwfEditTextSigned__swfEditText, cast ([reader] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
+      (leading = cast (((cast SwfEditText.readSwfEditTextSigned__swfEditText((cast reader : SwfReader)) : Float) / SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
     }
     _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>));
     text = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
     field = { align: align, border: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_BORDER__swfEditText)), 0.0), color: color, fontHeight: (fontHeight / SwfEditText.TWIPS_PER_PIXEL__swfEditText), fontId: fontId, hasColor: hasColor, height: height, html: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HTML__swfEditText)), 0.0), indent: indent, leading: leading, leftMargin: leftMargin, maxChars: maxChars, multiline: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_MULTILINE__swfEditText)), 0.0), readOnly: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_READ_ONLY__swfEditText)), 0.0), rightMargin: rightMargin, selectable: _Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_NO_SELECT__swfEditText)), 0.0), text: text, width: width, wordWrap: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_WORD_WRAP__swfEditText)), 0.0) };
-    return cast function(resolveFontName:Dynamic) return _Runtime.callValue(SwfEditText.createSwfEditTextNode__swfEditText, cast ([field, _Runtime.callValue(resolveFontName, cast ([_Runtime.field(field, 'fontId')] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast function(resolveFontName:Float->String):RichText return (cast SwfEditText.createSwfEditTextNode__swfEditText(field, (cast (cast resolveFontName((cast (cast field : SwfEditTextField__swfEditText).fontId : Float)) : String) : String)) : RichText);
     return cast null;
   }
 
   public static function createSwfEditTextNode__swfEditText(field:SwfEditTextField__swfEditText, fontName:String):RichText {
     var format:TextFormat = cast _Runtime.UNDEFINED;
-    var content:Dynamic = cast _Runtime.UNDEFINED;
-    var node:Dynamic = cast _Runtime.UNDEFINED;
+    var content:Null<RichTextContent> = cast _Runtime.UNDEFINED;
+    var node:RichText = cast _Runtime.UNDEFINED;
     format = { align: _Runtime.field(field, 'align'), indent: _Runtime.field(field, 'indent'), leading: _Runtime.field(field, 'leading'), leftMargin: _Runtime.field(field, 'leftMargin'), rightMargin: _Runtime.field(field, 'rightMargin'), size: _Runtime.field(field, 'fontHeight') };
-    if ((cast _Runtime.field(field, 'hasColor') : Bool)) { _Runtime.setField(format, 'color', _Runtime.field(field, 'color')); }
-    if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { _Runtime.setField(format, 'font', fontName); }
-    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast _Runtime.callValue(parseTextMarkup, cast ([_Runtime.field(field, 'text')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    node = _Runtime.callValue(createRichText, cast ([] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'border', _Runtime.field(field, 'border'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'defaultTextFormat', format);
-    _Runtime.setField(_Runtime.field(node, 'data'), 'height', _Runtime.field(field, 'height'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'maxChars', _Runtime.field(field, 'maxChars'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'multiline', _Runtime.field(field, 'multiline'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'selectable', ((cast _Runtime.field(field, 'selectable') : Bool) && (cast !(cast _Runtime.field(field, 'readOnly') : Bool) : Bool)));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'text', ((cast _Runtime.strictEquals(content, null) : Bool) ? (cast _Runtime.field(field, 'text') : Dynamic) : (cast _Runtime.field(content, 'text') : Dynamic)));
-    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { _Runtime.setField(_Runtime.field(node, 'data'), 'textFormatRanges', _Runtime.field(content, 'formatRanges')); }
-    _Runtime.setField(_Runtime.field(node, 'data'), 'textColor', _Runtime.field(field, 'color'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'textFormat', format);
-    _Runtime.setField(_Runtime.field(node, 'data'), 'width', _Runtime.field(field, 'width'));
-    _Runtime.setField(_Runtime.field(node, 'data'), 'wordWrap', _Runtime.field(field, 'wordWrap'));
+    if ((cast _Runtime.field(field, 'hasColor') : Bool)) { ((cast format : TextFormat).color = _Runtime.field(field, 'color')); }
+    if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast format : TextFormat).font = fontName); }
+    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast parseTextMarkup((cast _Runtime.field(field, 'text') : String), _Runtime.field(_Runtime, 'UNDEFINED')) : RichTextContent) : Dynamic) : (cast null : Dynamic));
+    node = (cast createRichText(_Runtime.field(_Runtime, 'UNDEFINED')) : RichText);
+    ((cast (cast node : RichText).data : RichTextData).border = _Runtime.field(field, 'border'));
+    ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
+    ((cast (cast node : RichText).data : RichTextData).height = _Runtime.field(field, 'height'));
+    ((cast (cast node : RichText).data : RichTextData).maxChars = _Runtime.field(field, 'maxChars'));
+    ((cast (cast node : RichText).data : RichTextData).multiline = _Runtime.field(field, 'multiline'));
+    ((cast (cast node : RichText).data : RichTextData).selectable = ((cast _Runtime.field(field, 'selectable') : Bool) && (cast !(cast _Runtime.field(field, 'readOnly') : Bool) : Bool)));
+    ((cast (cast node : RichText).data : RichTextData).text = ((cast _Runtime.strictEquals(content, null) : Bool) ? (cast _Runtime.field(field, 'text') : Dynamic) : (cast (cast content : RichTextContent).text : Dynamic)));
+    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { ((cast (cast node : RichText).data : RichTextData).textFormatRanges = (cast content : RichTextContent).formatRanges); }
+    ((cast (cast node : RichText).data : RichTextData).textColor = _Runtime.field(field, 'color'));
+    ((cast (cast node : RichText).data : RichTextData).textFormat = format);
+    ((cast (cast node : RichText).data : RichTextData).width = _Runtime.field(field, 'width'));
+    ((cast (cast node : RichText).data : RichTextData).wordWrap = _Runtime.field(field, 'wordWrap'));
     return cast node;
     return cast null;
   }
 
   public static function readSwfEditTextSigned__swfEditText(reader:SwfReader):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     return cast ((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic));
     return cast null;
@@ -103,35 +106,35 @@ class SwfEditText {
     return cast null;
   }
 
-  public static final EDIT_TEXT_ALIGN_CENTER__swfEditText:Dynamic = 2.0;
+  public static final EDIT_TEXT_ALIGN_CENTER__swfEditText:Float = 2.0;
 
-  public static final EDIT_TEXT_ALIGN_JUSTIFY__swfEditText:Dynamic = 3.0;
+  public static final EDIT_TEXT_ALIGN_JUSTIFY__swfEditText:Float = 3.0;
 
-  public static final EDIT_TEXT_ALIGN_RIGHT__swfEditText:Dynamic = 1.0;
+  public static final EDIT_TEXT_ALIGN_RIGHT__swfEditText:Float = 1.0;
 
-  public static final EDIT_TEXT_BORDER__swfEditText:Dynamic = 8.0;
+  public static final EDIT_TEXT_BORDER__swfEditText:Float = 8.0;
 
-  public static final EDIT_TEXT_HAS_FONT__swfEditText:Dynamic = 1.0;
+  public static final EDIT_TEXT_HAS_FONT__swfEditText:Float = 1.0;
 
-  public static final EDIT_TEXT_HAS_FONT_CLASS__swfEditText:Dynamic = 128.0;
+  public static final EDIT_TEXT_HAS_FONT_CLASS__swfEditText:Float = 128.0;
 
-  public static final EDIT_TEXT_HAS_LAYOUT__swfEditText:Dynamic = 32.0;
+  public static final EDIT_TEXT_HAS_LAYOUT__swfEditText:Float = 32.0;
 
-  public static final EDIT_TEXT_HAS_MAX_LENGTH__swfEditText:Dynamic = 2.0;
+  public static final EDIT_TEXT_HAS_MAX_LENGTH__swfEditText:Float = 2.0;
 
-  public static final EDIT_TEXT_HAS_TEXT__swfEditText:Dynamic = 128.0;
+  public static final EDIT_TEXT_HAS_TEXT__swfEditText:Float = 128.0;
 
-  public static final EDIT_TEXT_HAS_TEXT_COLOR__swfEditText:Dynamic = 4.0;
+  public static final EDIT_TEXT_HAS_TEXT_COLOR__swfEditText:Float = 4.0;
 
-  public static final EDIT_TEXT_HTML__swfEditText:Dynamic = 2.0;
+  public static final EDIT_TEXT_HTML__swfEditText:Float = 2.0;
 
-  public static final EDIT_TEXT_MULTILINE__swfEditText:Dynamic = 32.0;
+  public static final EDIT_TEXT_MULTILINE__swfEditText:Float = 32.0;
 
-  public static final EDIT_TEXT_NO_SELECT__swfEditText:Dynamic = 16.0;
+  public static final EDIT_TEXT_NO_SELECT__swfEditText:Float = 16.0;
 
-  public static final EDIT_TEXT_READ_ONLY__swfEditText:Dynamic = 8.0;
+  public static final EDIT_TEXT_READ_ONLY__swfEditText:Float = 8.0;
 
-  public static final EDIT_TEXT_WORD_WRAP__swfEditText:Dynamic = 64.0;
+  public static final EDIT_TEXT_WORD_WRAP__swfEditText:Float = 64.0;
 
-  public static final TWIPS_PER_PIXEL__swfEditText:Dynamic = 20.0;
+  public static final TWIPS_PER_PIXEL__swfEditText:Float = 20.0;
 }

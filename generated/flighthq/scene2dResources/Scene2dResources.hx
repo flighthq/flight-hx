@@ -45,7 +45,7 @@ class Scene2dResources {
     return cast null;
   }
 
-  public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, ?required:Dynamic):Scene2DSlotReference {
+  public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, ?required:Bool):Scene2DSlotReference {
     return cast Facade_Scene2dResources_flighthq_scene2dResources_Scene2DDocument.createScene2DSlotReference(name, target, linkage, required);
     return cast null;
   }

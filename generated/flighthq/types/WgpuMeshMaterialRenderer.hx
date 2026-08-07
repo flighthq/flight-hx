@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuMeshMaterialRenderer = { var bind:Dynamic; var draw:Dynamic; };
+typedef WgpuMeshMaterialRenderer = { var bind:WgpuRenderState->Null<Material>->Scene3DLightBlock->Camera3D->Void; var draw:WgpuRenderState->Scene3DRenderProxy->MeshGeometry->Void; };

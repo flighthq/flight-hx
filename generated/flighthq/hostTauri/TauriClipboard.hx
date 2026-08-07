@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriClipboardManager;
 
 class TauriClipboard {
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
-    var clipboard:Dynamic = cast _Runtime.UNDEFINED;
-    clipboard = _Runtime.field(tauri, 'clipboard');
-    return cast { readText: function():flighthq._internal._Promise<Dynamic> {
+    var clipboard:TauriClipboardManager = cast _Runtime.UNDEFINED;
+    clipboard = (cast tauri : TauriApi).clipboard;
+    return cast { readText: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'readText', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).readText(), function(__awaitValue0:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(__awaitValue0);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -27,11 +28,11 @@ class TauriClipboard {
           });
         })
       );
-    }, writeText: function(text:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, writeText: function(text:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'writeText', cast ([text] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).writeText(text), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -45,19 +46,19 @@ class TauriClipboard {
           });
         })
       );
-    }, readHtml: function():flighthq._internal._Promise<Dynamic> {
+    }, readHtml: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, writeHtml: function():flighthq._internal._Promise<Dynamic> {
+    }, writeHtml: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, hasText: function():flighthq._internal._Promise<Dynamic> {
+    }, hasText: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'readText', cast ([] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).readText(), function(__awaitValue2:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(((cast _Runtime.field(__awaitValue2, 'length') : Float) > (cast 0.0 : Float)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -70,71 +71,71 @@ class TauriClipboard {
           });
         })
       );
-    }, readImage: function():flighthq._internal._Promise<Dynamic> {
+    }, readImage: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, writeImage: function():flighthq._internal._Promise<Dynamic> {
+    }, writeImage: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, hasImage: function():flighthq._internal._Promise<Dynamic> {
+    }, hasImage: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readRTF: function():flighthq._internal._Promise<Dynamic> {
+    }, readRTF: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, writeRTF: function():flighthq._internal._Promise<Dynamic> {
+    }, writeRTF: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readBookmark: function():flighthq._internal._Promise<Dynamic> {
+    }, readBookmark: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, writeBookmark: function():flighthq._internal._Promise<Dynamic> {
+    }, writeBookmark: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFormat: function():flighthq._internal._Promise<Dynamic> {
+    }, readFormat: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, writeFormat: function():flighthq._internal._Promise<Dynamic> {
+    }, writeFormat: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, hasFormat: function():flighthq._internal._Promise<Dynamic> {
+    }, hasFormat: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, getFormats: function():flighthq._internal._Promise<Dynamic> {
+    }, getFormats: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, readItems: function():flighthq._internal._Promise<Dynamic> {
+    }, readItems: function():flighthq._internal._Promise<{  }> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve({  });
       }));
-    }, writeItems: function():flighthq._internal._Promise<Dynamic> {
+    }, writeItems: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFiles: function():flighthq._internal._Promise<Dynamic> {
+    }, readFiles: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, writeFiles: function():flighthq._internal._Promise<Dynamic> {
+    }, writeFiles: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, clear: function():flighthq._internal._Promise<Dynamic> {
+    }, clear: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(clipboard, 'clear', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).clear(), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -148,10 +149,10 @@ class TauriClipboard {
           });
         })
       );
-    }, getChangeCount: function() {
+    }, getChangeCount: function():Float {
       return cast -1.0;
-    }, subscribeClipboardChange: function() {
-      return cast function() {
+    }, subscribeClipboardChange: function():Void->Void {
+      return cast function():Void {
 
       };
     } };

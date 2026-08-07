@@ -4,22 +4,24 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapEdgeMode;
+import flighthq.types.PixelFormat;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
 class BitmapCrop {
   public static function cropBitmap(source:Bitmap, rect:RectangleLike):Bitmap {
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rw:Dynamic = cast _Runtime.UNDEFINED;
-    var rh:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var sd:Dynamic = cast _Runtime.UNDEFINED;
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rw:Float = cast _Runtime.UNDEFINED;
+    var rh:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     sw = source.width;
     sh = source.height;
     rx = HxMath.round(_Runtime.field(rect, 'x'));
@@ -29,17 +31,17 @@ class BitmapCrop {
     data = new flighthq._internal._UInt8ClampedArray(((rw * rh) * 4.0));
     sd = source.data;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast rh : Float)) : Bool)) {
-        var sy:Dynamic = (ry + py);
+        var sy:Float = (ry + py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast sh : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast rw : Float)) : Bool)) {
-            var sx:Dynamic = (rx + px);
+            var sx:Float = (rx + px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sw : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * sw) + sx) * 4.0);
-            var di:Dynamic = (((py * rw) + px) * 4.0);
+            var si:Float = (((sy * sw) + sx) * 4.0);
+            var di:Float = (((py * rw) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
@@ -50,21 +52,21 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw }] : Array<Dynamic>));
+    return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw }) : Bitmap);
     return cast null;
   }
 
-  public static function extendBitmap(source:Bitmap, left:Float, top:Float, right:Float, bottom:Float, edgeMode:BitmapEdgeMode = 'transparent', fillColor:Dynamic = 0.0):Bitmap {
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
-    var dw:Dynamic = cast _Runtime.UNDEFINED;
-    var dh:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var sd:Dynamic = cast _Runtime.UNDEFINED;
-    var fr:Dynamic = cast _Runtime.UNDEFINED;
-    var fg:Dynamic = cast _Runtime.UNDEFINED;
-    var fb:Dynamic = cast _Runtime.UNDEFINED;
-    var fa:Dynamic = cast _Runtime.UNDEFINED;
+  public static function extendBitmap(source:Bitmap, left:Float, top:Float, right:Float, bottom:Float, edgeMode:BitmapEdgeMode = 'transparent', fillColor:Float = 0.0):Bitmap {
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
+    var dw:Float = cast _Runtime.UNDEFINED;
+    var dh:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var fr:Float = cast _Runtime.UNDEFINED;
+    var fg:Float = cast _Runtime.UNDEFINED;
+    var fb:Float = cast _Runtime.UNDEFINED;
+    var fa:Float = cast _Runtime.UNDEFINED;
     sw = source.width;
     sh = source.height;
     dw = ((sw + left) + right);
@@ -76,25 +78,25 @@ class BitmapCrop {
     fb = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
     fa = (_Runtime.toInt32(fillColor) & 255);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
-            var sx:Dynamic = (px - left);
-            var sy:Dynamic = (py - top);
-            var di:Dynamic = (((py * dw) + px) * 4.0);
+            var sx:Float = (px - left);
+            var sy:Float = (py - top);
+            var di:Float = (((py * dw) + px) * 4.0);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast sx : Float) < (cast sw : Float)) : Bool)) : Bool) && (cast ((cast sy : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast sy : Float) < (cast sh : Float)) : Bool)) : Bool)) {
-              var si:Dynamic = (((sy * sw) + sx) * 4.0);
+              var si:Float = (((sy * sw) + sx) * 4.0);
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
             } else {
-              var cx:Dynamic = _Runtime.callValue(BitmapCrop.resolveEdge__bitmapCrop, cast ([sx, sw, edgeMode] : Array<Dynamic>));
-              var cy:Dynamic = _Runtime.callValue(BitmapCrop.resolveEdge__bitmapCrop, cast ([sy, sh, edgeMode] : Array<Dynamic>));
+              var cx:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sx : Float), (cast sw : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
+              var cy:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sy : Float), (cast sh : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
               if ((cast ((cast !_Runtime.strictEquals(cx, null) : Bool) && (cast !_Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
-                var si:Dynamic = (((cy * sw) + cx) * 4.0);
+                var si:Float = (((cy * sw) + cx) * 4.0);
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
@@ -112,18 +114,18 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw }] : Array<Dynamic>));
+    return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw }) : Bitmap);
     return cast null;
   }
 
   public static function trimBitmap(source:Bitmap):Bitmap {
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
-    var sd:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
+    var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     sw = source.width;
     sh = source.height;
     sd = source.data;
@@ -132,12 +134,12 @@ class BitmapCrop {
     maxX = -1.0;
     maxY = -1.0;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((py * sw) + px) * 4.0) + 3.0));
+            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((py * sw) + px) * 4.0) + 3.0));
             if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
               if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
               if ((cast ((cast px : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (px : Dynamic)); }
@@ -151,9 +153,9 @@ class BitmapCrop {
       }
     }
     if ((cast ((cast maxX : Float) < (cast 0.0 : Float)) : Bool)) {
-      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 }] : Array<Dynamic>));
+      return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 }) : Bitmap);
     }
-    return cast _Runtime.callValue(cropBitmap, cast ([source, { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }] : Array<Dynamic>));
+    return cast (cast cropBitmap((cast source : Bitmap), (cast { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) } : RectangleLike)) : Bitmap);
     return cast null;
   }
 
@@ -169,8 +171,8 @@ class BitmapCrop {
       }
       else if (__switchValue == 'mirror') {
         {
-          var period:Dynamic = (2.0 * size);
-          var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
+          var period:Float = (2.0 * size);
+          var wrapped:Float = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
           return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }

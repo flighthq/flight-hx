@@ -11,14 +11,14 @@ typedef Mutable__wgpuRenderStats<T> = Dynamic;
 class WgpuRenderStats {
   @:noCompletion
   public static function getWgpuRenderStats(state:WgpuRenderState):flighthq.types.WgpuRenderStats {
-    return cast _Runtime.callValue(WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));
+    return cast (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats((cast state : WgpuRenderState)) : flighthq.types.WgpuRenderStats);
     return cast null;
   }
 
   @:noCompletion
   public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
+    var entry:Null<Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = cast _Runtime.UNDEFINED;
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'drawCallCount', 1, true);
     _Runtime.setField(entry, 'instanceCount', _Runtime.addNumbers(_Runtime.field(entry, 'instanceCount'), instances));
@@ -27,16 +27,16 @@ class WgpuRenderStats {
 
   @:noCompletion
   public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
+    var entry:Null<Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = cast _Runtime.UNDEFINED;
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'textureUploadCount', 1, true);
   }
 
   @:noCompletion
   public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = _Runtime.callValue(WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));
+    var entry:Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> = cast _Runtime.UNDEFINED;
+    entry = (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats((cast state : WgpuRenderState)) : Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>);
     _Runtime.setField(entry, 'batchFlushCount', 0.0);
     _Runtime.setField(entry, 'drawCallCount', 0.0);
     _Runtime.setField(entry, 'instanceCount', 0.0);
@@ -44,15 +44,15 @@ class WgpuRenderStats {
   }
 
   public static function ensureWgpuRenderStatsMutable__wgpuRenderStats(state:WgpuRenderState):Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).get(state));
+    var entry:Null<Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = cast _Runtime.UNDEFINED;
+    entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ batchFlushCount: 0.0, drawCallCount: 0.0, instanceCount: 0.0, textureUploadCount: 0.0 } : Dynamic));
-      ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap).set(state, entry));
+      ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).set(state, entry));
     }
     return cast entry;
     return cast null;
   }
 
-  public static final _stats__wgpuRenderStats:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _stats__wgpuRenderStats:flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

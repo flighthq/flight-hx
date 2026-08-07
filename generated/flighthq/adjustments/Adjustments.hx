@@ -59,11 +59,11 @@ class Adjustments {
     return cast null;
   }
 
-  public static final COLOR_ADJUSTMENT_AFFINE:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_AFFINE;
+  public static final COLOR_ADJUSTMENT_AFFINE:Float = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_AFFINE;
 
-  public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_CHANNEL_MIXING;
+  public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Float = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_CHANNEL_MIXING;
 
-  public static final COLOR_ADJUSTMENT_NONE:Dynamic = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_NONE;
+  public static final COLOR_ADJUSTMENT_NONE:Float = Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.COLOR_ADJUSTMENT_NONE;
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
     Facade_Adjustments_flighthq_adjustments_ColorMatrixMath.concatColorMatrix(target, source);

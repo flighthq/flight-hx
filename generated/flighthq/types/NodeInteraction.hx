@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node.NodeAny;
 
-typedef HitArea = Dynamic;
+typedef HitArea = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, Path>, NodeAny>, String>;

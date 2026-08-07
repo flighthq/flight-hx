@@ -7,33 +7,34 @@ import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.types.Camera3D;
+import flighthq.types.Matrix4;
 import flighthq.types.Vector3.Vector3Like;
 
 class FrustumCorners {
   public static function getCamera3DFrustumCorners(out:Array<Vector3Like>, camera:Camera3D, aspect:Float):Bool {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var results:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([FrustumCorners.__scratchViewProjection__frustumCorners, camera, aspect] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners] : Array<Dynamic>)) : Bool) : Bool)) {
+    getCamera3DViewProjectionMatrix4(FrustumCorners.__scratchViewProjection__frustumCorners, (cast camera : Camera3D), (cast aspect : Float));
+    if ((cast !(cast (cast inverseMatrix4(FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     m = FrustumCorners.__scratchInverseVP__frustumCorners.m;
     ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
     results = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-        var __destructure0:Dynamic = flighthq._internal._StaticIndex.readArray(ndcCorners, i);
-        var nx:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
-        var ny:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
-        var nz:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-        var wx:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
-        var wy:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
-        var wz:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
-        var ww:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 11.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
+        var __destructure0 = flighthq._internal._StaticIndex.readArray(ndcCorners, i);
+        var nx:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var ny:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var nz:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+        var wx:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 12.0));
+        var wy:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 13.0));
+        var wz:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 14.0));
+        var ww:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), nx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), ny)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 11.0), nz)), flighthq._internal._StaticIndex.readFloat32Array(m, 15.0));
         if ((cast !_Runtime.strictEquals(ww, 0.0) : Bool)) {
-          var invW:Dynamic = (1.0 / ww);
+          var invW:Float = (1.0 / ww);
           (wx = cast ((wx * invW) : Dynamic));
           (wy = cast ((wy * invW) : Dynamic));
           (wz = cast ((wz * invW) : Dynamic));
@@ -43,7 +44,7 @@ class FrustumCorners {
       }
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
         (flighthq._internal._StaticIndex.readArray(out, i).x = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 0.0) : Dynamic));
         (flighthq._internal._StaticIndex.readArray(out, i).y = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 1.0) : Dynamic));
@@ -55,7 +56,7 @@ class FrustumCorners {
     return cast null;
   }
 
-  public static final __scratchViewProjection__frustumCorners:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final __scratchViewProjection__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final __scratchInverseVP__frustumCorners:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final __scratchInverseVP__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 }

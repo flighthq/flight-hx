@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.CustomShaderMaterial;
+import flighthq.types.Texture;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
 class CustomShaderMaterial {
   public static function createCustomShaderMaterial(?opts:Dynamic):flighthq.types.CustomShaderMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([CustomShaderMaterialKind, opts] : Array<Dynamic>)) : flighthq.types.CustomShaderMaterial);
-    _Runtime.setField(material, 'shaderKey', _Runtime.coalesce(_Runtime.optionalField(opts, 'shaderKey'), function():Dynamic return cast ''));
-    _Runtime.setField(material, 'textures', _Runtime.coalesce(_Runtime.optionalField(opts, 'textures'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'uniforms', _Runtime.coalesce(_Runtime.optionalField(opts, 'uniforms'), function():Dynamic return cast null));
+    var material:flighthq.types.CustomShaderMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast CustomShaderMaterialKind : String), opts) : flighthq.types.CustomShaderMaterial) : flighthq.types.CustomShaderMaterial);
+    ((cast material : flighthq.types.CustomShaderMaterial).shaderKey = _Runtime.coalesce(_Runtime.optionalField(opts, 'shaderKey'), function():Dynamic return cast ''));
+    ((cast material : flighthq.types.CustomShaderMaterial).textures = _Runtime.coalesce(_Runtime.optionalField(opts, 'textures'), function():Dynamic return cast null));
+    ((cast material : flighthq.types.CustomShaderMaterial).uniforms = _Runtime.coalesce(_Runtime.optionalField(opts, 'uniforms'), function():Dynamic return cast null));
     return cast material;
     return cast null;
   }

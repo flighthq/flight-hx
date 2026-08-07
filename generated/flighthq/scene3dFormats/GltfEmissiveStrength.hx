@@ -5,9 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
+import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.Material.MaterialLike;
+import flighthq.types.Scene3DDocument;
 import flighthq.types.StandardPbrMaterial;
+import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
@@ -15,33 +32,33 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfEmissiveStrength {
-  public static final GltfEmissiveStrengthExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
-    var negative:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfEmissiveStrengthExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
+    var negative:Float = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     negative = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var strength:Dynamic = _Runtime.optionalField(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_emissive_strength'), 'emissiveStrength');
+        var strength:Null<Float> = _Runtime.optionalField(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_emissive_strength'), 'emissiveStrength');
         if ((cast _Runtime.strictEquals(strength, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         if ((cast !(cast _Runtime.compare(strength, 0.0, '>=') : Bool) : Bool)) {
           negative++;
           i++;
           continue;
         }
-        var material:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(context, 'document'), 'materials'), i);
+        var material:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
         if ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), StandardPbrMaterialKind) : Bool)) {
-          _Runtime.setField((cast (cast material : Dynamic) : StandardPbrMaterial), 'emissiveStrength', strength);
+          ((cast (cast (cast material : flighthq._internal._Any) : StandardPbrMaterial) : StandardPbrMaterial).emissiveStrength = strength);
         } else { if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
-          _Runtime.setField(_Runtime.field((cast (cast material : Dynamic) : ExtendedPbrMaterial), 'standard'), 'emissiveStrength', strength);
+          ((cast (cast (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial) : ExtendedPbrMaterial).standard : StandardPbrMaterialProperties).emissiveStrength = strength);
         } }
         i++;
       }
     }
     if ((cast ((cast negative : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'gltf.emissive-strength-negative', 'GltfEmissiveStrengthExtensionHandler', { count: negative }] : Array<Dynamic>));
+      reportImportDiagnostic(_Runtime.field(context, 'diagnostics'), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.emissive-strength-negative' : String), (cast 'GltfEmissiveStrengthExtensionHandler' : String), (cast { count: negative } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
   }, kind: 'KHR_materials_emissive_strength' };
 }

@@ -9,7 +9,7 @@ import flighthq.types.TiledTileset.TiledTilesetRef;
 
 class TiledGid {
   public static function decodeTiledGid(gid:Float):flighthq.types.TiledGid {
-    var g:Dynamic = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
     g = _Runtime.unsignedShiftRight(_Runtime.toInt32(gid), 0);
     return cast { flipDiagonal: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_DIAGONAL__tiledGid)), 0.0), flipHorizontal: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_HORIZONTAL__tiledGid)), 0.0), flipVertical: !_Runtime.strictEquals((_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.FLIP_VERTICAL__tiledGid)), 0.0), tileId: (_Runtime.toInt32(g) & _Runtime.toInt32(TiledGid.TILE_ID_MASK__tiledGid)) };
     return cast null;
@@ -20,17 +20,17 @@ class TiledGid {
     if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
     best = null;
     for (ref in _Runtime.iterable(_Runtime.field(map, 'tilesets'))) {
-      if ((cast ((cast ((cast _Runtime.field(ref, 'firstGid') : Float) <= (cast tileId : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast ((cast _Runtime.field(ref, 'firstGid') : Float) > (cast _Runtime.field(best, 'firstGid') : Float))) : Bool)) : Bool)) { (best = cast (ref : Dynamic)); }
+      if ((cast ((cast ((cast (cast ref : TiledTilesetRef).firstGid : Float) <= (cast tileId : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast ((cast (cast ref : TiledTilesetRef).firstGid : Float) > (cast (cast best : TiledTilesetRef).firstGid : Float))) : Bool)) : Bool)) { (best = cast (ref : Dynamic)); }
     }
     return cast best;
     return cast null;
   }
 
-  public static final FLIP_HORIZONTAL__tiledGid:Dynamic = 2147483648.0;
+  public static final FLIP_HORIZONTAL__tiledGid:Float = 2147483648.0;
 
-  public static final FLIP_VERTICAL__tiledGid:Dynamic = 1073741824.0;
+  public static final FLIP_VERTICAL__tiledGid:Float = 1073741824.0;
 
-  public static final FLIP_DIAGONAL__tiledGid:Dynamic = 536870912.0;
+  public static final FLIP_DIAGONAL__tiledGid:Float = 536870912.0;
 
-  public static final TILE_ID_MASK__tiledGid:Dynamic = 536870911.0;
+  public static final TILE_ID_MASK__tiledGid:Float = 536870911.0;
 }

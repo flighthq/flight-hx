@@ -4,20 +4,32 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorFileInfo;
+import flighthq.types.CapacitorApi.CapacitorFilesystemCopyOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemMkdirOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemPathOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemPlugin;
+import flighthq.types.CapacitorApi.CapacitorFilesystemReadOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemReadResult;
+import flighthq.types.CapacitorApi.CapacitorFilesystemReaddirResult;
+import flighthq.types.CapacitorApi.CapacitorFilesystemRmdirOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemStatResult;
+import flighthq.types.CapacitorApi.CapacitorFilesystemWriteOptions;
+import flighthq.types.CapacitorApi.CapacitorFilesystemWriteResult;
 import flighthq.types.FileSystem.FileEntry;
 import flighthq.types.FileSystem.FileStat;
 import flighthq.types.FileSystem.FileSystemBackend;
 
 class CapacitorFileSystem {
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
-    var filesystem:Dynamic = cast _Runtime.UNDEFINED;
-    filesystem = _Runtime.field(capacitor, 'filesystem');
-    return cast { readTextFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    var filesystem:CapacitorFilesystemPlugin = cast _Runtime.UNDEFINED;
+    filesystem = (cast capacitor : CapacitorApi).filesystem;
+    return cast { readTextFile: function(path:String):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'readFile', cast ([{ path: path, encoding: 'utf8' }] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.field(__awaitValue0, 'data'));
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readFile({ path: path, encoding: 'utf8' }), function(__awaitValue0:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn((cast __awaitValue0 : CapacitorFilesystemReadResult).data);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -29,11 +41,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, writeTextFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, writeTextFile: function(path:String, data:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'writeFile', cast ([{ path: path, data: data, encoding: 'utf8', recursive: true }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).writeFile({ path: path, data: data, encoding: 'utf8', recursive: true }), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -47,12 +59,12 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, readBinaryFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, readBinaryFile: function(path:String):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'readFile', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callValue(CapacitorFileSystem.base64ToBytes__capacitorFileSystem, cast ([_Runtime.field(__awaitValue2, 'data')] : Array<Dynamic>)));
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readFile({ path: path }), function(__awaitValue2:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn((cast CapacitorFileSystem.base64ToBytes__capacitorFileSystem((cast (cast __awaitValue2 : CapacitorFilesystemReadResult).data : String)) : Null<flighthq._internal._Any>));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -64,15 +76,15 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, readBinaryFileRange: function():flighthq._internal._Promise<Dynamic> {
+    }, readBinaryFileRange: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, writeBinaryFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, writeBinaryFile: function(path:String, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'writeFile', cast ([{ path: path, data: _Runtime.callValue(CapacitorFileSystem.bytesToBase64__capacitorFileSystem, cast ([data] : Array<Dynamic>)), recursive: true }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).writeFile({ path: path, data: (cast CapacitorFileSystem.bytesToBase64__capacitorFileSystem((cast data : flighthq._internal._UInt8Array)) : String), recursive: true }), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -86,21 +98,21 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, writeFileAtomic: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, writeFileAtomic: function(path:String, data:flighthq._internal._Union2<String, flighthq._internal._UInt8Array>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch4:Dynamic;
             if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'writeFile', cast ([{ path: path, data: data, encoding: 'utf8', recursive: true }] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).writeFile({ path: path, data: data, encoding: 'utf8', recursive: true }), function(__awaitValue5:Dynamic):Dynamic {
                   __awaitValue5;
                   return flighthq._internal._Async.flowNormal();
                 });
               });
             } else {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'writeFile', cast ([{ path: path, data: _Runtime.callValue(CapacitorFileSystem.bytesToBase64__capacitorFileSystem, cast ([data] : Array<Dynamic>)), recursive: true }] : Array<Dynamic>)), function(__awaitValue6:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).writeFile({ path: path, data: (cast CapacitorFileSystem.bytesToBase64__capacitorFileSystem((cast data : flighthq._internal._UInt8Array)) : String), recursive: true }), function(__awaitValue6:Dynamic):Dynamic {
                   __awaitValue6;
                   return flighthq._internal._Async.flowNormal();
                 });
@@ -119,12 +131,12 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, fileExists: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, fileExists: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'stat', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(_Runtime.field(__awaitValue7, 'type'), 'directory'));
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).stat({ path: path }), function(__awaitValue7:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals((cast __awaitValue7 : CapacitorFilesystemStatResult).type, 'directory'));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -136,12 +148,12 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, directoryExists: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, directoryExists: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'stat', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(_Runtime.field(__awaitValue8, 'type'), 'directory'));
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).stat({ path: path }), function(__awaitValue8:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.strictEquals((cast __awaitValue8 : CapacitorFilesystemStatResult).type, 'directory'));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -153,11 +165,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, removeFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, removeFile: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'deleteFile', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue9:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).deleteFile({ path: path }), function(__awaitValue9:Dynamic):Dynamic {
               __awaitValue9;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -171,11 +183,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, removeDirectory: function(path:Dynamic, recursive:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, removeDirectory: function(path:String, recursive:Null<Bool>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'rmdir', cast ([{ path: path, recursive: _Runtime.coalesce(recursive, function():Dynamic return cast false) }] : Array<Dynamic>)), function(__awaitValue10:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).rmdir({ path: path, recursive: _Runtime.coalesce(recursive, function():Dynamic return cast false) }), function(__awaitValue10:Dynamic):Dynamic {
               __awaitValue10;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -189,11 +201,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, makeDirectory: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, makeDirectory: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'mkdir', cast ([{ path: path, recursive: true }] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).mkdir({ path: path, recursive: true }), function(__awaitValue11:Dynamic):Dynamic {
               __awaitValue11;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -207,12 +219,12 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, readDirectory: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, readDirectory: function(path:String):flighthq._internal._Promise<Array<FileEntry>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'readdir', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callProperty(_Runtime.field(__awaitValue12, 'files'), 'map', cast ([function(file:Dynamic) return _Runtime.callValue(CapacitorFileSystem.toFileEntry__capacitorFileSystem, cast ([_Runtime.field(file, 'name'), _Runtime.field(file, 'uri'), _Runtime.field(file, 'type')] : Array<Dynamic>))] : Array<Dynamic>)));
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readdir({ path: path }), function(__awaitValue12:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty((cast __awaitValue12 : CapacitorFilesystemReaddirResult).files, 'map', cast ([function(file:CapacitorFileInfo, __unused0:Float, __unused1:Array<CapacitorFileInfo>):FileEntry return (cast CapacitorFileSystem.toFileEntry__capacitorFileSystem((cast (cast file : CapacitorFileInfo).name : String), (cast (cast file : CapacitorFileInfo).uri : String), (cast (cast file : CapacitorFileInfo).type : String)) : FileEntry)] : Array<Dynamic>)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -224,19 +236,19 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, readDirectoryRecursive: function():flighthq._internal._Promise<Dynamic> {
+    }, readDirectoryRecursive: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, statFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, statFile: function(path:String):flighthq._internal._Promise<Null<FileStat>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            var stat:Dynamic = cast _Runtime.UNDEFINED;
+            var stat:CapacitorFilesystemStatResult = cast _Runtime.UNDEFINED;
             var out:FileStat = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'stat', cast ([{ path: path }] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).stat({ path: path }), function(__awaitValue13:Dynamic):Dynamic {
               stat = __awaitValue13;
-              out = { size: _Runtime.field(stat, 'size'), isDirectory: _Runtime.strictEquals(_Runtime.field(stat, 'type'), 'directory'), modifiedTime: _Runtime.field(stat, 'mtime'), createdTime: _Runtime.coalesce(_Runtime.field(stat, 'ctime'), function():Dynamic return cast _Runtime.field(stat, 'mtime')), isSymlink: false };
+              out = { size: (cast stat : CapacitorFilesystemStatResult).size, isDirectory: _Runtime.strictEquals((cast stat : CapacitorFilesystemStatResult).type, 'directory'), modifiedTime: (cast stat : CapacitorFilesystemStatResult).mtime, createdTime: _Runtime.coalesce((cast stat : CapacitorFilesystemStatResult).ctime, function():Dynamic return cast (cast stat : CapacitorFilesystemStatResult).mtime), isSymlink: false };
               return flighthq._internal._Async.flowReturn(out);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -249,11 +261,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, rename: function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, rename: function(from:String, to:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'rename', cast ([{ from: from, to: to }] : Array<Dynamic>)), function(__awaitValue14:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).rename({ from: from, to: to }), function(__awaitValue14:Dynamic):Dynamic {
               __awaitValue14;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -267,11 +279,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, copy: function(from:Dynamic, to:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, copy: function(from:String, to:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'copy', cast ([{ from: from, to: to }] : Array<Dynamic>)), function(__awaitValue15:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).copy({ from: from, to: to }), function(__awaitValue15:Dynamic):Dynamic {
               __awaitValue15;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -285,11 +297,11 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, appendTextFile: function(path:Dynamic, data:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, appendTextFile: function(path:String, data:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(filesystem, 'appendFile', cast ([{ path: path, data: data, encoding: 'utf8' }] : Array<Dynamic>)), function(__awaitValue16:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).appendFile({ path: path, data: data, encoding: 'utf8' }), function(__awaitValue16:Dynamic):Dynamic {
               __awaitValue16;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -303,47 +315,47 @@ class CapacitorFileSystem {
           });
         })
       );
-    }, openFileReadStream: function():flighthq._internal._Promise<Dynamic> {
+    }, openFileReadStream: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, openFileWriteStream: function():flighthq._internal._Promise<Dynamic> {
+    }, openFileWriteStream: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, createFileSymlink: function():flighthq._internal._Promise<Dynamic> {
+    }, createFileSymlink: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFileSymlink: function():flighthq._internal._Promise<Dynamic> {
+    }, readFileSymlink: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getFileRealPath: function():flighthq._internal._Promise<Dynamic> {
+    }, getFileRealPath: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getFilePermissions: function():flighthq._internal._Promise<Dynamic> {
+    }, getFilePermissions: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, setFilePermissions: function():flighthq._internal._Promise<Dynamic> {
+    }, setFilePermissions: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, canAccessFile: function():flighthq._internal._Promise<Dynamic> {
+    }, canAccessFile: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, getFileSystemUsage: function():flighthq._internal._Promise<Dynamic> {
+    }, getFileSystemUsage: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, watch: function() {
-      return cast function() {
+    }, watch: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, getPath: function() {
+    }, getPath: function():String {
       return cast '';
     } };
     return cast null;
@@ -355,12 +367,12 @@ class CapacitorFileSystem {
   }
 
   public static function base64ToBytes__capacitorFileSystem(base64:String):flighthq._internal._UInt8Array {
-    var binary:Dynamic = cast _Runtime.UNDEFINED;
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
+    var binary:String = cast _Runtime.UNDEFINED;
+    var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     binary = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([base64] : Array<Dynamic>));
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;
@@ -371,10 +383,10 @@ class CapacitorFileSystem {
   }
 
   public static function bytesToBase64__capacitorFileSystem(bytes:flighthq._internal._UInt8Array):String {
-    var binary:Dynamic = cast _Runtime.UNDEFINED;
+    var binary:String = cast _Runtime.UNDEFINED;
     binary = '';
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bytes, 'length') : Float)) : Bool)) {
         (binary = cast ((binary + _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, i)] : Array<Dynamic>))) : Dynamic));
         i++;

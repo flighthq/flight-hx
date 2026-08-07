@@ -4,34 +4,45 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlPbrExtensionRegistry.registerGlPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
+import flighthq.types.GlPbrExtensionShaderContext;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
 import flighthq.types.SpecularPbrExtension;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpecularPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
 class SpecularPbrGlExtension {
-  public static final specularPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:Dynamic, value:Dynamic) {
-    var extension:Dynamic = cast _Runtime.UNDEFINED;
+  public static final specularPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
+    var extension:SpecularPbrExtension = cast _Runtime.UNDEFINED;
     extension = (cast value : SpecularPbrExtension);
-    _Runtime.callProperty(context, 'setFloat', cast (['u_flightSpecular', _Runtime.field(extension, 'specular')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'setLinearColor', cast (['u_flightSpecularColor', _Runtime.field(extension, 'specularColor')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'bindTexture', cast (['u_flightSpecularMap', 'u_flightSpecularMapUvSet', 'u_flightSpecularMapTransform', _Runtime.field(extension, 'specularMap'), _Runtime.field(extension, 'specularMapUvSet')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'bindTexture', cast (['u_flightSpecularColorMap', 'u_flightSpecularColorMapUvSet', 'u_flightSpecularColorMapTransform', _Runtime.field(extension, 'specularColorMap'), _Runtime.field(extension, 'specularColorMapUvSet')] : Array<Dynamic>));
-  }, createShaderContribution: function(context:Dynamic, value:Dynamic) {
-    var extension:Dynamic = cast _Runtime.UNDEFINED;
-    var factorMap:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMap:Dynamic = cast _Runtime.UNDEFINED;
+    (cast context : GlPbrExtensionBindContext).setFloat('u_flightSpecular', _Runtime.field(extension, 'specular'));
+    (cast context : GlPbrExtensionBindContext).setLinearColor('u_flightSpecularColor', _Runtime.field(extension, 'specularColor'));
+    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightSpecularMap', 'u_flightSpecularMapUvSet', 'u_flightSpecularMapTransform', _Runtime.field(extension, 'specularMap'), _Runtime.field(extension, 'specularMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightSpecularColorMap', 'u_flightSpecularColorMapUvSet', 'u_flightSpecularColorMapTransform', _Runtime.field(extension, 'specularColorMap'), _Runtime.field(extension, 'specularColorMapUvSet'));
+  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):{ var applySurface:String; var contributeIbl:String; var contributePunctual:String; var finalize:String; var fragmentDeclarations:String; var fragmentFunctions:String; var key:String; var textureCount:Float; } {
+    var extension:SpecularPbrExtension = cast _Runtime.UNDEFINED;
+    var factorMap:Bool = cast _Runtime.UNDEFINED;
+    var colorMap:Bool = cast _Runtime.UNDEFINED;
     extension = (cast value : SpecularPbrExtension);
     factorMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'specularMap')] : Array<Dynamic>));
     colorMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'specularColorMap')] : Array<Dynamic>));
     return cast { applySurface: '\n  float flightSpecularFactor = u_flightSpecular * ' + Std.string(((cast factorMap : Bool) ? (cast 'texture(u_flightSpecularMap, flightSpecularUv()).a' : Dynamic) : (cast '1.0' : Dynamic))) + ';\n  vec3 flightSpecularColor = u_flightSpecularColor * ' + Std.string(((cast colorMap : Bool) ? (cast 'texture(u_flightSpecularColorMap, flightSpecularColorUv()).rgb' : Dynamic) : (cast 'vec3(1.0)' : Dynamic))) + ';\n  f0 = mix(min(0.04 * flightSpecularColor, vec3(1.0)) * flightSpecularFactor, albedo, metallic);', contributeIbl: '', contributePunctual: '', finalize: '', fragmentDeclarations: '\nuniform float u_flightSpecular;\nuniform vec3 u_flightSpecularColor;\n' + Std.string(((cast factorMap : Bool) ? (cast 'uniform sampler2D u_flightSpecularMap; uniform int u_flightSpecularMapUvSet; uniform mat3 u_flightSpecularMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast colorMap : Bool) ? (cast 'uniform sampler2D u_flightSpecularColorMap; uniform int u_flightSpecularColorMapUvSet; uniform mat3 u_flightSpecularColorMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '', fragmentFunctions: '\n' + Std.string(((cast factorMap : Bool) ? (cast 'vec2 flightSpecularUv() { vec2 uv = u_flightSpecularMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightSpecularMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast colorMap : Bool) ? (cast 'vec2 flightSpecularColorUv() { vec2 uv = u_flightSpecularColorMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightSpecularColorMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '', key: 'specular:' + Std.string(((cast factorMap : Bool) ? (cast 'f' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast colorMap : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '', textureCount: _Runtime.addNumbers(_Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([factorMap] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([colorMap] : Array<Dynamic>))) };
-  }, isSupported: function(extension:PbrExtension) {
+  }, isSupported: function(extension:PbrExtension):Bool {
     return cast true;
   } };
 
   public static function registerGlSpecularPbrExtension(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlPbrExtension, cast ([state, SpecularPbrExtensionKind, specularPbrGlExtension] : Array<Dynamic>));
+    registerGlPbrExtension((cast state : GlRenderState), (cast SpecularPbrExtensionKind : String), (cast specularPbrGlExtension : GlPbrExtensionRegistration));
   }
 }

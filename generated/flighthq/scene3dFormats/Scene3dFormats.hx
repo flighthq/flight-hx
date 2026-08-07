@@ -27,6 +27,7 @@ import flighthq.types.AnimationClip;
 import flighthq.types.GltfDraco.GltfDracoDecoder;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfExtension.GltfImportOptions;
+import flighthq.types.GltfSchema.GltfDocument;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.Node3D;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
@@ -49,7 +50,7 @@ class Scene3dFormats {
     return cast null;
   }
 
-  public static function createScene3DFromGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
+  public static function createScene3DFromGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_GltfParse.createScene3DFromGltf(source, diagnostics, options);
     return cast null;
   }
@@ -74,7 +75,7 @@ class Scene3dFormats {
     return cast null;
   }
 
-  public static function createScene3DsFromGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Array<Scene3D> {
+  public static function createScene3DsFromGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Array<Scene3D> {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_GltfParse.createScene3DsFromGltf(source, diagnostics, options);
     return cast null;
   }
@@ -133,7 +134,7 @@ class Scene3dFormats {
     return cast null;
   }
 
-  public static function parseAwd2SkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Dynamic {
+  public static function parseAwd2SkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):flighthq._internal._Record<String, AnimationClip> {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_Awd2Parse.parseAwd2SkeletonAnimations(bytes, joints, diagnostics);
     return cast null;
   }
@@ -143,7 +144,7 @@ class Scene3dFormats {
     return cast null;
   }
 
-  public static function parseGltf(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3DDocument {
+  public static function parseGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3DDocument {
     return cast Facade_Scene3dFormats_flighthq_scene3dFormats_GltfParse.parseGltf(source, diagnostics, options);
     return cast null;
   }

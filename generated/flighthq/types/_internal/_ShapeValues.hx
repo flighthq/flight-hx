@@ -9,5 +9,5 @@ import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 
 class _ShapeValues {
-  public static final ShapeKind:Dynamic = 'Shape';
+  public static final ShapeKind:String = 'Shape';
 }

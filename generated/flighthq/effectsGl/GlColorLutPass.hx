@@ -7,54 +7,55 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.ColorLut;
 import flighthq.types.GlColorLutTextureCache;
+import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlColorLutPass {
   @:noCompletion
   public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     size = _Runtime.field(lut, 'size');
-    texture = _Runtime.callValue(GlColorLutPass.uploadLutTexture__glColorLutPass, cast ([gl, lut, cache] : Array<Dynamic>));
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'adjustment.colorLut', GlColorLutPass.COLOR_LUT_FRAGMENT_SRC__glColorLutPass] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(glc:Dynamic, p:Dynamic) {
+    texture = (cast GlColorLutPass.uploadLutTexture__glColorLutPass((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast lut : ColorLut), (cast cache : GlColorLutTextureCache)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'adjustment.colorLut' : String), (cast GlColorLutPass.COLOR_LUT_FRAGMENT_SRC__glColorLutPass : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(glc:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lutSize'), size);
       flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       flighthq._internal.backend.WebGl2Backend.bindTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), texture);
       flighthq._internal.backend.WebGl2Backend.uniform1i(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lut'), 1.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-    }] : Array<Dynamic>));
+    });
   }
 
   public static function uploadLutTexture__glColorLutPass(gl:flighthq._internal.dom.WebGL2RenderingContext, lut:ColorLut, cache:GlColorLutTextureCache):flighthq._internal.dom.WebGLTexture {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'texture'); }
+    var n:Float = cast _Runtime.UNDEFINED;
+    var samples:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !_Runtime.strictEquals((cast cache : GlColorLutTextureCache).texture, null) : Bool) && (cast _Runtime.strictEquals((cast cache : GlColorLutTextureCache).lut, lut) : Bool)) : Bool)) { return cast (cast cache : GlColorLutTextureCache).texture; }
     n = _Runtime.field(lut, 'size');
     samples = _Runtime.field(lut, 'samples');
     data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
     {
-      var i:Dynamic = 0.0;
-      var j:Dynamic = 0.0;
-      var o:Dynamic = 0.0;
+      var i:Float = 0.0;
+      var j:Float = 0.0;
+      var o:Float = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([flighthq._internal._StaticIndex.readArray(samples, j++)] : Array<Dynamic>)), 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
+        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
         flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
         i++;
       }
     }
-    texture = _Runtime.field(cache, 'texture');
+    texture = (cast cache : GlColorLutTextureCache).texture;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
       (texture = cast (flighthq._internal.backend.WebGl2Backend.createTexture(gl) : Dynamic));
-      _Runtime.setField(cache, 'texture', texture);
+      ((cast cache : GlColorLutTextureCache).texture = texture);
     }
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), texture);
     flighthq._internal.backend.WebGl2Backend.texImage3D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA8', flighthq._internal.backend.WebGl2Backend.RGBA8), n, n, n, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), data);
@@ -64,7 +65,7 @@ class GlColorLutPass {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_R', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), null);
-    _Runtime.setField(cache, 'lut', lut);
+    ((cast cache : GlColorLutTextureCache).lut = lut);
     return cast texture;
     return cast null;
   }
@@ -74,5 +75,5 @@ class GlColorLutPass {
     return cast null;
   }
 
-  public static final COLOR_LUT_FRAGMENT_SRC__glColorLutPass:Dynamic = '#version 300 es\nprecision highp float;\nprecision highp sampler3D;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler3D u_lut;\nuniform float u_lutSize;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float scale = (u_lutSize - 1.0) / u_lutSize;\n  float offset = 0.5 / u_lutSize;\n  vec3 lc = clamp(c.rgb, 0.0, 1.0) * scale + offset;\n  o_color = vec4(texture(u_lut, lc).rgb, c.a);\n}';
+  public static final COLOR_LUT_FRAGMENT_SRC__glColorLutPass:String = '#version 300 es\nprecision highp float;\nprecision highp sampler3D;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler3D u_lut;\nuniform float u_lutSize;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float scale = (u_lutSize - 1.0) / u_lutSize;\n  float offset = 0.5 / u_lutSize;\n  vec3 lc = clamp(c.rgb, 0.0, 1.0) * scale + offset;\n  o_color = vec4(texture(u_lut, lc).rgb, c.a);\n}';
 }

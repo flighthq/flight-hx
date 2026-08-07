@@ -7,14 +7,14 @@ import flighthq.types.VideoResource.VideoResourceUrl;
 
 class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
-    var probe:Dynamic = cast _Runtime.UNDEFINED;
+    var probe:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
     probe = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
     return cast !_Runtime.strictEquals((cast probe : flighthq._internal.dom.HTMLVideoElement).canPlayType(mimeType), '');
     return cast null;
   }
 
-  public static function detectVideoMimeType(data:Dynamic):Null<String> {
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+  public static function detectVideoMimeType(data:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
+    var b:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     b = ((cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 4.0), 102.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 5.0), 116.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 6.0), 121.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 7.0), 112.0) : Bool)) : Bool)) { return cast 'video/mp4'; }
@@ -25,7 +25,7 @@ class VideoFormat {
   }
 
   public static function inferVideoMimeType(url:String):Null<String> {
-    var ext:Dynamic = cast _Runtime.UNDEFINED;
+    var ext:Null<String> = cast _Runtime.UNDEFINED;
     ext = _Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
       var __switchValue = ext;
@@ -62,7 +62,7 @@ class VideoFormat {
 
   public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
     for (source in _Runtime.iterable(sources)) {
-      if ((cast _Runtime.callValue(canPlayVideoType, cast ([_Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast _Runtime.callValue(inferVideoMimeType, cast ([source.url] : Array<Dynamic>))), function():Dynamic return cast '')] : Array<Dynamic>)) : Bool)) { return cast source; }
+      if ((cast (cast canPlayVideoType((cast _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast (cast inferVideoMimeType((cast source.url : String)) : String)), function():Dynamic return cast '') : String)) : Bool) : Bool)) { return cast source; }
     }
     return cast null;
     return cast null;

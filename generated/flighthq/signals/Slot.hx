@@ -9,21 +9,21 @@ import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
 
 class Slot {
-  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
-    (signal.emit = cast ((cast (cast nullSignalEmit : Dynamic) : Dynamic) : Dynamic));
+  public static function clearSignal<T>(signal:Signal<T>):Void {
+    (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : Dynamic));
     (signal.data = cast (null : Dynamic));
   }
 
-  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
-    var priority:Dynamic = cast _Runtime.UNDEFINED;
-    var repeat:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+  public static function connectSignal<T>(signal:Signal<T>, slot:T, ?options:SignalConnectOptions):Void {
+    var priority:Float = cast _Runtime.UNDEFINED;
+    var repeat:Bool = cast _Runtime.UNDEFINED;
+    var data:SignalData<T> = cast _Runtime.UNDEFINED;
     priority = _Runtime.coalesce(_Runtime.optionalField(options, 'priority'), function():Dynamic return cast 0.0);
     repeat = !(cast _Runtime.coalesce(_Runtime.optionalField(options, 'once'), function():Dynamic return cast false) : Bool);
-    _Runtime.callValue(Slot.initSignal__slot, cast ([signal] : Array<Dynamic>));
+    Slot.initSignal__slot(signal);
     data = signal.data;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.priorities, 'length') : Float)) : Bool)) {
         if ((cast ((cast priority : Float) > (cast flighthq._internal._StaticIndex.readArray(data.priorities, i) : Float)) : Bool)) {
           _Runtime.splice(data.slots, Std.int(i), Std.int(0.0), [slot]);
@@ -39,9 +39,9 @@ class Slot {
     _Runtime.callProperty(data.repeat, 'push', cast ([repeat] : Array<Dynamic>));
   }
 
-  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+  public static function disconnectSignal<T>(signal:Signal<T>, slot:T):Void {
+    var data:Null<SignalData<T>> = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     data = signal.data;
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     i = _Runtime.field(data.slots, 'length');
@@ -53,32 +53,32 @@ class Slot {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(data.slots, 'length'), 0.0) : Bool)) {
-      (signal.emit = cast ((cast (cast nullSignalEmit : Dynamic) : Dynamic) : Dynamic));
+      (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : Dynamic));
       (signal.data = cast (null : Dynamic));
     }
   }
 
-  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
+  public static function hasSignalSlots<T>(signal:Signal<T>):Bool {
     return cast ((cast !_Runtime.strictEquals(signal.data, null) : Bool) && (cast ((cast _Runtime.field(signal.data.slots, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
-  public static function initSignal__slot<T>(signal:Signal<Dynamic>):Void {
-    var data:SignalData<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function initSignal__slot<T>(signal:Signal<T>):Void {
+    var data:SignalData<T> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { return; }
     data = { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false };
     (signal.data = cast (data : Dynamic));
-    (signal.emit = cast (_Runtime.callValue(Slot.makeDispatch__slot, cast ([data] : Array<Dynamic>)) : Dynamic));
+    (signal.emit = cast ((cast Slot.makeDispatch__slot(data) : T) : Dynamic));
   }
 
-  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {
     return cast ((cast !_Runtime.strictEquals(signal.data, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callProperty(signal.data.slots, 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0) : Bool));
     return cast null;
   }
 
-  public static function makeDispatch__slot<T>(data:SignalData<Dynamic>):Dynamic {
-    return cast (cast (cast _Runtime.haxeRest(function(...args:Dynamic) {
-      var i:Dynamic = cast _Runtime.UNDEFINED;
+  public static function makeDispatch__slot<T>(data:SignalData<T>):T {
+    return cast (cast (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+      var i:Float = cast _Runtime.UNDEFINED;
       (data.cancelled = cast (false : Dynamic));
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
@@ -92,7 +92,7 @@ class Slot {
           i++;
         }
       }
-    }, 0) : Dynamic) : Dynamic);
+    }, 0) : flighthq._internal._Any) : T);
     return cast null;
   }
 }

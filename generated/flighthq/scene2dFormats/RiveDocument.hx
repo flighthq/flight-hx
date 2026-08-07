@@ -23,28 +23,28 @@ typedef RiveCursor__riveDocument = { var bytes:flighthq._internal._UInt8Array; v
 class RiveDocument {
   public static function parseRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq.types.RiveDocument> {
     var cursor:RiveCursor__riveDocument = cast _Runtime.UNDEFINED;
-    var header:Dynamic = cast _Runtime.UNDEFINED;
-    var fieldTypes:Dynamic = cast _Runtime.UNDEFINED;
+    var header:Null<RiveDocumentHeader> = cast _Runtime.UNDEFINED;
+    var fieldTypes:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     var objects:Array<RiveCoreObject> = cast _Runtime.UNDEFINED;
     cursor = { bytes: source, overflowed: false, position: 0.0, unknownPropertyKey: 0.0 };
-    header = _Runtime.callValue(RiveDocument.readRiveHeader__riveDocument, cast ([cursor] : Array<Dynamic>));
+    header = (cast RiveDocument.readRiveHeader__riveDocument(cursor) : Null<RiveDocumentHeader>);
     if ((cast _Runtime.strictEquals(header, null) : Bool)) {
-      _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([diagnostics, 'rive.invalid-header'] : Array<Dynamic>));
+      RiveDocument.reportRiveReject__riveDocument((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.invalid-header' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, Float>>));
       return cast null;
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(header, 'majorVersion'), RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument) : Bool)) {
-      _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([diagnostics, 'rive.unsupported-version', { major: _Runtime.field(header, 'majorVersion'), supported: RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument }] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast header : RiveDocumentHeader).majorVersion, RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument) : Bool)) {
+      RiveDocument.reportRiveReject__riveDocument((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.unsupported-version' : String), (cast { major: (cast header : RiveDocumentHeader).majorVersion, supported: RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument } : Null<flighthq._internal._Record<String, Float>>));
       return cast null;
     }
     fieldTypes = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    for (entry in _Runtime.iterable(_Runtime.field(header, 'tableOfContents'))) {
-      ((cast fieldTypes : flighthq._internal._Map).set(_Runtime.field(entry, 'key'), _Runtime.field(entry, 'type')));
+    for (entry in _Runtime.iterable((cast header : RiveDocumentHeader).tableOfContents)) {
+      ((cast fieldTypes : flighthq._internal._Map<Float, Float>).set((cast entry : RivePropertyFieldType).key, (cast entry : RivePropertyFieldType).type));
     }
     objects = cast ([] : Array<Dynamic>);
-    while ((cast ((cast _Runtime.field(cursor, 'position') : Float) < (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) {
-      var object:Dynamic = _Runtime.callValue(RiveDocument.readRiveCoreObject__riveDocument, cast ([cursor, fieldTypes] : Array<Dynamic>));
+    while ((cast ((cast (cast cursor : RiveCursor__riveDocument).position : Float) < (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
+      var object:Null<RiveCoreObject> = (cast RiveDocument.readRiveCoreObject__riveDocument(cursor, (cast fieldTypes : flighthq._internal._Map<Float, Float>)) : Null<RiveCoreObject>);
       if ((cast _Runtime.strictEquals(object, null) : Bool)) {
-        if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([diagnostics, 'rive.truncated-object-stream'] : Array<Dynamic>)); } else { _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([diagnostics, 'rive.unknown-property-width', { propertyKey: _Runtime.field(cursor, 'unknownPropertyKey') }] : Array<Dynamic>)); }
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { RiveDocument.reportRiveReject__riveDocument((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.truncated-object-stream' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, Float>>)); } else { RiveDocument.reportRiveReject__riveDocument((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.unknown-property-width' : String), (cast { propertyKey: (cast cursor : RiveCursor__riveDocument).unknownPropertyKey } : Null<flighthq._internal._Record<String, Float>>)); }
         return cast null;
       }
       _Runtime.callProperty(objects, 'push', cast ([object] : Array<Dynamic>));
@@ -54,98 +54,98 @@ class RiveDocument {
   }
 
   public static function readRiveHeader__riveDocument(cursor:RiveCursor__riveDocument):Null<RiveDocumentHeader> {
-    var majorVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var minorVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var fileId:Dynamic = cast _Runtime.UNDEFINED;
+    var majorVersion:Float = cast _Runtime.UNDEFINED;
+    var minorVersion:Float = cast _Runtime.UNDEFINED;
+    var fileId:Float = cast _Runtime.UNDEFINED;
     var keys:Array<Float> = cast _Runtime.UNDEFINED;
     var tableOfContents:Array<RivePropertyFieldType> = cast _Runtime.UNDEFINED;
-    var word:Dynamic = cast _Runtime.UNDEFINED;
-    var bit:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
+    var word:Float = cast _Runtime.UNDEFINED;
+    var bit:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast 4.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), index), flighthq._internal._StaticIndex.readArray(RiveDocument.RIVE_FINGERPRINT__riveDocument, index)) : Bool)) { return cast null; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, index), flighthq._internal._StaticIndex.readArray(RiveDocument.RIVE_FINGERPRINT__riveDocument, index)) : Bool)) { return cast null; }
         index++;
       }
     }
-    _Runtime.setField(cursor, 'position', 4.0);
-    majorVersion = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    minorVersion = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    fileId = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+    ((cast cursor : RiveCursor__riveDocument).position = 4.0);
+    majorVersion = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    minorVersion = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    fileId = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var key:Dynamic = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
+      var key:Float = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
       while ((cast !_Runtime.strictEquals(key, 0.0) : Bool)) {
-        if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
         _Runtime.callProperty(keys, 'push', cast ([key] : Array<Dynamic>));
-        (key = cast (_Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>)) : Dynamic));
+        (key = cast ((cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float) : Dynamic));
       }
     }
-    if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+    if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
     tableOfContents = cast ([] : Array<Dynamic>);
     word = 0.0;
     bit = RiveDocument.FIELD_TYPE_BITS_PER_WORD__riveDocument;
     for (key in _Runtime.iterable(keys)) {
       if ((cast _Runtime.strictEquals(bit, RiveDocument.FIELD_TYPE_BITS_PER_WORD__riveDocument) : Bool)) {
-        (word = cast (_Runtime.callValue(RiveDocument.readRiveUint32__riveDocument, cast ([cursor] : Array<Dynamic>)) : Dynamic));
+        (word = cast ((cast RiveDocument.readRiveUint32__riveDocument(cursor) : Float) : Dynamic));
         (bit = cast (0.0 : Dynamic));
-        if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
       }
-      _Runtime.callProperty(tableOfContents, 'push', cast ([{ key: key, type: _Runtime.callValue(RiveDocument.toRiveFieldType__riveDocument, cast ([(_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(word), _Runtime.toInt32(bit))) & 3)] : Array<Dynamic>)) }] : Array<Dynamic>));
+      _Runtime.callProperty(tableOfContents, 'push', cast ([{ key: key, type: (cast RiveDocument.toRiveFieldType__riveDocument((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(word), _Runtime.toInt32(bit))) & 3) : Float)) : RiveFieldType) }] : Array<Dynamic>));
       (bit = cast ((bit + 2.0) : Dynamic));
     }
     return cast { fileId: fileId, majorVersion: majorVersion, minorVersion: minorVersion, tableOfContents: tableOfContents };
     return cast null;
   }
 
-  public static function readRiveCoreObject__riveDocument(cursor:RiveCursor__riveDocument, fieldTypes:Dynamic):Null<RiveCoreObject> {
-    var typeKey:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readRiveCoreObject__riveDocument(cursor:RiveCursor__riveDocument, fieldTypes:flighthq._internal._Map<Float, Float>):Null<RiveCoreObject> {
+    var typeKey:Float = cast _Runtime.UNDEFINED;
     var properties:Array<RiveProperty> = cast _Runtime.UNDEFINED;
-    typeKey = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+    typeKey = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
     properties = cast ([] : Array<Dynamic>);
     {
       while (true) {
-        var key:Dynamic = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-        if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
+        var key:Float = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(key, 0.0) : Bool)) { return cast { properties: properties, typeKey: typeKey }; }
-        var type:Dynamic = _Runtime.coalesce(_Runtime.callValue(getRiveCorePropertyFieldType, cast ([key] : Array<Dynamic>)), function():Dynamic return cast ((cast fieldTypes : flighthq._internal._Map).get(key)));
+        var type:Null<Float> = _Runtime.coalesce((cast getRiveCorePropertyFieldType((cast key : Float)) : Null<Float>), function():Dynamic return cast ((cast fieldTypes : flighthq._internal._Map<Float, Float>).get(key)));
         if ((cast _Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.setField(cursor, 'unknownPropertyKey', key);
+          ((cast cursor : RiveCursor__riveDocument).unknownPropertyKey = key);
           return cast null;
         }
-        var value:Dynamic = _Runtime.callValue(RiveDocument.readRiveValue__riveDocument, cast ([cursor, type, key] : Array<Dynamic>));
-        if ((cast _Runtime.field(cursor, 'overflowed') : Bool)) { return cast null; }
-        _Runtime.callProperty(properties, 'push', cast ([{ key: key, type: _Runtime.callValue(RiveDocument.toRiveFieldType__riveDocument, cast ([type] : Array<Dynamic>)), value: value }] : Array<Dynamic>));
+        var value:RiveValue = (cast RiveDocument.readRiveValue__riveDocument(cursor, (cast type : Float), (cast key : Float)) : RiveValue);
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
+        _Runtime.callProperty(properties, 'push', cast ([{ key: key, type: (cast RiveDocument.toRiveFieldType__riveDocument((cast type : Float)) : RiveFieldType), value: value }] : Array<Dynamic>));
       }
     }
     return cast null;
   }
 
   public static function readRiveValue__riveDocument(cursor:RiveCursor__riveDocument, type:Float, key:Float):RiveValue {
-    if ((cast _Runtime.strictEquals(type, RiveFieldTypeValue.String) : Bool)) {
-      return cast ((cast _Runtime.callValue(isRiveCoreBytesProperty, cast ([key] : Array<Dynamic>)) : Bool) ? (cast _Runtime.callValue(RiveDocument.readRiveBytes__riveDocument, cast ([cursor] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(RiveDocument.readRiveString__riveDocument, cast ([cursor] : Array<Dynamic>)) : Dynamic));
+    if ((cast _Runtime.strictEquals(type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).String) : Bool)) {
+      return cast ((cast (cast isRiveCoreBytesProperty((cast key : Float)) : Bool) : Bool) ? (cast (cast RiveDocument.readRiveBytes__riveDocument(cursor) : RiveValue) : Dynamic) : (cast (cast RiveDocument.readRiveString__riveDocument(cursor) : RiveValue) : Dynamic));
     }
-    if ((cast _Runtime.strictEquals(type, RiveFieldTypeValue.Double) : Bool)) { return cast _Runtime.callValue(RiveDocument.readRiveFloat32__riveDocument, cast ([cursor] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(type, RiveFieldTypeValue.Color) : Bool)) { return cast _Runtime.callValue(RiveDocument.readRiveUint32__riveDocument, cast ([cursor] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Double) : Bool)) { return cast (cast RiveDocument.readRiveFloat32__riveDocument(cursor) : RiveValue); }
+    if ((cast _Runtime.strictEquals(type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color) : Bool)) { return cast (cast RiveDocument.readRiveUint32__riveDocument(cursor) : RiveValue); }
+    return cast (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : RiveValue);
     return cast null;
   }
 
   public static function readRiveVarUint__riveDocument(cursor:RiveCursor__riveDocument):Float {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var shift:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Float = cast _Runtime.UNDEFINED;
+    var shift:Float = cast _Runtime.UNDEFINED;
     result = 0.0;
     shift = 0.0;
     {
       while (true) {
-        if ((cast ((cast _Runtime.field(cursor, 'position') : Float) >= (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) {
-          _Runtime.setField(cursor, 'overflowed', true);
+        if ((cast ((cast (cast cursor : RiveCursor__riveDocument).position : Float) >= (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
+          ((cast cursor : RiveCursor__riveDocument).overflowed = true);
           return cast 0.0;
         }
-        var byte:Dynamic = flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), _Runtime.incrementField(cursor, 'position', 1, true));
+        var byte:Float = flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, (cast cursor : RiveCursor__riveDocument).position++);
         (result = cast ((result + _Runtime.multiplyNumbers((_Runtime.toInt32(byte) & 127), HxMath.pow(2.0, shift))) : Dynamic));
         if ((cast _Runtime.strictEquals((_Runtime.toInt32(byte) & 128), 0.0) : Bool)) { return cast result; }
         (shift = cast ((shift + 7.0) : Dynamic));
@@ -155,70 +155,70 @@ class RiveDocument {
   }
 
   public static function readRiveUint32__riveDocument(cursor:RiveCursor__riveDocument):Float {
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    var position:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 4.0) : Float) > (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) {
-      _Runtime.setField(cursor, 'overflowed', true);
+    var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var position:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast cursor : RiveCursor__riveDocument).position + 4.0) : Float) > (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
+      ((cast cursor : RiveCursor__riveDocument).overflowed = true);
       return cast 0.0;
     }
-    bytes = _Runtime.field(cursor, 'bytes');
-    position = _Runtime.field(cursor, 'position');
-    _Runtime.setField(cursor, 'position', _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 4.0));
+    bytes = (cast cursor : RiveCursor__riveDocument).bytes;
+    position = (cast cursor : RiveCursor__riveDocument).position;
+    ((cast cursor : RiveCursor__riveDocument).position += 4.0);
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, position)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 1.0))) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 2.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 3.0))) << 24)))), 0);
     return cast null;
   }
 
   public static function readRiveFloat32__riveDocument(cursor:RiveCursor__riveDocument):Float {
-    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 4.0) : Float) > (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) {
-      _Runtime.setField(cursor, 'overflowed', true);
+    if ((cast ((cast ((cast cursor : RiveCursor__riveDocument).position + 4.0) : Float) > (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
+      ((cast cursor : RiveCursor__riveDocument).overflowed = true);
       return cast 0.0;
     }
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 0.0, flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), _Runtime.field(cursor, 'position')));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 1.0, flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 1.0)));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 2.0, flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 2.0)));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 3.0, flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(cursor, 'bytes'), _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 3.0)));
-    _Runtime.setField(cursor, 'position', _Runtime.addNumbers(_Runtime.field(cursor, 'position'), 4.0));
+    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 0.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, (cast cursor : RiveCursor__riveDocument).position));
+    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 1.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 1.0)));
+    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 2.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 2.0)));
+    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 3.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 3.0)));
+    ((cast cursor : RiveCursor__riveDocument).position += 4.0);
     return cast _Runtime.callProperty(RiveDocument._floatView__riveDocument, 'getFloat32', cast ([0.0, true] : Array<Dynamic>));
     return cast null;
   }
 
   public static function readRiveBytes__riveDocument(cursor:RiveCursor__riveDocument):flighthq._internal._UInt8Array {
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    length = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(cursor, 'overflowed') : Bool) || (cast ((cast _Runtime.addNumbers(_Runtime.field(cursor, 'position'), length) : Float) > (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(cursor, 'overflowed', true);
+    var length:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    length = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    if ((cast ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool) || (cast ((cast ((cast cursor : RiveCursor__riveDocument).position + length) : Float) > (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) : Bool)) {
+      ((cast cursor : RiveCursor__riveDocument).overflowed = true);
       return cast RiveDocument._emptyBytes__riveDocument;
     }
-    start = _Runtime.field(cursor, 'position');
-    _Runtime.setField(cursor, 'position', _Runtime.addNumbers(_Runtime.field(cursor, 'position'), length));
-    return cast _Runtime.slice(_Runtime.field(cursor, 'bytes'), start, (start + length));
+    start = (cast cursor : RiveCursor__riveDocument).position;
+    ((cast cursor : RiveCursor__riveDocument).position += length);
+    return cast _Runtime.slice((cast cursor : RiveCursor__riveDocument).bytes, start, (start + length));
     return cast null;
   }
 
   public static function readRiveString__riveDocument(cursor:RiveCursor__riveDocument):String {
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    length = _Runtime.callValue(RiveDocument.readRiveVarUint__riveDocument, cast ([cursor] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(cursor, 'overflowed') : Bool) || (cast ((cast _Runtime.addNumbers(_Runtime.field(cursor, 'position'), length) : Float) > (cast _Runtime.field(_Runtime.field(cursor, 'bytes'), 'length') : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(cursor, 'overflowed', true);
+    var length:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    length = (cast RiveDocument.readRiveVarUint__riveDocument(cursor) : Float);
+    if ((cast ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool) || (cast ((cast ((cast cursor : RiveCursor__riveDocument).position + length) : Float) > (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) : Bool)) {
+      ((cast cursor : RiveCursor__riveDocument).overflowed = true);
       return cast '';
     }
-    start = _Runtime.field(cursor, 'position');
-    _Runtime.setField(cursor, 'position', _Runtime.addNumbers(_Runtime.field(cursor, 'position'), length));
-    return cast _Runtime.callValue(RiveDocument.decodeRiveUtf8__riveDocument, cast ([_Runtime.field(cursor, 'bytes'), start, length] : Array<Dynamic>));
+    start = (cast cursor : RiveCursor__riveDocument).position;
+    ((cast cursor : RiveCursor__riveDocument).position += length);
+    return cast (cast RiveDocument.decodeRiveUtf8__riveDocument((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast start : Float), (cast length : Float)) : String);
     return cast null;
   }
 
   public static function decodeRiveUtf8__riveDocument(bytes:flighthq._internal._UInt8Array, start:Float, length:Float):String {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var result:String = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
     result = '';
     index = start;
     end = (start + length);
     while ((cast ((cast index : Float) < (cast end : Float)) : Bool)) {
-      var first:Dynamic = flighthq._internal._StaticIndex.readUint8Array(bytes, index++);
+      var first:Float = flighthq._internal._StaticIndex.readUint8Array(bytes, index++);
       if ((cast ((cast first : Float) < (cast 128.0 : Float)) : Bool)) {
         (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([first] : Array<Dynamic>))) : Dynamic));
         continue;
@@ -231,34 +231,34 @@ class RiveDocument {
         (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 15)) << 12)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)))] : Array<Dynamic>))) : Dynamic));
         continue;
       }
-      var point:Dynamic = ((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 7)) << 18)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 12)))) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63))) - 65536.0);
+      var point:Float = ((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 7)) << 18)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 12)))) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63))) - 65536.0);
       (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(55296.0 + (_Runtime.toInt32(point) >> 10)), (56320.0 + (_Runtime.toInt32(point) & 1023))] : Array<Dynamic>))) : Dynamic));
     }
     return cast result;
     return cast null;
   }
 
-  public static function toRiveFieldType__riveDocument(value:Float):Dynamic {
-    if ((cast _Runtime.strictEquals(value, RiveFieldTypeValue.String) : Bool)) { return cast RiveFieldTypeValue.String; }
-    if ((cast _Runtime.strictEquals(value, RiveFieldTypeValue.Double) : Bool)) { return cast RiveFieldTypeValue.Double; }
-    if ((cast _Runtime.strictEquals(value, RiveFieldTypeValue.Color) : Bool)) { return cast RiveFieldTypeValue.Color; }
-    return cast RiveFieldTypeValue.Uint;
+  public static function toRiveFieldType__riveDocument(value:Float):flighthq._internal._IndexedAccess<RiveProperty, String> {
+    if ((cast _Runtime.strictEquals(value, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).String) : Bool)) { return cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).String; }
+    if ((cast _Runtime.strictEquals(value, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Double) : Bool)) { return cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Double; }
+    if ((cast _Runtime.strictEquals(value, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color) : Bool)) { return cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color; }
+    return cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Uint;
     return cast null;
   }
 
-  public static function reportRiveReject__riveDocument(diagnostics:Null<Array<ImportDiagnostic>>, kind:String, ?detail:Dynamic):Void {
-    _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, kind, 'parseRiveDocument', detail] : Array<Dynamic>));
+  public static function reportRiveReject__riveDocument(diagnostics:Null<Array<ImportDiagnostic>>, kind:String, ?detail:flighthq._internal._Record<String, Float>):Void {
+    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast kind : String), (cast 'parseRiveDocument' : String), (cast detail : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
   }
 
-  public static final RIVE_FINGERPRINT__riveDocument:Dynamic = cast ([82.0, 73.0, 86.0, 69.0] : Array<Dynamic>);
+  public static final RIVE_FINGERPRINT__riveDocument:Array<Float> = cast ([82.0, 73.0, 86.0, 69.0] : Array<Dynamic>);
 
-  public static final RIVE_SUPPORTED_MAJOR_VERSION__riveDocument:Dynamic = 7.0;
+  public static final RIVE_SUPPORTED_MAJOR_VERSION__riveDocument:Float = 7.0;
 
-  public static final FIELD_TYPE_BITS_PER_WORD__riveDocument:Dynamic = 8.0;
+  public static final FIELD_TYPE_BITS_PER_WORD__riveDocument:Float = 8.0;
 
-  public static final _floatView__riveDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [4.0])]);
+  public static final _floatView__riveDocument:flighthq._internal._Any = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [4.0])]);
 
-  public static final _floatBytes__riveDocument:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(RiveDocument._floatView__riveDocument, 'buffer'));
+  public static final _floatBytes__riveDocument:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.field(RiveDocument._floatView__riveDocument, 'buffer'));
 
-  public static final _emptyBytes__riveDocument:Dynamic = new flighthq._internal._UInt8Array(0.0);
+  public static final _emptyBytes__riveDocument:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(0.0);
 }

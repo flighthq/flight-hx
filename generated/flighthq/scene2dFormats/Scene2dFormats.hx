@@ -11,6 +11,7 @@ import flighthq.scene2dFormats.SvgDocument as Facade_Scene2dFormats_flighthq_sce
 import flighthq.types.AnimationClip;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
+import flighthq.types.LottieDocument;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportOptions;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportResult;
 import flighthq.types.RiveDocument;
@@ -28,7 +29,7 @@ class Scene2dFormats {
     return cast null;
   }
 
-  public static function createScene2DFromLottieDocument(source:Dynamic, ?diagnostics:Array<ImportDiagnostic>, ?options:LottieDocumentImportOptions):LottieDocumentImportResult {
+  public static function createScene2DFromLottieDocument(source:flighthq._internal._Union2<String, LottieDocument>, ?diagnostics:Array<ImportDiagnostic>, ?options:LottieDocumentImportOptions):LottieDocumentImportResult {
     return cast Facade_Scene2dFormats_flighthq_scene2dFormats_LottieDocument.createScene2DFromLottieDocument(source, diagnostics, options);
     return cast null;
   }

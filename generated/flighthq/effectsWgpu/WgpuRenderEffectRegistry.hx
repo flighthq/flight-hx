@@ -6,23 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class WgpuRenderEffectRegistry {
   @:noCompletion
   public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuRenderEffectRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuRenderEffectRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, WgpuRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuRenderEffectRegistry'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(kind)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuRenderEffectRegistry; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, WgpuRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'wgpuRenderEffectRegistry', (_Runtime.field(runtime, 'wgpuRenderEffectRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, runner));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    ((cast ((cast runtime : WgpuRenderStateRuntime).wgpuRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, runner));
   }
 }

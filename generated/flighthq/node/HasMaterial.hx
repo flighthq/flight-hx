@@ -4,11 +4,12 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasMaterial;
+import flighthq.types.Material;
 
 class HasMaterial {
   @:noCompletion
   public static function initMaterialTrait(target:flighthq.types.HasMaterial, ?obj:Dynamic):Void {
-    _Runtime.setField(target, 'material', _Runtime.coalesce(_Runtime.optionalField(obj, 'material'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'materialData', _Runtime.coalesce(_Runtime.optionalField(obj, 'materialData'), function():Dynamic return cast null));
+    ((cast target : flighthq.types.HasMaterial).material = _Runtime.coalesce(_Runtime.optionalField(obj, 'material'), function():Dynamic return cast null));
+    ((cast target : flighthq.types.HasMaterial).materialData = _Runtime.coalesce(_Runtime.optionalField(obj, 'materialData'), function():Dynamic return cast null));
   }
 }

@@ -23,19 +23,29 @@ import flighthq.platform.Platform.setPlatformBackend;
 import flighthq.shell.Shell.setShellBackend;
 import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.tray.Tray.setTrayBackend;
+import flighthq.types.App.AppBackend;
+import flighthq.types.ApplicationWindow.WindowBackend;
+import flighthq.types.Clipboard.ClipboardBackend;
+import flighthq.types.Dialog.DialogBackend;
+import flighthq.types.Menu.MenuBackend;
+import flighthq.types.Notification.NotificationBackend;
+import flighthq.types.Platform.PlatformBackend;
+import flighthq.types.Shell.ShellBackend;
+import flighthq.types.Shortcut.ShortcutBackend;
 import flighthq.types.TauriApi;
+import flighthq.types.Tray.TrayBackend;
 
 class TauriRegister {
   public static function registerTauriBackends(tauri:TauriApi):Void {
-    _Runtime.callValue(setPlatformBackend, cast ([_Runtime.callValue(createTauriPlatformBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setAppBackend, cast ([_Runtime.callValue(createTauriAppBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setWindowBackend, cast ([_Runtime.callValue(createTauriWindowBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setDialogBackend, cast ([_Runtime.callValue(createTauriDialogBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setClipboardBackend, cast ([_Runtime.callValue(createTauriClipboardBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setMenuBackend, cast ([_Runtime.callValue(createTauriMenuBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setTrayBackend, cast ([_Runtime.callValue(createTauriTrayBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setShortcutBackend, cast ([_Runtime.callValue(createTauriShortcutBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setNotificationBackend, cast ([_Runtime.callValue(createTauriNotificationBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(setShellBackend, cast ([_Runtime.callValue(createTauriShellBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
+    setPlatformBackend((cast createTauriPlatformBackend((cast tauri : TauriApi)) : Null<PlatformBackend>));
+    setAppBackend((cast createTauriAppBackend((cast tauri : TauriApi)) : Null<AppBackend>));
+    setWindowBackend((cast createTauriWindowBackend((cast tauri : TauriApi)) : Null<WindowBackend>));
+    setDialogBackend((cast createTauriDialogBackend((cast tauri : TauriApi)) : Null<DialogBackend>));
+    setClipboardBackend((cast createTauriClipboardBackend((cast tauri : TauriApi)) : Null<ClipboardBackend>));
+    setMenuBackend((cast createTauriMenuBackend((cast tauri : TauriApi)) : Null<MenuBackend>));
+    setTrayBackend((cast createTauriTrayBackend((cast tauri : TauriApi)) : Null<TrayBackend>));
+    setShortcutBackend((cast createTauriShortcutBackend((cast tauri : TauriApi)) : Null<ShortcutBackend>));
+    setNotificationBackend((cast createTauriNotificationBackend((cast tauri : TauriApi)) : Null<NotificationBackend>));
+    setShellBackend((cast createTauriShellBackend((cast tauri : TauriApi)) : Null<ShellBackend>));
   }
 }

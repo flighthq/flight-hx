@@ -6,10 +6,10 @@ import flighthq._internal._Runtime;
 
 class PremultiplyColorAlpha {
   public static function premultiplyColorAlpha(color:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
     r = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) * a));
     g = HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) * a));
@@ -19,10 +19,10 @@ class PremultiplyColorAlpha {
   }
 
   public static function unpremultiplyColorAlpha(color:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
     if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) { return cast color; }
     r = HxMath.min(255.0, HxMath.round(((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / a)));

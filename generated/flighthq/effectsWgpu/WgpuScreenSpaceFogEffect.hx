@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.ScreenSpaceFogEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,33 +17,33 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuScreenSpaceFogEffect {
   @:noCompletion
   public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
-    var packed:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var density:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var packed:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var density:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     packed = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 3369262335.0);
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.screenSpaceFog', WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'atmospheric.screenSpaceFog' : String), (cast WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, density);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, r);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScreenSpaceFogEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScreenSpaceFogEffect)] : Array<Dynamic>));
+  public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyScreenSpaceFogEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ScreenSpaceFogEffect) : ScreenSpaceFogEffect));
   };
 
   public static function registerWgpuScreenSpaceFogEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultWgpuScreenSpaceFogEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ScreenSpaceFogEffect' : String), (cast defaultWgpuScreenSpaceFogEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:Dynamic = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';
+  public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:String = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';
 }

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ImageDecodeFailureExplanation = Dynamic;
+typedef ImageDecodeFailureExplanation = flighthq._internal._Union2<{ var mimeType:Dynamic; var reason:String; }, { var mimeType:String; var reason:String; }>;

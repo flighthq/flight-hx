@@ -10,277 +10,277 @@ import flighthq.types.ObjSchema.ObjMaterial;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
-typedef MtlDropTally__mtlParse = { var count:Float; var detail:Dynamic; var kind:String; var severity:ImportDiagnosticSeverity; };
+typedef MtlDropTally__mtlParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class MtlParse {
   public static function parseObjMaterialLibrary(source:String, ?diagnostics:Array<ImportDiagnostic>):ObjMaterialLibrary {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+    var materials:flighthq._internal._Map<String, ObjMaterial> = cast _Runtime.UNDEFINED;
     var current:Null<ObjMaterial> = cast _Runtime.UNDEFINED;
-    var lines:Dynamic = cast _Runtime.UNDEFINED;
-    var mtlDrops:Dynamic = cast _Runtime.UNDEFINED;
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
+    var mtlDrops:Null<flighthq._internal._Map<String, MtlDropTally__mtlParse>> = cast _Runtime.UNDEFINED;
     materials = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     current = null;
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     mtlDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-        var raw:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+        var raw:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0) : Bool)) : Bool)) { i++; continue; }
-        var spaceIndex:Dynamic = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
+        var spaceIndex:Float = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
         if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) {
           if ((cast _Runtime.strictEquals(raw, 'newmtl') : Bool)) {
-            _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Drop, 'mtl.newmtl-no-name', '', { firstLine: (i + 1.0) }] : Array<Dynamic>));
+            MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'mtl.newmtl-no-name' : String), (cast '' : String), (cast { firstLine: (i + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           } else { if ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ka') : Bool) || (cast _Runtime.strictEquals(raw, 'Kd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ks') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ke') : Bool)) : Bool)) {
-            if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Recover, 'mtl.color-malformed', 'too-few-components', { firstDirective: raw, firstLine: (i + 1.0), reason: 'too-few-components' }] : Array<Dynamic>)); }
+            if ((cast _Runtime.strictEquals(current, null) : Bool)) { MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast raw : String), (cast i : Float)); } else { MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'mtl.color-malformed' : String), (cast 'too-few-components' : String), (cast { firstDirective: raw, firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); }
           } else { if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'Ns') : Bool) || (cast _Runtime.strictEquals(raw, 'd') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Tr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'illum') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pm') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Ps') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pc') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'Pcr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'aniso') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'anisor') : Bool)) : Bool)) {
-            if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); }
+            if ((cast _Runtime.strictEquals(current, null) : Bool)) { MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast raw : String), (cast i : Float)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast raw : String), (cast i : Float)); }
           } else { if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(raw, 'map_Kd') : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ka') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ks') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Bump') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'bump') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_d') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Ke') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Pr') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'map_Pm') : Bool)) : Bool) || (cast _Runtime.strictEquals(raw, 'norm') : Bool)) : Bool)) {
-            if ((cast _Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, raw, i] : Array<Dynamic>)); } else { _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Drop, 'mtl.map-no-filename', raw, { directive: raw, firstLine: (i + 1.0) }] : Array<Dynamic>)); }
+            if ((cast _Runtime.strictEquals(current, null) : Bool)) { MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast raw : String), (cast i : Float)); } else { MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'mtl.map-no-filename' : String), (cast raw : String), (cast { directive: raw, firstLine: (i + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); }
           } } } }
           i++;
           continue;
         }
-        var directive:Dynamic = _Runtime.slice(raw, 0.0, spaceIndex);
-        var args:Dynamic = StringTools.trim(Std.string(_Runtime.slice(raw, (spaceIndex + 1.0), null)));
+        var directive:String = _Runtime.slice(raw, 0.0, spaceIndex);
+        var args:String = StringTools.trim(Std.string(_Runtime.slice(raw, (spaceIndex + 1.0), null)));
         {
           var __switchValue = directive;
           do {
             if (__switchValue == 'newmtl') {
               {
-                (current = cast (_Runtime.callValue(MtlParse.createDefaultObjMaterial__mtlParse, cast ([args] : Array<Dynamic>)) : Dynamic));
-                ((cast materials : flighthq._internal._Map).set(args, current));
+                (current = cast ((cast MtlParse.createDefaultObjMaterial__mtlParse((cast args : String)) : Null<ObjMaterial>) : Dynamic));
+                ((cast materials : flighthq._internal._Map<String, ObjMaterial>).set(args, current));
               }
             }
             else if (__switchValue == 'Ka') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.ambient = cast (c : Dynamic)); }
+                var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), mtlDrops, (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).ambient = cast (c : Dynamic)); }
               }
             }
             else if (__switchValue == 'Kd') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.diffuse = cast (c : Dynamic)); }
+                var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), mtlDrops, (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).diffuse = cast (c : Dynamic)); }
               }
             }
             else if (__switchValue == 'Ks') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.specular = cast (c : Dynamic)); }
+                var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), mtlDrops, (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).specular = cast (c : Dynamic)); }
               }
             }
             else if (__switchValue == 'Ns') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.specularExponent = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).specularExponent = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'd') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).dissolve = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Tr') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.dissolve = cast ((1.0 - v) : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).dissolve = cast ((1.0 - v) : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'illum') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.illumination = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).illumination = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'map_Kd') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapDiffuse = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapDiffuse = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Ka') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapAmbient = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapAmbient = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Ks') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapSpecular = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapSpecular = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapBump = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapBump = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'Ke') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var c:Dynamic = _Runtime.callValue(MtlParse.parseColor__mtlParse, cast ([args, mtlDrops, directive, i] : Array<Dynamic>));
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { (current.emissive = cast (c : Dynamic)); }
+                var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), mtlDrops, (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).emissive = cast (c : Dynamic)); }
               }
             }
             else if (__switchValue == 'Pr') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.roughness = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).roughness = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pm') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.metallic = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).metallic = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Ps') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.sheen = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).sheen = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pc') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.clearcoat = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).clearcoat = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pcr') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.clearcoatRoughness = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).clearcoatRoughness = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'aniso') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.anisotropy = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).anisotropy = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'anisor') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                var v:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { (current.anisotropyRotation = cast (v : Dynamic)); } else { _Runtime.callValue(MtlParse.tallyInvalidValue__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>)); }
+                var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : flighthq.types.ObjSchema.ObjMaterial).anisotropyRotation = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse(mtlDrops, (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'map_d') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapDissolve = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapDissolve = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Ke') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapEmissive = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapEmissive = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Pr') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapRoughness = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapRoughness = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'map_Pm') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapMetallic = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapMetallic = cast (args : Dynamic));
               }
             }
             else if (__switchValue == 'norm') {
               {
                 if ((cast _Runtime.strictEquals(current, null) : Bool)) {
-                  _Runtime.callValue(MtlParse.tallyDirectiveBeforeMaterial__mtlParse, cast ([mtlDrops, directive, i] : Array<Dynamic>));
+                  MtlParse.tallyDirectiveBeforeMaterial__mtlParse(mtlDrops, (cast directive : String), (cast i : Float));
                   break;
                 }
-                (current.mapNormal = cast (args : Dynamic));
+                ((cast current : flighthq.types.ObjSchema.ObjMaterial).mapNormal = cast (args : Dynamic));
               }
             }
             else  {
@@ -291,8 +291,8 @@ class MtlParse {
       }
     }
     if ((cast !_Runtime.strictEquals(mtlDrops, null) : Bool)) {
-      for (tally in _Runtime.iterable(((cast mtlDrops : flighthq._internal._Map).values()))) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, _Runtime.field(tally, 'severity'), _Runtime.field(tally, 'kind'), 'parseObjMaterialLibrary', _Runtime.mergeObjects([_Runtime.field(tally, 'detail'), { count: _Runtime.field(tally, 'count') }])] : Array<Dynamic>));
+      for (tally in _Runtime.iterable(((cast mtlDrops : flighthq._internal._Map<String, MtlDropTally__mtlParse>).values()))) {
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast tally : MtlDropTally__mtlParse).severity : ImportDiagnosticSeverity), (cast (cast tally : MtlDropTally__mtlParse).kind : String), (cast 'parseObjMaterialLibrary' : String), (cast _Runtime.mergeObjects([(cast tally : MtlDropTally__mtlParse).detail, { count: (cast tally : MtlDropTally__mtlParse).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     }
     return cast { materials: materials };
@@ -304,41 +304,41 @@ class MtlParse {
     return cast null;
   }
 
-  public static function parseColor__mtlParse(args:String, mtlDrops:Null<Dynamic>, directive:String, lineIndex:Float):Null<Array<Float>> {
-    var parts:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseColor__mtlParse(args:String, mtlDrops:Null<flighthq._internal._Map<String, MtlDropTally__mtlParse>>, directive:String, lineIndex:Float):Null<Array<Float>> {
+    var parts:Array<String> = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
     if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-      _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Recover, 'mtl.color-malformed', 'too-few-components', { firstDirective: directive, firstLine: (lineIndex + 1.0), reason: 'too-few-components' }] : Array<Dynamic>));
+      MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'mtl.color-malformed' : String), (cast 'too-few-components' : String), (cast { firstDirective: directive, firstLine: (lineIndex + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     r = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
     g = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
     b = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([r] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([g] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Recover, 'mtl.color-malformed', 'non-numeric', { firstDirective: directive, firstLine: (lineIndex + 1.0), reason: 'non-numeric' }] : Array<Dynamic>));
+      MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'mtl.color-malformed' : String), (cast 'non-numeric' : String), (cast { firstDirective: directive, firstLine: (lineIndex + 1.0), reason: 'non-numeric' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     return cast cast ([r, g, b] : Array<Dynamic>);
     return cast null;
   }
 
-  public static function tallyDirectiveBeforeMaterial__mtlParse(mtlDrops:Null<Dynamic>, directive:String, lineIndex:Float):Void {
-    _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Drop, 'mtl.directive-before-material', '', { firstDirective: directive, firstLine: (lineIndex + 1.0) }] : Array<Dynamic>));
+  public static function tallyDirectiveBeforeMaterial__mtlParse(mtlDrops:Null<flighthq._internal._Map<String, MtlDropTally__mtlParse>>, directive:String, lineIndex:Float):Void {
+    MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'mtl.directive-before-material' : String), (cast '' : String), (cast { firstDirective: directive, firstLine: (lineIndex + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
   }
 
-  public static function tallyInvalidValue__mtlParse(mtlDrops:Null<Dynamic>, directive:String, lineIndex:Float):Void {
-    _Runtime.callValue(MtlParse.tallyMtlDrop__mtlParse, cast ([mtlDrops, ImportDiagnosticSeverityValue.Recover, 'mtl.invalid-value', directive, { directive: directive, firstLine: (lineIndex + 1.0) }] : Array<Dynamic>));
+  public static function tallyInvalidValue__mtlParse(mtlDrops:Null<flighthq._internal._Map<String, MtlDropTally__mtlParse>>, directive:String, lineIndex:Float):Void {
+    MtlParse.tallyMtlDrop__mtlParse(mtlDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'mtl.invalid-value' : String), (cast directive : String), (cast { directive: directive, firstLine: (lineIndex + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
   }
 
-  public static function tallyMtlDrop__mtlParse(tallies:Null<Dynamic>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tallyMtlDrop__mtlParse(tallies:Null<flighthq._internal._Map<String, MtlDropTally__mtlParse>>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
+    var key:String = cast _Runtime.UNDEFINED;
+    var existing:Null<MtlDropTally__mtlParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flighthq._internal._Map).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { _Runtime.incrementField(existing, 'count', 1, true); }
+    existing = ((cast tallies : flighthq._internal._Map<String, MtlDropTally__mtlParse>).get(key));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, MtlDropTally__mtlParse>).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : MtlDropTally__mtlParse).count++; }
   }
 }

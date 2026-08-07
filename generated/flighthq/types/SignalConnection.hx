@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SignalConnection<T> = { var signal:Signal<Dynamic>; var slot:Dynamic; var connected:Bool; var paused:Bool; };
+typedef SignalConnection<T> = { var signal:Signal<T>; var slot:T; var connected:Bool; var paused:Bool; };

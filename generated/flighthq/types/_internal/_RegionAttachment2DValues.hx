@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Attachment2D;
 
 class _RegionAttachment2DValues {
-  public static final RegionAttachment2DKind:Dynamic = 'RegionAttachment2D';
+  public static final RegionAttachment2DKind:String = 'RegionAttachment2D';
 }

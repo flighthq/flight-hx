@@ -9,29 +9,30 @@ import flighthq.types.Material;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class WgpuMeshMaterialRegistry {
   @:noCompletion
   public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
-    ((cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).set(kind, renderer));
+    ((cast (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).set(kind, renderer));
   }
 
   @:noCompletion
   public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
+    var registry:flighthq._internal._Map<String, WgpuMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
+    registry = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var renderer:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
+      var renderer:Null<WgpuMeshMaterialRenderer> = ((cast registry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(_Runtime.field(material, 'kind')));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map).get(StandardMaterialKindValue)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(StandardMaterialKindValue)), function():Dynamic return cast null);
     return cast null;
   }
 }

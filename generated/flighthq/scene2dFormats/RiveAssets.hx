@@ -7,55 +7,57 @@ import flighthq.scene2dFormats.RiveCoreTypes.getRiveCoreTypeName;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveFileAsset;
+import flighthq.types.RiveDocument.RiveProperty;
+import flighthq.types.RiveDocument.RiveValue;
 
 class RiveAssets {
   public static function createRiveFileAssets(objects:Array<RiveCoreObject>):Array<RiveFileAsset> {
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;
     assets = cast ([] : Array<Dynamic>);
     for (object in _Runtime.iterable(objects)) {
-      if ((cast _Runtime.callValue(isRiveCoreTypeDerivedFrom, cast ([_Runtime.field(object, 'typeKey'), RiveAssets.RIVE_FILE_ASSET__riveAssets] : Array<Dynamic>)) : Bool)) {
-        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: _Runtime.callValue(RiveAssets.readRiveText__riveAssets, cast ([object, RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets, ''] : Array<Dynamic>)), height: _Runtime.callValue(RiveAssets.readRiveNumber__riveAssets, cast ([object, RiveAssets.RIVE_ASSET_HEIGHT__riveAssets, 0.0] : Array<Dynamic>)), kind: _Runtime.coalesce(_Runtime.callValue(getRiveCoreTypeName, cast ([_Runtime.field(object, 'typeKey')] : Array<Dynamic>)), function():Dynamic return cast ''), name: _Runtime.callValue(RiveAssets.readRiveText__riveAssets, cast ([object, RiveAssets.RIVE_ASSET_NAME__riveAssets, ''] : Array<Dynamic>)), width: _Runtime.callValue(RiveAssets.readRiveNumber__riveAssets, cast ([object, RiveAssets.RIVE_ASSET_WIDTH__riveAssets, 0.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+      if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveAssets.RIVE_FILE_ASSET__riveAssets : Float)) : Bool) : Bool)) {
+        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast _Runtime.field(object, 'typeKey') : Float)) : String), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         continue;
       }
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) : Bool)) { continue; }
-      _Runtime.setField(flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)), 'bytes', _Runtime.callValue(RiveAssets.readRiveBytes__riveAssets, cast ([object, RiveAssets.RIVE_ASSET_BYTES__riveAssets] : Array<Dynamic>)));
+      ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : RiveFileAsset).bytes = (cast RiveAssets.readRiveBytes__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>));
     }
     return cast assets;
     return cast null;
   }
 
   public static function readRiveBytes__riveAssets(source:RiveCoreObject, key:Float):Null<flighthq._internal._UInt8Array> {
-    var property:Dynamic = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(property, 'value'), flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(property, 'value') : Dynamic));
+    var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
+    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.isInstanceOf((cast property : RiveProperty).value, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveNumber__riveAssets(source:RiveCoreObject, key:Float, fallback:Float):Float {
-    var property:Dynamic = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(property, 'value')), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast _Runtime.field(property, 'value') : Dynamic));
+    var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
+    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveAssets(source:RiveCoreObject, key:Float, fallback:String):String {
-    var property:Dynamic = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(property, 'value')), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast _Runtime.field(property, 'value') : Dynamic));
+    var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
+    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
-  public static final RIVE_FILE_ASSET__riveAssets:Dynamic = 103.0;
+  public static final RIVE_FILE_ASSET__riveAssets:Float = 103.0;
 
-  public static final RIVE_FILE_ASSET_CONTENTS__riveAssets:Dynamic = 106.0;
+  public static final RIVE_FILE_ASSET_CONTENTS__riveAssets:Float = 106.0;
 
-  public static final RIVE_ASSET_NAME__riveAssets:Dynamic = 203.0;
+  public static final RIVE_ASSET_NAME__riveAssets:Float = 203.0;
 
-  public static final RIVE_ASSET_HEIGHT__riveAssets:Dynamic = 207.0;
+  public static final RIVE_ASSET_HEIGHT__riveAssets:Float = 207.0;
 
-  public static final RIVE_ASSET_WIDTH__riveAssets:Dynamic = 208.0;
+  public static final RIVE_ASSET_WIDTH__riveAssets:Float = 208.0;
 
-  public static final RIVE_ASSET_BYTES__riveAssets:Dynamic = 212.0;
+  public static final RIVE_ASSET_BYTES__riveAssets:Float = 212.0;
 
-  public static final RIVE_ASSET_CDN_BASE_URL__riveAssets:Dynamic = 362.0;
+  public static final RIVE_ASSET_CDN_BASE_URL__riveAssets:Float = 362.0;
 }

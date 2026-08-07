@@ -5,33 +5,34 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapFingerprint.compareBitmapFingerprints;
 import flighthq.bitmap.BitmapFingerprint.parseBitmapFingerprint;
+import flighthq.types.BitmapFingerprint;
 import flighthq.types.CaptureCheckResult;
 
 class CaptureComparison {
-  public static final CAPTURE_PARITY_TOLERANCE:Dynamic = 15.0;
+  public static final CAPTURE_PARITY_TOLERANCE:Float = 15.0;
 
-  public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = 5.0;
+  public static final CAPTURE_REGRESSION_TOLERANCE:Float = 5.0;
 
   public static function compareCaptureFingerprints(a:String, b:String):Float {
-    var fa:Dynamic = cast _Runtime.UNDEFINED;
-    var fb:Dynamic = cast _Runtime.UNDEFINED;
-    fa = _Runtime.callValue(parseBitmapFingerprint, cast ([a] : Array<Dynamic>));
-    fb = _Runtime.callValue(parseBitmapFingerprint, cast ([b] : Array<Dynamic>));
-    if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize')) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
-    return cast _Runtime.callValue(compareBitmapFingerprints, cast ([fa, fb] : Array<Dynamic>));
+    var fa:Null<BitmapFingerprint> = cast _Runtime.UNDEFINED;
+    var fb:Null<BitmapFingerprint> = cast _Runtime.UNDEFINED;
+    fa = (cast parseBitmapFingerprint((cast a : String)) : Null<BitmapFingerprint>);
+    fb = (cast parseBitmapFingerprint((cast b : String)) : Null<BitmapFingerprint>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast fa : BitmapFingerprint).gridSize, (cast fb : BitmapFingerprint).gridSize) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
+    return cast (cast compareBitmapFingerprints(fa, fb) : Float);
     return cast null;
   }
 
-  public static function evaluateCaptureParity(a:String, b:String, tolerance:Dynamic = 15.0):CaptureCheckResult {
-    var difference:Dynamic = cast _Runtime.UNDEFINED;
-    difference = _Runtime.callValue(compareCaptureFingerprints, cast ([a, b] : Array<Dynamic>));
+  public static function evaluateCaptureParity(a:String, b:String, tolerance:Float = 15.0):CaptureCheckResult {
+    var difference:Float = cast _Runtime.UNDEFINED;
+    difference = (cast compareCaptureFingerprints((cast a : String), (cast b : String)) : Float);
     return cast { pass: ((cast difference : Float) <= (cast tolerance : Float)), difference: difference, tolerance: tolerance };
     return cast null;
   }
 
-  public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, tolerance:Dynamic = 5.0):CaptureCheckResult {
-    var difference:Dynamic = cast _Runtime.UNDEFINED;
-    difference = _Runtime.callValue(compareCaptureFingerprints, cast ([fingerprint, baselineFingerprint] : Array<Dynamic>));
+  public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, tolerance:Float = 5.0):CaptureCheckResult {
+    var difference:Float = cast _Runtime.UNDEFINED;
+    difference = (cast compareCaptureFingerprints((cast fingerprint : String), (cast baselineFingerprint : String)) : Float);
     return cast { pass: ((cast difference : Float) <= (cast tolerance : Float)), difference: difference, tolerance: tolerance };
     return cast null;
   }

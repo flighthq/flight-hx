@@ -17,18 +17,18 @@ class TiltShiftEffect {
   }
 
   public static function getTiltShiftEffectPadding(effect:flighthq.types.TiltShiftEffect):RenderEffectPadding {
-    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    var vertical:Float = cast _Runtime.UNDEFINED;
     vertical = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0)), 3.0));
     return cast { bottom: vertical, left: 0.0, right: 0.0, top: vertical };
     return cast null;
   }
 
   public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'TiltShiftEffect', TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'TiltShiftEffect' : String), TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect);
   }
 
   public static function resolveTiltShiftEffectPadding__tiltShiftEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getTiltShiftEffectPadding, cast ([(cast effect : flighthq.types.TiltShiftEffect)] : Array<Dynamic>));
+    return cast (cast getTiltShiftEffectPadding((cast (cast effect : flighthq.types.TiltShiftEffect) : flighthq.types.TiltShiftEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

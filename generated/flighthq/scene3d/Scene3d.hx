@@ -48,7 +48,7 @@ class Scene3d {
     Facade_Scene3d_flighthq_scene3d_SceneAnimation.applyAnimationClipToScene3D(clip, time);
   }
 
-  public static final BillboardKind:Dynamic = Facade_Scene3d_flighthq_types__internal__BillboardValues.BillboardKind;
+  public static final BillboardKind:String = Facade_Scene3d_flighthq_types__internal__BillboardValues.BillboardKind;
 
   public static function buildScene3DFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
     Facade_Scene3d_flighthq_scene3d_SceneNodeCulling.buildScene3DFrustum(out, viewProjection);
@@ -79,7 +79,7 @@ class Scene3d {
     return cast null;
   }
 
-  public static function createScene3DFromDocument(document:Scene3DDocument, ?sceneIndex:Dynamic):Scene3D {
+  public static function createScene3DFromDocument(document:Scene3DDocument, ?sceneIndex:Float):Scene3D {
     return cast Facade_Scene3d_flighthq_scene3d_SceneDocument.createScene3DFromDocument(document, sceneIndex);
     return cast null;
   }
@@ -170,14 +170,14 @@ class Scene3d {
     return cast null;
   }
 
-  public static function isMesh(source:Dynamic):Bool {
+  public static function isMesh(source:flighthq._internal._Any):Bool {
     return cast Facade_Scene3d_flighthq_scene3d_Mesh.isMesh(source);
     return cast null;
   }
 
-  public static final MeshKind:Dynamic = Facade_Scene3d_flighthq_types__internal__MeshValues.MeshKind;
+  public static final MeshKind:String = Facade_Scene3d_flighthq_types__internal__MeshValues.MeshKind;
 
-  public static final Node3DKind:Dynamic = Facade_Scene3d_flighthq_types__internal__Node3DValues.Node3DKind;
+  public static final Node3DKind:String = Facade_Scene3d_flighthq_types__internal__Node3DValues.Node3DKind;
 
   public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
     Facade_Scene3d_flighthq_scene3d_BillboardCamera.orientBillboardToCamera(billboard, camera);

@@ -12,7 +12,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
-    return cast _Runtime.callValue(createQuaternion, cast ([source.x, source.y, source.z, source.w] : Array<Dynamic>));
+    return cast (cast createQuaternion((cast source.x : Null<Float>), (cast source.y : Null<Float>), (cast source.z : Null<Float>), (cast source.w : Null<Float>)) : flighthq.types.Quaternion);
     return cast null;
   }
 
@@ -31,20 +31,20 @@ class Quaternion {
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Quaternion {
-    return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) } : Null<{ var x:Float; var y:Float; var z:Float; var w:Float; }>)) : flighthq.types.Quaternion);
     return cast null;
   }
 
   public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast ((cast _Runtime.strictEquals(a.x, b.x) : Bool) && (cast _Runtime.strictEquals(a.y, b.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.z, b.z) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.w, b.w) : Bool));
+    return cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).x, (cast b : flighthq.types.Quaternion).x) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).y, (cast b : flighthq.types.Quaternion).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).z, (cast b : flighthq.types.Quaternion).z) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).w, (cast b : flighthq.types.Quaternion).w) : Bool));
     return cast null;
   }
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
-    var dot:Dynamic = cast _Runtime.UNDEFINED;
-    dot = HxMath.abs(_Runtime.callValue(getQuaternionDot, cast ([a, b] : Array<Dynamic>)));
+    var dot:Float = cast _Runtime.UNDEFINED;
+    dot = HxMath.abs((cast getQuaternionDot((cast a : QuaternionLike), (cast b : QuaternionLike)) : Float));
     return cast _Runtime.multiplyNumbers(2.0, HxMath.acos(HxMath.min(1.0, dot)));
     return cast null;
   }
@@ -55,28 +55,28 @@ class Quaternion {
   }
 
   public static function getQuaternionEuler(out:Vector3Like, source:QuaternionLike, order:EulerOrder = 'XYZ'):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var xx:Dynamic = cast _Runtime.UNDEFINED;
-    var yy:Dynamic = cast _Runtime.UNDEFINED;
-    var zz:Dynamic = cast _Runtime.UNDEFINED;
-    var xy:Dynamic = cast _Runtime.UNDEFINED;
-    var xz:Dynamic = cast _Runtime.UNDEFINED;
-    var yz:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    var wz:Dynamic = cast _Runtime.UNDEFINED;
-    var m00:Dynamic = cast _Runtime.UNDEFINED;
-    var m01:Dynamic = cast _Runtime.UNDEFINED;
-    var m02:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m20:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
+    var m00:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m20:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
     x = source.x;
     y = source.y;
     z = source.z;
@@ -177,12 +177,12 @@ class Quaternion {
   }
 
   public static function inverseQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
     x = source.x;
     y = source.y;
     z = source.z;
@@ -203,14 +203,14 @@ class Quaternion {
   }
 
   public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var aw:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var bz:Dynamic = cast _Runtime.UNDEFINED;
-    var bw:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var aw:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    var bw:Float = cast _Runtime.UNDEFINED;
     ax = a.x;
     ay = a.y;
     az = a.z;
@@ -226,18 +226,18 @@ class Quaternion {
   }
 
   public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var l:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var l:Float = cast _Runtime.UNDEFINED;
     x = source.x;
     y = source.y;
     z = source.z;
     w = source.w;
     l = HxMath.sqrt(((((x * x) + (y * y)) + (z * z)) + (w * w)));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
-      var inv:Dynamic = (1.0 / l);
+      var inv:Float = (1.0 / l);
       (out.x = cast ((x * inv) : Dynamic));
       (out.y = cast ((y * inv) : Dynamic));
       (out.z = cast ((z * inv) : Dynamic));
@@ -253,16 +253,16 @@ class Quaternion {
   }
 
   public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
-    var qx:Dynamic = cast _Runtime.UNDEFINED;
-    var qy:Dynamic = cast _Runtime.UNDEFINED;
-    var qz:Dynamic = cast _Runtime.UNDEFINED;
-    var qw:Dynamic = cast _Runtime.UNDEFINED;
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var vz:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var tz:Dynamic = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var qw:Float = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var vz:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var tz:Float = cast _Runtime.UNDEFINED;
     qx = q.x;
     qy = q.y;
     qz = q.z;
@@ -286,8 +286,8 @@ class Quaternion {
   }
 
   public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
-    var half:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var half:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
     half = (angle * 0.5);
     s = HxMath.sin(half);
     (out.x = cast ((axis.x * s) : Dynamic));
@@ -297,12 +297,12 @@ class Quaternion {
   }
 
   public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
-    var c1:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var c2:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var c3:Dynamic = cast _Runtime.UNDEFINED;
-    var s3:Dynamic = cast _Runtime.UNDEFINED;
+    var c1:Float = cast _Runtime.UNDEFINED;
+    var s1:Float = cast _Runtime.UNDEFINED;
+    var c2:Float = cast _Runtime.UNDEFINED;
+    var s2:Float = cast _Runtime.UNDEFINED;
+    var c3:Float = cast _Runtime.UNDEFINED;
+    var s3:Float = cast _Runtime.UNDEFINED;
     c1 = HxMath.cos((x / 2.0));
     s1 = HxMath.sin((x / 2.0));
     c2 = HxMath.cos((y / 2.0));
@@ -351,17 +351,17 @@ class Quaternion {
   }
 
   public static function setQuaternionFromMatrix4(out:QuaternionLike, source:Matrix4Like):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var m00:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m20:Dynamic = cast _Runtime.UNDEFINED;
-    var m01:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m02:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
-    var trace:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var m00:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m20:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
+    var trace:Float = cast _Runtime.UNDEFINED;
     m = source.m;
     m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
     m10 = flighthq._internal._StaticIndex.readFloat32Array(m, 4.0);
@@ -374,25 +374,25 @@ class Quaternion {
     m22 = flighthq._internal._StaticIndex.readFloat32Array(m, 10.0);
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
+      var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
       (out.w = cast ((0.25 / s) : Dynamic));
       (out.x = cast (((m12 - m21) * s) : Dynamic));
       (out.y = cast (((m20 - m02) * s) : Dynamic));
       (out.z = cast (((m01 - m10) * s) : Dynamic));
     } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       (out.w = cast (((m12 - m21) / s) : Dynamic));
       (out.x = cast ((0.25 * s) : Dynamic));
       (out.y = cast (((m10 + m01) / s) : Dynamic));
       (out.z = cast (((m20 + m02) / s) : Dynamic));
     } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       (out.w = cast (((m20 - m02) / s) : Dynamic));
       (out.x = cast (((m10 + m01) / s) : Dynamic));
       (out.y = cast ((0.25 * s) : Dynamic));
       (out.z = cast (((m21 + m12) / s) : Dynamic));
     } else {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
       (out.w = cast (((m01 - m10) / s) : Dynamic));
       (out.x = cast (((m20 + m02) / s) : Dynamic));
       (out.y = cast (((m21 + m12) / s) : Dynamic));
@@ -401,17 +401,17 @@ class Quaternion {
   }
 
   public static function setQuaternionFromUnitVectors(out:QuaternionLike, from:Vector3Like, to:Vector3Like):Void {
-    var fx:Dynamic = cast _Runtime.UNDEFINED;
-    var fy:Dynamic = cast _Runtime.UNDEFINED;
-    var fz:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var tz:Dynamic = cast _Runtime.UNDEFINED;
-    var dot:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var fx:Float = cast _Runtime.UNDEFINED;
+    var fy:Float = cast _Runtime.UNDEFINED;
+    var fz:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var tz:Float = cast _Runtime.UNDEFINED;
+    var dot:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     fx = from.x;
     fy = from.y;
     fz = from.z;
@@ -420,22 +420,22 @@ class Quaternion {
     tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
     if ((cast ((cast dot : Float) > (cast 0.999999 : Float)) : Bool)) {
-      _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
+      setQuaternionIdentity((cast out : QuaternionLike));
       return;
     }
     if ((cast ((cast dot : Float) < (cast -0.999999 : Float)) : Bool)) {
-      var ax:Dynamic = 1.0;
-      var ay:Dynamic = 0.0;
-      var az:Dynamic = 0.0;
+      var ax:Float = 1.0;
+      var ay:Float = 0.0;
+      var az:Float = 0.0;
       if ((cast ((cast HxMath.abs(fx) : Float) > (cast 0.9 : Float)) : Bool)) {
         (ax = cast (0.0 : Dynamic));
         (ay = cast (1.0 : Dynamic));
         (az = cast (0.0 : Dynamic));
       }
-      var px:Dynamic = ((fy * az) - (fz * ay));
-      var py:Dynamic = ((fz * ax) - (fx * az));
-      var pz:Dynamic = ((fx * ay) - (fy * ax));
-      var pLen:Dynamic = HxMath.sqrt((((px * px) + (py * py)) + (pz * pz)));
+      var px:Float = ((fy * az) - (fz * ay));
+      var py:Float = ((fz * ax) - (fx * az));
+      var pz:Float = ((fx * ay) - (fy * ax));
+      var pLen:Float = HxMath.sqrt((((px * px) + (py * py)) + (pz * pz)));
       (px = cast ((px / pLen) : Dynamic));
       (py = cast ((py / pLen) : Dynamic));
       (pz = cast ((pz / pLen) : Dynamic));
@@ -454,7 +454,7 @@ class Quaternion {
     (out.w = cast ((1.0 + dot) : Dynamic));
     len = HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w)));
     if ((cast !_Runtime.strictEquals(len, 0.0) : Bool)) {
-      var inv:Dynamic = (1.0 / len);
+      var inv:Float = (1.0 / len);
       (out.x *= inv);
       (out.y *= inv);
       (out.z *= inv);
@@ -470,30 +470,30 @@ class Quaternion {
   }
 
   public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
-    var fx:Dynamic = cast _Runtime.UNDEFINED;
-    var fy:Dynamic = cast _Runtime.UNDEFINED;
-    var fz:Dynamic = cast _Runtime.UNDEFINED;
-    var ux:Dynamic = cast _Runtime.UNDEFINED;
-    var uy:Dynamic = cast _Runtime.UNDEFINED;
-    var uz:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rz:Dynamic = cast _Runtime.UNDEFINED;
-    var rLen:Dynamic = cast _Runtime.UNDEFINED;
-    var rInv:Dynamic = cast _Runtime.UNDEFINED;
-    var cux:Dynamic = cast _Runtime.UNDEFINED;
-    var cuy:Dynamic = cast _Runtime.UNDEFINED;
-    var cuz:Dynamic = cast _Runtime.UNDEFINED;
-    var m00:Dynamic = cast _Runtime.UNDEFINED;
-    var m01:Dynamic = cast _Runtime.UNDEFINED;
-    var m02:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m20:Dynamic = cast _Runtime.UNDEFINED;
-    var m21:Dynamic = cast _Runtime.UNDEFINED;
-    var m22:Dynamic = cast _Runtime.UNDEFINED;
-    var trace:Dynamic = cast _Runtime.UNDEFINED;
+    var fx:Float = cast _Runtime.UNDEFINED;
+    var fy:Float = cast _Runtime.UNDEFINED;
+    var fz:Float = cast _Runtime.UNDEFINED;
+    var ux:Float = cast _Runtime.UNDEFINED;
+    var uy:Float = cast _Runtime.UNDEFINED;
+    var uz:Float = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rz:Float = cast _Runtime.UNDEFINED;
+    var rLen:Float = cast _Runtime.UNDEFINED;
+    var rInv:Float = cast _Runtime.UNDEFINED;
+    var cux:Float = cast _Runtime.UNDEFINED;
+    var cuy:Float = cast _Runtime.UNDEFINED;
+    var cuz:Float = cast _Runtime.UNDEFINED;
+    var m00:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m20:Float = cast _Runtime.UNDEFINED;
+    var m21:Float = cast _Runtime.UNDEFINED;
+    var m22:Float = cast _Runtime.UNDEFINED;
+    var trace:Float = cast _Runtime.UNDEFINED;
     fx = forward.x;
     fy = forward.y;
     fz = forward.z;
@@ -505,7 +505,7 @@ class Quaternion {
     rz = ((ux * fy) - (uy * fx));
     rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
     if ((cast _Runtime.strictEquals(rLen, 0.0) : Bool)) {
-      _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
+      setQuaternionIdentity((cast out : QuaternionLike));
       return;
     }
     rInv = (1.0 / rLen);
@@ -526,25 +526,25 @@ class Quaternion {
     m22 = fz;
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
+      var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
       (out.w = cast ((0.25 / s) : Dynamic));
       (out.x = cast (((m12 - m21) * s) : Dynamic));
       (out.y = cast (((m20 - m02) * s) : Dynamic));
       (out.z = cast (((m01 - m10) * s) : Dynamic));
     } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       (out.w = cast (((m12 - m21) / s) : Dynamic));
       (out.x = cast ((0.25 * s) : Dynamic));
       (out.y = cast (((m10 + m01) / s) : Dynamic));
       (out.z = cast (((m20 + m02) / s) : Dynamic));
     } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       (out.w = cast (((m20 - m02) / s) : Dynamic));
       (out.x = cast (((m10 + m01) / s) : Dynamic));
       (out.y = cast ((0.25 * s) : Dynamic));
       (out.z = cast (((m21 + m12) / s) : Dynamic));
     } else {
-      var s:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
+      var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
       (out.w = cast (((m01 - m10) / s) : Dynamic));
       (out.x = cast (((m20 + m02) / s) : Dynamic));
       (out.y = cast (((m21 + m12) / s) : Dynamic));
@@ -553,15 +553,15 @@ class Quaternion {
   }
 
   public static function slerpQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike, t:Float):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var aw:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var bz:Dynamic = cast _Runtime.UNDEFINED;
-    var bw:Dynamic = cast _Runtime.UNDEFINED;
-    var cosHalfTheta:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var aw:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    var bw:Float = cast _Runtime.UNDEFINED;
+    var cosHalfTheta:Float = cast _Runtime.UNDEFINED;
     var scaleA:Float = cast _Runtime.UNDEFINED;
     var scaleB:Float = cast _Runtime.UNDEFINED;
     ax = a.x;
@@ -581,8 +581,8 @@ class Quaternion {
       (bw = cast (-bw : Dynamic));
     }
     if ((cast ((cast cosHalfTheta : Float) < (cast 0.999999 : Float)) : Bool)) {
-      var halfTheta:Dynamic = HxMath.acos(cosHalfTheta);
-      var sinHalfTheta:Dynamic = HxMath.sin(halfTheta);
+      var halfTheta:Float = HxMath.acos(cosHalfTheta);
+      var sinHalfTheta:Float = HxMath.sin(halfTheta);
       (scaleA = cast (_Runtime.divideNumbers(HxMath.sin(((1.0 - t) * halfTheta)), sinHalfTheta) : Dynamic));
       (scaleB = cast (_Runtime.divideNumbers(HxMath.sin((t * halfTheta)), sinHalfTheta) : Dynamic));
     } else {

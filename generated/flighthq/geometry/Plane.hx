@@ -10,7 +10,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Plane {
   public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
-    return cast _Runtime.callValue(createPlane, cast ([source.a, source.b, source.c, source.d] : Array<Dynamic>));
+    return cast (cast createPlane((cast source.a : Null<Float>), (cast source.b : Null<Float>), (cast source.c : Null<Float>), (cast source.d : Null<Float>)) : flighthq.types.Plane);
     return cast null;
   }
 
@@ -22,15 +22,15 @@ class Plane {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
-    return cast _Runtime.callValue(createEntity, cast ([{ a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) } : Null<{ var a:Float; var b:Float; var c:Float; var d:Float; }>)) : flighthq.types.Plane);
     return cast null;
   }
 
   public static function getClosestPointOnPlane(out:Vector3Like, plane:PlaneLike, point:Vector3Like):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -52,12 +52,12 @@ class Plane {
   }
 
   public static function normalizePlane(out:PlaneLike, source:PlaneLike):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
     a = source.a;
     b = source.b;
     c = source.c;
@@ -78,10 +78,10 @@ class Plane {
   }
 
   public static function projectVector3OntoPlane(out:Vector3Like, point:Vector3Like, plane:PlaneLike):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -106,17 +106,17 @@ class Plane {
   }
 
   public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
-    var e1x:Dynamic = cast _Runtime.UNDEFINED;
-    var e1y:Dynamic = cast _Runtime.UNDEFINED;
-    var e1z:Dynamic = cast _Runtime.UNDEFINED;
-    var e2x:Dynamic = cast _Runtime.UNDEFINED;
-    var e2y:Dynamic = cast _Runtime.UNDEFINED;
-    var e2z:Dynamic = cast _Runtime.UNDEFINED;
-    var nx:Dynamic = cast _Runtime.UNDEFINED;
-    var ny:Dynamic = cast _Runtime.UNDEFINED;
-    var nz:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
+    var e1x:Float = cast _Runtime.UNDEFINED;
+    var e1y:Float = cast _Runtime.UNDEFINED;
+    var e1z:Float = cast _Runtime.UNDEFINED;
+    var e2x:Float = cast _Runtime.UNDEFINED;
+    var e2y:Float = cast _Runtime.UNDEFINED;
+    var e2z:Float = cast _Runtime.UNDEFINED;
+    var nx:Float = cast _Runtime.UNDEFINED;
+    var ny:Float = cast _Runtime.UNDEFINED;
+    var nz:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
     e1x = (b.x - a.x);
     e1y = (b.y - a.y);
     e1z = (b.z - a.z);

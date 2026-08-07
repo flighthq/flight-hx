@@ -11,6 +11,7 @@ import flighthq.scene3dFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.scene3dFormats.Shared.convertQuaternionsZUpToYUp;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationTrack;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Node3D;
@@ -24,20 +25,20 @@ typedef Md5AnimHierarchyEntry__md5AnimParse = { var flags:Float; var name:String
 
 typedef Md5AnimBaseframePose__md5AnimParse = { var orientationX:Float; var orientationY:Float; var orientationZ:Float; var positionX:Float; var positionY:Float; var positionZ:Float; };
 
-typedef Md5AnimDropTally__md5AnimParse = { var count:Float; var detail:Dynamic; var kind:String; var severity:ImportDiagnosticSeverity; };
+typedef Md5AnimDropTally__md5AnimParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class Md5AnimParse {
   public static function parseMd5Anim(source:String, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Null<AnimationClip> {
-    var lines:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    var frameRate:Dynamic = cast _Runtime.UNDEFINED;
-    var numFrames:Dynamic = cast _Runtime.UNDEFINED;
-    var numJoints:Dynamic = cast _Runtime.UNDEFINED;
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    var frameRate:Float = cast _Runtime.UNDEFINED;
+    var numFrames:Float = cast _Runtime.UNDEFINED;
+    var numJoints:Float = cast _Runtime.UNDEFINED;
     var hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse> = cast _Runtime.UNDEFINED;
-    var declaredComponents:Dynamic = cast _Runtime.UNDEFINED;
+    var declaredComponents:Float = cast _Runtime.UNDEFINED;
     var baseframe:Array<Md5AnimBaseframePose__md5AnimParse> = cast _Runtime.UNDEFINED;
     var frames:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    var md5Drops:Dynamic = cast _Runtime.UNDEFINED;
+    var md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>> = cast _Runtime.UNDEFINED;
     var clip:Null<AnimationClip> = cast _Runtime.UNDEFINED;
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
     i = 0.0;
@@ -50,13 +51,13 @@ class Md5AnimParse {
     frames = cast ([] : Array<Dynamic>);
     md5Drops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+      var line:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
       if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
-        var version:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
+        var version:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.unsupported-version', 'parseMd5Anim', { version: version }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.unsupported-version' : String), (cast 'parseMd5Anim' : String), (cast { version: version } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
         }
         continue;
       }
@@ -64,7 +65,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'numFrames') : Bool)) {
         (numFrames = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([numFrames] : Array<Dynamic>)) : Bool) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.non-numeric-numframes', 'parseMd5Anim'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.non-numeric-numframes' : String), (cast 'parseMd5Anim' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           (numFrames = cast (0.0 : Dynamic));
         }
         continue;
@@ -72,7 +73,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'numJoints') : Bool)) {
         (numJoints = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([numJoints] : Array<Dynamic>)) : Bool) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.non-numeric-numjoints', 'parseMd5Anim'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.non-numeric-numjoints' : String), (cast 'parseMd5Anim' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           (numJoints = cast (0.0 : Dynamic));
         }
         continue;
@@ -80,73 +81,73 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'frameRate') : Bool)) {
         (frameRate = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([frameRate] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast frameRate : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.invalid-framerate', 'parseMd5Anim'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.invalid-framerate' : String), (cast 'parseMd5Anim' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           (frameRate = cast (24.0 : Dynamic));
         }
         continue;
       }
       if ((cast StringTools.startsWith(line, 'numAnimatedComponents') : Bool)) {
-        var declared:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
+        var declared:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([declared] : Array<Dynamic>)) : Bool) && (cast ((cast declared : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { (declaredComponents = cast (declared : Dynamic)); }
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'hierarchy {') : Bool)) {
-        (i = cast (_Runtime.callValue(Md5AnimParse.parseHierarchyBlock__md5AnimParse, cast ([lines, i, hierarchy, md5Drops] : Array<Dynamic>)) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseHierarchyBlock__md5AnimParse((cast lines : Array<String>), (cast i : Float), hierarchy, md5Drops) : Float) : Dynamic));
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'bounds {') : Bool)) {
-        (i = cast (_Runtime.callValue(Md5AnimParse.skipBlock__md5AnimParse, cast ([lines, i] : Array<Dynamic>)) : Dynamic));
+        (i = cast ((cast Md5AnimParse.skipBlock__md5AnimParse((cast lines : Array<String>), (cast i : Float)) : Float) : Dynamic));
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'baseframe {') : Bool)) {
-        (i = cast (_Runtime.callValue(Md5AnimParse.parseBaseframeBlock__md5AnimParse, cast ([lines, i, baseframe, md5Drops] : Array<Dynamic>)) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseBaseframeBlock__md5AnimParse((cast lines : Array<String>), (cast i : Float), baseframe, md5Drops) : Float) : Dynamic));
         continue;
       }
       if ((cast ((cast StringTools.startsWith(line, 'frame ') : Bool) && (cast StringTools.endsWith(Std.string(line), '{') : Bool)) : Bool)) {
         var frameData:Array<Float> = cast ([] : Array<Dynamic>);
-        (i = cast (_Runtime.callValue(Md5AnimParse.parseFrameBlock__md5AnimParse, cast ([lines, i, frameData, md5Drops] : Array<Dynamic>)) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseFrameBlock__md5AnimParse((cast lines : Array<String>), (cast i : Float), (cast frameData : Array<Float>), md5Drops) : Float) : Dynamic));
         _Runtime.callProperty(frames, 'push', cast ([frameData] : Array<Dynamic>));
         continue;
       }
     }
     clip = null;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md5anim.no-data', 'parseMd5Anim'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md5anim.no-data' : String), (cast 'parseMd5Anim' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     } else {
       if ((cast !_Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), numJoints) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.joint-count-mismatch', 'parseMd5Anim', { declared: numJoints, found: _Runtime.field(hierarchy, 'length') }] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.joint-count-mismatch' : String), (cast 'parseMd5Anim' : String), (cast { declared: numJoints, found: _Runtime.field(hierarchy, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(frames, 'length'), numFrames) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'md5anim.frame-count-mismatch', 'parseMd5Anim', { declared: numFrames, found: _Runtime.field(frames, 'length') }] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.frame-count-mismatch' : String), (cast 'parseMd5Anim' : String), (cast { declared: numFrames, found: _Runtime.field(frames, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
       if ((cast ((cast _Runtime.field(joints, 'length') : Float) < (cast _Runtime.field(hierarchy, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md5anim.joints-too-few', 'parseMd5Anim', { animationJoints: _Runtime.field(hierarchy, 'length'), suppliedJoints: _Runtime.field(joints, 'length') }] : Array<Dynamic>));
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'md5anim.joints-too-few' : String), (cast 'parseMd5Anim' : String), (cast { animationJoints: _Runtime.field(hierarchy, 'length'), suppliedJoints: _Runtime.field(joints, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       } else {
-        (clip = cast (_Runtime.callValue(Md5AnimParse.buildAnimationClip__md5AnimParse, cast ([joints, hierarchy, baseframe, frames, frameRate, declaredComponents, md5Drops] : Array<Dynamic>)) : Dynamic));
+        (clip = cast ((cast Md5AnimParse.buildAnimationClip__md5AnimParse((cast joints : Array<Node3D>), hierarchy, baseframe, (cast frames : Array<Array<Float>>), (cast frameRate : Float), (cast declaredComponents : Float), md5Drops) : Null<AnimationClip>) : Dynamic));
       }
     }
     if ((cast !_Runtime.strictEquals(md5Drops, null) : Bool)) {
-      for (tally in _Runtime.iterable(((cast md5Drops : flighthq._internal._Map).values()))) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, _Runtime.field(tally, 'severity'), _Runtime.field(tally, 'kind'), 'parseMd5Anim', _Runtime.mergeObjects([_Runtime.field(tally, 'detail'), { count: _Runtime.field(tally, 'count') }])] : Array<Dynamic>));
+      for (tally in _Runtime.iterable(((cast md5Drops : flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>).values()))) {
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast tally : Md5AnimDropTally__md5AnimParse).severity : ImportDiagnosticSeverity), (cast (cast tally : Md5AnimDropTally__md5AnimParse).kind : String), (cast 'parseMd5Anim' : String), (cast _Runtime.mergeObjects([(cast tally : Md5AnimDropTally__md5AnimParse).detail, { count: (cast tally : Md5AnimDropTally__md5AnimParse).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     }
     return cast clip;
     return cast null;
   }
 
-  public static function buildAnimationClip__md5AnimParse(joints:Array<Node3D>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float, declaredComponents:Float, md5Drops:Null<Dynamic>):AnimationClip {
-    var frameCount:Dynamic = cast _Runtime.UNDEFINED;
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildAnimationClip__md5AnimParse(joints:Array<Node3D>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float, declaredComponents:Float, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>):AnimationClip {
+    var frameCount:Float = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
-    var nodeByName:Dynamic = cast _Runtime.UNDEFINED;
-    var componentTotal:Dynamic = cast _Runtime.UNDEFINED;
+    var nodeByName:flighthq._internal._Map<String, Node3D> = cast _Runtime.UNDEFINED;
+    var componentTotal:Float = cast _Runtime.UNDEFINED;
     frameCount = _Runtime.field(frames, 'length');
     jointCount = _Runtime.field(hierarchy, 'length');
     channels = cast ([] : Array<Dynamic>);
     times = cast ([] : Array<Dynamic>);
     {
-      var f:Dynamic = 0.0;
+      var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
         _Runtime.callProperty(times, 'push', cast ([(f / frameRate)] : Array<Dynamic>));
         f++;
@@ -154,48 +155,48 @@ class Md5AnimParse {
     }
     nodeByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (joint in _Runtime.iterable(joints)) {
-      if (_Runtime.truthy(_Runtime.field(joint, 'name'))) { ((cast nodeByName : flighthq._internal._Map).set(_Runtime.field(joint, 'name'), joint)); }
+      if (_Runtime.truthy((cast joint : { var name:Null<String>; }).name)) { ((cast nodeByName : flighthq._internal._Map<String, Node3D>).set((cast joint : { var name:Null<String>; }).name, joint)); }
     }
-    componentTotal = _Runtime.callValue(Md5AnimParse.totalMd5AnimComponents__md5AnimParse, cast ([hierarchy] : Array<Dynamic>));
+    componentTotal = (cast Md5AnimParse.totalMd5AnimComponents__md5AnimParse(hierarchy) : Float);
     if ((cast ((cast ((cast declaredComponents : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(declaredComponents, componentTotal) : Bool)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.component-count-mismatch', '', { firstActual: componentTotal, firstExpected: declaredComponents }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.component-count-mismatch' : String), (cast '' : String), (cast { firstActual: componentTotal, firstExpected: declaredComponents } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
     if ((cast ((cast _Runtime.field(baseframe, 'length') : Float) < (cast jointCount : Float)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.baseframe-count-mismatch', '', { firstActual: _Runtime.field(baseframe, 'length'), firstExpected: jointCount }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.baseframe-count-mismatch' : String), (cast '' : String), (cast { firstActual: _Runtime.field(baseframe, 'length'), firstExpected: jointCount } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     }
     {
-      var f:Dynamic = 0.0;
+      var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), componentTotal) : Bool)) {
-          _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.frame-width-mismatch', '', { firstActual: _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), firstExpected: componentTotal, firstFrame: f }] : Array<Dynamic>));
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.frame-width-mismatch' : String), (cast '' : String), (cast { firstActual: _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), firstExpected: componentTotal, firstFrame: f } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           break;
         }
         f++;
       }
     }
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(hierarchy, j);
-        var base:Dynamic = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
-        var flags:Dynamic = _Runtime.field(entry, 'flags');
-        var width:Dynamic = _Runtime.callValue(Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse, cast ([flags] : Array<Dynamic>));
-        if ((cast ((cast ((cast _Runtime.field(entry, 'startIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast width : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast _Runtime.addNumbers(_Runtime.field(entry, 'startIndex'), width) : Float) > (cast componentTotal : Float))) : Bool)) : Bool)) {
-          _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.joint-frame-window-invalid', '', { firstIndex: _Runtime.field(entry, 'startIndex'), firstJoint: j, firstWidth: width }] : Array<Dynamic>));
+        var entry:Md5AnimHierarchyEntry__md5AnimParse = flighthq._internal._StaticIndex.readArray(hierarchy, j);
+        var base:Md5AnimBaseframePose__md5AnimParse = ((cast ((cast j : Float) < (cast _Runtime.field(baseframe, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(baseframe, j) : Dynamic) : (cast Md5AnimParse.DEFAULT_BASEFRAME__md5AnimParse : Dynamic));
+        var flags:Float = (cast entry : Md5AnimHierarchyEntry__md5AnimParse).flags;
+        var width:Float = (cast Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse((cast flags : Float)) : Float);
+        if ((cast ((cast ((cast (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast width : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast ((cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex + width) : Float) > (cast componentTotal : Float))) : Bool)) : Bool)) {
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.joint-frame-window-invalid' : String), (cast '' : String), (cast { firstIndex: (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex, firstJoint: j, firstWidth: width } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
         }
         var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
         var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
         {
-          var f:Dynamic = 0.0;
+          var f:Float = 0.0;
           while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
-            var frameData:Dynamic = flighthq._internal._StaticIndex.readArray(frames, f);
-            var tx:Dynamic = _Runtime.field(base, 'positionX');
-            var ty:Dynamic = _Runtime.field(base, 'positionY');
-            var tz:Dynamic = _Runtime.field(base, 'positionZ');
-            var qx:Dynamic = _Runtime.field(base, 'orientationX');
-            var qy:Dynamic = _Runtime.field(base, 'orientationY');
-            var qz:Dynamic = _Runtime.field(base, 'orientationZ');
-            var componentOffset:Dynamic = _Runtime.field(entry, 'startIndex');
+            var frameData:Array<Float> = flighthq._internal._StaticIndex.readArray(frames, f);
+            var tx:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).positionX;
+            var ty:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).positionY;
+            var tz:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).positionZ;
+            var qx:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).orientationX;
+            var qy:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).orientationY;
+            var qz:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).orientationZ;
+            var componentOffset:Float = (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex;
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TX__md5AnimParse)))) {
               (tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast tx) : Dynamic));
             }
@@ -214,103 +215,103 @@ class Md5AnimParse {
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QZ__md5AnimParse)))) {
               (qz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
             }
-            var sumSq:Dynamic = (((qx * qx) + (qy * qy)) + (qz * qz));
-            var qw:Dynamic = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));
+            var sumSq:Float = (((qx * qx) + (qy * qy)) + (qz * qz));
+            var qw:Float = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));
             _Runtime.pushMany(translationValues, cast ([tx, ty, tz] : Array<Dynamic>));
             _Runtime.pushMany(rotationValues, cast ([qx, qy, qz, qw] : Array<Dynamic>));
             f++;
           }
         }
-        _Runtime.callValue(convertPositionsZUpToYUp, cast ([translationValues] : Array<Dynamic>));
-        _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([rotationValues] : Array<Dynamic>));
-        var node:Dynamic = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map).get(_Runtime.field(entry, 'name'))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(joints, j));
-        var translationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
-        _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([translationTrack, { node: node, path: Scene3DAnimationPathTranslation }] : Array<Dynamic>))] : Array<Dynamic>));
-        var rotationTrack:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));
-        _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([rotationTrack, { node: node, path: Scene3DAnimationPathRotation }] : Array<Dynamic>))] : Array<Dynamic>));
+        convertPositionsZUpToYUp((cast translationValues : flighthq._internal._Intersection2<flighthq._internal._ArrayLike<Float>, {  }>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        convertQuaternionsZUpToYUp((cast rotationValues : Array<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        var node:Node3D = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map<String, Node3D>).get((cast entry : Md5AnimHierarchyEntry__md5AnimParse).name)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(joints, j));
+        var translationTrack:AnimationTrack = (cast createAnimationTrack({ components: 3.0, times: times, values: translationValues }) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(translationTrack, (cast { node: node, path: Scene3DAnimationPathTranslation } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+        var rotationTrack:AnimationTrack = (cast createAnimationTrack({ components: 4.0, quaternion: true, times: times, values: rotationValues }) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(rotationTrack, (cast { node: node, path: Scene3DAnimationPathRotation } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
         j++;
       }
     }
-    return cast _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>));
+    return cast (cast createAnimationClip((cast channels : Array<AnimationChannel>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : AnimationClip);
     return cast null;
   }
 
-  public static function parseHierarchyBlock__md5AnimParse(lines:Array<String>, startLine:Float, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, md5Drops:Null<Dynamic>):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseHierarchyBlock__md5AnimParse(lines:Array<String>, startLine:Float, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>):Float {
+    var i:Float = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+      var line:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var entry:Dynamic = _Runtime.callValue(Md5AnimParse.parseHierarchyLine__md5AnimParse, cast ([line, md5Drops, (i - 1.0)] : Array<Dynamic>));
+      var entry:Null<Md5AnimHierarchyEntry__md5AnimParse> = (cast Md5AnimParse.parseHierarchyLine__md5AnimParse((cast line : String), md5Drops, (cast (i - 1.0) : Float)) : Null<Md5AnimHierarchyEntry__md5AnimParse>);
       if ((cast !_Runtime.strictEquals(entry, null) : Bool)) { _Runtime.callProperty(hierarchy, 'push', cast ([entry] : Array<Dynamic>)); }
     }
-    _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.hierarchy-block-unclosed', '', {  }] : Array<Dynamic>));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.hierarchy-block-unclosed' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     return cast i;
     return cast null;
   }
 
-  public static function parseHierarchyLine__md5AnimParse(line:String, md5Drops:Null<Dynamic>, lineIndex:Float):Null<Md5AnimHierarchyEntry__md5AnimParse> {
-    var nameStart:Dynamic = cast _Runtime.UNDEFINED;
-    var nameEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var rest:Dynamic = cast _Runtime.UNDEFINED;
-    var tokens:Dynamic = cast _Runtime.UNDEFINED;
-    var parentIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var flags:Dynamic = cast _Runtime.UNDEFINED;
-    var startIndex:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseHierarchyLine__md5AnimParse(line:String, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>, lineIndex:Float):Null<Md5AnimHierarchyEntry__md5AnimParse> {
+    var nameStart:Float = cast _Runtime.UNDEFINED;
+    var nameEnd:Float = cast _Runtime.UNDEFINED;
+    var name:String = cast _Runtime.UNDEFINED;
+    var rest:String = cast _Runtime.UNDEFINED;
+    var tokens:Array<String> = cast _Runtime.UNDEFINED;
+    var parentIndex:Float = cast _Runtime.UNDEFINED;
+    var flags:Float = cast _Runtime.UNDEFINED;
+    var startIndex:Float = cast _Runtime.UNDEFINED;
     nameStart = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
     nameEnd = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast nameStart : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nameEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Drop, 'md5anim.malformed-hierarchy', 'missing-name-quotes', { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md5anim.malformed-hierarchy' : String), (cast 'missing-name-quotes' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
-    tokens = _Runtime.callProperty(_Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = _Runtime.callProperty(_Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Drop, 'md5anim.malformed-hierarchy', 'not-enough-components', { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md5anim.malformed-hierarchy' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     parentIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0), 10.0] : Array<Dynamic>));
     flags = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 1.0), 10.0] : Array<Dynamic>));
     startIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flags] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startIndex] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Drop, 'md5anim.malformed-hierarchy', 'non-numeric-values', { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md5anim.malformed-hierarchy' : String), (cast 'non-numeric-values' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     return cast { flags: flags, name: name, parentIndex: parentIndex, startIndex: startIndex };
     return cast null;
   }
 
-  public static function parseBaseframeBlock__md5AnimParse(lines:Array<String>, startLine:Float, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, md5Drops:Null<Dynamic>):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseBaseframeBlock__md5AnimParse(lines:Array<String>, startLine:Float, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>):Float {
+    var i:Float = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+      var line:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var pose:Dynamic = _Runtime.callValue(Md5AnimParse.parseBaseframeLine__md5AnimParse, cast ([line, md5Drops, (i - 1.0)] : Array<Dynamic>));
+      var pose:Null<Md5AnimBaseframePose__md5AnimParse> = (cast Md5AnimParse.parseBaseframeLine__md5AnimParse((cast line : String), md5Drops, (cast (i - 1.0) : Float)) : Null<Md5AnimBaseframePose__md5AnimParse>);
       if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { _Runtime.callProperty(baseframe, 'push', cast ([pose] : Array<Dynamic>)); }
     }
-    _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.baseframe-block-unclosed', '', {  }] : Array<Dynamic>));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.baseframe-block-unclosed' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     return cast i;
     return cast null;
   }
 
-  public static function parseBaseframeLine__md5AnimParse(line:String, md5Drops:Null<Dynamic>, lineIndex:Float):Null<Md5AnimBaseframePose__md5AnimParse> {
-    var tokens:Dynamic = cast _Runtime.UNDEFINED;
-    var positionX:Dynamic = cast _Runtime.UNDEFINED;
-    var positionY:Dynamic = cast _Runtime.UNDEFINED;
-    var positionZ:Dynamic = cast _Runtime.UNDEFINED;
-    var orientationX:Dynamic = cast _Runtime.UNDEFINED;
-    var orientationY:Dynamic = cast _Runtime.UNDEFINED;
-    var orientationZ:Dynamic = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+  public static function parseBaseframeLine__md5AnimParse(line:String, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>, lineIndex:Float):Null<Md5AnimBaseframePose__md5AnimParse> {
+    var tokens:Array<String> = cast _Runtime.UNDEFINED;
+    var positionX:Float = cast _Runtime.UNDEFINED;
+    var positionY:Float = cast _Runtime.UNDEFINED;
+    var positionZ:Float = cast _Runtime.UNDEFINED;
+    var orientationX:Float = cast _Runtime.UNDEFINED;
+    var orientationY:Float = cast _Runtime.UNDEFINED;
+    var orientationZ:Float = cast _Runtime.UNDEFINED;
+    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Drop, 'md5anim.malformed-baseframe', 'not-enough-components', { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md5anim.malformed-baseframe' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     positionX = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0)] : Array<Dynamic>));
@@ -320,39 +321,39 @@ class Md5AnimParse {
     orientationY = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0)] : Array<Dynamic>));
     orientationZ = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Drop, 'md5anim.malformed-baseframe', 'non-numeric-values', { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }] : Array<Dynamic>));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'md5anim.malformed-baseframe' : String), (cast 'non-numeric-values' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
       return cast null;
     }
     return cast { orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ, positionX: positionX, positionY: positionY, positionZ: positionZ };
     return cast null;
   }
 
-  public static function parseFrameBlock__md5AnimParse(lines:Array<String>, startLine:Float, frameData:Array<Float>, md5Drops:Null<Dynamic>):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseFrameBlock__md5AnimParse(lines:Array<String>, startLine:Float, frameData:Array<Float>, md5Drops:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>):Float {
+    var i:Float = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-      var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+      var line:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var tokens:Dynamic = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+      var tokens:Array<String> = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
       for (token in _Runtime.iterable(tokens)) {
-        var value:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([token] : Array<Dynamic>));
+        var value:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([token] : Array<Dynamic>));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
-          _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.non-numeric-frame-value', 'non-numeric-frame-value', { firstLine: i, firstToken: token }] : Array<Dynamic>));
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.non-numeric-frame-value' : String), (cast 'non-numeric-frame-value' : String), (cast { firstLine: i, firstToken: token } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
           _Runtime.callProperty(frameData, 'push', cast ([0.0] : Array<Dynamic>));
           continue;
         }
         _Runtime.callProperty(frameData, 'push', cast ([value] : Array<Dynamic>));
       }
     }
-    _Runtime.callValue(Md5AnimParse.tallyMd5AnimDrop__md5AnimParse, cast ([md5Drops, ImportDiagnosticSeverityValue.Recover, 'md5anim.frame-block-unclosed', '', {  }] : Array<Dynamic>));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse(md5Drops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'md5anim.frame-block-unclosed' : String), (cast '' : String), (cast {  } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
     return cast i;
     return cast null;
   }
 
   public static function skipBlock__md5AnimParse(lines:Array<String>, startLine:Float):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = startLine;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       if ((cast _Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '}') : Bool)) { return cast (i + 1.0); }
@@ -362,34 +363,34 @@ class Md5AnimParse {
     return cast null;
   }
 
-  public static final FLAG_TX__md5AnimParse:Dynamic = 1.0;
+  public static final FLAG_TX__md5AnimParse:Float = 1.0;
 
-  public static final FLAG_TY__md5AnimParse:Dynamic = 2.0;
+  public static final FLAG_TY__md5AnimParse:Float = 2.0;
 
-  public static final FLAG_TZ__md5AnimParse:Dynamic = 4.0;
+  public static final FLAG_TZ__md5AnimParse:Float = 4.0;
 
-  public static final FLAG_QX__md5AnimParse:Dynamic = 8.0;
+  public static final FLAG_QX__md5AnimParse:Float = 8.0;
 
-  public static final FLAG_QY__md5AnimParse:Dynamic = 16.0;
+  public static final FLAG_QY__md5AnimParse:Float = 16.0;
 
-  public static final FLAG_QZ__md5AnimParse:Dynamic = 32.0;
+  public static final FLAG_QZ__md5AnimParse:Float = 32.0;
 
   public static final DEFAULT_BASEFRAME__md5AnimParse:Md5AnimBaseframePose__md5AnimParse = { orientationX: 0.0, orientationY: 0.0, orientationZ: 0.0, positionX: 0.0, positionY: 0.0, positionZ: 0.0 };
 
-  public static function tallyMd5AnimDrop__md5AnimParse(tallies:Null<Dynamic>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tallyMd5AnimDrop__md5AnimParse(tallies:Null<flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>>, severity:ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
+    var key:String = cast _Runtime.UNDEFINED;
+    var existing:Null<Md5AnimDropTally__md5AnimParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flighthq._internal._Map).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { _Runtime.incrementField(existing, 'count', 1, true); }
+    existing = ((cast tallies : flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>).get(key));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : Md5AnimDropTally__md5AnimParse).count++; }
   }
 
   public static function countMd5AnimFlagComponents__md5AnimParse(flags:Float):Float {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
     {
-      var bit:Dynamic = 0.0;
+      var bit:Float = 0.0;
       while ((cast ((cast bit : Float) < (cast 6.0 : Float)) : Bool)) {
         if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32((1 << _Runtime.toInt32(bit)))))) { count++; }
         bit++;
@@ -400,10 +401,10 @@ class Md5AnimParse {
   }
 
   public static function totalMd5AnimComponents__md5AnimParse(hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>):Float {
-    var total:Dynamic = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
     total = 0.0;
     for (entry in _Runtime.iterable(hierarchy)) {
-      (total = cast ((total + _Runtime.callValue(Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse, cast ([_Runtime.field(entry, 'flags')] : Array<Dynamic>))) : Dynamic));
+      (total = cast ((total + (cast Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse((cast (cast entry : Md5AnimHierarchyEntry__md5AnimParse).flags : Float)) : Float)) : Dynamic));
     }
     return cast total;
     return cast null;

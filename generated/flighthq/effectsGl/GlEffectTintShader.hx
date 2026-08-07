@@ -9,62 +9,62 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
-typedef TintShaderLocations__glEffectTintShader = Dynamic;
+typedef TintShaderLocations__glEffectTintShader = { >GlFullscreenProgram, var locColor:flighthq._internal.dom.WebGLUniformLocation; var locAlpha:flighthq._internal.dom.WebGLUniformLocation; var locStrength:flighthq._internal.dom.WebGLUniformLocation; };
 
 class GlEffectTintShader {
-  public static final TINT_FRAGMENT_SRC__glEffectTintShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, texture(u_texture, v_texCoord).a * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
+  public static final TINT_FRAGMENT_SRC__glEffectTintShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, texture(u_texture, v_texCoord).a * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
 
-  public static final INVERT_TINT_FRAGMENT_SRC__glEffectTintShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, (1.0 - texture(u_texture, v_texCoord).a) * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
+  public static final INVERT_TINT_FRAGMENT_SRC__glEffectTintShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, (1.0 - texture(u_texture, v_texCoord).a) * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
 
-  public static final tintShaders__glEffectTintShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final tintShaders__glEffectTintShader:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final invertTintShaders__glEffectTintShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final invertTintShaders__glEffectTintShader:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callValue(GlEffectTintShader.getGlInvertTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
+    var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
+    loc = (cast GlEffectTintShader.getGlInvertTintShader__glEffectTintShader((cast state : GlRenderState)) : TintShaderLocations__glEffectTintShader);
+    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast loc : { var locColor:flighthq._internal.dom.WebGLUniformLocation; }).locColor, ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locAlpha:flighthq._internal.dom.WebGLUniformLocation; }).locAlpha, alpha);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locStrength:flighthq._internal.dom.WebGLUniformLocation; }).locStrength, strength);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   @:noCompletion
   public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callValue(GlEffectTintShader.getGlTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(loc, 'locColor'), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locAlpha'), alpha);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(loc, 'locStrength'), strength);
+    var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
+    loc = (cast GlEffectTintShader.getGlTintShader__glEffectTintShader((cast state : GlRenderState)) : TintShaderLocations__glEffectTintShader);
+    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast loc : { var locColor:flighthq._internal.dom.WebGLUniformLocation; }).locColor, ((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locAlpha:flighthq._internal.dom.WebGLUniformLocation; }).locAlpha, alpha);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locStrength:flighthq._internal.dom.WebGLUniformLocation; }).locStrength, strength);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }] : Array<Dynamic>));
+    }, cast ([__unused4] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlEffectTintShader.invertTintShaders__glEffectTintShader : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var loc:Null<TintShaderLocations__glEffectTintShader> = cast _Runtime.UNDEFINED;
+    loc = ((cast GlEffectTintShader.invertTintShaders__glEffectTintShader : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var gl:Dynamic = _Runtime.field(state, 'gl');
-      var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectTintShader.INVERT_TINT_FRAGMENT_SRC__glEffectTintShader] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_color') }, { locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_alpha') }, { locStrength: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_strength') }]) : Dynamic));
-      ((cast GlEffectTintShader.invertTintShaders__glEffectTintShader : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
+      var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEffectTintShader.INVERT_TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
+      (loc = cast (_Runtime.mergeObjects([base, { locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
+      ((cast GlEffectTintShader.invertTintShaders__glEffectTintShader : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader>).set((cast state : GlRenderState).gl, loc));
     }
     return cast loc;
     return cast null;
   }
 
   public static function getGlTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlEffectTintShader.tintShaders__glEffectTintShader : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var loc:Null<TintShaderLocations__glEffectTintShader> = cast _Runtime.UNDEFINED;
+    loc = ((cast GlEffectTintShader.tintShaders__glEffectTintShader : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var gl:Dynamic = _Runtime.field(state, 'gl');
-      var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectTintShader.TINT_FRAGMENT_SRC__glEffectTintShader] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_color') }, { locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_alpha') }, { locStrength: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(base, 'program'), 'u_strength') }]) : Dynamic));
-      ((cast GlEffectTintShader.tintShaders__glEffectTintShader : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
+      var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEffectTintShader.TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
+      (loc = cast (_Runtime.mergeObjects([base, { locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
+      ((cast GlEffectTintShader.tintShaders__glEffectTintShader : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader>).set((cast state : GlRenderState).gl, loc));
     }
     return cast loc;
     return cast null;

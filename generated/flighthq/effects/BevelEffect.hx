@@ -18,20 +18,20 @@ class BevelEffect {
   }
 
   public static function getBevelEffectPadding(effect:flighthq.types.BevelEffect):RenderEffectPadding {
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), _Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.multiplyNumbers(HxMath.sin(angle), distance)] : Array<Dynamic>));
+    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BevelEffect', BevelEffect.resolveBevelEffectPadding__bevelEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BevelEffect' : String), BevelEffect.resolveBevelEffectPadding__bevelEffect);
   }
 
   public static function resolveBevelEffectPadding__bevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getBevelEffectPadding, cast ([(cast effect : flighthq.types.BevelEffect)] : Array<Dynamic>));
+    return cast (cast getBevelEffectPadding((cast (cast effect : flighthq.types.BevelEffect) : flighthq.types.BevelEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

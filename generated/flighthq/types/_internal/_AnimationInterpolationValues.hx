@@ -5,9 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _AnimationInterpolationValues {
-  public static final AnimationInterpolationCubic:Dynamic = 'Cubic';
+  public static final AnimationInterpolationCubic:String = 'Cubic';
 
-  public static final AnimationInterpolationLinear:Dynamic = 'Linear';
+  public static final AnimationInterpolationLinear:String = 'Linear';
 
-  public static final AnimationInterpolationStep:Dynamic = 'Step';
+  public static final AnimationInterpolationStep:String = 'Step';
 }

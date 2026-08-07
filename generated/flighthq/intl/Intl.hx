@@ -27,12 +27,12 @@ class Intl {
     return cast null;
   }
 
-  public static function formatDate(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatDate(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
     return cast Facade_Intl_flighthq_intl_Datetime.formatDate(date, locale, options);
     return cast null;
   }
 
-  public static function formatDateTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatDateTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
     return cast Facade_Intl_flighthq_intl_Datetime.formatDateTime(date, locale, options);
     return cast null;
   }
@@ -57,7 +57,7 @@ class Intl {
     return cast null;
   }
 
-  public static function formatTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
     return cast Facade_Intl_flighthq_intl_Datetime.formatTime(date, locale, options);
     return cast null;
   }

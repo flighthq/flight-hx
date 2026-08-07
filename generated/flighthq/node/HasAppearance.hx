@@ -8,7 +8,7 @@ import flighthq.types.HasAppearance;
 class HasAppearance {
   @:noCompletion
   public static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:Dynamic):Void {
-    _Runtime.setField(target, 'alpha', _Runtime.coalesce(_Runtime.optionalField(obj, 'alpha'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'visible', _Runtime.coalesce(_Runtime.optionalField(obj, 'visible'), function():Dynamic return cast true));
+    ((cast target : flighthq.types.HasAppearance).alpha = _Runtime.coalesce(_Runtime.optionalField(obj, 'alpha'), function():Dynamic return cast 1.0));
+    ((cast target : flighthq.types.HasAppearance).visible = _Runtime.coalesce(_Runtime.optionalField(obj, 'visible'), function():Dynamic return cast true));
   }
 }

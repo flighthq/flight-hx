@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TweenManager = { var __brand:String; var defaultEase:EasingFunction; var tweens:Dynamic; };
+typedef TweenManager = { var __brand:String; var defaultEase:EasingFunction; var tweens:flighthq._internal._Map<flighthq._internal._Object, Array<Tween<flighthq._internal._Any>>>; };

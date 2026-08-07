@@ -18,13 +18,13 @@ typedef AsepriteHashFrame = AsepriteBaseFrame;
 
 typedef AsepriteArrayFrame = { var duration:Float; var frame:AsepriteRect; var rotated:Bool; var sourceSize:AsepriteSize; var spriteSourceSize:AsepriteRect; var trimmed:Bool; var filename:String; };
 
-typedef AsepriteMeta = { var app:String; var format:String; var frameTags:Array<AsepriteFrameTag>; var image:String; @:optional var layers:Array<AsepriteLayer>; var scale:Dynamic; var size:AsepriteSize; @:optional var slices:Array<Dynamic>; var version:String; };
+typedef AsepriteMeta = { var app:String; var format:String; var frameTags:Array<AsepriteFrameTag>; var image:String; @:optional var layers:Array<AsepriteLayer>; var scale:flighthq._internal._Union2<Float, String>; var size:AsepriteSize; @:optional var slices:Array<flighthq._internal._Any>; var version:String; };
 
-typedef AsepriteHashDocument = { var frames:Dynamic; var meta:AsepriteMeta; };
+typedef AsepriteHashDocument = { var frames:flighthq._internal._Record<String, AsepriteHashFrame>; var meta:AsepriteMeta; };
 
 typedef AsepriteArrayDocument = { var frames:Array<AsepriteArrayFrame>; var meta:AsepriteMeta; };
 
-typedef AsepriteDocument = Dynamic;
+typedef AsepriteDocument = flighthq._internal._Union2<AsepriteArrayDocument, AsepriteHashDocument>;
 
 typedef AsepriteParsed = { var data:SpritesheetData; var document:AsepriteDocument; };
 

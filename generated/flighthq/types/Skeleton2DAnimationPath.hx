@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
 
-typedef Skeleton2DAnimationPath = Dynamic;
+typedef Skeleton2DAnimationPath = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.skeleton2d.Skeleton2d.computeSkeleton2DBoneWorldTransform;
 import flighthq.skeleton2d.Skeleton2dConstraint.registerSkeleton2DConstraintSolver;
+import flighthq.types.Bone2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DConstraint;
 import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
@@ -13,29 +14,29 @@ import flighthq.types.Skeleton2DTransformConstraint;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
 class TransformConstraint2D {
-  public static final MATRIX_STRIDE__transformConstraint2D:Dynamic = 6.0;
+  public static final MATRIX_STRIDE__transformConstraint2D:Float = 6.0;
 
   public static function registerSkeleton2DTransformConstraintSolver():Void {
-    _Runtime.callValue(registerSkeleton2DConstraintSolver, cast ([Skeleton2DConstraintKindValue.Transform, solveSkeleton2DTransformConstraint] : Array<Dynamic>));
+    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), solveSkeleton2DTransformConstraint);
   }
 
   @:noCompletion
   public static function solveSkeleton2DTransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var targetRotation:Dynamic = cast _Runtime.UNDEFINED;
-    var targetScaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var targetScaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var targetShearY:Dynamic = cast _Runtime.UNDEFINED;
-    var targetX:Dynamic = cast _Runtime.UNDEFINED;
-    var targetY:Dynamic = cast _Runtime.UNDEFINED;
-    var mix:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Skeleton2DTransformConstraint = cast _Runtime.UNDEFINED;
+    var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var targetRotation:Float = cast _Runtime.UNDEFINED;
+    var targetScaleX:Float = cast _Runtime.UNDEFINED;
+    var targetScaleY:Float = cast _Runtime.UNDEFINED;
+    var targetShearY:Float = cast _Runtime.UNDEFINED;
+    var targetX:Float = cast _Runtime.UNDEFINED;
+    var targetY:Float = cast _Runtime.UNDEFINED;
+    var mix:Float = cast _Runtime.UNDEFINED;
     transform = (cast constraint : Skeleton2DTransformConstraint);
-    bones = _Runtime.field(skeleton, 'bones');
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    bones = (cast skeleton : Skeleton2D).bones;
+    world = (cast skeleton : Skeleton2D).worldMatrices;
     target = _Runtime.field(transform, 'targetBoneIndex');
     if ((cast ((cast ((cast target : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast target : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     t = (target * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
@@ -48,57 +49,57 @@ class TransformConstraint2D {
     mix = _Runtime.field(transform, 'mix');
     for (boneIndex in _Runtime.iterable(_Runtime.field(transform, 'boneIndices'))) {
       if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { continue; }
-      var bone:Dynamic = flighthq._internal._StaticIndex.readArray(bones, boneIndex);
-      var o:Dynamic = (boneIndex * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
-      var rotateMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixRotate'), mix);
-      var scaleXMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixScaleX'), mix);
-      var scaleYMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixScaleY'), mix);
-      var shearMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixShearY'), mix);
+      var bone:Bone2D = flighthq._internal._StaticIndex.readArray(bones, boneIndex);
+      var o:Float = (boneIndex * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
+      var rotateMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixRotate'), mix);
+      var scaleXMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixScaleX'), mix);
+      var scaleYMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixScaleY'), mix);
+      var shearMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixShearY'), mix);
       if ((cast !_Runtime.strictEquals(rotateMix, 0.0) : Bool)) {
-        var current:Dynamic = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
-        var wanted:Dynamic = _Runtime.addNumbers(targetRotation, _Runtime.field(transform, 'offsetRotation'));
-        _Runtime.setField(bone, 'rotation', _Runtime.addNumbers(_Runtime.field(bone, 'rotation'), _Runtime.multiplyNumbers(_Runtime.callValue(TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D, cast ([(wanted - current)] : Array<Dynamic>)), rotateMix)));
+        var current:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
+        var wanted:Float = _Runtime.addNumbers(targetRotation, _Runtime.field(transform, 'offsetRotation'));
+        ((cast bone : Bone2D).rotation += ((cast TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D((cast (wanted - current) : Float)) : Float) * rotateMix));
       }
       if ((cast !_Runtime.strictEquals(scaleXMix, 0.0) : Bool)) {
-        var current:Dynamic = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, o), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)));
-        if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(bone, 'scaleX', _Runtime.multiplyNumbers(_Runtime.field(bone, 'scaleX'), (1.0 + (((_Runtime.addNumbers(targetScaleX, _Runtime.field(transform, 'offsetScaleX')) / current) - 1.0) * scaleXMix)))); }
+        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, o), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)));
+        if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { ((cast bone : Bone2D).scaleX *= (1.0 + (((_Runtime.addNumbers(targetScaleX, _Runtime.field(transform, 'offsetScaleX')) / current) - 1.0) * scaleXMix))); }
       }
       if ((cast !_Runtime.strictEquals(scaleYMix, 0.0) : Bool)) {
-        var current:Dynamic = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)));
-        if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(bone, 'scaleY', _Runtime.multiplyNumbers(_Runtime.field(bone, 'scaleY'), (1.0 + (((_Runtime.addNumbers(targetScaleY, _Runtime.field(transform, 'offsetScaleY')) / current) - 1.0) * scaleYMix)))); }
+        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)));
+        if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { ((cast bone : Bone2D).scaleY *= (1.0 + (((_Runtime.addNumbers(targetScaleY, _Runtime.field(transform, 'offsetScaleY')) / current) - 1.0) * scaleYMix))); }
       }
       if ((cast !_Runtime.strictEquals(shearMix, 0.0) : Bool)) {
-        var currentRotation:Dynamic = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
-        var current:Dynamic = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0))), RAD_TO_DEG) - 90.0) - currentRotation);
-        _Runtime.setField(bone, 'shearY', _Runtime.addNumbers(_Runtime.field(bone, 'shearY'), _Runtime.multiplyNumbers(_Runtime.callValue(TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D, cast ([(_Runtime.addNumbers(targetShearY, _Runtime.field(transform, 'offsetShearY')) - current)] : Array<Dynamic>)), shearMix)));
+        var currentRotation:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
+        var current:Float = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0))), RAD_TO_DEG) - 90.0) - currentRotation);
+        ((cast bone : Bone2D).shearY += ((cast TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D((cast (_Runtime.addNumbers(targetShearY, _Runtime.field(transform, 'offsetShearY')) - current) : Float)) : Float) * shearMix));
       }
-      var translateXMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixX'), mix);
-      var translateYMix:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixY'), mix);
+      var translateXMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixX'), mix);
+      var translateYMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixY'), mix);
       if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
-        var wantedX:Dynamic = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0))) * translateXMix));
-        var wantedY:Dynamic = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0))) * translateYMix));
-        var local:Dynamic = _Runtime.callValue(TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D, cast ([skeleton, boneIndex, wantedX, wantedY] : Array<Dynamic>));
+        var wantedX:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0))) * translateXMix));
+        var wantedY:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0))) * translateYMix));
+        var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D((cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
         if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
-          _Runtime.setField(bone, 'x', _Runtime.field(local, 'x'));
-          _Runtime.setField(bone, 'y', _Runtime.field(local, 'y'));
+          ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
+          ((cast bone : Bone2D).y = (cast local : { var x:Float; var y:Float; }).y);
         }
       }
-      _Runtime.callValue(computeSkeleton2DBoneWorldTransform, cast ([skeleton, boneIndex] : Array<Dynamic>));
+      computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast boneIndex : Float));
     }
   }
 
   public static function toSkeleton2DParentSpace__transformConstraint2D(skeleton:Skeleton2D, boneIndex:Float, x:Float, y:Float):Null<{ var x:Float; var y:Float; }> {
-    var parentIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var determinant:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    parentIndex = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'bones'), boneIndex), 'parentIndex');
+    var parentIndex:Float = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var p:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var determinant:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    parentIndex = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'bones'), boneIndex) : Bone2D).parentIndex;
     if ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast { x: x, y: y }; }
     world = _Runtime.field(skeleton, 'worldMatrices');
     p = (parentIndex * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
@@ -115,12 +116,12 @@ class TransformConstraint2D {
   }
 
   public static function wrapSkeleton2DAngle__transformConstraint2D(degrees:Float):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.fmod(degrees, 360.0);
     if ((cast ((cast value : Float) > (cast 180.0 : Float)) : Bool)) { (value = cast ((value - 360.0) : Dynamic)); } else { if ((cast ((cast value : Float) < (cast -180.0 : Float)) : Bool)) { (value = cast ((value + 360.0) : Dynamic)); } }
     return cast value;
     return cast null;
   }
 
-  public static final MINIMUM_DETERMINANT__transformConstraint2D:Dynamic = 1e-9;
+  public static final MINIMUM_DETERMINANT__transformConstraint2D:Float = 1e-9;
 }

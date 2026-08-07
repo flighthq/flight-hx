@@ -10,13 +10,13 @@ import flighthq.types.Skeleton2D;
 import flighthq.types.Vector2.Vector2Like;
 
 class PointAttachment2D {
-  public static final MATRIX_STRIDE__pointAttachment2D:Dynamic = 6.0;
+  public static final MATRIX_STRIDE__pointAttachment2D:Float = 6.0;
 
   public static function computeSkeleton2DPointAttachmentPosition(out:Vector2Like, attachment:flighthq.types.PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     world = _Runtime.field(skeleton, 'worldMatrices');
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
@@ -27,13 +27,13 @@ class PointAttachment2D {
   }
 
   public static function computeSkeleton2DPointAttachmentRotation(attachment:flighthq.types.PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Float {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var radians:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var radians:Float = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     world = _Runtime.field(skeleton, 'worldMatrices');
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return cast _Runtime.field(attachment, 'rotation'); }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);

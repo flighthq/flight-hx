@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 class BoxBlurMath {
   public static function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
-    var lowerWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var lowerCount:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
+    var lowerWidth:Float = cast _Runtime.UNDEFINED;
+    var lowerCount:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    lowerWidth = _Runtime.callValue(BoxBlurMath.computeBoxBlurLowerWidth__boxBlurMath, cast ([sigma, passes] : Array<Dynamic>));
-    lowerCount = _Runtime.callValue(BoxBlurMath.computeBoxBlurLowerPassCount__boxBlurMath, cast ([sigma, passes, lowerWidth] : Array<Dynamic>));
+    lowerWidth = (cast BoxBlurMath.computeBoxBlurLowerWidth__boxBlurMath((cast sigma : Float), (cast passes : Float)) : Float);
+    lowerCount = (cast BoxBlurMath.computeBoxBlurLowerPassCount__boxBlurMath((cast sigma : Float), (cast passes : Float), (cast lowerWidth : Float)) : Float);
     width = ((cast ((cast pass : Float) < (cast lowerCount : Float)) : Bool) ? (cast lowerWidth : Dynamic) : (cast (lowerWidth + 2.0) : Dynamic));
     return cast HxMath.max(0.0, ((width - 1.0) / 2.0));
     return cast null;
@@ -24,7 +24,7 @@ class BoxBlurMath {
   }
 
   public static function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast passes : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
     width = ((2.0 * radius) + 1.0);
     return cast HxMath.sqrt((((passes * width) * width) / 12.0));
@@ -32,7 +32,7 @@ class BoxBlurMath {
   }
 
   public static function computeBoxBlurLowerWidth__boxBlurMath(sigma:Float, passes:Float):Float {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
     width = HxMath.floor(HxMath.sqrt(((((12.0 * sigma) * sigma) / passes) + 1.0)));
     if ((cast _Runtime.strictEquals(_Runtime.fmod(width, 2.0), 0.0) : Bool)) { (width = cast ((width - 1.0) : Dynamic)); }
     return cast width;

@@ -5,50 +5,51 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
 import flighthq.types.CapacitorApi.CapacitorStatusBarInfoResult;
+import flighthq.types.CapacitorApi.CapacitorStatusBarPlugin;
 import flighthq.types.StatusBar.StatusBarBackend;
 import flighthq.types.StatusBar.StatusBarInfo;
 import flighthq.types.StatusBar.StatusBarStyle;
 
 class CapacitorStatusBar {
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
-    var statusBar:Dynamic = cast _Runtime.UNDEFINED;
+    var statusBar:CapacitorStatusBarPlugin = cast _Runtime.UNDEFINED;
     var cachedInfo:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
-    statusBar = _Runtime.field(capacitor, 'statusBar');
+    statusBar = (cast capacitor : CapacitorApi).statusBar;
     cachedInfo = null;
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(statusBar, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast statusBar : CapacitorStatusBarPlugin).getInfo(), 'then', cast ([function(info:CapacitorStatusBarInfoResult):Void {
       (cachedInfo = cast (info : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { getInfo: function(out:StatusBarInfo) {
-      var info:Dynamic = cast _Runtime.UNDEFINED;
+    return cast { getInfo: function(out:StatusBarInfo):StatusBarInfo {
+      var info:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
-      (out.color = cast (((cast !_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(CapacitorStatusBar.hexToRgba__capacitorStatusBar, cast ([_Runtime.field(info, 'color')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      (out.color = cast (((cast !_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast CapacitorStatusBar.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
       (out.height = cast (-1.0 : Dynamic));
       (out.overlaysContent = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'overlays'), function():Dynamic return cast false) : Dynamic));
-      (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast _Runtime.callValue(CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar, cast ([_Runtime.field(info, 'style')] : Array<Dynamic>)) : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
+      (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast (cast CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).style : String)) : StatusBarStyle) : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
       (out.visible = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true) : Dynamic));
       return cast out;
-    }, setBackgroundColor: function(color:Float) {
-      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setBackgroundColor', cast ([{ color: _Runtime.callValue(CapacitorStatusBar.rgbaToHex__capacitorStatusBar, cast ([color] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
+    }, setBackgroundColor: function(color:Float):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor({ color: (cast CapacitorStatusBar.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) }), function():Void {
 
       });
-    }, setOverlaysContent: function(overlay:Bool) {
-      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setOverlaysWebView', cast ([{ overlay: overlay }] : Array<Dynamic>)), function() {
+    }, setOverlaysContent: function(overlay:Bool):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView({ overlay: overlay }), function():Void {
 
       });
-    }, setStyle: function(style:StatusBarStyle) {
-      flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'setStyle', cast ([{ style: _Runtime.callValue(CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar, cast ([style] : Array<Dynamic>)) }] : Array<Dynamic>)), function() {
+    }, setStyle: function(style:StatusBarStyle):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle({ style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar((cast style : StatusBarStyle)) : String) }), function():Void {
 
       });
-    }, setVisible: function(visible:Bool) {
-      if ((cast visible : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'show', cast ([] : Array<Dynamic>)), function() {
+    }, setVisible: function(visible:Bool):Void {
+      if ((cast visible : Bool)) { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).show(), function():Void {
 
-      }); } else { flighthq._internal._Async.recover(_Runtime.callProperty(statusBar, 'hide', cast ([] : Array<Dynamic>)), function() {
+      }); } else { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).hide(), function():Void {
 
       }); }
-    }, subscribe: function() {
-      return cast function() {
+    }, subscribe: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
@@ -70,14 +71,14 @@ class CapacitorStatusBar {
   }
 
   public static function rgbaToHex__capacitorStatusBar(color:Float):String {
-    var rgb:Dynamic = cast _Runtime.UNDEFINED;
+    var rgb:Float = cast _Runtime.UNDEFINED;
     rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 16777215);
     return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString(rgb, 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
   public static function hexToRgba__capacitorStatusBar(hex:String):Float {
-    var digits:Dynamic = cast _Runtime.UNDEFINED;
+    var digits:String = cast _Runtime.UNDEFINED;
     digits = _Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false);
     if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), 0); }
     if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << 8)) | 255)), 0); }

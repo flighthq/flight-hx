@@ -10,15 +10,15 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 
 class PrewarmParticleEmitter2D {
-  public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     if (stepDeltaTime == null) stepDeltaTime = cast ((1.0 / 60.0) : Dynamic);
-    var step:Dynamic = cast _Runtime.UNDEFINED;
-    var elapsed:Dynamic = cast _Runtime.UNDEFINED;
+    var step:Float = cast _Runtime.UNDEFINED;
+    var elapsed:Float = cast _Runtime.UNDEFINED;
     step = ((cast ((cast stepDeltaTime : Float) > (cast 0.0 : Float)) : Bool) ? (cast stepDeltaTime : Dynamic) : (cast duration : Dynamic));
     elapsed = 0.0;
     while ((cast ((cast elapsed : Float) < (cast duration : Float)) : Bool)) {
-      var deltaTime:Dynamic = HxMath.min(step, (duration - elapsed));
-      _Runtime.callValue(updateParticleEmitter2D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
+      var deltaTime:Float = HxMath.min(step, (duration - elapsed));
+      updateParticleEmitter2D((cast emitter : ParticleEmitter2D), (cast state : ParticleEmitterState), (cast config : ParticleEmitterConfig), (cast deltaTime : Float), (cast callbacks : Null<ParticleEmitterCallbacks>));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));
     }
   }

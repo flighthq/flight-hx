@@ -11,4 +11,4 @@ typedef CanvasRenderTextureExplanation = { var height:Float; var status:CanvasRe
 
 typedef CanvasRenderTextureEntry = { var status:CanvasRenderTextureStatus; var target:CanvasRenderTarget; };
 
-typedef CanvasRenderTexturePool = { var destroyed:Bool; var effectTargets:CanvasRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; var owner:Null<CanvasRenderState>; };
+typedef CanvasRenderTexturePool = { var destroyed:Bool; var effectTargets:CanvasRenderTargetPool; var free:Array<RenderTexture>; var leased:flighthq._internal._Set<RenderTexture>; var owner:Null<CanvasRenderState>; };

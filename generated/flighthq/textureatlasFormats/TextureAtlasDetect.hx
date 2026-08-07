@@ -19,9 +19,9 @@ import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormat
 import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindStarling;
 import flighthq.types._internal._TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
 
-typedef FormatEntry__textureAtlasDetect = { var detect:Dynamic; var parse:Dynamic; };
+typedef FormatEntry__textureAtlasDetect = { var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; };
 
-typedef FormatRegistry__textureAtlasDetect = Dynamic;
+typedef FormatRegistry__textureAtlasDetect = flighthq._internal._Map<TextureAtlasFormatKind, FormatEntry__textureAtlasDetect>;
 
 class TextureAtlasDetect {
   public static var _registry__textureAtlasDetect:Null<FormatRegistry__textureAtlasDetect> = _Runtime.explicitNull();
@@ -29,23 +29,23 @@ class TextureAtlasDetect {
   public static function getRegistry__textureAtlasDetect():FormatRegistry__textureAtlasDetect {
     if ((cast !_Runtime.strictEquals(TextureAtlasDetect._registry__textureAtlasDetect, null) : Bool)) { return cast TextureAtlasDetect._registry__textureAtlasDetect; }
     (TextureAtlasDetect._registry__textureAtlasDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindAseprite, { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic) return _Runtime.callValue(parseTextureAtlasAsepriteJson, cast ([content, atlas] : Array<Dynamic>)) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindLibgdxAtlas, { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic) return _Runtime.callValue(parseTextureAtlasLibgdxAtlas, cast ([content, atlas] : Array<Dynamic>)) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindStarling, { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic, options:Dynamic) return _Runtime.callValue(parseTextureAtlasStarlingXml, cast ([content, atlas, options] : Array<Dynamic>)) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindTexturePacker, { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic, options:Dynamic) return _Runtime.callValue(parseTextureAtlasPackerJson, cast ([content, atlas, options] : Array<Dynamic>)) }));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindAseprite, { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused0:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasAsepriteJson((cast content : String), (cast atlas : TextureAtlas)) : TextureAtlas) }));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindLibgdxAtlas, { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused1:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasLibgdxAtlas((cast content : String), (cast atlas : TextureAtlas)) : TextureAtlas) }));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindStarling, { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasStarlingXml((cast content : String), (cast atlas : TextureAtlas), options) : TextureAtlas) }));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindTexturePacker, { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasPackerJson((cast content : String), (cast atlas : TextureAtlas), options) : TextureAtlas) }));
     return cast TextureAtlasDetect._registry__textureAtlasDetect;
     return cast null;
   }
 
   public static function detectStarling__textureAtlasDetect(content:String):Bool {
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
+    var trimmed:String = cast _Runtime.UNDEFINED;
     trimmed = _Runtime.callProperty(content, 'trimStart', cast ([] : Array<Dynamic>));
     return cast ((cast StringTools.startsWith(trimmed, '<') : Bool) && (cast _Runtime.includes(trimmed, '<TextureAtlas') : Bool));
     return cast null;
   }
 
   public static function detectLibgdxAtlas__textureAtlasDetect(content:String):Bool {
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
+    var trimmed:String = cast _Runtime.UNDEFINED;
     trimmed = _Runtime.callProperty(content, 'trimStart', cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.strictEquals(trimmed, '') : Bool) || (cast StringTools.startsWith(trimmed, '<') : Bool)) : Bool) || (cast StringTools.startsWith(trimmed, '{') : Bool)) : Bool)) { return cast false; }
     return cast ((cast _Runtime.callProperty(_Runtime.regexp('^\\s*(size|format|filter|repeat)\\s*:', 'm'), 'test', cast ([trimmed] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.regexp('^\\s*(xy|orig)\\s*:', 'm'), 'test', cast ([trimmed] : Array<Dynamic>)) : Bool));
@@ -53,20 +53,20 @@ class TextureAtlasDetect {
   }
 
   public static function detectAseprite__textureAtlasDetect(content:String):Bool {
-    return cast _Runtime.strictEquals(_Runtime.callValue(TextureAtlasDetect.readJsonAtlasKind__textureAtlasDetect, cast ([content] : Array<Dynamic>)), TextureAtlasFormatKindAseprite);
+    return cast _Runtime.strictEquals((cast TextureAtlasDetect.readJsonAtlasKind__textureAtlasDetect((cast content : String)) : Null<String>), TextureAtlasFormatKindAseprite);
     return cast null;
   }
 
   public static function detectTexturePacker__textureAtlasDetect(content:String):Bool {
-    return cast _Runtime.strictEquals(_Runtime.callValue(TextureAtlasDetect.readJsonAtlasKind__textureAtlasDetect, cast ([content] : Array<Dynamic>)), TextureAtlasFormatKindTexturePacker);
+    return cast _Runtime.strictEquals((cast TextureAtlasDetect.readJsonAtlasKind__textureAtlasDetect((cast content : String)) : Null<String>), TextureAtlasFormatKindTexturePacker);
     return cast null;
   }
 
   public static function readJsonAtlasKind__textureAtlasDetect(content:String):Null<TextureAtlasFormatKind> {
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    var obj:Dynamic = cast _Runtime.UNDEFINED;
-    var app:Dynamic = cast _Runtime.UNDEFINED;
+    var trimmed:String = cast _Runtime.UNDEFINED;
+    var raw:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var obj:{ @:optional var frames:flighthq._internal._Any; @:optional var meta:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var app:String = cast _Runtime.UNDEFINED;
     trimmed = _Runtime.callProperty(content, 'trimStart', cast ([] : Array<Dynamic>));
     if ((cast !(cast StringTools.startsWith(trimmed, '{') : Bool) : Bool)) { return cast null; }
     try {
@@ -75,51 +75,51 @@ class TextureAtlasDetect {
       return cast null;
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) { return cast null; }
-    obj = (cast raw : { @:optional var frames:Dynamic; @:optional var meta:Dynamic; });
-    if ((cast _Runtime.strictEquals(_Runtime.field(obj, 'frames'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    app = _Runtime.callProperty(_Runtime.callValue(TextureAtlasDetect.readMetaApp__textureAtlasDetect, cast ([_Runtime.field(obj, 'meta')] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
+    obj = (cast raw : { @:optional var frames:flighthq._internal._Any; @:optional var meta:flighthq._internal._Any; });
+    if ((cast _Runtime.strictEquals((cast obj : { @:optional var frames:flighthq._internal._Any; @:optional var meta:flighthq._internal._Any; }).frames, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    app = _Runtime.callProperty((cast TextureAtlasDetect.readMetaApp__textureAtlasDetect((cast (cast obj : { @:optional var frames:flighthq._internal._Any; @:optional var meta:flighthq._internal._Any; }).meta : flighthq._internal._Any)) : String), 'toLowerCase', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.includes(app, 'aseprite') : Bool)) { return cast TextureAtlasFormatKindAseprite; }
     if ((cast ((cast _Runtime.includes(app, 'texturepacker') : Bool) || (cast _Runtime.includes(app, 'codeandweb') : Bool)) : Bool)) { return cast TextureAtlasFormatKindTexturePacker; }
-    return cast ((cast _Runtime.callValue(TextureAtlasDetect.hasFrameDuration__textureAtlasDetect, cast ([_Runtime.field(obj, 'frames')] : Array<Dynamic>)) : Bool) ? (cast TextureAtlasFormatKindAseprite : Dynamic) : (cast TextureAtlasFormatKindTexturePacker : Dynamic));
+    return cast ((cast (cast TextureAtlasDetect.hasFrameDuration__textureAtlasDetect((cast (cast obj : { @:optional var frames:flighthq._internal._Any; @:optional var meta:flighthq._internal._Any; }).frames : flighthq._internal._Any)) : Bool) : Bool) ? (cast TextureAtlasFormatKindAseprite : Dynamic) : (cast TextureAtlasFormatKindTexturePacker : Dynamic));
     return cast null;
   }
 
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(content), 'string') : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(_Runtime.callProperty(content, 'trimStart', cast ([] : Array<Dynamic>)), '') : Bool)) { return cast null; }
-    for (__iteration0 in _Runtime.iterable(_Runtime.callValue(TextureAtlasDetect.getRegistry__textureAtlasDetect, cast ([] : Array<Dynamic>)))) {
-      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      if ((cast _Runtime.callProperty(entry, 'detect', cast ([content] : Array<Dynamic>)) : Bool)) { return cast kind; }
+    for (__iteration2 in _Runtime.iterable((cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect))) {
+      var kind:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var entry:FormatEntry__textureAtlasDetect = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+      if ((cast (cast entry : FormatEntry__textureAtlasDetect).detect(content) : Bool)) { return cast kind; }
     }
     return cast null;
     return cast null;
   }
 
-  public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
-    return cast _Runtime.coalesce(((cast _Runtime.callValue(TextureAtlasDetect.getRegistry__textureAtlasDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+  public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }> {
+    return cast _Runtime.coalesce(((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function parseTextureAtlas(content:String, atlas:TextureAtlas, ?formatKind:TextureAtlasFormatKind, ?options:TextureAtlasParseOptions):Null<TextureAtlas> {
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    kind = _Runtime.coalesce(formatKind, function():Dynamic return cast _Runtime.callValue(detectTextureAtlasFormat, cast ([content] : Array<Dynamic>)));
+    var kind:Null<String> = cast _Runtime.UNDEFINED;
+    var entry:Null<FormatEntry__textureAtlasDetect> = cast _Runtime.UNDEFINED;
+    kind = _Runtime.coalesce(formatKind, function():Dynamic return cast (cast detectTextureAtlasFormat((cast content : String)) : Null<String>));
     if ((cast ((cast _Runtime.strictEquals(kind, null) : Bool) || (cast _Runtime.strictEquals(kind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
-    entry = ((cast _Runtime.callValue(TextureAtlasDetect.getRegistry__textureAtlasDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).get(kind));
+    entry = ((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).get(kind));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty(entry, 'parse', cast ([content, atlas, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
+    return cast (cast entry : FormatEntry__textureAtlasDetect).parse(content, atlas, _Runtime.coalesce(options, function():Dynamic return cast {  }));
     return cast null;
   }
 
-  public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
-    ((cast _Runtime.callValue(TextureAtlasDetect.getRegistry__textureAtlasDetect, cast ([] : Array<Dynamic>)) : flighthq._internal._Map).set(kind, entry));
+  public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }):Void {
+    ((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).set(kind, entry));
   }
 
-  public static function firstFrame__textureAtlasDetect(frames:Dynamic):Dynamic {
+  public static function firstFrame__textureAtlasDetect(frames:flighthq._internal._Any):flighthq._internal._Any {
     if ((cast _Runtime.isArray(frames) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(frames, 0.0); }
     if ((cast ((cast !_Runtime.strictEquals(frames, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(frames), 'object') : Bool)) : Bool)) {
-      for (value in _Runtime.iterable(flighthq._internal.DynamicObject.values((cast frames : Dynamic)))) {
+      for (value in _Runtime.iterable(flighthq._internal.DynamicObject.values((cast frames : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
         return cast value;
       }
     }
@@ -127,17 +127,17 @@ class TextureAtlasDetect {
     return cast null;
   }
 
-  public static function hasFrameDuration__textureAtlasDetect(frames:Dynamic):Bool {
-    var frame:Dynamic = cast _Runtime.UNDEFINED;
-    frame = _Runtime.callValue(TextureAtlasDetect.firstFrame__textureAtlasDetect, cast ([frames] : Array<Dynamic>));
-    return cast ((cast ((cast !_Runtime.strictEquals(frame, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast frame : { @:optional var duration:Dynamic; }), 'duration')), 'number') : Bool));
+  public static function hasFrameDuration__textureAtlasDetect(frames:flighthq._internal._Any):Bool {
+    var frame:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    frame = TextureAtlasDetect.firstFrame__textureAtlasDetect((cast frames : flighthq._internal._Any));
+    return cast ((cast ((cast !_Runtime.strictEquals(frame, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast frame : { @:optional var duration:flighthq._internal._Any; }) : { @:optional var duration:flighthq._internal._Any; }).duration), 'number') : Bool));
     return cast null;
   }
 
-  public static function readMetaApp__textureAtlasDetect(meta:Dynamic):String {
-    var app:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readMetaApp__textureAtlasDetect(meta:flighthq._internal._Any):String {
+    var app:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(meta, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(meta), 'object') : Bool)) : Bool)) { return cast ''; }
-    app = _Runtime.field((cast meta : { @:optional var app:Dynamic; }), 'app');
+    app = (cast (cast meta : { @:optional var app:flighthq._internal._Any; }) : { @:optional var app:flighthq._internal._Any; }).app;
     return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(app), 'string') : Bool) ? (cast app : Dynamic) : (cast '' : Dynamic));
     return cast null;
   }

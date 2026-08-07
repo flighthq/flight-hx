@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.imageCodec.ImageEncoderRegistry.getImageEncoder;
 import flighthq.types.DecodedImage;
 import flighthq.types.ImageEncodeOptions;
+import flighthq.types.ImageEncoder;
 
 class EncodeImage {
   public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      var encoder:Dynamic = cast _Runtime.UNDEFINED;
-      encoder = _Runtime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>));
+      var encoder:Null<ImageEncoder> = cast _Runtime.UNDEFINED;
+      encoder = (cast getImageEncoder((cast mimeType : String)) : Null<ImageEncoder>);
       if ((cast _Runtime.strictEquals(encoder, null) : Bool)) { return cast null; }
-      return cast _Runtime.callValue(encoder, cast ([image, options] : Array<Dynamic>));
+      return cast (cast encoder((cast image : DecodedImage), (cast options : Null<ImageEncodeOptions>)) : Null<flighthq._internal._Any>);
       return cast null;
     }));
   }

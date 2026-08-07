@@ -11,7 +11,10 @@ import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.OuterGlowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -20,25 +23,25 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuOuterGlowEffect {
   @:noCompletion
   public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var mask:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var blurTemp:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
-    var tintStrength:Dynamic = cast _Runtime.UNDEFINED;
-    var glowPasses:Dynamic = cast _Runtime.UNDEFINED;
+    var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var mask:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var blurTemp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
+    var tintStrength:Float = cast _Runtime.UNDEFINED;
+    var glowPasses:Float = cast _Runtime.UNDEFINED;
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    mask = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    blurred = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    blurTemp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    mask = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    blurTemp = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -46,31 +49,31 @@ class WgpuOuterGlowEffect {
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, mask, color, alpha, tintStrength] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, mask, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
-    _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
+    applyWgpuEffectTintPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast mask : WgpuRenderTarget), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyWgpuEffectBoxBlur((cast state : WgpuRenderState), (cast mask : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast blurTemp : WgpuRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    clearWgpuEffectTarget((cast state : WgpuRenderState), (cast dst : WgpuRenderTarget));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, blurred, dst] : Array<Dynamic>));
+        applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast blurred : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>));
+      applyWgpuEffectErasePass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
+      applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
     } }
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, mask] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, blurTemp] : Array<Dynamic>));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast mask : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurred : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurTemp : WgpuRenderTarget));
   }
 
-  public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyOuterGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
+  public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyOuterGlowEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : OuterGlowEffect) : OuterGlowEffect));
   };
 
   public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'OuterGlowEffect', defaultWgpuOuterGlowEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'OuterGlowEffect' : String), (cast defaultWgpuOuterGlowEffectRunner : WgpuRenderEffectRunner));
   }
 }

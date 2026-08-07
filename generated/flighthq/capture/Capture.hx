@@ -10,9 +10,9 @@ import flighthq.types.CaptureCheckResult;
 import flighthq.types.CaptureColumnBaseline;
 
 class Capture {
-  public static final CAPTURE_PARITY_TOLERANCE:Dynamic = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_PARITY_TOLERANCE;
+  public static final CAPTURE_PARITY_TOLERANCE:Float = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_PARITY_TOLERANCE;
 
-  public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_REGRESSION_TOLERANCE;
+  public static final CAPTURE_REGRESSION_TOLERANCE:Float = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_REGRESSION_TOLERANCE;
 
   public static function compareCaptureFingerprints(a:String, b:String):Float {
     return cast Facade_Capture_flighthq_capture_CaptureComparison.compareCaptureFingerprints(a, b);
@@ -24,12 +24,12 @@ class Capture {
     return cast null;
   }
 
-  public static function evaluateCaptureParity(a:String, b:String, ?tolerance:Dynamic):CaptureCheckResult {
+  public static function evaluateCaptureParity(a:String, b:String, ?tolerance:Float):CaptureCheckResult {
     return cast Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureParity(a, b, tolerance);
     return cast null;
   }
 
-  public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, ?tolerance:Dynamic):CaptureCheckResult {
+  public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, ?tolerance:Float):CaptureCheckResult {
     return cast Facade_Capture_flighthq_capture_CaptureComparison.evaluateCaptureRegression(fingerprint, baselineFingerprint, tolerance);
     return cast null;
   }

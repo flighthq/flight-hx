@@ -43,7 +43,7 @@ class Image {
     return cast null;
   }
 
-  public static function createImageResourceFailure(cause:Dynamic):ImageResourceFailure {
+  public static function createImageResourceFailure(cause:flighthq._internal._Any):ImageResourceFailure {
     return cast Facade_Image_flighthq_image_ImageResourceReference.createImageResourceFailure(cause);
     return cast null;
   }

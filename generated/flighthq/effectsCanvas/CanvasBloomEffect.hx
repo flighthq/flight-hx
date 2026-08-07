@@ -9,53 +9,55 @@ import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarg
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.BloomEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RenderEffect;
 
 class CanvasBloomEffect {
   @:noCompletion
   public static function applyBloomEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:BloomEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var contrast:Dynamic = cast _Runtime.UNDEFINED;
-    var brightnessShift:Dynamic = cast _Runtime.UNDEFINED;
-    var bright:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var contrast:Float = cast _Runtime.UNDEFINED;
+    var brightnessShift:Float = cast _Runtime.UNDEFINED;
+    var bright:CanvasRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:CanvasRenderTarget = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    radius = _Runtime.callValue(computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
+    radius = (cast computeBloomBlurRadius((cast effect : BloomEffect)) : Float);
     contrast = (1.0 + (threshold * 6.0));
     brightnessShift = (1.0 - threshold);
-    bright = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([bright, source, 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')'] : Array<Dynamic>));
-    blurred = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    bright = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    drawCanvasEffectPass((cast bright : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    blurred = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, bright, 'blur(' + Std.string(radius) + 'px)'] : Array<Dynamic>));
+      drawCanvasEffectPass((cast blurred : CanvasRenderTarget), (cast bright : CanvasRenderTarget), (cast 'blur(' + Std.string(radius) + 'px)' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     } else {
-      _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, bright, 'none'] : Array<Dynamic>));
+      drawCanvasEffectPass((cast blurred : CanvasRenderTarget), (cast bright : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     }
-    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
+    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'lighter');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(blurred, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast blurred : CanvasRenderTarget).canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, bright] : Array<Dynamic>));
-    _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
+    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast bright : CanvasRenderTarget));
+    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast blurred : CanvasRenderTarget));
   }
 
-  public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBloomEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
+  public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyBloomEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : BloomEffect) : BloomEffect));
   };
 
   public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BloomEffect', defaultCanvasBloomEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'BloomEffect' : String), (cast defaultCanvasBloomEffectRunner : CanvasRenderEffectRunner));
   }
 }

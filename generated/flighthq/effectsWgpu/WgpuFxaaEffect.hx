@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.FxaaEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,28 +17,28 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuFxaaEffect {
   @:noCompletion
   public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
-    var edgeThreshold:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var edgeThreshold:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     edgeThreshold = _Runtime.coalesce(_Runtime.field(effect, 'edgeThreshold'), function():Dynamic return cast 0.0312);
     width = _Runtime.field(source, 'width');
     height = _Runtime.field(source, 'height');
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'antialiasing.fxaa', WgpuFxaaEffect.FXAA_FRAGMENT_WGSL__wgpuFxaaEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'antialiasing.fxaa' : String), (cast WgpuFxaaEffect.FXAA_FRAGMENT_WGSL__wgpuFxaaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, width);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, height);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, edgeThreshold);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuFxaaEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyFxaaEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FxaaEffect)] : Array<Dynamic>));
+  public static final defaultWgpuFxaaEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyFxaaEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : FxaaEffect) : FxaaEffect));
   };
 
   public static function registerWgpuFxaaEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'FxaaEffect', defaultWgpuFxaaEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'FxaaEffect' : String), (cast defaultWgpuFxaaEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final FXAA_FRAGMENT_WGSL__wgpuFxaaEffect:Dynamic = '\nstruct Uniforms { u_resolution : vec2f, u_edgeThreshold : f32, _pad0 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let rgbM = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let rgbNW = textureSampleLevel(tex, smp, uv + vec2f(-1.0, -1.0) * texel, 0.0).rgb;\n  let rgbNE = textureSampleLevel(tex, smp, uv + vec2f(1.0, -1.0) * texel, 0.0).rgb;\n  let rgbSW = textureSampleLevel(tex, smp, uv + vec2f(-1.0, 1.0) * texel, 0.0).rgb;\n  let rgbSE = textureSampleLevel(tex, smp, uv + vec2f(1.0, 1.0) * texel, 0.0).rgb;\n  let lumaM = luma(rgbM);\n  let lumaNW = luma(rgbNW);\n  let lumaNE = luma(rgbNE);\n  let lumaSW = luma(rgbSW);\n  let lumaSE = luma(rgbSE);\n  let lumaMin = min(lumaM, min(min(lumaNW, lumaNE), min(lumaSW, lumaSE)));\n  let lumaMax = max(lumaM, max(max(lumaNW, lumaNE), max(lumaSW, lumaSE)));\n  let range = lumaMax - lumaMin;\n  if (range < max(uni.u_edgeThreshold, lumaMax * 0.125)) {\n    return vec4f(rgbM, textureSampleLevel(tex, smp, uv, 0.0).a);\n  }\n  var dir : vec2f;\n  dir.x = -((lumaNW + lumaNE) - (lumaSW + lumaSE));\n  dir.y = ((lumaNW + lumaSW) - (lumaNE + lumaSE));\n  let dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * 0.03125, 0.0078125);\n  let rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);\n  dir = clamp(dir * rcpDirMin, vec2f(-8.0), vec2f(8.0)) * texel;\n  let rgbA = 0.5 * (\n    textureSampleLevel(tex, smp, uv + dir * (1.0 / 3.0 - 0.5), 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + dir * (2.0 / 3.0 - 0.5), 0.0).rgb);\n  let rgbB = rgbA * 0.5 + 0.25 * (\n    textureSampleLevel(tex, smp, uv + dir * -0.5, 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + dir * 0.5, 0.0).rgb);\n  let lumaB = luma(rgbB);\n  let result = select(rgbB, rgbA, lumaB < lumaMin || lumaB > lumaMax);\n  return vec4f(result, textureSampleLevel(tex, smp, uv, 0.0).a);\n}';
+  public static final FXAA_FRAGMENT_WGSL__wgpuFxaaEffect:String = '\nstruct Uniforms { u_resolution : vec2f, u_edgeThreshold : f32, _pad0 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let rgbM = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let rgbNW = textureSampleLevel(tex, smp, uv + vec2f(-1.0, -1.0) * texel, 0.0).rgb;\n  let rgbNE = textureSampleLevel(tex, smp, uv + vec2f(1.0, -1.0) * texel, 0.0).rgb;\n  let rgbSW = textureSampleLevel(tex, smp, uv + vec2f(-1.0, 1.0) * texel, 0.0).rgb;\n  let rgbSE = textureSampleLevel(tex, smp, uv + vec2f(1.0, 1.0) * texel, 0.0).rgb;\n  let lumaM = luma(rgbM);\n  let lumaNW = luma(rgbNW);\n  let lumaNE = luma(rgbNE);\n  let lumaSW = luma(rgbSW);\n  let lumaSE = luma(rgbSE);\n  let lumaMin = min(lumaM, min(min(lumaNW, lumaNE), min(lumaSW, lumaSE)));\n  let lumaMax = max(lumaM, max(max(lumaNW, lumaNE), max(lumaSW, lumaSE)));\n  let range = lumaMax - lumaMin;\n  if (range < max(uni.u_edgeThreshold, lumaMax * 0.125)) {\n    return vec4f(rgbM, textureSampleLevel(tex, smp, uv, 0.0).a);\n  }\n  var dir : vec2f;\n  dir.x = -((lumaNW + lumaNE) - (lumaSW + lumaSE));\n  dir.y = ((lumaNW + lumaSW) - (lumaNE + lumaSE));\n  let dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * 0.03125, 0.0078125);\n  let rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);\n  dir = clamp(dir * rcpDirMin, vec2f(-8.0), vec2f(8.0)) * texel;\n  let rgbA = 0.5 * (\n    textureSampleLevel(tex, smp, uv + dir * (1.0 / 3.0 - 0.5), 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + dir * (2.0 / 3.0 - 0.5), 0.0).rgb);\n  let rgbB = rgbA * 0.5 + 0.25 * (\n    textureSampleLevel(tex, smp, uv + dir * -0.5, 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + dir * 0.5, 0.0).rgb);\n  let lumaB = luma(rgbB);\n  let result = select(rgbB, rgbA, lumaB < lumaMin || lumaB > lumaMax);\n  return vec4f(result, textureSampleLevel(tex, smp, uv, 0.0).a);\n}';
 }

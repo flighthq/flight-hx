@@ -5,20 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegmenterBackend.getTextSegmenterBackend;
 import flighthq.types.TextSegment;
+import flighthq.types.TextSegment.TextSegmentGranularity;
+import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class TextSegment {
   public static function segmentGraphemes(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'grapheme', locale] : Array<Dynamic>));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'grapheme', locale);
     return cast null;
   }
 
   public static function segmentSentences(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'sentence', locale] : Array<Dynamic>));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'sentence', locale);
     return cast null;
   }
 
   public static function segmentWords(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'word', locale] : Array<Dynamic>));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'word', locale);
     return cast null;
   }
 }

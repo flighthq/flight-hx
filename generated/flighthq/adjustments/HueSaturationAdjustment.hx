@@ -9,23 +9,23 @@ import flighthq.types.HueSaturationAdjustment;
 class HueSaturationAdjustment {
   public static function createHueSaturationAdjustment(?options:Dynamic):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var hue:Dynamic = cast _Runtime.UNDEFINED;
-    var saturation:Dynamic = cast _Runtime.UNDEFINED;
-    var lightness:Dynamic = cast _Runtime.UNDEFINED;
+    var hue:Float = cast _Runtime.UNDEFINED;
+    var saturation:Float = cast _Runtime.UNDEFINED;
+    var lightness:Float = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
     hue = _Runtime.divideNumbers(_Runtime.coalesce(_Runtime.field(options, 'hue'), function():Dynamic return cast 0.0), 360.0);
     saturation = _Runtime.coalesce(_Runtime.field(options, 'saturation'), function():Dynamic return cast 1.0);
     lightness = _Runtime.coalesce(_Runtime.field(options, 'lightness'), function():Dynamic return cast 0.0);
-    transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
-      var mx:Dynamic = cast _Runtime.UNDEFINED;
-      var mn:Dynamic = cast _Runtime.UNDEFINED;
-      var h:Dynamic = cast _Runtime.UNDEFINED;
-      var s:Dynamic = cast _Runtime.UNDEFINED;
-      var l:Dynamic = cast _Runtime.UNDEFINED;
-      var d:Dynamic = cast _Runtime.UNDEFINED;
-      var ln:Dynamic = cast _Runtime.UNDEFINED;
-      var q:Dynamic = cast _Runtime.UNDEFINED;
-      var p:Dynamic = cast _Runtime.UNDEFINED;
+    transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+      var mx:Float = cast _Runtime.UNDEFINED;
+      var mn:Float = cast _Runtime.UNDEFINED;
+      var h:Float = cast _Runtime.UNDEFINED;
+      var s:Float = cast _Runtime.UNDEFINED;
+      var l:Float = cast _Runtime.UNDEFINED;
+      var d:Float = cast _Runtime.UNDEFINED;
+      var ln:Float = cast _Runtime.UNDEFINED;
+      var q:Float = cast _Runtime.UNDEFINED;
+      var p:Float = cast _Runtime.UNDEFINED;
       mx = HxMath.max(HxMath.max(r, g), b);
       mn = HxMath.min(HxMath.min(r, g), b);
       h = 0.0;
@@ -37,9 +37,9 @@ class HueSaturationAdjustment {
         if ((cast _Runtime.strictEquals(mx, r) : Bool)) { (h = cast (_Runtime.addNumbers(((g - b) / d), ((cast ((cast g : Float) < (cast b : Float)) : Bool) ? (cast 6.0 : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic)); } else { if ((cast _Runtime.strictEquals(mx, g) : Bool)) { (h = cast ((((b - r) / d) + 2.0) : Dynamic)); } else { (h = cast ((((r - g) / d) + 4.0) : Dynamic)); } }
         (h = cast ((h / 6.0) : Dynamic));
       }
-      (h = cast (_Runtime.callValue(HueSaturationAdjustment.fract__hueSaturationAdjustment, cast ([(h + hue)] : Array<Dynamic>)) : Dynamic));
-      (s = cast (_Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(s * saturation)] : Array<Dynamic>)) : Dynamic));
-      ln = _Runtime.callValue(HueSaturationAdjustment.clamp01__hueSaturationAdjustment, cast ([(l + lightness)] : Array<Dynamic>));
+      (h = cast ((cast HueSaturationAdjustment.fract__hueSaturationAdjustment((cast (h + hue) : Float)) : Float) : Dynamic));
+      (s = cast ((cast HueSaturationAdjustment.clamp01__hueSaturationAdjustment((cast (s * saturation) : Float)) : Float) : Dynamic));
+      ln = (cast HueSaturationAdjustment.clamp01__hueSaturationAdjustment((cast (l + lightness) : Float)) : Float);
       if ((cast ((cast s : Float) <= (cast 0.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(out, 0.0, ln);
         flighthq._internal._StaticIndex.writeArray(out, 1.0, ln);
@@ -48,9 +48,9 @@ class HueSaturationAdjustment {
       }
       q = ((cast ((cast ln : Float) < (cast 0.5 : Float)) : Bool) ? (cast (ln * (1.0 + s)) : Dynamic) : (cast ((ln + s) - (ln * s)) : Dynamic));
       p = ((2.0 * ln) - q);
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h + (1.0 / 3.0))] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, h] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment, cast ([p, q, (h - (1.0 / 3.0))] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h + (1.0 / 3.0)) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast h : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h - (1.0 / 3.0)) : Float)) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'HueSaturationAdjustment' }, options, { transform: transform }]);
     return cast null;
@@ -67,7 +67,7 @@ class HueSaturationAdjustment {
   }
 
   public static function hue2rgb__hueSaturationAdjustment(p:Float, q:Float, tRaw:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     t = tRaw;
     if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast ((t + 1.0) : Dynamic)); }
     if ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) { (t = cast ((t - 1.0) : Dynamic)); }

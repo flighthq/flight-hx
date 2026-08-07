@@ -22,11 +22,20 @@ import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.scene3d.SceneNodeBounds.getNode3DWorldBounds;
+import flighthq.types.Aabb;
 import flighthq.types.Camera3D;
+import flighthq.types.Camera3D.PerspectiveProjection;
+import flighthq.types.Camera3D.Projection;
+import flighthq.types.Matrix4;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.Mesh.MeshRuntime;
+import flighthq.types.MeshGeometry;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types.Ray3D;
 import flighthq.types.Scene3DHit;
 import flighthq.types.Scene3DPickOptions;
@@ -34,38 +43,38 @@ import flighthq.types.Vector3;
 
 class PickScene3D {
   public static function createScene3DHit():Scene3DHit {
-    return cast _Runtime.callValue(createEntity, cast ([{ distance: 0.0, node: null, normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { distance: 0.0, node: null, normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 } : Null<{ var distance:Float; var node:flighthq._internal._Any; var normalX:Float; var normalY:Float; var normalZ:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; }>)) : Scene3DHit);
     return cast null;
   }
 
   public static function pickScene3D(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {
-    if ((cast !(cast _Runtime.callValue(PickScene3D.buildCameraPickRay__pickScene3D, cast ([PickScene3D._cameraRay__pickScene3D, camera, screenX, screenY] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(pickScene3DWithRay3D, cast ([scene, PickScene3D._cameraRay__pickScene3D, out, options] : Array<Dynamic>));
+    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D((cast PickScene3D._cameraRay__pickScene3D : Ray3D), (cast camera : Camera3D), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) { return cast null; }
+    return cast (cast pickScene3DWithRay3D((cast scene : Node3D), (cast PickScene3D._cameraRay__pickScene3D : Ray3D), (cast out : Scene3DHit), (cast options : Null<Scene3DPickOptions>)) : Null<Scene3DHit>);
     return cast null;
   }
 
   public static function pickScene3DAll(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
-    if ((cast !(cast _Runtime.callValue(PickScene3D.buildCameraPickRay__pickScene3D, cast ([PickScene3D._cameraRay__pickScene3D, camera, screenX, screenY] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D((cast PickScene3D._cameraRay__pickScene3D : Ray3D), (cast camera : Camera3D), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) {
       _Runtime.setLength(outArray, 0.0);
       return cast outArray;
     }
-    return cast _Runtime.callValue(pickScene3DAllWithRay3D, cast ([scene, PickScene3D._cameraRay__pickScene3D, outArray, options] : Array<Dynamic>));
+    return cast (cast pickScene3DAllWithRay3D((cast scene : Node3D), (cast PickScene3D._cameraRay__pickScene3D : Ray3D), (cast outArray : Array<Scene3DHit>), (cast options : Null<Scene3DPickOptions>)) : Array<Scene3DHit>);
     return cast null;
   }
 
   public static function pickScene3DAllWithRay3D(scene:Node3D, ray:Ray3D, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
-    _Runtime.callValue(PickScene3D.forEachScene3DRayHit__pickScene3D, cast ([scene, ray, options, function(hit:Dynamic) {
-      var slot:Dynamic = cast _Runtime.UNDEFINED;
+    PickScene3D.forEachScene3DRayHit__pickScene3D((cast scene : Node3D), (cast ray : Ray3D), (cast options : Null<Scene3DPickOptions>), (cast function(hit:Scene3DHit):Void {
+      var slot:Scene3DHit = cast _Runtime.UNDEFINED;
       slot = flighthq._internal._StaticIndex.readArray(outArray, count);
       if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (slot = cast (_Runtime.callValue(createScene3DHit, cast ([] : Array<Dynamic>)) : Dynamic));
+        (slot = cast ((cast createScene3DHit() : Scene3DHit) : Dynamic));
         flighthq._internal._StaticIndex.writeArray(outArray, count, slot);
       }
-      _Runtime.callValue(PickScene3D.copyScene3DHit__pickScene3D, cast ([slot, hit] : Array<Dynamic>));
+      PickScene3D.copyScene3DHit__pickScene3D((cast slot : Scene3DHit), (cast hit : Scene3DHit));
       count++;
-    }] : Array<Dynamic>));
+    } : Scene3DHit->Void));
     _Runtime.setLength(outArray, count);
     _Runtime.callProperty(outArray, 'sort', cast ([PickScene3D.compareScene3DHitByDistance__pickScene3D] : Array<Dynamic>));
     return cast outArray;
@@ -73,40 +82,40 @@ class PickScene3D {
   }
 
   public static function pickScene3DWithRay3D(scene:Node3D, ray:Ray3D, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
-    var bestT:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
+    var bestT:Float = cast _Runtime.UNDEFINED;
     found = false;
     bestT = HxMath.POSITIVE_INFINITY;
-    _Runtime.callValue(PickScene3D.forEachScene3DRayHit__pickScene3D, cast ([scene, ray, options, function(hit:Dynamic) {
+    PickScene3D.forEachScene3DRayHit__pickScene3D((cast scene : Node3D), (cast ray : Ray3D), (cast options : Null<Scene3DPickOptions>), (cast function(hit:Scene3DHit):Void {
       if ((cast ((cast _Runtime.field(hit, 'distance') : Float) >= (cast bestT : Float)) : Bool)) { return; }
       (bestT = cast (_Runtime.field(hit, 'distance') : Dynamic));
       (found = cast (true : Dynamic));
-      _Runtime.callValue(PickScene3D.copyScene3DHit__pickScene3D, cast ([out, hit] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+      PickScene3D.copyScene3DHit__pickScene3D((cast out : Scene3DHit), (cast hit : Scene3DHit));
+    } : Scene3DHit->Void));
     return cast ((cast found : Bool) ? (cast out : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function buildCameraPickRay__pickScene3D(out:Ray3D, camera:Camera3D, screenX:Float, screenY:Float):Bool {
-    var aspect:Dynamic = cast _Runtime.UNDEFINED;
-    aspect = ((cast _Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'perspective') : Bool) ? (cast camera.projection.aspect : Dynamic) : (cast 1.0 : Dynamic));
-    return cast _Runtime.callValue(getCamera3DScreenToWorldRay, cast ([out, camera, screenX, screenY, aspect] : Array<Dynamic>));
+    var aspect:Float = cast _Runtime.UNDEFINED;
+    aspect = ((cast _Runtime.strictEquals((cast camera.projection : { var kind:String; }).kind, 'perspective') : Bool) ? (cast camera.projection.aspect : Dynamic) : (cast 1.0 : Dynamic));
+    return cast (cast getCamera3DScreenToWorldRay(out, (cast camera : Camera3D), (cast screenX : Float), (cast screenY : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 
   public static function copyScene3DHit__pickScene3D(out:Scene3DHit, src:Scene3DHit):Void {
-    _Runtime.setField(out, 'node', _Runtime.field(src, 'node'));
-    _Runtime.setField(out, 'distance', _Runtime.field(src, 'distance'));
-    _Runtime.setField(out, 'triangleIndex', _Runtime.field(src, 'triangleIndex'));
-    _Runtime.setField(out, 'u', _Runtime.field(src, 'u'));
-    _Runtime.setField(out, 'v', _Runtime.field(src, 'v'));
-    _Runtime.setField(out, 'w', _Runtime.field(src, 'w'));
-    _Runtime.setField(out, 'pointX', _Runtime.field(src, 'pointX'));
-    _Runtime.setField(out, 'pointY', _Runtime.field(src, 'pointY'));
-    _Runtime.setField(out, 'pointZ', _Runtime.field(src, 'pointZ'));
-    _Runtime.setField(out, 'normalX', _Runtime.field(src, 'normalX'));
-    _Runtime.setField(out, 'normalY', _Runtime.field(src, 'normalY'));
-    _Runtime.setField(out, 'normalZ', _Runtime.field(src, 'normalZ'));
+    ((cast out : Scene3DHit).node = _Runtime.field(src, 'node'));
+    ((cast out : Scene3DHit).distance = _Runtime.field(src, 'distance'));
+    ((cast out : Scene3DHit).triangleIndex = _Runtime.field(src, 'triangleIndex'));
+    ((cast out : Scene3DHit).u = _Runtime.field(src, 'u'));
+    ((cast out : Scene3DHit).v = _Runtime.field(src, 'v'));
+    ((cast out : Scene3DHit).w = _Runtime.field(src, 'w'));
+    ((cast out : Scene3DHit).pointX = _Runtime.field(src, 'pointX'));
+    ((cast out : Scene3DHit).pointY = _Runtime.field(src, 'pointY'));
+    ((cast out : Scene3DHit).pointZ = _Runtime.field(src, 'pointZ'));
+    ((cast out : Scene3DHit).normalX = _Runtime.field(src, 'normalX'));
+    ((cast out : Scene3DHit).normalY = _Runtime.field(src, 'normalY'));
+    ((cast out : Scene3DHit).normalZ = _Runtime.field(src, 'normalZ'));
   }
 
   public static function compareScene3DHitByDistance__pickScene3D(a:Scene3DHit, b:Scene3DHit):Float {
@@ -114,101 +123,101 @@ class PickScene3D {
     return cast null;
   }
 
-  public static function forEachScene3DRayHit__pickScene3D(scene:Node3D, ray:Ray3D, options:Null<Scene3DPickOptions>, onHit:Dynamic):Void {
-    var predicate:Dynamic = cast _Runtime.UNDEFINED;
-    var maxDistance:Dynamic = cast _Runtime.UNDEFINED;
-    var cullBackfaces:Dynamic = cast _Runtime.UNDEFINED;
+  public static function forEachScene3DRayHit__pickScene3D(scene:Node3D, ray:Ray3D, options:Null<Scene3DPickOptions>, onHit:Scene3DHit->Void):Void {
+    var predicate:Null<Mesh->Bool> = cast _Runtime.UNDEFINED;
+    var maxDistance:Float = cast _Runtime.UNDEFINED;
+    var cullBackfaces:Bool = cast _Runtime.UNDEFINED;
     predicate = _Runtime.optionalField(options, 'predicate');
     maxDistance = _Runtime.coalesce(_Runtime.optionalField(options, 'maxDistance'), function():Dynamic return cast HxMath.POSITIVE_INFINITY);
     cullBackfaces = _Runtime.coalesce(_Runtime.optionalField(options, 'cullBackfaces'), function():Dynamic return cast false);
-    _Runtime.callValue(PickScene3D.pickNode__pickScene3D, cast ([(cast (cast scene : Dynamic) : Node3D), ray, predicate, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
+    PickScene3D.pickNode__pickScene3D((cast (cast (cast scene : flighthq._internal._Any) : Node3D) : Node3D), (cast ray : Ray3D), (cast predicate : Null<Mesh->Bool>), (cast maxDistance : Float), (cast cullBackfaces : Bool), (cast onHit : Scene3DHit->Void));
   }
 
-  public static function pickNode__pickScene3D(node:Node3D, ray:Ray3D, predicate:Null<Dynamic>, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
+  public static function pickNode__pickScene3D(node:Node3D, ray:Ray3D, predicate:Null<Mesh->Bool>, maxDistance:Float, cullBackfaces:Bool, onHit:Scene3DHit->Void):Void {
+    var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
-    if ((cast ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(predicate, cast ([node] : Array<Dynamic>))) : Bool)) : Bool)) {
-      _Runtime.callValue(PickScene3D.intersectMeshTriangles__pickScene3D, cast ([node, ray, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
+    if ((cast ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast predicate : Mesh->Bool)((cast node : Mesh)) : Bool)) : Bool)) : Bool)) {
+      PickScene3D.intersectMeshTriangles__pickScene3D((cast node : Mesh), (cast ray : Ray3D), (cast maxDistance : Float), (cast cullBackfaces : Bool), (cast onHit : Scene3DHit->Void));
     }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(PickScene3D.pickNode__pickScene3D, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D), ray, predicate, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
+          PickScene3D.pickNode__pickScene3D((cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D) : Node3D), (cast ray : Ray3D), (cast predicate : Null<Mesh->Bool>), (cast maxDistance : Float), (cast cullBackfaces : Bool), (cast onHit : Scene3DHit->Void));
           i++;
         }
       }
     }
   }
 
-  public static function intersectMeshTriangles__pickScene3D(mesh:Mesh, ray:Ray3D, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
-    var posedLocalBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var worldMatrix:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
-    posedLocalBounds = _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([(cast mesh : NodeAny)] : Array<Dynamic>)) : MeshRuntime), 'deformedLocalBounds');
+  public static function intersectMeshTriangles__pickScene3D(mesh:Mesh, ray:Ray3D, maxDistance:Float, cullBackfaces:Bool, onHit:Scene3DHit->Void):Void {
+    var posedLocalBounds:Null<Aabb> = cast _Runtime.UNDEFINED;
+    var worldMatrix:Matrix4Like = cast _Runtime.UNDEFINED;
+    var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
+    var triangleCount:Float = cast _Runtime.UNDEFINED;
+    posedLocalBounds = (cast (cast (cast getNodeRuntime((cast mesh : NodeAny)) : MeshRuntime) : MeshRuntime) : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds;
     if ((cast !_Runtime.looseEquals(posedLocalBounds, null) : Bool)) {
-      _Runtime.callValue(ensureNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
-      _Runtime.callValue(transformAabbByMatrix4, cast ([PickScene3D._worldBounds__pickScene3D, posedLocalBounds, _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>))] : Array<Dynamic>));
+      ensureNodeWorldMatrix4(mesh);
+      transformAabbByMatrix4(PickScene3D._worldBounds__pickScene3D, posedLocalBounds, (cast getNodeWorldMatrix4(mesh) : Matrix4Like));
     } else {
-      _Runtime.callValue(getNode3DWorldBounds, cast ([PickScene3D._worldBounds__pickScene3D, mesh] : Array<Dynamic>));
+      getNode3DWorldBounds(PickScene3D._worldBounds__pickScene3D, (cast mesh : Node3D));
     }
-    if ((cast ((cast _Runtime.callValue(intersectRay3DAabb, cast ([ray, PickScene3D._worldBounds__pickScene3D] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    _Runtime.callValue(ensureNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
-    worldMatrix = _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(inverseMatrix4, cast ([PickScene3D._inverseWorld__pickScene3D, worldMatrix] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    _Runtime.callValue(PickScene3D.transformPointByMatrix4__pickScene3D, cast ([PickScene3D._localRay__pickScene3D.origin, ray.origin, PickScene3D._inverseWorld__pickScene3D.m] : Array<Dynamic>));
-    _Runtime.callValue(PickScene3D.transformDirectionByMatrix4__pickScene3D, cast ([PickScene3D._localRay__pickScene3D.direction, ray.direction, PickScene3D._inverseWorld__pickScene3D.m] : Array<Dynamic>));
+    if ((cast ((cast (cast intersectRay3DAabb(ray, PickScene3D._worldBounds__pickScene3D) : Float) : Float) < (cast 0.0 : Float)) : Bool)) { return; }
+    ensureNodeWorldMatrix4(mesh);
+    worldMatrix = (cast getNodeWorldMatrix4(mesh) : Matrix4Like);
+    if ((cast !(cast (cast inverseMatrix4(PickScene3D._inverseWorld__pickScene3D, worldMatrix) : Bool) : Bool) : Bool)) { return; }
+    PickScene3D.transformPointByMatrix4__pickScene3D((cast PickScene3D._localRay__pickScene3D.origin : Vector3), (cast ray.origin : Vector3), (cast PickScene3D._inverseWorld__pickScene3D.m : flighthq._internal._Float32Array));
+    PickScene3D.transformDirectionByMatrix4__pickScene3D((cast PickScene3D._localRay__pickScene3D.direction : Vector3), (cast ray.direction : Vector3), (cast PickScene3D._inverseWorld__pickScene3D.m : flighthq._internal._Float32Array));
     geometry = mesh.geometry;
-    triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
+    triangleCount = (cast getMeshGeometryTriangleCount(geometry) : Float);
     {
-      var triangle:Dynamic = 0.0;
+      var triangle:Float = 0.0;
       while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callValue(getMeshGeometryTriangleVertexIndices, cast ([PickScene3D._triangle__pickScene3D, geometry, triangle] : Array<Dynamic>)) : Bool) : Bool)) { triangle++; continue; }
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene3D._a__pickScene3D, geometry, _Runtime.field(PickScene3D._triangle__pickScene3D, 'i0')] : Array<Dynamic>));
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene3D._b__pickScene3D, geometry, _Runtime.field(PickScene3D._triangle__pickScene3D, 'i1')] : Array<Dynamic>));
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene3D._c__pickScene3D, geometry, _Runtime.field(PickScene3D._triangle__pickScene3D, 'i2')] : Array<Dynamic>));
-        var t:Dynamic = _Runtime.callValue(intersectRay3DTriangle, cast ([PickScene3D._localRay__pickScene3D, PickScene3D._a__pickScene3D, PickScene3D._b__pickScene3D, PickScene3D._c__pickScene3D] : Array<Dynamic>));
+        if ((cast !(cast (cast getMeshGeometryTriangleVertexIndices(PickScene3D._triangle__pickScene3D, geometry, (cast triangle : Float)) : Bool) : Bool) : Bool)) { triangle++; continue; }
+        (cast getMeshGeometryVertexPosition((cast PickScene3D._a__pickScene3D : { var x:Float; var y:Float; var z:Float; }), geometry, (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i0 : Float)) : Bool);
+        (cast getMeshGeometryVertexPosition((cast PickScene3D._b__pickScene3D : { var x:Float; var y:Float; var z:Float; }), geometry, (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i1 : Float)) : Bool);
+        (cast getMeshGeometryVertexPosition((cast PickScene3D._c__pickScene3D : { var x:Float; var y:Float; var z:Float; }), geometry, (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i2 : Float)) : Bool);
+        var t:Float = (cast intersectRay3DTriangle(PickScene3D._localRay__pickScene3D, PickScene3D._a__pickScene3D, PickScene3D._b__pickScene3D, PickScene3D._c__pickScene3D) : Float);
         if ((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast t : Float) > (cast maxDistance : Float)) : Bool)) : Bool)) { triangle++; continue; }
-        _Runtime.callValue(PickScene3D.transformPointByMatrix4__pickScene3D, cast ([PickScene3D._wa__pickScene3D, PickScene3D._a__pickScene3D, worldMatrix.m] : Array<Dynamic>));
-        _Runtime.callValue(PickScene3D.transformPointByMatrix4__pickScene3D, cast ([PickScene3D._wb__pickScene3D, PickScene3D._b__pickScene3D, worldMatrix.m] : Array<Dynamic>));
-        _Runtime.callValue(PickScene3D.transformPointByMatrix4__pickScene3D, cast ([PickScene3D._wc__pickScene3D, PickScene3D._c__pickScene3D, worldMatrix.m] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.callValue(PickScene3D.writeFaceNormal__pickScene3D, cast ([PickScene3D._worldNormal__pickScene3D, PickScene3D._wa__pickScene3D, PickScene3D._wb__pickScene3D, PickScene3D._wc__pickScene3D] : Array<Dynamic>)) : Bool) : Bool)) { triangle++; continue; }
+        PickScene3D.transformPointByMatrix4__pickScene3D((cast PickScene3D._wa__pickScene3D : Vector3), (cast PickScene3D._a__pickScene3D : Vector3), (cast worldMatrix.m : flighthq._internal._Float32Array));
+        PickScene3D.transformPointByMatrix4__pickScene3D((cast PickScene3D._wb__pickScene3D : Vector3), (cast PickScene3D._b__pickScene3D : Vector3), (cast worldMatrix.m : flighthq._internal._Float32Array));
+        PickScene3D.transformPointByMatrix4__pickScene3D((cast PickScene3D._wc__pickScene3D : Vector3), (cast PickScene3D._c__pickScene3D : Vector3), (cast worldMatrix.m : flighthq._internal._Float32Array));
+        if ((cast !(cast (cast PickScene3D.writeFaceNormal__pickScene3D((cast PickScene3D._worldNormal__pickScene3D : Vector3), (cast PickScene3D._wa__pickScene3D : Vector3), (cast PickScene3D._wb__pickScene3D : Vector3), (cast PickScene3D._wc__pickScene3D : Vector3)) : Bool) : Bool) : Bool)) { triangle++; continue; }
         if ((cast ((cast cullBackfaces : Bool) && (cast ((cast (((ray.direction.x * PickScene3D._worldNormal__pickScene3D.x) + (ray.direction.y * PickScene3D._worldNormal__pickScene3D.y)) + (ray.direction.z * PickScene3D._worldNormal__pickScene3D.z)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           triangle++;
           continue;
         }
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'node', mesh);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'distance', t);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'triangleIndex', triangle);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'normalX', PickScene3D._worldNormal__pickScene3D.x);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'normalY', PickScene3D._worldNormal__pickScene3D.y);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'normalZ', PickScene3D._worldNormal__pickScene3D.z);
-        _Runtime.callValue(getRay3DPointAt, cast ([PickScene3D._worldPoint__pickScene3D, ray, t] : Array<Dynamic>));
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'pointX', PickScene3D._worldPoint__pickScene3D.x);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'pointY', PickScene3D._worldPoint__pickScene3D.y);
-        _Runtime.setField(PickScene3D._hit__pickScene3D, 'pointZ', PickScene3D._worldPoint__pickScene3D.z);
-        _Runtime.callValue(getRay3DPointAt, cast ([PickScene3D._localPoint__pickScene3D, PickScene3D._localRay__pickScene3D, t] : Array<Dynamic>));
-        _Runtime.callValue(PickScene3D.writeBarycentric__pickScene3D, cast ([PickScene3D._hit__pickScene3D, PickScene3D._localPoint__pickScene3D, PickScene3D._a__pickScene3D, PickScene3D._b__pickScene3D, PickScene3D._c__pickScene3D] : Array<Dynamic>));
-        _Runtime.callValue(onHit, cast ([PickScene3D._hit__pickScene3D] : Array<Dynamic>));
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).node = mesh);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).distance = t);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).triangleIndex = triangle);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalX = PickScene3D._worldNormal__pickScene3D.x);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalY = PickScene3D._worldNormal__pickScene3D.y);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalZ = PickScene3D._worldNormal__pickScene3D.z);
+        getRay3DPointAt(PickScene3D._worldPoint__pickScene3D, ray, (cast t : Float));
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointX = PickScene3D._worldPoint__pickScene3D.x);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointY = PickScene3D._worldPoint__pickScene3D.y);
+        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointZ = PickScene3D._worldPoint__pickScene3D.z);
+        getRay3DPointAt(PickScene3D._localPoint__pickScene3D, PickScene3D._localRay__pickScene3D, (cast t : Float));
+        PickScene3D.writeBarycentric__pickScene3D((cast PickScene3D._hit__pickScene3D : Scene3DHit), (cast PickScene3D._localPoint__pickScene3D : Vector3), (cast PickScene3D._a__pickScene3D : Vector3), (cast PickScene3D._b__pickScene3D : Vector3), (cast PickScene3D._c__pickScene3D : Vector3));
+        onHit((cast PickScene3D._hit__pickScene3D : Scene3DHit));
         triangle++;
       }
     }
   }
 
   public static function writeFaceNormal__pickScene3D(out:Vector3, a:Vector3, b:Vector3, c:Vector3):Bool {
-    var e1x:Dynamic = cast _Runtime.UNDEFINED;
-    var e1y:Dynamic = cast _Runtime.UNDEFINED;
-    var e1z:Dynamic = cast _Runtime.UNDEFINED;
-    var e2x:Dynamic = cast _Runtime.UNDEFINED;
-    var e2y:Dynamic = cast _Runtime.UNDEFINED;
-    var e2z:Dynamic = cast _Runtime.UNDEFINED;
-    var nx:Dynamic = cast _Runtime.UNDEFINED;
-    var ny:Dynamic = cast _Runtime.UNDEFINED;
-    var nz:Dynamic = cast _Runtime.UNDEFINED;
-    var lengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
+    var e1x:Float = cast _Runtime.UNDEFINED;
+    var e1y:Float = cast _Runtime.UNDEFINED;
+    var e1z:Float = cast _Runtime.UNDEFINED;
+    var e2x:Float = cast _Runtime.UNDEFINED;
+    var e2y:Float = cast _Runtime.UNDEFINED;
+    var e2z:Float = cast _Runtime.UNDEFINED;
+    var nx:Float = cast _Runtime.UNDEFINED;
+    var ny:Float = cast _Runtime.UNDEFINED;
+    var nz:Float = cast _Runtime.UNDEFINED;
+    var lengthSquared:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
     e1x = (b.x - a.x);
     e1y = (b.y - a.y);
     e1z = (b.z - a.z);
@@ -229,24 +238,24 @@ class PickScene3D {
   }
 
   public static function writeBarycentric__pickScene3D(out:Scene3DHit, p:Vector3, a:Vector3, b:Vector3, c:Vector3):Void {
-    var v0x:Dynamic = cast _Runtime.UNDEFINED;
-    var v0y:Dynamic = cast _Runtime.UNDEFINED;
-    var v0z:Dynamic = cast _Runtime.UNDEFINED;
-    var v1x:Dynamic = cast _Runtime.UNDEFINED;
-    var v1y:Dynamic = cast _Runtime.UNDEFINED;
-    var v1z:Dynamic = cast _Runtime.UNDEFINED;
-    var v2x:Dynamic = cast _Runtime.UNDEFINED;
-    var v2y:Dynamic = cast _Runtime.UNDEFINED;
-    var v2z:Dynamic = cast _Runtime.UNDEFINED;
-    var d00:Dynamic = cast _Runtime.UNDEFINED;
-    var d01:Dynamic = cast _Runtime.UNDEFINED;
-    var d11:Dynamic = cast _Runtime.UNDEFINED;
-    var d20:Dynamic = cast _Runtime.UNDEFINED;
-    var d21:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
+    var v0x:Float = cast _Runtime.UNDEFINED;
+    var v0y:Float = cast _Runtime.UNDEFINED;
+    var v0z:Float = cast _Runtime.UNDEFINED;
+    var v1x:Float = cast _Runtime.UNDEFINED;
+    var v1y:Float = cast _Runtime.UNDEFINED;
+    var v1z:Float = cast _Runtime.UNDEFINED;
+    var v2x:Float = cast _Runtime.UNDEFINED;
+    var v2y:Float = cast _Runtime.UNDEFINED;
+    var v2z:Float = cast _Runtime.UNDEFINED;
+    var d00:Float = cast _Runtime.UNDEFINED;
+    var d01:Float = cast _Runtime.UNDEFINED;
+    var d11:Float = cast _Runtime.UNDEFINED;
+    var d20:Float = cast _Runtime.UNDEFINED;
+    var d21:Float = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
+    var v:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
     v0x = (b.x - a.x);
     v0y = (b.y - a.y);
     v0z = (b.z - a.z);
@@ -263,23 +272,23 @@ class PickScene3D {
     d21 = (((v2x * v1x) + (v2y * v1y)) + (v2z * v1z));
     denom = ((d00 * d11) - (d01 * d01));
     if ((cast _Runtime.strictEquals(denom, 0.0) : Bool)) {
-      _Runtime.setField(out, 'u', 1.0);
-      _Runtime.setField(out, 'v', 0.0);
-      _Runtime.setField(out, 'w', 0.0);
+      ((cast out : Scene3DHit).u = 1.0);
+      ((cast out : Scene3DHit).v = 0.0);
+      ((cast out : Scene3DHit).w = 0.0);
       return;
     }
     inv = (1.0 / denom);
     v = (((d11 * d20) - (d01 * d21)) * inv);
     w = (((d00 * d21) - (d01 * d20)) * inv);
-    _Runtime.setField(out, 'u', ((1.0 - v) - w));
-    _Runtime.setField(out, 'v', v);
-    _Runtime.setField(out, 'w', w);
+    ((cast out : Scene3DHit).u = ((1.0 - v) - w));
+    ((cast out : Scene3DHit).v = v);
+    ((cast out : Scene3DHit).w = w);
   }
 
   public static function transformPointByMatrix4__pickScene3D(out:Vector3, p:Vector3, m:flighthq._internal._Float32Array):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
     x = p.x;
     y = p.y;
     z = p.z;
@@ -289,9 +298,9 @@ class PickScene3D {
   }
 
   public static function transformDirectionByMatrix4__pickScene3D(out:Vector3, d:Vector3, m:flighthq._internal._Float32Array):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var z:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
     x = d.x;
     y = d.y;
     z = d.z;
@@ -300,33 +309,33 @@ class PickScene3D {
     (out.z = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), z)) : Dynamic));
   }
 
-  public static final _cameraRay__pickScene3D:Dynamic = _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>));
+  public static final _cameraRay__pickScene3D:Ray3D = (cast createRay3D((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Ray3D);
 
-  public static final _localRay__pickScene3D:Dynamic = _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>));
+  public static final _localRay__pickScene3D:Ray3D = (cast createRay3D((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Ray3D);
 
-  public static final _inverseWorld__pickScene3D:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _inverseWorld__pickScene3D:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 
-  public static final _worldBounds__pickScene3D:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
+  public static final _worldBounds__pickScene3D:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
 
-  public static final _a__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _a__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _b__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _b__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _c__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _c__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _wa__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _wa__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _wb__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _wb__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _wc__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _wc__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _worldNormal__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _worldNormal__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _localPoint__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _localPoint__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _worldPoint__pickScene3D:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
+  public static final _worldPoint__pickScene3D:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
 
-  public static final _hit__pickScene3D:Dynamic = _Runtime.callValue(createScene3DHit, cast ([] : Array<Dynamic>));
+  public static final _hit__pickScene3D:Scene3DHit = (cast createScene3DHit() : Scene3DHit);
 
-  public static final _triangle__pickScene3D:Dynamic = { i0: 0.0, i1: 0.0, i2: 0.0 };
+  public static final _triangle__pickScene3D:{ var i0:Float; var i1:Float; var i2:Float; } = { i0: 0.0, i1: 0.0, i2: 0.0 };
 }

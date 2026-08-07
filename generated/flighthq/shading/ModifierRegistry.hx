@@ -14,11 +14,11 @@ class ModifierRegistry {
   }
 
   public static function registerModifier(registry:flighthq.types.ModifierRegistry, definition:ModifierDefinition):Void {
-    ((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).set(_Runtime.field(definition, 'kind'), definition));
+    ((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map<String, ModifierDefinition>).set(_Runtime.field(definition, 'kind'), definition));
   }
 
   public static function resolveModifier(registry:flighthq.types.ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flighthq._internal._Map<String, ModifierDefinition>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 }

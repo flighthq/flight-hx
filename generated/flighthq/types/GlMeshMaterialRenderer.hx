@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlMeshMaterialRenderer = { var bind:Dynamic; var draw:Dynamic; };
+typedef GlMeshMaterialRenderer = { var bind:GlRenderState->Null<Material>->Scene3DLightBlock->Camera3D->Void; var draw:GlRenderState->Scene3DRenderProxy->MeshGeometry->Void; };

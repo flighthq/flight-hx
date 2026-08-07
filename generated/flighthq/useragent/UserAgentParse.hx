@@ -55,11 +55,11 @@ class UserAgentParse {
   }
 
   public static function parseUserAgentOsVersion(ua:String):String {
-    var android:Dynamic = cast _Runtime.UNDEFINED;
-    var ios:Dynamic = cast _Runtime.UNDEFINED;
-    var win:Dynamic = cast _Runtime.UNDEFINED;
-    var mac:Dynamic = cast _Runtime.UNDEFINED;
-    var cros:Dynamic = cast _Runtime.UNDEFINED;
+    var android:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var ios:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var win:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var mac:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var cros:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     android = _Runtime.match(ua, _Runtime.regexp('android\\s+([\\d.]+)', 'i'));
     if (_Runtime.truthy(android)) { return cast _Runtime.getIndex(android, 1.0); }
     ios = _Runtime.match(ua, _Runtime.regexp('(?:iphone|ipad|ipod).*?os\\s+([\\d_]+)', 'i'));

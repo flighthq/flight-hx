@@ -9,67 +9,69 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingExplanation;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
 
 class RenderEffectPadding {
-  public static function computeRenderEffectPadding(state:RenderState, effects:Dynamic):flighthq.types.RenderEffectPadding {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    var explanation:Dynamic = cast _Runtime.UNDEFINED;
-    var emitMiss:Dynamic = cast _Runtime.UNDEFINED;
+  public static function computeRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):flighthq.types.RenderEffectPadding {
+    var list:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var explanation:RenderEffectPaddingExplanation = cast _Runtime.UNDEFINED;
+    var emitMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>> = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
-    explanation = _Runtime.callValue(explainRenderEffectPadding, cast ([state, list] : Array<Dynamic>));
-    emitMiss = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss');
-    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable(_Runtime.field(explanation, 'missingKinds'))) {   _Runtime.callValue(emitMiss, cast ([RenderRegistry.EffectPaddingResolver, kind] : Array<Dynamic>)); } }
-    return cast _Runtime.field(explanation, 'padding');
+    explanation = (cast explainRenderEffectPadding((cast state : RenderState), (cast list : flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>)) : RenderEffectPaddingExplanation);
+    emitMiss = (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).registryMiss;
+    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable((cast explanation : RenderEffectPaddingExplanation).missingKinds)) {   emitMiss((cast RenderRegistry.EffectPaddingResolver : RenderRegistry), (cast kind : String)); } }
+    return cast (cast explanation : RenderEffectPaddingExplanation).padding;
     return cast null;
   }
 
-  public static function explainRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPaddingExplanation {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
+  public static function explainRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPaddingExplanation {
+    var list:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var registry:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
+    var left:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
     var missingKinds:Array<Kind> = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
-    registry = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderEffectPaddingResolverRegistry');
+    registry = (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderEffectPaddingResolverRegistry;
     bottom = 0.0;
     left = 0.0;
     right = 0.0;
     top = 0.0;
     missingKinds = cast ([] : Array<Dynamic>);
     for (effect in _Runtime.iterable(list)) {
-      var resolver:Dynamic = ({ final __collection4:Dynamic = registry; __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._Map).get(_Runtime.field(effect, 'kind'))); });
+      var resolver:Null<RenderEffectPaddingResolver> = ({ final __collection4:Dynamic = registry; __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._Map<String, RenderEffectPaddingResolver>).get(_Runtime.field(effect, 'kind'))); });
       if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         if ((cast !(cast _Runtime.includes(missingKinds, _Runtime.field(effect, 'kind')) : Bool) : Bool)) { _Runtime.callProperty(missingKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); }
         continue;
       }
-      var padding:Dynamic = _Runtime.callValue(resolver, cast ([effect] : Array<Dynamic>));
-      (bottom = cast ((bottom + _Runtime.callValue(RenderEffectPadding.sanitizePadding__renderEffectPadding, cast ([_Runtime.field(padding, 'bottom')] : Array<Dynamic>))) : Dynamic));
-      (left = cast ((left + _Runtime.callValue(RenderEffectPadding.sanitizePadding__renderEffectPadding, cast ([_Runtime.field(padding, 'left')] : Array<Dynamic>))) : Dynamic));
-      (right = cast ((right + _Runtime.callValue(RenderEffectPadding.sanitizePadding__renderEffectPadding, cast ([_Runtime.field(padding, 'right')] : Array<Dynamic>))) : Dynamic));
-      (top = cast ((top + _Runtime.callValue(RenderEffectPadding.sanitizePadding__renderEffectPadding, cast ([_Runtime.field(padding, 'top')] : Array<Dynamic>))) : Dynamic));
+      var padding:flighthq.types.RenderEffectPadding = (cast resolver((cast effect : RenderEffect)) : flighthq.types.RenderEffectPadding);
+      (bottom = cast ((bottom + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'bottom') : Float)) : Float)) : Dynamic));
+      (left = cast ((left + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'left') : Float)) : Float)) : Dynamic));
+      (right = cast ((right + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'right') : Float)) : Float)) : Dynamic));
+      (top = cast ((top + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'top') : Float)) : Float)) : Dynamic));
     }
     return cast { missingKinds: missingKinds, padding: { bottom: bottom, left: left, right: right, top: top }, status: ((cast _Runtime.strictEquals(_Runtime.field(missingKinds, 'length'), 0.0) : Bool) ? (cast 'complete' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 
   public static function getDirectionalRenderEffectPadding(blurX:Float, blurY:Float, offsetX:Float, offsetY:Float):flighthq.types.RenderEffectPadding {
-    var gaussian:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    gaussian = _Runtime.callValue(getGaussianRenderEffectPadding, cast ([blurX, blurY] : Array<Dynamic>));
+    var gaussian:flighthq.types.RenderEffectPadding = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    gaussian = (cast getGaussianRenderEffectPadding((cast blurX : Float), (cast blurY : Float)) : flighthq.types.RenderEffectPadding);
     dx = ((cast ((cast HxMath.abs(offsetX) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetX : Dynamic));
     dy = ((cast ((cast HxMath.abs(offsetY) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetY : Dynamic));
-    return cast { bottom: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'bottom'), HxMath.max(0.0, dy))), left: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'left'), HxMath.max(0.0, -dx))), right: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'right'), HxMath.max(0.0, dx))), top: HxMath.ceil(_Runtime.addNumbers(_Runtime.field(gaussian, 'top'), HxMath.max(0.0, -dy))) };
+    return cast { bottom: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).bottom, HxMath.max(0.0, dy))), left: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).left, HxMath.max(0.0, -dx))), right: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).right, HxMath.max(0.0, dx))), top: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).top, HxMath.max(0.0, -dy))) };
     return cast null;
   }
 
   public static function getGaussianRenderEffectPadding(blurX:Float, blurY:Float):flighthq.types.RenderEffectPadding {
-    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
-    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    var horizontal:Float = cast _Runtime.UNDEFINED;
+    var vertical:Float = cast _Runtime.UNDEFINED;
     horizontal = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, blurX), 3.0));
     vertical = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, blurY), 3.0));
     return cast { bottom: vertical, left: horizontal, right: horizontal, top: vertical };
@@ -77,9 +79,9 @@ class RenderEffectPadding {
   }
 
   public static function registerRenderEffectPaddingResolver(state:RenderState, kind:Kind, resolver:Null<RenderEffectPaddingResolver>):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection5:Dynamic = _Runtime.field(runtime, 'renderEffectPaddingResolverRegistry'); __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map).delete_(kind)); }); } else { ((cast _Runtime.setField(runtime, 'renderEffectPaddingResolverRegistry', (_Runtime.field(runtime, 'renderEffectPaddingResolverRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, resolver)); }
+    var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection5:Dynamic = (cast runtime : RenderStateRuntime).renderEffectPaddingResolverRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, RenderEffectPaddingResolver>).delete_(kind)); }); } else { ((cast ((cast runtime : RenderStateRuntime).renderEffectPaddingResolverRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, resolver)); }
   }
 
   public static function sanitizePadding__renderEffectPadding(value:Float):Float {

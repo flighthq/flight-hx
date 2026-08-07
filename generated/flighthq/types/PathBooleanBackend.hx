@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef PathBooleanContour = Array<Float>;
 
-typedef PathBooleanBackend = { var computePathBoolean:Dynamic; };
+typedef PathBooleanBackend = { var computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>; };

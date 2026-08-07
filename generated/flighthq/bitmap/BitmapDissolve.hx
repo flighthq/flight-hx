@@ -4,29 +4,30 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapDissolve {
   public static function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    var bits:Dynamic = cast _Runtime.UNDEFINED;
-    var period:Dynamic = cast _Runtime.UNDEFINED;
-    var mask:Dynamic = cast _Runtime.UNDEFINED;
-    var cursor:Dynamic = cast _Runtime.UNDEFINED;
-    var toFill:Dynamic = cast _Runtime.UNDEFINED;
-    var fillR:Dynamic = cast _Runtime.UNDEFINED;
-    var fillG:Dynamic = cast _Runtime.UNDEFINED;
-    var fillB:Dynamic = cast _Runtime.UNDEFINED;
-    var fillA:Dynamic = cast _Runtime.UNDEFINED;
-    var destData:Dynamic = cast _Runtime.UNDEFINED;
-    var destStride:Dynamic = cast _Runtime.UNDEFINED;
-    var destBitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceData:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceStride:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var dissolved:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    var bits:Float = cast _Runtime.UNDEFINED;
+    var period:Float = cast _Runtime.UNDEFINED;
+    var mask:Float = cast _Runtime.UNDEFINED;
+    var cursor:Float = cast _Runtime.UNDEFINED;
+    var toFill:Bool = cast _Runtime.UNDEFINED;
+    var fillR:Float = cast _Runtime.UNDEFINED;
+    var fillG:Float = cast _Runtime.UNDEFINED;
+    var fillB:Float = cast _Runtime.UNDEFINED;
+    var fillA:Float = cast _Runtime.UNDEFINED;
+    var destData:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var destStride:Float = cast _Runtime.UNDEFINED;
+    var destBitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var sourceData:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var sourceStride:Float = cast _Runtime.UNDEFINED;
+    var sourceBitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var dissolved:Float = cast _Runtime.UNDEFINED;
     width = _Runtime.field(dest, 'width');
     height = _Runtime.field(dest, 'height');
     total = (width * height);
@@ -50,16 +51,16 @@ class BitmapDissolve {
     sourceBitmapHeight = _Runtime.field(source, 'bitmap').height;
     dissolved = 0.0;
     while ((cast ((cast ((cast dissolved : Float) < (cast pixelCount : Float)) : Bool) && (cast ((cast cursor : Float) < (cast period : Float)) : Bool)) : Bool)) {
-      var pixelIndex:Dynamic = _Runtime.callValue(BitmapDissolve.permutePixelIndex__bitmapDissolve, cast ([cursor, bits, mask] : Array<Dynamic>));
+      var pixelIndex:Float = (cast BitmapDissolve.permutePixelIndex__bitmapDissolve((cast cursor : Float), (cast bits : Float), (cast mask : Float)) : Float);
       cursor++;
       if ((cast ((cast pixelIndex : Float) >= (cast total : Float)) : Bool)) { continue; }
       dissolved++;
-      var px:Dynamic = _Runtime.fmod(pixelIndex, width);
-      var py:Dynamic = (_Runtime.toInt32((pixelIndex / width)) | 0);
-      var dx:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
-      var dy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+      var px:Float = _Runtime.fmod(pixelIndex, width);
+      var py:Float = (_Runtime.toInt32((pixelIndex / width)) | 0);
+      var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+      var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
       if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast destStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast destBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
-      var di:Dynamic = (((dy * destStride) + dx) * 4.0);
+      var di:Float = (((dy * destStride) + dx) * 4.0);
       if ((cast toFill : Bool)) {
         flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, di, fillR);
         flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 1.0), fillG);
@@ -67,23 +68,23 @@ class BitmapDissolve {
         flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), fillA);
         continue;
       }
-      var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-      var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+      var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+      var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
       if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sourceStride : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast sourceBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
-      var si:Dynamic = (((sy * sourceStride) + sx) * 4.0);
+      var si:Float = (((sy * sourceStride) + sx) * 4.0);
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, si));
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 1.0)));
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 2.0)));
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 3.0)));
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
     return cast cursor;
     return cast null;
   }
 
   public static function permutePixelIndex__bitmapDissolve(cursor:Float, bits:Float, mask:Float):Float {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    var shift:Dynamic = cast _Runtime.UNDEFINED;
+    var v:Float = cast _Runtime.UNDEFINED;
+    var shift:Float = cast _Runtime.UNDEFINED;
     v = (_Runtime.toInt32(cursor) & _Runtime.toInt32(mask));
     shift = ((cast ((cast bits : Float) > (cast 1.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(bits) >> 1) : Dynamic) : (cast 1.0 : Dynamic));
     (v = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(v), _Runtime.toInt32(2654435761.0))) & _Runtime.toInt32(mask)) : Dynamic));

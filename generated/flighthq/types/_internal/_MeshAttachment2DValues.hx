@@ -7,5 +7,5 @@ import flighthq.types.Attachment2D;
 import flighthq.types.Skin2D;
 
 class _MeshAttachment2DValues {
-  public static final MeshAttachment2DKind:Dynamic = 'MeshAttachment2D';
+  public static final MeshAttachment2DKind:String = 'MeshAttachment2D';
 }

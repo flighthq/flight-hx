@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ShapeCommand.ShapeCommandKey;
 
-typedef CanvasShapeHandler = Dynamic;
+typedef CanvasShapeHandler = flighthq._internal.dom.CanvasRenderingContext2D->CanvasShapeDrawState->Array<flighthq._internal._Any>->Float->Void;
 
-typedef CanvasShapeCommand<K> = { var key:Dynamic; var draw:CanvasShapeHandler; };
+typedef CanvasShapeCommand<K> = { var key:K; var draw:CanvasShapeHandler; };

@@ -7,27 +7,30 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.ConvolutionEffect;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderEffect;
 
 class GlConvolutionEffect {
   @:noCompletion
-  public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Dynamic = 49.0;
+  public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Float = 49.0;
 
   @:noCompletion
   public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixX:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixY:Dynamic = cast _Runtime.UNDEFINED;
-    var bias:Dynamic = cast _Runtime.UNDEFINED;
-    var clampEdge:Dynamic = cast _Runtime.UNDEFINED;
-    var preserveAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeColor:Dynamic = cast _Runtime.UNDEFINED;
-    var divisor:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixData:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var matrix:Array<Float> = cast _Runtime.UNDEFINED;
+    var matrixX:Float = cast _Runtime.UNDEFINED;
+    var matrixY:Float = cast _Runtime.UNDEFINED;
+    var bias:Float = cast _Runtime.UNDEFINED;
+    var clampEdge:Bool = cast _Runtime.UNDEFINED;
+    var preserveAlpha:Bool = cast _Runtime.UNDEFINED;
+    var edgeColor:Float = cast _Runtime.UNDEFINED;
+    var divisor:Float = cast _Runtime.UNDEFINED;
+    var matrixData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     __destructure0 = effect;
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
@@ -39,17 +42,17 @@ class GlConvolutionEffect {
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(GlConvolutionEffect.getAutoDivisor__glConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
+    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast GlConvolutionEffect.getAutoDivisor__glConvolutionEffect((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
     matrixData = new flighthq._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32Array(matrixData, i, flighthq._internal._StaticIndex.readArray(matrix, i));
         i++;
       }
     }
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.convolution', GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.convolution' : String), (cast GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal.backend.WebGl2Backend.uniform1fv(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrix[0]'), matrixData);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrixX'), matrixX);
@@ -59,22 +62,22 @@ class GlConvolutionEffect {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeColor'), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(edgeColor) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyConvolutionEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect)] : Array<Dynamic>));
+  public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyConvolutionEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ConvolutionEffect) : ConvolutionEffect));
   };
 
   public static function registerGlConvolutionEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ConvolutionEffect', defaultGlConvolutionEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'ConvolutionEffect' : String), (cast defaultGlConvolutionEffectRunner : GlRenderEffectRunner));
   }
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
@@ -84,5 +87,5 @@ class GlConvolutionEffect {
     return cast null;
   }
 
-  public static final CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform float u_matrix[' + Std.string(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE) + '];\nuniform int u_matrixX;\nuniform int u_matrixY;\nuniform float u_divisor;\nuniform float u_bias;\nuniform bool u_clamp;\nuniform bool u_preserveAlpha;\nuniform vec4 u_edgeColor;\nout vec4 fragColor;\n\nvec4 sampleAt(vec2 uv) {\n  if (u_clamp) {\n    return texture(u_texture0, clamp(uv, vec2(0.0), vec2(1.0)));\n  }\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return u_edgeColor;\n  }\n  return texture(u_texture0, uv);\n}\n\nvoid main() {\n  int offsetX = u_matrixX / 2;\n  int offsetY = u_matrixY / 2;\n  vec4 sum = vec4(0.0);\n  for (int ky = 0; ky < u_matrixY; ky++) {\n    for (int kx = 0; kx < u_matrixX; kx++) {\n      float weight = u_matrix[ky * u_matrixX + kx];\n      vec2 off = vec2(float(kx - offsetX), float(ky - offsetY)) * u_texelSize;\n      sum += sampleAt(v_texCoord + off) * weight;\n    }\n  }\n  sum /= u_divisor;\n  sum += u_bias / 255.0;\n  sum = clamp(sum, 0.0, 1.0);\n  if (u_preserveAlpha) {\n    // Keep the convolved color and restore the source alpha, matching the reference: a zero-sum\n    // kernel (e.g. edge-detect) drives the convolved alpha to 0, so overriding only .a leaves the\n    // color channels as the non-preserve branch produces them.\n    sum.a = texture(u_texture0, v_texCoord).a;\n  }\n  fragColor = sum;\n}';
+  public static final CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform float u_matrix[' + Std.string(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE) + '];\nuniform int u_matrixX;\nuniform int u_matrixY;\nuniform float u_divisor;\nuniform float u_bias;\nuniform bool u_clamp;\nuniform bool u_preserveAlpha;\nuniform vec4 u_edgeColor;\nout vec4 fragColor;\n\nvec4 sampleAt(vec2 uv) {\n  if (u_clamp) {\n    return texture(u_texture0, clamp(uv, vec2(0.0), vec2(1.0)));\n  }\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return u_edgeColor;\n  }\n  return texture(u_texture0, uv);\n}\n\nvoid main() {\n  int offsetX = u_matrixX / 2;\n  int offsetY = u_matrixY / 2;\n  vec4 sum = vec4(0.0);\n  for (int ky = 0; ky < u_matrixY; ky++) {\n    for (int kx = 0; kx < u_matrixX; kx++) {\n      float weight = u_matrix[ky * u_matrixX + kx];\n      vec2 off = vec2(float(kx - offsetX), float(ky - offsetY)) * u_texelSize;\n      sum += sampleAt(v_texCoord + off) * weight;\n    }\n  }\n  sum /= u_divisor;\n  sum += u_bias / 255.0;\n  sum = clamp(sum, 0.0, 1.0);\n  if (u_preserveAlpha) {\n    // Keep the convolved color and restore the source alpha, matching the reference: a zero-sum\n    // kernel (e.g. edge-detect) drives the convolved alpha to 0, so overriding only .a leaves the\n    // color channels as the non-preserve branch produces them.\n    sum.a = texture(u_texture0, v_texCoord).a;\n  }\n  fragColor = sum;\n}';
 }

@@ -12,16 +12,16 @@ class Haptics {
   public static var _backend__haptics:Null<HapticsBackend> = _Runtime.explicitNull();
 
   public static function cancelDeviceVibration():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'cancel', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).cancel();
     return cast null;
   }
 
   @:noCompletion
   public static function createWebHapticsBackend():HapticsBackend {
-    return cast { cancel: function() {
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([0.0] : Array<Dynamic>));
-    }, capabilities: function(out:HapticsCapabilities) {
-      var supported:Dynamic = cast _Runtime.UNDEFINED;
+    return cast { cancel: function():Bool {
+      return cast (cast Haptics.webVibrate__haptics((cast 0.0 : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, capabilities: function(out:HapticsCapabilities):HapticsCapabilities {
+      var supported:Bool = cast _Runtime.UNDEFINED;
       supported = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool));
       (out.amplitudeControl = cast (false : Dynamic));
       (out.customEvents = cast (false : Dynamic));
@@ -29,54 +29,54 @@ class Haptics {
       (out.patterns = cast (supported : Dynamic));
       (out.supported = cast (supported : Dynamic));
       return cast out;
-    }, impact: function(style:HapticImpactStyle, ?intensity:Float) {
-      var base:Dynamic = cast _Runtime.UNDEFINED;
-      var ms:Dynamic = cast _Runtime.UNDEFINED;
+    }, impact: function(style:HapticImpactStyle, ?intensity:Float):Bool {
+      var base:Float = cast _Runtime.UNDEFINED;
+      var ms:Float = cast _Runtime.UNDEFINED;
       base = ((cast ((cast _Runtime.strictEquals(style, 'heavy') : Bool) || (cast _Runtime.strictEquals(style, 'rigid') : Bool)) : Bool) ? (cast 30.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(style, 'medium') : Bool) ? (cast 20.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(style, 'soft') : Bool) ? (cast 25.0 : Dynamic) : (cast 10.0 : Dynamic)) : Dynamic)) : Dynamic));
       ms = ((cast !_Runtime.strictEquals(intensity, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers(base, HxMath.max(0.0, HxMath.min(1.0, intensity)))) : Dynamic) : (cast base : Dynamic));
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([ms] : Array<Dynamic>));
-    }, isSupported: function() {
+      return cast (cast Haptics.webVibrate__haptics((cast ms : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, isSupported: function():Bool {
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool));
-    }, notification: function(type:HapticNotificationType) {
-      var pattern:Dynamic = cast _Runtime.UNDEFINED;
+    }, notification: function(type:HapticNotificationType):Bool {
+      var pattern:Array<Float> = cast _Runtime.UNDEFINED;
       pattern = ((cast _Runtime.strictEquals(type, 'error') : Bool) ? (cast cast ([20.0, 60.0, 20.0] : Array<Dynamic>) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'warning') : Bool) ? (cast cast ([20.0, 60.0, 20.0, 60.0] : Array<Dynamic>) : Dynamic) : (cast cast ([15.0, 50.0, 15.0] : Array<Dynamic>) : Dynamic)) : Dynamic));
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([pattern] : Array<Dynamic>));
-    }, prepare: function() {
+      return cast (cast Haptics.webVibrate__haptics((cast pattern : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, prepare: function():Void {
 
-    }, selection: function() {
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([5.0] : Array<Dynamic>));
-    }, vibrate: function(durationMs:Float) {
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([durationMs] : Array<Dynamic>));
-    }, vibratePattern: function(pattern:Array<Float>) {
+    }, selection: function():Bool {
+      return cast (cast Haptics.webVibrate__haptics((cast 5.0 : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, vibrate: function(durationMs:Float):Bool {
+      return cast (cast Haptics.webVibrate__haptics((cast durationMs : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, vibratePattern: function(pattern:Array<Float>):Bool {
       if ((cast _Runtime.strictEquals(_Runtime.field(pattern, 'length'), 0.0) : Bool)) { return cast false; }
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([(cast pattern : Array<Float>)] : Array<Dynamic>));
-    }, vibrateWaveform: function(timings:Array<Float>, _amplitudes:Array<Float>, ?repeat:Float) {
+      return cast (cast Haptics.webVibrate__haptics((cast (cast pattern : Array<Float>) : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
+    }, vibrateWaveform: function(timings:Array<Float>, _amplitudes:Array<Float>, ?repeat:Float):Bool {
       if ((cast _Runtime.strictEquals(_Runtime.field(timings, 'length'), 0.0) : Bool)) { return cast false; }
       _Runtime.voidValue(repeat);
-      return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([(cast timings : Array<Float>)] : Array<Dynamic>));
+      return cast (cast Haptics.webVibrate__haptics((cast (cast timings : Array<Float>) : flighthq._internal._Union2<Float, Array<Float>>)) : Bool);
     } };
     return cast null;
   }
 
   @:noCompletion
   public static function getHapticsBackend():HapticsBackend {
-    if ((cast _Runtime.strictEquals(Haptics._backend__haptics, null) : Bool)) { (Haptics._backend__haptics = cast (_Runtime.callValue(createWebHapticsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Haptics._backend__haptics, null) : Bool)) { (Haptics._backend__haptics = cast ((cast createWebHapticsBackend() : Null<HapticsBackend>) : Dynamic)); }
     return cast Haptics._backend__haptics;
     return cast null;
   }
 
   public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'capabilities', cast ([out] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).capabilities(out);
     return cast null;
   }
 
   public static function isHapticsSupported():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'isSupported', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).isSupported();
     return cast null;
   }
 
   public static function prepareHaptics():Void {
-    _Runtime.callOptionalProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'prepare', cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).prepare, cast ([] : Array<Dynamic>));
   }
 
   @:noCompletion
@@ -85,49 +85,49 @@ class Haptics {
   }
 
   public static function triggerHapticImpact(style:HapticImpactStyle, ?intensity:Float):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'impact', cast ([style, _Runtime.coalesce(intensity, function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).impact(style, _Runtime.coalesce(intensity, function():Dynamic return cast 1.0));
     return cast null;
   }
 
   public static function triggerHapticNotification(type:HapticNotificationType):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'notification', cast ([type] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).notification(type);
     return cast null;
   }
 
   public static function triggerHapticSelection():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'selection', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).selection();
     return cast null;
   }
 
   public static function vibrateDevice(durationMs:Float):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'vibrate', cast ([durationMs] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).vibrate(durationMs);
     return cast null;
   }
 
   public static function vibrateDevicePattern(pattern:Array<Float>):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.field(pattern, 'length'), 0.0) : Bool)) { return cast false; }
-    return cast _Runtime.callProperty(_Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'vibratePattern', cast ([pattern] : Array<Dynamic>));
+    return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).vibratePattern(pattern);
     return cast null;
   }
 
-  public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Dynamic):Bool {
+  public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
     if (repeat == null) repeat = cast (-1.0 : Dynamic);
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>));
+    var backend:HapticsBackend = cast _Runtime.UNDEFINED;
+    backend = (cast getHapticsBackend() : HapticsBackend);
     if ((cast _Runtime.strictEquals(_Runtime.field(timings, 'length'), 0.0) : Bool)) { return cast false; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'vibrateWaveform'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast _Runtime.callProperty(backend, 'vibrateWaveform', cast ([timings, amplitudes, repeat] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast backend : HapticsBackend).vibrateWaveform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      return cast (cast backend : HapticsBackend).vibrateWaveform(timings, amplitudes, repeat);
     }
-    return cast _Runtime.callProperty(backend, 'vibratePattern', cast ([timings] : Array<Dynamic>));
+    return cast (cast backend : HapticsBackend).vibratePattern(timings);
     return cast null;
   }
 
-  public static function webVibrate__haptics(pattern:Dynamic):Bool {
+  public static function webVibrate__haptics(pattern:flighthq._internal._Union2<Float, Array<Float>>):Bool {
     if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate')), 'function') : Bool)) : Bool)) {
       return cast false;
     }
     try {
-      return cast flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate', cast ([(cast pattern : Dynamic)] : Array<Dynamic>));
+      return cast flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'vibrate', cast ([(cast pattern : flighthq._internal._Union2<Float, Array<Float>>)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast false;
     }

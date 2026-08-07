@@ -6,25 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.textshaper._TextShaperHooks._setTextShaperBackendHook;
+import flighthq.types.Signal;
 import flighthq.types.TextShaper.TextShaperBackend;
 import flighthq.types.TextShaperSignals;
 
 class TextShaperSignals {
   public static function disposeTextShaperSignals():Void {
     if ((cast _Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return; }
-    _Runtime.callValue(clearSignal, cast ([_Runtime.field(TextShaperSignals._signals__textShaperSignals, 'onBackendChanged')] : Array<Dynamic>));
+    clearSignal((cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged);
     (TextShaperSignals._signals__textShaperSignals = cast (null : Dynamic));
-    _Runtime.callValue(_setTextShaperBackendHook, cast ([null] : Array<Dynamic>));
+    _setTextShaperBackendHook((cast null : Null<Null<TextShaperBackend>->Void>));
   }
 
   public static function enableTextShaperSignals():flighthq.types.TextShaperSignals {
     if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return cast TextShaperSignals._signals__textShaperSignals; }
-    (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
-    _Runtime.callValue(_setTextShaperBackendHook, cast ([function(backend:Dynamic) {
+    (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: (cast createSignal() : Signal<Null<TextShaperBackend>->Void>) } : Dynamic));
+    _setTextShaperBackendHook((cast function(backend:Null<TextShaperBackend>):Void {
       if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) {
-        _Runtime.callValue(_Runtime.field(TextShaperSignals._signals__textShaperSignals, 'onBackendChanged').emit, cast ([backend] : Array<Dynamic>));
+        ((cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged.emit)(backend);
       }
-    }] : Array<Dynamic>));
+    } : Null<Null<TextShaperBackend>->Void>));
     return cast TextShaperSignals._signals__textShaperSignals;
     return cast null;
   }

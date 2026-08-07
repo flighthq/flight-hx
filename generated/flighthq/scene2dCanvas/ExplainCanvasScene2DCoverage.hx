@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.render.ExplainScene2DCoverage.explainScene2DCoverage;
 import flighthq.render.ExplainScene2DCoverage.hasScene2DCoverage;
 import flighthq.scene2dCanvas.CanvasMaterialRegistry.getCanvasMaterialRenderer;
+import flighthq.types.CanvasMaterialRenderer;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Scene2DKindUsage;
@@ -16,32 +17,32 @@ import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 class ExplainCanvasScene2DCoverage {
   @:noCompletion
   public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage):Void {
-    _Runtime.callValue(explainScene2DCoverage, cast ([out, state, usage] : Array<Dynamic>));
-    _Runtime.callValue(ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
+    explainScene2DCoverage((cast out : Array<SceneCoverageEntry>), state, (cast usage : Scene2DKindUsage));
+    (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : CanvasRenderState), (cast usage : Scene2DKindUsage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast _Runtime.callValue(hasScene2DCoverage, cast ([state, usage] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    return cast !(cast _Runtime.callValue(ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(state, (cast usage : Scene2DKindUsage)) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : CanvasRenderState), (cast usage : Scene2DKindUsage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
   public static function collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(out:Null<Array<SceneCoverageEntry>>, state:CanvasRenderState, usage:Scene2DKindUsage, stopAtFirst:Bool):Bool {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
     found = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
-        if ((cast !_Runtime.strictEquals(_Runtime.callValue(getCanvasMaterialRenderer, cast ([state, kind] : Array<Dynamic>)), null) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+        if ((cast !_Runtime.strictEquals((cast getCanvasMaterialRenderer((cast state : CanvasRenderState), (cast kind : String)) : Null<CanvasMaterialRenderer>), null) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Fallback, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Fallback, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
         i++;
       }
     }

@@ -7,19 +7,21 @@ import flighthq.log.Log.logOnce;
 import flighthq.scene3dGl.GlPbrExtensionRegistry.explainGlPbrExtensions;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlPbrExtensionIssue;
+import flighthq.types.GlPbrExtensionIssue.GlPbrExtensionIssueCode;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.PbrExtension;
 
 class EnableGlPbrExtensionGuards {
   public static function areGlPbrExtensionGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionGuard'), null);
+    return cast !_Runtime.strictEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionGuard, null);
     return cast null;
   }
 
   public static function enableGlPbrExtensionGuards(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionGuard', function(extensions:Dynamic) {
-      _Runtime.callValue(EnableGlPbrExtensionGuards.warnGlPbrExtensionIssues__enableGlPbrExtensionGuards, cast ([state, extensions] : Array<Dynamic>));
+    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionGuard = function(extensions:Array<PbrExtension>):Void {
+      EnableGlPbrExtensionGuards.warnGlPbrExtensionIssues__enableGlPbrExtensionGuards((cast state : GlRenderState), (cast extensions : Array<PbrExtension>));
     });
   }
 
@@ -46,13 +48,13 @@ class EnableGlPbrExtensionGuards {
   }
 
   public static function warnGlPbrExtensionIssues__enableGlPbrExtensionGuards(state:GlRenderState, extensions:Array<PbrExtension>):Void {
-    var issues:Dynamic = cast _Runtime.UNDEFINED;
-    issues = _Runtime.callValue(explainGlPbrExtensions, cast ([state, extensions] : Array<Dynamic>));
+    var issues:Array<GlPbrExtensionIssue> = cast _Runtime.UNDEFINED;
+    issues = (cast explainGlPbrExtensions((cast state : GlRenderState), (cast extensions : Array<PbrExtension>)) : Array<GlPbrExtensionIssue>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(issues, 'length') : Float)) : Bool)) {
-        var issue:Dynamic = flighthq._internal._StaticIndex.readArray(issues, i);
-        _Runtime.callValue(logOnce, cast (['scene-gl:pbr-extension:' + Std.string(_Runtime.field(issue, 'code')) + ':' + Std.string(_Runtime.field(issue, 'kind')) + '', LogLevel.Warn, { code: _Runtime.field(issue, 'code'), kind: _Runtime.field(issue, 'kind'), message: _Runtime.callValue(EnableGlPbrExtensionGuards.getGlPbrExtensionIssueMessage__enableGlPbrExtensionGuards, cast ([issue] : Array<Dynamic>)) }, 'scene-gl'] : Array<Dynamic>));
+        var issue:GlPbrExtensionIssue = flighthq._internal._StaticIndex.readArray(issues, i);
+        (cast logOnce((cast 'scene-gl:pbr-extension:' + Std.string((cast issue : GlPbrExtensionIssue).code) + ':' + Std.string((cast issue : GlPbrExtensionIssue).kind) + '' : String), (cast LogLevel.Warn : LogLevel), { code: (cast issue : GlPbrExtensionIssue).code, kind: (cast issue : GlPbrExtensionIssue).kind, message: EnableGlPbrExtensionGuards.getGlPbrExtensionIssueMessage__enableGlPbrExtensionGuards((cast issue : GlPbrExtensionIssue)) }, (cast 'scene-gl' : Null<String>)) : Bool);
         i++;
       }
     }

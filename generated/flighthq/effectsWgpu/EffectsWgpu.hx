@@ -50,6 +50,7 @@ import flighthq.effectsWgpu.WgpuTiltShiftEffect as Facade_EffectsWgpu_flighthq_e
 import flighthq.effectsWgpu.WgpuToneMapEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect;
 import flighthq.effectsWgpu.WgpuVignetteEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect;
+import flighthq.types.Adjustment;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
@@ -163,7 +164,7 @@ class EffectsWgpu {
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
 
-  public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.endWgpuRenderEffectPipeline(state, pipeline, operations);
   }
 

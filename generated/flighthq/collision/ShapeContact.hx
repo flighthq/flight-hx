@@ -16,146 +16,147 @@ import flighthq.collision.ShapeCollision.testCirclePolygonCollision;
 import flighthq.types.Collision.CollisionAabb;
 import flighthq.types.Collision.CollisionCircle;
 import flighthq.types.Collision.CollisionContactManifold;
+import flighthq.types.Collision.CollisionContactPoint;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 
 class ShapeContact {
   public static function collideAabbAabbContactManifold(a:CollisionAabb, b:CollisionAabb, out:CollisionContactManifold):Bool {
-    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeContact.contactScratchA__shapeContact] : Array<Dynamic>));
-    _Runtime.callValue(writeAabbVertices, cast ([b, ShapeContact.contactScratchB__shapeContact] : Array<Dynamic>));
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([ShapeContact.contactScratchA__shapeContact, 4.0, ShapeContact.contactScratchB__shapeContact, 4.0, out] : Array<Dynamic>));
+    writeAabbVertices((cast a : CollisionAabb), (cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._Float64Array));
+    writeAabbVertices((cast b : CollisionAabb), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._Float64Array));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideAabbObbContactManifold(a:CollisionAabb, b:CollisionObb, out:CollisionContactManifold):Bool {
-    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeContact.contactScratchA__shapeContact] : Array<Dynamic>));
-    _Runtime.callValue(writeObbVertices, cast ([b, ShapeContact.contactScratchB__shapeContact] : Array<Dynamic>));
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([ShapeContact.contactScratchA__shapeContact, 4.0, ShapeContact.contactScratchB__shapeContact, 4.0, out] : Array<Dynamic>));
+    writeAabbVertices((cast a : CollisionAabb), (cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._Float64Array));
+    writeObbVertices((cast b : CollisionObb), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._Float64Array));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideAabbPolygonContactManifold(a:CollisionAabb, b:CollisionPolygon, out:CollisionContactManifold):Bool {
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeContact.contactScratchA__shapeContact] : Array<Dynamic>));
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    writeAabbVertices((cast a : CollisionAabb), (cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._Float64Array));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([ShapeContact.contactScratchA__shapeContact, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideCircleAabbContactManifold(a:CollisionCircle, b:CollisionAabb, out:CollisionContactManifold):Bool {
-    if ((cast !(cast _Runtime.callValue(testCircleAabbCollision, cast ([a, b, ShapeContact.leanScratch__shapeContact] : Array<Dynamic>)) : Bool) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+    if ((cast !(cast (cast testCircleAabbCollision((cast a : CollisionCircle), (cast b : CollisionAabb), (cast ShapeContact.leanScratch__shapeContact : CollisionManifold)) : Bool) : Bool) : Bool)) {
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
-    return cast _Runtime.callValue(ShapeContact.writeCircleContact__shapeContact, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.writeCircleContact__shapeContact((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideCircleCircleContactManifold(a:CollisionCircle, b:CollisionCircle, out:CollisionContactManifold):Bool {
-    if ((cast !(cast _Runtime.callValue(testCircleCircleCollision, cast ([a, b, ShapeContact.leanScratch__shapeContact] : Array<Dynamic>)) : Bool) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+    if ((cast !(cast (cast testCircleCircleCollision((cast a : CollisionCircle), (cast b : CollisionCircle), (cast ShapeContact.leanScratch__shapeContact : CollisionManifold)) : Bool) : Bool) : Bool)) {
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
-    return cast _Runtime.callValue(ShapeContact.writeCircleContact__shapeContact, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.writeCircleContact__shapeContact((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideCircleObbContactManifold(a:CollisionCircle, b:CollisionObb, out:CollisionContactManifold):Bool {
-    if ((cast !(cast _Runtime.callValue(testCircleObbCollision, cast ([a, b, ShapeContact.leanScratch__shapeContact] : Array<Dynamic>)) : Bool) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+    if ((cast !(cast (cast testCircleObbCollision((cast a : CollisionCircle), (cast b : CollisionObb), (cast ShapeContact.leanScratch__shapeContact : CollisionManifold)) : Bool) : Bool) : Bool)) {
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
-    return cast _Runtime.callValue(ShapeContact.writeCircleContact__shapeContact, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.writeCircleContact__shapeContact((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideCirclePolygonContactManifold(a:CollisionCircle, b:CollisionPolygon, out:CollisionContactManifold):Bool {
-    if ((cast !(cast _Runtime.callValue(testCirclePolygonCollision, cast ([a, b, ShapeContact.leanScratch__shapeContact] : Array<Dynamic>)) : Bool) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+    if ((cast !(cast (cast testCirclePolygonCollision((cast a : CollisionCircle), (cast b : CollisionPolygon), (cast ShapeContact.leanScratch__shapeContact : CollisionManifold)) : Bool) : Bool) : Bool)) {
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
-    return cast _Runtime.callValue(ShapeContact.writeCircleContact__shapeContact, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.writeCircleContact__shapeContact((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideObbObbContactManifold(a:CollisionObb, b:CollisionObb, out:CollisionContactManifold):Bool {
-    _Runtime.callValue(writeObbVertices, cast ([a, ShapeContact.contactScratchA__shapeContact] : Array<Dynamic>));
-    _Runtime.callValue(writeObbVertices, cast ([b, ShapeContact.contactScratchB__shapeContact] : Array<Dynamic>));
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([ShapeContact.contactScratchA__shapeContact, 4.0, ShapeContact.contactScratchB__shapeContact, 4.0, out] : Array<Dynamic>));
+    writeObbVertices((cast a : CollisionObb), (cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._Float64Array));
+    writeObbVertices((cast b : CollisionObb), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._Float64Array));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast ShapeContact.contactScratchB__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collideObbPolygonContactManifold(a:CollisionObb, b:CollisionPolygon, out:CollisionContactManifold):Bool {
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(writeObbVertices, cast ([a, ShapeContact.contactScratchA__shapeContact] : Array<Dynamic>));
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    writeObbVertices((cast a : CollisionObb), (cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._Float64Array));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([ShapeContact.contactScratchA__shapeContact, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast ShapeContact.contactScratchA__shapeContact : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
   public static function collidePolygonPolygonContactManifold(a:CollisionPolygon, b:CollisionPolygon, out:CollisionContactManifold):Bool {
-    var aPoints:Dynamic = cast _Runtime.UNDEFINED;
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
+    var aPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
     aPoints = _Runtime.field(a, 'points');
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeContact.convexContact__shapeContact, cast ([aPoints, (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1), bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeContact.convexContact__shapeContact((cast aPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionContactManifold)) : Bool);
     return cast null;
   }
 
-  public static function convexContact__shapeContact(ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionContactManifold):Bool {
-    var separationA:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeA:Dynamic = cast _Runtime.UNDEFINED;
-    var normalAX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalAY:Dynamic = cast _Runtime.UNDEFINED;
-    var separationB:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeB:Dynamic = cast _Runtime.UNDEFINED;
-    var magnitude:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceIsA:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceX:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceCount:Dynamic = cast _Runtime.UNDEFINED;
-    var incidentX:Dynamic = cast _Runtime.UNDEFINED;
-    var incidentCount:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceEdge:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceNext:Dynamic = cast _Runtime.UNDEFINED;
-    var v1X:Dynamic = cast _Runtime.UNDEFINED;
-    var v1Y:Dynamic = cast _Runtime.UNDEFINED;
-    var v2X:Dynamic = cast _Runtime.UNDEFINED;
-    var v2Y:Dynamic = cast _Runtime.UNDEFINED;
-    var incidentEdge:Dynamic = cast _Runtime.UNDEFINED;
-    var incidentNext:Dynamic = cast _Runtime.UNDEFINED;
-    var p0X:Dynamic = cast _Runtime.UNDEFINED;
-    var p0Y:Dynamic = cast _Runtime.UNDEFINED;
-    var p1X:Dynamic = cast _Runtime.UNDEFINED;
-    var p1Y:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentX:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentY:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentLength:Dynamic = cast _Runtime.UNDEFINED;
-    var low:Dynamic = cast _Runtime.UNDEFINED;
-    var high:Dynamic = cast _Runtime.UNDEFINED;
-    var t0:Dynamic = cast _Runtime.UNDEFINED;
-    var t1:Dynamic = cast _Runtime.UNDEFINED;
-    var clipStart:Dynamic = cast _Runtime.UNDEFINED;
-    var clipEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentSpan:Dynamic = cast _Runtime.UNDEFINED;
-    var referenceSeparation:Dynamic = cast _Runtime.UNDEFINED;
+  public static function convexContact__shapeContact(ax:flighthq._internal._ArrayLike<Float>, an:Float, bx:flighthq._internal._ArrayLike<Float>, bn:Float, out:CollisionContactManifold):Bool {
+    var separationA:Float = cast _Runtime.UNDEFINED;
+    var edgeA:Float = cast _Runtime.UNDEFINED;
+    var normalAX:Float = cast _Runtime.UNDEFINED;
+    var normalAY:Float = cast _Runtime.UNDEFINED;
+    var separationB:Float = cast _Runtime.UNDEFINED;
+    var edgeB:Float = cast _Runtime.UNDEFINED;
+    var magnitude:Float = cast _Runtime.UNDEFINED;
+    var referenceIsA:Bool = cast _Runtime.UNDEFINED;
+    var referenceX:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
+    var referenceCount:Float = cast _Runtime.UNDEFINED;
+    var incidentX:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
+    var incidentCount:Float = cast _Runtime.UNDEFINED;
+    var referenceEdge:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
+    var referenceNext:Float = cast _Runtime.UNDEFINED;
+    var v1X:Float = cast _Runtime.UNDEFINED;
+    var v1Y:Float = cast _Runtime.UNDEFINED;
+    var v2X:Float = cast _Runtime.UNDEFINED;
+    var v2Y:Float = cast _Runtime.UNDEFINED;
+    var incidentEdge:Float = cast _Runtime.UNDEFINED;
+    var incidentNext:Float = cast _Runtime.UNDEFINED;
+    var p0X:Float = cast _Runtime.UNDEFINED;
+    var p0Y:Float = cast _Runtime.UNDEFINED;
+    var p1X:Float = cast _Runtime.UNDEFINED;
+    var p1Y:Float = cast _Runtime.UNDEFINED;
+    var tangentX:Float = cast _Runtime.UNDEFINED;
+    var tangentY:Float = cast _Runtime.UNDEFINED;
+    var tangentLength:Float = cast _Runtime.UNDEFINED;
+    var low:Float = cast _Runtime.UNDEFINED;
+    var high:Float = cast _Runtime.UNDEFINED;
+    var t0:Float = cast _Runtime.UNDEFINED;
+    var t1:Float = cast _Runtime.UNDEFINED;
+    var clipStart:Float = cast _Runtime.UNDEFINED;
+    var clipEnd:Float = cast _Runtime.UNDEFINED;
+    var tangentSpan:Float = cast _Runtime.UNDEFINED;
+    var referenceSeparation:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast an : Float) < (cast 3.0 : Float)) : Bool) || (cast ((cast bn : Float) < (cast 3.0 : Float)) : Bool)) : Bool) || (cast ((cast an : Float) > (cast FEATURE_INDEX_LIMIT : Float)) : Bool)) : Bool) || (cast ((cast bn : Float) > (cast FEATURE_INDEX_LIMIT : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
-    separationA = _Runtime.callValue(ShapeContact.maxFaceSeparation__shapeContact, cast ([ax, an, bx, bn] : Array<Dynamic>));
+    separationA = (cast ShapeContact.maxFaceSeparation__shapeContact((cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float), (cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float)) : Float);
     if ((cast ((cast ((cast separationA : Float) >= (cast 0.0 : Float)) : Bool) || (cast ((cast ShapeContact.separationEdge__shapeContact : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
     edgeA = ShapeContact.separationEdge__shapeContact;
     normalAX = ShapeContact.separationNormalX__shapeContact;
     normalAY = ShapeContact.separationNormalY__shapeContact;
-    separationB = _Runtime.callValue(ShapeContact.maxFaceSeparation__shapeContact, cast ([bx, bn, ax, an] : Array<Dynamic>));
+    separationB = (cast ShapeContact.maxFaceSeparation__shapeContact((cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float), (cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float)) : Float);
     if ((cast ((cast ((cast separationB : Float) >= (cast 0.0 : Float)) : Bool) || (cast ((cast ShapeContact.separationEdge__shapeContact : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
     edgeB = ShapeContact.separationEdge__shapeContact;
@@ -173,7 +174,7 @@ class ShapeContact {
     v1Y = _Runtime.getIndex(referenceX, ((_Runtime.toInt32(referenceEdge) << 1) + 1.0));
     v2X = _Runtime.getIndex(referenceX, (_Runtime.toInt32(referenceNext) << 1));
     v2Y = _Runtime.getIndex(referenceX, ((_Runtime.toInt32(referenceNext) << 1) + 1.0));
-    incidentEdge = _Runtime.callValue(ShapeContact.mostAntiParallelEdge__shapeContact, cast ([incidentX, incidentCount, normalX, normalY] : Array<Dynamic>));
+    incidentEdge = (cast ShapeContact.mostAntiParallelEdge__shapeContact((cast incidentX : flighthq._internal._ArrayLike<Float>), (cast incidentCount : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
     incidentNext = ((cast _Runtime.strictEquals((incidentEdge + 1.0), incidentCount) : Bool) ? (cast 0.0 : Dynamic) : (cast (incidentEdge + 1.0) : Dynamic));
     p0X = _Runtime.getIndex(incidentX, (_Runtime.toInt32(incidentEdge) << 1));
     p0Y = _Runtime.getIndex(incidentX, ((_Runtime.toInt32(incidentEdge) << 1) + 1.0));
@@ -183,7 +184,7 @@ class ShapeContact {
     tangentY = (v2Y - v1Y);
     tangentLength = HxMath.sqrt(((tangentX * tangentX) + (tangentY * tangentY)));
     if ((cast ((cast tangentLength : Float) <= (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
     (tangentX = cast ((tangentX / tangentLength) : Dynamic));
@@ -196,10 +197,10 @@ class ShapeContact {
     clipEnd = 1.0;
     tangentSpan = (t1 - t0);
     if ((cast ((cast HxMath.abs(tangentSpan) : Float) > (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) {
-      var sLow:Dynamic = ((low - t0) / tangentSpan);
-      var sHigh:Dynamic = ((high - t0) / tangentSpan);
-      var sMin:Dynamic = ((cast ((cast sLow : Float) < (cast sHigh : Float)) : Bool) ? (cast sLow : Dynamic) : (cast sHigh : Dynamic));
-      var sMax:Dynamic = ((cast ((cast sLow : Float) < (cast sHigh : Float)) : Bool) ? (cast sHigh : Dynamic) : (cast sLow : Dynamic));
+      var sLow:Float = ((low - t0) / tangentSpan);
+      var sHigh:Float = ((high - t0) / tangentSpan);
+      var sMin:Float = ((cast ((cast sLow : Float) < (cast sHigh : Float)) : Bool) ? (cast sLow : Dynamic) : (cast sHigh : Dynamic));
+      var sMax:Float = ((cast ((cast sLow : Float) < (cast sHigh : Float)) : Bool) ? (cast sHigh : Dynamic) : (cast sLow : Dynamic));
       if ((cast ((cast sMin : Float) > (cast clipStart : Float)) : Bool)) { (clipStart = cast (sMin : Dynamic)); }
       if ((cast ((cast sMax : Float) < (cast clipEnd : Float)) : Bool)) { (clipEnd = cast (sMax : Dynamic)); }
     } else { if ((cast ((cast ((cast t0 : Float) < (cast (low - ShapeContact.EPS__shapeContact) : Float)) : Bool) || (cast ((cast t0 : Float) > (cast (high + ShapeContact.EPS__shapeContact) : Float)) : Bool)) : Bool)) {
@@ -207,17 +208,17 @@ class ShapeContact {
       (clipEnd = cast (0.0 : Dynamic));
     } }
     referenceSeparation = ((cast referenceIsA : Bool) ? (cast separationA : Dynamic) : (cast separationB : Dynamic));
-    _Runtime.setField(out, 'normalX', ((cast referenceIsA : Bool) ? (cast -normalX : Dynamic) : (cast normalX : Dynamic)));
-    _Runtime.setField(out, 'normalY', ((cast referenceIsA : Bool) ? (cast -normalY : Dynamic) : (cast normalY : Dynamic)));
-    _Runtime.setField(out, 'depth', -referenceSeparation);
-    _Runtime.setField(out, 'overlapping', true);
-    _Runtime.setField(out, 'pointCount', 0.0);
+    ((cast out : CollisionContactManifold).normalX = ((cast referenceIsA : Bool) ? (cast -normalX : Dynamic) : (cast normalX : Dynamic)));
+    ((cast out : CollisionContactManifold).normalY = ((cast referenceIsA : Bool) ? (cast -normalY : Dynamic) : (cast normalY : Dynamic)));
+    ((cast out : CollisionContactManifold).depth = -referenceSeparation);
+    ((cast out : CollisionContactManifold).overlapping = true);
+    ((cast out : CollisionContactManifold).pointCount = 0.0);
     if ((cast ((cast clipStart : Float) <= (cast clipEnd : Float)) : Bool)) {
-      var first:Dynamic = _Runtime.callValue(packContactFeatureId, cast ([referenceIsA, referenceEdge, incidentEdge, false] : Array<Dynamic>));
-      _Runtime.callValue(ShapeContact.appendClippedContact__shapeContact, cast ([p0X, p0Y, p1X, p1Y, clipStart, v1X, v1Y, normalX, normalY, first, out] : Array<Dynamic>));
+      var first:Float = (cast packContactFeatureId((cast referenceIsA : Bool), (cast referenceEdge : Float), (cast incidentEdge : Float), (cast false : Bool)) : Float);
+      ShapeContact.appendClippedContact__shapeContact((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipStart : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast first : Float), (cast out : CollisionContactManifold));
       if ((cast ((cast clipEnd : Float) > (cast clipStart : Float)) : Bool)) {
-        var second:Dynamic = _Runtime.callValue(packContactFeatureId, cast ([referenceIsA, referenceEdge, incidentEdge, true] : Array<Dynamic>));
-        _Runtime.callValue(ShapeContact.appendClippedContact__shapeContact, cast ([p0X, p0Y, p1X, p1Y, clipEnd, v1X, v1Y, normalX, normalY, second, out] : Array<Dynamic>));
+        var second:Float = (cast packContactFeatureId((cast referenceIsA : Bool), (cast referenceEdge : Float), (cast incidentEdge : Float), (cast true : Bool)) : Float);
+        ShapeContact.appendClippedContact__shapeContact((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipEnd : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast second : Float), (cast out : CollisionContactManifold));
       }
     }
     return cast true;
@@ -225,33 +226,33 @@ class ShapeContact {
   }
 
   public static function appendClippedContact__shapeContact(p0X:Float, p0Y:Float, p1X:Float, p1Y:Float, s:Float, faceX:Float, faceY:Float, normalX:Float, normalY:Float, featureId:Float, out:CollisionContactManifold):Void {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var separation:Dynamic = cast _Runtime.UNDEFINED;
-    var point:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var separation:Float = cast _Runtime.UNDEFINED;
+    var point:CollisionContactPoint = cast _Runtime.UNDEFINED;
     x = (p0X + ((p1X - p0X) * s));
     y = (p0Y + ((p1Y - p0Y) * s));
     separation = ((normalX * (x - faceX)) + (normalY * (y - faceY)));
     if ((cast ((cast separation : Float) > (cast 0.0 : Float)) : Bool)) { return; }
-    point = flighthq._internal._StaticIndex.readArray(_Runtime.field(out, 'points'), _Runtime.field(out, 'pointCount'));
-    _Runtime.setField(point, 'x', x);
-    _Runtime.setField(point, 'y', y);
-    _Runtime.setField(point, 'depth', -separation);
-    _Runtime.setField(point, 'featureId', featureId);
-    _Runtime.incrementField(out, 'pointCount', 1, true);
+    point = flighthq._internal._StaticIndex.readArray((cast out : CollisionContactManifold).points, (cast out : CollisionContactManifold).pointCount);
+    ((cast point : CollisionContactPoint).x = x);
+    ((cast point : CollisionContactPoint).y = y);
+    ((cast point : CollisionContactPoint).depth = -separation);
+    ((cast point : CollisionContactPoint).featureId = featureId);
+    (cast out : CollisionContactManifold).pointCount++;
   }
 
-  public static function maxFaceSeparation__shapeContact(sx:Dynamic, sn:Float, ox:Dynamic, on:Float):Float {
-    var centroidX:Dynamic = cast _Runtime.UNDEFINED;
-    var centroidY:Dynamic = cast _Runtime.UNDEFINED;
-    var best:Dynamic = cast _Runtime.UNDEFINED;
-    var bestEdge:Dynamic = cast _Runtime.UNDEFINED;
-    var bestNormalX:Dynamic = cast _Runtime.UNDEFINED;
-    var bestNormalY:Dynamic = cast _Runtime.UNDEFINED;
+  public static function maxFaceSeparation__shapeContact(sx:flighthq._internal._ArrayLike<Float>, sn:Float, ox:flighthq._internal._ArrayLike<Float>, on:Float):Float {
+    var centroidX:Float = cast _Runtime.UNDEFINED;
+    var centroidY:Float = cast _Runtime.UNDEFINED;
+    var best:Float = cast _Runtime.UNDEFINED;
+    var bestEdge:Float = cast _Runtime.UNDEFINED;
+    var bestNormalX:Float = cast _Runtime.UNDEFINED;
+    var bestNormalY:Float = cast _Runtime.UNDEFINED;
     centroidX = 0.0;
     centroidY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sn : Float)) : Bool)) {
         (centroidX = cast ((centroidX + _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (centroidY = cast ((centroidY + _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
@@ -265,14 +266,14 @@ class ShapeContact {
     bestNormalX = 0.0;
     bestNormalY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sn : Float)) : Bool)) {
-        var j:Dynamic = ((cast _Runtime.strictEquals((i + 1.0), sn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
-        var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var normalX:Dynamic = _Runtime.subtractNumbers(_Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
-        var normalY:Dynamic = _Runtime.subtractNumbers(x0, _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1)));
-        var length:Dynamic = HxMath.sqrt(((normalX * normalX) + (normalY * normalY)));
+        var j:Float = ((cast _Runtime.strictEquals((i + 1.0), sn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
+        var x0:Float = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
+        var y0:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var normalX:Float = _Runtime.subtractNumbers(_Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
+        var normalY:Float = _Runtime.subtractNumbers(x0, _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1)));
+        var length:Float = HxMath.sqrt(((normalX * normalX) + (normalY * normalY)));
         if ((cast ((cast length : Float) <= (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) { i++; continue; }
         (normalX = cast ((normalX / length) : Dynamic));
         (normalY = cast ((normalY / length) : Dynamic));
@@ -280,11 +281,11 @@ class ShapeContact {
           (normalX = cast (-normalX : Dynamic));
           (normalY = cast (-normalY : Dynamic));
         }
-        var separation:Dynamic = HxMath.POSITIVE_INFINITY;
+        var separation:Float = HxMath.POSITIVE_INFINITY;
         {
-          var k:Dynamic = 0.0;
+          var k:Float = 0.0;
           while ((cast ((cast k : Float) < (cast on : Float)) : Bool)) {
-            var projected:Dynamic = ((normalX * _Runtime.subtractNumbers(_Runtime.getIndex(ox, (_Runtime.toInt32(k) << 1)), x0)) + (normalY * _Runtime.subtractNumbers(_Runtime.getIndex(ox, ((_Runtime.toInt32(k) << 1) + 1.0)), y0)));
+            var projected:Float = ((normalX * _Runtime.subtractNumbers(_Runtime.getIndex(ox, (_Runtime.toInt32(k) << 1)), x0)) + (normalY * _Runtime.subtractNumbers(_Runtime.getIndex(ox, ((_Runtime.toInt32(k) << 1) + 1.0)), y0)));
             if ((cast ((cast projected : Float) < (cast separation : Float)) : Bool)) { (separation = cast (projected : Dynamic)); }
             k++;
           }
@@ -305,15 +306,15 @@ class ShapeContact {
     return cast null;
   }
 
-  public static function mostAntiParallelEdge__shapeContact(px:Dynamic, pn:Float, normalX:Float, normalY:Float):Float {
-    var centroidX:Dynamic = cast _Runtime.UNDEFINED;
-    var centroidY:Dynamic = cast _Runtime.UNDEFINED;
-    var best:Dynamic = cast _Runtime.UNDEFINED;
-    var bestEdge:Dynamic = cast _Runtime.UNDEFINED;
+  public static function mostAntiParallelEdge__shapeContact(px:flighthq._internal._ArrayLike<Float>, pn:Float, normalX:Float, normalY:Float):Float {
+    var centroidX:Float = cast _Runtime.UNDEFINED;
+    var centroidY:Float = cast _Runtime.UNDEFINED;
+    var best:Float = cast _Runtime.UNDEFINED;
+    var bestEdge:Float = cast _Runtime.UNDEFINED;
     centroidX = 0.0;
     centroidY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         (centroidX = cast ((centroidX + _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (centroidY = cast ((centroidY + _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
@@ -325,14 +326,14 @@ class ShapeContact {
     best = HxMath.POSITIVE_INFINITY;
     bestEdge = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var j:Dynamic = ((cast _Runtime.strictEquals((i + 1.0), pn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
-        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var edgeNormalX:Dynamic = _Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
-        var edgeNormalY:Dynamic = _Runtime.subtractNumbers(x0, _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1)));
-        var length:Dynamic = HxMath.sqrt(((edgeNormalX * edgeNormalX) + (edgeNormalY * edgeNormalY)));
+        var j:Float = ((cast _Runtime.strictEquals((i + 1.0), pn) : Bool) ? (cast 0.0 : Dynamic) : (cast (i + 1.0) : Dynamic));
+        var x0:Float = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
+        var y0:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var edgeNormalX:Float = _Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0)), y0);
+        var edgeNormalY:Float = _Runtime.subtractNumbers(x0, _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1)));
+        var length:Float = HxMath.sqrt(((edgeNormalX * edgeNormalX) + (edgeNormalY * edgeNormalY)));
         if ((cast ((cast length : Float) <= (cast ShapeContact.EPS__shapeContact : Float)) : Bool)) { i++; continue; }
         (edgeNormalX = cast ((edgeNormalX / length) : Dynamic));
         (edgeNormalY = cast ((edgeNormalY / length) : Dynamic));
@@ -340,7 +341,7 @@ class ShapeContact {
           (edgeNormalX = cast (-edgeNormalX : Dynamic));
           (edgeNormalY = cast (-edgeNormalY : Dynamic));
         }
-        var alignment:Dynamic = ((edgeNormalX * normalX) + (edgeNormalY * normalY));
+        var alignment:Float = ((edgeNormalX * normalX) + (edgeNormalY * normalY));
         if ((cast ((cast alignment : Float) < (cast best : Float)) : Bool)) {
           (best = cast (alignment : Dynamic));
           (bestEdge = cast (i : Dynamic));
@@ -353,40 +354,40 @@ class ShapeContact {
   }
 
   public static function writeCircleContact__shapeContact(cx:Float, cy:Float, radius:Float, out:CollisionContactManifold):Bool {
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    var depth:Dynamic = cast _Runtime.UNDEFINED;
-    var point:Dynamic = cast _Runtime.UNDEFINED;
-    normalX = _Runtime.field(ShapeContact.leanScratch__shapeContact, 'normalX');
-    normalY = _Runtime.field(ShapeContact.leanScratch__shapeContact, 'normalY');
-    depth = _Runtime.field(ShapeContact.leanScratch__shapeContact, 'depth');
-    _Runtime.setField(out, 'normalX', normalX);
-    _Runtime.setField(out, 'normalY', normalY);
-    _Runtime.setField(out, 'depth', depth);
-    _Runtime.setField(out, 'overlapping', true);
-    point = flighthq._internal._StaticIndex.readArray(_Runtime.field(out, 'points'), 0.0);
-    _Runtime.setField(point, 'x', (cx - (normalX * radius)));
-    _Runtime.setField(point, 'y', (cy - (normalY * radius)));
-    _Runtime.setField(point, 'depth', depth);
-    _Runtime.setField(point, 'featureId', 0.0);
-    _Runtime.setField(out, 'pointCount', 1.0);
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
+    var depth:Float = cast _Runtime.UNDEFINED;
+    var point:CollisionContactPoint = cast _Runtime.UNDEFINED;
+    normalX = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).normalX;
+    normalY = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).normalY;
+    depth = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).depth;
+    ((cast out : CollisionContactManifold).normalX = normalX);
+    ((cast out : CollisionContactManifold).normalY = normalY);
+    ((cast out : CollisionContactManifold).depth = depth);
+    ((cast out : CollisionContactManifold).overlapping = true);
+    point = flighthq._internal._StaticIndex.readArray((cast out : CollisionContactManifold).points, 0.0);
+    ((cast point : CollisionContactPoint).x = (cx - (normalX * radius)));
+    ((cast point : CollisionContactPoint).y = (cy - (normalY * radius)));
+    ((cast point : CollisionContactPoint).depth = depth);
+    ((cast point : CollisionContactPoint).featureId = 0.0);
+    ((cast out : CollisionContactManifold).pointCount = 1.0);
     return cast true;
     return cast null;
   }
 
-  public static final EPS__shapeContact:Dynamic = 1e-9;
+  public static final EPS__shapeContact:Float = 1e-9;
 
-  public static final REFERENCE_BIAS__shapeContact:Dynamic = 0.000001;
+  public static final REFERENCE_BIAS__shapeContact:Float = 0.000001;
 
-  public static final contactScratchA__shapeContact:Dynamic = new flighthq._internal._Float64Array(8.0);
+  public static final contactScratchA__shapeContact:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(8.0);
 
-  public static final contactScratchB__shapeContact:Dynamic = new flighthq._internal._Float64Array(8.0);
+  public static final contactScratchB__shapeContact:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(8.0);
 
-  public static final leanScratch__shapeContact:CollisionManifold = _Runtime.callValue(createCollisionManifold, cast ([] : Array<Dynamic>));
+  public static final leanScratch__shapeContact:CollisionManifold = (cast createCollisionManifold() : CollisionManifold);
 
-  public static var separationEdge__shapeContact:Dynamic = -1.0;
+  public static var separationEdge__shapeContact:Float = -1.0;
 
-  public static var separationNormalX__shapeContact:Dynamic = 0.0;
+  public static var separationNormalX__shapeContact:Float = 0.0;
 
-  public static var separationNormalY__shapeContact:Dynamic = 0.0;
+  public static var separationNormalY__shapeContact:Float = 0.0;
 }

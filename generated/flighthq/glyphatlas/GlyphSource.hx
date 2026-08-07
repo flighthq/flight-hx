@@ -7,19 +7,23 @@ import flighthq.glyphatlas.GlyphAtlas.getGlyphAtlasBitmap;
 import flighthq.glyphatlas.GlyphAtlasEntry.getGlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasKerning;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasMetrics;
+import flighthq.types.Bitmap;
 import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphAtlas;
+import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.TextureSource;
 
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
-    return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
-      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast _Runtime.callValue(getGlyphAtlasBitmap, cast ([atlas] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    }, getGlyphEntry: function(codepoint:Dynamic) {
-      return cast _Runtime.callValue(getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
-    }, getGlyphKerning: function(left:Dynamic, right:Dynamic) {
-      return cast _Runtime.callValue(getGlyphAtlasKerning, cast ([atlas, left, right] : Array<Dynamic>));
-    }, getGlyphMetrics: function() {
-      return cast _Runtime.callValue(getGlyphAtlasMetrics, cast ([atlas] : Array<Dynamic>));
+    return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<Bitmap> {
+      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast (cast getGlyphAtlasBitmap((cast atlas : GlyphAtlas)) : Null<TextureSource>) : Dynamic) : (cast null : Dynamic));
+    }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
+      return cast (cast getGlyphAtlasEntry((cast atlas : GlyphAtlas), (cast codepoint : Float)) : Null<GlyphEntry>);
+    }, getGlyphKerning: function(left:Float, right:Float):Float {
+      return cast (cast getGlyphAtlasKerning((cast atlas : GlyphAtlas), (cast left : Float), (cast right : Float)) : Float);
+    }, getGlyphMetrics: function():GlyphMetrics {
+      return cast (cast getGlyphAtlasMetrics((cast atlas : GlyphAtlas)) : GlyphMetrics);
     } };
     return cast null;
   }

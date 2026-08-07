@@ -11,17 +11,17 @@ import flighthq.types.ImageEncoder;
 class RegisterWebImageEncoders {
   public static function registerWebImageEncoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageEncoders.webEncodableMimeTypes__registerWebImageEncoders)) {
-      _Runtime.callValue(registerImageEncoder, cast ([mimeType, _Runtime.callValue(RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders, cast ([mimeType] : Array<Dynamic>))] : Array<Dynamic>));
+      registerImageEncoder((cast mimeType : String), (cast (cast RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders((cast mimeType : String)) : ImageEncoder) : ImageEncoder));
     }
   }
 
   public static function createCanvasImageEncoder__registerWebImageEncoders(mimeType:String):ImageEncoder {
     return cast function(image:DecodedImage, ?options:ImageEncodeOptions):flighthq._internal._Promise<flighthq._internal._UInt8Array> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        var canvas:Dynamic = cast _Runtime.UNDEFINED;
-        var context:Dynamic = cast _Runtime.UNDEFINED;
-        var pixels:Dynamic = cast _Runtime.UNDEFINED;
-        var blob:Dynamic = cast _Runtime.UNDEFINED;
+        var canvas:flighthq._internal.dom.OffscreenCanvas = cast _Runtime.UNDEFINED;
+        var context:flighthq._internal.dom.OffscreenCanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+        var pixels:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+        var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
         canvas = _Runtime.construct(flighthq._internal._HostValueLut.get('OffscreenCanvas'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
         context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : flighthq._internal.dom.OffscreenCanvasRenderingContext2D);
         pixels = new flighthq._internal._UInt8ClampedArray(_Runtime.field(image, 'data'));

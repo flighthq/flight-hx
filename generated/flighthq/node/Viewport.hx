@@ -9,7 +9,7 @@ import flighthq.types.Viewport.ViewportLike;
 
 class Viewport {
   public static function createViewport(?obj:ViewportLike):flighthq.types.Viewport {
-    return cast _Runtime.callValue(createEntity, cast ([{ devicePixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'devicePixelRatio'), function():Dynamic return cast 1.0), height: _Runtime.coalesce(_Runtime.optionalField(obj, 'height'), function():Dynamic return cast 0.0), width: _Runtime.coalesce(_Runtime.optionalField(obj, 'width'), function():Dynamic return cast 0.0), x: _Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0), y: _Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { devicePixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'devicePixelRatio'), function():Dynamic return cast 1.0), height: _Runtime.coalesce(_Runtime.optionalField(obj, 'height'), function():Dynamic return cast 0.0), width: _Runtime.coalesce(_Runtime.optionalField(obj, 'width'), function():Dynamic return cast 0.0), x: _Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0), y: _Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) } : Null<{ var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; }>)) : flighthq.types.Viewport);
     return cast null;
   }
 

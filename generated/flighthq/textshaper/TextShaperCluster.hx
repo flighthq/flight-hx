@@ -4,22 +4,23 @@ package flighthq.textshaper;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ShapedRun;
+import flighthq.types.ShapedRun.ShapedGlyph;
 
 class TextShaperCluster {
   public static function getCaretPositionsForRun(run:ShapedRun):Array<Float> {
-    var glyphs:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var positions:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
+    var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var positions:Array<Float> = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
     glyphs = _Runtime.field(run, 'glyphs');
     count = _Runtime.field(run, 'glyphCount');
     positions = _Runtime.createArray((count + 1.0));
     flighthq._internal._StaticIndex.writeArray(positions, 0.0, 0.0);
     x = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'xAdvance')) : Dynamic));
+        (x = cast ((x + (cast flighthq._internal._StaticIndex.readArray(glyphs, i) : ShapedGlyph).xAdvance) : Dynamic));
         flighthq._internal._StaticIndex.writeArray(positions, (i + 1.0), x);
         i++;
       }
@@ -29,17 +30,17 @@ class TextShaperCluster {
   }
 
   public static function getClusterForIndex(run:ShapedRun, stringIndex:Float):Float {
-    var glyphs:Dynamic = cast _Runtime.UNDEFINED;
-    var best:Dynamic = cast _Runtime.UNDEFINED;
+    var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
+    var best:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast -1.0; }
     if ((cast ((cast stringIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     glyphs = _Runtime.field(run, 'glyphs');
     best = -1.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster') : Float) <= (cast stringIndex : Float)) : Bool)) {
-          (best = cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster') : Dynamic));
+        if ((cast ((cast (cast flighthq._internal._StaticIndex.readArray(glyphs, i) : ShapedGlyph).cluster : Float) <= (cast stringIndex : Float)) : Bool)) {
+          (best = cast ((cast flighthq._internal._StaticIndex.readArray(glyphs, i) : ShapedGlyph).cluster : Dynamic));
         }
         i++;
       }
@@ -49,19 +50,19 @@ class TextShaperCluster {
   }
 
   public static function getIndexRangeForCluster(run:ShapedRun, cluster:Float, ?stringLength:Float):Null<Array<Float>> {
-    var glyphs:Dynamic = cast _Runtime.UNDEFINED;
+    var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast null; }
     glyphs = _Runtime.field(run, 'glyphs');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, i), 'cluster'), cluster) : Bool)) {
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(glyphs, i) : ShapedGlyph).cluster, cluster) : Bool)) {
           var end:Null<Float> = cast _Runtime.UNDEFINED;
           {
-            var j:Dynamic = (i + 1.0);
+            var j:Float = (i + 1.0);
             while ((cast ((cast j : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {
-              if ((cast !_Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, j), 'cluster'), cluster) : Bool)) {
-                (end = cast (_Runtime.field(flighthq._internal._StaticIndex.readArray(glyphs, j), 'cluster') : Dynamic));
+              if ((cast !_Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(glyphs, j) : ShapedGlyph).cluster, cluster) : Bool)) {
+                (end = cast ((cast flighthq._internal._StaticIndex.readArray(glyphs, j) : ShapedGlyph).cluster : Dynamic));
                 break;
               }
               j++;

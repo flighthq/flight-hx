@@ -7,26 +7,29 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.ConvolutionEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuConvolutionEffect {
   @:noCompletion
-  public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Dynamic = 49.0;
+  public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Float = 49.0;
 
   @:noCompletion
   public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixX:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixY:Dynamic = cast _Runtime.UNDEFINED;
-    var bias:Dynamic = cast _Runtime.UNDEFINED;
-    var clampEdge:Dynamic = cast _Runtime.UNDEFINED;
-    var preserveAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeColor:Dynamic = cast _Runtime.UNDEFINED;
-    var divisor:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var matrix:Array<Float> = cast _Runtime.UNDEFINED;
+    var matrixX:Float = cast _Runtime.UNDEFINED;
+    var matrixY:Float = cast _Runtime.UNDEFINED;
+    var bias:Float = cast _Runtime.UNDEFINED;
+    var clampEdge:Bool = cast _Runtime.UNDEFINED;
+    var preserveAlpha:Bool = cast _Runtime.UNDEFINED;
+    var edgeColor:Float = cast _Runtime.UNDEFINED;
+    var divisor:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     __destructure0 = effect;
     matrix = _Runtime.field(__destructure0, 'matrix');
     matrixX = _Runtime.field(__destructure0, 'matrixX');
@@ -38,9 +41,9 @@ class WgpuConvolutionEffect {
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.convolution', WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
+    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.convolution' : String), (cast WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, matrixX);
@@ -54,28 +57,28 @@ class WgpuConvolutionEffect {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 10.0, ((_Runtime.toInt32(edgeColor) & 255) / 255.0));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 11.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(f32, (12.0 + i), flighthq._internal._StaticIndex.readArray(matrix, i));
           i++;
         }
       }
-    }] : Array<Dynamic>));
+    } : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyConvolutionEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect)] : Array<Dynamic>));
+  public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyConvolutionEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ConvolutionEffect) : ConvolutionEffect));
   };
 
   public static function registerWgpuConvolutionEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ConvolutionEffect', defaultWgpuConvolutionEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ConvolutionEffect' : String), (cast defaultWgpuConvolutionEffectRunner : WgpuRenderEffectRunner));
   }
 
   public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
         (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
         i++;
@@ -85,5 +88,5 @@ class WgpuConvolutionEffect {
     return cast null;
   }
 
-  public static final CONVOLUTION_WGSL__wgpuConvolutionEffect:Dynamic = '\nstruct Uniforms {\n  texelSize : vec2f,\n  matrixX : i32,\n  matrixY : i32,\n  divisor : f32,\n  bias : f32,\n  clampEdge : i32,\n  preserveAlpha : i32,\n  edgeColor : vec4f,\n  matrix : array<f32, ' + Std.string(MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE) + '>,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sampleAt(uv : vec2f) -> vec4f {\n  if (uni.clampEdge != 0) {\n    return textureSampleLevel(tex, smp, clamp(uv, vec2f(0.0), vec2f(1.0)), 0.0);\n  }\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return uni.edgeColor;\n  }\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let offsetX = uni.matrixX / 2;\n  let offsetY = uni.matrixY / 2;\n  var sum = vec4f(0.0);\n  for (var ky : i32 = 0; ky < uni.matrixY; ky++) {\n    for (var kx : i32 = 0; kx < uni.matrixX; kx++) {\n      let weight = uni.matrix[ky * uni.matrixX + kx];\n      let off = vec2f(f32(kx - offsetX), f32(ky - offsetY)) * uni.texelSize;\n      sum += sampleAt(uv + off) * weight;\n    }\n  }\n  sum = sum / uni.divisor;\n  sum += uni.bias / 255.0;\n  sum = clamp(sum, vec4f(0.0), vec4f(1.0));\n  if (uni.preserveAlpha != 0) {\n    let origAlpha = textureSampleLevel(tex, smp, uv, 0.0).a;\n    let straightRGB = select(vec3f(0.0), clamp(sum.rgb / sum.a, vec3f(0.0), vec3f(1.0)), sum.a > 0.0);\n    sum = vec4f(straightRGB * origAlpha, origAlpha);\n  }\n  return sum;\n}';
+  public static final CONVOLUTION_WGSL__wgpuConvolutionEffect:String = '\nstruct Uniforms {\n  texelSize : vec2f,\n  matrixX : i32,\n  matrixY : i32,\n  divisor : f32,\n  bias : f32,\n  clampEdge : i32,\n  preserveAlpha : i32,\n  edgeColor : vec4f,\n  matrix : array<f32, ' + Std.string(MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE) + '>,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sampleAt(uv : vec2f) -> vec4f {\n  if (uni.clampEdge != 0) {\n    return textureSampleLevel(tex, smp, clamp(uv, vec2f(0.0), vec2f(1.0)), 0.0);\n  }\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return uni.edgeColor;\n  }\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let offsetX = uni.matrixX / 2;\n  let offsetY = uni.matrixY / 2;\n  var sum = vec4f(0.0);\n  for (var ky : i32 = 0; ky < uni.matrixY; ky++) {\n    for (var kx : i32 = 0; kx < uni.matrixX; kx++) {\n      let weight = uni.matrix[ky * uni.matrixX + kx];\n      let off = vec2f(f32(kx - offsetX), f32(ky - offsetY)) * uni.texelSize;\n      sum += sampleAt(uv + off) * weight;\n    }\n  }\n  sum = sum / uni.divisor;\n  sum += uni.bias / 255.0;\n  sum = clamp(sum, vec4f(0.0), vec4f(1.0));\n  if (uni.preserveAlpha != 0) {\n    let origAlpha = textureSampleLevel(tex, smp, uv, 0.0).a;\n    let straightRGB = select(vec3f(0.0), clamp(sum.rgb / sum.a, vec3f(0.0), vec3f(1.0)), sum.a > 0.0);\n    sum = vec4f(straightRGB * origAlpha, origAlpha);\n  }\n  return sum;\n}';
 }

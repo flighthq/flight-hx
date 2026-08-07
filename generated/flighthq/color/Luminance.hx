@@ -7,12 +7,12 @@ import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 
 class Luminance {
   public static function getColorContrastRatio(a:Float, b:Float):Float {
-    var la:Dynamic = cast _Runtime.UNDEFINED;
-    var lb:Dynamic = cast _Runtime.UNDEFINED;
-    var lighter:Dynamic = cast _Runtime.UNDEFINED;
-    var darker:Dynamic = cast _Runtime.UNDEFINED;
-    la = _Runtime.callValue(getColorLuminance, cast ([a] : Array<Dynamic>));
-    lb = _Runtime.callValue(getColorLuminance, cast ([b] : Array<Dynamic>));
+    var la:Float = cast _Runtime.UNDEFINED;
+    var lb:Float = cast _Runtime.UNDEFINED;
+    var lighter:Float = cast _Runtime.UNDEFINED;
+    var darker:Float = cast _Runtime.UNDEFINED;
+    la = (cast getColorLuminance((cast a : Float)) : Float);
+    lb = (cast getColorLuminance((cast b : Float)) : Float);
     lighter = HxMath.max(la, lb);
     darker = HxMath.min(la, lb);
     return cast ((lighter + 0.05) / (darker + 0.05));
@@ -20,12 +20,12 @@ class Luminance {
   }
 
   public static function getColorLuminance(color:Float):Float {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0)] : Array<Dynamic>));
-    g = _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0)] : Array<Dynamic>));
-    b = _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0)] : Array<Dynamic>));
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    r = (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0) : Float)) : Float);
+    g = (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0) : Float)) : Float);
+    b = (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0) : Float)) : Float);
     return cast (((0.2126 * r) + (0.7152 * g)) + (0.0722 * b));
     return cast null;
   }

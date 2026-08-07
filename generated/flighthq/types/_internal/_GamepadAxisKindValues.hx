@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _GamepadAxisKindValues {
-  public static final GamepadAxisKindValue:Dynamic = { STICK_LEFT_X: 'StickLeftX', STICK_LEFT_Y: 'StickLeftY', STICK_RIGHT_X: 'StickRightX', STICK_RIGHT_Y: 'StickRightY' };
+  public static final GamepadAxisKindValue:{ var STICK_LEFT_X:String; var STICK_LEFT_Y:String; var STICK_RIGHT_X:String; var STICK_RIGHT_Y:String; } = { STICK_LEFT_X: 'StickLeftX', STICK_LEFT_Y: 'StickLeftY', STICK_RIGHT_X: 'StickRightX', STICK_RIGHT_Y: 'StickRightY' };
 }

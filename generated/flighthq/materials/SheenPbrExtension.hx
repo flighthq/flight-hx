@@ -6,18 +6,27 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
 import flighthq.types.SheenPbrExtension;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SheenPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SheenPbrExtensionValues.SheenPbrExtensionKind;
 
 class SheenPbrExtension {
   public static function createSheenPbrExtension(?opts:Dynamic):flighthq.types.SheenPbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ kind: SheenPbrExtensionKind, sheenColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColor'), function():Dynamic return cast 255.0), sheenColorMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColorMap'), function():Dynamic return cast null), sheenColorMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColorMapUvSet'), function():Dynamic return cast 0.0), sheenRoughness: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughness'), function():Dynamic return cast 0.0), sheenRoughnessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughnessMap'), function():Dynamic return cast null), sheenRoughnessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughnessMapUvSet'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity({ kind: SheenPbrExtensionKind, sheenColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColor'), function():Dynamic return cast 255.0), sheenColorMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColorMap'), function():Dynamic return cast null), sheenColorMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenColorMapUvSet'), function():Dynamic return cast 0.0), sheenRoughness: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughness'), function():Dynamic return cast 0.0), sheenRoughnessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughnessMap'), function():Dynamic return cast null), sheenRoughnessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'sheenRoughnessMapUvSet'), function():Dynamic return cast 0.0) }) : flighthq.types.SheenPbrExtension);
     return cast null;
   }
 
   public static function isValidSheenPbrExtension(value:flighthq.types.SheenPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'sheenRoughness')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'sheenColorMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'sheenRoughnessMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'sheenRoughness') : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'sheenColorMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'sheenRoughnessMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

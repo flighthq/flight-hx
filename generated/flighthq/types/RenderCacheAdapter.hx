@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderCacheAdapter = { var adapt:Dynamic; var cache:Null<RenderCache>; var signals:Null<RenderCacheAdapterSignals>; };
+typedef RenderCacheAdapter = { var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>; var cache:Null<RenderCache>; var signals:Null<RenderCacheAdapterSignals>; };

@@ -15,7 +15,7 @@ import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
 
 class Assets {
-  public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
+  public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<T> {
     return cast Facade_Assets_flighthq_assets_AssetLibrary.acquireAsset(library, id);
     return cast null;
   }
@@ -47,7 +47,7 @@ class Assets {
     return cast null;
   }
 
-  public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
+  public static function getAsset<T>(library:AssetLibrary, id:String):Null<T> {
     return cast Facade_Assets_flighthq_assets_AssetLibrary.getAsset(library, id);
     return cast null;
   }
@@ -76,7 +76,7 @@ class Assets {
     Facade_Assets_flighthq_assets_AssetLibrary.registerAssetDescriptor(library, descriptor);
   }
 
-  public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
+  public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<T>):Void {
     Facade_Assets_flighthq_assets_AssetLibrary.registerAssetLoader(library, type, adapter);
   }
 

@@ -19,54 +19,58 @@ import flighthq.types.ClipRegion;
 import flighthq.types.Entity.Kind;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
+import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DDataFactory;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DRuntimeFactory;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.PartialNode;
+import flighthq.types.Scene2D;
 import flighthq.types.Types.Node2DTraitsKey;
 import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
 
 class DisplayObject {
-  public static function createNode2D<R>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<Dynamic>):Node2D {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createNode, cast ([kind, obj, createData, _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : Dynamic) : NodeRuntimeFactory<Dynamic>))] : Array<Dynamic>)) : Node2D);
-    _Runtime.callValue(initTransform2DTrait, cast ([out, obj] : Array<Dynamic>));
-    _Runtime.callValue(initBoundsRectangleTrait, cast ([out, obj] : Array<Dynamic>));
-    _Runtime.callValue(initAppearanceTrait, cast ([out, obj] : Array<Dynamic>));
-    _Runtime.callValue(initBlendModeTrait, cast ([out, obj] : Array<Dynamic>));
-    _Runtime.callValue(initMaterialTrait, cast ([out, obj] : Array<Dynamic>));
-    _Runtime.callValue(initClipTrait, cast ([out, obj] : Array<Dynamic>));
+  public static function createNode2D<R>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
+    var out:Node2D = cast _Runtime.UNDEFINED;
+    out = (cast (cast createNode((cast kind : String), obj, createData, _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flighthq._internal._Any) : NodeRuntimeFactory<R>))) : Node2D) : Node2D);
+    initTransform2DTrait(out, (cast obj : Null<flighthq._internal._Any>));
+    initBoundsRectangleTrait(out, (cast obj : Null<flighthq._internal._Any>));
+    initAppearanceTrait(out, (cast obj : Null<flighthq._internal._Any>));
+    initBlendModeTrait(out, (cast obj : Null<flighthq._internal._Any>));
+    initMaterialTrait(out, (cast obj : Null<flighthq._internal._Any>));
+    initClipTrait(out, (cast obj : Null<flighthq._internal._Any>));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
   public static function createNode2DRuntime(?methods:Dynamic):Node2DRuntime {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createNodeRuntime, cast ([methods] : Array<Dynamic>)) : Node2DRuntime);
-    _Runtime.setField(out, 'traits', Node2DTraitsKey);
-    _Runtime.setField(out, 'scene2d', null);
-    _Runtime.callValue(initTransform2DRuntimeTrait, cast ([out, methods] : Array<Dynamic>));
-    _Runtime.callValue(initBoundsRectangleRuntimeTrait, cast ([out, methods] : Array<Dynamic>));
+    var out:Node2DRuntime = cast _Runtime.UNDEFINED;
+    out = (cast (cast createNodeRuntime((cast methods : Null<flighthq._internal._Any>)) : Node2DRuntime) : Node2DRuntime);
+    ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node2DTraits>>; }).traits = Node2DTraitsKey);
+    ((cast out : { var scene2d:Null<Scene2D>; }).scene2d = null);
+    initTransform2DRuntimeTrait(out, (cast methods : Null<flighthq._internal._Any>));
+    initBoundsRectangleRuntimeTrait(out, (cast methods : Null<flighthq._internal._Any>));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
   public static function getNode2DRuntime(source:Node2D):Node2DRuntime {
-    return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : Node2DRuntime);
+    return cast (cast (cast getNodeRuntime(source) : Node2DRuntime) : Node2DRuntime);
     return cast null;
   }
 
   public static function isNode2D(node:NodeAny):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'traits'), Node2DTraitsKey);
+    return cast _Runtime.strictEquals(_Runtime.field((cast getNodeRuntime(node) : NodeRuntime<flighthq._internal._Any>), 'traits'), Node2DTraitsKey);
     return cast null;
   }
 
   public static function setNode2DClip(source:Node2D, value:Null<ClipRegion>):Void {
-    _Runtime.setField(source, 'clip', value);
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    ((cast source : { var clip:Null<ClipRegion>; }).clip = value);
+    invalidateNodeAppearance(source);
   }
 }

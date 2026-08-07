@@ -7,14 +7,14 @@ import flighthq.types.EasingFunction;
 
 class EaseDampedSine {
   public static function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
-    var wavelength:Dynamic = cast _Runtime.UNDEFINED;
-    var overshoot:Dynamic = cast _Runtime.UNDEFINED;
-    var phase:Dynamic = cast _Runtime.UNDEFINED;
-    wavelength = _Runtime.callValue(EaseDampedSine.toDampedSineWavelength__easeDampedSine, cast ([period] : Array<Dynamic>));
-    overshoot = _Runtime.callValue(EaseDampedSine.toDampedSineOvershoot__easeDampedSine, cast ([amplitude] : Array<Dynamic>));
-    phase = _Runtime.callValue(EaseDampedSine.toDampedSinePhase__easeDampedSine, cast ([overshoot, wavelength] : Array<Dynamic>));
-    return cast function(t:Dynamic) {
-      var time:Dynamic = cast _Runtime.UNDEFINED;
+    var wavelength:Float = cast _Runtime.UNDEFINED;
+    var overshoot:Float = cast _Runtime.UNDEFINED;
+    var phase:Float = cast _Runtime.UNDEFINED;
+    wavelength = (cast EaseDampedSine.toDampedSineWavelength__easeDampedSine((cast period : Float)) : Float);
+    overshoot = (cast EaseDampedSine.toDampedSineOvershoot__easeDampedSine((cast amplitude : Float)) : Float);
+    phase = (cast EaseDampedSine.toDampedSinePhase__easeDampedSine((cast overshoot : Float), (cast wavelength : Float)) : Float);
+    return cast function(t:Float):Float {
+      var time:Float = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
       time = (t - 1.0);
       return cast -_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(overshoot, HxMath.pow(2.0, (10.0 * time))), HxMath.sin((((time - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength)));
@@ -23,14 +23,14 @@ class EaseDampedSine {
   }
 
   public static function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
-    var wavelength:Dynamic = cast _Runtime.UNDEFINED;
-    var overshoot:Dynamic = cast _Runtime.UNDEFINED;
-    var phase:Dynamic = cast _Runtime.UNDEFINED;
-    wavelength = _Runtime.callValue(EaseDampedSine.toDampedSineWavelength__easeDampedSine, cast ([period] : Array<Dynamic>));
-    overshoot = _Runtime.callValue(EaseDampedSine.toDampedSineOvershoot__easeDampedSine, cast ([amplitude] : Array<Dynamic>));
-    phase = _Runtime.callValue(EaseDampedSine.toDampedSinePhase__easeDampedSine, cast ([overshoot, wavelength] : Array<Dynamic>));
-    return cast function(t:Dynamic) {
-      var time:Dynamic = cast _Runtime.UNDEFINED;
+    var wavelength:Float = cast _Runtime.UNDEFINED;
+    var overshoot:Float = cast _Runtime.UNDEFINED;
+    var phase:Float = cast _Runtime.UNDEFINED;
+    wavelength = (cast EaseDampedSine.toDampedSineWavelength__easeDampedSine((cast period : Float)) : Float);
+    overshoot = (cast EaseDampedSine.toDampedSineOvershoot__easeDampedSine((cast amplitude : Float)) : Float);
+    phase = (cast EaseDampedSine.toDampedSinePhase__easeDampedSine((cast overshoot : Float), (cast wavelength : Float)) : Float);
+    return cast function(t:Float):Float {
+      var time:Float = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
       time = ((t * 2.0) - 1.0);
       if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
@@ -42,13 +42,13 @@ class EaseDampedSine {
   }
 
   public static function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
-    var wavelength:Dynamic = cast _Runtime.UNDEFINED;
-    var overshoot:Dynamic = cast _Runtime.UNDEFINED;
-    var phase:Dynamic = cast _Runtime.UNDEFINED;
-    wavelength = _Runtime.callValue(EaseDampedSine.toDampedSineWavelength__easeDampedSine, cast ([period] : Array<Dynamic>));
-    overshoot = _Runtime.callValue(EaseDampedSine.toDampedSineOvershoot__easeDampedSine, cast ([amplitude] : Array<Dynamic>));
-    phase = _Runtime.callValue(EaseDampedSine.toDampedSinePhase__easeDampedSine, cast ([overshoot, wavelength] : Array<Dynamic>));
-    return cast function(t:Dynamic) {
+    var wavelength:Float = cast _Runtime.UNDEFINED;
+    var overshoot:Float = cast _Runtime.UNDEFINED;
+    var phase:Float = cast _Runtime.UNDEFINED;
+    wavelength = (cast EaseDampedSine.toDampedSineWavelength__easeDampedSine((cast period : Float)) : Float);
+    overshoot = (cast EaseDampedSine.toDampedSineOvershoot__easeDampedSine((cast amplitude : Float)) : Float);
+    phase = (cast EaseDampedSine.toDampedSinePhase__easeDampedSine((cast overshoot : Float), (cast wavelength : Float)) : Float);
+    return cast function(t:Float):Float {
       if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
       return cast (_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(overshoot, HxMath.pow(2.0, (-10.0 * t))), HxMath.sin((((t - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength))) + 1.0);
     };
@@ -70,7 +70,7 @@ class EaseDampedSine {
     return cast null;
   }
 
-  public static final TAU__easeDampedSine:Dynamic = (2.0 * HxMath.PI);
+  public static final TAU__easeDampedSine:Float = (2.0 * HxMath.PI);
 
-  public static final DEFAULT_DAMPED_SINE_PERIOD__easeDampedSine:Dynamic = 0.4;
+  public static final DEFAULT_DAMPED_SINE_PERIOD__easeDampedSine:Float = 0.4;
 }

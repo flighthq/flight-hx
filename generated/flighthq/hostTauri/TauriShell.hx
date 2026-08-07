@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriOpenerPlugin;
 
 class TauriShell {
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
-    var opener:Dynamic = cast _Runtime.UNDEFINED;
-    opener = _Runtime.field(tauri, 'opener');
-    return cast { openExternal: function(url:Dynamic):flighthq._internal._Promise<Dynamic> {
+    var opener:TauriOpenerPlugin = cast _Runtime.UNDEFINED;
+    opener = (cast tauri : TauriApi).opener;
+    return cast { openExternal: function(url:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(opener, 'openUrl', cast ([url] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl(url), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -28,11 +29,11 @@ class TauriShell {
           });
         })
       );
-    }, openPath: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, openPath: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(opener, 'openPath', cast ([path] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath(path), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -46,11 +47,11 @@ class TauriShell {
           });
         })
       );
-    }, openPathResult: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, openPathResult: function(path:String):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(opener, 'openPath', cast ([path] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath(path), function(__awaitValue2:Dynamic):Dynamic {
               __awaitValue2;
               return flighthq._internal._Async.flowReturn('');
             });
@@ -64,11 +65,11 @@ class TauriShell {
           });
         })
       );
-    }, showItemInFolder: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, showItemInFolder: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(opener, 'revealItemInDir', cast ([path] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).revealItemInDir(path), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -82,23 +83,23 @@ class TauriShell {
           });
         })
       );
-    }, moveToTrash: function():flighthq._internal._Promise<Dynamic> {
+    }, moveToTrash: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, moveItemsToTrash: function(paths:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, moveItemsToTrash: function(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(_Runtime.callProperty(paths, 'map', cast ([function() return false] : Array<Dynamic>)));
+        return flighthq._internal._Async.resolve(_Runtime.callProperty(paths, 'map', cast ([function(__unused0:String, __unused1:Float, __unused2:Array<String>):Bool return false] : Array<Dynamic>)));
       }));
-    }, readShortcutLink: function():flighthq._internal._Promise<Dynamic> {
+    }, readShortcutLink: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, writeShortcutLink: function():flighthq._internal._Promise<Dynamic> {
+    }, writeShortcutLink: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, beep: function() {
+    }, beep: function():Void {
 
     } };
     return cast null;

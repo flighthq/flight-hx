@@ -9,15 +9,15 @@ import flighthq.types.MorphShape.MorphShapeGradientEndpointReason;
 
 class ExplainMorphShapeGradientEndpoints {
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
-    var issue:Dynamic = cast _Runtime.UNDEFINED;
-    issue = _Runtime.callValue(getMorphShapeGradientEndpointIssue, cast ([start, end] : Array<Dynamic>));
-    return cast { endStopCount: _Runtime.field(_Runtime.field(end, 'colors'), 'length'), reason: _Runtime.callValue(ExplainMorphShapeGradientEndpoints.getReason__explainMorphShapeGradientEndpoints, cast ([issue] : Array<Dynamic>)), startStopCount: _Runtime.field(_Runtime.field(start, 'colors'), 'length'), supported: _Runtime.strictEquals(issue, ExplainMorphShapeGradientEndpoints.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
+    var issue:Float = cast _Runtime.UNDEFINED;
+    issue = (cast getMorphShapeGradientEndpointIssue((cast start : MorphShapeGradientEndpoint), (cast end : MorphShapeGradientEndpoint)) : Float);
+    return cast { endStopCount: _Runtime.field(_Runtime.field(end, 'colors'), 'length'), reason: (cast ExplainMorphShapeGradientEndpoints.getReason__explainMorphShapeGradientEndpoints((cast issue : Float)) : MorphShapeGradientEndpointReason), startStopCount: _Runtime.field(_Runtime.field(start, 'colors'), 'length'), supported: _Runtime.strictEquals(issue, ExplainMorphShapeGradientEndpoints.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
     return cast null;
   }
 
   public static function getMorphShapeGradientEndpointIssue(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):Float {
-    var startCount:Dynamic = cast _Runtime.UNDEFINED;
-    var endCount:Dynamic = cast _Runtime.UNDEFINED;
+    var startCount:Float = cast _Runtime.UNDEFINED;
+    var endCount:Float = cast _Runtime.UNDEFINED;
     startCount = _Runtime.field(_Runtime.field(start, 'colors'), 'length');
     endCount = _Runtime.field(_Runtime.field(end, 'colors'), 'length');
     if ((cast ((cast _Runtime.strictEquals(startCount, 0.0) : Bool) || (cast _Runtime.strictEquals(endCount, 0.0) : Bool)) : Bool)) { return cast ExplainMorphShapeGradientEndpoints.GradientEndpointIssueEmpty__explainMorphShapeGradientEndpoints; }
@@ -41,13 +41,13 @@ class ExplainMorphShapeGradientEndpoints {
     return cast null;
   }
 
-  public static final GradientEndpointIssueNone__explainMorphShapeGradientEndpoints:Dynamic = 0.0;
+  public static final GradientEndpointIssueNone__explainMorphShapeGradientEndpoints:Float = 0.0;
 
-  public static final GradientEndpointIssueEmpty__explainMorphShapeGradientEndpoints:Dynamic = 1.0;
+  public static final GradientEndpointIssueEmpty__explainMorphShapeGradientEndpoints:Float = 1.0;
 
-  public static final GradientEndpointIssueStartComponents__explainMorphShapeGradientEndpoints:Dynamic = 2.0;
+  public static final GradientEndpointIssueStartComponents__explainMorphShapeGradientEndpoints:Float = 2.0;
 
-  public static final GradientEndpointIssueEndComponents__explainMorphShapeGradientEndpoints:Dynamic = 3.0;
+  public static final GradientEndpointIssueEndComponents__explainMorphShapeGradientEndpoints:Float = 3.0;
 
-  public static final GradientEndpointIssueStopCount__explainMorphShapeGradientEndpoints:Dynamic = 4.0;
+  public static final GradientEndpointIssueStopCount__explainMorphShapeGradientEndpoints:Float = 4.0;
 }

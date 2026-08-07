@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Hierarchy.removeNodeChild;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 
 class Scene2DSlotReference {
   public static function setScene2DSlotReferenceContent(reference:flighthq.types.Scene2DDocument.Scene2DSlotReference, content:Null<Node2D>):Void {
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
-    previous = _Runtime.field(reference, 'content');
-    if ((cast ((cast _Runtime.strictEquals(previous, content) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(content, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([content] : Array<Dynamic>)), _Runtime.field(reference, 'target'))) : Bool)) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(previous, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([previous] : Array<Dynamic>)), _Runtime.field(reference, 'target')) : Bool)) : Bool)) {
-      _Runtime.callValue(removeNodeChild, cast ([_Runtime.field(reference, 'target'), previous] : Array<Dynamic>));
+    var previous:Null<Node2D> = cast _Runtime.UNDEFINED;
+    previous = (cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).content;
+    if ((cast ((cast _Runtime.strictEquals(previous, content) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(content, null), function():Dynamic return cast _Runtime.strictEquals((cast getNodeParent(content) : Null<NodeOf<Node2DTraits>>), (cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).target)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(previous, null) : Bool) && (cast _Runtime.strictEquals((cast getNodeParent(previous) : Null<NodeOf<Node2DTraits>>), (cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).target) : Bool)) : Bool)) {
+      (cast removeNodeChild((cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).target, previous) : NodeOf<Node2DTraits>);
     }
-    _Runtime.setField(reference, 'content', content);
-    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([_Runtime.field(reference, 'target'), content] : Array<Dynamic>)); }
+    ((cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).content = content);
+    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { (cast addNodeChild((cast reference : flighthq.types.Scene2DDocument.Scene2DSlotReference).target, content) : NodeOf<Node2DTraits>); }
   }
 }

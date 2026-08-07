@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextShaperCache = { var _entries:Dynamic; };
+typedef TextShaperCache = { var _entries:flighthq._internal._Map<String, ShapedRun>; };

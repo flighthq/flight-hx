@@ -4,39 +4,44 @@ package flighthq.render;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderState.getRenderStateRuntime;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.Kind;
+import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
 class Renderer {
   @:noCompletion
   public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    _Runtime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(source, 'displayObjectClipHooks'), null) : Bool)) { _Runtime.setField(target, 'displayObjectClipHooks', _Runtime.field(source, 'displayObjectClipHooks')); }
+    copyRenderersFromRenderState((cast target : RenderState), (cast source : RenderState));
+    if ((cast !_Runtime.strictEquals((cast source : RenderState).displayObjectClipHooks, null) : Bool)) { ((cast target : RenderState).displayObjectClipHooks = (cast source : RenderState).displayObjectClipHooks); }
   }
 
   @:noCompletion
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    ((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap') : flighthq._internal._Map).forEach(function(renderer:Dynamic, kind:Dynamic) {
-      _Runtime.callValue(registerRenderer, cast ([target, kind, renderer] : Array<Dynamic>));
+    ((cast (cast (cast getRenderStateRuntime((cast source : RenderState)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).forEach(function(renderer:flighthq.types.Renderer, kind:String, __unused0:flighthq._internal._Map<String, flighthq.types.Renderer>):Void {
+      registerRenderer((cast target : RenderState), (cast kind : String), (cast renderer : flighthq.types.Renderer));
     }));
   }
 
   @:noCompletion
   public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var sourcePaddingRegistry:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceShapeCommands:Dynamic = cast _Runtime.UNDEFINED;
-    targetRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([target] : Array<Dynamic>));
-    sourceRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>));
-    _Runtime.setField(targetRuntime, 'colorAdjustmentResolver', _Runtime.field(sourceRuntime, 'colorAdjustmentResolver'));
-    sourcePaddingRegistry = _Runtime.field(sourceRuntime, 'renderEffectPaddingResolverRegistry');
-    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourcePaddingRegistry]) : Dynamic)));
-    sourceShapeCommands = _Runtime.field(sourceRuntime, 'canvasShapeCommandRegistry');
-    _Runtime.setField(targetRuntime, 'canvasShapeCommandRegistry', ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceShapeCommands]) : Dynamic)));
+    var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    var sourceRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    var sourcePaddingRegistry:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
+    var sourceShapeCommands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast getRenderStateRuntime((cast target : RenderState)) : RenderStateRuntime);
+    sourceRuntime = (cast getRenderStateRuntime((cast source : RenderState)) : RenderStateRuntime);
+    ((cast targetRuntime : RenderStateRuntime).colorAdjustmentResolver = (cast sourceRuntime : RenderStateRuntime).colorAdjustmentResolver);
+    sourcePaddingRegistry = (cast sourceRuntime : RenderStateRuntime).renderEffectPaddingResolverRegistry;
+    ((cast targetRuntime : RenderStateRuntime).renderEffectPaddingResolverRegistry = ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourcePaddingRegistry]) : Dynamic)));
+    sourceShapeCommands = (cast sourceRuntime : RenderStateRuntime).canvasShapeCommandRegistry;
+    ((cast targetRuntime : RenderStateRuntime).canvasShapeCommandRegistry = ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceShapeCommands]) : Dynamic)));
   }
 
   @:noCompletion
@@ -46,19 +51,19 @@ class Renderer {
   }
 
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).get(kind)), renderer) : Bool)) { return; }
-    _Runtime.setField(runtime, 'rendererMapId', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(runtime, 'rendererMapId'), 1.0)), 0));
-    ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).set(kind, renderer));
+    var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    if ((cast _Runtime.strictEquals(((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).get(kind)), renderer) : Bool)) { return; }
+    ((cast runtime : RenderStateRuntime).rendererMapId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : RenderStateRuntime).rendererMapId + 1.0)), 0));
+    ((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).set(kind, renderer));
   }
 
   @:noCompletion
-  public static function registerRenderers(state:RenderState, entries:Array<Array<Dynamic>>):Void {
-    for (__iteration0 in _Runtime.iterable(entries)) {
-      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var renderer:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      _Runtime.callValue(registerRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
+  public static function registerRenderers(state:RenderState, entries:Array<Array<flighthq._internal._Union2<Kind, flighthq.types.Renderer>>>):Void {
+    for (__iteration1 in _Runtime.iterable(entries)) {
+      var kind:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var renderer:flighthq.types.Renderer = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+      registerRenderer((cast state : RenderState), (cast kind : String), (cast renderer : flighthq.types.Renderer));
     }
   }
 }

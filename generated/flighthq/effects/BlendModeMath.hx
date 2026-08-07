@@ -7,25 +7,25 @@ import flighthq.types.AdvancedBlendMode;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 
 class BlendModeMath {
-  public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
+  public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     {
       var __switchValue = mode;
-      if (__switchValue == AdvancedBlendModeValue.Hue) {
-        ({ var __destructure0:Dynamic = _Runtime.callValue(BlendModeMath.setBlendSaturation__blendModeMath, cast ([csR, csG, csB, _Runtime.callValue(BlendModeMath.blendSaturation__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure0, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure0, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure0, 2); __destructure0; });
-        ({ var __destructure1:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([r, g, b, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure1, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure1, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure1, 2); __destructure1; });
+      if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Hue) {
+        ({ var __destructure0:Dynamic = (cast BlendModeMath.setBlendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast BlendModeMath.blendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure0, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure0, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure0, 2); __destructure0; });
+        ({ var __destructure1:Dynamic = (cast BlendModeMath.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast BlendModeMath.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure1, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure1, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure1, 2); __destructure1; });
       }
-      else if (__switchValue == AdvancedBlendModeValue.Saturation) {
-        ({ var __destructure2:Dynamic = _Runtime.callValue(BlendModeMath.setBlendSaturation__blendModeMath, cast ([cbR, cbG, cbB, _Runtime.callValue(BlendModeMath.blendSaturation__blendModeMath, cast ([csR, csG, csB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure2, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure2, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure2, 2); __destructure2; });
-        ({ var __destructure3:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([r, g, b, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure3, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure3, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure3, 2); __destructure3; });
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Saturation) {
+        ({ var __destructure2:Dynamic = (cast BlendModeMath.setBlendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast BlendModeMath.blendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure2, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure2, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure2, 2); __destructure2; });
+        ({ var __destructure3:Dynamic = (cast BlendModeMath.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast BlendModeMath.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure3, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure3, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure3, 2); __destructure3; });
       }
-      else if (__switchValue == AdvancedBlendModeValue.Color) {
-        ({ var __destructure4:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([csR, csG, csB, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure4, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure4, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure4, 2); __destructure4; });
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Color) {
+        ({ var __destructure4:Dynamic = (cast BlendModeMath.setBlendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast BlendModeMath.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure4, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure4, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure4, 2); __destructure4; });
       }
-      else if (__switchValue == AdvancedBlendModeValue.Luminosity) {
-        ({ var __destructure5:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([cbR, cbG, cbB, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([csR, csG, csB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast flighthq._internal._StaticIndex.readArray(__destructure5, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure5, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure5, 2); __destructure5; });
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Luminosity) {
+        ({ var __destructure5:Dynamic = (cast BlendModeMath.setBlendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast BlendModeMath.blendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flighthq._internal._StaticIndex.readArray(__destructure5, 0); g = cast flighthq._internal._StaticIndex.readArray(__destructure5, 1); b = cast flighthq._internal._StaticIndex.readArray(__destructure5, 2); __destructure5; });
       }
       else  {
         (r = cast (csR : Dynamic));
@@ -38,17 +38,17 @@ class BlendModeMath {
     _Runtime.setIndex(out, 2.0, b);
   }
 
-  public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(isNonSeparableBlendMode, cast ([mode] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(blendNonSeparableRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));
+  public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    if ((cast (cast isNonSeparableBlendMode((cast mode : String)) : Bool) : Bool)) {
+      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), (cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>));
       return;
     }
-    r = _Runtime.callValue(getSeparableBlendChannel, cast ([mode, cbR, csR] : Array<Dynamic>));
-    g = _Runtime.callValue(getSeparableBlendChannel, cast ([mode, cbG, csG] : Array<Dynamic>));
-    b = _Runtime.callValue(getSeparableBlendChannel, cast ([mode, cbB, csB] : Array<Dynamic>));
+    r = (cast getSeparableBlendChannel((cast mode : String), (cast cbR : Float), (cast csR : Float)) : Float);
+    g = (cast getSeparableBlendChannel((cast mode : String), (cast cbG : Float), (cast csG : Float)) : Float);
+    b = (cast getSeparableBlendChannel((cast mode : String), (cast cbB : Float), (cast csB : Float)) : Float);
     _Runtime.setIndex(out, 0.0, r);
     _Runtime.setIndex(out, 1.0, g);
     _Runtime.setIndex(out, 2.0, b);
@@ -57,36 +57,36 @@ class BlendModeMath {
   public static function getSeparableBlendChannel(mode:AdvancedBlendMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
-      if (__switchValue == AdvancedBlendModeValue.Overlay) {
+      if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Overlay) {
         return cast ((cast ((cast cb : Float) <= (cast 0.5 : Float)) : Bool) ? (cast ((2.0 * cb) * cs) : Dynamic) : (cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))) : Dynamic));
       }
-      else if (__switchValue == AdvancedBlendModeValue.HardLight) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).HardLight) {
         return cast ((cast ((cast cs : Float) <= (cast 0.5 : Float)) : Bool) ? (cast ((2.0 * cb) * cs) : Dynamic) : (cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))) : Dynamic));
       }
-      else if (__switchValue == AdvancedBlendModeValue.SoftLight) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).SoftLight) {
         {
-          var d:Dynamic = ((cast ((cast cb : Float) <= (cast 0.25 : Float)) : Bool) ? (cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb) : Dynamic) : (cast HxMath.sqrt(cb) : Dynamic));
+          var d:Float = ((cast ((cast cb : Float) <= (cast 0.25 : Float)) : Bool) ? (cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb) : Dynamic) : (cast HxMath.sqrt(cb) : Dynamic));
           return cast ((cast ((cast cs : Float) <= (cast 0.5 : Float)) : Bool) ? (cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))) : Dynamic) : (cast (cb + (((2.0 * cs) - 1.0) * (d - cb))) : Dynamic));
         }
       }
-      else if (__switchValue == AdvancedBlendModeValue.Darken) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Darken) {
         return cast HxMath.min(cb, cs);
       }
-      else if (__switchValue == AdvancedBlendModeValue.Difference) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Difference) {
         return cast HxMath.abs((cb - cs));
       }
-      else if (__switchValue == AdvancedBlendModeValue.Exclusion) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Exclusion) {
         return cast ((cb + cs) - ((2.0 * cb) * cs));
       }
-      else if (__switchValue == AdvancedBlendModeValue.ColorDodge) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).ColorDodge) {
         if ((cast ((cast cb : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
         if ((cast ((cast cs : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
         return cast HxMath.min(1.0, (cb / (1.0 - cs)));
       }
-      else if (__switchValue == AdvancedBlendModeValue.Lighten) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Lighten) {
         return cast HxMath.max(cb, cs);
       }
-      else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
+      else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).ColorBurn) {
         if ((cast ((cast cb : Float) >= (cast 1.0 : Float)) : Bool)) { return cast 1.0; }
         if ((cast ((cast cs : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
         return cast _Runtime.subtractNumbers(1.0, HxMath.min(1.0, ((1.0 - cb) / cs)));
@@ -99,7 +99,7 @@ class BlendModeMath {
   }
 
   public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
-    return cast _Runtime.orValue(((cast ((cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Hue) : Bool) || (cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Saturation) : Bool)) : Bool) || (cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Color) : Bool)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Luminosity));
+    return cast _Runtime.orValue(((cast ((cast _Runtime.strictEquals(mode, (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Hue) : Bool) || (cast _Runtime.strictEquals(mode, (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Saturation) : Bool)) : Bool) || (cast _Runtime.strictEquals(mode, (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Color) : Bool)), function():Dynamic return cast _Runtime.strictEquals(mode, (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Luminosity));
     return cast null;
   }
 
@@ -114,26 +114,26 @@ class BlendModeMath {
   }
 
   public static function clipBlendColor__blendModeMath(r:Float, g:Float, b:Float):Array<Float> {
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var cr:Dynamic = cast _Runtime.UNDEFINED;
-    var cg:Dynamic = cast _Runtime.UNDEFINED;
-    var cb:Dynamic = cast _Runtime.UNDEFINED;
-    l = _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([r, g, b] : Array<Dynamic>));
+    var l:Float = cast _Runtime.UNDEFINED;
+    var min:Float = cast _Runtime.UNDEFINED;
+    var max:Float = cast _Runtime.UNDEFINED;
+    var cr:Float = cast _Runtime.UNDEFINED;
+    var cg:Float = cast _Runtime.UNDEFINED;
+    var cb:Float = cast _Runtime.UNDEFINED;
+    l = (cast BlendModeMath.blendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float)) : Float);
     min = HxMath.min(HxMath.min(r, g), b);
     max = HxMath.max(HxMath.max(r, g), b);
     cr = r;
     cg = g;
     cb = b;
     if ((cast ((cast min : Float) < (cast 0.0 : Float)) : Bool)) {
-      var denom:Dynamic = (l - min);
+      var denom:Float = (l - min);
       (cr = cast ((l + (((cr - l) * l) / denom)) : Dynamic));
       (cg = cast ((l + (((cg - l) * l) / denom)) : Dynamic));
       (cb = cast ((l + (((cb - l) * l) / denom)) : Dynamic));
     }
     if ((cast ((cast max : Float) > (cast 1.0 : Float)) : Bool)) {
-      var denom:Dynamic = (max - l);
+      var denom:Float = (max - l);
       (cr = cast ((l + (((cr - l) * (1.0 - l)) / denom)) : Dynamic));
       (cg = cast ((l + (((cg - l) * (1.0 - l)) / denom)) : Dynamic));
       (cb = cast ((l + (((cb - l) * (1.0 - l)) / denom)) : Dynamic));
@@ -143,22 +143,22 @@ class BlendModeMath {
   }
 
   public static function setBlendLuminosity__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    d = _Runtime.subtractNumbers(target, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([r, g, b] : Array<Dynamic>)));
-    return cast _Runtime.callValue(BlendModeMath.clipBlendColor__blendModeMath, cast ([(r + d), (g + d), (b + d)] : Array<Dynamic>));
+    var d:Float = cast _Runtime.UNDEFINED;
+    d = (target - (cast BlendModeMath.blendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float)) : Float));
+    return cast (cast BlendModeMath.clipBlendColor__blendModeMath((cast (r + d) : Float), (cast (g + d) : Float), (cast (b + d) : Float)) : Array<Float>);
     return cast null;
   }
 
   public static function setBlendSaturation__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
-    var iMin:Dynamic = cast _Runtime.UNDEFINED;
-    var iMax:Dynamic = cast _Runtime.UNDEFINED;
-    var iMid:Dynamic = cast _Runtime.UNDEFINED;
+    var iMin:Float = cast _Runtime.UNDEFINED;
+    var iMax:Float = cast _Runtime.UNDEFINED;
+    var iMid:Float = cast _Runtime.UNDEFINED;
     out = cast ([r, g, b] : Array<Dynamic>);
     iMin = 0.0;
     iMax = 0.0;
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
         if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) < (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
         if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }

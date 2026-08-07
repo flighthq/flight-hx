@@ -4,15 +4,16 @@ package flighthq.importdiagnostics;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 
 class ImportDiagnosticText {
   public static function formatImportDiagnostic(diagnostic:ImportDiagnostic):String {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var detail:Dynamic = cast _Runtime.UNDEFINED;
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
-    var origin:Dynamic = cast _Runtime.UNDEFINED;
-    var severity:Dynamic = cast _Runtime.UNDEFINED;
-    var detailText:Dynamic = cast _Runtime.UNDEFINED;
+    var detail:Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>> = cast _Runtime.UNDEFINED;
+    var kind:String = cast _Runtime.UNDEFINED;
+    var origin:String = cast _Runtime.UNDEFINED;
+    var severity:ImportDiagnosticSeverity = cast _Runtime.UNDEFINED;
+    var detailText:String = cast _Runtime.UNDEFINED;
     __destructure0 = diagnostic;
     detail = _Runtime.field(__destructure0, 'detail');
     kind = _Runtime.field(__destructure0, 'kind');
@@ -20,7 +21,7 @@ class ImportDiagnosticText {
     severity = _Runtime.field(__destructure0, 'severity');
     detailText = '';
     if ((cast !_Runtime.strictEquals(detail, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var keys:Dynamic = _Runtime.callProperty(flighthq._internal.DynamicObject.keys(detail), 'sort', cast ([] : Array<Dynamic>));
+      var keys:Array<String> = _Runtime.callProperty(flighthq._internal.DynamicObject.keys(detail), 'sort', cast ([] : Array<Dynamic>));
       for (key in _Runtime.iterable(keys)) {
         (detailText = cast ((detailText + ' ' + Std.string(key) + '=' + Std.string(_Runtime.getIndex(detail, key)) + '') : Dynamic));
       }

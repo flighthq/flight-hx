@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,15 +17,15 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuVignetteEffect {
   @:noCompletion
   public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var softness:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var softness:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
     softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
@@ -31,8 +34,8 @@ class WgpuVignetteEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.vignette', WgpuVignetteEffect.VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.vignette' : String), (cast WgpuVignetteEffect.VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, radius);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, softness);
@@ -40,16 +43,16 @@ class WgpuVignetteEffect {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, a);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyVignetteEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
+  public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
   };
 
   public static function registerWgpuVignetteEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'VignetteEffect', defaultWgpuVignetteEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'VignetteEffect' : String), (cast defaultWgpuVignetteEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radius : f32,\n  u_softness : f32,\n  _pad0 : f32,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let centered = uv - vec2f(0.5);\n  let dist = length(centered) * 1.41421356;\n  let vig = smoothstep(uni.u_radius, uni.u_radius - uni.u_softness, dist);\n  let darken = (1.0 - vig) * uni.u_intensity * uni.u_color.a;\n  return vec4f(mix(c.rgb, uni.u_color.rgb, darken), c.a);\n}';
+  public static final VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radius : f32,\n  u_softness : f32,\n  _pad0 : f32,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let centered = uv - vec2f(0.5);\n  let dist = length(centered) * 1.41421356;\n  let vig = smoothstep(uni.u_radius, uni.u_radius - uni.u_softness, dist);\n  let darken = (1.0 - vig) * uni.u_intensity * uni.u_color.a;\n  return vec4f(mix(c.rgb, uni.u_color.rgb, darken), c.a);\n}';
 }

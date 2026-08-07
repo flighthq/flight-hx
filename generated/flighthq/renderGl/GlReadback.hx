@@ -5,23 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 
 class GlReadback {
   @:noCompletion
-  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var readFbo:Dynamic = cast _Runtime.UNDEFINED;
-    var prevFbo:Dynamic = cast _Runtime.UNDEFINED;
-    var status:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var type:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._Float32Array>):Bool {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var readFbo:flighthq._internal.dom.WebGLFramebuffer = cast _Runtime.UNDEFINED;
+    var prevFbo:Null<flighthq._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;
+    var status:Float = cast _Runtime.UNDEFINED;
+    var format:Float = cast _Runtime.UNDEFINED;
+    var type:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.field(target, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(target, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    gl = (cast state : GlRenderState).gl;
     readFbo = _Runtime.coalesce(_Runtime.field(target, 'resolveFramebuffer'), function():Dynamic return cast _Runtime.field(target, 'framebuffer'));
-    prevFbo = _Runtime.field(runtime, 'currentFramebuffer');
+    prevFbo = (cast runtime : GlRenderStateRuntime).currentFramebuffer;
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER), readFbo);
     status = flighthq._internal.backend.WebGl2Backend.checkFramebufferStatus(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER));
     if ((cast !_Runtime.strictEquals(status, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_COMPLETE', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_COMPLETE)) : Bool)) {

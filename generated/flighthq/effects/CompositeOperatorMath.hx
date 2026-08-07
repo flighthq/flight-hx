@@ -7,52 +7,52 @@ import flighthq.types.CompositeOperator;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue;
 
 class CompositeOperatorMath {
-  public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
-    var as:Dynamic = cast _Runtime.UNDEFINED;
-    var ab:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
+    var as:Float = cast _Runtime.UNDEFINED;
+    var ab:Float = cast _Runtime.UNDEFINED;
     var fa:Float = cast _Runtime.UNDEFINED;
     var fb:Float = cast _Runtime.UNDEFINED;
     as = sourceAlpha;
     ab = backdropAlpha;
     {
       var __switchValue = operator_;
-      if (__switchValue == CompositeOperatorValue.Clear) {
+      if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Clear) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.Copy) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Copy) {
         (fa = cast (1.0 : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.DestinationAtop) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationAtop) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (as : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.DestinationIn) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationIn) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast (as : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.DestinationOut) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationOut) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.DestinationOver) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationOver) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (1.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.SourceAtop) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceAtop) {
         (fa = cast (ab : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.SourceIn) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceIn) {
         (fa = cast (ab : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.SourceOut) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceOut) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperatorValue.Xor) {
+      else if (__switchValue == (cast CompositeOperatorValue : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Xor) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }

@@ -49,21 +49,36 @@ import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.ClipRegion;
 import flighthq.types.DisplayObject;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Image;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
+import flighthq.types.RichText;
+import flighthq.types.Sampler;
 import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.Sprite;
 import flighthq.types.SvgDocumentImport.SvgDocumentImportOptions;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
+import flighthq.types.TextLabel;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Transform2D;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.TextLabelKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types.XmlElement;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._RichTextValues.RichTextKind;
@@ -74,13 +89,13 @@ typedef SvgColor__svgDocument = { var alpha:Float; var rgb:Float; };
 
 typedef SvgClipGeometry__svgDocument = { var path:Null<Path>; var region:Null<ClipRegion>; var winding:PathWinding; };
 
-typedef SvgCssRule__svgDocument = { var declarations:Dynamic; var order:Float; var selector:String; var specificity:Float; };
+typedef SvgCssRule__svgDocument = { var declarations:flighthq._internal._Record<String, String>; var order:Float; var selector:String; var specificity:Float; };
 
 typedef SvgGradient__svgDocument = { var cx:Float; var cy:Float; var fx:Float; var fy:Float; var kind:String; var units:String; var spreadMethod:SpreadMethod; var stops:Array<SvgGradientStop__svgDocument>; var transform:Null<Matrix>; var x1:Float; var x2:Float; var y1:Float; var y2:Float; var radius:Float; };
 
 typedef SvgGradientStop__svgDocument = { var color:SvgColor__svgDocument; var offset:Float; };
 
-typedef SvgImportContext__svgDocument = { var cssRules:Array<SvgCssRule__svgDocument>; var diagnostics:Null<Array<ImportDiagnostic>>; var elementsById:Dynamic; var gradientsById:Dynamic; var options:Null<SvgDocumentImportOptions>; var parentByElement:Dynamic; var reportedUnsupportedElements:Dynamic; var resolvingClipUses:Dynamic; var resolvingClips:Dynamic; var resolvingGradients:Dynamic; var resolvingUses:Dynamic; var resolvedDefinitionStyles:Dynamic; };
+typedef SvgImportContext__svgDocument = { var cssRules:Array<SvgCssRule__svgDocument>; var diagnostics:Null<Array<ImportDiagnostic>>; var elementsById:flighthq._internal._Map<String, XmlElement>; var gradientsById:flighthq._internal._Map<String, SvgGradient__svgDocument>; var options:Null<SvgDocumentImportOptions>; var parentByElement:flighthq._internal._Map<XmlElement, Null<XmlElement>>; var reportedUnsupportedElements:flighthq._internal._Set<XmlElement>; var resolvingClipUses:flighthq._internal._Set<String>; var resolvingClips:flighthq._internal._Set<String>; var resolvingGradients:flighthq._internal._Set<String>; var resolvingUses:flighthq._internal._Set<String>; var resolvedDefinitionStyles:flighthq._internal._Map<XmlElement, SvgStyle__svgDocument>; };
 
 typedef SvgStyle__svgDocument = { var clipRule:PathWinding; var color:String; var display:String; var fill:String; var fillOpacity:Float; var fillRule:PathWinding; var filter:String; var fontFamily:String; var fontSize:Float; var fontStyle:String; var fontWeight:String; var opacity:Float; var stroke:String; var strokeDasharray:String; var strokeDashoffset:Float; var strokeLinecap:String; var strokeLinejoin:String; var strokeMiterlimit:Float; var strokeOpacity:Float; var strokeWidth:Float; var textAnchor:String; var visibility:String; };
 
@@ -88,24 +103,24 @@ typedef SvgTextRun__svgDocument = { var style:SvgStyle__svgDocument; var text:St
 
 class SvgDocument {
   public static function createScene2DFromSvgDocument(source:String, ?diagnostics:Array<ImportDiagnostic>, ?options:SvgDocumentImportOptions):DisplayObject {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var document:Dynamic = cast _Runtime.UNDEFINED;
+    var out:DisplayObject = cast _Runtime.UNDEFINED;
+    var document:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var context:SvgImportContext__svgDocument = cast _Runtime.UNDEFINED;
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var rootStyle:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
-    document = _Runtime.callValue(parseXmlDocument, cast ([source] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(document, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([document.name] : Array<Dynamic>)), 'svg') : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'svg.invalid-document', 'createScene2DFromSvgDocument'] : Array<Dynamic>));
+    var viewport:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var rootStyle:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    out = (cast createDisplayObject(_Runtime.field(_Runtime, 'UNDEFINED')) : DisplayObject);
+    document = (cast parseXmlDocument((cast source : String)) : Null<XmlElement>);
+    if ((cast ((cast _Runtime.strictEquals(document, null) : Bool) || (cast !_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast document : flighthq.types.XmlElement).name : String)) : String), 'svg') : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'svg.invalid-document' : String), (cast 'createScene2DFromSvgDocument' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast out;
     }
-    context = { cssRules: _Runtime.callValue(SvgDocument.collectCssRules__svgDocument, cast ([document] : Array<Dynamic>)), diagnostics: diagnostics, elementsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), gradientsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), options: options, parentByElement: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), reportedUnsupportedElements: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClipUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClips: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingGradients: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvedDefinitionStyles: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
-    _Runtime.callValue(SvgDocument.indexSvgDefinitions__svgDocument, cast ([document, context] : Array<Dynamic>));
-    viewport = _Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([document] : Array<Dynamic>));
-    rootStyle = _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([out, document, SvgDocument.defaultSvgStyle__svgDocument, context, viewport, true] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.appendSvgChildren__svgDocument, cast ([out, document, rootStyle, context] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([out, document, context, _Runtime.callValue(SvgDocument.createSvgNode2DBounds__svgDocument, cast ([out] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument, cast ([document, context] : Array<Dynamic>));
+    context = { cssRules: (cast SvgDocument.collectCssRules__svgDocument((cast document : XmlElement)) : Array<SvgCssRule__svgDocument>), diagnostics: diagnostics, elementsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), gradientsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), options: options, parentByElement: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), reportedUnsupportedElements: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClipUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClips: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingGradients: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvedDefinitionStyles: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
+    SvgDocument.indexSvgDefinitions__svgDocument((cast document : XmlElement), context);
+    viewport = (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast document : XmlElement), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }>)) : Null<Matrix>);
+    rootStyle = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast out : Node2D), (cast document : XmlElement), SvgDocument.defaultSvgStyle__svgDocument, context, (cast viewport : Null<Matrix>), (cast true : Bool)) : SvgStyle__svgDocument);
+    SvgDocument.appendSvgChildren__svgDocument((cast out : DisplayObject), (cast document : XmlElement), rootStyle, context);
+    SvgDocument.applySvgElementClip__svgDocument((cast out : Node2D), (cast document : XmlElement), context, (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast out : Node2D)) : Null<Rectangle>) : Null<Rectangle>));
+    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast document : XmlElement), context, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
     return cast out;
     return cast null;
   }
@@ -114,72 +129,72 @@ class SvgDocument {
 
   public static function appendSvgChildren__svgDocument(parent:DisplayObject, element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):Void {
     for (child in _Runtime.iterable(element.children)) {
-      var node:Dynamic = _Runtime.callValue(SvgDocument.createSvgElementNode__svgDocument, cast ([child, parentStyle, context] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(node, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([parent, node] : Array<Dynamic>)); }
+      var node:Null<Node2D> = (cast SvgDocument.createSvgElementNode__svgDocument((cast child : XmlElement), parentStyle, context) : Null<Node2D>);
+      if ((cast !_Runtime.strictEquals(node, null) : Bool)) { (cast addNodeChild(parent, node) : NodeOf<Node2DTraits>); }
     }
   }
 
-  public static function applySvgElementAppearance__svgDocument(target:Node2D, element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument, ?geometryTransform:Null<Matrix>, hasVisualDescendants:Dynamic = false):SvgStyle__svgDocument {
+  public static function applySvgElementAppearance__svgDocument(target:Node2D, element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument, ?geometryTransform:Null<Matrix>, hasVisualDescendants:Bool = false):SvgStyle__svgDocument {
     if (geometryTransform == null) geometryTransform = cast (null : Dynamic);
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var authorTransform:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    style = _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>));
-    _Runtime.setField(target, 'alpha', _Runtime.field(style, 'opacity'));
-    _Runtime.setField(target, 'visible', ((cast !_Runtime.strictEquals(_Runtime.field(style, 'display'), 'none') : Bool) && (cast _Runtime.orValue(hasVisualDescendants, function():Dynamic return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(style, 'visibility'), 'hidden'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(style, 'visibility'), 'collapse'))) : Bool)));
-    _Runtime.setField(target, 'name', _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'filter'), 'none') : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.unsupported-filter', 'applySvgElementAppearance', { filter: _Runtime.field(style, 'filter') }] : Array<Dynamic>));
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var authorTransform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var transform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element : XmlElement), parentStyle, context) : SvgStyle__svgDocument);
+    ((cast target : { var alpha:Float; }).alpha = (cast style : SvgStyle__svgDocument).opacity);
+    ((cast target : { var visible:Bool; }).visible = ((cast !_Runtime.strictEquals((cast style : SvgStyle__svgDocument).display, 'none') : Bool) && (cast _Runtime.orValue(hasVisualDescendants, function():Dynamic return cast _Runtime.andValue(!_Runtime.strictEquals((cast style : SvgStyle__svgDocument).visibility, 'hidden'), function():Dynamic return cast !_Runtime.strictEquals((cast style : SvgStyle__svgDocument).visibility, 'collapse'))) : Bool)));
+    ((cast target : { var name:Null<String>; }).name = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>));
+    if ((cast !_Runtime.strictEquals((cast style : SvgStyle__svgDocument).filter, 'none') : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.unsupported-filter' : String), (cast 'applySvgElementAppearance' : String), (cast { filter: (cast style : SvgStyle__svgDocument).filter } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    authorTransform = _Runtime.callValue(SvgDocument.parseSvgTransform__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'transform'] : Array<Dynamic>))] : Array<Dynamic>));
-    transform = ((cast _Runtime.strictEquals(authorTransform, null) : Bool) ? (cast geometryTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(geometryTransform, null) : Bool) ? (cast authorTransform : Dynamic) : (cast _Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([authorTransform, geometryTransform] : Array<Dynamic>)) : Dynamic)) : Dynamic));
-    _Runtime.callValue(SvgDocument.applySvgTransform__svgDocument, cast ([target, transform] : Array<Dynamic>));
+    authorTransform = (cast SvgDocument.parseSvgTransform__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'transform' : String)) : Null<String>) : Null<String>)) : Null<Matrix>);
+    transform = ((cast _Runtime.strictEquals(authorTransform, null) : Bool) ? (cast geometryTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(geometryTransform, null) : Bool) ? (cast authorTransform : Dynamic) : (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast authorTransform : Matrix), (cast geometryTransform : Matrix)) : Matrix) : Dynamic)) : Dynamic));
+    SvgDocument.applySvgTransform__svgDocument((cast target : Node2D), (cast transform : Null<Matrix>));
     return cast style;
     return cast null;
   }
 
   public static function applySvgElementClip__svgDocument(target:Node2D, element:XmlElement, context:SvgImportContext__svgDocument, targetBounds:Null<Rectangle>):Void {
-    var clipReference:Dynamic = cast _Runtime.UNDEFINED;
-    var maskReference:Dynamic = cast _Runtime.UNDEFINED;
-    var clipId:Dynamic = cast _Runtime.UNDEFINED;
-    var clipElement:Dynamic = cast _Runtime.UNDEFINED;
-    clipReference = _Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clip-path'] : Array<Dynamic>))] : Array<Dynamic>));
-    maskReference = _Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'mask'] : Array<Dynamic>))] : Array<Dynamic>));
+    var clipReference:Null<String> = cast _Runtime.UNDEFINED;
+    var maskReference:Null<String> = cast _Runtime.UNDEFINED;
+    var clipId:Null<String> = cast _Runtime.UNDEFINED;
+    var clipElement:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    clipReference = (cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clip-path' : String)) : Null<String>) : Null<String>)) : Null<String>);
+    maskReference = (cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'mask' : String)) : Null<String>) : Null<String>)) : Null<String>);
     clipId = _Runtime.coalesce(clipReference, function():Dynamic return cast maskReference);
     if ((cast _Runtime.strictEquals(clipId, null) : Bool)) { return; }
-    clipElement = ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).get(clipId));
+    clipElement = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).get(clipId));
     if ((cast _Runtime.strictEquals(clipElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'svg.unresolved-clip-reference', 'applySvgElementClip', { id: clipId }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'svg.unresolved-clip-reference' : String), (cast 'applySvgElementClip' : String), (cast { id: clipId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return;
     }
-    if ((cast ((cast _Runtime.callValue(SvgDocument.usesSvgObjectBoundingBoxUnits__svgDocument, cast ([clipElement] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(targetBounds, null) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.object-bounding-box-clip-without-bounds', 'applySvgElementClip', { id: clipId }] : Array<Dynamic>));
+    if ((cast ((cast (cast SvgDocument.usesSvgObjectBoundingBoxUnits__svgDocument((cast clipElement : XmlElement)) : Bool) : Bool) && (cast _Runtime.strictEquals(targetBounds, null) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.object-bounding-box-clip-without-bounds' : String), (cast 'applySvgElementClip' : String), (cast { id: clipId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return;
     }
-    _Runtime.setField(target, 'clip', _Runtime.callValue(SvgDocument.createSvgClipRegion__svgDocument, cast ([clipElement, targetBounds, context] : Array<Dynamic>)));
+    ((cast target : { var clip:Null<ClipRegion>; }).clip = (cast SvgDocument.createSvgClipRegion__svgDocument((cast clipElement : XmlElement), (cast targetBounds : Null<Rectangle>), context) : Null<ClipRegion>));
     if ((cast !_Runtime.strictEquals(maskReference, null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Recover, 'svg.mask-as-hard-clip', 'applySvgElementClip', { id: maskReference }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'svg.mask-as-hard-clip' : String), (cast 'applySvgElementClip' : String), (cast { id: maskReference } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
   }
 
   public static function applySvgTransform__svgDocument(target:Node2D, matrix:Null<Matrix>):Void {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Transform2D = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { return; }
-    transform = _Runtime.callValue(createTransform2D, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(decomposeMatrixToTransform2D, cast ([transform, matrix] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.assignSvgTransform__svgDocument, cast ([target, transform] : Array<Dynamic>));
+    transform = (cast createTransform2D((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Transform2D);
+    decomposeMatrixToTransform2D(transform, matrix);
+    SvgDocument.assignSvgTransform__svgDocument((cast target : Node2D), (cast transform : Transform2D));
   }
 
   public static function assignSvgTransform__svgDocument(target:Node2D, transform:Transform2D):Void {
-    _Runtime.setField(target, 'pivotX', _Runtime.field(transform, 'pivotX'));
-    _Runtime.setField(target, 'pivotY', _Runtime.field(transform, 'pivotY'));
-    _Runtime.setField(target, 'rotation', _Runtime.field(transform, 'rotation'));
-    _Runtime.setField(target, 'scaleX', _Runtime.field(transform, 'scaleX'));
-    _Runtime.setField(target, 'scaleY', _Runtime.field(transform, 'scaleY'));
-    _Runtime.setField(target, 'skewX', _Runtime.field(transform, 'skewX'));
-    _Runtime.setField(target, 'skewY', _Runtime.field(transform, 'skewY'));
-    _Runtime.setField(target, 'x', _Runtime.field(transform, 'x'));
-    _Runtime.setField(target, 'y', _Runtime.field(transform, 'y'));
+    ((cast target : { var pivotX:Float; }).pivotX = _Runtime.field(transform, 'pivotX'));
+    ((cast target : { var pivotY:Float; }).pivotY = _Runtime.field(transform, 'pivotY'));
+    ((cast target : { var rotation:Float; }).rotation = _Runtime.field(transform, 'rotation'));
+    ((cast target : { var scaleX:Float; }).scaleX = _Runtime.field(transform, 'scaleX'));
+    ((cast target : { var scaleY:Float; }).scaleY = _Runtime.field(transform, 'scaleY'));
+    ((cast target : { var skewX:Float; }).skewX = _Runtime.field(transform, 'skewX'));
+    ((cast target : { var skewY:Float; }).skewY = _Runtime.field(transform, 'skewY'));
+    ((cast target : { var x:Float; }).x = _Runtime.field(transform, 'x'));
+    ((cast target : { var y:Float; }).y = _Runtime.field(transform, 'y'));
   }
 
   public static function attribute__svgDocument(element:XmlElement, name:String):Null<String> {
@@ -190,50 +205,50 @@ class SvgDocument {
   public static function collectCssRules__svgDocument(root:XmlElement):Array<SvgCssRule__svgDocument> {
     var rules:Array<SvgCssRule__svgDocument> = cast _Runtime.UNDEFINED;
     rules = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(SvgDocument.visitXmlElements__svgDocument, cast ([root, function(element:Dynamic) {
-      var text:Dynamic = cast _Runtime.UNDEFINED;
-      var expression:Dynamic = cast _Runtime.UNDEFINED;
+    SvgDocument.visitXmlElements__svgDocument((cast root : XmlElement), (cast function(element:XmlElement):Void {
+      var text:String = cast _Runtime.UNDEFINED;
+      var expression:flighthq._internal._Any = cast _Runtime.UNDEFINED;
       var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)), 'style') : Bool)) { return; }
+      if ((cast !_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), 'style') : Bool)) { return; }
       text = _Runtime.replace(element.text, _Runtime.regexp('\\/\\*[\\s\\S]*?\\*\\/', 'g'), '', false);
       expression = _Runtime.regexp('([^{}]+)\\{([^{}]*)\\}', 'g');
       while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(expression, 'exec', cast ([text] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-        var declarations:Dynamic = _Runtime.callValue(SvgDocument.parseStyleDeclarations__svgDocument, cast ([_Runtime.getIndex(match, 2.0)] : Array<Dynamic>));
+        var declarations:flighthq._internal._Record<String, String> = (cast SvgDocument.parseStyleDeclarations__svgDocument((cast _Runtime.getIndex(match, 2.0) : String)) : flighthq._internal._Record<String, String>);
         for (selectorText in _Runtime.iterable(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)))) {
-          var selector:Dynamic = StringTools.trim(Std.string(selectorText));
+          var selector:String = StringTools.trim(Std.string(selectorText));
           if ((cast ((cast _Runtime.strictEquals(selector, '') : Bool) || (cast _Runtime.callProperty(_Runtime.regexp('[\\s>+~:[\\]]', ''), 'test', cast ([selector] : Array<Dynamic>)) : Bool)) : Bool)) { continue; }
-          _Runtime.callProperty(rules, 'push', cast ([{ declarations: declarations, order: _Runtime.field(rules, 'length'), selector: selector, specificity: _Runtime.callValue(SvgDocument.getCssSelectorSpecificity__svgDocument, cast ([selector] : Array<Dynamic>)) }] : Array<Dynamic>));
+          _Runtime.callProperty(rules, 'push', cast ([{ declarations: declarations, order: _Runtime.field(rules, 'length'), selector: selector, specificity: (cast SvgDocument.getCssSelectorSpecificity__svgDocument((cast selector : String)) : Float) }] : Array<Dynamic>));
         }
       }
-    }] : Array<Dynamic>));
+    } : XmlElement->Void));
     return cast rules;
     return cast null;
   }
 
   public static function createSvgNode2DBounds__svgDocument(target:Node2D):Null<Rectangle> {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var hasBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var hasUnresolvedChildBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var childCount:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(target, 'kind'), TextLabelKind) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'kind'), RichTextKind) : Bool)) : Bool)) { return cast null; }
-    out = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
-    hasBounds = _Runtime.callValue(SvgDocument.copyNonEmptySvgBounds__svgDocument, cast ([out, _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>)), false] : Array<Dynamic>));
+    var out:Rectangle = cast _Runtime.UNDEFINED;
+    var hasBounds:Bool = cast _Runtime.UNDEFINED;
+    var hasUnresolvedChildBounds:Bool = cast _Runtime.UNDEFINED;
+    var childCount:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, TextLabelKind) : Bool) || (cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, RichTextKind) : Bool)) : Bool)) { return cast null; }
+    out = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+    hasBounds = (cast SvgDocument.copyNonEmptySvgBounds__svgDocument((cast out : Rectangle), (cast (cast getNodeLocalBoundsRectangle(target) : Rectangle) : Rectangle), (cast false : Bool)) : Bool);
     hasUnresolvedChildBounds = false;
-    childCount = _Runtime.callValue(getNodeChildCount, cast ([target] : Array<Dynamic>));
+    childCount = (cast getNodeChildCount(target) : Float);
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast childCount : Float)) : Bool)) {
-        var child:Dynamic = (cast _Runtime.callValue(getNodeChildAt, cast ([target, index] : Array<Dynamic>)) : Null<Node2D>);
+        var child:Null<Node2D> = (cast (cast getNodeChildAt(target, (cast index : Float)) : Null<Node2D>) : Null<Node2D>);
         if ((cast _Runtime.strictEquals(child, null) : Bool)) { index++; continue; }
-        var childBounds:Dynamic = _Runtime.callValue(SvgDocument.createSvgNode2DBounds__svgDocument, cast ([child] : Array<Dynamic>));
+        var childBounds:Null<Rectangle> = (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast child : Node2D)) : Null<Rectangle>);
         if ((cast _Runtime.strictEquals(childBounds, null) : Bool)) {
           (hasUnresolvedChildBounds = cast (true : Dynamic));
           index++;
           continue;
         }
-        var bounds:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(matrixTransformRectangle, cast ([bounds, _Runtime.callValue(getNodeLocalMatrix, cast ([child] : Array<Dynamic>)), childBounds] : Array<Dynamic>));
-        (hasBounds = cast (_Runtime.callValue(SvgDocument.copyNonEmptySvgBounds__svgDocument, cast ([out, bounds, hasBounds] : Array<Dynamic>)) : Dynamic));
+        var bounds:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+        matrixTransformRectangle(bounds, (cast getNodeLocalMatrix(child) : MatrixLike), childBounds);
+        (hasBounds = cast ((cast SvgDocument.copyNonEmptySvgBounds__svgDocument((cast out : Rectangle), (cast bounds : Rectangle), (cast hasBounds : Bool)) : Bool) : Dynamic));
         index++;
       }
     }
@@ -242,111 +257,111 @@ class SvgDocument {
   }
 
   public static function createSvgClipRegion__svgDocument(element:XmlElement, targetBounds:Null<Rectangle>, context:SvgImportContext__svgDocument):ClipRegion {
-    var clipStyle:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var clipStyle:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var out:Path = cast _Runtime.UNDEFINED;
     var geometries:Array<SvgClipGeometry__svgDocument> = cast _Runtime.UNDEFINED;
     var winding:Null<PathWinding> = cast _Runtime.UNDEFINED;
-    var mixedWindingReported:Dynamic = cast _Runtime.UNDEFINED;
+    var mixedWindingReported:Bool = cast _Runtime.UNDEFINED;
     var clippedRegions:Array<ClipRegion> = cast _Runtime.UNDEFINED;
-    var region:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var unitsAttribute:Dynamic = cast _Runtime.UNDEFINED;
-    clipStyle = _Runtime.callValue(SvgDocument.resolveSvgDefinitionStyle__svgDocument, cast ([element, context] : Array<Dynamic>));
-    out = _Runtime.callValue(createPath, cast ([_Runtime.field(clipStyle, 'clipRule')] : Array<Dynamic>));
+    var region:ClipRegion = cast _Runtime.UNDEFINED;
+    var transform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var unitsAttribute:Null<String> = cast _Runtime.UNDEFINED;
+    clipStyle = (cast SvgDocument.resolveSvgDefinitionStyle__svgDocument((cast element : XmlElement), context) : SvgStyle__svgDocument);
+    out = (cast createPath((cast (cast clipStyle : SvgStyle__svgDocument).clipRule : PathWinding)) : Path);
     geometries = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(SvgDocument.collectSvgClipGeometry__svgDocument, cast ([element, clipStyle, null, context, geometries] : Array<Dynamic>));
+    SvgDocument.collectSvgClipGeometry__svgDocument((cast element : XmlElement), clipStyle, (cast null : Null<Matrix>), context, geometries);
     winding = null;
     mixedWindingReported = false;
     clippedRegions = cast ([] : Array<Dynamic>);
     for (geometry in _Runtime.iterable(geometries)) {
       if ((cast _Runtime.strictEquals(winding, null) : Bool)) {
-        (winding = cast (_Runtime.field(geometry, 'winding') : Dynamic));
-        _Runtime.setField(out, 'winding', winding);
-      } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'winding'), winding) : Bool) && (cast !(cast mixedWindingReported : Bool) : Bool)) : Bool)) {
+        (winding = cast ((cast geometry : SvgClipGeometry__svgDocument).winding : Dynamic));
+        ((cast out : Path).winding = winding);
+      } else { if ((cast ((cast !_Runtime.strictEquals((cast geometry : SvgClipGeometry__svgDocument).winding, winding) : Bool) && (cast !(cast mixedWindingReported : Bool) : Bool)) : Bool)) {
         (mixedWindingReported = cast (true : Dynamic));
-        _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Recover, 'svg.mixed-clip-rule', 'createSvgClipPath', { id: _Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>)), function():Dynamic return cast '') }] : Array<Dynamic>));
+        reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'svg.mixed-clip-rule' : String), (cast 'createSvgClipPath' : String), (cast { id: _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>), function():Dynamic return cast '') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       } }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'path'), null) : Bool)) { _Runtime.callValue(SvgDocument.appendPathData__svgDocument, cast ([out, _Runtime.field(geometry, 'path')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(geometry, 'region'), null) : Bool)) { _Runtime.callProperty(clippedRegions, 'push', cast ([_Runtime.field(geometry, 'region')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals((cast geometry : SvgClipGeometry__svgDocument).path, null) : Bool)) { SvgDocument.appendPathData__svgDocument((cast out : Path), (cast (cast geometry : SvgClipGeometry__svgDocument).path : Path)); }
+      if ((cast !_Runtime.strictEquals((cast geometry : SvgClipGeometry__svgDocument).region, null) : Bool)) { _Runtime.callProperty(clippedRegions, 'push', cast ([(cast geometry : SvgClipGeometry__svgDocument).region] : Array<Dynamic>)); }
     }
-    region = _Runtime.callValue(createClipRegionFromPath, cast ([out] : Array<Dynamic>));
+    region = (cast createClipRegionFromPath((cast out : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion);
     for (clippedRegion in _Runtime.iterable(clippedRegions)) {
-      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(out, 'commands'), 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(region, 'rect'), 'width'), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(region, 'rect'), 'height'), 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { _Runtime.callValue(unionClipRegions, cast ([region, region, clippedRegion] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions((cast region : ClipRegion), (cast region : ClipRegion), (cast clippedRegion : ClipRegion)); }
     }
-    (region = cast (_Runtime.callValue(SvgDocument.intersectSvgClipReference__svgDocument, cast ([region, element, null, context] : Array<Dynamic>)) : Dynamic));
-    transform = _Runtime.callValue(SvgDocument.parseSvgTransform__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'transform'] : Array<Dynamic>))] : Array<Dynamic>));
-    unitsAttribute = ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)), 'mask') : Bool) ? (cast _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'maskContentUnits'] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clipPathUnits'] : Array<Dynamic>)) : Dynamic));
+    (region = cast ((cast SvgDocument.intersectSvgClipReference__svgDocument((cast region : ClipRegion), (cast element : XmlElement), (cast null : Null<Matrix>), context) : ClipRegion) : Dynamic));
+    transform = (cast SvgDocument.parseSvgTransform__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'transform' : String)) : Null<String>) : Null<String>)) : Null<Matrix>);
+    unitsAttribute = ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), 'mask') : Bool) ? (cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'maskContentUnits' : String)) : Null<String>) : Dynamic) : (cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clipPathUnits' : String)) : Null<String>) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(unitsAttribute, 'objectBoundingBox') : Bool) && (cast !_Runtime.strictEquals(targetBounds, null) : Bool)) : Bool)) {
-      var unitTransform:Dynamic = _Runtime.callValue(createMatrix, cast ([_Runtime.field(targetBounds, 'width'), 0.0, 0.0, _Runtime.field(targetBounds, 'height'), _Runtime.field(targetBounds, 'x'), _Runtime.field(targetBounds, 'y')] : Array<Dynamic>));
-      (transform = cast (((cast _Runtime.strictEquals(transform, null) : Bool) ? (cast unitTransform : Dynamic) : (cast _Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([unitTransform, transform] : Array<Dynamic>)) : Dynamic)) : Dynamic));
+      var unitTransform:Matrix = (cast createMatrix((cast _Runtime.field(targetBounds, 'width') : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast _Runtime.field(targetBounds, 'height') : Null<Float>), (cast _Runtime.field(targetBounds, 'x') : Null<Float>), (cast _Runtime.field(targetBounds, 'y') : Null<Float>)) : Matrix);
+      (transform = cast (((cast _Runtime.strictEquals(transform, null) : Bool) ? (cast unitTransform : Dynamic) : (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast unitTransform : Matrix), (cast transform : Matrix)) : Null<Matrix>) : Dynamic)) : Dynamic));
     }
     if ((cast _Runtime.strictEquals(transform, null) : Bool)) { return cast region; }
-    _Runtime.callValue(transformClipRegion, cast ([region, region, transform] : Array<Dynamic>));
+    transformClipRegion((cast region : ClipRegion), (cast region : ClipRegion), transform);
     return cast region;
     return cast null;
   }
 
   public static function collectSvgClipGeometry__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, parentTransform:Null<Matrix>, context:SvgImportContext__svgDocument, out:Array<SvgClipGeometry__svgDocument>):Void {
     for (child in _Runtime.iterable(element.children)) {
-      _Runtime.callValue(SvgDocument.collectSvgClipGeometryElement__svgDocument, cast ([child, parentStyle, parentTransform, context, out] : Array<Dynamic>));
+      SvgDocument.collectSvgClipGeometryElement__svgDocument((cast child : XmlElement), parentStyle, (cast parentTransform : Null<Matrix>), context, out, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<XmlElement>));
     }
   }
 
   public static function collectSvgClipGeometryElement__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, parentTransform:Null<Matrix>, context:SvgImportContext__svgDocument, out:Array<SvgClipGeometry__svgDocument>, ?viewportElement:XmlElement):Void {
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var name:String = cast _Runtime.UNDEFINED;
     var geometryTransform:Null<Matrix> = cast _Runtime.UNDEFINED;
-    var authorTransform:Dynamic = cast _Runtime.UNDEFINED;
-    var localTransform:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    style = _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(style, 'display'), 'none') : Bool)) { return; }
-    name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
+    var authorTransform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var localTransform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var transform:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var path:Null<Path> = cast _Runtime.UNDEFINED;
+    style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element : XmlElement), parentStyle, context) : SvgStyle__svgDocument);
+    if ((cast _Runtime.strictEquals((cast style : SvgStyle__svgDocument).display, 'none') : Bool)) { return; }
+    name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
     geometryTransform = null;
     if ((cast _Runtime.strictEquals(name, 'use') : Bool)) {
-      (geometryTransform = cast (_Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y', 0.0] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (geometryTransform = cast ((cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x' : String), (cast 0.0 : Float)) : Null<Float>) : Null<Float>), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y' : String), (cast 0.0 : Float)) : Null<Float>) : Null<Float>)) : Null<Matrix>) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(name, 'svg') : Bool)) {
-      (geometryTransform = cast (_Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([element] : Array<Dynamic>)) : Dynamic));
+      (geometryTransform = cast ((cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element : XmlElement), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }>)) : Null<Matrix>) : Dynamic));
     } else { if ((cast ((cast _Runtime.strictEquals(name, 'symbol') : Bool) && (cast !_Runtime.strictEquals(viewportElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      (geometryTransform = cast (_Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([element, { height: _Runtime.coalesce(_Runtime.callValue(SvgDocument.optionalNumberAttribute__svgDocument, cast ([viewportElement, 'height'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), width: _Runtime.coalesce(_Runtime.callValue(SvgDocument.optionalNumberAttribute__svgDocument, cast ([viewportElement, 'width'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), x: 0.0, y: 0.0 }] : Array<Dynamic>)) : Dynamic));
+      (geometryTransform = cast ((cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element : XmlElement), (cast { height: _Runtime.coalesce((cast SvgDocument.optionalNumberAttribute__svgDocument((cast viewportElement : XmlElement), (cast 'height' : String)) : Null<Float>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), width: _Runtime.coalesce((cast SvgDocument.optionalNumberAttribute__svgDocument((cast viewportElement : XmlElement), (cast 'width' : String)) : Null<Float>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), x: 0.0, y: 0.0 } : Null<{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }>)) : Null<Matrix>) : Dynamic));
     } } }
-    authorTransform = _Runtime.callValue(SvgDocument.parseSvgTransform__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'transform'] : Array<Dynamic>))] : Array<Dynamic>));
-    localTransform = ((cast _Runtime.strictEquals(authorTransform, null) : Bool) ? (cast geometryTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(geometryTransform, null) : Bool) ? (cast authorTransform : Dynamic) : (cast _Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([authorTransform, geometryTransform] : Array<Dynamic>)) : Dynamic)) : Dynamic));
-    transform = ((cast _Runtime.strictEquals(parentTransform, null) : Bool) ? (cast localTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(localTransform, null) : Bool) ? (cast parentTransform : Dynamic) : (cast _Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([parentTransform, localTransform] : Array<Dynamic>)) : Dynamic)) : Dynamic));
+    authorTransform = (cast SvgDocument.parseSvgTransform__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'transform' : String)) : Null<String>) : Null<String>)) : Null<Matrix>);
+    localTransform = ((cast _Runtime.strictEquals(authorTransform, null) : Bool) ? (cast geometryTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(geometryTransform, null) : Bool) ? (cast authorTransform : Dynamic) : (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast authorTransform : Matrix), (cast geometryTransform : Matrix)) : Matrix) : Dynamic)) : Dynamic));
+    transform = ((cast _Runtime.strictEquals(parentTransform, null) : Bool) ? (cast localTransform : Dynamic) : (cast ((cast _Runtime.strictEquals(localTransform, null) : Bool) ? (cast parentTransform : Dynamic) : (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast parentTransform : Matrix), (cast localTransform : Matrix)) : Matrix) : Dynamic)) : Dynamic));
     if ((cast _Runtime.strictEquals(name, 'use') : Bool)) {
-      _Runtime.callValue(SvgDocument.collectSvgClipUseGeometry__svgDocument, cast ([element, style, transform, context, out] : Array<Dynamic>));
+      SvgDocument.collectSvgClipUseGeometry__svgDocument((cast element : XmlElement), style, (cast transform : Null<Matrix>), context, out);
       return;
     }
-    path = _Runtime.callValue(SvgDocument.createSvgGeometryPath__svgDocument, cast ([element, _Runtime.field(style, 'clipRule')] : Array<Dynamic>));
+    path = (cast SvgDocument.createSvgGeometryPath__svgDocument((cast element : XmlElement), (cast (cast style : SvgStyle__svgDocument).clipRule : PathWinding)) : Null<Path>);
     if ((cast !_Runtime.strictEquals(path, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'visibility'), 'visible') : Bool)) { return; }
-      var transformedPath:Dynamic = path;
+      if ((cast !_Runtime.strictEquals((cast style : SvgStyle__svgDocument).visibility, 'visible') : Bool)) { return; }
+      var transformedPath:Path = path;
       if ((cast !_Runtime.strictEquals(transform, null) : Bool)) {
-        var transformed:Dynamic = _Runtime.callValue(createPath, cast ([_Runtime.field(path, 'winding')] : Array<Dynamic>));
-        _Runtime.callValue(transformPath, cast ([path, transform, transformed] : Array<Dynamic>));
+        var transformed:Path = (cast createPath((cast (cast path : Path).winding : PathWinding)) : Path);
+        transformPath((cast path : Path), transform, (cast transformed : Path));
         (transformedPath = cast (transformed : Dynamic));
       }
-      if ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clip-path'] : Array<Dynamic>))] : Array<Dynamic>)), null) : Bool)) {
-        _Runtime.callProperty(out, 'push', cast ([{ path: transformedPath, region: null, winding: _Runtime.field(path, 'winding') }] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals((cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clip-path' : String)) : Null<String>) : Null<String>)) : Null<String>), null) : Bool)) {
+        _Runtime.callProperty(out, 'push', cast ([{ path: transformedPath, region: null, winding: (cast path : Path).winding }] : Array<Dynamic>));
       } else {
-        var region:Dynamic = _Runtime.callValue(SvgDocument.intersectSvgClipReference__svgDocument, cast ([_Runtime.callValue(createClipRegionFromPath, cast ([transformedPath] : Array<Dynamic>)), element, transform, context] : Array<Dynamic>));
-        _Runtime.callProperty(out, 'push', cast ([{ path: null, region: region, winding: _Runtime.field(region, 'winding') }] : Array<Dynamic>));
+        var region:ClipRegion = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast (cast createClipRegionFromPath((cast transformedPath : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion) : ClipRegion), (cast element : XmlElement), (cast transform : Null<Matrix>), context) : ClipRegion);
+        _Runtime.callProperty(out, 'push', cast ([{ path: null, region: region, winding: (cast region : ClipRegion).winding }] : Array<Dynamic>));
       }
       return;
     }
     if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'a') : Bool) || (cast _Runtime.strictEquals(name, 'g') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'svg') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'switch') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'symbol') : Bool)) : Bool)) {
-      var start:Dynamic = _Runtime.field(out, 'length');
-      _Runtime.callValue(SvgDocument.collectSvgClipGeometry__svgDocument, cast ([element, style, transform, context, out] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clip-path'] : Array<Dynamic>))] : Array<Dynamic>)), null) : Bool)) {
+      var start:Float = _Runtime.field(out, 'length');
+      SvgDocument.collectSvgClipGeometry__svgDocument((cast element : XmlElement), style, (cast transform : Null<Matrix>), context, out);
+      if ((cast !_Runtime.strictEquals((cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clip-path' : String)) : Null<String>) : Null<String>)) : Null<String>), null) : Bool)) {
         {
-          var index:Dynamic = start;
+          var index:Float = start;
           while ((cast ((cast index : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
-            var geometry:Dynamic = flighthq._internal._StaticIndex.readArray(out, index);
-            var region:Dynamic = _Runtime.coalesce(_Runtime.field(geometry, 'region'), function():Dynamic return cast _Runtime.callValue(createClipRegionFromPath, cast ([_Runtime.field(geometry, 'path')] : Array<Dynamic>)));
-            _Runtime.setField(geometry, 'path', null);
-            _Runtime.setField(geometry, 'region', _Runtime.callValue(SvgDocument.intersectSvgClipReference__svgDocument, cast ([region, element, transform, context] : Array<Dynamic>)));
-            _Runtime.setField(geometry, 'winding', _Runtime.field(_Runtime.field(geometry, 'region'), 'winding'));
+            var geometry:SvgClipGeometry__svgDocument = flighthq._internal._StaticIndex.readArray(out, index);
+            var region:ClipRegion = _Runtime.coalesce((cast geometry : SvgClipGeometry__svgDocument).region, function():Dynamic return cast (cast createClipRegionFromPath((cast (cast geometry : SvgClipGeometry__svgDocument).path : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ClipRegion>));
+            ((cast geometry : SvgClipGeometry__svgDocument).path = null);
+            ((cast geometry : SvgClipGeometry__svgDocument).region = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast region : ClipRegion), (cast element : XmlElement), (cast transform : Null<Matrix>), context) : Null<ClipRegion>));
+            ((cast geometry : SvgClipGeometry__svgDocument).winding = (cast (cast geometry : SvgClipGeometry__svgDocument).region : ClipRegion).winding);
             index++;
           }
         }
@@ -354,181 +369,181 @@ class SvgDocument {
       return;
     }
     if ((cast _Runtime.strictEquals(name, 'text') : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.unsupported-clip-text', 'collectSvgClipGeometryElement', { element: name }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.unsupported-clip-text' : String), (cast 'collectSvgClipGeometryElement' : String), (cast { element: name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
   }
 
   public static function intersectSvgClipReference__svgDocument(base:ClipRegion, element:XmlElement, transform:Null<Matrix>, context:SvgImportContext__svgDocument):ClipRegion {
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
-    var referencedRegion:Dynamic = cast _Runtime.UNDEFINED;
-    id = _Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clip-path'] : Array<Dynamic>))] : Array<Dynamic>));
+    var id:Null<String> = cast _Runtime.UNDEFINED;
+    var referenced:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    var referencedRegion:ClipRegion = cast _Runtime.UNDEFINED;
+    id = (cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clip-path' : String)) : Null<String>) : Null<String>)) : Null<String>);
     if ((cast _Runtime.strictEquals(id, null) : Bool)) { return cast base; }
-    referenced = ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).get(id));
-    if ((cast ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(context, 'resolvingClips') : flighthq._internal._Set).has(id)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ((cast ((cast _Runtime.field(context, 'resolvingClips') : flighthq._internal._Set).has(id)) : Bool) ? (cast ImportDiagnosticSeverityValue.Reject : Dynamic) : (cast ImportDiagnosticSeverityValue.Drop : Dynamic)), 'svg.unresolved-clip-reference', 'intersectSvgClipReference', { id: id }] : Array<Dynamic>));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).get(id));
+    if ((cast ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).has(id)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).has(id)) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)) : ImportDiagnosticSeverity), (cast 'svg.unresolved-clip-reference' : String), (cast 'intersectSvgClipReference' : String), (cast { id: id } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast base;
     }
-    if ((cast ((cast !_Runtime.strictEquals(transform, null) : Bool) && (cast _Runtime.callValue(SvgDocument.usesSvgObjectBoundingBoxUnits__svgDocument, cast ([referenced] : Array<Dynamic>)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.clip-nested-intersection-unsupported', 'intersectSvgClipReference', { id: id, reason: 'transformed-object-bounding-box-target' }] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(transform, null) : Bool) && (cast (cast SvgDocument.usesSvgObjectBoundingBoxUnits__svgDocument((cast referenced : XmlElement)) : Bool) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.clip-nested-intersection-unsupported' : String), (cast 'intersectSvgClipReference' : String), (cast { id: id, reason: 'transformed-object-bounding-box-target' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast base;
     }
-    ((cast _Runtime.field(context, 'resolvingClips') : flighthq._internal._Set).add(id));
-    referencedRegion = _Runtime.callValue(SvgDocument.createSvgClipRegion__svgDocument, cast ([referenced, _Runtime.field(base, 'rect'), context] : Array<Dynamic>));
-    ((cast _Runtime.field(context, 'resolvingClips') : flighthq._internal._Set).delete_(id));
-    if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callValue(transformClipRegion, cast ([referencedRegion, referencedRegion, transform] : Array<Dynamic>)); }
-    _Runtime.callValue(intersectClipRegions, cast ([base, base, referencedRegion] : Array<Dynamic>));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).add(id));
+    referencedRegion = (cast SvgDocument.createSvgClipRegion__svgDocument((cast referenced : XmlElement), (cast (cast base : ClipRegion).rect : Null<Rectangle>), context) : ClipRegion);
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).delete_(id));
+    if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { transformClipRegion((cast referencedRegion : ClipRegion), (cast referencedRegion : ClipRegion), transform); }
+    intersectClipRegions((cast base : ClipRegion), (cast base : ClipRegion), (cast referencedRegion : ClipRegion));
     return cast base;
     return cast null;
   }
 
   public static function collectSvgClipUseGeometry__svgDocument(element:XmlElement, style:SvgStyle__svgDocument, transform:Null<Matrix>, context:SvgImportContext__svgDocument, out:Array<SvgClipGeometry__svgDocument>):Void {
-    var href:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
-    href = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'href'] : Array<Dynamic>));
+    var href:Null<String> = cast _Runtime.UNDEFINED;
+    var id:Null<String> = cast _Runtime.UNDEFINED;
+    var referenced:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    href = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'href' : String)) : Null<String>);
     id = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast _Runtime.field(context, 'resolvingClipUses') : flighthq._internal._Set).has(id)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast ImportDiagnosticSeverityValue.Drop : Dynamic) : (cast ImportDiagnosticSeverityValue.Reject : Dynamic)), ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)), 'collectSvgClipUseGeometry', ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flighthq._internal._Set<String>).has(id)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic)) : ImportDiagnosticSeverity), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)) : String), (cast 'collectSvgClipUseGeometry' : String), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic)) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return;
     }
-    referenced = ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).get(id));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).get(id));
     if ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'svg.unresolved-use', 'collectSvgClipUseGeometry', { id: id }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'svg.unresolved-use' : String), (cast 'collectSvgClipUseGeometry' : String), (cast { id: id } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return;
     }
-    ((cast _Runtime.field(context, 'resolvingClipUses') : flighthq._internal._Set).add(id));
-    _Runtime.callValue(SvgDocument.collectSvgClipGeometryElement__svgDocument, cast ([referenced, style, transform, context, out, element] : Array<Dynamic>));
-    ((cast _Runtime.field(context, 'resolvingClipUses') : flighthq._internal._Set).delete_(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flighthq._internal._Set<String>).add(id));
+    SvgDocument.collectSvgClipGeometryElement__svgDocument((cast referenced : XmlElement), style, (cast transform : Null<Matrix>), context, out, (cast element : Null<XmlElement>));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flighthq._internal._Set<String>).delete_(id));
   }
 
   public static function copyNonEmptySvgBounds__svgDocument(out:Rectangle, source:Rectangle, hasBounds:Bool):Bool {
-    var minimumX:Dynamic = cast _Runtime.UNDEFINED;
-    var minimumY:Dynamic = cast _Runtime.UNDEFINED;
-    var maximumX:Dynamic = cast _Runtime.UNDEFINED;
-    var maximumY:Dynamic = cast _Runtime.UNDEFINED;
+    var minimumX:Float = cast _Runtime.UNDEFINED;
+    var minimumY:Float = cast _Runtime.UNDEFINED;
+    var maximumX:Float = cast _Runtime.UNDEFINED;
+    var maximumY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'width'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), 0.0) : Bool)) : Bool)) { return cast hasBounds; }
     if ((cast !(cast hasBounds : Bool) : Bool)) {
-      _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
-      _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
-      _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(source, 'height'));
+      ((cast out : Rectangle).x = _Runtime.field(source, 'x'));
+      ((cast out : Rectangle).y = _Runtime.field(source, 'y'));
+      ((cast out : Rectangle).width = _Runtime.field(source, 'width'));
+      ((cast out : Rectangle).height = _Runtime.field(source, 'height'));
       return cast true;
     }
-    minimumX = HxMath.min(_Runtime.field(out, 'x'), _Runtime.field(source, 'x'));
-    minimumY = HxMath.min(_Runtime.field(out, 'y'), _Runtime.field(source, 'y'));
-    maximumX = HxMath.max(_Runtime.addNumbers(_Runtime.field(out, 'x'), _Runtime.field(out, 'width')), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    maximumY = HxMath.max(_Runtime.addNumbers(_Runtime.field(out, 'y'), _Runtime.field(out, 'height')), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
-    _Runtime.setField(out, 'x', minimumX);
-    _Runtime.setField(out, 'y', minimumY);
-    _Runtime.setField(out, 'width', (maximumX - minimumX));
-    _Runtime.setField(out, 'height', (maximumY - minimumY));
+    minimumX = HxMath.min((cast out : Rectangle).x, _Runtime.field(source, 'x'));
+    minimumY = HxMath.min((cast out : Rectangle).y, _Runtime.field(source, 'y'));
+    maximumX = HxMath.max(((cast out : Rectangle).x + (cast out : Rectangle).width), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
+    maximumY = HxMath.max(((cast out : Rectangle).y + (cast out : Rectangle).height), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
+    ((cast out : Rectangle).x = minimumX);
+    ((cast out : Rectangle).y = minimumY);
+    ((cast out : Rectangle).width = (maximumX - minimumX));
+    ((cast out : Rectangle).height = (maximumY - minimumY));
     return cast true;
     return cast null;
   }
 
   public static function createSvgElementNode__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):Null<Node2D> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
+    var name:String = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var path:Null<Path> = cast _Runtime.UNDEFINED;
+    name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
     if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'defs') : Bool) || (cast _Runtime.strictEquals(name, 'style') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'title') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'desc') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'metadata') : Bool)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'linearGradient') : Bool) || (cast _Runtime.strictEquals(name, 'radialGradient') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'clipPath') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'mask') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'symbol') : Bool)) : Bool)) {
       return cast null;
     }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'g') : Bool) || (cast _Runtime.strictEquals(name, 'a') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'switch') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'svg') : Bool)) : Bool)) {
-      var container:Dynamic = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
-      var viewport:Dynamic = ((cast _Runtime.strictEquals(name, 'svg') : Bool) ? (cast _Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([element] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-      var style:Dynamic = _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([container, element, parentStyle, context, viewport, true] : Array<Dynamic>));
-      _Runtime.callValue(SvgDocument.appendSvgChildren__svgDocument, cast ([container, element, style, context] : Array<Dynamic>));
-      _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([container, element, context, _Runtime.callValue(SvgDocument.createSvgNode2DBounds__svgDocument, cast ([container] : Array<Dynamic>))] : Array<Dynamic>));
+      var container:DisplayObject = (cast createDisplayObject(_Runtime.field(_Runtime, 'UNDEFINED')) : DisplayObject);
+      var viewport:Null<Matrix> = ((cast _Runtime.strictEquals(name, 'svg') : Bool) ? (cast (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element : XmlElement), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }>)) : Null<Matrix>) : Dynamic) : (cast null : Dynamic));
+      var style:SvgStyle__svgDocument = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast container : Node2D), (cast element : XmlElement), parentStyle, context, (cast viewport : Null<Matrix>), (cast true : Bool)) : SvgStyle__svgDocument);
+      SvgDocument.appendSvgChildren__svgDocument((cast container : DisplayObject), (cast element : XmlElement), style, context);
+      SvgDocument.applySvgElementClip__svgDocument((cast container : Node2D), (cast element : XmlElement), context, (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast container : Node2D)) : Null<Rectangle>) : Null<Rectangle>));
       return cast container;
     }
-    if ((cast _Runtime.strictEquals(name, 'use') : Bool)) { return cast _Runtime.callValue(SvgDocument.createSvgUseNode__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(name, 'text') : Bool)) { return cast _Runtime.callValue(SvgDocument.createSvgTextNode__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(name, 'image') : Bool)) { return cast _Runtime.callValue(SvgDocument.createSvgImageNode__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>)); }
-    style = _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>));
-    path = _Runtime.callValue(SvgDocument.createSvgGeometryPath__svgDocument, cast ([element, _Runtime.field(style, 'fillRule')] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(name, 'use') : Bool)) { return cast (cast SvgDocument.createSvgUseNode__svgDocument((cast element : XmlElement), parentStyle, context) : Null<Node2D>); }
+    if ((cast _Runtime.strictEquals(name, 'text') : Bool)) { return cast (cast SvgDocument.createSvgTextNode__svgDocument((cast element : XmlElement), parentStyle, context) : Null<Node2D>); }
+    if ((cast _Runtime.strictEquals(name, 'image') : Bool)) { return cast (cast SvgDocument.createSvgImageNode__svgDocument((cast element : XmlElement), parentStyle, context) : Null<Node2D>); }
+    style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element : XmlElement), parentStyle, context) : SvgStyle__svgDocument);
+    path = (cast SvgDocument.createSvgGeometryPath__svgDocument((cast element : XmlElement), (cast (cast style : SvgStyle__svgDocument).fillRule : PathWinding)) : Null<Path>);
     if ((cast !_Runtime.strictEquals(path, null) : Bool)) {
-      var shape:Dynamic = _Runtime.callValue(createShape, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([shape, element, parentStyle, context] : Array<Dynamic>));
-      _Runtime.callValue(SvgDocument.appendSvgShapePaint__svgDocument, cast ([shape, path, style, element, context] : Array<Dynamic>));
-      var bounds:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(getPathBounds, cast ([path, bounds] : Array<Dynamic>));
-      _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([shape, element, context, bounds] : Array<Dynamic>));
+      var shape:Shape = (cast createShape(_Runtime.field(_Runtime, 'UNDEFINED')) : Shape);
+      (cast SvgDocument.applySvgElementAppearance__svgDocument((cast shape : Node2D), (cast element : XmlElement), parentStyle, context, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Matrix>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+      SvgDocument.appendSvgShapePaint__svgDocument((cast shape : Shape), (cast path : Path), style, (cast element : XmlElement), context);
+      var bounds:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+      (cast getPathBounds((cast path : Path), bounds) : Bool);
+      SvgDocument.applySvgElementClip__svgDocument((cast shape : Node2D), (cast element : XmlElement), context, (cast bounds : Null<Rectangle>));
       return cast shape;
     }
-    if ((cast _Runtime.callValue(SvgDocument.isUnsupportedSvgElementName__svgDocument, cast ([name] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(SvgDocument.reportUnsupportedSvgElement__svgDocument, cast ([element, context] : Array<Dynamic>)); } else { _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.unknown-element', 'createSvgElementNode', { element: name }] : Array<Dynamic>)); }
+    if ((cast (cast SvgDocument.isUnsupportedSvgElementName__svgDocument((cast name : String)) : Bool) : Bool)) { SvgDocument.reportUnsupportedSvgElement__svgDocument((cast element : XmlElement), context); } else { reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.unknown-element' : String), (cast 'createSvgElementNode' : String), (cast { element: name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>)); }
     return cast null;
     return cast null;
   }
 
   public static function createSvgImageNode__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):Null<Node2D> {
-    var href:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmap:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    href = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'href'] : Array<Dynamic>));
-    image = ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(context, 'options'), 'resolveImageResource', cast ([href] : Array<Dynamic>)), function():Dynamic return cast null) : Dynamic));
+    var href:Null<String> = cast _Runtime.UNDEFINED;
+    var image:Null<Image> = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var bitmap:Sprite = cast _Runtime.UNDEFINED;
+    var geometry:Matrix = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    href = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'href' : String)) : Null<String>);
+    image = ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast context : SvgImportContext__svgDocument).options, 'resolveImageResource', cast ([href] : Array<Dynamic>)), function():Dynamic return cast null) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(href, null) : Bool) || (cast _Runtime.strictEquals(image, null) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast 'svg.image-missing-href' : Dynamic) : (cast 'svg.unresolved-image' : Dynamic)), 'createSvgImageNode', ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { href: href } : Dynamic))] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast 'svg.image-missing-href' : Dynamic) : (cast 'svg.unresolved-image' : Dynamic)) : String), (cast 'createSvgImageNode' : String), (cast ((cast _Runtime.strictEquals(href, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { href: href } : Dynamic)) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    width = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'width', _Runtime.field(image, 'width')] : Array<Dynamic>));
-    height = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'height', _Runtime.field(image, 'height')] : Array<Dynamic>));
-    x = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x', 0.0] : Array<Dynamic>));
-    y = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y', 0.0] : Array<Dynamic>));
-    bitmap = _Runtime.callValue(createSprite, cast ([{ data: { texture: _Runtime.callValue(createTexture, cast ([{ dimension: '2d', source: image }] : Array<Dynamic>)) } }] : Array<Dynamic>));
-    geometry = ((cast ((cast ((cast ((cast ((cast _Runtime.field(image, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(image, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast width : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast height : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.callValue(SvgDocument.createSvgViewBoxMatrix__svgDocument, cast ([cast ([0.0, 0.0, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')] : Array<Dynamic>), { height: height, width: width, x: x, y: y }, _Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'preserveAspectRatio'] : Array<Dynamic>)), function():Dynamic return cast 'xMidYMid meet')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, x, y] : Array<Dynamic>)) : Dynamic));
-    _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([bitmap, element, parentStyle, context, geometry] : Array<Dynamic>));
-    bounds = _Runtime.callValue(createRectangle, cast ([0.0, 0.0, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([bitmap, element, context, bounds] : Array<Dynamic>));
+    width = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'width' : String), (cast (cast image : Image).width : Float)) : Float);
+    height = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'height' : String), (cast (cast image : Image).height : Float)) : Float);
+    x = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x' : String), (cast 0.0 : Float)) : Float);
+    y = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y' : String), (cast 0.0 : Float)) : Float);
+    bitmap = (cast createSprite({ data: { texture: (cast createTexture({ dimension: '2d', source: image }) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) } }) : Sprite);
+    geometry = ((cast ((cast ((cast ((cast ((cast (cast image : Image).width : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast image : Image).height : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast width : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast height : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast SvgDocument.createSvgViewBoxMatrix__svgDocument((cast cast ([0.0, 0.0, (cast image : Image).width, (cast image : Image).height] : Array<Dynamic>) : Array<Float>), (cast { height: height, width: width, x: x, y: y } : { var height:Float; var width:Float; var x:Float; var y:Float; }), (cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'preserveAspectRatio' : String)) : String), function():Dynamic return cast 'xMidYMid meet') : String)) : Matrix) : Dynamic) : (cast (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast x : Null<Float>), (cast y : Null<Float>)) : Matrix) : Dynamic));
+    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast bitmap : Node2D), (cast element : XmlElement), parentStyle, context, (cast geometry : Null<Matrix>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+    bounds = (cast createRectangle((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast (cast image : Image).width : Null<Float>), (cast (cast image : Image).height : Null<Float>)) : Rectangle);
+    SvgDocument.applySvgElementClip__svgDocument((cast bitmap : Node2D), (cast element : XmlElement), context, (cast bounds : Null<Rectangle>));
     return cast bitmap;
     return cast null;
   }
 
   public static function createSvgGeometryPath__svgDocument(element:XmlElement, winding:PathWinding):Null<Path> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
+    var name:String = cast _Runtime.UNDEFINED;
+    var path:Path = cast _Runtime.UNDEFINED;
+    name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
     if ((cast _Runtime.strictEquals(name, 'path') : Bool)) {
-      var path:Dynamic = _Runtime.callValue(parseSvgPathData, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'd'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(path, null) : Bool)) { _Runtime.setField(path, 'winding', winding); }
+      var path:Null<Path> = (cast parseSvgPathData((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'd' : String)) : String), function():Dynamic return cast '') : String)) : Null<Path>);
+      if ((cast !_Runtime.strictEquals(path, null) : Bool)) { ((cast path : Path).winding = winding); }
       return cast path;
     }
-    path = _Runtime.callValue(createPath, cast ([winding] : Array<Dynamic>));
+    path = (cast createPath((cast winding : PathWinding)) : Path);
     if ((cast _Runtime.strictEquals(name, 'rect') : Bool)) {
-      var x:Dynamic = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x', 0.0] : Array<Dynamic>));
-      var y:Dynamic = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y', 0.0] : Array<Dynamic>));
-      var width:Dynamic = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'width', 0.0] : Array<Dynamic>));
-      var height:Dynamic = _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'height', 0.0] : Array<Dynamic>));
-      var rx:Dynamic = HxMath.max(0.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'rx', 0.0] : Array<Dynamic>)));
-      var ry:Dynamic = HxMath.max(0.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'ry', rx] : Array<Dynamic>)));
+      var x:Float = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x' : String), (cast 0.0 : Float)) : Float);
+      var y:Float = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y' : String), (cast 0.0 : Float)) : Float);
+      var width:Float = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'width' : String), (cast 0.0 : Float)) : Float);
+      var height:Float = (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'height' : String), (cast 0.0 : Float)) : Float);
+      var rx:Float = HxMath.max(0.0, (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'rx' : String), (cast 0.0 : Float)) : Float));
+      var ry:Float = HxMath.max(0.0, (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'ry' : String), (cast rx : Float)) : Float));
       if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast path; }
-      if ((cast ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool) || (cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(appendPathRoundRectangle, cast ([path, x, y, width, height, HxMath.min(HxMath.min(HxMath.max(rx, ry), (width / 2.0)), (height / 2.0))] : Array<Dynamic>)); } else { _Runtime.callValue(appendPathRectangle, cast ([path, x, y, width, height] : Array<Dynamic>)); }
+      if ((cast ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool) || (cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { appendPathRoundRectangle((cast path : Path), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float), (cast HxMath.min(HxMath.min(HxMath.max(rx, ry), (width / 2.0)), (height / 2.0)) : flighthq._internal._Union2<Float, Array<Float>>)); } else { appendPathRectangle((cast path : Path), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float)); }
       return cast path;
     }
     if ((cast _Runtime.strictEquals(name, 'circle') : Bool)) {
-      _Runtime.callValue(appendPathCircle, cast ([path, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'cx', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'cy', 0.0] : Array<Dynamic>)), HxMath.max(0.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'r', 0.0] : Array<Dynamic>)))] : Array<Dynamic>));
+      appendPathCircle((cast path : Path), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'cx' : String), (cast 0.0 : Float)) : Float) : Float), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'cy' : String), (cast 0.0 : Float)) : Float) : Float), (cast HxMath.max(0.0, (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'r' : String), (cast 0.0 : Float)) : Float)) : Float));
       return cast path;
     }
     if ((cast _Runtime.strictEquals(name, 'ellipse') : Bool)) {
-      _Runtime.callValue(appendPathEllipse, cast ([path, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'cx', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'cy', 0.0] : Array<Dynamic>)), HxMath.max(0.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'rx', 0.0] : Array<Dynamic>))), HxMath.max(0.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'ry', 0.0] : Array<Dynamic>)))] : Array<Dynamic>));
+      appendPathEllipse((cast path : Path), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'cx' : String), (cast 0.0 : Float)) : Float) : Float), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'cy' : String), (cast 0.0 : Float)) : Float) : Float), (cast HxMath.max(0.0, (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'rx' : String), (cast 0.0 : Float)) : Float)) : Float), (cast HxMath.max(0.0, (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'ry' : String), (cast 0.0 : Float)) : Float)) : Float));
       return cast path;
     }
     if ((cast _Runtime.strictEquals(name, 'line') : Bool)) {
-      _Runtime.callValue(appendPathMoveTo, cast ([path, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x1', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y1', 0.0] : Array<Dynamic>))] : Array<Dynamic>));
-      _Runtime.callValue(appendPathLineTo, cast ([path, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x2', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y2', 0.0] : Array<Dynamic>))] : Array<Dynamic>));
+      appendPathMoveTo((cast path : Path), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x1' : String), (cast 0.0 : Float)) : Float) : Float), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y1' : String), (cast 0.0 : Float)) : Float) : Float));
+      appendPathLineTo((cast path : Path), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x2' : String), (cast 0.0 : Float)) : Float) : Float), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y2' : String), (cast 0.0 : Float)) : Float) : Float));
       return cast path;
     }
     if ((cast ((cast _Runtime.strictEquals(name, 'polygon') : Bool) || (cast _Runtime.strictEquals(name, 'polyline') : Bool)) : Bool)) {
-      var points:Dynamic = _Runtime.callValue(SvgDocument.parseSvgNumberList__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'points'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(name, 'polygon') : Bool)) { _Runtime.callValue(appendPathPolygon, cast ([path, points] : Array<Dynamic>)); } else { _Runtime.callValue(appendPathPolyline, cast ([path, points] : Array<Dynamic>)); }
+      var points:Array<Float> = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'points' : String)) : String), function():Dynamic return cast '') : String)) : Array<Float>);
+      if ((cast _Runtime.strictEquals(name, 'polygon') : Bool)) { appendPathPolygon((cast path : Path), (cast points : Array<Float>)); } else { appendPathPolyline((cast path : Path), (cast points : Array<Float>)); }
       return cast path;
     }
     return cast null;
@@ -536,165 +551,165 @@ class SvgDocument {
   }
 
   public static function createSvgTextNode__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):Node2D {
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var directTspans:Dynamic = cast _Runtime.UNDEFINED;
-    var tspans:Dynamic = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var directTspans:Array<XmlElement> = cast _Runtime.UNDEFINED;
+    var tspans:Array<XmlElement> = cast _Runtime.UNDEFINED;
     var runs:Array<SvgTextRun__svgDocument> = cast _Runtime.UNDEFINED;
-    var lastRun:Dynamic = cast _Runtime.UNDEFINED;
-    var text:Dynamic = cast _Runtime.UNDEFINED;
+    var lastRun:SvgTextRun__svgDocument = cast _Runtime.UNDEFINED;
+    var text:String = cast _Runtime.UNDEFINED;
     var ranges:Array<TextFormatRange> = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var firstTspan:Dynamic = cast _Runtime.UNDEFINED;
-    var xElement:Dynamic = cast _Runtime.UNDEFINED;
-    var yElement:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var common:Dynamic = cast _Runtime.UNDEFINED;
-    var label:Dynamic = cast _Runtime.UNDEFINED;
-    style = _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>));
-    format = _Runtime.callValue(SvgDocument.createSvgTextFormat__svgDocument, cast ([style] : Array<Dynamic>));
-    directTspans = _Runtime.callProperty(element.children, 'filter', cast ([function(child:Dynamic) return _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([child.name] : Array<Dynamic>)), 'tspan')] : Array<Dynamic>));
-    tspans = _Runtime.callValue(SvgDocument.collectSvgTspanElements__svgDocument, cast ([element] : Array<Dynamic>));
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var firstTspan:XmlElement = cast _Runtime.UNDEFINED;
+    var xElement:XmlElement = cast _Runtime.UNDEFINED;
+    var yElement:XmlElement = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var common:{ var alpha:Float; var name:Null<String>; var visible:Bool; } = cast _Runtime.UNDEFINED;
+    var label:TextLabel = cast _Runtime.UNDEFINED;
+    style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element : XmlElement), parentStyle, context) : SvgStyle__svgDocument);
+    format = (cast SvgDocument.createSvgTextFormat__svgDocument(style) : TextFormat);
+    directTspans = _Runtime.callProperty(element.children, 'filter', cast ([function(child:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast child.name : String)) : String), 'tspan')] : Array<Dynamic>));
+    tspans = (cast SvgDocument.collectSvgTspanElements__svgDocument((cast element : XmlElement)) : Array<XmlElement>);
     runs = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(SvgDocument.collectSvgTextRuns__svgDocument, cast ([element, style, context, runs] : Array<Dynamic>));
+    SvgDocument.collectSvgTextRuns__svgDocument((cast element : XmlElement), style, context, runs);
     lastRun = flighthq._internal._StaticIndex.readArray(runs, _Runtime.subtractNumbers(_Runtime.field(runs, 'length'), 1.0));
-    if ((cast !_Runtime.strictEquals(lastRun, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(lastRun, 'text', _Runtime.callProperty(_Runtime.field(lastRun, 'text'), 'trimEnd', cast ([] : Array<Dynamic>))); }
-    text = _Runtime.join(_Runtime.callProperty(runs, 'map', cast ([function(run:Dynamic) return _Runtime.field(run, 'text')] : Array<Dynamic>)), '');
+    if ((cast !_Runtime.strictEquals(lastRun, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast lastRun : SvgTextRun__svgDocument).text = _Runtime.callProperty((cast lastRun : SvgTextRun__svgDocument).text, 'trimEnd', cast ([] : Array<Dynamic>))); }
+    text = _Runtime.join(_Runtime.callProperty(runs, 'map', cast ([function(run:SvgTextRun__svgDocument, __unused2:Float, __unused3:Array<SvgTextRun__svgDocument>):String return (cast run : SvgTextRun__svgDocument).text] : Array<Dynamic>)), '');
     ranges = cast ([] : Array<Dynamic>);
     offset = 0.0;
     for (run in _Runtime.iterable(runs)) {
-      var end:Dynamic = _Runtime.addNumbers(offset, _Runtime.field(_Runtime.field(run, 'text'), 'length'));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(run, 'style'), style) : Bool)) { _Runtime.callProperty(ranges, 'push', cast ([_Runtime.callValue(createTextFormatRange, cast ([_Runtime.callValue(SvgDocument.createSvgTextFormat__svgDocument, cast ([_Runtime.field(run, 'style')] : Array<Dynamic>)), offset, end] : Array<Dynamic>))] : Array<Dynamic>)); }
+      var end:Float = _Runtime.addNumbers(offset, _Runtime.field((cast run : SvgTextRun__svgDocument).text, 'length'));
+      if ((cast !_Runtime.strictEquals((cast run : SvgTextRun__svgDocument).style, style) : Bool)) { _Runtime.callProperty(ranges, 'push', cast ([(cast createTextFormatRange((cast (cast SvgDocument.createSvgTextFormat__svgDocument((cast run : SvgTextRun__svgDocument).style) : TextFormat) : TextFormat), (cast offset : Float), (cast end : Float)) : TextFormatRange)] : Array<Dynamic>)); }
       (offset = cast (end : Dynamic));
     }
     firstTspan = flighthq._internal._StaticIndex.readArray(directTspans, 0.0);
-    xElement = ((cast ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'x'] : Array<Dynamic>)), null) : Bool) && (cast !_Runtime.strictEquals(firstTspan, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast firstTspan : Dynamic) : (cast element : Dynamic));
-    yElement = ((cast ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'y'] : Array<Dynamic>)), null) : Bool) && (cast !_Runtime.strictEquals(firstTspan, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast firstTspan : Dynamic) : (cast element : Dynamic));
-    x = _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([xElement, 'x'] : Array<Dynamic>)), 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'dx'] : Array<Dynamic>)), 0.0] : Array<Dynamic>))), ((cast _Runtime.strictEquals(xElement, element) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([xElement, 'dx'] : Array<Dynamic>)), 0.0] : Array<Dynamic>)) : Dynamic)));
-    y = _Runtime.subtractNumbers(_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([yElement, 'y'] : Array<Dynamic>)), 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'dy'] : Array<Dynamic>)), 0.0] : Array<Dynamic>))), ((cast _Runtime.strictEquals(yElement, element) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.firstNumber__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([yElement, 'dy'] : Array<Dynamic>)), 0.0] : Array<Dynamic>)) : Dynamic))), _Runtime.field(style, 'fontSize'));
-    common = { alpha: _Runtime.field(style, 'opacity'), name: _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>)), visible: ((cast !_Runtime.strictEquals(_Runtime.field(style, 'display'), 'none') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(style, 'visibility'), 'visible') : Bool)) };
-    label = ((cast _Runtime.strictEquals(_Runtime.field(ranges, 'length'), 0.0) : Bool) ? (cast _Runtime.callValue(createTextLabel, cast ([_Runtime.mergeObjects([common, { data: { autoSize: 'left', height: _Runtime.multiplyNumbers(_Runtime.field(style, 'fontSize'), 1.25), text: text, textFormat: format, width: 10000.0 } }])] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(createRichText, cast ([_Runtime.mergeObjects([common, { data: { autoSize: 'left', defaultTextFormat: format, height: _Runtime.multiplyNumbers(_Runtime.field(style, 'fontSize'), 1.25), text: text, textFormat: format, textFormatRanges: ranges, width: 10000.0 } }])] : Array<Dynamic>)) : Dynamic));
-    if ((cast _Runtime.callValue(SvgDocument.hasFlattenedSvgTextPosition__svgDocument, cast ([tspans, firstTspan] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Recover, 'svg.tspan-position-flattened', 'createSvgTextNode', { count: _Runtime.field(tspans, 'length') }] : Array<Dynamic>));
+    xElement = ((cast ((cast _Runtime.strictEquals((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'x' : String)) : Null<String>), null) : Bool) && (cast !_Runtime.strictEquals(firstTspan, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast firstTspan : Dynamic) : (cast element : Dynamic));
+    yElement = ((cast ((cast _Runtime.strictEquals((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'y' : String)) : Null<String>), null) : Bool) && (cast !_Runtime.strictEquals(firstTspan, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast firstTspan : Dynamic) : (cast element : Dynamic));
+    x = _Runtime.addNumbers(((cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast xElement : XmlElement), (cast 'x' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float) + (cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'dx' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float)), ((cast _Runtime.strictEquals(xElement, element) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast xElement : XmlElement), (cast 'dx' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float) : Dynamic)));
+    y = (_Runtime.addNumbers(((cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast yElement : XmlElement), (cast 'y' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float) + (cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'dy' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float)), ((cast _Runtime.strictEquals(yElement, element) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast SvgDocument.firstNumber__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast yElement : XmlElement), (cast 'dy' : String)) : Null<String>) : Null<String>), (cast 0.0 : Float)) : Float) : Dynamic))) - (cast style : SvgStyle__svgDocument).fontSize);
+    common = { alpha: (cast style : SvgStyle__svgDocument).opacity, name: (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>), visible: ((cast !_Runtime.strictEquals((cast style : SvgStyle__svgDocument).display, 'none') : Bool) && (cast _Runtime.strictEquals((cast style : SvgStyle__svgDocument).visibility, 'visible') : Bool)) };
+    label = ((cast _Runtime.strictEquals(_Runtime.field(ranges, 'length'), 0.0) : Bool) ? (cast (cast createTextLabel(_Runtime.mergeObjects([common, { data: { autoSize: 'left', height: ((cast style : SvgStyle__svgDocument).fontSize * 1.25), text: text, textFormat: format, width: 10000.0 } }])) : TextLabel) : Dynamic) : (cast (cast createRichText(_Runtime.mergeObjects([common, { data: { autoSize: 'left', defaultTextFormat: format, height: ((cast style : SvgStyle__svgDocument).fontSize * 1.25), text: text, textFormat: format, textFormatRanges: ranges, width: 10000.0 } }])) : RichText) : Dynamic));
+    if ((cast (cast SvgDocument.hasFlattenedSvgTextPosition__svgDocument((cast tspans : Array<XmlElement>), (cast firstTspan : Null<XmlElement>)) : Bool) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'svg.tspan-position-flattened' : String), (cast 'createSvgTextNode' : String), (cast { count: _Runtime.field(tspans, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([label, element, parentStyle, context, _Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, x, y] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([label, element, context, null] : Array<Dynamic>));
+    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast label : Node2D), (cast element : XmlElement), parentStyle, context, (cast (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast x : Null<Float>), (cast y : Null<Float>)) : Null<Matrix>) : Null<Matrix>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+    SvgDocument.applySvgElementClip__svgDocument((cast label : Node2D), (cast element : XmlElement), context, (cast null : Null<Rectangle>));
     return cast label;
     return cast null;
   }
 
   public static function createSvgTextFormat__svgDocument(style:SvgStyle__svgDocument):TextFormat {
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    color = _Runtime.coalesce(_Runtime.callValue(SvgDocument.resolveSvgColor__svgDocument, cast ([_Runtime.field(style, 'fill'), _Runtime.field(style, 'color')] : Array<Dynamic>)), function():Dynamic return cast { alpha: 1.0, rgb: 0.0 });
-    return cast { align: ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'middle') : Bool) ? (cast 'center' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'end') : Bool) ? (cast 'right' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), bold: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontWeight'), 'bold') : Bool) || (cast ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.field(style, 'fontWeight')] : Array<Dynamic>)) : Float) >= (cast 600.0 : Float)) : Bool)), color: _Runtime.callValue(packColor, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 16)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 8)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.field(color, 'rgb')) & 255) / 255.0), _Runtime.multiplyNumbers(_Runtime.field(color, 'alpha'), _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>)), font: _Runtime.replace(_Runtime.field(style, 'fontFamily'), _Runtime.regexp('^[\'"]|[\'"]$$', 'g'), '', false), italic: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'italic') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'oblique') : Bool)), size: _Runtime.field(style, 'fontSize') };
+    var color:SvgColor__svgDocument = cast _Runtime.UNDEFINED;
+    color = _Runtime.coalesce((cast SvgDocument.resolveSvgColor__svgDocument((cast _Runtime.field(style, 'fill') : String), (cast _Runtime.field(style, 'color') : String)) : Null<SvgColor__svgDocument>), function():Dynamic return cast { alpha: 1.0, rgb: 0.0 });
+    return cast { align: ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'middle') : Bool) ? (cast 'center' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'end') : Bool) ? (cast 'right' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), bold: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontWeight'), 'bold') : Bool) || (cast ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.field(style, 'fontWeight')] : Array<Dynamic>)) : Float) >= (cast 600.0 : Float)) : Bool)), color: (cast packColor((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast color : SvgColor__svgDocument).rgb), 16)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast color : SvgColor__svgDocument).rgb), 8)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32((cast color : SvgColor__svgDocument).rgb) & 255) / 255.0) : Float), (cast _Runtime.multiplyNumbers((cast color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity')) : Float)) : Null<Float>), font: _Runtime.replace(_Runtime.field(style, 'fontFamily'), _Runtime.regexp('^[\'"]|[\'"]$$', 'g'), '', false), italic: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'italic') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'oblique') : Bool)), size: _Runtime.field(style, 'fontSize') };
     return cast null;
   }
 
   public static function createSvgUseNode__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):Null<Node2D> {
-    var href:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    var placement:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var referencedNode:Dynamic = cast _Runtime.UNDEFINED;
-    href = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'href'] : Array<Dynamic>));
+    var href:Null<String> = cast _Runtime.UNDEFINED;
+    var id:Null<String> = cast _Runtime.UNDEFINED;
+    var referenced:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    var container:DisplayObject = cast _Runtime.UNDEFINED;
+    var placement:Matrix = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var referencedNode:Null<Node2D> = cast _Runtime.UNDEFINED;
+    href = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'href' : String)) : Null<String>);
     id = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast _Runtime.field(context, 'resolvingUses') : flighthq._internal._Set).has(id)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast ImportDiagnosticSeverityValue.Drop : Dynamic) : (cast ImportDiagnosticSeverityValue.Reject : Dynamic)), ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)), 'createSvgUseNode', ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flighthq._internal._Set<String>).has(id)) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic)) : ImportDiagnosticSeverity), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)) : String), (cast 'createSvgUseNode' : String), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic)) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    referenced = ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).get(id));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).get(id));
     if ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'svg.unresolved-use', 'createSvgUseNode', { id: id }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'svg.unresolved-use' : String), (cast 'createSvgUseNode' : String), (cast { id: id } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    ((cast _Runtime.field(context, 'resolvingUses') : flighthq._internal._Set).add(id));
-    _Runtime.callValue(SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument, cast ([referenced, context] : Array<Dynamic>));
-    container = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
-    placement = _Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x', 0.0] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y', 0.0] : Array<Dynamic>))] : Array<Dynamic>));
-    style = _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([container, element, parentStyle, context, placement, true] : Array<Dynamic>));
-    referencedNode = ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([referenced.name] : Array<Dynamic>)), 'symbol') : Bool) ? (cast _Runtime.callValue(SvgDocument.createSvgSymbolNode__svgDocument, cast ([referenced, element, style, context] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(SvgDocument.createSvgElementNode__svgDocument, cast ([referenced, style, context] : Array<Dynamic>)) : Dynamic));
-    if ((cast !_Runtime.strictEquals(referencedNode, null) : Bool)) { _Runtime.callValue(addNodeChild, cast ([container, referencedNode] : Array<Dynamic>)); }
-    _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([container, element, context, _Runtime.callValue(SvgDocument.createSvgNode2DBounds__svgDocument, cast ([container] : Array<Dynamic>))] : Array<Dynamic>));
-    ((cast _Runtime.field(context, 'resolvingUses') : flighthq._internal._Set).delete_(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flighthq._internal._Set<String>).add(id));
+    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast referenced : XmlElement), context, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
+    container = (cast createDisplayObject(_Runtime.field(_Runtime, 'UNDEFINED')) : DisplayObject);
+    placement = (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x' : String), (cast 0.0 : Float)) : Null<Float>) : Null<Float>), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y' : String), (cast 0.0 : Float)) : Null<Float>) : Null<Float>)) : Matrix);
+    style = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast container : Node2D), (cast element : XmlElement), parentStyle, context, (cast placement : Null<Matrix>), (cast true : Bool)) : SvgStyle__svgDocument);
+    referencedNode = ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast referenced : flighthq.types.XmlElement).name : String)) : String), 'symbol') : Bool) ? (cast (cast SvgDocument.createSvgSymbolNode__svgDocument((cast referenced : XmlElement), (cast element : XmlElement), style, context) : DisplayObject) : Dynamic) : (cast (cast SvgDocument.createSvgElementNode__svgDocument((cast referenced : XmlElement), style, context) : Null<Node2D>) : Dynamic));
+    if ((cast !_Runtime.strictEquals(referencedNode, null) : Bool)) { (cast addNodeChild(container, referencedNode) : NodeOf<Node2DTraits>); }
+    SvgDocument.applySvgElementClip__svgDocument((cast container : Node2D), (cast element : XmlElement), context, (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast container : Node2D)) : Null<Rectangle>) : Null<Rectangle>));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flighthq._internal._Set<String>).delete_(id));
     return cast container;
     return cast null;
   }
 
   public static function createSvgSymbolNode__svgDocument(element:XmlElement, useElement:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):DisplayObject {
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    var useWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var useHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    container = _Runtime.callValue(createDisplayObject, cast ([{ name: _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>)) }] : Array<Dynamic>));
-    useWidth = _Runtime.callValue(SvgDocument.optionalNumberAttribute__svgDocument, cast ([useElement, 'width'] : Array<Dynamic>));
-    useHeight = _Runtime.callValue(SvgDocument.optionalNumberAttribute__svgDocument, cast ([useElement, 'height'] : Array<Dynamic>));
-    viewport = _Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([element, { height: _Runtime.coalesce(useHeight, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), width: _Runtime.coalesce(useWidth, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), x: 0.0, y: 0.0 }] : Array<Dynamic>));
-    style = _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([container, element, parentStyle, context, viewport, true] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.appendSvgChildren__svgDocument, cast ([container, element, style, context] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.applySvgElementClip__svgDocument, cast ([container, element, context, _Runtime.callValue(SvgDocument.createSvgNode2DBounds__svgDocument, cast ([container] : Array<Dynamic>))] : Array<Dynamic>));
+    var container:DisplayObject = cast _Runtime.UNDEFINED;
+    var useWidth:Null<Float> = cast _Runtime.UNDEFINED;
+    var useHeight:Null<Float> = cast _Runtime.UNDEFINED;
+    var viewport:Null<Matrix> = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    container = (cast createDisplayObject({ name: (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>) }) : DisplayObject);
+    useWidth = (cast SvgDocument.optionalNumberAttribute__svgDocument((cast useElement : XmlElement), (cast 'width' : String)) : Null<Float>);
+    useHeight = (cast SvgDocument.optionalNumberAttribute__svgDocument((cast useElement : XmlElement), (cast 'height' : String)) : Null<Float>);
+    viewport = (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element : XmlElement), (cast { height: _Runtime.coalesce(useHeight, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), width: _Runtime.coalesce(useWidth, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), x: 0.0, y: 0.0 } : Null<{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }>)) : Null<Matrix>);
+    style = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast container : Node2D), (cast element : XmlElement), parentStyle, context, (cast viewport : Null<Matrix>), (cast true : Bool)) : SvgStyle__svgDocument);
+    SvgDocument.appendSvgChildren__svgDocument((cast container : DisplayObject), (cast element : XmlElement), style, context);
+    SvgDocument.applySvgElementClip__svgDocument((cast container : Node2D), (cast element : XmlElement), context, (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast container : Node2D)) : Null<Rectangle>) : Null<Rectangle>));
     return cast container;
     return cast null;
   }
 
   public static function appendSvgShapePaint__svgDocument(shape:Shape, path:Path, style:SvgStyle__svgDocument, element:XmlElement, context:SvgImportContext__svgDocument):Void {
-    var fillGradient:Dynamic = cast _Runtime.UNDEFINED;
-    var fillColor:Dynamic = cast _Runtime.UNDEFINED;
-    var strokeGradient:Dynamic = cast _Runtime.UNDEFINED;
-    var strokeColor:Dynamic = cast _Runtime.UNDEFINED;
-    var strokePath:Dynamic = cast _Runtime.UNDEFINED;
-    fillGradient = _Runtime.callValue(SvgDocument.resolveSvgGradient__svgDocument, cast ([_Runtime.field(style, 'fill'), context] : Array<Dynamic>));
-    fillColor = _Runtime.callValue(SvgDocument.resolveSvgColor__svgDocument, cast ([_Runtime.field(style, 'fill'), _Runtime.field(style, 'color')] : Array<Dynamic>));
+    var fillGradient:Null<SvgGradient__svgDocument> = cast _Runtime.UNDEFINED;
+    var fillColor:Null<SvgColor__svgDocument> = cast _Runtime.UNDEFINED;
+    var strokeGradient:Null<SvgGradient__svgDocument> = cast _Runtime.UNDEFINED;
+    var strokeColor:Null<SvgColor__svgDocument> = cast _Runtime.UNDEFINED;
+    var strokePath:Path = cast _Runtime.UNDEFINED;
+    fillGradient = (cast SvgDocument.resolveSvgGradient__svgDocument((cast _Runtime.field(style, 'fill') : String), context) : Null<SvgGradient__svgDocument>);
+    fillColor = (cast SvgDocument.resolveSvgColor__svgDocument((cast _Runtime.field(style, 'fill') : String), (cast _Runtime.field(style, 'color') : String)) : Null<SvgColor__svgDocument>);
     if ((cast !_Runtime.strictEquals(fillGradient, null) : Bool)) {
-      _Runtime.callValue(appendShapeBeginGradientFill, cast ([shape, _Runtime.field(fillGradient, 'kind'), _Runtime.callProperty(_Runtime.field(fillGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return _Runtime.field(_Runtime.field(stop, 'color'), 'rgb')] : Array<Dynamic>)), _Runtime.callProperty(_Runtime.field(fillGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(stop, 'color'), 'alpha'), _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>)), _Runtime.callProperty(_Runtime.field(fillGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(stop, 'offset'), 255.0))] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.createSvgGradientMatrix__svgDocument, cast ([fillGradient, path] : Array<Dynamic>)), _Runtime.field(fillGradient, 'spreadMethod')] : Array<Dynamic>));
+      appendShapeBeginGradientFill((cast shape : Shape), (cast fillGradient : SvgGradient__svgDocument).kind, (cast _Runtime.callProperty((cast fillGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused4:Float, __unused5:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb] : Array<Dynamic>)) : Array<Float>), (cast _Runtime.callProperty((cast fillGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused6:Float, __unused7:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>)) : Array<Float>), (cast _Runtime.callProperty((cast fillGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused8:Float, __unused9:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0))] : Array<Dynamic>)) : Array<Float>), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument(fillGradient, (cast path : Path)) : Null<Matrix>) : Null<Matrix>), (cast (cast fillGradient : SvgGradient__svgDocument).spreadMethod : SpreadMethod), _Runtime.field(_Runtime, 'UNDEFINED'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
     } else { if ((cast !_Runtime.strictEquals(fillColor, null) : Bool)) {
-      _Runtime.callValue(appendShapeBeginFill, cast ([shape, _Runtime.field(fillColor, 'rgb'), _Runtime.multiplyNumbers(_Runtime.field(fillColor, 'alpha'), _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>));
+      appendShapeBeginFill((cast shape : Shape), (cast (cast fillColor : SvgColor__svgDocument).rgb : Float), (cast _Runtime.multiplyNumbers((cast fillColor : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity')) : Float));
     } }
     if ((cast ((cast !_Runtime.strictEquals(fillGradient, null) : Bool) || (cast !_Runtime.strictEquals(fillColor, null) : Bool)) : Bool)) {
-      _Runtime.callValue(appendShapePath, cast ([shape, _Runtime.slice(_Runtime.field(path, 'commands'), 0, null), _Runtime.slice(_Runtime.field(path, 'data'), 0, null), _Runtime.field(path, 'winding')] : Array<Dynamic>));
-      _Runtime.callValue(appendShapeEndFill, cast ([shape] : Array<Dynamic>));
-    } else { if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.field(style, 'fill')] : Array<Dynamic>)), null) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'svg.unresolved-fill-gradient', 'appendSvgShapePaint', { element: _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)) }] : Array<Dynamic>));
+      appendShapePath((cast shape : Shape), (cast _Runtime.slice(_Runtime.field(path, 'commands'), 0, null) : Array<Float>), (cast _Runtime.slice(_Runtime.field(path, 'data'), 0, null) : Array<Float>), (cast _Runtime.field(path, 'winding') : PathWinding));
+      appendShapeEndFill((cast shape : Shape));
+    } else { if ((cast !_Runtime.strictEquals((cast SvgDocument.parseUrlReference__svgDocument((cast _Runtime.field(style, 'fill') : Null<String>)) : Null<String>), null) : Bool)) {
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'svg.unresolved-fill-gradient' : String), (cast 'appendSvgShapePaint' : String), (cast { element: (cast SvgDocument.localName__svgDocument((cast element.name : String)) : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     } }
-    strokeGradient = _Runtime.callValue(SvgDocument.resolveSvgGradient__svgDocument, cast ([_Runtime.field(style, 'stroke'), context] : Array<Dynamic>));
-    strokeColor = _Runtime.callValue(SvgDocument.resolveSvgColor__svgDocument, cast ([_Runtime.field(style, 'stroke'), _Runtime.field(style, 'color')] : Array<Dynamic>));
+    strokeGradient = (cast SvgDocument.resolveSvgGradient__svgDocument((cast _Runtime.field(style, 'stroke') : String), context) : Null<SvgGradient__svgDocument>);
+    strokeColor = (cast SvgDocument.resolveSvgColor__svgDocument((cast _Runtime.field(style, 'stroke') : String), (cast _Runtime.field(style, 'color') : String)) : Null<SvgColor__svgDocument>);
     if ((cast ((cast _Runtime.strictEquals(strokeGradient, null) : Bool) && (cast _Runtime.strictEquals(strokeColor, null) : Bool)) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([_Runtime.field(style, 'stroke')] : Array<Dynamic>)), null) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Drop, 'svg.unresolved-stroke-gradient', 'appendSvgShapePaint', { element: _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)) }] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals((cast SvgDocument.parseUrlReference__svgDocument((cast _Runtime.field(style, 'stroke') : Null<String>)) : Null<String>), null) : Bool)) {
+        reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'svg.unresolved-stroke-gradient' : String), (cast 'appendSvgShapePaint' : String), (cast { element: (cast SvgDocument.localName__svgDocument((cast element.name : String)) : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
       return;
     }
-    _Runtime.callValue(appendShapeLineStyle, cast ([shape, _Runtime.field(style, 'strokeWidth'), _Runtime.coalesce(_Runtime.optionalField(strokeColor, 'rgb'), function():Dynamic return cast 0.0), _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.optionalField(strokeColor, 'alpha'), function():Dynamic return cast 1.0), _Runtime.field(style, 'strokeOpacity')), false, 'normal', _Runtime.callValue(SvgDocument.mapSvgLineCap__svgDocument, cast ([_Runtime.field(style, 'strokeLinecap')] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.mapSvgLineJoin__svgDocument, cast ([_Runtime.field(style, 'strokeLinejoin')] : Array<Dynamic>)), _Runtime.field(style, 'strokeMiterlimit')] : Array<Dynamic>));
+    appendShapeLineStyle((cast shape : Shape), (cast _Runtime.field(style, 'strokeWidth') : Float), (cast _Runtime.coalesce(_Runtime.optionalField(strokeColor, 'rgb'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.optionalField(strokeColor, 'alpha'), function():Dynamic return cast 1.0), _Runtime.field(style, 'strokeOpacity')) : Float), (cast false : Bool), 'normal', (cast SvgDocument.mapSvgLineCap__svgDocument((cast _Runtime.field(style, 'strokeLinecap') : String)) : Null<String>), (cast SvgDocument.mapSvgLineJoin__svgDocument((cast _Runtime.field(style, 'strokeLinejoin') : String)) : Null<String>), (cast _Runtime.field(style, 'strokeMiterlimit') : Float));
     if ((cast !_Runtime.strictEquals(strokeGradient, null) : Bool)) {
-      _Runtime.callValue(appendShapeLineGradientStyle, cast ([shape, _Runtime.field(strokeGradient, 'kind'), _Runtime.callProperty(_Runtime.field(strokeGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return _Runtime.field(_Runtime.field(stop, 'color'), 'rgb')] : Array<Dynamic>)), _Runtime.callProperty(_Runtime.field(strokeGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(stop, 'color'), 'alpha'), _Runtime.field(style, 'strokeOpacity'))] : Array<Dynamic>)), _Runtime.callProperty(_Runtime.field(strokeGradient, 'stops'), 'map', cast ([function(stop:Dynamic) return HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(stop, 'offset'), 255.0))] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.createSvgGradientMatrix__svgDocument, cast ([strokeGradient, path] : Array<Dynamic>)), _Runtime.field(strokeGradient, 'spreadMethod')] : Array<Dynamic>));
+      appendShapeLineGradientStyle((cast shape : Shape), (cast strokeGradient : SvgGradient__svgDocument).kind, (cast _Runtime.callProperty((cast strokeGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused10:Float, __unused11:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb] : Array<Dynamic>)) : Array<Float>), (cast _Runtime.callProperty((cast strokeGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused12:Float, __unused13:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'strokeOpacity'))] : Array<Dynamic>)) : Array<Float>), (cast _Runtime.callProperty((cast strokeGradient : SvgGradient__svgDocument).stops, 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused14:Float, __unused15:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0))] : Array<Dynamic>)) : Array<Float>), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument(strokeGradient, (cast path : Path)) : Null<Matrix>) : Null<Matrix>), (cast (cast strokeGradient : SvgGradient__svgDocument).spreadMethod : SpreadMethod), _Runtime.field(_Runtime, 'UNDEFINED'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
     }
     strokePath = path;
     if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'strokeDasharray'), 'none') : Bool)) {
-      var dash:Dynamic = _Runtime.callProperty(_Runtime.callValue(SvgDocument.parseSvgNumberList__svgDocument, cast ([_Runtime.field(style, 'strokeDasharray')] : Array<Dynamic>)), 'filter', cast ([function(value:Dynamic) return ((cast value : Float) >= (cast 0.0 : Float))] : Array<Dynamic>));
+      var dash:Array<Float> = _Runtime.callProperty((cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.field(style, 'strokeDasharray') : String)) : Array<Float>), 'filter', cast ([function(value:Float, __unused16:Float, __unused17:Array<Float>):Bool return ((cast value : Float) >= (cast 0.0 : Float))] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        (strokePath = cast (_Runtime.callValue(createPath, cast ([_Runtime.field(path, 'winding')] : Array<Dynamic>)) : Dynamic));
-        _Runtime.callValue(dashPath, cast ([path, ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic)), _Runtime.field(style, 'strokeDashoffset'), strokePath] : Array<Dynamic>));
+        (strokePath = cast ((cast createPath((cast _Runtime.field(path, 'winding') : PathWinding)) : Path) : Dynamic));
+        dashPath((cast path : Path), (cast ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic)) : Array<Float>), (cast _Runtime.field(style, 'strokeDashoffset') : Float), (cast strokePath : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
       }
     }
-    _Runtime.callValue(appendShapePath, cast ([shape, _Runtime.slice(_Runtime.field(strokePath, 'commands'), 0, null), _Runtime.slice(_Runtime.field(strokePath, 'data'), 0, null), _Runtime.field(strokePath, 'winding')] : Array<Dynamic>));
+    appendShapePath((cast shape : Shape), (cast _Runtime.slice(_Runtime.field(strokePath, 'commands'), 0, null) : Array<Float>), (cast _Runtime.slice(_Runtime.field(strokePath, 'data'), 0, null) : Array<Float>), (cast _Runtime.field(strokePath, 'winding') : PathWinding));
   }
 
   public static function appendPathData__svgDocument(out:Path, source:Path):Void {
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(source, 'commands'))]));
-    _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(source, 'data'))]));
+    _Runtime.callProperty((cast out : Path).commands, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(source, 'commands'))]));
+    _Runtime.callProperty((cast out : Path).data, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(source, 'data'))]));
   }
 
   public static function collectSvgTextRuns__svgDocument(element:XmlElement, style:SvgStyle__svgDocument, context:SvgImportContext__svgDocument, out:Array<SvgTextRun__svgDocument>):Void {
     for (content in _Runtime.iterable(element.content)) {
       if ((cast _Runtime.strictEquals(_Runtime.typeofValue(content), 'string') : Bool)) {
-        _Runtime.callValue(SvgDocument.appendSvgTextRun__svgDocument, cast ([out, style, content] : Array<Dynamic>));
+        SvgDocument.appendSvgTextRun__svgDocument(out, style, (cast content : String));
         continue;
       }
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([content.name] : Array<Dynamic>)), 'tspan') : Bool)) { continue; }
-      _Runtime.callValue(SvgDocument.collectSvgTextRuns__svgDocument, cast ([content, _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([content, style, context] : Array<Dynamic>)), context, out] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast content : flighthq.types.XmlElement).name : String)) : String), 'tspan') : Bool)) { continue; }
+      SvgDocument.collectSvgTextRuns__svgDocument((cast content : XmlElement), (cast SvgDocument.resolveSvgStyle__svgDocument((cast content : XmlElement), style, context) : SvgStyle__svgDocument), context, out);
     }
   }
 
@@ -702,94 +717,94 @@ class SvgDocument {
     var out:Array<XmlElement> = cast _Runtime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
     for (child in _Runtime.iterable(element.children)) {
-      if ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([child.name] : Array<Dynamic>)), 'tspan') : Bool)) { _Runtime.callProperty(out, 'push', cast ([child] : Array<Dynamic>)); }
-      _Runtime.callProperty(out, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(SvgDocument.collectSvgTspanElements__svgDocument, cast ([child] : Array<Dynamic>)))]));
+      if ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast child.name : String)) : String), 'tspan') : Bool)) { _Runtime.callProperty(out, 'push', cast ([child] : Array<Dynamic>)); }
+      _Runtime.callProperty(out, 'push', _Runtime.concatArrays([_Runtime.toArray((cast SvgDocument.collectSvgTspanElements__svgDocument((cast child : XmlElement)) : Array<XmlElement>))]));
     }
     return cast out;
     return cast null;
   }
 
   public static function appendSvgTextRun__svgDocument(out:Array<SvgTextRun__svgDocument>, style:SvgStyle__svgDocument, source:String):Void {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
+    var text:String = cast _Runtime.UNDEFINED;
+    var previous:SvgTextRun__svgDocument = cast _Runtime.UNDEFINED;
     text = _Runtime.replace(_Runtime.replace(_Runtime.replace(source, _Runtime.regexp('[\\n\\r]', 'g'), '', false), _Runtime.regexp('\\t', 'g'), ' ', false), _Runtime.regexp(' +', 'g'), ' ', false);
     if ((cast _Runtime.strictEquals(_Runtime.field(out, 'length'), 0.0) : Bool)) { (text = cast (_Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)) : Dynamic)); }
     previous = flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(_Runtime.optionalField(previous, 'text'), 'endsWith', cast ([' '] : Array<Dynamic>)), true) : Bool) && (cast StringTools.startsWith(text, ' ') : Bool)) : Bool)) { (text = cast (_Runtime.slice(text, 1.0, null) : Dynamic)); }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(({ final __structural17 = previous; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : SvgTextRun__svgDocument).text; }), 'endsWith', cast ([' '] : Array<Dynamic>)), true) : Bool) && (cast StringTools.startsWith(text, ' ') : Bool)) : Bool)) { (text = cast (_Runtime.slice(text, 1.0, null) : Dynamic)); }
     if ((cast !_Runtime.strictEquals(text, '') : Bool)) { _Runtime.callProperty(out, 'push', cast ([{ style: style, text: text }] : Array<Dynamic>)); }
   }
 
   public static function createSvgGradientMatrix__svgDocument(gradient:SvgGradient__svgDocument, path:Path):Matrix {
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var mapX:Dynamic = cast _Runtime.UNDEFINED;
-    var mapY:Dynamic = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    var mapX:Float->Float = cast _Runtime.UNDEFINED;
+    var mapY:Float->Float = cast _Runtime.UNDEFINED;
     var matrix:Matrix = cast _Runtime.UNDEFINED;
-    bounds = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(getPathBounds, cast ([path, bounds] : Array<Dynamic>));
-    mapX = function(value:Float) return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.multiplyNumbers(value, _Runtime.field(bounds, 'width'))) : Dynamic) : (cast value : Dynamic));
-    mapY = function(value:Float) return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.multiplyNumbers(value, _Runtime.field(bounds, 'height'))) : Dynamic) : (cast value : Dynamic));
+    bounds = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+    (cast getPathBounds((cast path : Path), bounds) : Bool);
+    mapX = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).x + (value * (cast bounds : Rectangle).width)) : Dynamic) : (cast value : Dynamic)) : Float->Float);
+    mapY = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).y + (value * (cast bounds : Rectangle).height)) : Dynamic) : (cast value : Dynamic)) : Float->Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'kind'), 'linear') : Bool)) {
-      var x1:Dynamic = _Runtime.callValue(mapX, cast ([_Runtime.field(gradient, 'x1')] : Array<Dynamic>));
-      var y1:Dynamic = _Runtime.callValue(mapY, cast ([_Runtime.field(gradient, 'y1')] : Array<Dynamic>));
-      var x2:Dynamic = _Runtime.callValue(mapX, cast ([_Runtime.field(gradient, 'x2')] : Array<Dynamic>));
-      var y2:Dynamic = _Runtime.callValue(mapY, cast ([_Runtime.field(gradient, 'y2')] : Array<Dynamic>));
-      var dx:Dynamic = (x2 - x1);
-      var dy:Dynamic = (y2 - y1);
-      var length:Dynamic = HxMath.max(_Runtime.hypot(dx, dy), 1.0);
-      (matrix = cast (_Runtime.callValue(createGradientTransformMatrix, cast ([length, length, HxMath.atan2(dy, dx), ((x1 + x2) / 2.0), ((y1 + y2) / 2.0)] : Array<Dynamic>)) : Dynamic));
+      var x1:Float = (cast mapX((cast _Runtime.field(gradient, 'x1') : Float)) : Float);
+      var y1:Float = (cast mapY((cast _Runtime.field(gradient, 'y1') : Float)) : Float);
+      var x2:Float = (cast mapX((cast _Runtime.field(gradient, 'x2') : Float)) : Float);
+      var y2:Float = (cast mapY((cast _Runtime.field(gradient, 'y2') : Float)) : Float);
+      var dx:Float = (x2 - x1);
+      var dy:Float = (y2 - y1);
+      var length:Float = HxMath.max(_Runtime.hypot(dx, dy), 1.0);
+      (matrix = cast ((cast createGradientTransformMatrix((cast length : Float), (cast length : Float), (cast HxMath.atan2(dy, dx) : Float), (cast ((x1 + x2) / 2.0) : Float), (cast ((y1 + y2) / 2.0) : Float)) : Matrix) : Dynamic));
     } else {
-      var radiusX:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), _Runtime.field(bounds, 'width')) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
-      var radiusY:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), _Runtime.field(bounds, 'height')) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
-      (matrix = cast (_Runtime.callValue(createGradientTransformMatrix, cast ([HxMath.max((radiusX * 2.0), 1.0), HxMath.max((radiusY * 2.0), 1.0), 0.0, _Runtime.callValue(mapX, cast ([_Runtime.field(gradient, 'cx')] : Array<Dynamic>)), _Runtime.callValue(mapY, cast ([_Runtime.field(gradient, 'cy')] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      var radiusX:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), (cast bounds : Rectangle).width) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
+      var radiusY:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), (cast bounds : Rectangle).height) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
+      (matrix = cast ((cast createGradientTransformMatrix((cast HxMath.max((radiusX * 2.0), 1.0) : Float), (cast HxMath.max((radiusY * 2.0), 1.0) : Float), (cast 0.0 : Float), (cast (cast mapX((cast _Runtime.field(gradient, 'cx') : Float)) : Null<Float>) : Float), (cast (cast mapY((cast _Runtime.field(gradient, 'cy') : Float)) : Null<Float>) : Float)) : Matrix) : Dynamic));
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(gradient, 'transform'), null) : Bool)) { (matrix = cast (_Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([_Runtime.field(gradient, 'transform'), matrix] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(gradient, 'transform'), null) : Bool)) { (matrix = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast _Runtime.field(gradient, 'transform') : Matrix), (cast matrix : Matrix)) : Matrix) : Dynamic)); }
     return cast matrix;
     return cast null;
   }
 
   public static function createSvgViewportMatrix__svgDocument(element:XmlElement, ?viewport:{ @:optional var height:Float; @:optional var width:Float; @:optional var x:Float; @:optional var y:Float; }):Null<Matrix> {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var viewBox:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    x = _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'x', 0.0] : Array<Dynamic>)));
-    y = _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast _Runtime.callValue(SvgDocument.numberAttribute__svgDocument, cast ([element, 'y', 0.0] : Array<Dynamic>)));
-    viewBox = _Runtime.callValue(SvgDocument.parseSvgNumberList__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'viewBox'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(viewBox, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return cast ((cast ((cast _Runtime.strictEquals(x, 0.0) : Bool) && (cast _Runtime.strictEquals(y, 0.0) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, x, y] : Array<Dynamic>)) : Dynamic)); }
-    width = _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'width'] : Array<Dynamic>)), flighthq._internal._StaticIndex.readArray(viewBox, 2.0)] : Array<Dynamic>)));
-    height = _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'height'] : Array<Dynamic>)), flighthq._internal._StaticIndex.readArray(viewBox, 3.0)] : Array<Dynamic>)));
-    return cast _Runtime.callValue(SvgDocument.createSvgViewBoxMatrix__svgDocument, cast ([viewBox, { height: height, width: width, x: x, y: y }, _Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'preserveAspectRatio'] : Array<Dynamic>)), function():Dynamic return cast 'xMidYMid meet')] : Array<Dynamic>));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var viewBox:Array<Float> = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    x = _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'x' : String), (cast 0.0 : Float)) : Null<Float>));
+    y = _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast (cast SvgDocument.numberAttribute__svgDocument((cast element : XmlElement), (cast 'y' : String), (cast 0.0 : Float)) : Null<Float>));
+    viewBox = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'viewBox' : String)) : String), function():Dynamic return cast '') : String)) : Array<Float>);
+    if ((cast ((cast _Runtime.field(viewBox, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return cast ((cast ((cast _Runtime.strictEquals(x, 0.0) : Bool) && (cast _Runtime.strictEquals(y, 0.0) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast x : Null<Float>), (cast y : Null<Float>)) : Null<Matrix>) : Dynamic)); }
+    width = _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'width' : String)) : Null<String>) : Null<String>), (cast flighthq._internal._StaticIndex.readArray(viewBox, 2.0) : Float)) : Null<Float>));
+    height = _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'height' : String)) : Null<String>) : Null<String>), (cast flighthq._internal._StaticIndex.readArray(viewBox, 3.0) : Float)) : Null<Float>));
+    return cast (cast SvgDocument.createSvgViewBoxMatrix__svgDocument((cast viewBox : Array<Float>), (cast { height: height, width: width, x: x, y: y } : { var height:Float; var width:Float; var x:Float; var y:Float; }), (cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'preserveAspectRatio' : String)) : String), function():Dynamic return cast 'xMidYMid meet') : String)) : Null<Matrix>);
     return cast null;
   }
 
   public static function createSvgViewBoxMatrix__svgDocument(viewBox:Array<Float>, viewport:{ var height:Float; var width:Float; var x:Float; var y:Float; }, preserveAspectRatioValue:String):Matrix {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var preserveAspectRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var parts:Dynamic = cast _Runtime.UNDEFINED;
-    var alignment:Dynamic = cast _Runtime.UNDEFINED;
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformScale:Dynamic = cast _Runtime.UNDEFINED;
-    var spareX:Dynamic = cast _Runtime.UNDEFINED;
-    var spareY:Dynamic = cast _Runtime.UNDEFINED;
-    var alignX:Dynamic = cast _Runtime.UNDEFINED;
-    var alignY:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure0 = viewport;
-    height = _Runtime.field(__destructure0, 'height');
-    width = _Runtime.field(__destructure0, 'width');
-    x = _Runtime.field(__destructure0, 'x');
-    y = _Runtime.field(__destructure0, 'y');
+    var __destructure18:Dynamic = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var preserveAspectRatio:String = cast _Runtime.UNDEFINED;
+    var parts:Array<String> = cast _Runtime.UNDEFINED;
+    var alignment:String = cast _Runtime.UNDEFINED;
+    var mode:String = cast _Runtime.UNDEFINED;
+    var uniformScale:Float = cast _Runtime.UNDEFINED;
+    var spareX:Float = cast _Runtime.UNDEFINED;
+    var spareY:Float = cast _Runtime.UNDEFINED;
+    var alignX:Float = cast _Runtime.UNDEFINED;
+    var alignY:Float = cast _Runtime.UNDEFINED;
+    __destructure18 = viewport;
+    height = _Runtime.field(__destructure18, 'height');
+    width = _Runtime.field(__destructure18, 'width');
+    x = _Runtime.field(__destructure18, 'x');
+    y = _Runtime.field(__destructure18, 'y');
     sx = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(viewBox, 2.0), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.divideNumbers(width, flighthq._internal._StaticIndex.readArray(viewBox, 2.0)) : Dynamic));
     sy = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(viewBox, 3.0), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.divideNumbers(height, flighthq._internal._StaticIndex.readArray(viewBox, 3.0)) : Dynamic));
     preserveAspectRatio = StringTools.trim(Std.string(preserveAspectRatioValue));
     if ((cast _Runtime.strictEquals(preserveAspectRatio, 'none') : Bool)) {
-      return cast _Runtime.callValue(createMatrix, cast ([sx, 0.0, 0.0, sy, (x - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx)), (y - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy))] : Array<Dynamic>));
+      return cast (cast createMatrix((cast sx : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast sy : Null<Float>), (cast (x - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx)) : Null<Float>), (cast (y - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy)) : Null<Float>)) : Matrix);
     }
     parts = _Runtime.callProperty(preserveAspectRatio, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
     alignment = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'defer') : Bool) ? (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 'xMidYMid') : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(parts, 0.0) : Dynamic));
@@ -801,14 +816,14 @@ class SvgDocument {
     spareY = (height - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 3.0), sy));
     alignX = ((cast _Runtime.includes(alignment, 'xMax') : Bool) ? (cast spareX : Dynamic) : (cast ((cast _Runtime.includes(alignment, 'xMid') : Bool) ? (cast (spareX / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     alignY = ((cast _Runtime.includes(alignment, 'YMax') : Bool) ? (cast spareY : Dynamic) : (cast ((cast _Runtime.includes(alignment, 'YMid') : Bool) ? (cast (spareY / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-    return cast _Runtime.callValue(createMatrix, cast ([sx, 0.0, 0.0, sy, ((x + alignX) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx)), ((y + alignY) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy))] : Array<Dynamic>));
+    return cast (cast createMatrix((cast sx : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast sy : Null<Float>), (cast ((x + alignX) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx)) : Null<Float>), (cast ((y + alignY) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy)) : Null<Float>)) : Matrix);
     return cast null;
   }
 
   public static function getCssSelectorSpecificity__svgDocument(selector:String):Float {
-    var ids:Dynamic = cast _Runtime.UNDEFINED;
-    var classes:Dynamic = cast _Runtime.UNDEFINED;
-    var hasType:Dynamic = cast _Runtime.UNDEFINED;
+    var ids:Float = cast _Runtime.UNDEFINED;
+    var classes:Float = cast _Runtime.UNDEFINED;
+    var hasType:Float = cast _Runtime.UNDEFINED;
     ids = _Runtime.coalesce(_Runtime.optionalField(_Runtime.match(selector, _Runtime.regexp('#[\\w-]+', 'g')), 'length'), function():Dynamic return cast 0.0);
     classes = _Runtime.coalesce(_Runtime.optionalField(_Runtime.match(selector, _Runtime.regexp('\\.[\\w-]+', 'g')), 'length'), function():Dynamic return cast 0.0);
     hasType = ((cast _Runtime.callProperty(_Runtime.regexp('^[a-zA-Z_][\\w-]*', ''), 'test', cast ([selector] : Array<Dynamic>)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
@@ -817,31 +832,31 @@ class SvgDocument {
   }
 
   public static function indexSvgDefinitions__svgDocument(root:XmlElement, context:SvgImportContext__svgDocument):Void {
-    var indexElement:Dynamic = cast _Runtime.UNDEFINED;
-    indexElement = function(element:XmlElement, parent:Null<XmlElement>) {
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      ((cast _Runtime.field(context, 'parentByElement') : flighthq._internal._Map).set(element, parent));
-      id = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(id, null) : Bool)) { ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).set(id, element)); }
+    var indexElement:XmlElement->Null<XmlElement>->Void = cast _Runtime.UNDEFINED;
+    indexElement = (cast function(element:XmlElement, parent:Null<XmlElement>):Void {
+      var id:Null<String> = cast _Runtime.UNDEFINED;
+      ((cast (cast context : SvgImportContext__svgDocument).parentByElement : flighthq._internal._Map<XmlElement, Null<XmlElement>>).set(element, parent));
+      id = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>);
+      if ((cast !_Runtime.strictEquals(id, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).set(id, element)); }
       for (child in _Runtime.iterable(element.children)) {
-        _Runtime.callValue(indexElement, cast ([child, element] : Array<Dynamic>));
+        indexElement((cast child : XmlElement), (cast element : Null<XmlElement>));
       }
-    };
-    _Runtime.callValue(indexElement, cast ([root, null] : Array<Dynamic>));
-    _Runtime.callValue(SvgDocument.visitXmlElements__svgDocument, cast ([root, function(element:Dynamic) {
-      var name:Dynamic = cast _Runtime.UNDEFINED;
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
-      id = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>));
+    } : XmlElement->Null<XmlElement>->Void);
+    indexElement((cast root : XmlElement), (cast null : Null<XmlElement>));
+    SvgDocument.visitXmlElements__svgDocument((cast root : XmlElement), (cast function(element:XmlElement):Void {
+      var name:String = cast _Runtime.UNDEFINED;
+      var id:Null<String> = cast _Runtime.UNDEFINED;
+      name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
+      id = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>);
       if ((cast ((cast !_Runtime.strictEquals(id, null) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(name, 'linearGradient'), function():Dynamic return cast _Runtime.strictEquals(name, 'radialGradient')) : Bool)) : Bool)) {
-        var gradient:Dynamic = _Runtime.callValue(SvgDocument.parseSvgGradient__svgDocument, cast ([element, context] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(gradient, null) : Bool)) { ((cast _Runtime.field(context, 'gradientsById') : flighthq._internal._Map).set(id, gradient)); }
+        var gradient:Null<SvgGradient__svgDocument> = (cast SvgDocument.parseSvgGradient__svgDocument((cast element : XmlElement), context) : Null<SvgGradient__svgDocument>);
+        if ((cast !_Runtime.strictEquals(gradient, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flighthq._internal._Map<String, SvgGradient__svgDocument>).set(id, gradient)); }
       }
-    }] : Array<Dynamic>));
+    } : XmlElement->Void));
   }
 
   public static function localName__svgDocument(name:String):String {
-    var colon:Dynamic = cast _Runtime.UNDEFINED;
+    var colon:Float = cast _Runtime.UNDEFINED;
     colon = _Runtime.callProperty(name, 'indexOf', cast ([':'] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(colon, -1.0) : Bool) ? (cast name : Dynamic) : (cast _Runtime.slice(name, (colon + 1.0), null) : Dynamic));
     return cast null;
@@ -858,38 +873,38 @@ class SvgDocument {
   }
 
   public static function matchesCssSelector__svgDocument(element:XmlElement, selector:String):Bool {
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var tag:Dynamic = cast _Runtime.UNDEFINED;
-    var className:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast StringTools.startsWith(selector, '#') : Bool)) { return cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'id'] : Array<Dynamic>)), _Runtime.slice(selector, 1.0, null)); }
+    var __destructure19:Dynamic = cast _Runtime.UNDEFINED;
+    var tag:String = cast _Runtime.UNDEFINED;
+    var className:String = cast _Runtime.UNDEFINED;
+    if ((cast StringTools.startsWith(selector, '#') : Bool)) { return cast _Runtime.strictEquals((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'id' : String)) : Null<String>), _Runtime.slice(selector, 1.0, null)); }
     if ((cast StringTools.startsWith(selector, '.') : Bool)) {
-      var classes:Dynamic = _Runtime.callProperty(_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'class'] : Array<Dynamic>)), function():Dynamic return cast ''), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
+      var classes:Array<String> = _Runtime.callProperty(_Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'class' : String)) : Null<String>), function():Dynamic return cast ''), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
       return cast _Runtime.includes(classes, _Runtime.slice(selector, 1.0, null));
     }
-    __destructure1 = _Runtime.callProperty(selector, 'split', cast (['.'] : Array<Dynamic>));
-    tag = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
-    className = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
-    return cast ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)), tag) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(className, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(SvgDocument.matchesCssSelector__svgDocument, cast ([element, '.' + Std.string(className) + ''] : Array<Dynamic>))) : Bool));
+    __destructure19 = _Runtime.callProperty(selector, 'split', cast (['.'] : Array<Dynamic>));
+    tag = flighthq._internal._StaticIndex.readArray(__destructure19, 0.0);
+    className = flighthq._internal._StaticIndex.readArray(__destructure19, 1.0);
+    return cast ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), tag) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(className, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast SvgDocument.matchesCssSelector__svgDocument((cast element : XmlElement), (cast '.' + Std.string(className) + '' : String)) : Bool)) : Bool));
     return cast null;
   }
 
   public static function multiplySvgMatrices__svgDocument(a:Matrix, b:Matrix):Matrix {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(multiplyMatrix, cast ([out, a, b] : Array<Dynamic>));
+    var out:Matrix = cast _Runtime.UNDEFINED;
+    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
+    multiplyMatrix(out, a, b);
     return cast out;
     return cast null;
   }
 
   public static function numberAttribute__svgDocument(element:XmlElement, name:String, fallback:Float):Float {
-    return cast _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, name] : Array<Dynamic>)), fallback] : Array<Dynamic>));
+    return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast name : String)) : Null<String>) : Null<String>), (cast fallback : Float)) : Float);
     return cast null;
   }
 
   public static function optionalNumberAttribute__svgDocument(element:XmlElement, name:String):Null<Float> {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    value = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, name] : Array<Dynamic>));
+    var value:Null<String> = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
+    value = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast name : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
@@ -897,21 +912,21 @@ class SvgDocument {
   }
 
   public static function parseCssNumber__svgDocument(value:Null<String>, fallback:Float):Float {
-    var number:Dynamic = cast _Runtime.UNDEFINED;
+    var number:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast fallback; }
     number = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([number] : Array<Dynamic>)) : Bool) ? (cast number : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 
-  public static function parseStyleDeclarations__svgDocument(value:String):Dynamic {
-    var declarations:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseStyleDeclarations__svgDocument(value:String):flighthq._internal._Record<String, String> {
+    var declarations:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     declarations = {  };
     for (part in _Runtime.iterable(_Runtime.callProperty(value, 'split', cast ([';'] : Array<Dynamic>)))) {
-      var colon:Dynamic = _Runtime.callProperty(part, 'indexOf', cast ([':'] : Array<Dynamic>));
+      var colon:Float = _Runtime.callProperty(part, 'indexOf', cast ([':'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(colon, -1.0) : Bool)) { continue; }
-      var name:Dynamic = StringTools.trim(Std.string(_Runtime.slice(part, 0.0, colon)));
-      var propertyValue:Dynamic = _Runtime.replace(StringTools.trim(Std.string(_Runtime.slice(part, (colon + 1.0), null))), _Runtime.regexp('\\s*!important\\s*$$', ''), '', false);
+      var name:String = StringTools.trim(Std.string(_Runtime.slice(part, 0.0, colon)));
+      var propertyValue:String = _Runtime.replace(StringTools.trim(Std.string(_Runtime.slice(part, (colon + 1.0), null))), _Runtime.regexp('\\s*!important\\s*$$', ''), '', false);
       if ((cast !_Runtime.strictEquals(name, '') : Bool)) { _Runtime.setIndex(declarations, name, propertyValue); }
     }
     return cast declarations;
@@ -919,49 +934,49 @@ class SvgDocument {
   }
 
   public static function parseSvgColor__svgDocument(value:String):Null<SvgColor__svgDocument> {
-    var normalized:Dynamic = cast _Runtime.UNDEFINED;
-    var functionMatch:Dynamic = cast _Runtime.UNDEFINED;
-    var named:Dynamic = cast _Runtime.UNDEFINED;
+    var normalized:String = cast _Runtime.UNDEFINED;
+    var functionMatch:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var named:Float = cast _Runtime.UNDEFINED;
     normalized = _Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.strictEquals(normalized, '') : Bool) || (cast _Runtime.strictEquals(normalized, 'none') : Bool)) : Bool) || (cast _Runtime.strictEquals(normalized, 'transparent') : Bool)) : Bool)) { return cast null; }
     if ((cast StringTools.startsWith(normalized, '#') : Bool)) {
-      var hex:Dynamic = _Runtime.slice(normalized, 1.0, null);
+      var hex:String = _Runtime.slice(normalized, 1.0, null);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool)) : Bool)) {
-        var r:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 0.0) + _Runtime.getIndex(hex, 0.0)), 16.0] : Array<Dynamic>));
-        var g:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 1.0) + _Runtime.getIndex(hex, 1.0)), 16.0] : Array<Dynamic>));
-        var b:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 2.0) + _Runtime.getIndex(hex, 2.0)), 16.0] : Array<Dynamic>));
-        var a:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 3.0) + _Runtime.getIndex(hex, 3.0)), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+        var r:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 0.0) + _Runtime.getIndex(hex, 0.0)), 16.0] : Array<Dynamic>));
+        var g:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 1.0) + _Runtime.getIndex(hex, 1.0)), 16.0] : Array<Dynamic>));
+        var b:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 2.0) + _Runtime.getIndex(hex, 2.0)), 16.0] : Array<Dynamic>));
+        var a:Float = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 3.0) + _Runtime.getIndex(hex, 3.0)), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
         return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([(((r + g) + b) + a)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: a, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) } : Dynamic));
       }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool)) : Bool)) {
-        var rgb:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 0.0, 6.0), 16.0] : Array<Dynamic>));
-        var alpha:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 6.0, null), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+        var rgb:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 0.0, 6.0), 16.0] : Array<Dynamic>));
+        var alpha:Float = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 6.0, null), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
         return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([(rgb + alpha)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: alpha, rgb: rgb } : Dynamic));
       }
     }
     functionMatch = _Runtime.callProperty(_Runtime.regexp('^(rgba?|hsla?)\\((.*)\\)$$', ''), 'exec', cast ([normalized] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(functionMatch, null) : Bool)) {
-      var components:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(functionMatch, 2.0), 'split', cast ([_Runtime.regexp('[\\s,/]+', '')] : Array<Dynamic>)), 'filter', cast ([_Runtime.truthy] : Array<Dynamic>));
+      var components:Array<String> = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(functionMatch, 2.0), 'split', cast ([_Runtime.regexp('[\\s,/]+', '')] : Array<Dynamic>)), 'filter', cast ([_Runtime.truthy] : Array<Dynamic>));
       if ((cast ((cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'rgb'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'rgba')) : Bool) && (cast ((cast _Runtime.field(components, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) : Bool)) {
-        var component:Dynamic = cast _Runtime.UNDEFINED;
-        component = function(index:Float) {
-          var text:Dynamic = cast _Runtime.UNDEFINED;
+        var component:Float->Float = cast _Runtime.UNDEFINED;
+        component = (cast function(index:Float):Float {
+          var text:String = cast _Runtime.UNDEFINED;
           text = flighthq._internal._StaticIndex.readArray(components, index);
           return cast ((cast StringTools.endsWith(Std.string(text), '%') : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)), 255.0) / 100.0) : Dynamic) : (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)) : Dynamic));
-        };
-        var r:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([0.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
-        var g:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([1.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
-        var b:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([2.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
-        var alpha:Dynamic = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.parseCssAlpha__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 3.0)] : Array<Dynamic>)) : Dynamic));
+        } : Float->Float);
+        var r:Float = HxMath.round((cast SvgDocument.clamp__svgDocument((cast (cast component((cast 0.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 255.0 : Float)) : Float));
+        var g:Float = HxMath.round((cast SvgDocument.clamp__svgDocument((cast (cast component((cast 1.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 255.0 : Float)) : Float));
+        var b:Float = HxMath.round((cast SvgDocument.clamp__svgDocument((cast (cast component((cast 2.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 255.0 : Float)) : Float));
+        var alpha:Float = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast (cast SvgDocument.parseCssAlpha__svgDocument((cast flighthq._internal._StaticIndex.readArray(components, 3.0) : String)) : Float) : Dynamic));
         if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(((r + g) + b) + alpha)] : Array<Dynamic>)) : Bool)) { return cast { alpha: alpha, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) }; }
       }
       if ((cast ((cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'hsl'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'hsla')) : Bool) && (cast ((cast _Runtime.field(components, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) : Bool)) {
-        var hue:Dynamic = _Runtime.callValue(SvgDocument.parseCssHue__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 0.0)] : Array<Dynamic>));
-        var saturation:Dynamic = _Runtime.callValue(SvgDocument.parseCssFraction__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 1.0)] : Array<Dynamic>));
-        var lightness:Dynamic = _Runtime.callValue(SvgDocument.parseCssFraction__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 2.0)] : Array<Dynamic>));
-        var alpha:Dynamic = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.parseCssAlpha__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 3.0)] : Array<Dynamic>)) : Dynamic));
+        var hue:Float = (cast SvgDocument.parseCssHue__svgDocument((cast flighthq._internal._StaticIndex.readArray(components, 0.0) : String)) : Float);
+        var saturation:Float = (cast SvgDocument.parseCssFraction__svgDocument((cast flighthq._internal._StaticIndex.readArray(components, 1.0) : String)) : Float);
+        var lightness:Float = (cast SvgDocument.parseCssFraction__svgDocument((cast flighthq._internal._StaticIndex.readArray(components, 2.0) : String)) : Float);
+        var alpha:Float = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast (cast SvgDocument.parseCssAlpha__svgDocument((cast flighthq._internal._StaticIndex.readArray(components, 3.0) : String)) : Float) : Dynamic));
         if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(((hue + saturation) + lightness) + alpha)] : Array<Dynamic>)) : Bool)) {
-          return cast { alpha: alpha, rgb: _Runtime.callValue(SvgDocument.hslToRgb__svgDocument, cast ([hue, saturation, lightness] : Array<Dynamic>)) };
+          return cast { alpha: alpha, rgb: (cast SvgDocument.hslToRgb__svgDocument((cast hue : Float), (cast saturation : Float), (cast lightness : Float)) : Float) };
         }
       }
     }
@@ -971,46 +986,46 @@ class SvgDocument {
   }
 
   public static function parseSvgGradient__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument):Null<SvgGradient__svgDocument> {
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
-    var href:Dynamic = cast _Runtime.UNDEFINED;
-    var inheritedId:Dynamic = cast _Runtime.UNDEFINED;
-    var inherited:Dynamic = cast _Runtime.UNDEFINED;
+    var kind:String = cast _Runtime.UNDEFINED;
+    var href:Null<String> = cast _Runtime.UNDEFINED;
+    var inheritedId:Null<String> = cast _Runtime.UNDEFINED;
+    var inherited:Null<SvgGradient__svgDocument> = cast _Runtime.UNDEFINED;
     var stops:Array<SvgGradientStop__svgDocument> = cast _Runtime.UNDEFINED;
-    var resolvedStops:Dynamic = cast _Runtime.UNDEFINED;
-    kind = ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)), 'linearGradient') : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic));
-    href = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'href'] : Array<Dynamic>));
+    var resolvedStops:Array<SvgGradientStop__svgDocument> = cast _Runtime.UNDEFINED;
+    kind = ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), 'linearGradient') : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic));
+    href = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'href' : String)) : Null<String>);
     inheritedId = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    inherited = ((cast _Runtime.strictEquals(inheritedId, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.field(context, 'gradientsById') : flighthq._internal._Map).get(inheritedId)) : Dynamic));
-    if ((cast ((cast ((cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(inheritedId, null) : Bool)) : Bool) && (cast !(cast ((cast _Runtime.field(context, 'resolvingGradients') : flighthq._internal._Set).has(inheritedId)) : Bool) : Bool)) : Bool)) {
-      var inheritedElement:Dynamic = ((cast _Runtime.field(context, 'elementsById') : flighthq._internal._Map).get(inheritedId));
-      if ((cast ((cast !_Runtime.strictEquals(inheritedElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([inheritedElement.name] : Array<Dynamic>)), 'linearGradient'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([inheritedElement.name] : Array<Dynamic>)), 'radialGradient')) : Bool)) : Bool)) {
-        ((cast _Runtime.field(context, 'resolvingGradients') : flighthq._internal._Set).add(inheritedId));
-        (inherited = cast (_Runtime.coalesce(_Runtime.callValue(SvgDocument.parseSvgGradient__svgDocument, cast ([inheritedElement, context] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
-        ((cast _Runtime.field(context, 'resolvingGradients') : flighthq._internal._Set).delete_(inheritedId));
-        if ((cast !_Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _Runtime.field(context, 'gradientsById') : flighthq._internal._Map).set(inheritedId, inherited)); }
+    inherited = ((cast _Runtime.strictEquals(inheritedId, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flighthq._internal._Map<String, SvgGradient__svgDocument>).get(inheritedId)) : Dynamic));
+    if ((cast ((cast ((cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(inheritedId, null) : Bool)) : Bool) && (cast !(cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flighthq._internal._Set<String>).has(inheritedId)) : Bool) : Bool)) : Bool)) {
+      var inheritedElement:Null<XmlElement> = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flighthq._internal._Map<String, XmlElement>).get(inheritedId));
+      if ((cast ((cast !_Runtime.strictEquals(inheritedElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast inheritedElement : flighthq.types.XmlElement).name : String)) : String), 'linearGradient'), function():Dynamic return cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast inheritedElement : flighthq.types.XmlElement).name : String)) : String), 'radialGradient')) : Bool)) : Bool)) {
+        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flighthq._internal._Set<String>).add(inheritedId));
+        (inherited = cast (_Runtime.coalesce((cast SvgDocument.parseSvgGradient__svgDocument((cast inheritedElement : XmlElement), context) : Null<SvgGradient__svgDocument>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
+        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flighthq._internal._Set<String>).delete_(inheritedId));
+        if ((cast !_Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flighthq._internal._Map<String, SvgGradient__svgDocument>).set(inheritedId, inherited)); }
       }
     }
     if ((cast ((cast !_Runtime.strictEquals(inheritedId, null) : Bool) && (cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ((cast ((cast _Runtime.field(context, 'resolvingGradients') : flighthq._internal._Set).has(inheritedId)) : Bool) ? (cast ImportDiagnosticSeverityValue.Reject : Dynamic) : (cast ImportDiagnosticSeverityValue.Drop : Dynamic)), ((cast ((cast _Runtime.field(context, 'resolvingGradients') : flighthq._internal._Set).has(inheritedId)) : Bool) ? (cast 'svg.recursive-gradient' : Dynamic) : (cast 'svg.unresolved-gradient-reference' : Dynamic)), 'parseSvgGradient', { id: inheritedId }] : Array<Dynamic>));
+      reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flighthq._internal._Set<String>).has(inheritedId)) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)) : ImportDiagnosticSeverity), (cast ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flighthq._internal._Set<String>).has(inheritedId)) : Bool) ? (cast 'svg.recursive-gradient' : Dynamic) : (cast 'svg.unresolved-gradient-reference' : Dynamic)) : String), (cast 'parseSvgGradient' : String), (cast { id: inheritedId } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     stops = cast ([] : Array<Dynamic>);
     for (child in _Runtime.iterable(element.children)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([child.name] : Array<Dynamic>)), 'stop') : Bool)) { continue; }
-      var declarations:Dynamic = _Runtime.callValue(SvgDocument.parseStyleDeclarations__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([child, 'style'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>));
-      var color:Dynamic = _Runtime.callValue(SvgDocument.resolveSvgColor__svgDocument, cast ([_Runtime.coalesce(_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([child, 'stop-color'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(declarations, 'stop-color')), function():Dynamic return cast '#000000'), _Runtime.field(_Runtime.callValue(SvgDocument.resolveSvgDefinitionStyle__svgDocument, cast ([child, context] : Array<Dynamic>)), 'color')] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast child.name : String)) : String), 'stop') : Bool)) { continue; }
+      var declarations:flighthq._internal._Record<String, String> = (cast SvgDocument.parseStyleDeclarations__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast child : XmlElement), (cast 'style' : String)) : String), function():Dynamic return cast '') : String)) : flighthq._internal._Record<String, String>);
+      var color:Null<SvgColor__svgDocument> = (cast SvgDocument.resolveSvgColor__svgDocument((cast _Runtime.coalesce(_Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast child : XmlElement), (cast 'stop-color' : String)) : String), function():Dynamic return cast _Runtime.getIndex(declarations, 'stop-color')), function():Dynamic return cast '#000000') : String), (cast (cast (cast SvgDocument.resolveSvgDefinitionStyle__svgDocument((cast child : XmlElement), context) : SvgStyle__svgDocument) : SvgStyle__svgDocument).color : String)) : Null<SvgColor__svgDocument>);
       if ((cast _Runtime.strictEquals(color, null) : Bool)) { continue; }
-      _Runtime.setField(color, 'alpha', _Runtime.multiplyNumbers(_Runtime.field(color, 'alpha'), _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([child, 'stop-opacity'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(declarations, 'stop-opacity')), 1.0] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>))));
-      _Runtime.callProperty(stops, 'push', cast ([{ color: color, offset: _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseSvgOffset__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([child, 'offset'] : Array<Dynamic>))] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+      ((cast color : SvgColor__svgDocument).alpha *= (cast SvgDocument.clamp__svgDocument((cast (cast SvgDocument.parseCssNumber__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast child : XmlElement), (cast 'stop-opacity' : String)) : Null<String>), function():Dynamic return cast _Runtime.getIndex(declarations, 'stop-opacity')) : Null<String>), (cast 1.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float));
+      _Runtime.callProperty(stops, 'push', cast ([{ color: color, offset: (cast SvgDocument.clamp__svgDocument((cast (cast SvgDocument.parseSvgOffset__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast child : XmlElement), (cast 'offset' : String)) : Null<String>) : Null<String>)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) }] : Array<Dynamic>));
     }
-    resolvedStops = ((cast _Runtime.strictEquals(_Runtime.field(stops, 'length'), 0.0) : Bool) ? (cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.optionalField(inherited, 'stops'), 'map', cast ([function(stop:Dynamic) return { color: _Runtime.mergeObjects([_Runtime.field(stop, 'color')]), offset: _Runtime.field(stop, 'offset') }] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic) : (cast stops : Dynamic));
+    resolvedStops = ((cast _Runtime.strictEquals(_Runtime.field(stops, 'length'), 0.0) : Bool) ? (cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.optionalField(inherited, 'stops'), 'map', cast ([function(stop:SvgGradientStop__svgDocument, __unused20:Float, __unused21:Array<SvgGradientStop__svgDocument>):{ var color:{ var alpha:Float; var rgb:Float; }; var offset:Float; } return { color: _Runtime.mergeObjects([(cast stop : SvgGradientStop__svgDocument).color]), offset: (cast stop : SvgGradientStop__svgDocument).offset }] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic) : (cast stops : Dynamic));
     if ((cast _Runtime.strictEquals(_Runtime.field(resolvedStops, 'length'), 0.0) : Bool)) { return cast null; }
-    _Runtime.sortAndReturn(resolvedStops, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(a, 'offset'), _Runtime.field(b, 'offset')));
-    return cast { cx: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'cx'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'cx'), function():Dynamic return cast 0.5)] : Array<Dynamic>)), cy: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'cy'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'cy'), function():Dynamic return cast 0.5)] : Array<Dynamic>)), fx: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'fx'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'fx'), function():Dynamic return cast 0.5)] : Array<Dynamic>)), fy: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'fy'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'fy'), function():Dynamic return cast 0.5)] : Array<Dynamic>)), kind: kind, radius: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'r'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'radius'), function():Dynamic return cast 0.5)] : Array<Dynamic>)), spreadMethod: _Runtime.coalesce(_Runtime.coalesce(_Runtime.callValue(SvgDocument.parseSvgSpreadMethod__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'spreadMethod'] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.optionalField(inherited, 'spreadMethod')), function():Dynamic return cast 'pad'), stops: resolvedStops, transform: _Runtime.coalesce(_Runtime.coalesce(_Runtime.callValue(SvgDocument.parseSvgTransform__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'gradientTransform'] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.optionalField(inherited, 'transform')), function():Dynamic return cast null), units: ((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'gradientUnits'] : Array<Dynamic>)), 'userSpaceOnUse') : Bool) ? (cast 'userSpaceOnUse' : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'units'), function():Dynamic return cast 'objectBoundingBox') : Dynamic)), x1: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'x1'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'x1'), function():Dynamic return cast 0.0)] : Array<Dynamic>)), x2: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'x2'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'x2'), function():Dynamic return cast 1.0)] : Array<Dynamic>)), y1: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'y1'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'y1'), function():Dynamic return cast 0.0)] : Array<Dynamic>)), y2: _Runtime.callValue(SvgDocument.parseSvgCoordinate__svgDocument, cast ([_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'y2'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(inherited, 'y2'), function():Dynamic return cast 0.0)] : Array<Dynamic>)) };
+    _Runtime.sortAndReturn(resolvedStops, function(a:SvgGradientStop__svgDocument, b:SvgGradientStop__svgDocument) return ((cast a : SvgGradientStop__svgDocument).offset - (cast b : SvgGradientStop__svgDocument).offset));
+    return cast { cx: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'cx' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'cx'), function():Dynamic return cast 0.5) : Float)) : Float), cy: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'cy' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'cy'), function():Dynamic return cast 0.5) : Float)) : Float), fx: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'fx' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'fx'), function():Dynamic return cast 0.5) : Float)) : Float), fy: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'fy' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'fy'), function():Dynamic return cast 0.5) : Float)) : Float), kind: kind, radius: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'r' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'radius'), function():Dynamic return cast 0.5) : Float)) : Float), spreadMethod: _Runtime.coalesce(_Runtime.coalesce((cast SvgDocument.parseSvgSpreadMethod__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'spreadMethod' : String)) : Null<String>) : Null<String>)) : SpreadMethod), function():Dynamic return cast _Runtime.optionalField(inherited, 'spreadMethod')), function():Dynamic return cast 'pad'), stops: resolvedStops, transform: _Runtime.coalesce(_Runtime.coalesce((cast SvgDocument.parseSvgTransform__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'gradientTransform' : String)) : Null<String>) : Null<String>)) : Null<Matrix>), function():Dynamic return cast _Runtime.optionalField(inherited, 'transform')), function():Dynamic return cast null), units: ((cast _Runtime.strictEquals((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'gradientUnits' : String)) : Null<String>), 'userSpaceOnUse') : Bool) ? (cast 'userSpaceOnUse' : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'units'), function():Dynamic return cast 'objectBoundingBox') : Dynamic)), x1: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'x1' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'x1'), function():Dynamic return cast 0.0) : Float)) : Float), x2: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'x2' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'x2'), function():Dynamic return cast 1.0) : Float)) : Float), y1: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'y1' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'y1'), function():Dynamic return cast 0.0) : Float)) : Float), y2: (cast SvgDocument.parseSvgCoordinate__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'y2' : String)) : Null<String>) : Null<String>), (cast _Runtime.coalesce(_Runtime.optionalField(inherited, 'y2'), function():Dynamic return cast 0.0) : Float)) : Float) };
     return cast null;
   }
 
   public static function parseSvgCoordinate__svgDocument(value:Null<String>, fallback:Float):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast fallback; }
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast fallback; }
@@ -1019,23 +1034,23 @@ class SvgDocument {
   }
 
   public static function parseCssAlpha__svgDocument(value:String):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
-    return cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)), 0.0, 1.0] : Array<Dynamic>));
+    return cast (cast SvgDocument.clamp__svgDocument((cast ((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float);
     return cast null;
   }
 
   public static function parseCssFraction__svgDocument(value:String):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
-    return cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)), 0.0, 1.0] : Array<Dynamic>));
+    return cast (cast SvgDocument.clamp__svgDocument((cast ((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float);
     return cast null;
   }
 
   public static function parseCssHue__svgDocument(value:String):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
     if ((cast StringTools.endsWith(Std.string(value), 'turn') : Bool)) { return cast (parsed * 360.0); }
@@ -1046,28 +1061,28 @@ class SvgDocument {
   }
 
   public static function hslToRgb__svgDocument(hue:Float, saturation:Float, lightness:Float):Float {
-    var normalizedHue:Dynamic = cast _Runtime.UNDEFINED;
-    var chroma:Dynamic = cast _Runtime.UNDEFINED;
-    var secondary:Dynamic = cast _Runtime.UNDEFINED;
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var red:Dynamic = cast _Runtime.UNDEFINED;
-    var green:Dynamic = cast _Runtime.UNDEFINED;
-    var blue:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var normalizedHue:Float = cast _Runtime.UNDEFINED;
+    var chroma:Float = cast _Runtime.UNDEFINED;
+    var secondary:Float = cast _Runtime.UNDEFINED;
+    var __destructure22:Dynamic = cast _Runtime.UNDEFINED;
+    var red:Float = cast _Runtime.UNDEFINED;
+    var green:Float = cast _Runtime.UNDEFINED;
+    var blue:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
     normalizedHue = (_Runtime.fmod((_Runtime.fmod(hue, 360.0) + 360.0), 360.0) / 60.0);
     chroma = (_Runtime.subtractNumbers(1.0, HxMath.abs(((2.0 * lightness) - 1.0))) * saturation);
     secondary = (chroma * _Runtime.subtractNumbers(1.0, HxMath.abs((_Runtime.fmod(normalizedHue, 2.0) - 1.0))));
-    __destructure2 = ((cast ((cast normalizedHue : Float) < (cast 1.0 : Float)) : Bool) ? (cast cast ([chroma, secondary, 0.0] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 2.0 : Float)) : Bool) ? (cast cast ([secondary, chroma, 0.0] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 3.0 : Float)) : Bool) ? (cast cast ([0.0, chroma, secondary] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 4.0 : Float)) : Bool) ? (cast cast ([0.0, secondary, chroma] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 5.0 : Float)) : Bool) ? (cast cast ([secondary, 0.0, chroma] : Array<Dynamic>) : Dynamic) : (cast cast ([chroma, 0.0, secondary] : Array<Dynamic>) : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
-    red = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
-    green = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
-    blue = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);
+    __destructure22 = ((cast ((cast normalizedHue : Float) < (cast 1.0 : Float)) : Bool) ? (cast cast ([chroma, secondary, 0.0] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 2.0 : Float)) : Bool) ? (cast cast ([secondary, chroma, 0.0] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 3.0 : Float)) : Bool) ? (cast cast ([0.0, chroma, secondary] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 4.0 : Float)) : Bool) ? (cast cast ([0.0, secondary, chroma] : Array<Dynamic>) : Dynamic) : (cast ((cast ((cast normalizedHue : Float) < (cast 5.0 : Float)) : Bool) ? (cast cast ([secondary, 0.0, chroma] : Array<Dynamic>) : Dynamic) : (cast cast ([chroma, 0.0, secondary] : Array<Dynamic>) : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
+    red = flighthq._internal._StaticIndex.readArray(__destructure22, 0.0);
+    green = flighthq._internal._StaticIndex.readArray(__destructure22, 1.0);
+    blue = flighthq._internal._StaticIndex.readArray(__destructure22, 2.0);
     offset = (lightness - (chroma / 2.0));
     return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(((red + offset) * 255.0))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((green + offset) * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(((blue + offset) * 255.0))));
     return cast null;
   }
 
   public static function parseSvgLength__svgDocument(value:Null<String>, fallback:Float):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast fallback; }
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast fallback : Dynamic));
@@ -1075,14 +1090,14 @@ class SvgDocument {
   }
 
   public static function parseSvgNumberList__svgDocument(value:String):Array<Float> {
-    var matches:Dynamic = cast _Runtime.UNDEFINED;
+    var matches:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     matches = _Runtime.match(value, _Runtime.regexp('[+-]?(?:\\d+\\.?\\d*|\\.\\d+)(?:e[+-]?\\d+)?', 'gi'));
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(matches, 'map', cast ([flighthq._internal._HostValueLut.get('Number')] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseSvgOffset__svgDocument(value:Null<String>):Float {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast 0.0; }
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
@@ -1096,20 +1111,20 @@ class SvgDocument {
   }
 
   public static function parseSvgTransform__svgDocument(value:Null<String>):Null<Matrix> {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var expression:Dynamic = cast _Runtime.UNDEFINED;
-    var matched:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Matrix = cast _Runtime.UNDEFINED;
+    var expression:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var matched:Bool = cast _Runtime.UNDEFINED;
     var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
-    result = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+    result = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
     expression = _Runtime.regexp('([a-zA-Z]+)\\s*\\(([^)]*)\\)', 'g');
     matched = false;
     while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(expression, 'exec', cast ([value] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       (matched = cast (true : Dynamic));
-      var values:Dynamic = _Runtime.callValue(SvgDocument.parseSvgNumberList__svgDocument, cast ([_Runtime.getIndex(match, 2.0)] : Array<Dynamic>));
-      var operation:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+      var values:Array<Float> = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.getIndex(match, 2.0) : String)) : Array<Float>);
+      var operation:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'matrix') : Bool) && (cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) : Bool)) {
-        (operation = cast (_Runtime.callValue(createMatrix, cast ([flighthq._internal._StaticIndex.readArray(values, 0.0), flighthq._internal._StaticIndex.readArray(values, 1.0), flighthq._internal._StaticIndex.readArray(values, 2.0), flighthq._internal._StaticIndex.readArray(values, 3.0), flighthq._internal._StaticIndex.readArray(values, 4.0), flighthq._internal._StaticIndex.readArray(values, 5.0)] : Array<Dynamic>)) : Dynamic));
+        (operation = cast ((cast createMatrix((cast flighthq._internal._StaticIndex.readArray(values, 0.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 1.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 2.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 3.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 4.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 5.0) : Null<Float>)) : Matrix) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'translate') : Bool)) {
         (operation.tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0) : Dynamic));
         (operation.ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 1.0), function():Dynamic return cast 0.0) : Dynamic));
@@ -1117,12 +1132,12 @@ class SvgDocument {
         (operation.a = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 1.0) : Dynamic));
         (operation.d = cast (_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 1.0), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(values, 0.0)), function():Dynamic return cast 1.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'rotate') : Bool)) {
-        var radians:Dynamic = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
-        var cosine:Dynamic = HxMath.cos(radians);
-        var sine:Dynamic = HxMath.sin(radians);
-        var rotation:Dynamic = _Runtime.callValue(createMatrix, cast ([cosine, sine, -sine, cosine] : Array<Dynamic>));
+        var radians:Float = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
+        var cosine:Float = HxMath.cos(radians);
+        var sine:Float = HxMath.sin(radians);
+        var rotation:Matrix = (cast createMatrix((cast cosine : Null<Float>), (cast sine : Null<Float>), (cast -sine : Null<Float>), (cast cosine : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
         if ((cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
-          (operation = cast (_Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([_Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, flighthq._internal._StaticIndex.readArray(values, 1.0), flighthq._internal._StaticIndex.readArray(values, 2.0)] : Array<Dynamic>)), _Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([rotation, _Runtime.callValue(createMatrix, cast ([1.0, 0.0, 0.0, 1.0, -flighthq._internal._StaticIndex.readArray(values, 1.0), -flighthq._internal._StaticIndex.readArray(values, 2.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+          (operation = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 1.0) : Null<Float>), (cast flighthq._internal._StaticIndex.readArray(values, 2.0) : Null<Float>)) : Matrix) : Matrix), (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast rotation : Matrix), (cast (cast createMatrix((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast -flighthq._internal._StaticIndex.readArray(values, 1.0) : Null<Float>), (cast -flighthq._internal._StaticIndex.readArray(values, 2.0) : Null<Float>)) : Matrix) : Matrix)) : Matrix) : Matrix)) : Matrix) : Dynamic));
         } else {
           (operation = cast (rotation : Dynamic));
         }
@@ -1133,121 +1148,121 @@ class SvgDocument {
       } else {
         continue;
       } } } } } }
-      (result = cast (_Runtime.callValue(SvgDocument.multiplySvgMatrices__svgDocument, cast ([result, operation] : Array<Dynamic>)) : Dynamic));
+      (result = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast result : Matrix), (cast operation : Matrix)) : Matrix) : Dynamic));
     }
     return cast ((cast matched : Bool) ? (cast result : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseUrlReference__svgDocument(value:Null<String>):Null<String> {
-    var match:Dynamic = cast _Runtime.UNDEFINED;
+    var match:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
     match = _Runtime.callProperty(_Runtime.regexp('^url\\(\\s*[\'"]?#([^\'")\\s]+)[\'"]?\\s*\\)$$', ''), 'exec', cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>));
     return cast _Runtime.coalesce(_Runtime.optionalIndex(match, 1.0), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function reportRemainingUnsupportedSvgElements__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument, insideDefinitions:Dynamic = false):Void {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var definitions:Dynamic = cast _Runtime.UNDEFINED;
-    name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
+  public static function reportRemainingUnsupportedSvgElements__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument, insideDefinitions:Bool = false):Void {
+    var name:String = cast _Runtime.UNDEFINED;
+    var definitions:Bool = cast _Runtime.UNDEFINED;
+    name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
     definitions = ((cast insideDefinitions : Bool) || (cast _Runtime.strictEquals(name, 'defs') : Bool));
-    if ((cast ((cast !(cast definitions : Bool) : Bool) && (cast _Runtime.callValue(SvgDocument.isUnsupportedSvgElementName__svgDocument, cast ([name] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callValue(SvgDocument.reportUnsupportedSvgElement__svgDocument, cast ([element, context] : Array<Dynamic>)); }
+    if ((cast ((cast !(cast definitions : Bool) : Bool) && (cast (cast SvgDocument.isUnsupportedSvgElementName__svgDocument((cast name : String)) : Bool) : Bool)) : Bool)) { SvgDocument.reportUnsupportedSvgElement__svgDocument((cast element : XmlElement), context); }
     for (child in _Runtime.iterable(element.children)) {
-      _Runtime.callValue(SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument, cast ([child, context, definitions] : Array<Dynamic>));
+      SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast child : XmlElement), context, (cast definitions : Bool));
     }
   }
 
   public static function reportUnsupportedSvgElement__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument):Void {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(context, 'reportedUnsupportedElements') : flighthq._internal._Set).has(element)) : Bool)) { return; }
-    ((cast _Runtime.field(context, 'reportedUnsupportedElements') : flighthq._internal._Set).add(element));
-    name = _Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>));
-    _Runtime.callValue(reportImportDiagnostic, cast ([_Runtime.field(context, 'diagnostics'), ImportDiagnosticSeverityValue.Skip, 'svg.unsupported-' + Std.string(name) + '', 'createSvgElementNode', { element: name }] : Array<Dynamic>));
+    var name:String = cast _Runtime.UNDEFINED;
+    if ((cast ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flighthq._internal._Set<XmlElement>).has(element)) : Bool)) { return; }
+    ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flighthq._internal._Set<XmlElement>).add(element));
+    name = (cast SvgDocument.localName__svgDocument((cast element.name : String)) : String);
+    reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'svg.unsupported-' + Std.string(name) + '' : String), (cast 'createSvgElementNode' : String), (cast { element: name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
   }
 
   public static function resolveSvgColor__svgDocument(value:String, currentColor:String):Null<SvgColor__svgDocument> {
-    return cast _Runtime.callValue(SvgDocument.parseSvgColor__svgDocument, cast ([((cast _Runtime.strictEquals(_Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>)), 'currentcolor') : Bool) ? (cast currentColor : Dynamic) : (cast value : Dynamic))] : Array<Dynamic>));
+    return cast (cast SvgDocument.parseSvgColor__svgDocument((cast ((cast _Runtime.strictEquals(_Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>)), 'currentcolor') : Bool) ? (cast currentColor : Dynamic) : (cast value : Dynamic)) : String)) : Null<SvgColor__svgDocument>);
     return cast null;
   }
 
   public static function resolveSvgGradient__svgDocument(value:String, context:SvgImportContext__svgDocument):Null<SvgGradient__svgDocument> {
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    id = _Runtime.callValue(SvgDocument.parseUrlReference__svgDocument, cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast _Runtime.field(context, 'gradientsById') : flighthq._internal._Map).get(id)), function():Dynamic return cast null) : Dynamic));
+    var id:Null<String> = cast _Runtime.UNDEFINED;
+    id = (cast SvgDocument.parseUrlReference__svgDocument((cast value : Null<String>)) : Null<String>);
+    return cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast _Runtime.field(context, 'gradientsById') : flighthq._internal._Map<String, SvgGradient__svgDocument>).get(id)), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }
 
   public static function resolveSvgStyle__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, context:SvgImportContext__svgDocument):SvgStyle__svgDocument {
-    var declarations:Dynamic = cast _Runtime.UNDEFINED;
-    var matchingRules:Dynamic = cast _Runtime.UNDEFINED;
-    var inheritedProperties:Dynamic = cast _Runtime.UNDEFINED;
+    var declarations:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
+    var matchingRules:Array<SvgCssRule__svgDocument> = cast _Runtime.UNDEFINED;
+    var inheritedProperties:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
     var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
     declarations = {  };
     for (name in _Runtime.iterable(SvgDocument.svgPresentationAttributes__svgDocument)) {
-      var value:Dynamic = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, name] : Array<Dynamic>));
+      var value:Null<String> = (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast name : String)) : Null<String>);
       if ((cast !_Runtime.strictEquals(value, null) : Bool)) { _Runtime.setIndex(declarations, name, value); }
     }
-    matchingRules = _Runtime.sortAndReturn(_Runtime.callProperty(_Runtime.field(context, 'cssRules'), 'filter', cast ([function(rule:Dynamic) return _Runtime.callValue(SvgDocument.matchesCssSelector__svgDocument, cast ([element, _Runtime.field(rule, 'selector')] : Array<Dynamic>))] : Array<Dynamic>)), function(a:Dynamic, b:Dynamic) return _Runtime.orValue(_Runtime.subtractNumbers(_Runtime.field(a, 'specificity'), _Runtime.field(b, 'specificity')), function():Dynamic return cast _Runtime.subtractNumbers(_Runtime.field(a, 'order'), _Runtime.field(b, 'order'))));
+    matchingRules = _Runtime.sortAndReturn(_Runtime.callProperty(_Runtime.field(context, 'cssRules'), 'filter', cast ([function(rule:SvgCssRule__svgDocument, __unused23:Float, __unused24:Array<SvgCssRule__svgDocument>):Bool return SvgDocument.matchesCssSelector__svgDocument((cast element : XmlElement), (cast (cast rule : SvgCssRule__svgDocument).selector : String))] : Array<Dynamic>)), function(a:SvgCssRule__svgDocument, b:SvgCssRule__svgDocument) return _Runtime.orValue(((cast a : SvgCssRule__svgDocument).specificity - (cast b : SvgCssRule__svgDocument).specificity), function():Dynamic return cast ((cast a : SvgCssRule__svgDocument).order - (cast b : SvgCssRule__svgDocument).order)));
     for (rule in _Runtime.iterable(matchingRules)) {
-      flighthq._internal.DynamicObject.assign(declarations, _Runtime.field(rule, 'declarations'));
+      flighthq._internal.DynamicObject.assign(declarations, (cast rule : SvgCssRule__svgDocument).declarations);
     }
-    flighthq._internal.DynamicObject.assign(declarations, _Runtime.callValue(SvgDocument.parseStyleDeclarations__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'style'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>)));
+    flighthq._internal.DynamicObject.assign(declarations, (cast SvgDocument.parseStyleDeclarations__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'style' : String)) : String), function():Dynamic return cast '') : String)) : flighthq._internal._Record<String, String>));
     inheritedProperties = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(declarations))) {
       if ((cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(declarations, name))), 'inherit') : Bool)) { continue; }
-      ((cast inheritedProperties : flighthq._internal._Set).add(name));
+      ((cast inheritedProperties : flighthq._internal._Set<String>).add(name));
       _Runtime.deleteIndex(declarations, name);
     }
     style = _Runtime.mergeObjects([parentStyle]);
-    _Runtime.setField(style, 'clipRule', _Runtime.callValue(SvgDocument.resolveSvgWinding__svgDocument, cast ([_Runtime.getIndex(declarations, 'clip-rule'), _Runtime.field(style, 'clipRule')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'color', _Runtime.coalesce(_Runtime.field(declarations, 'color'), function():Dynamic return cast _Runtime.field(style, 'color')));
-    _Runtime.setField(style, 'display', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('display')) : Bool) ? (cast _Runtime.field(parentStyle, 'display') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'display'), function():Dynamic return cast 'inline') : Dynamic)));
-    _Runtime.setField(style, 'fill', _Runtime.coalesce(_Runtime.field(declarations, 'fill'), function():Dynamic return cast _Runtime.field(style, 'fill')));
-    _Runtime.setField(style, 'fillOpacity', _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.getIndex(declarations, 'fill-opacity'), _Runtime.field(style, 'fillOpacity')] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)));
-    _Runtime.setField(style, 'fillRule', _Runtime.callValue(SvgDocument.resolveSvgWinding__svgDocument, cast ([_Runtime.getIndex(declarations, 'fill-rule'), _Runtime.field(style, 'fillRule')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'filter', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('filter')) : Bool) ? (cast _Runtime.field(parentStyle, 'filter') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'filter'), function():Dynamic return cast 'none') : Dynamic)));
-    _Runtime.setField(style, 'fontFamily', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-family'), function():Dynamic return cast _Runtime.field(style, 'fontFamily')));
-    _Runtime.setField(style, 'fontSize', _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.coalesce(_Runtime.getIndex(declarations, 'font-size'), function():Dynamic return cast null), _Runtime.field(style, 'fontSize')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'fontStyle', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-style'), function():Dynamic return cast _Runtime.field(style, 'fontStyle')));
-    _Runtime.setField(style, 'fontWeight', _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-weight'), function():Dynamic return cast _Runtime.field(style, 'fontWeight')));
-    _Runtime.setField(style, 'opacity', ((cast ((cast inheritedProperties : flighthq._internal._Set).has('opacity')) : Bool) ? (cast _Runtime.field(parentStyle, 'opacity') : Dynamic) : (cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.field(declarations, 'opacity'), 1.0] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)) : Dynamic)));
-    _Runtime.setField(style, 'stroke', _Runtime.coalesce(_Runtime.field(declarations, 'stroke'), function():Dynamic return cast _Runtime.field(style, 'stroke')));
-    _Runtime.setField(style, 'strokeDasharray', _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dasharray'), function():Dynamic return cast _Runtime.field(style, 'strokeDasharray')));
-    _Runtime.setField(style, 'strokeDashoffset', _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dashoffset'), function():Dynamic return cast null), _Runtime.field(style, 'strokeDashoffset')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'strokeLinecap', _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-linecap'), function():Dynamic return cast _Runtime.field(style, 'strokeLinecap')));
-    _Runtime.setField(style, 'strokeLinejoin', _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-linejoin'), function():Dynamic return cast _Runtime.field(style, 'strokeLinejoin')));
-    _Runtime.setField(style, 'strokeMiterlimit', _Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.getIndex(declarations, 'stroke-miterlimit'), _Runtime.field(style, 'strokeMiterlimit')] : Array<Dynamic>)));
-    _Runtime.setField(style, 'strokeOpacity', _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(SvgDocument.parseCssNumber__svgDocument, cast ([_Runtime.getIndex(declarations, 'stroke-opacity'), _Runtime.field(style, 'strokeOpacity')] : Array<Dynamic>)), 0.0, 1.0] : Array<Dynamic>)));
-    _Runtime.setField(style, 'strokeWidth', HxMath.max(0.0, _Runtime.callValue(SvgDocument.parseSvgLength__svgDocument, cast ([_Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-width'), function():Dynamic return cast null), _Runtime.field(style, 'strokeWidth')] : Array<Dynamic>))));
-    _Runtime.setField(style, 'textAnchor', _Runtime.coalesce(_Runtime.getIndex(declarations, 'text-anchor'), function():Dynamic return cast _Runtime.field(style, 'textAnchor')));
-    _Runtime.setField(style, 'visibility', _Runtime.coalesce(_Runtime.field(declarations, 'visibility'), function():Dynamic return cast _Runtime.field(style, 'visibility')));
+    ((cast style : SvgStyle__svgDocument).clipRule = (cast SvgDocument.resolveSvgWinding__svgDocument((cast _Runtime.getIndex(declarations, 'clip-rule') : Null<String>), (cast (cast style : SvgStyle__svgDocument).clipRule : PathWinding)) : PathWinding));
+    ((cast style : SvgStyle__svgDocument).color = _Runtime.coalesce(_Runtime.field(declarations, 'color'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).color));
+    ((cast style : SvgStyle__svgDocument).display = ((cast ((cast inheritedProperties : flighthq._internal._Set<String>).has('display')) : Bool) ? (cast _Runtime.field(parentStyle, 'display') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'display'), function():Dynamic return cast 'inline') : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).fill = _Runtime.coalesce(_Runtime.field(declarations, 'fill'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fill));
+    ((cast style : SvgStyle__svgDocument).fillOpacity = (cast SvgDocument.clamp__svgDocument((cast (cast SvgDocument.parseCssNumber__svgDocument((cast _Runtime.getIndex(declarations, 'fill-opacity') : Null<String>), (cast (cast style : SvgStyle__svgDocument).fillOpacity : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float));
+    ((cast style : SvgStyle__svgDocument).fillRule = (cast SvgDocument.resolveSvgWinding__svgDocument((cast _Runtime.getIndex(declarations, 'fill-rule') : Null<String>), (cast (cast style : SvgStyle__svgDocument).fillRule : PathWinding)) : PathWinding));
+    ((cast style : SvgStyle__svgDocument).filter = ((cast ((cast inheritedProperties : flighthq._internal._Set<String>).has('filter')) : Bool) ? (cast _Runtime.field(parentStyle, 'filter') : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(declarations, 'filter'), function():Dynamic return cast 'none') : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).fontFamily = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-family'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontFamily));
+    ((cast style : SvgStyle__svgDocument).fontSize = (cast SvgDocument.parseSvgLength__svgDocument((cast _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-size'), function():Dynamic return cast null) : Null<String>), (cast (cast style : SvgStyle__svgDocument).fontSize : Float)) : Float));
+    ((cast style : SvgStyle__svgDocument).fontStyle = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-style'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontStyle));
+    ((cast style : SvgStyle__svgDocument).fontWeight = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-weight'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontWeight));
+    ((cast style : SvgStyle__svgDocument).opacity = ((cast ((cast inheritedProperties : flighthq._internal._Set<String>).has('opacity')) : Bool) ? (cast _Runtime.field(parentStyle, 'opacity') : Dynamic) : (cast (cast SvgDocument.clamp__svgDocument((cast (cast SvgDocument.parseCssNumber__svgDocument((cast _Runtime.field(declarations, 'opacity') : Null<String>), (cast 1.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).stroke = _Runtime.coalesce(_Runtime.field(declarations, 'stroke'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).stroke));
+    ((cast style : SvgStyle__svgDocument).strokeDasharray = _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dasharray'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).strokeDasharray));
+    ((cast style : SvgStyle__svgDocument).strokeDashoffset = (cast SvgDocument.parseSvgLength__svgDocument((cast _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dashoffset'), function():Dynamic return cast null) : Null<String>), (cast (cast style : SvgStyle__svgDocument).strokeDashoffset : Float)) : Float));
+    ((cast style : SvgStyle__svgDocument).strokeLinecap = _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-linecap'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).strokeLinecap));
+    ((cast style : SvgStyle__svgDocument).strokeLinejoin = _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-linejoin'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).strokeLinejoin));
+    ((cast style : SvgStyle__svgDocument).strokeMiterlimit = (cast SvgDocument.parseCssNumber__svgDocument((cast _Runtime.getIndex(declarations, 'stroke-miterlimit') : Null<String>), (cast (cast style : SvgStyle__svgDocument).strokeMiterlimit : Float)) : Float));
+    ((cast style : SvgStyle__svgDocument).strokeOpacity = (cast SvgDocument.clamp__svgDocument((cast (cast SvgDocument.parseCssNumber__svgDocument((cast _Runtime.getIndex(declarations, 'stroke-opacity') : Null<String>), (cast (cast style : SvgStyle__svgDocument).strokeOpacity : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float));
+    ((cast style : SvgStyle__svgDocument).strokeWidth = HxMath.max(0.0, (cast SvgDocument.parseSvgLength__svgDocument((cast _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-width'), function():Dynamic return cast null) : Null<String>), (cast (cast style : SvgStyle__svgDocument).strokeWidth : Float)) : Float)));
+    ((cast style : SvgStyle__svgDocument).textAnchor = _Runtime.coalesce(_Runtime.getIndex(declarations, 'text-anchor'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).textAnchor));
+    ((cast style : SvgStyle__svgDocument).visibility = _Runtime.coalesce(_Runtime.field(declarations, 'visibility'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).visibility));
     return cast style;
     return cast null;
   }
 
   public static function resolveSvgDefinitionStyle__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument):SvgStyle__svgDocument {
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
-    var parentStyle:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    cached = ((cast _Runtime.field(context, 'resolvedDefinitionStyles') : flighthq._internal._Map).get(element));
+    var cached:Null<SvgStyle__svgDocument> = cast _Runtime.UNDEFINED;
+    var parent:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    var parentStyle:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
+    cached = ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flighthq._internal._Map<XmlElement, SvgStyle__svgDocument>).get(element));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parent = _Runtime.coalesce(((cast _Runtime.field(context, 'parentByElement') : flighthq._internal._Map).get(element)), function():Dynamic return cast null);
-    parentStyle = ((cast _Runtime.strictEquals(parent, null) : Bool) ? (cast SvgDocument.defaultSvgStyle__svgDocument : Dynamic) : (cast _Runtime.callValue(SvgDocument.resolveSvgDefinitionStyle__svgDocument, cast ([parent, context] : Array<Dynamic>)) : Dynamic));
-    style = _Runtime.callValue(SvgDocument.resolveSvgStyle__svgDocument, cast ([element, parentStyle, context] : Array<Dynamic>));
-    ((cast _Runtime.field(context, 'resolvedDefinitionStyles') : flighthq._internal._Map).set(element, style));
+    parent = _Runtime.coalesce(((cast (cast context : SvgImportContext__svgDocument).parentByElement : flighthq._internal._Map<XmlElement, Null<XmlElement>>).get(element)), function():Dynamic return cast null);
+    parentStyle = ((cast _Runtime.strictEquals(parent, null) : Bool) ? (cast SvgDocument.defaultSvgStyle__svgDocument : Dynamic) : (cast (cast SvgDocument.resolveSvgDefinitionStyle__svgDocument((cast parent : XmlElement), context) : SvgStyle__svgDocument) : Dynamic));
+    style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element : XmlElement), parentStyle, context) : SvgStyle__svgDocument);
+    ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flighthq._internal._Map<XmlElement, SvgStyle__svgDocument>).set(element, style));
     return cast style;
     return cast null;
   }
 
   public static function firstNumber__svgDocument(value:Null<String>, fallback:Float):Float {
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.callValue(SvgDocument.parseSvgNumberList__svgDocument, cast ([_Runtime.coalesce(value, function():Dynamic return cast '')] : Array<Dynamic>)), 0.0), function():Dynamic return cast fallback);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce(value, function():Dynamic return cast '') : String)) : Array<Float>), 0.0), function():Dynamic return cast fallback);
     return cast null;
   }
 
   public static function hasFlattenedSvgTextPosition__svgDocument(tspans:Array<XmlElement>, firstTspan:Null<XmlElement>):Bool {
-    return cast _Runtime.callProperty(tspans, 'some', cast ([function(tspan:Dynamic) return _Runtime.callProperty(cast (['x', 'y', 'dx', 'dy', 'rotate', 'transform'] : Array<Dynamic>), 'some', cast ([function(name:Dynamic) return ((cast !_Runtime.strictEquals(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([tspan, name] : Array<Dynamic>)), null) : Bool) && (cast _Runtime.orValue(((cast !_Runtime.strictEquals(tspan, firstTspan) : Bool) || (cast _Runtime.strictEquals(name, 'rotate') : Bool)), function():Dynamic return cast _Runtime.strictEquals(name, 'transform')) : Bool))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(tspans, 'some', cast ([function(tspan:XmlElement, __unused25:Float, __unused26:Array<XmlElement>):Bool return _Runtime.callProperty(cast (['x', 'y', 'dx', 'dy', 'rotate', 'transform'] : Array<Dynamic>), 'some', cast ([function(name:String, __unused27:Float, __unused28:Array<String>):Bool return ((cast !_Runtime.strictEquals((cast SvgDocument.attribute__svgDocument((cast tspan : XmlElement), (cast name : String)) : Null<String>), null) : Bool) && (cast _Runtime.orValue(((cast !_Runtime.strictEquals(tspan, firstTspan) : Bool) || (cast _Runtime.strictEquals(name, 'rotate') : Bool)), function():Dynamic return cast _Runtime.strictEquals(name, 'transform')) : Bool))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
@@ -1264,14 +1279,14 @@ class SvgDocument {
   }
 
   public static function usesSvgObjectBoundingBoxUnits__svgDocument(element:XmlElement):Bool {
-    return cast _Runtime.strictEquals(((cast _Runtime.strictEquals(_Runtime.callValue(SvgDocument.localName__svgDocument, cast ([element.name] : Array<Dynamic>)), 'mask') : Bool) ? (cast _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'maskContentUnits'] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'clipPathUnits'] : Array<Dynamic>)) : Dynamic)), 'objectBoundingBox');
+    return cast _Runtime.strictEquals(((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), 'mask') : Bool) ? (cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'maskContentUnits' : String)) : Null<String>) : Dynamic) : (cast (cast SvgDocument.attribute__svgDocument((cast element : XmlElement), (cast 'clipPathUnits' : String)) : Null<String>) : Dynamic)), 'objectBoundingBox');
     return cast null;
   }
 
-  public static function visitXmlElements__svgDocument(element:XmlElement, visitor:Dynamic):Void {
-    _Runtime.callValue(visitor, cast ([element] : Array<Dynamic>));
+  public static function visitXmlElements__svgDocument(element:XmlElement, visitor:XmlElement->Void):Void {
+    visitor((cast element : XmlElement));
     for (child in _Runtime.iterable(element.children)) {
-      _Runtime.callValue(SvgDocument.visitXmlElements__svgDocument, cast ([child, visitor] : Array<Dynamic>));
+      SvgDocument.visitXmlElements__svgDocument((cast child : XmlElement), (cast visitor : XmlElement->Void));
     }
   }
 
@@ -1280,7 +1295,7 @@ class SvgDocument {
     return cast null;
   }
 
-  public static final svgPresentationAttributes__svgDocument:Dynamic = cast (['clip-rule', 'color', 'display', 'fill', 'fill-opacity', 'fill-rule', 'filter', 'font-family', 'font-size', 'font-style', 'font-weight', 'opacity', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'visibility'] : Array<Dynamic>);
+  public static final svgPresentationAttributes__svgDocument:Array<String> = cast (['clip-rule', 'color', 'display', 'fill', 'fill-opacity', 'fill-rule', 'filter', 'font-family', 'font-size', 'font-style', 'font-weight', 'opacity', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'visibility'] : Array<Dynamic>);
 
-  public static final svgNamedColors__svgDocument:Dynamic = { aqua: 65535.0, black: 0.0, blue: 255.0, cyan: 65535.0, fuchsia: 16711935.0, gray: 8421504.0, green: 32768.0, grey: 8421504.0, lime: 65280.0, magenta: 16711935.0, maroon: 8388608.0, navy: 128.0, olive: 8421376.0, orange: 16753920.0, purple: 8388736.0, red: 16711680.0, silver: 12632256.0, teal: 32896.0, white: 16777215.0, yellow: 16776960.0 };
+  public static final svgNamedColors__svgDocument:flighthq._internal._Record<String, Float> = { aqua: 65535.0, black: 0.0, blue: 255.0, cyan: 65535.0, fuchsia: 16711935.0, gray: 8421504.0, green: 32768.0, grey: 8421504.0, lime: 65280.0, magenta: 16711935.0, maroon: 8388608.0, navy: 128.0, olive: 8421376.0, orange: 16753920.0, purple: 8388736.0, red: 16711680.0, silver: 12632256.0, teal: 32896.0, white: 16777215.0, yellow: 16776960.0 };
 }

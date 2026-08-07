@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class ColorTemperatureMath {
   public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
+    var temp:Float = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
@@ -26,10 +26,10 @@ class ColorTemperatureMath {
   }
 
   public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
-    var kelvin:Dynamic = cast _Runtime.UNDEFINED;
-    var greenShift:Dynamic = cast _Runtime.UNDEFINED;
+    var kelvin:Float = cast _Runtime.UNDEFINED;
+    var greenShift:Float = cast _Runtime.UNDEFINED;
     kelvin = (6500.0 - (temperature * 4500.0));
-    _Runtime.callValue(computeColorTemperatureRgb, cast ([kelvin, out] : Array<Dynamic>));
+    computeColorTemperatureRgb((cast kelvin : Float), (cast out : Array<Float>));
     greenShift = (-tint * 0.1);
     flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 0.0)));
     flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), greenShift)));

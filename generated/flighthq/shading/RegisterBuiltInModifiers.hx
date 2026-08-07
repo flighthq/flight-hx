@@ -7,12 +7,18 @@ import flighthq.shading.ModifierRegistry.registerModifier;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.EmissiveModifier;
 import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.FogModifier;
 import flighthq.types.FogModifier.FogModifierMode;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierRegistry;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.AnimatedNormalModifierKind;
 import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types.Types.EmissiveModifierKind;
@@ -21,8 +27,11 @@ import flighthq.types.Types.FogModifierKind;
 import flighthq.types.Types.RimModifierKind;
 import flighthq.types.Types.ToonModifierKind;
 import flighthq.types.Types.VertexDisplaceModifierKind;
+import flighthq.types.Vector2;
+import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
@@ -37,57 +46,57 @@ import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModi
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
 class RegisterBuiltInModifiers {
-  public static final animatedNormalModifierDefinition:ModifierDefinition = { kind: AnimatedNormalModifierKind, slot: ModifierSlotValue.Normal, getDefineSignature: function(modifier:Modifier) {
-    var animated:Dynamic = cast _Runtime.UNDEFINED;
+  public static final animatedNormalModifierDefinition:ModifierDefinition = { kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, getDefineSignature: function(modifier:Modifier):String {
+    var animated:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     animated = (cast modifier : AnimatedNormalModifier);
     if ((cast _Runtime.strictEquals(_Runtime.field(animated, 'map'), null) : Bool)) { return cast '0'; }
     return cast ((cast !_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '2' : Dynamic) : (cast '1' : Dynamic));
   } };
 
-  public static final dissolveModifierDefinition:ModifierDefinition = { kind: DissolveModifierKind, slot: ModifierSlotValue.Effect, getDefineSignature: function(modifier:Modifier) {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.field((cast modifier : { @:optional var map:Dynamic; }), 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'm' : Dynamic) : (cast '' : Dynamic));
+  public static final dissolveModifierDefinition:ModifierDefinition = { kind: DissolveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, getDefineSignature: function(modifier:Modifier):String {
+    return cast ((cast !_Runtime.strictEquals((cast (cast modifier : { @:optional var map:flighthq._internal._Any; }) : { @:optional var map:flighthq._internal._Any; }).map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'm' : Dynamic) : (cast '' : Dynamic));
   } };
 
-  public static final emissiveModifierDefinition:ModifierDefinition = { kind: EmissiveModifierKind, slot: ModifierSlotValue.Emissive, getDefineSignature: function(modifier:Modifier) {
-    var emissive:Dynamic = cast _Runtime.UNDEFINED;
-    var signature:Dynamic = cast _Runtime.UNDEFINED;
+  public static final emissiveModifierDefinition:ModifierDefinition = { kind: EmissiveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive, getDefineSignature: function(modifier:Modifier):String {
+    var emissive:EmissiveModifier = cast _Runtime.UNDEFINED;
+    var signature:String = cast _Runtime.UNDEFINED;
     emissive = (cast modifier : EmissiveModifier);
     signature = '';
     if ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'm') : Dynamic)); }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), EmissiveModifierFacingValue.Ignore) : Bool)) : Bool)) { (signature = cast ((signature + 'g') : Dynamic)); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool)) : Bool)) { (signature = cast ((signature + 'g') : Dynamic)); }
     return cast signature;
   } };
 
-  public static final envReflectModifierDefinition:ModifierDefinition = { kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect };
+  public static final envReflectModifierDefinition:ModifierDefinition = { kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
 
-  public static final fogModifierDefinition:ModifierDefinition = { kind: FogModifierKind, slot: ModifierSlotValue.Effect, getDefineSignature: function(modifier:Modifier) {
-    var fog:Dynamic = cast _Runtime.UNDEFINED;
+  public static final fogModifierDefinition:ModifierDefinition = { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, getDefineSignature: function(modifier:Modifier):String {
+    var fog:FogModifier = cast _Runtime.UNDEFINED;
     fog = (cast modifier : FogModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Exponential) : Bool)) { return cast 'e'; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Exponential2) : Bool)) { return cast 'x'; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool)) { return cast 'e'; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool)) { return cast 'x'; }
     return cast 'l';
   } };
 
   public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
-    _Runtime.callValue(registerModifier, cast ([registry, animatedNormalModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, dissolveModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, emissiveModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, envReflectModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, fogModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, rimModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, toonModifierDefinition] : Array<Dynamic>));
-    _Runtime.callValue(registerModifier, cast ([registry, vertexDisplaceModifierDefinition] : Array<Dynamic>));
+    registerModifier((cast registry : ModifierRegistry), (cast animatedNormalModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast dissolveModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast emissiveModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast envReflectModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast fogModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast rimModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast toonModifierDefinition : ModifierDefinition));
+    registerModifier((cast registry : ModifierRegistry), (cast vertexDisplaceModifierDefinition : ModifierDefinition));
   }
 
-  public static final rimModifierDefinition:ModifierDefinition = { kind: RimModifierKind, slot: ModifierSlotValue.Effect };
+  public static final rimModifierDefinition:ModifierDefinition = { kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
 
-  public static final toonModifierDefinition:ModifierDefinition = { kind: ToonModifierKind, slot: ModifierSlotValue.Effect };
+  public static final toonModifierDefinition:ModifierDefinition = { kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
 
-  public static final vertexDisplaceModifierDefinition:ModifierDefinition = { kind: VertexDisplaceModifierKind, slot: ModifierSlotValue.Vertex, getDefineSignature: function(modifier:Modifier) {
-    var displace:Dynamic = cast _Runtime.UNDEFINED;
-    var signature:Dynamic = cast _Runtime.UNDEFINED;
+  public static final vertexDisplaceModifierDefinition:ModifierDefinition = { kind: VertexDisplaceModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex, getDefineSignature: function(modifier:Modifier):String {
+    var displace:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
+    var signature:String = cast _Runtime.UNDEFINED;
     displace = (cast modifier : VertexDisplaceModifier);
-    signature = ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSourceValue.HeightMap) : Bool) ? (cast 'h' : Dynamic) : (cast 's' : Dynamic));
+    signature = ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast 'h' : Dynamic) : (cast 's' : Dynamic));
     if ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'a') : Dynamic)); }
     return cast signature;
   } };

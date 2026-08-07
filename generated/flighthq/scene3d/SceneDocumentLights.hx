@@ -13,16 +13,21 @@ import flighthq.lighting.SpotLight.cloneSpotLight;
 import flighthq.types.AmbientLight;
 import flighthq.types.DirectionalLight;
 import flighthq.types.HemisphereLight;
+import flighthq.types.Light;
 import flighthq.types.PointLight;
+import flighthq.types.Quaternion;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
 import flighthq.types.Scene3DLights;
 import flighthq.types.SpotLight;
+import flighthq.types.Transform3D;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Types.HemisphereLightKind;
 import flighthq.types.Types.PointLightKind;
 import flighthq.types.Types.SpotLightKind;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
@@ -43,45 +48,45 @@ class SceneDocumentLights {
     point = cast ([] : Array<Dynamic>);
     spot = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'lights'), 'length') : Float)) : Bool)) {
-        var source:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'lights'), i);
-        var descriptor:Dynamic = _Runtime.field(source, 'descriptor');
-        if ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'kind'), AmbientLightKind) : Bool)) {
-          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast (_Runtime.callValue(cloneAmbientLight, cast ([(cast descriptor : AmbientLight)] : Array<Dynamic>)) : Dynamic)); }
+        var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'lights'), i);
+        var descriptor:Light = (cast source : Scene3DDocumentLight).descriptor;
+        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, AmbientLightKind) : Bool)) {
+          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast (cast descriptor : AmbientLight) : AmbientLight)) : Null<AmbientLight>) : Dynamic)); }
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'kind'), DirectionalLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, DirectionalLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(directional, null) : Bool)) {
-            (directional = cast (_Runtime.callValue(cloneDirectionalLight, cast ([(cast descriptor : DirectionalLight)] : Array<Dynamic>)) : Dynamic));
-            _Runtime.callValue(rotateVector3ByQuaternion, cast ([_Runtime.field(directional, 'direction'), _Runtime.field(directional, 'direction'), _Runtime.field(_Runtime.field(source, 'transform'), 'rotation')] : Array<Dynamic>));
+            (directional = cast ((cast cloneDirectionalLight((cast (cast descriptor : DirectionalLight) : DirectionalLight)) : Null<DirectionalLight>) : Dynamic));
+            rotateVector3ByQuaternion((cast (cast directional : DirectionalLight).direction : Vector3Like), (cast (cast directional : DirectionalLight).direction : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation);
           }
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'kind'), HemisphereLightKind) : Bool)) {
-          _Runtime.callProperty(hemisphere, 'push', cast ([_Runtime.callValue(cloneHemisphereLight, cast ([(cast descriptor : HemisphereLight)] : Array<Dynamic>))] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, HemisphereLightKind) : Bool)) {
+          _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast (cast descriptor : HemisphereLight) : HemisphereLight)) : HemisphereLight)] : Array<Dynamic>));
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'kind'), PointLightKind) : Bool)) {
-          var resolved:Dynamic = _Runtime.callValue(clonePointLight, cast ([(cast descriptor : PointLight)] : Array<Dynamic>));
-          _Runtime.callValue(SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights, cast ([_Runtime.field(resolved, 'position'), _Runtime.field(source, 'transform')] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, PointLightKind) : Bool)) {
+          var resolved:PointLight = (cast clonePointLight((cast (cast descriptor : PointLight) : PointLight)) : PointLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : PointLight).position : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3DLike));
           _Runtime.callProperty(point, 'push', cast ([resolved] : Array<Dynamic>));
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'kind'), SpotLightKind) : Bool)) {
-          var resolved:Dynamic = _Runtime.callValue(cloneSpotLight, cast ([(cast descriptor : SpotLight)] : Array<Dynamic>));
-          _Runtime.callValue(SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights, cast ([_Runtime.field(resolved, 'position'), _Runtime.field(source, 'transform')] : Array<Dynamic>));
-          _Runtime.callValue(rotateVector3ByQuaternion, cast ([_Runtime.field(resolved, 'direction'), _Runtime.field(resolved, 'direction'), _Runtime.field(_Runtime.field(source, 'transform'), 'rotation')] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, SpotLightKind) : Bool)) {
+          var resolved:SpotLight = (cast cloneSpotLight((cast (cast descriptor : SpotLight) : SpotLight)) : SpotLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : SpotLight).position : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3DLike));
+          rotateVector3ByQuaternion((cast (cast resolved : SpotLight).direction : Vector3Like), (cast (cast resolved : SpotLight).direction : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation);
           _Runtime.callProperty(spot, 'push', cast ([resolved] : Array<Dynamic>));
         }
         i++;
       }
     }
-    return cast _Runtime.callValue(createScene3DLights, cast ([{ ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot }] : Array<Dynamic>));
+    return cast (cast createScene3DLights((cast { ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot } : Null<flighthq._internal._Any>)) : Scene3DLights);
     return cast null;
   }
 
@@ -89,7 +94,7 @@ class SceneDocumentLights {
     (out.x *= _Runtime.field(transform, 'scale').x);
     (out.y *= _Runtime.field(transform, 'scale').y);
     (out.z *= _Runtime.field(transform, 'scale').z);
-    _Runtime.callValue(rotateVector3ByQuaternion, cast ([out, out, _Runtime.field(transform, 'rotation')] : Array<Dynamic>));
+    rotateVector3ByQuaternion((cast out : Vector3Like), (cast out : Vector3Like), _Runtime.field(transform, 'rotation'));
     (out.x += _Runtime.field(transform, 'position').x);
     (out.y += _Runtime.field(transform, 'position').y);
     (out.z += _Runtime.field(transform, 'position').z);

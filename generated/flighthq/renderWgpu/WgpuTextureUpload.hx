@@ -14,11 +14,11 @@ class WgpuTextureUpload {
 
   @:noCompletion
   public static function uploadWgpuTextureElement(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, width:Float, height:Float, source:flighthq._internal.dom.GPUCopyExternalImageSource):Void {
-    _Runtime.callValue(tryCopyWgpuExternalImageToTexture, cast ([flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), { source: source }, { texture: texture, origin: origin }, width, height] : Array<Dynamic>));
+    (cast tryCopyWgpuExternalImageToTexture((cast flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue') : flighthq._internal.dom.GPUQueue), (cast { source: source } : flighthq._internal.dom.GPUCopyExternalImageSourceInfo), (cast { texture: texture, origin: origin } : flighthq._internal.dom.GPUCopyExternalImageDestInfo), (cast width : Float), (cast height : Float)) : Bool);
   }
 
   @:noCompletion
   public static function uploadWgpuTextureImageResource(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, image:Image):Void {
-    _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource)] : Array<Dynamic>));
+    uploadWgpuTextureElement((cast device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), (cast (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource) : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>, flighthq._internal.dom.ImageData>));
   }
 }

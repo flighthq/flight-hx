@@ -29,9 +29,9 @@ class Spritesheet {
   }
 
   public static function cloneSpritesheet(spritesheet:flighthq.types.Spritesheet):flighthq.types.Spritesheet {
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated }] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames }] : Array<Dynamic>));
+    var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
+    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated } : Null<flighthq._internal._Any>)) : SpritesheetFrame)] : Array<Dynamic>));
+    return cast (cast createEntity({ atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames }) : flighthq.types.Spritesheet);
     return cast null;
   }
 
@@ -41,7 +41,7 @@ class Spritesheet {
   }
 
   public static function createSpritesheet(?obj:Dynamic):flighthq.types.Spritesheet {
-    return cast _Runtime.callValue(createEntity, cast ([{ atlas: _Runtime.coalesce(_Runtime.optionalField(obj, 'atlas'), function():Dynamic return cast null), animations: _Runtime.coalesce(_Runtime.optionalField(obj, 'animations'), function():Dynamic return cast {  }), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ atlas: _Runtime.coalesce(_Runtime.optionalField(obj, 'atlas'), function():Dynamic return cast null), animations: _Runtime.coalesce(_Runtime.optionalField(obj, 'animations'), function():Dynamic return cast {  }), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }) : flighthq.types.Spritesheet);
     return cast null;
   }
 
@@ -113,7 +113,7 @@ class Spritesheet {
     Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.pauseSpritesheetPlayer(player);
   }
 
-  public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, ?restart:Dynamic):Void {
+  public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, ?restart:Bool):Void {
     Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.playSpritesheetAnimation(player, animation, restart);
   }
 

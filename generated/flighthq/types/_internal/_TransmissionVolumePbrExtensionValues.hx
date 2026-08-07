@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _TransmissionVolumePbrExtensionValues {
-  public static final TransmissionVolumePbrExtensionKind:Dynamic = 'TransmissionVolumePbrExtension';
+  public static final TransmissionVolumePbrExtensionKind:String = 'TransmissionVolumePbrExtension';
 }

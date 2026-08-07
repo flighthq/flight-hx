@@ -11,6 +11,6 @@ import flighthq.types.Node.NodeTraits;
 
 typedef HasTransform3D = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
 
-typedef HasTransform3DRuntime = { var binding:Null<Dynamic>; var localMatrix4:Null<Matrix4>; var localMatrix4Detached:Bool; var worldMatrix4:Null<Matrix4>; };
+typedef HasTransform3DRuntime = { var binding:Null<flighthq._internal._Object>; var localMatrix4:Null<Matrix4>; var localMatrix4Detached:Bool; var worldMatrix4:Null<Matrix4>; };
 
 typedef Transform3DNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };

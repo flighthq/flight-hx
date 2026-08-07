@@ -10,7 +10,7 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 class StandardMaterial {
   public static function createStandardMaterial(?options:Dynamic):flighthq.types.StandardMaterial {
-    return cast _Runtime.callValue(createEntity, cast ([{ kind: StandardMaterialKindValue, name: _Runtime.coalesce(_Runtime.optionalField(options, 'name'), function():Dynamic return cast null) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { kind: StandardMaterialKindValue, name: _Runtime.coalesce(_Runtime.optionalField(options, 'name'), function():Dynamic return cast null) } : Null<{ var kind:String; var name:Null<String>; }>)) : flighthq.types.StandardMaterial);
     return cast null;
   }
 }

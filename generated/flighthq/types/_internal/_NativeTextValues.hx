@@ -11,5 +11,5 @@ import flighthq.types.TextFormat.TextFormatAlign;
 import flighthq.types.TextVerticalAlign;
 
 class _NativeTextValues {
-  public static final NativeTextKind:Dynamic = 'NativeText';
+  public static final NativeTextKind:String = 'NativeText';
 }

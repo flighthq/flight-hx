@@ -23,14 +23,23 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRichTextOverlay;
+import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextContent;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
+import flighthq.types.TextFormatRange;
+import flighthq.types.TextInputState;
 import flighthq.types.TextLabel.TextLabelRuntime;
+import flighthq.types.TextLayout.TextLayoutGroup;
+import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextVerticalAlign;
 
 typedef GlRichTextData__glRichText = { var texture:Null<flighthq._internal.dom.WebGLTexture>; };
 
@@ -43,82 +52,82 @@ class GlRichText {
 
   @:noCompletion
   public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast (cast (cast { texture: null } : Dynamic) : RendererData);
+    return cast (cast (cast { texture: null } : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure0 = (cast (cast data : Dynamic) : GlRichTextData__glRichText);
+    var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
+    __destructure0 = (cast (cast data : flighthq._internal._Any) : GlRichTextData__glRichText);
     texture = _Runtime.field(__destructure0, 'texture');
-    if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture); }
+    if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, texture); }
   }
 
   @:noCompletion
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    var overlay:Dynamic = cast _Runtime.UNDEFINED;
-    overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    _Runtime.callValue(drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
+    var overlay:Null<GlRichTextOverlay> = cast _Runtime.UNDEFINED;
+    overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast (cast (cast renderProxy : RenderProxy2D).source : RichText) : RichText)) : RichTextRuntime), 'input'), null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    drawGlRichTextWithOverlay((cast state : GlRenderState), (cast renderProxy : RenderProxy2D), (cast overlay : Null<GlRichTextOverlay>));
   }
 
   @:noCompletion
   public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var richTextRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var content:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var fieldW:Dynamic = cast _Runtime.UNDEFINED;
-    var fieldH:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var offCtx:Dynamic = cast _Runtime.UNDEFINED;
-    var shader:Dynamic = cast _Runtime.UNDEFINED;
-    var richTextData:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
-    data = _Runtime.field(source, 'data');
-    richTextRuntime = (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
-    content = _Runtime.callValue(getRichTextContent, cast ([richTextRuntime] : Array<Dynamic>));
-    _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0) : Bool) && (cast !(cast _Runtime.field(data, 'background') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(data, 'border') : Bool) : Bool)) : Bool)) { return; }
-    result = _Runtime.callValue(GlRichText.layoutRichText__glRichText, cast ([source, richTextRuntime, _Runtime.field(content, 'text'), _Runtime.field(content, 'formatRanges')] : Array<Dynamic>));
-    fieldW = HxMath.ceil(_Runtime.callValue(computeTextBoundsWidth, cast ([data, result] : Array<Dynamic>)));
-    fieldH = HxMath.ceil(_Runtime.callValue(computeTextBoundsHeight, cast ([data, result] : Array<Dynamic>)));
+    var source:RichText = cast _Runtime.UNDEFINED;
+    var data:RichTextData = cast _Runtime.UNDEFINED;
+    var richTextRuntime:RichTextRuntime = cast _Runtime.UNDEFINED;
+    var content:RichTextContent = cast _Runtime.UNDEFINED;
+    var result:TextLayoutResult = cast _Runtime.UNDEFINED;
+    var fieldW:Float = cast _Runtime.UNDEFINED;
+    var fieldH:Float = cast _Runtime.UNDEFINED;
+    var pixelRatio:Float = cast _Runtime.UNDEFINED;
+    var offCtx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var shader:GlBitmapShader = cast _Runtime.UNDEFINED;
+    var richTextData:GlRichTextData__glRichText = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    flushGlQuadBatchWriter((cast state : GlRenderState));
+    source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
+    data = (cast source : RichText).data;
+    richTextRuntime = (cast (cast getRichTextRuntime((cast source : RichText)) : RichTextRuntime) : RichTextRuntime);
+    content = (cast getRichTextContent((cast richTextRuntime : RichTextRuntime)) : RichTextContent);
+    computeRichTextContent(content, data, (cast (cast getRichTextPasswordCharacter((cast source : RichText)) : Null<String>) : Null<String>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast content : RichTextContent).text, 'length'), 0.0) : Bool) && (cast !(cast (cast data : RichTextData).background : Bool) : Bool)) : Bool) && (cast !(cast (cast data : RichTextData).border : Bool) : Bool)) : Bool)) { return; }
+    result = (cast GlRichText.layoutRichText__glRichText((cast source : RichText), (cast richTextRuntime : RichTextRuntime), (cast (cast content : RichTextContent).text : String), (cast content : RichTextContent).formatRanges) : TextLayoutResult);
+    fieldW = HxMath.ceil((cast computeTextBoundsWidth(data, result) : Float));
+    fieldH = HxMath.ceil((cast computeTextBoundsHeight(data, result) : Float));
     if ((cast ((cast ((cast fieldW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast fieldH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    pixelRatio = _Runtime.field(state, 'pixelRatio');
-    offCtx = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([fieldW, fieldH, pixelRatio] : Array<Dynamic>));
+    pixelRatio = (cast state : GlRenderState).pixelRatio;
+    offCtx = (cast GlRichText.getOffscreenCanvas__glRichText((cast fieldW : Float), (cast fieldH : Float), (cast pixelRatio : Float)) : flighthq._internal.dom.CanvasRenderingContext2D);
     flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'clearRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
-    if ((cast _Runtime.field(data, 'background') : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(data, 'backgroundColor')] : Array<Dynamic>)));
+    if ((cast (cast data : RichTextData).background : Bool)) {
+      flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'fillStyle', (cast computeRgbHexString((cast (cast data : RichTextData).backgroundColor : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'fillRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
-    if ((cast _Runtime.field(data, 'border') : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'strokeStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(data, 'borderColor')] : Array<Dynamic>)));
+    if ((cast (cast data : RichTextData).border : Bool)) {
+      flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'strokeStyle', (cast computeRgbHexString((cast (cast data : RichTextData).borderColor : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
       flighthq._internal.backend.Canvas2dBackend.setField(offCtx, 'lineWidth', 1.0);
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'strokeRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
-    if ((cast ((cast _Runtime.field(_Runtime.field(content, 'text'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(GlRichText.drawRichTextToCanvas__glRichText, cast ([offCtx, source, result, fieldW, fieldH, _Runtime.field(content, 'text')] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field((cast content : RichTextContent).text, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
+      GlRichText.drawRichTextToCanvas__glRichText((cast offCtx : flighthq._internal.dom.CanvasRenderingContext2D), (cast source : RichText), result, (cast fieldW : Float), (cast fieldH : Float), (cast (cast content : RichTextContent).text : String));
     }
-    _Runtime.callOptionalValue(overlay, cast ([offCtx, source, result, fieldW, fieldH, _Runtime.field(content, 'text')] : Array<Dynamic>));
-    shader = _Runtime.callValue(resolveGlShader, cast ([state, renderProxy] : Array<Dynamic>));
-    _Runtime.callValue(useGlProgram, cast ([state, shader] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
-    richTextData = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlRichTextData__glRichText);
-    texture = _Runtime.field(richTextData, 'texture');
+    _Runtime.callOptionalValue(overlay, cast ([offCtx, source, result, fieldW, fieldH, (cast content : RichTextContent).text] : Array<Dynamic>));
+    shader = (cast resolveGlShader((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)) : GlBitmapShader);
+    useGlProgram((cast state : GlRenderState), shader);
+    if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
+    richTextData = (cast (cast (cast renderProxy : RenderProxy2D).rendererData : flighthq._internal._Any) : GlRichTextData__glRichText);
+    texture = (cast richTextData : GlRichTextData__glRichText).texture;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
-      (texture = cast (_Runtime.callValue(createGlTexture, cast ([state] : Array<Dynamic>)) : Dynamic));
-      _Runtime.setField(richTextData, 'texture', texture);
+      (texture = cast ((cast createGlTexture((cast state : GlRenderState)) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic));
+      ((cast richTextData : GlRichTextData__glRichText).texture = texture);
     }
-    _Runtime.callValue(updateGlTexture, cast ([state, texture, GlRichText._offscreenCanvas__glRichText] : Array<Dynamic>));
-    _Runtime.callProperty(shader, 'bind', cast ([_Runtime.field(state, 'gl'), state, renderProxy] : Array<Dynamic>));
-    offsetX = _Runtime.callValue(computeTextBoundsOffsetX, cast ([data, result] : Array<Dynamic>));
-    _Runtime.callValue(drawGlQuad, cast ([state, offsetX, 0.0, (offsetX + fieldW), fieldH, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
+    updateGlTexture((cast state : GlRenderState), (cast texture : flighthq._internal.dom.WebGLTexture), (cast GlRichText._offscreenCanvas__glRichText : flighthq._internal.dom.HTMLCanvasElement));
+    (cast shader : { var bind:flighthq._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; }).bind((cast state : GlRenderState).gl, state, renderProxy);
+    offsetX = (cast computeTextBoundsOffsetX(data, result) : Float);
+    drawGlQuad((cast state : GlRenderState), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
@@ -129,43 +138,43 @@ class GlRichText {
   public static final defaultGlRichTextRenderer:Scene2DRenderer = { createData: createGlRichTextData, destroyData: destroyGlRichTextData, submit: drawGlRichText };
 
   public static function drawRichTextToCanvas__glRichText(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    firstVisibleLine = _Runtime.subtractNumbers(_Runtime.field(data, 'scrollV'), 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(result, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    scrollXOffset = _Runtime.field(data, 'scrollH');
+    var data:RichTextData = cast _Runtime.UNDEFINED;
+    var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
+    var scrollYOffset:Float = cast _Runtime.UNDEFINED;
+    var scrollXOffset:Float = cast _Runtime.UNDEFINED;
+    data = (cast source : RichText).data;
+    firstVisibleLine = ((cast data : RichTextData).scrollV - 1.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast result : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollXOffset = (cast data : RichTextData).scrollH;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'start');
-    for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      if ((cast ((cast _Runtime.field(group, 'lineIndex') : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast _Runtime.field(data, 'textColor'))] : Array<Dynamic>)));
-      var slice:Dynamic = _Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'));
-      var x:Dynamic = _Runtime.subtractNumbers(_Runtime.field(group, 'offsetX'), scrollXOffset);
-      var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')) - scrollYOffset);
+    for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
+      if ((cast ((cast (cast group : TextLayoutGroup).lineIndex : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString((cast (cast group : TextLayoutGroup).format : TextFormat)) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).color, function():Dynamic return cast (cast data : RichTextData).textColor) : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+      var slice:String = _Runtime.substring(text, (cast group : TextLayoutGroup).startIndex, (cast group : TextLayoutGroup).endIndex);
+      var x:Float = ((cast group : TextLayoutGroup).offsetX - scrollXOffset);
+      var y:Float = (((cast group : TextLayoutGroup).offsetY + (cast group : TextLayoutGroup).ascent) - scrollYOffset);
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(_Runtime.field(group, 'format'), 'underline'), function():Dynamic return cast _Runtime.field(_Runtime.field(group, 'format'), 'strikethrough')))) {
-        flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast _Runtime.field(data, 'textColor'))] : Array<Dynamic>)));
-        flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', HxMath.max(1.0, _Runtime.divideNumbers(_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'size'), function():Dynamic return cast 12.0), 16.0)));
-        if (_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'underline'))) {
-          var lineY:Dynamic = _Runtime.addNumbers(y, _Runtime.field(group, 'descent'));
+      if (_Runtime.truthy(_Runtime.orValue((cast (cast group : TextLayoutGroup).format : TextFormat).underline, function():Dynamic return cast (cast (cast group : TextLayoutGroup).format : TextFormat).strikethrough))) {
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).color, function():Dynamic return cast (cast data : RichTextData).textColor) : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', HxMath.max(1.0, _Runtime.divideNumbers(_Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).size, function():Dynamic return cast 12.0), 16.0)));
+        if (_Runtime.truthy((cast (cast group : TextLayoutGroup).format : TextFormat).underline)) {
+          var lineY:Float = (y + (cast group : TextLayoutGroup).descent);
           flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, lineY] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.addNumbers(x, _Runtime.field(group, 'width')), lineY] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([(x + (cast group : TextLayoutGroup).width), lineY] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
         }
-        if (_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'strikethrough'))) {
-          var lineY:Dynamic = (y - _Runtime.multiplyNumbers(_Runtime.field(group, 'ascent'), 0.35));
+        if (_Runtime.truthy((cast (cast group : TextLayoutGroup).format : TextFormat).strikethrough)) {
+          var lineY:Float = (y - ((cast group : TextLayoutGroup).ascent * 0.35));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, lineY] : Array<Dynamic>));
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([_Runtime.addNumbers(x, _Runtime.field(group, 'width')), lineY] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([(x + (cast group : TextLayoutGroup).width), lineY] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
         }
       }
@@ -173,26 +182,26 @@ class GlRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function layoutRichText__glRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic):Dynamic {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var measure:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    measure = function(value:String, format:TextFormat) {
-      var context:Dynamic = cast _Runtime.UNDEFINED;
-      context = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([1.0, 1.0] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+  public static function layoutRichText__glRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<Array<Dynamic>, Float>, String>):Dynamic {
+    var data:RichTextData = cast _Runtime.UNDEFINED;
+    var measure:String->TextFormat->Float = cast _Runtime.UNDEFINED;
+    var result:TextLayoutResult = cast _Runtime.UNDEFINED;
+    data = (cast source : RichText).data;
+    measure = (cast function(value:String, format:TextFormat):Float {
+      var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+      context = (cast GlRichText.getOffscreenCanvas__glRichText((cast 1.0 : Float), (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : flighthq._internal.dom.CanvasRenderingContext2D);
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString((cast format : TextFormat)) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
-    };
-    result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: formatRanges, width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));
+    } : String->TextFormat->Float);
+    result = (cast getTextLayoutResult((cast (cast richTextRuntime : TextLabelRuntime) : TextLabelRuntime)) : TextLayoutResult);
+    computeTextLayout(result, { text: text, formatRanges: formatRanges, width: (cast data : RichTextData).width, height: (cast data : RichTextData).height, measure: measure, multiline: (cast data : RichTextData).multiline, verticalAlign: ((cast _Runtime.strictEquals((cast data : RichTextData).autoSize, 'none') : Bool) ? (cast (cast data : RichTextData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: (cast data : RichTextData).wordWrap });
     return cast result;
     return cast null;
   }
 
   public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.CanvasRenderingContext2D {
-    var pw:Dynamic = cast _Runtime.UNDEFINED;
-    var ph:Dynamic = cast _Runtime.UNDEFINED;
+    var pw:Float = cast _Runtime.UNDEFINED;
+    var ph:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(GlRichText._offscreenCanvas__glRichText) : Bool)) {
       (GlRichText._offscreenCanvas__glRichText = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
       (GlRichText._offscreenCtx__glRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(GlRichText._offscreenCanvas__glRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));

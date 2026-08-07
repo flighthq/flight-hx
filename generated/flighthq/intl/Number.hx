@@ -9,34 +9,34 @@ import flighthq.types.LocaleInput;
 
 class Number {
   public static function formatCompactNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, _Runtime.mergeObjects([{ notation: 'compact' }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Number.getNumberFormat__number((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ notation: 'compact' }, options]) : Null<flighthq._internal._Any>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function formatCurrency(value:Float, currency:String, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, _Runtime.mergeObjects([{ style: 'currency' }, { currency: currency }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Number.getNumberFormat__number((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ style: 'currency' }, { currency: currency }, options]) : Null<flighthq._internal._Any>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function formatNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, options] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Number.getNumberFormat__number((cast locale : LocaleInput), (cast options : Null<flighthq._internal._Any>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function formatPercent(value:Float, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, _Runtime.mergeObjects([{ style: 'percent' }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Number.getNumberFormat__number((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ style: 'percent' }, options]) : Null<flighthq._internal._Any>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function formatUnit(value:Float, unit:String, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(Number.getNumberFormat__number, cast ([locale, _Runtime.mergeObjects([{ style: 'unit' }, { unit: unit }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Number.getNumberFormat__number((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ style: 'unit' }, { unit: unit }, options]) : Null<flighthq._internal._Any>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getNumberFormat__number(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    key = _Runtime.callValue(getCacheKey, cast (['number', locale, options] : Array<Dynamic>));
-    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'NumberFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    var key:String = cast _Runtime.UNDEFINED;
+    key = (cast getCacheKey((cast 'number' : String), (cast locale : LocaleInput), (cast options : Null<flighthq._internal._Object>)) : String);
+    return cast getCached((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'NumberFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]) : Void->flighthq._internal._Any));
     return cast null;
   }
 }

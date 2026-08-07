@@ -8,53 +8,56 @@ import flighthq.animation.AnimationBlendTree.sampleAnimationBlendTreeChannel;
 import flighthq.animation.AnimationStateMachineAdvance.advanceAnimationStateMachineWithScratch;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationBlendTree;
+import flighthq.types.AnimationBlendTree.AnimationBlendTreeChannel;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationStateMachine;
 import flighthq.types.AnimationStateMachine.AnimationStateMachineChannel;
 import flighthq.types.AnimationStateMachine.AnimationStateMachineState;
+import flighthq.types.AnimationTrack;
 import flighthq.types.EasingFunction;
 
 class AnimationStateMachine {
   public static function advanceAnimationStateMachine(machine:flighthq.types.AnimationStateMachine, dt:Float):Void {
-    var advanced:Dynamic = cast _Runtime.UNDEFINED;
-    advanced = _Runtime.field(machine, 'advanceScratch');
+    var advanced:Array<AnimationPlayer> = cast _Runtime.UNDEFINED;
+    advanced = (cast machine : flighthq.types.AnimationStateMachine).advanceScratch;
     _Runtime.setLength(advanced, 0.0);
-    _Runtime.callValue(advanceAnimationStateMachineWithScratch, cast ([machine, dt, advanced] : Array<Dynamic>));
+    advanceAnimationStateMachineWithScratch((cast machine : flighthq.types.AnimationStateMachine), (cast dt : Float), advanced);
   }
 
-  public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, initialState:Dynamic = 0.0):flighthq.types.AnimationStateMachine {
-    var copiedStates:Dynamic = cast _Runtime.UNDEFINED;
-    var stateByName:Dynamic = cast _Runtime.UNDEFINED;
-    var initialStateIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var channels:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleWidth:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, initialState:flighthq._internal._Union2<String, Float> = 0.0):flighthq.types.AnimationStateMachine {
+    var copiedStates:Array<AnimationStateMachineState> = cast _Runtime.UNDEFINED;
+    var stateByName:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var initialStateIndex:Float = cast _Runtime.UNDEFINED;
+    var channels:Array<AnimationStateMachineChannel> = cast _Runtime.UNDEFINED;
+    var sampleWidth:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine requires at least one state.')); }
     copiedStates = _Runtime.slice(states, 0, null);
     stateByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) {
-        var name:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(copiedStates, index), 'name');
-        if ((cast ((cast stateByName : flighthq._internal._Map).has(name)) : Bool)) { _Runtime.throwValue(_Runtime.typeError('AnimationStateMachine contains duplicate state "' + Std.string(name) + '".')); }
-        ((cast stateByName : flighthq._internal._Map).set(name, index));
+        var name:String = (cast flighthq._internal._StaticIndex.readArray(copiedStates, index) : AnimationStateMachineState).name;
+        if ((cast ((cast stateByName : flighthq._internal._Map<String, Float>).has(name)) : Bool)) { _Runtime.throwValue(_Runtime.typeError('AnimationStateMachine contains duplicate state "' + Std.string(name) + '".')); }
+        ((cast stateByName : flighthq._internal._Map<String, Float>).set(name, index));
         index++;
       }
     }
-    initialStateIndex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(initialState), 'number') : Bool) ? (cast initialState : Dynamic) : (cast _Runtime.coalesce(((cast stateByName : flighthq._internal._Map).get(initialState)), function():Dynamic return cast _Runtime.field(copiedStates, 'length')) : Dynamic));
+    initialStateIndex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(initialState), 'number') : Bool) ? (cast initialState : Dynamic) : (cast _Runtime.coalesce(((cast stateByName : flighthq._internal._Map<String, Float>).get(initialState)), function():Dynamic return cast _Runtime.field(copiedStates, 'length')) : Dynamic));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([initialStateIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast initialStateIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast initialStateIndex : Float) >= (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine initial state "' + Std.string(Std.string(initialState)) + '" does not exist.'));
     }
-    channels = _Runtime.callValue(AnimationStateMachine.createAnimationStateMachineChannels__animationStateMachine, cast ([copiedStates] : Array<Dynamic>));
+    channels = (cast AnimationStateMachine.createAnimationStateMachineChannels__animationStateMachine((cast copiedStates : Array<AnimationStateMachineState>)) : Array<AnimationStateMachineChannel>);
     sampleWidth = 0.0;
     for (entry in _Runtime.iterable(channels)) {
-      (sampleWidth = cast (HxMath.max(sampleWidth, _Runtime.field(_Runtime.field(_Runtime.field(entry, 'channel'), 'track'), 'components')) : Dynamic));
+      (sampleWidth = cast (HxMath.max(sampleWidth, (cast _Runtime.field((cast entry : AnimationStateMachineChannel).channel, 'track') : AnimationTrack).components) : Dynamic));
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ advanceScratch: cast ([] : Array<Dynamic>), channels: channels, currentStateIndex: initialStateIndex, fromSample: new flighthq._internal._Float32Array(sampleWidth), states: copiedStates, toSample: new flighthq._internal._Float32Array(sampleWidth), transitionCurve: AnimationStateMachine.linearAnimationStateMachineCurve__animationStateMachine, transitionDuration: 0.0, transitionElapsed: 0.0, transitionFromStateIndex: null, transitionToStateIndex: null, transitionWeight: 0.0 }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { advanceScratch: cast ([] : Array<Dynamic>), channels: channels, currentStateIndex: initialStateIndex, fromSample: new flighthq._internal._Float32Array(sampleWidth), states: copiedStates, toSample: new flighthq._internal._Float32Array(sampleWidth), transitionCurve: AnimationStateMachine.linearAnimationStateMachineCurve__animationStateMachine, transitionDuration: 0.0, transitionElapsed: 0.0, transitionFromStateIndex: null, transitionToStateIndex: null, transitionWeight: 0.0 } : Null<{ var advanceScratch:Array<flighthq._internal._Any>; var channels:Array<AnimationStateMachineChannel>; var currentStateIndex:Float; var fromSample:flighthq._internal._Float32Array; var states:Array<AnimationStateMachineState>; var toSample:flighthq._internal._Float32Array; var transitionCurve:Float->Float; var transitionDuration:Float; var transitionElapsed:Float; var transitionFromStateIndex:flighthq._internal._Any; var transitionToStateIndex:flighthq._internal._Any; var transitionWeight:Float; }>)) : flighthq.types.AnimationStateMachine);
     return cast null;
   }
 
   public static function createAnimationStateMachineState(name:String, blendTree:AnimationBlendTree):AnimationStateMachineState {
-    return cast _Runtime.callValue(createEntity, cast ([{ blendTree: blendTree, name: name }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { blendTree: blendTree, name: name } : Null<{ var blendTree:AnimationBlendTree; var name:String; }>)) : AnimationStateMachineState);
     return cast null;
   }
 
@@ -68,44 +71,44 @@ class AnimationStateMachine {
     return cast null;
   }
 
-  public static function sampleAnimationStateMachine(out:Dynamic, machine:flighthq.types.AnimationStateMachine, visit:Dynamic):Void {
+  public static function sampleAnimationStateMachine(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, machine:flighthq.types.AnimationStateMachine, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(machine, 'channels'), 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.callValue(sampleAnimationStateMachineChannel, cast ([out, machine, index] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(visit, cast ([out, _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'channels'), index), 'channel'), index] : Array<Dynamic>)); }
+        if ((cast (cast sampleAnimationStateMachineChannel((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast machine : flighthq.types.AnimationStateMachine), (cast index : Float)) : Bool) : Bool)) { visit((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'channels'), index), 'channel') : AnimationChannel), (cast index : Float)); }
         index++;
       }
     }
   }
 
-  public static function sampleAnimationStateMachineChannel(out:Dynamic, machine:flighthq.types.AnimationStateMachine, channelIndex:Float):Bool {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    var toStateIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var fromStateIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var fromChannelIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var toChannelIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var hasFrom:Dynamic = cast _Runtime.UNDEFINED;
-    var hasTo:Dynamic = cast _Runtime.UNDEFINED;
+  public static function sampleAnimationStateMachineChannel(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, machine:flighthq.types.AnimationStateMachine, channelIndex:Float):Bool {
+    var entry:AnimationStateMachineChannel = cast _Runtime.UNDEFINED;
+    var toStateIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    var fromStateIndex:Float = cast _Runtime.UNDEFINED;
+    var fromChannelIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    var toChannelIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    var hasFrom:Bool = cast _Runtime.UNDEFINED;
+    var hasTo:Bool = cast _Runtime.UNDEFINED;
     entry = flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'channels'), channelIndex);
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     toStateIndex = _Runtime.field(machine, 'transitionToStateIndex');
     if ((cast _Runtime.strictEquals(toStateIndex, null) : Bool)) {
-      var currentChannelIndex:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(entry, 'stateChannelIndices'), _Runtime.field(machine, 'currentStateIndex'));
-      return cast _Runtime.andValue(!_Runtime.strictEquals(currentChannelIndex, null), function():Dynamic return cast _Runtime.callValue(sampleAnimationBlendTreeChannel, cast ([out, _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), _Runtime.field(machine, 'currentStateIndex')), 'blendTree'), currentChannelIndex] : Array<Dynamic>)));
+      var currentChannelIndex:Null<Float> = flighthq._internal._StaticIndex.readArray(_Runtime.field(entry, 'stateChannelIndices'), _Runtime.field(machine, 'currentStateIndex'));
+      return cast _Runtime.andValue(!_Runtime.strictEquals(currentChannelIndex, null), function():Dynamic return cast (cast sampleAnimationBlendTreeChannel((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), _Runtime.field(machine, 'currentStateIndex')) : AnimationStateMachineState).blendTree : AnimationBlendTree), (cast currentChannelIndex : Float)) : Bool));
     }
     fromStateIndex = _Runtime.field(machine, 'transitionFromStateIndex');
     fromChannelIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(entry, 'stateChannelIndices'), fromStateIndex);
     toChannelIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(entry, 'stateChannelIndices'), toStateIndex);
-    hasFrom = ((cast !_Runtime.strictEquals(fromChannelIndex, null) : Bool) && (cast _Runtime.callValue(sampleAnimationBlendTreeChannel, cast ([_Runtime.field(machine, 'fromSample'), _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), fromStateIndex), 'blendTree'), fromChannelIndex] : Array<Dynamic>)) : Bool));
-    hasTo = ((cast !_Runtime.strictEquals(toChannelIndex, null) : Bool) && (cast _Runtime.callValue(sampleAnimationBlendTreeChannel, cast ([_Runtime.field(machine, 'toSample'), _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), toStateIndex), 'blendTree'), toChannelIndex] : Array<Dynamic>)) : Bool));
+    hasFrom = ((cast !_Runtime.strictEquals(fromChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel((cast _Runtime.field(machine, 'fromSample') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), fromStateIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree), (cast fromChannelIndex : Float)) : Bool) : Bool));
+    hasTo = ((cast !_Runtime.strictEquals(toChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel((cast _Runtime.field(machine, 'toSample') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(machine, 'states'), toStateIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree), (cast toChannelIndex : Float)) : Bool) : Bool));
     if ((cast ((cast !(cast hasFrom : Bool) : Bool) && (cast !(cast hasTo : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast hasFrom : Bool) && (cast hasTo : Bool)) : Bool)) {
-      _Runtime.callValue(blendAnimationSamples, cast ([out, _Runtime.field(machine, 'fromSample'), _Runtime.field(machine, 'toSample'), _Runtime.field(machine, 'transitionWeight'), _Runtime.field(_Runtime.field(_Runtime.field(entry, 'channel'), 'track'), 'quaternion')] : Array<Dynamic>));
+      blendAnimationSamples((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast _Runtime.field(machine, 'fromSample') : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(machine, 'toSample') : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(machine, 'transitionWeight') : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
     } else {
-      var source:Dynamic = ((cast hasFrom : Bool) ? (cast _Runtime.field(machine, 'fromSample') : Dynamic) : (cast _Runtime.field(machine, 'toSample') : Dynamic));
-      var width:Dynamic = HxMath.min(HxMath.min(_Runtime.field(out, 'length'), _Runtime.field(_Runtime.field(_Runtime.field(entry, 'channel'), 'track'), 'components')), _Runtime.field(source, 'length'));
+      var source:flighthq._internal._Float32Array = ((cast hasFrom : Bool) ? (cast _Runtime.field(machine, 'fromSample') : Dynamic) : (cast _Runtime.field(machine, 'toSample') : Dynamic));
+      var width:Float = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components), _Runtime.field(source, 'length'));
       {
-        var component:Dynamic = 0.0;
+        var component:Float = 0.0;
         while ((cast ((cast component : Float) < (cast width : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, flighthq._internal._StaticIndex.readFloat32Array(source, component));
           component++;
@@ -116,58 +119,58 @@ class AnimationStateMachine {
     return cast null;
   }
 
-  public static function transitionAnimationStateMachine(machine:flighthq.types.AnimationStateMachine, toState:Dynamic, duration:Float, ?curve:EasingFunction):Bool {
+  public static function transitionAnimationStateMachine(machine:flighthq.types.AnimationStateMachine, toState:flighthq._internal._Union2<String, Float>, duration:Float, ?curve:EasingFunction):Bool {
     if (curve == null) curve = cast (AnimationStateMachine.linearAnimationStateMachineCurve__animationStateMachine : Dynamic);
-    var toStateIndex:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(machine, 'transitionToStateIndex'), null) : Bool)) { return cast false; }
-    toStateIndex = _Runtime.callValue(AnimationStateMachine.findAnimationStateMachineStateIndex__animationStateMachine, cast ([_Runtime.field(machine, 'states'), toState] : Array<Dynamic>));
-    if ((cast ((cast ((cast toStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(toStateIndex, _Runtime.field(machine, 'currentStateIndex')) : Bool)) : Bool)) { return cast false; }
-    _Runtime.setField(machine, 'transitionCurve', curve);
-    _Runtime.setField(machine, 'transitionDuration', HxMath.max(0.0, duration));
-    _Runtime.setField(machine, 'transitionElapsed', 0.0);
-    _Runtime.setField(machine, 'transitionFromStateIndex', _Runtime.field(machine, 'currentStateIndex'));
-    _Runtime.setField(machine, 'transitionToStateIndex', toStateIndex);
-    _Runtime.setField(machine, 'transitionWeight', _Runtime.callValue(curve, cast ([_Runtime.callValue(AnimationStateMachine.getLinearAnimationStateMachineTransitionWeight__animationStateMachine, cast ([0.0, _Runtime.field(machine, 'transitionDuration')] : Array<Dynamic>))] : Array<Dynamic>)));
-    if ((cast _Runtime.strictEquals(_Runtime.field(machine, 'transitionDuration'), 0.0) : Bool)) {
-      _Runtime.setField(machine, 'currentStateIndex', toStateIndex);
-      _Runtime.setField(machine, 'transitionFromStateIndex', null);
-      _Runtime.setField(machine, 'transitionToStateIndex', null);
+    var toStateIndex:Float = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals((cast machine : flighthq.types.AnimationStateMachine).transitionToStateIndex, null) : Bool)) { return cast false; }
+    toStateIndex = (cast AnimationStateMachine.findAnimationStateMachineStateIndex__animationStateMachine((cast (cast machine : flighthq.types.AnimationStateMachine).states : Array<AnimationStateMachineState>), (cast toState : flighthq._internal._Union2<String, Float>)) : Float);
+    if ((cast ((cast ((cast toStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(toStateIndex, (cast machine : flighthq.types.AnimationStateMachine).currentStateIndex) : Bool)) : Bool)) { return cast false; }
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionCurve = curve);
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionDuration = HxMath.max(0.0, duration));
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionElapsed = 0.0);
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionFromStateIndex = (cast machine : flighthq.types.AnimationStateMachine).currentStateIndex);
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionToStateIndex = toStateIndex);
+    ((cast machine : flighthq.types.AnimationStateMachine).transitionWeight = (cast curve((cast (cast AnimationStateMachine.getLinearAnimationStateMachineTransitionWeight__animationStateMachine((cast 0.0 : Float), (cast (cast machine : flighthq.types.AnimationStateMachine).transitionDuration : Float)) : Float) : Float)) : Float));
+    if ((cast _Runtime.strictEquals((cast machine : flighthq.types.AnimationStateMachine).transitionDuration, 0.0) : Bool)) {
+      ((cast machine : flighthq.types.AnimationStateMachine).currentStateIndex = toStateIndex);
+      ((cast machine : flighthq.types.AnimationStateMachine).transitionFromStateIndex = null);
+      ((cast machine : flighthq.types.AnimationStateMachine).transitionToStateIndex = null);
     }
     return cast true;
     return cast null;
   }
 
   public static function assertCompatibleAnimationStateMachineChannels__animationStateMachine(existing:AnimationChannel, channel:AnimationChannel):Void {
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'components'), _Runtime.field(_Runtime.field(channel, 'track'), 'components')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'track'), 'quaternion'), _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion')) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals((cast _Runtime.field(existing, 'track') : AnimationTrack).components, (cast _Runtime.field(channel, 'track') : AnimationTrack).components) : Bool) || (cast !_Runtime.strictEquals((cast _Runtime.field(existing, 'track') : AnimationTrack).quaternion, (cast _Runtime.field(channel, 'track') : AnimationTrack).quaternion) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('AnimationStateMachine target has incompatible tracks across states.'));
     }
   }
 
   public static function createAnimationStateMachineChannels__animationStateMachine(states:Array<AnimationStateMachineState>):Array<AnimationStateMachineChannel> {
     var channels:Array<AnimationStateMachineChannel> = cast _Runtime.UNDEFINED;
-    var channelByTarget:Dynamic = cast _Runtime.UNDEFINED;
+    var channelByTarget:flighthq._internal._Map<flighthq._internal._Any, Float> = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     channelByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var stateIndex:Dynamic = 0.0;
+      var stateIndex:Float = 0.0;
       while ((cast ((cast stateIndex : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) {
-        var stateChannels:Dynamic = _Runtime.field(_Runtime.field(flighthq._internal._StaticIndex.readArray(states, stateIndex), 'blendTree'), 'channels');
+        var stateChannels:Array<AnimationBlendTreeChannel> = (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, stateIndex), 'blendTree') : AnimationBlendTree).channels;
         {
-          var stateChannelIndex:Dynamic = 0.0;
+          var stateChannelIndex:Float = 0.0;
           while ((cast ((cast stateChannelIndex : Float) < (cast _Runtime.field(stateChannels, 'length') : Float)) : Bool)) {
-            var channel:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(stateChannels, stateChannelIndex), 'channel');
-            var existingIndex:Dynamic = ((cast channelByTarget : flighthq._internal._Map).get(_Runtime.field(channel, 'targetRef')));
+            var channel:AnimationChannel = _Runtime.field(flighthq._internal._StaticIndex.readArray(stateChannels, stateChannelIndex), 'channel');
+            var existingIndex:Null<Float> = ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).get(_Runtime.field(channel, 'targetRef')));
             if ((cast _Runtime.strictEquals(existingIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              var stateChannelIndices:Dynamic = _Runtime.fill(_Runtime.createArray(_Runtime.field(states, 'length')), null, 0, null, 1);
+              var stateChannelIndices:Array<Null<Float>> = _Runtime.fill(_Runtime.createArray(_Runtime.field(states, 'length')), null, 0, null, 1);
               flighthq._internal._StaticIndex.writeArray(stateChannelIndices, stateIndex, stateChannelIndex);
-              ((cast channelByTarget : flighthq._internal._Map).set(_Runtime.field(channel, 'targetRef'), _Runtime.field(channels, 'length')));
+              ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set(_Runtime.field(channel, 'targetRef'), _Runtime.field(channels, 'length')));
               _Runtime.callProperty(channels, 'push', cast ([{ channel: channel, stateChannelIndices: stateChannelIndices }] : Array<Dynamic>));
               stateChannelIndex++;
               continue;
             }
-            var existing:Dynamic = flighthq._internal._StaticIndex.readArray(channels, existingIndex);
-            _Runtime.callValue(AnimationStateMachine.assertCompatibleAnimationStateMachineChannels__animationStateMachine, cast ([_Runtime.field(existing, 'channel'), channel] : Array<Dynamic>));
-            flighthq._internal._StaticIndex.writeArray((cast _Runtime.field(existing, 'stateChannelIndices') : Array<Null<Float>>), stateIndex, stateChannelIndex);
+            var existing:AnimationStateMachineChannel = flighthq._internal._StaticIndex.readArray(channels, existingIndex);
+            AnimationStateMachine.assertCompatibleAnimationStateMachineChannels__animationStateMachine((cast (cast existing : AnimationStateMachineChannel).channel : AnimationChannel), (cast channel : AnimationChannel));
+            flighthq._internal._StaticIndex.writeArray((cast (cast existing : AnimationStateMachineChannel).stateChannelIndices : Array<Null<Float>>), stateIndex, stateChannelIndex);
             stateChannelIndex++;
           }
         }
@@ -178,10 +181,10 @@ class AnimationStateMachine {
     return cast null;
   }
 
-  public static function findAnimationStateMachineStateIndex__animationStateMachine(states:Array<AnimationStateMachineState>, state:Dynamic):Float {
+  public static function findAnimationStateMachineStateIndex__animationStateMachine(states:Array<AnimationStateMachineState>, state:flighthq._internal._Union2<String, Float>):Float {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(state), 'number') : Bool)) { return cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([state] : Array<Dynamic>)) : Bool) && (cast ((cast state : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast state : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) : Bool) ? (cast state : Dynamic) : (cast -1.0 : Dynamic)); }
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(states, index), 'name'), state) : Bool)) { return cast index; }
         index++;
@@ -192,7 +195,7 @@ class AnimationStateMachine {
   }
 
   public static function getLinearAnimationStateMachineTransitionWeight__animationStateMachine(elapsed:Float, duration:Float):Float {
-    var normalized:Dynamic = cast _Runtime.UNDEFINED;
+    var normalized:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast duration : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 1.0; }
     normalized = (elapsed / duration);
     return cast ((cast ((cast normalized : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast normalized : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast normalized : Dynamic)) : Dynamic));

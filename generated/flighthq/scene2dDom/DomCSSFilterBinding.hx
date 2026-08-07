@@ -10,24 +10,24 @@ import flighthq.types.RenderProxy2D;
 
 class DomCSSFilterBinding {
   public static function enableDomCssFilterSupport(state:DomRenderState):Void {
-    _Runtime.setField(state, 'domCssFilterResolver', getDomCssFilter);
+    ((cast state : DomRenderState).domCssFilterResolver = getDomCssFilter);
   }
 
   @:noCompletion
   public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy));
+    return cast ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).get(renderProxy));
     return cast null;
   }
 
   public static function setDomCssFilter(state:DomRenderState, node:Node2D, filter:Null<String>):Void {
-    var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
-    renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
+    var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
+    renderProxy = (cast getOrCreateRenderProxy2D(state, node) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
-      ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).delete_(renderProxy));
+      ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).delete_(renderProxy));
       return;
     }
-    ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).set(renderProxy, filter));
+    ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, filter));
   }
 
-  public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _cssFilterBindings__domCSSFilterBinding:flighthq._internal._WeakMap<RenderProxy2D, String> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

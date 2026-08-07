@@ -8,33 +8,35 @@ import flighthq.textureFormats.ParseAtf.getAtfParseFailureReason;
 import flighthq.textureFormats.ParseBasis.getBasisParseFailureReason;
 import flighthq.textureFormats.ParseDds.getDdsParseFailureReason;
 import flighthq.textureFormats.ParseKtx2.getKtx2ParseFailureReason;
+import flighthq.types.TextureContainerKind;
 import flighthq.types.TextureContainerParseExplanation;
+import flighthq.types.TextureContainerParseFailureReason;
 
 class ExplainTextureContainerParse {
   public static function explainTextureContainerParse(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseExplanation> {
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    var reason:Dynamic = cast _Runtime.UNDEFINED;
-    container = _Runtime.callValue(detectTextureContainer, cast ([bytes] : Array<Dynamic>));
+    var container:Null<String> = cast _Runtime.UNDEFINED;
+    var reason:Null<String> = cast _Runtime.UNDEFINED;
+    container = (cast detectTextureContainer((cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
     if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast { container: null, reason: 'container-unrecognized' }; }
-    reason = _Runtime.callValue(ExplainTextureContainerParse.getParseFailureReason__explainTextureContainerParse, cast ([container, bytes] : Array<Dynamic>));
+    reason = (cast ExplainTextureContainerParse.getParseFailureReason__explainTextureContainerParse((cast container : flighthq._internal._Any), (cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
     return cast ((cast _Runtime.strictEquals(reason, null) : Bool) ? (cast null : Dynamic) : (cast { container: container, reason: reason } : Dynamic));
     return cast null;
   }
 
-  public static function getParseFailureReason__explainTextureContainerParse(container:Dynamic, bytes:flighthq._internal._UInt8Array):Null<Dynamic> {
+  public static function getParseFailureReason__explainTextureContainerParse(container:flighthq._internal._IndexedAccess<TextureContainerParseExplanation, String>, bytes:flighthq._internal._UInt8Array):Null<flighthq._internal._IndexedAccess<TextureContainerParseExplanation, String>> {
     {
       var __switchValue = container;
       if (__switchValue == 'atf') {
-        return cast _Runtime.callValue(getAtfParseFailureReason, cast ([bytes] : Array<Dynamic>));
+        return cast (cast getAtfParseFailureReason((cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
       }
       else if (__switchValue == 'basis') {
-        return cast _Runtime.callValue(getBasisParseFailureReason, cast ([bytes] : Array<Dynamic>));
+        return cast (cast getBasisParseFailureReason((cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
       }
       else if (__switchValue == 'dds') {
-        return cast _Runtime.callValue(getDdsParseFailureReason, cast ([bytes] : Array<Dynamic>));
+        return cast (cast getDdsParseFailureReason((cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
       }
       else if (__switchValue == 'ktx2') {
-        return cast _Runtime.callValue(getKtx2ParseFailureReason, cast ([bytes] : Array<Dynamic>));
+        return cast (cast getKtx2ParseFailureReason((cast bytes : flighthq._internal._UInt8Array)) : Null<String>);
       }
     }
     return cast null;

@@ -4,39 +4,42 @@ package flighthq.hostTauri;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ShortcutEvent;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriGlobalShortcutPlugin;
+import flighthq.types.TauriApi.TauriShortcutEvent;
 
 class TauriShortcut {
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
-    var globalShortcut:Dynamic = cast _Runtime.UNDEFINED;
-    var registered:Dynamic = cast _Runtime.UNDEFINED;
-    globalShortcut = _Runtime.field(tauri, 'globalShortcut');
+    var globalShortcut:TauriGlobalShortcutPlugin = cast _Runtime.UNDEFINED;
+    var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    globalShortcut = (cast tauri : TauriApi).globalShortcut;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    return cast { getRegistered: function() {
+    return cast { getRegistered: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
-    }, isRegistered: function(accelerator:Dynamic) {
-      return cast ((cast registered : flighthq._internal._Set).has(accelerator));
-    }, register: function(accelerator:Dynamic, listener:Dynamic) {
-      ((cast registered : flighthq._internal._Set).add(accelerator));
-      flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function(event:Dynamic) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>)); }
-      }] : Array<Dynamic>)), function() {
-        ((cast registered : flighthq._internal._Set).delete_(accelerator));
+    }, isRegistered: function(accelerator:String):Bool {
+      return cast ((cast registered : flighthq._internal._Set<String>).has(accelerator));
+    }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
+      ((cast registered : flighthq._internal._Set<String>).add(accelerator));
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).register(accelerator, function(event:TauriShortcutEvent):Void {
+        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { listener({ accelerator: accelerator }); }
+      }), function():Void {
+        ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
       });
       return cast true;
-    }, setAllEnabled: function() {
+    }, setAllEnabled: function():Void {
 
-    }, setEnabled: function() {
+    }, setEnabled: function():Bool {
       return cast false;
-    }, unregister: function(accelerator:Dynamic) {
-      ((cast registered : flighthq._internal._Set).delete_(accelerator));
-      flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregister', cast ([accelerator] : Array<Dynamic>)), function() {
+    }, unregister: function(accelerator:String):Bool {
+      ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregister(accelerator), function():Void {
 
       });
       return cast true;
-    }, unregisterAll: function() {
-      ((cast registered : flighthq._internal._Set).clear());
-      flighthq._internal._Async.recover(_Runtime.callProperty(globalShortcut, 'unregisterAll', cast ([] : Array<Dynamic>)), function() {
+    }, unregisterAll: function():Void {
+      ((cast registered : flighthq._internal._Set<String>).clear());
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregisterAll(), function():Void {
 
       });
     } };

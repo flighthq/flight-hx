@@ -5,18 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.createScene2DDocumentFromBytes;
 import flighthq.types.Scene2DDocument;
+import flighthq.types.Scene2DResources.Scene2DDocumentFetchProgress;
 import flighthq.types.Scene2DResources.Scene2DDocumentFetcher;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
+import flighthq.types.Signal;
 
 class Scene2DDocumentSource {
   public static function loadScene2DDocumentFromUrl(url:String, registry:Scene2DDocumentImporterRegistry, fetchDocument:Scene2DDocumentFetcher, ?options:Scene2DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene2DDocument>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var signal:Dynamic = cast _Runtime.UNDEFINED;
-        var source:Dynamic = cast _Runtime.UNDEFINED;
+        var signal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
+        var source:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(fetchDocument, cast ([url, signal, _Runtime.coalesce(_Runtime.optionalField(options, 'progress'), function():Dynamic return cast null)] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast fetchDocument((cast url : String), (cast signal : flighthq._internal.dom.AbortSignal), _Runtime.coalesce(_Runtime.optionalField(options, 'progress'), function():Dynamic return cast null)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue0:Dynamic):Dynamic {
           source = __awaitValue0;
           var __flowBranch1:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
@@ -27,7 +29,7 @@ class Scene2DDocumentSource {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callValue(createScene2DDocumentFromBytes, cast ([source, registry, { mimeType: _Runtime.coalesce(_Runtime.optionalField(options, 'mimeType'), function():Dynamic return cast null), url: url }] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn((cast createScene2DDocumentFromBytes((cast source : flighthq._internal._UInt8Array), (cast registry : Scene2DDocumentImporterRegistry), { mimeType: _Runtime.coalesce(_Runtime.optionalField(options, 'mimeType'), function():Dynamic return cast null), url: url }) : Null<flighthq._internal._Any>));
           });
         });
       })

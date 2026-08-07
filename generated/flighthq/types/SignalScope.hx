@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SignalScope = { var connections:Array<SignalConnection<Dynamic>>; };
+typedef SignalScope = { var connections:Array<SignalConnection<Array<flighthq._internal._Any>->Void>>; };

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class Interpolation {
   public static function inverseLerp(a:Float, b:Float, value:Float):Float {
-    var range:Dynamic = cast _Runtime.UNDEFINED;
+    var range:Float = cast _Runtime.UNDEFINED;
     range = (b - a);
     return cast ((cast _Runtime.strictEquals(range, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast ((value - a) / range) : Dynamic));
     return cast null;
@@ -18,7 +18,7 @@ class Interpolation {
   }
 
   public static function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
-    var inRange:Dynamic = cast _Runtime.UNDEFINED;
+    var inRange:Float = cast _Runtime.UNDEFINED;
     inRange = (inMax - inMin);
     if ((cast _Runtime.strictEquals(inRange, 0.0) : Bool)) { return cast outMin; }
     return cast (outMin + (((value - inMin) / inRange) * (outMax - outMin)));
@@ -26,8 +26,8 @@ class Interpolation {
   }
 
   public static function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
     s = ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
     return cast ((s * s) * (3.0 - (2.0 * s)));

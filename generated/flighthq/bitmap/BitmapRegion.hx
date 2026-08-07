@@ -17,11 +17,11 @@ class BitmapRegion {
   public static function setBitmapRegion(out:flighthq.types.BitmapRegion, bitmap:Bitmap, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.BitmapRegion {
     if (width == null) width = cast (bitmap.width : Dynamic);
     if (height == null) height = cast (bitmap.height : Dynamic);
-    _Runtime.setField(out, 'bitmap', bitmap);
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'width', width);
-    _Runtime.setField(out, 'height', height);
+    ((cast out : flighthq.types.BitmapRegion).bitmap = bitmap);
+    ((cast out : flighthq.types.BitmapRegion).x = x);
+    ((cast out : flighthq.types.BitmapRegion).y = y);
+    ((cast out : flighthq.types.BitmapRegion).width = width);
+    ((cast out : flighthq.types.BitmapRegion).height = height);
     return cast out;
     return cast null;
   }

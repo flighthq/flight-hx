@@ -22,7 +22,7 @@ typedef Physics2DContactPoint = { var x:Float; var y:Float; var depth:Float; var
 
 typedef Physics2DContact = { var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var pointCount:Float; var points:Array<Physics2DContactPoint>; var friction:Float; var restitution:Float; var enabled:Bool; var sensor:Bool; var touching:Bool; };
 
-typedef Physics2DContactCallback = Dynamic;
+typedef Physics2DContactCallback = Physics2DWorld->Physics2DContact->Void;
 
 typedef Physics2DContactHooks = { var preSolve:Null<Physics2DContactCallback>; var postSolve:Null<Physics2DContactCallback>; };
 
@@ -30,7 +30,7 @@ typedef Physics2DSolverConfig = { var allowSleeping:Bool; var sleepLinearThresho
 
 typedef Physics2DStepExplanation = { var bodyStateValid:Bool; var contactStateValid:Bool; var gravityValid:Bool; var jointStateValid:Bool; var previousTimestepValid:Bool; var solverConfigValid:Bool; var timestepValid:Bool; var velocityIterationsValid:Bool; var positionIterationsValid:Bool; var status:String; };
 
-typedef Physics2DWorld = { var version:Float; var bodies:Array<RigidBody2D>; var bodyByIndex:Dynamic; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:Dynamic; var jointCollisionSuppressions:Dynamic; var events:Physics2DContactEvents; var contactHooks:Physics2DContactHooks; var index:SpatialIndexBackend; var config:Physics2DSolverConfig; var islandParents:Dynamic; var islandSleepTimers:Dynamic; var solveIslandByRoot:Dynamic; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
+typedef Physics2DWorld = { var version:Float; var bodies:Array<RigidBody2D>; var bodyByIndex:flighthq._internal._Map<Float, RigidBody2D>; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:flighthq._internal._Map<Physics2DJointKind, Physics2DJointSolver>; var jointCollisionSuppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>; var events:Physics2DContactEvents; var contactHooks:Physics2DContactHooks; var index:SpatialIndexBackend; var config:Physics2DSolverConfig; var islandParents:flighthq._internal._Map<Float, Float>; var islandSleepTimers:flighthq._internal._Map<Float, Float>; var solveIslandByRoot:flighthq._internal._Map<Float, Float>; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
 
 typedef Physics2DJointKind = String;
 
@@ -76,7 +76,7 @@ typedef Physics2DWheelJointOptions = { var bodyA:Float; var bodyB:Float; @:optio
 
 typedef Physics2DMouseJointOptions = { var body:Float; var targetX:Float; var targetY:Float; var maxForce:Float; @:optional var localAnchorX:Float; @:optional var localAnchorY:Float; @:optional var frequencyHz:Float; @:optional var dampingRatio:Float; };
 
-typedef Physics2DJointSolver = { var prepare:Dynamic; var solve:Dynamic; @:optional var usesBodyA:Bool; @:optional var keepsBodiesAwake:Bool; @:optional var swapEnds:Dynamic; @:optional var warmStart:Dynamic; @:optional var scaleAccumulatedImpulses:Dynamic; @:optional var clearAccumulatedImpulses:Dynamic; };
+typedef Physics2DJointSolver = { var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var usesBodyA:Bool; @:optional var keepsBodiesAwake:Bool; @:optional var swapEnds:Physics2DJoint->Bool; @:optional var warmStart:Physics2DWorld->Physics2DJoint->Void; @:optional var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; @:optional var clearAccumulatedImpulses:Physics2DJoint->Void; };
 
 typedef Physics2DContactEvents = { var began:Array<Physics2DContact>; var ended:Array<Physics2DContact>; };
 

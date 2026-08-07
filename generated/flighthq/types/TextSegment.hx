@@ -10,4 +10,4 @@ typedef TextSegment = { var start:Float; var end:Float; var text:String; @:optio
 
 typedef TextSegmentRange = { var start:Float; var end:Float; };
 
-typedef TextSegmenterBackend = { var segment:Dynamic; };
+typedef TextSegmenterBackend = { var segment:String->TextSegmentGranularity->String->Array<flighthq.types.TextSegment>; };

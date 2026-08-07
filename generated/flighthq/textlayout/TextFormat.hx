@@ -3,28 +3,29 @@ package flighthq.textlayout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.FontVariation;
 import flighthq.types.TextFormat;
 
 class TextFormat {
-  public static final DEFAULT_SIZE__textFormat:Dynamic = 12.0;
+  public static final DEFAULT_SIZE__textFormat:Float = 12.0;
 
   public static function getTextFormatAscent(format:flighthq.types.TextFormat):Float {
-    return cast _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat);
+    return cast _Runtime.coalesce((cast format : flighthq.types.TextFormat).size, function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat);
     return cast null;
   }
 
   public static function getTextFormatDescent(format:flighthq.types.TextFormat):Float {
-    return cast _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat), 0.185);
+    return cast _Runtime.multiplyNumbers(_Runtime.coalesce((cast format : flighthq.types.TextFormat).size, function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat), 0.185);
     return cast null;
   }
 
   public static function getTextFormatHeight(format:flighthq.types.TextFormat):Float {
-    return cast _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(getTextFormatAscent, cast ([format] : Array<Dynamic>)), _Runtime.callValue(getTextFormatDescent, cast ([format] : Array<Dynamic>))), _Runtime.callValue(getTextFormatLeading, cast ([format] : Array<Dynamic>)));
+    return cast (((cast getTextFormatAscent((cast format : flighthq.types.TextFormat)) : Float) + (cast getTextFormatDescent((cast format : flighthq.types.TextFormat)) : Float)) + (cast getTextFormatLeading((cast format : flighthq.types.TextFormat)) : Float));
     return cast null;
   }
 
   public static function getTextFormatLeading(format:flighthq.types.TextFormat):Float {
-    return cast _Runtime.coalesce(_Runtime.field(format, 'leading'), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce((cast format : flighthq.types.TextFormat).leading, function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -32,9 +33,9 @@ class TextFormat {
     var result:flighthq.types.TextFormat = cast _Runtime.UNDEFINED;
     result = _Runtime.mergeObjects([base]);
     for (key in _Runtime.iterable((cast flighthq._internal.DynamicObject.keys(override_) : Array<flighthq.types.TextFormat>))) {
-      var value:Dynamic = _Runtime.getIndex(override_, key);
+      var value:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>, Array<Float>>, Array<FontVariation>>> = _Runtime.getIndex(override_, key);
       if ((cast !_Runtime.looseEquals(value, null) : Bool)) {
-        _Runtime.setIndex((cast result : Dynamic), key, value);
+        _Runtime.setIndex((cast result : flighthq._internal._Record<String, flighthq._internal._Any>), key, value);
       }
     }
     return cast result;

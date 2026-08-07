@@ -6,10 +6,10 @@ import flighthq._internal._Runtime;
 
 class DepthMath {
   public static function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
-    var fd:Dynamic = cast _Runtime.UNDEFINED;
-    var fl:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var fd:Float = cast _Runtime.UNDEFINED;
+    var fl:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     fd = HxMath.max(0.00001, focusDistance);
     fl = _Runtime.divideNumbers(HxMath.max(0.00001, focalLength), 1000.0);
     d = HxMath.max(0.00001, depth);
@@ -24,17 +24,17 @@ class DepthMath {
   }
 
   public static function computeSsaoSampleKernel(samples:Float, out:flighthq._internal._Float32Array):Float {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     n = HxMath.max(1.0, HxMath.round(samples));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var h2:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 2.0] : Array<Dynamic>));
-        var h3:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 3.0] : Array<Dynamic>));
-        var theta:Dynamic = ((h2 * 2.0) * HxMath.PI);
-        var phi:Dynamic = HxMath.acos((1.0 - h3));
-        var scale:Dynamic = (i / n);
-        var dist:Dynamic = (0.1 + ((0.9 * scale) * scale));
+        var h2:Float = (cast DepthMath.halton__depthMath((cast (i + 1.0) : Float), (cast 2.0 : Float)) : Float);
+        var h3:Float = (cast DepthMath.halton__depthMath((cast (i + 1.0) : Float), (cast 3.0 : Float)) : Float);
+        var theta:Float = ((h2 * 2.0) * HxMath.PI);
+        var phi:Float = HxMath.acos((1.0 - h3));
+        var scale:Float = (i / n);
+        var dist:Float = (0.1 + ((0.9 * scale) * scale));
         flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 0.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.cos(theta)) * dist));
         flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 1.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.sin(theta)) * dist));
         flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 2.0), _Runtime.multiplyNumbers(HxMath.cos(phi), dist));
@@ -46,9 +46,9 @@ class DepthMath {
   }
 
   public static function halton__depthMath(index:Float, base:Float):Float {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var f:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Float = cast _Runtime.UNDEFINED;
+    var f:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     result = 0.0;
     f = 1.0;
     i = index;

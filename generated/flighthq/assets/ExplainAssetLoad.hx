@@ -3,25 +3,30 @@ package flighthq.assets;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Assets.AssetDescriptor;
+import flighthq.types.Assets.AssetEntry;
 import flighthq.types.Assets.AssetLibrary;
+import flighthq.types.Assets.AssetLibraryRuntime;
 import flighthq.types.Assets.AssetLoadExplanation;
+import flighthq.types.Assets.AssetLoaderAdapter;
+import flighthq.types.Assets.AssetType;
 
 class ExplainAssetLoad {
   public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var type:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;
+    var descriptor:Null<AssetDescriptor> = cast _Runtime.UNDEFINED;
+    var type:AssetType = cast _Runtime.UNDEFINED;
+    var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
-    descriptor = ((cast runtime.descriptors : flighthq._internal._Map).get(id));
+    descriptor = ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(id));
     if ((cast _Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-descriptor', type: null }; }
-    type = descriptor.type;
-    if ((cast !(cast ((cast runtime.adapters : flighthq._internal._Map).has(type)) : Bool) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-loader', type: type }; }
-    entry = ((cast runtime.entries : flighthq._internal._Map).get(id));
+    type = (cast descriptor : flighthq.types.Assets.AssetDescriptor).type;
+    if ((cast !(cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).has(type)) : Bool) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-loader', type: type }; }
+    entry = ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast { id: id, refCount: entry.refcount, status: ((cast entry.resident : Bool) ? (cast 'resident' : Dynamic) : (cast 'loading' : Dynamic)), type: type };
+      return cast { id: id, refCount: (cast entry : flighthq.types.Assets.AssetEntry).refcount, status: ((cast (cast entry : flighthq.types.Assets.AssetEntry).resident : Bool) ? (cast 'resident' : Dynamic) : (cast 'loading' : Dynamic)), type: type };
     }
-    return cast { id: id, refCount: 0.0, status: ((cast ((cast runtime.freedIds : flighthq._internal._Set).has(id)) : Bool) ? (cast 'freed' : Dynamic) : (cast 'never-acquired' : Dynamic)), type: type };
+    return cast { id: id, refCount: 0.0, status: ((cast ((cast runtime.freedIds : flighthq._internal._Set<String>).has(id)) : Bool) ? (cast 'freed' : Dynamic) : (cast 'never-acquired' : Dynamic)), type: type };
     return cast null;
   }
 }

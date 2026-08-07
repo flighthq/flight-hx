@@ -6,70 +6,71 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 class FitPathCurves {
-  public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([source, flattenTolerance] : Array<Dynamic>));
-    _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
-    _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
+  public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Float = 0.25):Void {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var toleranceSq:Float = cast _Runtime.UNDEFINED;
+    contours = (cast flattenPath((cast source : Path), (cast flattenTolerance : Float)) : Array<Array<Float>>);
+    _Runtime.setLength((cast out : Path).commands, 0.0);
+    _Runtime.setLength((cast out : Path).data, 0.0);
+    ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     toleranceSq = (tolerance * tolerance);
     for (contour in _Runtime.iterable(contours)) {
-      var n:Dynamic = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
+      var n:Float = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var closed:Dynamic = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0))) : Bool));
-      var pts:Dynamic = ((cast closed : Bool) ? (cast _Runtime.slice(contour, 0.0, ((n - 1.0) * 2.0)) : Dynamic) : (cast contour : Dynamic));
-      var pn:Dynamic = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
+      var closed:Bool = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0))) : Bool));
+      var pts:Array<Float> = ((cast closed : Bool) ? (cast _Runtime.slice(contour, 0.0, ((n - 1.0) * 2.0)) : Dynamic) : (cast contour : Dynamic));
+      var pn:Float = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
       if ((cast ((cast pn : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals(pn, 2.0) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0)] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(pts, 2.0), flighthq._internal._StaticIndex.readArray(pts, 3.0)] : Array<Dynamic>));
-        if ((cast closed : Bool)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
+        _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+        _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0)] : Array<Dynamic>));
+        _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+        _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(pts, 2.0), flighthq._internal._StaticIndex.readArray(pts, 3.0)] : Array<Dynamic>));
+        if ((cast closed : Bool)) { _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>)); }
         continue;
       }
-      var corners:Dynamic = _Runtime.callValue(FitPathCurves.findCorners__fitPathCurves, cast ([pts, pn] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-      _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0)] : Array<Dynamic>));
+      var corners:Array<Float> = (cast FitPathCurves.findCorners__fitPathCurves((cast pts : Array<Float>), (cast pn : Float)) : Array<Float>);
+      _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+      _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0)] : Array<Dynamic>));
       {
-        var ci:Dynamic = 0.0;
+        var ci:Float = 0.0;
         while ((cast ((cast ci : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(corners, 'length'), 1.0) : Float)) : Bool)) {
-          var first:Dynamic = flighthq._internal._StaticIndex.readArray(corners, ci);
-          var last:Dynamic = flighthq._internal._StaticIndex.readArray(corners, (ci + 1.0));
+          var first:Float = flighthq._internal._StaticIndex.readArray(corners, ci);
+          var last:Float = flighthq._internal._StaticIndex.readArray(corners, (ci + 1.0));
           if ((cast ((cast (last - first) : Float) < (cast 2.0 : Float)) : Bool)) {
-            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-            _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
+            _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+            _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
             ci++;
             continue;
           }
-          var tHat1:Dynamic = _Runtime.callValue(FitPathCurves.computeLeftTangent__fitPathCurves, cast ([pts, first] : Array<Dynamic>));
-          var tHat2:Dynamic = _Runtime.callValue(FitPathCurves.computeRightTangent__fitPathCurves, cast ([pts, last] : Array<Dynamic>));
-          _Runtime.callValue(FitPathCurves.fitCubic__fitPathCurves, cast ([pts, first, last, tHat1, tHat2, toleranceSq, out] : Array<Dynamic>));
+          var tHat1:Array<Float> = (cast FitPathCurves.computeLeftTangent__fitPathCurves((cast pts : Array<Float>), (cast first : Float)) : Array<Float>);
+          var tHat2:Array<Float> = (cast FitPathCurves.computeRightTangent__fitPathCurves((cast pts : Array<Float>), (cast last : Float)) : Array<Float>);
+          FitPathCurves.fitCubic__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast last : Float), (cast tHat1 : Array<Float>), (cast tHat2 : Array<Float>), (cast toleranceSq : Float), (cast out : Path));
           ci++;
         }
       }
-      if ((cast closed : Bool)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
+      if ((cast closed : Bool)) { _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>)); }
     }
   }
 
   public static function findCorners__fitPathCurves(pts:Array<Float>, n:Float):Array<Float> {
-    var corners:Dynamic = cast _Runtime.UNDEFINED;
+    var corners:Array<Float> = cast _Runtime.UNDEFINED;
     corners = cast ([0.0] : Array<Dynamic>);
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var dx0:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i - 1.0) * 2.0)));
-        var dy0:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, (((i - 1.0) * 2.0) + 1.0)));
-        var dx1:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
-        var dy1:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
-        var len0:Dynamic = HxMath.sqrt(((dx0 * dx0) + (dy0 * dy0)));
-        var len1:Dynamic = HxMath.sqrt(((dx1 * dx1) + (dy1 * dy1)));
+        var dx0:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i - 1.0) * 2.0)));
+        var dy0:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, (((i - 1.0) * 2.0) + 1.0)));
+        var dx1:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
+        var dy1:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
+        var len0:Float = HxMath.sqrt(((dx0 * dx0) + (dy0 * dy0)));
+        var len1:Float = HxMath.sqrt(((dx1 * dx1) + (dy1 * dy1)));
         if ((cast ((cast _Runtime.strictEquals(len0, 0.0) : Bool) || (cast _Runtime.strictEquals(len1, 0.0) : Bool)) : Bool)) { i++; continue; }
-        var dot:Dynamic = (((dx0 * dx1) + (dy0 * dy1)) / (len0 * len1));
+        var dot:Float = (((dx0 * dx1) + (dy0 * dy1)) / (len0 * len1));
         if ((cast ((cast dot : Float) < (cast 0.5 : Float)) : Bool)) { _Runtime.callProperty(corners, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
@@ -80,9 +81,9 @@ class FitPathCurves {
   }
 
   public static function computeLeftTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((idx + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (idx * 2.0)));
     dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((idx + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((idx * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));
@@ -91,9 +92,9 @@ class FitPathCurves {
   }
 
   public static function computeRightTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((idx - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (idx * 2.0)));
     dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((idx - 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((idx * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));
@@ -103,13 +104,13 @@ class FitPathCurves {
 
   public static function chordLengthParameterize__fitPathCurves(pts:Array<Float>, first:Float, last:Float):Array<Float> {
     var u:Array<Float> = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
     u = cast ([0.0] : Array<Dynamic>);
     {
-      var i:Dynamic = (first + 1.0);
+      var i:Float = (first + 1.0);
       while ((cast ((cast i : Float) <= (cast last : Float)) : Bool)) {
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i - 1.0) * 2.0)));
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, (((i - 1.0) * 2.0) + 1.0)));
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i - 1.0) * 2.0)));
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, (((i - 1.0) * 2.0) + 1.0)));
         _Runtime.callProperty(u, 'push', cast ([_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(u, _Runtime.subtractNumbers(_Runtime.field(u, 'length'), 1.0)), HxMath.sqrt(((dx * dx) + (dy * dy))))] : Array<Dynamic>));
         i++;
       }
@@ -117,7 +118,7 @@ class FitPathCurves {
     total = flighthq._internal._StaticIndex.readArray(u, _Runtime.subtractNumbers(_Runtime.field(u, 'length'), 1.0));
     if ((cast ((cast total : Float) > (cast 0.0 : Float)) : Bool)) {
       {
-        var i:Dynamic = 1.0;
+        var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(u, 'length') : Float)) : Bool)) {
           ({ var __indexedObject2:Dynamic = u; var __indexedKey3:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3), total)); });
           i++;
@@ -129,37 +130,37 @@ class FitPathCurves {
   }
 
   public static function fitCubic__fitPathCurves(pts:Array<Float>, first:Float, last:Float, tHat1:Array<Float>, tHat2:Array<Float>, toleranceSq:Float, out:Path):Void {
-    var nPts:Dynamic = cast _Runtime.UNDEFINED;
-    var u:Dynamic = cast _Runtime.UNDEFINED;
-    var MAX_ITERATIONS:Dynamic = cast _Runtime.UNDEFINED;
+    var nPts:Float = cast _Runtime.UNDEFINED;
+    var u:Array<Float> = cast _Runtime.UNDEFINED;
+    var MAX_ITERATIONS:Float = cast _Runtime.UNDEFINED;
     nPts = ((last - first) + 1.0);
     if ((cast _Runtime.strictEquals(nPts, 2.0) : Bool)) {
-      var dist:Dynamic = HxMath.sqrt((HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (first * 2.0))), 2.0) + HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0))), 2.0)));
-      var d:Dynamic = (dist / 3.0);
-      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
-      _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 0.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 1.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 0.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 1.0), d)), flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
+      var dist:Float = HxMath.sqrt((HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (first * 2.0))), 2.0) + HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0))), 2.0)));
+      var d:Float = (dist / 3.0);
+      _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO] : Array<Dynamic>));
+      _Runtime.pushMany((cast out : Path).data, cast ([_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 0.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 1.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 0.0), d)), _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 1.0), d)), flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
       return;
     }
-    u = _Runtime.callValue(FitPathCurves.chordLengthParameterize__fitPathCurves, cast ([pts, first, last] : Array<Dynamic>));
+    u = (cast FitPathCurves.chordLengthParameterize__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast last : Float)) : Array<Float>);
     MAX_ITERATIONS = 4.0;
     {
-      var iter:Dynamic = 0.0;
+      var iter:Float = 0.0;
       while ((cast ((cast iter : Float) <= (cast MAX_ITERATIONS : Float)) : Bool)) {
-        var bezier:Dynamic = _Runtime.callValue(FitPathCurves.generateBezier__fitPathCurves, cast ([pts, first, last, u, tHat1, tHat2] : Array<Dynamic>));
-        var __destructure0:Dynamic = _Runtime.callValue(FitPathCurves.computeMaxError__fitPathCurves, cast ([pts, first, last, bezier, u] : Array<Dynamic>));
-        var maxErr:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
-        var splitPoint:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var bezier:Array<Float> = (cast FitPathCurves.generateBezier__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast last : Float), (cast u : Array<Float>), (cast tHat1 : Array<Float>), (cast tHat2 : Array<Float>)) : Array<Float>);
+        var __destructure0 = (cast FitPathCurves.computeMaxError__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast last : Float), (cast bezier : Array<Float>), (cast u : Array<Float>)) : Array<flighthq._internal._Any>);
+        var maxErr:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var splitPoint:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
         if ((cast ((cast maxErr : Float) < (cast toleranceSq : Float)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(bezier, 2.0), flighthq._internal._StaticIndex.readArray(bezier, 3.0), flighthq._internal._StaticIndex.readArray(bezier, 4.0), flighthq._internal._StaticIndex.readArray(bezier, 5.0), flighthq._internal._StaticIndex.readArray(bezier, 6.0), flighthq._internal._StaticIndex.readArray(bezier, 7.0)] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(bezier, 2.0), flighthq._internal._StaticIndex.readArray(bezier, 3.0), flighthq._internal._StaticIndex.readArray(bezier, 4.0), flighthq._internal._StaticIndex.readArray(bezier, 5.0), flighthq._internal._StaticIndex.readArray(bezier, 6.0), flighthq._internal._StaticIndex.readArray(bezier, 7.0)] : Array<Dynamic>));
           return;
         }
         if ((cast ((cast iter : Float) < (cast MAX_ITERATIONS : Float)) : Bool)) {
-          (u = cast (_Runtime.callValue(FitPathCurves.reparameterize__fitPathCurves, cast ([pts, first, last, u, bezier] : Array<Dynamic>)) : Dynamic));
+          (u = cast ((cast FitPathCurves.reparameterize__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast last : Float), (cast u : Array<Float>), (cast bezier : Array<Float>)) : Array<Float>) : Dynamic));
         } else {
-          var tHatCenter:Dynamic = _Runtime.callValue(FitPathCurves.computeCenterTangent__fitPathCurves, cast ([pts, splitPoint] : Array<Dynamic>));
-          _Runtime.callValue(FitPathCurves.fitCubic__fitPathCurves, cast ([pts, first, splitPoint, tHat1, cast ([-flighthq._internal._StaticIndex.readArray(tHatCenter, 0.0), -flighthq._internal._StaticIndex.readArray(tHatCenter, 1.0)] : Array<Dynamic>), toleranceSq, out] : Array<Dynamic>));
-          _Runtime.callValue(FitPathCurves.fitCubic__fitPathCurves, cast ([pts, splitPoint, last, tHatCenter, tHat2, toleranceSq, out] : Array<Dynamic>));
+          var tHatCenter:Array<Float> = (cast FitPathCurves.computeCenterTangent__fitPathCurves((cast pts : Array<Float>), (cast splitPoint : Float)) : Array<Float>);
+          FitPathCurves.fitCubic__fitPathCurves((cast pts : Array<Float>), (cast first : Float), (cast splitPoint : Float), (cast tHat1 : Array<Float>), (cast cast ([-flighthq._internal._StaticIndex.readArray(tHatCenter, 0.0), -flighthq._internal._StaticIndex.readArray(tHatCenter, 1.0)] : Array<Dynamic>) : Array<Float>), (cast toleranceSq : Float), (cast out : Path));
+          FitPathCurves.fitCubic__fitPathCurves((cast pts : Array<Float>), (cast splitPoint : Float), (cast last : Float), (cast tHatCenter : Array<Float>), (cast tHat2 : Array<Float>), (cast toleranceSq : Float), (cast out : Path));
         }
         iter++;
       }
@@ -167,17 +168,17 @@ class FitPathCurves {
   }
 
   public static function generateBezier__fitPathCurves(pts:Array<Float>, first:Float, last:Float, u:Array<Float>, tHat1:Array<Float>, tHat2:Array<Float>):Array<Float> {
-    var nPts:Dynamic = cast _Runtime.UNDEFINED;
-    var c00:Dynamic = cast _Runtime.UNDEFINED;
-    var c01:Dynamic = cast _Runtime.UNDEFINED;
-    var c11:Dynamic = cast _Runtime.UNDEFINED;
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var det:Dynamic = cast _Runtime.UNDEFINED;
+    var nPts:Float = cast _Runtime.UNDEFINED;
+    var c00:Float = cast _Runtime.UNDEFINED;
+    var c01:Float = cast _Runtime.UNDEFINED;
+    var c11:Float = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var det:Float = cast _Runtime.UNDEFINED;
     var alpha1:Float = cast _Runtime.UNDEFINED;
     var alpha2:Float = cast _Runtime.UNDEFINED;
-    var segLength:Dynamic = cast _Runtime.UNDEFINED;
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
+    var segLength:Float = cast _Runtime.UNDEFINED;
+    var epsilon:Float = cast _Runtime.UNDEFINED;
     nPts = ((last - first) + 1.0);
     c00 = 0.0;
     c01 = 0.0;
@@ -185,22 +186,22 @@ class FitPathCurves {
     x0 = 0.0;
     x1 = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast nPts : Float)) : Bool)) {
-        var t:Dynamic = flighthq._internal._StaticIndex.readArray(u, i);
-        var b1:Dynamic = (((3.0 * t) * (1.0 - t)) * (1.0 - t));
-        var b2:Dynamic = (((3.0 * t) * t) * (1.0 - t));
-        var a1x:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 0.0), b1);
-        var a1y:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 1.0), b1);
-        var a2x:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 0.0), b2);
-        var a2y:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 1.0), b2);
+        var t:Float = flighthq._internal._StaticIndex.readArray(u, i);
+        var b1:Float = (((3.0 * t) * (1.0 - t)) * (1.0 - t));
+        var b2:Float = (((3.0 * t) * t) * (1.0 - t));
+        var a1x:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 0.0), b1);
+        var a1y:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat1, 1.0), b1);
+        var a2x:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 0.0), b2);
+        var a2y:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(tHat2, 1.0), b2);
         (c00 = cast ((c00 + ((a1x * a1x) + (a1y * a1y))) : Dynamic));
         (c01 = cast ((c01 + ((a1x * a2x) + (a1y * a2y))) : Dynamic));
         (c11 = cast ((c11 + ((a2x * a2x) + (a2y * a2y))) : Dynamic));
-        var b0:Dynamic = (((1.0 - t) * (1.0 - t)) * (1.0 - t));
-        var b3:Dynamic = ((t * t) * t);
-        var tmpx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)), (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), b0) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), b1)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), b2)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), b3)));
-        var tmpy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)), (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), b0) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), b1)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), b2)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), b3)));
+        var b0:Float = (((1.0 - t) * (1.0 - t)) * (1.0 - t));
+        var b3:Float = ((t * t) * t);
+        var tmpx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)), (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), b0) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (first * 2.0)), b1)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), b2)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), b3)));
+        var tmpy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)), (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), b0) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0)), b1)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), b2)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), b3)));
         (x0 = cast ((x0 + ((a1x * tmpx) + (a1y * tmpy))) : Dynamic));
         (x1 = cast ((x1 + ((a2x * tmpx) + (a2y * tmpy))) : Dynamic));
         i++;
@@ -208,7 +209,7 @@ class FitPathCurves {
     }
     det = ((c00 * c11) - (c01 * c01));
     if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-12 : Float)) : Bool)) {
-      var dist:Dynamic = HxMath.sqrt((HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (first * 2.0))), 2.0) + HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0))), 2.0)));
+      var dist:Float = HxMath.sqrt((HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (last * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (first * 2.0))), 2.0) + HxMath.pow(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0))), 2.0)));
       (alpha1 = cast ((alpha2 = cast ((dist / 3.0) : Dynamic)) : Dynamic));
     } else {
       (alpha1 = cast ((((c11 * x0) - (c01 * x1)) / det) : Dynamic));
@@ -224,20 +225,20 @@ class FitPathCurves {
   }
 
   public static function computeMaxError__fitPathCurves(pts:Array<Float>, first:Float, last:Float, bezier:Array<Float>, u:Array<Float>):Array<Float> {
-    var maxDist:Dynamic = cast _Runtime.UNDEFINED;
-    var splitPoint:Dynamic = cast _Runtime.UNDEFINED;
+    var maxDist:Float = cast _Runtime.UNDEFINED;
+    var splitPoint:Float = cast _Runtime.UNDEFINED;
     maxDist = 0.0;
     splitPoint = (_Runtime.toInt32(((last - first) + 1.0)) >> 1);
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast (last - first) : Float)) : Bool)) {
-        var t:Dynamic = flighthq._internal._StaticIndex.readArray(u, i);
-        var mt:Dynamic = (1.0 - t);
-        var bx:Dynamic = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 0.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * t), flighthq._internal._StaticIndex.readArray(bezier, 2.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 4.0))) + _Runtime.multiplyNumbers(((t * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 6.0)));
-        var by:Dynamic = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 1.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * t), flighthq._internal._StaticIndex.readArray(bezier, 3.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 5.0))) + _Runtime.multiplyNumbers(((t * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 7.0)));
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)), bx);
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)), by);
-        var distSq:Dynamic = ((dx * dx) + (dy * dy));
+        var t:Float = flighthq._internal._StaticIndex.readArray(u, i);
+        var mt:Float = (1.0 - t);
+        var bx:Float = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 0.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * t), flighthq._internal._StaticIndex.readArray(bezier, 2.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 4.0))) + _Runtime.multiplyNumbers(((t * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 6.0)));
+        var by:Float = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 1.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * t), flighthq._internal._StaticIndex.readArray(bezier, 3.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 5.0))) + _Runtime.multiplyNumbers(((t * t) * t), flighthq._internal._StaticIndex.readArray(bezier, 7.0)));
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)), bx);
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)), by);
+        var distSq:Float = ((dx * dx) + (dy * dy));
         if ((cast ((cast distSq : Float) >= (cast maxDist : Float)) : Bool)) {
           (maxDist = cast (distSq : Dynamic));
           (splitPoint = cast ((first + i) : Dynamic));
@@ -253,9 +254,9 @@ class FitPathCurves {
     var uPrime:Array<Float> = cast _Runtime.UNDEFINED;
     uPrime = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast (last - first) : Float)) : Bool)) {
-        _Runtime.callProperty(uPrime, 'push', cast ([_Runtime.callValue(FitPathCurves.newtonRaphsonRootFind__fitPathCurves, cast ([bezier, flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(u, i)] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(uPrime, 'push', cast ([(cast FitPathCurves.newtonRaphsonRootFind__fitPathCurves((cast bezier : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(pts, ((first + i) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, (((first + i) * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(u, i) : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }
@@ -264,15 +265,15 @@ class FitPathCurves {
   }
 
   public static function newtonRaphsonRootFind__fitPathCurves(bezier:Array<Float>, px:Float, py:Float, u:Float):Float {
-    var mt:Dynamic = cast _Runtime.UNDEFINED;
-    var qx:Dynamic = cast _Runtime.UNDEFINED;
-    var qy:Dynamic = cast _Runtime.UNDEFINED;
-    var q1x:Dynamic = cast _Runtime.UNDEFINED;
-    var q1y:Dynamic = cast _Runtime.UNDEFINED;
-    var num:Dynamic = cast _Runtime.UNDEFINED;
-    var q2x:Dynamic = cast _Runtime.UNDEFINED;
-    var q2y:Dynamic = cast _Runtime.UNDEFINED;
-    var den:Dynamic = cast _Runtime.UNDEFINED;
+    var mt:Float = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var q1x:Float = cast _Runtime.UNDEFINED;
+    var q1y:Float = cast _Runtime.UNDEFINED;
+    var num:Float = cast _Runtime.UNDEFINED;
+    var q2x:Float = cast _Runtime.UNDEFINED;
+    var q2y:Float = cast _Runtime.UNDEFINED;
+    var den:Float = cast _Runtime.UNDEFINED;
     mt = (1.0 - u);
     qx = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 0.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * u), flighthq._internal._StaticIndex.readArray(bezier, 2.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * u) * u), flighthq._internal._StaticIndex.readArray(bezier, 4.0))) + _Runtime.multiplyNumbers(((u * u) * u), flighthq._internal._StaticIndex.readArray(bezier, 6.0)));
     qy = (((_Runtime.multiplyNumbers(((mt * mt) * mt), flighthq._internal._StaticIndex.readArray(bezier, 1.0)) + _Runtime.multiplyNumbers((((3.0 * mt) * mt) * u), flighthq._internal._StaticIndex.readArray(bezier, 3.0))) + _Runtime.multiplyNumbers((((3.0 * mt) * u) * u), flighthq._internal._StaticIndex.readArray(bezier, 5.0))) + _Runtime.multiplyNumbers(((u * u) * u), flighthq._internal._StaticIndex.readArray(bezier, 7.0)));
@@ -288,9 +289,9 @@ class FitPathCurves {
   }
 
   public static function computeCenterTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((idx - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((idx + 1.0) * 2.0)));
     dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((idx - 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, (((idx + 1.0) * 2.0) + 1.0)));
     len = HxMath.sqrt(((dx * dx) + (dy * dy)));

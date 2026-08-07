@@ -12,40 +12,54 @@ import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Sprite;
+import flighthq.types.Sprite.SpriteData;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class CanvasSprite {
   @:noCompletion
   public static function drawCanvasSprite(state:CanvasRenderState, sprite:RenderProxy2D):Void {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var drawable:Dynamic = cast _Runtime.UNDEFINED;
-    var textureWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var textureHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceX:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceY:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothing:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(drawCanvasScene2D, cast ([state, sprite] : Array<Dynamic>));
-    texture = _Runtime.field(_Runtime.field((cast _Runtime.field(sprite, 'source') : Sprite), 'data'), 'texture');
-    if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) : Bool)) { return; }
-    drawable = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), texture] : Array<Dynamic>));
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var drawable:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var textureWidth:Float = cast _Runtime.UNDEFINED;
+    var textureHeight:Float = cast _Runtime.UNDEFINED;
+    var sourceX:Float = cast _Runtime.UNDEFINED;
+    var sourceY:Float = cast _Runtime.UNDEFINED;
+    var sourceWidth:Float = cast _Runtime.UNDEFINED;
+    var sourceHeight:Float = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var smoothing:Bool = cast _Runtime.UNDEFINED;
+    drawCanvasScene2D((cast state : CanvasRenderState), (cast sprite : RenderProxy2D));
+    texture = (cast (cast (cast (cast sprite : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
+    drawable = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }
-    textureWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
-    textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
-    sourceX = _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, textureWidth);
-    sourceY = _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, textureHeight);
-    sourceWidth = HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, textureWidth));
-    sourceHeight = HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, textureHeight));
+    textureWidth = (cast getTextureWidth(texture) : Float);
+    textureHeight = (cast getTextureHeight(texture) : Float);
+    sourceX = ((cast texture : Texture2D).uvOffset.x * textureWidth);
+    sourceY = ((cast texture : Texture2D).uvOffset.y * textureHeight);
+    sourceWidth = HxMath.abs(((cast texture : Texture2D).uvScale.x * textureWidth));
+    sourceHeight = HxMath.abs(((cast texture : Texture2D).uvScale.y * textureHeight));
     if ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    context = _Runtime.field(state, 'context');
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(sprite, 'blendMode')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(sprite, 'alpha'));
-    _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(sprite, 'transform2D')] : Array<Dynamic>));
-    smoothing = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
+    context = (cast state : CanvasRenderState).context;
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast sprite : RenderProxy2D).blendMode] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast sprite : RenderProxy2D).alpha);
+    setCanvasTransform((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast sprite : RenderProxy2D).transform2D);
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, sourceX, sourceY, sourceWidth, sourceHeight, 0.0, 0.0, sourceWidth, sourceHeight] : Array<Dynamic>));
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }

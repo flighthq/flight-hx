@@ -6,18 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlScene3DCustomShaderGuards {
   @:noCompletion
   public static function areGlScene3DCustomShaderGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DCustomShaderGuards(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard', EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards);
+    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard = EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards);
   }
 
   public static function glUniformTypeName__enableGlScene3DCustomShaderGuards(gl:flighthq._internal.dom.WebGL2RenderingContext, type:Float):String {
@@ -52,26 +53,26 @@ class EnableGlScene3DCustomShaderGuards {
   }
 
   public static function warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, shaderKey:String):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var expected:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet).has(program)) : Bool)) { return; }
-    ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet).add(program));
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var expected:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLProgram>).has(program)) : Bool)) { return; }
+    ((cast EnableGlScene3DCustomShaderGuards._checkedPrograms__enableGlScene3DCustomShaderGuards : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLProgram>).add(program));
+    gl = (cast state : GlRenderState).gl;
     expected = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast (['u_model', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT4', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4)] : Array<Dynamic>), cast (['u_viewProjection', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT4', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT4)] : Array<Dynamic>), cast (['u_normalMatrix', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_MAT3', flighthq._internal.backend.WebGl2Backend.FLOAT_MAT3)] : Array<Dynamic>), cast (['u_cameraPosition', flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT_VEC3', flighthq._internal.backend.WebGl2Backend.FLOAT_VEC3)] : Array<Dynamic>)] : Array<Dynamic>)]);
     count = (cast flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ACTIVE_UNIFORMS', flighthq._internal.backend.WebGl2Backend.ACTIVE_UNIFORMS)) : Float);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var info:Dynamic = flighthq._internal.backend.WebGl2Backend.getActiveUniform(gl, program, i);
+        var info:Null<flighthq._internal.dom.WebGLActiveInfo> = flighthq._internal.backend.WebGl2Backend.getActiveUniform(gl, program, i);
         if ((cast _Runtime.strictEquals(info, null) : Bool)) { i++; continue; }
-        var want:Dynamic = ((cast expected : flighthq._internal._Map).get((cast info : flighthq._internal.dom.WebGLActiveInfo).name));
+        var want:Null<Float> = ((cast expected : flighthq._internal._Map<String, Float>).get((cast info : flighthq._internal.dom.WebGLActiveInfo).name));
         if ((cast ((cast _Runtime.strictEquals(want, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast info : flighthq._internal.dom.WebGLActiveInfo).type, want) : Bool)) : Bool)) { i++; continue; }
-        _Runtime.callValue(logOnce, cast (['scene-gl:custom-shader-uniform-type:' + Std.string(shaderKey) + ':' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '', LogLevel.Warn, { message: 'customShaderGlMeshMaterialRenderer: shader "' + Std.string(shaderKey) + '" declares ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + ' as ' + Std.string(_Runtime.callValue(EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards, cast ([gl, (cast info : flighthq._internal.dom.WebGLActiveInfo).type] : Array<Dynamic>))) + ' but the renderer uploads it as ' + Std.string(_Runtime.callValue(EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards, cast ([gl, want] : Array<Dynamic>))) + ' — the mismatched upload raises a silent GL_INVALID_OPERATION and the draw is dropped. Declare \'' + Std.string(_Runtime.callValue(EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards, cast ([gl, want] : Array<Dynamic>))) + ' ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '\' in the shader.' }, 'scene-gl'] : Array<Dynamic>));
+        (cast logOnce((cast 'scene-gl:custom-shader-uniform-type:' + Std.string(shaderKey) + ':' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '' : String), (cast LogLevel.Warn : LogLevel), { message: 'customShaderGlMeshMaterialRenderer: shader "' + Std.string(shaderKey) + '" declares ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + ' as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast info : flighthq._internal.dom.WebGLActiveInfo).type : Float)) : String)) + ' but the renderer uploads it as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast want : Float)) : String)) + ' — the mismatched upload raises a silent GL_INVALID_OPERATION and the draw is dropped. Declare \'' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast want : Float)) : String)) + ' ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '\' in the shader.' }, (cast 'scene-gl' : Null<String>)) : Bool);
         i++;
       }
     }
   }
 
-  public static final _checkedPrograms__enableGlScene3DCustomShaderGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+  public static final _checkedPrograms__enableGlScene3DCustomShaderGuards:flighthq._internal._WeakSet<flighthq._internal.dom.WebGLProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

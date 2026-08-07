@@ -9,13 +9,13 @@ import flighthq.types.Texture;
 
 class GetScene3DResourceTextures {
   public static function getScene3DResourceTextures(out:Array<Texture>, scene:Scene3D):Void {
-    var seen:Dynamic = cast _Runtime.UNDEFINED;
+    var seen:flighthq._internal._Set<Texture> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     seen = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (resource in _Runtime.iterable(scene.resources)) {
-      for (texture in _Runtime.iterable(_Runtime.coalesce(_Runtime.field(resource, 'textures'), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-        if ((cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) { continue; }
-        ((cast seen : flighthq._internal._Set).add(texture));
+      for (texture in _Runtime.iterable(_Runtime.coalesce((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+        if ((cast ((cast seen : flighthq._internal._Set<Texture>).has(texture)) : Bool)) { continue; }
+        ((cast seen : flighthq._internal._Set<Texture>).add(texture));
         _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
       }
     }
@@ -24,7 +24,7 @@ class GetScene3DResourceTextures {
   @:noCompletion
   public static function getScene3DTextureResourceReference(scene:Scene3D, texture:Texture):Null<ImageResourceReference> {
     for (resource in _Runtime.iterable(scene.resources)) {
-      if ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(_Runtime.field(resource, 'textures'), 'includes', cast ([(cast texture : Texture)] : Array<Dynamic>)), true) : Bool)) { return cast resource; }
+      if ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, 'includes', cast ([(cast texture : Texture)] : Array<Dynamic>)), true) : Bool)) { return cast resource; }
     }
     return cast null;
     return cast null;

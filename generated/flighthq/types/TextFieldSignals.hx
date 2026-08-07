@@ -10,4 +10,4 @@ typedef TextFieldLinkEvent = { var url:String; var x:Float; var y:Float; };
 
 typedef TextFieldScrollEvent = { var previousScrollH:Float; var previousScrollV:Float; var scrollH:Float; var scrollV:Float; };
 
-typedef TextFieldSignals = { var onTextFieldChange:Signal<Dynamic>; var onTextFieldLink:Signal<Dynamic>; var onTextFieldScroll:Signal<Dynamic>; };
+typedef TextFieldSignals = { var onTextFieldChange:Signal<TextFieldChangeEvent->Void>; var onTextFieldLink:Signal<TextFieldLinkEvent->Void>; var onTextFieldScroll:Signal<TextFieldScrollEvent->Void>; };

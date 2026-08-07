@@ -16,7 +16,7 @@ class TextSegmenterBackend {
 
   @:noCompletion
   public static function getTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
-    if ((cast _Runtime.strictEquals(TextSegmenterBackend._backend__textSegmenterBackend, null) : Bool)) { (TextSegmenterBackend._backend__textSegmenterBackend = cast (_Runtime.callValue(createWebTextSegmenterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(TextSegmenterBackend._backend__textSegmenterBackend, null) : Bool)) { (TextSegmenterBackend._backend__textSegmenterBackend = cast ((cast createWebTextSegmenterBackend() : Null<flighthq.types.TextSegment.TextSegmenterBackend>) : Dynamic)); }
     return cast TextSegmenterBackend._backend__textSegmenterBackend;
     return cast null;
   }
@@ -28,40 +28,40 @@ class TextSegmenterBackend {
 
   public static var _backend__textSegmenterBackend:Null<flighthq.types.TextSegment.TextSegmenterBackend> = _Runtime.explicitNull();
 
-  public static final _segmenterCache__textSegmenterBackend:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final _segmenterCache__textSegmenterBackend:flighthq._internal._Map<String, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static final _segmenterCacheCapacity__textSegmenterBackend:Dynamic = 64.0;
+  public static final _segmenterCacheCapacity__textSegmenterBackend:Float = 64.0;
 
   public static function getCachedSegmenter__textSegmenterBackend(locale:Null<String>, granularity:TextSegmentGranularity):Null<Dynamic> {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var built:Dynamic = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    var existing:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var built:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Segmenter')), 'undefined') : Bool)) : Bool)) { return cast null; }
     key = '' + Std.string(_Runtime.coalesce(locale, function():Dynamic return cast '')) + '|' + Std.string(granularity) + '';
-    existing = ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).get(key));
+    existing = ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map<String, flighthq._internal._Any>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     built = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
-    if ((cast ((cast (cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).size : Float) >= (cast TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend : Float)) : Bool)) {
-      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
-      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).delete_(oldest)); }
+    if ((cast ((cast (cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map<String, flighthq._internal._Any>).size : Float) >= (cast TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend : Float)) : Bool)) {
+      var oldest:Null<String> = (cast _Runtime.callProperty(((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map<String, flighthq._internal._Any>).keys()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<String>; }).value;
+      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map<String, flighthq._internal._Any>).delete_(oldest)); }
     }
-    ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).set(key, built));
+    ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map<String, flighthq._internal._Any>).set(key, built));
     return cast built;
     return cast null;
   }
 
   public static function segmentWithIntlSegmenter__textSegmenterBackend(text:String, granularity:TextSegmentGranularity, ?locale:String):Array<TextSegment> {
-    var segmenter:Dynamic = cast _Runtime.UNDEFINED;
+    var segmenter:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     var out:Array<TextSegment> = cast _Runtime.UNDEFINED;
-    var isWordGranularity:Dynamic = cast _Runtime.UNDEFINED;
-    segmenter = _Runtime.callValue(TextSegmenterBackend.getCachedSegmenter__textSegmenterBackend, cast ([locale, granularity] : Array<Dynamic>));
+    var isWordGranularity:Bool = cast _Runtime.UNDEFINED;
+    segmenter = (cast TextSegmenterBackend.getCachedSegmenter__textSegmenterBackend((cast locale : Null<String>), (cast granularity : TextSegmentGranularity)) : Null<flighthq._internal._Any>);
     if ((cast _Runtime.strictEquals(segmenter, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     out = cast ([] : Array<Dynamic>);
     isWordGranularity = _Runtime.strictEquals(granularity, 'word');
     for (data in _Runtime.iterable(_Runtime.callProperty(segmenter, 'segment', cast ([text] : Array<Dynamic>)))) {
-      var start:Dynamic = _Runtime.field(data, 'index');
+      var start:Float = _Runtime.field(data, 'index');
       var record:TextSegment = { start: start, end: _Runtime.addNumbers(start, _Runtime.field(_Runtime.field(data, 'segment'), 'length')), text: _Runtime.field(data, 'segment') };
-      if ((cast isWordGranularity : Bool)) { _Runtime.setField(record, 'isWordLike', _Runtime.coalesce(_Runtime.field(data, 'isWordLike'), function():Dynamic return cast false)); }
+      if ((cast isWordGranularity : Bool)) { ((cast record : TextSegment).isWordLike = _Runtime.coalesce(_Runtime.field(data, 'isWordLike'), function():Dynamic return cast false)); }
       _Runtime.callProperty(out, 'push', cast ([record] : Array<Dynamic>));
     }
     return cast out;

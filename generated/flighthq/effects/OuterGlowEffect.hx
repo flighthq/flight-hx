@@ -18,16 +18,16 @@ class OuterGlowEffect {
   }
 
   public static function getOuterGlowEffectPadding(effect:flighthq.types.OuterGlowEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)] : Array<Dynamic>));
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'OuterGlowEffect', OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'OuterGlowEffect' : String), OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect);
   }
 
   public static function resolveOuterGlowEffectPadding__outerGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getOuterGlowEffectPadding, cast ([(cast effect : flighthq.types.OuterGlowEffect)] : Array<Dynamic>));
+    return cast (cast getOuterGlowEffectPadding((cast (cast effect : flighthq.types.OuterGlowEffect) : flighthq.types.OuterGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

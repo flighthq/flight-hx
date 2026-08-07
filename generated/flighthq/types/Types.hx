@@ -152,595 +152,595 @@ class Types {
 
   public static final __enum_RenderRegistry:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'BlendRealization', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.BlendRealization }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.BlendRealization, value: 'BlendRealization' }, { key: 'EffectPaddingResolver', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.EffectPaddingResolver, value: 'EffectPaddingResolver' }, { key: 'MaterialRenderer', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialRenderer, value: 'MaterialRenderer' }, { key: 'MaterialTextureLister', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialTextureLister }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.MaterialTextureLister, value: 'MaterialTextureLister' }, { key: 'ModifierSnippet', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ModifierSnippet, value: 'ModifierSnippet' }, { key: 'NodeRenderer', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.NodeRenderer, value: 'NodeRenderer' }, { key: 'ShapeCommandHandler', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeCommandHandler, value: 'ShapeCommandHandler' }, { key: 'ShapeRasterizer', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.ShapeRasterizer, value: 'ShapeRasterizer' }, { key: 'TextureResolver', value: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver }, { key: Facade_Types_flighthq_types_RenderRegistrySignals_RenderRegistry.TextureResolver, value: 'TextureResolver' }] : Array<Dynamic>));
 
-  public static final AbcMultinameKind:Dynamic = Facade_Types_flighthq_types_Abc.AbcMultinameKindValue;
+  public static final AbcMultinameKind:{ var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; } = Facade_Types_flighthq_types_Abc.AbcMultinameKindValue;
 
-  public static final AbcOpcode:Dynamic = Facade_Types_flighthq_types_Abc.AbcOpcodeValue;
+  public static final AbcOpcode:{ var Add:Float; var AddInt:Float; var ApplyType:Float; var AsType:Float; var AsTypeLate:Float; var BitAnd:Float; var BitNot:Float; var BitOr:Float; var BitXor:Float; var Breakpoint:Float; var BreakpointLine:Float; var Call:Float; var CallMethod:Float; var CallProperty:Float; var CallPropLex:Float; var CallPropVoid:Float; var CallStatic:Float; var CallSuper:Float; var CallSuperVoid:Float; var CheckFilter:Float; var Coerce:Float; var CoerceAny:Float; var CoerceBoolean:Float; var CoerceDouble:Float; var CoerceInt:Float; var CoerceObject:Float; var CoerceString:Float; var CoerceUint:Float; var Construct:Float; var ConstructProp:Float; var ConstructSuper:Float; var ConvertBoolean:Float; var ConvertDouble:Float; var ConvertInt:Float; var ConvertObject:Float; var ConvertString:Float; var ConvertUint:Float; var Debug:Float; var DebugFile:Float; var DebugLine:Float; var DecLocal:Float; var DecLocalInt:Float; var Decrement:Float; var DecrementInt:Float; var DeleteProperty:Float; var Divide:Float; var Dup:Float; var Dxns:Float; var DxnsLate:Float; var Equals:Float; var FindDef:Float; var FindProperty:Float; var FindPropStrict:Float; var GetDescendants:Float; var GetGlobalScope:Float; var GetGlobalSlot:Float; var GetLex:Float; var GetLocal:Float; var GetLocal0:Float; var GetLocal1:Float; var GetLocal2:Float; var GetLocal3:Float; var GetProperty:Float; var GetScopeObject:Float; var GetSlot:Float; var GetSuper:Float; var GreaterEquals:Float; var GreaterThan:Float; var HasNext:Float; var HasNext2:Float; var IfEq:Float; var IfFalse:Float; var IfGe:Float; var IfGt:Float; var IfLe:Float; var IfLt:Float; var IfNe:Float; var IfNge:Float; var IfNgt:Float; var IfNle:Float; var IfNlt:Float; var IfStrictEq:Float; var IfStrictNe:Float; var IfTrue:Float; var In:Float; var IncLocal:Float; var IncLocalInt:Float; var Increment:Float; var IncrementInt:Float; var InitProperty:Float; var InstanceOf:Float; var IsType:Float; var IsTypeLate:Float; var Jump:Float; var Kill:Float; var Label:Float; var LessEquals:Float; var LessThan:Float; var LoadFloat32:Float; var LoadFloat64:Float; var LoadInt16:Float; var LoadInt32:Float; var LoadInt8:Float; var LookupSwitch:Float; var LShift:Float; var Modulo:Float; var Multiply:Float; var MultiplyInt:Float; var Negate:Float; var NegateInt:Float; var NewActivation:Float; var NewArray:Float; var NewCatch:Float; var NewClass:Float; var NewFunction:Float; var NewObject:Float; var NextName:Float; var NextValue:Float; var Nop:Float; var Not:Float; var Pop:Float; var PopScope:Float; var PushByte:Float; var PushDouble:Float; var PushFalse:Float; var PushInt:Float; var PushNamespace:Float; var PushNan:Float; var PushNull:Float; var PushScope:Float; var PushShort:Float; var PushString:Float; var PushTrue:Float; var PushUint:Float; var PushUndefined:Float; var PushWith:Float; var ReturnValue:Float; var ReturnVoid:Float; var RShift:Float; var SetGlobalSlot:Float; var SetLocal:Float; var SetLocal0:Float; var SetLocal1:Float; var SetLocal2:Float; var SetLocal3:Float; var SetProperty:Float; var SetSlot:Float; var SetSuper:Float; var SignExtend1:Float; var SignExtend16:Float; var SignExtend8:Float; var StoreFloat32:Float; var StoreFloat64:Float; var StoreInt16:Float; var StoreInt32:Float; var StoreInt8:Float; var StrictEquals:Float; var Subtract:Float; var SubtractInt:Float; var Swap:Float; var Throw:Float; var Timestamp:Float; var TypeOf:Float; var URShift:Float; } = Facade_Types_flighthq_types_Abc.AbcOpcodeValue;
 
-  public static final AbcTraitKind:Dynamic = Facade_Types_flighthq_types_Abc.AbcTraitKindValue;
+  public static final AbcTraitKind:{ var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; } = Facade_Types_flighthq_types_Abc.AbcTraitKindValue;
 
-  public static final AdvancedBlendMode:Dynamic = Facade_Types_flighthq_types__internal__AdvancedBlendModeValues.AdvancedBlendModeValue;
+  public static final AdvancedBlendMode:{ var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; } = Facade_Types_flighthq_types__internal__AdvancedBlendModeValues.AdvancedBlendModeValue;
 
-  public static final AmbientLightKind:Dynamic = Facade_Types_flighthq_types__internal__AmbientLightValues.AmbientLightKind;
+  public static final AmbientLightKind:String = Facade_Types_flighthq_types__internal__AmbientLightValues.AmbientLightKind;
 
-  public static final AnchorLayoutKind:Dynamic = Facade_Types_flighthq_types_Layout.AnchorLayoutKind;
+  public static final AnchorLayoutKind:String = Facade_Types_flighthq_types_Layout.AnchorLayoutKind;
 
-  public static final AnimatedNormalModifierKind:Dynamic = Facade_Types_flighthq_types__internal__AnimatedNormalModifierValues.AnimatedNormalModifierKind;
+  public static final AnimatedNormalModifierKind:String = Facade_Types_flighthq_types__internal__AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 
-  public static final AnimationInterpolationCubic:Dynamic = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationCubic;
+  public static final AnimationInterpolationCubic:String = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationCubic;
 
-  public static final AnimationInterpolationLinear:Dynamic = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationLinear;
+  public static final AnimationInterpolationLinear:String = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationLinear;
 
-  public static final AnimationInterpolationStep:Dynamic = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationStep;
+  public static final AnimationInterpolationStep:String = Facade_Types_flighthq_types__internal__AnimationInterpolationValues.AnimationInterpolationStep;
 
-  public static final AnimationLoopModePingPong:Dynamic = Facade_Types_flighthq_types__internal__AnimationLoopModeValues.AnimationLoopModePingPong;
+  public static final AnimationLoopModePingPong:String = Facade_Types_flighthq_types__internal__AnimationLoopModeValues.AnimationLoopModePingPong;
 
-  public static final AnimationLoopModeRepeat:Dynamic = Facade_Types_flighthq_types__internal__AnimationLoopModeValues.AnimationLoopModeRepeat;
+  public static final AnimationLoopModeRepeat:String = Facade_Types_flighthq_types__internal__AnimationLoopModeValues.AnimationLoopModeRepeat;
 
-  public static final AnisotropyPbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
+  public static final AnisotropyPbrExtensionKind:String = Facade_Types_flighthq_types__internal__AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
-  public static final AreaLightKind:Dynamic = Facade_Types_flighthq_types__internal__AreaLightValues.AreaLightKind;
+  public static final AreaLightKind:String = Facade_Types_flighthq_types__internal__AreaLightValues.AreaLightKind;
 
-  public static final AttractorForceKind:Dynamic = Facade_Types_flighthq_types__internal__AttractorForceValues.AttractorForceKind;
+  public static final AttractorForceKind:String = Facade_Types_flighthq_types__internal__AttractorForceValues.AttractorForceKind;
 
-  public static final AudioResourceFailureKind:Dynamic = Facade_Types_flighthq_types__internal__AudioResourceReferenceValues.AudioResourceFailureKindValue;
+  public static final AudioResourceFailureKind:{ var Error:String; var Unavailable:String; } = Facade_Types_flighthq_types__internal__AudioResourceReferenceValues.AudioResourceFailureKindValue;
 
-  public static final AudioResourceReferenceKind:Dynamic = Facade_Types_flighthq_types__internal__AudioResourceReferenceValues.AudioResourceReferenceKindValue;
+  public static final AudioResourceReferenceKind:{ var Embedded:String; var External:String; } = Facade_Types_flighthq_types__internal__AudioResourceReferenceValues.AudioResourceReferenceKindValue;
 
-  public static final BillboardKind:Dynamic = Facade_Types_flighthq_types__internal__BillboardValues.BillboardKind;
+  public static final BillboardKind:String = Facade_Types_flighthq_types__internal__BillboardValues.BillboardKind;
 
-  public static final BitmapCompositeMode:Dynamic = Facade_Types_flighthq_types__internal__BitmapCompositeModeValues.BitmapCompositeModeValue;
+  public static final BitmapCompositeMode:{ var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; } = Facade_Types_flighthq_types__internal__BitmapCompositeModeValues.BitmapCompositeModeValue;
 
-  public static final BitmapTextKind:Dynamic = Facade_Types_flighthq_types__internal__BitmapTextValues.BitmapTextKind;
+  public static final BitmapTextKind:String = Facade_Types_flighthq_types__internal__BitmapTextValues.BitmapTextKind;
 
-  public static final BitmapTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.BitmapTextureSourceKind;
+  public static final BitmapTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.BitmapTextureSourceKind;
 
-  public static final BlendMode:Dynamic = Facade_Types_flighthq_types__internal__BlendModeValues.BlendModeValue;
+  public static final BlendMode:{ var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; } = Facade_Types_flighthq_types__internal__BlendModeValues.BlendModeValue;
 
-  public static final BlinnPhongMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__BlinnPhongMaterialValues.BlinnPhongMaterialKind;
+  public static final BlinnPhongMaterialKind:String = Facade_Types_flighthq_types__internal__BlinnPhongMaterialValues.BlinnPhongMaterialKind;
 
-  public static final BoundingBoxAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__BoundingBoxAttachment2DValues.BoundingBoxAttachment2DKind;
+  public static final BoundingBoxAttachment2DKind:String = Facade_Types_flighthq_types__internal__BoundingBoxAttachment2DValues.BoundingBoxAttachment2DKind;
 
-  public static final CandelaLightUnit:Dynamic = Facade_Types_flighthq_types__internal__LightUnitValues.CandelaLightUnit;
+  public static final CandelaLightUnit:String = Facade_Types_flighthq_types__internal__LightUnitValues.CandelaLightUnit;
 
-  public static final CircleColliderKind:Dynamic = Facade_Types_flighthq_types__internal__CircleColliderValues.CircleColliderKind;
+  public static final CircleColliderKind:String = Facade_Types_flighthq_types__internal__CircleColliderValues.CircleColliderKind;
 
-  public static final ClearcoatPbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
+  public static final ClearcoatPbrExtensionKind:String = Facade_Types_flighthq_types__internal__ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
-  public static final ClipboardFormatBookmark:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatBookmark;
+  public static final ClipboardFormatBookmark:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatBookmark;
 
-  public static final ClipboardFormatHtml:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatHtml;
+  public static final ClipboardFormatHtml:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatHtml;
 
-  public static final ClipboardFormatImage:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatImage;
+  public static final ClipboardFormatImage:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatImage;
 
-  public static final ClipboardFormatRtf:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatRtf;
+  public static final ClipboardFormatRtf:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatRtf;
 
-  public static final ClipboardFormatText:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatText;
+  public static final ClipboardFormatText:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatText;
 
-  public static final ClipboardFormatUriList:Dynamic = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
+  public static final ClipboardFormatUriList:String = Facade_Types_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
 
-  public static final ClippingAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__ClippingAttachment2DValues.ClippingAttachment2DKind;
+  public static final ClippingAttachment2DKind:String = Facade_Types_flighthq_types__internal__ClippingAttachment2DValues.ClippingAttachment2DKind;
 
-  public static final CompositeOperator:Dynamic = Facade_Types_flighthq_types__internal__CompositeOperatorValues.CompositeOperatorValue;
+  public static final CompositeOperator:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = Facade_Types_flighthq_types__internal__CompositeOperatorValues.CompositeOperatorValue;
 
-  public static final CompressedImageTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.CompressedImageTextureSourceKind;
+  public static final CompressedImageTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.CompressedImageTextureSourceKind;
 
-  public static final Compression:Dynamic = Facade_Types_flighthq_types__internal__CompressionValues.CompressionValue;
+  public static final Compression:{ var Deflate:String; var Lzma:String; } = Facade_Types_flighthq_types__internal__CompressionValues.CompressionValue;
 
-  public static final CubeFaceNegativeX:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeX;
+  public static final CubeFaceNegativeX:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeX;
 
-  public static final CubeFaceNegativeY:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeY;
+  public static final CubeFaceNegativeY:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeY;
 
-  public static final CubeFaceNegativeZ:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeZ;
+  public static final CubeFaceNegativeZ:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeZ;
 
-  public static final CubeFacePositiveX:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveX;
+  public static final CubeFacePositiveX:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveX;
 
-  public static final CubeFacePositiveY:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveY;
+  public static final CubeFacePositiveY:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveY;
 
-  public static final CubeFacePositiveZ:Dynamic = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveZ;
+  public static final CubeFacePositiveZ:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFacePositiveZ;
 
-  public static final CurlNoiseForceKind:Dynamic = Facade_Types_flighthq_types__internal__CurlNoiseForceValues.CurlNoiseForceKind;
+  public static final CurlNoiseForceKind:String = Facade_Types_flighthq_types__internal__CurlNoiseForceValues.CurlNoiseForceKind;
 
-  public static final CustomShaderMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__CustomShaderMaterialValues.CustomShaderMaterialKind;
+  public static final CustomShaderMaterialKind:String = Facade_Types_flighthq_types__internal__CustomShaderMaterialValues.CustomShaderMaterialKind;
 
-  public static final DepthMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__DepthMaterialValues.DepthMaterialKind;
+  public static final DepthMaterialKind:String = Facade_Types_flighthq_types__internal__DepthMaterialValues.DepthMaterialKind;
 
-  public static final DeviceFormFactorCar:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorCar;
+  public static final DeviceFormFactorCar:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorCar;
 
-  public static final DeviceFormFactorDesktop:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorDesktop;
+  public static final DeviceFormFactorDesktop:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorDesktop;
 
-  public static final DeviceFormFactorPhone:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorPhone;
+  public static final DeviceFormFactorPhone:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorPhone;
 
-  public static final DeviceFormFactorTablet:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorTablet;
+  public static final DeviceFormFactorTablet:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorTablet;
 
-  public static final DeviceFormFactorTV:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorTV;
+  public static final DeviceFormFactorTV:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorTV;
 
-  public static final DeviceFormFactorUnknown:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorUnknown;
+  public static final DeviceFormFactorUnknown:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorUnknown;
 
-  public static final DeviceFormFactorWatch:Dynamic = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorWatch;
+  public static final DeviceFormFactorWatch:String = Facade_Types_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorWatch;
 
-  public static final DIRECTIONAL_SHADOW_MAP_SIZE:Dynamic = Facade_Types_flighthq_types__internal__DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
+  public static final DIRECTIONAL_SHADOW_MAP_SIZE:Float = Facade_Types_flighthq_types__internal__DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
 
-  public static final DirectionalLightKind:Dynamic = Facade_Types_flighthq_types__internal__DirectionalLightValues.DirectionalLightKind;
+  public static final DirectionalLightKind:String = Facade_Types_flighthq_types__internal__DirectionalLightValues.DirectionalLightKind;
 
-  public static final DisplayObjectKind:Dynamic = Facade_Types_flighthq_types__internal__Node2DValues.DisplayObjectKind;
+  public static final DisplayObjectKind:String = Facade_Types_flighthq_types__internal__Node2DValues.DisplayObjectKind;
 
-  public static final DissolveModifierKind:Dynamic = Facade_Types_flighthq_types__internal__DissolveModifierValues.DissolveModifierKind;
+  public static final DissolveModifierKind:String = Facade_Types_flighthq_types__internal__DissolveModifierValues.DissolveModifierKind;
 
-  public static final DragForceKind:Dynamic = Facade_Types_flighthq_types__internal__DragForceValues.DragForceKind;
+  public static final DragForceKind:String = Facade_Types_flighthq_types__internal__DragForceValues.DragForceKind;
 
-  public static final EmissiveMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__EmissiveMaterialValues.EmissiveMaterialKind;
+  public static final EmissiveMaterialKind:String = Facade_Types_flighthq_types__internal__EmissiveMaterialValues.EmissiveMaterialKind;
 
-  public static final EmissiveModifierFacing:Dynamic = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierFacingValue;
+  public static final EmissiveModifierFacing:{ var AwayFromLight:String; var Ignore:String; var TowardLight:String; } = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierFacingValue;
 
-  public static final EmissiveModifierKind:Dynamic = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierKind;
+  public static final EmissiveModifierKind:String = Facade_Types_flighthq_types__internal__EmissiveModifierValues.EmissiveModifierKind;
 
-  public static final EntityRuntimeKey:Dynamic = Facade_Types_flighthq_types__internal__EntityValues.EntityRuntimeKey;
+  public static final EntityRuntimeKey:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__EntityValues.EntityRuntimeKey;
 
-  public static final EnvironmentKind:Dynamic = Facade_Types_flighthq_types__internal__EnvironmentValues.EnvironmentKind;
+  public static final EnvironmentKind:String = Facade_Types_flighthq_types__internal__EnvironmentValues.EnvironmentKind;
 
-  public static final EnvReflectModifierKind:Dynamic = Facade_Types_flighthq_types__internal__EnvReflectModifierValues.EnvReflectModifierKind;
+  public static final EnvReflectModifierKind:String = Facade_Types_flighthq_types__internal__EnvReflectModifierValues.EnvReflectModifierKind;
 
-  public static final ExtendedPbrMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
+  public static final ExtendedPbrMaterialKind:String = Facade_Types_flighthq_types__internal__ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
-  public static final ExternalTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.ExternalTextureSourceKind;
+  public static final ExternalTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.ExternalTextureSourceKind;
 
-  public static final FlexLayoutKind:Dynamic = Facade_Types_flighthq_types_Layout.FlexLayoutKind;
+  public static final FlexLayoutKind:String = Facade_Types_flighthq_types_Layout.FlexLayoutKind;
 
-  public static final FogModifierKind:Dynamic = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierKind;
+  public static final FogModifierKind:String = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierKind;
 
-  public static final FogModifierMode:Dynamic = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierModeValue;
+  public static final FogModifierMode:{ var Exponential:String; var Exponential2:String; var Linear:String; } = Facade_Types_flighthq_types__internal__FogModifierValues.FogModifierModeValue;
 
-  public static final FontVariationItalic:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationItalic;
+  public static final FontVariationItalic:String = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationItalic;
 
-  public static final FontVariationOpticalSize:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationOpticalSize;
+  public static final FontVariationOpticalSize:String = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationOpticalSize;
 
-  public static final FontVariationSlant:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationSlant;
+  public static final FontVariationSlant:String = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationSlant;
 
-  public static final FontVariationWeight:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationWeight;
+  public static final FontVariationWeight:String = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationWeight;
 
-  public static final FontVariationWidth:Dynamic = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationWidth;
+  public static final FontVariationWidth:String = Facade_Types_flighthq_types__internal__FontVariationValues.FontVariationWidth;
 
-  public static final GamepadAxisKind:Dynamic = Facade_Types_flighthq_types__internal__GamepadAxisKindValues.GamepadAxisKindValue;
+  public static final GamepadAxisKind:{ var STICK_LEFT_X:String; var STICK_LEFT_Y:String; var STICK_RIGHT_X:String; var STICK_RIGHT_Y:String; } = Facade_Types_flighthq_types__internal__GamepadAxisKindValues.GamepadAxisKindValue;
 
-  public static final GamepadButtonKind:Dynamic = Facade_Types_flighthq_types__internal__GamepadButtonKindValues.GamepadButtonKindValue;
+  public static final GamepadButtonKind:{ var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; } = Facade_Types_flighthq_types__internal__GamepadButtonKindValues.GamepadButtonKindValue;
 
-  public static final GridLayoutKind:Dynamic = Facade_Types_flighthq_types_Layout.GridLayoutKind;
+  public static final GridLayoutKind:String = Facade_Types_flighthq_types_Layout.GridLayoutKind;
 
-  public static final GroupKind:Dynamic = Facade_Types_flighthq_types__internal__GroupValues.GroupKind;
+  public static final GroupKind:String = Facade_Types_flighthq_types__internal__GroupValues.GroupKind;
 
-  public static final HemisphereLightKind:Dynamic = Facade_Types_flighthq_types__internal__HemisphereLightValues.HemisphereLightKind;
+  public static final HemisphereLightKind:String = Facade_Types_flighthq_types__internal__HemisphereLightValues.HemisphereLightKind;
 
-  public static final HtmlViewKind:Dynamic = Facade_Types_flighthq_types__internal__HtmlViewValues.HtmlViewKind;
+  public static final HtmlViewKind:String = Facade_Types_flighthq_types__internal__HtmlViewValues.HtmlViewKind;
 
-  public static final ImageChannel:Dynamic = Facade_Types_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
+  public static final ImageChannel:{ var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; } = Facade_Types_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
 
-  public static final ImageResourceFailureKind:Dynamic = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceFailureKindValue;
+  public static final ImageResourceFailureKind:{ var Error:String; var Unavailable:String; } = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceFailureKindValue;
 
-  public static final ImageResourceReferenceKind:Dynamic = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceReferenceKindValue;
+  public static final ImageResourceReferenceKind:{ var Embedded:String; var External:String; } = Facade_Types_flighthq_types__internal__ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
-  public static final ImageTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.ImageTextureSourceKind;
+  public static final ImageTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.ImageTextureSourceKind;
 
-  public static final ImportDiagnosticSeverity:Dynamic = Facade_Types_flighthq_types__internal__ImportDiagnosticValues.ImportDiagnosticSeverityValue;
+  public static final ImportDiagnosticSeverity:{ var Drop:String; var Recover:String; var Reject:String; var Skip:String; } = Facade_Types_flighthq_types__internal__ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
-  public static final InstancedMeshKind:Dynamic = Facade_Types_flighthq_types__internal__InstancedMeshValues.InstancedMeshKind;
+  public static final InstancedMeshKind:String = Facade_Types_flighthq_types__internal__InstancedMeshValues.InstancedMeshKind;
 
-  public static final IridescencePbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__IridescencePbrExtensionValues.IridescencePbrExtensionKind;
+  public static final IridescencePbrExtensionKind:String = Facade_Types_flighthq_types__internal__IridescencePbrExtensionValues.IridescencePbrExtensionKind;
 
-  public static final KeyCode:Dynamic = Facade_Types_flighthq_types__internal__KeyCodeValues.KeyCodeValue;
+  public static final KeyCode:{ var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; } = Facade_Types_flighthq_types__internal__KeyCodeValues.KeyCodeValue;
 
-  public static final KeyModifier:Dynamic = Facade_Types_flighthq_types__internal__KeyModifierValues.KeyModifierValue;
+  public static final KeyModifier:{ var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; } = Facade_Types_flighthq_types__internal__KeyModifierValues.KeyModifierValue;
 
-  public static final LambertMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__LambertMaterialValues.LambertMaterialKind;
+  public static final LambertMaterialKind:String = Facade_Types_flighthq_types__internal__LambertMaterialValues.LambertMaterialKind;
 
-  public static final LayoutResolutionFailureKind:Dynamic = Facade_Types_flighthq_types_Layout.LayoutResolutionFailureKindValue;
+  public static final LayoutResolutionFailureKind:{ var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; } = Facade_Types_flighthq_types_Layout.LayoutResolutionFailureKindValue;
 
-  public static final LibgdxParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.LibgdxParticleFormatKind;
+  public static final LibgdxParticleFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.LibgdxParticleFormatKind;
 
-  public static final LodMeshKind:Dynamic = Facade_Types_flighthq_types__internal__LodMeshValues.LodMeshKind;
+  public static final LodMeshKind:String = Facade_Types_flighthq_types__internal__LodMeshValues.LodMeshKind;
 
-  public static final LumenLightUnit:Dynamic = Facade_Types_flighthq_types__internal__LightUnitValues.LumenLightUnit;
+  public static final LumenLightUnit:String = Facade_Types_flighthq_types__internal__LightUnitValues.LumenLightUnit;
 
-  public static final LuxLightUnit:Dynamic = Facade_Types_flighthq_types__internal__LightUnitValues.LuxLightUnit;
+  public static final LuxLightUnit:String = Facade_Types_flighthq_types__internal__LightUnitValues.LuxLightUnit;
 
-  public static final MatcapMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__MatcapMaterialValues.MatcapMaterialKind;
+  public static final MatcapMaterialKind:String = Facade_Types_flighthq_types__internal__MatcapMaterialValues.MatcapMaterialKind;
 
-  public static final MAX_DIRECTIONAL_SHADOW_PCF_RADIUS:Dynamic = Facade_Types_flighthq_types__internal__DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
+  public static final MAX_DIRECTIONAL_SHADOW_PCF_RADIUS:Float = Facade_Types_flighthq_types__internal__DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
-  public static final MAX_FORWARD_LIGHTS:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
+  public static final MAX_FORWARD_LIGHTS:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
-  public static final MeshAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__MeshAttachment2DValues.MeshAttachment2DKind;
+  public static final MeshAttachment2DKind:String = Facade_Types_flighthq_types__internal__MeshAttachment2DValues.MeshAttachment2DKind;
 
-  public static final MeshDeformerMorph:Dynamic = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerMorph;
+  public static final MeshDeformerMorph:String = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerMorph;
 
-  public static final MeshDeformerNone:Dynamic = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerNone;
+  public static final MeshDeformerNone:String = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerNone;
 
-  public static final MeshDeformerSkeletal:Dynamic = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerSkeletal;
+  public static final MeshDeformerSkeletal:String = Facade_Types_flighthq_types__internal__MeshDeformerValues.MeshDeformerSkeletal;
 
-  public static final MeshKind:Dynamic = Facade_Types_flighthq_types__internal__MeshValues.MeshKind;
+  public static final MeshKind:String = Facade_Types_flighthq_types__internal__MeshValues.MeshKind;
 
-  public static final ModifierSlot:Dynamic = Facade_Types_flighthq_types__internal__ModifierSlotValues.ModifierSlotValue;
+  public static final ModifierSlot:{ var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; } = Facade_Types_flighthq_types__internal__ModifierSlotValues.ModifierSlotValue;
 
-  public static final MorphShapeKind:Dynamic = Facade_Types_flighthq_types__internal__MorphShapeValues.MorphShapeKind;
+  public static final MorphShapeKind:String = Facade_Types_flighthq_types__internal__MorphShapeValues.MorphShapeKind;
 
-  public static final MouseButton:Dynamic = Facade_Types_flighthq_types__internal__MouseButtonValues.MouseButtonValue;
+  public static final MouseButton:{ var LEFT:Float; var MIDDLE:Float; var RIGHT:Float; } = Facade_Types_flighthq_types__internal__MouseButtonValues.MouseButtonValue;
 
-  public static final MovieClipKind:Dynamic = Facade_Types_flighthq_types__internal__MovieClipValues.MovieClipKind;
+  public static final MovieClipKind:String = Facade_Types_flighthq_types__internal__MovieClipValues.MovieClipKind;
 
-  public static final NativeTextKind:Dynamic = Facade_Types_flighthq_types__internal__NativeTextValues.NativeTextKind;
+  public static final NativeTextKind:String = Facade_Types_flighthq_types__internal__NativeTextValues.NativeTextKind;
 
-  public static final Node2DAnimationPathAlpha:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathAlpha;
+  public static final Node2DAnimationPathAlpha:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathAlpha;
 
-  public static final Node2DAnimationPathPivot:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivot;
+  public static final Node2DAnimationPathPivot:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivot;
 
-  public static final Node2DAnimationPathPivotX:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivotX;
+  public static final Node2DAnimationPathPivotX:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivotX;
 
-  public static final Node2DAnimationPathPivotY:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivotY;
+  public static final Node2DAnimationPathPivotY:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPivotY;
 
-  public static final Node2DAnimationPathPosition:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPosition;
+  public static final Node2DAnimationPathPosition:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathPosition;
 
-  public static final Node2DAnimationPathRotation:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathRotation;
+  public static final Node2DAnimationPathRotation:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathRotation;
 
-  public static final Node2DAnimationPathScale:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScale;
+  public static final Node2DAnimationPathScale:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScale;
 
-  public static final Node2DAnimationPathScaleX:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScaleX;
+  public static final Node2DAnimationPathScaleX:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScaleX;
 
-  public static final Node2DAnimationPathScaleY:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScaleY;
+  public static final Node2DAnimationPathScaleY:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathScaleY;
 
-  public static final Node2DAnimationPathSkew:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkew;
+  public static final Node2DAnimationPathSkew:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkew;
 
-  public static final Node2DAnimationPathSkewX:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkewX;
+  public static final Node2DAnimationPathSkewX:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkewX;
 
-  public static final Node2DAnimationPathSkewY:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkewY;
+  public static final Node2DAnimationPathSkewY:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathSkewY;
 
-  public static final Node2DAnimationPathVisible:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathVisible;
+  public static final Node2DAnimationPathVisible:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathVisible;
 
-  public static final Node2DAnimationPathX:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathX;
+  public static final Node2DAnimationPathX:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathX;
 
-  public static final Node2DAnimationPathY:Dynamic = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathY;
+  public static final Node2DAnimationPathY:String = Facade_Types_flighthq_types__internal__Node2DAnimationPathValues.Node2DAnimationPathY;
 
-  public static final Node2DTraitsKey:Dynamic = Facade_Types_flighthq_types__internal__Node2DValues.Node2DTraitsKey;
+  public static final Node2DTraitsKey:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__Node2DValues.Node2DTraitsKey;
 
-  public static final Node3DKind:Dynamic = Facade_Types_flighthq_types__internal__Node3DValues.Node3DKind;
+  public static final Node3DKind:String = Facade_Types_flighthq_types__internal__Node3DValues.Node3DKind;
 
-  public static final Node3DTraitsKey:Dynamic = Facade_Types_flighthq_types__internal__Node3DValues.Node3DTraitsKey;
+  public static final Node3DTraitsKey:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__Node3DValues.Node3DTraitsKey;
 
-  public static final NodeKind:Dynamic = Facade_Types_flighthq_types__internal__NodeValues.NodeKind;
+  public static final NodeKind:String = Facade_Types_flighthq_types__internal__NodeValues.NodeKind;
 
-  public static final NormalMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__NormalMaterialValues.NormalMaterialKind;
+  public static final NormalMaterialKind:String = Facade_Types_flighthq_types__internal__NormalMaterialValues.NormalMaterialKind;
 
-  public static final NullScene3D:Dynamic = Facade_Types_flighthq_types__internal__NodeValues.NullScene3D;
+  public static final NullScene3D:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__NodeValues.NullScene3D;
 
-  public static final ParticleDesignerFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.ParticleDesignerFormatKind;
+  public static final ParticleDesignerFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.ParticleDesignerFormatKind;
 
-  public static final ParticleEmitter2DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter2DValues.ParticleEmitter2DKind;
+  public static final ParticleEmitter2DKind:String = Facade_Types_flighthq_types__internal__ParticleEmitter2DValues.ParticleEmitter2DKind;
 
-  public static final ParticleEmitter3DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter3DValues.ParticleEmitter3DKind;
+  public static final ParticleEmitter3DKind:String = Facade_Types_flighthq_types__internal__ParticleEmitter3DValues.ParticleEmitter3DKind;
 
-  public static final PathAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__PathAttachment2DValues.PathAttachment2DKind;
+  public static final PathAttachment2DKind:String = Facade_Types_flighthq_types__internal__PathAttachment2DValues.PathAttachment2DKind;
 
-  public static final PathCommand:Dynamic = Facade_Types_flighthq_types__internal__PathValues.PathCommandValue;
+  public static final PathCommand:{ var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; } = Facade_Types_flighthq_types__internal__PathValues.PathCommandValue;
 
-  public static final PhaserParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PhaserParticleFormatKind;
+  public static final PhaserParticleFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PhaserParticleFormatKind;
 
-  public static final PhongMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__PhongMaterialValues.PhongMaterialKind;
+  public static final PhongMaterialKind:String = Facade_Types_flighthq_types__internal__PhongMaterialValues.PhongMaterialKind;
 
-  public static final PixiParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PixiParticleFormatKind;
+  public static final PixiParticleFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PixiParticleFormatKind;
 
-  public static final PlaneColliderKind:Dynamic = Facade_Types_flighthq_types__internal__PlaneColliderValues.PlaneColliderKind;
+  public static final PlaneColliderKind:String = Facade_Types_flighthq_types__internal__PlaneColliderValues.PlaneColliderKind;
 
-  public static final PointAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__PointAttachment2DValues.PointAttachment2DKind;
+  public static final PointAttachment2DKind:String = Facade_Types_flighthq_types__internal__PointAttachment2DValues.PointAttachment2DKind;
 
-  public static final PointGravityWellForceKind:Dynamic = Facade_Types_flighthq_types__internal__PointGravityWellForceValues.PointGravityWellForceKind;
+  public static final PointGravityWellForceKind:String = Facade_Types_flighthq_types__internal__PointGravityWellForceValues.PointGravityWellForceKind;
 
-  public static final PointLightKind:Dynamic = Facade_Types_flighthq_types__internal__PointLightValues.PointLightKind;
+  public static final PointLightKind:String = Facade_Types_flighthq_types__internal__PointLightValues.PointLightKind;
 
-  public static final QuadBatchKind:Dynamic = Facade_Types_flighthq_types__internal__QuadBatchValues.QuadBatchKind;
+  public static final QuadBatchKind:String = Facade_Types_flighthq_types__internal__QuadBatchValues.QuadBatchKind;
 
-  public static final RectangleColliderKind:Dynamic = Facade_Types_flighthq_types__internal__RectangleColliderValues.RectangleColliderKind;
+  public static final RectangleColliderKind:String = Facade_Types_flighthq_types__internal__RectangleColliderValues.RectangleColliderKind;
 
-  public static final RegionAttachment2DKind:Dynamic = Facade_Types_flighthq_types__internal__RegionAttachment2DValues.RegionAttachment2DKind;
+  public static final RegionAttachment2DKind:String = Facade_Types_flighthq_types__internal__RegionAttachment2DValues.RegionAttachment2DKind;
 
-  public static final RenderCacheKind:Dynamic = Facade_Types_flighthq_types__internal__RenderCacheValues.RenderCacheKindValue;
+  public static final RenderCacheKind:String = Facade_Types_flighthq_types__internal__RenderCacheValues.RenderCacheKindValue;
 
-  public static final RenderTargetTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.RenderTargetTextureSourceKind;
+  public static final RenderTargetTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.RenderTargetTextureSourceKind;
 
-  public static final ResourceResolutionState:Dynamic = Facade_Types_flighthq_types__internal__ResourceResolutionStateValues.ResourceResolutionStateValue;
+  public static final ResourceResolutionState:{ var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; } = Facade_Types_flighthq_types__internal__ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-  public static final RichTextKind:Dynamic = Facade_Types_flighthq_types__internal__RichTextValues.RichTextKind;
+  public static final RichTextKind:String = Facade_Types_flighthq_types__internal__RichTextValues.RichTextKind;
 
-  public static final RimModifierKind:Dynamic = Facade_Types_flighthq_types__internal__RimModifierValues.RimModifierKind;
+  public static final RimModifierKind:String = Facade_Types_flighthq_types__internal__RimModifierValues.RimModifierKind;
 
-  public static final RiveAnimationLoop:Dynamic = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveAnimationLoopValue;
+  public static final RiveAnimationLoop:{ var OneShot:String; var Loop:String; var PingPong:String; } = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveAnimationLoopValue;
 
-  public static final RiveFieldType:Dynamic = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveFieldTypeValue;
+  public static final RiveFieldType:{ var Uint:Float; var String:Float; var Double:Float; var Color:Float; } = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveFieldTypeValue;
 
-  public static final RiveWeightedPointKind:Dynamic = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveWeightedPointKindValue;
+  public static final RiveWeightedPointKind:{ var Point:String; var In:String; var Out:String; } = Facade_Types_flighthq_types__internal__RiveDocumentValues.RiveWeightedPointKindValue;
 
-  public static final SamplerKind:Dynamic = Facade_Types_flighthq_types_TextureKind.SamplerKind;
+  public static final SamplerKind:String = Facade_Types_flighthq_types_TextureKind.SamplerKind;
 
-  public static final Scale9ShapeKind:Dynamic = Facade_Types_flighthq_types__internal__Scale9ShapeValues.Scale9ShapeKind;
+  public static final Scale9ShapeKind:String = Facade_Types_flighthq_types__internal__Scale9ShapeValues.Scale9ShapeKind;
 
-  public static final SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
+  public static final SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
 
-  public static final SCENE_LIGHT_BLOCK_FLOATS:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
+  public static final SCENE_LIGHT_BLOCK_FLOATS:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
 
-  public static final SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET;
+  public static final SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET;
 
-  public static final SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET;
+  public static final SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET;
 
-  public static final SCENE_LIGHT_HEAD_FLOATS:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEAD_FLOATS;
+  public static final SCENE_LIGHT_HEAD_FLOATS:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEAD_FLOATS;
 
-  public static final SCENE_LIGHT_HEMISPHERE_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
+  public static final SCENE_LIGHT_HEMISPHERE_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
 
-  public static final SCENE_LIGHT_HEMISPHERE_STRIDE:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
+  public static final SCENE_LIGHT_HEMISPHERE_STRIDE:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
 
-  public static final SCENE_LIGHT_POINT_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_POINT_OFFSET;
+  public static final SCENE_LIGHT_POINT_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_POINT_OFFSET;
 
-  public static final SCENE_LIGHT_POINT_STRIDE:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
+  public static final SCENE_LIGHT_POINT_STRIDE:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
 
-  public static final SCENE_LIGHT_SPOT_OFFSET:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
+  public static final SCENE_LIGHT_SPOT_OFFSET:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 
-  public static final SCENE_LIGHT_SPOT_STRIDE:Dynamic = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
+  public static final SCENE_LIGHT_SPOT_STRIDE:Float = Facade_Types_flighthq_types__internal__Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-  public static final Scene3DAnimationPathRotation:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathRotation;
+  public static final Scene3DAnimationPathRotation:String = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathRotation;
 
-  public static final Scene3DAnimationPathScale:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathScale;
+  public static final Scene3DAnimationPathScale:String = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathScale;
 
-  public static final Scene3DAnimationPathTranslation:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathTranslation;
+  public static final Scene3DAnimationPathTranslation:String = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathTranslation;
 
-  public static final Scene3DAnimationPathWeights:Dynamic = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
+  public static final Scene3DAnimationPathWeights:String = Facade_Types_flighthq_types__internal__Scene3DAnimationPathValues.Scene3DAnimationPathWeights;
 
-  public static final Scene3DResourceResolverRuntimeKey:Dynamic = Facade_Types_flighthq_types__internal__Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
+  public static final Scene3DResourceResolverRuntimeKey:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
-  public static final SceneCoverage:Dynamic = Facade_Types_flighthq_types__internal__SceneCoverageEntryValues.SceneCoverageValue;
+  public static final SceneCoverage:{ var Fallback:String; var Missing:String; var Satisfied:String; } = Facade_Types_flighthq_types__internal__SceneCoverageEntryValues.SceneCoverageValue;
 
-  public static final ShadedMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__ShadedMaterialValues.ShadedMaterialKind;
+  public static final ShadedMaterialKind:String = Facade_Types_flighthq_types__internal__ShadedMaterialValues.ShadedMaterialKind;
 
-  public static final ShapeKind:Dynamic = Facade_Types_flighthq_types__internal__ShapeValues.ShapeKind;
+  public static final ShapeKind:String = Facade_Types_flighthq_types__internal__ShapeValues.ShapeKind;
 
-  public static final SheenPbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__SheenPbrExtensionValues.SheenPbrExtensionKind;
+  public static final SheenPbrExtensionKind:String = Facade_Types_flighthq_types__internal__SheenPbrExtensionValues.SheenPbrExtensionKind;
 
-  public static final Skeleton2DAnimationPath:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
+  public static final Skeleton2DAnimationPath:{ var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; } = Facade_Types_flighthq_types__internal__Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
 
-  public static final Skeleton2DAnimationTargetKind:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue;
+  public static final Skeleton2DAnimationTargetKind:{ var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; } = Facade_Types_flighthq_types__internal__Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue;
 
-  public static final Skeleton2DConstraintKind:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
+  public static final Skeleton2DConstraintKind:{ var Ik:String; var Path:String; var Transform:String; } = Facade_Types_flighthq_types__internal__Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
-  public static final Skeleton2DPathPositionMode:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathPositionModeValue;
+  public static final Skeleton2DPathPositionMode:{ var Fixed:String; var Percent:String; } = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathPositionModeValue;
 
-  public static final Skeleton2DPathRotateMode:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathRotateModeValue;
+  public static final Skeleton2DPathRotateMode:{ var Chain:String; var Tangent:String; } = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathRotateModeValue;
 
-  public static final Skeleton2DPathSpacingMode:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
+  public static final Skeleton2DPathSpacingMode:{ var Fixed:String; var Length:String; var Percent:String; } = Facade_Types_flighthq_types__internal__Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
 
-  public static final Skeleton2DSlotAnimationPath:Dynamic = Facade_Types_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
+  public static final Skeleton2DSlotAnimationPath:{ var Attachment:String; var Color:String; } = Facade_Types_flighthq_types__internal__Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
-  public static final SoftKeyboardEasingDefaultKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingDefaultKindValue;
+  public static final SoftKeyboardEasingDefaultKind:String = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingDefaultKindValue;
 
-  public static final SoftKeyboardEasingEaseInKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseInKindValue;
+  public static final SoftKeyboardEasingEaseInKind:String = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseInKindValue;
 
-  public static final SoftKeyboardEasingEaseOutKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseOutKindValue;
+  public static final SoftKeyboardEasingEaseOutKind:String = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingEaseOutKindValue;
 
-  public static final SoftKeyboardEasingKeyboardDefaultKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingKeyboardDefaultKindValue;
+  public static final SoftKeyboardEasingKeyboardDefaultKind:String = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingKeyboardDefaultKindValue;
 
-  public static final SoftKeyboardEasingLinearKind:Dynamic = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingLinearKindValue;
+  public static final SoftKeyboardEasingLinearKind:String = Facade_Types_flighthq_types__internal__SoftKeyboardEasingKindValues.SoftKeyboardEasingLinearKindValue;
 
-  public static final SoftKeyboardResizeBodyKind:Dynamic = Facade_Types_flighthq_types_Keyboard.SoftKeyboardResizeBodyKind;
+  public static final SoftKeyboardResizeBodyKind:String = Facade_Types_flighthq_types_Keyboard.SoftKeyboardResizeBodyKind;
 
-  public static final SoftKeyboardResizeNoneKind:Dynamic = Facade_Types_flighthq_types_Keyboard.SoftKeyboardResizeNoneKind;
+  public static final SoftKeyboardResizeNoneKind:String = Facade_Types_flighthq_types_Keyboard.SoftKeyboardResizeNoneKind;
 
-  public static final SoftKeyboardStyleDarkKind:Dynamic = Facade_Types_flighthq_types_Keyboard.SoftKeyboardStyleDarkKind;
+  public static final SoftKeyboardStyleDarkKind:String = Facade_Types_flighthq_types_Keyboard.SoftKeyboardStyleDarkKind;
 
-  public static final SoftKeyboardStyleDefaultKind:Dynamic = Facade_Types_flighthq_types_Keyboard.SoftKeyboardStyleDefaultKind;
+  public static final SoftKeyboardStyleDefaultKind:String = Facade_Types_flighthq_types_Keyboard.SoftKeyboardStyleDefaultKind;
 
-  public static final SpecularGlossinessPbrMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
+  public static final SpecularGlossinessPbrMaterialKind:String = Facade_Types_flighthq_types__internal__SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
-  public static final SpecularPbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__SpecularPbrExtensionValues.SpecularPbrExtensionKind;
+  public static final SpecularPbrExtensionKind:String = Facade_Types_flighthq_types__internal__SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
-  public static final SphereColliderKind:Dynamic = Facade_Types_flighthq_types__internal__SphereColliderValues.SphereColliderKind;
+  public static final SphereColliderKind:String = Facade_Types_flighthq_types__internal__SphereColliderValues.SphereColliderKind;
 
-  public static final SpineParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.SpineParticleFormatKind;
+  public static final SpineParticleFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.SpineParticleFormatKind;
 
-  public static final SpotLightKind:Dynamic = Facade_Types_flighthq_types__internal__SpotLightValues.SpotLightKind;
+  public static final SpotLightKind:String = Facade_Types_flighthq_types__internal__SpotLightValues.SpotLightKind;
 
-  public static final SpriteKind:Dynamic = Facade_Types_flighthq_types__internal__SpriteValues.SpriteKind;
+  public static final SpriteKind:String = Facade_Types_flighthq_types__internal__SpriteValues.SpriteKind;
 
-  public static final SpritesheetFormatKindAseprite:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindAseprite;
+  public static final SpritesheetFormatKindAseprite:String = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindAseprite;
 
-  public static final SpritesheetFormatKindCocosPlist:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindCocosPlist;
+  public static final SpritesheetFormatKindCocosPlist:String = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindCocosPlist;
 
-  public static final SpritesheetFormatKindLibgdxAtlas:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindLibgdxAtlas;
+  public static final SpritesheetFormatKindLibgdxAtlas:String = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindLibgdxAtlas;
 
-  public static final SpritesheetFormatKindStarling:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindStarling;
+  public static final SpritesheetFormatKindStarling:String = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindStarling;
 
-  public static final SpritesheetFormatKindTexturePacker:Dynamic = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindTexturePacker;
+  public static final SpritesheetFormatKindTexturePacker:String = Facade_Types_flighthq_types_SpritesheetFormat.SpritesheetFormatKindTexturePacker;
 
-  public static final StandardMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__StandardMaterialValues.StandardMaterialKindValue;
+  public static final StandardMaterialKind:String = Facade_Types_flighthq_types__internal__StandardMaterialValues.StandardMaterialKindValue;
 
-  public static final StandardPbrMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__StandardPbrMaterialValues.StandardPbrMaterialKind;
+  public static final StandardPbrMaterialKind:String = Facade_Types_flighthq_types__internal__StandardPbrMaterialValues.StandardPbrMaterialKind;
 
-  public static final StarlingPexFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.StarlingPexFormatKind;
+  public static final StarlingPexFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.StarlingPexFormatKind;
 
-  public static final StatechartAtomicStateKind:Dynamic = Facade_Types_flighthq_types__internal__StatechartValues.StatechartAtomicStateKind;
+  public static final StatechartAtomicStateKind:String = Facade_Types_flighthq_types__internal__StatechartValues.StatechartAtomicStateKind;
 
-  public static final StatechartComparison:Dynamic = Facade_Types_flighthq_types__internal__StatechartValues.StatechartComparisonValue;
+  public static final StatechartComparison:{ var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; } = Facade_Types_flighthq_types__internal__StatechartValues.StatechartComparisonValue;
 
-  public static final StatechartInputKind:Dynamic = Facade_Types_flighthq_types__internal__StatechartValues.StatechartInputKindValue;
+  public static final StatechartInputKind:{ var Boolean:String; var Number:String; var Trigger:String; } = Facade_Types_flighthq_types__internal__StatechartValues.StatechartInputKindValue;
 
-  public static final StatechartNestedStateKind:Dynamic = Facade_Types_flighthq_types__internal__StatechartValues.StatechartNestedStateKind;
+  public static final StatechartNestedStateKind:String = Facade_Types_flighthq_types__internal__StatechartValues.StatechartNestedStateKind;
 
-  public static final StatechartTransitionStatus:Dynamic = Facade_Types_flighthq_types__internal__StatechartValues.StatechartTransitionStatusValue;
+  public static final StatechartTransitionStatus:{ var ConditionsUnmet:String; var ExitTimePending:String; var InvalidRegion:String; var MissingRegionDuration:String; var NoTransitions:String; var Ready:String; var Transitioning:String; } = Facade_Types_flighthq_types__internal__StatechartValues.StatechartTransitionStatusValue;
 
-  public static final TextDirectionLeftToRight:Dynamic = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionLeftToRight;
+  public static final TextDirectionLeftToRight:String = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionLeftToRight;
 
-  public static final TextDirectionRightToLeft:Dynamic = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionRightToLeft;
+  public static final TextDirectionRightToLeft:String = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionRightToLeft;
 
-  public static final TextDirectionTopToBottom:Dynamic = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionTopToBottom;
+  public static final TextDirectionTopToBottom:String = Facade_Types_flighthq_types__internal__TextDirectionValues.TextDirectionTopToBottom;
 
-  public static final TextFeatureCapitals:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureCapitals;
+  public static final TextFeatureCapitals:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureCapitals;
 
-  public static final TextFeatureContextualAlternates:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureContextualAlternates;
+  public static final TextFeatureContextualAlternates:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureContextualAlternates;
 
-  public static final TextFeatureDiscretionaryLigatures:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureDiscretionaryLigatures;
+  public static final TextFeatureDiscretionaryLigatures:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureDiscretionaryLigatures;
 
-  public static final TextFeatureFractions:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureFractions;
+  public static final TextFeatureFractions:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureFractions;
 
-  public static final TextFeatureKerning:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureKerning;
+  public static final TextFeatureKerning:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureKerning;
 
-  public static final TextFeatureLigatures:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureLigatures;
+  public static final TextFeatureLigatures:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureLigatures;
 
-  public static final TextFeatureOldStyleFigures:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureOldStyleFigures;
+  public static final TextFeatureOldStyleFigures:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureOldStyleFigures;
 
-  public static final TextFeatureSmallCaps:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSmallCaps;
+  public static final TextFeatureSmallCaps:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSmallCaps;
 
-  public static final TextFeatureStylisticAlternates:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureStylisticAlternates;
+  public static final TextFeatureStylisticAlternates:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureStylisticAlternates;
 
-  public static final TextFeatureSubscript:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSubscript;
+  public static final TextFeatureSubscript:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSubscript;
 
-  public static final TextFeatureSuperscript:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSuperscript;
+  public static final TextFeatureSuperscript:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureSuperscript;
 
-  public static final TextFeatureTabularFigures:Dynamic = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureTabularFigures;
+  public static final TextFeatureTabularFigures:String = Facade_Types_flighthq_types__internal__TextFeatureValues.TextFeatureTabularFigures;
 
-  public static final TextLabelKind:Dynamic = Facade_Types_flighthq_types__internal__TextLabelValues.TextLabelKind;
+  public static final TextLabelKind:String = Facade_Types_flighthq_types__internal__TextLabelValues.TextLabelKind;
 
-  public static final TextureAtlasFormatKindAseprite:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindAseprite;
+  public static final TextureAtlasFormatKindAseprite:String = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindAseprite;
 
-  public static final TextureAtlasFormatKindCocosPlist:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindCocosPlist;
+  public static final TextureAtlasFormatKindCocosPlist:String = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindCocosPlist;
 
-  public static final TextureAtlasFormatKindLibgdxAtlas:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindLibgdxAtlas;
+  public static final TextureAtlasFormatKindLibgdxAtlas:String = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindLibgdxAtlas;
 
-  public static final TextureAtlasFormatKindStarling:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindStarling;
+  public static final TextureAtlasFormatKindStarling:String = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindStarling;
 
-  public static final TextureAtlasFormatKindTexturePacker:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
+  public static final TextureAtlasFormatKindTexturePacker:String = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
 
-  public static final TextureKind:Dynamic = Facade_Types_flighthq_types_TextureKind.TextureKind;
+  public static final TextureKind:String = Facade_Types_flighthq_types_TextureKind.TextureKind;
 
-  public static final THREE_DS_CAMERA:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA;
+  public static final THREE_DS_CAMERA:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA;
 
-  public static final THREE_DS_CAMERA_APERTURE_MM:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA_APERTURE_MM;
+  public static final THREE_DS_CAMERA_APERTURE_MM:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA_APERTURE_MM;
 
-  public static final THREE_DS_CAMERA_RANGES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA_RANGES;
+  public static final THREE_DS_CAMERA_RANGES:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CAMERA_RANGES;
 
-  public static final THREE_DS_CHUNK_HEADER_BYTES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
+  public static final THREE_DS_CHUNK_HEADER_BYTES:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
 
-  public static final THREE_DS_COLOR_BYTE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_BYTE;
+  public static final THREE_DS_COLOR_BYTE:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_BYTE;
 
-  public static final THREE_DS_COLOR_FLOAT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_FLOAT;
+  public static final THREE_DS_COLOR_FLOAT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_FLOAT;
 
-  public static final THREE_DS_EDITOR:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_EDITOR;
+  public static final THREE_DS_EDITOR:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_EDITOR;
 
-  public static final THREE_DS_FACE_MATERIAL:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACE_MATERIAL;
+  public static final THREE_DS_FACE_MATERIAL:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACE_MATERIAL;
 
-  public static final THREE_DS_FACES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACES;
+  public static final THREE_DS_FACES:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACES;
 
-  public static final THREE_DS_KEYFRAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME;
+  public static final THREE_DS_KEYFRAME:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME;
 
-  public static final THREE_DS_KEYFRAME_NODE_HEADER:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_NODE_HEADER;
+  public static final THREE_DS_KEYFRAME_NODE_HEADER:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_NODE_HEADER;
 
-  public static final THREE_DS_KEYFRAME_OBJECT_NODE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_OBJECT_NODE;
+  public static final THREE_DS_KEYFRAME_OBJECT_NODE:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_OBJECT_NODE;
 
-  public static final THREE_DS_KEYFRAME_PIVOT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_PIVOT;
+  public static final THREE_DS_KEYFRAME_PIVOT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME_PIVOT;
 
-  public static final THREE_DS_LIGHT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT;
+  public static final THREE_DS_LIGHT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT;
 
-  public static final THREE_DS_LIGHT_INNER_RANGE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_INNER_RANGE;
+  public static final THREE_DS_LIGHT_INNER_RANGE:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_INNER_RANGE;
 
-  public static final THREE_DS_LIGHT_MULTIPLIER:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_MULTIPLIER;
+  public static final THREE_DS_LIGHT_MULTIPLIER:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_MULTIPLIER;
 
-  public static final THREE_DS_LIGHT_OFF:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_OFF;
+  public static final THREE_DS_LIGHT_OFF:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_OFF;
 
-  public static final THREE_DS_LIGHT_OUTER_RANGE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_OUTER_RANGE;
+  public static final THREE_DS_LIGHT_OUTER_RANGE:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_OUTER_RANGE;
 
-  public static final THREE_DS_LIGHT_SPOT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_SPOT;
+  public static final THREE_DS_LIGHT_SPOT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_LIGHT_SPOT;
 
-  public static final THREE_DS_MAIN:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MAIN;
+  public static final THREE_DS_MAIN:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MAIN;
 
-  public static final THREE_DS_MATERIAL:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL;
+  public static final THREE_DS_MATERIAL:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL;
 
-  public static final THREE_DS_MATERIAL_AMBIENT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
+  public static final THREE_DS_MATERIAL_AMBIENT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
 
-  public static final THREE_DS_MATERIAL_BUMP_MAP:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_BUMP_MAP;
+  public static final THREE_DS_MATERIAL_BUMP_MAP:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_BUMP_MAP;
 
-  public static final THREE_DS_MATERIAL_DIFFUSE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
+  public static final THREE_DS_MATERIAL_DIFFUSE:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
 
-  public static final THREE_DS_MATERIAL_NAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_NAME;
+  public static final THREE_DS_MATERIAL_NAME:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_NAME;
 
-  public static final THREE_DS_MATERIAL_OPACITY_MAP:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_OPACITY_MAP;
+  public static final THREE_DS_MATERIAL_OPACITY_MAP:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_OPACITY_MAP;
 
-  public static final THREE_DS_MATERIAL_SHININESS:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_SHININESS;
+  public static final THREE_DS_MATERIAL_SHININESS:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_SHININESS;
 
-  public static final THREE_DS_MATERIAL_SPECULAR:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
+  public static final THREE_DS_MATERIAL_SPECULAR:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
 
-  public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
+  public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
 
-  public static final THREE_DS_MATERIAL_TEXTURE_MAP:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_MAP;
+  public static final THREE_DS_MATERIAL_TEXTURE_MAP:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_MAP;
 
-  public static final THREE_DS_MATERIAL_TRANSPARENCY:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TRANSPARENCY;
+  public static final THREE_DS_MATERIAL_TRANSPARENCY:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TRANSPARENCY;
 
-  public static final THREE_DS_OBJECT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_OBJECT;
+  public static final THREE_DS_OBJECT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_OBJECT;
 
-  public static final THREE_DS_PERCENT_FLOAT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_PERCENT_FLOAT;
+  public static final THREE_DS_PERCENT_FLOAT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_PERCENT_FLOAT;
 
-  public static final THREE_DS_PERCENT_INT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_PERCENT_INT;
+  public static final THREE_DS_PERCENT_INT:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_PERCENT_INT;
 
-  public static final THREE_DS_SMOOTH_GROUP:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_SMOOTH_GROUP;
+  public static final THREE_DS_SMOOTH_GROUP:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_SMOOTH_GROUP;
 
-  public static final THREE_DS_TRANSFORM_MATRIX:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRANSFORM_MATRIX;
+  public static final THREE_DS_TRANSFORM_MATRIX:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRANSFORM_MATRIX;
 
-  public static final THREE_DS_TRIMESH:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRIMESH;
+  public static final THREE_DS_TRIMESH:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRIMESH;
 
-  public static final THREE_DS_UV_COORDS:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_UV_COORDS;
+  public static final THREE_DS_UV_COORDS:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_UV_COORDS;
 
-  public static final THREE_DS_VERTICES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_VERTICES;
+  public static final THREE_DS_VERTICES:Float = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_VERTICES;
 
-  public static final TilemapKind:Dynamic = Facade_Types_flighthq_types__internal__TilemapValues.TilemapKind;
+  public static final TilemapKind:String = Facade_Types_flighthq_types__internal__TilemapValues.TilemapKind;
 
-  public static final TimelineAudioCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineAudioCueKind;
+  public static final TimelineAudioCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineAudioCueKind;
 
-  public static final TimelineFrameEntryCause:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineFrameEntryCauseValue;
+  public static final TimelineFrameEntryCause:{ var Advance:String; var Seek:String; } = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineFrameEntryCauseValue;
 
-  public static final TimelineGotoCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineGotoCueKind;
+  public static final TimelineGotoCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineGotoCueKind;
 
-  public static final TimelineNextFrameCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineNextFrameCueKind;
+  public static final TimelineNextFrameCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineNextFrameCueKind;
 
-  public static final TimelinePlayCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelinePlayCueKind;
+  public static final TimelinePlayCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelinePlayCueKind;
 
-  public static final TimelinePreviousFrameCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelinePreviousFrameCueKind;
+  public static final TimelinePreviousFrameCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelinePreviousFrameCueKind;
 
-  public static final TimelineStopCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineStopCueKind;
+  public static final TimelineStopCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineStopCueKind;
 
-  public static final TimelineStreamAudioCueKind:Dynamic = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineStreamAudioCueKind;
+  public static final TimelineStreamAudioCueKind:String = Facade_Types_flighthq_types__internal__TimelineCueValues.TimelineStreamAudioCueKind;
 
-  public static final ToonMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__ToonMaterialValues.ToonMaterialKind;
+  public static final ToonMaterialKind:String = Facade_Types_flighthq_types__internal__ToonMaterialValues.ToonMaterialKind;
 
-  public static final ToonModifierKind:Dynamic = Facade_Types_flighthq_types__internal__ToonModifierValues.ToonModifierKind;
+  public static final ToonModifierKind:String = Facade_Types_flighthq_types__internal__ToonModifierValues.ToonModifierKind;
 
-  public static final TransformMode2D:Dynamic = Facade_Types_flighthq_types_TransformMode2D.TransformMode2D;
+  public static final TransformMode2D:{ var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; } = Facade_Types_flighthq_types_TransformMode2D.TransformMode2D;
 
-  public static final TransmissionVolumePbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
+  public static final TransmissionVolumePbrExtensionKind:String = Facade_Types_flighthq_types__internal__TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
-  public static final TurbulenceForceKind:Dynamic = Facade_Types_flighthq_types__internal__TurbulenceForceValues.TurbulenceForceKind;
+  public static final TurbulenceForceKind:String = Facade_Types_flighthq_types__internal__TurbulenceForceValues.TurbulenceForceKind;
 
-  public static final UnitlessLightUnit:Dynamic = Facade_Types_flighthq_types__internal__LightUnitValues.UnitlessLightUnit;
+  public static final UnitlessLightUnit:String = Facade_Types_flighthq_types__internal__LightUnitValues.UnitlessLightUnit;
 
-  public static final UnityParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.UnityParticleFormatKind;
+  public static final UnityParticleFormatKind:String = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.UnityParticleFormatKind;
 
-  public static final UnlitMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__UnlitMaterialValues.UnlitMaterialKind;
+  public static final UnlitMaterialKind:String = Facade_Types_flighthq_types__internal__UnlitMaterialValues.UnlitMaterialKind;
 
-  public static final VertexColorMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__VertexColorMaterialValues.VertexColorMaterialKind;
+  public static final VertexColorMaterialKind:String = Facade_Types_flighthq_types__internal__VertexColorMaterialValues.VertexColorMaterialKind;
 
-  public static final VertexDisplaceModifierKind:Dynamic = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierKind;
+  public static final VertexDisplaceModifierKind:String = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 
-  public static final VertexDisplaceModifierSource:Dynamic = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
+  public static final VertexDisplaceModifierSource:{ var HeightMap:String; var Sine:String; } = Facade_Types_flighthq_types__internal__VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
-  public static final VortexForceKind:Dynamic = Facade_Types_flighthq_types__internal__VortexForceValues.VortexForceKind;
+  public static final VortexForceKind:String = Facade_Types_flighthq_types__internal__VortexForceValues.VortexForceKind;
 
-  public static final VoxelGridTextureSourceKind:Dynamic = Facade_Types_flighthq_types__internal__TextureSourceKindValues.VoxelGridTextureSourceKind;
+  public static final VoxelGridTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.VoxelGridTextureSourceKind;
 
-  public static final WellKnownMenuItemRole:Dynamic = Facade_Types_flighthq_types_WellKnownMenuItemRole.WellKnownMenuItemRole;
+  public static final WellKnownMenuItemRole:{ var copy:String; var cut:String; var delete:String; var paste:String; var pasteAndMatchStyle:String; var redo:String; var selectAll:String; var toggleSpellChecker:String; var undo:String; var about:String; var close:String; var front:String; var hide:String; var hideOthers:String; var mergeAllWindows:String; var minimize:String; var moveTabToNewWindow:String; var quit:String; var selectNextTab:String; var selectPreviousTab:String; var toggleTabBar:String; var unhide:String; var zoom:String; var forceReload:String; var reload:String; var resetZoom:String; var toggleDevTools:String; var toggleFullscreen:String; var zoomIn:String; var zoomOut:String; var help:String; var services:String; var startSpeaking:String; var stopSpeaking:String; var clearRecentDocuments:String; var recentDocuments:String; var appMenu:String; var editMenu:String; var fileMenu:String; var helpMenu:String; var shareMenu:String; var viewMenu:String; var windowMenu:String; } = Facade_Types_flighthq_types_WellKnownMenuItemRole.WellKnownMenuItemRole;
 
-  public static final WindForceKind:Dynamic = Facade_Types_flighthq_types__internal__WindForceValues.WindForceKind;
+  public static final WindForceKind:String = Facade_Types_flighthq_types__internal__WindForceValues.WindForceKind;
 
-  public static final WireframeMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__WireframeMaterialValues.WireframeMaterialKind;
+  public static final WireframeMaterialKind:String = Facade_Types_flighthq_types__internal__WireframeMaterialValues.WireframeMaterialKind;
 
-  public static final WrappedDiffusePbrExtensionKind:Dynamic = Facade_Types_flighthq_types__internal__WrappedDiffusePbrExtensionValues.WrappedDiffusePbrExtensionKind;
+  public static final WrappedDiffusePbrExtensionKind:String = Facade_Types_flighthq_types__internal__WrappedDiffusePbrExtensionValues.WrappedDiffusePbrExtensionKind;
 }

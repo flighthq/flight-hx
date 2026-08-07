@@ -22,7 +22,9 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry as Facade_EffectsCanvas
 import flighthq.effectsCanvas.CanvasRenderTextureEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderTextureEffect;
 import flighthq.effectsCanvas.CanvasScanlinesEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect;
 import flighthq.effectsCanvas.CanvasVignetteEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect;
+import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
+import flighthq.types.BevelEffect;
 import flighthq.types.CanvasRenderEffectPipeline;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
@@ -34,7 +36,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
 class EffectsCanvas {
-  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void {
+  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Float, ?scale:Float):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
   }
 
@@ -52,7 +54,7 @@ class EffectsCanvas {
     return cast null;
   }
 
-  public static function clipCanvasBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:Dynamic):Void {
+  public static function clipCanvasBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:flighthq._internal._IndexedAccess<BevelEffect, String>):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasBevelEffect.clipCanvasBevelBand(band, source, bevelType);
   }
 
@@ -91,7 +93,7 @@ class EffectsCanvas {
 
   public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect.defaultCanvasVignetteEffectRunner;
 
-  public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline.endCanvasRenderEffectPipeline(state, pipeline, operations);
   }
 

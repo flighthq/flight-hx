@@ -8,24 +8,25 @@ import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class TextureAtlasGrid {
   public static function createTextureAtlasFromGrid(options:GridSliceOptions, ?texture:Null<Texture2D>):TextureAtlas {
     if (texture == null) texture = cast (null : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var columns:Dynamic = cast _Runtime.UNDEFINED;
-    var rows:Dynamic = cast _Runtime.UNDEFINED;
-    var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var imageHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var marginX:Dynamic = cast _Runtime.UNDEFINED;
-    var marginY:Dynamic = cast _Runtime.UNDEFINED;
-    var spacingX:Dynamic = cast _Runtime.UNDEFINED;
-    var spacingY:Dynamic = cast _Runtime.UNDEFINED;
-    var namePrefix:Dynamic = cast _Runtime.UNDEFINED;
-    var frameWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var frameHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
+    var columns:Float = cast _Runtime.UNDEFINED;
+    var rows:Float = cast _Runtime.UNDEFINED;
+    var imageWidth:Float = cast _Runtime.UNDEFINED;
+    var imageHeight:Float = cast _Runtime.UNDEFINED;
+    var marginX:Float = cast _Runtime.UNDEFINED;
+    var marginY:Float = cast _Runtime.UNDEFINED;
+    var spacingX:Float = cast _Runtime.UNDEFINED;
+    var spacingY:Float = cast _Runtime.UNDEFINED;
+    var namePrefix:String = cast _Runtime.UNDEFINED;
+    var frameWidth:Float = cast _Runtime.UNDEFINED;
+    var frameHeight:Float = cast _Runtime.UNDEFINED;
+    var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
+    var id:Float = cast _Runtime.UNDEFINED;
     __destructure0 = options;
     columns = _Runtime.field(__destructure0, 'columns');
     rows = _Runtime.field(__destructure0, 'rows');
@@ -38,15 +39,15 @@ class TextureAtlasGrid {
     namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
     frameWidth = _Runtime.coalesce(options.frameWidth, function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
     frameHeight = _Runtime.coalesce(options.frameHeight, function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
-    atlas = _Runtime.callValue(createTextureAtlas, cast ([{ texture: texture }] : Array<Dynamic>));
+    atlas = (cast createTextureAtlas((cast { texture: texture } : Null<flighthq._internal._Any>)) : TextureAtlas);
     id = 0.0;
     {
-      var row:Dynamic = 0.0;
+      var row:Float = 0.0;
       while ((cast ((cast row : Float) < (cast rows : Float)) : Bool)) {
         {
-          var column:Dynamic = 0.0;
+          var column:Float = 0.0;
           while ((cast ((cast column : Float) < (cast columns : Float)) : Bool)) {
-            _Runtime.callProperty(atlas.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: (marginX + (column * (frameWidth + spacingX))), y: (marginY + (row * (frameHeight + spacingY))) }] : Array<Dynamic>))] : Array<Dynamic>));
+            _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: (marginX + (column * (frameWidth + spacingX))), y: (marginY + (row * (frameHeight + spacingY))) } : Null<flighthq._internal._Any>)) : TextureAtlasRegion)] : Array<Dynamic>));
             id++;
             column++;
           }

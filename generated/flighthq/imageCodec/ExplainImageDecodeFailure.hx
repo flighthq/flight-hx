@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.imageCodec.DetectImageMimeType.detectImageMimeType;
 import flighthq.imageCodec.ImageDecoderRegistry.getImageDecoder;
 import flighthq.types.ImageDecodeFailureExplanation;
+import flighthq.types.ImageDecoder;
 
 class ExplainImageDecodeFailure {
   public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
-    var type:Dynamic = cast _Runtime.UNDEFINED;
-    type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
+    var type:Null<String> = cast _Runtime.UNDEFINED;
+    type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>));
     if ((cast _Runtime.strictEquals(type, null) : Bool)) { return cast { mimeType: null, reason: 'mime-type-undetected' }; }
-    if ((cast _Runtime.strictEquals(_Runtime.callValue(getImageDecoder, cast ([type] : Array<Dynamic>)), null) : Bool)) { return cast { mimeType: type, reason: 'decoder-not-registered' }; }
+    if ((cast _Runtime.strictEquals((cast getImageDecoder((cast type : String)) : Null<ImageDecoder>), null) : Bool)) { return cast { mimeType: type, reason: 'decoder-not-registered' }; }
     return cast null;
     return cast null;
   }

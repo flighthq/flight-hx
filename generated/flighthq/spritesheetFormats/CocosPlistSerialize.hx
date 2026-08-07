@@ -5,42 +5,43 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CocosPlistSchema.CocosPlistDocument;
 import flighthq.types.CocosPlistSchema.CocosPlistFrame;
+import flighthq.types.CocosPlistSchema.CocosPlistMetadata;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
 class CocosPlistSerialize {
   public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var frames:flighthq._internal._Record<String, CocosPlistFrame> = cast _Runtime.UNDEFINED;
     var doc:CocosPlistDocument = cast _Runtime.UNDEFINED;
     frames = {  };
     for (frame in _Runtime.iterable(data.frames)) {
-      _Runtime.setIndex(frames, frame.name, _Runtime.callValue(CocosPlistSerialize.frameToEntry__cocosPlistSerialize, cast ([frame] : Array<Dynamic>)));
+      _Runtime.setIndex(frames, frame.name, (cast CocosPlistSerialize.frameToEntry__cocosPlistSerialize((cast frame : SpritesheetFrameData)) : CocosPlistFrame));
     }
     doc = { frames: frames, metadata: { format: _Runtime.coalesce(({ final __typedStruct2 = _Runtime.optionalField(existing, 'metadata'); __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.format; }), function():Dynamic return cast 3.0), size: '{' + Std.string(data.imageWidth) + ',' + Std.string(data.imageHeight) + '}', textureFileName: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __typedStruct3 = _Runtime.optionalField(existing, 'metadata'); __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.textureFileName; })), function():Dynamic return cast '') } };
-    return cast _Runtime.callValue(CocosPlistSerialize.documentToXml__cocosPlistSerialize, cast ([doc] : Array<Dynamic>));
+    return cast (cast CocosPlistSerialize.documentToXml__cocosPlistSerialize((cast doc : CocosPlistDocument)) : String);
     return cast null;
   }
 
   public static function documentToXml__cocosPlistSerialize(doc:CocosPlistDocument):String {
-    var lines:Dynamic = cast _Runtime.UNDEFINED;
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>', '	<key>frames</key>', '	<dict>'] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(doc.frames))) {
-      var name:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var frame:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      _Runtime.callProperty(lines, 'push', cast (['		<key>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([name] : Array<Dynamic>))) + '</key>'] : Array<Dynamic>));
+      var name:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var frame:CocosPlistFrame = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      _Runtime.callProperty(lines, 'push', cast (['		<key>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast name : String)) : String)) + '</key>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['		<dict>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>frame</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([frame.frame] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast frame.frame : String)) : String)) + '</string>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>spriteOffset</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([frame.spriteOffset] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast frame.spriteOffset : String)) : String)) + '</string>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>spriteSize</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([frame.spriteSize] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast frame.spriteSize : String)) : String)) + '</string>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>spriteSourceSize</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([frame.spriteSourceSize] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast frame.spriteSourceSize : String)) : String)) + '</string>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>spriteTrimmed</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			' + Std.string(_Runtime.callValue(CocosPlistSerialize.plistValue__cocosPlistSerialize, cast ([frame.spriteTrimmed] : Array<Dynamic>))) + ''] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			' + Std.string((cast CocosPlistSerialize.plistValue__cocosPlistSerialize((cast frame.spriteTrimmed : Bool)) : String)) + ''] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['			<key>textureRotated</key>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['			' + Std.string(_Runtime.callValue(CocosPlistSerialize.plistValue__cocosPlistSerialize, cast ([frame.textureRotated] : Array<Dynamic>))) + ''] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['			' + Std.string((cast CocosPlistSerialize.plistValue__cocosPlistSerialize((cast frame.textureRotated : Bool)) : String)) + ''] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['		</dict>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['	</dict>'] : Array<Dynamic>));
@@ -49,9 +50,9 @@ class CocosPlistSerialize {
     _Runtime.callProperty(lines, 'push', cast (['		<key>format</key>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['		<integer>' + Std.string(doc.metadata.format) + '</integer>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['		<key>size</key>'] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['		<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([doc.metadata.size] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['		<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast doc.metadata.size : String)) : String)) + '</string>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['		<key>textureFileName</key>'] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast (['		<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([doc.metadata.textureFileName] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast (['		<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast doc.metadata.textureFileName : String)) : String)) + '</string>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['	</dict>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['</dict>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['</plist>'] : Array<Dynamic>));
@@ -65,11 +66,11 @@ class CocosPlistSerialize {
   }
 
   public static function frameToEntry__cocosPlistSerialize(frame:SpritesheetFrameData):CocosPlistFrame {
-    var rectStr:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetStr:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceSizeStr:Dynamic = cast _Runtime.UNDEFINED;
-    var sizeStr:Dynamic = cast _Runtime.UNDEFINED;
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
+    var rectStr:String = cast _Runtime.UNDEFINED;
+    var offsetStr:String = cast _Runtime.UNDEFINED;
+    var sourceSizeStr:String = cast _Runtime.UNDEFINED;
+    var sizeStr:String = cast _Runtime.UNDEFINED;
+    var trimmed:Bool = cast _Runtime.UNDEFINED;
     rectStr = '{{' + Std.string(frame.x) + ',' + Std.string(frame.y) + '},{' + Std.string(frame.width) + ',' + Std.string(frame.height) + '}}';
     offsetStr = '{' + Std.string(frame.offsetX) + ',' + Std.string(frame.offsetY) + '}';
     sourceSizeStr = '{' + Std.string(frame.sourceWidth) + ',' + Std.string(frame.sourceHeight) + '}';
@@ -81,7 +82,7 @@ class CocosPlistSerialize {
 
   public static function plistValue__cocosPlistSerialize(el:Bool):String {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(el), 'boolean') : Bool)) { return cast ((cast el : Bool) ? (cast '<true/>' : Dynamic) : (cast '<false/>' : Dynamic)); }
-    return cast '<string>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([Std.string(el)] : Array<Dynamic>))) + '</string>';
+    return cast '<string>' + Std.string((cast CocosPlistSerialize.escapeXml__cocosPlistSerialize((cast Std.string(el) : String)) : String)) + '</string>';
     return cast null;
   }
 }

@@ -10,14 +10,14 @@ import flighthq.types.Collision.CollisionTestExplanation;
 
 class ExplainCollisionTest {
   public static function explainCollisionTest(a:CollisionShape, b:CollisionShape):CollisionTestExplanation {
-    var statusA:Dynamic = cast _Runtime.UNDEFINED;
-    var statusB:Dynamic = cast _Runtime.UNDEFINED;
-    var overlapping:Dynamic = cast _Runtime.UNDEFINED;
-    statusA = _Runtime.callValue(getCollisionShapeValidationStatus, cast ([a] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(statusA, null) : Bool)) { return cast { kind: _Runtime.field(a, 'kind'), overlapping: false, shapeIndex: 0.0, status: statusA }; }
-    statusB = _Runtime.callValue(getCollisionShapeValidationStatus, cast ([b] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(statusB, null) : Bool)) { return cast { kind: _Runtime.field(b, 'kind'), overlapping: false, shapeIndex: 1.0, status: statusB }; }
-    overlapping = _Runtime.callValue(testCollision, cast ([a, b, { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false }] : Array<Dynamic>));
+    var statusA:Null<String> = cast _Runtime.UNDEFINED;
+    var statusB:Null<String> = cast _Runtime.UNDEFINED;
+    var overlapping:Bool = cast _Runtime.UNDEFINED;
+    statusA = (cast getCollisionShapeValidationStatus((cast a : CollisionShape)) : Null<String>);
+    if ((cast !_Runtime.strictEquals(statusA, null) : Bool)) { return cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; }
+    statusB = (cast getCollisionShapeValidationStatus((cast b : CollisionShape)) : Null<String>);
+    if ((cast !_Runtime.strictEquals(statusB, null) : Bool)) { return cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; }
+    overlapping = (cast testCollision((cast a : CollisionShape), (cast b : CollisionShape), { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false }) : Bool);
     return cast { kind: null, overlapping: overlapping, shapeIndex: null, status: ((cast overlapping : Bool) ? (cast 'overlapping' : Dynamic) : (cast 'separated' : Dynamic)) };
     return cast null;
   }

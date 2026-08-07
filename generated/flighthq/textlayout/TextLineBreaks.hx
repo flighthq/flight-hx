@@ -5,16 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class TextLineBreaks {
-  public static function getTextLineBreakIndex(lineBreaks:Array<Float>, startIndex:Dynamic = 0.0):Float {
-    var lo:Dynamic = cast _Runtime.UNDEFINED;
-    var hi:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getTextLineBreakIndex(lineBreaks:Array<Float>, startIndex:Float = 0.0):Float {
+    var lo:Float = cast _Runtime.UNDEFINED;
+    var hi:Float = cast _Runtime.UNDEFINED;
+    var result:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(lineBreaks, 'length'), 0.0) : Bool)) { return cast -1.0; }
     lo = 0.0;
     hi = _Runtime.subtractNumbers(_Runtime.field(lineBreaks, 'length'), 1.0);
     result = -1.0;
     while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
-      var mid:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), 1);
+      var mid:Float = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), 1);
       if ((cast ((cast flighthq._internal._StaticIndex.readArray(lineBreaks, mid) : Float) >= (cast startIndex : Float)) : Bool)) {
         (result = cast (flighthq._internal._StaticIndex.readArray(lineBreaks, mid) : Dynamic));
         (hi = cast ((mid - 1.0) : Dynamic));
@@ -27,12 +27,12 @@ class TextLineBreaks {
   }
 
   public static function getTextLineBreaks(out:Array<Float>, text:String):Void {
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     index = -1.0;
     while ((cast ((cast index : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
-      var lf:Dynamic = _Runtime.callProperty(text, 'indexOf', cast (['\n', (index + 1.0)] : Array<Dynamic>));
-      var cr:Dynamic = _Runtime.callProperty(text, 'indexOf', cast (['\r', (index + 1.0)] : Array<Dynamic>));
+      var lf:Float = _Runtime.callProperty(text, 'indexOf', cast (['\n', (index + 1.0)] : Array<Dynamic>));
+      var cr:Float = _Runtime.callProperty(text, 'indexOf', cast (['\r', (index + 1.0)] : Array<Dynamic>));
       if ((cast ((cast _Runtime.strictEquals(lf, -1.0) : Bool) && (cast _Runtime.strictEquals(cr, -1.0) : Bool)) : Bool)) { break; }
       (index = cast (((cast _Runtime.strictEquals(cr, -1.0) : Bool) ? (cast lf : Dynamic) : (cast ((cast _Runtime.strictEquals(lf, -1.0) : Bool) ? (cast cr : Dynamic) : (cast HxMath.min(cr, lf) : Dynamic)) : Dynamic)) : Dynamic));
       _Runtime.callProperty(out, 'push', cast ([index] : Array<Dynamic>));

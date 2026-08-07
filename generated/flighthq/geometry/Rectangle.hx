@@ -10,21 +10,21 @@ import flighthq.types.Vector2.Vector2Like;
 
 class Rectangle {
   public static function cloneRectangle(source:RectangleLike):flighthq.types.Rectangle {
-    return cast _Runtime.callValue(createRectangle, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    return cast (cast createRectangle((cast _Runtime.field(source, 'x') : Null<Float>), (cast _Runtime.field(source, 'y') : Null<Float>), (cast _Runtime.field(source, 'width') : Null<Float>), (cast _Runtime.field(source, 'height') : Null<Float>)) : flighthq.types.Rectangle);
     return cast null;
   }
 
   public static function computeRectangleIntersection(out:RectangleLike, a:RectangleLike, b:RectangleLike):Void {
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = HxMath.max(_Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)));
-    x1 = HxMath.min(_Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)));
-    y0 = HxMath.max(_Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)));
-    y1 = HxMath.min(_Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)));
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
+    x0 = HxMath.max((cast getRectangleMinX((cast a : RectangleLike)) : Float), (cast getRectangleMinX((cast b : RectangleLike)) : Float));
+    x1 = HxMath.min((cast getRectangleMaxX((cast a : RectangleLike)) : Float), (cast getRectangleMaxX((cast b : RectangleLike)) : Float));
+    y0 = HxMath.max((cast getRectangleMinY((cast a : RectangleLike)) : Float), (cast getRectangleMinY((cast b : RectangleLike)) : Float));
+    y1 = HxMath.min((cast getRectangleMaxY((cast a : RectangleLike)) : Float), (cast getRectangleMaxY((cast b : RectangleLike)) : Float));
     if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(setEmptyRectangle, cast ([out] : Array<Dynamic>));
+      setEmptyRectangle((cast out : RectangleLike));
       return;
     }
     _Runtime.setField(out, 'x', x0);
@@ -34,15 +34,15 @@ class Rectangle {
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
-    return cast _Runtime.callValue(containsRectanglePointXY, cast ([source, vector.x, vector.y] : Array<Dynamic>));
+    return cast (cast containsRectanglePointXY((cast source : RectangleLike), (cast vector.x : Float), (cast vector.y : Float)) : Bool);
     return cast null;
   }
 
   public static function containsRectanglePointXY(source:RectangleLike, x:Float, y:Float):Bool {
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
     x0 = HxMath.min(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
     x1 = HxMath.max(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
     y0 = HxMath.min(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
@@ -61,19 +61,19 @@ class Rectangle {
   }
 
   public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):flighthq.types.Rectangle {
-    return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), width: _Runtime.coalesce(width, function():Dynamic return cast 0.0), height: _Runtime.coalesce(height, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), width: _Runtime.coalesce(width, function():Dynamic return cast 0.0), height: _Runtime.coalesce(height, function():Dynamic return cast 0.0) } : Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>)) : flighthq.types.Rectangle);
     return cast null;
   }
 
   public static function enclosesRectangle(source:RectangleLike, other:RectangleLike):Bool {
-    var sx0:Dynamic = cast _Runtime.UNDEFINED;
-    var sx1:Dynamic = cast _Runtime.UNDEFINED;
-    var sy0:Dynamic = cast _Runtime.UNDEFINED;
-    var sy1:Dynamic = cast _Runtime.UNDEFINED;
-    var ox0:Dynamic = cast _Runtime.UNDEFINED;
-    var ox1:Dynamic = cast _Runtime.UNDEFINED;
-    var oy0:Dynamic = cast _Runtime.UNDEFINED;
-    var oy1:Dynamic = cast _Runtime.UNDEFINED;
+    var sx0:Float = cast _Runtime.UNDEFINED;
+    var sx1:Float = cast _Runtime.UNDEFINED;
+    var sy0:Float = cast _Runtime.UNDEFINED;
+    var sy1:Float = cast _Runtime.UNDEFINED;
+    var ox0:Float = cast _Runtime.UNDEFINED;
+    var ox1:Float = cast _Runtime.UNDEFINED;
+    var oy0:Float = cast _Runtime.UNDEFINED;
+    var oy1:Float = cast _Runtime.UNDEFINED;
     sx0 = HxMath.min(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
     sx1 = HxMath.max(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
     sy0 = HxMath.min(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
@@ -94,7 +94,7 @@ class Rectangle {
   }
 
   public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
-    _Runtime.callValue(inflateRectangle, cast ([out, sourceRect, sourceVec2.x, sourceVec2.y] : Array<Dynamic>));
+    inflateRectangle((cast out : RectangleLike), (cast sourceRect : RectangleLike), (cast sourceVec2.x : Float), (cast sourceVec2.y : Float));
   }
 
   public static function getRectangleBottom(source:RectangleLike):Float {
@@ -133,13 +133,13 @@ class Rectangle {
   }
 
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (_Runtime.callValue(getRectangleMaxX, cast ([source] : Array<Dynamic>)) : Dynamic));
-    (out.y = cast (_Runtime.callValue(getRectangleMaxY, cast ([source] : Array<Dynamic>)) : Dynamic));
+    (out.x = cast ((cast getRectangleMaxX((cast source : RectangleLike)) : Float) : Dynamic));
+    (out.y = cast ((cast getRectangleMaxY((cast source : RectangleLike)) : Float) : Dynamic));
   }
 
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (_Runtime.callValue(getRectangleMinX, cast ([source] : Array<Dynamic>)) : Dynamic));
-    (out.y = cast (_Runtime.callValue(getRectangleMinY, cast ([source] : Array<Dynamic>)) : Dynamic));
+    (out.x = cast ((cast getRectangleMinX((cast source : RectangleLike)) : Float) : Dynamic));
+    (out.y = cast ((cast getRectangleMinY((cast source : RectangleLike)) : Float) : Dynamic));
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
@@ -170,7 +170,7 @@ class Rectangle {
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
-    return cast !(cast _Runtime.orValue(((cast ((cast ((cast _Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)) : Float) <= (cast _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)) : Float)) : Bool) || (cast ((cast _Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)) : Float) >= (cast _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)) : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)) : Float) <= (cast _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)) : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)) : Float) >= (cast _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)) : Float))) : Bool);
+    return cast !(cast _Runtime.orValue(((cast ((cast ((cast (cast getRectangleMaxX((cast a : RectangleLike)) : Float) : Float) <= (cast (cast getRectangleMinX((cast b : RectangleLike)) : Float) : Float)) : Bool) || (cast ((cast (cast getRectangleMinX((cast a : RectangleLike)) : Float) : Float) >= (cast (cast getRectangleMaxX((cast b : RectangleLike)) : Float) : Float)) : Bool)) : Bool) || (cast ((cast (cast getRectangleMaxY((cast a : RectangleLike)) : Float) : Float) <= (cast (cast getRectangleMinY((cast b : RectangleLike)) : Float) : Float)) : Bool)), function():Dynamic return cast ((cast (cast getRectangleMinY((cast a : RectangleLike)) : Float) : Float) >= (cast (cast getRectangleMaxY((cast b : RectangleLike)) : Float) : Float))) : Bool);
     return cast null;
   }
 
@@ -191,17 +191,17 @@ class Rectangle {
 
   public static function mergeRectangle(out:RectangleLike, source:RectangleLike, other:RectangleLike):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var ow:Dynamic = cast _Runtime.UNDEFINED;
-    var oh:Dynamic = cast _Runtime.UNDEFINED;
-    var sEmpty:Dynamic = cast _Runtime.UNDEFINED;
-    var oEmpty:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var ow:Float = cast _Runtime.UNDEFINED;
+    var oh:Float = cast _Runtime.UNDEFINED;
+    var sEmpty:Bool = cast _Runtime.UNDEFINED;
+    var oEmpty:Bool = cast _Runtime.UNDEFINED;
     __destructure0 = source;
     sx = _Runtime.field(__destructure0, 'x');
     sy = _Runtime.field(__destructure0, 'y');
@@ -221,18 +221,18 @@ class Rectangle {
       _Runtime.setField(out, 'width', ((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)));
       _Runtime.setField(out, 'height', ((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)));
     } else {
-      var sourceLeft:Dynamic = HxMath.min(sx, (sx + sw));
-      var sourceRight:Dynamic = HxMath.max(sx, (sx + sw));
-      var sourceTop:Dynamic = HxMath.min(sy, (sy + sh));
-      var sourceBottom:Dynamic = HxMath.max(sy, (sy + sh));
-      var otherLeft:Dynamic = HxMath.min(ox, (ox + ow));
-      var otherRight:Dynamic = HxMath.max(ox, (ox + ow));
-      var otherTop:Dynamic = HxMath.min(oy, (oy + oh));
-      var otherBottom:Dynamic = HxMath.max(oy, (oy + oh));
-      var x0:Dynamic = HxMath.min(sourceLeft, otherLeft);
-      var x1:Dynamic = HxMath.max(sourceRight, otherRight);
-      var y0:Dynamic = HxMath.min(sourceTop, otherTop);
-      var y1:Dynamic = HxMath.max(sourceBottom, otherBottom);
+      var sourceLeft:Float = HxMath.min(sx, (sx + sw));
+      var sourceRight:Float = HxMath.max(sx, (sx + sw));
+      var sourceTop:Float = HxMath.min(sy, (sy + sh));
+      var sourceBottom:Float = HxMath.max(sy, (sy + sh));
+      var otherLeft:Float = HxMath.min(ox, (ox + ow));
+      var otherRight:Float = HxMath.max(ox, (ox + ow));
+      var otherTop:Float = HxMath.min(oy, (oy + oh));
+      var otherBottom:Float = HxMath.max(oy, (oy + oh));
+      var x0:Float = HxMath.min(sourceLeft, otherLeft);
+      var x1:Float = HxMath.max(sourceRight, otherRight);
+      var y0:Float = HxMath.min(sourceTop, otherTop);
+      var y1:Float = HxMath.max(sourceBottom, otherBottom);
       _Runtime.setField(out, 'x', x0);
       _Runtime.setField(out, 'y', y0);
       _Runtime.setField(out, 'width', (x1 - x0));
@@ -241,14 +241,14 @@ class Rectangle {
   }
 
   public static function normalizeRectangle(out:RectangleLike, source:RectangleLike):Void {
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    maxX = _Runtime.callValue(getRectangleMaxX, cast ([source] : Array<Dynamic>));
-    maxY = _Runtime.callValue(getRectangleMaxY, cast ([source] : Array<Dynamic>));
-    minX = _Runtime.callValue(getRectangleMinX, cast ([source] : Array<Dynamic>));
-    minY = _Runtime.callValue(getRectangleMinY, cast ([source] : Array<Dynamic>));
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    maxX = (cast getRectangleMaxX((cast source : RectangleLike)) : Float);
+    maxY = (cast getRectangleMaxY((cast source : RectangleLike)) : Float);
+    minX = (cast getRectangleMinX((cast source : RectangleLike)) : Float);
+    minY = (cast getRectangleMinY((cast source : RectangleLike)) : Float);
     _Runtime.setField(out, 'x', minX);
     _Runtime.setField(out, 'y', minY);
     _Runtime.setField(out, 'width', (maxX - minX));

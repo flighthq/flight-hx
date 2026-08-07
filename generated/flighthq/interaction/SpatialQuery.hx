@@ -6,23 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Node.getNodeRuntime;
+import flighthq.types.Node;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Rectangle;
 
 class SpatialQuery {
   public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
-    var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.field(root, 'enabled') : Bool) : Bool)) { return cast out; }
-    worldBounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([root] : Array<Dynamic>));
-    if ((cast _Runtime.callValue(intersectsRectangle, cast ([worldBounds, rect] : Array<Dynamic>)) : Bool)) {
+    var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
+    worldBounds = (cast getNodeWorldBoundsRectangle(root) : Rectangle);
+    if ((cast (cast intersectsRectangle(worldBounds, rect) : Bool) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
+    children = _Runtime.field((cast getNodeRuntime(root) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        _Runtime.callValue(hitTestAreaQuery, cast ([(cast child : Node2D), rect, out] : Array<Dynamic>));
+        (cast hitTestAreaQuery((cast (cast child : Node2D) : Node2D), (cast rect : Rectangle), (cast out : Array<Node2D>)) : Array<Node2D>);
       }
     }
     return cast out;
@@ -31,14 +34,14 @@ class SpatialQuery {
 
   public static function hitTestAreaQueryCircle(root:Node2D, cx:Float, cy:Float, radius:Float, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var nearX:Dynamic = cast _Runtime.UNDEFINED;
-    var nearY:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.field(root, 'enabled') : Bool) : Bool)) { return cast out; }
-    b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([root] : Array<Dynamic>));
+    var b:Rectangle = cast _Runtime.UNDEFINED;
+    var nearX:Float = cast _Runtime.UNDEFINED;
+    var nearY:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
+    b = (cast getNodeWorldBoundsRectangle(root) : Rectangle);
     nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width'))));
     nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height'))));
     dx = (cx - nearX);
@@ -46,10 +49,10 @@ class SpatialQuery {
     if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (radius * radius) : Float)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)), 'children');
+    children = _Runtime.field((cast getNodeRuntime(root) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        _Runtime.callValue(hitTestAreaQueryCircle, cast ([(cast child : Node2D), cx, cy, radius, out] : Array<Dynamic>));
+        (cast hitTestAreaQueryCircle((cast (cast child : Node2D) : Node2D), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast out : Array<Node2D>)) : Array<Node2D>);
       }
     }
     return cast out;

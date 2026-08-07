@@ -7,5 +7,5 @@ import flighthq.types.Light;
 import flighthq.types.Vector3;
 
 class _AreaLightValues {
-  public static final AreaLightKind:Dynamic = 'AreaLight';
+  public static final AreaLightKind:String = 'AreaLight';
 }

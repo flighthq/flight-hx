@@ -9,11 +9,12 @@ import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class Aabb {
   public static function cloneAabb(source:AabbLike):flighthq.types.Aabb {
-    return cast _Runtime.callValue(createAabb, cast ([source.min.x, source.min.y, source.min.z, source.max.x, source.max.y, source.max.z] : Array<Dynamic>));
+    return cast (cast createAabb((cast source.min.x : Null<Float>), (cast source.min.y : Null<Float>), (cast source.min.z : Null<Float>), (cast source.max.x : Null<Float>), (cast source.max.y : Null<Float>), (cast source.max.z : Null<Float>)) : flighthq.types.Aabb);
     return cast null;
   }
 
@@ -32,18 +33,18 @@ class Aabb {
   }
 
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flighthq.types.Aabb {
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY), _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY), _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY)] : Array<Dynamic>));
-    max = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY), _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY), _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY)] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ max: max, min: min }] : Array<Dynamic>));
+    var min:Vector3 = cast _Runtime.UNDEFINED;
+    var max:Vector3 = cast _Runtime.UNDEFINED;
+    min = (cast createVector3((cast _Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Null<Float>), (cast _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Null<Float>), (cast _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Null<Float>)) : Vector3);
+    max = (cast createVector3((cast _Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY) : Null<Float>), (cast _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY) : Null<Float>), (cast _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY) : Null<Float>)) : Vector3);
+    return cast (cast createEntity({ max: max, min: min }) : flighthq.types.Aabb);
     return cast null;
   }
 
   public static function expandAabbByPoint(out:AabbLike, aabb:AabbLike, point:Vector3Like):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -56,10 +57,10 @@ class Aabb {
   }
 
   public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.min.x = cast (aabb.min.x : Dynamic));
       (out.min.y = cast (aabb.min.y : Dynamic));
@@ -100,9 +101,9 @@ class Aabb {
   }
 
   public static function getClosestPointOnAabb(out:Vector3Like, aabb:AabbLike, point:Vector3Like):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -112,18 +113,18 @@ class Aabb {
   }
 
   public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
-    var aMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var aMinZ:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinZ:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxZ:Dynamic = cast _Runtime.UNDEFINED;
+    var aMinX:Float = cast _Runtime.UNDEFINED;
+    var aMinY:Float = cast _Runtime.UNDEFINED;
+    var aMinZ:Float = cast _Runtime.UNDEFINED;
+    var aMaxX:Float = cast _Runtime.UNDEFINED;
+    var aMaxY:Float = cast _Runtime.UNDEFINED;
+    var aMaxZ:Float = cast _Runtime.UNDEFINED;
+    var bMinX:Float = cast _Runtime.UNDEFINED;
+    var bMinY:Float = cast _Runtime.UNDEFINED;
+    var bMinZ:Float = cast _Runtime.UNDEFINED;
+    var bMaxX:Float = cast _Runtime.UNDEFINED;
+    var bMaxY:Float = cast _Runtime.UNDEFINED;
+    var bMaxZ:Float = cast _Runtime.UNDEFINED;
     aMinX = a.min.x;
     aMinY = a.min.y;
     aMinZ = a.min.z;
@@ -159,12 +160,12 @@ class Aabb {
   }
 
   public static function setAabbFromPoints(out:AabbLike, points:Array<Vector3Like>):Void {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     minZ = HxMath.POSITIVE_INFINITY;
@@ -172,9 +173,9 @@ class Aabb {
     maxY = HxMath.NEGATIVE_INFINITY;
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        var p:Dynamic = flighthq._internal._StaticIndex.readArray(points, i);
+        var p:Vector3Like = flighthq._internal._StaticIndex.readArray(points, i);
         if ((cast ((cast p.x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (p.x : Dynamic)); }
         if ((cast ((cast p.y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (p.y : Dynamic)); }
         if ((cast ((cast p.z : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (p.z : Dynamic)); }
@@ -193,25 +194,25 @@ class Aabb {
   }
 
   public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var ez:Dynamic = cast _Runtime.UNDEFINED;
-    var _m:Dynamic = cast _Runtime.UNDEFINED;
-    var tcx:Dynamic = cast _Runtime.UNDEFINED;
-    var tcy:Dynamic = cast _Runtime.UNDEFINED;
-    var tcz:Dynamic = cast _Runtime.UNDEFINED;
-    var tex:Dynamic = cast _Runtime.UNDEFINED;
-    var tey:Dynamic = cast _Runtime.UNDEFINED;
-    var tez:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var ez:Float = cast _Runtime.UNDEFINED;
+    var _m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var tcx:Float = cast _Runtime.UNDEFINED;
+    var tcy:Float = cast _Runtime.UNDEFINED;
+    var tcz:Float = cast _Runtime.UNDEFINED;
+    var tex:Float = cast _Runtime.UNDEFINED;
+    var tey:Float = cast _Runtime.UNDEFINED;
+    var tez:Float = cast _Runtime.UNDEFINED;
     minX = aabb.min.x;
     minY = aabb.min.y;
     minZ = aabb.min.z;
@@ -240,18 +241,18 @@ class Aabb {
   }
 
   public static function unionAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
-    var aMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var aMinZ:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinZ:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxZ:Dynamic = cast _Runtime.UNDEFINED;
+    var aMinX:Float = cast _Runtime.UNDEFINED;
+    var aMinY:Float = cast _Runtime.UNDEFINED;
+    var aMinZ:Float = cast _Runtime.UNDEFINED;
+    var aMaxX:Float = cast _Runtime.UNDEFINED;
+    var aMaxY:Float = cast _Runtime.UNDEFINED;
+    var aMaxZ:Float = cast _Runtime.UNDEFINED;
+    var bMinX:Float = cast _Runtime.UNDEFINED;
+    var bMinY:Float = cast _Runtime.UNDEFINED;
+    var bMinZ:Float = cast _Runtime.UNDEFINED;
+    var bMaxX:Float = cast _Runtime.UNDEFINED;
+    var bMaxY:Float = cast _Runtime.UNDEFINED;
+    var bMaxZ:Float = cast _Runtime.UNDEFINED;
     aMinX = a.min.x;
     aMinY = a.min.y;
     aMinZ = a.min.z;

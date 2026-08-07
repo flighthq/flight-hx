@@ -7,14 +7,14 @@ import flighthq.types.TextFormat;
 
 class TextFormatFont {
   public static function computeTextFormatFontString(format:TextFormat):String {
-    var style:Dynamic = cast _Runtime.UNDEFINED;
-    var weight:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var family:Dynamic = cast _Runtime.UNDEFINED;
-    style = _Runtime.select(_Runtime.field(format, 'italic'), function():Dynamic return cast 'italic', function():Dynamic return cast 'normal');
-    weight = _Runtime.select(_Runtime.field(format, 'bold'), function():Dynamic return cast 'bold', function():Dynamic return cast 'normal');
-    size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
-    family = _Runtime.coalesce(_Runtime.field(format, 'font'), function():Dynamic return cast 'sans-serif');
+    var style:String = cast _Runtime.UNDEFINED;
+    var weight:String = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var family:String = cast _Runtime.UNDEFINED;
+    style = _Runtime.select((cast format : TextFormat).italic, function():Dynamic return cast 'italic', function():Dynamic return cast 'normal');
+    weight = _Runtime.select((cast format : TextFormat).bold, function():Dynamic return cast 'bold', function():Dynamic return cast 'normal');
+    size = _Runtime.coalesce((cast format : TextFormat).size, function():Dynamic return cast 12.0);
+    family = _Runtime.coalesce((cast format : TextFormat).font, function():Dynamic return cast 'sans-serif');
     return cast '' + Std.string(style) + ' ' + Std.string(weight) + ' ' + Std.string(size) + 'px ' + Std.string(family) + '';
     return cast null;
   }

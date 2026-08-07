@@ -5,18 +5,42 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.AnisotropyPbrExtension.createAnisotropyPbrExtension;
 import flighthq.scene3dFormats.GltfMaterialExtension.attachGltfPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
+import flighthq.types.GltfSchema.GltfTextureInfo;
+import flighthq.types.PbrExtension;
+import flighthq.types.Sampler;
+import flighthq.types.Scene3DDocument;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class GltfAnisotropy {
-  public static final GltfAnisotropyExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfAnisotropyExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_anisotropy');
+        var block:Null<GltfMaterialsAnisotropy> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_anisotropy');
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        _Runtime.callValue(attachGltfPbrExtension, cast ([_Runtime.field(context, 'document'), i, _Runtime.callValue(createAnisotropyPbrExtension, cast ([{ anisotropyMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'anisotropyTexture'), 'linear'] : Array<Dynamic>)), anisotropyRotation: _Runtime.coalesce(_Runtime.field(block, 'anisotropyRotation'), function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce(_Runtime.field(block, 'anisotropyStrength'), function():Dynamic return cast 0.0) }] : Array<Dynamic>))] : Array<Dynamic>));
+        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createAnisotropyPbrExtension((cast { anisotropyMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsAnisotropy).anisotropyTexture, 'linear'] : Array<Dynamic>)), anisotropyRotation: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyRotation, function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyStrength, function():Dynamic return cast 0.0) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
         i++;
       }
     }

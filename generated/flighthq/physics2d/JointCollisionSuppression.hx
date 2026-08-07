@@ -3,34 +3,36 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Physics2D.Physics2DJoint;
+import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DWorld;
 
 class JointCollisionSuppression {
   public static function isPhysics2DPairJointSuppressed(world:Physics2DWorld, bodyA:Float, bodyB:Float):Bool {
-    var first:Dynamic = cast _Runtime.UNDEFINED;
-    var second:Dynamic = cast _Runtime.UNDEFINED;
+    var first:Float = cast _Runtime.UNDEFINED;
+    var second:Float = cast _Runtime.UNDEFINED;
     first = HxMath.min(bodyA, bodyB);
     second = HxMath.max(bodyA, bodyB);
-    return cast ((cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast _Runtime.field(world, 'jointCollisionSuppressions') : flighthq._internal._Map).get(first)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(second)); }), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float));
+    return cast ((cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast _Runtime.field(world, 'jointCollisionSuppressions') : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).get(first)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<Float, Float>).get(second)); }), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float));
     return cast null;
   }
 
   public static function rebuildPhysics2DJointCollisionSuppressions(world:Physics2DWorld):Void {
-    var suppressions:Dynamic = cast _Runtime.UNDEFINED;
-    suppressions = _Runtime.field(world, 'jointCollisionSuppressions');
-    ((cast suppressions : flighthq._internal._Map).clear());
-    for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
-      if ((cast _Runtime.field(joint, 'collideConnected') : Bool)) { continue; }
-      var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
-      if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(solver, 'usesBodyA'), false) : Bool)) : Bool)) { continue; }
-      var first:Dynamic = HxMath.min(_Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'));
-      var second:Dynamic = HxMath.max(_Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'));
-      var seconds:Dynamic = ((cast suppressions : flighthq._internal._Map).get(first));
+    var suppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>> = cast _Runtime.UNDEFINED;
+    suppressions = (cast world : Physics2DWorld).jointCollisionSuppressions;
+    ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).clear());
+    for (joint in _Runtime.iterable((cast world : Physics2DWorld).joints)) {
+      if ((cast (cast joint : Physics2DJoint).collideConnected : Bool)) { continue; }
+      var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
+      if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool)) : Bool)) { continue; }
+      var first:Float = HxMath.min((cast joint : Physics2DJoint).bodyA, (cast joint : Physics2DJoint).bodyB);
+      var second:Float = HxMath.max((cast joint : Physics2DJoint).bodyA, (cast joint : Physics2DJoint).bodyB);
+      var seconds:Null<flighthq._internal._Map<Float, Float>> = ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).get(first));
       if ((cast _Runtime.strictEquals(seconds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (seconds = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-        ((cast suppressions : flighthq._internal._Map).set(first, seconds));
+        ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).set(first, seconds));
       }
-      ((cast seconds : flighthq._internal._Map).set(second, _Runtime.addNumbers(_Runtime.coalesce(((cast seconds : flighthq._internal._Map).get(second)), function():Dynamic return cast 0.0), 1.0)));
+      ((cast seconds : flighthq._internal._Map<Float, Float>).set(second, _Runtime.addNumbers(_Runtime.coalesce(((cast seconds : flighthq._internal._Map<Float, Float>).get(second)), function():Dynamic return cast 0.0), 1.0)));
     }
   }
 }

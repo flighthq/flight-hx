@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ResourceLoadItem<T> = { @:optional var bytesHint:Float; @:optional var group:String; @:optional var key:String; var load:Dynamic; @:optional var onBytesProgress:Dynamic; @:optional var priority:Float; @:optional var retries:Float; @:optional var timeoutMs:Float; @:optional var weight:Float; };
+typedef ResourceLoadItem<T> = { @:optional var bytesHint:Float; @:optional var group:String; @:optional var key:String; var load:flighthq._internal.dom.AbortSignal->ResourceLoadBytesReporter->flighthq._internal._Promise<T>; @:optional var onBytesProgress:Float->Float->Void; @:optional var priority:Float; @:optional var retries:Float; @:optional var timeoutMs:Float; @:optional var weight:Float; };

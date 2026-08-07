@@ -8,8 +8,8 @@ import flighthq.types.Tilemap.TilemapData;
 
 typedef TiledCompression = String;
 
-typedef TiledInflate = Dynamic;
+typedef TiledInflate = flighthq._internal._UInt8Array->TiledCompression->Null<flighthq._internal._UInt8Array>;
 
 typedef TiledParseOptions = { @:optional var inflate:TiledInflate; };
 
-typedef TiledTilesetResolver = Dynamic;
+typedef TiledTilesetResolver = TiledTilesetRef->Null<Dynamic>;

@@ -6,135 +6,137 @@ import flighthq._internal._Runtime;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorAppInfo;
+import flighthq.types.CapacitorApi.CapacitorAppPlugin;
 import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 
 class CapacitorApp {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
-    var app:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedName:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedVersion:Dynamic = cast _Runtime.UNDEFINED;
-    app = _Runtime.field(capacitor, 'app');
+    var app:CapacitorAppPlugin = cast _Runtime.UNDEFINED;
+    var cachedName:String = cast _Runtime.UNDEFINED;
+    var cachedVersion:String = cast _Runtime.UNDEFINED;
+    app = (cast capacitor : CapacitorApi).app;
     cachedName = '';
     cachedVersion = '';
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
-      (cachedName = cast (_Runtime.field(info, 'name') : Dynamic));
-      (cachedVersion = cast (_Runtime.field(info, 'version') : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast app : CapacitorAppPlugin).getInfo(), 'then', cast ([function(info:CapacitorAppInfo):Void {
+      (cachedName = cast ((cast info : CapacitorAppInfo).name : Dynamic));
+      (cachedVersion = cast ((cast info : CapacitorAppInfo).version : Dynamic));
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { addRecentDocument: function() {
+    return cast { addRecentDocument: function():Void {
 
-    }, bounceDock: function() {
+    }, bounceDock: function():Float {
       return cast -1.0;
-    }, cancelAttention: function() {
+    }, cancelAttention: function():Void {
 
-    }, cancelDockBounce: function() {
+    }, cancelDockBounce: function():Void {
 
-    }, clearRecentDocuments: function() {
+    }, clearRecentDocuments: function():Void {
 
-    }, focus: function() {
+    }, focus: function():Void {
 
-    }, getAppDirectoryPath: function() {
+    }, getAppDirectoryPath: function():String {
       return cast '';
-    }, getAppPath: function() {
+    }, getAppPath: function():String {
       return cast '';
-    }, getCommandLine: function() {
+    }, getCommandLine: function():Array<flighthq._internal._Any> {
       return cast cast ([] : Array<Dynamic>);
-    }, getExecutablePath: function() {
+    }, getExecutablePath: function():String {
       return cast '';
-    }, getLocale: function() {
+    }, getLocale: function():String {
       return cast '';
-    }, getLoginItem: function() {
+    }, getLoginItem: function():AppLoginItem {
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
       out = { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) };
       return cast out;
-    }, getName: function() {
+    }, getName: function():String {
       return cast cachedName;
-    }, getPreferredSystemLanguages: function() {
+    }, getPreferredSystemLanguages: function():Array<flighthq._internal._Any> {
       return cast cast ([] : Array<Dynamic>);
-    }, getSystemLocale: function() {
+    }, getSystemLocale: function():String {
       return cast '';
-    }, getVersion: function() {
+    }, getVersion: function():String {
       return cast cachedVersion;
-    }, hasSingleInstanceLock: function() {
+    }, hasSingleInstanceLock: function():Bool {
       return cast false;
-    }, hideApp: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'minimizeApp', cast ([] : Array<Dynamic>)), function() {
+    }, hideApp: function():Bool {
+      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).minimizeApp(), function():Void {
 
       });
       return cast true;
-    }, isAppHidden: function() {
+    }, isAppHidden: function():Bool {
       return cast false;
-    }, quit: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'exitApp', cast ([] : Array<Dynamic>)), function() {
+    }, quit: function():Void {
+      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).exitApp(), function():Void {
 
       });
-    }, relaunch: function() {
+    }, relaunch: function():Void {
 
-    }, releaseSingleInstanceLock: function() {
+    }, releaseSingleInstanceLock: function():Void {
 
-    }, requestAttention: function() {
+    }, requestAttention: function():Float {
       return cast -1.0;
-    }, requestSingleInstanceLock: function() {
+    }, requestSingleInstanceLock: function():Bool {
       return cast true;
-    }, setActivationPolicy: function() {
+    }, setActivationPolicy: function():Void {
 
-    }, setBadgeCount: function() {
+    }, setBadgeCount: function():Bool {
       return cast false;
-    }, setDockBadge: function() {
+    }, setDockBadge: function():Void {
 
-    }, setDockMenu: function() {
+    }, setDockMenu: function():Void {
 
-    }, setLoginItem: function() {
+    }, setLoginItem: function():Bool {
       return cast false;
-    }, setName: function() {
+    }, setName: function():Bool {
       return cast false;
-    }, setUserModelId: function() {
+    }, setUserModelId: function():Bool {
       return cast false;
-    }, showApp: function() {
+    }, showApp: function():Bool {
       return cast false;
-    }, subscribeActivate: function(listener:Dynamic) {
-      return cast _Runtime.callValue(CapacitorApp.toUnsubscribe__capacitorApp, cast ([_Runtime.callProperty(app, 'addListener', cast (['appStateChange', function(state:Dynamic) {
-        if ((cast _Runtime.field(state, 'isActive') : Bool)) { _Runtime.callValue(listener, cast ([] : Array<Dynamic>)); }
-      }] : Array<Dynamic>))] : Array<Dynamic>));
-    }, subscribeAllWindowsClosed: function() {
-      return cast function() {
+    }, subscribeActivate: function(listener:Void->Void):Void->Void {
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener('appStateChange', function(state:{ var isActive:Bool; }):Void {
+        if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
+      }) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+    }, subscribeAllWindowsClosed: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeOpenFile: function(listener:Dynamic) {
-      return cast _Runtime.callValue(CapacitorApp.toUnsubscribe__capacitorApp, cast ([_Runtime.callProperty(app, 'addListener', cast (['appUrlOpen', function(event:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.field(event, 'url')] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
-    }, subscribeQuitRequest: function() {
-      return cast function() {
+    }, subscribeOpenFile: function(listener:String->Void):Void->Void {
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener('appUrlOpen', function(event:{ var url:String; }):Void return listener((cast (cast event : { var url:String; }).url : String))) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+    }, subscribeQuitRequest: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeReady: function() {
-      return cast function() {
+    }, subscribeReady: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeSecondInstance: function() {
-      return cast function() {
+    }, subscribeSecondInstance: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
     return cast null;
   }
 
-  public static function toUnsubscribe__capacitorApp(handlePromise:flighthq._internal._Promise<CapacitorPluginListenerHandle>):Dynamic {
-    var removed:Dynamic = cast _Runtime.UNDEFINED;
+  public static function toUnsubscribe__capacitorApp(handlePromise:flighthq._internal._Promise<CapacitorPluginListenerHandle>):Void->Void {
+    var removed:Bool = cast _Runtime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast _Runtime.UNDEFINED;
     removed = false;
     handle = null;
-    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:CapacitorPluginListenerHandle):Void {
       (handle = cast (resolved : Dynamic));
-      if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
 
       }); }
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast function() {
+    return cast function():Void {
       (removed = cast (true : Dynamic));
-      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
 
       }); }
     };

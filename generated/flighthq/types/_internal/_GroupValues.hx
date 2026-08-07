@@ -7,5 +7,5 @@ import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
 
 class _GroupValues {
-  public static final GroupKind:Dynamic = 'Group';
+  public static final GroupKind:String = 'Group';
 }

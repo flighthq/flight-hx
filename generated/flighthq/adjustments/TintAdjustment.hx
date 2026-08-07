@@ -7,11 +7,11 @@ import flighthq.types.TintAdjustment;
 
 class TintAdjustment {
   public static function createTintAdjustment(rgba:Float):flighthq.types.TintAdjustment {
-    var redScale:Dynamic = cast _Runtime.UNDEFINED;
-    var greenScale:Dynamic = cast _Runtime.UNDEFINED;
-    var blueScale:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaScale:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var redScale:Float = cast _Runtime.UNDEFINED;
+    var greenScale:Float = cast _Runtime.UNDEFINED;
+    var blueScale:Float = cast _Runtime.UNDEFINED;
+    var alphaScale:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     redScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 24)) & 255) / 255.0);
     greenScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 16)) & 255) / 255.0);
     blueScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 8)) & 255) / 255.0);

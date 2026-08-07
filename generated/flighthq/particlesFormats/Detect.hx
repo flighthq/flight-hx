@@ -19,10 +19,10 @@ import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKin
 
 class Detect {
   public static function detectParticleFormat(text:String):Null<ParticleFormatKind> {
-    var trimmed:Dynamic = cast _Runtime.UNDEFINED;
-    var firstLine:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    var obj:Dynamic = cast _Runtime.UNDEFINED;
+    var trimmed:String = cast _Runtime.UNDEFINED;
+    var firstLine:String = cast _Runtime.UNDEFINED;
+    var raw:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var obj:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool)) { return cast null; }
     trimmed = _Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>));
     firstLine = _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(trimmed, 'split', cast (['\n'] : Array<Dynamic>)), 0.0), 'trim', cast ([] : Array<Dynamic>));
@@ -38,30 +38,30 @@ class Detect {
       return cast null;
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) { return cast null; }
-    obj = (cast raw : Dynamic);
-    if ((cast ((cast ((cast ((cast ((cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startLifetime')] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSpeed')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.callValue(Detect.hasMinMaxCurveMode__detect, cast ([_Runtime.field(obj, 'startSize')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'gravityModifier')), 'number') : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'looping')), 'boolean'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'startLifetime'), _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
+    obj = (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>);
+    if ((cast ((cast ((cast ((cast ((cast (cast Detect.hasMinMaxCurveMode__detect((cast _Runtime.field(obj, 'startLifetime') : flighthq._internal._Any)) : Bool) : Bool) || (cast (cast Detect.hasMinMaxCurveMode__detect((cast _Runtime.field(obj, 'startSpeed') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) || (cast (cast Detect.hasMinMaxCurveMode__detect((cast _Runtime.field(obj, 'startSize') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'gravityModifier')), 'number') : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'looping')), 'boolean'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(obj, 'startLifetime'), _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
       return cast UnityParticleFormatKind;
     }
     if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(obj, 'pos'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'alpha')), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(obj, 'alpha'), null) : Bool)) : Bool) && (cast _Runtime.orValue(_Runtime.hasField(_Runtime.field(obj, 'alpha'), 'start'), function():Dynamic return cast _Runtime.hasField(_Runtime.field(obj, 'alpha'), 'end')) : Bool)) : Bool)) {
       return cast PixiParticleFormatKind;
     }
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'continuous')), 'boolean') : Bool) || (cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'emission')] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.callValue(Detect.isRangeObject__detect, cast ([_Runtime.field(obj, 'life')] : Array<Dynamic>)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(obj, 'continuous')), 'boolean') : Bool) || (cast (cast Detect.isRangeObject__detect((cast _Runtime.field(obj, 'emission') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) || (cast (cast Detect.isRangeObject__detect((cast _Runtime.field(obj, 'life') : flighthq._internal._Any)) : Bool) : Bool)) : Bool)) {
       return cast SpineParticleFormatKind;
     }
     return cast null;
     return cast null;
   }
 
-  public static function hasMinMaxCurveMode__detect(val:Dynamic):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(val, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(val), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast val : { @:optional var mode:Dynamic; }), 'mode')), 'string') : Bool));
+  public static function hasMinMaxCurveMode__detect(val:flighthq._internal._Any):Bool {
+    return cast ((cast ((cast !_Runtime.strictEquals(val, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(val), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast val : { @:optional var mode:flighthq._internal._Any; }) : { @:optional var mode:flighthq._internal._Any; }).mode), 'string') : Bool));
     return cast null;
   }
 
-  public static function isRangeObject__detect(val:Dynamic):Bool {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+  public static function isRangeObject__detect(val:flighthq._internal._Any):Bool {
+    var o:{ @:optional var low:flighthq._internal._Any; @:optional var high:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(val, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(val), 'object') : Bool)) : Bool)) { return cast false; }
-    o = (cast val : { @:optional var low:Dynamic; @:optional var high:Dynamic; });
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool));
+    o = (cast val : { @:optional var low:flighthq._internal._Any; @:optional var high:flighthq._internal._Any; });
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var low:flighthq._internal._Any; @:optional var high:flighthq._internal._Any; }).low), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var low:flighthq._internal._Any; @:optional var high:flighthq._internal._Any; }).high), 'number') : Bool));
     return cast null;
   }
 }

@@ -5,34 +5,35 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class WgpuMipmap {
   @:noCompletion
   public static function generateWgpuMipmaps(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture, width:Float, height:Float, format:flighthq._internal.dom.GPUTextureFormat):Void {
-    var levelCount:Dynamic = cast _Runtime.UNDEFINED;
+    var levelCount:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    var encoder:Dynamic = cast _Runtime.UNDEFINED;
-    levelCount = _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>));
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var cached:{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    var layout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var encoder:flighthq._internal.dom.GPUCommandEncoder = cast _Runtime.UNDEFINED;
+    levelCount = (cast getWgpuMipLevelCount((cast width : Float), (cast height : Float)) : Float);
     if ((cast ((cast levelCount : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    cached = _Runtime.callValue(WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap, cast ([state, format] : Array<Dynamic>));
-    pipeline = _Runtime.field(cached, 'pipeline');
-    layout = _Runtime.field(cached, 'bindGroupLayout');
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    cached = (cast WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap((cast state : WgpuRenderState), (cast format : String)) : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; });
+    pipeline = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).pipeline;
+    layout = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).bindGroupLayout;
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
     {
-      var level:Dynamic = 1.0;
+      var level:Float = 1.0;
       while ((cast ((cast level : Float) < (cast levelCount : Float)) : Bool)) {
-        var srcView:Dynamic = texture.createView({ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 });
-        var dstView:Dynamic = texture.createView({ baseMipLevel: level, mipLevelCount: 1.0 });
-        var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: srcView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-        var pass:Dynamic = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
+        var srcView:flighthq._internal.dom.GPUTextureView = texture.createView({ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 });
+        var dstView:flighthq._internal.dom.GPUTextureView = texture.createView({ baseMipLevel: level, mipLevelCount: 1.0 });
+        var bindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: srcView }, { binding: 1.0, resource: (cast runtime : WgpuRenderStateRuntime).linearSampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+        var pass:flighthq._internal.dom.GPURenderPassEncoder = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
@@ -50,16 +51,16 @@ class WgpuMipmap {
   }
 
   public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat):{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var cached:Null<{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }> = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
-    var bindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var module:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    cached = ((cast _Runtime.field(runtime, 'mipmapPipelineCache') : flighthq._internal._Map).get(format));
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    var result:{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    cached = ((cast (cast runtime : WgpuRenderStateRuntime).mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).get(format));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure1 = state;
     device = _Runtime.field(__destructure1, 'device');
@@ -67,10 +68,10 @@ class WgpuMipmap {
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuMipmap.MIPMAP_WGSL__wgpuMipmap }] : Array<Dynamic>));
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     result = { bindGroupLayout: bindGroupLayout, pipeline: pipeline };
-    ((cast _Runtime.field(runtime, 'mipmapPipelineCache') : flighthq._internal._Map).set(format, result));
+    ((cast (cast runtime : WgpuRenderStateRuntime).mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).set(format, result));
     return cast result;
     return cast null;
   }
 
-  public static final MIPMAP_WGSL__wgpuMipmap:Dynamic = '\nstruct VsOut {\n  @builtin(position) pos : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VsOut {\n  // Full-screen triangle covering the clip rect; uv in [0,1] with v flipped into texture space.\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  var out : VsOut;\n  out.pos = vec4f(x, y, 0.0, 1.0);\n  out.uv = vec2f((x + 1.0) * 0.5, (1.0 - y) * 0.5);\n  return out;\n}\n\n@group(0) @binding(0) var srcTexture : texture_2d<f32>;\n@group(0) @binding(1) var srcSampler : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  return textureSample(srcTexture, srcSampler, uv);\n}\n';
+  public static final MIPMAP_WGSL__wgpuMipmap:String = '\nstruct VsOut {\n  @builtin(position) pos : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VsOut {\n  // Full-screen triangle covering the clip rect; uv in [0,1] with v flipped into texture space.\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  var out : VsOut;\n  out.pos = vec4f(x, y, 0.0, 1.0);\n  out.uv = vec2f((x + 1.0) * 0.5, (1.0 - y) * 0.5);\n  return out;\n}\n\n@group(0) @binding(0) var srcTexture : texture_2d<f32>;\n@group(0) @binding(1) var srcSampler : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  return textureSample(srcTexture, srcSampler, uv);\n}\n';
 }

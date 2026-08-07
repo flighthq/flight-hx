@@ -8,13 +8,13 @@ import flighthq.types.SketchEffect;
 
 class EdgeDetectMath {
   public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var feather:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var feather:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     threshold = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1));
     feather = (threshold * 0.5);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
@@ -36,8 +36,8 @@ class EdgeDetectMath {
   }
 
   public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
     strength = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)));
     threshold = HxMath.max(0.01, HxMath.min(1.0, (1.0 - (strength * 0.95))));
     flighthq._internal._StaticIndex.writeArray(out, 0.0, threshold);

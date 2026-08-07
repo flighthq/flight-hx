@@ -11,19 +11,19 @@ import flighthq.types.ImageDecoder;
 class RegisterWebImageDecoders {
   public static function registerWebImageDecoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageDecoders.webDecodableMimeTypes__registerWebImageDecoders)) {
-      _Runtime.callValue(registerImageDecoder, cast ([mimeType, RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders] : Array<Dynamic>));
+      registerImageDecoder((cast mimeType : String), (cast RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders : ImageDecoder));
     }
   }
 
   public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = function(bytes:flighthq._internal._UInt8Array, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var bitmap:Dynamic = cast _Runtime.UNDEFINED;
-        var width:Dynamic = cast _Runtime.UNDEFINED;
-        var height:Dynamic = cast _Runtime.UNDEFINED;
-        var canvas:Dynamic = cast _Runtime.UNDEFINED;
-        var context:Dynamic = cast _Runtime.UNDEFINED;
-        var data:Dynamic = cast _Runtime.UNDEFINED;
+        var bitmap:flighthq._internal.dom.ImageBitmap = cast _Runtime.UNDEFINED;
+        var width:Float = cast _Runtime.UNDEFINED;
+        var height:Float = cast _Runtime.UNDEFINED;
+        var canvas:flighthq._internal.dom.OffscreenCanvas = cast _Runtime.UNDEFINED;
+        var context:flighthq._internal.dom.OffscreenCanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+        var data:flighthq._internal._Any = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('createImageBitmap'), cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           bitmap = __awaitValue2;
           width = (cast bitmap : flighthq._internal.dom.ImageBitmap).width;
@@ -36,7 +36,7 @@ class RegisterWebImageDecoders {
           var __flowBranch3:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
-              _Runtime.callValue(RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders, cast ([data] : Array<Dynamic>));
+              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders((cast data : flighthq._internal._UInt8ClampedArray));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
@@ -52,9 +52,9 @@ class RegisterWebImageDecoders {
 
   public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:flighthq._internal._UInt8ClampedArray):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var alpha:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        var alpha:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
         if ((cast _Runtime.strictEquals(alpha, 255.0) : Bool)) { (i = cast ((i + 4.0) : Dynamic)); continue; }
         flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), alpha) / 255.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), alpha) / 255.0));

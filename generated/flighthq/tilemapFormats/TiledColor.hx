@@ -6,29 +6,29 @@ import flighthq._internal._Runtime;
 
 class TiledColor {
   public static function formatTiledColor(packed:Float):String {
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var rgb:Dynamic = cast _Runtime.UNDEFINED;
+    var p:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var rgb:Float = cast _Runtime.UNDEFINED;
     p = _Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 0);
     alpha = (_Runtime.toInt32(p) & 255);
     rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(p), 8)) & 16777215);
-    return cast '#' + Std.string(_Runtime.callValue(TiledColor.hex2__tiledColor, cast ([alpha] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledColor.hex6__tiledColor, cast ([rgb] : Array<Dynamic>))) + '';
+    return cast '#' + Std.string((cast TiledColor.hex2__tiledColor((cast alpha : Float)) : String)) + '' + Std.string((cast TiledColor.hex6__tiledColor((cast rgb : Float)) : String)) + '';
     return cast null;
   }
 
   public static function parseTiledColor(text:String):Null<Float> {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var s:String = cast _Runtime.UNDEFINED;
     s = StringTools.trim(Std.string(text));
     if ((cast StringTools.startsWith(s, '#') : Bool)) { (s = cast (_Runtime.slice(s, 1.0, null) : Dynamic)); }
     if ((cast !(cast _Runtime.callProperty(_Runtime.regexp('^[0-9a-fA-F]+$$', ''), 'test', cast ([s] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(_Runtime.field(s, 'length'), 6.0) : Bool)) {
-      var rgb:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
+      var rgb:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
       return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | 255)), 0);
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(s, 'length'), 8.0) : Bool)) {
-      var argb:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
-      var alpha:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(argb), 24)) & 255);
-      var rgb:Dynamic = (_Runtime.toInt32(argb) & 16777215);
+      var argb:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
+      var alpha:Float = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(argb), 24)) & 255);
+      var rgb:Float = (_Runtime.toInt32(argb) & 16777215);
       return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | _Runtime.toInt32(alpha))), 0);
     }
     return cast null;

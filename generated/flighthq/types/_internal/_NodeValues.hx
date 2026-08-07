@@ -13,9 +13,9 @@ import flighthq.types.NodeSignals;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class _NodeValues {
-  public static var NodeTraitsKey__Node:Dynamic;
+  public static var NodeTraitsKey__Node:flighthq._internal._Symbol;
 
-  public static final NodeKind:Dynamic = 'Node';
+  public static final NodeKind:String = 'Node';
 
-  public static final NullScene3D:Dynamic = _Runtime.symbol('NullScene3D');
+  public static final NullScene3D:flighthq._internal._Symbol = _Runtime.symbol('NullScene3D');
 }

@@ -14,14 +14,14 @@ class Angle {
   }
 
   public static function deltaAngle(from:Float, to:Float):Float {
-    var diff:Dynamic = cast _Runtime.UNDEFINED;
+    var diff:Float = cast _Runtime.UNDEFINED;
     diff = _Runtime.fmod((_Runtime.fmod((to - from), TAU) + TAU), TAU);
     return cast ((cast ((cast diff : Float) > (cast HxMath.PI : Float)) : Bool) ? (cast (diff - TAU) : Dynamic) : (cast diff : Dynamic));
     return cast null;
   }
 
   public static function normalizeAngle(radians:Float):Float {
-    var wrapped:Dynamic = cast _Runtime.UNDEFINED;
+    var wrapped:Float = cast _Runtime.UNDEFINED;
     wrapped = _Runtime.fmod((_Runtime.fmod(radians, TAU) + TAU), TAU);
     return cast ((cast ((cast wrapped : Float) >= (cast HxMath.PI : Float)) : Bool) ? (cast (wrapped - TAU) : Dynamic) : (cast wrapped : Dynamic));
     return cast null;

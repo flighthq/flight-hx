@@ -9,20 +9,22 @@ import flighthq.geometry.Matrix4.decomposeMatrix4;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Quaternion;
 import flighthq.types.Transform3D;
 import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Vector3;
 
 class Transform3d {
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
-    _Runtime.callValue(composeMatrix4, cast ([out, _Runtime.field(source, 'position'), _Runtime.field(source, 'rotation'), _Runtime.field(source, 'scale')] : Array<Dynamic>));
+    composeMatrix4((cast out : Matrix4Like), _Runtime.field(source, 'position'), _Runtime.field(source, 'rotation'), _Runtime.field(source, 'scale'));
   }
 
   public static function createTransform3D():Transform3D {
-    return cast _Runtime.callValue(createEntity, cast ([{ rotation: _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)), scale: _Runtime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)), position: _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ rotation: (cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Quaternion), scale: (cast createVector3((cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Vector3), position: (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3) }) : Transform3D);
     return cast null;
   }
 
   public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
-    _Runtime.callValue(decomposeMatrix4, cast ([_Runtime.field(out, 'position'), _Runtime.field(out, 'rotation'), _Runtime.field(out, 'scale'), m] : Array<Dynamic>));
+    decomposeMatrix4(_Runtime.field(out, 'position'), _Runtime.field(out, 'rotation'), _Runtime.field(out, 'scale'), (cast m : Matrix4Like));
   }
 }

@@ -23,6 +23,8 @@ import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryVarint;
 import flighthq.skeleton2dFormats.SpineBinaryReader.skipSpineBinaryBytes;
 import flighthq.skeleton2dFormats.SpineDrawOrder.resolveSpineDrawOrdering;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationClip;
+import flighthq.types.AnimationTrack;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
 import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
@@ -33,6 +35,7 @@ import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
+import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types.Skeleton2DImport;
@@ -56,134 +59,134 @@ import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DS
 
 class SpineBinaryParse {
   public static function parseSpineSkeletonBinary(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
-    var reader:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var nonessential:Dynamic = cast _Runtime.UNDEFINED;
-    var strings:Dynamic = cast _Runtime.UNDEFINED;
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
+    var reader:ByteReader = cast _Runtime.UNDEFINED;
+    var version:Null<String> = cast _Runtime.UNDEFINED;
+    var nonessential:Bool = cast _Runtime.UNDEFINED;
+    var strings:Array<Null<String>> = cast _Runtime.UNDEFINED;
+    var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var attachmentNames:Dynamic = cast _Runtime.UNDEFINED;
-    var slots:Dynamic = cast _Runtime.UNDEFINED;
-    var skins:Dynamic = cast _Runtime.UNDEFINED;
-    var setup:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
-    reader = _Runtime.callValue(createSpineBinaryReader, cast ([bytes] : Array<Dynamic>));
-    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_HASH_BYTES__spineBinaryParse] : Array<Dynamic>));
-    version = _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'spine.binary-header-unreadable', 'parseSpineSkeletonBinary', { bytes: _Runtime.field(bytes, 'byteLength') }] : Array<Dynamic>));
+    var attachmentNames:Array<Null<String>> = cast _Runtime.UNDEFINED;
+    var slots:Array<Slot2D> = cast _Runtime.UNDEFINED;
+    var skins:Array<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
+    var setup:Null<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
+    var animations:Array<Skeleton2DImportAnimation> = cast _Runtime.UNDEFINED;
+    var skeleton:Skeleton2D = cast _Runtime.UNDEFINED;
+    reader = (cast createSpineBinaryReader((cast bytes : flighthq._internal._UInt8Array)) : ByteReader);
+    skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_HASH_BYTES__spineBinaryParse : Float));
+    version = (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+    if ((cast ((cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'spine.binary-header-unreadable' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { bytes: _Runtime.field(bytes, 'byteLength') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    if ((cast !(cast _Runtime.callValue(SpineBinaryParse.isSupportedSpineBinaryVersion__spineBinaryParse, cast ([version] : Array<Dynamic>)) : Bool) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'spine.binary-version-unsupported', 'parseSpineSkeletonBinary', { version: version }] : Array<Dynamic>));
+    if ((cast !(cast (cast SpineBinaryParse.isSupportedSpineBinaryVersion__spineBinaryParse((cast version : String)) : Bool) : Bool) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'spine.binary-version-unsupported' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { version: version } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       return cast null;
     }
-    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_BOUNDS_BYTES__spineBinaryParse] : Array<Dynamic>));
-    nonessential = _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>));
+    skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_BOUNDS_BYTES__spineBinaryParse : Float));
+    nonessential = (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool);
     if ((cast nonessential : Bool)) {
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_FPS_BYTES__spineBinaryParse] : Array<Dynamic>));
-      _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_FPS_BYTES__spineBinaryParse : Float));
+      (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+      (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
     }
-    strings = _Runtime.callValue(SpineBinaryParse.readSpineBinaryStringTable__spineBinaryParse, cast ([reader] : Array<Dynamic>));
-    bones = _Runtime.callValue(SpineBinaryParse.parseSpineBinaryBones__spineBinaryParse, cast ([reader, nonessential] : Array<Dynamic>));
-    __destructure0 = _Runtime.callValue(SpineBinaryParse.parseSpineBinarySlots__spineBinaryParse, cast ([reader, strings, diagnostics] : Array<Dynamic>));
+    strings = (cast SpineBinaryParse.readSpineBinaryStringTable__spineBinaryParse((cast reader : ByteReader)) : Array<Null<String>>);
+    bones = (cast SpineBinaryParse.parseSpineBinaryBones__spineBinaryParse((cast reader : ByteReader), (cast nonessential : Bool)) : Array<Bone2D>);
+    __destructure0 = (cast SpineBinaryParse.parseSpineBinarySlots__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : { var attachmentNames:Array<Null<String>>; var slots:Array<Slot2D>; });
     attachmentNames = _Runtime.field(__destructure0, 'attachmentNames');
     slots = _Runtime.field(__destructure0, 'slots');
-    _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraints__spineBinaryParse, cast ([reader, diagnostics] : Array<Dynamic>));
-    skins = _Runtime.callValue(SpineBinaryParse.parseSpineBinarySkins__spineBinaryParse, cast ([reader, strings, nonessential, diagnostics] : Array<Dynamic>));
-    setup = _Runtime.find(skins, function(skin:Dynamic) return _Runtime.strictEquals(_Runtime.field(skin, 'name'), SpineBinaryParse.SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse));
+    SpineBinaryParse.skipSpineBinaryConstraints__spineBinaryParse((cast reader : ByteReader), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+    skins = (cast SpineBinaryParse.parseSpineBinarySkins__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast nonessential : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<AttachmentSkin2D>);
+    setup = _Runtime.find(skins, function(skin:AttachmentSkin2D, __unused1:Float, __unused2:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, SpineBinaryParse.SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse));
     if ((cast !_Runtime.strictEquals(setup, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      for (entry in _Runtime.iterable(_Runtime.field(setup, 'attachments'))) {
-        if ((cast ((cast ((cast _Runtime.field(entry, 'slotIndex') : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attachmentNames, _Runtime.field(entry, 'slotIndex')), _Runtime.field(entry, 'name')) : Bool)) : Bool)) {
-          _Runtime.setField(flighthq._internal._StaticIndex.readArray(slots, _Runtime.field(entry, 'slotIndex')), 'attachment', _Runtime.field(entry, 'attachment'));
+      for (entry in _Runtime.iterable((cast setup : AttachmentSkin2D).attachments)) {
+        if ((cast ((cast ((cast (cast entry : SkinAttachment2D).slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attachmentNames, (cast entry : SkinAttachment2D).slotIndex), (cast entry : SkinAttachment2D).name) : Bool)) : Bool)) {
+          ((cast flighthq._internal._StaticIndex.readArray(slots, (cast entry : SkinAttachment2D).slotIndex) : Slot2D).attachment = (cast entry : SkinAttachment2D).attachment);
         }
       }
     }
-    _Runtime.callValue(SpineBinaryParse.skipSpineBinaryEvents__spineBinaryParse, cast ([reader, diagnostics] : Array<Dynamic>));
-    animations = _Runtime.callValue(SpineBinaryParse.parseSpineBinaryAnimations__spineBinaryParse, cast ([reader, strings, setup, _Runtime.field(slots, 'length'), diagnostics] : Array<Dynamic>));
-    if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'spine.binary-truncated', 'parseSpineSkeletonBinary', { bones: _Runtime.field(bones, 'length'), slots: _Runtime.field(slots, 'length') }] : Array<Dynamic>));
+    SpineBinaryParse.skipSpineBinaryEvents__spineBinaryParse((cast reader : ByteReader), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+    animations = (cast SpineBinaryParse.parseSpineBinaryAnimations__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast setup : Null<AttachmentSkin2D>), (cast _Runtime.field(slots, 'length') : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Skeleton2DImportAnimation>);
+    if ((cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'spine.binary-truncated' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { bones: _Runtime.field(bones, 'length'), slots: _Runtime.field(slots, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     } else {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.binary-tail-unparsed', 'parseSpineSkeletonBinary', { bytes: _Runtime.subtractNumbers(_Runtime.field(bytes, 'byteLength'), reader.offset) }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.binary-tail-unparsed' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { bytes: _Runtime.subtractNumbers(_Runtime.field(bytes, 'byteLength'), reader.offset) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    skeleton = _Runtime.callValue(createSkeleton2D, cast ([bones, slots] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setField(skeleton, 'skins', skins); }
+    skeleton = (cast createSkeleton2D((cast bones : Array<Bone2D>), (cast slots : Null<Array<Slot2D>>)) : Skeleton2D);
+    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast skeleton : Skeleton2D).skins = skins); }
     return cast { animations: animations, skeleton: skeleton };
     return cast null;
   }
 
   public static function skipSpineBinaryEvents__spineBinaryParse(reader:ByteReader, ?diagnostics:Array<ImportDiagnostic>):Void {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var count:Float = cast _Runtime.UNDEFINED;
+    count = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(_Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>)), null) : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 8.0] : Array<Dynamic>)); }
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
+        (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+        if ((cast !_Runtime.strictEquals((cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>), null) : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast 8.0 : Float)); }
         i++;
       }
     }
-    _Runtime.callValue(SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse, cast ([diagnostics, count, 'spine.event-unsupported', 'events'] : Array<Dynamic>));
+    SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast count : Float), (cast 'spine.event-unsupported' : String), (cast 'events' : String));
   }
 
   public static function parseSpineBinaryAnimations__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, slotCount:Float, ?diagnostics:Array<ImportDiagnostic>):Array<Skeleton2DImportAnimation> {
     var animations:Array<Skeleton2DImportAnimation> = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var unmodeled:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     animations = cast ([] : Array<Dynamic>);
-    count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    count = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var name:Dynamic = _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var name:Null<String> = (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         var channels:Array<AnimationChannel> = cast ([] : Array<Dynamic>);
-        _Runtime.callValue(SpineBinaryParse.parseSpineBinarySlotTimelines__spineBinaryParse, cast ([reader, channels, strings, setup, unmodeled, diagnostics] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.parseSpineBinaryBoneTimelines__spineBinaryParse, cast ([reader, channels, diagnostics] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraintTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryDeformTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
-        var drawOrder:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryDrawOrderTimeline__spineBinaryParse, cast ([reader, slotCount, diagnostics] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryEventTimelines__spineBinaryParse, cast ([reader, unmodeled] : Array<Dynamic>));
-        _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels] : Array<Dynamic>)), drawOrder: drawOrder, name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
+        SpineBinaryParse.parseSpineBinarySlotTimelines__spineBinaryParse((cast reader : ByteReader), (cast channels : Array<AnimationChannel>), (cast strings : Array<Null<String>>), (cast setup : Null<AttachmentSkin2D>), (cast unmodeled : flighthq._internal._Map<String, Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+        SpineBinaryParse.parseSpineBinaryBoneTimelines__spineBinaryParse((cast reader : ByteReader), (cast channels : Array<AnimationChannel>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+        SpineBinaryParse.skipSpineBinaryConstraintTimelines__spineBinaryParse((cast reader : ByteReader), (cast unmodeled : flighthq._internal._Map<String, Float>));
+        SpineBinaryParse.skipSpineBinaryDeformTimelines__spineBinaryParse((cast reader : ByteReader), (cast unmodeled : flighthq._internal._Map<String, Float>));
+        var drawOrder:Null<Skeleton2DDrawOrderTimeline> = (cast SpineBinaryParse.readSpineBinaryDrawOrderTimeline__spineBinaryParse((cast reader : ByteReader), (cast slotCount : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Skeleton2DDrawOrderTimeline>);
+        SpineBinaryParse.skipSpineBinaryEventTimelines__spineBinaryParse((cast reader : ByteReader), (cast unmodeled : flighthq._internal._Map<String, Float>));
+        _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels : Array<AnimationChannel>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : AnimationClip), drawOrder: drawOrder, name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
         i++;
       }
     }
-    for (__iteration1 in _Runtime.iterable(unmodeled)) {
-      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-      var tally:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.' + Std.string(kind) + '-timeline-unsupported', 'parseSpineSkeletonBinary', { timelines: SpineBinaryParse.tally__spineBinaryParse }] : Array<Dynamic>));
+    for (__iteration3 in _Runtime.iterable(unmodeled)) {
+      var kind:String = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
+      var tally:Float = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { timelines: SpineBinaryParse.tally__spineBinaryParse } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast animations;
     return cast null;
   }
 
   public static function parseSpineBinaryBoneTimelines__spineBinaryParse(reader:ByteReader, channels:Array<AnimationChannel>, ?diagnostics:Array<ImportDiagnostic>):Void {
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    bones = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var bones:Float = cast _Runtime.UNDEFINED;
+    bones = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast bones : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var boneIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var timelines:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast bones : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var boneIndex:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var timelines:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            var ordinal:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
-            var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            var kind:Dynamic = ((cast ((cast ordinal : Float) < (cast SpineBinaryParse.SPINE_BINARY_BONE_TIMELINES__spineBinaryParse.length : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_BONE_TIMELINES__spineBinaryParse, ordinal) : Dynamic) : (cast null : Dynamic));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            var ordinal:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
+            var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            var kind:Null<{ var path:String; var values:Float; }> = ((cast ((cast ordinal : Float) < (cast SpineBinaryParse.SPINE_BINARY_BONE_TIMELINES__spineBinaryParse.length : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_BONE_TIMELINES__spineBinaryParse, ordinal) : Dynamic) : (cast null : Dynamic));
             if ((cast _Runtime.strictEquals(kind, null) : Bool)) {
-              _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, _Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0)] : Array<Dynamic>));
+              skipSpineBinaryBytes((cast reader : ByteReader), (cast _Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0) : Float));
               return;
             }
-            var timeline:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryValueTimeline__spineBinaryParse, cast ([reader, frameCount, _Runtime.field(kind, 'values')] : Array<Dynamic>));
-            _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(SpineBinaryParse.buildSpineBinaryBoneChannel__spineBinaryParse, cast ([timeline, kind, boneIndex, diagnostics] : Array<Dynamic>))] : Array<Dynamic>));
+            var timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; } = (cast SpineBinaryParse.readSpineBinaryValueTimeline__spineBinaryParse((cast reader : ByteReader), (cast frameCount : Float), (cast (cast kind : { var values:Float; }).values : Float)) : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; });
+            _Runtime.callProperty(channels, 'push', cast ([(cast SpineBinaryParse.buildSpineBinaryBoneChannel__spineBinaryParse((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }), (cast kind : { var path:String; var values:Float; }), (cast boneIndex : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : AnimationChannel)] : Array<Dynamic>));
             j++;
           }
         }
@@ -200,32 +203,32 @@ class SpineBinaryParse {
     flat = cast ([] : Array<Dynamic>);
     curves = cast ([] : Array<Dynamic>);
     if ((cast ((cast frameCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast { curves: curves, times: times, values: flat }; }
-    _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(times, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast values : Float)) : Bool)) {
-        _Runtime.callProperty(flat, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(flat, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
         v++;
       }
     }
     {
-      var frame:Dynamic = 0.0;
-      while ((cast ((cast ((cast (frame + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+      var frame:Float = 0.0;
+      while ((cast ((cast ((cast (frame + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.callProperty(times, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
         {
-          var v:Dynamic = 0.0;
+          var v:Float = 0.0;
           while ((cast ((cast v : Float) < (cast values : Float)) : Bool)) {
-            _Runtime.callProperty(flat, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+            _Runtime.callProperty(flat, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
             v++;
           }
         }
-        var tag:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
+        var tag:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
         if ((cast _Runtime.strictEquals(tag, SpineBinaryParse.SPINE_BINARY_CURVE_BEZIER__spineBinaryParse) : Bool)) {
           var points:Array<Float> = cast ([] : Array<Dynamic>);
           {
-            var v:Dynamic = 0.0;
+            var v:Float = 0.0;
             while ((cast ((cast v : Float) < (cast (values * 4.0) : Float)) : Bool)) {
-              _Runtime.callProperty(points, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+              _Runtime.callProperty(points, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
               v++;
             }
           }
@@ -240,49 +243,49 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function buildSpineBinaryBoneChannel__spineBinaryParse(timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }, kind:Dynamic, boneIndex:Float, ?diagnostics:Array<ImportDiagnostic>):AnimationChannel {
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    var components:Dynamic = cast _Runtime.UNDEFINED;
-    var values:Dynamic = cast _Runtime.UNDEFINED;
-    var track:Dynamic = cast _Runtime.UNDEFINED;
-    frames = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
-    components = _Runtime.field(kind, 'values');
+  public static function buildSpineBinaryBoneChannel__spineBinaryParse(timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }, kind:flighthq._internal._IndexedAccess<Dynamic, Float>, boneIndex:Float, ?diagnostics:Array<ImportDiagnostic>):AnimationChannel {
+    var frames:Float = cast _Runtime.UNDEFINED;
+    var components:Float = cast _Runtime.UNDEFINED;
+    var values:Array<Float> = cast _Runtime.UNDEFINED;
+    var track:AnimationTrack = cast _Runtime.UNDEFINED;
+    frames = _Runtime.field((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, 'length');
+    components = (cast kind : { var values:Float; }).values;
     values = _Runtime.createArray((frames * components));
     {
-      var f:Dynamic = 0.0;
+      var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast (frames * components) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(values, f, flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), f));
+        flighthq._internal._StaticIndex.writeArray(values, f, flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, f));
         f++;
       }
     }
-    track = _Runtime.callValue(createAnimationTrack, cast ([{ components: components, interpolation: AnimationInterpolationLinear, segmentEasings: _Runtime.callValue(SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse, cast ([timeline, _Runtime.field(kind, 'values'), diagnostics] : Array<Dynamic>)), times: _Runtime.field(timeline, 'times'), values: values }] : Array<Dynamic>));
-    return cast _Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DBoneAnimationTarget, cast ([boneIndex, _Runtime.field(kind, 'path')] : Array<Dynamic>))] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: components, interpolation: AnimationInterpolationLinear, segmentEasings: (cast SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }), (cast (cast kind : { var values:Float; }).values : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Array<Null<EasingFunction>>>), times: (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
+    return cast (cast createAnimationChannel(track, (cast createSkeleton2DBoneAnimationTarget((cast boneIndex : Float), (cast (cast kind : { var path:String; }).path : Skeleton2DAnimationPath)) : flighthq._internal._Any)) : AnimationChannel);
     return cast null;
   }
 
   public static function buildSpineBinarySegmentEasings__spineBinaryParse(timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }, values:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Array<Null<EasingFunction>>> {
     var easings:Array<Null<EasingFunction>> = cast _Runtime.UNDEFINED;
-    var curved:Dynamic = cast _Runtime.UNDEFINED;
-    var divergent:Dynamic = cast _Runtime.UNDEFINED;
+    var curved:Bool = cast _Runtime.UNDEFINED;
+    var divergent:Float = cast _Runtime.UNDEFINED;
     easings = cast ([] : Array<Dynamic>);
     curved = false;
     divergent = 0.0;
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(timeline, 'curves'), 'length') : Float)) : Bool)) {
-        var points:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'curves'), i);
-        var span:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'times'), (i + 1.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'times'), i));
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).curves, 'length') : Float)) : Bool)) {
+        var points:Null<Array<Float>> = flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).curves, i);
+        var span:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, (i + 1.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i));
         if ((cast ((cast _Runtime.strictEquals(points, null) : Bool) || (cast ((cast span : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
           continue;
         }
-        var winner:Dynamic = -1.0;
-        var widest:Dynamic = 0.0;
+        var winner:Float = -1.0;
+        var widest:Float = 0.0;
         {
-          var v:Dynamic = 0.0;
+          var v:Float = 0.0;
           while ((cast ((cast ((cast v : Float) < (cast values : Float)) : Bool) && (cast ((cast ((v + 1.0) * 4.0) : Float) <= (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
-            var rise:Dynamic = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), (((i + 1.0) * values) + v)), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), ((i * values) + v))));
+            var rise:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, (((i + 1.0) * values) + v)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, ((i * values) + v))));
             if ((cast ((cast rise : Float) > (cast widest : Float)) : Bool)) {
               (widest = cast (rise : Dynamic));
               (winner = cast (v : Dynamic));
@@ -290,25 +293,25 @@ class SpineBinaryParse {
             v++;
           }
         }
-        var rebase:Dynamic = cast _Runtime.UNDEFINED;
-        rebase = function(v:Float) {
-          var from:Dynamic = cast _Runtime.UNDEFINED;
-          var rise:Dynamic = cast _Runtime.UNDEFINED;
-          from = flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), ((i * values) + v));
-          rise = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'values'), (((i + 1.0) * values) + v)), from);
+        var rebase:Float->Null<Array<Float>> = cast _Runtime.UNDEFINED;
+        rebase = (cast function(v:Float):Null<Array<Float>> {
+          var from:Float = cast _Runtime.UNDEFINED;
+          var rise:Float = cast _Runtime.UNDEFINED;
+          from = flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, ((i * values) + v));
+          rise = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, (((i + 1.0) * values) + v)), from);
           if ((cast _Runtime.strictEquals(rise, 0.0) : Bool)) { return cast null; }
-          return cast cast ([(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (v * 4.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'times'), i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 1.0)), from) / rise), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 2.0)), flighthq._internal._StaticIndex.readArray(_Runtime.field(timeline, 'times'), i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 3.0)), from) / rise)] : Array<Dynamic>);
-        };
-        var won:Dynamic = ((cast ((cast winner : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(rebase, cast ([winner] : Array<Dynamic>)) : Dynamic));
+          return cast cast ([(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (v * 4.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 1.0)), from) / rise), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 2.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 3.0)), from) / rise)] : Array<Dynamic>);
+        } : Float->Null<Array<Float>>);
+        var won:Null<Array<Float>> = ((cast ((cast winner : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast (cast rebase((cast winner : Float)) : Null<Array<Float>>) : Dynamic));
         if ((cast !_Runtime.strictEquals(won, null) : Bool)) {
           {
-            var v:Dynamic = 0.0;
+            var v:Float = 0.0;
             while ((cast ((cast ((cast v : Float) < (cast values : Float)) : Bool) && (cast ((cast ((v + 1.0) * 4.0) : Float) <= (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
               if ((cast _Runtime.strictEquals(v, winner) : Bool)) { v++; continue; }
-              var other:Dynamic = _Runtime.callValue(rebase, cast ([v] : Array<Dynamic>));
+              var other:Null<Array<Float>> = (cast rebase((cast v : Float)) : Null<Array<Float>>);
               if ((cast _Runtime.strictEquals(other, null) : Bool)) { v++; continue; }
               {
-                var k:Dynamic = 0.0;
+                var k:Float = 0.0;
                 while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
                   if ((cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(other, k), flighthq._internal._StaticIndex.readArray(won, k))) : Float) > (cast SpineBinaryParse.SPINE_BINARY_CURVE_EPSILON__spineBinaryParse : Float)) : Bool)) { divergent++; }
                   k++;
@@ -318,57 +321,57 @@ class SpineBinaryParse {
             }
           }
         }
-        var chosen:Dynamic = !_Runtime.strictEquals(won, null);
-        var x1:Dynamic = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 0.0) : Dynamic));
-        var y1:Dynamic = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 1.0) : Dynamic));
-        var x2:Dynamic = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 2.0) : Dynamic));
-        var y2:Dynamic = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 3.0) : Dynamic));
+        var chosen:Bool = !_Runtime.strictEquals(won, null);
+        var x1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 0.0) : Dynamic));
+        var y1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 1.0) : Dynamic));
+        var x2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 2.0) : Dynamic));
+        var y2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 3.0) : Dynamic));
         if ((cast !(cast chosen : Bool) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
           continue;
         }
         (curved = cast (true : Dynamic));
-        _Runtime.callProperty(easings, 'push', cast ([_Runtime.callValue(easeCubicBezier, cast ([_Runtime.callValue(SpineBinaryParse.clampSpineBinaryUnit__spineBinaryParse, cast ([x1] : Array<Dynamic>)), y1, _Runtime.callValue(SpineBinaryParse.clampSpineBinaryUnit__spineBinaryParse, cast ([x2] : Array<Dynamic>)), y2] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(easings, 'push', cast ([(cast easeCubicBezier((cast (cast SpineBinaryParse.clampSpineBinaryUnit__spineBinaryParse((cast x1 : Float)) : Float) : Float), (cast y1 : Float), (cast (cast SpineBinaryParse.clampSpineBinaryUnit__spineBinaryParse((cast x2 : Float)) : Float) : Float), (cast y2 : Float)) : Null<EasingFunction>)] : Array<Dynamic>));
         i++;
       }
     }
     if ((cast ((cast divergent : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.per-component-curve-easing-unsupported', 'parseSpineSkeletonBinary', { segments: divergent }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.per-component-curve-easing-unsupported' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { segments: divergent } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast ((cast curved : Bool) ? (cast easings : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function parseSpineBinarySlotTimelines__spineBinaryParse(reader:ByteReader, channels:Array<AnimationChannel>, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, unmodeled:Dynamic, ?diagnostics:Array<ImportDiagnostic>):Void {
-    var slots:Dynamic = cast _Runtime.UNDEFINED;
-    slots = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+  public static function parseSpineBinarySlotTimelines__spineBinaryParse(reader:ByteReader, channels:Array<AnimationChannel>, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, unmodeled:flighthq._internal._Map<String, Float>, ?diagnostics:Array<ImportDiagnostic>):Void {
+    var slots:Float = cast _Runtime.UNDEFINED;
+    slots = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast slots : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var slotIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var timelines:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast slots : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var slotIndex:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var timelines:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            var type:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
-            var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            var type:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
+            var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
             if ((cast _Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_SLOT_ATTACHMENT__spineBinaryParse) : Bool)) {
-              _Runtime.callValue(SpineBinaryParse.addSpineBinaryAttachmentChannel__spineBinaryParse, cast ([reader, channels, strings, setup, slotIndex, frameCount] : Array<Dynamic>));
+              SpineBinaryParse.addSpineBinaryAttachmentChannel__spineBinaryParse((cast reader : ByteReader), (cast channels : Array<AnimationChannel>), (cast strings : Array<Null<String>>), (cast setup : Null<AttachmentSkin2D>), (cast slotIndex : Float), (cast frameCount : Float));
               j++;
               continue;
             }
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            var count:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse, type), function():Dynamic return cast 1.0);
+            (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            var count:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse, type), function():Dynamic return cast 1.0);
             if ((cast !_Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_SLOT_RGBA__spineBinaryParse) : Bool)) {
-              _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'slot-color'] : Array<Dynamic>));
-              _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse, cast ([reader, frameCount, count, count] : Array<Dynamic>));
+              SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'slot-color' : String));
+              SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse((cast reader : ByteReader), (cast frameCount : Float), (cast count : Float), (cast count : Float));
               j++;
               continue;
             }
-            var timeline:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryColorTimeline__spineBinaryParse, cast ([reader, frameCount, count] : Array<Dynamic>));
-            var track:Dynamic = _Runtime.callValue(createAnimationTrack, cast ([{ components: count, interpolation: AnimationInterpolationLinear, segmentEasings: _Runtime.callValue(SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse, cast ([timeline, count, diagnostics] : Array<Dynamic>)), times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'values') }] : Array<Dynamic>));
-            _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Color] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+            var timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; } = (cast SpineBinaryParse.readSpineBinaryColorTimeline__spineBinaryParse((cast reader : ByteReader), (cast frameCount : Float), (cast count : Float)) : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; });
+            var track:AnimationTrack = (cast createAnimationTrack((cast { components: count, interpolation: AnimationInterpolationLinear, segmentEasings: (cast SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }), (cast count : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Array<Null<EasingFunction>>>), times: (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, values: (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
+            _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color : Skeleton2DSlotAnimationPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
             j++;
           }
         }
@@ -379,37 +382,37 @@ class SpineBinaryParse {
 
   public static function addSpineBinaryAttachmentChannel__spineBinaryParse(reader:ByteReader, channels:Array<AnimationChannel>, strings:Array<Null<String>>, setup:Null<AttachmentSkin2D>, slotIndex:Float, frameCount:Float):Void {
     var attachments:Array<Null<Attachment2D>> = cast _Runtime.UNDEFINED;
-    var indexByName:Dynamic = cast _Runtime.UNDEFINED;
+    var indexByName:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
-    var track:Dynamic = cast _Runtime.UNDEFINED;
+    var track:AnimationTrack = cast _Runtime.UNDEFINED;
     attachments = cast ([] : Array<Dynamic>);
     indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     times = cast ([] : Array<Dynamic>);
     values = cast ([] : Array<Dynamic>);
     {
-      var f:Dynamic = 0.0;
-      while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
-        var name:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse, cast ([reader, strings] : Array<Dynamic>));
+      var f:Float = 0.0;
+      while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.callProperty(times, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
+        var name:Null<String> = (cast SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>)) : Null<String>);
         if ((cast _Runtime.strictEquals(name, null) : Bool)) {
           _Runtime.callProperty(values, 'push', cast ([SpineBinaryParse.SPINE_BINARY_NO_ATTACHMENT_INDEX__spineBinaryParse] : Array<Dynamic>));
           f++;
           continue;
         }
-        var index:Dynamic = ((cast indexByName : flighthq._internal._Map).get(name));
+        var index:Null<Float> = ((cast indexByName : flighthq._internal._Map<String, Float>).get(name));
         if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var found:Dynamic = _Runtime.callOptionalProperty(_Runtime.optionalField(setup, 'attachments'), 'find', cast ([function(entry:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.field(entry, 'slotIndex'), slotIndex) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'name'), name) : Bool))] : Array<Dynamic>));
-          (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineBinaryParse.SPINE_BINARY_NO_ATTACHMENT_INDEX__spineBinaryParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([_Runtime.field(found, 'attachment')] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
-          ((cast indexByName : flighthq._internal._Map).set(name, index));
+          var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(_Runtime.optionalField(setup, 'attachments'), 'find', cast ([function(entry:SkinAttachment2D, __unused4:Float, __unused5:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals((cast entry : SkinAttachment2D).slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals((cast entry : SkinAttachment2D).name, name) : Bool))] : Array<Dynamic>));
+          (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineBinaryParse.SPINE_BINARY_NO_ATTACHMENT_INDEX__spineBinaryParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([(cast found : SkinAttachment2D).attachment] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
+          ((cast indexByName : flighthq._internal._Map<String, Float>).set(name, index));
         }
         _Runtime.callProperty(values, 'push', cast ([index] : Array<Dynamic>));
         f++;
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return; }
-    track = _Runtime.callValue(createAnimationTrack, cast ([{ components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values }] : Array<Dynamic>));
-    _Runtime.callProperty(channels, 'push', cast ([_Runtime.callValue(createAnimationChannel, cast ([track, _Runtime.callValue(createSkeleton2DSlotAnimationTarget, cast ([slotIndex, Skeleton2DSlotAnimationPathValue.Attachment, attachments] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Attachment : Skeleton2DSlotAnimationPath), (cast attachments : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function readSpineBinaryColorTimeline__spineBinaryParse(reader:ByteReader, frameCount:Float, channelCount:Float):{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; } {
@@ -420,32 +423,32 @@ class SpineBinaryParse {
     values = cast ([] : Array<Dynamic>);
     curves = cast ([] : Array<Dynamic>);
     if ((cast ((cast frameCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast { curves: curves, times: times, values: values }; }
-    _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(times, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
     {
-      var c:Dynamic = 0.0;
+      var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast channelCount : Float)) : Bool)) {
-        _Runtime.callProperty(values, 'push', cast ([_Runtime.divideNumbers(_Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>)), 255.0)] : Array<Dynamic>));
+        _Runtime.callProperty(values, 'push', cast ([((cast readSpineBinaryByte((cast reader : ByteReader)) : Float) / 255.0)] : Array<Dynamic>));
         c++;
       }
     }
     {
-      var f:Dynamic = 0.0;
-      while ((cast ((cast ((cast (f + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callProperty(times, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+      var f:Float = 0.0;
+      while ((cast ((cast ((cast (f + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.callProperty(times, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
         {
-          var c:Dynamic = 0.0;
+          var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast channelCount : Float)) : Bool)) {
-            _Runtime.callProperty(values, 'push', cast ([_Runtime.divideNumbers(_Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>)), 255.0)] : Array<Dynamic>));
+            _Runtime.callProperty(values, 'push', cast ([((cast readSpineBinaryByte((cast reader : ByteReader)) : Float) / 255.0)] : Array<Dynamic>));
             c++;
           }
         }
-        var tag:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
+        var tag:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
         if ((cast _Runtime.strictEquals(tag, SpineBinaryParse.SPINE_BINARY_CURVE_BEZIER__spineBinaryParse) : Bool)) {
           var points:Array<Float> = cast ([] : Array<Dynamic>);
           {
-            var v:Dynamic = 0.0;
+            var v:Float = 0.0;
             while ((cast ((cast v : Float) < (cast (channelCount * 4.0) : Float)) : Bool)) {
-              _Runtime.callProperty(points, 'push', cast ([_Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+              _Runtime.callProperty(points, 'push', cast ([(cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
               v++;
             }
           }
@@ -460,59 +463,59 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function skipSpineBinaryConstraintTimelines__spineBinaryParse(reader:ByteReader, unmodeled:Dynamic):Void {
-    var ik:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    ik = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+  public static function skipSpineBinaryConstraintTimelines__spineBinaryParse(reader:ByteReader, unmodeled:flighthq._internal._Map<String, Float>):Void {
+    var ik:Float = cast _Runtime.UNDEFINED;
+    var transform:Float = cast _Runtime.UNDEFINED;
+    var path:Float = cast _Runtime.UNDEFINED;
+    ik = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast ik : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'ik'] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 12.0] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast ik : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'ik' : String));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 12.0 : Float));
         {
-          var f:Dynamic = 0.0;
-          while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 3.0] : Array<Dynamic>));
+          var f:Float = 0.0;
+          while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            skipSpineBinaryBytes((cast reader : ByteReader), (cast 3.0 : Float));
             if ((cast _Runtime.strictEquals(f, (frameCount - 1.0)) : Bool)) { break; }
-            _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 12.0] : Array<Dynamic>));
-            _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse, cast ([reader, 2.0] : Array<Dynamic>));
+            skipSpineBinaryBytes((cast reader : ByteReader), (cast 12.0 : Float));
+            SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse((cast reader : ByteReader), (cast 2.0 : Float));
             f++;
           }
         }
         i++;
       }
     }
-    transform = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    transform = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast transform : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'transform'] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse, cast ([reader, frameCount, 24.0, 6.0] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast transform : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'transform' : String));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse((cast reader : ByteReader), (cast frameCount : Float), (cast 24.0 : Float), (cast 6.0 : Float));
         i++;
       }
     }
-    path = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    path = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast path : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var timelines:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast path : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var timelines:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'path'] : Array<Dynamic>));
-            var type:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
-            var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            var values:Dynamic = ((cast _Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_PATH_MIX__spineBinaryParse) : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic));
-            _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse, cast ([reader, frameCount, (values * 4.0), values] : Array<Dynamic>));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast timelines : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'path' : String));
+            var type:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
+            var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            var values:Float = ((cast _Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_PATH_MIX__spineBinaryParse) : Bool) ? (cast 3.0 : Dynamic) : (cast 1.0 : Dynamic));
+            SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse((cast reader : ByteReader), (cast frameCount : Float), (cast (values * 4.0) : Float), (cast values : Float));
             j++;
           }
         }
@@ -521,45 +524,45 @@ class SpineBinaryParse {
     }
   }
 
-  public static function skipSpineBinaryDeformTimelines__spineBinaryParse(reader:ByteReader, unmodeled:Dynamic):Void {
-    var skins:Dynamic = cast _Runtime.UNDEFINED;
-    skins = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+  public static function skipSpineBinaryDeformTimelines__spineBinaryParse(reader:ByteReader, unmodeled:flighthq._internal._Map<String, Float>):Void {
+    var skins:Float = cast _Runtime.UNDEFINED;
+    skins = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast skins : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var slots:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast skins : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var slots:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast slots : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            var attachments:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast slots : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            var attachments:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
             {
-              var k:Dynamic = 0.0;
-              while ((cast ((cast ((cast k : Float) < (cast attachments : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-                var type:Dynamic = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
-                var frameCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+              var k:Float = 0.0;
+              while ((cast ((cast ((cast k : Float) < (cast attachments : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+                (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+                var type:Float = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
+                var frameCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
                 if ((cast _Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_ATTACHMENT_SEQUENCE__spineBinaryParse) : Bool)) {
-                  _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'attachment-sequence'] : Array<Dynamic>));
-                  _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, (frameCount * 12.0)] : Array<Dynamic>));
+                  SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'attachment-sequence' : String));
+                  skipSpineBinaryBytes((cast reader : ByteReader), (cast (frameCount * 12.0) : Float));
                   k++;
                   continue;
                 }
-                _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'deform'] : Array<Dynamic>));
-                _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-                _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
+                SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'deform' : String));
+                (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+                skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
                 {
-                  var f:Dynamic = 0.0;
-                  while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                    var run:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+                  var f:Float = 0.0;
+                  while ((cast ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+                    var run:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
                     if ((cast !_Runtime.strictEquals(run, 0.0) : Bool)) {
-                      _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-                      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, (run * 4.0)] : Array<Dynamic>));
+                      (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+                      skipSpineBinaryBytes((cast reader : ByteReader), (cast (run * 4.0) : Float));
                     }
                     if ((cast _Runtime.strictEquals(f, (frameCount - 1.0)) : Bool)) { break; }
-                    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
-                    _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse, cast ([reader, 1.0] : Array<Dynamic>));
+                    skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
+                    SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse((cast reader : ByteReader), (cast 1.0 : Float));
                     f++;
                   }
                 }
@@ -575,30 +578,30 @@ class SpineBinaryParse {
   }
 
   public static function readSpineBinaryDrawOrderTimeline__spineBinaryParse(reader:ByteReader, slotCount:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var frames:Float = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var orderings:Array<Float> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    frames = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     times = cast ([] : Array<Dynamic>);
     orderings = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast frames : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var time:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var offsets:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast frames : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var time:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var offsets:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         var moves:Array<{ var offset:Float; var slotIndex:Float; }> = cast ([] : Array<Dynamic>);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast offsets : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            var slotIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-            _Runtime.callProperty(moves, 'push', cast ([{ offset: _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>)), slotIndex: slotIndex }] : Array<Dynamic>));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast offsets : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            var slotIndex:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+            _Runtime.callProperty(moves, 'push', cast ([{ offset: (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float), slotIndex: slotIndex }] : Array<Dynamic>));
             j++;
           }
         }
-        if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) { break; }
-        var ordering:Dynamic = _Runtime.callValue(resolveSpineDrawOrdering, cast ([moves, slotCount] : Array<Dynamic>));
+        if ((cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool)) { break; }
+        var ordering:Null<Array<Float>> = (cast resolveSpineDrawOrdering((cast moves : Array<{ var offset:Float; var slotIndex:Float; }>), (cast slotCount : Float)) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(ordering, null) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.draworder-keyframe-unresolved', 'parseSpineBinarySkeleton', { time: time }] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.draworder-keyframe-unresolved' : String), (cast 'parseSpineBinarySkeleton' : String), (cast { time: time } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           i++;
           continue;
         }
@@ -611,18 +614,18 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function skipSpineBinaryEventTimelines__spineBinaryParse(reader:ByteReader, unmodeled:Dynamic):Void {
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    if ((cast ((cast frames : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(SpineBinaryParse.tally__spineBinaryParse, cast ([unmodeled, 'event'] : Array<Dynamic>)); }
+  public static function skipSpineBinaryEventTimelines__spineBinaryParse(reader:ByteReader, unmodeled:flighthq._internal._Map<String, Float>):Void {
+    var frames:Float = cast _Runtime.UNDEFINED;
+    frames = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    if ((cast ((cast frames : Float) > (cast 0.0 : Float)) : Bool)) { SpineBinaryParse.tally__spineBinaryParse((cast unmodeled : flighthq._internal._Map<String, Float>), (cast 'event' : String)); }
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast frames : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
-        if ((cast _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>)); }
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast frames : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
+        if ((cast (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool) : Bool)) { (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>); }
         i++;
       }
     }
@@ -630,20 +633,20 @@ class SpineBinaryParse {
 
   public static function skipSpineBinaryCurveFrames__spineBinaryParse(reader:ByteReader, frameCount:Float, payloadBytes:Float, curveValues:Float):Void {
     if ((cast ((cast frameCount : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, (4.0 + payloadBytes)] : Array<Dynamic>));
+    skipSpineBinaryBytes((cast reader : ByteReader), (cast (4.0 + payloadBytes) : Float));
     {
-      var f:Dynamic = 0.0;
-      while ((cast ((cast ((cast (f + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, (4.0 + payloadBytes)] : Array<Dynamic>));
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse, cast ([reader, curveValues] : Array<Dynamic>));
+      var f:Float = 0.0;
+      while ((cast ((cast ((cast (f + 1.0) : Float) < (cast frameCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast (4.0 + payloadBytes) : Float));
+        SpineBinaryParse.skipSpineBinaryCurveTag__spineBinaryParse((cast reader : ByteReader), (cast curveValues : Float));
         f++;
       }
     }
   }
 
   public static function skipSpineBinaryCurveTag__spineBinaryParse(reader:ByteReader, curveValues:Float):Void {
-    if ((cast _Runtime.strictEquals(_Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>)), SpineBinaryParse.SPINE_BINARY_CURVE_BEZIER__spineBinaryParse) : Bool)) {
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, (curveValues * 16.0)] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast readSpineBinaryByte((cast reader : ByteReader)) : Float), SpineBinaryParse.SPINE_BINARY_CURVE_BEZIER__spineBinaryParse) : Bool)) {
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast (curveValues * 16.0) : Float));
     }
   }
 
@@ -652,8 +655,8 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function tally__spineBinaryParse(counts:Dynamic, kind:String):Void {
-    ((cast counts : flighthq._internal._Map).set(kind, _Runtime.addNumbers(_Runtime.coalesce(((cast counts : flighthq._internal._Map).get(kind)), function():Dynamic return cast 0.0), 1.0)));
+  public static function tally__spineBinaryParse(counts:flighthq._internal._Map<String, Float>, kind:String):Void {
+    ((cast counts : flighthq._internal._Map<String, Float>).set(kind, _Runtime.addNumbers(_Runtime.coalesce(((cast counts : flighthq._internal._Map<String, Float>).get(kind)), function():Dynamic return cast 0.0), 1.0)));
   }
 
   public static function isSupportedSpineBinaryVersion__spineBinaryParse(version:String):Bool {
@@ -662,27 +665,27 @@ class SpineBinaryParse {
   }
 
   public static function parseSpineBinaryBones__spineBinaryParse(reader:ByteReader, nonessential:Bool):Array<Bone2D> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
-    count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    count = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     bones = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) { break; }
-        var name:Dynamic = _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-        var parentIndex:Dynamic = ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>)) : Dynamic));
-        var rotation:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var x:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var y:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var scaleX:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var scaleY:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var shearX:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var shearY:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var length:Dynamic = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-        var transformMode:Dynamic = _Runtime.callValue(SpineBinaryParse.spineBinaryTransformMode__spineBinaryParse, cast ([_Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>));
-        if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>)); }
+        if ((cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool)) { break; }
+        var name:Null<String> = (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+        var parentIndex:Float = ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float) : Dynamic));
+        var rotation:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var x:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var y:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var scaleX:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var scaleY:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var shearX:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var shearY:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var length:Float = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+        var transformMode:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; } = (cast SpineBinaryParse.spineBinaryTransformMode__spineBinaryParse((cast (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float) : Float)) : { var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; });
+        (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool);
+        if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float)); }
         _Runtime.callProperty(bones, 'push', cast ([{ length: length, name: name, parentIndex: parentIndex, rotation: rotation, scaleX: scaleX, scaleY: scaleY, shearX: shearX, shearY: shearY, transformMode: transformMode, x: x, y: y }] : Array<Dynamic>));
         i++;
       }
@@ -692,89 +695,89 @@ class SpineBinaryParse {
   }
 
   public static function parseSpineBinarySlots__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, ?diagnostics:Array<ImportDiagnostic>):{ var attachmentNames:Array<Null<String>>; var slots:Array<Slot2D>; } {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var attachmentNames:Array<Null<String>> = cast _Runtime.UNDEFINED;
     var slots:Array<Slot2D> = cast _Runtime.UNDEFINED;
-    var darkColors:Dynamic = cast _Runtime.UNDEFINED;
-    count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var darkColors:Float = cast _Runtime.UNDEFINED;
+    count = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     attachmentNames = cast ([] : Array<Dynamic>);
     slots = cast ([] : Array<Dynamic>);
     darkColors = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        if ((cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool)) { break; }
-        var name:Dynamic = _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-        var boneIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var color:Dynamic = _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(readSpineBinaryInt, cast ([reader] : Array<Dynamic>))), 0);
-        if ((cast !_Runtime.strictEquals(_Runtime.callValue(readSpineBinaryInt, cast ([reader] : Array<Dynamic>)), SpineBinaryParse.SPINE_BINARY_NO_DARK_COLOR__spineBinaryParse) : Bool)) { darkColors++; }
-        _Runtime.callProperty(attachmentNames, 'push', cast ([_Runtime.callValue(SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse, cast ([reader, strings] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+        if ((cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool)) { break; }
+        var name:Null<String> = (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+        var boneIndex:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var color:Float = _Runtime.unsignedShiftRight(_Runtime.toInt32((cast readSpineBinaryInt((cast reader : ByteReader)) : Float)), 0);
+        if ((cast !_Runtime.strictEquals((cast readSpineBinaryInt((cast reader : ByteReader)) : Float), SpineBinaryParse.SPINE_BINARY_NO_DARK_COLOR__spineBinaryParse) : Bool)) { darkColors++; }
+        _Runtime.callProperty(attachmentNames, 'push', cast ([(cast SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>)) : Null<String>)] : Array<Dynamic>));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         _Runtime.callProperty(slots, 'push', cast ([{ attachment: null, boneIndex: boneIndex, color: color, name: name }] : Array<Dynamic>));
         i++;
       }
     }
     if ((cast ((cast darkColors : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.slot-dark-color-unsupported', 'parseSpineSkeletonBinary', { slots: darkColors }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.slot-dark-color-unsupported' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { slots: darkColors } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast { attachmentNames: attachmentNames, slots: slots };
     return cast null;
   }
 
   public static function skipSpineBinaryConstraints__spineBinaryParse(reader:ByteReader, ?diagnostics:Array<ImportDiagnostic>):Void {
-    var ik:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    ik = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var ik:Float = cast _Runtime.UNDEFINED;
+    var transform:Float = cast _Runtime.UNDEFINED;
+    var path:Float = cast _Runtime.UNDEFINED;
+    ik = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast ik : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 8.0] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 4.0] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast ik : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse((cast reader : ByteReader));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 8.0 : Float));
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 4.0 : Float));
         i++;
       }
     }
-    transform = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    transform = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast transform : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 2.0] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 48.0] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast transform : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse((cast reader : ByteReader));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 2.0 : Float));
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 48.0 : Float));
         i++;
       }
     }
-    path = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    path = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast path : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 24.0] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast path : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        SpineBinaryParse.skipSpineBinaryConstraintHead__spineBinaryParse((cast reader : ByteReader));
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        skipSpineBinaryBytes((cast reader : ByteReader), (cast 24.0 : Float));
         i++;
       }
     }
-    _Runtime.callValue(SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse, cast ([diagnostics, ik, 'spine.ik-constraint-unsupported', 'constraints'] : Array<Dynamic>));
-    _Runtime.callValue(SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse, cast ([diagnostics, transform, 'spine.transform-constraint-unsupported', 'constraints'] : Array<Dynamic>));
-    _Runtime.callValue(SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse, cast ([diagnostics, path, 'spine.path-constraint-unsupported', 'constraints'] : Array<Dynamic>));
+    SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast ik : Float), (cast 'spine.ik-constraint-unsupported' : String), (cast 'constraints' : String));
+    SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast transform : Float), (cast 'spine.transform-constraint-unsupported' : String), (cast 'constraints' : String));
+    SpineBinaryParse.reportSpineBinaryCrumb__spineBinaryParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast path : Float), (cast 'spine.path-constraint-unsupported' : String), (cast 'constraints' : String));
   }
 
   public static function skipSpineBinaryConstraintHead__spineBinaryParse(reader:ByteReader):Void {
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>));
-    bones = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var bones:Float = cast _Runtime.UNDEFINED;
+    (cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>);
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool);
+    bones = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast bones : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast bones : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         i++;
       }
     }
@@ -782,61 +785,61 @@ class SpineBinaryParse {
 
   public static function parseSpineBinarySkins__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, nonessential:Bool, ?diagnostics:Array<ImportDiagnostic>):Array<AttachmentSkin2D> {
     var skins:Array<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
-    var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
-    var defaultSlots:Dynamic = cast _Runtime.UNDEFINED;
-    var alternates:Dynamic = cast _Runtime.UNDEFINED;
+    var unmodeled:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var defaultSlots:Float = cast _Runtime.UNDEFINED;
+    var alternates:Float = cast _Runtime.UNDEFINED;
     skins = cast ([] : Array<Dynamic>);
     unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    defaultSlots = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    defaultSlots = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     if ((cast ((cast defaultSlots : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(skins, 'push', cast ([{ attachments: _Runtime.callValue(SpineBinaryParse.readSpineBinarySkinBody__spineBinaryParse, cast ([reader, strings, defaultSlots, nonessential, unmodeled] : Array<Dynamic>)), name: SpineBinaryParse.SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse }] : Array<Dynamic>));
+      _Runtime.callProperty(skins, 'push', cast ([{ attachments: (cast SpineBinaryParse.readSpineBinarySkinBody__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast defaultSlots : Float), (cast nonessential : Bool), (cast unmodeled : flighthq._internal._Map<String, Float>)) : Array<SkinAttachment2D>), name: SpineBinaryParse.SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse }] : Array<Dynamic>));
     }
-    alternates = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    alternates = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast alternates : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var name:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse, cast ([reader, strings] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast alternates : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var name:Null<String> = (cast SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>)) : Null<String>);
         {
-          var list:Dynamic = 0.0;
+          var list:Float = 0.0;
           while ((cast ((cast list : Float) < (cast SpineBinaryParse.SPINE_BINARY_SKIN_REQUIREMENT_LISTS__spineBinaryParse : Float)) : Bool)) {
-            var required:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+            var required:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
             {
-              var j:Dynamic = 0.0;
-              while ((cast ((cast ((cast j : Float) < (cast required : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+              var j:Float = 0.0;
+              while ((cast ((cast ((cast j : Float) < (cast required : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+                (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
                 j++;
               }
             }
             list++;
           }
         }
-        var slotCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        _Runtime.callProperty(skins, 'push', cast ([{ attachments: _Runtime.callValue(SpineBinaryParse.readSpineBinarySkinBody__spineBinaryParse, cast ([reader, strings, slotCount, nonessential, unmodeled] : Array<Dynamic>)), name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
+        var slotCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        _Runtime.callProperty(skins, 'push', cast ([{ attachments: (cast SpineBinaryParse.readSpineBinarySkinBody__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast slotCount : Float), (cast nonessential : Bool), (cast unmodeled : flighthq._internal._Map<String, Float>)) : Array<SkinAttachment2D>), name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
         i++;
       }
     }
-    for (__iteration2 in _Runtime.iterable(unmodeled)) {
-      var type:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
-      var count:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.' + Std.string(type) + '-attachment-unsupported', 'parseSpineSkeletonBinary', { attachments: count }] : Array<Dynamic>));
+    for (__iteration6 in _Runtime.iterable(unmodeled)) {
+      var type:String = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
+      var count:Float = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.' + Std.string(type) + '-attachment-unsupported' : String), (cast 'parseSpineSkeletonBinary' : String), (cast { attachments: count } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast skins;
     return cast null;
   }
 
-  public static function readSpineBinarySkinBody__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, slotCount:Float, nonessential:Bool, unmodeled:Dynamic):Array<SkinAttachment2D> {
+  public static function readSpineBinarySkinBody__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, slotCount:Float, nonessential:Bool, unmodeled:flighthq._internal._Map<String, Float>):Array<SkinAttachment2D> {
     var attachments:Array<SkinAttachment2D> = cast _Runtime.UNDEFINED;
     attachments = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast slotCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var slotIndex:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-        var entries:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast slotCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var slotIndex:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+        var entries:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         {
-          var j:Dynamic = 0.0;
-          while ((cast ((cast ((cast j : Float) < (cast entries : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-            var key:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse, cast ([reader, strings] : Array<Dynamic>));
-            var attachment:Dynamic = _Runtime.callValue(SpineBinaryParse.readSpineBinaryAttachment__spineBinaryParse, cast ([reader, strings, key, nonessential, unmodeled] : Array<Dynamic>));
+          var j:Float = 0.0;
+          while ((cast ((cast ((cast j : Float) < (cast entries : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+            var key:Null<String> = (cast SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>)) : Null<String>);
+            var attachment:Null<Attachment2D> = (cast SpineBinaryParse.readSpineBinaryAttachment__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast key : Null<String>), (cast nonessential : Bool), (cast unmodeled : flighthq._internal._Map<String, Float>)) : Null<Attachment2D>);
             if ((cast ((cast !_Runtime.strictEquals(attachment, null) : Bool) && (cast !_Runtime.strictEquals(key, null) : Bool)) : Bool)) { _Runtime.callProperty(attachments, 'push', cast ([{ attachment: attachment, name: key, slotIndex: slotIndex }] : Array<Dynamic>)); }
             j++;
           }
@@ -848,116 +851,116 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function readSpineBinaryAttachment__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, key:Null<String>, nonessential:Bool, unmodeled:Dynamic):Null<Attachment2D> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var ordinal:Dynamic = cast _Runtime.UNDEFINED;
-    var type:Dynamic = cast _Runtime.UNDEFINED;
-    var label:Dynamic = cast _Runtime.UNDEFINED;
-    name = _Runtime.coalesce(_Runtime.callValue(SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse, cast ([reader, strings] : Array<Dynamic>)), function():Dynamic return cast key);
-    ordinal = _Runtime.callValue(readSpineBinaryByte, cast ([reader] : Array<Dynamic>));
+  public static function readSpineBinaryAttachment__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, key:Null<String>, nonessential:Bool, unmodeled:flighthq._internal._Map<String, Float>):Null<Attachment2D> {
+    var name:Null<String> = cast _Runtime.UNDEFINED;
+    var ordinal:Float = cast _Runtime.UNDEFINED;
+    var type:Null<String> = cast _Runtime.UNDEFINED;
+    var label:String = cast _Runtime.UNDEFINED;
+    name = _Runtime.coalesce((cast SpineBinaryParse.readSpineBinaryStringReference__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>)) : Null<String>), function():Dynamic return cast key);
+    ordinal = (cast readSpineBinaryByte((cast reader : ByteReader)) : Float);
     type = ((cast ((cast ordinal : Float) < (cast SpineBinaryParse.SPINE_BINARY_ATTACHMENT_TYPES__spineBinaryParse.length : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_ATTACHMENT_TYPES__spineBinaryParse, ordinal) : Dynamic) : (cast null : Dynamic));
-    if ((cast _Runtime.strictEquals(type, 'region') : Bool)) { return cast _Runtime.callValue(SpineBinaryParse.readSpineBinaryRegionAttachment__spineBinaryParse, cast ([reader, strings, name] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast _Runtime.callValue(SpineBinaryParse.readSpineBinaryMeshAttachment__spineBinaryParse, cast ([reader, strings, name, nonessential] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(type, 'region') : Bool)) { return cast (cast SpineBinaryParse.readSpineBinaryRegionAttachment__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast name : Null<String>)) : Null<Attachment2D>); }
+    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast SpineBinaryParse.readSpineBinaryMeshAttachment__spineBinaryParse((cast reader : ByteReader), (cast strings : Array<Null<String>>), (cast name : Null<String>), (cast nonessential : Bool)) : Null<Attachment2D>); }
     label = _Runtime.coalesce(type, function():Dynamic return cast 'unknown');
-    ((cast unmodeled : flighthq._internal._Map).set(label, _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map).get(label)), function():Dynamic return cast 0.0), 1.0)));
+    ((cast unmodeled : flighthq._internal._Map<String, Float>).set(label, _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map<String, Float>).get(label)), function():Dynamic return cast 0.0), 1.0)));
     if ((cast _Runtime.strictEquals(type, 'boundingbox') : Bool)) {
-      _Runtime.callValue(SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse, cast ([reader, _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
-      if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>)); }
+      SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse((cast reader : ByteReader), (cast (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float) : Float));
+      if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float)); }
     } else { if ((cast _Runtime.strictEquals(type, 'clipping') : Bool)) {
-      _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse, cast ([reader, _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
-      if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>)); }
+      (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse((cast reader : ByteReader), (cast (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float) : Float));
+      if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float)); }
     } else { if ((cast _Runtime.strictEquals(type, 'point') : Bool)) {
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 12.0] : Array<Dynamic>));
-      if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>)); }
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast 12.0 : Float));
+      if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float)); }
     } else { if ((cast _Runtime.strictEquals(type, 'linkedmesh') : Bool)) {
-      _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>));
-      _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse, cast ([reader] : Array<Dynamic>));
-      if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 8.0] : Array<Dynamic>)); }
+      (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float));
+      (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool);
+      SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse((cast reader : ByteReader));
+      if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast 8.0 : Float)); }
     } else { if ((cast _Runtime.strictEquals(type, 'path') : Bool)) {
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, 2.0] : Array<Dynamic>));
-      var vertexCount:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse, cast ([reader, vertexCount] : Array<Dynamic>));
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, _Runtime.multiplyNumbers(HxMath.floor((vertexCount / 3.0)), 4.0)] : Array<Dynamic>));
-      if ((cast nonessential : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>)); }
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast 2.0 : Float));
+      var vertexCount:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      SpineBinaryParse.skipSpineBinaryVertices__spineBinaryParse((cast reader : ByteReader), (cast vertexCount : Float));
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast _Runtime.multiplyNumbers(HxMath.floor((vertexCount / 3.0)), 4.0) : Float));
+      if ((cast nonessential : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float)); }
     } } } } }
-    if ((cast _Runtime.strictEquals(type, null) : Bool)) { _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, _Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0)] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(type, null) : Bool)) { skipSpineBinaryBytes((cast reader : ByteReader), (cast _Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0) : Float)); }
     return cast null;
     return cast null;
   }
 
   public static function readSpineBinaryMeshAttachment__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, name:Null<String>, nonessential:Bool):MeshAttachment2D {
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var uvs:Dynamic = cast _Runtime.UNDEFINED;
-    var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
-    var triangles:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>));
-    vertexCount = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var uvs:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var triangleCount:Float = cast _Runtime.UNDEFINED;
+    var triangles:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
+    var geometry:{ var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; } = cast _Runtime.UNDEFINED;
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float));
+    vertexCount = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     uvs = new flighthq._internal._Float32Array((vertexCount * 2.0));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(uvs, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(uvs, i, _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeFloat32Array(uvs, i, (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float));
         i++;
       }
     }
-    triangleCount = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    triangleCount = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     triangles = new flighthq._internal._UInt16Array(triangleCount);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast triangleCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint16Array(triangles, i, _Runtime.callValue(readSpineBinaryUnsignedShort, cast ([reader] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeUint16Array(triangles, i, (cast readSpineBinaryUnsignedShort((cast reader : ByteReader)) : Float));
         i++;
       }
     }
-    geometry = _Runtime.callValue(SpineBinaryParse.readSpineBinaryVertices__spineBinaryParse, cast ([reader, vertexCount] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse, cast ([reader] : Array<Dynamic>));
+    geometry = (cast SpineBinaryParse.readSpineBinaryVertices__spineBinaryParse((cast reader : ByteReader), (cast vertexCount : Float)) : { var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; });
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse((cast reader : ByteReader));
     if ((cast nonessential : Bool)) {
-      var edges:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-      _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, ((edges * 2.0) + 8.0)] : Array<Dynamic>));
+      var edges:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+      skipSpineBinaryBytes((cast reader : ByteReader), (cast ((edges * 2.0) + 8.0) : Float));
     }
-    return cast { kind: MeshAttachment2DKind, name: name, skin: _Runtime.field(geometry, 'skin'), triangles: triangles, uvs: uvs, vertexCount: vertexCount, vertices: _Runtime.field(geometry, 'vertices') };
+    return cast { kind: MeshAttachment2DKind, name: name, skin: (cast geometry : { var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; }).skin, triangles: triangles, uvs: uvs, vertexCount: vertexCount, vertices: (cast geometry : { var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; }).vertices };
     return cast null;
   }
 
   public static function readSpineBinaryRegionAttachment__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>, name:Null<String>):RegionAttachment2D {
-    var rotation:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    rotation = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    x = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    y = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    scaleX = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    scaleY = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    width = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    height = _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(skipSpineBinaryBytes, cast ([reader, SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse] : Array<Dynamic>));
-    _Runtime.callValue(SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse, cast ([reader] : Array<Dynamic>));
+    var rotation:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    rotation = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    x = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    y = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    scaleX = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    scaleY = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    width = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    height = (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float);
+    skipSpineBinaryBytes((cast reader : ByteReader), (cast SpineBinaryParse.SPINE_BINARY_COLOR_BYTES__spineBinaryParse : Float));
+    SpineBinaryParse.skipSpineBinarySequence__spineBinaryParse((cast reader : ByteReader));
     return cast { height: height, kind: RegionAttachment2DKind, name: name, rotation: rotation, scaleX: scaleX, scaleY: scaleY, width: width, x: x, y: y };
     return cast null;
   }
 
   public static function readSpineBinaryVertices__spineBinaryParse(reader:ByteReader, vertexCount:Float):{ var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; } {
-    var influenceCounts:Dynamic = cast _Runtime.UNDEFINED;
+    var influenceCounts:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var influences:Array<Float> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) {
-      var vertices:Dynamic = new flighthq._internal._Float32Array((vertexCount * 2.0));
+    if ((cast !(cast (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool) : Bool) : Bool)) {
+      var vertices:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((vertexCount * 2.0));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, i, _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>)));
+          flighthq._internal._StaticIndex.writeFloat32Array(vertices, i, (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float));
           i++;
         }
       }
@@ -966,14 +969,14 @@ class SpineBinaryParse {
     influenceCounts = new flighthq._internal._UInt16Array(vertexCount);
     influences = cast ([] : Array<Dynamic>);
     {
-      var v:Dynamic = 0.0;
-      while ((cast ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        var count:Dynamic = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+      var v:Float = 0.0;
+      while ((cast ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        var count:Float = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
         flighthq._internal._StaticIndex.writeUint16Array(influenceCounts, v, count);
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-            _Runtime.pushMany(influences, cast ([_Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>)), _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>)), _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>)), _Runtime.callValue(readSpineBinaryFloat, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+            _Runtime.pushMany(influences, cast ([(cast readSpineBinaryVarint((cast reader : ByteReader)) : Float), (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float), (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float), (cast readSpineBinaryFloat((cast reader : ByteReader)) : Float)] : Array<Dynamic>));
             i++;
           }
         }
@@ -985,39 +988,39 @@ class SpineBinaryParse {
   }
 
   public static function skipSpineBinaryVertices__spineBinaryParse(reader:ByteReader, vertexCount:Float):Void {
-    _Runtime.callValue(SpineBinaryParse.readSpineBinaryVertices__spineBinaryParse, cast ([reader, vertexCount] : Array<Dynamic>));
+    (cast SpineBinaryParse.readSpineBinaryVertices__spineBinaryParse((cast reader : ByteReader), (cast vertexCount : Float)) : { var skin:Null<Skin2D>; var vertices:Null<flighthq._internal._Float32Array>; });
   }
 
   public static function skipSpineBinarySequence__spineBinaryParse(reader:ByteReader):Void {
-    if ((cast !(cast _Runtime.callValue(readSpineBinaryBoolean, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    if ((cast !(cast (cast readSpineBinaryBoolean((cast reader : ByteReader)) : Bool) : Bool) : Bool)) { return; }
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
+    (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
   }
 
   public static function readSpineBinaryStringReference__spineBinaryParse(reader:ByteReader, strings:Array<Null<String>>):Null<String> {
-    var index:Dynamic = cast _Runtime.UNDEFINED;
-    index = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    var index:Float = cast _Runtime.UNDEFINED;
+    index = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     return cast ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(strings, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(strings, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function reportSpineBinaryCrumb__spineBinaryParse(diagnostics:Null<Array<ImportDiagnostic>>, count:Float, kind:String, unit:String):Void {
     if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, kind, 'parseSpineSkeletonBinary', _Runtime.objectFromPairs([{ key: unit, value: count }])] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast kind : String), (cast 'parseSpineSkeletonBinary' : String), (cast _Runtime.objectFromPairs([{ key: unit, value: count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
   }
 
   public static function readSpineBinaryStringTable__spineBinaryParse(reader:ByteReader):Array<Null<String>> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var strings:Array<Null<String>> = cast _Runtime.UNDEFINED;
-    count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
+    count = (cast readSpineBinaryVarint((cast reader : ByteReader)) : Float);
     strings = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-        _Runtime.callProperty(strings, 'push', cast ([_Runtime.callValue(readSpineBinaryString, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader : ByteReader)) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.callProperty(strings, 'push', cast ([(cast readSpineBinaryString((cast reader : ByteReader)) : Null<String>)] : Array<Dynamic>));
         i++;
       }
     }
@@ -1025,44 +1028,44 @@ class SpineBinaryParse {
     return cast null;
   }
 
-  public static function spineBinaryTransformMode__spineBinaryParse(ordinal:Float):Dynamic {
-    return cast ((cast ((cast ((cast ordinal : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast ordinal : Float) < (cast SpineBinaryParse.SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse.length : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse, ordinal) : Dynamic) : (cast TransformMode2D.Normal : Dynamic));
+  public static function spineBinaryTransformMode__spineBinaryParse(ordinal:Float):flighthq._internal._IndexedAccess<Dynamic, Float> {
+    return cast ((cast ((cast ((cast ordinal : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast ordinal : Float) < (cast SpineBinaryParse.SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse.length : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse, ordinal) : Dynamic) : (cast (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).Normal : Dynamic));
     return cast null;
   }
 
-  public static final SPINE_BINARY_BOUNDS_BYTES__spineBinaryParse:Dynamic = 16.0;
+  public static final SPINE_BINARY_BOUNDS_BYTES__spineBinaryParse:Float = 16.0;
 
-  public static final SPINE_BINARY_COLOR_BYTES__spineBinaryParse:Dynamic = 4.0;
+  public static final SPINE_BINARY_COLOR_BYTES__spineBinaryParse:Float = 4.0;
 
-  public static final SPINE_BINARY_FPS_BYTES__spineBinaryParse:Dynamic = 4.0;
+  public static final SPINE_BINARY_FPS_BYTES__spineBinaryParse:Float = 4.0;
 
-  public static final SPINE_BINARY_HASH_BYTES__spineBinaryParse:Dynamic = 8.0;
+  public static final SPINE_BINARY_HASH_BYTES__spineBinaryParse:Float = 8.0;
 
-  public static final SPINE_BINARY_ATTACHMENT_TYPES__spineBinaryParse:Dynamic = cast (['region', 'boundingbox', 'mesh', 'linkedmesh', 'path', 'point', 'clipping'] : Array<Dynamic>);
+  public static final SPINE_BINARY_ATTACHMENT_TYPES__spineBinaryParse:Array<String> = cast (['region', 'boundingbox', 'mesh', 'linkedmesh', 'path', 'point', 'clipping'] : Array<Dynamic>);
 
-  public static final SPINE_BINARY_BONE_TIMELINES__spineBinaryParse:Dynamic = cast ([{ path: Skeleton2DAnimationPathValue.Rotation, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Translation, values: 2.0 }, { path: Skeleton2DAnimationPathValue.TranslationX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.TranslationY, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Scale, values: 2.0 }, { path: Skeleton2DAnimationPathValue.ScaleX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.ScaleY, values: 1.0 }, { path: Skeleton2DAnimationPathValue.Shear, values: 2.0 }, { path: Skeleton2DAnimationPathValue.ShearX, values: 1.0 }, { path: Skeleton2DAnimationPathValue.ShearY, values: 1.0 }] : Array<Dynamic>);
+  public static final SPINE_BINARY_BONE_TIMELINES__spineBinaryParse:Array<{ var path:String; var values:Float; }> = cast ([{ path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Rotation, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation, values: 2.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationX, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationY, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale, values: 2.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleX, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleY, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Shear, values: 2.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearX, values: 1.0 }, { path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearY, values: 1.0 }] : Array<Dynamic>);
 
-  public static final SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse:Dynamic = cast ([0.0, 4.0, 3.0, 7.0, 6.0, 1.0] : Array<Dynamic>);
+  public static final SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse:Array<Float> = cast ([0.0, 4.0, 3.0, 7.0, 6.0, 1.0] : Array<Dynamic>);
 
-  public static final SPINE_BINARY_CURVE_BEZIER__spineBinaryParse:Dynamic = 2.0;
+  public static final SPINE_BINARY_CURVE_BEZIER__spineBinaryParse:Float = 2.0;
 
-  public static final SPINE_BINARY_SLOT_ATTACHMENT__spineBinaryParse:Dynamic = 0.0;
+  public static final SPINE_BINARY_SLOT_ATTACHMENT__spineBinaryParse:Float = 0.0;
 
-  public static final SPINE_BINARY_SLOT_RGBA__spineBinaryParse:Dynamic = 1.0;
+  public static final SPINE_BINARY_SLOT_RGBA__spineBinaryParse:Float = 1.0;
 
-  public static final SPINE_BINARY_NO_ATTACHMENT_INDEX__spineBinaryParse:Dynamic = -1.0;
+  public static final SPINE_BINARY_NO_ATTACHMENT_INDEX__spineBinaryParse:Float = -1.0;
 
-  public static final SPINE_BINARY_ATTACHMENT_SEQUENCE__spineBinaryParse:Dynamic = 1.0;
+  public static final SPINE_BINARY_ATTACHMENT_SEQUENCE__spineBinaryParse:Float = 1.0;
 
-  public static final SPINE_BINARY_PATH_MIX__spineBinaryParse:Dynamic = 2.0;
+  public static final SPINE_BINARY_PATH_MIX__spineBinaryParse:Float = 2.0;
 
-  public static final SPINE_BINARY_CURVE_EPSILON__spineBinaryParse:Dynamic = 0.000001;
+  public static final SPINE_BINARY_CURVE_EPSILON__spineBinaryParse:Float = 0.000001;
 
-  public static final SPINE_BINARY_NO_DARK_COLOR__spineBinaryParse:Dynamic = -1.0;
+  public static final SPINE_BINARY_NO_DARK_COLOR__spineBinaryParse:Float = -1.0;
 
-  public static final SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse:Dynamic = 'default';
+  public static final SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse:String = 'default';
 
-  public static final SPINE_BINARY_SKIN_REQUIREMENT_LISTS__spineBinaryParse:Dynamic = 4.0;
+  public static final SPINE_BINARY_SKIN_REQUIREMENT_LISTS__spineBinaryParse:Float = 4.0;
 
-  public static final SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse:Dynamic = cast ([TransformMode2D.Normal, TransformMode2D.OnlyTranslation, TransformMode2D.NoRotationOrReflection, TransformMode2D.NoScale, TransformMode2D.NoScaleOrReflection] : Array<Dynamic>);
+  public static final SPINE_BINARY_TRANSFORM_MODES__spineBinaryParse:Array<{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }> = cast ([(cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).Normal, (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).OnlyTranslation, (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).NoRotationOrReflection, (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).NoScale, (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).NoScaleOrReflection] : Array<Dynamic>);
 }

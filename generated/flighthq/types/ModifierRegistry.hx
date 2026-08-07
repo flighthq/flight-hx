@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ModifierRegistry = { var definitions:Dynamic; };
+typedef ModifierRegistry = { var definitions:flighthq._internal._Map<ModifierKind, ModifierDefinition>; };

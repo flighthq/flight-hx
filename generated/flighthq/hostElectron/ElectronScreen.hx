@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.ElectronApi.ElectronDisplay;
+import flighthq.types.ElectronApi.ElectronScreen;
 import flighthq.types.Screen.ScreenBackend;
 import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenChangeEvent;
@@ -12,55 +13,55 @@ import flighthq.types.ScreenChangeEvent.ScreenChangeKind;
 
 class ElectronScreen {
   public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
-    var screen:Dynamic = cast _Runtime.UNDEFINED;
-    screen = _Runtime.field(electron, 'screen');
-    return cast { getScreens: function(out:Dynamic) {
-      var displays:Dynamic = cast _Runtime.UNDEFINED;
-      var primaryId:Dynamic = cast _Runtime.UNDEFINED;
-      displays = _Runtime.callProperty(screen, 'getAllDisplays', cast ([] : Array<Dynamic>));
-      primaryId = _Runtime.field(_Runtime.callProperty(screen, 'getPrimaryDisplay', cast ([] : Array<Dynamic>)), 'id');
+    var screen:flighthq.types.ElectronApi.ElectronScreen = cast _Runtime.UNDEFINED;
+    screen = (cast electron : ElectronApi).screen;
+    return cast { getScreens: function(out:Array<ScreenInfo>):Array<ScreenInfo> {
+      var displays:Array<ElectronDisplay> = cast _Runtime.UNDEFINED;
+      var primaryId:Float = cast _Runtime.UNDEFINED;
+      displays = (cast screen : flighthq.types.ElectronApi.ElectronScreen).getAllDisplays();
+      primaryId = (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id;
       _Runtime.setLength(out, _Runtime.field(displays, 'length'));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) {
-          var display:Dynamic = flighthq._internal._StaticIndex.readArray(displays, i);
-          flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), primaryId)] : Array<Dynamic>)));
+          var display:ElectronDisplay = flighthq._internal._StaticIndex.readArray(displays, i);
+          flighthq._internal._StaticIndex.writeArray(out, i, (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo) : ScreenInfo), (cast display : ElectronDisplay), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, primaryId) : Bool)) : ScreenInfo));
           i++;
         }
       }
       return cast out;
-    }, getPrimaryScreen: function(out:Dynamic) {
-      return cast _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([out, _Runtime.callProperty(screen, 'getPrimaryDisplay', cast ([] : Array<Dynamic>)), true] : Array<Dynamic>));
-    }, getCursorPosition: function(out:Dynamic) {
-      var point:Dynamic = cast _Runtime.UNDEFINED;
-      point = _Runtime.callProperty(screen, 'getCursorScreenPoint', cast ([] : Array<Dynamic>));
-      _Runtime.setField(out, 'x', _Runtime.field(point, 'x'));
-      _Runtime.setField(out, 'y', _Runtime.field(point, 'y'));
+    }, getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
+      return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast out : ScreenInfo), (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay), (cast true : Bool)) : ScreenInfo);
+    }, getCursorPosition: function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+      var point:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+      point = (cast screen : flighthq.types.ElectronApi.ElectronScreen).getCursorScreenPoint();
+      ((cast out : { var x:Float; var y:Float; }).x = (cast point : { var x:Float; var y:Float; }).x);
+      ((cast out : { var x:Float; var y:Float; }).y = (cast point : { var x:Float; var y:Float; }).y);
       return cast out;
-    }, subscribe: function(listener:Dynamic) {
-      var primaryId:Dynamic = cast _Runtime.UNDEFINED;
-      var makeHandler:Dynamic = cast _Runtime.UNDEFINED;
-      var onAdded:Dynamic = cast _Runtime.UNDEFINED;
-      var onRemoved:Dynamic = cast _Runtime.UNDEFINED;
-      var onMetrics:Dynamic = cast _Runtime.UNDEFINED;
-      primaryId = function() return _Runtime.field(_Runtime.callProperty(screen, 'getPrimaryDisplay', cast ([] : Array<Dynamic>)), 'id');
-      makeHandler = function(kind:ScreenChangeKind) return _Runtime.haxeRest(function(...args:Dynamic) {
-        var display:Dynamic = cast _Runtime.UNDEFINED;
+    }, subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
+      var primaryId:Void->Float = cast _Runtime.UNDEFINED;
+      var makeHandler:ScreenChangeKind->Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      var onAdded:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      var onRemoved:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      var onMetrics:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      primaryId = (cast function():Float return (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id : Void->Float);
+      makeHandler = (cast function(kind:ScreenChangeKind):Array<flighthq._internal._Any>->Void return _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+        var display:Null<ElectronDisplay> = cast _Runtime.UNDEFINED;
         var event:ScreenChangeEvent = cast _Runtime.UNDEFINED;
         display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
-        event = { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast _Runtime.callValue(ElectronScreen.fillScreenInfo__electronScreen, cast ([(cast {  } : ScreenInfo), display, _Runtime.strictEquals(_Runtime.field(display, 'id'), _Runtime.callValue(primaryId, cast ([] : Array<Dynamic>)))] : Array<Dynamic>)), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) };
-        _Runtime.callValue(listener, cast ([event] : Array<Dynamic>));
-      }, 0);
-      onAdded = _Runtime.callValue(makeHandler, cast (['ScreenAdded'] : Array<Dynamic>));
-      onRemoved = _Runtime.callValue(makeHandler, cast (['ScreenRemoved'] : Array<Dynamic>));
-      onMetrics = _Runtime.callValue(makeHandler, cast (['ScreenMetricsChanged'] : Array<Dynamic>));
-      _Runtime.callProperty(screen, 'on', cast (['display-added', onAdded] : Array<Dynamic>));
-      _Runtime.callProperty(screen, 'on', cast (['display-removed', onRemoved] : Array<Dynamic>));
-      _Runtime.callProperty(screen, 'on', cast (['display-metrics-changed', onMetrics] : Array<Dynamic>));
-      return cast function() {
-        _Runtime.callProperty(screen, 'removeListener', cast (['display-added', onAdded] : Array<Dynamic>));
-        _Runtime.callProperty(screen, 'removeListener', cast (['display-removed', onRemoved] : Array<Dynamic>));
-        _Runtime.callProperty(screen, 'removeListener', cast (['display-metrics-changed', onMetrics] : Array<Dynamic>));
+        event = { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo) : ScreenInfo), (cast display : ElectronDisplay), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, (cast primaryId() : Float)) : Bool)) : ScreenInfo), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) };
+        listener((cast event : ScreenChangeEvent));
+      }, 0) : ScreenChangeKind->Array<flighthq._internal._Any>->Void);
+      onAdded = (cast makeHandler((cast 'ScreenAdded' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
+      onRemoved = (cast makeHandler((cast 'ScreenRemoved' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
+      onMetrics = (cast makeHandler((cast 'ScreenMetricsChanged' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-added', onAdded);
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-removed', onRemoved);
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-metrics-changed', onMetrics);
+      return cast function():Void {
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-added', onAdded);
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-removed', onRemoved);
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-metrics-changed', onMetrics);
       };
     } };
     return cast null;
@@ -68,12 +69,12 @@ class ElectronScreen {
 
   public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
     (out.id = cast (_Runtime.field(display, 'id') : Dynamic));
-    (out.x = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'x') : Dynamic));
-    (out.y = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'y') : Dynamic));
-    (out.width = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'width') : Dynamic));
-    (out.height = cast (_Runtime.field(_Runtime.field(display, 'bounds'), 'height') : Dynamic));
-    (out.workWidth = cast (_Runtime.field(_Runtime.field(display, 'workArea'), 'width') : Dynamic));
-    (out.workHeight = cast (_Runtime.field(_Runtime.field(display, 'workArea'), 'height') : Dynamic));
+    (out.x = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).x : Dynamic));
+    (out.y = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).y : Dynamic));
+    (out.width = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Dynamic));
+    (out.height = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Dynamic));
+    (out.workWidth = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Dynamic));
+    (out.workHeight = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Dynamic));
     (out.scaleFactor = cast (_Runtime.field(display, 'scaleFactor') : Dynamic));
     (out.isPrimary = cast (isPrimary : Dynamic));
     return cast out;

@@ -12,21 +12,21 @@ import flighthq.video.VideoResource.disposeVideoResource;
 
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:flighthq._internal.dom.MediaStream):VideoResource {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
+    var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
     element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
     ((cast element : flighthq._internal.dom.HTMLVideoElement).srcObject = stream);
-    return cast _Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>));
+    return cast (cast createVideoResource((cast element : Null<flighthq._internal.dom.HTMLVideoElement>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : VideoResource);
     return cast null;
   }
 
   public static function loadVideoResourceFromBlob(blob:flighthq._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var url:Dynamic = cast _Runtime.UNDEFINED;
+        var url:String = cast _Runtime.UNDEFINED;
         var resource:VideoResource = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap(loadVideoResourceFromUrl((cast url : String), (cast options : Null<VideoResourceLoadOptions>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue0:Dynamic):Dynamic {
             (resource = cast (__awaitValue0 : Dynamic));
             return flighthq._internal._Async.flowNormal();
           });
@@ -46,38 +46,38 @@ class VideoResourceFrom {
 
   public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     if (_Runtime.truthy(({ final __hostType1 = signal; __hostType1 == null ? _Runtime.UNDEFINED : __hostType1.aborted; }))) { return cast flighthq._internal._Async.reject(signal.reason); }
-    return cast flighthq._internal._Async.create(function(resolve:Dynamic, reject:Dynamic) {
-      var element:Dynamic = cast _Runtime.UNDEFINED;
-      var readyEvent:Dynamic = cast _Runtime.UNDEFINED;
-      var onReady:Dynamic = cast _Runtime.UNDEFINED;
-      var onError:Dynamic = cast _Runtime.UNDEFINED;
-      var onAbort:Dynamic = cast _Runtime.UNDEFINED;
-      var cleanup:Dynamic = cast _Runtime.UNDEFINED;
+    return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
+      var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
+      var readyEvent:String = cast _Runtime.UNDEFINED;
+      var onReady:Void->Void = cast _Runtime.UNDEFINED;
+      var onError:Void->Void = cast _Runtime.UNDEFINED;
+      var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var cleanup:Void->Void = cast _Runtime.UNDEFINED;
       element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
-      ((cast element : flighthq._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.preload; }), function():Dynamic return cast 'auto') : Dynamic));
+      ((cast element : flighthq._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.preload; }), function():Dynamic return cast 'auto') : flighthq._internal._IndexedAccess<flighthq._internal.dom.HTMLMediaElement, String>));
       if ((cast !_Runtime.strictEquals(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).crossOrigin = options.crossOrigin); }
       if ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).muted = options.muted); }
       if ((cast !_Runtime.strictEquals(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).playsInline = options.playsInline); }
-      readyEvent = _Runtime.callValue(VideoResourceFrom.readinessEventName__videoResourceFrom, cast ([({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.readiness; })] : Array<Dynamic>));
-      onReady = function() {
-        _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(resolve, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
-      };
-      onError = function() {
-        _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(disposeVideoResource, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(reject, cast ([_Runtime.error('Failed to load video: ' + Std.string(url) + '')] : Array<Dynamic>));
-      };
-      onAbort = function() {
-        _Runtime.callValue(cleanup, cast ([] : Array<Dynamic>));
-        _Runtime.callValue(disposeVideoResource, cast ([_Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(reject, cast ([signal.reason] : Array<Dynamic>));
-      };
-      cleanup = function() {
+      readyEvent = (cast VideoResourceFrom.readinessEventName__videoResourceFrom((cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.readiness; }) : Null<String>)) : String);
+      onReady = (cast function():Void {
+        cleanup();
+        resolve((cast createVideoResource((cast element : Null<flighthq._internal.dom.HTMLVideoElement>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : flighthq._internal._Any));
+      } : Void->Void);
+      onError = (cast function():Void {
+        cleanup();
+        disposeVideoResource((cast (cast createVideoResource((cast element : Null<flighthq._internal.dom.HTMLVideoElement>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : VideoResource) : VideoResource));
+        reject((cast _Runtime.error('Failed to load video: ' + Std.string(url) + '') : flighthq._internal._Any));
+      } : Void->Void);
+      onAbort = (cast function():Void {
+        cleanup();
+        disposeVideoResource((cast (cast createVideoResource((cast element : Null<flighthq._internal.dom.HTMLVideoElement>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : VideoResource) : VideoResource));
+        reject((cast signal.reason : flighthq._internal._Any));
+      } : Void->Void);
+      cleanup = (cast function():Void {
         (cast element : flighthq._internal.dom.HTMLVideoElement).removeEventListener(readyEvent, onReady);
         (cast element : flighthq._internal.dom.HTMLVideoElement).removeEventListener('error', onError);
         if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { signal.removeEventListener('abort', onAbort); }
-      };
+      } : Void->Void);
       (cast element : flighthq._internal.dom.HTMLVideoElement).addEventListener(readyEvent, onReady, { once: true });
       (cast element : flighthq._internal.dom.HTMLVideoElement).addEventListener('error', onError, { once: true });
       if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { signal.addEventListener('abort', onAbort, { once: true }); }
@@ -87,14 +87,14 @@ class VideoResourceFrom {
   }
 
   public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
-    var selected:Dynamic = cast _Runtime.UNDEFINED;
-    selected = _Runtime.callValue(selectVideoResourceUrl, cast ([sources] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve(_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))); }
-    return cast _Runtime.callValue(loadVideoResourceFromUrl, cast ([selected.url, options, signal] : Array<Dynamic>));
+    var selected:Null<VideoResourceUrl> = cast _Runtime.UNDEFINED;
+    selected = (cast selectVideoResourceUrl((cast sources : Array<VideoResourceUrl>)) : Null<VideoResourceUrl>);
+    if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve((cast createVideoResource((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal.dom.HTMLVideoElement>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : VideoResource)); }
+    return cast (cast loadVideoResourceFromUrl((cast (cast selected : flighthq.types.VideoResource.VideoResourceUrl).url : String), (cast options : Null<VideoResourceLoadOptions>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)) : flighthq._internal._Promise<VideoResource>);
     return cast null;
   }
 
-  public static function readinessEventName__videoResourceFrom(readiness:Dynamic):String {
+  public static function readinessEventName__videoResourceFrom(readiness:flighthq._internal._IndexedAccess<VideoResourceLoadOptions, String>):String {
     {
       var __switchValue = readiness;
       if (__switchValue == 'metadata') {

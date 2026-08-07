@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ResourceLoadBytesReporter = Dynamic;
+typedef ResourceLoadBytesReporter = Float->Float->Void;

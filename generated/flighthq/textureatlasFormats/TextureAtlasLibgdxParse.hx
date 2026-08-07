@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class TextureAtlasLibgdxParse {
   public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
-    var lines:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    var id:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(atlas.regions, 0.0);
     lines = _Runtime.callProperty(text, 'split', cast ([_Runtime.regexp('\\r?\\n', '')] : Array<Dynamic>));
     i = 0.0;
@@ -18,7 +19,7 @@ class TextureAtlasLibgdxParse {
     while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
       while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) { i++; }
       if ((cast ((cast i : Float) >= (cast _Runtime.field(lines, 'length') : Float)) : Bool)) { break; }
-      var maybeImage:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+      var maybeImage:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
       if ((cast !(cast _Runtime.includes(maybeImage, ':') : Bool) : Bool)) {
         i++;
         while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) {
@@ -26,26 +27,26 @@ class TextureAtlasLibgdxParse {
         }
       }
       while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i))), '') : Bool)) : Bool)) {
-        var line:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+        var line:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
         if ((cast !(cast _Runtime.includes(line, ':') : Bool) : Bool)) {
-          var regionName:Dynamic = line;
+          var regionName:String = line;
           i++;
-          var atlasX:Dynamic = 0.0;
-          var atlasY:Dynamic = 0.0;
-          var atlasW:Dynamic = 0.0;
-          var atlasH:Dynamic = 0.0;
-          var origW:Dynamic = 0.0;
-          var origH:Dynamic = 0.0;
-          var offsetX:Dynamic = 0.0;
-          var offsetY:Dynamic = 0.0;
-          var rotated:Dynamic = false;
-          var index:Dynamic = -1.0;
+          var atlasX:Float = 0.0;
+          var atlasY:Float = 0.0;
+          var atlasW:Float = 0.0;
+          var atlasH:Float = 0.0;
+          var origW:Float = 0.0;
+          var origH:Float = 0.0;
+          var offsetX:Float = 0.0;
+          var offsetY:Float = 0.0;
+          var rotated:Bool = false;
+          var index:Float = -1.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(lines, 'length') : Float)) : Bool)) {
-            var kv:Dynamic = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
+            var kv:String = StringTools.trim(Std.string(flighthq._internal._StaticIndex.readArray(lines, i)));
             if ((cast ((cast _Runtime.strictEquals(kv, '') : Bool) || (cast !(cast _Runtime.includes(kv, ':') : Bool) : Bool)) : Bool)) { break; }
-            var colon:Dynamic = _Runtime.callProperty(kv, 'indexOf', cast ([':'] : Array<Dynamic>));
-            var key:Dynamic = StringTools.trim(Std.string(_Runtime.slice(kv, 0.0, colon)));
-            var value:Dynamic = StringTools.trim(Std.string(_Runtime.slice(kv, (colon + 1.0), null)));
+            var colon:Float = _Runtime.callProperty(kv, 'indexOf', cast ([':'] : Array<Dynamic>));
+            var key:String = StringTools.trim(Std.string(_Runtime.slice(kv, 0.0, colon)));
+            var value:String = StringTools.trim(Std.string(_Runtime.slice(kv, (colon + 1.0), null)));
             i++;
             {
               var __switchValue = key;
@@ -54,28 +55,28 @@ class TextureAtlasLibgdxParse {
               }
               else if (__switchValue == 'xy') {
                 {
-                  var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
+                  var parts:Array<String> = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
                   (atlasX = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                   (atlasY = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'size') {
                 {
-                  var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
+                  var parts:Array<String> = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
                   (atlasW = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                   (atlasH = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'orig') {
                 {
-                  var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
+                  var parts:Array<String> = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
                   (origW = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                   (origH = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'offset') {
                 {
-                  var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
+                  var parts:Array<String> = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
                   (offsetX = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                   (offsetY = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
@@ -85,9 +86,9 @@ class TextureAtlasLibgdxParse {
               }
             }
           }
-          var name:Dynamic = ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(regionName) + '_' + Std.string(index) + '' : Dynamic) : (cast regionName : Dynamic));
-          var trimmed:Dynamic = ((cast ((cast ((cast origW : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast origH : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(origW, atlasW), function():Dynamic return cast !_Runtime.strictEquals(origH, atlasH)) : Bool));
-          _Runtime.callProperty(atlas.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY }] : Array<Dynamic>))] : Array<Dynamic>));
+          var name:String = ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(regionName) + '_' + Std.string(index) + '' : Dynamic) : (cast regionName : Dynamic));
+          var trimmed:Bool = ((cast ((cast ((cast origW : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast origH : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(origW, atlasW), function():Dynamic return cast !_Runtime.strictEquals(origH, atlasH)) : Bool));
+          _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY } : Null<flighthq._internal._Any>)) : TextureAtlasRegion)] : Array<Dynamic>));
           id++;
         } else {
           i++;

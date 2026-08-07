@@ -6,19 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.BlendMode;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 class CanvasBackground {
   public static function renderCanvasBackground(state:CanvasRenderState):Void {
-    flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', BlendModeValue.Normal);
-    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'globalAlpha', 1.0);
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'fillStyle', _Runtime.field(state, 'backgroundColorString'));
-      flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'fillRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalCompositeOperation', 'source-over');
+    ((cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).currentBlendMode = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal);
+    flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalAlpha', 1.0);
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast state : CanvasRenderState).backgroundColor) & 255), 0.0) : Bool)) {
+      flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'fillStyle', (cast state : CanvasRenderState).backgroundColorString);
+      flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'fillRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'width'), flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'height')] : Array<Dynamic>));
     } else {
-      flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'width'), flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'height')] : Array<Dynamic>));
     }
   }
 }

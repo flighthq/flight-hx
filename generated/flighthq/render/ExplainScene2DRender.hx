@@ -6,29 +6,32 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasAppearance;
+import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderBlankReason;
 import flighthq.types.Scene2DRenderExplanation;
 
 class ExplainScene2DRender {
   @:noCompletion
   public static function explainScene2DRender(state:RenderState, source:Renderable):Scene2DRenderExplanation {
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
-    var hasRenderer:Dynamic = cast _Runtime.UNDEFINED;
-    var proxy:Dynamic = cast _Runtime.UNDEFINED;
-    var prepared:Dynamic = cast _Runtime.UNDEFINED;
-    var appearance:Dynamic = cast _Runtime.UNDEFINED;
-    var visible:Dynamic = cast _Runtime.UNDEFINED;
-    var effectiveAlpha:Dynamic = cast _Runtime.UNDEFINED;
+    var kind:String = cast _Runtime.UNDEFINED;
+    var hasRenderer:Bool = cast _Runtime.UNDEFINED;
+    var proxy:Null<RenderProxy2D> = cast _Runtime.UNDEFINED;
+    var prepared:Bool = cast _Runtime.UNDEFINED;
+    var appearance:HasAppearance = cast _Runtime.UNDEFINED;
+    var visible:Bool = cast _Runtime.UNDEFINED;
+    var effectiveAlpha:Float = cast _Runtime.UNDEFINED;
     var reason:Scene2DRenderBlankReason = cast _Runtime.UNDEFINED;
-    kind = _Runtime.field(source, 'kind');
-    hasRenderer = !_Runtime.strictEquals(((cast _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'rendererMap') : flighthq._internal._Map).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
-    proxy = _Runtime.callValue(getRenderProxy2D, cast ([state, source] : Array<Dynamic>));
+    kind = (cast source : { var kind:String; }).kind;
+    hasRenderer = !_Runtime.strictEquals(((cast (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, Renderer>).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
+    proxy = (cast getRenderProxy2D((cast state : RenderState), (cast source : Renderable)) : Null<RenderProxy2D>);
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
-    appearance = (cast (cast source : Dynamic) : HasAppearance);
-    visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(proxy, 'visible') : Dynamic) : (cast _Runtime.field(appearance, 'visible') : Dynamic));
-    effectiveAlpha = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(proxy, 'alpha') : Dynamic) : (cast _Runtime.field(appearance, 'alpha') : Dynamic));
+    appearance = (cast (cast source : flighthq._internal._Any) : HasAppearance);
+    visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast proxy : RenderProxy2D).visible : Dynamic) : (cast (cast appearance : HasAppearance).visible : Dynamic));
+    effectiveAlpha = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast proxy : RenderProxy2D).alpha : Dynamic) : (cast (cast appearance : HasAppearance).alpha : Dynamic));
     if ((cast !(cast hasRenderer : Bool) : Bool)) { (reason = cast ('no-renderer' : Dynamic)); } else { if ((cast !(cast prepared : Bool) : Bool)) { (reason = cast ('not-prepared' : Dynamic)); } else { if ((cast !(cast visible : Bool) : Bool)) { (reason = cast ('not-visible' : Dynamic)); } else { if ((cast ((cast effectiveAlpha : Float) <= (cast 0.0 : Float)) : Bool)) { (reason = cast ('zero-alpha' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } } }
     return cast { kind: kind, hasRenderer: hasRenderer, prepared: prepared, visible: visible, effectiveAlpha: effectiveAlpha, reason: reason };
     return cast null;

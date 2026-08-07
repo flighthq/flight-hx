@@ -4,34 +4,36 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronGlobalShortcut;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ShortcutEvent;
 
 class ElectronShortcut {
   public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
-    var globalShortcut:Dynamic = cast _Runtime.UNDEFINED;
-    var registered:Dynamic = cast _Runtime.UNDEFINED;
-    globalShortcut = _Runtime.field(electron, 'globalShortcut');
+    var globalShortcut:ElectronGlobalShortcut = cast _Runtime.UNDEFINED;
+    var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    globalShortcut = (cast electron : ElectronApi).globalShortcut;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    return cast { getRegistered: function() {
+    return cast { getRegistered: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
-    }, register: function(accelerator:Dynamic, listener:Dynamic) {
-      var ok:Dynamic = cast _Runtime.UNDEFINED;
-      ok = _Runtime.callProperty(globalShortcut, 'register', cast ([accelerator, function() return _Runtime.callValue(listener, cast ([{ accelerator: accelerator }] : Array<Dynamic>))] : Array<Dynamic>));
-      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set).add(accelerator)); }
+    }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
+      var ok:Bool = cast _Runtime.UNDEFINED;
+      ok = (cast globalShortcut : ElectronGlobalShortcut).register(accelerator, function():Void return listener({ accelerator: accelerator }));
+      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set<String>).add(accelerator)); }
       return cast ok;
-    }, setAllEnabled: function(_enabled:Dynamic) {
+    }, setAllEnabled: function(_enabled:Bool):Void {
 
-    }, setEnabled: function(_accelerator:Dynamic, _enabled:Dynamic) {
+    }, setEnabled: function(_accelerator:String, _enabled:Bool):Bool {
       return cast false;
-    }, unregister: function(accelerator:Dynamic) {
-      _Runtime.callProperty(globalShortcut, 'unregister', cast ([accelerator] : Array<Dynamic>));
-      ((cast registered : flighthq._internal._Set).delete_(accelerator));
+    }, unregister: function(accelerator:String):Bool {
+      (cast globalShortcut : ElectronGlobalShortcut).unregister(accelerator);
+      ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
       return cast true;
-    }, unregisterAll: function() {
-      _Runtime.callProperty(globalShortcut, 'unregisterAll', cast ([] : Array<Dynamic>));
-      ((cast registered : flighthq._internal._Set).clear());
-    }, isRegistered: function(accelerator:Dynamic) {
-      return cast _Runtime.callProperty(globalShortcut, 'isRegistered', cast ([accelerator] : Array<Dynamic>));
+    }, unregisterAll: function():Void {
+      (cast globalShortcut : ElectronGlobalShortcut).unregisterAll();
+      ((cast registered : flighthq._internal._Set<String>).clear());
+    }, isRegistered: function(accelerator:String):Bool {
+      return cast (cast globalShortcut : ElectronGlobalShortcut).isRegistered(accelerator);
     } };
     return cast null;
   }

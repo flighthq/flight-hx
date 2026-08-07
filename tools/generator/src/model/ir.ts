@@ -9,11 +9,24 @@ export interface SourceOrigin {
 export type IrType =
   | { kind: 'anonymous'; fields: IrTypeField[]; extends: IrType[] }
   | { kind: 'array'; element: IrType }
-  | { kind: 'dynamic' }
+  | { detail?: string | undefined; kind: 'dynamic'; reason?: IrDynamicReason | undefined }
   | { kind: 'function'; parameters: IrType[]; returns: IrType }
   | { kind: 'named'; arguments: IrType[]; name: string }
   | { kind: 'nullable'; inner: IrType }
-  | { kind: 'primitive'; name: 'Bool' | 'Float' | 'Int' | 'String' | 'Void' };
+  | { kind: 'primitive'; name: 'Bool' | 'Float' | 'Int' | 'String' | 'Void' }
+  | { kind: 'union'; alternatives: IrType[] };
+
+export type IrDynamicReason =
+  | 'checker-known-unrepresentable'
+  | 'external-toolkit-boundary'
+  | 'source-any'
+  | 'source-never'
+  | 'source-null'
+  | 'source-object'
+  | 'source-symbol'
+  | 'source-undefined'
+  | 'source-unknown'
+  | 'standard-toolkit-boundary';
 
 export interface IrTypeField {
   contextualParameters?: IrParameter[] | undefined;
@@ -134,7 +147,9 @@ type IrExpressionNode =
       kind: 'call';
       arguments: IrExpression[];
       callee: IrExpression;
+      directArgumentTypes?: Array<IrType | undefined>;
       direct?: boolean;
+      directCalleeType?: IrType;
       haxeRestIndex?: number;
       optional?: boolean;
       typeArguments: IrType[];
@@ -193,6 +208,7 @@ type IrExpressionNode =
       optional?: boolean | undefined;
       generatedClass?: string | undefined;
       hostTypeBinding?: IrHostTypeBinding | undefined;
+      structuralReceiverType?: IrType | undefined;
       typedStructBinding?: IrTypedStructBinding | undefined;
     }
   | { flags: string; kind: 'regexp'; pattern: string }
@@ -202,6 +218,7 @@ type IrExpressionNode =
 
 export type IrExpression = IrExpressionNode & {
   staticFacts?: IrExpressionStaticFacts | undefined;
+  type?: IrType | undefined;
 };
 
 export type IrObjectMember =

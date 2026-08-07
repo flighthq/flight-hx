@@ -7,6 +7,7 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle.RectangleLike;
@@ -14,6 +15,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderTarget.RenderTargetAxes;
 import flighthq.types.RenderTarget.RenderTargetAxisDifference;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
 
 class RenderTarget {
@@ -28,9 +30,9 @@ class RenderTarget {
   }
 
   @:noCompletion
-  public static function computeRenderTargetSize(bounds:RectangleLike, padding:Dynamic = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
-    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
-    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+  public static function computeRenderTargetSize(bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
+    var horizontal:Float = cast _Runtime.UNDEFINED;
+    var vertical:Float = cast _Runtime.UNDEFINED;
     horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'left'), _Runtime.field(padding, 'right')) : Dynamic));
     vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast (padding * 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'top'), _Runtime.field(padding, 'bottom')) : Dynamic));
     return cast { width: HxMath.max(minWidth, _Runtime.addNumbers(HxMath.ceil(_Runtime.field(bounds, 'width')), horizontal)), height: HxMath.max(minHeight, _Runtime.addNumbers(HxMath.ceil(_Runtime.field(bounds, 'height')), vertical)) };
@@ -39,16 +41,16 @@ class RenderTarget {
 
   @:noCompletion
   public static function computeScene2DRenderTargetTransform(outRenderTransform:MatrixLike, source:Node2D, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
-    var localTransform:Dynamic = cast _Runtime.UNDEFINED;
-    localTransform = _Runtime.callValue(getNodeLocalMatrix, cast ([source] : Array<Dynamic>));
-    _Runtime.callValue(inverseMatrix, cast ([RenderTarget._tempInvLocal__renderTarget, localTransform] : Array<Dynamic>));
+    var localTransform:Matrix = cast _Runtime.UNDEFINED;
+    localTransform = (cast getNodeLocalMatrix(source) : Matrix);
+    (cast inverseMatrix((cast RenderTarget._tempInvLocal__renderTarget : MatrixLike), (cast localTransform : MatrixLike)) : Bool);
     (RenderTarget._tempTranslation__renderTarget.a = cast (1.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.tx = cast (_Runtime.subtractNumbers(contentX, _Runtime.field(bounds, 'x')) : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.ty = cast (_Runtime.subtractNumbers(contentY, _Runtime.field(bounds, 'y')) : Dynamic));
-    _Runtime.callValue(multiplyMatrix, cast ([outRenderTransform, RenderTarget._tempTranslation__renderTarget, RenderTarget._tempInvLocal__renderTarget] : Array<Dynamic>));
+    multiplyMatrix((cast outRenderTransform : MatrixLike), (cast RenderTarget._tempTranslation__renderTarget : MatrixLike), (cast RenderTarget._tempInvLocal__renderTarget : MatrixLike));
   }
 
   @:noCompletion
@@ -56,9 +58,9 @@ class RenderTarget {
     var differences:Array<RenderTargetAxisDifference> = cast _Runtime.UNDEFINED;
     differences = cast ([] : Array<Dynamic>);
     for (axis in _Runtime.iterable(RenderTarget._renderTargetAxisOrder__renderTarget)) {
-      var requestedValue:Dynamic = _Runtime.getIndex(requested, axis);
-      var effectiveValue:Dynamic = _Runtime.getIndex(effective, axis);
-      var equal:Dynamic = ((cast ((cast _Runtime.isArray(requestedValue) : Bool) && (cast _Runtime.isArray(effectiveValue) : Bool)) : Bool) ? (cast ((cast _Runtime.strictEquals(_Runtime.field(requestedValue, 'length'), _Runtime.field(effectiveValue, 'length')) : Bool) && (cast _Runtime.callProperty(requestedValue, 'every', cast ([function(value:Dynamic, index:Dynamic) return _Runtime.strictEquals(value, flighthq._internal._StaticIndex.readArray(effectiveValue, index))] : Array<Dynamic>)) : Bool)) : Dynamic) : (cast _Runtime.strictEquals(requestedValue, effectiveValue) : Dynamic));
+      var requestedValue:flighthq._internal._Union2<flighthq._internal._Union2<Float, String>, Array<RenderTargetFormat>> = _Runtime.getIndex(requested, axis);
+      var effectiveValue:flighthq._internal._Union2<flighthq._internal._Union2<Float, String>, Array<RenderTargetFormat>> = _Runtime.getIndex(effective, axis);
+      var equal:Bool = ((cast ((cast _Runtime.isArray(requestedValue) : Bool) && (cast _Runtime.isArray(effectiveValue) : Bool)) : Bool) ? (cast ((cast _Runtime.strictEquals(_Runtime.field(requestedValue, 'length'), _Runtime.field(effectiveValue, 'length')) : Bool) && (cast _Runtime.callProperty(requestedValue, 'every', cast ([function(value:flighthq._internal._Any, index:Float, __unused0:Array<flighthq._internal._Any>):Bool return _Runtime.strictEquals(value, flighthq._internal._StaticIndex.readArray(effectiveValue, index))] : Array<Dynamic>)) : Bool)) : Dynamic) : (cast _Runtime.strictEquals(requestedValue, effectiveValue) : Dynamic));
       if ((cast !(cast equal : Bool) : Bool)) { _Runtime.callProperty(differences, 'push', cast ([{ axis: axis, effective: effectiveValue, requested: requestedValue }] : Array<Dynamic>)); }
     }
     return cast differences;
@@ -67,23 +69,23 @@ class RenderTarget {
 
   @:noCompletion
   public static function resolveRenderTargetDescriptor(descriptor:RenderTargetDescriptor):ResolvedRenderTargetDescriptor {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var colorAttachments:Dynamic = cast _Runtime.UNDEFINED;
-    var defaultFormat:Dynamic = cast _Runtime.UNDEFINED;
-    var colorFormats:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var colorAttachments:Float = cast _Runtime.UNDEFINED;
+    var defaultFormat:RenderTargetFormat = cast _Runtime.UNDEFINED;
+    var colorFormats:flighthq._internal._IndexedAccess<ResolvedRenderTargetDescriptor, String> = cast _Runtime.UNDEFINED;
     width = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'width')));
     height = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'height')));
     colorAttachments = HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(_Runtime.field(descriptor, 'colorAttachments'), function():Dynamic return cast 1.0)));
     defaultFormat = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast 'rgba8');
-    colorFormats = _Runtime.toArray({ length: colorAttachments }, function(_:Dynamic, index:Dynamic) return _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(descriptor, 'colorFormats'), index), function():Dynamic return cast defaultFormat));
+    colorFormats = _Runtime.toArray({ length: colorAttachments }, function(_:flighthq._internal._Any, index:Float):RenderTargetFormat return _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(descriptor, 'colorFormats'), index), function():Dynamic return cast defaultFormat));
     return cast { width: width, height: height, format: flighthq._internal._StaticIndex.readArray(colorFormats, 0.0), colorAttachments: colorAttachments, colorFormats: colorFormats, sampleCount: HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0))), depth: _Runtime.coalesce(_Runtime.field(descriptor, 'depth'), function():Dynamic return cast 'none'), colorSpace: _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'), clearColors: _Runtime.select(_Runtime.field(descriptor, 'clearColors'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]), function():Dynamic return cast cast ([] : Array<Dynamic>)), clearDepth: _Runtime.coalesce(_Runtime.field(descriptor, 'clearDepth'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
-  public static final _tempInvLocal__renderTarget:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final _tempInvLocal__renderTarget:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
 
-  public static final _tempTranslation__renderTarget:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final _tempTranslation__renderTarget:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
 
   public static final _renderTargetAxisOrder__renderTarget:Array<RenderTargetAxes> = cast (['width', 'height', 'format', 'colorAttachments', 'colorFormats', 'sampleCount', 'depth', 'colorSpace'] : Array<Dynamic>);
 }

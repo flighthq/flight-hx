@@ -10,52 +10,57 @@ import flighthq.textureatlas.TextureAtlasGrid.createTextureAtlasFromGrid;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetAnimationData;
+import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetData;
+import flighthq.types.SpritesheetFrame;
+import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class SpritesheetFrom {
   public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
-    var nameToRegionId:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    var frameNameToIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
+    var nameToRegionId:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
+    var frameNameToIndex:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var animations:flighthq._internal._Record<String, SpritesheetAnimation> = cast _Runtime.UNDEFINED;
     nameToRegionId = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast !_Runtime.strictEquals(region.name, null) : Bool)) {
-        ((cast nameToRegionId : flighthq._internal._Map).set(region.name, region.id));
+        ((cast nameToRegionId : flighthq._internal._Map<String, Float>).set(region.name, region.id));
       }
     }
-    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(fd:Dynamic, index:Dynamic) {
-      var regionId:Dynamic = cast _Runtime.UNDEFINED;
-      regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
-      return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated }] : Array<Dynamic>));
+    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(fd:SpritesheetFrameData, index:Float, __unused0:Array<SpritesheetFrameData>):SpritesheetFrame {
+      var regionId:Float = cast _Runtime.UNDEFINED;
+      regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map<String, Float>).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
+      return cast (cast createSpritesheetFrame((cast { id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated } : Null<flighthq._internal._Any>)) : SpritesheetFrame);
     }] : Array<Dynamic>));
     frameNameToIndex = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.frames, 'length') : Float)) : Bool)) {
-        var name:Dynamic = flighthq._internal._StaticIndex.readArray(data.frames, i).name;
+        var name:String = flighthq._internal._StaticIndex.readArray(data.frames, i).name;
         if ((cast !_Runtime.strictEquals(name, '') : Bool)) {
-          ((cast frameNameToIndex : flighthq._internal._Map).set(name, i));
+          ((cast frameNameToIndex : flighthq._internal._Map<String, Float>).set(name, i));
         }
         i++;
       }
     }
     animations = {  };
     for (ad in _Runtime.iterable(data.animations)) {
-      var resolvedFrames:Dynamic = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(ad.frameNames, 'map', cast ([function(n:Dynamic) return ((cast frameNameToIndex : flighthq._internal._Map).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Dynamic) return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:Dynamic, i:Dynamic) return i) : Dynamic));
-      _Runtime.setIndex(animations, ad.name, _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount }] : Array<Dynamic>)));
+      var resolvedFrames:Array<Float> = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(ad.frameNames, 'map', cast ([function(n:String, __unused1:Float, __unused2:Array<String>):Null<Float> return ((cast frameNameToIndex : flighthq._internal._Map<String, Float>).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Null<Float>, __unused3:Float, __unused4:Array<Null<Float>>):Bool return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:flighthq._internal._Any, i:Float):Float return i) : Dynamic));
+      _Runtime.setIndex(animations, ad.name, (cast createSpritesheetAnimation((cast { direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount } : Null<flighthq._internal._Any>)) : SpritesheetAnimation));
     }
-    return cast _Runtime.callValue(createSpritesheet, cast ([{ animations: animations, atlas: atlas, frames: frames }] : Array<Dynamic>));
+    return cast (cast createSpritesheet((cast { animations: animations, atlas: atlas, frames: frames } : Null<flighthq._internal._Any>)) : Spritesheet);
     return cast null;
   }
 
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
-    atlas = _Runtime.callValue(createTextureAtlasFromGrid, cast ([options] : Array<Dynamic>));
-    frames = _Runtime.callProperty(atlas.regions, 'map', cast ([function(region:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: region.id }] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheet, cast ([{ atlas: atlas, frames: frames }] : Array<Dynamic>));
+    var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
+    var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
+    atlas = (cast createTextureAtlasFromGrid((cast options : GridSliceOptions), _Runtime.field(_Runtime, 'UNDEFINED')) : TextureAtlas);
+    frames = _Runtime.callProperty(atlas.regions, 'map', cast ([function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: region.id } : Null<flighthq._internal._Any>)) : SpritesheetFrame)] : Array<Dynamic>));
+    return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames } : Null<flighthq._internal._Any>)) : Spritesheet);
     return cast null;
   }
 }

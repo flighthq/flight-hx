@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _SpecularGlossinessPbrMaterialValues {
-  public static final SpecularGlossinessPbrMaterialKind:Dynamic = 'SpecularGlossinessPbrMaterial';
+  public static final SpecularGlossinessPbrMaterialKind:String = 'SpecularGlossinessPbrMaterial';
 }

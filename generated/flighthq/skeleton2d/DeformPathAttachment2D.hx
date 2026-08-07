@@ -6,27 +6,29 @@ import flighthq._internal._Runtime;
 import flighthq.skeleton2d.SkinAttachment2DPoints.skinSkeleton2DAttachmentPoints;
 import flighthq.types.Path;
 import flighthq.types.PathAttachment2D;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.Skeleton2D;
+import flighthq.types.Skin2D;
 
 class DeformPathAttachment2D {
   public static function deformSkeleton2DPathAttachment(out:Path, attachment:PathAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var outCommands:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var outCommands:Array<Float> = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(attachment, 'commands');
-    data = _Runtime.field(out, 'data');
-    outCommands = _Runtime.field(out, 'commands');
+    data = (cast out : Path).data;
+    outCommands = (cast out : Path).commands;
     _Runtime.setLength(outCommands, _Runtime.field(commands, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(outCommands, i, flighthq._internal._StaticIndex.readArray(commands, i));
         i++;
       }
     }
-    _Runtime.setField(out, 'winding', _Runtime.field(attachment, 'winding'));
+    ((cast out : Path).winding = _Runtime.field(attachment, 'winding'));
     _Runtime.setLength(data, _Runtime.multiplyNumbers(_Runtime.field(attachment, 'pointCount'), 2.0));
-    _Runtime.callValue(skinSkeleton2DAttachmentPoints, cast ([data, _Runtime.field(attachment, 'skin'), _Runtime.field(attachment, 'vertices'), skeleton, boneIndex, deform, 'PathAttachment2D'] : Array<Dynamic>));
+    skinSkeleton2DAttachmentPoints((cast data : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), _Runtime.field(attachment, 'skin'), (cast _Runtime.field(attachment, 'vertices') : Null<flighthq._internal._Float32Array>), (cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast deform : Null<flighthq._internal._Float32Array>), (cast 'PathAttachment2D' : String));
   }
 }

@@ -8,25 +8,27 @@ import flighthq.shading.ModifierRegistry.createModifierRegistry;
 import flighthq.shading.ModifierRegistry.registerModifier;
 import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.types.ModifierKind;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.WgpuModifierSnippet;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuScene3DRuntime;
 
 class WgpuShadedModifierSnippet {
   @:noCompletion
   public static function registerWgpuModifierSnippet(state:WgpuRenderState, snippet:WgpuModifierSnippet):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'modifierSnippetRegistry'), null) : Bool)) { _Runtime.setField(runtime, 'modifierSnippetRegistry', _Runtime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
-    _Runtime.callValue(registerModifier, cast ([_Runtime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
-    _Runtime.incrementField(runtime, 'modifierSnippetRevision', 1, true);
+    var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry, null) : Bool)) { ((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry = (cast createModifierRegistry() : Null<ModifierRegistry>)); }
+    registerModifier((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry, snippet);
+    (cast runtime : WgpuScene3DRuntime).modifierSnippetRevision++;
   }
 
   @:noCompletion
   public static function resolveWgpuModifierSnippet(state:WgpuRenderState, kind:ModifierKind):Null<WgpuModifierSnippet> {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
+    var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
+    registry = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
-    return cast (cast _Runtime.callValue(resolveModifier, cast ([registry, kind] : Array<Dynamic>)) : Null<WgpuModifierSnippet>);
+    return cast (cast (cast resolveModifier(registry, (cast kind : String)) : Null<WgpuModifierSnippet>) : Null<WgpuModifierSnippet>);
     return cast null;
   }
 }

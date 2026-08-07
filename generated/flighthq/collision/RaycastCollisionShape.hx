@@ -5,49 +5,55 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus;
 import flighthq.collision.PointContainment.getCollisionShapeContainsPoint;
+import flighthq.types.Collision.CollisionAabb;
+import flighthq.types.Collision.CollisionCircle;
+import flighthq.types.Collision.CollisionObb;
+import flighthq.types.Collision.CollisionPoint;
+import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionRaycastHit;
+import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 
 class RaycastCollisionShape {
-  public static final RELATIVE_EPSILON__raycastCollisionShape:Dynamic = 1e-9;
+  public static final RELATIVE_EPSILON__raycastCollisionShape:Float = 1e-9;
 
   public static function createCollisionRaycastHit():CollisionRaycastHit {
     return cast { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 };
     return cast null;
   }
 
-  public static function raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit, ?maxFraction:Dynamic):Bool {
+  public static function raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit, ?maxFraction:Float):Bool {
     if (maxFraction == null) maxFraction = cast (HxMath.POSITIVE_INFINITY : Dynamic);
-    var directionLengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(RaycastCollisionShape.clearRaycastHit__raycastCollisionShape, cast ([out] : Array<Dynamic>));
+    var directionLengthSquared:Float = cast _Runtime.UNDEFINED;
+    RaycastCollisionShape.clearRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit));
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast false;
     }
-    if ((cast _Runtime.callValue(getCollisionShapeContainsPoint, cast ([shape, originX, originY] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, 0.0, 0.0, 0.0] : Array<Dynamic>));
+    if ((cast (cast getCollisionShapeContainsPoint((cast shape : CollisionShape), (cast originX : Float), (cast originY : Float)) : Bool) : Bool)) {
+      RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
       return cast true;
     }
     directionLengthSquared = ((directionX * directionX) + (directionY * directionY));
     if ((cast !(cast _Runtime.compare(directionLengthSquared, 0.0, '>') : Bool) : Bool)) { return cast false; }
     {
-      var __switchValue = _Runtime.field(shape, 'kind');
+      var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastCircle__raycastCollisionShape, cast ([_Runtime.field(shape, 'x'), _Runtime.field(shape, 'y'), _Runtime.field(shape, 'radius'), originX, originY, directionX, directionY, directionLengthSquared, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastCircle__raycastCollisionShape((cast (cast shape : { >CollisionCircle, var kind:String; }).x : Float), (cast (cast shape : { >CollisionCircle, var kind:String; }).y : Float), (cast (cast shape : { >CollisionCircle, var kind:String; }).radius : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else if (__switchValue == 'aabb') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastBox__raycastCollisionShape, cast ([_Runtime.field(shape, 'minX'), _Runtime.field(shape, 'minY'), _Runtime.field(shape, 'maxX'), _Runtime.field(shape, 'maxY'), originX, originY, directionX, directionY, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastBox__raycastCollisionShape((cast (cast shape : { >CollisionAabb, var kind:String; }).minX : Float), (cast (cast shape : { >CollisionAabb, var kind:String; }).minY : Float), (cast (cast shape : { >CollisionAabb, var kind:String; }).maxX : Float), (cast (cast shape : { >CollisionAabb, var kind:String; }).maxY : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else if (__switchValue == 'obb') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastObb__raycastCollisionShape, cast ([shape, originX, originY, directionX, directionY, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastObb__raycastCollisionShape(shape, (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else if (__switchValue == 'polygon') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastPolygon__raycastCollisionShape, cast ([_Runtime.field(shape, 'points'), originX, originY, directionX, directionY, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastPolygon__raycastCollisionShape((cast (cast shape : { >CollisionPolygon, var kind:String; }).points : Array<Float>), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else if (__switchValue == 'segment') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastSegment__raycastCollisionShape, cast ([_Runtime.field(shape, 'x0'), _Runtime.field(shape, 'y0'), _Runtime.field(shape, 'x1'), _Runtime.field(shape, 'y1'), originX, originY, directionX, directionY, directionLengthSquared, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastSegment__raycastCollisionShape((cast (cast shape : { >CollisionSegment, var kind:String; }).x0 : Float), (cast (cast shape : { >CollisionSegment, var kind:String; }).y0 : Float), (cast (cast shape : { >CollisionSegment, var kind:String; }).x1 : Float), (cast (cast shape : { >CollisionSegment, var kind:String; }).y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else if (__switchValue == 'point') {
-        return cast _Runtime.callValue(RaycastCollisionShape.raycastPoint__raycastCollisionShape, cast ([_Runtime.field(shape, 'x'), _Runtime.field(shape, 'y'), originX, originY, directionX, directionY, directionLengthSquared, maxFraction, out] : Array<Dynamic>));
+        return cast (cast RaycastCollisionShape.raycastPoint__raycastCollisionShape((cast (cast shape : { >CollisionPoint, var kind:String; }).x : Float), (cast (cast shape : { >CollisionPoint, var kind:String; }).y : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), (cast out : CollisionRaycastHit)) : Bool);
       }
       else  {
         return cast false;
@@ -57,16 +63,16 @@ class RaycastCollisionShape {
   }
 
   public static function raycastCircle__raycastCollisionShape(centerX:Float, centerY:Float, radius:Float, originX:Float, originY:Float, directionX:Float, directionY:Float, directionLengthSquared:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var mx:Dynamic = cast _Runtime.UNDEFINED;
-    var my:Dynamic = cast _Runtime.UNDEFINED;
-    var projection:Dynamic = cast _Runtime.UNDEFINED;
-    var discriminant:Dynamic = cast _Runtime.UNDEFINED;
-    var fraction:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var normalLength:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+    var mx:Float = cast _Runtime.UNDEFINED;
+    var my:Float = cast _Runtime.UNDEFINED;
+    var projection:Float = cast _Runtime.UNDEFINED;
+    var discriminant:Float = cast _Runtime.UNDEFINED;
+    var fraction:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var normalLength:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([centerX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([centerY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(radius, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       return cast false;
     }
@@ -82,16 +88,16 @@ class RaycastCollisionShape {
     normalLength = _Runtime.hypot((x - centerX), (y - centerY));
     normalX = ((cast ((cast normalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((x - centerX) / normalLength) : Dynamic) : (cast 0.0 : Dynamic));
     normalY = ((cast ((cast normalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((y - centerY) / normalLength) : Dynamic) : (cast 0.0 : Dynamic));
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, fraction, normalX, normalY] : Array<Dynamic>));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
 
   public static function raycastBox__raycastCollisionShape(minX:Float, minY:Float, maxX:Float, maxY:Float, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var lower:Dynamic = cast _Runtime.UNDEFINED;
-    var upper:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+    var lower:Float = cast _Runtime.UNDEFINED;
+    var upper:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) : Bool) || (cast ((cast minY : Float) > (cast maxY : Float)) : Bool)) : Bool)) {
       return cast false;
     }
@@ -102,12 +108,12 @@ class RaycastCollisionShape {
     if ((cast _Runtime.strictEquals(directionX, 0.0) : Bool)) {
       if ((cast ((cast ((cast originX : Float) < (cast minX : Float)) : Bool) || (cast ((cast originX : Float) > (cast maxX : Float)) : Bool)) : Bool)) { return cast false; }
     } else {
-      var inverse:Dynamic = (1.0 / directionX);
-      var first:Dynamic = ((minX - originX) * inverse);
-      var second:Dynamic = ((maxX - originX) * inverse);
-      var firstNormalX:Dynamic = -1.0;
+      var inverse:Float = (1.0 / directionX);
+      var first:Float = ((minX - originX) * inverse);
+      var second:Float = ((maxX - originX) * inverse);
+      var firstNormalX:Float = -1.0;
       if ((cast ((cast first : Float) > (cast second : Float)) : Bool)) {
-        var swap:Dynamic = first;
+        var swap:Float = first;
         (first = cast (second : Dynamic));
         (second = cast (swap : Dynamic));
         (firstNormalX = cast (1.0 : Dynamic));
@@ -123,12 +129,12 @@ class RaycastCollisionShape {
     if ((cast _Runtime.strictEquals(directionY, 0.0) : Bool)) {
       if ((cast ((cast ((cast originY : Float) < (cast minY : Float)) : Bool) || (cast ((cast originY : Float) > (cast maxY : Float)) : Bool)) : Bool)) { return cast false; }
     } else {
-      var inverse:Dynamic = (1.0 / directionY);
-      var first:Dynamic = ((minY - originY) * inverse);
-      var second:Dynamic = ((maxY - originY) * inverse);
-      var firstNormalY:Dynamic = -1.0;
+      var inverse:Float = (1.0 / directionY);
+      var first:Float = ((minY - originY) * inverse);
+      var second:Float = ((maxY - originY) * inverse);
+      var firstNormalY:Float = -1.0;
       if ((cast ((cast first : Float) > (cast second : Float)) : Bool)) {
-        var swap:Dynamic = first;
+        var swap:Float = first;
         (first = cast (second : Dynamic));
         (second = cast (swap : Dynamic));
         (firstNormalY = cast (1.0 : Dynamic));
@@ -142,82 +148,82 @@ class RaycastCollisionShape {
       if ((cast ((cast lower : Float) > (cast upper : Float)) : Bool)) { return cast false; }
     }
     if ((cast ((cast ((cast lower : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast lower : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) { return cast false; }
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, lower, normalX, normalY] : Array<Dynamic>));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast lower : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
 
   public static function raycastObb__raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var localOriginX:Dynamic = cast _Runtime.UNDEFINED;
-    var localOriginY:Dynamic = cast _Runtime.UNDEFINED;
-    var localDirectionX:Dynamic = cast _Runtime.UNDEFINED;
-    var localDirectionY:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'x')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'y')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfW'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfW')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfH'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfH')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'rotation')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var localOriginX:Float = cast _Runtime.UNDEFINED;
+    var localOriginY:Float = cast _Runtime.UNDEFINED;
+    var localDirectionX:Float = cast _Runtime.UNDEFINED;
+    var localDirectionY:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast shape : { >CollisionObb, var kind:String; }).halfW, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).halfW] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast shape : { >CollisionObb, var kind:String; }).halfH, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).halfH] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).rotation] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       return cast false;
     }
-    cos = HxMath.cos(_Runtime.field(shape, 'rotation'));
-    sin = HxMath.sin(_Runtime.field(shape, 'rotation'));
-    offsetX = _Runtime.subtractNumbers(originX, _Runtime.field(shape, 'x'));
-    offsetY = _Runtime.subtractNumbers(originY, _Runtime.field(shape, 'y'));
+    cos = HxMath.cos((cast shape : { >CollisionObb, var kind:String; }).rotation);
+    sin = HxMath.sin((cast shape : { >CollisionObb, var kind:String; }).rotation);
+    offsetX = (originX - (cast shape : { >CollisionObb, var kind:String; }).x);
+    offsetY = (originY - (cast shape : { >CollisionObb, var kind:String; }).y);
     localOriginX = ((offsetX * cos) + (offsetY * sin));
     localOriginY = ((-offsetX * sin) + (offsetY * cos));
     localDirectionX = ((directionX * cos) + (directionY * sin));
     localDirectionY = ((-directionX * sin) + (directionY * cos));
-    if ((cast !(cast _Runtime.callValue(RaycastCollisionShape.raycastBox__raycastCollisionShape, cast ([-_Runtime.field(shape, 'halfW'), -_Runtime.field(shape, 'halfH'), _Runtime.field(shape, 'halfW'), _Runtime.field(shape, 'halfH'), localOriginX, localOriginY, localDirectionX, localDirectionY, maxFraction, RaycastCollisionShape.localHitScratch__raycastCollisionShape] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast RaycastCollisionShape.raycastBox__raycastCollisionShape((cast -(cast shape : { >CollisionObb, var kind:String; }).halfW : Float), (cast -(cast shape : { >CollisionObb, var kind:String; }).halfH : Float), (cast (cast shape : { >CollisionObb, var kind:String; }).halfW : Float), (cast (cast shape : { >CollisionObb, var kind:String; }).halfH : Float), (cast localOriginX : Float), (cast localOriginY : Float), (cast localDirectionX : Float), (cast localDirectionY : Float), (cast maxFraction : Float), (cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    normalX = (_Runtime.multiplyNumbers(_Runtime.field(RaycastCollisionShape.localHitScratch__raycastCollisionShape, 'normalX'), cos) - _Runtime.multiplyNumbers(_Runtime.field(RaycastCollisionShape.localHitScratch__raycastCollisionShape, 'normalY'), sin));
-    normalY = (_Runtime.multiplyNumbers(_Runtime.field(RaycastCollisionShape.localHitScratch__raycastCollisionShape, 'normalX'), sin) + _Runtime.multiplyNumbers(_Runtime.field(RaycastCollisionShape.localHitScratch__raycastCollisionShape, 'normalY'), cos));
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, _Runtime.field(RaycastCollisionShape.localHitScratch__raycastCollisionShape, 'fraction'), normalX, normalY] : Array<Dynamic>));
+    normalX = (((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalX * cos) - ((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalY * sin));
+    normalY = (((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalX * sin) + ((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalY * cos));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).fraction : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
 
   public static function raycastPolygon__raycastCollisionShape(points:Array<Float>, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var bestFraction:Dynamic = cast _Runtime.UNDEFINED;
-    var bestNormalX:Dynamic = cast _Runtime.UNDEFINED;
-    var bestNormalY:Dynamic = cast _Runtime.UNDEFINED;
-    var found:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var center:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([points] : Array<Dynamic>)), null) : Bool)) { return cast false; }
+    var bestFraction:Float = cast _Runtime.UNDEFINED;
+    var bestNormalX:Float = cast _Runtime.UNDEFINED;
+    var bestNormalY:Float = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var center:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast points : Array<Float>)) : Null<String>), null) : Bool)) { return cast false; }
     bestFraction = maxFraction;
     bestNormalX = 0.0;
     bestNormalY = 0.0;
     found = false;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    center = _Runtime.callValue(RaycastCollisionShape.polygonCenter__raycastCollisionShape, cast ([points, count] : Array<Dynamic>));
+    center = (cast RaycastCollisionShape.polygonCenter__raycastCollisionShape((cast points : Array<Float>), (cast count : Float)) : { var x:Float; var y:Float; });
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), count);
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(j) << 1));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(j) << 1) + 1.0));
-        if ((cast !(cast _Runtime.callValue(RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape, cast ([x0, y0, x1, y1, originX, originY, directionX, directionY, ((directionX * directionX) + (directionY * directionY)), bestFraction, RaycastCollisionShape.fractionScratch__raycastCollisionShape] : Array<Dynamic>)) : Bool) : Bool)) {
+        var j:Float = _Runtime.fmod((i + 1.0), count);
+        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(j) << 1));
+        var y1:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(j) << 1) + 1.0));
+        if ((cast !(cast (cast RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast ((directionX * directionX) + (directionY * directionY)) : Float), (cast bestFraction : Float), (cast RaycastCollisionShape.fractionScratch__raycastCollisionShape : { var value:Float; })) : Bool) : Bool) : Bool)) {
           i++;
           continue;
         }
-        var edgeX:Dynamic = (x1 - x0);
-        var edgeY:Dynamic = (y1 - y0);
-        var length:Dynamic = _Runtime.hypot(edgeX, edgeY);
+        var edgeX:Float = (x1 - x0);
+        var edgeY:Float = (y1 - y0);
+        var length:Float = _Runtime.hypot(edgeX, edgeY);
         if ((cast !(cast _Runtime.compare(length, 0.0, '>') : Bool) : Bool)) { i++; continue; }
-        var normalX:Dynamic = (edgeY / length);
-        var normalY:Dynamic = (-edgeX / length);
-        var middleX:Dynamic = ((x0 + x1) * 0.5);
-        var middleY:Dynamic = ((y0 + y1) * 0.5);
-        if ((cast ((cast ((normalX * _Runtime.subtractNumbers(_Runtime.field(center, 'x'), middleX)) + (normalY * _Runtime.subtractNumbers(_Runtime.field(center, 'y'), middleY))) : Float) > (cast 0.0 : Float)) : Bool)) {
+        var normalX:Float = (edgeY / length);
+        var normalY:Float = (-edgeX / length);
+        var middleX:Float = ((x0 + x1) * 0.5);
+        var middleY:Float = ((y0 + y1) * 0.5);
+        if ((cast ((cast ((normalX * ((cast center : { var x:Float; var y:Float; }).x - middleX)) + (normalY * ((cast center : { var x:Float; var y:Float; }).y - middleY))) : Float) > (cast 0.0 : Float)) : Bool)) {
           (normalX = cast (-normalX : Dynamic));
           (normalY = cast (-normalY : Dynamic));
         }
-        (bestFraction = cast (_Runtime.field(RaycastCollisionShape.fractionScratch__raycastCollisionShape, 'value') : Dynamic));
+        (bestFraction = cast ((cast RaycastCollisionShape.fractionScratch__raycastCollisionShape : { var value:Float; }).value : Dynamic));
         (bestNormalX = cast (normalX : Dynamic));
         (bestNormalY = cast (normalY : Dynamic));
         (found = cast (true : Dynamic));
@@ -225,38 +231,38 @@ class RaycastCollisionShape {
       }
     }
     if ((cast !(cast found : Bool) : Bool)) { return cast false; }
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, bestFraction, bestNormalX, bestNormalY] : Array<Dynamic>));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast bestFraction : Float), (cast bestNormalX : Float), (cast bestNormalY : Float));
     return cast true;
     return cast null;
   }
 
   public static function polygonCenter__raycastCollisionShape(points:Array<Float>, count:Float):{ var x:Float; var y:Float; } {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     x = 0.0;
     y = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         (x = cast ((x + flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1))) : Dynamic));
         (y = cast ((y + flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
         i++;
       }
     }
-    _Runtime.setField(RaycastCollisionShape.polygonCenterScratch__raycastCollisionShape, 'x', (x / count));
-    _Runtime.setField(RaycastCollisionShape.polygonCenterScratch__raycastCollisionShape, 'y', (y / count));
+    ((cast RaycastCollisionShape.polygonCenterScratch__raycastCollisionShape : { var x:Float; var y:Float; }).x = (x / count));
+    ((cast RaycastCollisionShape.polygonCenterScratch__raycastCollisionShape : { var x:Float; var y:Float; }).y = (y / count));
     return cast RaycastCollisionShape.polygonCenterScratch__raycastCollisionShape;
     return cast null;
   }
 
   public static function raycastSegment__raycastCollisionShape(x0:Float, y0:Float, x1:Float, y1:Float, originX:Float, originY:Float, directionX:Float, directionY:Float, directionLengthSquared:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var edgeX:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeY:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeLength:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+    var edgeX:Float = cast _Runtime.UNDEFINED;
+    var edgeY:Float = cast _Runtime.UNDEFINED;
+    var edgeLength:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y0] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y1] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape, cast ([x0, y0, x1, y1, originX, originY, directionX, directionY, directionLengthSquared, maxFraction, RaycastCollisionShape.fractionScratch__raycastCollisionShape] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), (cast RaycastCollisionShape.fractionScratch__raycastCollisionShape : { var value:Float; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     edgeX = (x1 - x0);
@@ -268,20 +274,20 @@ class RaycastCollisionShape {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, _Runtime.field(RaycastCollisionShape.fractionScratch__raycastCollisionShape, 'value'), normalX, normalY] : Array<Dynamic>));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast RaycastCollisionShape.fractionScratch__raycastCollisionShape : { var value:Float; }).value : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
 
   public static function writeRaySegmentFraction__raycastCollisionShape(x0:Float, y0:Float, x1:Float, y1:Float, originX:Float, originY:Float, directionX:Float, directionY:Float, directionLengthSquared:Float, maxFraction:Float, out:{ var value:Float; }):Bool {
-    var edgeX:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeY:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var denominator:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var fraction:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeFraction:Dynamic = cast _Runtime.UNDEFINED;
+    var edgeX:Float = cast _Runtime.UNDEFINED;
+    var edgeY:Float = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var denominator:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var fraction:Float = cast _Runtime.UNDEFINED;
+    var edgeFraction:Float = cast _Runtime.UNDEFINED;
     edgeX = (x1 - x0);
     edgeY = (y1 - y0);
     offsetX = (x0 - originX);
@@ -289,14 +295,14 @@ class RaycastCollisionShape {
     denominator = ((directionX * edgeY) - (directionY * edgeX));
     scale = HxMath.sqrt((directionLengthSquared * ((edgeX * edgeX) + (edgeY * edgeY))));
     if ((cast ((cast HxMath.abs(denominator) : Float) <= (cast (scale * RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape) : Float)) : Bool)) {
-      var cross:Dynamic = ((offsetX * directionY) - (offsetY * directionX));
+      var cross:Float = ((offsetX * directionY) - (offsetY * directionX));
       if ((cast ((cast HxMath.abs(cross) : Float) > (cast _Runtime.multiplyNumbers(HxMath.sqrt(directionLengthSquared), RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape) : Float)) : Bool)) { return cast false; }
-      var first:Dynamic = (((offsetX * directionX) + (offsetY * directionY)) / directionLengthSquared);
-      var second:Dynamic = ((((x1 - originX) * directionX) + ((y1 - originY) * directionY)) / directionLengthSquared);
-      var far:Dynamic = HxMath.max(first, second);
-      var fraction:Dynamic = HxMath.max(0.0, HxMath.min(first, second));
+      var first:Float = (((offsetX * directionX) + (offsetY * directionY)) / directionLengthSquared);
+      var second:Float = ((((x1 - originX) * directionX) + ((y1 - originY) * directionY)) / directionLengthSquared);
+      var far:Float = HxMath.max(first, second);
+      var fraction:Float = HxMath.max(0.0, HxMath.min(first, second));
       if ((cast ((cast ((cast far : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast fraction : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) { return cast false; }
-      _Runtime.setField(out, 'value', fraction);
+      ((cast out : { var value:Float; }).value = fraction);
       return cast true;
     }
     fraction = (((offsetX * edgeY) - (offsetY * edgeX)) / denominator);
@@ -304,18 +310,18 @@ class RaycastCollisionShape {
     if ((cast ((cast ((cast ((cast ((cast fraction : Float) < (cast -RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape : Float)) : Bool) || (cast ((cast fraction : Float) > (cast maxFraction : Float)) : Bool)) : Bool) || (cast ((cast edgeFraction : Float) < (cast -RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape : Float)) : Bool)) : Bool) || (cast ((cast edgeFraction : Float) > (cast (1.0 + RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape) : Float)) : Bool)) : Bool)) {
       return cast false;
     }
-    _Runtime.setField(out, 'value', ((cast ((cast fraction : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast fraction : Dynamic)));
+    ((cast out : { var value:Float; }).value = ((cast ((cast fraction : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast fraction : Dynamic)));
     return cast true;
     return cast null;
   }
 
   public static function raycastPoint__raycastCollisionShape(pointX:Float, pointY:Float, originX:Float, originY:Float, directionX:Float, directionY:Float, directionLengthSquared:Float, maxFraction:Float, out:CollisionRaycastHit):Bool {
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var fraction:Dynamic = cast _Runtime.UNDEFINED;
-    var hitX:Dynamic = cast _Runtime.UNDEFINED;
-    var hitY:Dynamic = cast _Runtime.UNDEFINED;
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var fraction:Float = cast _Runtime.UNDEFINED;
+    var hitX:Float = cast _Runtime.UNDEFINED;
+    var hitY:Float = cast _Runtime.UNDEFINED;
+    var epsilon:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([pointX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([pointY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     offsetX = (pointX - originX);
     offsetY = (pointY - originY);
@@ -325,30 +331,30 @@ class RaycastCollisionShape {
     hitY = (originY + (directionY * fraction));
     epsilon = _Runtime.multiplyNumbers(HxMath.max(1.0, _Runtime.hypot(offsetX, offsetY)), RaycastCollisionShape.RELATIVE_EPSILON__raycastCollisionShape);
     if ((cast ((cast _Runtime.hypot((hitX - pointX), (hitY - pointY)) : Float) > (cast epsilon : Float)) : Bool)) { return cast false; }
-    _Runtime.callValue(RaycastCollisionShape.writeRaycastHit__raycastCollisionShape, cast ([out, originX, originY, directionX, directionY, fraction, 0.0, 0.0] : Array<Dynamic>));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape((cast out : CollisionRaycastHit), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast 0.0 : Float), (cast 0.0 : Float));
     return cast true;
     return cast null;
   }
 
   public static function writeRaycastHit__raycastCollisionShape(out:CollisionRaycastHit, originX:Float, originY:Float, directionX:Float, directionY:Float, fraction:Float, normalX:Float, normalY:Float):Void {
-    _Runtime.setField(out, 'fraction', fraction);
-    _Runtime.setField(out, 'x', (originX + (directionX * fraction)));
-    _Runtime.setField(out, 'y', (originY + (directionY * fraction)));
-    _Runtime.setField(out, 'normalX', normalX);
-    _Runtime.setField(out, 'normalY', normalY);
+    ((cast out : CollisionRaycastHit).fraction = fraction);
+    ((cast out : CollisionRaycastHit).x = (originX + (directionX * fraction)));
+    ((cast out : CollisionRaycastHit).y = (originY + (directionY * fraction)));
+    ((cast out : CollisionRaycastHit).normalX = normalX);
+    ((cast out : CollisionRaycastHit).normalY = normalY);
   }
 
   public static function clearRaycastHit__raycastCollisionShape(out:CollisionRaycastHit):Void {
-    _Runtime.setField(out, 'fraction', 0.0);
-    _Runtime.setField(out, 'x', 0.0);
-    _Runtime.setField(out, 'y', 0.0);
-    _Runtime.setField(out, 'normalX', 0.0);
-    _Runtime.setField(out, 'normalY', 0.0);
+    ((cast out : CollisionRaycastHit).fraction = 0.0);
+    ((cast out : CollisionRaycastHit).x = 0.0);
+    ((cast out : CollisionRaycastHit).y = 0.0);
+    ((cast out : CollisionRaycastHit).normalX = 0.0);
+    ((cast out : CollisionRaycastHit).normalY = 0.0);
   }
 
   public static final localHitScratch__raycastCollisionShape:CollisionRaycastHit = { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 };
 
-  public static final fractionScratch__raycastCollisionShape:Dynamic = { value: 0.0 };
+  public static final fractionScratch__raycastCollisionShape:{ var value:Float; } = { value: 0.0 };
 
-  public static final polygonCenterScratch__raycastCollisionShape:Dynamic = { x: 0.0, y: 0.0 };
+  public static final polygonCenterScratch__raycastCollisionShape:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
 }

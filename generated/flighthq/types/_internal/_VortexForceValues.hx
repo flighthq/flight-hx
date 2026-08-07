@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.ForceFalloff;
 
 class _VortexForceValues {
-  public static final VortexForceKind:Dynamic = 'VortexForce';
+  public static final VortexForceKind:String = 'VortexForce';
 }

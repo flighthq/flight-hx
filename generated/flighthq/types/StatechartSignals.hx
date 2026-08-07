@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef StatechartSignals = { var onStateChange:Signal<Dynamic>; };
+typedef StatechartSignals = { var onStateChange:Signal<Float->Float->Float->Void>; };

@@ -90,7 +90,7 @@ class Scene3dGl {
     Facade_Scene3dGl_flighthq_scene3dGl_EnableGlPbrExtensionGuards.enableGlPbrExtensionGuards(state);
   }
 
-  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):GlMeshUpload {
+  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Bool):GlMeshUpload {
     return cast Facade_Scene3dGl_flighthq_scene3dGl_GlMeshUpload.ensureGlMeshUpload(state, geometry, gpuSkinned);
     return cast null;
   }

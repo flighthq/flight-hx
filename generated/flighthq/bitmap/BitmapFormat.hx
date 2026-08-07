@@ -8,36 +8,36 @@ import flighthq.types.PixelOrder;
 class BitmapFormat {
   public static function convertBitmapPixelOrder(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float, from:PixelOrder, to:PixelOrder):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var srcR:Dynamic = cast _Runtime.UNDEFINED;
-    var srcG:Dynamic = cast _Runtime.UNDEFINED;
-    var srcB:Dynamic = cast _Runtime.UNDEFINED;
-    var srcA:Dynamic = cast _Runtime.UNDEFINED;
+    var srcR:Float = cast _Runtime.UNDEFINED;
+    var srcG:Float = cast _Runtime.UNDEFINED;
+    var srcB:Float = cast _Runtime.UNDEFINED;
+    var srcA:Float = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var dstR:Dynamic = cast _Runtime.UNDEFINED;
-    var dstG:Dynamic = cast _Runtime.UNDEFINED;
-    var dstB:Dynamic = cast _Runtime.UNDEFINED;
-    var dstA:Dynamic = cast _Runtime.UNDEFINED;
+    var dstR:Float = cast _Runtime.UNDEFINED;
+    var dstG:Float = cast _Runtime.UNDEFINED;
+    var dstB:Float = cast _Runtime.UNDEFINED;
+    var dstA:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(from, to) : Bool)) {
       if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out : flighthq._internal._UInt8ClampedArray).set((cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))); }
       return;
     }
-    __destructure0 = _Runtime.callValue(BitmapFormat.channelOffsets__bitmapFormat, cast ([from] : Array<Dynamic>));
+    __destructure0 = (cast BitmapFormat.channelOffsets__bitmapFormat((cast from : PixelOrder)) : Array<flighthq._internal._Any>);
     srcR = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     srcG = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     srcB = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     srcA = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    __destructure1 = _Runtime.callValue(BitmapFormat.channelOffsets__bitmapFormat, cast ([to] : Array<Dynamic>));
+    __destructure1 = (cast BitmapFormat.channelOffsets__bitmapFormat((cast to : PixelOrder)) : Array<flighthq._internal._Any>);
     dstR = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     dstG = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     dstB = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
     dstA = flighthq._internal._StaticIndex.readArray(__destructure1, 3.0);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcR));
-        var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcG));
-        var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcB));
-        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcA));
+        var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcR));
+        var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcG));
+        var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcB));
+        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + srcA));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstR), r);
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstG), g);
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + dstB), b);
@@ -49,9 +49,9 @@ class BitmapFormat {
 
   public static function premultiplyBitmapPixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var a:Dynamic = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)), 255.0);
+        var a:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0)), 255.0);
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, i), a)));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)), a)));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)), a)));
@@ -63,16 +63,16 @@ class BitmapFormat {
 
   public static function unpremultiplyBitmapPixels(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0));
+        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 3.0));
         if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) {
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, 0.0);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), 0.0);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), 0.0);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), 0.0);
         } else {
-          var inv:Dynamic = (255.0 / a);
+          var inv:Float = (255.0 / a);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, i), inv))));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 1.0)), inv))));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source, (i + 2.0)), inv))));

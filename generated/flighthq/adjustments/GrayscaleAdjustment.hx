@@ -8,13 +8,13 @@ import flighthq.types.GrayscaleAdjustment;
 class GrayscaleAdjustment {
   public static function createGrayscaleAdjustment(?options:Dynamic):flighthq.types.GrayscaleAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var k:Dynamic = cast _Runtime.UNDEFINED;
-    var j:Dynamic = cast _Runtime.UNDEFINED;
-    var lr:Dynamic = cast _Runtime.UNDEFINED;
-    var lg:Dynamic = cast _Runtime.UNDEFINED;
-    var lb:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var k:Float = cast _Runtime.UNDEFINED;
+    var j:Float = cast _Runtime.UNDEFINED;
+    var lr:Float = cast _Runtime.UNDEFINED;
+    var lg:Float = cast _Runtime.UNDEFINED;
+    var lb:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     k = intensity;
     j = (1.0 - intensity);

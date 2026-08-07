@@ -11,20 +11,27 @@ import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterSignals.getParticleEmitterSignals;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Node3D;
+import flighthq.types.ParticleCurve;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.ParticleEmitterState;
+import flighthq.types.RandomSource;
+import flighthq.types.Signal;
 
 class UpdateParticleEmitter3D {
-  public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D:Dynamic = 4.0;
+  public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D:Float = 4.0;
 
-  public static final TWO_PI__updateParticleEmitter3D:Dynamic = (HxMath.PI * 2.0);
+  public static final TWO_PI__updateParticleEmitter3D:Float = (HxMath.PI * 2.0);
 
   public static function isParticleEmitter3DComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
     if ((cast ((cast ((cast config.duration : Float) <= (cast 0.0 : Float)) : Bool) || (cast config.loop : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast state.emitterAge : Float) >= (cast config.duration : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(emitter, 'data').particleCount, 0.0) : Bool));
+    return cast ((cast ((cast state.emitterAge : Float) >= (cast config.duration : Float)) : Bool) && (cast _Runtime.strictEquals((cast emitter : ParticleEmitter3D).data.particleCount, 0.0) : Bool));
     return cast null;
   }
 
@@ -34,57 +41,57 @@ class UpdateParticleEmitter3D {
   }
 
   public static function updateParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var worldM:Dynamic = cast _Runtime.UNDEFINED;
-    var originM:Dynamic = cast _Runtime.UNDEFINED;
-    var trackX:Dynamic = cast _Runtime.UNDEFINED;
-    var trackY:Dynamic = cast _Runtime.UNDEFINED;
-    var trackZ:Dynamic = cast _Runtime.UNDEFINED;
-    var hasVelInherit:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterVelX:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterVelY:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterVelZ:Dynamic = cast _Runtime.UNDEFINED;
-    var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
-    var velocities:Dynamic = cast _Runtime.UNDEFINED;
-    var scales:Dynamic = cast _Runtime.UNDEFINED;
-    var rotationSpeeds:Dynamic = cast _Runtime.UNDEFINED;
-    var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
-    var gx:Dynamic = cast _Runtime.UNDEFINED;
-    var gy:Dynamic = cast _Runtime.UNDEFINED;
-    var gz:Dynamic = cast _Runtime.UNDEFINED;
+    var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
+    var worldM:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var originM:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var trackX:Float = cast _Runtime.UNDEFINED;
+    var trackY:Float = cast _Runtime.UNDEFINED;
+    var trackZ:Float = cast _Runtime.UNDEFINED;
+    var hasVelInherit:Bool = cast _Runtime.UNDEFINED;
+    var emitterVelX:Float = cast _Runtime.UNDEFINED;
+    var emitterVelY:Float = cast _Runtime.UNDEFINED;
+    var emitterVelZ:Float = cast _Runtime.UNDEFINED;
+    var lifetimes:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var velocities:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var scales:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var rotationSpeeds:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var positionsZ:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var gx:Float = cast _Runtime.UNDEFINED;
+    var gy:Float = cast _Runtime.UNDEFINED;
+    var gz:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var colorStartR:Dynamic = cast _Runtime.UNDEFINED;
-    var colorStartG:Dynamic = cast _Runtime.UNDEFINED;
-    var colorStartB:Dynamic = cast _Runtime.UNDEFINED;
-    var colorEndR:Dynamic = cast _Runtime.UNDEFINED;
-    var colorEndG:Dynamic = cast _Runtime.UNDEFINED;
-    var colorEndB:Dynamic = cast _Runtime.UNDEFINED;
-    var hasColorVariance:Dynamic = cast _Runtime.UNDEFINED;
-    var hasColorGradient:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var colorCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasAlphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasColorCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasScaleCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasScaleAnim:Dynamic = cast _Runtime.UNDEFINED;
-    var hasColorWork:Dynamic = cast _Runtime.UNDEFINED;
-    var hasRotationSpeed:Dynamic = cast _Runtime.UNDEFINED;
-    var hasFlipbook:Dynamic = cast _Runtime.UNDEFINED;
-    var signals:Dynamic = cast _Runtime.UNDEFINED;
-    var onDeath:Dynamic = cast _Runtime.UNDEFINED;
-    var onSpawn:Dynamic = cast _Runtime.UNDEFINED;
-    var liveCount:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    var emitting:Dynamic = cast _Runtime.UNDEFINED;
-    var toSpawn:Dynamic = cast _Runtime.UNDEFINED;
-    var maxNew:Dynamic = cast _Runtime.UNDEFINED;
-    var liveVelocityCount:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(emitter, 'data');
-    worldM = ((cast config.worldSpace : Bool) ? (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : Node3D)] : Array<Dynamic>)).m : Dynamic) : (cast null : Dynamic));
+    var colorStartR:Float = cast _Runtime.UNDEFINED;
+    var colorStartG:Float = cast _Runtime.UNDEFINED;
+    var colorStartB:Float = cast _Runtime.UNDEFINED;
+    var colorEndR:Float = cast _Runtime.UNDEFINED;
+    var colorEndG:Float = cast _Runtime.UNDEFINED;
+    var colorEndB:Float = cast _Runtime.UNDEFINED;
+    var hasColorVariance:Bool = cast _Runtime.UNDEFINED;
+    var hasColorGradient:Bool = cast _Runtime.UNDEFINED;
+    var alphaCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var colorCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var scaleCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var hasAlphaCurve:Bool = cast _Runtime.UNDEFINED;
+    var hasColorCurve:Bool = cast _Runtime.UNDEFINED;
+    var hasScaleCurve:Bool = cast _Runtime.UNDEFINED;
+    var hasScaleAnim:Bool = cast _Runtime.UNDEFINED;
+    var hasColorWork:Bool = cast _Runtime.UNDEFINED;
+    var hasRotationSpeed:Bool = cast _Runtime.UNDEFINED;
+    var hasFlipbook:Bool = cast _Runtime.UNDEFINED;
+    var signals:Null<ParticleEmitterSignals> = cast _Runtime.UNDEFINED;
+    var onDeath:Null<Float->Float->Float->Void> = cast _Runtime.UNDEFINED;
+    var onSpawn:Null<Float->Float->Float->Void> = cast _Runtime.UNDEFINED;
+    var liveCount:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    var emitting:Bool = cast _Runtime.UNDEFINED;
+    var toSpawn:Float = cast _Runtime.UNDEFINED;
+    var maxNew:Float = cast _Runtime.UNDEFINED;
+    var liveVelocityCount:Float = cast _Runtime.UNDEFINED;
+    data = (cast emitter : ParticleEmitter3D).data;
+    worldM = ((cast config.worldSpace : Bool) ? (cast (cast getNodeWorldMatrix4((cast (cast emitter : flighthq._internal._Any) : Node3D)) : Matrix4Like).m : Dynamic) : (cast null : Dynamic));
     (data.worldSpace = cast (!_Runtime.strictEquals(worldM, null) : Dynamic));
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    originM = ((cast !_Runtime.strictEquals(worldM, null) : Bool) ? (cast worldM : Dynamic) : (cast _Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : Node3D)] : Array<Dynamic>)).m : Dynamic));
+    originM = ((cast !_Runtime.strictEquals(worldM, null) : Bool) ? (cast worldM : Dynamic) : (cast (cast getNodeLocalMatrix4((cast (cast emitter : flighthq._internal._Any) : Node3D)) : Matrix4Like).m : Dynamic));
     trackX = flighthq._internal._StaticIndex.readFloat32Array(originM, 12.0);
     trackY = flighthq._internal._StaticIndex.readFloat32Array(originM, 13.0);
     trackZ = flighthq._internal._StaticIndex.readFloat32Array(originM, 14.0);
@@ -124,35 +131,35 @@ class UpdateParticleEmitter3D {
     hasColorWork = ((cast hasColorCurve : Bool) || (cast hasColorGradient : Bool));
     hasRotationSpeed = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
     hasFlipbook = ((cast config.frameCount : Float) > (cast 1.0 : Float));
-    signals = _Runtime.callValue(getParticleEmitterSignals, cast ([state] : Array<Dynamic>));
+    signals = (cast getParticleEmitterSignals((cast state : flighthq._internal._Object)) : Null<ParticleEmitterSignals>);
     onDeath = _Runtime.optionalField(callbacks, 'onDeath');
     onSpawn = _Runtime.optionalField(callbacks, 'onSpawn');
     liveCount = data.particleCount;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
-      var lt:Dynamic = (i * 2.0);
+      var lt:Float = (i * 2.0);
       ({ var __indexedObject0:Dynamic = lifetimes; var __indexedKey1:Dynamic = lt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), deltaTime)); });
       if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt) : Float) >= (cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)) : Float)) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(onDeath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(signals, null) : Bool)) : Bool)) {
-          var tt:Dynamic = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
-          var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(data.transforms, tt);
-          var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(data.transforms, (tt + 1.0));
-          var dz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positionsZ, i);
+          var tt:Float = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
+          var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(data.transforms, tt);
+          var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(data.transforms, (tt + 1.0));
+          var dz:Float = flighthq._internal._StaticIndex.readFloat32Array(positionsZ, i);
           _Runtime.callOptionalValue(onDeath, cast ([dx, dy, dz] : Array<Dynamic>));
-          _Runtime.callOptionalValue(({ final __typedStruct5 = ({ final __typedStruct4 = signals; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.onParticleDeath; }); __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.emit; }), cast ([dx, dy, dz] : Array<Dynamic>));
+          _Runtime.callOptionalValue(({ final __typedStruct5 = ({ final __typedStruct4 = signals; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : flighthq.types.ParticleEmitterSignals).onParticleDeath; }); __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.emit; }), cast ([dx, dy, dz] : Array<Dynamic>));
         }
         liveCount--;
         if ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
-          var lt2:Dynamic = (liveCount * 2.0);
+          var lt2:Float = (liveCount * 2.0);
           flighthq._internal._StaticIndex.writeFloat32Array(lifetimes, lt, flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt2));
           flighthq._internal._StaticIndex.writeFloat32Array(lifetimes, (lt + 1.0), flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt2 + 1.0)));
-          var vt:Dynamic = (i * PARTICLE_VELOCITY_STRIDE);
-          var vt2:Dynamic = (liveCount * PARTICLE_VELOCITY_STRIDE);
+          var vt:Float = (i * PARTICLE_VELOCITY_STRIDE);
+          var vt2:Float = (liveCount * PARTICLE_VELOCITY_STRIDE);
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, vt, flighthq._internal._StaticIndex.readFloat32Array(velocities, vt2));
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, (vt + 1.0), flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt2 + 1.0)));
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, (vt + 2.0), flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt2 + 2.0)));
-          var tt:Dynamic = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
-          var tt2:Dynamic = (liveCount * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
+          var tt:Float = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
+          var tt2:Float = (liveCount * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
           flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, tt, flighthq._internal._StaticIndex.readFloat32Array(data.transforms, tt2));
           flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 1.0), flighthq._internal._StaticIndex.readFloat32Array(data.transforms, (tt2 + 1.0)));
           flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 2.0), flighthq._internal._StaticIndex.readFloat32Array(data.transforms, (tt2 + 2.0)));
@@ -160,8 +167,8 @@ class UpdateParticleEmitter3D {
           flighthq._internal._StaticIndex.writeFloat32Array(positionsZ, i, flighthq._internal._StaticIndex.readFloat32Array(positionsZ, liveCount));
           flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, i, flighthq._internal._StaticIndex.readFloat32Array(data.alphas, liveCount));
           flighthq._internal._StaticIndex.writeUint16Array(data.ids, i, flighthq._internal._StaticIndex.readUint16Array(data.ids, liveCount));
-          var ct:Dynamic = (i * 3.0);
-          var ct2:Dynamic = (liveCount * 3.0);
+          var ct:Float = (i * 3.0);
+          var ct2:Float = (liveCount * 3.0);
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, ct, flighthq._internal._StaticIndex.readFloat32Array(data.colors, ct2));
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 1.0), flighthq._internal._StaticIndex.readFloat32Array(data.colors, (ct2 + 1.0)));
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 2.0), flighthq._internal._StaticIndex.readFloat32Array(data.colors, (ct2 + 2.0)));
@@ -178,20 +185,20 @@ class UpdateParticleEmitter3D {
         }
         continue;
       }
-      var vt:Dynamic = (i * PARTICLE_VELOCITY_STRIDE);
+      var vt:Float = (i * PARTICLE_VELOCITY_STRIDE);
       ({ var __indexedObject6:Dynamic = velocities; var __indexedKey7:Dynamic = vt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7), gx)); });
       ({ var __indexedObject8:Dynamic = velocities; var __indexedKey9:Dynamic = (vt + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject8, __indexedKey9, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject8, __indexedKey9), gy)); });
       ({ var __indexedObject10:Dynamic = velocities; var __indexedKey11:Dynamic = (vt + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject10, __indexedKey11, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject10, __indexedKey11), gz)); });
-      var tt:Dynamic = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
+      var tt:Float = (i * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
       ({ var __indexedObject12:Dynamic = data.transforms; var __indexedKey13:Dynamic = tt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject12, __indexedKey13, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject12, __indexedKey13), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(velocities, vt), deltaTime))); });
       ({ var __indexedObject14:Dynamic = data.transforms; var __indexedKey15:Dynamic = (tt + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject14, __indexedKey15, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject14, __indexedKey15), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)), deltaTime))); });
       ({ var __indexedObject16:Dynamic = positionsZ; var __indexedKey17:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject16, __indexedKey17, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject16, __indexedKey17), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 2.0)), deltaTime))); });
-      var lifeFraction:Dynamic = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)));
-      flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, i, ((cast hasAlphaCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, lifeFraction] : Array<Dynamic>)) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)));
+      var lifeFraction:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)));
+      flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, i, ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(alphaCurve, (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)));
       if ((cast hasColorWork : Bool)) {
-        var ct:Dynamic = (i * 3.0);
+        var ct:Float = (i * 3.0);
         if ((cast hasColorCurve : Bool)) {
-          _Runtime.callValue(sampleParticleColorCurve, cast ([data.colors, ct, colorCurve, lifeFraction] : Array<Dynamic>));
+          sampleParticleColorCurve((cast data.colors : {  }), (cast ct : Float), colorCurve, (cast lifeFraction : Float));
         } else { if ((cast hasColorVariance : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, ct, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(state.colorBirth, ct), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(state.colorDeath, ct), flighthq._internal._StaticIndex.readFloat32Array(state.colorBirth, ct)) * lifeFraction)));
           flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 1.0), _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(state.colorBirth, (ct + 1.0)), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(state.colorDeath, (ct + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(state.colorBirth, (ct + 1.0))) * lifeFraction)));
@@ -203,20 +210,20 @@ class UpdateParticleEmitter3D {
         } }
       }
       if ((cast hasScaleAnim : Bool)) {
-        var scaleFactor:Dynamic = ((cast hasScaleCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, lifeFraction] : Array<Dynamic>)) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
+        var scaleFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(scaleCurve, (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(scales, i), scaleFactor));
       }
       if ((cast hasRotationSpeed : Bool)) {
         ({ var __indexedObject18:Dynamic = data.transforms; var __indexedKey19:Dynamic = (tt + 2.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject18, __indexedKey19, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject18, __indexedKey19), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(rotationSpeeds, i), deltaTime))); });
       }
       if ((cast hasFlipbook : Bool)) {
-        var frame:Dynamic = _Runtime.fmod(HxMath.floor(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), config.frameRate)), config.frameCount);
+        var frame:Float = _Runtime.fmod(HxMath.floor(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), config.frameRate)), config.frameCount);
         flighthq._internal._StaticIndex.writeUint16Array(data.ids, i, (config.regionIdMin + frame));
       }
       i++;
     }
     (data.particleCount = cast (liveCount : Dynamic));
-    emitting = _Runtime.callValue(UpdateParticleEmitter3D.isEmitting__updateParticleEmitter3D, cast ([config, state.emitterAge] : Array<Dynamic>));
+    emitting = (cast UpdateParticleEmitter3D.isEmitting__updateParticleEmitter3D((cast config : ParticleEmitterConfig), (cast state.emitterAge : Float)) : Bool);
     if ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool)) { (state.emitterAge += deltaTime); }
     (state.spawnAccumulator += ((cast emitting : Bool) ? (cast (config.spawnRate * deltaTime) : Dynamic) : (cast 0.0 : Dynamic)));
     toSpawn = HxMath.floor(state.spawnAccumulator);
@@ -231,51 +238,51 @@ class UpdateParticleEmitter3D {
     maxNew = (config.maxParticles - liveCount);
     if ((cast ((cast toSpawn : Float) > (cast maxNew : Float)) : Bool)) { (toSpawn = cast (maxNew : Dynamic)); }
     if ((cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) {
-      var newCount:Dynamic = (liveCount + toSpawn);
-      _Runtime.callValue(reserveParticleEmitter3D, cast ([emitter, newCount] : Array<Dynamic>));
-      _Runtime.callValue(ensureParticleEmitterStateCapacity, cast ([state, newCount, hasColorVariance] : Array<Dynamic>));
-      var baseAngle:Dynamic = HxMath.atan2(config.directionY, config.directionX);
-      var regionRange:Dynamic = (config.regionIdMax - config.regionIdMin);
-      var regionIdMin:Dynamic = config.regionIdMin;
-      var rotSpeedRange:Dynamic = (config.rotationSpeedMax - config.rotationSpeedMin);
-      var hasRotSpeed:Dynamic = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
-      var dirLen:Dynamic = HxMath.sqrt((((config.directionX * config.directionX) + (config.directionY * config.directionY)) + (config.directionZ * config.directionZ)));
-      var dirNx:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionX / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
-      var dirNy:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionY / dirLen) : Dynamic) : (cast -1.0 : Dynamic));
-      var dirNz:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionZ / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
-      var doTrail:Dynamic = ((cast !_Runtime.strictEquals(worldM, null) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
-      var prevPathX:Dynamic = ((cast doTrail : Bool) ? (cast state.prevX : Dynamic) : (cast trackX : Dynamic));
-      var prevPathY:Dynamic = ((cast doTrail : Bool) ? (cast state.prevY : Dynamic) : (cast trackY : Dynamic));
-      var prevPathZ:Dynamic = ((cast doTrail : Bool) ? (cast state.prevZ : Dynamic) : (cast trackZ : Dynamic));
+      var newCount:Float = (liveCount + toSpawn);
+      reserveParticleEmitter3D((cast emitter : ParticleEmitter3D), (cast newCount : Float));
+      ensureParticleEmitterStateCapacity((cast state : ParticleEmitterState), (cast newCount : Float), (cast hasColorVariance : Bool));
+      var baseAngle:Float = HxMath.atan2(config.directionY, config.directionX);
+      var regionRange:Float = (config.regionIdMax - config.regionIdMin);
+      var regionIdMin:Float = config.regionIdMin;
+      var rotSpeedRange:Float = (config.rotationSpeedMax - config.rotationSpeedMin);
+      var hasRotSpeed:Bool = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
+      var dirLen:Float = HxMath.sqrt((((config.directionX * config.directionX) + (config.directionY * config.directionY)) + (config.directionZ * config.directionZ)));
+      var dirNx:Float = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionX / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
+      var dirNy:Float = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionY / dirLen) : Dynamic) : (cast -1.0 : Dynamic));
+      var dirNz:Float = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionZ / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
+      var doTrail:Bool = ((cast !_Runtime.strictEquals(worldM, null) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
+      var prevPathX:Float = ((cast doTrail : Bool) ? (cast state.prevX : Dynamic) : (cast trackX : Dynamic));
+      var prevPathY:Float = ((cast doTrail : Bool) ? (cast state.prevY : Dynamic) : (cast trackY : Dynamic));
+      var prevPathZ:Float = ((cast doTrail : Bool) ? (cast state.prevZ : Dynamic) : (cast trackZ : Dynamic));
       {
-        var sIdx:Dynamic = 0.0;
+        var sIdx:Float = 0.0;
         while ((cast ((cast sIdx : Float) < (cast toSpawn : Float)) : Bool)) {
-          var idx:Dynamic = (liveCount + sIdx);
-          var lifetime:Dynamic = (config.lifetimeMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.lifetimeMax - config.lifetimeMin)));
-          var lt:Dynamic = (idx * 2.0);
+          var idx:Float = (liveCount + sIdx);
+          var lifetime:Float = (config.lifetimeMin + _Runtime.multiplyNumbers((state.random)(), (config.lifetimeMax - config.lifetimeMin)));
+          var lt:Float = (idx * 2.0);
           flighthq._internal._StaticIndex.writeFloat32Array(state.lifetimes, lt, 0.0);
           flighthq._internal._StaticIndex.writeFloat32Array(state.lifetimes, (lt + 1.0), lifetime);
-          var speed:Dynamic = (config.speedMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.speedMax - config.speedMin)));
+          var speed:Float = (config.speedMin + _Runtime.multiplyNumbers((state.random)(), (config.speedMax - config.speedMin)));
           var vx:Float = cast _Runtime.UNDEFINED;
           var vy:Float = cast _Runtime.UNDEFINED;
           var vz:Float = cast _Runtime.UNDEFINED;
-          var spawnX:Dynamic = 0.0;
-          var spawnY:Dynamic = 0.0;
-          var spawnZ:Dynamic = 0.0;
-          var shape:Dynamic = config.emitterShape;
+          var spawnX:Float = 0.0;
+          var spawnY:Float = 0.0;
+          var spawnZ:Float = 0.0;
+          var shape:ParticleEmitterShape = config.emitterShape;
           if ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool)) {
             var sx:Float = cast _Runtime.UNDEFINED;
             var sy:Float = cast _Runtime.UNDEFINED;
             var sz:Float = cast _Runtime.UNDEFINED;
             if ((cast ((cast _Runtime.strictEquals(shape, 'cone3d') : Bool) && (cast ((cast config.emitterConeAngle : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-              var coneHalf:Dynamic = (config.emitterConeAngle / 2.0);
-              var cosTheta:Dynamic = (1.0 - _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), _Runtime.subtractNumbers(1.0, HxMath.cos(coneHalf))));
-              var sinTheta:Dynamic = HxMath.sqrt((1.0 - (cosTheta * cosTheta)));
-              var phi:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), UpdateParticleEmitter3D.TWO_PI__updateParticleEmitter3D);
-              var lx:Dynamic = _Runtime.multiplyNumbers(sinTheta, HxMath.cos(phi));
-              var ly:Dynamic = _Runtime.multiplyNumbers(sinTheta, HxMath.sin(phi));
-              var lz:Dynamic = cosTheta;
-              var rDir:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.rotateToDirection__updateParticleEmitter3D, cast ([lx, ly, lz, dirNx, dirNy, dirNz] : Array<Dynamic>));
+              var coneHalf:Float = (config.emitterConeAngle / 2.0);
+              var cosTheta:Float = (1.0 - _Runtime.multiplyNumbers((state.random)(), _Runtime.subtractNumbers(1.0, HxMath.cos(coneHalf))));
+              var sinTheta:Float = HxMath.sqrt((1.0 - (cosTheta * cosTheta)));
+              var phi:Float = _Runtime.multiplyNumbers((state.random)(), UpdateParticleEmitter3D.TWO_PI__updateParticleEmitter3D);
+              var lx:Float = _Runtime.multiplyNumbers(sinTheta, HxMath.cos(phi));
+              var ly:Float = _Runtime.multiplyNumbers(sinTheta, HxMath.sin(phi));
+              var lz:Float = cosTheta;
+              var rDir:Array<Float> = (cast UpdateParticleEmitter3D.rotateToDirection__updateParticleEmitter3D((cast lx : Float), (cast ly : Float), (cast lz : Float), (cast dirNx : Float), (cast dirNy : Float), (cast dirNz : Float)) : Array<Float>);
               (sx = cast (flighthq._internal._StaticIndex.readArray(rDir, 0.0) : Dynamic));
               (sy = cast (flighthq._internal._StaticIndex.readArray(rDir, 1.0) : Dynamic));
               (sz = cast (flighthq._internal._StaticIndex.readArray(rDir, 2.0) : Dynamic));
@@ -284,11 +291,11 @@ class UpdateParticleEmitter3D {
               var v:Float = cast _Runtime.UNDEFINED;
               var s2:Float = cast _Runtime.UNDEFINED;
               do {
-                (u = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
-                (v = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+                (u = cast ((_Runtime.multiplyNumbers((state.random)(), 2.0) - 1.0) : Dynamic));
+                (v = cast ((_Runtime.multiplyNumbers((state.random)(), 2.0) - 1.0) : Dynamic));
                 (s2 = cast (((u * u) + (v * v)) : Dynamic));
               } while ((cast ((cast ((cast s2 : Float) >= (cast 1.0 : Float)) : Bool) || (cast _Runtime.strictEquals(s2, 0.0) : Bool)) : Bool));
-              var f:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - s2)));
+              var f:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - s2)));
               (sx = cast ((u * f) : Dynamic));
               (sy = cast ((v * f) : Dynamic));
               (sz = cast ((1.0 - (2.0 * s2)) : Dynamic));
@@ -297,55 +304,55 @@ class UpdateParticleEmitter3D {
             (vy = cast ((sy * speed) : Dynamic));
             (vz = cast ((sz * speed) : Dynamic));
             if ((cast ((cast config.emitterRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-              var r:Dynamic = _Runtime.multiplyNumbers(_Runtime.cbrt(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>))), config.emitterRadius);
+              var r:Float = _Runtime.multiplyNumbers(_Runtime.cbrt((state.random)()), config.emitterRadius);
               var pu:Float = cast _Runtime.UNDEFINED;
               var pv:Float = cast _Runtime.UNDEFINED;
               var ps2:Float = cast _Runtime.UNDEFINED;
               do {
-                (pu = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
-                (pv = cast ((_Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 2.0) - 1.0) : Dynamic));
+                (pu = cast ((_Runtime.multiplyNumbers((state.random)(), 2.0) - 1.0) : Dynamic));
+                (pv = cast ((_Runtime.multiplyNumbers((state.random)(), 2.0) - 1.0) : Dynamic));
                 (ps2 = cast (((pu * pu) + (pv * pv)) : Dynamic));
               } while ((cast ((cast ((cast ps2 : Float) >= (cast 1.0 : Float)) : Bool) || (cast _Runtime.strictEquals(ps2, 0.0) : Bool)) : Bool));
-              var pf:Dynamic = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - ps2)));
+              var pf:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((1.0 - ps2)));
               (spawnX = cast (((pu * pf) * r) : Dynamic));
               (spawnY = cast (((pv * pf) * r) : Dynamic));
               (spawnZ = cast (((1.0 - (2.0 * ps2)) * r) : Dynamic));
             }
           } else { if ((cast _Runtime.strictEquals(shape, 'box') : Bool)) {
-            var angle:Dynamic = (baseAngle + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.spread));
+            var angle:Float = (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread));
             (vx = cast (_Runtime.multiplyNumbers(HxMath.cos(angle), speed) : Dynamic));
             (vy = cast (_Runtime.multiplyNumbers(HxMath.sin(angle), speed) : Dynamic));
             (vz = cast (_Runtime.divideNumbers((config.directionZ * speed), ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast dirLen : Dynamic) : (cast 1.0 : Dynamic))) : Dynamic));
-            (spawnX = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterWidth) : Dynamic));
-            (spawnY = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterHeight) : Dynamic));
-            (spawnZ = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterDepth) : Dynamic));
+            (spawnX = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterWidth) : Dynamic));
+            (spawnY = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterHeight) : Dynamic));
+            (spawnZ = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterDepth) : Dynamic));
           } else {
-            var angle:Dynamic = (baseAngle + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.spread));
+            var angle:Float = (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread));
             (vx = cast (_Runtime.multiplyNumbers(HxMath.cos(angle), speed) : Dynamic));
             (vy = cast (_Runtime.multiplyNumbers(HxMath.sin(angle), speed) : Dynamic));
             (vz = cast (0.0 : Dynamic));
             if ((cast ((cast _Runtime.strictEquals(shape, 'circle') : Bool) && (cast ((cast config.emitterRadius : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-              var r:Dynamic = _Runtime.multiplyNumbers(HxMath.sqrt(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>))), config.emitterRadius);
-              var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), UpdateParticleEmitter3D.TWO_PI__updateParticleEmitter3D);
+              var r:Float = _Runtime.multiplyNumbers(HxMath.sqrt((state.random)()), config.emitterRadius);
+              var a:Float = _Runtime.multiplyNumbers((state.random)(), UpdateParticleEmitter3D.TWO_PI__updateParticleEmitter3D);
               (spawnX = cast (_Runtime.multiplyNumbers(HxMath.cos(a), r) : Dynamic));
               (spawnY = cast (_Runtime.multiplyNumbers(HxMath.sin(a), r) : Dynamic));
             } else { if ((cast ((cast _Runtime.strictEquals(shape, 'rect') : Bool) && (cast _Runtime.orValue(((cast config.emitterWidth : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast config.emitterHeight : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
-              (spawnX = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterWidth) : Dynamic));
-              (spawnY = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterHeight) : Dynamic));
+              (spawnX = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterWidth) : Dynamic));
+              (spawnY = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterHeight) : Dynamic));
             } }
           } }
           if ((cast !_Runtime.strictEquals(worldM, null) : Bool)) {
-            var m:Dynamic = worldM;
-            var t:Dynamic = ((cast ((cast toSpawn : Float) > (cast 1.0 : Float)) : Bool) ? (cast (sIdx / (toSpawn - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
-            var originX:Dynamic = (prevPathX + ((trackX - prevPathX) * t));
-            var originY:Dynamic = (prevPathY + ((trackY - prevPathY) * t));
-            var originZ:Dynamic = (prevPathZ + ((trackZ - prevPathZ) * t));
-            var px:Dynamic = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), spawnZ)) + originX);
-            var py:Dynamic = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), spawnZ)) + originY);
-            var pz:Dynamic = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), spawnZ)) + originZ);
-            var wvx:Dynamic = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), vz));
-            var wvy:Dynamic = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), vz));
-            var wvz:Dynamic = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), vz));
+            var m:flighthq._internal._Float32Array = worldM;
+            var t:Float = ((cast ((cast toSpawn : Float) > (cast 1.0 : Float)) : Bool) ? (cast (sIdx / (toSpawn - 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+            var originX:Float = (prevPathX + ((trackX - prevPathX) * t));
+            var originY:Float = (prevPathY + ((trackY - prevPathY) * t));
+            var originZ:Float = (prevPathZ + ((trackZ - prevPathZ) * t));
+            var px:Float = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), spawnZ)) + originX);
+            var py:Float = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), spawnZ)) + originY);
+            var pz:Float = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), spawnX) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), spawnY)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), spawnZ)) + originZ);
+            var wvx:Float = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), vz));
+            var wvy:Float = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 9.0), vz));
+            var wvz:Float = ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), vx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), vy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 10.0), vz));
             (spawnX = cast (px : Dynamic));
             (spawnY = cast (py : Dynamic));
             (spawnZ = cast (pz : Dynamic));
@@ -358,29 +365,29 @@ class UpdateParticleEmitter3D {
             (vy = cast ((vy + (emitterVelY * config.velocityInheritance)) : Dynamic));
             (vz = cast ((vz + (emitterVelZ * config.velocityInheritance)) : Dynamic));
           }
-          var vt:Dynamic = (idx * PARTICLE_VELOCITY_STRIDE);
+          var vt:Float = (idx * PARTICLE_VELOCITY_STRIDE);
           flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, vt, vx);
           flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, (vt + 1.0), vy);
           flighthq._internal._StaticIndex.writeFloat32Array(state.velocities, (vt + 2.0), vz);
-          var spawnScale:Dynamic = (config.scaleMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.scaleMax - config.scaleMin)));
+          var spawnScale:Float = (config.scaleMin + _Runtime.multiplyNumbers((state.random)(), (config.scaleMax - config.scaleMin)));
           flighthq._internal._StaticIndex.writeFloat32Array(state.scales, idx, spawnScale);
-          var tt:Dynamic = (idx * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
+          var tt:Float = (idx * UpdateParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
           flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, tt, spawnX);
           flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 1.0), spawnY);
-          flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 2.0), ((cast ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool) || (cast _Runtime.strictEquals(shape, 'box') : Bool)) : Bool) ? (cast HxMath.atan2(vy, vx) : Dynamic) : (cast (baseAngle + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.spread)) : Dynamic)));
-          flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast _Runtime.multiplyNumbers(spawnScale, _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))) : Dynamic) : (cast spawnScale : Dynamic)));
+          flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 2.0), ((cast ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool) || (cast _Runtime.strictEquals(shape, 'box') : Bool)) : Bool) ? (cast HxMath.atan2(vy, vx) : Dynamic) : (cast (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread)) : Dynamic)));
+          flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(scaleCurve, (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)));
           flighthq._internal._StaticIndex.writeFloat32Array(data.positionsZ, idx, spawnZ);
-          flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, idx, ((cast hasAlphaCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)) : Dynamic) : (cast config.alphaStart : Dynamic)));
-          var ct:Dynamic = (idx * 3.0);
+          flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, idx, ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(alphaCurve, (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)));
+          var ct:Float = (idx * 3.0);
           if ((cast hasColorCurve : Bool)) {
-            _Runtime.callValue(sampleParticleColorCurve, cast ([data.colors, ct, colorCurve, 0.0] : Array<Dynamic>));
+            sampleParticleColorCurve((cast data.colors : {  }), (cast ct : Float), colorCurve, (cast 0.0 : Float));
           } else { if ((cast hasColorVariance : Bool)) {
-            var r0:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorStartR + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceR))] : Array<Dynamic>));
-            var g0:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorStartG + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceG))] : Array<Dynamic>));
-            var b0:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorStartB + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorStartVarianceB))] : Array<Dynamic>));
-            var r1:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorEndR + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceR))] : Array<Dynamic>));
-            var g1:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorEndG + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceG))] : Array<Dynamic>));
-            var b1:Dynamic = _Runtime.callValue(UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D, cast ([(colorEndB + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.colorEndVarianceB))] : Array<Dynamic>));
+            var r0:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorStartR + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceR)) : Float)) : Float);
+            var g0:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorStartG + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceG)) : Float)) : Float);
+            var b0:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorStartB + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceB)) : Float)) : Float);
+            var r1:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorEndR + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorEndVarianceR)) : Float)) : Float);
+            var g1:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorEndG + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorEndVarianceG)) : Float)) : Float);
+            var b1:Float = (cast UpdateParticleEmitter3D.clamp01__updateParticleEmitter3D((cast (colorEndB + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorEndVarianceB)) : Float)) : Float);
             flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, ct, r0);
             flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, (ct + 1.0), g0);
             flighthq._internal._StaticIndex.writeFloat32Array(state.colorBirth, (ct + 2.0), b0);
@@ -395,11 +402,11 @@ class UpdateParticleEmitter3D {
             flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 1.0), colorStartG);
             flighthq._internal._StaticIndex.writeFloat32Array(data.colors, (ct + 2.0), colorStartB);
           } }
-          flighthq._internal._StaticIndex.writeUint16Array(data.ids, idx, _Runtime.addNumbers(regionIdMin, ((cast ((cast config.frameCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast regionRange : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), regionRange)) | 0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic))));
-          flighthq._internal._StaticIndex.writeFloat32Array(state.rotationSpeeds, idx, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
+          flighthq._internal._StaticIndex.writeUint16Array(data.ids, idx, _Runtime.addNumbers(regionIdMin, ((cast ((cast config.frameCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast regionRange : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.multiplyNumbers((state.random)(), regionRange)) | 0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic))));
+          flighthq._internal._StaticIndex.writeFloat32Array(state.rotationSpeeds, idx, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers((state.random)(), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
           _Runtime.callOptionalValue(onSpawn, cast ([spawnX, spawnY, spawnZ] : Array<Dynamic>));
           if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
-            _Runtime.callValue(signals.onParticleSpawn.emit, cast ([spawnX, spawnY, spawnZ, vx, vy, vz] : Array<Dynamic>));
+            ((cast signals : flighthq.types.ParticleEmitterSignals).onParticleSpawn.emit)(spawnX, spawnY, spawnZ, vx, vy, vz);
           }
           sIdx++;
         }
@@ -412,15 +419,15 @@ class UpdateParticleEmitter3D {
     liveVelocityCount = (data.particleCount * PARTICLE_VELOCITY_STRIDE);
     if ((cast ((cast _Runtime.field(data.velocities, 'length') : Float) >= (cast liveVelocityCount : Float)) : Bool)) {
       {
-        var vi:Dynamic = 0.0;
+        var vi:Float = 0.0;
         while ((cast ((cast vi : Float) < (cast liveVelocityCount : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(data.velocities, vi, flighthq._internal._StaticIndex.readFloat32Array(state.velocities, vi));
           vi++;
         }
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast _Runtime.callValue(isParticleEmitter3DComplete, cast ([emitter, state, config] : Array<Dynamic>)) : Bool)) : Bool)) {
-      _Runtime.callValue(signals.onEmitterComplete.emit, cast ([] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast (cast isParticleEmitter3DComplete((cast emitter : ParticleEmitter3D), (cast state : ParticleEmitterState), (cast config : ParticleEmitterConfig)) : Bool) : Bool)) : Bool)) {
+      ((cast signals : flighthq.types.ParticleEmitterSignals).onEmitterComplete.emit)();
     }
   }
 
@@ -432,17 +439,17 @@ class UpdateParticleEmitter3D {
   public static final _rot__updateParticleEmitter3D:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 
   public static function rotateToDirection__updateParticleEmitter3D(lx:Float, ly:Float, lz:Float, dx:Float, dy:Float, dz:Float):Array<Float> {
-    var kx:Dynamic = cast _Runtime.UNDEFINED;
-    var ky:Dynamic = cast _Runtime.UNDEFINED;
-    var sinAngle:Dynamic = cast _Runtime.UNDEFINED;
-    var cosAngle:Dynamic = cast _Runtime.UNDEFINED;
-    var invSin:Dynamic = cast _Runtime.UNDEFINED;
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var kdotv:Dynamic = cast _Runtime.UNDEFINED;
-    var crossX:Dynamic = cast _Runtime.UNDEFINED;
-    var crossY:Dynamic = cast _Runtime.UNDEFINED;
-    var crossZ:Dynamic = cast _Runtime.UNDEFINED;
+    var kx:Float = cast _Runtime.UNDEFINED;
+    var ky:Float = cast _Runtime.UNDEFINED;
+    var sinAngle:Float = cast _Runtime.UNDEFINED;
+    var cosAngle:Float = cast _Runtime.UNDEFINED;
+    var invSin:Float = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var kdotv:Float = cast _Runtime.UNDEFINED;
+    var crossX:Float = cast _Runtime.UNDEFINED;
+    var crossY:Float = cast _Runtime.UNDEFINED;
+    var crossZ:Float = cast _Runtime.UNDEFINED;
     kx = -dy;
     ky = dx;
     sinAngle = HxMath.sqrt(((kx * kx) + (ky * ky)));

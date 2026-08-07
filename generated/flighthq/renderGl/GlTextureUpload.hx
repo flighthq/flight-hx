@@ -21,6 +21,6 @@ class GlTextureUpload {
   @:noCompletion
   public static function uploadGlTextureImageResource(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, image:Image, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, target, (cast _Runtime.field(image, 'source') : flighthq._internal.dom.TexImageSource), internalFormat] : Array<Dynamic>));
+    uploadGlTextureElement((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast target : Float), (cast (cast _Runtime.field(image, 'source') : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast internalFormat : Float));
   }
 }

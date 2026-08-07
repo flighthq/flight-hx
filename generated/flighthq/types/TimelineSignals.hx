@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TimelineSignals = { var onComplete:Signal<Dynamic>; var onEnterFrame:Signal<Dynamic>; var onExitFrame:Signal<Dynamic>; var onFrameConstructed:Signal<Dynamic>; var onLoop:Signal<Dynamic>; };
+typedef TimelineSignals = { var onComplete:Signal<Void->Void>; var onEnterFrame:Signal<TimelineFrameEvent->Void>; var onExitFrame:Signal<TimelineFrameEvent->Void>; var onFrameConstructed:Signal<TimelineFrameEvent->Void>; var onLoop:Signal<Void->Void>; };

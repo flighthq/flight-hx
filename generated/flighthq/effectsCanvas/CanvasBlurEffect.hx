@@ -6,27 +6,29 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.BlurEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RenderEffect;
 
 class CanvasBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlurEffect):Void {
-    var blurX:Dynamic = cast _Runtime.UNDEFINED;
-    var blurY:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    var blurX:Float = cast _Runtime.UNDEFINED;
+    var blurY:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
     radius = HxMath.max(0.0, ((blurX + blurY) / 2.0));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic))] : Array<Dynamic>));
+    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
   }
 
-  public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlurEffect)] : Array<Dynamic>));
+  public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyBlurEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : BlurEffect) : BlurEffect));
   };
 
   public static function registerCanvasBlurEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BlurEffect', defaultCanvasBlurEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'BlurEffect' : String), (cast defaultCanvasBlurEffectRunner : CanvasRenderEffectRunner));
   }
 }

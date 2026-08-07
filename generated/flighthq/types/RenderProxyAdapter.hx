@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderProxyAdapter = { var adapt:Dynamic; };
+typedef RenderProxyAdapter = { var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>; };

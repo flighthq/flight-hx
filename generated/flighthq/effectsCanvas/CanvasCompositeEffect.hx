@@ -5,17 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasBlendEffect.getCanvasBlendEffectBackdrop;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
+import flighthq.types.RenderEffect;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
 class CanvasCompositeEffect {
   @:noCompletion
   public static function applyCompositeEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:CompositeEffect):Void {
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -23,17 +25,17 @@ class CanvasCompositeEffect {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(effect, 'operator'), CompositeOperatorValues.Clear) : Bool)) {
-      var backdrop:Dynamic = _Runtime.callValue(getCanvasBlendEffectBackdrop, cast ([state, _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null)] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(backdrop, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(backdrop, 'canvas'), 0.0, 0.0] : Array<Dynamic>)); }
-      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', _Runtime.callValue(getCanvasCompositeEffectOperation, cast ([_Runtime.field(effect, 'operator')] : Array<Dynamic>)));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(effect, 'operator'), (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Clear) : Bool)) {
+      var backdrop:Null<CanvasRenderTarget> = (cast getCanvasBlendEffectBackdrop((cast state : CanvasRenderState), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null) : Null<String>)) : Null<CanvasRenderTarget>);
+      if ((cast !_Runtime.strictEquals(backdrop, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : CanvasRenderTarget).canvas, 0.0, 0.0] : Array<Dynamic>)); }
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', getCanvasCompositeEffectOperation((cast _Runtime.field(effect, 'operator') : String)));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
     }
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasCompositeEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyCompositeEffectToCanvas, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CompositeEffect)] : Array<Dynamic>));
+  public static final defaultCanvasCompositeEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyCompositeEffectToCanvas((cast _Runtime.field(ctx, 'state') : CanvasRenderState), (cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : CompositeEffect) : CompositeEffect));
   };
 
   public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):flighthq._internal.dom.GlobalCompositeOperation {
@@ -42,8 +44,8 @@ class CanvasCompositeEffect {
   }
 
   public static function registerCanvasCompositeEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'CompositeEffect', defaultCanvasCompositeEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'CompositeEffect' : String), (cast defaultCanvasCompositeEffectRunner : CanvasRenderEffectRunner));
   }
 
-  public static final COMPOSITE_OPERATOR_OPERATION__canvasCompositeEffect:Dynamic = _Runtime.objectFromPairs([{ key: CompositeOperatorValues.Copy, value: 'copy' }, { key: CompositeOperatorValues.DestinationAtop, value: 'destination-atop' }, { key: CompositeOperatorValues.DestinationIn, value: 'destination-in' }, { key: CompositeOperatorValues.DestinationOut, value: 'destination-out' }, { key: CompositeOperatorValues.DestinationOver, value: 'destination-over' }, { key: CompositeOperatorValues.SourceAtop, value: 'source-atop' }, { key: CompositeOperatorValues.SourceIn, value: 'source-in' }, { key: CompositeOperatorValues.SourceOut, value: 'source-out' }, { key: CompositeOperatorValues.SourceOver, value: 'source-over' }, { key: CompositeOperatorValues.Xor, value: 'xor' }]);
+  public static final COMPOSITE_OPERATOR_OPERATION__canvasCompositeEffect:flighthq._internal._Record<String, flighthq._internal.dom.GlobalCompositeOperation> = _Runtime.objectFromPairs([{ key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Copy, value: 'copy' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationAtop, value: 'destination-atop' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationIn, value: 'destination-in' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationOut, value: 'destination-out' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).DestinationOver, value: 'destination-over' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceAtop, value: 'source-atop' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceIn, value: 'source-in' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceOut, value: 'source-out' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).SourceOver, value: 'source-over' }, { key: (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Xor, value: 'xor' }]);
 }

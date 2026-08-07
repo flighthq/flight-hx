@@ -7,79 +7,84 @@ import flighthq.image.ImageResource.createImageResource;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene2dWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.scene2dWgpu.WgpuRendererData.getWgpuRendererData;
+import flighthq.types.Image;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.TextureSource;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuRenderState.WgpuTextureSourceTextureEntry;
 import flighthq.types.WgpuShapeRendererData;
 import flighthq.types.WgpuShapeRendererData.WgpuShapeRasterSurface;
 
 class WgpuShapeData {
   @:noCompletion
   public static function acquireWgpuShapeRasterSurface(data:WgpuShapeRendererData):WgpuShapeRasterSurface {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
+    var existing:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:WgpuShapeRasterSurface = cast _Runtime.UNDEFINED;
-    existing = _Runtime.field(data, 'surface');
+    existing = (cast data : WgpuShapeRendererData).surface;
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast existing; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
-    surface = { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: _Runtime.callValue(createImageResource, cast ([canvas] : Array<Dynamic>)) };
-    _Runtime.setField(data, 'surface', surface);
+    surface = { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image) };
+    ((cast data : WgpuShapeRendererData).surface = surface);
     return cast surface;
     return cast null;
   }
 
   @:noCompletion
   public static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
-    return cast _Runtime.callValue(createWgpuRendererData, cast ([{ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } }] : Array<Dynamic>));
+    return cast (cast createWgpuRendererData((cast { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } } : WgpuShapeRendererData)) : RendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function destroyWgpuShapeData(state:WgpuRenderState, data:RendererData):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeData:Dynamic = cast _Runtime.UNDEFINED;
-    var surface:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    shapeData = _Runtime.callValue(getWgpuShapeData, cast ([data] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var shapeData:Null<WgpuShapeRendererData> = cast _Runtime.UNDEFINED;
+    var surface:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
+    var b:WgpuShapeMeshBuffers = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    shapeData = (cast getWgpuShapeData((cast data : RendererData)) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    surface = _Runtime.field(shapeData, 'surface');
+    surface = (cast shapeData : WgpuShapeRendererData).surface;
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
-      var entry:Dynamic = ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(surface, 'image')));
+      var entry:Null<WgpuTextureSourceTextureEntry> = ((cast (cast runtime : WgpuRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast surface : WgpuShapeRasterSurface).image));
       if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (cast _Runtime.field(entry, 'texture') : flighthq._internal.dom.GPUTexture).destroy();
-        ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(surface, 'image')));
+        (cast (cast entry : WgpuTextureSourceTextureEntry).texture : flighthq._internal.dom.GPUTexture).destroy();
+        ((cast (cast runtime : WgpuRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast surface : WgpuShapeRasterSurface).image));
       }
     }
-    b = _Runtime.field(shapeData, 'meshBuffers');
-    for (buffer in _Runtime.iterable(_Runtime.field(b, 'vertexBuffers'))) {
+    b = (cast shapeData : WgpuShapeRendererData).meshBuffers;
+    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).vertexBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable(_Runtime.field(b, 'indexBuffers'))) {
+    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).indexBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable(_Runtime.field(b, 'uniformBuffers'))) {
+    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).uniformBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable(_Runtime.field(b, 'colorScaleBiasUniformBuffers'))) {
+    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    _Runtime.setLength(_Runtime.field(b, 'vertexBuffers'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'vertexCapacities'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'indexBuffers'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'indexCapacities'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'uniformBuffers'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'bindGroups'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'colorScaleBiasUniformBuffers'), 0.0);
-    _Runtime.setLength(_Runtime.field(b, 'colorScaleBiasBindGroups'), 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).vertexBuffers, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).vertexCapacities, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).indexBuffers, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).indexCapacities, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).uniformBuffers, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).bindGroups, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers, 0.0);
+    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).colorScaleBiasBindGroups, 0.0);
   }
 
   @:noCompletion
   public static function getWgpuShapeData(data:RendererData):Null<WgpuShapeRendererData> {
-    return cast _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
+    return cast (cast getWgpuRendererData((cast data : Null<RendererData>)) : Null<WgpuShapeRendererData>);
     return cast null;
   }
 }

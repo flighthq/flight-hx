@@ -7,14 +7,14 @@ import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasGradientRamp {
-  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, bias:Dynamic = 0.0, scale:Dynamic = 1.0):Void {
-    _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
+  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, bias:Float = 0.0, scale:Float = 1.0):Void {
+    drawCanvasImageDataPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
-          var at:Dynamic = (i * 4.0);
-          var t:Dynamic = (bias + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (at + 3.0)), 255.0) * scale));
-          var index:Dynamic = _Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(255.0, HxMath.round((t * 255.0)))), 4.0);
+          var at:Float = (i * 4.0);
+          var t:Float = (bias + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (at + 3.0)), 255.0) * scale));
+          var index:Float = _Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(255.0, HxMath.round((t * 255.0)))), 4.0);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, at, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, index));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (at + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (index + 1.0)));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (at + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (index + 2.0)));
@@ -22,17 +22,17 @@ class CanvasGradientRamp {
           i++;
         }
       }
-    }] : Array<Dynamic>));
+    } : flighthq._internal._UInt8ClampedArray->Float->Void));
   }
 
   public static function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {
-    var ramp:Dynamic = cast _Runtime.UNDEFINED;
+    var ramp:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     ramp = new flighthq._internal._UInt8ClampedArray((256.0 * 4.0));
     if ((cast _Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0) : Bool)) { return cast ramp; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
-        var upper:Dynamic = 0.0;
+        var upper:Float = 0.0;
         while ((cast ((cast ((cast upper : Float) < (cast _Runtime.field(ratios, 'length') : Float)) : Bool) && (cast ((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(ratios, upper), function():Dynamic return cast 0.0) : Float) < (cast i : Float)) : Bool)) : Bool)) { upper++; }
         var color:Float = cast _Runtime.UNDEFINED;
         var alpha:Float = cast _Runtime.UNDEFINED;
@@ -43,16 +43,16 @@ class CanvasGradientRamp {
           (color = cast (flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0)) : Dynamic));
           (alpha = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0)), function():Dynamic return cast 1.0) : Dynamic));
         } else {
-          var lowRatio:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(ratios, (upper - 1.0)), function():Dynamic return cast 0.0);
-          var highRatio:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(ratios, upper), function():Dynamic return cast 255.0);
-          var span:Dynamic = (highRatio - lowRatio);
-          var t:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((i - lowRatio) / span) : Dynamic) : (cast 1.0 : Dynamic));
-          var lowColor:Dynamic = flighthq._internal._StaticIndex.readArray(colors, (upper - 1.0));
-          var highColor:Dynamic = flighthq._internal._StaticIndex.readArray(colors, upper);
+          var lowRatio:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(ratios, (upper - 1.0)), function():Dynamic return cast 0.0);
+          var highRatio:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(ratios, upper), function():Dynamic return cast 255.0);
+          var span:Float = (highRatio - lowRatio);
+          var t:Float = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((i - lowRatio) / span) : Dynamic) : (cast 1.0 : Dynamic));
+          var lowColor:Float = flighthq._internal._StaticIndex.readArray(colors, (upper - 1.0));
+          var highColor:Float = flighthq._internal._StaticIndex.readArray(colors, upper);
           (color = cast ((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(((_Runtime.toInt32((_Runtime.toInt32(lowColor) >> 16)) & 255) + (((_Runtime.toInt32((_Runtime.toInt32(highColor) >> 16)) & 255) - (_Runtime.toInt32((_Runtime.toInt32(lowColor) >> 16)) & 255)) * t)))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((_Runtime.toInt32((_Runtime.toInt32(lowColor) >> 8)) & 255) + (((_Runtime.toInt32((_Runtime.toInt32(highColor) >> 8)) & 255) - (_Runtime.toInt32((_Runtime.toInt32(lowColor) >> 8)) & 255)) * t)))) << 8)))) | _Runtime.toInt32(HxMath.round(((_Runtime.toInt32(lowColor) & 255) + (((_Runtime.toInt32(highColor) & 255) - (_Runtime.toInt32(lowColor) & 255)) * t))))) : Dynamic));
           (alpha = cast (_Runtime.addNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(alphas, (upper - 1.0)), function():Dynamic return cast 1.0), (_Runtime.subtractNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(alphas, upper), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(alphas, (upper - 1.0)), function():Dynamic return cast 1.0)) * t)) : Dynamic));
         } }
-        var at:Dynamic = (i * 4.0);
+        var at:Float = (i * 4.0);
         flighthq._internal._StaticIndex.writeUint8ClampedArray(ramp, at, (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(ramp, (at + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(ramp, (at + 2.0), (_Runtime.toInt32(color) & 255));

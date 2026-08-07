@@ -14,19 +14,19 @@ import flighthq.types._internal._Node2DValues.DisplayObjectKind;
 
 class DisplayContainer {
   public static function createDisplayObject(?obj:PartialNode<DisplayObject>):DisplayObject {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([DisplayObjectKind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createDisplayObjectRuntime] : Array<Dynamic>)) : DisplayObject);
+    return cast (cast (cast createNode2D((cast DisplayObjectKind : String), obj, _Runtime.field(_Runtime, 'UNDEFINED'), function(__unused0:Dynamic):DisplayObjectRuntime return createDisplayObjectRuntime()) : DisplayObject) : DisplayObject);
     return cast null;
   }
 
   @:noCompletion
   public static function createDisplayObjectRuntime():DisplayObjectRuntime {
-    return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) : DisplayObjectRuntime);
+    return cast (cast (cast createNode2DRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : DisplayObjectRuntime) : DisplayObjectRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : DisplayObjectRuntime) : DisplayObjectRuntime);
     return cast null;
   }
 }

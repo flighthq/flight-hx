@@ -20,9 +20,9 @@ class Scene2DDocument {
     return cast null;
   }
 
-  public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, required:Dynamic = true):Scene2DSlotReference {
+  public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, required:Bool = true):Scene2DSlotReference {
     if (linkage == null) linkage = cast (null : Dynamic);
-    _Runtime.setField(target, 'name', name);
+    ((cast target : { var name:Null<String>; }).name = name);
     return cast { content: null, linkage: linkage, name: name, required: required, target: target };
     return cast null;
   }

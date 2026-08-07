@@ -9,11 +9,11 @@ import flighthq.types.Adjustment;
 import flighthq.types.ColorScaleBias;
 
 class ColorAdjustmentResolution {
-  public static final COLOR_ADJUSTMENT_NONE:Dynamic = 0.0;
+  public static final COLOR_ADJUSTMENT_NONE:Float = 0.0;
 
-  public static final COLOR_ADJUSTMENT_AFFINE:Dynamic = 1.0;
+  public static final COLOR_ADJUSTMENT_AFFINE:Float = 1.0;
 
-  public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Dynamic = 2.0;
+  public static final COLOR_ADJUSTMENT_CHANNEL_MIXING:Float = 2.0;
 
   public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
     return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 1.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 2.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 3.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 7.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 8.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 10.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 11.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 13.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 15.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 16.0), 0.0) : Bool)), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(matrix, 17.0), 0.0));
@@ -25,43 +25,43 @@ class ColorAdjustmentResolution {
     if ((cast ((cast _Runtime.strictEquals(adjustments, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     matrices = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
-        var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([flighthq._internal._StaticIndex.readArray(adjustments, i)] : Array<Dynamic>));
+        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix((cast flighthq._internal._StaticIndex.readArray(adjustments, i) : { var kind:String; })) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { return cast null; }
         _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>));
+    return cast (cast fuseColorMatrices((cast matrices : Array<Array<Float>>)) : Null<Array<Float>>);
     return cast null;
   }
 
   public static function resolveColorAdjustmentsColorScaleBias(adjustments:Null<Array<Adjustment>>, out:ColorScaleBias):Float {
     var matrices:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    var inlineable:Dynamic = cast _Runtime.UNDEFINED;
-    var fused:Dynamic = cast _Runtime.UNDEFINED;
+    var inlineable:Bool = cast _Runtime.UNDEFINED;
+    var fused:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(adjustments, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0) : Bool)) : Bool)) { return cast COLOR_ADJUSTMENT_NONE; }
     matrices = cast ([] : Array<Dynamic>);
     inlineable = true;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
-        var matrix:Dynamic = _Runtime.callValue(getAdjustmentColorMatrix, cast ([flighthq._internal._StaticIndex.readArray(adjustments, i)] : Array<Dynamic>));
+        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix((cast flighthq._internal._StaticIndex.readArray(adjustments, i) : { var kind:String; })) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { (inlineable = cast (false : Dynamic)); } else { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         i++;
       }
     }
-    fused = _Runtime.callValue(fuseColorMatrices, cast ([matrices] : Array<Dynamic>));
-    _Runtime.setField(out, 'redScale', flighthq._internal._StaticIndex.readArray(fused, 0.0));
-    _Runtime.setField(out, 'greenScale', flighthq._internal._StaticIndex.readArray(fused, 6.0));
-    _Runtime.setField(out, 'blueScale', flighthq._internal._StaticIndex.readArray(fused, 12.0));
-    _Runtime.setField(out, 'alphaScale', flighthq._internal._StaticIndex.readArray(fused, 18.0));
-    _Runtime.setField(out, 'redBias', flighthq._internal._StaticIndex.readArray(fused, 4.0));
-    _Runtime.setField(out, 'greenBias', flighthq._internal._StaticIndex.readArray(fused, 9.0));
-    _Runtime.setField(out, 'blueBias', flighthq._internal._StaticIndex.readArray(fused, 14.0));
-    _Runtime.setField(out, 'alphaBias', flighthq._internal._StaticIndex.readArray(fused, 19.0));
-    return cast ((cast ((cast inlineable : Bool) && (cast _Runtime.callValue(isAffineColorMatrix, cast ([fused] : Array<Dynamic>)) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
+    fused = (cast fuseColorMatrices((cast matrices : Array<Array<Float>>)) : Array<Float>);
+    ((cast out : ColorScaleBias).redScale = flighthq._internal._StaticIndex.readArray(fused, 0.0));
+    ((cast out : ColorScaleBias).greenScale = flighthq._internal._StaticIndex.readArray(fused, 6.0));
+    ((cast out : ColorScaleBias).blueScale = flighthq._internal._StaticIndex.readArray(fused, 12.0));
+    ((cast out : ColorScaleBias).alphaScale = flighthq._internal._StaticIndex.readArray(fused, 18.0));
+    ((cast out : ColorScaleBias).redBias = flighthq._internal._StaticIndex.readArray(fused, 4.0));
+    ((cast out : ColorScaleBias).greenBias = flighthq._internal._StaticIndex.readArray(fused, 9.0));
+    ((cast out : ColorScaleBias).blueBias = flighthq._internal._StaticIndex.readArray(fused, 14.0));
+    ((cast out : ColorScaleBias).alphaBias = flighthq._internal._StaticIndex.readArray(fused, 19.0));
+    return cast ((cast ((cast inlineable : Bool) && (cast (cast isAffineColorMatrix((cast fused : Array<Float>)) : Bool) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
     return cast null;
   }
 }

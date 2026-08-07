@@ -7,15 +7,15 @@ import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 
 class ImportDiagnosticCollector {
-  public static function collectImportDiagnostics(run:Dynamic):Array<ImportDiagnostic> {
+  public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(run, cast ([diagnostics] : Array<Dynamic>));
+    run((cast diagnostics : Array<ImportDiagnostic>));
     return cast diagnostics;
     return cast null;
   }
 
-  public static function reportImportDiagnostic(sink:Null<Array<ImportDiagnostic>>, severity:ImportDiagnosticSeverity, kind:String, origin:String, ?detail:Dynamic):Void {
+  public static function reportImportDiagnostic(sink:Null<Array<ImportDiagnostic>>, severity:ImportDiagnosticSeverity, kind:String, origin:String, ?detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
     if ((cast _Runtime.strictEquals(sink, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.callProperty(sink, 'push', cast ([{ detail: detail, kind: kind, origin: origin, severity: severity }] : Array<Dynamic>));
   }

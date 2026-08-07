@@ -5,41 +5,42 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.TEXT_LAYOUT_GUTTER;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.TextAutoSize;
 import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextLayout.TextLayoutResult;
 
 class TextBounds {
   @:noCompletion
-  public static final TEXT_BOUNDS_GUTTER:Dynamic = TEXT_LAYOUT_GUTTER;
+  public static final TEXT_BOUNDS_GUTTER:Float = TEXT_LAYOUT_GUTTER;
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none') : Bool)) { return cast _Runtime.field(spec, 'height'); }
+    if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'none') : Bool)) { return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).height; }
     return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textHeight'), (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 
   public static function computeTextBoundsOffsetX(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    var slack:Dynamic = cast _Runtime.UNDEFINED;
-    slack = _Runtime.subtractNumbers(_Runtime.field(spec, 'width'), _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>)));
-    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool)) { return cast slack; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool)) { return cast (slack / 2.0); }
+    var slack:Float = cast _Runtime.UNDEFINED;
+    slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - (cast computeTextBoundsWidth(spec, (cast layout : TextLayoutResult)) : Float));
+    if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool)) { return cast slack; }
+    if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool)) { return cast (slack / 2.0); }
     return cast 0.0;
     return cast null;
   }
 
   public static function computeTextBoundsRectangle(out:RectangleLike, spec:TextBoundsSpec, layout:TextLayoutResult):Void {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var slack:Dynamic = cast _Runtime.UNDEFINED;
-    width = _Runtime.callValue(computeTextBoundsWidth, cast ([spec, layout] : Array<Dynamic>));
-    slack = _Runtime.subtractNumbers(_Runtime.field(spec, 'width'), width);
-    _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)));
+    var width:Float = cast _Runtime.UNDEFINED;
+    var slack:Float = cast _Runtime.UNDEFINED;
+    width = (cast computeTextBoundsWidth(spec, (cast layout : TextLayoutResult)) : Float);
+    slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - width);
+    _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)));
     _Runtime.setField(out, 'y', 0.0);
     _Runtime.setField(out, 'width', width);
-    _Runtime.setField(out, 'height', _Runtime.callValue(computeTextBoundsHeight, cast ([spec, layout] : Array<Dynamic>)));
+    _Runtime.setField(out, 'height', (cast computeTextBoundsHeight(spec, (cast layout : TextLayoutResult)) : Float));
   }
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(spec, 'wordWrap')))) { return cast _Runtime.field(spec, 'width'); }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'none'), function():Dynamic return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).wordWrap))) { return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width; }
     return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textWidth'), (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }

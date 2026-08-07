@@ -5,13 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _FontVariationValues {
-  public static final FontVariationItalic:Dynamic = 'ital';
+  public static final FontVariationItalic:String = 'ital';
 
-  public static final FontVariationOpticalSize:Dynamic = 'opsz';
+  public static final FontVariationOpticalSize:String = 'opsz';
 
-  public static final FontVariationSlant:Dynamic = 'slnt';
+  public static final FontVariationSlant:String = 'slnt';
 
-  public static final FontVariationWeight:Dynamic = 'wght';
+  public static final FontVariationWeight:String = 'wght';
 
-  public static final FontVariationWidth:Dynamic = 'wdth';
+  public static final FontVariationWidth:String = 'wdth';
 }

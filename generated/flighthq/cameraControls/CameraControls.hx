@@ -52,12 +52,12 @@ class CameraControls {
     Facade_CameraControls_flighthq_cameraControls_OrbitCameraController.dollyOrbitCameraController(controller, deltaDistance);
   }
 
-  public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, ?padding:Dynamic):Bool {
+  public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, ?padding:Float):Bool {
     return cast Facade_CameraControls_flighthq_cameraControls_Framing.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
     return cast null;
   }
 
-  public static function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, ?padding:Dynamic):Float {
+  public static function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, ?padding:Float):Float {
     return cast Facade_CameraControls_flighthq_cameraControls_Framing.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
     return cast null;
   }
@@ -90,7 +90,7 @@ class CameraControls {
     Facade_CameraControls_flighthq_cameraControls_OrbitCameraController.rotateOrbitCameraController(controller, deltaAzimuth, deltaPolar);
   }
 
-  public static function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, ?padding:Dynamic):Void {
+  public static function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, ?padding:Float):Void {
     Facade_CameraControls_flighthq_cameraControls_Framing.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
   }
 

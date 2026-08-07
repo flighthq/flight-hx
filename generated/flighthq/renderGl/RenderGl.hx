@@ -55,7 +55,7 @@ class RenderGl {
     Facade_RenderGl_flighthq_renderGl_GlRenderPass.beginGlRenderPass(state, target, preserve, viewport);
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic, ?colorSpace:TextureColorSpace):flighthq._internal.dom.WebGLTexture {
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Bool, ?colorSpace:TextureColorSpace):flighthq._internal.dom.WebGLTexture {
     return cast Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
     return cast null;
   }
@@ -205,7 +205,7 @@ class RenderGl {
     Facade_RenderGl_flighthq_renderGl_GlBackground.renderGlBackground(state);
   }
 
-  public static function renderIntoGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, callback:Dynamic):Void {
+  public static function renderIntoGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, callback:GlRenderState->Void):Void {
     Facade_RenderGl_flighthq_renderGl_GlRenderTexture.renderIntoGlRenderTexture(state, renderTexture, callback);
   }
 
@@ -214,7 +214,7 @@ class RenderGl {
     return cast null;
   }
 
-  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
+  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Bool, ?workingColorSpace:RenderTargetColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
     return cast Facade_RenderGl_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
@@ -228,7 +228,7 @@ class RenderGl {
     return cast null;
   }
 
-  public static function withGlRenderTextures<T>(state:GlRenderState, pool:GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
+  public static function withGlRenderTextures<T>(state:GlRenderState, pool:GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     return cast Facade_RenderGl_flighthq_renderGl_GlRenderTexturePool.withGlRenderTextures(state, pool, descriptors, callback);
     return cast null;
   }

@@ -8,6 +8,7 @@ import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
 import flighthq.textureFormats.ByteReader.readByteReaderU32;
 import flighthq.textureFormats.ByteReader.readByteReaderU64;
 import flighthq.textureFormats.ByteReader.skipByteReader;
+import flighthq.types.ByteReader;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -19,55 +20,55 @@ typedef ParseFailure__parseKtx2 = { var reason:Null<TextureContainerParseFailure
 class ParseKtx2 {
   public static function getKtx2ParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseKtx2 = cast _Runtime.UNDEFINED;
-    var container:Dynamic = cast _Runtime.UNDEFINED;
+    var container:Null<TextureContainer> = cast _Runtime.UNDEFINED;
     failure = { reason: null };
-    container = _Runtime.callValue(ParseKtx2.parseKtx2Internal__parseKtx2, cast ([bytes, failure] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast _Runtime.field(failure, 'reason') : Dynamic) : (cast null : Dynamic));
+    container = (cast ParseKtx2.parseKtx2Internal__parseKtx2((cast bytes : flighthq._internal._UInt8Array), failure) : Null<TextureContainer>);
+    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast (cast failure : ParseFailure__parseKtx2).reason : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(ParseKtx2.parseKtx2Internal__parseKtx2, cast ([bytes] : Array<Dynamic>));
+    return cast (cast ParseKtx2.parseKtx2Internal__parseKtx2((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<TextureContainer>);
     return cast null;
   }
 
   public static function parseKtx2Internal__parseKtx2(bytes:flighthq._internal._UInt8Array, ?failure:ParseFailure__parseKtx2):Null<TextureContainer> {
-    var reader:Dynamic = cast _Runtime.UNDEFINED;
-    var vkFormat:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelDepth:Dynamic = cast _Runtime.UNDEFINED;
-    var layerCount:Dynamic = cast _Runtime.UNDEFINED;
-    var faceCount:Dynamic = cast _Runtime.UNDEFINED;
-    var levelCount:Dynamic = cast _Runtime.UNDEFINED;
-    var supercompressionScheme:Dynamic = cast _Runtime.UNDEFINED;
-    var supercompression:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var depth:Dynamic = cast _Runtime.UNDEFINED;
-    var layers:Dynamic = cast _Runtime.UNDEFINED;
-    var faces:Dynamic = cast _Runtime.UNDEFINED;
-    var levelCountPresent:Dynamic = cast _Runtime.UNDEFINED;
+    var reader:ByteReader = cast _Runtime.UNDEFINED;
+    var vkFormat:Float = cast _Runtime.UNDEFINED;
+    var pixelWidth:Float = cast _Runtime.UNDEFINED;
+    var pixelHeight:Float = cast _Runtime.UNDEFINED;
+    var pixelDepth:Float = cast _Runtime.UNDEFINED;
+    var layerCount:Float = cast _Runtime.UNDEFINED;
+    var faceCount:Float = cast _Runtime.UNDEFINED;
+    var levelCount:Float = cast _Runtime.UNDEFINED;
+    var supercompressionScheme:Float = cast _Runtime.UNDEFINED;
+    var supercompression:TextureContainerSupercompression = cast _Runtime.UNDEFINED;
+    var format:Null<String> = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var depth:Float = cast _Runtime.UNDEFINED;
+    var layers:Float = cast _Runtime.UNDEFINED;
+    var faces:Float = cast _Runtime.UNDEFINED;
+    var levelCountPresent:Float = cast _Runtime.UNDEFINED;
     var fileOrderLevels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
-    var imagesPerLevel:Dynamic = cast _Runtime.UNDEFINED;
-    var levels:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(ParseKtx2.hasKtx2Identifier__parseKtx2, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'container-unrecognized'] : Array<Dynamic>)); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Float)) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'header-truncated'] : Array<Dynamic>)); }
-    reader = _Runtime.callValue(createByteReader, cast ([bytes, 12.0] : Array<Dynamic>));
-    vkFormat = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    _Runtime.callValue(skipByteReader, cast ([reader, 4.0] : Array<Dynamic>));
-    pixelWidth = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    pixelHeight = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    pixelDepth = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    layerCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    faceCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    levelCount = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
-    supercompressionScheme = _Runtime.callValue(readByteReaderU32, cast ([reader] : Array<Dynamic>));
+    var imagesPerLevel:Float = cast _Runtime.UNDEFINED;
+    var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast ParseKtx2.hasKtx2Identifier__parseKtx2((cast bytes : flighthq._internal._UInt8Array)) : Bool) : Bool) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'container-unrecognized' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Float)) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    reader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast 12.0 : Float)) : ByteReader);
+    vkFormat = (cast readByteReaderU32(reader) : Float);
+    skipByteReader(reader, (cast 4.0 : Float));
+    pixelWidth = (cast readByteReaderU32(reader) : Float);
+    pixelHeight = (cast readByteReaderU32(reader) : Float);
+    pixelDepth = (cast readByteReaderU32(reader) : Float);
+    layerCount = (cast readByteReaderU32(reader) : Float);
+    faceCount = (cast readByteReaderU32(reader) : Float);
+    levelCount = (cast readByteReaderU32(reader) : Float);
+    supercompressionScheme = (cast readByteReaderU32(reader) : Float);
     supercompression = _Runtime.getIndex(ParseKtx2.ktx2Supercompression__parseKtx2, supercompressionScheme);
-    if ((cast _Runtime.strictEquals(supercompression, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
-    format = _Runtime.callValue(ParseKtx2.mapKtx2Format__parseKtx2, cast ([vkFormat, supercompressionScheme] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(supercompression, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    format = (cast ParseKtx2.mapKtx2Format__parseKtx2((cast vkFormat : Float), (cast supercompressionScheme : Float)) : Null<String>);
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
     width = HxMath.max(1.0, pixelWidth);
     height = HxMath.max(1.0, pixelHeight);
     depth = HxMath.max(1.0, pixelDepth);
@@ -75,27 +76,27 @@ class ParseKtx2 {
     faces = ((cast _Runtime.strictEquals(faceCount, 6.0) : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     levelCountPresent = HxMath.max(1.0, levelCount);
     (reader.offset = cast (ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Dynamic));
-    if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
+    if ((cast !(cast (cast hasByteReaderBytes(reader, (cast (levelCountPresent * 24.0) : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
     fileOrderLevels = cast ([] : Array<Dynamic>);
     imagesPerLevel = (layers * faces);
     {
-      var mip:Dynamic = 0.0;
+      var mip:Float = 0.0;
       while ((cast ((cast mip : Float) < (cast levelCountPresent : Float)) : Bool)) {
-        var byteOffset:Dynamic = _Runtime.callValue(readByteReaderU64, cast ([reader] : Array<Dynamic>));
-        var byteLength:Dynamic = _Runtime.callValue(readByteReaderU64, cast ([reader] : Array<Dynamic>));
-        _Runtime.callValue(skipByteReader, cast ([reader, 8.0] : Array<Dynamic>));
-        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast _Runtime.callValue(ParseKtx2.reject__parseKtx2, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
-        var mipWidth:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(mip)));
-        var mipHeight:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(mip)));
-        var splittable:Dynamic = ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0) : Bool));
+        var byteOffset:Float = (cast readByteReaderU64(reader) : Float);
+        var byteLength:Float = (cast readByteReaderU64(reader) : Float);
+        skipByteReader(reader, (cast 8.0 : Float));
+        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+        var mipWidth:Float = HxMath.max(1.0, (_Runtime.toInt32(width) >> _Runtime.toInt32(mip)));
+        var mipHeight:Float = HxMath.max(1.0, (_Runtime.toInt32(height) >> _Runtime.toInt32(mip)));
+        var splittable:Bool = ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.fmod(byteLength, imagesPerLevel), 0.0) : Bool));
         if ((cast !(cast splittable : Bool) : Bool)) {
           _Runtime.callProperty(fileOrderLevels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));
           (mip = cast ((mip + 1.0) : Dynamic));
           continue;
         }
-        var imageSize:Dynamic = (byteLength / imagesPerLevel);
+        var imageSize:Float = (byteLength / imagesPerLevel);
         {
-          var image:Dynamic = 0.0;
+          var image:Float = 0.0;
           while ((cast ((cast image : Float) < (cast imagesPerLevel : Float)) : Bool)) {
             _Runtime.callProperty(fileOrderLevels, 'push', cast ([{ byteLength: imageSize, byteOffset: (byteOffset + (image * imageSize)), height: mipHeight, width: mipWidth }] : Array<Dynamic>));
             (image = cast ((image + 1.0) : Dynamic));
@@ -108,10 +109,10 @@ class ParseKtx2 {
     if ((cast ((cast ((cast _Runtime.strictEquals(supercompression, 'None') : Bool) && (cast ((cast imagesPerLevel : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(fileOrderLevels, 'length'), (levelCountPresent * imagesPerLevel)) : Bool)) : Bool)) {
       (levels = cast (cast ([] : Array<Dynamic>) : Dynamic));
       {
-        var image:Dynamic = 0.0;
+        var image:Float = 0.0;
         while ((cast ((cast image : Float) < (cast imagesPerLevel : Float)) : Bool)) {
           {
-            var mip:Dynamic = 0.0;
+            var mip:Float = 0.0;
             while ((cast ((cast mip : Float) < (cast levelCountPresent : Float)) : Bool)) {
               _Runtime.callProperty(levels, 'push', cast ([flighthq._internal._StaticIndex.readArray(fileOrderLevels, ((mip * imagesPerLevel) + image))] : Array<Dynamic>));
               (mip = cast ((mip + 1.0) : Dynamic));
@@ -126,7 +127,7 @@ class ParseKtx2 {
   }
 
   public static function reject__parseKtx2(failure:Null<ParseFailure__parseKtx2>, reason:TextureContainerParseFailureReason):Dynamic {
-    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(failure, 'reason', reason); }
+    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast failure : ParseFailure__parseKtx2).reason = reason); }
     return cast null;
     return cast null;
   }
@@ -134,7 +135,7 @@ class ParseKtx2 {
   public static function hasKtx2Identifier__parseKtx2(bytes:flighthq._internal._UInt8Array):Bool {
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast 12.0 : Float)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, i), flighthq._internal._StaticIndex.readArray(ParseKtx2.ktx2Identifier__parseKtx2, i)) : Bool)) { return cast false; }
         (i = cast ((i + 1.0) : Dynamic));
@@ -152,9 +153,9 @@ class ParseKtx2 {
 
   public static final ktx2Identifier__parseKtx2:Array<Float> = cast ([171.0, 75.0, 84.0, 88.0, 32.0, 50.0, 48.0, 187.0, 13.0, 10.0, 26.0, 10.0] : Array<Dynamic>);
 
-  public static final ktx2LevelIndexOffset__parseKtx2:Dynamic = 80.0;
+  public static final ktx2LevelIndexOffset__parseKtx2:Float = 80.0;
 
-  public static final ktx2Supercompression__parseKtx2:Dynamic = _Runtime.objectFromPairs([{ key: '0', value: 'None' }, { key: '1', value: 'BasisLZ' }, { key: '2', value: 'Zstd' }, { key: '3', value: 'ZLIB' }]);
+  public static final ktx2Supercompression__parseKtx2:flighthq._internal._Record<Float, TextureContainerSupercompression> = _Runtime.objectFromPairs([{ key: '0', value: 'None' }, { key: '1', value: 'BasisLZ' }, { key: '2', value: 'Zstd' }, { key: '3', value: 'ZLIB' }]);
 
-  public static final ktx2VkFormat__parseKtx2:Dynamic = _Runtime.objectFromPairs([{ key: '9', value: 'r8unorm' }, { key: '16', value: 'rg8unorm' }, { key: '37', value: 'rgba8unorm' }, { key: '43', value: 'rgba8Srgb' }, { key: '44', value: 'bgra8unorm' }, { key: '50', value: 'bgra8Srgb' }, { key: '97', value: 'rgba16f' }, { key: '109', value: 'rgba32f' }, { key: '131', value: 'bc1' }, { key: '132', value: 'bc1Srgb' }, { key: '133', value: 'bc1' }, { key: '134', value: 'bc1Srgb' }, { key: '135', value: 'bc2' }, { key: '136', value: 'bc2Srgb' }, { key: '137', value: 'bc3' }, { key: '138', value: 'bc3Srgb' }, { key: '139', value: 'bc4' }, { key: '140', value: 'bc4Snorm' }, { key: '141', value: 'bc5' }, { key: '142', value: 'bc5Snorm' }, { key: '143', value: 'bc6hUfloat' }, { key: '144', value: 'bc6hSfloat' }, { key: '145', value: 'bc7' }, { key: '146', value: 'bc7Srgb' }, { key: '147', value: 'etc2Rgb' }, { key: '148', value: 'etc2RgbSrgb' }, { key: '149', value: 'etc2RgbA1' }, { key: '150', value: 'etc2RgbA1Srgb' }, { key: '151', value: 'etc2Rgba' }, { key: '152', value: 'etc2RgbaSrgb' }, { key: '153', value: 'eacR11' }, { key: '154', value: 'eacR11Snorm' }, { key: '155', value: 'eacRg11' }, { key: '156', value: 'eacRg11Snorm' }, { key: '157', value: 'astc4x4' }, { key: '158', value: 'astc4x4' }, { key: '159', value: 'astc5x4' }, { key: '160', value: 'astc5x4' }, { key: '161', value: 'astc5x5' }, { key: '162', value: 'astc5x5' }, { key: '163', value: 'astc6x5' }, { key: '164', value: 'astc6x5' }, { key: '165', value: 'astc6x6' }, { key: '166', value: 'astc6x6' }, { key: '167', value: 'astc8x5' }, { key: '168', value: 'astc8x5' }, { key: '169', value: 'astc8x6' }, { key: '170', value: 'astc8x6' }, { key: '171', value: 'astc8x8' }, { key: '172', value: 'astc8x8' }, { key: '173', value: 'astc10x5' }, { key: '174', value: 'astc10x5' }, { key: '175', value: 'astc10x6' }, { key: '176', value: 'astc10x6' }, { key: '177', value: 'astc10x8' }, { key: '178', value: 'astc10x8' }, { key: '179', value: 'astc10x10' }, { key: '180', value: 'astc10x10' }, { key: '181', value: 'astc12x10' }, { key: '182', value: 'astc12x10' }, { key: '183', value: 'astc12x12' }, { key: '184', value: 'astc12x12' }]);
+  public static final ktx2VkFormat__parseKtx2:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '9', value: 'r8unorm' }, { key: '16', value: 'rg8unorm' }, { key: '37', value: 'rgba8unorm' }, { key: '43', value: 'rgba8Srgb' }, { key: '44', value: 'bgra8unorm' }, { key: '50', value: 'bgra8Srgb' }, { key: '97', value: 'rgba16f' }, { key: '109', value: 'rgba32f' }, { key: '131', value: 'bc1' }, { key: '132', value: 'bc1Srgb' }, { key: '133', value: 'bc1' }, { key: '134', value: 'bc1Srgb' }, { key: '135', value: 'bc2' }, { key: '136', value: 'bc2Srgb' }, { key: '137', value: 'bc3' }, { key: '138', value: 'bc3Srgb' }, { key: '139', value: 'bc4' }, { key: '140', value: 'bc4Snorm' }, { key: '141', value: 'bc5' }, { key: '142', value: 'bc5Snorm' }, { key: '143', value: 'bc6hUfloat' }, { key: '144', value: 'bc6hSfloat' }, { key: '145', value: 'bc7' }, { key: '146', value: 'bc7Srgb' }, { key: '147', value: 'etc2Rgb' }, { key: '148', value: 'etc2RgbSrgb' }, { key: '149', value: 'etc2RgbA1' }, { key: '150', value: 'etc2RgbA1Srgb' }, { key: '151', value: 'etc2Rgba' }, { key: '152', value: 'etc2RgbaSrgb' }, { key: '153', value: 'eacR11' }, { key: '154', value: 'eacR11Snorm' }, { key: '155', value: 'eacRg11' }, { key: '156', value: 'eacRg11Snorm' }, { key: '157', value: 'astc4x4' }, { key: '158', value: 'astc4x4' }, { key: '159', value: 'astc5x4' }, { key: '160', value: 'astc5x4' }, { key: '161', value: 'astc5x5' }, { key: '162', value: 'astc5x5' }, { key: '163', value: 'astc6x5' }, { key: '164', value: 'astc6x5' }, { key: '165', value: 'astc6x6' }, { key: '166', value: 'astc6x6' }, { key: '167', value: 'astc8x5' }, { key: '168', value: 'astc8x5' }, { key: '169', value: 'astc8x6' }, { key: '170', value: 'astc8x6' }, { key: '171', value: 'astc8x8' }, { key: '172', value: 'astc8x8' }, { key: '173', value: 'astc10x5' }, { key: '174', value: 'astc10x5' }, { key: '175', value: 'astc10x6' }, { key: '176', value: 'astc10x6' }, { key: '177', value: 'astc10x8' }, { key: '178', value: 'astc10x8' }, { key: '179', value: 'astc10x10' }, { key: '180', value: 'astc10x10' }, { key: '181', value: 'astc12x10' }, { key: '182', value: 'astc12x10' }, { key: '183', value: 'astc12x12' }, { key: '184', value: 'astc12x12' }]);
 }

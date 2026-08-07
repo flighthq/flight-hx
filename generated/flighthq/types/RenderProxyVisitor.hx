@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderProxyVisitor = Dynamic;
+typedef RenderProxyVisitor = RenderState->Renderable->RenderProxy2D->Null<RenderProxy2D>->Void;

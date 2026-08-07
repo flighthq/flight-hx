@@ -5,7 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.types.BlendMode;
+import flighthq.types.Material;
+import flighthq.types.Node;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DData;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Scene2D;
 import flighthq.types.Scene2DKindUsage;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
@@ -20,38 +24,38 @@ class SceneKindUsage {
 
   @:noCompletion
   public static function getScene2DKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
-    var visit:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setLength(_Runtime.field(out, 'blendModes'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'materialKinds'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'nodeKinds'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'shapeCommandKeys'), 0.0);
-    visit = function(node:Node2D) {
-      var commands:Dynamic = cast _Runtime.UNDEFINED;
-      var i:Dynamic = cast _Runtime.UNDEFINED;
-      _Runtime.callValue(SceneKindUsage.addScene2DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'nodeKinds'), _Runtime.field(node, 'kind')] : Array<Dynamic>));
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), BlendModeValue.Normal) : Bool)) : Bool)) {
-        _Runtime.callValue(SceneKindUsage.addScene2DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'blendModes'), _Runtime.field(node, 'blendMode')] : Array<Dynamic>));
+    var visit:Node2D->Void = cast _Runtime.UNDEFINED;
+    _Runtime.setLength((cast out : Scene2DKindUsage).blendModes, 0.0);
+    _Runtime.setLength((cast out : Scene2DKindUsage).materialKinds, 0.0);
+    _Runtime.setLength((cast out : Scene2DKindUsage).nodeKinds, 0.0);
+    _Runtime.setLength((cast out : Scene2DKindUsage).shapeCommandKeys, 0.0);
+    visit = (cast function(node:Node2D):Void {
+      var commands:Null<Array<ShapeCommandToken>> = cast _Runtime.UNDEFINED;
+      var i:Float = cast _Runtime.UNDEFINED;
+      SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast (cast out : Scene2DKindUsage).nodeKinds : Array<String>), (cast _Runtime.field(node, 'kind') : String));
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal) : Bool)) : Bool)) {
+        SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast (cast out : Scene2DKindUsage).blendModes : Array<String>), (cast _Runtime.field(node, 'blendMode') : String));
       }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'material'), null) : Bool)) { _Runtime.callValue(SceneKindUsage.addScene2DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'materialKinds'), _Runtime.field(_Runtime.field(node, 'material'), 'kind')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'material'), null) : Bool)) { SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast (cast out : Scene2DKindUsage).materialKinds : Array<String>), (cast (cast _Runtime.field(node, 'material') : Material).kind : String)); }
       commands = _Runtime.optionalField((cast _Runtime.field(node, 'data') : Null<Dynamic>), 'commands');
       if ((cast _Runtime.strictEquals(commands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(SceneKindUsage.addScene2DUsedKind__sceneKindUsage, cast ([_Runtime.field(out, 'shapeCommandKeys'), (cast flighthq._internal._StaticIndex.readArray(commands, i) : String)] : Array<Dynamic>));
+        SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast (cast out : Scene2DKindUsage).shapeCommandKeys : Array<String>), (cast (cast flighthq._internal._StaticIndex.readArray(commands, i) : String) : String));
         (i = cast ((i + ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float) + 2.0)) : Dynamic));
       }
-    };
-    _Runtime.callValue(visit, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([_Runtime.field(scene, 'root'), function(node:Dynamic) return _Runtime.callValue(visit, cast ([(cast node : Node2D)] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'blendModes'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'materialKinds'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'nodeKinds'), 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(out, 'shapeCommandKeys'), 'sort', cast ([] : Array<Dynamic>));
+    } : Node2D->Void);
+    visit((cast _Runtime.field(scene, 'root') : Node2D));
+    forEachNodeDescendant(_Runtime.field(scene, 'root'), function(node:Node<Node2DTraits>):Void return visit((cast (cast node : Node2D) : Node2D)));
+    _Runtime.callProperty((cast out : Scene2DKindUsage).blendModes, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene2DKindUsage).materialKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene2DKindUsage).nodeKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Scene2DKindUsage).shapeCommandKeys, 'sort', cast ([] : Array<Dynamic>));
   }
 
   public static function addScene2DUsedKind__sceneKindUsage(kinds:Array<String>, kind:String):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(kinds, 'length') : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(kinds, i), kind) : Bool)) { return; }
         i++;

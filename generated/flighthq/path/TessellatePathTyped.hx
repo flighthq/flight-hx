@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.TessellatePath.tessellatePath;
 import flighthq.types.Path;
+import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
 class TessellatePathTyped {
-  public static function tessellatePathTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
-    var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    mesh = _Runtime.callValue(tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
-    return cast { vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: new flighthq._internal._UInt32Array(_Runtime.field(mesh, 'indices')) };
+  public static function tessellatePathTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
+    var mesh:PathMesh = cast _Runtime.UNDEFINED;
+    mesh = (cast tessellatePath((cast path : Path), (cast tolerance : Float)) : PathMesh);
+    return cast { vertices: new flighthq._internal._Float32Array((cast mesh : PathMesh).vertices), indices: new flighthq._internal._UInt32Array((cast mesh : PathMesh).indices) };
     return cast null;
   }
 }

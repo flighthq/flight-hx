@@ -4,20 +4,30 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerScene3DMaterialTextures;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Material;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.ShadedMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedScene3DMaterialTextures {
   @:noCompletion
   public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    _Runtime.callValue(registerScene3DMaterialTextures, cast ([registry, ShadedMaterialKind, function(material:Dynamic, out:Dynamic) {
-      var shaded:Dynamic = cast _Runtime.UNDEFINED;
+    registerScene3DMaterialTextures((cast registry : Scene3DMaterialTextureRegistry), (cast ShadedMaterialKind : String), function(material:Material, out:Array<Texture>):Void {
+      var shaded:ShadedMaterial = cast _Runtime.UNDEFINED;
       shaded = (cast material : ShadedMaterial);
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'diffuseMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'diffuseMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'normalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'normalMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'specularMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'specularMap')] : Array<Dynamic>)); }
-    }] : Array<Dynamic>));
+    });
   }
 }

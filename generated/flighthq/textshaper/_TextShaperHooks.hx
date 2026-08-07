@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.TextShaper.TextShaperBackend;
 
 class _TextShaperHooks {
-  public static var _textShaperBackendHook:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _textShaperBackendHook:Null<Null<TextShaperBackend>->Void> = _Runtime.explicitNull();
 
-  public static function _setTextShaperBackendHook(hook:Null<Dynamic>):Void {
+  public static function _setTextShaperBackendHook(hook:Null<Null<TextShaperBackend>->Void>):Void {
     (_textShaperBackendHook = cast (hook : Dynamic));
   }
 }

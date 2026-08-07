@@ -6,23 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderEffect;
 import flighthq.types.ScreenSpaceFogEffect;
 
 class GlScreenSpaceFogEffect {
   @:noCompletion
   public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:ScreenSpaceFogEffect):Void {
-    var packed:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var density:Dynamic = cast _Runtime.UNDEFINED;
-    var near:Dynamic = cast _Runtime.UNDEFINED;
-    var far:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var inputs:Dynamic = cast _Runtime.UNDEFINED;
+    var packed:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var density:Float = cast _Runtime.UNDEFINED;
+    var near:Float = cast _Runtime.UNDEFINED;
+    var far:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    var inputs:Array<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     packed = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 3369262335.0);
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);
@@ -30,24 +33,24 @@ class GlScreenSpaceFogEffect {
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     near = _Runtime.coalesce(_Runtime.field(effect, 'near'), function():Dynamic return cast 0.0);
     far = _Runtime.coalesce(_Runtime.field(effect, 'far'), function():Dynamic return cast 1.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'atmospheric.screenSpaceFog', GlScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect] : Array<Dynamic>));
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'atmospheric.screenSpaceFog' : String), (cast GlScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect : String)) : GlFullscreenProgram);
     inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast inputs : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_fogColor'), r, g, b);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_near'), near);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_far'), far);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_hasDepth'), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScreenSpaceFogEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : ScreenSpaceFogEffect)] : Array<Dynamic>));
+  public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyScreenSpaceFogEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'sceneDepthTexture') : Null<flighthq._internal.dom.WebGLTexture>), (cast (cast effect : ScreenSpaceFogEffect) : ScreenSpaceFogEffect));
   };
 
   public static function registerGlScreenSpaceFogEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultGlScreenSpaceFogEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'ScreenSpaceFogEffect' : String), (cast defaultGlScreenSpaceFogEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec3 u_fogColor;\nuniform float u_density;\nuniform float u_near;\nuniform float u_far;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float fog;\n  if (u_hasDepth > 0.5) {\n    // Real depth path: window-space depth remapped over [near, far], exponential fog by density.\n    float depth = texture(u_texture1, v_texCoord).r;\n    float d = clamp((depth - u_near) / max(u_far - u_near, 1e-4), 0.0, 1.0);\n    fog = clamp(1.0 - exp(-u_density * d), 0.0, 1.0);\n  } else {\n    // Sentinel path: no depth written (flat 2D scene) — screen-Y gradient as a depth proxy.\n    fog = clamp((1.0 - v_texCoord.y) * u_density, 0.0, 1.0);\n  }\n  o_color = vec4(mix(c.rgb, u_fogColor, fog), c.a);\n}';
+  public static final SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec3 u_fogColor;\nuniform float u_density;\nuniform float u_near;\nuniform float u_far;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float fog;\n  if (u_hasDepth > 0.5) {\n    // Real depth path: window-space depth remapped over [near, far], exponential fog by density.\n    float depth = texture(u_texture1, v_texCoord).r;\n    float d = clamp((depth - u_near) / max(u_far - u_near, 1e-4), 0.0, 1.0);\n    fog = clamp(1.0 - exp(-u_density * d), 0.0, 1.0);\n  } else {\n    // Sentinel path: no depth written (flat 2D scene) — screen-Y gradient as a depth proxy.\n    fog = clamp((1.0 - v_texCoord.y) * u_density, 0.0, 1.0);\n  }\n  o_color = vec4(mix(c.rgb, u_fogColor, fog), c.a);\n}';
 }

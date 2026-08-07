@@ -10,5 +10,5 @@ import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
 class _ParticleEmitter2DValues {
-  public static final ParticleEmitter2DKind:Dynamic = 'ParticleEmitter2D';
+  public static final ParticleEmitter2DKind:String = 'ParticleEmitter2D';
 }

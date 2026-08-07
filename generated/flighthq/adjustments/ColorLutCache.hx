@@ -12,19 +12,19 @@ import flighthq.types.ColorTransformFunction;
 
 class ColorLutCache {
   public static function bakeColorLutForRun(cache:flighthq.types.ColorLutCache, run:Array<{ var kind:String; }>, size:Float = 32.0):ColorLut {
-    var signature:Dynamic = cast _Runtime.UNDEFINED;
+    var signature:String = cast _Runtime.UNDEFINED;
     var transforms:Array<ColorTransformFunction> = cast _Runtime.UNDEFINED;
-    var lut:Dynamic = cast _Runtime.UNDEFINED;
-    signature = _Runtime.callValue(ColorLutCache.colorLutRunSignature__colorLutCache, cast ([run, size] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(cache, 'signature'), signature) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(cache, 'lut'), null) : Bool)) : Bool)) { return cast _Runtime.field(cache, 'lut'); }
+    var lut:ColorLut = cast _Runtime.UNDEFINED;
+    signature = (cast ColorLutCache.colorLutRunSignature__colorLutCache((cast run : Array<{ var kind:String; }>), (cast size : Float)) : String);
+    if ((cast ((cast _Runtime.strictEquals((cast cache : flighthq.types.ColorLutCache).signature, signature) : Bool) && (cast !_Runtime.strictEquals((cast cache : flighthq.types.ColorLutCache).lut, null) : Bool)) : Bool)) { return cast (cast cache : flighthq.types.ColorLutCache).lut; }
     transforms = cast ([] : Array<Dynamic>);
     for (operation in _Runtime.iterable(run)) {
-      var transform:Dynamic = _Runtime.callValue(getAdjustmentColorTransform, cast ([operation] : Array<Dynamic>));
+      var transform:Null<ColorTransformFunction> = (cast getAdjustmentColorTransform((cast operation : { var kind:String; })) : Null<ColorTransformFunction>);
       if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>)); }
     }
-    lut = _Runtime.callValue(bakeColorLut, cast ([transforms, size] : Array<Dynamic>));
-    _Runtime.setField(cache, 'signature', signature);
-    _Runtime.setField(cache, 'lut', lut);
+    lut = (cast bakeColorLut((cast transforms : Array<ColorTransformFunction>), (cast size : Float)) : ColorLut);
+    ((cast cache : flighthq.types.ColorLutCache).signature = signature);
+    ((cast cache : flighthq.types.ColorLutCache).lut = lut);
     return cast lut;
     return cast null;
   }

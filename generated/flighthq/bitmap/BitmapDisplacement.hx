@@ -3,26 +3,28 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
+import flighthq.types.BitmapDisplacementMapMode;
 import flighthq.types.BitmapDisplacementMapOptions;
 import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 
 class BitmapDisplacement {
   public static function displaceBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, options:BitmapDisplacementMapOptions):Void {
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var map:Dynamic = cast _Runtime.UNDEFINED;
-    var componentX:Dynamic = cast _Runtime.UNDEFINED;
-    var componentY:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeMode:Dynamic = cast _Runtime.UNDEFINED;
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
-    var fillColor:Dynamic = cast _Runtime.UNDEFINED;
-    var fillR:Dynamic = cast _Runtime.UNDEFINED;
-    var fillG:Dynamic = cast _Runtime.UNDEFINED;
-    var fillB:Dynamic = cast _Runtime.UNDEFINED;
-    var fillA:Dynamic = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var map:BitmapRegion = cast _Runtime.UNDEFINED;
+    var componentX:Float = cast _Runtime.UNDEFINED;
+    var componentY:Float = cast _Runtime.UNDEFINED;
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
+    var edgeMode:Null<String> = cast _Runtime.UNDEFINED;
+    var mode:BitmapDisplacementMapMode = cast _Runtime.UNDEFINED;
+    var fillColor:Float = cast _Runtime.UNDEFINED;
+    var fillR:Float = cast _Runtime.UNDEFINED;
+    var fillG:Float = cast _Runtime.UNDEFINED;
+    var fillB:Float = cast _Runtime.UNDEFINED;
+    var fillA:Float = cast _Runtime.UNDEFINED;
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     map = _Runtime.field(options, 'map');
@@ -38,18 +40,18 @@ class BitmapDisplacement {
     fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
     fillA = (_Runtime.toInt32(fillColor) & 255);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var di:Dynamic = (((py * w) + px) * 4.0);
-            var mapVx:Dynamic = _Runtime.callValue(BitmapDisplacement.sampleMapChannel__bitmapDisplacement, cast ([map, px, py, componentX] : Array<Dynamic>));
-            var mapVy:Dynamic = _Runtime.callValue(BitmapDisplacement.sampleMapChannel__bitmapDisplacement, cast ([map, px, py, componentY] : Array<Dynamic>));
-            var rawSampleX:Dynamic = (px + (((mapVx / 255.0) - 0.5) * scaleX));
-            var rawSampleY:Dynamic = (py + (((mapVy / 255.0) - 0.5) * scaleY));
-            var sampleX:Dynamic = rawSampleX;
-            var sampleY:Dynamic = rawSampleY;
+            var di:Float = (((py * w) + px) * 4.0);
+            var mapVx:Float = (cast BitmapDisplacement.sampleMapChannel__bitmapDisplacement((cast map : BitmapRegion), (cast px : Float), (cast py : Float), (cast componentX : Float)) : Float);
+            var mapVy:Float = (cast BitmapDisplacement.sampleMapChannel__bitmapDisplacement((cast map : BitmapRegion), (cast px : Float), (cast py : Float), (cast componentY : Float)) : Float);
+            var rawSampleX:Float = (px + (((mapVx / 255.0) - 0.5) * scaleX));
+            var rawSampleY:Float = (py + (((mapVy / 255.0) - 0.5) * scaleY));
+            var sampleX:Float = rawSampleX;
+            var sampleY:Float = rawSampleY;
             if ((cast ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(((cast ((cast ((cast rawSampleX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rawSampleX : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast rawSampleY : Float) < (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast rawSampleY : Float) >= (cast h : Float))) : Bool)) : Bool)) {
               if ((cast _Runtime.strictEquals(mode, 'wrap') : Bool)) {
                 (sampleX = cast (_Runtime.fmod((_Runtime.fmod(rawSampleX, w) + w), w) : Dynamic));
@@ -69,25 +71,25 @@ class BitmapDisplacement {
                 continue;
               } } }
             }
-            var x0:Dynamic = HxMath.floor(sampleX);
-            var y0:Dynamic = HxMath.floor(sampleY);
-            var tx:Dynamic = (sampleX - x0);
-            var ty:Dynamic = (sampleY - y0);
-            var sStride:Dynamic = _Runtime.field(source, 'bitmap').width;
-            var sData:Dynamic = _Runtime.field(source, 'bitmap').data;
-            var rx0:Dynamic = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((w - 1.0), x0)) : Dynamic) : (cast _Runtime.callValue(BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement, cast ([x0, w, edgeMode] : Array<Dynamic>)) : Dynamic));
-            var rx1:Dynamic = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((w - 1.0), (x0 + 1.0))) : Dynamic) : (cast _Runtime.callValue(BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement, cast ([(x0 + 1.0), w, edgeMode] : Array<Dynamic>)) : Dynamic));
-            var ry0:Dynamic = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((h - 1.0), y0)) : Dynamic) : (cast _Runtime.callValue(BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement, cast ([y0, h, edgeMode] : Array<Dynamic>)) : Dynamic));
-            var ry1:Dynamic = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((h - 1.0), (y0 + 1.0))) : Dynamic) : (cast _Runtime.callValue(BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement, cast ([(y0 + 1.0), h, edgeMode] : Array<Dynamic>)) : Dynamic));
-            var i00:Dynamic = ((cast ((cast _Runtime.strictEquals(rx0, null) : Bool) || (cast _Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic));
-            var i10:Dynamic = ((cast ((cast _Runtime.strictEquals(rx1, null) : Bool) || (cast _Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic));
-            var i01:Dynamic = ((cast ((cast _Runtime.strictEquals(rx0, null) : Bool) || (cast _Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic));
-            var i11:Dynamic = ((cast ((cast _Runtime.strictEquals(rx1, null) : Bool) || (cast _Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic));
+            var x0:Float = HxMath.floor(sampleX);
+            var y0:Float = HxMath.floor(sampleY);
+            var tx:Float = (sampleX - x0);
+            var ty:Float = (sampleY - y0);
+            var sStride:Float = _Runtime.field(source, 'bitmap').width;
+            var sData:flighthq._internal._UInt8ClampedArray = _Runtime.field(source, 'bitmap').data;
+            var rx0:Null<Float> = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((w - 1.0), x0)) : Dynamic) : (cast (cast BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement((cast x0 : Float), (cast w : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>) : Dynamic));
+            var rx1:Null<Float> = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((w - 1.0), (x0 + 1.0))) : Dynamic) : (cast (cast BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement((cast (x0 + 1.0) : Float), (cast w : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>) : Dynamic));
+            var ry0:Null<Float> = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((h - 1.0), y0)) : Dynamic) : (cast (cast BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement((cast y0 : Float), (cast h : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>) : Dynamic));
+            var ry1:Null<Float> = ((cast _Runtime.strictEquals(edgeMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, HxMath.min((h - 1.0), (y0 + 1.0))) : Dynamic) : (cast (cast BitmapDisplacement.resolveDisplacementEdge__bitmapDisplacement((cast (y0 + 1.0) : Float), (cast h : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>) : Dynamic));
+            var i00:Float = ((cast ((cast _Runtime.strictEquals(rx0, null) : Bool) || (cast _Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic));
+            var i10:Float = ((cast ((cast _Runtime.strictEquals(rx1, null) : Bool) || (cast _Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic));
+            var i01:Float = ((cast ((cast _Runtime.strictEquals(rx0, null) : Bool) || (cast _Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic));
+            var i11:Float = ((cast ((cast _Runtime.strictEquals(rx1, null) : Bool) || (cast _Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic));
             {
-              var c:Dynamic = 0.0;
+              var c:Float = 0.0;
               while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-                var top:Dynamic = (_Runtime.multiplyNumbers(((cast ((cast i00 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i00 + c)) : Dynamic)), (1.0 - tx)) + _Runtime.multiplyNumbers(((cast ((cast i10 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i10 + c)) : Dynamic)), tx));
-                var bottom:Dynamic = (_Runtime.multiplyNumbers(((cast ((cast i01 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i01 + c)) : Dynamic)), (1.0 - tx)) + _Runtime.multiplyNumbers(((cast ((cast i11 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i11 + c)) : Dynamic)), tx));
+                var top:Float = (_Runtime.multiplyNumbers(((cast ((cast i00 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i00 + c)) : Dynamic)), (1.0 - tx)) + _Runtime.multiplyNumbers(((cast ((cast i10 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i10 + c)) : Dynamic)), tx));
+                var bottom:Float = (_Runtime.multiplyNumbers(((cast ((cast i01 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i01 + c)) : Dynamic)), (1.0 - tx)) + _Runtime.multiplyNumbers(((cast ((cast i11 : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sData, (i11 + c)) : Dynamic)), tx));
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
                 c++;
               }
@@ -112,8 +114,8 @@ class BitmapDisplacement {
       }
       else if (__switchValue == 'mirror') {
         {
-          var period:Dynamic = (2.0 * size);
-          var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
+          var period:Float = (2.0 * size);
+          var wrapped:Float = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
           return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }
@@ -125,8 +127,8 @@ class BitmapDisplacement {
   }
 
   public static function sampleMapChannel__bitmapDisplacement(map:BitmapRegion, px:Float, py:Float, component:Float):Float {
-    var mx:Dynamic = cast _Runtime.UNDEFINED;
-    var my:Dynamic = cast _Runtime.UNDEFINED;
+    var mx:Float = cast _Runtime.UNDEFINED;
+    var my:Float = cast _Runtime.UNDEFINED;
     mx = _Runtime.addNumbers(_Runtime.field(map, 'x'), px);
     my = _Runtime.addNumbers(_Runtime.field(map, 'y'), py);
     if ((cast ((cast ((cast ((cast ((cast mx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast mx : Float) >= (cast _Runtime.field(map, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast my : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast my : Float) >= (cast _Runtime.field(map, 'bitmap').height : Float)) : Bool)) : Bool)) { return cast 128.0; }

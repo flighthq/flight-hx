@@ -10,12 +10,12 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 class CanvasTextMeasure {
   @:noCompletion
   public static function createCanvasTextMeasure():TextMeasureFunction {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast function(text:String, format:TextFormat) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+    return cast function(text:String, format:TextFormat):Float {
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString((cast format : TextFormat)) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     return cast null;

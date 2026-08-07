@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 
 class Statistics {
   public static function mean(values:Array<Float>):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(values, i)) : Dynamic));
         i++;
@@ -21,30 +21,30 @@ class Statistics {
   }
 
   public static function median(values:Array<Float>):Float {
-    var sorted:Dynamic = cast _Runtime.UNDEFINED;
-    var mid:Dynamic = cast _Runtime.UNDEFINED;
+    var sorted:Array<Float> = cast _Runtime.UNDEFINED;
+    var mid:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Dynamic, b:Dynamic) return (a - b));
+    sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Float, b:Float) return (a - b));
     mid = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(sorted, 'length'), 2.0));
     return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(sorted, mid) : Dynamic) : (cast (_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(sorted, (mid - 1.0)), flighthq._internal._StaticIndex.readArray(sorted, mid)) / 2.0) : Dynamic));
     return cast null;
   }
 
   public static function standardDeviation(values:Array<Float>):Float {
-    return cast HxMath.sqrt(_Runtime.callValue(variance, cast ([values] : Array<Dynamic>)));
+    return cast HxMath.sqrt((cast variance((cast values : Array<Float>)) : Float));
     return cast null;
   }
 
   public static function variance(values:Array<Float>):Float {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var m:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    m = _Runtime.callValue(mean, cast ([values] : Array<Dynamic>));
+    m = (cast mean((cast values : Array<Float>)) : Float);
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var d:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(values, i), m);
+        var d:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(values, i), m);
         (sum = cast ((sum + (d * d)) : Dynamic));
         i++;
       }
@@ -54,8 +54,8 @@ class Statistics {
   }
 
   public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
-    var sumWeights:Dynamic = cast _Runtime.UNDEFINED;
-    var sumProduct:Dynamic = cast _Runtime.UNDEFINED;
+    var sumWeights:Float = cast _Runtime.UNDEFINED;
+    var sumProduct:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('weightedAverage: values and weights must have the same length'));
     }
@@ -63,7 +63,7 @@ class Statistics {
     sumWeights = 0.0;
     sumProduct = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         (sumWeights = cast ((sumWeights + flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
         (sumProduct = cast ((sumProduct + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(values, i), flighthq._internal._StaticIndex.readArray(weights, i))) : Dynamic));

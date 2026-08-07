@@ -6,22 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.SpotLight;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuScene3DRuntime;
 
 class EnableWgpuScene3DForwardLightSelectionGuards {
   @:noCompletion
   public static function areWgpuScene3DForwardLightSelectionGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard'), null);
+    return cast !_Runtime.looseEquals((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).forwardLightSelectionGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableWgpuScene3DForwardLightSelectionGuards(state:WgpuRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard', EnableWgpuScene3DForwardLightSelectionGuards.warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards);
+    ((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).forwardLightSelectionGuard = EnableWgpuScene3DForwardLightSelectionGuards.warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards);
   }
 
   public static function warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards(lights:Scene3DLightsLike):Void {
-    _Runtime.callValue(logOnce, cast (['scene-wgpu:forward-light-selection-required', LogLevel.Warn, { message: 'drawWgpuScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareWgpuScene3DForwardLights after prepareScene3DRender and pass its result to drawWgpuScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) }, 'scene-wgpu'] : Array<Dynamic>));
+    (cast logOnce((cast 'scene-wgpu:forward-light-selection-required' : String), (cast LogLevel.Warn : LogLevel), { message: 'drawWgpuScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareWgpuScene3DForwardLights after prepareScene3DRender and pass its result to drawWgpuScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) }, (cast 'scene-wgpu' : Null<String>)) : Bool);
   }
 }

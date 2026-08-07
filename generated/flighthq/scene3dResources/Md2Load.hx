@@ -13,9 +13,9 @@ class Md2Load {
   public static function loadScene3DDocumentFromMd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var bytes:Dynamic = cast _Runtime.UNDEFINED;
-        var document:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadScene3DDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        var bytes:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+        var document:Scene3DDocument = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue0:Dynamic):Dynamic {
           bytes = __awaitValue0;
           var __flowBranch1:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
@@ -26,8 +26,8 @@ class Md2Load {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            document = _Runtime.callValue(parseMd2, cast ([bytes] : Array<Dynamic>));
-            _Runtime.callValue(setScene3DDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
+            document = (cast parseMd2((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl((cast document : Scene3DDocument), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });
         });

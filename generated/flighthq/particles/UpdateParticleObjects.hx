@@ -5,21 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleObjectsState.ensureParticleObjectsStateCapacity;
+import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
+import flighthq.types.RandomSource;
 
 class UpdateParticleObjects {
-  public static final TWO_PI__updateParticleObjects:Dynamic = (HxMath.PI * 2.0);
+  public static final TWO_PI__updateParticleObjects:Float = (HxMath.PI * 2.0);
 
   public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
     if ((cast ((cast ((cast config.duration : Float) <= (cast 0.0 : Float)) : Bool) || (cast config.loop : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast state.emitterAge : Float) < (cast config.duration : Float)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(objects, i), 'visible') : Bool)) { return cast false; }
+        if ((cast (cast flighthq._internal._StaticIndex.readArray(objects, i) : { var visible:Bool; }).visible : Bool)) { return cast false; }
         i++;
       }
     }
@@ -28,31 +31,31 @@ class UpdateParticleObjects {
   }
 
   public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
-    var velocities:Dynamic = cast _Runtime.UNDEFINED;
-    var scales:Dynamic = cast _Runtime.UNDEFINED;
-    var rotationSpeeds:Dynamic = cast _Runtime.UNDEFINED;
-    var gx:Dynamic = cast _Runtime.UNDEFINED;
-    var gy:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasAlphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasScaleCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var hasScaleAnim:Dynamic = cast _Runtime.UNDEFINED;
-    var hasRotSpeed:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterX:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterY:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterVelX:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterVelY:Dynamic = cast _Runtime.UNDEFINED;
-    var onDeath:Dynamic = cast _Runtime.UNDEFINED;
-    var emitting:Dynamic = cast _Runtime.UNDEFINED;
-    var toSpawn:Dynamic = cast _Runtime.UNDEFINED;
+    var lifetimes:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var velocities:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var scales:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var rotationSpeeds:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var gx:Float = cast _Runtime.UNDEFINED;
+    var gy:Float = cast _Runtime.UNDEFINED;
+    var alphaCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var scaleCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var hasAlphaCurve:Bool = cast _Runtime.UNDEFINED;
+    var hasScaleCurve:Bool = cast _Runtime.UNDEFINED;
+    var hasScaleAnim:Bool = cast _Runtime.UNDEFINED;
+    var hasRotSpeed:Bool = cast _Runtime.UNDEFINED;
+    var emitterX:Float = cast _Runtime.UNDEFINED;
+    var emitterY:Float = cast _Runtime.UNDEFINED;
+    var emitterVelX:Float = cast _Runtime.UNDEFINED;
+    var emitterVelY:Float = cast _Runtime.UNDEFINED;
+    var onDeath:Null<Void->Void> = cast _Runtime.UNDEFINED;
+    var emitting:Bool = cast _Runtime.UNDEFINED;
+    var toSpawn:Float = cast _Runtime.UNDEFINED;
     n = _Runtime.field(objects, 'length');
     if ((cast _Runtime.strictEquals(n, 0.0) : Bool)) { return; }
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    _Runtime.callValue(ensureParticleObjectsStateCapacity, cast ([state, n] : Array<Dynamic>));
+    ensureParticleObjectsStateCapacity((cast state : ParticleObjectsState), (cast n : Float));
     __destructure0 = state;
     lifetimes = _Runtime.field(__destructure0, 'lifetimes');
     velocities = _Runtime.field(__destructure0, 'velocities');
@@ -76,28 +79,28 @@ class UpdateParticleObjects {
     }
     onDeath = _Runtime.optionalField(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.callbacks; }), 'onDeath');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var lt:Dynamic = (i * 2.0);
+        var lt:Float = (i * 2.0);
         if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)) : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         ({ var __indexedObject3:Dynamic = lifetimes; var __indexedKey4:Dynamic = lt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject3, __indexedKey4, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject3, __indexedKey4), deltaTime)); });
         if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt) : Float) >= (cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)) : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(lifetimes, (lt + 1.0), 0.0);
-          _Runtime.setField(flighthq._internal._StaticIndex.readArray(objects, i), 'visible', false);
+          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var visible:Bool; }).visible = false);
           _Runtime.callOptionalValue(onDeath, cast ([] : Array<Dynamic>));
           i++;
           continue;
         }
-        var vt:Dynamic = (i * 2.0);
+        var vt:Float = (i * 2.0);
         ({ var __indexedObject5:Dynamic = velocities; var __indexedKey6:Dynamic = vt; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject5, __indexedKey6, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject5, __indexedKey6), gx)); });
         ({ var __indexedObject7:Dynamic = velocities; var __indexedKey8:Dynamic = (vt + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject7, __indexedKey8, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject7, __indexedKey8), gy)); });
         (flighthq._internal._StaticIndex.readArray(objects, i).x += _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(velocities, vt), deltaTime));
         (flighthq._internal._StaticIndex.readArray(objects, i).y += _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)), deltaTime));
-        var lifeFraction:Dynamic = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)));
-        _Runtime.setField(flighthq._internal._StaticIndex.readArray(objects, i), 'alpha', ((cast hasAlphaCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, lifeFraction] : Array<Dynamic>)) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)));
+        var lifeFraction:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readFloat32Array(lifetimes, lt), flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)));
+        ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var alpha:Float; }).alpha = ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(alphaCurve, (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)));
         if ((cast hasScaleAnim : Bool)) {
-          var factor:Dynamic = ((cast hasScaleCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, lifeFraction] : Array<Dynamic>)) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
-          var s:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(scales, i), factor);
+          var factor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(scaleCurve, (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
+          var s:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(scales, i), factor);
           (flighthq._internal._StaticIndex.readArray(objects, i).scaleX = cast (s : Dynamic));
           (flighthq._internal._StaticIndex.readArray(objects, i).scaleY = cast (s : Dynamic));
         }
@@ -120,45 +123,45 @@ class UpdateParticleObjects {
       }
     }
     if ((cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) {
-      var baseAngle:Dynamic = HxMath.atan2(config.directionY, config.directionX);
-      var rotSpeedRange:Dynamic = (config.rotationSpeedMax - config.rotationSpeedMin);
-      var onSpawn:Dynamic = _Runtime.optionalField(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.callbacks; }), 'onSpawn');
+      var baseAngle:Float = HxMath.atan2(config.directionY, config.directionX);
+      var rotSpeedRange:Float = (config.rotationSpeedMax - config.rotationSpeedMin);
+      var onSpawn:Null<Float->Float->Void> = _Runtime.optionalField(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.callbacks; }), 'onSpawn');
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast ((cast i : Float) < (cast n : Float)) : Bool) && (cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-          var lt:Dynamic = (i * 2.0);
+          var lt:Float = (i * 2.0);
           if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, (lt + 1.0)) : Float) > (cast 0.0 : Float)) : Bool)) { i++; continue; }
-          var lifetime:Dynamic = (config.lifetimeMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.lifetimeMax - config.lifetimeMin)));
+          var lifetime:Float = (config.lifetimeMin + _Runtime.multiplyNumbers((state.random)(), (config.lifetimeMax - config.lifetimeMin)));
           flighthq._internal._StaticIndex.writeFloat32Array(lifetimes, lt, 0.0);
           flighthq._internal._StaticIndex.writeFloat32Array(lifetimes, (lt + 1.0), lifetime);
-          var angle:Dynamic = (baseAngle + ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * 2.0) * config.spread));
-          var speed:Dynamic = (config.speedMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.speedMax - config.speedMin)));
-          var vt:Dynamic = (i * 2.0);
+          var angle:Float = (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread));
+          var speed:Float = (config.speedMin + _Runtime.multiplyNumbers((state.random)(), (config.speedMax - config.speedMin)));
+          var vt:Float = (i * 2.0);
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, vt, _Runtime.addNumbers(_Runtime.multiplyNumbers(HxMath.cos(angle), speed), ((cast !_Runtime.strictEquals(config.velocityInheritance, 0.0) : Bool) ? (cast (emitterVelX * config.velocityInheritance) : Dynamic) : (cast 0.0 : Dynamic))));
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, (vt + 1.0), _Runtime.addNumbers(_Runtime.multiplyNumbers(HxMath.sin(angle), speed), ((cast !_Runtime.strictEquals(config.velocityInheritance, 0.0) : Bool) ? (cast (emitterVelY * config.velocityInheritance) : Dynamic) : (cast 0.0 : Dynamic))));
-          var spawnX:Dynamic = 0.0;
-          var spawnY:Dynamic = 0.0;
+          var spawnX:Float = 0.0;
+          var spawnY:Float = 0.0;
           if ((cast ((cast _Runtime.strictEquals(config.emitterShape, 'circle') : Bool) && (cast ((cast config.emitterRadius : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-            var r:Dynamic = _Runtime.multiplyNumbers(HxMath.sqrt(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>))), config.emitterRadius);
-            var a:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), UpdateParticleObjects.TWO_PI__updateParticleObjects);
+            var r:Float = _Runtime.multiplyNumbers(HxMath.sqrt((state.random)()), config.emitterRadius);
+            var a:Float = _Runtime.multiplyNumbers((state.random)(), UpdateParticleObjects.TWO_PI__updateParticleObjects);
             (spawnX = cast (_Runtime.multiplyNumbers(HxMath.cos(a), r) : Dynamic));
             (spawnY = cast (_Runtime.multiplyNumbers(HxMath.sin(a), r) : Dynamic));
           } else { if ((cast ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool) && (cast _Runtime.orValue(((cast config.emitterWidth : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast config.emitterHeight : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
-            (spawnX = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterWidth) : Dynamic));
-            (spawnY = cast ((_Runtime.subtractNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), 0.5) * config.emitterHeight) : Dynamic));
+            (spawnX = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterWidth) : Dynamic));
+            (spawnY = cast ((_Runtime.subtractNumbers((state.random)(), 0.5) * config.emitterHeight) : Dynamic));
           } }
-          var spawnScale:Dynamic = (config.scaleMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), (config.scaleMax - config.scaleMin)));
+          var spawnScale:Float = (config.scaleMin + _Runtime.multiplyNumbers((state.random)(), (config.scaleMax - config.scaleMin)));
           flighthq._internal._StaticIndex.writeFloat32Array(scales, i, spawnScale);
-          flighthq._internal._StaticIndex.writeFloat32Array(rotationSpeeds, i, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers(_Runtime.callValue(state.random, cast ([] : Array<Dynamic>)), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
-          var obj:Dynamic = flighthq._internal._StaticIndex.readArray(objects, i);
+          flighthq._internal._StaticIndex.writeFloat32Array(rotationSpeeds, i, ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers((state.random)(), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)));
+          var obj:ParticleObject = flighthq._internal._StaticIndex.readArray(objects, i);
           (obj.x = cast (spawnX : Dynamic));
           (obj.y = cast (spawnY : Dynamic));
           (obj.rotation = cast (angle : Dynamic));
-          var spawnFactor:Dynamic = ((cast hasScaleCurve : Bool) ? (cast _Runtime.multiplyNumbers(spawnScale, _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))) : Dynamic) : (cast spawnScale : Dynamic));
+          var spawnFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(scaleCurve, (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic));
           (obj.scaleX = cast (spawnFactor : Dynamic));
           (obj.scaleY = cast (spawnFactor : Dynamic));
-          _Runtime.setField(obj, 'alpha', ((cast hasAlphaCurve : Bool) ? (cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)) : Dynamic) : (cast config.alphaStart : Dynamic)));
-          _Runtime.setField(obj, 'visible', true);
+          ((cast obj : { var alpha:Float; }).alpha = ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(alphaCurve, (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)));
+          ((cast obj : { var visible:Bool; }).visible = true);
           toSpawn--;
           _Runtime.callOptionalValue(onSpawn, cast ([spawnX, spawnY] : Array<Dynamic>));
           i++;

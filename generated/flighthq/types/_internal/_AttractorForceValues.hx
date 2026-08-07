@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.ForceFalloff;
 
 class _AttractorForceValues {
-  public static final AttractorForceKind:Dynamic = 'AttractorForce';
+  public static final AttractorForceKind:String = 'AttractorForce';
 }

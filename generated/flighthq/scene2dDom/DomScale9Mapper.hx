@@ -8,12 +8,12 @@ import flighthq.types.Scale9Mapper;
 
 class DomScale9Mapper {
   public static function buildDomScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
-    var gx:Dynamic = cast _Runtime.UNDEFINED;
-    var gy:Dynamic = cast _Runtime.UNDEFINED;
-    var gw:Dynamic = cast _Runtime.UNDEFINED;
-    var gh:Dynamic = cast _Runtime.UNDEFINED;
-    var bw:Dynamic = cast _Runtime.UNDEFINED;
-    var bh:Dynamic = cast _Runtime.UNDEFINED;
+    var gx:Float = cast _Runtime.UNDEFINED;
+    var gy:Float = cast _Runtime.UNDEFINED;
+    var gw:Float = cast _Runtime.UNDEFINED;
+    var gh:Float = cast _Runtime.UNDEFINED;
+    var bw:Float = cast _Runtime.UNDEFINED;
+    var bh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'width') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     gx = _Runtime.field(scale9Grid, 'x');
     gy = _Runtime.field(scale9Grid, 'y');
@@ -21,14 +21,14 @@ class DomScale9Mapper {
     gh = _Runtime.field(scale9Grid, 'height');
     bw = _Runtime.field(bounds, 'width');
     bh = _Runtime.field(bounds, 'height');
-    return cast { mapX: function(x:Float) return _Runtime.callValue(DomScale9Mapper.toScale9Position__domScale9Mapper, cast ([x, gx, gw, bw, scaleX] : Array<Dynamic>)), mapY: function(y:Float) return _Runtime.callValue(DomScale9Mapper.toScale9Position__domScale9Mapper, cast ([y, gy, gh, bh, scaleY] : Array<Dynamic>)) };
+    return cast { mapX: function(x:Float):Float return (cast DomScale9Mapper.toScale9Position__domScale9Mapper((cast x : Float), (cast gx : Float), (cast gw : Float), (cast bw : Float), (cast scaleX : Float)) : Float), mapY: function(y:Float):Float return (cast DomScale9Mapper.toScale9Position__domScale9Mapper((cast y : Float), (cast gy : Float), (cast gh : Float), (cast bh : Float), (cast scaleY : Float)) : Float) };
     return cast null;
   }
 
   public static function toScale9Position__domScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
-    var scale9End:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var center:Dynamic = cast _Runtime.UNDEFINED;
+    var scale9End:Float = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var center:Float = cast _Runtime.UNDEFINED;
     scale9End = ((unscaledSize - scale9Center) - scale9Start);
     size = (unscaledSize * scale);
     center = ((size - scale9Start) - scale9End);

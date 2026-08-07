@@ -14,4 +14,4 @@ typedef GeoPositionResult = { var position:Null<GeoPosition>; var reason:Null<Ge
 
 typedef GeolocationRequestOptions = { @:optional var enableHighAccuracy:Bool; @:optional var timeoutMs:Float; @:optional var maximumAgeMs:Float; };
 
-typedef GeolocationBackend = { var getCurrentPosition:Dynamic; var getCurrentPositionResult:Dynamic; var getPermission:Dynamic; var watchPosition:Dynamic; var clearWatch:Dynamic; var requestPermission:Dynamic; var subscribePermission:Dynamic; };
+typedef GeolocationBackend = { var getCurrentPosition:GeolocationRequestOptions->flighthq._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flighthq._internal._Promise<GeoPositionResult>; var getPermission:Void->flighthq._internal._Promise<GeolocationPermissionState>; var watchPosition:GeoPosition->Void->GeolocationRequestOptions->GeolocationErrorReason->Void->Float; var clearWatch:Float->Void; var requestPermission:Void->flighthq._internal._Promise<Bool>; var subscribePermission:GeolocationPermissionState->Void->Void->Void; };

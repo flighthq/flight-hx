@@ -4,12 +4,13 @@ package flighthq.statechart;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Signal;
 import flighthq.types.Statechart.StatechartInstance;
 import flighthq.types.StatechartSignals;
 
 class StatechartSignals {
   public static function enableStatechartSignals(instance:StatechartInstance):flighthq.types.StatechartSignals {
-    return cast _Runtime.setField(instance, 'signals', (_Runtime.field(instance, 'signals') ?? { onStateChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }));
+    return cast ((cast instance : StatechartInstance).signals ??= { onStateChange: (cast createSignal() : Signal<Float->Float->Float->Void>) });
     return cast null;
   }
 

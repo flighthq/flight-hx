@@ -21,20 +21,21 @@ import flighthq.types.UnitySchema.UnityMinMaxValue;
 import flighthq.types.UnitySchema.UnityParseOptions;
 import flighthq.types.UnitySchema.UnityParsed;
 import flighthq.types.UnitySchema.UnityParticleDocument;
+import flighthq.types.UnitySchema.UnityParticleShapeType;
 import flighthq.types.UnitySchema.UnityRotationOverLifetime;
 import flighthq.types.UnitySchema.UnityShape;
 import flighthq.types.UnitySchema.UnitySizeOverLifetime;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class UnityParse {
-  public static final DEG2RAD__unityParse:Dynamic = (HxMath.PI / 180.0);
+  public static final DEG2RAD__unityParse:Float = (HxMath.PI / 180.0);
 
-  public static final DEFAULT_PPU__unityParse:Dynamic = 100.0;
+  public static final DEFAULT_PPU__unityParse:Float = 100.0;
 
-  public static final DEFAULT_GRAVITY__unityParse:Dynamic = 9.81;
+  public static final DEFAULT_GRAVITY__unityParse:Float = 9.81;
 
-  public static function parseUnityJson__unityParse(json:String):Dynamic {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseUnityJson__unityParse(json:String):flighthq._internal._Record<String, flighthq._internal._Any> {
+    var raw:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     try {
       (raw = cast (_Runtime.jsonParse(json) : Dynamic));
     } catch (e:Dynamic) {
@@ -43,108 +44,108 @@ class UnityParse {
     if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Invalid Unity particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + ''));
     }
-    return cast (cast raw : Dynamic);
+    return cast (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>);
     return cast null;
   }
 
-  public static function rn__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rn__unityParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
     return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
-  public static function rb__unityParse(obj:Dynamic, def:Bool):Bool {
+  public static function rb__unityParse(obj:flighthq._internal._Any, def:Bool):Bool {
     return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'boolean') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
-  public static function rs__unityParse(obj:Dynamic, def:String):String {
+  public static function rs__unityParse(obj:flighthq._internal._Any, def:String):String {
     return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'string') : Bool) ? (cast obj : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
-  public static function mmLow__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
+  public static function mmLow__unityParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var mode:String = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast def; }
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast obj; }
-    o = (cast obj : Dynamic);
-    mode = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMin'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>));
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    mode = (cast UnityParse.rs__unityParse((cast _Runtime.field(o, 'mode') : flighthq._internal._Any), (cast 'constant' : String)) : String);
+    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constantMin') : flighthq._internal._Any), (cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constant') : flighthq._internal._Any), (cast def : Float)) : Null<Float>) : Float)) : Float); }
+    return cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constant') : flighthq._internal._Any), (cast def : Float)) : Float);
     return cast null;
   }
 
-  public static function mmHigh__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
+  public static function mmHigh__unityParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var mode:String = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast def; }
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast obj; }
-    o = (cast obj : Dynamic);
-    mode = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMax'), _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>))] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), def] : Array<Dynamic>));
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    mode = (cast UnityParse.rs__unityParse((cast _Runtime.field(o, 'mode') : flighthq._internal._Any), (cast 'constant' : String)) : String);
+    if ((cast ((cast _Runtime.strictEquals(mode, 'twoConstants') : Bool) || (cast _Runtime.strictEquals(mode, 'twoCurves') : Bool)) : Bool)) { return cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constantMax') : flighthq._internal._Any), (cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constant') : flighthq._internal._Any), (cast def : Float)) : Null<Float>) : Float)) : Float); }
+    return cast (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constant') : flighthq._internal._Any), (cast def : Float)) : Float);
     return cast null;
   }
 
-  public static function colorAt__unityParse(obj:Dynamic, def:UnityColor):UnityColor {
+  public static function colorAt__unityParse(obj:flighthq._internal._Any, def:UnityColor):UnityColor {
     if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
-      var o:Dynamic = (cast obj : Dynamic);
-      return cast { r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'r'), def.r] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'g'), def.g] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'b'), def.b] : Array<Dynamic>)), a: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'a'), def.a] : Array<Dynamic>)) };
+      var o:flighthq._internal._Record<String, flighthq._internal._Any> = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+      return cast { r: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'r') : flighthq._internal._Any), (cast def.r : Float)) : Float), g: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'g') : flighthq._internal._Any), (cast def.g : Float)) : Float), b: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'b') : flighthq._internal._Any), (cast def.b : Float)) : Float), a: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'a') : flighthq._internal._Any), (cast def.a : Float)) : Float) };
     }
     return cast _Runtime.mergeObjects([def]);
     return cast null;
   }
 
-  public static function rawToConfig__unityParse(raw:Dynamic, ppu:Float):ParticleEmitterConfig {
-    var physicsGravity:Dynamic = cast _Runtime.UNDEFINED;
-    var gravPixels:Dynamic = cast _Runtime.UNDEFINED;
-    var emRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var spawnRate:Dynamic = cast _Runtime.UNDEFINED;
-    var burstsRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var burst0:Dynamic = cast _Runtime.UNDEFINED;
-    var burstCount:Dynamic = cast _Runtime.UNDEFINED;
-    var burstInterval:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeEnabled:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeType:Dynamic = cast _Runtime.UNDEFINED;
+  public static function rawToConfig__unityParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>, ppu:Float):ParticleEmitterConfig {
+    var physicsGravity:Float = cast _Runtime.UNDEFINED;
+    var gravPixels:Float = cast _Runtime.UNDEFINED;
+    var emRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var spawnRate:Float = cast _Runtime.UNDEFINED;
+    var burstsRaw:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var burst0:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var burstCount:Float = cast _Runtime.UNDEFINED;
+    var burstInterval:Float = cast _Runtime.UNDEFINED;
+    var shapeRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var shapeEnabled:Bool = cast _Runtime.UNDEFINED;
+    var shapeType:String = cast _Runtime.UNDEFINED;
     var emitterShape:String = cast _Runtime.UNDEFINED;
-    var emitterRadius:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var directionX:Dynamic = cast _Runtime.UNDEFINED;
-    var directionY:Dynamic = cast _Runtime.UNDEFINED;
-    var spread:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleLow:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleHigh:Dynamic = cast _Runtime.UNDEFINED;
-    var solRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var solEnabled:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var colRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var colEnabled:Dynamic = cast _Runtime.UNDEFINED;
+    var emitterRadius:Float = cast _Runtime.UNDEFINED;
+    var emitterWidth:Float = cast _Runtime.UNDEFINED;
+    var emitterHeight:Float = cast _Runtime.UNDEFINED;
+    var directionX:Float = cast _Runtime.UNDEFINED;
+    var directionY:Float = cast _Runtime.UNDEFINED;
+    var spread:Float = cast _Runtime.UNDEFINED;
+    var scaleLow:Float = cast _Runtime.UNDEFINED;
+    var scaleHigh:Float = cast _Runtime.UNDEFINED;
+    var solRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var solEnabled:Bool = cast _Runtime.UNDEFINED;
+    var scaleEnd:Float = cast _Runtime.UNDEFINED;
+    var colRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var colEnabled:Bool = cast _Runtime.UNDEFINED;
     var WHITE:UnityColor = cast _Runtime.UNDEFINED;
     var FADE:UnityColor = cast _Runtime.UNDEFINED;
-    var startColor:Dynamic = cast _Runtime.UNDEFINED;
-    var endColor:Dynamic = cast _Runtime.UNDEFINED;
-    var gradient:Dynamic = cast _Runtime.UNDEFINED;
-    var colorCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var rolRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var rolEnabled:Dynamic = cast _Runtime.UNDEFINED;
-    var rotLow:Dynamic = cast _Runtime.UNDEFINED;
-    var rotHigh:Dynamic = cast _Runtime.UNDEFINED;
-    var looping:Dynamic = cast _Runtime.UNDEFINED;
-    physicsGravity = _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'physicsGravity'), UnityParse.DEFAULT_GRAVITY__unityParse] : Array<Dynamic>));
-    gravPixels = (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)), physicsGravity) * ppu);
-    emRaw = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
-    spawnRate = (_Runtime.addNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>)), _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(emRaw, 'rateOverTime'), 10.0] : Array<Dynamic>))) * 0.5);
-    burstsRaw = ((cast _Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')) : Bool) ? (cast (cast _Runtime.field(emRaw, 'bursts') : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    var startColor:UnityColor = cast _Runtime.UNDEFINED;
+    var endColor:UnityColor = cast _Runtime.UNDEFINED;
+    var gradient:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var colorCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var alphaCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var scaleCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var rolRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var rolEnabled:Bool = cast _Runtime.UNDEFINED;
+    var rotLow:Float = cast _Runtime.UNDEFINED;
+    var rotHigh:Float = cast _Runtime.UNDEFINED;
+    var looping:Bool = cast _Runtime.UNDEFINED;
+    physicsGravity = (cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'physicsGravity') : flighthq._internal._Any), (cast UnityParse.DEFAULT_GRAVITY__unityParse : Float)) : Float);
+    gravPixels = (((cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'gravityModifier') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * physicsGravity) * ppu);
+    emRaw = (cast _Runtime.field(raw, 'emission') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    spawnRate = (((cast UnityParse.mmLow__unityParse((cast _Runtime.optionalField(emRaw, 'rateOverTime') : flighthq._internal._Any), (cast 10.0 : Float)) : Float) + (cast UnityParse.mmHigh__unityParse((cast _Runtime.optionalField(emRaw, 'rateOverTime') : flighthq._internal._Any), (cast 10.0 : Float)) : Float)) * 0.5);
+    burstsRaw = ((cast _Runtime.isArray(_Runtime.optionalField(emRaw, 'bursts')) : Bool) ? (cast (cast _Runtime.field(emRaw, 'bursts') : Array<flighthq._internal._Record<String, flighthq._internal._Any>>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     burst0 = flighthq._internal._StaticIndex.readArray(burstsRaw, 0.0);
-    burstCount = _Runtime.select(burst0, function():Dynamic return cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'count'), 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    burstInterval = ((cast _Runtime.andValue(burst0, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'cycleCount'), 1.0] : Array<Dynamic>)), 1.0)) : Bool) ? (cast _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(burst0, 'repeatInterval'), 0.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    shapeRaw = (cast _Runtime.field(raw, 'shape') : Null<Dynamic>);
-    shapeEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'enabled'), false] : Array<Dynamic>));
-    shapeType = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'shapeType'), 'Cone'] : Array<Dynamic>));
+    burstCount = _Runtime.select(burst0, function():Dynamic return cast (cast UnityParse.rn__unityParse((cast _Runtime.field(burst0, 'count') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), function():Dynamic return cast 0.0);
+    burstInterval = ((cast _Runtime.andValue(burst0, function():Dynamic return cast !_Runtime.strictEquals((cast UnityParse.rn__unityParse((cast _Runtime.field(burst0, 'cycleCount') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), 1.0)) : Bool) ? (cast (cast UnityParse.rn__unityParse((cast _Runtime.field(burst0, 'repeatInterval') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    shapeRaw = (cast _Runtime.field(raw, 'shape') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    shapeEnabled = (cast UnityParse.rb__unityParse((cast _Runtime.optionalField(shapeRaw, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool);
+    shapeType = (cast UnityParse.rs__unityParse((cast _Runtime.optionalField(shapeRaw, 'shapeType') : flighthq._internal._Any), (cast 'Cone' : String)) : String);
     emitterShape = 'point';
     emitterRadius = 0.0;
     emitterWidth = 0.0;
@@ -153,150 +154,150 @@ class UnityParse {
     directionY = -1.0;
     spread = HxMath.PI;
     if ((cast shapeEnabled : Bool)) {
-      var shapeRadius:Dynamic = _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'radius'), 0.0] : Array<Dynamic>)), ppu);
-      var scaleRaw:Dynamic = (cast _Runtime.optionalField(shapeRaw, 'scale') : Null<Dynamic>);
+      var shapeRadius:Float = ((cast UnityParse.rn__unityParse((cast _Runtime.optionalField(shapeRaw, 'radius') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * ppu);
+      var scaleRaw:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = (cast _Runtime.optionalField(shapeRaw, 'scale') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
       if ((cast ((cast ((cast _Runtime.strictEquals(shapeType, 'Sphere') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Hemisphere') : Bool)) : Bool) || (cast _Runtime.strictEquals(shapeType, 'Circle') : Bool)) : Bool)) {
         (emitterShape = cast ('circle' : Dynamic));
         (emitterRadius = cast (shapeRadius : Dynamic));
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
       } else { if ((cast ((cast _Runtime.strictEquals(shapeType, 'Box') : Bool) || (cast _Runtime.strictEquals(shapeType, 'Rectangle') : Bool)) : Bool)) {
         (emitterShape = cast ('rect' : Dynamic));
-        (emitterWidth = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'x'), 1.0] : Array<Dynamic>)), ppu) : Dynamic));
-        (emitterHeight = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(scaleRaw, 'y'), 1.0] : Array<Dynamic>)), ppu) : Dynamic));
+        (emitterWidth = cast (((cast UnityParse.rn__unityParse((cast _Runtime.optionalField(scaleRaw, 'x') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) * ppu) : Dynamic));
+        (emitterHeight = cast (((cast UnityParse.rn__unityParse((cast _Runtime.optionalField(scaleRaw, 'y') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) * ppu) : Dynamic));
         (spread = cast ((HxMath.PI * 2.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(shapeType, 'Cone') : Bool)) {
-        (spread = cast (_Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(shapeRaw, 'angle'), 25.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic));
+        (spread = cast (((cast UnityParse.rn__unityParse((cast _Runtime.optionalField(shapeRaw, 'angle') : flighthq._internal._Any), (cast 25.0 : Float)) : Float) * UnityParse.DEG2RAD__unityParse) : Dynamic));
         (emitterShape = cast (((cast ((cast shapeRadius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'circle' : Dynamic) : (cast 'point' : Dynamic)) : Dynamic));
         (emitterRadius = cast (shapeRadius : Dynamic));
       } } }
     }
-    scaleLow = _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSize'), 1.0] : Array<Dynamic>));
-    scaleHigh = _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSize'), 1.0] : Array<Dynamic>));
-    solRaw = (cast _Runtime.field(raw, 'sizeOverLifetime') : Null<Dynamic>);
-    solEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(solRaw, 'enabled'), false] : Array<Dynamic>));
-    scaleEnd = ((cast solEnabled : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.optionalField(solRaw, 'sizeEnd'), 1.0] : Array<Dynamic>)), HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))) : Dynamic) : (cast 1.0 : Dynamic));
-    colRaw = (cast _Runtime.field(raw, 'colorOverLifetime') : Null<Dynamic>);
-    colEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(colRaw, 'enabled'), false] : Array<Dynamic>));
+    scaleLow = (cast UnityParse.mmLow__unityParse((cast _Runtime.field(raw, 'startSize') : flighthq._internal._Any), (cast 1.0 : Float)) : Float);
+    scaleHigh = (cast UnityParse.mmHigh__unityParse((cast _Runtime.field(raw, 'startSize') : flighthq._internal._Any), (cast 1.0 : Float)) : Float);
+    solRaw = (cast _Runtime.field(raw, 'sizeOverLifetime') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    solEnabled = (cast UnityParse.rb__unityParse((cast _Runtime.optionalField(solRaw, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool);
+    scaleEnd = ((cast solEnabled : Bool) ? (cast _Runtime.divideNumbers((cast UnityParse.rn__unityParse((cast _Runtime.optionalField(solRaw, 'sizeEnd') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), HxMath.max(0.001, ((scaleLow + scaleHigh) * 0.5))) : Dynamic) : (cast 1.0 : Dynamic));
+    colRaw = (cast _Runtime.field(raw, 'colorOverLifetime') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    colEnabled = (cast UnityParse.rb__unityParse((cast _Runtime.optionalField(colRaw, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool);
     WHITE = { r: 1.0, g: 1.0, b: 1.0, a: 1.0 };
     FADE = { r: 1.0, g: 1.0, b: 1.0, a: 0.0 };
-    startColor = ((cast colEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorStart'), WHITE] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)) : Dynamic));
-    endColor = ((cast colEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.optionalField(colRaw, 'colorEnd'), FADE] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), WHITE] : Array<Dynamic>)) : Dynamic));
-    gradient = ((cast colEnabled : Bool) ? (cast (cast _Runtime.optionalField(colRaw, 'gradient') : Null<Dynamic>) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    colorCurve = _Runtime.callValue(UnityParse.colorKeysToCurve__unityParse, cast ([_Runtime.optionalField(gradient, 'colorKeys')] : Array<Dynamic>));
-    alphaCurve = _Runtime.callValue(UnityParse.alphaKeysToCurve__unityParse, cast ([_Runtime.optionalField(gradient, 'alphaKeys')] : Array<Dynamic>));
-    scaleCurve = ((cast solEnabled : Bool) ? (cast _Runtime.callValue(UnityParse.sizeKeysToCurve__unityParse, cast ([_Runtime.optionalField(solRaw, 'curve')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    rolRaw = (cast _Runtime.field(raw, 'rotationOverLifetime') : Null<Dynamic>);
-    rolEnabled = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.optionalField(rolRaw, 'enabled'), false] : Array<Dynamic>));
-    rotLow = ((cast rolEnabled : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
-    rotHigh = ((cast rolEnabled : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.optionalField(rolRaw, 'angularVelocity'), 0.0] : Array<Dynamic>)), UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
-    looping = _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'looping'), true] : Array<Dynamic>));
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), spawnRate: spawnRate, loop: looping, duration: ((cast looping : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.max(0.0, _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>))) : Dynamic)), lifetimeMin: _Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), lifetimeMax: _Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), speedMin: _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmLow__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), ppu), speedMax: _Runtime.multiplyNumbers(_Runtime.callValue(UnityParse.mmHigh__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: startColor.r, colorStartG: startColor.g, colorStartB: startColor.b, colorEndR: endColor.r, colorEndG: endColor.g, colorEndB: endColor.b, alphaStart: startColor.a, alphaEnd: endColor.a, colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: _Runtime.callValue(UnityParse.unityBlendMode__unityParse, cast ([raw] : Array<Dynamic>)) }] : Array<Dynamic>));
+    startColor = ((cast colEnabled : Bool) ? (cast (cast UnityParse.colorAt__unityParse((cast _Runtime.optionalField(colRaw, 'colorStart') : flighthq._internal._Any), (cast WHITE : UnityColor)) : UnityColor) : Dynamic) : (cast (cast UnityParse.colorAt__unityParse((cast _Runtime.field(raw, 'startColor') : flighthq._internal._Any), (cast WHITE : UnityColor)) : UnityColor) : Dynamic));
+    endColor = ((cast colEnabled : Bool) ? (cast (cast UnityParse.colorAt__unityParse((cast _Runtime.optionalField(colRaw, 'colorEnd') : flighthq._internal._Any), (cast FADE : UnityColor)) : UnityColor) : Dynamic) : (cast (cast UnityParse.colorAt__unityParse((cast _Runtime.field(raw, 'startColor') : flighthq._internal._Any), (cast WHITE : UnityColor)) : UnityColor) : Dynamic));
+    gradient = ((cast colEnabled : Bool) ? (cast (cast _Runtime.optionalField(colRaw, 'gradient') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    colorCurve = (cast UnityParse.colorKeysToCurve__unityParse((cast _Runtime.optionalField(gradient, 'colorKeys') : flighthq._internal._Any)) : Null<ParticleCurve>);
+    alphaCurve = (cast UnityParse.alphaKeysToCurve__unityParse((cast _Runtime.optionalField(gradient, 'alphaKeys') : flighthq._internal._Any)) : Null<ParticleCurve>);
+    scaleCurve = ((cast solEnabled : Bool) ? (cast (cast UnityParse.sizeKeysToCurve__unityParse((cast _Runtime.optionalField(solRaw, 'curve') : flighthq._internal._Any)) : Null<ParticleCurve>) : Dynamic) : (cast null : Dynamic));
+    rolRaw = (cast _Runtime.field(raw, 'rotationOverLifetime') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    rolEnabled = (cast UnityParse.rb__unityParse((cast _Runtime.optionalField(rolRaw, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool);
+    rotLow = ((cast rolEnabled : Bool) ? (cast ((cast UnityParse.mmLow__unityParse((cast _Runtime.optionalField(rolRaw, 'angularVelocity') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
+    rotHigh = ((cast rolEnabled : Bool) ? (cast ((cast UnityParse.mmHigh__unityParse((cast _Runtime.optionalField(rolRaw, 'angularVelocity') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * UnityParse.DEG2RAD__unityParse) : Dynamic) : (cast 0.0 : Dynamic));
+    looping = (cast UnityParse.rb__unityParse((cast _Runtime.field(raw, 'looping') : flighthq._internal._Any), (cast true : Bool)) : Bool);
+    return cast (cast createParticleEmitterConfig((cast { maxParticles: (_Runtime.toInt32((cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'maxParticles') : flighthq._internal._Any), (cast 1000.0 : Float)) : Float)) | 0), spawnRate: spawnRate, loop: looping, duration: ((cast looping : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.max(0.0, (cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'duration') : flighthq._internal._Any), (cast 5.0 : Float)) : Float)) : Dynamic)), lifetimeMin: (cast UnityParse.mmLow__unityParse((cast _Runtime.field(raw, 'startLifetime') : flighthq._internal._Any), (cast 1.0 : Float)) : Null<Float>), lifetimeMax: (cast UnityParse.mmHigh__unityParse((cast _Runtime.field(raw, 'startLifetime') : flighthq._internal._Any), (cast 1.0 : Float)) : Null<Float>), speedMin: ((cast UnityParse.mmLow__unityParse((cast _Runtime.field(raw, 'startSpeed') : flighthq._internal._Any), (cast 5.0 : Float)) : Float) * ppu), speedMax: ((cast UnityParse.mmHigh__unityParse((cast _Runtime.field(raw, 'startSpeed') : flighthq._internal._Any), (cast 5.0 : Float)) : Float) * ppu), directionX: directionX, directionY: directionY, spread: spread, gravityX: 0.0, gravityY: gravPixels, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleLow, scaleMax: scaleHigh, scaleEnd: scaleEnd, colorStartR: startColor.r, colorStartG: startColor.g, colorStartB: startColor.b, colorEndR: endColor.r, colorEndG: endColor.g, colorEndB: endColor.b, alphaStart: startColor.a, alphaEnd: endColor.a, colorCurve: colorCurve, alphaCurve: alphaCurve, scaleCurve: scaleCurve, rotationSpeedMin: rotLow, rotationSpeedMax: rotHigh, burstCount: burstCount, burstInterval: burstInterval, blendMode: (cast UnityParse.unityBlendMode__unityParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : Null<String>) } : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static final UNSUPPORTED_UNITY_MODULES__unityParse:Array<Array<String>> = cast ([cast (['velocityOverLifetime', 'velocity-over-lifetime'] : Array<Dynamic>), cast (['forceOverLifetime', 'force-over-lifetime'] : Array<Dynamic>), cast (['limitVelocityOverLifetime', 'limit-velocity-over-lifetime'] : Array<Dynamic>), cast (['inheritVelocity', 'inherit-velocity'] : Array<Dynamic>), cast (['noise', 'noise'] : Array<Dynamic>), cast (['collision', 'collision'] : Array<Dynamic>), cast (['subEmitters', 'sub-emitters'] : Array<Dynamic>), cast (['trails', 'trails'] : Array<Dynamic>), cast (['textureSheetAnimation', 'texture-sheet-animation'] : Array<Dynamic>), cast (['externalForces', 'external-forces'] : Array<Dynamic>), cast (['lights', 'lights'] : Array<Dynamic>)] : Array<Dynamic>);
 
-  public static function collectUnityDiagnostics__unityParse(raw:Dynamic):Array<ImportDiagnostic> {
+  public static function collectUnityDiagnostics__unityParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var unsupportedModules:Array<String> = cast _Runtime.UNDEFINED;
-    var em:Dynamic = cast _Runtime.UNDEFINED;
-    var bursts:Dynamic = cast _Runtime.UNDEFINED;
-    var shape:Dynamic = cast _Runtime.UNDEFINED;
-    var startRotation:Dynamic = cast _Runtime.UNDEFINED;
-    var startRotationDropped:Dynamic = cast _Runtime.UNDEFINED;
+    var em:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var bursts:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var shape:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
+    var startRotation:UnityMinMaxValue = cast _Runtime.UNDEFINED;
+    var startRotationDropped:Bool = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
     unsupportedModules = cast ([] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(UnityParse.UNSUPPORTED_UNITY_MODULES__unityParse)) {
-      var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var label:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var mod:Dynamic = _Runtime.getIndex(raw, key);
-      if ((cast ((cast ((cast !_Runtime.looseEquals(mod, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field((cast mod : Dynamic), 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
+      var key:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var label:String = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var mod:flighthq._internal._Any = _Runtime.getIndex(raw, key);
+      if ((cast ((cast ((cast !_Runtime.looseEquals(mod, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(mod), 'object') : Bool)) : Bool) && (cast (cast UnityParse.rb__unityParse((cast _Runtime.field((cast mod : flighthq._internal._Record<String, flighthq._internal._Any>), 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(unsupportedModules, 'push', cast ([label] : Array<Dynamic>));
       }
     }
     for (module in _Runtime.iterable(unsupportedModules)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.module-unsupported', 'collectUnityDiagnostics', { module: module }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'unity.module-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast { module: module } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    em = (cast _Runtime.field(raw, 'emission') : Null<Dynamic>);
+    em = (cast _Runtime.field(raw, 'emission') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
     bursts = ((cast _Runtime.isArray(_Runtime.optionalField(em, 'bursts')) : Bool) ? (cast _Runtime.field(em, 'bursts') : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     if ((cast ((cast _Runtime.field(bursts, 'length') : Float) > (cast 1.0 : Float)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'unity.extra-bursts-dropped', 'collectUnityDiagnostics', { burstCount: _Runtime.field(bursts, 'length') }] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'unity.extra-bursts-dropped' : String), (cast 'collectUnityDiagnostics' : String), (cast { burstCount: _Runtime.field(bursts, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    shape = (cast _Runtime.field(raw, 'shape') : Null<Dynamic>);
-    if ((cast ((cast ((cast !_Runtime.looseEquals(shape, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) && (cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(shape, 'enabled'), false] : Array<Dynamic>)) : Bool)) : Bool)) {
-      var shapeType:Dynamic = _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(shape, 'shapeType'), 'Cone'] : Array<Dynamic>));
-      if ((cast !(cast ((cast UnityParse.KNOWN_UNITY_SHAPES__unityParse : flighthq._internal._Set).has(shapeType)) : Bool) : Bool)) {
-        _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'unity.shape-unsupported', 'collectUnityDiagnostics', { shapeType: shapeType }] : Array<Dynamic>));
+    shape = (cast _Runtime.field(raw, 'shape') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    if ((cast ((cast ((cast !_Runtime.looseEquals(shape, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) && (cast (cast UnityParse.rb__unityParse((cast _Runtime.field(shape, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool) : Bool)) : Bool)) {
+      var shapeType:String = (cast UnityParse.rs__unityParse((cast _Runtime.field(shape, 'shapeType') : flighthq._internal._Any), (cast 'Cone' : String)) : String);
+      if ((cast !(cast ((cast UnityParse.KNOWN_UNITY_SHAPES__unityParse : flighthq._internal._Set<String>).has(shapeType)) : Bool) : Bool)) {
+        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'unity.shape-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast { shapeType: shapeType } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
       }
     }
-    if ((cast _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'prewarm'), false] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.prewarm-unsupported', 'collectUnityDiagnostics'] : Array<Dynamic>));
+    if ((cast (cast UnityParse.rb__unityParse((cast _Runtime.field(raw, 'prewarm') : flighthq._internal._Any), (cast false : Bool)) : Bool) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'unity.prewarm-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    startRotation = _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startRotation'), 0.0] : Array<Dynamic>));
+    startRotation = (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(raw, 'startRotation') : flighthq._internal._Any), (cast 0.0 : Float)) : UnityMinMaxValue);
     startRotationDropped = ((cast ((cast ((cast ((cast _Runtime.strictEquals(startRotation.mode, 'curve') : Bool) || (cast _Runtime.strictEquals(startRotation.mode, 'twoCurves') : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constant, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMin, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMax, 0.0) : Bool));
     if ((cast startRotationDropped : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'unity.start-rotation-unsupported', 'collectUnityDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'unity.start-rotation-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast diagnostics;
     return cast null;
   }
 
-  public static final KNOWN_UNITY_SHAPES__unityParse:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['Sphere', 'Hemisphere', 'Circle', 'Box', 'Rectangle', 'Cone'] : Array<Dynamic>)]);
+  public static final KNOWN_UNITY_SHAPES__unityParse:flighthq._internal._Set<String> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['Sphere', 'Hemisphere', 'Circle', 'Box', 'Rectangle', 'Cone'] : Array<Dynamic>)]);
 
-  public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function colorKeysToCurve__unityParse(arr:flighthq._internal._Any):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        var c:Dynamic = (cast _Runtime.coalesce(_Runtime.field(k, 'color'), function():Dynamic return cast k) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), r: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'r'), 1.0] : Array<Dynamic>)), g: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'g'), 1.0] : Array<Dynamic>)), b: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(c, 'b'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast flighthq._internal._StaticIndex.readArray(arr, i) : flighthq._internal._Record<String, flighthq._internal._Any>);
+        var c:flighthq._internal._Record<String, flighthq._internal._Any> = (cast _Runtime.coalesce(_Runtime.field(k, 'color'), function():Dynamic return cast k) : flighthq._internal._Record<String, flighthq._internal._Any>);
+        _Runtime.callProperty(keys, 'push', cast ([{ time: (cast UnityParse.rn__unityParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Float)) : Float), r: (cast UnityParse.rn__unityParse((cast _Runtime.field(c, 'r') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), g: (cast UnityParse.rn__unityParse((cast _Runtime.field(c, 'g') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), b: (cast UnityParse.rn__unityParse((cast _Runtime.field(c, 'b') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(particleColorCurveFromKeyframes, cast ([keys] : Array<Dynamic>));
+    return cast (cast particleColorCurveFromKeyframes((cast keys : Array<ColorKeyframe>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ParticleCurve>);
     return cast null;
   }
 
-  public static function alphaKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function alphaKeysToCurve__unityParse(arr:flighthq._internal._Any):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'alpha'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast flighthq._internal._StaticIndex.readArray(arr, i) : flighthq._internal._Record<String, flighthq._internal._Any>);
+        _Runtime.callProperty(keys, 'push', cast ([{ time: (cast UnityParse.rn__unityParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Float)) : Float), value: (cast UnityParse.rn__unityParse((cast _Runtime.field(k, 'alpha') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(particleCurveFromKeyframes, cast ([keys] : Array<Dynamic>));
+    return cast (cast particleCurveFromKeyframes((cast keys : Array<CurveKeyframe>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ParticleCurve>);
     return cast null;
   }
 
-  public static function sizeKeysToCurve__unityParse(curve:Dynamic):Null<ParticleCurve> {
-    var arr:Dynamic = cast _Runtime.UNDEFINED;
+  public static function sizeKeysToCurve__unityParse(curve:flighthq._internal._Any):Null<ParticleCurve> {
+    var arr:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.looseEquals(curve, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(curve), 'object') : Bool)) : Bool)) { return cast null; }
-    arr = _Runtime.field((cast curve : Dynamic), 'keys');
+    arr = _Runtime.field((cast curve : flighthq._internal._Record<String, flighthq._internal._Any>), 'keys');
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        _Runtime.callProperty(keys, 'push', cast ([{ time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'time'), (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0))] : Array<Dynamic>)), value: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(k, 'value'), 1.0] : Array<Dynamic>)) }] : Array<Dynamic>));
+        var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast flighthq._internal._StaticIndex.readArray(arr, i) : flighthq._internal._Record<String, flighthq._internal._Any>);
+        _Runtime.callProperty(keys, 'push', cast ([{ time: (cast UnityParse.rn__unityParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Float)) : Float), value: (cast UnityParse.rn__unityParse((cast _Runtime.field(k, 'value') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(particleCurveFromKeyframes, cast ([keys] : Array<Dynamic>));
+    return cast (cast particleCurveFromKeyframes((cast keys : Array<CurveKeyframe>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ParticleCurve>);
     return cast null;
   }
 
-  public static function unityBlendMode__unityParse(raw:Dynamic):Null<ParticleBlendMode> {
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
+  public static function unityBlendMode__unityParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):Null<ParticleBlendMode> {
+    var mode:Null<String> = cast _Runtime.UNDEFINED;
     mode = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string') : Bool) ? (cast _Runtime.callProperty(_Runtime.field(raw, 'blendMode'), 'toLowerCase', cast ([] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(mode, 'additive') : Bool) || (cast _Runtime.strictEquals(mode, 'add') : Bool)) : Bool)) { return cast 'add'; }
     if ((cast _Runtime.strictEquals(mode, 'multiply') : Bool)) { return cast 'multiply'; }
@@ -306,79 +307,79 @@ class UnityParse {
     return cast null;
   }
 
-  public static function readMinMax__unityParse(obj:Dynamic, defConst:Dynamic = 1.0):UnityMinMaxValue {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readMinMax__unityParse(obj:flighthq._internal._Any, defConst:Float = 1.0):UnityMinMaxValue {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(obj, null) : Bool)) { return cast { mode: 'constant', constant: defConst }; }
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'number') : Bool)) { return cast { mode: 'constant', constant: obj }; }
-    o = (cast obj : Dynamic);
-    return cast { mode: (cast _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'mode'), 'constant'] : Array<Dynamic>)) : Dynamic), constant: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constant'), defConst] : Array<Dynamic>)), constantMin: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMin'), defConst] : Array<Dynamic>)), constantMax: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'constantMax'), defConst] : Array<Dynamic>)) };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { mode: (cast (cast UnityParse.rs__unityParse((cast _Runtime.field(o, 'mode') : flighthq._internal._Any), (cast 'constant' : String)) : String) : flighthq._internal._IndexedAccess<UnityMinMaxValue, String>), constant: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constant') : flighthq._internal._Any), (cast defConst : Float)) : Null<Float>), constantMin: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constantMin') : flighthq._internal._Any), (cast defConst : Float)) : Null<Float>), constantMax: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'constantMax') : flighthq._internal._Any), (cast defConst : Float)) : Null<Float>) };
     return cast null;
   }
 
-  public static function readEmission__unityParse(obj:Dynamic):UnityEmission {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var bursts:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readEmission__unityParse(obj:flighthq._internal._Any):UnityEmission {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var bursts:Array<{ var time:Float; var count:Float; var cycleCount:Float; var repeatInterval:Float; }> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { rateOverTime: { mode: 'constant', constant: 10.0 }, bursts: cast ([] : Array<Dynamic>) }; }
-    o = (cast obj : Dynamic);
-    bursts = ((cast _Runtime.isArray(_Runtime.field(o, 'bursts')) : Bool) ? (cast _Runtime.callProperty((cast _Runtime.field(o, 'bursts') : Array<Dynamic>), 'map', cast ([function(b:Dynamic) return { time: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'time'), 0.0] : Array<Dynamic>)), count: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'count'), 0.0] : Array<Dynamic>)), cycleCount: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'cycleCount'), 1.0] : Array<Dynamic>)), repeatInterval: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(b, 'repeatInterval'), 0.0] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    return cast { rateOverTime: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(o, 'rateOverTime'), 10.0] : Array<Dynamic>)), bursts: bursts };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    bursts = ((cast _Runtime.isArray(_Runtime.field(o, 'bursts')) : Bool) ? (cast _Runtime.callProperty((cast _Runtime.field(o, 'bursts') : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), 'map', cast ([function(b:flighthq._internal._Record<String, flighthq._internal._Any>, __unused1:Float, __unused2:Array<flighthq._internal._Record<String, flighthq._internal._Any>>):{ var time:Float; var count:Float; var cycleCount:Float; var repeatInterval:Float; } return { time: (cast UnityParse.rn__unityParse((cast _Runtime.field(b, 'time') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), count: (cast UnityParse.rn__unityParse((cast _Runtime.field(b, 'count') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), cycleCount: (cast UnityParse.rn__unityParse((cast _Runtime.field(b, 'cycleCount') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), repeatInterval: (cast UnityParse.rn__unityParse((cast _Runtime.field(b, 'repeatInterval') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    return cast { rateOverTime: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(o, 'rateOverTime') : flighthq._internal._Any), (cast 10.0 : Float)) : UnityMinMaxValue), bursts: bursts };
     return cast null;
   }
 
-  public static function readShape__unityParse(obj:Dynamic):UnityShape {
+  public static function readShape__unityParse(obj:flighthq._internal._Any):UnityShape {
     var def:UnityShape = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
-    var sc:Dynamic = cast _Runtime.UNDEFINED;
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var sc:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     def = { enabled: true, shapeType: 'Cone', radius: 1.0, angle: 25.0, scale: { x: 1.0, y: 1.0, z: 1.0 } };
     if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast def; }
-    o = (cast obj : Dynamic);
-    sc = _Runtime.select(_Runtime.andValue(_Runtime.field(o, 'scale'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'scale')), 'object')), function():Dynamic return cast (cast _Runtime.field(o, 'scale') : Dynamic), function():Dynamic return cast {  });
-    return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), true] : Array<Dynamic>)), shapeType: (cast _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(o, 'shapeType'), 'Cone'] : Array<Dynamic>)) : Dynamic), radius: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'radius'), 1.0] : Array<Dynamic>)), angle: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'angle'), 25.0] : Array<Dynamic>)), scale: { x: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'x'), 1.0] : Array<Dynamic>)), y: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'y'), 1.0] : Array<Dynamic>)), z: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(sc, 'z'), 1.0] : Array<Dynamic>)) } };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    sc = _Runtime.select(_Runtime.andValue(_Runtime.field(o, 'scale'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'scale')), 'object')), function():Dynamic return cast (cast _Runtime.field(o, 'scale') : flighthq._internal._Record<String, flighthq._internal._Any>), function():Dynamic return cast {  });
+    return cast { enabled: (cast UnityParse.rb__unityParse((cast _Runtime.field(o, 'enabled') : flighthq._internal._Any), (cast true : Bool)) : Bool), shapeType: (cast (cast UnityParse.rs__unityParse((cast _Runtime.field(o, 'shapeType') : flighthq._internal._Any), (cast 'Cone' : String)) : UnityParticleShapeType) : flighthq._internal._IndexedAccess<UnityShape, String>), radius: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'radius') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), angle: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'angle') : flighthq._internal._Any), (cast 25.0 : Float)) : Float), scale: { x: (cast UnityParse.rn__unityParse((cast _Runtime.field(sc, 'x') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), y: (cast UnityParse.rn__unityParse((cast _Runtime.field(sc, 'y') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), z: (cast UnityParse.rn__unityParse((cast _Runtime.field(sc, 'z') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) } };
     return cast null;
   }
 
-  public static function readColorLifetime__unityParse(obj:Dynamic):UnityColorOverLifetime {
+  public static function readColorLifetime__unityParse(obj:flighthq._internal._Any):UnityColorOverLifetime {
     var def:UnityColorOverLifetime = cast _Runtime.UNDEFINED;
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     def = { enabled: false, colorStart: { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }, colorEnd: { r: 1.0, g: 1.0, b: 1.0, a: 0.0 } };
     if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast def; }
-    o = (cast obj : Dynamic);
-    return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), colorStart: _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(o, 'colorStart'), def.colorStart] : Array<Dynamic>)), colorEnd: _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(o, 'colorEnd'), def.colorEnd] : Array<Dynamic>)) };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { enabled: (cast UnityParse.rb__unityParse((cast _Runtime.field(o, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool), colorStart: (cast UnityParse.colorAt__unityParse((cast _Runtime.field(o, 'colorStart') : flighthq._internal._Any), (cast def.colorStart : UnityColor)) : UnityColor), colorEnd: (cast UnityParse.colorAt__unityParse((cast _Runtime.field(o, 'colorEnd') : flighthq._internal._Any), (cast def.colorEnd : UnityColor)) : UnityColor) };
     return cast null;
   }
 
-  public static function readSizeLifetime__unityParse(obj:Dynamic):UnitySizeOverLifetime {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readSizeLifetime__unityParse(obj:flighthq._internal._Any):UnitySizeOverLifetime {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { enabled: false, sizeStart: 1.0, sizeEnd: 1.0 }; }
-    o = (cast obj : Dynamic);
-    return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), sizeStart: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'sizeStart'), 1.0] : Array<Dynamic>)), sizeEnd: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(o, 'sizeEnd'), 1.0] : Array<Dynamic>)) };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { enabled: (cast UnityParse.rb__unityParse((cast _Runtime.field(o, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool), sizeStart: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'sizeStart') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), sizeEnd: (cast UnityParse.rn__unityParse((cast _Runtime.field(o, 'sizeEnd') : flighthq._internal._Any), (cast 1.0 : Float)) : Float) };
     return cast null;
   }
 
-  public static function readRotationLifetime__unityParse(obj:Dynamic):UnityRotationOverLifetime {
-    var o:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readRotationLifetime__unityParse(obj:flighthq._internal._Any):UnityRotationOverLifetime {
+    var o:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.looseEquals(obj, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) { return cast { enabled: false, angularVelocity: { mode: 'constant', constant: 0.0 } }; }
-    o = (cast obj : Dynamic);
-    return cast { enabled: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(o, 'enabled'), false] : Array<Dynamic>)), angularVelocity: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(o, 'angularVelocity'), 0.0] : Array<Dynamic>)) };
+    o = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { enabled: (cast UnityParse.rb__unityParse((cast _Runtime.field(o, 'enabled') : flighthq._internal._Any), (cast false : Bool)) : Bool), angularVelocity: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(o, 'angularVelocity') : flighthq._internal._Any), (cast 0.0 : Float)) : UnityMinMaxValue) };
     return cast null;
   }
 
-  public static function rawToDocument__unityParse(raw:Dynamic):UnityParticleDocument {
-    return cast { name: _Runtime.callValue(UnityParse.rs__unityParse, cast ([_Runtime.field(raw, 'name'), ''] : Array<Dynamic>)), duration: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'duration'), 5.0] : Array<Dynamic>)), looping: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'looping'), true] : Array<Dynamic>)), prewarm: _Runtime.callValue(UnityParse.rb__unityParse, cast ([_Runtime.field(raw, 'prewarm'), false] : Array<Dynamic>)), maxParticles: (_Runtime.toInt32(_Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | 0), startLifetime: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), startSpeed: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), startSize: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startSize'), 1.0] : Array<Dynamic>)), startRotation: _Runtime.callValue(UnityParse.readMinMax__unityParse, cast ([_Runtime.field(raw, 'startRotation'), 0.0] : Array<Dynamic>)), startColor: _Runtime.callValue(UnityParse.colorAt__unityParse, cast ([_Runtime.field(raw, 'startColor'), { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }] : Array<Dynamic>)), gravityModifier: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)), physicsGravity: _Runtime.callValue(UnityParse.rn__unityParse, cast ([_Runtime.field(raw, 'physicsGravity'), UnityParse.DEFAULT_GRAVITY__unityParse] : Array<Dynamic>)), emission: _Runtime.callValue(UnityParse.readEmission__unityParse, cast ([_Runtime.field(raw, 'emission')] : Array<Dynamic>)), shape: _Runtime.callValue(UnityParse.readShape__unityParse, cast ([_Runtime.field(raw, 'shape')] : Array<Dynamic>)), colorOverLifetime: _Runtime.callValue(UnityParse.readColorLifetime__unityParse, cast ([_Runtime.field(raw, 'colorOverLifetime')] : Array<Dynamic>)), sizeOverLifetime: _Runtime.callValue(UnityParse.readSizeLifetime__unityParse, cast ([_Runtime.field(raw, 'sizeOverLifetime')] : Array<Dynamic>)), rotationOverLifetime: _Runtime.callValue(UnityParse.readRotationLifetime__unityParse, cast ([_Runtime.field(raw, 'rotationOverLifetime')] : Array<Dynamic>)) };
+  public static function rawToDocument__unityParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):UnityParticleDocument {
+    return cast { name: (cast UnityParse.rs__unityParse((cast _Runtime.field(raw, 'name') : flighthq._internal._Any), (cast '' : String)) : String), duration: (cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'duration') : flighthq._internal._Any), (cast 5.0 : Float)) : Float), looping: (cast UnityParse.rb__unityParse((cast _Runtime.field(raw, 'looping') : flighthq._internal._Any), (cast true : Bool)) : Bool), prewarm: (cast UnityParse.rb__unityParse((cast _Runtime.field(raw, 'prewarm') : flighthq._internal._Any), (cast false : Bool)) : Bool), maxParticles: (_Runtime.toInt32((cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'maxParticles') : flighthq._internal._Any), (cast 1000.0 : Float)) : Float)) | 0), startLifetime: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(raw, 'startLifetime') : flighthq._internal._Any), (cast 1.0 : Float)) : UnityMinMaxValue), startSpeed: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(raw, 'startSpeed') : flighthq._internal._Any), (cast 5.0 : Float)) : UnityMinMaxValue), startSize: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(raw, 'startSize') : flighthq._internal._Any), (cast 1.0 : Float)) : UnityMinMaxValue), startRotation: (cast UnityParse.readMinMax__unityParse((cast _Runtime.field(raw, 'startRotation') : flighthq._internal._Any), (cast 0.0 : Float)) : UnityMinMaxValue), startColor: (cast UnityParse.colorAt__unityParse((cast _Runtime.field(raw, 'startColor') : flighthq._internal._Any), (cast { r: 1.0, g: 1.0, b: 1.0, a: 1.0 } : UnityColor)) : UnityColor), gravityModifier: (cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'gravityModifier') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), physicsGravity: (cast UnityParse.rn__unityParse((cast _Runtime.field(raw, 'physicsGravity') : flighthq._internal._Any), (cast UnityParse.DEFAULT_GRAVITY__unityParse : Float)) : Float), emission: (cast UnityParse.readEmission__unityParse((cast _Runtime.field(raw, 'emission') : flighthq._internal._Any)) : UnityEmission), shape: (cast UnityParse.readShape__unityParse((cast _Runtime.field(raw, 'shape') : flighthq._internal._Any)) : UnityShape), colorOverLifetime: (cast UnityParse.readColorLifetime__unityParse((cast _Runtime.field(raw, 'colorOverLifetime') : flighthq._internal._Any)) : UnityColorOverLifetime), sizeOverLifetime: (cast UnityParse.readSizeLifetime__unityParse((cast _Runtime.field(raw, 'sizeOverLifetime') : flighthq._internal._Any)) : UnitySizeOverLifetime), rotationOverLifetime: (cast UnityParse.readRotationLifetime__unityParse((cast _Runtime.field(raw, 'rotationOverLifetime') : flighthq._internal._Any)) : UnityRotationOverLifetime) };
     return cast null;
   }
 
   public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
-    return cast _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([_Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>)), _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse)] : Array<Dynamic>));
+    return cast (cast UnityParse.rawToConfig__unityParse((cast (cast UnityParse.parseUnityJson__unityParse((cast json : String)) : flighthq._internal._Record<String, flighthq._internal._Any>) : flighthq._internal._Record<String, flighthq._internal._Any>), (cast _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse) : Float)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static function parseUnityParticleDocument(json:String, ?options:UnityParseOptions):UnityParsed {
-    var ppu:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+    var ppu:Float = cast _Runtime.UNDEFINED;
+    var raw:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     ppu = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.pixelsPerUnit; }), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse);
-    raw = _Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([raw, ppu] : Array<Dynamic>)), diagnostics: _Runtime.callValue(UnityParse.collectUnityDiagnostics__unityParse, cast ([raw] : Array<Dynamic>)), document: _Runtime.callValue(UnityParse.rawToDocument__unityParse, cast ([raw] : Array<Dynamic>)) };
+    raw = (cast UnityParse.parseUnityJson__unityParse((cast json : String)) : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { config: (cast UnityParse.rawToConfig__unityParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>), (cast ppu : Float)) : ParticleEmitterConfig), diagnostics: (cast UnityParse.collectUnityDiagnostics__unityParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : Array<ImportDiagnostic>), document: (cast UnityParse.rawToDocument__unityParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : UnityParticleDocument) };
     return cast null;
   }
 }

@@ -10,4 +10,4 @@ typedef HapticNotificationType = String;
 
 typedef HapticsCapabilities = { var amplitudeControl:Bool; var customEvents:Bool; var intensity:Bool; var patterns:Bool; var supported:Bool; };
 
-typedef HapticsBackend = { var cancel:Dynamic; var capabilities:Dynamic; var impact:Dynamic; var isSupported:Dynamic; var notification:Dynamic; @:optional var prepare:Dynamic; var selection:Dynamic; var vibrate:Dynamic; var vibratePattern:Dynamic; @:optional var vibrateWaveform:Dynamic; };
+typedef HapticsBackend = { var cancel:Void->Bool; var capabilities:HapticsCapabilities->HapticsCapabilities; var impact:HapticImpactStyle->Float->Bool; var isSupported:Void->Bool; var notification:HapticNotificationType->Bool; @:optional var prepare:Void->Void; var selection:Void->Bool; var vibrate:Float->Bool; var vibratePattern:Array<Float>->Bool; @:optional var vibrateWaveform:Array<Float>->Array<Float>->Float->Bool; };

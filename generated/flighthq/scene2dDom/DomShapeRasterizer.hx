@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.ShapeRasterizer;
 
 class DomShapeRasterizer {
   public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'shapeRasterizer'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerDomShapeRasterizer(state:DomRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    _Runtime.setField(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'shapeRasterizer', rasterizer);
+    ((cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).shapeRasterizer = rasterizer);
   }
 }

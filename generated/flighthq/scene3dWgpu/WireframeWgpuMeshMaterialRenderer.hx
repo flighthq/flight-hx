@@ -17,70 +17,76 @@ import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuScene3DRuntime;
+import flighthq.types.WgpuWireframePipeline;
+import flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 class WireframeWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    var wireframe:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var wireframe:Null<WireframeMaterial> = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuWireframePipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.field(stateRuntime, 'renderPass');
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     wireframe = (cast material : Null<WireframeMaterial>);
-    format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuWireframePipeline, cast ([state, format, _Runtime.strictEquals(_Runtime.optionalField(wireframe, 'alphaMode'), 'mask')] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
+    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    pipeline = (cast ensureWgpuWireframePipeline((cast state : WgpuRenderState), (cast format : String), (cast _Runtime.strictEquals(_Runtime.optionalField(wireframe, 'alphaMode'), 'mask') : Bool)) : WgpuWireframePipeline);
+    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast _lights : Scene3DLightBlock));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
-      (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer, WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>)) : Dynamic));
+      (group = cast ((cast bindWgpuWireframeColor((cast state : WgpuRenderState), pipeline, (cast WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      _Runtime.callValue(unpackColorToLinear, cast ([WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
-      (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, wireframe, WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'alphaCutoff')] : Array<Dynamic>)) : Dynamic));
+      (cast unpackColorToLinear((cast WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(wireframe, 'color') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuWireframeColor((cast state : WgpuRenderState), pipeline, (cast wireframe : flighthq._internal._Object), (cast WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(wireframe, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
+    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
-  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
-    var subset:Dynamic = cast _Runtime.UNDEFINED;
-    var upload:Dynamic = cast _Runtime.UNDEFINED;
-    var drawBindGroup:Dynamic = cast _Runtime.UNDEFINED;
-    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.field(stateRuntime, 'renderPass');
-    scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null) : Bool)) : Bool)) { return; }
+  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
+    var subset:MeshSubset = cast _Runtime.UNDEFINED;
+    var upload:Null<WgpuWireframeUpload> = cast _Runtime.UNDEFINED;
+    var drawBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    scene = (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime);
+    if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).activeMeshPipeline, null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
-    upload = _Runtime.callValue(ensureWgpuWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
+    upload = (cast ensureWgpuWireframeUpload((cast state : WgpuRenderState), (cast geometry : MeshGeometry)) : Null<WgpuWireframeUpload>);
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
-    drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
-    flighthq._internal._StaticIndex.writeUint32Array(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
+    drawBindGroup = (cast writeWgpuDrawUniform((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy)) : flighthq._internal.dom.GPUBindGroup);
+    flighthq._internal._StaticIndex.writeUint32Array(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, (cast scene : WgpuScene3DRuntime).pendingDrawOffset);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer'));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'lineIndexBuffer'), _Runtime.field(upload, 'indexFormat'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuWireframeUpload).vertexBuffer);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0);
   } };
 
   public static function registerWgpuWireframeMaterial(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, WireframeMaterialKind, wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
+    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast WireframeMaterialKind : String), (cast wireframeWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
   }
 
   public static final _scratch__wireframeWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final _dynamicOffsets__wireframeWgpuMeshMaterialRenderer:Dynamic = new flighthq._internal._UInt32Array(1.0);
+  public static final _dynamicOffsets__wireframeWgpuMeshMaterialRenderer:flighthq._internal._UInt32Array = new flighthq._internal._UInt32Array(1.0);
 
   public static final WHITE__wireframeWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
 
-  public static final FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer:Dynamic = (cast {  } : WireframeMaterial);
+  public static final FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer:WireframeMaterial = (cast {  } : WireframeMaterial);
 }

@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 class NumberTheory {
   public static function factorial(n:Float):Float {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('factorial: n must be a non-negative integer')); }
     if ((cast ((cast _Runtime.strictEquals(n, 0.0) : Bool) || (cast _Runtime.strictEquals(n, 1.0) : Bool)) : Bool)) { return cast 1.0; }
     result = 1.0;
     {
-      var i:Dynamic = 2.0;
+      var i:Float = 2.0;
       while ((cast ((cast i : Float) <= (cast n : Float)) : Bool)) {
         (result = cast ((result * i) : Dynamic));
         i++;
@@ -26,7 +26,7 @@ class NumberTheory {
     (b = cast (HxMath.abs(_Runtime.trunc(b)) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) && (cast _Runtime.strictEquals(b, 0.0) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('gcd: both arguments must not be 0')); }
     while ((cast !_Runtime.strictEquals(b, 0.0) : Bool)) {
-      var t:Dynamic = b;
+      var t:Float = b;
       (b = cast (_Runtime.fmod(a, b) : Dynamic));
       (a = cast (t : Dynamic));
     }
@@ -50,8 +50,8 @@ class NumberTheory {
   }
 
   public static function lcm(a:Float, b:Float):Float {
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    g = _Runtime.callValue(gcd, cast ([a, b] : Array<Dynamic>));
+    var g:Float = cast _Runtime.UNDEFINED;
+    g = (cast gcd((cast a : Float), (cast b : Float)) : Float);
     return cast _Runtime.multiplyNumbers(_Runtime.divideNumbers(HxMath.abs(_Runtime.trunc(a)), g), HxMath.abs(_Runtime.trunc(b)));
     return cast null;
   }

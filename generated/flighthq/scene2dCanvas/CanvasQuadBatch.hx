@@ -12,73 +12,84 @@ import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.QuadBatch;
+import flighthq.types.QuadBatch.QuadBatchData;
+import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class CanvasQuadBatch {
   @:noCompletion
   public static function drawCanvasQuadBatch(state:CanvasRenderState, quadBatch:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var source:QuadBatch = cast _Runtime.UNDEFINED;
+    var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceCount:Dynamic = cast _Runtime.UNDEFINED;
-    var ids:Dynamic = cast _Runtime.UNDEFINED;
-    var transforms:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    var numRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var roundPixels:Dynamic = cast _Runtime.UNDEFINED;
-    var quadTransform:Dynamic = cast _Runtime.UNDEFINED;
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothing:Dynamic = cast _Runtime.UNDEFINED;
-    var restoreMaterial:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(quadBatch, 'source') : QuadBatch);
-    data = _Runtime.field(source, 'data');
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var instanceCount:Float = cast _Runtime.UNDEFINED;
+    var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
+    var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var image:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
+    var numRegions:Float = cast _Runtime.UNDEFINED;
+    var transform:Matrix = cast _Runtime.UNDEFINED;
+    var roundPixels:Bool = cast _Runtime.UNDEFINED;
+    var quadTransform:Matrix = cast _Runtime.UNDEFINED;
+    var stride:Float = cast _Runtime.UNDEFINED;
+    var smoothing:Bool = cast _Runtime.UNDEFINED;
+    var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
+    source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
+    data = (cast source : QuadBatch).data;
     __destructure0 = data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    image = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), atlas.texture] : Array<Dynamic>));
+    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), atlas.texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(quadBatch, 'blendMode')] : Array<Dynamic>));
-    context = _Runtime.field(state, 'context');
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast quadBatch : RenderProxy2D).blendMode] : Array<Dynamic>));
+    context = (cast state : CanvasRenderState).context;
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    transform = _Runtime.field(quadBatch, 'transform2D');
-    roundPixels = _Runtime.field(state, 'roundPixels');
-    quadTransform = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
-    stride = ((cast _Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(quadBatch, 'alpha'));
-    smoothing = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(atlas.texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
+    transform = (cast quadBatch : RenderProxy2D).transform2D;
+    roundPixels = (cast state : CanvasRenderState).roundPixels;
+    quadTransform = (cast acquireMatrix() : Matrix);
+    stride = ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast quadBatch : RenderProxy2D).alpha);
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast atlas.texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
-    restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(quadBatch, 'material')] : Array<Dynamic>));
+    restoreMaterial = (cast applyCanvasMaterial((cast state : CanvasRenderState), (cast quadBatch : RenderProxy2D).material) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-        var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
+        var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
         if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           i++;
           continue;
         }
-        var offset:Dynamic = (i * stride);
+        var offset:Float = (i * stride);
         if ((cast _Runtime.strictEquals(stride, 2.0) : Bool)) {
-          var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, offset);
-          var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
+          var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, offset);
+          var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
-          _Runtime.callValue(setMatrixFromFloat32Array, cast ([quadTransform, offset, transforms] : Array<Dynamic>));
-          _Runtime.callValue(multiplyMatrix, cast ([quadTransform, transform, quadTransform] : Array<Dynamic>));
+          setMatrixFromFloat32Array(quadTransform, (cast offset : Float), (cast transforms : flighthq._internal._Float32Array));
+          multiplyMatrix(quadTransform, transform, quadTransform);
           if ((cast roundPixels : Bool)) {
             (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Dynamic));
             (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Dynamic));
@@ -91,7 +102,7 @@ class CanvasQuadBatch {
     }
     if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callValue(releaseMatrix, cast ([quadTransform] : Array<Dynamic>));
+    releaseMatrix(quadTransform);
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
     }

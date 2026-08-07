@@ -17,18 +17,18 @@ class MedianEffect {
   }
 
   public static function getMedianEffectPadding(effect:flighthq.types.MedianEffect):RenderEffectPadding {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
     radius = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0)));
     return cast { bottom: radius, left: radius, right: radius, top: radius };
     return cast null;
   }
 
   public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'MedianEffect', MedianEffect.resolveMedianEffectPadding__medianEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'MedianEffect' : String), MedianEffect.resolveMedianEffectPadding__medianEffect);
   }
 
   public static function resolveMedianEffectPadding__medianEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getMedianEffectPadding, cast ([(cast effect : flighthq.types.MedianEffect)] : Array<Dynamic>));
+    return cast (cast getMedianEffectPadding((cast (cast effect : flighthq.types.MedianEffect) : flighthq.types.MedianEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

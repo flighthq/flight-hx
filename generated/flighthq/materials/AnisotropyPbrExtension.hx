@@ -7,17 +7,26 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
 import flighthq.types.AnisotropyPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.AnisotropyPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
 class AnisotropyPbrExtension {
   public static function createAnisotropyPbrExtension(?opts:Dynamic):flighthq.types.AnisotropyPbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ anisotropyMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyMap'), function():Dynamic return cast null), anisotropyMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyMapUvSet'), function():Dynamic return cast 0.0), anisotropyRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyRotation'), function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyStrength'), function():Dynamic return cast 0.0), kind: AnisotropyPbrExtensionKind }] : Array<Dynamic>));
+    return cast (cast createEntity({ anisotropyMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyMap'), function():Dynamic return cast null), anisotropyMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyMapUvSet'), function():Dynamic return cast 0.0), anisotropyRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyRotation'), function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropyStrength'), function():Dynamic return cast 0.0), kind: AnisotropyPbrExtensionKind }) : flighthq.types.AnisotropyPbrExtension);
     return cast null;
   }
 
   public static function isValidAnisotropyPbrExtension(value:flighthq.types.AnisotropyPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'anisotropyStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'anisotropyRotation')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'anisotropyMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'anisotropyStrength') : Float)) : Bool) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'anisotropyRotation')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'anisotropyMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

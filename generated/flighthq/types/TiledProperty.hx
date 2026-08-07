@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef TiledPropertyType = String;
 
-typedef TiledProperty = { var name:String; var type:TiledPropertyType; var value:Dynamic; };
+typedef TiledProperty = { var name:String; var type:TiledPropertyType; var value:flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>; };

@@ -11,20 +11,22 @@ import flighthq.textureatlasFormats.TextureAtlasPackerParse.parseTextureAtlasPac
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
+import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TexturePackerSchema.TexturePackerDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
 import flighthq.types.TexturePackerSchema.TexturePackerMeta;
 import flighthq.types.TexturePackerSchema.TexturePackerParsed;
+import flighthq.types.TexturePackerSchema.TexturePackerSize;
 
 class TexturePackerParse {
   public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
-    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y }] : Array<Dynamic>));
+    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y } : Null<flighthq._internal._Any>)) : SpritesheetFrameData);
     return cast null;
   }
 
   public static function animationsFromFrameTags__texturePackerParse(tags:Array<TexturePackerFrameTag>, frameNames:Array<String>):Array<SpritesheetAnimationData> {
-    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return _Runtime.callValue(createSpritesheetAnimationData, cast ([{ direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, tag.from, (tag.to + 1.0)), name: tag.name, repeatCount: -1.0 }] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(tags, 'map', cast ([function(tag:TexturePackerFrameTag, __unused0:Float, __unused1:Array<TexturePackerFrameTag>):SpritesheetAnimationData return (cast createSpritesheetAnimationData((cast { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: _Runtime.slice(frameNames, tag.from, (tag.to + 1.0)), name: tag.name, repeatCount: -1.0 } : Null<flighthq._internal._Any>)) : SpritesheetAnimationData)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -35,19 +37,19 @@ class TexturePackerParse {
   }
 
   public static function documentToData__texturePackerParse(doc:TexturePackerDocument):SpritesheetData {
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
+    var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNames:Array<String> = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var meta:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
-    regions = _Runtime.callValue(parseTextureAtlasPackerDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
+    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var meta:TexturePackerMeta = cast _Runtime.UNDEFINED;
+    var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
+    regions = (cast parseTextureAtlasPackerDocument(doc, (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : TextureAtlas), _Runtime.field(_Runtime, 'UNDEFINED')) : TextureAtlas).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([TexturePackerParse.frameFromRegion__texturePackerParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
-    __destructure0 = doc;
-    meta = _Runtime.field(__destructure0, 'meta');
-    animations = _Runtime.select(meta.frameTags, function():Dynamic return cast _Runtime.callValue(TexturePackerParse.animationsFromFrameTags__texturePackerParse, cast ([meta.frameTags, frameNames] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: meta.image, imageHeight: meta.size.h, imageWidth: meta.size.w, scale: _Runtime.callValue(TexturePackerParse.metaScale__texturePackerParse, cast ([meta] : Array<Dynamic>)) }] : Array<Dynamic>));
+    frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:TextureAtlasRegion, __unused2:Float, __unused3:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
+    __destructure4 = doc;
+    meta = _Runtime.field(__destructure4, 'meta');
+    animations = _Runtime.select(meta.frameTags, function():Dynamic return cast (cast TexturePackerParse.animationsFromFrameTags__texturePackerParse((cast meta.frameTags : Array<TexturePackerFrameTag>), (cast frameNames : Array<String>)) : Array<SpritesheetAnimationData>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: meta.image, imageHeight: meta.size.h, imageWidth: meta.size.w, scale: (cast TexturePackerParse.metaScale__texturePackerParse((cast meta : TexturePackerMeta)) : Null<Float>) } : Null<flighthq._internal._Any>)) : SpritesheetData);
     return cast null;
   }
 
@@ -56,9 +58,9 @@ class TexturePackerParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>));
+      return cast (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : SpritesheetData);
     }
-    return cast _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([document] : Array<Dynamic>));
+    return cast (cast TexturePackerParse.documentToData__texturePackerParse((cast document : TexturePackerDocument)) : SpritesheetData);
     return cast null;
   }
 
@@ -67,9 +69,9 @@ class TexturePackerParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast { data: _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>)), document: _Runtime.callValue(TexturePackerParse.createEmptyTexturePackerDocument__texturePackerParse, cast ([] : Array<Dynamic>)) };
+      return cast { data: (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : SpritesheetData), document: (cast TexturePackerParse.createEmptyTexturePackerDocument__texturePackerParse() : TexturePackerDocument) };
     }
-    return cast { data: _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([document] : Array<Dynamic>)), document: document };
+    return cast { data: (cast TexturePackerParse.documentToData__texturePackerParse((cast document : TexturePackerDocument)) : SpritesheetData), document: document };
     return cast null;
   }
 

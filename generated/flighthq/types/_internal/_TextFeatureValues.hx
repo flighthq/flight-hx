@@ -5,27 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _TextFeatureValues {
-  public static final TextFeatureCapitals:Dynamic = 'c2sc';
+  public static final TextFeatureCapitals:String = 'c2sc';
 
-  public static final TextFeatureContextualAlternates:Dynamic = 'calt';
+  public static final TextFeatureContextualAlternates:String = 'calt';
 
-  public static final TextFeatureDiscretionaryLigatures:Dynamic = 'dlig';
+  public static final TextFeatureDiscretionaryLigatures:String = 'dlig';
 
-  public static final TextFeatureFractions:Dynamic = 'frac';
+  public static final TextFeatureFractions:String = 'frac';
 
-  public static final TextFeatureKerning:Dynamic = 'kern';
+  public static final TextFeatureKerning:String = 'kern';
 
-  public static final TextFeatureLigatures:Dynamic = 'liga';
+  public static final TextFeatureLigatures:String = 'liga';
 
-  public static final TextFeatureOldStyleFigures:Dynamic = 'onum';
+  public static final TextFeatureOldStyleFigures:String = 'onum';
 
-  public static final TextFeatureSmallCaps:Dynamic = 'smcp';
+  public static final TextFeatureSmallCaps:String = 'smcp';
 
-  public static final TextFeatureStylisticAlternates:Dynamic = 'salt';
+  public static final TextFeatureStylisticAlternates:String = 'salt';
 
-  public static final TextFeatureSubscript:Dynamic = 'subs';
+  public static final TextFeatureSubscript:String = 'subs';
 
-  public static final TextFeatureSuperscript:Dynamic = 'sups';
+  public static final TextFeatureSuperscript:String = 'sups';
 
-  public static final TextFeatureTabularFigures:Dynamic = 'tnum';
+  public static final TextFeatureTabularFigures:String = 'tnum';
 }

@@ -8,18 +8,27 @@ import flighthq.materials.MaterialValidation.isValidMaterialIor;
 import flighthq.materials.MaterialValidation.isValidMaterialIridescenceThickness;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.IridescencePbrExtension;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.IridescencePbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._IridescencePbrExtensionValues.IridescencePbrExtensionKind;
 
 class IridescencePbrExtension {
   public static function createIridescencePbrExtension(?opts:Dynamic):flighthq.types.IridescencePbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ iridescence: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescence'), function():Dynamic return cast 0.0), iridescenceIor: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceIor'), function():Dynamic return cast 1.3), iridescenceMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceMap'), function():Dynamic return cast null), iridescenceMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceMapUvSet'), function():Dynamic return cast 0.0), iridescenceThicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMap'), function():Dynamic return cast null), iridescenceThicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMapUvSet'), function():Dynamic return cast 0.0), iridescenceThicknessMax: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMax'), function():Dynamic return cast 400.0), iridescenceThicknessMin: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMin'), function():Dynamic return cast 100.0), kind: IridescencePbrExtensionKind }] : Array<Dynamic>));
+    return cast (cast createEntity({ iridescence: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescence'), function():Dynamic return cast 0.0), iridescenceIor: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceIor'), function():Dynamic return cast 1.3), iridescenceMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceMap'), function():Dynamic return cast null), iridescenceMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceMapUvSet'), function():Dynamic return cast 0.0), iridescenceThicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMap'), function():Dynamic return cast null), iridescenceThicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMapUvSet'), function():Dynamic return cast 0.0), iridescenceThicknessMax: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMax'), function():Dynamic return cast 400.0), iridescenceThicknessMin: _Runtime.coalesce(_Runtime.optionalField(opts, 'iridescenceThicknessMin'), function():Dynamic return cast 100.0), kind: IridescencePbrExtensionKind }) : flighthq.types.IridescencePbrExtension);
     return cast null;
   }
 
   public static function isValidIridescencePbrExtension(value:flighthq.types.IridescencePbrExtension):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'iridescence')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isValidMaterialIor, cast ([_Runtime.field(value, 'iridescenceIor')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidMaterialIridescenceThickness, cast ([_Runtime.field(value, 'iridescenceThicknessMin')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidMaterialIridescenceThickness, cast ([_Runtime.field(value, 'iridescenceThicknessMax')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'iridescenceThicknessMin') : Float) <= (cast _Runtime.field(value, 'iridescenceThicknessMax') : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'iridescenceMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'iridescenceThicknessMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'iridescence') : Float)) : Bool) : Bool) && (cast (cast isValidMaterialIor((cast _Runtime.field(value, 'iridescenceIor') : Float)) : Bool) : Bool)) : Bool) && (cast (cast isValidMaterialIridescenceThickness((cast _Runtime.field(value, 'iridescenceThicknessMin') : Float)) : Bool) : Bool)) : Bool) && (cast (cast isValidMaterialIridescenceThickness((cast _Runtime.field(value, 'iridescenceThicknessMax') : Float)) : Bool) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'iridescenceThicknessMin') : Float) <= (cast _Runtime.field(value, 'iridescenceThicknessMax') : Float)) : Bool)) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'iridescenceMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'iridescenceThicknessMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

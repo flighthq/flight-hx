@@ -5,18 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.Luminance.getColorLuminance;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterial;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.PhongMaterial;
+import flighthq.types.Sampler;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class PhongToPbr {
   public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
-    return cast _Runtime.callValue(createStandardPbrMaterial, cast ([_Runtime.mergeObjects([{ baseColor: _Runtime.field(phong, 'diffuse') }, { baseColorMap: _Runtime.field(phong, 'diffuseMap') }, { metallic: _Runtime.callValue(getPbrMetallicFromPhongSpecular, cast ([_Runtime.field(phong, 'specular'), _Runtime.field(phong, 'diffuse')] : Array<Dynamic>)) }, { normalMap: _Runtime.field(phong, 'normalMap') }, { normalScale: _Runtime.field(phong, 'normalScale') }, { roughness: _Runtime.callValue(getPbrRoughnessFromPhongShininess, cast ([_Runtime.field(phong, 'shininess')] : Array<Dynamic>)) }, opts])] : Array<Dynamic>));
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: _Runtime.field(phong, 'diffuse') }, { baseColorMap: _Runtime.field(phong, 'diffuseMap') }, { metallic: (cast getPbrMetallicFromPhongSpecular((cast _Runtime.field(phong, 'specular') : Float), (cast _Runtime.field(phong, 'diffuse') : Float)) : Null<Float>) }, { normalMap: _Runtime.field(phong, 'normalMap') }, { normalScale: _Runtime.field(phong, 'normalScale') }, { roughness: (cast getPbrRoughnessFromPhongShininess((cast _Runtime.field(phong, 'shininess') : Float)) : Null<Float>) }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
     return cast null;
   }
 
   public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
-    return cast ((cast ((cast ((cast _Runtime.callValue(getColorLuminance, cast ([specular] : Array<Dynamic>)) : Float) > (cast 0.5 : Float)) : Bool) && (cast ((cast _Runtime.callValue(getColorLuminance, cast ([diffuse] : Array<Dynamic>)) : Float) < (cast 0.04 : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast ((cast (cast getColorLuminance((cast specular : Float)) : Float) : Float) > (cast 0.5 : Float)) : Bool) && (cast ((cast (cast getColorLuminance((cast diffuse : Float)) : Float) : Float) < (cast 0.04 : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 

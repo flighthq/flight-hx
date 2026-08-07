@@ -14,7 +14,7 @@ typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<Entity
 
 typedef Texture2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:Null<TextureSource>; };
 
-typedef Texture = Dynamic;
+typedef Texture = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { >TextureCommon__Texture, var dimension:String; var sources:Array<Null<TextureSource>>; }>, { >TextureCommon__Texture, var dimension:String; var source:Null<VoxelGrid>; }>, { >TextureCommon__Texture, var dimension:String; var sources:TextureSourceCubeFaces; }>;
 
 typedef TextureLikeFrom__Texture<Type> = Dynamic;
 

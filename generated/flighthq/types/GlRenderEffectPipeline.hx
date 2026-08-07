@@ -9,13 +9,13 @@ import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<flighthq._internal.dom.WebGLTexture>; var sceneVelocityTexture:Null<flighthq._internal.dom.WebGLTexture>; };
 
-typedef GlRenderEffectRunner = Dynamic;
+typedef GlRenderEffectRunner = GlRenderEffectContext->RenderEffect->Void;
 
 typedef GlRenderEffectApplicationStatus = String;
 
 typedef GlRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:GlRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; };
 
-typedef GlRenderEffectApplicationGuard = Dynamic;
+typedef GlRenderEffectApplicationGuard = GlRenderState->GlRenderEffectApplicationExplanation->Void;
 
 typedef RenderEffectPipelineOptions = { @:optional var sampleCount:Float; @:optional var format:RenderTargetFormat; @:optional var depth:RenderTargetDepth; };
 

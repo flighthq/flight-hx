@@ -8,7 +8,10 @@ import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DResourceTe
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DTextureResourceReference;
 import flighthq.scene3dResources.ResolveScene3DResources.updateScene3DResourceStreaming;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.Scene3D;
+import flighthq.types.Scene3DResources;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
 import flighthq.types.Texture;
@@ -16,23 +19,23 @@ import flighthq.types.Texture;
 class SceneResourceRecovery {
   public static function retryFailedScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Float {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;
-    var reset:Dynamic = cast _Runtime.UNDEFINED;
+    var reset:flighthq._internal._Set<ImageResourceReference> = cast _Runtime.UNDEFINED;
     textures = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getScene3DResourceTextures, cast ([textures, scene] : Array<Dynamic>));
+    getScene3DResourceTextures((cast textures : Array<Texture>), (cast scene : Scene3D));
     reset = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
-        var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
-        var ref:Dynamic = _Runtime.callValue(getScene3DTextureResourceReference, cast ([scene, texture] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flighthq._internal._Set).has(ref)) : Bool)) : Bool)) { i++; continue; }
-        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callValue(options.select, cast ([texture, ref] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
-        if ((cast _Runtime.callValue(resetFailedImageResourceReference, cast ([ref] : Array<Dynamic>)) : Bool)) { ((cast reset : flighthq._internal._Set).add(ref)); }
+        var texture:Texture = flighthq._internal._StaticIndex.readArray(textures, i);
+        var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference((cast scene : Scene3D), (cast texture : Texture)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+        if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flighthq._internal._Set<ImageResourceReference>).has(ref)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(texture, ref) : Bool) : Bool)) : Bool)) { i++; continue; }
+        if ((cast (cast resetFailedImageResourceReference((cast ref : ImageResourceReference)) : Bool) : Bool)) { ((cast reset : flighthq._internal._Set<ImageResourceReference>).add(ref)); }
         i++;
       }
     }
-    _Runtime.callValue(updateScene3DResourceStreaming, cast ([scene, resolver, options] : Array<Dynamic>));
-    return cast (cast reset : flighthq._internal._Set).size;
+    (cast updateScene3DResourceStreaming((cast scene : Scene3D), (cast resolver : Scene3DResourceResolver), (cast options : Null<UpdateScene3DResourceStreamingOptions>)) : Scene3DResources);
+    return cast (cast reset : flighthq._internal._Set<ImageResourceReference>).size;
     return cast null;
   }
 }

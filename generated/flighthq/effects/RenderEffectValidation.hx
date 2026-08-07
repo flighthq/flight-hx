@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectInput;
 class RenderEffectValidation {
   public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
     for (effect in _Runtime.iterable(effects)) {
-      var required:Dynamic = _Runtime.callValue(getRenderEffectInputs, cast ([effect] : Array<Dynamic>));
+      var required:Array<RenderEffectInput> = (cast getRenderEffectInputs((cast effect : RenderEffect)) : Array<RenderEffectInput>);
       for (input in _Runtime.iterable(required)) {
         if ((cast !(cast _Runtime.includes(available, input) : Bool) : Bool)) {
           return cast input;

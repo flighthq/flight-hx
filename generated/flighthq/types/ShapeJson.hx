@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef ShapeTextureReference = { var index:Float; };
 
-typedef ShapeJsonFormatOptions = { @:optional var space:Dynamic; };
+typedef ShapeJsonFormatOptions = { @:optional var space:flighthq._internal._Union2<Float, String>; };
 
-typedef ShapeJsonParseOptions = { @:optional var resolveTexture:Dynamic; };
+typedef ShapeJsonParseOptions = { @:optional var resolveTexture:ShapeTextureReference->Null<Texture>; };

@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
 class _CircleColliderValues {
-  public static final CircleColliderKind:Dynamic = 'CircleCollider';
+  public static final CircleColliderKind:String = 'CircleCollider';
 }

@@ -8,7 +8,7 @@ import flighthq.types.Node.NodeTraits;
 
 typedef FocusDirection = String;
 
-typedef FocusManager<N> = { var focused:Null<Dynamic>; var root:Dynamic; var wrap:Bool; };
+typedef FocusManager<N> = { var focused:Null<N>; var root:N; var wrap:Bool; };
 
 typedef FocusManagerOptions = { @:optional var wrap:Bool; };
 

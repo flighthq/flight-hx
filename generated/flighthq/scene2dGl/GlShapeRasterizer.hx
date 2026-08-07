@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.ShapeRasterizer;
 
 class GlShapeRasterizer {
   public static function getGlShapeRasterizer(state:GlRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'shapeRasterizer'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlShapeRasterizer(state:GlRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'shapeRasterizer', rasterizer);
+    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).shapeRasterizer = rasterizer);
   }
 }

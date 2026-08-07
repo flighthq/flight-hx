@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _NormalMaterialValues {
-  public static final NormalMaterialKind:Dynamic = 'NormalMaterial';
+  public static final NormalMaterialKind:String = 'NormalMaterial';
 }

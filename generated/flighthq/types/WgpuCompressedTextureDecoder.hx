@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuCompressedTextureDecoder = Dynamic;
+typedef WgpuCompressedTextureDecoder = TextureContainerFormat->Float->Float->flighthq._internal._UInt8Array->Null<flighthq._internal._UInt8ClampedArray>;

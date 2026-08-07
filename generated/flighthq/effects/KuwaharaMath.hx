@@ -7,24 +7,24 @@ import flighthq.types.KuwaharaEffect;
 
 class KuwaharaMath {
   public static function computeKuwaharaGaussianWeights(radius:Float, out:flighthq._internal._Float32Array):Float {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var sigma:Dynamic = cast _Runtime.UNDEFINED;
-    var twoSigmaSq:Dynamic = cast _Runtime.UNDEFINED;
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
-    var invSum:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var sigma:Float = cast _Runtime.UNDEFINED;
+    var twoSigmaSq:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var invSum:Float = cast _Runtime.UNDEFINED;
     r = HxMath.max(1.0, HxMath.floor(radius));
     size = (r + 1.0);
     sigma = (r / 2.0);
     twoSigmaSq = ((2.0 * sigma) * sigma);
     sum = 0.0;
     {
-      var y:Dynamic = 0.0;
+      var y:Float = 0.0;
       while ((cast ((cast y : Float) < (cast size : Float)) : Bool)) {
         {
-          var x:Dynamic = 0.0;
+          var x:Float = 0.0;
           while ((cast ((cast x : Float) < (cast size : Float)) : Bool)) {
-            var d:Dynamic = ((x * x) + (y * y));
+            var d:Float = ((x * x) + (y * y));
             flighthq._internal._StaticIndex.writeFloat32Array(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
             (sum = cast ((sum + flighthq._internal._StaticIndex.readFloat32Array(out, ((y * size) + x))) : Dynamic));
             x++;
@@ -35,7 +35,7 @@ class KuwaharaMath {
     }
     invSum = ((cast ((cast sum : Float) > (cast 1e-10 : Float)) : Bool) ? (cast (1.0 / sum) : Dynamic) : (cast 1.0 : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
         ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), invSum)); });
         i++;
@@ -46,16 +46,16 @@ class KuwaharaMath {
   }
 
   public static function computeKuwaharaSectorOffsets(radius:Float, out:Array<Float>):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var half:Dynamic = cast _Runtime.UNDEFINED;
-    var v0:Dynamic = cast _Runtime.UNDEFINED;
-    var v1:Dynamic = cast _Runtime.UNDEFINED;
-    var v2:Dynamic = cast _Runtime.UNDEFINED;
-    var v3:Dynamic = cast _Runtime.UNDEFINED;
-    var v4:Dynamic = cast _Runtime.UNDEFINED;
-    var v5:Dynamic = cast _Runtime.UNDEFINED;
-    var v6:Dynamic = cast _Runtime.UNDEFINED;
-    var v7:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var half:Float = cast _Runtime.UNDEFINED;
+    var v0:Float = cast _Runtime.UNDEFINED;
+    var v1:Float = cast _Runtime.UNDEFINED;
+    var v2:Float = cast _Runtime.UNDEFINED;
+    var v3:Float = cast _Runtime.UNDEFINED;
+    var v4:Float = cast _Runtime.UNDEFINED;
+    var v5:Float = cast _Runtime.UNDEFINED;
+    var v6:Float = cast _Runtime.UNDEFINED;
+    var v7:Float = cast _Runtime.UNDEFINED;
     r = HxMath.max(1.0, HxMath.floor(radius));
     half = r;
     v0 = -half;
@@ -77,8 +77,8 @@ class KuwaharaMath {
   }
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    s = _Runtime.callValue(computeKuwaharaSectorSize, cast ([effect] : Array<Dynamic>));
+    var s:Float = cast _Runtime.UNDEFINED;
+    s = (cast computeKuwaharaSectorSize((cast effect : KuwaharaEffect)) : Float);
     return cast (s * s);
     return cast null;
   }

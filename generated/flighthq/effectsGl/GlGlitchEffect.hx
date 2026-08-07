@@ -6,40 +6,43 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlitchEffect;
+import flighthq.types.RenderEffect;
 
 class GlGlitchEffect {
   @:noCompletion
   public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var blockSize:Dynamic = cast _Runtime.UNDEFINED;
-    var colorShift:Dynamic = cast _Runtime.UNDEFINED;
-    var seed:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var blockSize:Float = cast _Runtime.UNDEFINED;
+    var colorShift:Float = cast _Runtime.UNDEFINED;
+    var seed:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5);
     blockSize = _Runtime.coalesce(_Runtime.field(effect, 'blockSize'), function():Dynamic return cast 24.0);
     colorShift = _Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.glitch', GlGlitchEffect.GLITCH_FRAGMENT_SRC__glGlitchEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.glitch' : String), (cast GlGlitchEffect.GLITCH_FRAGMENT_SRC__glGlitchEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_blockSize'), blockSize);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_colorShift'), colorShift);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlGlitchEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGlitchEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GlitchEffect)] : Array<Dynamic>));
+  public static final defaultGlGlitchEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyGlitchEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : GlitchEffect) : GlitchEffect));
   };
 
   public static function registerGlGlitchEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'GlitchEffect', defaultGlGlitchEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'GlitchEffect' : String), (cast defaultGlGlitchEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final GLITCH_FRAGMENT_SRC__glGlitchEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_blockSize;\nuniform float u_colorShift;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat ghash(float n) { return fract(sin(n) * 43758.5453123); }\nvoid main() {\n  float blockSize = max(2.0, u_blockSize);\n  float block = floor(v_texCoord.y * u_resolution.y / blockSize);\n  float r = ghash(block + u_seed * 7.0);\n  float tear = step(1.0 - u_intensity * 0.6, r);\n  float shiftPx = (ghash(block * 1.7 + u_seed) - 0.5) * 2.0 * tear * u_intensity * 40.0;\n  vec2 baseUv = vec2(v_texCoord.x + shiftPx / u_resolution.x, v_texCoord.y);\n  float cs = (u_colorShift * (0.4 + tear)) / u_resolution.x;\n  float rC = texture(u_texture0, vec2(baseUv.x + cs, baseUv.y)).r;\n  float gC = texture(u_texture0, baseUv).g;\n  float bC = texture(u_texture0, vec2(baseUv.x - cs, baseUv.y)).b;\n  float a = texture(u_texture0, baseUv).a;\n  vec3 col = vec3(rC, gC, bC);\n  float corrupt = step(0.985 - u_intensity * 0.04, ghash(block * 3.3 + u_seed * 2.0));\n  col = mix(col, vec3(1.0), corrupt * 0.6);\n  o_color = vec4(col, a);\n}';
+  public static final GLITCH_FRAGMENT_SRC__glGlitchEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_blockSize;\nuniform float u_colorShift;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat ghash(float n) { return fract(sin(n) * 43758.5453123); }\nvoid main() {\n  float blockSize = max(2.0, u_blockSize);\n  float block = floor(v_texCoord.y * u_resolution.y / blockSize);\n  float r = ghash(block + u_seed * 7.0);\n  float tear = step(1.0 - u_intensity * 0.6, r);\n  float shiftPx = (ghash(block * 1.7 + u_seed) - 0.5) * 2.0 * tear * u_intensity * 40.0;\n  vec2 baseUv = vec2(v_texCoord.x + shiftPx / u_resolution.x, v_texCoord.y);\n  float cs = (u_colorShift * (0.4 + tear)) / u_resolution.x;\n  float rC = texture(u_texture0, vec2(baseUv.x + cs, baseUv.y)).r;\n  float gC = texture(u_texture0, baseUv).g;\n  float bC = texture(u_texture0, vec2(baseUv.x - cs, baseUv.y)).b;\n  float a = texture(u_texture0, baseUv).a;\n  vec3 col = vec3(rC, gC, bC);\n  float corrupt = step(0.985 - u_intensity * 0.04, ghash(block * 3.3 + u_seed * 2.0));\n  col = mix(col, vec3(1.0), corrupt * 0.6);\n  o_color = vec4(col, a);\n}';
 }

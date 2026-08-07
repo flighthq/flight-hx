@@ -4,13 +4,14 @@ package flighthq.signals;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Signal;
+import flighthq.types.Signal.SignalData;
 
 class Emitter {
-  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function cancelSignal<T>(signal:Signal<T>):Void {
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { (signal.data.cancelled = cast (true : Dynamic)); }
   }
 
-  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
-    _Runtime.apply((cast signal.emit : Dynamic), _Runtime.concatArrays([_Runtime.toArray(args)]));
+  public static function emitSignal<T>(signal:Signal<T>, ...args:Dynamic):Void {
+    _Runtime.apply((cast signal.emit : Array<flighthq._internal._Any>->Void), _Runtime.concatArrays([_Runtime.toArray(args)]));
   }
 }

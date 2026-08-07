@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _IridescencePbrExtensionValues {
-  public static final IridescencePbrExtensionKind:Dynamic = 'IridescencePbrExtension';
+  public static final IridescencePbrExtensionKind:String = 'IridescencePbrExtension';
 }

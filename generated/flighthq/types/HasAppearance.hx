@@ -11,6 +11,6 @@ import flighthq.types.Node.NodeTraits;
 
 typedef HasAppearance = { var alpha:Float; var visible:Bool; };
 
-typedef HasAppearanceRuntime = { var binding:Null<Dynamic>; var worldAlpha:Null<Float>; var worldAlphaUsingAppearanceId:Float; var worldAlphaUsingParentAppearanceId:Float; var worldAppearanceId:Float; };
+typedef HasAppearanceRuntime = { var binding:Null<flighthq._internal._Object>; var worldAlpha:Null<Float>; var worldAlphaUsingAppearanceId:Float; var worldAlphaUsingParentAppearanceId:Float; var worldAppearanceId:Float; };
 
 typedef AppearanceNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var alpha:Float; var visible:Bool; };

@@ -5,22 +5,25 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.ColorScaleBias;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.TintMaterialData;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class EnableWgpuColorAdjustmentGuards {
   @:noCompletion
   public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeatureGuard'), null);
+    return cast !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeatureGuard', EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards);
+    ((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard = EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards);
   }
 
   public static function warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards():Void {
-    _Runtime.callValue(logOnce, cast (['scene2d-wgpu:color-adjustment-not-enabled', LogLevel.Warn, { message: 'recordWgpuQuadBatchColorScaleBias: color adjustment present but WGPU color adjustment not enabled — call registerWgpuColorAdjustmentMaterialFeature(state)' }, 'scene2d-wgpu'] : Array<Dynamic>));
+    (cast logOnce((cast 'scene2d-wgpu:color-adjustment-not-enabled' : String), (cast LogLevel.Warn : LogLevel), { message: 'recordWgpuQuadBatchColorScaleBias: color adjustment present but WGPU color adjustment not enabled — call registerWgpuColorAdjustmentMaterialFeature(state)' }, (cast 'scene2d-wgpu' : Null<String>)) : Bool);
   }
 }

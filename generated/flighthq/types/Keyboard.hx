@@ -14,16 +14,16 @@ typedef SoftKeyboardTransition = { var durationSeconds:Float; var height:Float; 
 
 typedef SoftKeyboardInfo = { var visible:Bool; var height:Float; var x:Float; var y:Float; var width:Float; };
 
-typedef SoftKeyboardBackend = { var getInfo:Dynamic; var subscribe:Dynamic; var show:Dynamic; var hide:Dynamic; @:optional var getResizeMode:Dynamic; @:optional var setResizeMode:Dynamic; @:optional var getAccessoryBarVisible:Dynamic; @:optional var setAccessoryBarVisible:Dynamic; @:optional var getScrollAssistEnabled:Dynamic; @:optional var setScrollAssistEnabled:Dynamic; @:optional var setStyle:Dynamic; };
+typedef SoftKeyboardBackend = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; var subscribe:SoftKeyboardPhase->SoftKeyboardTransition->Void->Void->Void; var show:Void->Void; var hide:Void->Void; @:optional var getResizeMode:Void->SoftKeyboardResizeMode; @:optional var setResizeMode:SoftKeyboardResizeMode->Void; @:optional var getAccessoryBarVisible:Void->Bool; @:optional var setAccessoryBarVisible:Bool->Void; @:optional var getScrollAssistEnabled:Void->Bool; @:optional var setScrollAssistEnabled:Bool->Void; @:optional var setStyle:SoftKeyboardStyleKind->Void; };
 
-typedef SoftKeyboard = { var onShow:Signal<Dynamic>; var onHide:Signal<Dynamic>; var onResize:Signal<Dynamic>; var onWillShow:Signal<Dynamic>; var onWillHide:Signal<Dynamic>; var onWillResize:Signal<Dynamic>; var onDidShow:Signal<Dynamic>; var onDidHide:Signal<Dynamic>; var onDidResize:Signal<Dynamic>; };
+typedef SoftKeyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; var onWillShow:Signal<SoftKeyboardTransition->Void>; var onWillHide:Signal<SoftKeyboardTransition->Void>; var onWillResize:Signal<SoftKeyboardTransition->Void>; var onDidShow:Signal<Float->Void>; var onDidHide:Signal<Void->Void>; var onDidResize:Signal<Float->Void>; };
 
 class Keyboard {
-  public static final SoftKeyboardResizeNoneKind:Dynamic = 'None';
+  public static final SoftKeyboardResizeNoneKind:String = 'None';
 
-  public static final SoftKeyboardResizeBodyKind:Dynamic = 'Body';
+  public static final SoftKeyboardResizeBodyKind:String = 'Body';
 
-  public static final SoftKeyboardStyleDefaultKind:Dynamic = 'Default';
+  public static final SoftKeyboardStyleDefaultKind:String = 'Default';
 
-  public static final SoftKeyboardStyleDarkKind:Dynamic = 'Dark';
+  public static final SoftKeyboardStyleDarkKind:String = 'Dark';
 }

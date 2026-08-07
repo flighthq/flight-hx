@@ -31,7 +31,7 @@ class Velocity {
     Facade_Velocity_flighthq_velocity_TransformVelocity.contributeTransformVelocity(field, root);
   }
 
-  public static function contributeVelocity(field:VelocityField, source:Dynamic, x:Float, y:Float):Void {
+  public static function contributeVelocity(field:VelocityField, source:flighthq._internal._Object, x:Float, y:Float):Void {
     Facade_Velocity_flighthq_velocity_VelocityField.contributeVelocity(field, source, x, y);
   }
 
@@ -50,7 +50,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function getVelocity(field:VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
+  public static function getVelocity(field:VelocityField, source:flighthq._internal._Object, out:Velocity2D):Velocity2D {
     return cast Facade_Velocity_flighthq_velocity_VelocityField.getVelocity(field, source, out);
     return cast null;
   }
@@ -60,7 +60,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function hasVelocity(field:VelocityField, source:Dynamic):Bool {
+  public static function hasVelocity(field:VelocityField, source:flighthq._internal._Object):Bool {
     return cast Facade_Velocity_flighthq_velocity_VelocityField.hasVelocity(field, source);
     return cast null;
   }
@@ -95,7 +95,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function suppressVelocity(field:VelocityField, source:Dynamic):Void {
+  public static function suppressVelocity(field:VelocityField, source:flighthq._internal._Object):Void {
     Facade_Velocity_flighthq_velocity_VelocityField.suppressVelocity(field, source);
   }
 

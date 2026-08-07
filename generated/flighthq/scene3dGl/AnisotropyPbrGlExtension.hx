@@ -5,30 +5,41 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlPbrExtensionRegistry.registerGlPbrExtension;
 import flighthq.types.AnisotropyPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
+import flighthq.types.GlPbrExtensionShaderContext;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.AnisotropyPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
 class AnisotropyPbrGlExtension {
-  public static final anisotropyPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:Dynamic, value:Dynamic) {
-    var extension:Dynamic = cast _Runtime.UNDEFINED;
+  public static final anisotropyPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
+    var extension:AnisotropyPbrExtension = cast _Runtime.UNDEFINED;
     extension = (cast value : AnisotropyPbrExtension);
-    _Runtime.callProperty(context, 'setFloat', cast (['u_flightAnisotropyStrength', _Runtime.field(extension, 'anisotropyStrength')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'setFloat', cast (['u_flightAnisotropyRotation', _Runtime.field(extension, 'anisotropyRotation')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'bindTexture', cast (['u_flightAnisotropyMap', 'u_flightAnisotropyMapUvSet', 'u_flightAnisotropyMapTransform', _Runtime.field(extension, 'anisotropyMap'), _Runtime.field(extension, 'anisotropyMapUvSet')] : Array<Dynamic>));
-  }, createShaderContribution: function(context:Dynamic, value:Dynamic) {
-    var extension:Dynamic = cast _Runtime.UNDEFINED;
-    var hasMap:Dynamic = cast _Runtime.UNDEFINED;
+    (cast context : GlPbrExtensionBindContext).setFloat('u_flightAnisotropyStrength', _Runtime.field(extension, 'anisotropyStrength'));
+    (cast context : GlPbrExtensionBindContext).setFloat('u_flightAnisotropyRotation', _Runtime.field(extension, 'anisotropyRotation'));
+    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightAnisotropyMap', 'u_flightAnisotropyMapUvSet', 'u_flightAnisotropyMapTransform', _Runtime.field(extension, 'anisotropyMap'), _Runtime.field(extension, 'anisotropyMapUvSet'));
+  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):{ var applySurface:String; var contributeIbl:String; var contributePunctual:String; var finalize:String; var fragmentDeclarations:String; var fragmentFunctions:String; var key:String; var textureCount:Float; } {
+    var extension:AnisotropyPbrExtension = cast _Runtime.UNDEFINED;
+    var hasMap:Bool = cast _Runtime.UNDEFINED;
     extension = (cast value : AnisotropyPbrExtension);
     hasMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'anisotropyMap')] : Array<Dynamic>));
     return cast { applySurface: '', contributeIbl: '\n  float flightAnisotropyIblStrength = clamp(u_flightAnisotropyStrength * flightAnisotropySample().z, 0.0, 1.0);\n  float flightAnisotropyAngle = u_flightAnisotropyRotation + atan(flightAnisotropySample().y, flightAnisotropySample().x);\n  vec3 flightAnisotropyTangent = normalize(cos(flightAnisotropyAngle) * tangentDir + sin(flightAnisotropyAngle) * bitangentDir);\n  vec3 flightAnisotropyReflection = normalize(mix(reflect(-V, N), flightAnisotropyTangent, flightAnisotropyIblStrength * rough * 0.35));\n  vec3 flightAnisotropyPrefiltered = textureLod(u_iblPrefiltered, flightAnisotropyReflection, rough * u_iblMaxMip).rgb;\n  ambient += (flightAnisotropyPrefiltered - prefiltered) * (F * brdf.x + brdf.y) * flightAnisotropyIblStrength * occ * u_iblIntensity;', contributePunctual: '\n  vec3 flightAnisotropyData = flightAnisotropySample();\n  float flightAnisotropyStrength = clamp(u_flightAnisotropyStrength * flightAnisotropyData.z, 0.0, 1.0);\n  float flightAnisotropyAngle = u_flightAnisotropyRotation + atan(flightAnisotropyData.y, flightAnisotropyData.x);\n  vec3 flightAnisotropyTangent = normalize(cos(flightAnisotropyAngle) * tangentDir + sin(flightAnisotropyAngle) * bitangentDir);\n  vec3 flightAnisotropyBitangent = normalize(cross(N, flightAnisotropyTangent));\n  float flightAt = max(roughness * roughness * (1.0 + flightAnisotropyStrength), 1e-3);\n  float flightAb = max(roughness * roughness * (1.0 - flightAnisotropyStrength), 1e-3);\n  float flightAnisotropyD = flightDistributionGgxAnisotropic(\n    nDotH, dot(flightAnisotropyTangent, halfVec), dot(flightAnisotropyBitangent, halfVec), flightAt, flightAb);\n  direct += (flightAnisotropyD - d) * vis * fresnel * lightColor * nDotL;', finalize: '', fragmentDeclarations: '\nuniform float u_flightAnisotropyStrength;\nuniform float u_flightAnisotropyRotation;\n' + Std.string(((cast hasMap : Bool) ? (cast 'uniform sampler2D u_flightAnisotropyMap;\nuniform int u_flightAnisotropyMapUvSet;\nuniform mat3 u_flightAnisotropyMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '', fragmentFunctions: '\nvec3 flightAnisotropySample() {\n' + Std.string(((cast hasMap : Bool) ? (cast '  vec2 uv = u_flightAnisotropyMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0;\n  vec3 value = texture(u_flightAnisotropyMap, (u_flightAnisotropyMapTransform * vec3(uv, 1.0)).xy).rgb;\n  return vec3(value.rg * 2.0 - 1.0, value.b);' : Dynamic) : (cast '  return vec3(1.0, 0.0, 1.0);' : Dynamic))) + '\n}\nfloat flightDistributionGgxAnisotropic(float nDotH, float tDotH, float bDotH, float at, float ab) {\n  float value = tDotH * tDotH / (at * at) + bDotH * bDotH / (ab * ab) + nDotH * nDotH;\n  return 1.0 / max(PI * at * ab * value * value, 1e-7);\n}', key: 'anisotropy:' + Std.string(((cast hasMap : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '', textureCount: ((cast hasMap : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) };
-  }, isSupported: function(extension:PbrExtension) {
+  }, isSupported: function(extension:PbrExtension):Bool {
     return cast true;
   } };
 
   public static function registerGlAnisotropyPbrExtension(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlPbrExtension, cast ([state, AnisotropyPbrExtensionKind, anisotropyPbrGlExtension] : Array<Dynamic>));
+    registerGlPbrExtension((cast state : GlRenderState), (cast AnisotropyPbrExtensionKind : String), (cast anisotropyPbrGlExtension : GlPbrExtensionRegistration));
   }
 }

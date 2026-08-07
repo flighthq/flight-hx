@@ -8,24 +8,24 @@ import flighthq.effects.GaussianKernel.getGaussianKernelSize;
 
 class LinearSampledGaussian {
   public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var tapCount:Dynamic = cast _Runtime.UNDEFINED;
-    size = _Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>));
+    var size:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var tapCount:Float = cast _Runtime.UNDEFINED;
+    size = (cast getGaussianKernelSize((cast sigma : Float)) : Float);
     radius = ((size - 1.0) / 2.0);
-    _Runtime.callValue(computeGaussianKernelWeights, cast ([sigma, LinearSampledGaussian.scratchWeights__linearSampledGaussian] : Array<Dynamic>));
-    tapCount = _Runtime.callValue(getLinearSampledGaussianTapCount, cast ([sigma] : Array<Dynamic>));
+    (cast computeGaussianKernelWeights((cast sigma : Float), (cast LinearSampledGaussian.scratchWeights__linearSampledGaussian : Array<Float>)) : Array<Float>);
+    tapCount = (cast getLinearSampledGaussianTapCount((cast sigma : Float)) : Float);
     _Runtime.setLength(outWeights, tapCount);
     _Runtime.setLength(outOffsets, tapCount);
     {
-      var tap:Dynamic = 0.0;
+      var tap:Float = 0.0;
       while ((cast ((cast tap : Float) < (cast tapCount : Float)) : Bool)) {
-        var i:Dynamic = (tap * 2.0);
-        var posA:Dynamic = (i - radius);
+        var i:Float = (tap * 2.0);
+        var posA:Float = (i - radius);
         if ((cast ((cast (i + 1.0) : Float) < (cast size : Float)) : Bool)) {
-          var weightA:Dynamic = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
-          var weightB:Dynamic = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
-          var combined:Dynamic = (weightA + weightB);
+          var weightA:Float = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
+          var weightB:Float = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
+          var combined:Float = (weightA + weightB);
           flighthq._internal._StaticIndex.writeArray(outWeights, tap, combined);
           flighthq._internal._StaticIndex.writeArray(outOffsets, tap, ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)));
         } else {
@@ -40,7 +40,7 @@ class LinearSampledGaussian {
   }
 
   public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
-    return cast HxMath.ceil(_Runtime.divideNumbers(_Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>)), 2.0));
+    return cast HxMath.ceil(((cast getGaussianKernelSize((cast sigma : Float)) : Float) / 2.0));
     return cast null;
   }
 

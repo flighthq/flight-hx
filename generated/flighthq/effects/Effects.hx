@@ -141,7 +141,7 @@ import flighthq.types.VolumetricLightEffect;
 import flighthq.types.WhiteBalanceEffect;
 
 class Effects {
-  public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
+  public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     Facade_Effects_flighthq_effects_BlendModeMath.blendNonSeparableRgb(mode, cbR, cbG, cbB, csR, csG, csB, out);
   }
 
@@ -298,7 +298,7 @@ class Effects {
     return cast null;
   }
 
-  public static function computeRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPadding {
+  public static function computeRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPadding {
     return cast Facade_Effects_flighthq_effects_RenderEffectPadding.computeRenderEffectPadding(state, effects);
     return cast null;
   }
@@ -605,7 +605,7 @@ class Effects {
     return cast null;
   }
 
-  public static function explainRenderEffectPadding(state:RenderState, effects:Dynamic):RenderEffectPaddingExplanation {
+  public static function explainRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPaddingExplanation {
     return cast Facade_Effects_flighthq_effects_RenderEffectPadding.explainRenderEffectPadding(state, effects);
     return cast null;
   }
@@ -618,7 +618,7 @@ class Effects {
     Facade_Effects_flighthq_effects_ToneMapMath.getAcesOutputMatrix(out);
   }
 
-  public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
+  public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     Facade_Effects_flighthq_effects_BlendModeMath.getAdvancedBlendRgb(mode, cbR, cbG, cbB, csR, csG, csB, out);
   }
 
@@ -652,7 +652,7 @@ class Effects {
     return cast null;
   }
 
-  public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
+  public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     Facade_Effects_flighthq_effects_CompositeOperatorMath.getCompositeOperatorFactors(operator_, sourceAlpha, backdropAlpha, out);
   }
 
@@ -741,7 +741,7 @@ class Effects {
     return cast null;
   }
 
-  public static function getRenderEffectDefaults(kind:String):Dynamic {
+  public static function getRenderEffectDefaults(kind:String):flighthq._internal._Record<String, flighthq._internal._Any> {
     return cast Facade_Effects_flighthq_effects_RenderEffectDefaults.getRenderEffectDefaults(kind);
     return cast null;
   }

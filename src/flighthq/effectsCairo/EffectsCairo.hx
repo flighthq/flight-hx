@@ -22,7 +22,9 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry as Facade_EffectsCanvas
 import flighthq.effectsCanvas.CanvasRenderTextureEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderTextureEffect;
 import flighthq.effectsCanvas.CanvasScanlinesEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect;
 import flighthq.effectsCanvas.CanvasVignetteEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect;
+import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
+import flighthq.types.BevelEffect;
 import flighthq.types.CanvasRenderEffectPipeline;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
@@ -34,13 +36,13 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
 class EffectsCairo {
-  public static inline function applyCairoGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void { flighthq.effectsCanvas.EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale); }
+  public static inline function applyCairoGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Float, ?scale:Float):Void { flighthq.effectsCanvas.EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale); }
   public static inline function applyCairoRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool { return flighthq.effectsCanvas.EffectsCanvas.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects); }
   public static inline function beginCairoRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline):Void { flighthq.effectsCanvas.EffectsCanvas.beginCanvasRenderEffectPipeline(state, pipeline); }
   public static inline function buildCairoGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray { return flighthq.effectsCanvas.EffectsCanvas.buildCanvasGradientRamp(colors, alphas, ratios); }
-  public static inline function clipCairoBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:Dynamic):Void { flighthq.effectsCanvas.EffectsCanvas.clipCanvasBevelBand(band, source, bevelType); }
+  public static inline function clipCairoBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:flighthq._internal._IndexedAccess<BevelEffect, String>):Void { flighthq.effectsCanvas.EffectsCanvas.clipCanvasBevelBand(band, source, bevelType); }
   public static inline function createCairoRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline { return flighthq.effectsCanvas.EffectsCanvas.createCanvasRenderEffectPipeline(_state, options); }
-  public static inline function endCairoRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<Dynamic>):Void { flighthq.effectsCanvas.EffectsCanvas.endCanvasRenderEffectPipeline(state, pipeline, operations); }
+  public static inline function endCairoRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void { flighthq.effectsCanvas.EffectsCanvas.endCanvasRenderEffectPipeline(state, pipeline, operations); }
   public static inline function getCairoBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> { return flighthq.effectsCanvas.EffectsCanvas.getCanvasBlendEffectBackdrop(state, backdropKey); }
   public static inline function getCairoBlendEffectCompositeOperation(mode:AdvancedBlendMode):flighthq._internal.dom.GlobalCompositeOperation { return flighthq.effectsCanvas.EffectsCanvas.getCanvasBlendEffectCompositeOperation(mode); }
   public static inline function getCairoCompositeEffectOperation(operator_:CompositeOperator):flighthq._internal.dom.GlobalCompositeOperation { return flighthq.effectsCanvas.EffectsCanvas.getCanvasCompositeEffectOperation(operator_); }

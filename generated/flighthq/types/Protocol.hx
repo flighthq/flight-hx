@@ -4,8 +4,8 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParsedProtocolUrl = { var scheme:String; var host:String; var path:String; var query:Dynamic; };
+typedef ParsedProtocolUrl = { var scheme:String; var host:String; var path:String; var query:flighthq._internal._Record<String, String>; };
 
-typedef ProtocolHandler = { var onOpenUrl:Signal<Dynamic>; };
+typedef ProtocolHandler = { var onOpenUrl:Signal<String->Void>; };
 
-typedef ProtocolBackend = { var register:Dynamic; var unregister:Dynamic; var isRegistered:Dynamic; var getRegisteredSchemes:Dynamic; var setAsDefault:Dynamic; var isDefault:Dynamic; var removeAsDefault:Dynamic; var getLaunchUrl:Dynamic; var drainPendingUrls:Dynamic; var subscribe:Dynamic; };
+typedef ProtocolBackend = { var register:String->Bool; var unregister:String->Bool; var isRegistered:String->Bool; var getRegisteredSchemes:Void->Array<String>; var setAsDefault:String->Bool; var isDefault:String->Bool; var removeAsDefault:String->Bool; var getLaunchUrl:Void->Null<String>; var drainPendingUrls:Void->Array<String>; var subscribe:String->Void->Void->Void; };

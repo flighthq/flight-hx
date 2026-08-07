@@ -6,23 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.spring.Spring.createSpring;
 import flighthq.spring.Spring.isSpringSettled;
 import flighthq.spring.Spring.updateSpring;
+import flighthq.types.Spring;
 import flighthq.types.Spring.Spring3D;
 import flighthq.types.Spring.SpringConfig;
 
 class Spring3D {
   public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):flighthq.types.Spring.Spring3D {
-    return cast { x: _Runtime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: _Runtime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)), z: _Runtime.callValue(createSpring, cast ([valueZ, velocityZ] : Array<Dynamic>)) };
+    return cast { x: (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring), y: (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring), z: (cast createSpring((cast valueZ : Float), (cast velocityZ : Float)) : Spring) };
     return cast null;
   }
 
   public static function isSpring3DSettled(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue(((cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring3D, 'z'), targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast (cast isSpringSettled(_Runtime.field(spring3D, 'x'), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool) : Bool) && (cast (cast isSpringSettled(_Runtime.field(spring3D, 'y'), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isSpringSettled(_Runtime.field(spring3D, 'z'), (cast targetZ : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
     return cast null;
   }
 
   public static function updateSpring3D(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
-    _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring3D, 'x'), targetX, config, deltaTime] : Array<Dynamic>));
-    _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring3D, 'y'), targetY, config, deltaTime] : Array<Dynamic>));
-    _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring3D, 'z'), targetZ, config, deltaTime] : Array<Dynamic>));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).x, (cast targetX : Float), (cast config : SpringConfig), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).y, (cast targetY : Float), (cast config : SpringConfig), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).z, (cast targetZ : Float), (cast config : SpringConfig), (cast deltaTime : Float));
   }
 }

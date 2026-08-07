@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node.NodeAny;
 
-typedef HitTestFunction = Dynamic;
+typedef HitTestFunction = NodeAny->Float->Float->Bool;
 
-typedef HitTestPreciseFunction = Dynamic;
+typedef HitTestPreciseFunction = NodeAny->Float->Float->Float;

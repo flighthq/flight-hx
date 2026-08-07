@@ -4,27 +4,28 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapResizeMode;
 import flighthq.types.BitmapResizeOptions;
 
 class BitmapResize {
-  public static function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, options:Dynamic = 'bilinear'):Void {
+  public static function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, options:flighthq._internal._Union2<BitmapResizeMode, BitmapResizeOptions> = 'bilinear'):Void {
     var opts:BitmapResizeOptions = cast _Runtime.UNDEFINED;
-    var mode:Dynamic = cast _Runtime.UNDEFINED;
-    var edgeMode:Dynamic = cast _Runtime.UNDEFINED;
-    var premultiplied:Dynamic = cast _Runtime.UNDEFINED;
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
-    var dw:Dynamic = cast _Runtime.UNDEFINED;
-    var dh:Dynamic = cast _Runtime.UNDEFINED;
-    var sd:Dynamic = cast _Runtime.UNDEFINED;
-    var dd:Dynamic = cast _Runtime.UNDEFINED;
-    var sStride:Dynamic = cast _Runtime.UNDEFINED;
-    var dStride:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleY:Dynamic = cast _Runtime.UNDEFINED;
+    var mode:BitmapResizeMode = cast _Runtime.UNDEFINED;
+    var edgeMode:BitmapEdgeMode = cast _Runtime.UNDEFINED;
+    var premultiplied:Bool = cast _Runtime.UNDEFINED;
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
+    var dw:Float = cast _Runtime.UNDEFINED;
+    var dh:Float = cast _Runtime.UNDEFINED;
+    var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var sStride:Float = cast _Runtime.UNDEFINED;
+    var dStride:Float = cast _Runtime.UNDEFINED;
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
     opts = ((cast _Runtime.strictEquals(_Runtime.typeofValue(options), 'string') : Bool) ? (cast { mode: options } : Dynamic) : (cast options : Dynamic));
     mode = _Runtime.coalesce(_Runtime.field(opts, 'mode'), function():Dynamic return cast 'bilinear');
     edgeMode = _Runtime.coalesce(_Runtime.field(opts, 'edgeMode'), function():Dynamic return cast 'clamp');
@@ -40,21 +41,21 @@ class BitmapResize {
     dStride = _Runtime.field(dest, 'bitmap').width;
     if ((cast _Runtime.strictEquals(mode, 'nearest') : Bool)) {
       {
-        var dy:Dynamic = 0.0;
+        var dy:Float = 0.0;
         while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-          var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
+          var oy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
           if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
-          var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), HxMath.min((sh - 1.0), HxMath.floor(((dy * sh) / dh))));
+          var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), HxMath.min((sh - 1.0), HxMath.floor(((dy * sh) / dh))));
           if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
           {
-            var dx:Dynamic = 0.0;
+            var dx:Float = 0.0;
             while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-              var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
+              var ox:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
               if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
-              var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), HxMath.min((sw - 1.0), HxMath.floor(((dx * sw) / dw))));
+              var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), HxMath.min((sw - 1.0), HxMath.floor(((dx * sw) / dw))));
               if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { dx++; continue; }
-              var si:Dynamic = (((sy * sStride) + sx) * 4.0);
-              var di:Dynamic = (((oy * dStride) + ox) * 4.0);
+              var si:Float = (((sy * sStride) + sx) * 4.0);
+              var di:Float = (((oy * dStride) + ox) * 4.0);
               flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
@@ -71,41 +72,41 @@ class BitmapResize {
     scaleY = (sh / dh);
     if ((cast _Runtime.strictEquals(mode, 'bicubic') : Bool)) {
       {
-        var dy:Dynamic = 0.0;
+        var dy:Float = 0.0;
         while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-          var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
+          var oy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
           if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
-          var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
-          var y1:Dynamic = HxMath.floor(fy);
-          var ty:Dynamic = (fy - y1);
+          var fy:Float = (((dy + 0.5) * scaleY) - 0.5);
+          var y1:Float = HxMath.floor(fy);
+          var ty:Float = (fy - y1);
           {
-            var dx:Dynamic = 0.0;
+            var dx:Float = 0.0;
             while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-              var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
+              var ox:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
               if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
-              var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
-              var x1:Dynamic = HxMath.floor(fx);
-              var tx:Dynamic = (fx - x1);
-              var di:Dynamic = (((oy * dStride) + ox) * 4.0);
+              var fx:Float = (((dx + 0.5) * scaleX) - 0.5);
+              var x1:Float = HxMath.floor(fx);
+              var tx:Float = (fx - x1);
+              var di:Float = (((oy * dStride) + ox) * 4.0);
               {
-                var c:Dynamic = 0.0;
+                var c:Float = 0.0;
                 while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-                  var sum:Dynamic = 0.0;
+                  var sum:Float = 0.0;
                   {
-                    var m:Dynamic = -1.0;
+                    var m:Float = -1.0;
                     while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
-                      var wy:Dynamic = _Runtime.callValue(BitmapResize.catmullRomWeight__bitmapResize, cast ([(ty - m)] : Array<Dynamic>));
-                      var ry:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([(y1 + m), sh, edgeMode] : Array<Dynamic>));
+                      var wy:Float = (cast BitmapResize.catmullRomWeight__bitmapResize((cast (ty - m) : Float)) : Float);
+                      var ry:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (y1 + m) : Float), (cast sh : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
                       {
-                        var n:Dynamic = -1.0;
+                        var n:Float = -1.0;
                         while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
-                          var wx:Dynamic = _Runtime.callValue(BitmapResize.catmullRomWeight__bitmapResize, cast ([(tx - n)] : Array<Dynamic>));
-                          var rx:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([(x1 + n), sw, edgeMode] : Array<Dynamic>));
+                          var wx:Float = (cast BitmapResize.catmullRomWeight__bitmapResize((cast (tx - n) : Float)) : Float);
+                          var rx:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x1 + n) : Float), (cast sw : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
                           if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) { n++; continue; }
-                          var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), ry);
-                          var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), rx);
-                          var si:Dynamic = (((sy * sStride) + sx) * 4.0);
-                          var v:Dynamic = ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0))) / 255.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)) : Dynamic));
+                          var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), ry);
+                          var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), rx);
+                          var si:Float = (((sy * sStride) + sx) * 4.0);
+                          var v:Float = ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0))) / 255.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)) : Dynamic));
                           (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                           n++;
                         }
@@ -118,7 +119,7 @@ class BitmapResize {
                 }
               }
               if ((cast premultiplied : Bool)) {
-                var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
+                var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
                 if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
                   flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di), 255.0) / a))));
                   flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)), 255.0) / a))));
@@ -138,51 +139,51 @@ class BitmapResize {
       return;
     }
     {
-      var dy:Dynamic = 0.0;
+      var dy:Float = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-        var oy:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
+        var oy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
         if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { dy++; continue; }
-        var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
-        var y0:Dynamic = HxMath.floor(fy);
-        var ty:Dynamic = (fy - y0);
-        var ry0:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([y0, sh, edgeMode] : Array<Dynamic>));
-        var ry1:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([(y0 + 1.0), sh, edgeMode] : Array<Dynamic>));
+        var fy:Float = (((dy + 0.5) * scaleY) - 0.5);
+        var y0:Float = HxMath.floor(fy);
+        var ty:Float = (fy - y0);
+        var ry0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast y0 : Float), (cast sh : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
+        var ry1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (y0 + 1.0) : Float), (cast sh : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
         {
-          var dx:Dynamic = 0.0;
+          var dx:Float = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-            var ox:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
+            var ox:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
             if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
-            var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
-            var x0:Dynamic = HxMath.floor(fx);
-            var tx:Dynamic = (fx - x0);
-            var rx0:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([x0, sw, edgeMode] : Array<Dynamic>));
-            var rx1:Dynamic = _Runtime.callValue(BitmapResize.resolveResizeEdge__bitmapResize, cast ([(x0 + 1.0), sw, edgeMode] : Array<Dynamic>));
-            var di:Dynamic = (((oy * dStride) + ox) * 4.0);
-            var i00:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
-            var i10:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
-            var i01:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
-            var i11:Dynamic = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var fx:Float = (((dx + 0.5) * scaleX) - 0.5);
+            var x0:Float = HxMath.floor(fx);
+            var tx:Float = (fx - x0);
+            var rx0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast x0 : Float), (cast sw : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
+            var rx1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x0 + 1.0) : Float), (cast sw : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
+            var di:Float = (((oy * dStride) + ox) * 4.0);
+            var i00:Float = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i10:Float = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry0) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i01:Float = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
+            var i11:Float = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry1, null) : Bool)) : Bool) ? (cast ((_Runtime.addNumbers((_Runtime.addNumbers(_Runtime.field(source, 'y'), ry1) * sStride), _Runtime.field(source, 'x')) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
             {
-              var c:Dynamic = 0.0;
+              var c:Float = 0.0;
               while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-                var v00:Dynamic = ((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i00 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v10:Dynamic = ((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i10 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v01:Dynamic = ((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i01 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v11:Dynamic = ((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i11 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v00:Float = ((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i00 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v10:Float = ((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i10 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v01:Float = ((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i01 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v11:Float = ((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i11 + c)) : Dynamic) : (cast 0.0 : Dynamic));
                 if ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool)) {
                   (v00 = cast (((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v00, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i00 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                   (v10 = cast (((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v10, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i10 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                   (v01 = cast (((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v01, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i01 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                   (v11 = cast (((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v11, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i11 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                 }
-                var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
-                var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
+                var top:Float = ((v00 * (1.0 - tx)) + (v10 * tx));
+                var bottom:Float = ((v01 * (1.0 - tx)) + (v11 * tx));
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
                 c++;
               }
             }
             if ((cast premultiplied : Bool)) {
-              var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
+              var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
               if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di), 255.0) / a))));
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)), 255.0) / a))));
@@ -199,11 +200,11 @@ class BitmapResize {
         dy++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function catmullRomWeight__bitmapResize(t:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     a = HxMath.abs(t);
     if ((cast ((cast a : Float) >= (cast 2.0 : Float)) : Bool)) { return cast 0.0; }
     if ((cast ((cast a : Float) >= (cast 1.0 : Float)) : Bool)) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
@@ -223,8 +224,8 @@ class BitmapResize {
       }
       else if (__switchValue == 'mirror') {
         {
-          var period:Dynamic = (2.0 * size);
-          var wrapped:Dynamic = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
+          var period:Float = (2.0 * size);
+          var wrapped:Float = _Runtime.fmod((_Runtime.fmod(v, period) + period), period);
           return cast ((cast ((cast wrapped : Float) < (cast size : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast ((period - 1.0) - wrapped) : Dynamic));
         }
       }

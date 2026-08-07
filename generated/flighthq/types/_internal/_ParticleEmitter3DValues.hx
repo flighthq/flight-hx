@@ -9,5 +9,5 @@ import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
 class _ParticleEmitter3DValues {
-  public static final ParticleEmitter3DKind:Dynamic = 'ParticleEmitter3D';
+  public static final ParticleEmitter3DKind:String = 'ParticleEmitter3D';
 }

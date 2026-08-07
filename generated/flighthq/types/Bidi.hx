@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef BidiClass = String;
 
-typedef BidiClassBackend = { var getBidiClass:Dynamic; };
+typedef BidiClassBackend = { var getBidiClass:Float->BidiClass; };
 
 typedef BidiDirection = String;
 

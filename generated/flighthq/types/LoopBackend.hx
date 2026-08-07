@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef LoopBackend = { var requestFrame:Dynamic; var cancelFrame:Dynamic; var now:Dynamic; };
+typedef LoopBackend = { var requestFrame:Float->Void->flighthq._internal._Any; var cancelFrame:flighthq._internal._Any->Void; var now:Void->Float; };

@@ -13,8 +13,8 @@ typedef SpatialDeclineReason = String;
 
 typedef SpatialIndexingOperation = String;
 
-typedef SpatialIndexingReason = Dynamic;
+typedef SpatialIndexingReason = flighthq._internal._Union2<SpatialDeclineReason, String>;
 
 typedef SpatialIndexingNotice = { var cellSize:Float; var id:SpatialObjectId; var mode:SpatialIndexingMode; var operation:SpatialIndexingOperation; var wouldOccupyBucketCount:Float; var reason:Null<SpatialIndexingReason>; };
 
-typedef SpatialIndexingGuard = Dynamic;
+typedef SpatialIndexingGuard = SpatialIndexingNotice->Void;

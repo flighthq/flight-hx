@@ -8,6 +8,6 @@ typedef Skeleton2DCoercedInterpolation = { var applied:String; var stated:String
 
 typedef Skeleton2DDeformLengthMismatch = { var addressed:Float; var offsets:Float; var subject:String; };
 
-typedef Skeleton2DCoercedInterpolationGuard = Dynamic;
+typedef Skeleton2DCoercedInterpolationGuard = Skeleton2DCoercedInterpolation->Void;
 
-typedef Skeleton2DDeformLengthGuard = Dynamic;
+typedef Skeleton2DDeformLengthGuard = Skeleton2DDeformLengthMismatch->Void;

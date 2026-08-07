@@ -18,31 +18,31 @@ typedef StrokeSubpath__strokePathGeometry = { var closed:Bool; var points:Array<
 typedef SegmentFrame__strokePathGeometry = { var nx:Float; var ny:Float; var tx:Float; var ty:Float; };
 
 class StrokePathGeometry {
-  public static final StrokePathTessellationIssueNone:Dynamic = 0.0;
+  public static final StrokePathTessellationIssueNone:Float = 0.0;
 
-  public static final StrokePathTessellationIssueInvalidStyle:Dynamic = 1.0;
+  public static final StrokePathTessellationIssueInvalidStyle:Float = 1.0;
 
-  public static final StrokePathTessellationIssueInvalidPath:Dynamic = 2.0;
+  public static final StrokePathTessellationIssueInvalidPath:Float = 2.0;
 
-  public static final StrokePathTessellationIssueSelfIntersectingCenterline:Dynamic = 3.0;
+  public static final StrokePathTessellationIssueSelfIntersectingCenterline:Float = 3.0;
 
-  public static final StrokePathTessellationIssueReversingJoin:Dynamic = 4.0;
+  public static final StrokePathTessellationIssueReversingJoin:Float = 4.0;
 
-  public static final StrokePathTessellationIssueSelfIntersectingOutline:Dynamic = 5.0;
+  public static final StrokePathTessellationIssueSelfIntersectingOutline:Float = 5.0;
 
   public static function buildStrokePathGeometry(path:Path, style:StrokeStyle, tolerance:Float):StrokePathGeometry__strokePathGeometry {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var dashOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var miterLimit:Dynamic = cast _Runtime.UNDEFINED;
-    var dash:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var centerlineIntersection:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var dashOffset:Float = cast _Runtime.UNDEFINED;
+    var miterLimit:Float = cast _Runtime.UNDEFINED;
+    var dash:Array<Float> = cast _Runtime.UNDEFINED;
+    var source:Array<StrokeSubpath__strokePathGeometry> = cast _Runtime.UNDEFINED;
+    var centerlineIntersection:Null<Float> = cast _Runtime.UNDEFINED;
     var issue:StrokePathTessellationIssue__strokePathGeometry = cast _Runtime.UNDEFINED;
-    var issueSubpath:Dynamic = cast _Runtime.UNDEFINED;
+    var issueSubpath:Null<Float> = cast _Runtime.UNDEFINED;
     var pieces:Array<StrokePathPieceGeometry__strokePathGeometry> = cast _Runtime.UNDEFINED;
-    var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var cap:Dynamic = cast _Runtime.UNDEFINED;
-    var join:Dynamic = cast _Runtime.UNDEFINED;
+    var halfWidth:Float = cast _Runtime.UNDEFINED;
+    var cap:String = cast _Runtime.UNDEFINED;
+    var join:String = cast _Runtime.UNDEFINED;
     width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
     dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
     miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
@@ -51,7 +51,7 @@ class StrokePathGeometry {
     }
     dash = _Runtime.coalesce(_Runtime.field(style, 'dash'), function():Dynamic return cast StrokePathGeometry.EMPTY_DASH__strokePathGeometry);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
         if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(dash, i)] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(dash, i) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
           return cast { issue: StrokePathTessellationIssueInvalidStyle, issueSubpath: null, pieces: cast ([] : Array<Dynamic>) };
@@ -59,17 +59,17 @@ class StrokePathGeometry {
         i++;
       }
     }
-    source = _Runtime.callValue(StrokePathGeometry.createStrokeSubpaths__strokePathGeometry, cast ([path, tolerance] : Array<Dynamic>));
+    source = (cast StrokePathGeometry.createStrokeSubpaths__strokePathGeometry((cast path : Path), (cast tolerance : Float)) : Array<StrokeSubpath__strokePathGeometry>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callValue(StrokePathGeometry.areFinitePoints__strokePathGeometry, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(source, i), 'points')] : Array<Dynamic>)) : Bool) : Bool)) {
-          return cast { issue: StrokePathTessellationIssueInvalidPath, issueSubpath: _Runtime.field(flighthq._internal._StaticIndex.readArray(source, i), 'sourceIndex'), pieces: cast ([] : Array<Dynamic>) };
+        if ((cast !(cast (cast StrokePathGeometry.areFinitePoints__strokePathGeometry((cast (cast flighthq._internal._StaticIndex.readArray(source, i) : StrokeSubpath__strokePathGeometry).points : Array<Float>)) : Bool) : Bool) : Bool)) {
+          return cast { issue: StrokePathTessellationIssueInvalidPath, issueSubpath: (cast flighthq._internal._StaticIndex.readArray(source, i) : StrokeSubpath__strokePathGeometry).sourceIndex, pieces: cast ([] : Array<Dynamic>) };
         }
         i++;
       }
     }
-    centerlineIntersection = _Runtime.callValue(StrokePathGeometry.findCenterlineIntersection__strokePathGeometry, cast ([source] : Array<Dynamic>));
+    centerlineIntersection = (cast StrokePathGeometry.findCenterlineIntersection__strokePathGeometry(source) : Null<Float>);
     issue = ((cast _Runtime.strictEquals(centerlineIntersection, null) : Bool) ? (cast StrokePathTessellationIssueNone : Dynamic) : (cast StrokePathTessellationIssueSelfIntersectingCenterline : Dynamic));
     issueSubpath = centerlineIntersection;
     pieces = cast ([] : Array<Dynamic>);
@@ -77,24 +77,24 @@ class StrokePathGeometry {
     cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
     join = _Runtime.coalesce(_Runtime.field(style, 'join'), function():Dynamic return cast 'miter');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        var subpath:Dynamic = flighthq._internal._StaticIndex.readArray(source, i);
-        var spans:Dynamic = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(StrokePathGeometry.applyDash__strokePathGeometry, cast ([subpath, dash, dashOffset] : Array<Dynamic>)) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
+        var subpath:StrokeSubpath__strokePathGeometry = flighthq._internal._StaticIndex.readArray(source, i);
+        var spans:Array<StrokeSubpath__strokePathGeometry> = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast StrokePathGeometry.applyDash__strokePathGeometry(subpath, (cast dash : Array<Float>), (cast dashOffset : Float)) : Array<StrokeSubpath__strokePathGeometry>) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
         {
-          var j:Dynamic = 0.0;
+          var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(spans, 'length') : Float)) : Bool)) {
-            var built:Dynamic = _Runtime.callValue(StrokePathGeometry.buildStrokePiece__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(spans, j), halfWidth, join, cap, miterLimit, tolerance] : Array<Dynamic>));
-            if ((cast !_Runtime.strictEquals(_Runtime.field(built, 'piece'), null) : Bool)) {
-              _Runtime.callProperty(pieces, 'push', cast ([_Runtime.field(built, 'piece')] : Array<Dynamic>));
-              if ((cast ((cast _Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.hasInvalidOutline__strokePathGeometry, cast ([_Runtime.field(built, 'piece')] : Array<Dynamic>)) : Bool)) : Bool)) {
+            var built:{ var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; } = (cast StrokePathGeometry.buildStrokePiece__strokePathGeometry(flighthq._internal._StaticIndex.readArray(spans, j), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), (cast tolerance : Float)) : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; });
+            if ((cast !_Runtime.strictEquals((cast built : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; }).piece, null) : Bool)) {
+              _Runtime.callProperty(pieces, 'push', cast ([(cast built : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; }).piece] : Array<Dynamic>));
+              if ((cast ((cast _Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool) && (cast (cast StrokePathGeometry.hasInvalidOutline__strokePathGeometry((cast built : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; }).piece) : Bool) : Bool)) : Bool)) {
                 (issue = cast (StrokePathTessellationIssueSelfIntersectingOutline : Dynamic));
-                (issueSubpath = cast (_Runtime.field(subpath, 'sourceIndex') : Dynamic));
+                (issueSubpath = cast ((cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Dynamic));
               }
             }
-            if ((cast ((cast _Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(built, 'issue'), StrokePathTessellationIssueNone) : Bool)) : Bool)) {
-              (issue = cast (_Runtime.field(built, 'issue') : Dynamic));
-              (issueSubpath = cast (_Runtime.field(subpath, 'sourceIndex') : Dynamic));
+            if ((cast ((cast _Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool) && (cast !_Runtime.strictEquals((cast built : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; }).issue, StrokePathTessellationIssueNone) : Bool)) : Bool)) {
+              (issue = cast ((cast built : { var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; }).issue : Dynamic));
+              (issueSubpath = cast ((cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Dynamic));
             }
             j++;
           }
@@ -107,17 +107,17 @@ class StrokePathGeometry {
   }
 
   public static function createStrokeSubpaths__strokePathGeometry(path:Path, tolerance:Float):Array<StrokeSubpath__strokePathGeometry> {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var result:Array<StrokeSubpath__strokePathGeometry> = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     result = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var points:Dynamic = _Runtime.callValue(StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(contours, i)] : Array<Dynamic>));
+        var points:Array<Float> = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(contours, i) : Array<Float>)) : Array<Float>);
         if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { i++; continue; }
-        var last:Dynamic = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
-        var closed:Dynamic = ((cast ((cast ((cast _Runtime.field(points, 'length') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, last)] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(points, 1.0), flighthq._internal._StaticIndex.readArray(points, (last + 1.0))] : Array<Dynamic>)) : Bool));
+        var last:Float = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
+        var closed:Bool = ((cast ((cast ((cast _Runtime.field(points, 'length') : Float) >= (cast 8.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, last) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (last + 1.0)) : Float)) : Bool) : Bool));
         if ((cast closed : Bool)) {
           flighthq._internal._StaticIndex.writeArray(points, last, flighthq._internal._StaticIndex.readArray(points, 0.0));
           flighthq._internal._StaticIndex.writeArray(points, (last + 1.0), flighthq._internal._StaticIndex.readArray(points, 1.0));
@@ -131,50 +131,50 @@ class StrokePathGeometry {
   }
 
   public static function buildStrokePiece__strokePathGeometry(subpath:StrokeSubpath__strokePathGeometry, halfWidth:Float, join:String, cap:String, miterLimit:Float, tolerance:Float):{ var issue:StrokePathTessellationIssue__strokePathGeometry; var piece:Null<StrokePathPieceGeometry__strokePathGeometry>; } {
-    var points:Dynamic = cast _Runtime.UNDEFINED;
-    var pointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var segmentCount:Dynamic = cast _Runtime.UNDEFINED;
+    var points:Array<Float> = cast _Runtime.UNDEFINED;
+    var pointCount:Float = cast _Runtime.UNDEFINED;
+    var segmentCount:Float = cast _Runtime.UNDEFINED;
     var frames:Array<SegmentFrame__strokePathGeometry> = cast _Runtime.UNDEFINED;
     var piece:StrokePathPieceGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
-    points = _Runtime.field(subpath, 'points');
+    points = (cast subpath : StrokeSubpath__strokePathGeometry).points;
     pointCount = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
     segmentCount = (pointCount - 1.0);
     if ((cast ((cast segmentCount : Float) < (cast 1.0 : Float)) : Bool)) { return cast { issue: StrokePathTessellationIssueNone, piece: null }; }
     frames = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segmentCount : Float)) : Bool)) {
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(points, (i * 2.0));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0));
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((i + 1.0) * 2.0)), x0);
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (((i + 1.0) * 2.0) + 1.0)), y0);
-        var length:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
+        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (i * 2.0));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0));
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((i + 1.0) * 2.0)), x0);
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (((i + 1.0) * 2.0) + 1.0)), y0);
+        var length:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast length : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { i++; continue; }
-        var tx:Dynamic = (dx / length);
-        var ty:Dynamic = (dy / length);
+        var tx:Float = (dx / length);
+        var ty:Float = (dy / length);
         _Runtime.callProperty(frames, 'push', cast ([{ nx: -ty, ny: tx, tx: tx, ty: ty }] : Array<Dynamic>));
         i++;
       }
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(frames, 'length'), segmentCount) : Bool)) { return cast { issue: StrokePathTessellationIssueInvalidPath, piece: null }; }
-    piece = { closed: _Runtime.field(subpath, 'closed'), endCap: cast ([] : Array<Dynamic>), left: cast ([] : Array<Dynamic>), right: cast ([] : Array<Dynamic>), startCap: cast ([] : Array<Dynamic>) };
-    if ((cast !(cast _Runtime.field(subpath, 'closed') : Bool) : Bool)) {
-      _Runtime.callValue(StrokePathGeometry.appendEndpointSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0), flighthq._internal._StaticIndex.readArray(frames, 0.0), halfWidth, cap, true, tolerance] : Array<Dynamic>));
+    piece = { closed: (cast subpath : StrokeSubpath__strokePathGeometry).closed, endCap: cast ([] : Array<Dynamic>), left: cast ([] : Array<Dynamic>), right: cast ([] : Array<Dynamic>), startCap: cast ([] : Array<Dynamic>) };
+    if ((cast !(cast (cast subpath : StrokeSubpath__strokePathGeometry).closed : Bool) : Bool)) {
+      StrokePathGeometry.appendEndpointSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float), flighthq._internal._StaticIndex.readArray(frames, 0.0), (cast halfWidth : Float), (cast cap : String), (cast true : Bool), (cast tolerance : Float));
       {
-        var i:Dynamic = 1.0;
+        var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast (pointCount - 1.0) : Float)) : Bool)) {
-          var issue:Dynamic = _Runtime.callValue(StrokePathGeometry.appendJoinSections__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(points, (i * 2.0)), flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(frames, (i - 1.0)), flighthq._internal._StaticIndex.readArray(frames, i), halfWidth, join, miterLimit, tolerance] : Array<Dynamic>));
+          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(points, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)) : Float), flighthq._internal._StaticIndex.readArray(frames, (i - 1.0)), flighthq._internal._StaticIndex.readArray(frames, i), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
           if ((cast !_Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool)) { return cast { issue: issue, piece: piece }; }
           i++;
         }
       }
-      _Runtime.callValue(StrokePathGeometry.appendEndpointSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(points, ((pointCount - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(points, (((pointCount - 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(frames, _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0)), halfWidth, cap, false, tolerance] : Array<Dynamic>));
+      StrokePathGeometry.appendEndpointSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(points, ((pointCount - 1.0) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (((pointCount - 1.0) * 2.0) + 1.0)) : Float), flighthq._internal._StaticIndex.readArray(frames, _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0)), (cast halfWidth : Float), (cast cap : String), (cast false : Bool), (cast tolerance : Float));
     } else {
-      var uniquePointCount:Dynamic = (pointCount - 1.0);
+      var uniquePointCount:Float = (pointCount - 1.0);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast uniquePointCount : Float)) : Bool)) {
-          var issue:Dynamic = _Runtime.callValue(StrokePathGeometry.appendJoinSections__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(points, (i * 2.0)), flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(frames, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(frames, 'length')) - 1.0), _Runtime.field(frames, 'length'))), flighthq._internal._StaticIndex.readArray(frames, i), halfWidth, join, miterLimit, tolerance] : Array<Dynamic>));
+          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(points, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)) : Float), flighthq._internal._StaticIndex.readArray(frames, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(frames, 'length')) - 1.0), _Runtime.field(frames, 'length'))), flighthq._internal._StaticIndex.readArray(frames, i), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
           if ((cast !_Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool)) { return cast { issue: issue, piece: piece }; }
           i++;
         }
@@ -185,92 +185,92 @@ class StrokePathGeometry {
   }
 
   public static function appendEndpointSection__strokePathGeometry(piece:StrokePathPieceGeometry__strokePathGeometry, px:Float, py:Float, frame:SegmentFrame__strokePathGeometry, halfWidth:Float, cap:String, start:Bool, tolerance:Float):Void {
-    var extension:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
+    var extension:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
     extension = ((cast _Runtime.strictEquals(cap, 'square') : Bool) ? (cast ((cast start : Bool) ? (cast -halfWidth : Dynamic) : (cast halfWidth : Dynamic)) : Dynamic) : (cast 0.0 : Dynamic));
-    cx = (px + _Runtime.multiplyNumbers(_Runtime.field(frame, 'tx'), extension));
-    cy = (py + _Runtime.multiplyNumbers(_Runtime.field(frame, 'ty'), extension));
-    _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, (cx + _Runtime.multiplyNumbers(_Runtime.field(frame, 'nx'), halfWidth)), (cy + _Runtime.multiplyNumbers(_Runtime.field(frame, 'ny'), halfWidth)), (cx - _Runtime.multiplyNumbers(_Runtime.field(frame, 'nx'), halfWidth)), (cy - _Runtime.multiplyNumbers(_Runtime.field(frame, 'ny'), halfWidth))] : Array<Dynamic>));
+    cx = (px + ((cast frame : SegmentFrame__strokePathGeometry).tx * extension));
+    cy = (py + ((cast frame : SegmentFrame__strokePathGeometry).ty * extension));
+    StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast (cx + ((cast frame : SegmentFrame__strokePathGeometry).nx * halfWidth)) : Float), (cast (cy + ((cast frame : SegmentFrame__strokePathGeometry).ny * halfWidth)) : Float), (cast (cx - ((cast frame : SegmentFrame__strokePathGeometry).nx * halfWidth)) : Float), (cast (cy - ((cast frame : SegmentFrame__strokePathGeometry).ny * halfWidth)) : Float));
     if ((cast !_Runtime.strictEquals(cap, 'round') : Bool)) { return; }
     if ((cast start : Bool)) {
-      _Runtime.setField(piece, 'startCap', _Runtime.callValue(StrokePathGeometry.createArcInteriorPoints__strokePathGeometry, cast ([px, py, halfWidth, HxMath.atan2(-_Runtime.field(frame, 'ny'), -_Runtime.field(frame, 'nx')), -HxMath.PI, tolerance] : Array<Dynamic>)));
+      ((cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap = (cast StrokePathGeometry.createArcInteriorPoints__strokePathGeometry((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-(cast frame : SegmentFrame__strokePathGeometry).ny, -(cast frame : SegmentFrame__strokePathGeometry).nx) : Float), (cast -HxMath.PI : Float), (cast tolerance : Float)) : Array<Float>));
     } else {
-      _Runtime.setField(piece, 'endCap', _Runtime.callValue(StrokePathGeometry.createArcInteriorPoints__strokePathGeometry, cast ([px, py, halfWidth, HxMath.atan2(_Runtime.field(frame, 'ny'), _Runtime.field(frame, 'nx')), -HxMath.PI, tolerance] : Array<Dynamic>)));
+      ((cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap = (cast StrokePathGeometry.createArcInteriorPoints__strokePathGeometry((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2((cast frame : SegmentFrame__strokePathGeometry).ny, (cast frame : SegmentFrame__strokePathGeometry).nx) : Float), (cast -HxMath.PI : Float), (cast tolerance : Float)) : Array<Float>));
     }
   }
 
   public static function appendJoinSections__strokePathGeometry(piece:StrokePathPieceGeometry__strokePathGeometry, px:Float, py:Float, previous:SegmentFrame__strokePathGeometry, next:SegmentFrame__strokePathGeometry, halfWidth:Float, join:String, miterLimit:Float, tolerance:Float):StrokePathTessellationIssue__strokePathGeometry {
-    var turn:Dynamic = cast _Runtime.UNDEFINED;
-    var direction:Dynamic = cast _Runtime.UNDEFINED;
-    var left0X:Dynamic = cast _Runtime.UNDEFINED;
-    var left0Y:Dynamic = cast _Runtime.UNDEFINED;
-    var left1X:Dynamic = cast _Runtime.UNDEFINED;
-    var left1Y:Dynamic = cast _Runtime.UNDEFINED;
-    var right0X:Dynamic = cast _Runtime.UNDEFINED;
-    var right0Y:Dynamic = cast _Runtime.UNDEFINED;
-    var right1X:Dynamic = cast _Runtime.UNDEFINED;
-    var right1Y:Dynamic = cast _Runtime.UNDEFINED;
-    var leftIntersection:Dynamic = cast _Runtime.UNDEFINED;
-    var rightIntersection:Dynamic = cast _Runtime.UNDEFINED;
-    var outerIntersection:Dynamic = cast _Runtime.UNDEFINED;
-    var outerDistance:Dynamic = cast _Runtime.UNDEFINED;
-    var inner:Dynamic = cast _Runtime.UNDEFINED;
-    turn = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([_Runtime.field(previous, 'tx'), _Runtime.field(previous, 'ty'), _Runtime.field(next, 'tx'), _Runtime.field(next, 'ty')] : Array<Dynamic>));
-    direction = (_Runtime.multiplyNumbers(_Runtime.field(previous, 'tx'), _Runtime.field(next, 'tx')) + _Runtime.multiplyNumbers(_Runtime.field(previous, 'ty'), _Runtime.field(next, 'ty')));
+    var turn:Float = cast _Runtime.UNDEFINED;
+    var direction:Float = cast _Runtime.UNDEFINED;
+    var left0X:Float = cast _Runtime.UNDEFINED;
+    var left0Y:Float = cast _Runtime.UNDEFINED;
+    var left1X:Float = cast _Runtime.UNDEFINED;
+    var left1Y:Float = cast _Runtime.UNDEFINED;
+    var right0X:Float = cast _Runtime.UNDEFINED;
+    var right0Y:Float = cast _Runtime.UNDEFINED;
+    var right1X:Float = cast _Runtime.UNDEFINED;
+    var right1Y:Float = cast _Runtime.UNDEFINED;
+    var leftIntersection:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    var rightIntersection:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    var outerIntersection:Array<Float> = cast _Runtime.UNDEFINED;
+    var outerDistance:Float = cast _Runtime.UNDEFINED;
+    var inner:Array<Float> = cast _Runtime.UNDEFINED;
+    turn = (cast StrokePathGeometry.cross__strokePathGeometry((cast (cast previous : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).ty : Float), (cast (cast next : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast next : SegmentFrame__strokePathGeometry).ty : Float)) : Float);
+    direction = (((cast previous : SegmentFrame__strokePathGeometry).tx * (cast next : SegmentFrame__strokePathGeometry).tx) + ((cast previous : SegmentFrame__strokePathGeometry).ty * (cast next : SegmentFrame__strokePathGeometry).ty));
     if ((cast ((cast HxMath.abs(turn) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) {
       if ((cast ((cast direction : Float) < (cast 0.0 : Float)) : Bool)) { return cast StrokePathTessellationIssueReversingJoin; }
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, (px + _Runtime.multiplyNumbers(_Runtime.field(next, 'nx'), halfWidth)), (py + _Runtime.multiplyNumbers(_Runtime.field(next, 'ny'), halfWidth)), (px - _Runtime.multiplyNumbers(_Runtime.field(next, 'nx'), halfWidth)), (py - _Runtime.multiplyNumbers(_Runtime.field(next, 'ny'), halfWidth))] : Array<Dynamic>));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast (px + ((cast next : SegmentFrame__strokePathGeometry).nx * halfWidth)) : Float), (cast (py + ((cast next : SegmentFrame__strokePathGeometry).ny * halfWidth)) : Float), (cast (px - ((cast next : SegmentFrame__strokePathGeometry).nx * halfWidth)) : Float), (cast (py - ((cast next : SegmentFrame__strokePathGeometry).ny * halfWidth)) : Float));
       return cast StrokePathTessellationIssueNone;
     }
-    left0X = (px + _Runtime.multiplyNumbers(_Runtime.field(previous, 'nx'), halfWidth));
-    left0Y = (py + _Runtime.multiplyNumbers(_Runtime.field(previous, 'ny'), halfWidth));
-    left1X = (px + _Runtime.multiplyNumbers(_Runtime.field(next, 'nx'), halfWidth));
-    left1Y = (py + _Runtime.multiplyNumbers(_Runtime.field(next, 'ny'), halfWidth));
-    right0X = (px - _Runtime.multiplyNumbers(_Runtime.field(previous, 'nx'), halfWidth));
-    right0Y = (py - _Runtime.multiplyNumbers(_Runtime.field(previous, 'ny'), halfWidth));
-    right1X = (px - _Runtime.multiplyNumbers(_Runtime.field(next, 'nx'), halfWidth));
-    right1Y = (py - _Runtime.multiplyNumbers(_Runtime.field(next, 'ny'), halfWidth));
-    leftIntersection = _Runtime.callValue(StrokePathGeometry.intersectLines__strokePathGeometry, cast ([left0X, left0Y, _Runtime.field(previous, 'tx'), _Runtime.field(previous, 'ty'), left1X, left1Y, _Runtime.field(next, 'tx'), _Runtime.field(next, 'ty')] : Array<Dynamic>));
-    rightIntersection = _Runtime.callValue(StrokePathGeometry.intersectLines__strokePathGeometry, cast ([right0X, right0Y, _Runtime.field(previous, 'tx'), _Runtime.field(previous, 'ty'), right1X, right1Y, _Runtime.field(next, 'tx'), _Runtime.field(next, 'ty')] : Array<Dynamic>));
+    left0X = (px + ((cast previous : SegmentFrame__strokePathGeometry).nx * halfWidth));
+    left0Y = (py + ((cast previous : SegmentFrame__strokePathGeometry).ny * halfWidth));
+    left1X = (px + ((cast next : SegmentFrame__strokePathGeometry).nx * halfWidth));
+    left1Y = (py + ((cast next : SegmentFrame__strokePathGeometry).ny * halfWidth));
+    right0X = (px - ((cast previous : SegmentFrame__strokePathGeometry).nx * halfWidth));
+    right0Y = (py - ((cast previous : SegmentFrame__strokePathGeometry).ny * halfWidth));
+    right1X = (px - ((cast next : SegmentFrame__strokePathGeometry).nx * halfWidth));
+    right1Y = (py - ((cast next : SegmentFrame__strokePathGeometry).ny * halfWidth));
+    leftIntersection = (cast StrokePathGeometry.intersectLines__strokePathGeometry((cast left0X : Float), (cast left0Y : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).ty : Float), (cast left1X : Float), (cast left1Y : Float), (cast (cast next : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast next : SegmentFrame__strokePathGeometry).ty : Float)) : Null<Array<Float>>);
+    rightIntersection = (cast StrokePathGeometry.intersectLines__strokePathGeometry((cast right0X : Float), (cast right0Y : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).ty : Float), (cast right1X : Float), (cast right1Y : Float), (cast (cast next : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast next : SegmentFrame__strokePathGeometry).ty : Float)) : Null<Array<Float>>);
     if ((cast ((cast _Runtime.strictEquals(leftIntersection, null) : Bool) || (cast _Runtime.strictEquals(rightIntersection, null) : Bool)) : Bool)) { return cast StrokePathTessellationIssueReversingJoin; }
     outerIntersection = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast rightIntersection : Dynamic) : (cast leftIntersection : Dynamic));
     outerDistance = _Runtime.hypot(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 0.0), px), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 1.0), py));
     if ((cast ((cast ((cast _Runtime.strictEquals(join, 'miter') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast outerDistance : Float) <= (cast _Runtime.multiplyNumbers(halfWidth, HxMath.max(0.0, miterLimit)) : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(leftIntersection, 0.0), flighthq._internal._StaticIndex.readArray(leftIntersection, 1.0), flighthq._internal._StaticIndex.readArray(rightIntersection, 0.0), flighthq._internal._StaticIndex.readArray(rightIntersection, 1.0)] : Array<Dynamic>));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(leftIntersection, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(leftIntersection, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rightIntersection, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rightIntersection, 1.0) : Float));
       return cast StrokePathTessellationIssueNone;
     }
     inner = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast leftIntersection : Dynamic) : (cast rightIntersection : Dynamic));
     if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
-      var outer0X:Dynamic = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast right0X : Dynamic) : (cast left0X : Dynamic));
-      var outer0Y:Dynamic = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast right0Y : Dynamic) : (cast left0Y : Dynamic));
-      var outerStartAngle:Dynamic = HxMath.atan2((outer0Y - py), (outer0X - px));
-      var sweep:Dynamic = _Runtime.callValue(StrokePathGeometry.signedJoinSweep__strokePathGeometry, cast ([previous, next, turn] : Array<Dynamic>));
-      var outer:Dynamic = _Runtime.callValue(StrokePathGeometry.createArcPoints__strokePathGeometry, cast ([px, py, halfWidth, outerStartAngle, sweep, tolerance] : Array<Dynamic>));
+      var outer0X:Float = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast right0X : Dynamic) : (cast left0X : Dynamic));
+      var outer0Y:Float = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast right0Y : Dynamic) : (cast left0Y : Dynamic));
+      var outerStartAngle:Float = HxMath.atan2((outer0Y - py), (outer0X - px));
+      var sweep:Float = (cast StrokePathGeometry.signedJoinSweep__strokePathGeometry(previous, next, (cast turn : Float)) : Float);
+      var outer:Array<Float> = (cast StrokePathGeometry.createArcPoints__strokePathGeometry((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast outerStartAngle : Float), (cast sweep : Float), (cast tolerance : Float)) : Array<Float>);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(outer, 'length') : Float)) : Bool)) {
-          if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0), flighthq._internal._StaticIndex.readArray(outer, i), flighthq._internal._StaticIndex.readArray(outer, (i + 1.0))] : Array<Dynamic>)); } else { _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(outer, i), flighthq._internal._StaticIndex.readArray(outer, (i + 1.0)), flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0)] : Array<Dynamic>)); }
+          if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) { StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, i) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, (i + 1.0)) : Float)); } else { StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(outer, i) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, (i + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float)); }
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
     } else { if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0), right0X, right0Y] : Array<Dynamic>));
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0), right1X, right1Y] : Array<Dynamic>));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast right0X : Float), (cast right0Y : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast right1X : Float), (cast right1Y : Float));
     } else {
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, left0X, left0Y, flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0)] : Array<Dynamic>));
-      _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, left1X, left1Y, flighthq._internal._StaticIndex.readArray(inner, 0.0), flighthq._internal._StaticIndex.readArray(inner, 1.0)] : Array<Dynamic>));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast left0X : Float), (cast left0Y : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry(piece, (cast left1X : Float), (cast left1Y : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float));
     } }
     return cast StrokePathTessellationIssueNone;
     return cast null;
   }
 
   public static function signedJoinSweep__strokePathGeometry(previous:SegmentFrame__strokePathGeometry, next:SegmentFrame__strokePathGeometry, turn:Float):Float {
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var sweep:Dynamic = cast _Runtime.UNDEFINED;
-    start = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.atan2(-_Runtime.field(previous, 'ny'), -_Runtime.field(previous, 'nx')) : Dynamic) : (cast HxMath.atan2(_Runtime.field(previous, 'ny'), _Runtime.field(previous, 'nx')) : Dynamic));
-    end = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.atan2(-_Runtime.field(next, 'ny'), -_Runtime.field(next, 'nx')) : Dynamic) : (cast HxMath.atan2(_Runtime.field(next, 'ny'), _Runtime.field(next, 'nx')) : Dynamic));
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var sweep:Float = cast _Runtime.UNDEFINED;
+    start = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.atan2(-(cast previous : SegmentFrame__strokePathGeometry).ny, -(cast previous : SegmentFrame__strokePathGeometry).nx) : Dynamic) : (cast HxMath.atan2((cast previous : SegmentFrame__strokePathGeometry).ny, (cast previous : SegmentFrame__strokePathGeometry).nx) : Dynamic));
+    end = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.atan2(-(cast next : SegmentFrame__strokePathGeometry).ny, -(cast next : SegmentFrame__strokePathGeometry).nx) : Dynamic) : (cast HxMath.atan2((cast next : SegmentFrame__strokePathGeometry).ny, (cast next : SegmentFrame__strokePathGeometry).nx) : Dynamic));
     sweep = (end - start);
     if ((cast ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast sweep : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
     if ((cast ((cast ((cast turn : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast sweep : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (sweep = cast ((sweep - (HxMath.PI * 2.0)) : Dynamic)); }
@@ -279,30 +279,30 @@ class StrokePathGeometry {
   }
 
   public static function appendSection__strokePathGeometry(piece:StrokePathPieceGeometry__strokePathGeometry, lx:Float, ly:Float, rx:Float, ry:Float):Void {
-    _Runtime.pushMany(_Runtime.field(piece, 'left'), cast ([lx, ly] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(piece, 'right'), cast ([rx, ry] : Array<Dynamic>));
+    _Runtime.pushMany((cast piece : StrokePathPieceGeometry__strokePathGeometry).left, cast ([lx, ly] : Array<Dynamic>));
+    _Runtime.pushMany((cast piece : StrokePathPieceGeometry__strokePathGeometry).right, cast ([rx, ry] : Array<Dynamic>));
   }
 
   public static function createArcInteriorPoints__strokePathGeometry(cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, tolerance:Float):Array<Float> {
-    var points:Dynamic = cast _Runtime.UNDEFINED;
-    points = _Runtime.callValue(StrokePathGeometry.createArcPoints__strokePathGeometry, cast ([cx, cy, radius, startAngle, sweep, tolerance] : Array<Dynamic>));
+    var points:Array<Float> = cast _Runtime.UNDEFINED;
+    points = (cast StrokePathGeometry.createArcPoints__strokePathGeometry((cast cx : Float), (cast cy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast tolerance : Float)) : Array<Float>);
     return cast _Runtime.slice(points, 2.0, -2.0);
     return cast null;
   }
 
   public static function createArcPoints__strokePathGeometry(cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, tolerance:Float):Array<Float> {
-    var ratio:Dynamic = cast _Runtime.UNDEFINED;
-    var maxStep:Dynamic = cast _Runtime.UNDEFINED;
-    var steps:Dynamic = cast _Runtime.UNDEFINED;
+    var ratio:Float = cast _Runtime.UNDEFINED;
+    var maxStep:Float = cast _Runtime.UNDEFINED;
+    var steps:Float = cast _Runtime.UNDEFINED;
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     ratio = HxMath.max(-1.0, HxMath.min(1.0, (1.0 - (tolerance / radius))));
     maxStep = HxMath.max((HxMath.PI / 32.0), _Runtime.multiplyNumbers(2.0, HxMath.acos(ratio)));
     steps = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), maxStep)));
     points = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast steps : Float)) : Bool)) {
-        var angle:Dynamic = (startAngle + ((sweep * i) / steps));
+        var angle:Float = (startAngle + ((sweep * i) / steps));
         _Runtime.pushMany(points, cast ([(cx + _Runtime.multiplyNumbers(HxMath.cos(angle), radius)), (cy + _Runtime.multiplyNumbers(HxMath.sin(angle), radius))] : Array<Dynamic>));
         i++;
       }
@@ -312,28 +312,28 @@ class StrokePathGeometry {
   }
 
   public static function intersectLines__strokePathGeometry(ax:Float, ay:Float, adx:Float, ady:Float, bx:Float, by:Float, bdx:Float, bdy:Float):Null<Array<Float>> {
-    var denominator:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    denominator = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([adx, ady, bdx, bdy] : Array<Dynamic>));
+    var denominator:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    denominator = (cast StrokePathGeometry.cross__strokePathGeometry((cast adx : Float), (cast ady : Float), (cast bdx : Float), (cast bdy : Float)) : Float);
     if ((cast ((cast HxMath.abs(denominator) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { return cast null; }
-    scale = _Runtime.divideNumbers(_Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([(bx - ax), (by - ay), bdx, bdy] : Array<Dynamic>)), denominator);
+    scale = ((cast StrokePathGeometry.cross__strokePathGeometry((cast (bx - ax) : Float), (cast (by - ay) : Float), (cast bdx : Float), (cast bdy : Float)) : Float) / denominator);
     return cast cast ([(ax + (adx * scale)), (ay + (ady * scale))] : Array<Dynamic>);
     return cast null;
   }
 
   public static function applyDash__strokePathGeometry(subpath:StrokeSubpath__strokePathGeometry, dash:Array<Float>, dashOffset:Float):Array<StrokeSubpath__strokePathGeometry> {
-    var pattern:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var patternIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var consumedOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var remaining:Dynamic = cast _Runtime.UNDEFINED;
-    var on:Dynamic = cast _Runtime.UNDEFINED;
+    var pattern:Array<Float> = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var patternIndex:Float = cast _Runtime.UNDEFINED;
+    var consumedOffset:Float = cast _Runtime.UNDEFINED;
+    var remaining:Float = cast _Runtime.UNDEFINED;
+    var on:Bool = cast _Runtime.UNDEFINED;
     var result:Array<StrokeSubpath__strokePathGeometry> = cast _Runtime.UNDEFINED;
     var current:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    var points:Dynamic = cast _Runtime.UNDEFINED;
+    var points:Array<Float> = cast _Runtime.UNDEFINED;
     pattern = ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.callProperty(dash, 'concat', cast ([dash] : Array<Dynamic>)) : Dynamic));
-    total = _Runtime.reduce(pattern, function(sum:Dynamic, value:Dynamic) return (sum + value), 0.0);
+    total = _Runtime.reduce(pattern, function(sum:Float, value:Float, __unused0:Float, __unused1:Array<Float>):Float return (sum + value), 0.0);
     if ((cast ((cast total : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { return cast cast ([subpath] : Array<Dynamic>); }
     offset = _Runtime.fmod((_Runtime.fmod(dashOffset, total) + total), total);
     patternIndex = 0.0;
@@ -346,39 +346,39 @@ class StrokePathGeometry {
     on = _Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0);
     result = cast ([] : Array<Dynamic>);
     current = null;
-    points = _Runtime.field(subpath, 'points');
+    points = (cast subpath : StrokeSubpath__strokePathGeometry).points;
     {
-      var segment:Dynamic = 0.0;
+      var segment:Float = 0.0;
       while ((cast ((cast segment : Float) < (cast ((_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1) - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(points, (segment * 2.0));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((segment * 2.0) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((segment + 1.0) * 2.0));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(points, (((segment + 1.0) * 2.0) + 1.0));
-        var dx:Dynamic = (x1 - x0);
-        var dy:Dynamic = (y1 - y0);
-        var length:Dynamic = _Runtime.hypot(dx, dy);
-        var distance:Dynamic = 0.0;
+        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (segment * 2.0));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((segment * 2.0) + 1.0));
+        var x1:Float = flighthq._internal._StaticIndex.readArray(points, ((segment + 1.0) * 2.0));
+        var y1:Float = flighthq._internal._StaticIndex.readArray(points, (((segment + 1.0) * 2.0) + 1.0));
+        var dx:Float = (x1 - x0);
+        var dy:Float = (y1 - y0);
+        var length:Float = _Runtime.hypot(dx, dy);
+        var distance:Float = 0.0;
         while ((cast ((cast distance : Float) < (cast (length - StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry) : Float)) : Bool)) {
           while ((cast ((cast remaining : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) {
             (patternIndex = cast (_Runtime.fmod((patternIndex + 1.0), _Runtime.field(pattern, 'length')) : Dynamic));
             (remaining = cast (flighthq._internal._StaticIndex.readArray(pattern, patternIndex) : Dynamic));
             (on = cast (_Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast !(cast on : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-              _Runtime.callValue(StrokePathGeometry.pushDash__strokePathGeometry, cast ([result, current, _Runtime.field(subpath, 'sourceIndex')] : Array<Dynamic>));
+              StrokePathGeometry.pushDash__strokePathGeometry(result, (cast current : Array<Float>), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
               (current = cast (null : Dynamic));
             }
           }
-          var step:Dynamic = HxMath.min(remaining, (length - distance));
-          var startX:Dynamic = (x0 + ((dx * distance) / length));
-          var startY:Dynamic = (y0 + ((dy * distance) / length));
+          var step:Float = HxMath.min(remaining, (length - distance));
+          var startX:Float = (x0 + ((dx * distance) / length));
+          var startY:Float = (y0 + ((dy * distance) / length));
           (distance = cast ((distance + step) : Dynamic));
-          var endX:Dynamic = (x0 + ((dx * distance) / length));
-          var endY:Dynamic = (y0 + ((dy * distance) / length));
+          var endX:Float = (x0 + ((dx * distance) / length));
+          var endY:Float = (y0 + ((dy * distance) / length));
           if ((cast on : Bool)) {
             (current ??= cast ([startX, startY] : Array<Dynamic>));
             _Runtime.pushMany(current, cast ([endX, endY] : Array<Dynamic>));
           } else { if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-            _Runtime.callValue(StrokePathGeometry.pushDash__strokePathGeometry, cast ([result, current, _Runtime.field(subpath, 'sourceIndex')] : Array<Dynamic>));
+            StrokePathGeometry.pushDash__strokePathGeometry(result, (cast current : Array<Float>), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
             (current = cast (null : Dynamic));
           } }
           (remaining = cast ((remaining - step) : Dynamic));
@@ -386,7 +386,7 @@ class StrokePathGeometry {
         segment++;
       }
     }
-    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { _Runtime.callValue(StrokePathGeometry.pushDash__strokePathGeometry, cast ([result, current, _Runtime.field(subpath, 'sourceIndex')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { StrokePathGeometry.pushDash__strokePathGeometry(result, (cast current : Array<Float>), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float)); }
     return cast result;
     return cast null;
   }
@@ -397,14 +397,14 @@ class StrokePathGeometry {
 
   public static function findCenterlineIntersection__strokePathGeometry(subpaths:Array<StrokeSubpath__strokePathGeometry>):Null<Float> {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(subpaths, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.callValue(StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'points'), _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'closed')] : Array<Dynamic>)) : Bool)) { return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'sourceIndex'); }
+        if ((cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).points : Array<Float>), (cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).closed : Bool)) : Bool) : Bool)) { return cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).sourceIndex; }
         {
-          var j:Dynamic = 0.0;
+          var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast i : Float)) : Bool)) {
-            if ((cast _Runtime.callValue(StrokePathGeometry.doPolylinesIntersect__strokePathGeometry, cast ([_Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'points'), _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'closed'), _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, j), 'points'), _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, j), 'closed')] : Array<Dynamic>)) : Bool)) {
-              return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(subpaths, i), 'sourceIndex');
+            if ((cast (cast StrokePathGeometry.doPolylinesIntersect__strokePathGeometry((cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).points : Array<Float>), (cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).closed : Bool), (cast (cast flighthq._internal._StaticIndex.readArray(subpaths, j) : StrokeSubpath__strokePathGeometry).points : Array<Float>), (cast (cast flighthq._internal._StaticIndex.readArray(subpaths, j) : StrokeSubpath__strokePathGeometry).closed : Bool)) : Bool) : Bool)) {
+              return cast (cast flighthq._internal._StaticIndex.readArray(subpaths, i) : StrokeSubpath__strokePathGeometry).sourceIndex;
             }
             j++;
           }
@@ -417,35 +417,35 @@ class StrokePathGeometry {
   }
 
   public static function hasInvalidOutline__strokePathGeometry(piece:StrokePathPieceGeometry__strokePathGeometry):Bool {
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var outline:Dynamic = cast _Runtime.UNDEFINED;
-    left = _Runtime.callValue(StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry, cast ([_Runtime.field(piece, 'left')] : Array<Dynamic>));
-    right = _Runtime.callValue(StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry, cast ([_Runtime.field(piece, 'right')] : Array<Dynamic>));
-    if ((cast _Runtime.field(piece, 'closed') : Bool)) {
-      return cast _Runtime.orValue(((cast _Runtime.callValue(StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry, cast ([left, true] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry, cast ([right, true] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(StrokePathGeometry.doPolylinesIntersect__strokePathGeometry, cast ([left, true, right, true] : Array<Dynamic>)));
+    var left:Array<Float> = cast _Runtime.UNDEFINED;
+    var right:Array<Float> = cast _Runtime.UNDEFINED;
+    var outline:Array<Float> = cast _Runtime.UNDEFINED;
+    left = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast (cast piece : StrokePathPieceGeometry__strokePathGeometry).left : Array<Float>)) : Array<Float>);
+    right = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast (cast piece : StrokePathPieceGeometry__strokePathGeometry).right : Array<Float>)) : Array<Float>);
+    if ((cast (cast piece : StrokePathPieceGeometry__strokePathGeometry).closed : Bool)) {
+      return cast _Runtime.orValue(((cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast left : Array<Float>), (cast true : Bool)) : Bool) : Bool) || (cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast right : Array<Float>), (cast true : Bool)) : Bool) : Bool)), function():Dynamic return cast (cast StrokePathGeometry.doPolylinesIntersect__strokePathGeometry((cast left : Array<Float>), (cast true : Bool), (cast right : Array<Float>), (cast true : Bool)) : Bool));
     }
-    outline = _Runtime.callProperty(left, 'concat', cast ([_Runtime.field(piece, 'endCap'), _Runtime.callValue(StrokePathGeometry.reversePoints__strokePathGeometry, cast ([right] : Array<Dynamic>)), _Runtime.field(piece, 'startCap')] : Array<Dynamic>));
-    return cast _Runtime.callValue(StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry, cast ([_Runtime.callValue(StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry, cast ([outline] : Array<Dynamic>)), true] : Array<Dynamic>));
+    outline = _Runtime.callProperty(left, 'concat', cast ([(cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap, StrokePathGeometry.reversePoints__strokePathGeometry((cast right : Array<Float>)), (cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap] : Array<Dynamic>));
+    return cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast outline : Array<Float>)) : Array<Float>) : Array<Float>), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function hasPolylineSelfIntersection__strokePathGeometry(points:Array<Float>, closed:Bool):Bool {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var segmentCount:Dynamic = cast _Runtime.UNDEFINED;
-    count = _Runtime.callValue(StrokePathGeometry.getPolylinePointCount__strokePathGeometry, cast ([points, closed] : Array<Dynamic>));
+    var count:Float = cast _Runtime.UNDEFINED;
+    var segmentCount:Float = cast _Runtime.UNDEFINED;
+    count = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry((cast points : Array<Float>), (cast closed : Bool)) : Float);
     segmentCount = ((cast closed : Bool) ? (cast count : Dynamic) : (cast (count - 1.0) : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segmentCount : Float)) : Bool)) {
-        var iNext:Dynamic = _Runtime.fmod((i + 1.0), count);
-        if ((cast _Runtime.callValue(StrokePathGeometry.samePoint__strokePathGeometry, cast ([points, i, iNext] : Array<Dynamic>)) : Bool)) { i++; continue; }
+        var iNext:Float = _Runtime.fmod((i + 1.0), count);
+        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry((cast points : Array<Float>), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
-          var j:Dynamic = (i + 1.0);
+          var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast segmentCount : Float)) : Bool)) {
-            var jNext:Dynamic = _Runtime.fmod((j + 1.0), count);
-            if ((cast ((cast _Runtime.callValue(StrokePathGeometry.samePoint__strokePathGeometry, cast ([points, j, jNext] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(StrokePathGeometry.segmentsAreAdjacent__strokePathGeometry, cast ([i, j, segmentCount, closed] : Array<Dynamic>)) : Bool)) : Bool)) { j++; continue; }
-            if ((cast _Runtime.callValue(StrokePathGeometry.segmentsIntersect__strokePathGeometry, cast ([points, i, iNext, points, j, jNext] : Array<Dynamic>)) : Bool)) { return cast true; }
+            var jNext:Float = _Runtime.fmod((j + 1.0), count);
+            if ((cast ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry((cast points : Array<Float>), (cast j : Float), (cast jNext : Float)) : Bool) : Bool) || (cast (cast StrokePathGeometry.segmentsAreAdjacent__strokePathGeometry((cast i : Float), (cast j : Float), (cast segmentCount : Float), (cast closed : Bool)) : Bool) : Bool)) : Bool)) { j++; continue; }
+            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry((cast points : Array<Float>), (cast i : Float), (cast iNext : Float), (cast points : Array<Float>), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -457,25 +457,25 @@ class StrokePathGeometry {
   }
 
   public static function doPolylinesIntersect__strokePathGeometry(a:Array<Float>, aClosed:Bool, b:Array<Float>, bClosed:Bool):Bool {
-    var aCount:Dynamic = cast _Runtime.UNDEFINED;
-    var bCount:Dynamic = cast _Runtime.UNDEFINED;
-    var aSegments:Dynamic = cast _Runtime.UNDEFINED;
-    var bSegments:Dynamic = cast _Runtime.UNDEFINED;
-    aCount = _Runtime.callValue(StrokePathGeometry.getPolylinePointCount__strokePathGeometry, cast ([a, aClosed] : Array<Dynamic>));
-    bCount = _Runtime.callValue(StrokePathGeometry.getPolylinePointCount__strokePathGeometry, cast ([b, bClosed] : Array<Dynamic>));
+    var aCount:Float = cast _Runtime.UNDEFINED;
+    var bCount:Float = cast _Runtime.UNDEFINED;
+    var aSegments:Float = cast _Runtime.UNDEFINED;
+    var bSegments:Float = cast _Runtime.UNDEFINED;
+    aCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry((cast a : Array<Float>), (cast aClosed : Bool)) : Float);
+    bCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry((cast b : Array<Float>), (cast bClosed : Bool)) : Float);
     aSegments = ((cast aClosed : Bool) ? (cast aCount : Dynamic) : (cast (aCount - 1.0) : Dynamic));
     bSegments = ((cast bClosed : Bool) ? (cast bCount : Dynamic) : (cast (bCount - 1.0) : Dynamic));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast aSegments : Float)) : Bool)) {
-        var iNext:Dynamic = _Runtime.fmod((i + 1.0), aCount);
-        if ((cast _Runtime.callValue(StrokePathGeometry.samePoint__strokePathGeometry, cast ([a, i, iNext] : Array<Dynamic>)) : Bool)) { i++; continue; }
+        var iNext:Float = _Runtime.fmod((i + 1.0), aCount);
+        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry((cast a : Array<Float>), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
-          var j:Dynamic = 0.0;
+          var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast bSegments : Float)) : Bool)) {
-            var jNext:Dynamic = _Runtime.fmod((j + 1.0), bCount);
-            if ((cast _Runtime.callValue(StrokePathGeometry.samePoint__strokePathGeometry, cast ([b, j, jNext] : Array<Dynamic>)) : Bool)) { j++; continue; }
-            if ((cast _Runtime.callValue(StrokePathGeometry.segmentsIntersect__strokePathGeometry, cast ([a, i, iNext, b, j, jNext] : Array<Dynamic>)) : Bool)) { return cast true; }
+            var jNext:Float = _Runtime.fmod((j + 1.0), bCount);
+            if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry((cast b : Array<Float>), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { j++; continue; }
+            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry((cast a : Array<Float>), (cast i : Float), (cast iNext : Float), (cast b : Array<Float>), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -487,9 +487,9 @@ class StrokePathGeometry {
   }
 
   public static function getPolylinePointCount__strokePathGeometry(points:Array<Float>, closed:Bool):Float {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.samePoint__strokePathGeometry, cast ([points, 0.0, (count - 1.0)] : Array<Dynamic>)) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
+    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast (cast StrokePathGeometry.samePoint__strokePathGeometry((cast points : Array<Float>), (cast 0.0 : Float), (cast (count - 1.0) : Float)) : Bool) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
     return cast null;
   }
 
@@ -500,18 +500,18 @@ class StrokePathGeometry {
   }
 
   public static function segmentsIntersect__strokePathGeometry(a:Array<Float>, ai:Float, aj:Float, b:Array<Float>, bi:Float, bj:Float):Bool {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var abC:Dynamic = cast _Runtime.UNDEFINED;
-    var abD:Dynamic = cast _Runtime.UNDEFINED;
-    var cdA:Dynamic = cast _Runtime.UNDEFINED;
-    var cdB:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var abC:Float = cast _Runtime.UNDEFINED;
+    var abD:Float = cast _Runtime.UNDEFINED;
+    var cdA:Float = cast _Runtime.UNDEFINED;
+    var cdB:Float = cast _Runtime.UNDEFINED;
     ax = flighthq._internal._StaticIndex.readArray(a, (ai * 2.0));
     ay = flighthq._internal._StaticIndex.readArray(a, ((ai * 2.0) + 1.0));
     bx = flighthq._internal._StaticIndex.readArray(a, (aj * 2.0));
@@ -520,17 +520,17 @@ class StrokePathGeometry {
     cy = flighthq._internal._StaticIndex.readArray(b, ((bi * 2.0) + 1.0));
     dx = flighthq._internal._StaticIndex.readArray(b, (bj * 2.0));
     dy = flighthq._internal._StaticIndex.readArray(b, ((bj * 2.0) + 1.0));
-    abC = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([(bx - ax), (by - ay), (cx - ax), (cy - ay)] : Array<Dynamic>));
-    abD = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([(bx - ax), (by - ay), (dx - ax), (dy - ay)] : Array<Dynamic>));
-    cdA = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([(dx - cx), (dy - cy), (ax - cx), (ay - cy)] : Array<Dynamic>));
-    cdB = _Runtime.callValue(StrokePathGeometry.cross__strokePathGeometry, cast ([(dx - cx), (dy - cy), (bx - cx), (by - cy)] : Array<Dynamic>));
+    abC = (cast StrokePathGeometry.cross__strokePathGeometry((cast (bx - ax) : Float), (cast (by - ay) : Float), (cast (cx - ax) : Float), (cast (cy - ay) : Float)) : Float);
+    abD = (cast StrokePathGeometry.cross__strokePathGeometry((cast (bx - ax) : Float), (cast (by - ay) : Float), (cast (dx - ax) : Float), (cast (dy - ay) : Float)) : Float);
+    cdA = (cast StrokePathGeometry.cross__strokePathGeometry((cast (dx - cx) : Float), (cast (dy - cy) : Float), (cast (ax - cx) : Float), (cast (ay - cy) : Float)) : Float);
+    cdB = (cast StrokePathGeometry.cross__strokePathGeometry((cast (dx - cx) : Float), (cast (dy - cy) : Float), (cast (bx - cx) : Float), (cast (by - cy) : Float)) : Float);
     if ((cast ((cast _Runtime.orValue(_Runtime.andValue(((cast abC : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)), function():Dynamic return cast ((cast abD : Float) < (cast -StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float))), function():Dynamic return cast _Runtime.andValue(((cast abC : Float) < (cast -StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)), function():Dynamic return cast ((cast abD : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)))) : Bool) && (cast _Runtime.orValue(_Runtime.andValue(((cast cdA : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)), function():Dynamic return cast ((cast cdB : Float) < (cast -StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float))), function():Dynamic return cast _Runtime.andValue(((cast cdA : Float) < (cast -StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)), function():Dynamic return cast ((cast cdB : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)))) : Bool)) : Bool)) {
       return cast true;
     }
-    if ((cast ((cast ((cast HxMath.abs(abC) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.pointOnSegment__strokePathGeometry, cast ([cx, cy, ax, ay, bx, by] : Array<Dynamic>)) : Bool)) : Bool)) { return cast true; }
-    if ((cast ((cast ((cast HxMath.abs(abD) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.pointOnSegment__strokePathGeometry, cast ([dx, dy, ax, ay, bx, by] : Array<Dynamic>)) : Bool)) : Bool)) { return cast true; }
-    if ((cast ((cast ((cast HxMath.abs(cdA) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.pointOnSegment__strokePathGeometry, cast ([ax, ay, cx, cy, dx, dy] : Array<Dynamic>)) : Bool)) : Bool)) { return cast true; }
-    return cast ((cast ((cast HxMath.abs(cdB) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.pointOnSegment__strokePathGeometry, cast ([bx, by, cx, cy, dx, dy] : Array<Dynamic>)) : Bool));
+    if ((cast ((cast ((cast HxMath.abs(abC) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast (cast StrokePathGeometry.pointOnSegment__strokePathGeometry((cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float)) : Bool) : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast ((cast HxMath.abs(abD) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast (cast StrokePathGeometry.pointOnSegment__strokePathGeometry((cast dx : Float), (cast dy : Float), (cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float)) : Bool) : Bool)) : Bool)) { return cast true; }
+    if ((cast ((cast ((cast HxMath.abs(cdA) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast (cast StrokePathGeometry.pointOnSegment__strokePathGeometry((cast ax : Float), (cast ay : Float), (cast cx : Float), (cast cy : Float), (cast dx : Float), (cast dy : Float)) : Bool) : Bool)) : Bool)) { return cast true; }
+    return cast ((cast ((cast HxMath.abs(cdB) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) && (cast (cast StrokePathGeometry.pointOnSegment__strokePathGeometry((cast bx : Float), (cast by : Float), (cast cx : Float), (cast cy : Float), (cast dx : Float), (cast dy : Float)) : Bool) : Bool));
     return cast null;
   }
 
@@ -543,9 +543,9 @@ class StrokePathGeometry {
     var result:Array<Float> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        if ((cast ((cast ((cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 2.0)), flighthq._internal._StaticIndex.readArray(source, i)] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 1.0)), flighthq._internal._StaticIndex.readArray(source, (i + 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+        if ((cast ((cast ((cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(source, i) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(source, (i + 1.0)) : Float)) : Bool) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readArray(source, i), flighthq._internal._StaticIndex.readArray(source, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -558,7 +558,7 @@ class StrokePathGeometry {
     var result:Array<Float> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readArray(points, i), flighthq._internal._StaticIndex.readArray(points, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));
@@ -570,7 +570,7 @@ class StrokePathGeometry {
 
   public static function areFinitePoints__strokePathGeometry(points:Array<Float>):Bool {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(points, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
@@ -581,7 +581,7 @@ class StrokePathGeometry {
   }
 
   public static function samePoint__strokePathGeometry(points:Array<Float>, a:Float, b:Float):Bool {
-    return cast ((cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(points, (a * 2.0)), flighthq._internal._StaticIndex.readArray(points, (b * 2.0))] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(StrokePathGeometry.approximatelyEqual__strokePathGeometry, cast ([flighthq._internal._StaticIndex.readArray(points, ((a * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(points, ((b * 2.0) + 1.0))] : Array<Dynamic>)) : Bool));
+    return cast ((cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, (a * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (b * 2.0)) : Float)) : Bool) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, ((a * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((b * 2.0) + 1.0)) : Float)) : Bool) : Bool));
     return cast null;
   }
 
@@ -597,5 +597,5 @@ class StrokePathGeometry {
 
   public static final EMPTY_DASH__strokePathGeometry:Array<Float> = cast ([] : Array<Dynamic>);
 
-  public static final GEOMETRY_EPSILON__strokePathGeometry:Dynamic = 1e-8;
+  public static final GEOMETRY_EPSILON__strokePathGeometry:Float = 1e-8;
 }

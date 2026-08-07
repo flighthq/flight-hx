@@ -7,32 +7,33 @@ import flighthq.skeleton3d.SkinVertices.skinVertices;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
+import flighthq.types.Vector3.Vector3Like;
 
 class GetMeshSkinBounds {
   public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
-    var positions:Dynamic = cast _Runtime.UNDEFINED;
-    var restVertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var restMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var restMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var restMinZ:Dynamic = cast _Runtime.UNDEFINED;
-    var restMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var restMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var restMaxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var ez:Dynamic = cast _Runtime.UNDEFINED;
-    var palette:Dynamic = cast _Runtime.UNDEFINED;
-    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
+    var positions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var restVertexCount:Float = cast _Runtime.UNDEFINED;
+    var restMinX:Float = cast _Runtime.UNDEFINED;
+    var restMinY:Float = cast _Runtime.UNDEFINED;
+    var restMinZ:Float = cast _Runtime.UNDEFINED;
+    var restMaxX:Float = cast _Runtime.UNDEFINED;
+    var restMaxY:Float = cast _Runtime.UNDEFINED;
+    var restMaxZ:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var ez:Float = cast _Runtime.UNDEFINED;
+    var palette:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
+    var referenced:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
     positions = _Runtime.field(bindPose, 'positions');
     restVertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     restMinX = HxMath.POSITIVE_INFINITY;
@@ -42,12 +43,12 @@ class GetMeshSkinBounds {
     restMaxY = HxMath.NEGATIVE_INFINITY;
     restMaxZ = HxMath.NEGATIVE_INFINITY;
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast restVertexCount : Float)) : Bool)) {
-        var p:Dynamic = (v * 3.0);
-        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, p);
-        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 1.0));
-        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 2.0));
+        var p:Float = (v * 3.0);
+        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(positions, p);
+        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 1.0));
+        var pz:Float = flighthq._internal._StaticIndex.readFloat32Array(positions, (p + 2.0));
         if ((cast ((cast px : Float) < (cast restMinX : Float)) : Bool)) { (restMinX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast restMinY : Float)) : Bool)) { (restMinY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast restMinZ : Float)) : Bool)) { (restMinZ = cast (pz : Dynamic)); }
@@ -74,7 +75,7 @@ class GetMeshSkinBounds {
     ez = ((restMaxZ - restMinZ) * 0.5);
     palette = _Runtime.field(skeleton, 'jointMatrices');
     jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(palette, 'length'), 16.0)) | 0);
-    referenced = _Runtime.callValue(GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds, cast ([_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), jointCount] : Array<Dynamic>));
+    referenced = (cast GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds((cast _Runtime.field(bindPose, 'joints') : flighthq._internal._Float32Array), (cast _Runtime.field(bindPose, 'weights') : flighthq._internal._Float32Array), (cast jointCount : Float)) : flighthq._internal._UInt8Array);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     minZ = HxMath.POSITIVE_INFINITY;
@@ -82,16 +83,16 @@ class GetMeshSkinBounds {
     maxY = HxMath.NEGATIVE_INFINITY;
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
-      var j:Dynamic = 0.0;
+      var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         if ((cast !_Runtime.truthy(flighthq._internal._StaticIndex.readUint8Array(referenced, j)) : Bool)) { j++; continue; }
-        var m:Dynamic = (j * 16.0);
-        var tcx:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, m), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 12.0)));
-        var tcy:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0)), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 13.0)));
-        var tcz:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0)), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 14.0)));
-        var tex:Dynamic = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, m)), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0))), ez));
-        var tey:Dynamic = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0))), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0))), ez));
-        var tez:Dynamic = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0))), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0))), ez));
+        var m:Float = (j * 16.0);
+        var tcx:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, m), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 12.0)));
+        var tcy:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0)), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 13.0)));
+        var tcz:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0)), cx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0)), cy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0)), cz)), flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 14.0)));
+        var tex:Float = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, m)), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 4.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 8.0))), ez));
+        var tey:Float = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 1.0))), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 5.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 9.0))), ez));
+        var tez:Float = ((_Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 2.0))), ex) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 6.0))), ey)) + _Runtime.multiplyNumbers(HxMath.abs(flighthq._internal._StaticIndex.readFloat32Array(palette, (m + 10.0))), ez));
         if ((cast ((cast (tcx - tex) : Float) < (cast minX : Float)) : Bool)) { (minX = cast ((tcx - tex) : Dynamic)); }
         if ((cast ((cast (tcy - tey) : Float) < (cast minY : Float)) : Bool)) { (minY = cast ((tcy - tey) : Dynamic)); }
         if ((cast ((cast (tcz - tez) : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast ((tcz - tez) : Dynamic)); }
@@ -110,15 +111,15 @@ class GetMeshSkinBounds {
   }
 
   public static function getMeshSkinExactBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
-    var skinned:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(skinVertices, cast ([_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), _Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices')] : Array<Dynamic>));
+    var skinned:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
+    skinVertices((cast _Runtime.field(bindPose, 'skinnedPositions') : flighthq._internal._Float32Array), (cast _Runtime.field(bindPose, 'skinnedNormals') : flighthq._internal._Float32Array), (cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array), (cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array), (cast _Runtime.field(bindPose, 'joints') : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(bindPose, 'weights') : flighthq._internal._Float32Array), (cast _Runtime.field(skeleton, 'jointMatrices') : flighthq._internal._Float32Array));
     skinned = _Runtime.field(bindPose, 'skinnedPositions');
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(skinned, 'length'), 3.0)) | 0);
     minX = HxMath.POSITIVE_INFINITY;
@@ -128,12 +129,12 @@ class GetMeshSkinBounds {
     maxY = HxMath.NEGATIVE_INFINITY;
     maxZ = HxMath.NEGATIVE_INFINITY;
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-        var p:Dynamic = (v * 3.0);
-        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, p);
-        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 1.0));
-        var pz:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 2.0));
+        var p:Float = (v * 3.0);
+        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(skinned, p);
+        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 1.0));
+        var pz:Float = flighthq._internal._StaticIndex.readFloat32Array(skinned, (p + 2.0));
         if ((cast ((cast px : Float) < (cast minX : Float)) : Bool)) { (minX = cast (px : Dynamic)); }
         if ((cast ((cast py : Float) < (cast minY : Float)) : Bool)) { (minY = cast (py : Dynamic)); }
         if ((cast ((cast pz : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast (pz : Dynamic)); }
@@ -152,15 +153,15 @@ class GetMeshSkinBounds {
   }
 
   public static function getReferencedJoints__getMeshSkinBounds(joints:flighthq._internal._Float32Array, weights:flighthq._internal._Float32Array, jointCount:Float):flighthq._internal._UInt8Array {
-    var referenced:Dynamic = cast _Runtime.UNDEFINED;
-    var influenceCount:Dynamic = cast _Runtime.UNDEFINED;
+    var referenced:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var influenceCount:Float = cast _Runtime.UNDEFINED;
     referenced = new flighthq._internal._UInt8Array(jointCount);
     influenceCount = _Runtime.field(joints, 'length');
     {
-      var k:Dynamic = 0.0;
+      var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast influenceCount : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(weights, k), 0.0) : Bool)) { k++; continue; }
-        var j:Dynamic = (_Runtime.toInt32(flighthq._internal._StaticIndex.readFloat32Array(joints, k)) | 0);
+        var j:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readFloat32Array(joints, k)) | 0);
         if ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) : Bool)) { flighthq._internal._StaticIndex.writeUint8Array(referenced, j, 1.0); }
         k++;
       }

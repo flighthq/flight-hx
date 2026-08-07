@@ -5,39 +5,41 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 
 class CanvasVignetteEffect {
   @:noCompletion
   public static function applyVignetteEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:VignetteEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var softness:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var colorAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var darken:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var outer:Dynamic = cast _Runtime.UNDEFINED;
-    var inner:Dynamic = cast _Runtime.UNDEFINED;
-    var ramp:Dynamic = cast _Runtime.UNDEFINED;
-    var gradient:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var softness:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var colorAlpha:Float = cast _Runtime.UNDEFINED;
+    var darken:Float = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var outer:Float = cast _Runtime.UNDEFINED;
+    var inner:Float = cast _Runtime.UNDEFINED;
+    var ramp:Float = cast _Runtime.UNDEFINED;
+    var gradient:flighthq._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
     softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
+    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
@@ -61,11 +63,11 @@ class CanvasVignetteEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyVignetteEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
+  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
   };
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'VignetteEffect', defaultCanvasVignetteEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'VignetteEffect' : String), (cast defaultCanvasVignetteEffectRunner : CanvasRenderEffectRunner));
   }
 }

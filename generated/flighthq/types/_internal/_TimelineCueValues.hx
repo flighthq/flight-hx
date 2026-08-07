@@ -8,19 +8,19 @@ import flighthq.types.Entity;
 import flighthq.types.Timeline;
 
 class _TimelineCueValues {
-  public static final TimelineAudioCueKind:Dynamic = 'Audio';
+  public static final TimelineAudioCueKind:String = 'Audio';
 
-  public static final TimelineGotoCueKind:Dynamic = 'Goto';
+  public static final TimelineGotoCueKind:String = 'Goto';
 
-  public static final TimelineNextFrameCueKind:Dynamic = 'NextFrame';
+  public static final TimelineNextFrameCueKind:String = 'NextFrame';
 
-  public static final TimelinePlayCueKind:Dynamic = 'Play';
+  public static final TimelinePlayCueKind:String = 'Play';
 
-  public static final TimelinePreviousFrameCueKind:Dynamic = 'PreviousFrame';
+  public static final TimelinePreviousFrameCueKind:String = 'PreviousFrame';
 
-  public static final TimelineStopCueKind:Dynamic = 'Stop';
+  public static final TimelineStopCueKind:String = 'Stop';
 
-  public static final TimelineStreamAudioCueKind:Dynamic = 'StreamAudio';
+  public static final TimelineStreamAudioCueKind:String = 'StreamAudio';
 
-  public static final TimelineFrameEntryCauseValue:Dynamic = { Advance: 'Advance', Seek: 'Seek' };
+  public static final TimelineFrameEntryCauseValue:{ var Advance:String; var Seek:String; } = { Advance: 'Advance', Seek: 'Seek' };
 }

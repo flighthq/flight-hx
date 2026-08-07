@@ -11,25 +11,25 @@ class BitmapFill {
   public static var _floodFillVisited__bitmapFill:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 
   public static function fillBitmapRectangle(dest:BitmapRegion, color:Float):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     b = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
     a = (_Runtime.toInt32(color) & 255);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var i:Dynamic = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
+            var i:Float = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, i, r);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (i + 1.0), g);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (i + 2.0), b);
@@ -40,21 +40,21 @@ class BitmapFill {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap((cast _Runtime.field(dest, 'bitmap') : Bitmap));
   }
 
   public static function floodFillBitmap(out:Bitmap, x:Float, y:Float, color:Float):Void {
-    var fillR:Dynamic = cast _Runtime.UNDEFINED;
-    var fillG:Dynamic = cast _Runtime.UNDEFINED;
-    var fillB:Dynamic = cast _Runtime.UNDEFINED;
-    var fillA:Dynamic = cast _Runtime.UNDEFINED;
-    var targetI:Dynamic = cast _Runtime.UNDEFINED;
-    var targetR:Dynamic = cast _Runtime.UNDEFINED;
-    var targetG:Dynamic = cast _Runtime.UNDEFINED;
-    var targetB:Dynamic = cast _Runtime.UNDEFINED;
-    var targetA:Dynamic = cast _Runtime.UNDEFINED;
-    var needed:Dynamic = cast _Runtime.UNDEFINED;
-    var visited:Dynamic = cast _Runtime.UNDEFINED;
+    var fillR:Float = cast _Runtime.UNDEFINED;
+    var fillG:Float = cast _Runtime.UNDEFINED;
+    var fillB:Float = cast _Runtime.UNDEFINED;
+    var fillA:Float = cast _Runtime.UNDEFINED;
+    var targetI:Float = cast _Runtime.UNDEFINED;
+    var targetR:Float = cast _Runtime.UNDEFINED;
+    var targetG:Float = cast _Runtime.UNDEFINED;
+    var targetB:Float = cast _Runtime.UNDEFINED;
+    var targetA:Float = cast _Runtime.UNDEFINED;
+    var needed:Float = cast _Runtime.UNDEFINED;
+    var visited:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast out.width : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast out.height : Float)) : Bool)) : Bool)) { return; }
     fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
@@ -76,12 +76,12 @@ class BitmapFill {
     visited = BitmapFill._floodFillVisited__bitmapFill;
     stack = cast ([(x + (y * out.width))] : Array<Dynamic>);
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      var idx:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
+      var idx:Float = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(flighthq._internal._StaticIndex.readUint8Array(visited, idx))) { continue; }
       flighthq._internal._StaticIndex.writeUint8Array(visited, idx, 1.0);
-      var px:Dynamic = _Runtime.fmod(idx, out.width);
-      var py:Dynamic = HxMath.floor((idx / out.width));
-      var i:Dynamic = (idx * 4.0);
+      var px:Float = _Runtime.fmod(idx, out.width);
+      var py:Float = HxMath.floor((idx / out.width));
+      var i:Float = (idx * 4.0);
       if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, i), targetR) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 1.0)), targetG) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 2.0)), targetB) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 3.0)), targetA) : Bool)) : Bool)) {
         continue;
       }
@@ -94,6 +94,6 @@ class BitmapFill {
       if ((cast ((cast py : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - out.width)] : Array<Dynamic>)); }
       if ((cast ((cast py : Float) < (cast (out.height - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + out.width)] : Array<Dynamic>)); }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([out] : Array<Dynamic>));
+    invalidateBitmap((cast out : Bitmap));
   }
 }

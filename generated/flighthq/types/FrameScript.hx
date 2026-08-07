@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef FrameScript = Dynamic;
+typedef FrameScript = Node2D->Float->Void;

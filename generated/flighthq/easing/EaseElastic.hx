@@ -6,27 +6,27 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseElastic {
-  public static final easeInElastic:EasingFunction = function(t:Dynamic) {
+  public static final easeInElastic:EasingFunction = function(t:Float):Float {
     if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
     return cast -_Runtime.multiplyNumbers(HxMath.pow(2.0, _Runtime.multiplyNumbers(10.0, (t = cast ((t - 1.0) : Dynamic)))), HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic)));
   };
 
-  public static final easeInOutElastic:EasingFunction = function(t:Dynamic) {
+  public static final easeInOutElastic:EasingFunction = function(t:Float):Float {
     if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
     if ((cast ((cast (t = cast ((t * 2.0) : Dynamic)) : Float) < (cast 1.0 : Float)) : Bool)) { return cast (-0.5 * _Runtime.multiplyNumbers(HxMath.pow(2.0, _Runtime.multiplyNumbers(10.0, (t = cast ((t - 1.0) : Dynamic)))), HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)))); }
     return cast (_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(0.5, HxMath.pow(2.0, _Runtime.multiplyNumbers(-10.0, (t = cast ((t - 1.0) : Dynamic))))), HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic))) + 1.0);
   };
 
-  public static final easeOutElastic:EasingFunction = function(t:Dynamic) {
+  public static final easeOutElastic:EasingFunction = function(t:Float):Float {
     if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
     return cast (_Runtime.multiplyNumbers(HxMath.pow(2.0, (-10.0 * t)), HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic))) + 1.0);
   };
 
-  public static final p__easeElastic:Dynamic = 0.4;
+  public static final p__easeElastic:Float = 0.4;
 
-  public static final p2__easeElastic:Dynamic = 0.45;
+  public static final p2__easeElastic:Float = 0.45;
 
-  public static final s__easeElastic:Dynamic = _Runtime.multiplyNumbers((EaseElastic.p__easeElastic / (2.0 * HxMath.PI)), HxMath.asin(1.0));
+  public static final s__easeElastic:Float = _Runtime.multiplyNumbers((EaseElastic.p__easeElastic / (2.0 * HxMath.PI)), HxMath.asin(1.0));
 
-  public static final s2__easeElastic:Dynamic = _Runtime.multiplyNumbers((EaseElastic.p2__easeElastic / (2.0 * HxMath.PI)), HxMath.asin(1.0));
+  public static final s2__easeElastic:Float = _Runtime.multiplyNumbers((EaseElastic.p2__easeElastic / (2.0 * HxMath.PI)), HxMath.asin(1.0));
 }

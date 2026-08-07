@@ -9,14 +9,15 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.Menu.MenuBackend;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.MenuSignals;
+import flighthq.types.Signal;
 
 class Menu {
   public static var _backend__menu:Null<MenuBackend> = _Runtime.explicitNull();
 
   public static var _menuSignals__menu:Null<MenuSignals> = _Runtime.explicitNull();
 
-  public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
-    if ((cast ((cast seen : flighthq._internal._Set).has(item)) : Bool)) {
+  public static function _validateItem__menu(item:MenuItemTemplate, seen:flighthq._internal._Set<MenuItemTemplate>):Null<String> {
+    if ((cast ((cast seen : flighthq._internal._Set<MenuItemTemplate>).has(item)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected'));
     }
     if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
@@ -38,21 +39,21 @@ class Menu {
       return cast 'item type "' + Std.string(_Runtime.coalesce(item.type, function():Dynamic return cast 'normal')) + '" has "checked" (only "checkbox" and "radio" items are checkable)';
     }
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var groupError:Dynamic = _Runtime.callValue(Menu._validateRadioGroups__menu, cast ([item.submenu] : Array<Dynamic>));
+      var groupError:Null<String> = (cast Menu._validateRadioGroups__menu((cast item.submenu : Array<MenuItemTemplate>)) : Null<String>);
       if ((cast !_Runtime.strictEquals(groupError, null) : Bool)) { return cast groupError; }
-      ((cast seen : flighthq._internal._Set).add(item));
+      ((cast seen : flighthq._internal._Set<MenuItemTemplate>).add(item));
       for (child in _Runtime.iterable(item.submenu)) {
-        var err:Dynamic = _Runtime.callValue(Menu._validateItem__menu, cast ([child, seen] : Array<Dynamic>));
+        var err:Null<String> = (cast Menu._validateItem__menu((cast child : MenuItemTemplate), (cast seen : flighthq._internal._Set<MenuItemTemplate>)) : Null<String>);
         if ((cast !_Runtime.strictEquals(err, null) : Bool)) { return cast err; }
       }
-      ((cast seen : flighthq._internal._Set).delete_(item));
+      ((cast seen : flighthq._internal._Set<MenuItemTemplate>).delete_(item));
     }
     return cast null;
     return cast null;
   }
 
   public static function _validateRadioGroups__menu(items:Array<MenuItemTemplate>):Null<String> {
-    var checkedInRun:Dynamic = cast _Runtime.UNDEFINED;
+    var checkedInRun:Float = cast _Runtime.UNDEFINED;
     checkedInRun = 0.0;
     for (item in _Runtime.iterable(items)) {
       if ((cast !_Runtime.strictEquals(item.type, 'radio') : Bool)) {
@@ -68,34 +69,34 @@ class Menu {
     return cast null;
   }
 
-  public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):flighthq._internal.dom.HTMLUListElement {
-    var menu:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:String->Void):flighthq._internal.dom.HTMLUListElement {
+    var menu:flighthq._internal.dom.HTMLUListElement = cast _Runtime.UNDEFINED;
     menu = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['ul'] : Array<Dynamic>));
     ((cast (cast menu : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = _Runtime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
     for (item in _Runtime.iterable(items)) {
       if ((cast _Runtime.strictEquals(item.visible, false) : Bool)) { continue; }
-      var li:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['li'] : Array<Dynamic>));
+      var li:flighthq._internal.dom.HTMLLIElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['li'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
         ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'height:1px;margin:4px 8px;background:#e0e0e0;');
         (cast menu : flighthq._internal.dom.HTMLUListElement).appendChild(li);
         continue;
       }
-      var enabled:Dynamic = !_Runtime.strictEquals(item.enabled, false);
-      var hasSubmenu:Dynamic = ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(item.submenu, 'length') : Float) > (cast 0.0 : Float)) : Bool));
+      var enabled:Bool = !_Runtime.strictEquals(item.enabled, false);
+      var hasSubmenu:Bool = ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(item.submenu, 'length') : Float) > (cast 0.0 : Float)) : Bool));
       (cast li : flighthq._internal.dom.HTMLLIElement).setAttribute('data-enabled', ((cast enabled : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic)));
       if ((cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex((cast li : flighthq._internal.dom.HTMLLIElement).dataset, 'itemId', item.id); }
       ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = _Runtime.join(cast (['display:flex', 'align-items:center', 'padding:5px 12px 5px 28px', ('cursor:' + ((cast enabled : Bool) ? (cast 'default' : Dynamic) : (cast 'not-allowed' : Dynamic))), ('color:' + ((cast enabled : Bool) ? (cast '#111' : Dynamic) : (cast '#999' : Dynamic))), 'position:relative'] : Array<Dynamic>), ';'));
       if ((cast _Runtime.strictEquals(item.checked, true) : Bool)) {
-        var mark:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+        var mark:flighthq._internal.dom.HTMLSpanElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         ((cast mark : flighthq._internal.dom.HTMLSpanElement).textContent = ((cast _Runtime.strictEquals(item.type, 'radio') : Bool) ? (cast '●' : Dynamic) : (cast '✓' : Dynamic)));
         ((cast (cast mark : flighthq._internal.dom.HTMLSpanElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'position:absolute;left:8px;font-size:11px;');
         (cast li : flighthq._internal.dom.HTMLLIElement).appendChild(mark);
       }
-      var labelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+      var labelEl:flighthq._internal.dom.HTMLSpanElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
       ((cast labelEl : flighthq._internal.dom.HTMLSpanElement).textContent = _Runtime.coalesce(item.label, function():Dynamic return cast ''));
       ((cast (cast labelEl : flighthq._internal.dom.HTMLSpanElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'flex:1;');
       if ((cast !_Runtime.strictEquals(item.sublabel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var sublabelEl:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+        var sublabelEl:flighthq._internal.dom.HTMLSpanElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         ((cast sublabelEl : flighthq._internal.dom.HTMLSpanElement).textContent = item.sublabel);
         ((cast (cast sublabelEl : flighthq._internal.dom.HTMLSpanElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'display:block;font-size:11px;color:#888;');
         (cast labelEl : flighthq._internal.dom.HTMLSpanElement).appendChild(sublabelEl);
@@ -103,52 +104,52 @@ class Menu {
       (cast li : flighthq._internal.dom.HTMLLIElement).appendChild(labelEl);
       if ((cast !_Runtime.strictEquals(item.toolTip, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast li : flighthq._internal.dom.HTMLLIElement).title = item.toolTip); }
       if ((cast hasSubmenu : Bool)) {
-        var arrow:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+        var arrow:flighthq._internal.dom.HTMLSpanElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         ((cast arrow : flighthq._internal.dom.HTMLSpanElement).textContent = '▶');
         ((cast (cast arrow : flighthq._internal.dom.HTMLSpanElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'margin-left:8px;font-size:9px;color:#888;');
         (cast li : flighthq._internal.dom.HTMLLIElement).appendChild(arrow);
       } else { if ((cast !_Runtime.strictEquals(item.accelerator, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var accel:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
+        var accel:flighthq._internal.dom.HTMLSpanElement = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['span'] : Array<Dynamic>));
         ((cast accel : flighthq._internal.dom.HTMLSpanElement).textContent = item.accelerator);
         ((cast (cast accel : flighthq._internal.dom.HTMLSpanElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'margin-left:24px;color:#888;font-size:11px;');
         (cast li : flighthq._internal.dom.HTMLLIElement).appendChild(accel);
       } }
       if ((cast enabled : Bool)) {
-        (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseenter', function() {
-          var accelEl:Dynamic = cast _Runtime.UNDEFINED;
+        (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseenter', function(__unused5:flighthq._internal.dom.MouseEvent):Void {
+          var accelEl:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
           ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).background = '#0066cc');
           ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = '#fff');
           accelEl = (cast li : flighthq._internal.dom.HTMLLIElement).querySelector('span:last-child');
           if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { ((cast (cast accelEl : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = 'rgba(255,255,255,.7)'); }
           if ((cast ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool) && (cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemHighlight], [item.id]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : flighthq.types.MenuSignals).onMenuItemHighlight], [item.id]]), 1);
           }
         });
-        (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseleave', function() {
-          var accelEl:Dynamic = cast _Runtime.UNDEFINED;
+        (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseleave', function(__unused6:flighthq._internal.dom.MouseEvent):Void {
+          var accelEl:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
           ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).background = '');
           ((cast (cast li : flighthq._internal.dom.HTMLLIElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = '#111');
           accelEl = (cast li : flighthq._internal.dom.HTMLLIElement).querySelector('span:last-child');
           if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { ((cast (cast accelEl : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = '#888'); }
         });
         if ((cast hasSubmenu : Bool)) {
-          var submenuEl:Dynamic = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([item.submenu, onSelect] : Array<Dynamic>));
+          var submenuEl:flighthq._internal.dom.HTMLUListElement = (cast Menu.buildWebMenuElement__menu((cast item.submenu : Array<MenuItemTemplate>), (cast onSelect : String->Void)) : flighthq._internal.dom.HTMLUListElement);
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).left = '100%');
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'none');
           (cast li : flighthq._internal.dom.HTMLLIElement).appendChild(submenuEl);
-          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseenter', function() {
+          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseenter', function(__unused7:flighthq._internal.dom.MouseEvent):Void {
             ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'block');
           });
-          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseleave', function() {
+          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('mouseleave', function(__unused8:flighthq._internal.dom.MouseEvent):Void {
             ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'none');
           });
         } else { if ((cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var itemId:Dynamic = item.id;
-          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('click', function(e:Dynamic) {
+          var itemId:String = item.id;
+          (cast li : flighthq._internal.dom.HTMLLIElement).addEventListener('click', function(e:flighthq._internal.dom.PointerEvent):Void {
             (cast e : flighthq._internal.dom.PointerEvent).stopPropagation();
-            _Runtime.callValue(onSelect, cast ([itemId] : Array<Dynamic>));
+            onSelect((cast itemId : String));
           });
         } }
       }
@@ -202,7 +203,7 @@ class Menu {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]);
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (item.submenu = cast (_Runtime.callProperty(item.submenu, 'map', cast ([function(child:Dynamic) return _Runtime.callValue(createMenuItemTemplate, cast ([child] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (item.submenu = cast (_Runtime.callProperty(item.submenu, 'map', cast ([function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate((cast child : Null<flighthq._internal._Any>)) : MenuItemTemplate)] : Array<Dynamic>)) : Dynamic));
     }
     return cast item;
     return cast null;
@@ -210,12 +211,12 @@ class Menu {
 
   @:noCompletion
   public static function createWebMenuBackend():MenuBackend {
-    return cast { setApplicationMenu: function() {
+    return cast { setApplicationMenu: function():Bool {
       return cast false;
-    }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {
-      return cast _Runtime.callValue(Menu.showWebContextMenu__menu, cast ([items, x, y] : Array<Dynamic>));
-    }, subscribeSelect: function() {
-      return cast function() {
+    }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
+      return cast (cast Menu.showWebContextMenu__menu((cast items : Array<MenuItemTemplate>), (cast x : Float), (cast y : Float)) : flighthq._internal._Promise<Null<String>>);
+    }, subscribeSelect: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
@@ -224,7 +225,7 @@ class Menu {
 
   public static function enableMenuSignals():MenuSignals {
     if ((cast _Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
-      (Menu._menuSignals__menu = cast ({ onContextMenuClose: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onContextMenuOpen: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemHighlight: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemSelect: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
+      (Menu._menuSignals__menu = cast ({ onContextMenuClose: (cast createSignal() : Signal<Void->Void>), onContextMenuOpen: (cast createSignal() : Signal<Void->Void>), onMenuItemHighlight: (cast createSignal() : Signal<String->Void>), onMenuItemSelect: (cast createSignal() : Signal<String->Void>) } : Dynamic));
     }
     return cast Menu._menuSignals__menu;
     return cast null;
@@ -232,7 +233,7 @@ class Menu {
 
   @:noCompletion
   public static function getMenuBackend():MenuBackend {
-    if ((cast _Runtime.strictEquals(Menu._backend__menu, null) : Bool)) { (Menu._backend__menu = cast (_Runtime.callValue(createWebMenuBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Menu._backend__menu, null) : Bool)) { (Menu._backend__menu = cast ((cast createWebMenuBackend() : Null<MenuBackend>) : Dynamic)); }
     return cast Menu._backend__menu;
     return cast null;
   }
@@ -242,16 +243,16 @@ class Menu {
     return cast null;
   }
 
-  public static function onMenuSelect(listener:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'subscribeSelect', cast ([function(id:Dynamic) {
-      _Runtime.callValue(listener, cast ([id] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemSelect], [id]]), 1); }
-    }] : Array<Dynamic>));
+  public static function onMenuSelect(listener:String->Void):Void->Void {
+    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).subscribeSelect(function(id:String):Void {
+      listener((cast id : String));
+      if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : flighthq.types.MenuSignals).onMenuItemSelect], [id]]), 1); }
+    });
     return cast null;
   }
 
   public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'setApplicationMenu', cast ([items] : Array<Dynamic>));
+    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).setApplicationMenu(items);
     return cast null;
   }
 
@@ -261,31 +262,31 @@ class Menu {
   }
 
   public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-    var promise:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onContextMenuOpen]]), 1); }
-    promise = _Runtime.callProperty(_Runtime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'popupContextMenu', cast ([items, x, y] : Array<Dynamic>));
+    var promise:flighthq._internal._Promise<Null<String>> = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : flighthq.types.MenuSignals).onContextMenuOpen]]), 1); }
+    promise = (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).popupContextMenu(items, x, y);
     if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
-      var signals:Dynamic = Menu._menuSignals__menu;
-      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onContextMenuClose]]), 1)] : Array<Dynamic>)));
+      var signals:MenuSignals = Menu._menuSignals__menu;
+      _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function():Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onContextMenuClose]]), 1)] : Array<Dynamic>)));
     }
     return cast promise;
     return cast null;
   }
 
   public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-    return cast flighthq._internal._Async.create(function(resolve:Dynamic) {
+    return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused2:flighthq._internal._Any):Void {
       var clampMenu:flighthq._internal.dom.HTMLElement->Float->Float->Void = cast _Runtime.UNDEFINED;
       var close:Null<String>->Void = cast _Runtime.UNDEFINED;
       var moveFocus:Float->Void = cast _Runtime.UNDEFINED;
       var onKeyDown:flighthq._internal.dom.KeyboardEvent->Void = cast _Runtime.UNDEFINED;
-      var overlay:Dynamic = cast _Runtime.UNDEFINED;
-      var menu:Dynamic = cast _Runtime.UNDEFINED;
-      var focusableItems:Dynamic = cast _Runtime.UNDEFINED;
-      var focusIndex:Dynamic = cast _Runtime.UNDEFINED;
-      clampMenu = function clampMenu(el:flighthq._internal.dom.HTMLElement, anchorX:Float, anchorY:Float):Void {
-        var rect:Dynamic = cast _Runtime.UNDEFINED;
-        var vw:Dynamic = cast _Runtime.UNDEFINED;
-        var vh:Dynamic = cast _Runtime.UNDEFINED;
+      var overlay:flighthq._internal.dom.HTMLDivElement = cast _Runtime.UNDEFINED;
+      var menu:flighthq._internal.dom.HTMLUListElement = cast _Runtime.UNDEFINED;
+      var focusableItems:flighthq._internal.dom.NodeListOf<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
+      var focusIndex:Float = cast _Runtime.UNDEFINED;
+      clampMenu = (cast function clampMenu(el:flighthq._internal.dom.HTMLElement, anchorX:Float, anchorY:Float):Void {
+        var rect:flighthq._internal.dom.DOMRect = cast _Runtime.UNDEFINED;
+        var vw:Float = cast _Runtime.UNDEFINED;
+        var vh:Float = cast _Runtime.UNDEFINED;
         ((cast el.style : flighthq._internal.dom.CSSStyleDeclaration).left = '' + Std.string(anchorX) + 'px');
         ((cast el.style : flighthq._internal.dom.CSSStyleDeclaration).top = '' + Std.string(anchorY) + 'px');
         rect = el.getBoundingClientRect();
@@ -293,19 +294,19 @@ class Menu {
         vh = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight') : Dynamic) : (cast 0.0 : Dynamic));
         if ((cast ((cast (cast rect : flighthq._internal.dom.DOMRect).right : Float) > (cast vw : Float)) : Bool)) { ((cast el.style : flighthq._internal.dom.CSSStyleDeclaration).left = '' + Std.string(HxMath.max(0.0, _Runtime.subtractNumbers(anchorX, (cast rect : flighthq._internal.dom.DOMRect).width))) + 'px'); }
         if ((cast ((cast (cast rect : flighthq._internal.dom.DOMRect).bottom : Float) > (cast vh : Float)) : Bool)) { ((cast el.style : flighthq._internal.dom.CSSStyleDeclaration).top = '' + Std.string(HxMath.max(0.0, _Runtime.subtractNumbers(anchorY, (cast rect : flighthq._internal.dom.DOMRect).height))) + 'px'); }
-      };
-      close = function close(selectedId:Null<String>):Void {
+      } : flighthq._internal.dom.HTMLElement->Float->Float->Void);
+      close = (cast function close(selectedId:Null<String>):Void {
         flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
         (cast overlay : flighthq._internal.dom.HTMLDivElement).remove();
         (cast menu : flighthq._internal.dom.HTMLUListElement).remove();
-        _Runtime.callValue(resolve, cast ([selectedId] : Array<Dynamic>));
-      };
-      moveFocus = function moveFocus(delta:Float):Void {
-        var items:Dynamic = cast _Runtime.UNDEFINED;
-        items = _Runtime.toArray(focusableItems);
+        resolve((cast selectedId : Null<flighthq._internal._Any>));
+      } : Null<String>->Void);
+      moveFocus = (cast function moveFocus(delta:Float):Void {
+        var items:Array<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
+        items = (cast _Runtime.toArray(focusableItems) : Array<flighthq._internal.dom.HTMLElement>);
         if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return; }
         (focusIndex = cast (((cast _Runtime.strictEquals(focusIndex, -1.0) : Bool) ? (cast ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(items, 'length'), 1.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic) : (cast _Runtime.fmod(_Runtime.addNumbers((focusIndex + delta), _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic)) : Dynamic));
-        _Runtime.callProperty(items, 'forEach', cast ([function(el:Dynamic, i:Dynamic) {
+        _Runtime.callProperty(items, 'forEach', cast ([function(el:flighthq._internal.dom.HTMLElement, i:Float, __unused3:Array<flighthq._internal.dom.HTMLElement>):Void {
           if ((cast _Runtime.strictEquals(i, focusIndex) : Bool)) {
             (cast el : flighthq._internal.dom.HTMLElement).setAttribute('data-focused', 'true');
             ((cast (cast el : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).background = '#0066cc');
@@ -317,50 +318,50 @@ class Menu {
           }
         }] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
-          var focused:Dynamic = flighthq._internal._StaticIndex.readArray(items, focusIndex);
-          var itemId:Dynamic = _Runtime.optionalIndex(({ final __hostType7 = focused; __hostType7 == null ? _Runtime.UNDEFINED : (cast __hostType7 : flighthq._internal.dom.HTMLElement).dataset; }), 'itemId');
-          if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Menu._menuSignals__menu.onMenuItemHighlight], [itemId]]), 1); }
+          var focused:flighthq._internal.dom.HTMLElement = flighthq._internal._StaticIndex.readArray(items, focusIndex);
+          var itemId:Null<String> = _Runtime.optionalIndex(({ final __hostType7 = focused; __hostType7 == null ? _Runtime.UNDEFINED : (cast __hostType7 : flighthq._internal.dom.HTMLElement).dataset; }), 'itemId');
+          if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : flighthq.types.MenuSignals).onMenuItemHighlight], [itemId]]), 1); }
         }
-      };
-      onKeyDown = function onKeyDown(e:flighthq._internal.dom.KeyboardEvent):Void {
+      } : Float->Void);
+      onKeyDown = (cast function onKeyDown(e:flighthq._internal.dom.KeyboardEvent):Void {
         if ((cast _Runtime.strictEquals(e.key, 'Escape') : Bool)) {
           e.preventDefault();
-          _Runtime.callValue(close, cast ([null] : Array<Dynamic>));
+          close((cast null : Null<String>));
         } else { if ((cast _Runtime.strictEquals(e.key, 'ArrowDown') : Bool)) {
           e.preventDefault();
-          _Runtime.callValue(moveFocus, cast ([1.0] : Array<Dynamic>));
+          moveFocus((cast 1.0 : Float));
         } else { if ((cast _Runtime.strictEquals(e.key, 'ArrowUp') : Bool)) {
           e.preventDefault();
-          _Runtime.callValue(moveFocus, cast ([-1.0] : Array<Dynamic>));
+          moveFocus((cast -1.0 : Float));
         } else { if ((cast ((cast _Runtime.strictEquals(e.key, 'Enter') : Bool) || (cast _Runtime.strictEquals(e.key, ' ') : Bool)) : Bool)) {
           e.preventDefault();
-          var focused:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.toArray(focusableItems), focusIndex);
+          var focused:flighthq._internal.dom.HTMLElement = flighthq._internal._StaticIndex.readArray(_Runtime.toArray(focusableItems), focusIndex);
           if ((cast !_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            var itemId:Dynamic = _Runtime.getIndex((cast focused : flighthq._internal.dom.HTMLElement).dataset, 'itemId');
-            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(close, cast ([itemId] : Array<Dynamic>)); }
+            var itemId:Null<String> = _Runtime.getIndex((cast focused : flighthq._internal.dom.HTMLElement).dataset, 'itemId');
+            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { close((cast itemId : Null<String>)); }
           }
         } } } }
-      };
+      } : flighthq._internal.dom.KeyboardEvent->Void);
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) {
-        _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
+        resolve((cast null : Null<flighthq._internal._Any>));
         return;
       }
       overlay = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
       ((cast (cast overlay : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'position:fixed;inset:0;z-index:2147483646;');
-      menu = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([items, function(id:Dynamic) return _Runtime.callValue(close, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
+      menu = (cast Menu.buildWebMenuElement__menu((cast items : Array<MenuItemTemplate>), (cast function(id:String):Void return close((cast id : Null<String>)) : String->Void)) : flighthq._internal.dom.HTMLUListElement);
       focusableItems = (cast menu : flighthq._internal.dom.HTMLUListElement).querySelectorAll(':scope > li[data-enabled="true"]');
       focusIndex = -1.0;
-      (cast overlay : flighthq._internal.dom.HTMLDivElement).addEventListener('click', function() return _Runtime.callValue(close, cast ([null] : Array<Dynamic>)));
+      (cast overlay : flighthq._internal.dom.HTMLDivElement).addEventListener('click', function(__unused4:flighthq._internal.dom.PointerEvent):Void return close((cast null : Null<String>)));
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
       (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(overlay);
       (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(menu);
-      _Runtime.callValue(clampMenu, cast ([menu, x, y] : Array<Dynamic>));
+      clampMenu((cast menu : flighthq._internal.dom.HTMLElement), (cast x : Float), (cast y : Float));
     });
     return cast null;
   }
 
   public static function validateMenuItemTemplate(template:MenuItemTemplate):Null<String> {
-    return cast _Runtime.callValue(Menu._validateItem__menu, cast ([template, _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [])] : Array<Dynamic>));
+    return cast (cast Menu._validateItem__menu((cast template : MenuItemTemplate), (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) : flighthq._internal._Set<MenuItemTemplate>)) : Null<String>);
     return cast null;
   }
 }

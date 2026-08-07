@@ -7,39 +7,39 @@ import flighthq.types.EasingFunction;
 
 class EaseCombinators {
   public static function easeClamp(ease:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>));
+    return cast function(t:Float):Float return (cast ease((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Float)) : Float);
     return cast null;
   }
 
   public static function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
-    return cast function(t:Dynamic) {
-      var v:Dynamic = cast _Runtime.UNDEFINED;
-      v = _Runtime.callValue(ease, cast ([t] : Array<Dynamic>));
+    return cast function(t:Float):Float {
+      var v:Float = cast _Runtime.UNDEFINED;
+      v = (cast ease((cast t : Float)) : Float);
       return cast ((cast ((cast v : Float) < (cast min : Float)) : Bool) ? (cast min : Dynamic) : (cast ((cast ((cast v : Float) > (cast max : Float)) : Bool) ? (cast max : Dynamic) : (cast v : Dynamic)) : Dynamic));
     };
     return cast null;
   }
 
   public static function easeInvert(ease:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return _Runtime.subtractNumbers(1.0, _Runtime.callValue(ease, cast ([t] : Array<Dynamic>)));
+    return cast function(t:Float):Float return (1.0 - (cast ease((cast t : Float)) : Float));
     return cast null;
   }
 
   public static function easeMirror(easeIn:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) {
-      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast _Runtime.multiplyNumbers(_Runtime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)), 0.5); }
-      return cast (1.0 - _Runtime.multiplyNumbers(_Runtime.callValue(easeIn, cast ([((1.0 - t) * 2.0)] : Array<Dynamic>)), 0.5));
+    return cast function(t:Float):Float {
+      if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast ((cast easeIn((cast (t * 2.0) : Float)) : Float) * 0.5); }
+      return cast (1.0 - ((cast easeIn((cast ((1.0 - t) * 2.0) : Float)) : Float) * 0.5));
     };
     return cast null;
   }
 
   public static function easeReverse(easeIn:EasingFunction):EasingFunction {
-    return cast function(t:Dynamic) return _Runtime.subtractNumbers(1.0, _Runtime.callValue(easeIn, cast ([(1.0 - t)] : Array<Dynamic>)));
+    return cast function(t:Float):Float return (1.0 - (cast easeIn((cast (1.0 - t) : Float)) : Float));
     return cast null;
   }
 
   public static function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
-    return cast function(t:Dynamic) return (fromValue + _Runtime.multiplyNumbers(_Runtime.callValue(ease, cast ([t] : Array<Dynamic>)), (toValue - fromValue)));
+    return cast function(t:Float):Float return (fromValue + ((cast ease((cast t : Float)) : Float) * (toValue - fromValue)));
     return cast null;
   }
 }

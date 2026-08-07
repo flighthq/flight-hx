@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
+import flighthq.types.BitmapFont.BitmapFontGlyphData;
+import flighthq.types.BitmapFont.BitmapFontKerningData;
 import flighthq.types.BitmapFont.BitmapFontKerningPair;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
@@ -12,19 +14,19 @@ import flighthq.types.TextureAtlas;
 
 class BitmapFont {
   public static function createBitmapFont(data:BitmapFontData):flighthq.types.BitmapFont {
-    var pageCount:Dynamic = cast _Runtime.UNDEFINED;
-    var glyphs:Dynamic = cast _Runtime.UNDEFINED;
-    var kerning:Dynamic = cast _Runtime.UNDEFINED;
+    var pageCount:Float = cast _Runtime.UNDEFINED;
+    var glyphs:flighthq._internal._Map<Float, GlyphEntry> = cast _Runtime.UNDEFINED;
+    var kerning:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     pageCount = _Runtime.field(data.pages, 'length');
     glyphs = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (glyph in _Runtime.iterable(data.glyphs)) {
-      var page:Dynamic = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
-      ((cast glyphs : flighthq._internal._Map).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: _Runtime.callValue(BitmapFont.resolveBitmapFontGlyphPage__bitmapFont, cast ([glyph.codepoint, page, pageCount] : Array<Dynamic>)), width: glyph.width, x: glyph.x, y: glyph.y }));
+      var page:Float = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
+      ((cast glyphs : flighthq._internal._Map<Float, GlyphEntry>).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y }));
     }
     kerning = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(data.kerning)) {
-        ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(packBitmapFontKerningKey, cast ([pair.left, pair.right] : Array<Dynamic>)), pair.amount));
+        ((cast kerning : flighthq._internal._Map<Float, Float>).set((cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float), pair.amount));
       }
     }
     return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: data.metrics.ascent, descent: data.metrics.descent, lineGap: data.metrics.lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
@@ -32,12 +34,12 @@ class BitmapFont {
   }
 
   public static function getBitmapFontGlyph(font:flighthq.types.BitmapFont, codepoint:Float):Null<GlyphEntry> {
-    return cast _Runtime.coalesce(((cast font.glyphs : flighthq._internal._Map).get(codepoint)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getBitmapFontKerning(font:flighthq.types.BitmapFont, left:Float, right:Float):Float {
-    return cast _Runtime.coalesce(((cast font.kerning : flighthq._internal._Map).get(_Runtime.callValue(packBitmapFontKerningKey, cast ([left, right] : Array<Dynamic>)))), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast font.kerning : flighthq._internal._Map<Float, Float>).get((cast packBitmapFontKerningKey((cast left : Float), (cast right : Float)) : Float))), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -46,7 +48,7 @@ class BitmapFont {
     return cast null;
   }
 
-  public static function getBitmapFontPage(font:flighthq.types.BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
+  public static function getBitmapFontPage(font:flighthq.types.BitmapFont, page:Float = 0.0):Null<TextureAtlas> {
     return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(font.pages, page), function():Dynamic return cast null);
     return cast null;
   }
@@ -57,7 +59,7 @@ class BitmapFont {
   }
 
   public static function hasBitmapFontGlyph(font:flighthq.types.BitmapFont, codepoint:Float):Bool {
-    return cast ((cast font.glyphs : flighthq._internal._Map).has(codepoint));
+    return cast ((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).has(codepoint));
     return cast null;
   }
 
@@ -68,14 +70,14 @@ class BitmapFont {
   }
 
   @:noCompletion
-  public static function setBitmapFontGuard(guard:Null<Dynamic>):Void {
+  public static function setBitmapFontGuard(guard:Null<String->Float->Float->Void>):Void {
     (BitmapFont._guard__bitmapFont = cast (guard : Dynamic));
   }
 
   @:noCompletion
   public static function unpackBitmapFontKerningKey(key:Float, out:BitmapFontKerningPair):BitmapFontKerningPair {
-    _Runtime.setField(out, 'left', HxMath.floor((key / BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont)));
-    _Runtime.setField(out, 'right', _Runtime.fmod(key, BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont));
+    ((cast out : BitmapFontKerningPair).left = HxMath.floor((key / BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont)));
+    ((cast out : BitmapFontKerningPair).right = _Runtime.fmod(key, BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont));
     return cast out;
     return cast null;
   }
@@ -87,7 +89,7 @@ class BitmapFont {
     return cast null;
   }
 
-  public static final UNICODE_CODEPOINT_SPACE__bitmapFont:Dynamic = 1114112.0;
+  public static final UNICODE_CODEPOINT_SPACE__bitmapFont:Float = 1114112.0;
 
-  public static var _guard__bitmapFont:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _guard__bitmapFont:Null<String->Float->Float->Void> = _Runtime.explicitNull();
 }

@@ -6,17 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetFrame;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class SpritesheetAnimation {
   public static function createSpritesheetAnimation(?obj:Dynamic):flighthq.types.SpritesheetAnimation {
-    return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0), repeatCount: _Runtime.coalesce(_Runtime.optionalField(obj, 'repeatCount'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity({ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0), repeatCount: _Runtime.coalesce(_Runtime.optionalField(obj, 'repeatCount'), function():Dynamic return cast 0.0) }) : flighthq.types.SpritesheetAnimation);
     return cast null;
   }
 
   public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<flighthq.types.SpritesheetAnimation> {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var frames:Dynamic = cast _Runtime.UNDEFINED;
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
     var matchedIndices:Array<Float> = cast _Runtime.UNDEFINED;
     __destructure0 = spritesheet;
     atlas = _Runtime.field(__destructure0, 'atlas');
@@ -24,14 +27,14 @@ class SpritesheetAnimation {
     if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return cast null; }
     matchedIndices = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-        var regionId:Dynamic = flighthq._internal._StaticIndex.readArray(frames, i).id;
-        var region:Dynamic = flighthq._internal._StaticIndex.readArray(atlas.regions, regionId);
+        var regionId:Float = flighthq._internal._StaticIndex.readArray(frames, i).id;
+        var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(atlas.regions, regionId);
         if ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var name:Dynamic = region.name;
+        var name:Null<String> = region.name;
         if ((cast _Runtime.strictEquals(name, null) : Bool)) { i++; continue; }
-        var matches:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(pattern), 'string') : Bool) ? (cast ((cast _Runtime.strictEquals(name, pattern) : Bool) || (cast StringTools.startsWith(name, pattern) : Bool)) : Dynamic) : (cast _Runtime.callProperty(pattern, 'test', cast ([name] : Array<Dynamic>)) : Dynamic));
+        var matches:Bool = ((cast _Runtime.strictEquals(_Runtime.typeofValue(pattern), 'string') : Bool) ? (cast ((cast _Runtime.strictEquals(name, pattern) : Bool) || (cast StringTools.startsWith(name, pattern) : Bool)) : Dynamic) : (cast _Runtime.callProperty(pattern, 'test', cast ([name] : Array<Dynamic>)) : Dynamic));
         if ((cast matches : Bool)) {
           _Runtime.callProperty(matchedIndices, 'push', cast ([i] : Array<Dynamic>));
         }
@@ -39,7 +42,7 @@ class SpritesheetAnimation {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(matchedIndices, 'length'), 0.0) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createSpritesheetAnimation, cast ([{ direction: _Runtime.optionalField(options, 'direction'), frameDuration: _Runtime.optionalField(options, 'frameDuration'), frameDurations: _Runtime.optionalField(options, 'frameDurations'), frames: matchedIndices, originX: _Runtime.optionalField(options, 'originX'), originY: _Runtime.optionalField(options, 'originY'), repeatCount: _Runtime.optionalField(options, 'repeatCount') }] : Array<Dynamic>));
+    return cast (cast createSpritesheetAnimation((cast { direction: _Runtime.optionalField(options, 'direction'), frameDuration: _Runtime.optionalField(options, 'frameDuration'), frameDurations: _Runtime.optionalField(options, 'frameDurations'), frames: matchedIndices, originX: _Runtime.optionalField(options, 'originX'), originY: _Runtime.optionalField(options, 'originY'), repeatCount: _Runtime.optionalField(options, 'repeatCount') } : Null<flighthq._internal._Any>)) : Null<flighthq.types.SpritesheetAnimation>);
     return cast null;
   }
 }

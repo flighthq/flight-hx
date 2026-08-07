@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ResourceLoaderItemSignals = { var onItemComplete:Signal<Dynamic>; var onItemError:Signal<Dynamic>; var onItemRetry:Signal<Dynamic>; var onItemStart:Signal<Dynamic>; };
+typedef ResourceLoaderItemSignals = { var onItemComplete:Signal<String->flighthq._internal._Any->Void>; var onItemError:Signal<String->flighthq._internal._Any->Float->Void>; var onItemRetry:Signal<String->Float->Float->Void>; var onItemStart:Signal<String->Void>; };

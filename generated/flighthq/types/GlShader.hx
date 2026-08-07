@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlShader = { var program:flighthq._internal.dom.WebGLProgram; var bind:Dynamic; };
+typedef GlShader = { var program:flighthq._internal.dom.WebGLProgram; var bind:flighthq._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; };

@@ -9,7 +9,7 @@ import flighthq.types.RenderTarget.RenderTargetDimensions;
 
 typedef ApplicationRenderView<State, Target> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var renderState:State; var renderTarget:Target; var viewport:Viewport; var window:ApplicationWindow; };
 
-typedef ApplicationRenderViewResize<State, Target> = Dynamic;
+typedef ApplicationRenderViewResize<State, Target> = State->Target->Float->Float->Void;
 
 typedef ApplicationRenderViewTargetOptions = Dynamic;
 

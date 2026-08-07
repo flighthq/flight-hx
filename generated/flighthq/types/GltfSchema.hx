@@ -18,7 +18,7 @@ typedef GltfAnimationChannel = { var sampler:Float; var target:{ @:optional var 
 
 typedef GltfAnimationSampler = { var input:Float; var output:Float; @:optional var interpolation:String; };
 
-typedef GltfMaterial = { @:optional var name:String; @:optional var pbrMetallicRoughness:GltfPbrMetallicRoughness; @:optional var normalTexture:GltfNormalTextureInfo; @:optional var occlusionTexture:GltfOcclusionTextureInfo; @:optional var emissiveTexture:GltfTextureInfo; @:optional var emissiveFactor:Array<Float>; @:optional var alphaMode:String; @:optional var alphaCutoff:Float; @:optional var doubleSided:Bool; @:optional var extensions:{ @:optional var KHR_materials_anisotropy:GltfMaterialsAnisotropy; @:optional var KHR_materials_clearcoat:GltfMaterialsClearcoat; @:optional var KHR_materials_emissive_strength:GltfMaterialsEmissiveStrength; @:optional var KHR_materials_ior:GltfMaterialsIor; @:optional var KHR_materials_iridescence:GltfMaterialsIridescence; @:optional var KHR_materials_pbrSpecularGlossiness:GltfMaterialsPbrSpecularGlossiness; @:optional var KHR_materials_sheen:GltfMaterialsSheen; @:optional var KHR_materials_unlit:Dynamic; @:optional var KHR_materials_specular:GltfMaterialsSpecular; @:optional var KHR_materials_transmission:GltfMaterialsTransmission; @:optional var KHR_materials_volume:GltfMaterialsVolume; }; };
+typedef GltfMaterial = { @:optional var name:String; @:optional var pbrMetallicRoughness:GltfPbrMetallicRoughness; @:optional var normalTexture:GltfNormalTextureInfo; @:optional var occlusionTexture:GltfOcclusionTextureInfo; @:optional var emissiveTexture:GltfTextureInfo; @:optional var emissiveFactor:Array<Float>; @:optional var alphaMode:String; @:optional var alphaCutoff:Float; @:optional var doubleSided:Bool; @:optional var extensions:{ @:optional var KHR_materials_anisotropy:GltfMaterialsAnisotropy; @:optional var KHR_materials_clearcoat:GltfMaterialsClearcoat; @:optional var KHR_materials_emissive_strength:GltfMaterialsEmissiveStrength; @:optional var KHR_materials_ior:GltfMaterialsIor; @:optional var KHR_materials_iridescence:GltfMaterialsIridescence; @:optional var KHR_materials_pbrSpecularGlossiness:GltfMaterialsPbrSpecularGlossiness; @:optional var KHR_materials_sheen:GltfMaterialsSheen; @:optional var KHR_materials_unlit:flighthq._internal._Record<String, flighthq._internal._Any>; @:optional var KHR_materials_specular:GltfMaterialsSpecular; @:optional var KHR_materials_transmission:GltfMaterialsTransmission; @:optional var KHR_materials_volume:GltfMaterialsVolume; }; };
 
 typedef GltfMaterialsAnisotropy = { @:optional var anisotropyRotation:Float; @:optional var anisotropyStrength:Float; @:optional var anisotropyTexture:GltfTextureInfo; };
 
@@ -68,7 +68,7 @@ typedef GltfMorphTarget = { @:optional var NORMAL:Float; @:optional var POSITION
 
 typedef GltfPrimitive = { var attributes:{ @:optional var JOINTS_0:Float; @:optional var NORMAL:Float; @:optional var POSITION:Float; @:optional var TANGENT:Float; @:optional var TEXCOORD_0:Float; @:optional var WEIGHTS_0:Float; }; @:optional var indices:Float; @:optional var material:Float; @:optional var mode:Float; @:optional var extensions:{ @:optional var KHR_draco_mesh_compression:GltfDracoMeshCompression; }; @:optional var targets:Array<GltfMorphTarget>; };
 
-typedef GltfDracoMeshCompression = { var attributes:Dynamic; var bufferView:Float; };
+typedef GltfDracoMeshCompression = { var attributes:flighthq._internal._Record<String, Float>; var bufferView:Float; };
 
 typedef GltfComponentType = Float;
 

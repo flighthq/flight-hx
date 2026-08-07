@@ -8,4 +8,4 @@ typedef MarkupTagResult = Dynamic;
 
 typedef MarkupTagEffect = { @:optional var breakBefore:Bool; @:optional var format:Dynamic; @:optional var text:String; };
 
-typedef MarkupTagHandler = Dynamic;
+typedef MarkupTagHandler = flighthq._internal._Record<String, String>->MarkupTagResult;

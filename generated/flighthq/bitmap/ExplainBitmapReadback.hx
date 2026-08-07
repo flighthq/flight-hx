@@ -8,15 +8,15 @@ import flighthq.types.BitmapReadback.BitmapReadbackExplanation;
 
 class ExplainBitmapReadback {
   public static function explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
-    var reason:Dynamic = cast _Runtime.UNDEFINED;
-    reason = _Runtime.callValue(ExplainBitmapReadback._blockReason__explainBitmapReadback, cast ([source, width, height] : Array<Dynamic>));
+    var reason:BitmapReadbackBlockReason = cast _Runtime.UNDEFINED;
+    reason = (cast ExplainBitmapReadback._blockReason__explainBitmapReadback((cast source : flighthq._internal._Any), (cast width : Float), (cast height : Float)) : BitmapReadbackBlockReason);
     return cast { readable: _Runtime.strictEquals(reason, 'ok'), reason: reason };
     return cast null;
   }
 
   public static function _blockReason__explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackBlockReason {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 'empty-size'; }
     if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'no-canvas'; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));

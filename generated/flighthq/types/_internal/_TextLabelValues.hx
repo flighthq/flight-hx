@@ -14,5 +14,5 @@ import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
 class _TextLabelValues {
-  public static final TextLabelKind:Dynamic = 'TextLabel';
+  public static final TextLabelKind:String = 'TextLabel';
 }

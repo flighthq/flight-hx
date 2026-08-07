@@ -19,85 +19,101 @@ import flighthq.scene2dGl.GlShapeData.destroyGlShapeData;
 import flighthq.scene2dGl.GlShapeData.getGlShapeData;
 import flighthq.scene2dGl.GlShapeRasterizer.getGlShapeRasterizer;
 import flighthq.types.BatchFormat;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlQuadBatchShader;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlShapeRendererData;
+import flighthq.types.GlShapeRendererData.GlShapeRasterSurface;
+import flighthq.types.Image;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.Renderable;
+import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
+import flighthq.types.Shape.ShapeData;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class GlRasterShapeRenderer {
   @:noCompletion
   public static function drawGlRasterShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var rasterizer:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var materialRenderer:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeData:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var surface:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var straightAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var startCount:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
-    __destructure0 = _Runtime.field(source, 'data');
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var rasterizer:Null<ShapeRasterizer> = cast _Runtime.UNDEFINED;
+    var material:Null<Material> = cast _Runtime.UNDEFINED;
+    var materialRenderer:Null<GlMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var shapeData:GlShapeRendererData = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var pixelRatio:Float = cast _Runtime.UNDEFINED;
+    var surface:GlShapeRasterSurface = cast _Runtime.UNDEFINED;
+    var t:Matrix = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var straightAlpha:Bool = cast _Runtime.UNDEFINED;
+    var startCount:Float = cast _Runtime.UNDEFINED;
+    var base:Float = cast _Runtime.UNDEFINED;
+    var d:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
+    __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) : Bool)) { return; }
-    rasterizer = _Runtime.callValue(getGlShapeRasterizer, cast ([state] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return; }
+    rasterizer = (cast getGlShapeRasterizer((cast state : GlRenderState)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast runtime : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
       return;
     }
-    material = _Runtime.field(renderProxy, 'material');
-    materialRenderer = _Runtime.callValue(resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
+    material = (cast renderProxy : RenderProxy2D).material;
+    materialRenderer = (cast resolveGlMaterialRenderer((cast state : GlRenderState), material) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    shapeData = _Runtime.callValue(getGlShapeData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
-    bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
+    version = (cast getNodeLocalContentRevision(source) : Float);
+    shapeData = (cast getGlShapeData((cast renderProxy : RenderProxy2D).rendererData) : GlShapeRendererData);
+    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
     w = HxMath.ceil(_Runtime.field(bounds, 'width'));
     h = HxMath.ceil(_Runtime.field(bounds, 'height'));
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    pixelRatio = _Runtime.field(state, 'pixelRatio');
-    surface = _Runtime.callValue(acquireGlShapeRasterSurface, cast ([shapeData] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(shapeData, 'lastPixelRatio')) : Bool)) : Bool)) {
-      var __destructure1:Dynamic = surface;
-      var canvas:Dynamic = _Runtime.field(__destructure1, 'canvas');
-      var ctx:Dynamic = _Runtime.field(__destructure1, 'ctx');
+    pixelRatio = (cast state : GlRenderState).pixelRatio;
+    surface = (cast acquireGlShapeRasterSurface(shapeData) : GlShapeRasterSurface);
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : GlShapeRendererData).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : GlShapeRendererData).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : GlShapeRendererData).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : GlShapeRendererData).lastPixelRatio) : Bool)) : Bool)) {
+      var __destructure1 = surface;
+      var canvas:flighthq._internal.dom.HTMLCanvasElement = _Runtime.field(__destructure1, 'canvas');
+      var ctx:flighthq._internal.dom.CanvasRenderingContext2D = _Runtime.field(__destructure1, 'ctx');
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', HxMath.ceil((w * pixelRatio)));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', HxMath.ceil((h * pixelRatio)));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
-      _Runtime.callValue(rasterizer, cast ([ctx, commands, state] : Array<Dynamic>));
+      rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), commands, state);
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(surface, 'image')] : Array<Dynamic>));
-      _Runtime.setField(shapeData, 'lastContentId', version);
-      _Runtime.setField(shapeData, 'lastPixelRatio', pixelRatio);
-      _Runtime.setField(shapeData, 'lastW', w);
-      _Runtime.setField(shapeData, 'lastH', h);
+      invalidateImageResource((cast surface : GlShapeRasterSurface).image);
+      ((cast shapeData : GlShapeRendererData).lastContentId = version);
+      ((cast shapeData : GlShapeRendererData).lastPixelRatio = pixelRatio);
+      ((cast shapeData : GlShapeRendererData).lastW = w);
+      ((cast shapeData : GlShapeRendererData).lastH = h);
     }
-    _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
-    t = _Runtime.field(renderProxy, 'transform2D');
+    (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
+    t = (cast renderProxy : RenderProxy2D).transform2D;
     tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
     ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
-    texture = _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(surface, 'image'), null, null, true] : Array<Dynamic>));
-    straightAlpha = _Runtime.field(runtime, 'currentTextureStraightAlpha');
-    startCount = _Runtime.field(runtime, 'quadBatchWriterCount');
-    base = _Runtime.callValue(prepareGlQuadBatchWrite, cast ([state, texture, straightAlpha, null, _Runtime.field(renderProxy, 'blendMode'), material, materialRenderer, 1.0] : Array<Dynamic>));
-    d = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
+    texture = (cast bindGlImageResourceTexture((cast state : GlRenderState), (cast surface : GlShapeRasterSurface).image, null, (cast null : Null<Bool>), (cast true : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : flighthq._internal.dom.WebGLTexture);
+    straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
+    startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
+    base = (cast prepareGlQuadBatchWrite((cast state : GlRenderState), (cast texture : flighthq._internal.dom.WebGLTexture), (cast straightAlpha : Bool), null, (cast (cast renderProxy : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    d = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
     flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), t.b);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 2.0), t.c);
@@ -110,10 +126,10 @@ class GlRasterShapeRenderer {
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 9.0), 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 10.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 11.0), 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), _Runtime.field(renderProxy, 'alpha'));
-    _Runtime.callValue(packGlQuadBatchMaterialInstance, cast ([state, _Runtime.field(renderProxy, 'materialData'), startCount] : Array<Dynamic>));
-    _Runtime.callValue(recordGlQuadBatchColorScaleBias, cast ([state, _Runtime.coalesce(_Runtime.field(renderProxy, 'colorMatrix'), function():Dynamic return cast _Runtime.field(renderProxy, 'colorScaleBias')), startCount] : Array<Dynamic>));
-    _Runtime.incrementField(runtime, 'quadBatchWriterCount', 1, true);
+    flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), (cast renderProxy : RenderProxy2D).alpha);
+    packGlQuadBatchMaterialInstance((cast state : GlRenderState), (cast (cast renderProxy : RenderProxy2D).materialData : Null<flighthq._internal._Object>), (cast startCount : Float));
+    recordGlQuadBatchColorScaleBias((cast state : GlRenderState), _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias), (cast startCount : Float));
+    (cast runtime : GlRenderStateRuntime).quadBatchWriterCount++;
   }
 
   public static final defaultGlRasterShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlRasterShape };

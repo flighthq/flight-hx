@@ -18,20 +18,20 @@ class DropShadowEffect {
   }
 
   public static function getDropShadowEffectPadding(effect:flighthq.types.DropShadowEffect):RenderEffectPadding {
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), _Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.multiplyNumbers(HxMath.sin(angle), distance)] : Array<Dynamic>));
+    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DropShadowEffect', DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DropShadowEffect' : String), DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect);
   }
 
   public static function resolveDropShadowEffectPadding__dropShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getDropShadowEffectPadding, cast ([(cast effect : flighthq.types.DropShadowEffect)] : Array<Dynamic>));
+    return cast (cast getDropShadowEffectPadding((cast (cast effect : flighthq.types.DropShadowEffect) : flighthq.types.DropShadowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

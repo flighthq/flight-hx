@@ -14,56 +14,59 @@ import flighthq.node.NodeOrderList.setNodeOrderListFromNodeChildren;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.NodeOrderList;
 import flighthq.types.RiveDocument.RiveArtboardGraph;
+import flighthq.types.RiveDocument.RiveCoreObject;
+import flighthq.types.RiveDocument.RiveProperty;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveDrawOrder {
   public static function applyRiveDrawOrder(nodes:Array<Null<Node2D>>, artboard:RiveArtboardGraph, root:DisplayObject, ?diagnostics:Array<ImportDiagnostic>):Void {
-    var lists:Dynamic = cast _Runtime.UNDEFINED;
+    var lists:flighthq._internal._Map<Node2D, NodeOrderList<Node2DTraits>> = cast _Runtime.UNDEFINED;
     lists = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        var object:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveDrawOrder.RIVE_DRAW_RULES_TYPE_KEY__riveDrawOrder) : Bool)) { index++; continue; }
-        var governed:Dynamic = _Runtime.callValue(RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder, cast ([nodes, flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index)] : Array<Dynamic>));
-        var target:Dynamic = _Runtime.callValue(RiveDrawOrder.resolveRiveDrawTarget__riveDrawOrder, cast ([nodes, artboard, _Runtime.callValue(RiveDrawOrder.readRiveDrawId__riveDrawOrder, cast ([object, RiveDrawOrder.RIVE_DRAW_TARGET_ID__riveDrawOrder] : Array<Dynamic>))] : Array<Dynamic>));
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+        if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveDrawOrder.RIVE_DRAW_RULES_TYPE_KEY__riveDrawOrder) : Bool)) { index++; continue; }
+        var governed:Null<Node2D> = (cast RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder((cast nodes : Array<Null<Node2D>>), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index) : Null<Float>)) : Null<Node2D>);
+        var target:Null<{ var isAbove:Bool; var node:Node2D; }> = (cast RiveDrawOrder.resolveRiveDrawTarget__riveDrawOrder((cast nodes : Array<Null<Node2D>>), (cast artboard : RiveArtboardGraph), (cast (cast RiveDrawOrder.readRiveDrawId__riveDrawOrder(object, (cast RiveDrawOrder.RIVE_DRAW_TARGET_ID__riveDrawOrder : Float)) : Null<Float>) : Null<Float>)) : Null<{ var isAbove:Bool; var node:Node2D; }>);
         if ((cast ((cast _Runtime.strictEquals(governed, null) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'rive.draw-rule-unresolved', 'applyRiveDrawOrder'] : Array<Dynamic>));
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'rive.draw-rule-unresolved' : String), (cast 'applyRiveDrawOrder' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           index++;
           continue;
         }
-        var parent:Dynamic = (cast _Runtime.callValue(getNodeParent, cast ([governed] : Array<Dynamic>)) : Null<Node2D>);
-        if ((cast ((cast _Runtime.strictEquals(parent, null) : Bool) || (cast !_Runtime.strictEquals(parent, _Runtime.callValue(getNodeParent, cast ([_Runtime.field(target, 'node')] : Array<Dynamic>))) : Bool)) : Bool)) {
-          _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Drop, 'rive.draw-rule-crosses-parent', 'applyRiveDrawOrder'] : Array<Dynamic>));
+        var parent:Null<Node2D> = (cast (cast getNodeParent(governed) : Null<Node2D>) : Null<Node2D>);
+        if ((cast ((cast _Runtime.strictEquals(parent, null) : Bool) || (cast !_Runtime.strictEquals(parent, (cast getNodeParent((cast target : { var isAbove:Bool; var node:Node2D; }).node) : Null<NodeOf<Node2DTraits>>)) : Bool)) : Bool)) {
+          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'rive.draw-rule-crosses-parent' : String), (cast 'applyRiveDrawOrder' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
           index++;
           continue;
         }
-        var list:Dynamic = ((cast lists : flighthq._internal._Map).get(parent));
+        var list:Null<NodeOrderList<Node2DTraits>> = ((cast lists : flighthq._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).get(parent));
         if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          (list = cast (_Runtime.callValue(createNodeOrderList, cast ([] : Array<Dynamic>)) : Dynamic));
-          _Runtime.callValue(setNodeOrderListFromNodeChildren, cast ([list, parent] : Array<Dynamic>));
-          ((cast lists : flighthq._internal._Map).set(parent, list));
+          (list = cast ((cast createNodeOrderList() : Null<NodeOrderList<Node2DTraits>>) : Dynamic));
+          setNodeOrderListFromNodeChildren((cast list : NodeOrderList<Node2DTraits>), parent);
+          ((cast lists : flighthq._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).set(parent, list));
         }
-        if ((cast _Runtime.field(target, 'isAbove') : Bool)) { _Runtime.callValue(setNodeOrderListEntryAbove, cast ([list, governed, _Runtime.field(target, 'node')] : Array<Dynamic>)); } else { _Runtime.callValue(setNodeOrderListEntryBelow, cast ([list, governed, _Runtime.field(target, 'node')] : Array<Dynamic>)); }
+        if ((cast (cast target : { var isAbove:Bool; var node:Node2D; }).isAbove : Bool)) { setNodeOrderListEntryAbove((cast list : NodeOrderList<Node2DTraits>), governed, (cast target : { var isAbove:Bool; var node:Node2D; }).node); } else { setNodeOrderListEntryBelow((cast list : NodeOrderList<Node2DTraits>), governed, (cast target : { var isAbove:Bool; var node:Node2D; }).node); }
         index++;
       }
     }
     for (__iteration0 in _Runtime.iterable(lists)) {
-      var parent:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var list:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      _Runtime.callValue(applyNodeOrderList, cast ([((cast _Runtime.strictEquals(parent, root) : Bool) ? (cast root : Dynamic) : (cast parent : Dynamic)), list] : Array<Dynamic>));
-      _Runtime.callValue(disposeNodeOrderList, cast ([list] : Array<Dynamic>));
+      var parent:Node2D = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var list:NodeOrderList<Node2DTraits> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      applyNodeOrderList(((cast _Runtime.strictEquals(parent, root) : Bool) ? (cast root : Dynamic) : (cast parent : Dynamic)), (cast list : NodeOrderList<Node2DTraits>));
+      disposeNodeOrderList((cast list : NodeOrderList<Node2DTraits>));
     }
   }
 
-  public static function readRiveDrawId__riveDrawOrder(object:Dynamic, key:Float):Null<Float> {
-    var property:Dynamic = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(object, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), key));
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(property, 'value')), 'number') : Bool) ? (cast _Runtime.field(property, 'value') : Dynamic) : (cast null : Dynamic));
+  public static function readRiveDrawId__riveDrawOrder(object:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<RiveArtboardGraph, String>, Float>, key:Float):Null<Float> {
+    var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
+    property = _Runtime.find(_Runtime.field(object, 'properties'), function(candidate:RiveProperty, __unused1:Float, __unused2:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(property, 'value')), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -73,26 +76,26 @@ class RiveDrawOrder {
   }
 
   public static function resolveRiveDrawTarget__riveDrawOrder(nodes:Array<Null<Node2D>>, artboard:RiveArtboardGraph, targetIndex:Null<Float>):Null<{ var isAbove:Bool; var node:Node2D; }> {
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    var drawable:Dynamic = cast _Runtime.UNDEFINED;
+    var target:RiveCoreObject = cast _Runtime.UNDEFINED;
+    var drawable:Null<Node2D> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(targetIndex, null) : Bool)) { return cast null; }
     target = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), targetIndex);
-    if ((cast ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(target, 'typeKey'), RiveDrawOrder.RIVE_DRAW_TARGET_TYPE_KEY__riveDrawOrder) : Bool)) : Bool)) { return cast null; }
-    drawable = _Runtime.callValue(RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder, cast ([nodes, _Runtime.coalesce(_Runtime.callValue(RiveDrawOrder.readRiveDrawId__riveDrawOrder, cast ([target, RiveDrawOrder.RIVE_DRAWABLE_ID__riveDrawOrder] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast target : RiveCoreObject).typeKey, RiveDrawOrder.RIVE_DRAW_TARGET_TYPE_KEY__riveDrawOrder) : Bool)) : Bool)) { return cast null; }
+    drawable = (cast RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder((cast nodes : Array<Null<Node2D>>), (cast _Runtime.coalesce((cast RiveDrawOrder.readRiveDrawId__riveDrawOrder(target, (cast RiveDrawOrder.RIVE_DRAWABLE_ID__riveDrawOrder : Float)) : Null<Float>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Null<Float>)) : Null<Node2D>);
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return cast null; }
-    return cast { isAbove: _Runtime.strictEquals(_Runtime.callValue(RiveDrawOrder.readRiveDrawId__riveDrawOrder, cast ([target, RiveDrawOrder.RIVE_PLACEMENT_VALUE__riveDrawOrder] : Array<Dynamic>)), RiveDrawOrder.RIVE_PLACEMENT_AFTER__riveDrawOrder), node: drawable };
+    return cast { isAbove: _Runtime.strictEquals((cast RiveDrawOrder.readRiveDrawId__riveDrawOrder(target, (cast RiveDrawOrder.RIVE_PLACEMENT_VALUE__riveDrawOrder : Float)) : Null<Float>), RiveDrawOrder.RIVE_PLACEMENT_AFTER__riveDrawOrder), node: drawable };
     return cast null;
   }
 
-  public static final RIVE_DRAW_TARGET_TYPE_KEY__riveDrawOrder:Dynamic = 48.0;
+  public static final RIVE_DRAW_TARGET_TYPE_KEY__riveDrawOrder:Float = 48.0;
 
-  public static final RIVE_DRAW_RULES_TYPE_KEY__riveDrawOrder:Dynamic = 49.0;
+  public static final RIVE_DRAW_RULES_TYPE_KEY__riveDrawOrder:Float = 49.0;
 
-  public static final RIVE_DRAWABLE_ID__riveDrawOrder:Dynamic = 119.0;
+  public static final RIVE_DRAWABLE_ID__riveDrawOrder:Float = 119.0;
 
-  public static final RIVE_PLACEMENT_VALUE__riveDrawOrder:Dynamic = 120.0;
+  public static final RIVE_PLACEMENT_VALUE__riveDrawOrder:Float = 120.0;
 
-  public static final RIVE_DRAW_TARGET_ID__riveDrawOrder:Dynamic = 121.0;
+  public static final RIVE_DRAW_TARGET_ID__riveDrawOrder:Float = 121.0;
 
-  public static final RIVE_PLACEMENT_AFTER__riveDrawOrder:Dynamic = 1.0;
+  public static final RIVE_PLACEMENT_AFTER__riveDrawOrder:Float = 1.0;
 }

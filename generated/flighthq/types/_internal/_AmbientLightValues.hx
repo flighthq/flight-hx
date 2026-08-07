@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Light;
 
 class _AmbientLightValues {
-  public static final AmbientLightKind:Dynamic = 'AmbientLight';
+  public static final AmbientLightKind:String = 'AmbientLight';
 }

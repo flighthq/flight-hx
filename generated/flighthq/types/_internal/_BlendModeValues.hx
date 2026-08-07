@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _BlendModeValues {
-  public static final BlendModeValue:Dynamic = { Add: 'Add', Darken: 'Darken', Lighten: 'Lighten', Multiply: 'Multiply', Normal: 'Normal', Screen: 'Screen' };
+  public static final BlendModeValue:{ var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; } = { Add: 'Add', Darken: 'Darken', Lighten: 'Lighten', Multiply: 'Multiply', Normal: 'Normal', Screen: 'Screen' };
 }

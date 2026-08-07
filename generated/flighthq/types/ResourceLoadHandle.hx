@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ResourceLoadHandle<T> = { var key:String; var promise:flighthq._internal._Promise<Dynamic>; };
+typedef ResourceLoadHandle<T> = { var key:String; var promise:flighthq._internal._Promise<T>; };

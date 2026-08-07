@@ -11,8 +11,8 @@ typedef Entity = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
 
 typedef EntityWithoutRuntime<Type> = Dynamic;
 
-typedef EntityRuntime = { var binding:Null<Dynamic>; };
+typedef EntityRuntime = { var binding:Null<flighthq._internal._Object>; };
 
 typedef EntityRuntimeWriteSlot = String;
 
-typedef EntityRuntimeWriteGuard = Dynamic;
+typedef EntityRuntimeWriteGuard = EntityRuntimeWriteSlot->Void;

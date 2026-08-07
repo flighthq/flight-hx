@@ -26,14 +26,14 @@ import flighthq.types.Physics2D.Physics2DWorld;
 
 class RegisterBuiltInPhysics2DJointSolvers {
   public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DDistanceJointKind, physics2DDistanceJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DGearJointKind, physics2DGearJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DMouseJointKind, physics2DMouseJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DPrismaticJointKind, physics2DPrismaticJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DPulleyJointKind, physics2DPulleyJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DRevoluteJointKind, physics2DRevoluteJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DRopeJointKind, physics2DRopeJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DWeldJointKind, physics2DWeldJointSolver] : Array<Dynamic>));
-    _Runtime.callValue(registerPhysics2DJointSolver, cast ([world, Physics2DWheelJointKind, physics2DWheelJointSolver] : Array<Dynamic>));
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DDistanceJointKind : String), physics2DDistanceJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DGearJointKind : String), physics2DGearJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DMouseJointKind : String), physics2DMouseJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DPrismaticJointKind : String), physics2DPrismaticJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DPulleyJointKind : String), physics2DPulleyJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DRevoluteJointKind : String), physics2DRevoluteJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DRopeJointKind : String), physics2DRopeJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DWeldJointKind : String), physics2DWeldJointSolver);
+    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DWheelJointKind : String), physics2DWheelJointSolver);
   }
 }

@@ -20,16 +20,16 @@ import flighthq.types.Collision.CollisionShapeKind;
 
 class CollideContactManifold {
   public static function collideContactManifold(a:CollisionShape, b:CollisionShape, out:CollisionContactManifold):Bool {
-    var rankA:Dynamic = cast _Runtime.UNDEFINED;
-    var rankB:Dynamic = cast _Runtime.UNDEFINED;
-    var swapped:Dynamic = cast _Runtime.UNDEFINED;
-    var lo:Dynamic = cast _Runtime.UNDEFINED;
-    var hi:Dynamic = cast _Runtime.UNDEFINED;
-    var overlapping:Dynamic = cast _Runtime.UNDEFINED;
-    rankA = _Runtime.callValue(CollideContactManifold.contactShapeKindRank__collideContactManifold, cast ([_Runtime.field(a, 'kind')] : Array<Dynamic>));
-    rankB = _Runtime.callValue(CollideContactManifold.contactShapeKindRank__collideContactManifold, cast ([_Runtime.field(b, 'kind')] : Array<Dynamic>));
+    var rankA:Float = cast _Runtime.UNDEFINED;
+    var rankB:Float = cast _Runtime.UNDEFINED;
+    var swapped:Bool = cast _Runtime.UNDEFINED;
+    var lo:CollisionShape = cast _Runtime.UNDEFINED;
+    var hi:CollisionShape = cast _Runtime.UNDEFINED;
+    var overlapping:Bool = cast _Runtime.UNDEFINED;
+    rankA = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold((cast (cast a : { var kind:String; }).kind : CollisionShapeKind)) : Float);
+    rankB = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold((cast (cast b : { var kind:String; }).kind : CollisionShapeKind)) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionContactManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionContactManifold((cast out : CollisionContactManifold));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -37,58 +37,58 @@ class CollideContactManifold {
     hi = ((cast swapped : Bool) ? (cast a : Dynamic) : (cast b : Dynamic));
     overlapping = false;
     {
-      var __switchValue = _Runtime.field(lo, 'kind');
+      var __switchValue = (cast lo : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast (_Runtime.callValue(collideCircleCircleContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideCircleCircleContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast (_Runtime.callValue(collideCircleAabbContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideCircleAabbContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(collideCircleObbContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideCircleObbContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(collideCirclePolygonContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideCirclePolygonContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'aabb') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast (_Runtime.callValue(collideAabbAabbContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideAabbAabbContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(collideAabbObbContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideAabbObbContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(collideAabbPolygonContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideAabbPolygonContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'obb') {
         {
-          var __switchValue = _Runtime.field(hi, 'kind');
+          var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast (_Runtime.callValue(collideObbObbContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideObbObbContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast (_Runtime.callValue(collideObbPolygonContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+            (overlapping = cast ((cast collideObbPolygonContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
-        if ((cast _Runtime.strictEquals(_Runtime.field(hi, 'kind'), 'polygon') : Bool)) {
-          (overlapping = cast (_Runtime.callValue(collidePolygonPolygonContactManifold, cast ([lo, hi, out] : Array<Dynamic>)) : Dynamic));
+        if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
+          (overlapping = cast ((cast collidePolygonPolygonContactManifold(lo, hi, (cast out : CollisionContactManifold)) : Bool) : Dynamic));
         }
       }
     }
     if ((cast ((cast overlapping : Bool) && (cast swapped : Bool)) : Bool)) {
-      _Runtime.setField(out, 'normalX', -_Runtime.field(out, 'normalX'));
-      _Runtime.setField(out, 'normalY', -_Runtime.field(out, 'normalY'));
+      ((cast out : CollisionContactManifold).normalX = -(cast out : CollisionContactManifold).normalX);
+      ((cast out : CollisionContactManifold).normalY = -(cast out : CollisionContactManifold).normalY);
     }
     return cast overlapping;
     return cast null;

@@ -7,8 +7,8 @@ import flighthq.types.WellKnownMenuItemRole.WellKnownMenuItemRoleValue;
 
 typedef MenuItemType = String;
 
-typedef MenuItemRole = Dynamic;
+typedef MenuItemRole = flighthq._internal._Union2<WellKnownMenuItemRoleValue, String>;
 
 typedef MenuItemTemplate = { @:optional var id:String; @:optional var label:String; @:optional var type:MenuItemType; @:optional var role:MenuItemRole; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var visible:Bool; @:optional var sublabel:String; @:optional var toolTip:String; @:optional var submenu:Array<MenuItemTemplate>; };
 
-typedef MenuBackend = { var setApplicationMenu:Dynamic; var popupContextMenu:Dynamic; var subscribeSelect:Dynamic; };
+typedef MenuBackend = { var setApplicationMenu:Array<MenuItemTemplate>->Bool; var popupContextMenu:Array<MenuItemTemplate>->Float->Float->flighthq._internal._Promise<Null<String>>; var subscribeSelect:String->Void->Void->Void; };

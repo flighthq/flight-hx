@@ -6,24 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlRenderTextureEffect.setGlRenderEffectApplicationGuard;
 import flighthq.log.Log.logOnce;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationStatus;
 import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 class EnableGlRenderEffectGuards {
   @:noCompletion
   public static function areGlRenderEffectGuardsEnabled(state:GlRenderState):Bool {
-    return cast ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet).has(state));
+    return cast ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).has(state));
     return cast null;
   }
 
   public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
-    _Runtime.callValue(setGlRenderEffectApplicationGuard, cast ([state, null] : Array<Dynamic>));
-    ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet).delete_(state));
+    setGlRenderEffectApplicationGuard((cast state : GlRenderState), null);
+    ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).delete_(state));
   }
 
   public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
-    _Runtime.callValue(setGlRenderEffectApplicationGuard, cast ([state, EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards] : Array<Dynamic>));
-    ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet).add(state));
+    setGlRenderEffectApplicationGuard((cast state : GlRenderState), EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards);
+    ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).add(state));
   }
 
   public static function getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(explanation:GlRenderEffectApplicationExplanation):String {
@@ -46,8 +47,8 @@ class EnableGlRenderEffectGuards {
   }
 
   public static function warnGlRenderEffectApplication__enableGlRenderEffectGuards(_state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    _Runtime.callValue(logOnce, cast (['effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '', LogLevel.Warn, { message: _Runtime.callValue(EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards, cast ([explanation] : Array<Dynamic>)), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') }, 'effects-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), (cast LogLevel.Warn : LogLevel), { message: EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards((cast explanation : GlRenderEffectApplicationExplanation)), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') }, (cast 'effects-gl' : Null<String>)) : Bool);
   }
 
-  public static final _guardedStates__enableGlRenderEffectGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+  public static final _guardedStates__enableGlRenderEffectGuards:flighthq._internal._WeakSet<GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

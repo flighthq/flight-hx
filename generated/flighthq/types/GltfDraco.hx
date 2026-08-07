@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GltfDracoMesh = { var attributes:Dynamic; var indices:Null<flighthq._internal._UInt32Array>; var vertexCount:Float; };
+typedef GltfDracoMesh = { var attributes:flighthq._internal._Record<String, flighthq._internal._Float32Array>; var indices:Null<flighthq._internal._UInt32Array>; var vertexCount:Float; };
 
-typedef GltfDracoDecoder = Dynamic;
+typedef GltfDracoDecoder = flighthq._internal._UInt8Array->flighthq._internal._Record<String, Float>->Null<GltfDracoMesh>;

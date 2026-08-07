@@ -12,7 +12,10 @@ import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInvertTintPass;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
+import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 import flighthq.types.InnerShadowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -21,27 +24,27 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuInnerShadowEffect {
   @:noCompletion
   public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var s0:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
+    var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var s0:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var s1:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var s2:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s2 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    s0 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    s1 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    s2 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
@@ -51,30 +54,30 @@ class WgpuInnerShadowEffect {
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    _Runtime.callValue(applyWgpuEffectInvertTintPass, cast ([state, src, s0, color, alpha, strength] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), edgeColor: _Runtime.callValue(WgpuInnerShadowEffect.getInvertTintEdgeColor__wgpuInnerShadowEffect, cast ([color, alpha, strength] : Array<Dynamic>)), passes: quality }] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectBlitOffsetPass, cast ([state, s1, s0, dx, dy] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectInnerClipPass, cast ([state, s0, src, s1] : Array<Dynamic>));
-    _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
+    applyWgpuEffectInvertTintPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast s0 : WgpuRenderTarget), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyWgpuEffectBoxBlur((cast state : WgpuRenderState), (cast s0 : WgpuRenderTarget), (cast s1 : WgpuRenderTarget), (cast s2 : WgpuRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), edgeColor: (cast WgpuInnerShadowEffect.getInvertTintEdgeColor__wgpuInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Null<Array<Float>>), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    applyWgpuEffectBlitOffsetPass((cast state : WgpuRenderState), (cast s1 : WgpuRenderTarget), (cast s0 : WgpuRenderTarget), (cast dx : Float), (cast dy : Float));
+    applyWgpuEffectInnerClipPass((cast state : WgpuRenderState), (cast s0 : WgpuRenderTarget), (cast src : WgpuRenderTarget), (cast s1 : WgpuRenderTarget));
+    clearWgpuEffectTarget((cast state : WgpuRenderState), (cast dst : WgpuRenderTarget));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
+      applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
     }
-    _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s1, dst] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s0] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s1] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
+    applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast s1 : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s0 : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s1 : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s2 : WgpuRenderTarget));
   }
 
-  public static final defaultWgpuInnerShadowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyInnerShadowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect)] : Array<Dynamic>));
+  public static final defaultWgpuInnerShadowEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyInnerShadowEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : InnerShadowEffect) : InnerShadowEffect));
   };
 
   public static function registerWgpuInnerShadowEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'InnerShadowEffect', defaultWgpuInnerShadowEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'InnerShadowEffect' : String), (cast defaultWgpuInnerShadowEffectRunner : WgpuRenderEffectRunner));
   }
 
   public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
-    var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
+    var edgeAlpha:Float = cast _Runtime.UNDEFINED;
     edgeAlpha = HxMath.min(1.0, (alpha * strength));
     return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & 255) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;

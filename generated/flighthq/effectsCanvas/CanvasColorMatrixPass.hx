@@ -9,33 +9,33 @@ import flighthq.types.CanvasRenderTarget;
 class CanvasColorMatrixPass {
   @:noCompletion
   public static function applyColorMatrixPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, matrix:Array<Float>):Void {
-    _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
-      _Runtime.callValue(applyColorMatrixToImageDataBytes, cast ([data, pixelCount, matrix] : Array<Dynamic>));
-    }] : Array<Dynamic>));
+    drawCanvasImageDataPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+      applyColorMatrixToImageDataBytes((cast data : flighthq._internal._UInt8ClampedArray), (cast pixelCount : Float), (cast matrix : Array<Float>));
+    } : flighthq._internal._UInt8ClampedArray->Float->Void));
   }
 
   @:noCompletion
   public static function applyColorMatrixToImageDataBytes(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float, matrix:Array<Float>):Void {
-    var m0:Dynamic = cast _Runtime.UNDEFINED;
-    var m1:Dynamic = cast _Runtime.UNDEFINED;
-    var m2:Dynamic = cast _Runtime.UNDEFINED;
-    var m3:Dynamic = cast _Runtime.UNDEFINED;
-    var m4:Dynamic = cast _Runtime.UNDEFINED;
-    var m5:Dynamic = cast _Runtime.UNDEFINED;
-    var m6:Dynamic = cast _Runtime.UNDEFINED;
-    var m7:Dynamic = cast _Runtime.UNDEFINED;
-    var m8:Dynamic = cast _Runtime.UNDEFINED;
-    var m9:Dynamic = cast _Runtime.UNDEFINED;
-    var m10:Dynamic = cast _Runtime.UNDEFINED;
-    var m11:Dynamic = cast _Runtime.UNDEFINED;
-    var m12:Dynamic = cast _Runtime.UNDEFINED;
-    var m13:Dynamic = cast _Runtime.UNDEFINED;
-    var m14:Dynamic = cast _Runtime.UNDEFINED;
-    var m15:Dynamic = cast _Runtime.UNDEFINED;
-    var m16:Dynamic = cast _Runtime.UNDEFINED;
-    var m17:Dynamic = cast _Runtime.UNDEFINED;
-    var m18:Dynamic = cast _Runtime.UNDEFINED;
-    var m19:Dynamic = cast _Runtime.UNDEFINED;
+    var m0:Float = cast _Runtime.UNDEFINED;
+    var m1:Float = cast _Runtime.UNDEFINED;
+    var m2:Float = cast _Runtime.UNDEFINED;
+    var m3:Float = cast _Runtime.UNDEFINED;
+    var m4:Float = cast _Runtime.UNDEFINED;
+    var m5:Float = cast _Runtime.UNDEFINED;
+    var m6:Float = cast _Runtime.UNDEFINED;
+    var m7:Float = cast _Runtime.UNDEFINED;
+    var m8:Float = cast _Runtime.UNDEFINED;
+    var m9:Float = cast _Runtime.UNDEFINED;
+    var m10:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
+    var m13:Float = cast _Runtime.UNDEFINED;
+    var m14:Float = cast _Runtime.UNDEFINED;
+    var m15:Float = cast _Runtime.UNDEFINED;
+    var m16:Float = cast _Runtime.UNDEFINED;
+    var m17:Float = cast _Runtime.UNDEFINED;
+    var m18:Float = cast _Runtime.UNDEFINED;
+    var m19:Float = cast _Runtime.UNDEFINED;
     m0 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 0.0), function():Dynamic return cast 0.0);
     m1 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 1.0), function():Dynamic return cast 0.0);
     m2 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 2.0), function():Dynamic return cast 0.0);
@@ -57,13 +57,13 @@ class CanvasColorMatrixPass {
     m18 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 18.0), function():Dynamic return cast 0.0);
     m19 = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 19.0), function():Dynamic return cast 0.0);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
-        var p:Dynamic = (i * 4.0);
-        var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, p);
-        var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0));
-        var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0));
-        var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 3.0));
+        var p:Float = (i * 4.0);
+        var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, p);
+        var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0));
+        var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0));
+        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 3.0));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, (((((m0 * r) + (m1 * g)) + (m2 * b)) + (m3 * a)) + (m4 * 255.0)));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), (((((m5 * r) + (m6 * g)) + (m7 * b)) + (m8 * a)) + (m9 * 255.0)));
         flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), (((((m10 * r) + (m11 * g)) + (m12 * b)) + (m13 * a)) + (m14 * 255.0)));

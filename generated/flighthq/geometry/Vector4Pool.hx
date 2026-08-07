@@ -8,12 +8,12 @@ import flighthq.types.Vector4;
 
 class Vector4Pool {
   public static function acquireEmptyVector4():Vector4 {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    v = _Runtime.callValue(acquireVector4, cast ([] : Array<Dynamic>));
-    _Runtime.setField(v, 'x', 0.0);
-    _Runtime.setField(v, 'y', 0.0);
-    _Runtime.setField(v, 'z', 0.0);
-    _Runtime.setField(v, 'w', 0.0);
+    var v:Vector4 = cast _Runtime.UNDEFINED;
+    v = (cast acquireVector4() : Vector4);
+    ((cast v : Vector4).x = 0.0);
+    ((cast v : Vector4).y = 0.0);
+    ((cast v : Vector4).z = 0.0);
+    ((cast v : Vector4).w = 0.0);
     return cast v;
     return cast null;
   }
@@ -23,7 +23,7 @@ class Vector4Pool {
     if ((cast ((cast _Runtime.field(Vector4Pool.pool__vector4Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (v = cast ((cast _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector4) : Dynamic));
     } else {
-      (v = cast (_Runtime.callValue(createVector4, cast ([] : Array<Dynamic>)) : Dynamic));
+      (v = cast ((cast createVector4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector4) : Dynamic));
     }
     return cast v;
     return cast null;

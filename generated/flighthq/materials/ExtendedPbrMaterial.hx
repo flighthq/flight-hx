@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.PbrExtension;
+import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
 class ExtendedPbrMaterial {
   public static function createExtendedPbrMaterial(?opts:Dynamic):flighthq.types.ExtendedPbrMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([ExtendedPbrMaterialKind, opts] : Array<Dynamic>)) : flighthq.types.ExtendedPbrMaterial);
-    _Runtime.setField(material, 'extensions', _Runtime.coalesce(_Runtime.optionalField(opts, 'extensions'), function():Dynamic return cast cast ([] : Array<Dynamic>)));
-    _Runtime.setField(material, 'standard', _Runtime.coalesce(_Runtime.optionalField(opts, 'standard'), function():Dynamic return cast _Runtime.callValue(createStandardPbrMaterialProperties, cast ([] : Array<Dynamic>))));
+    var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), opts) : flighthq.types.ExtendedPbrMaterial) : flighthq.types.ExtendedPbrMaterial);
+    ((cast material : flighthq.types.ExtendedPbrMaterial).extensions = _Runtime.coalesce(_Runtime.optionalField(opts, 'extensions'), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    ((cast material : flighthq.types.ExtendedPbrMaterial).standard = _Runtime.coalesce(_Runtime.optionalField(opts, 'standard'), function():Dynamic return cast (cast createStandardPbrMaterialProperties((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : StandardPbrMaterialProperties)));
     return cast material;
     return cast null;
   }

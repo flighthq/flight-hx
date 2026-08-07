@@ -4,25 +4,26 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorLut.sampleColorLut;
+import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.LookupTableGradeAdjustment;
 
 class LookupTableGradeAdjustment {
   public static function createLookupTableGradeAdjustment(?options:Dynamic):flighthq.types.LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var lut:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
+    var lut:Null<ColorLut> = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
     lut = _Runtime.field(options, 'lut');
     strength = _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0);
-    transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
+    transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       if ((cast ((cast _Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast strength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(out, 0.0, r);
         flighthq._internal._StaticIndex.writeArray(out, 1.0, g);
         flighthq._internal._StaticIndex.writeArray(out, 2.0, b);
         return;
       }
-      _Runtime.callValue(sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
+      sampleColorLut(lut, (cast out : Array<Float>), (cast r : Float), (cast g : Float), (cast b : Float));
       flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), r) * strength)));
       flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), g) * strength)));
       flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 2.0), b) * strength)));

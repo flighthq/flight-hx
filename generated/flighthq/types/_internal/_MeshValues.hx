@@ -12,5 +12,5 @@ import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Skin;
 
 class _MeshValues {
-  public static final MeshKind:Dynamic = 'Mesh';
+  public static final MeshKind:String = 'Mesh';
 }

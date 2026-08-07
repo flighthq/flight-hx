@@ -13,9 +13,19 @@ import flighthq.scene2dDom.DomReconcile.reconcileDomContainer;
 import flighthq.scene2dDom.DomReconcile.swapDomOrderLists;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomClipHooks;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
 class DomNode2D {
   @:noCompletion
@@ -26,44 +36,44 @@ class DomNode2D {
   public static final defaultDomScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawDomScene2D };
 
   public static function renderDomScene2D(state:DomRenderState, source:Node2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var container:Dynamic = cast _Runtime.UNDEFINED;
-    var clipHooks:Dynamic = cast _Runtime.UNDEFINED;
-    var applyClip:Dynamic = cast _Runtime.UNDEFINED;
-    var frameId:Dynamic = cast _Runtime.UNDEFINED;
-    var tempStack:Dynamic = cast _Runtime.UNDEFINED;
-    var stackLength:Dynamic = cast _Runtime.UNDEFINED;
-    var newLength:Dynamic = cast _Runtime.UNDEFINED;
-    var needsReconcile:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    container = _Runtime.field(state, 'element');
-    clipHooks = _Runtime.field(state, 'displayObjectClipHooks');
-    applyClip = _Runtime.field(runtime, 'domClipHooks');
-    frameId = _Runtime.field(runtime, 'currentFrameId');
-    tempStack = _Runtime.field(runtime, 'tempStack');
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var container:flighthq._internal.dom.HTMLElement = cast _Runtime.UNDEFINED;
+    var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
+    var applyClip:Null<DomClipHooks> = cast _Runtime.UNDEFINED;
+    var frameId:Float = cast _Runtime.UNDEFINED;
+    var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
+    var stackLength:Float = cast _Runtime.UNDEFINED;
+    var newLength:Float = cast _Runtime.UNDEFINED;
+    var needsReconcile:Bool = cast _Runtime.UNDEFINED;
+    runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
+    container = (cast state : DomRenderState).element;
+    clipHooks = (cast state : DomRenderState).displayObjectClipHooks;
+    applyClip = (cast runtime : DomRenderStateRuntime).domClipHooks;
+    frameId = (cast runtime : DomRenderStateRuntime).currentFrameId;
+    tempStack = (cast runtime : DomRenderStateRuntime).tempStack;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     newLength = 0.0;
     needsReconcile = false;
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
-      if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
-      var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
+      var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
+      if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(state, current) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
+      if ((cast !(cast (cast isRenderProxyVisible((cast data : RenderProxy2D)) : Bool) : Bool) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'renderer'), null) : Bool)) {
-        var result:Dynamic = _Runtime.callValue(processDomNode, cast ([runtime, data, frameId, function() return _Runtime.callProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>)), newLength] : Array<Dynamic>));
-        (newLength = cast (_Runtime.field(result, 'newLength') : Dynamic));
-        if ((cast _Runtime.field(result, 'needsReconcile') : Bool)) { (needsReconcile = cast (true : Dynamic)); }
+      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) {
+        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode(runtime, (cast data : RenderProxy2D), (cast frameId : Float), (cast function():Void return (cast (cast data : RenderProxy2D).renderer : Renderer).submit(state, data) : Void->Void), (cast newLength : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : { var newLength:Float; var needsReconcile:Bool; });
+        (newLength = cast ((cast result : { var newLength:Float; var needsReconcile:Bool; }).newLength : Dynamic));
+        if ((cast (cast result : { var newLength:Float; var needsReconcile:Bool; }).needsReconcile : Bool)) { (needsReconcile = cast (true : Dynamic)); }
         _Runtime.callOptionalProperty(applyClip, 'apply', cast ([state, data] : Array<Dynamic>));
       }
-      if ((cast _Runtime.field(data, 'traverseChildren') : Bool)) {
-        var children:Dynamic = _Runtime.field(_Runtime.callValue(getNode2DRuntime, cast ([current] : Array<Dynamic>)), 'children');
+      if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current : Node2D)) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
-            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
+            var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node2D));
               i--;
@@ -73,9 +83,9 @@ class DomNode2D {
       }
     }
     _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.callValue(hasDomStructureChanged, cast ([runtime, newLength, needsReconcile] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reconcileDomContainer, cast ([container, runtime, newLength] : Array<Dynamic>));
+    if ((cast (cast hasDomStructureChanged(runtime, (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
+      reconcileDomContainer((cast container : flighthq._internal.dom.HTMLElement), runtime, (cast newLength : Float));
     }
-    _Runtime.callValue(swapDomOrderLists, cast ([runtime, newLength] : Array<Dynamic>));
+    swapDomOrderLists(runtime, (cast newLength : Float));
   }
 }

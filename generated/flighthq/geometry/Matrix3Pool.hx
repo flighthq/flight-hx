@@ -9,9 +9,9 @@ import flighthq.types.Matrix3;
 
 class Matrix3Pool {
   public static function acquireIdentityMatrix3():Matrix3 {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireMatrix3, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrix3Identity, cast ([m] : Array<Dynamic>));
+    var m:Matrix3 = cast _Runtime.UNDEFINED;
+    m = (cast acquireMatrix3() : Matrix3);
+    setMatrix3Identity(m);
     return cast m;
     return cast null;
   }
@@ -21,7 +21,7 @@ class Matrix3Pool {
     if ((cast ((cast _Runtime.field(Matrix3Pool.pool__matrix3Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (m = cast ((cast _Runtime.callProperty(Matrix3Pool.pool__matrix3Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix3) : Dynamic));
     } else {
-      (m = cast (_Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic));
+      (m = cast ((cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix3) : Dynamic));
     }
     return cast m;
     return cast null;

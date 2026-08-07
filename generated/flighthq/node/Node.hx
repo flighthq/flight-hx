@@ -20,16 +20,19 @@ import flighthq.node.Viewport as Facade_Node_flighthq_node_Viewport;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.types.Adjustment;
+import flighthq.types.ColorScaleBias;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasBoundsRectangle.BoundsNode;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.HasTransform3D.Transform3DNode;
+import flighthq.types.InteractionSignals;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
+import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeDataFactory;
 import flighthq.types.Node.NodeOf;
@@ -37,6 +40,7 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
+import flighthq.types.NodeInteractionState;
 import flighthq.types.NodeOrderList;
 import flighthq.types.NodeOrderList.NodeOrderListEntryVisitor;
 import flighthq.types.NodeSignals;
@@ -44,6 +48,7 @@ import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scene2DFitContext;
+import flighthq.types.Signal;
 import flighthq.types.Transform2D.Transform2DLike;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Types.EntityRuntimeKey;
@@ -139,11 +144,11 @@ class Node {
   }
 
   public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<flighthq.types.Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):flighthq.types.Node<Traits> {
-    var runtimeFactory:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    runtimeFactory = _Runtime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : Dynamic) : NodeRuntimeFactory<Runtime>));
-    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createData, cast ([(cast _Runtime.optionalField(obj, 'data') : Dynamic)] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic)) }, { key: 'name', value: _Runtime.coalesce(_Runtime.optionalField(obj, 'name'), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) }]) : flighthq.types.Node<Traits>);
-    _Runtime.setField(out, 'enabled', _Runtime.coalesce(_Runtime.optionalField(obj, 'enabled'), function():Dynamic return cast true));
+    var runtimeFactory:NodeRuntimeFactory<Runtime> = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._Intersection2<flighthq.types.Node<Traits>, Traits> = cast _Runtime.UNDEFINED;
+    runtimeFactory = _Runtime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : flighthq._internal._Any) : NodeRuntimeFactory<Runtime>));
+    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createData((cast (cast _Runtime.optionalField(obj, 'data') : Dynamic) : Null<flighthq._internal._Any>)) : Null<flighthq._internal._Object>) : Dynamic) : (cast null : Dynamic)) }, { key: 'name', value: _Runtime.coalesce(_Runtime.optionalField(obj, 'name'), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: (cast runtimeFactory((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : Null<NodeRuntime<Traits>>) }]) : flighthq.types.Node<Traits>);
+    ((cast out : { var enabled:Bool; }).enabled = _Runtime.coalesce(_Runtime.optionalField(obj, 'enabled'), function():Dynamic return cast true));
     return cast out;
     return cast null;
   }
@@ -155,40 +160,40 @@ class Node {
 
   @:noCompletion
   public static function createNodeRuntime<Traits>(?methods:Dynamic):NodeRuntime<Traits> {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    _Runtime.setField(out, 'appearanceId', 0.0);
-    _Runtime.setField(out, 'boundsUsingLocalBoundsId', -1.0);
-    _Runtime.setField(out, 'boundsUsingLocalTransformId', -1.0);
-    _Runtime.setField(out, 'canAddChild', _Runtime.coalesce(_Runtime.optionalField(methods, 'canAddChild'), function():Dynamic return cast defaultNodeRuntimeCanAddChild));
-    _Runtime.setField(out, 'children', null);
-    _Runtime.setField(out, 'childrenId', 0.0);
-    _Runtime.setField(out, 'colorAdjustments', null);
-    _Runtime.setField(out, 'colorAdjustmentsUnsupported', false);
-    _Runtime.setField(out, 'nodeSignals', null);
-    _Runtime.setField(out, 'interactionSignals', null);
-    _Runtime.setField(out, 'interactionState', null);
-    _Runtime.setField(out, 'localBoundsId', 0.0);
-    _Runtime.setField(out, 'localBoundsUsingLocalBoundsId', -1.0);
-    _Runtime.setField(out, 'localContentId', 0.0);
-    _Runtime.setField(out, 'localTransformId', 0.0);
-    _Runtime.setField(out, 'localTransformUsingLocalTransformId', -1.0);
-    _Runtime.setField(out, 'parent', null);
-    _Runtime.setField(out, 'parentReferenceId', 0.0);
-    _Runtime.setField(out, 'resolvedColorMatrix', null);
-    _Runtime.setField(out, 'resolvedColorScaleBias', null);
-    _Runtime.setField(out, 'worldBoundsUsingLocalBoundsId', -1.0);
-    _Runtime.setField(out, 'worldBoundsUsingWorldTransformId', -1.0);
-    _Runtime.setField(out, 'worldTransformId', 0.0);
-    _Runtime.setField(out, 'worldTransformUsingLocalTransformId', -1.0);
-    _Runtime.setField(out, 'worldTransformUsingParentTransformId', -1.0);
+    var out:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    out = (cast (cast createEntityRuntime() : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    ((cast out : NodeRuntime<Traits>).appearanceId = 0.0);
+    ((cast out : NodeRuntime<Traits>).boundsUsingLocalBoundsId = -1.0);
+    ((cast out : NodeRuntime<Traits>).boundsUsingLocalTransformId = -1.0);
+    ((cast out : NodeRuntime<Traits>).canAddChild = _Runtime.coalesce(_Runtime.optionalField(methods, 'canAddChild'), function():Dynamic return cast defaultNodeRuntimeCanAddChild));
+    ((cast out : NodeRuntime<Traits>).children = null);
+    ((cast out : NodeRuntime<Traits>).childrenId = 0.0);
+    ((cast out : NodeRuntime<Traits>).colorAdjustments = null);
+    ((cast out : NodeRuntime<Traits>).colorAdjustmentsUnsupported = false);
+    ((cast out : NodeRuntime<Traits>).nodeSignals = null);
+    ((cast out : NodeRuntime<Traits>).interactionSignals = null);
+    ((cast out : NodeRuntime<Traits>).interactionState = null);
+    ((cast out : NodeRuntime<Traits>).localBoundsId = 0.0);
+    ((cast out : NodeRuntime<Traits>).localBoundsUsingLocalBoundsId = -1.0);
+    ((cast out : NodeRuntime<Traits>).localContentId = 0.0);
+    ((cast out : NodeRuntime<Traits>).localTransformId = 0.0);
+    ((cast out : NodeRuntime<Traits>).localTransformUsingLocalTransformId = -1.0);
+    ((cast out : NodeRuntime<Traits>).parent = null);
+    ((cast out : NodeRuntime<Traits>).parentReferenceId = 0.0);
+    ((cast out : NodeRuntime<Traits>).resolvedColorMatrix = null);
+    ((cast out : NodeRuntime<Traits>).resolvedColorScaleBias = null);
+    ((cast out : NodeRuntime<Traits>).worldBoundsUsingLocalBoundsId = -1.0);
+    ((cast out : NodeRuntime<Traits>).worldBoundsUsingWorldTransformId = -1.0);
+    ((cast out : NodeRuntime<Traits>).worldTransformId = 0.0);
+    ((cast out : NodeRuntime<Traits>).worldTransformUsingLocalTransformId = -1.0);
+    ((cast out : NodeRuntime<Traits>).worldTransformUsingParentTransformId = -1.0);
     return cast out;
     return cast null;
   }
 
   @:noCompletion
   public static function createNodeSignals():NodeSignals {
-    return cast { onChildAdded: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildRemoved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenOrderChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParentChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onChildAdded: (cast createSignal() : Signal<NodeAny->Void>), onChildRemoved: (cast createSignal() : Signal<NodeAny->Void>), onChildrenChanged: (cast createSignal() : Signal<Void->Void>), onChildrenOrderChanged: (cast createSignal() : Signal<Void->Void>), onParentChanged: (cast createSignal() : Signal<Void->Void>) };
     return cast null;
   }
 
@@ -204,42 +209,42 @@ class Node {
   }
 
   public static function disposeNode<Traits>(target:flighthq.types.Node<Traits>):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeSignals:Dynamic = cast _Runtime.UNDEFINED;
-    var interactionSignals:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    parent = (cast _Runtime.field(runtime, 'parent') : Null<flighthq.types.Node<Traits>>);
+    var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var parent:Null<flighthq.types.Node<Traits>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flighthq.types.Node<Traits>>> = cast _Runtime.UNDEFINED;
+    var nodeSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
+    var interactionSignals:Null<InteractionSignals> = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast getEntityRuntime(target) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    parent = (cast (cast runtime : NodeRuntime<Traits>).parent : Null<flighthq.types.Node<Traits>>);
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      _Runtime.callValue(removeNodeChild, cast ([parent, target] : Array<Dynamic>));
+      (cast removeNodeChild(parent, target) : NodeOf<Traits>);
     }
-    children = _Runtime.field(runtime, 'children');
+    children = (cast runtime : NodeRuntime<Traits>).children;
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
-      var snapshot:Dynamic = (cast _Runtime.slice(children, 0, null) : Array<flighthq.types.Node<Traits>>);
+      var snapshot:Array<flighthq.types.Node<Traits>> = (cast _Runtime.slice(children, 0, null) : Array<flighthq.types.Node<Traits>>);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(snapshot, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(disposeNode, cast ([flighthq._internal._StaticIndex.readArray(snapshot, i)] : Array<Dynamic>));
+          disposeNode(flighthq._internal._StaticIndex.readArray(snapshot, i));
           i++;
         }
       }
-      _Runtime.setField(runtime, 'children', null);
+      ((cast runtime : NodeRuntime<Traits>).children = null);
     }
-    nodeSignals = _Runtime.field(runtime, 'nodeSignals');
+    nodeSignals = (cast runtime : NodeRuntime<Traits>).nodeSignals;
     if ((cast !_Runtime.strictEquals(nodeSignals, null) : Bool)) {
-      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildAdded] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildRemoved] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildrenChanged] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([nodeSignals.onChildrenOrderChanged] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([nodeSignals.onParentChanged] : Array<Dynamic>));
-      _Runtime.setField(runtime, 'nodeSignals', null);
+      clearSignal((cast nodeSignals : flighthq.types.NodeSignals).onChildAdded);
+      clearSignal((cast nodeSignals : flighthq.types.NodeSignals).onChildRemoved);
+      clearSignal((cast nodeSignals : flighthq.types.NodeSignals).onChildrenChanged);
+      clearSignal((cast nodeSignals : flighthq.types.NodeSignals).onChildrenOrderChanged);
+      clearSignal((cast nodeSignals : flighthq.types.NodeSignals).onParentChanged);
+      ((cast runtime : NodeRuntime<Traits>).nodeSignals = null);
     }
-    interactionSignals = _Runtime.field(runtime, 'interactionSignals');
+    interactionSignals = (cast runtime : NodeRuntime<Traits>).interactionSignals;
     if ((cast !_Runtime.strictEquals(interactionSignals, null) : Bool)) {
-      _Runtime.setField(runtime, 'interactionSignals', null);
+      ((cast runtime : NodeRuntime<Traits>).interactionSignals = null);
     }
-    _Runtime.setField(runtime, 'interactionState', null);
+    ((cast runtime : NodeRuntime<Traits>).interactionState = null);
   }
 
   public static function disposeNodeOrderList<Traits>(list:NodeOrderList<Traits>):Void {
@@ -247,13 +252,13 @@ class Node {
   }
 
   public static function enableNodeSignals<Traits>(source:flighthq.types.Node<Traits>):NodeSignals {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    return cast _Runtime.setField(runtime, 'nodeSignals', (_Runtime.field(runtime, 'nodeSignals') ?? _Runtime.callValue(createNodeSignals, cast ([] : Array<Dynamic>))));
+    var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast getEntityRuntime(source) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    return cast ((cast runtime : NodeRuntime<Traits>).nodeSignals ??= (cast createNodeSignals() : Null<NodeSignals>));
     return cast null;
   }
 
-  public static function findNode<Traits>(source:flighthq.types.Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
+  public static function findNode<Traits>(source:flighthq.types.Node<Traits>, predicate:flighthq.types.Node<Traits>->Bool):Null<NodeOf<Traits>> {
     return cast Facade_Node_flighthq_node_Traversal.findNode(source, predicate);
     return cast null;
   }
@@ -263,15 +268,15 @@ class Node {
     return cast null;
   }
 
-  public static function forEachNodeAncestor<Traits>(source:flighthq.types.Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeAncestor<Traits>(source:flighthq.types.Node<Traits>, callback:flighthq.types.Node<Traits>->flighthq._internal._Union2<Bool, Void>):Void {
     Facade_Node_flighthq_node_Traversal.forEachNodeAncestor(source, callback);
   }
 
-  public static function forEachNodeChild<Traits>(source:flighthq.types.Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeChild<Traits>(source:flighthq.types.Node<Traits>, callback:flighthq.types.Node<Traits>->Float->flighthq._internal._Union2<Bool, Void>):Void {
     Facade_Node_flighthq_node_Hierarchy.forEachNodeChild(source, callback);
   }
 
-  public static function forEachNodeDescendant<Traits>(source:flighthq.types.Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeDescendant<Traits>(source:flighthq.types.Node<Traits>, callback:flighthq.types.Node<Traits>->Void):Void {
     Facade_Node_flighthq_node_Traversal.forEachNodeDescendant(source, callback);
   }
 
@@ -396,12 +401,12 @@ class Node {
 
   @:noCompletion
   public static function getNodeRuntime<Traits>(source:flighthq.types.Node<Traits>):NodeRuntime<Traits> {
-    return cast (cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
+    return cast (cast (cast getEntityRuntime(source) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
     return cast null;
   }
 
   public static function getNodeSignals<Traits>(source:flighthq.types.Node<Traits>):Null<NodeSignals> {
-    return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>), 'nodeSignals');
+    return cast (cast (cast (cast getEntityRuntime(source) : NodeRuntime<Traits>) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
     return cast null;
   }
 
@@ -511,8 +516,8 @@ class Node {
   }
 
   public static function setNodeEnabled<Traits>(target:flighthq.types.Node<Traits>, value:Bool):Void {
-    _Runtime.setField(target, 'enabled', value);
-    _Runtime.callValue(invalidateNode, cast ([target] : Array<Dynamic>));
+    ((cast target : flighthq.types.Node<Traits>).enabled = value);
+    invalidateNode(target);
   }
 
   public static function setNodeHeight<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {

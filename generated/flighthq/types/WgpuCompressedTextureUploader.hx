@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
-typedef WgpuCompressedTextureUploader = Dynamic;
+typedef WgpuCompressedTextureUploader = WgpuRenderState->CompressedImage->Null<WgpuCompressedTextureDecoder>->TextureColorSpace->Null<WgpuTextureEntry>;

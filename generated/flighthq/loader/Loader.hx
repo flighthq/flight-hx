@@ -7,6 +7,7 @@ import flighthq.loader.ResourceLoader as Facade_Loader_flighthq_loader_ResourceL
 import flighthq.types.ResourceLoadBytes;
 import flighthq.types.ResourceLoadCounts;
 import flighthq.types.ResourceLoadHandle;
+import flighthq.types.ResourceLoadItem;
 import flighthq.types.ResourceLoadItemStatus;
 import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
@@ -55,7 +56,7 @@ class Loader {
     Facade_Loader_flighthq_loader_ResourceLoader.pauseResourceLoad(loader);
   }
 
-  public static function queueResourceLoad<T>(loader:ResourceLoader, item:Dynamic):ResourceLoadHandle<Dynamic> {
+  public static function queueResourceLoad<T>(loader:ResourceLoader, item:flighthq._internal._Union2<ResourceLoadItem<T>, Void->flighthq._internal._Promise<T>>):ResourceLoadHandle<T> {
     return cast Facade_Loader_flighthq_loader_ResourceLoader.queueResourceLoad(loader, item);
     return cast null;
   }

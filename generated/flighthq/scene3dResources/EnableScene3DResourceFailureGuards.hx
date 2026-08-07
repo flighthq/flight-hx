@@ -8,55 +8,61 @@ import flighthq.log.Log.logOnce;
 import flighthq.scene3dResources.SceneResourceSignals.enableScene3DResourceSignals;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceFailure;
+import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
+import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.Scene3DResources.Scene3DResourceEvent;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
+import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.Signal;
 
-typedef Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards = { var failed:Dynamic; var resolved:Dynamic; };
+typedef Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards = { var failed:Scene3DResourceEvent->Void; var resolved:Scene3DResourceEvent->Void; };
 
 class EnableScene3DResourceFailureGuards {
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
-    return cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).has(resolver));
+    return cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver));
     return cast null;
   }
 
   public static function disableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void {
-    var guard:Dynamic = cast _Runtime.UNDEFINED;
-    var signals:Dynamic = cast _Runtime.UNDEFINED;
-    guard = ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).get(resolver));
+    var guard:Null<Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards> = cast _Runtime.UNDEFINED;
+    var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
+    guard = ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).get(resolver));
     if ((cast _Runtime.strictEquals(guard, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    signals = _Runtime.callValue(enableScene3DResourceSignals, cast ([resolver] : Array<Dynamic>));
-    _Runtime.callValue(disconnectSignal, cast ([signals.onResourceFailed, _Runtime.field(guard, 'failed')] : Array<Dynamic>));
-    _Runtime.callValue(disconnectSignal, cast ([signals.onResourceResolved, _Runtime.field(guard, 'resolved')] : Array<Dynamic>));
-    ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).delete_(resolver));
+    signals = (cast enableScene3DResourceSignals((cast resolver : Scene3DResourceResolver)) : Scene3DResourceSignals);
+    disconnectSignal(signals.onResourceFailed, (cast (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).failed : Scene3DResourceEvent->Void));
+    disconnectSignal(signals.onResourceResolved, (cast (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).resolved : Scene3DResourceEvent->Void));
+    ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).delete_(resolver));
   }
 
-  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Dynamic {
-    var warned:Dynamic = cast _Runtime.UNDEFINED;
-    var signals:Dynamic = cast _Runtime.UNDEFINED;
-    var failed:Dynamic = cast _Runtime.UNDEFINED;
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).has(resolver)) : Bool)) { return cast function() return _Runtime.callValue(disableScene3DResourceFailureGuards, cast ([resolver] : Array<Dynamic>)); }
+  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void->Void {
+    var warned:flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>> = cast _Runtime.UNDEFINED;
+    var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
+    var failed:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
+    var resolved:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
+    if ((cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver)) : Bool)) { return cast function():Void return disableScene3DResourceFailureGuards((cast resolver : Scene3DResourceResolver)); }
     warned = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-    signals = _Runtime.callValue(enableScene3DResourceSignals, cast ([resolver] : Array<Dynamic>));
-    failed = function(event:Scene3DResourceEvent) {
-      var explanation:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast ((cast ((cast warned : flighthq._internal._WeakMap).has(event.ref)) : Bool) && (cast _Runtime.strictEquals(((cast warned : flighthq._internal._WeakMap).get(event.ref)), _Runtime.field(event.ref, 'failure')) : Bool)) : Bool)) { return; }
-      ((cast warned : flighthq._internal._WeakMap).set(event.ref, _Runtime.field(event.ref, 'failure')));
-      explanation = _Runtime.callValue(explainImageResourceReferenceResolution, cast ([event.ref] : Array<Dynamic>));
-      _Runtime.callValue(logOnce, cast (['scene-resources:image-resource-resolution-failed:' + Std.string(++EnableScene3DResourceFailureGuards._attemptId__enableScene3DResourceFailureGuards) + '', LogLevel.Warn, { failureKind: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'kind'), function():Dynamic return cast null), failureName: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'name'), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'message'), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: _Runtime.field(explanation, 'kind') }, 'scene-resources'] : Array<Dynamic>));
-    };
-    resolved = function(event:Scene3DResourceEvent) {
-      ((cast warned : flighthq._internal._WeakMap).delete_(event.ref));
-    };
-    _Runtime.callValue(connectSignal, cast ([signals.onResourceFailed, failed] : Array<Dynamic>));
-    _Runtime.callValue(connectSignal, cast ([signals.onResourceResolved, resolved] : Array<Dynamic>));
-    ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).set(resolver, { failed: failed, resolved: resolved }));
-    return cast function() return _Runtime.callValue(disableScene3DResourceFailureGuards, cast ([resolver] : Array<Dynamic>));
+    signals = (cast enableScene3DResourceSignals((cast resolver : Scene3DResourceResolver)) : Scene3DResourceSignals);
+    failed = (cast function(event:Scene3DResourceEvent):Void {
+      var explanation:ImageResourceReferenceResolutionExplanation = cast _Runtime.UNDEFINED;
+      if ((cast ((cast ((cast warned : flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).has(event.ref)) : Bool) && (cast _Runtime.strictEquals(((cast warned : flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).get(event.ref)), (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure) : Bool)) : Bool)) { return; }
+      ((cast warned : flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).set(event.ref, (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure));
+      explanation = (cast explainImageResourceReferenceResolution(event.ref) : ImageResourceReferenceResolutionExplanation);
+      (cast logOnce((cast 'scene-resources:image-resource-resolution-failed:' + Std.string(++EnableScene3DResourceFailureGuards._attemptId__enableScene3DResourceFailureGuards) + '' : String), (cast LogLevel.Warn : LogLevel), { failureKind: _Runtime.coalesce(_Runtime.optionalField((cast explanation : ImageResourceReferenceResolutionExplanation).failure, 'kind'), function():Dynamic return cast null), failureName: _Runtime.coalesce(_Runtime.optionalField((cast explanation : ImageResourceReferenceResolutionExplanation).failure, 'name'), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(_Runtime.optionalField((cast explanation : ImageResourceReferenceResolutionExplanation).failure, 'message'), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: (cast explanation : ImageResourceReferenceResolutionExplanation).kind }, (cast 'scene-resources' : Null<String>)) : Bool);
+    } : Scene3DResourceEvent->Void);
+    resolved = (cast function(event:Scene3DResourceEvent):Void {
+      ((cast warned : flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).delete_(event.ref));
+    } : Scene3DResourceEvent->Void);
+    connectSignal(signals.onResourceFailed, (cast failed : Scene3DResourceEvent->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
+    connectSignal(signals.onResourceResolved, (cast resolved : Scene3DResourceEvent->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
+    ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).set(resolver, { failed: failed, resolved: resolved }));
+    return cast function():Void return disableScene3DResourceFailureGuards((cast resolver : Scene3DResourceResolver));
     return cast null;
   }
 
-  public static final _guards__enableScene3DResourceFailureGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _guards__enableScene3DResourceFailureGuards:flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static var _attemptId__enableScene3DResourceFailureGuards:Dynamic = 0.0;
+  public static var _attemptId__enableScene3DResourceFailureGuards:Float = 0.0;
 }

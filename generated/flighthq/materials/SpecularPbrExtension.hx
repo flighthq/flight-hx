@@ -6,18 +6,27 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
 import flighthq.types.SpecularPbrExtension;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpecularPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
 class SpecularPbrExtension {
   public static function createSpecularPbrExtension(?opts:Dynamic):flighthq.types.SpecularPbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ kind: SpecularPbrExtensionKind, specular: _Runtime.coalesce(_Runtime.optionalField(opts, 'specular'), function():Dynamic return cast 1.0), specularColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColor'), function():Dynamic return cast 4294967295.0), specularColorMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColorMap'), function():Dynamic return cast null), specularColorMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColorMapUvSet'), function():Dynamic return cast 0.0), specularMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularMap'), function():Dynamic return cast null), specularMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularMapUvSet'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity({ kind: SpecularPbrExtensionKind, specular: _Runtime.coalesce(_Runtime.optionalField(opts, 'specular'), function():Dynamic return cast 1.0), specularColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColor'), function():Dynamic return cast 4294967295.0), specularColorMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColorMap'), function():Dynamic return cast null), specularColorMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularColorMapUvSet'), function():Dynamic return cast 0.0), specularMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularMap'), function():Dynamic return cast null), specularMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'specularMapUvSet'), function():Dynamic return cast 0.0) }) : flighthq.types.SpecularPbrExtension);
     return cast null;
   }
 
   public static function isValidSpecularPbrExtension(value:flighthq.types.SpecularPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'specular')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'specularColorMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'specularMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'specular') : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'specularColorMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'specularMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

@@ -8,4 +8,4 @@ typedef TextureAtlasRegionTextureStatus = String;
 
 typedef TextureAtlasRegionTextureExplanation = { var status:TextureAtlasRegionTextureStatus; };
 
-typedef TextureAtlasRegionTextureGuard = Dynamic;
+typedef TextureAtlasRegionTextureGuard = TextureAtlas->Float->TextureAtlasRegionTextureExplanation->Void;

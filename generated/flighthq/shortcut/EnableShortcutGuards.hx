@@ -5,27 +5,31 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.shortcut.Shortcut.setShortcutDropGuard;
+import flighthq.types.AcceleratorParseError;
+import flighthq.types.AcceleratorParseError.AcceleratorParseErrorReason;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.ShortcutDrop;
+import flighthq.types.ShortcutDrop.ShortcutDropReason;
+import flighthq.types.ShortcutDrop.ShortcutOperation;
 
 class EnableShortcutGuards {
   public static function disableShortcutGuards():Void {
-    _Runtime.callValue(setShortcutDropGuard, cast ([null] : Array<Dynamic>));
+    setShortcutDropGuard(null);
   }
 
   public static function enableShortcutGuards():Void {
-    _Runtime.callValue(setShortcutDropGuard, cast ([EnableShortcutGuards.warnOnShortcutDrop__enableShortcutGuards] : Array<Dynamic>));
+    setShortcutDropGuard(EnableShortcutGuards.warnOnShortcutDrop__enableShortcutGuards);
   }
 
   public static function warnOnShortcutDrop__enableShortcutGuards(drop:ShortcutDrop):Void {
-    var parseError:Dynamic = cast _Runtime.UNDEFINED;
-    var detail:Dynamic = cast _Runtime.UNDEFINED;
+    var parseError:Null<AcceleratorParseError> = cast _Runtime.UNDEFINED;
+    var detail:String = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(drop, 'reason'), 'no-native-backend') : Bool)) {
-      _Runtime.callValue(logOnce, cast (['shortcut:no-native-backend', LogLevel.Warn, { message: '' + Std.string(_Runtime.field(drop, 'operation')) + ': no native shortcut backend is installed, so the default web backend handled this call — a browser cannot register OS-level global hotkeys. Call setShortcutBackend(...) from a native host (Electron/Tauri), and gate the feature on hasNativeShortcutBackend().' }, 'shortcut'] : Array<Dynamic>));
+      (cast logOnce((cast 'shortcut:no-native-backend' : String), (cast LogLevel.Warn : LogLevel), { message: '' + Std.string(_Runtime.field(drop, 'operation')) + ': no native shortcut backend is installed, so the default web backend handled this call — a browser cannot register OS-level global hotkeys. Call setShortcutBackend(...) from a native host (Electron/Tauri), and gate the feature on hasNativeShortcutBackend().' }, (cast 'shortcut' : Null<String>)) : Bool);
       return;
     }
     parseError = _Runtime.field(drop, 'parseError');
-    detail = ((cast _Runtime.strictEquals(parseError, null) : Bool) ? (cast 'it did not parse' : Dynamic) : (cast '' + Std.string(_Runtime.field(parseError, 'reason')) + '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(parseError, 'token'), '') : Bool) ? (cast '' : Dynamic) : (cast ' at \'' + Std.string(_Runtime.field(parseError, 'token')) + '\'' : Dynamic))) + '' : Dynamic));
-    _Runtime.callValue(logOnce, cast (['shortcut:unparseable-accelerator', LogLevel.Warn, { message: '' + Std.string(_Runtime.field(drop, 'operation')) + '(\'' + Std.string(_Runtime.field(drop, 'accelerator')) + '\'): the accelerator was dropped because ' + Std.string(detail) + '. Check the spelling against parseAcceleratorDetailed, or explainGlobalShortcutRegistration for the whole picture.' }, 'shortcut'] : Array<Dynamic>));
+    detail = ((cast _Runtime.strictEquals(parseError, null) : Bool) ? (cast 'it did not parse' : Dynamic) : (cast '' + Std.string((cast parseError : AcceleratorParseError).reason) + '' + Std.string(((cast _Runtime.strictEquals((cast parseError : AcceleratorParseError).token, '') : Bool) ? (cast '' : Dynamic) : (cast ' at \'' + Std.string((cast parseError : AcceleratorParseError).token) + '\'' : Dynamic))) + '' : Dynamic));
+    (cast logOnce((cast 'shortcut:unparseable-accelerator' : String), (cast LogLevel.Warn : LogLevel), { message: '' + Std.string(_Runtime.field(drop, 'operation')) + '(\'' + Std.string(_Runtime.field(drop, 'accelerator')) + '\'): the accelerator was dropped because ' + Std.string(detail) + '. Check the spelling against parseAcceleratorDetailed, or explainGlobalShortcutRegistration for the whole picture.' }, (cast 'shortcut' : Null<String>)) : Bool);
   }
 }

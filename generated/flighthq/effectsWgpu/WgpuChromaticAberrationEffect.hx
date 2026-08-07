@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.ChromaticAberrationEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,25 +17,25 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuChromaticAberrationEffect {
   @:noCompletion
   public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radial:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radial:Bool = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.005);
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.chromaticAberration', WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.chromaticAberration' : String), (cast WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyChromaticAberrationEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect)] : Array<Dynamic>));
+  public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyChromaticAberrationEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ChromaticAberrationEffect) : ChromaticAberrationEffect));
   };
 
   public static function registerWgpuChromaticAberrationEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultWgpuChromaticAberrationEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ChromaticAberrationEffect' : String), (cast defaultWgpuChromaticAberrationEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radial : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = uv - vec2f(0.5);\n  let scale = mix(1.0, length(centered) * 2.0, uni.u_radial);\n  let dir = mix(vec2f(1.0, 0.0), normalize(centered + vec2f(1e-5)), uni.u_radial);\n  let offset = dir * uni.u_intensity * scale;\n  let r = textureSampleLevel(tex, smp, uv + offset, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - offset, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(r, g, b, a);\n}';
+  public static final CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radial : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = uv - vec2f(0.5);\n  let scale = mix(1.0, length(centered) * 2.0, uni.u_radial);\n  let dir = mix(vec2f(1.0, 0.0), normalize(centered + vec2f(1e-5)), uni.u_radial);\n  let offset = dir * uni.u_intensity * scale;\n  let r = textureSampleLevel(tex, smp, uv + offset, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - offset, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(r, g, b, a);\n}';
 }

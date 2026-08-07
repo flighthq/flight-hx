@@ -7,6 +7,9 @@ import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
+import flighthq.types.Matrix4;
+import flighthq.types.Quaternion;
+import flighthq.types.Vector3;
 
 class HasTransform3d {
   @:noCompletion
@@ -18,8 +21,8 @@ class HasTransform3d {
 
   @:noCompletion
   public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
-    (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>))) : Dynamic));
-    (target.scale = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>))) : Dynamic));
-    (target.position = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'position'), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>))) : Dynamic));
+    (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast (cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Quaternion)) : Dynamic));
+    (target.scale = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast (cast createVector3((cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Vector3)) : Dynamic));
+    (target.position = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'position'), function():Dynamic return cast (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3)) : Dynamic));
   }
 }

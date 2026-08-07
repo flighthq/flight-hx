@@ -7,17 +7,26 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
 import flighthq.types.ClearcoatPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.ClearcoatPbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
 class ClearcoatPbrExtension {
   public static function createClearcoatPbrExtension(?opts:Dynamic):flighthq.types.ClearcoatPbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ clearcoat: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoat'), function():Dynamic return cast 0.0), clearcoatMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatMap'), function():Dynamic return cast null), clearcoatMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatMapUvSet'), function():Dynamic return cast 0.0), clearcoatNormalMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalMap'), function():Dynamic return cast null), clearcoatNormalMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalMapUvSet'), function():Dynamic return cast 0.0), clearcoatNormalScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalScale'), function():Dynamic return cast 1.0), clearcoatRoughness: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughness'), function():Dynamic return cast 0.0), clearcoatRoughnessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughnessMap'), function():Dynamic return cast null), clearcoatRoughnessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughnessMapUvSet'), function():Dynamic return cast 0.0), kind: ClearcoatPbrExtensionKind }] : Array<Dynamic>));
+    return cast (cast createEntity({ clearcoat: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoat'), function():Dynamic return cast 0.0), clearcoatMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatMap'), function():Dynamic return cast null), clearcoatMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatMapUvSet'), function():Dynamic return cast 0.0), clearcoatNormalMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalMap'), function():Dynamic return cast null), clearcoatNormalMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalMapUvSet'), function():Dynamic return cast 0.0), clearcoatNormalScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatNormalScale'), function():Dynamic return cast 1.0), clearcoatRoughness: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughness'), function():Dynamic return cast 0.0), clearcoatRoughnessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughnessMap'), function():Dynamic return cast null), clearcoatRoughnessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'clearcoatRoughnessMapUvSet'), function():Dynamic return cast 0.0), kind: ClearcoatPbrExtensionKind }) : flighthq.types.ClearcoatPbrExtension);
     return cast null;
   }
 
   public static function isValidClearcoatPbrExtension(value:flighthq.types.ClearcoatPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'clearcoat')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'clearcoatRoughness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'clearcoatNormalScale')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'clearcoatNormalScale') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'clearcoatMapUvSet')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'clearcoatNormalMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'clearcoatRoughnessMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'clearcoat') : Float)) : Bool) : Bool) && (cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'clearcoatRoughness') : Float)) : Bool) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'clearcoatNormalScale')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'clearcoatNormalScale') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'clearcoatMapUvSet') : Float)) : Bool) : Bool)) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'clearcoatNormalMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'clearcoatRoughnessMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

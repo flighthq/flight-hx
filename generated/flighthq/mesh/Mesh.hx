@@ -89,7 +89,7 @@ class Mesh {
     Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents(out, geometry);
   }
 
-  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
+  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.computeMeshGeometryWireframeIndices(geometry);
     return cast null;
   }

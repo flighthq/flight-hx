@@ -106,7 +106,7 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_MassProperties.computePhysics2DColliderMassData(collider, out);
   }
 
-  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, ?sensor:Dynamic, ?filter:Physics2DCollisionFilter):Physics2DCollider {
+  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, ?sensor:Bool, ?filter:Physics2DCollisionFilter):Physics2DCollider {
     return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DCollider(local, material, sensor, filter);
     return cast null;
   }
@@ -186,12 +186,12 @@ class Physics2d {
     return cast null;
   }
 
-  public static function createPhysics2DWorld(?gravityX:Dynamic, ?gravityY:Dynamic, ?index:SpatialIndexBackend):Physics2DWorld {
+  public static function createPhysics2DWorld(?gravityX:Float, ?gravityY:Float, ?index:SpatialIndexBackend):Physics2DWorld {
     return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DWorld(gravityX, gravityY, index);
     return cast null;
   }
 
-  public static function createRigidBody2D(type:Dynamic, x:Float, y:Float, ?angle:Dynamic):RigidBody2D {
+  public static function createRigidBody2D(type:flighthq._internal._IndexedAccess<RigidBody2D, String>, x:Float, y:Float, ?angle:Float):RigidBody2D {
     return cast Facade_Physics2d_flighthq_physics2d_World.createRigidBody2D(type, x, y, angle);
     return cast null;
   }
@@ -251,53 +251,53 @@ class Physics2d {
     return cast null;
   }
 
-  public static final Physics2DDistanceJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DDistanceJointKind;
+  public static final Physics2DDistanceJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DDistanceJointKind;
 
-  public static final physics2DDistanceJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
+  public static final physics2DDistanceJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
 
-  public static final Physics2DGearJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DGearJointKind;
+  public static final Physics2DGearJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DGearJointKind;
 
-  public static final physics2DGearJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DGearJointSolver;
+  public static final physics2DGearJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DGearJointSolver;
 
-  public static final Physics2DMouseJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DMouseJointKind;
+  public static final Physics2DMouseJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DMouseJointKind;
 
-  public static final physics2DMouseJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DMouseJointSolver;
+  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Void->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DMouseJointSolver;
 
-  public static final Physics2DPrismaticJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPrismaticJointKind;
+  public static final Physics2DPrismaticJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPrismaticJointKind;
 
-  public static final physics2DPrismaticJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPrismaticJointSolver;
+  public static final physics2DPrismaticJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPrismaticJointSolver;
 
-  public static final Physics2DPulleyJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPulleyJointKind;
+  public static final Physics2DPulleyJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPulleyJointKind;
 
-  public static final physics2DPulleyJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPulleyJointSolver;
+  public static final physics2DPulleyJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DPulleyJointSolver;
 
-  public static final Physics2DRevoluteJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DRevoluteJointKind;
+  public static final Physics2DRevoluteJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DRevoluteJointKind;
 
-  public static final physics2DRevoluteJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DRevoluteJointSolver;
+  public static final physics2DRevoluteJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DRevoluteJointSolver;
 
-  public static final Physics2DRopeJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DRopeJointKind;
+  public static final Physics2DRopeJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DRopeJointKind;
 
-  public static final physics2DRopeJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DRopeJointSolver;
+  public static final physics2DRopeJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DRopeJointSolver;
 
-  public static final Physics2DWeldJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWeldJointKind;
+  public static final Physics2DWeldJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWeldJointKind;
 
-  public static final physics2DWeldJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWeldJointSolver;
+  public static final physics2DWeldJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWeldJointSolver;
 
-  public static final Physics2DWheelJointKind:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWheelJointKind;
+  public static final Physics2DWheelJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWheelJointKind;
 
-  public static final physics2DWheelJointSolver:Dynamic = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWheelJointSolver;
+  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Void->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWheelJointSolver;
 
-  public static final Physics2DWorldVersion:Dynamic = Facade_Physics2d_flighthq_physics2d_World.Physics2DWorldVersion;
+  public static final Physics2DWorldVersion:Float = Facade_Physics2d_flighthq_physics2d_World.Physics2DWorldVersion;
 
   public static function queryPhysics2DPoint(world:Physics2DWorld, x:Float, y:Float, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
     Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DPoint(world, x, y, out, filter);
   }
 
-  public static function queryPhysics2DRay(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Dynamic, ?filter:Physics2DQueryFilter):Void {
+  public static function queryPhysics2DRay(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Float, ?filter:Physics2DQueryFilter):Void {
     Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRay(world, originX, originY, directionX, directionY, out, maxFraction, filter);
   }
 
-  public static function queryPhysics2DRayClosest(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Dynamic, ?filter:Physics2DQueryFilter):Void {
+  public static function queryPhysics2DRayClosest(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, ?maxFraction:Float, ?filter:Physics2DQueryFilter):Void {
     Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRayClosest(world, originX, originY, directionX, directionY, out, maxFraction, filter);
   }
 
@@ -353,7 +353,7 @@ class Physics2d {
     return cast null;
   }
 
-  public static function setPhysics2DBodyType(world:Physics2DWorld, body:RigidBody2D, type:Dynamic):Bool {
+  public static function setPhysics2DBodyType(world:Physics2DWorld, body:RigidBody2D, type:flighthq._internal._IndexedAccess<RigidBody2D, String>):Bool {
     return cast Facade_Physics2d_flighthq_physics2d_World.setPhysics2DBodyType(world, body, type);
     return cast null;
   }

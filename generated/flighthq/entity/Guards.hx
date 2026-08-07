@@ -19,11 +19,11 @@ class Guards {
   @:noCompletion
   public static function createGuardedEntity<Type>(entity:Type):Type {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
-    return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
+    return cast _Runtime.createProxy(entity, { set: function(target:flighthq._internal._Intersection2<Type, Entity>, prop:flighthq._internal._Union2<String, flighthq._internal._Symbol>, value:flighthq._internal._Any):Bool {
       if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['runtime-slot'] : Array<Dynamic>));
       }
-      _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
+      _Runtime.setIndex((cast (cast target : flighthq._internal._Any) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>), prop, value);
       return cast true;
     } });
     return cast null;
@@ -32,11 +32,11 @@ class Guards {
   @:noCompletion
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
-    return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
+    return cast _Runtime.createProxy(runtime, { set: function(target:EntityRuntime, prop:flighthq._internal._Union2<String, flighthq._internal._Symbol>, value:flighthq._internal._Any):Bool {
       if ((cast ((cast _Runtime.strictEquals(prop, 'binding') : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['binding-slot'] : Array<Dynamic>));
       }
-      _Runtime.setIndex((cast (cast target : Dynamic) : Dynamic), prop, value);
+      _Runtime.setIndex((cast (cast target : flighthq._internal._Any) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>), prop, value);
       return cast true;
     } });
     return cast null;
@@ -53,7 +53,7 @@ class Guards {
     (Guards._writeGuard__guards = cast (guard : Dynamic));
   }
 
-  public static var _guardsEnabled__guards:Dynamic = false;
+  public static var _guardsEnabled__guards:Bool = false;
 
   public static var _writeGuard__guards:Null<EntityRuntimeWriteGuard> = _Runtime.explicitNull();
 }

@@ -10,40 +10,40 @@ import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
 class PathMeshPool {
-  public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
-    var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    var fresh:Dynamic = cast _Runtime.UNDEFINED;
+  public static function acquirePathMesh(path:Path, tolerance:Float = 0.25):PathMesh {
+    var mesh:PathMesh = cast _Runtime.UNDEFINED;
+    var fresh:PathMesh = cast _Runtime.UNDEFINED;
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) } : Dynamic));
-    _Runtime.setLength(_Runtime.field(mesh, 'vertices'), 0.0);
-    _Runtime.setLength(_Runtime.field(mesh, 'indices'), 0.0);
-    fresh = _Runtime.callValue(tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
+    _Runtime.setLength((cast mesh : PathMesh).vertices, 0.0);
+    _Runtime.setLength((cast mesh : PathMesh).indices, 0.0);
+    fresh = (cast tessellatePath((cast path : Path), (cast tolerance : Float)) : PathMesh);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(mesh, 'vertices'), i, flighthq._internal._StaticIndex.readArray(_Runtime.field(fresh, 'vertices'), i));
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).vertices, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray((cast mesh : PathMesh).vertices, i, flighthq._internal._StaticIndex.readArray((cast fresh : PathMesh).vertices, i));
         i++;
       }
     }
-    _Runtime.setLength(_Runtime.field(mesh, 'vertices'), _Runtime.field(_Runtime.field(fresh, 'vertices'), 'length'));
+    _Runtime.setLength((cast mesh : PathMesh).vertices, _Runtime.field((cast fresh : PathMesh).vertices, 'length'));
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(fresh, 'indices'), 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(mesh, 'indices'), i, flighthq._internal._StaticIndex.readArray(_Runtime.field(fresh, 'indices'), i));
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).indices, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray((cast mesh : PathMesh).indices, i, flighthq._internal._StaticIndex.readArray((cast fresh : PathMesh).indices, i));
         i++;
       }
     }
-    _Runtime.setLength(_Runtime.field(mesh, 'indices'), _Runtime.field(_Runtime.field(fresh, 'indices'), 'length'));
+    _Runtime.setLength((cast mesh : PathMesh).indices, _Runtime.field((cast fresh : PathMesh).indices, 'length'));
     return cast mesh;
     return cast null;
   }
 
-  public static function acquirePathMeshTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
-    var fresh:Dynamic = cast _Runtime.UNDEFINED;
-    var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    fresh = _Runtime.callValue(tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
+  public static function acquirePathMeshTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
+    var fresh:PathMeshTyped = cast _Runtime.UNDEFINED;
+    var mesh:PathMeshTyped = cast _Runtime.UNDEFINED;
+    fresh = (cast tessellatePathTyped((cast path : Path), (cast tolerance : Float)) : PathMeshTyped);
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: new flighthq._internal._Float32Array(0.0), indices: new flighthq._internal._UInt32Array(0.0) } : Dynamic));
-    _Runtime.setField(mesh, 'vertices', _Runtime.field(fresh, 'vertices'));
-    _Runtime.setField(mesh, 'indices', _Runtime.field(fresh, 'indices'));
+    ((cast mesh : PathMeshTyped).vertices = (cast fresh : PathMeshTyped).vertices);
+    ((cast mesh : PathMeshTyped).indices = (cast fresh : PathMeshTyped).indices);
     return cast mesh;
     return cast null;
   }
@@ -60,7 +60,7 @@ class PathMeshPool {
     }
   }
 
-  public static final POOL_HIGH_WATER__pathMeshPool:Dynamic = 64.0;
+  public static final POOL_HIGH_WATER__pathMeshPool:Float = 64.0;
 
   public static final pathMeshPool__pathMeshPool:Array<PathMesh> = cast ([] : Array<Dynamic>);
 

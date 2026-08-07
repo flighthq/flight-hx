@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class CanvasElement {
   public static function createCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.HTMLCanvasElement {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
     ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(height) + 'px');

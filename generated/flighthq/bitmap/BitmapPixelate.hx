@@ -3,16 +3,17 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapPixelate {
   public static function pixelateBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, blockSize:Float):Void {
-    var block:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var block:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     block = HxMath.max(1.0, HxMath.round(blockSize));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
@@ -20,29 +21,29 @@ class BitmapPixelate {
     bitmapHeight = _Runtime.field(source, 'bitmap').height;
     data = _Runtime.field(source, 'bitmap').data;
     {
-      var by:Dynamic = 0.0;
+      var by:Float = 0.0;
       while ((cast ((cast by : Float) < (cast h : Float)) : Bool)) {
-        var yEnd:Dynamic = HxMath.min((by + block), h);
+        var yEnd:Float = HxMath.min((by + block), h);
         {
-          var bx:Dynamic = 0.0;
+          var bx:Float = 0.0;
           while ((cast ((cast bx : Float) < (cast w : Float)) : Bool)) {
-            var xEnd:Dynamic = HxMath.min((bx + block), w);
-            var r:Dynamic = 0.0;
-            var g:Dynamic = 0.0;
-            var b:Dynamic = 0.0;
-            var a:Dynamic = 0.0;
-            var count:Dynamic = 0.0;
+            var xEnd:Float = HxMath.min((bx + block), w);
+            var r:Float = 0.0;
+            var g:Float = 0.0;
+            var b:Float = 0.0;
+            var a:Float = 0.0;
+            var count:Float = 0.0;
             {
-              var py:Dynamic = by;
+              var py:Float = by;
               while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
-                var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+                var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
                 if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
                 {
-                  var px:Dynamic = bx;
+                  var px:Float = bx;
                   while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
-                    var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+                    var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
                     if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-                    var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
+                    var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArray(data, si)) : Dynamic));
                     (g = cast ((g + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0))) : Dynamic));
                     (b = cast ((b + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0))) : Dynamic));
@@ -55,17 +56,17 @@ class BitmapPixelate {
               }
             }
             if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { (bx = cast ((bx + block) : Dynamic)); continue; }
-            var ar:Dynamic = HxMath.round((r / count));
-            var ag:Dynamic = HxMath.round((g / count));
-            var ab:Dynamic = HxMath.round((b / count));
-            var aa:Dynamic = HxMath.round((a / count));
+            var ar:Float = HxMath.round((r / count));
+            var ag:Float = HxMath.round((g / count));
+            var ab:Float = HxMath.round((b / count));
+            var aa:Float = HxMath.round((a / count));
             {
-              var py:Dynamic = by;
+              var py:Float = by;
               while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
                 {
-                  var px:Dynamic = bx;
+                  var px:Float = bx;
                   while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
-                    var di:Dynamic = (((py * w) + px) * 4.0);
+                    var di:Float = (((py * w) + px) * 4.0);
                     flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, ar);
                     flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), ag);
                     flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), ab);

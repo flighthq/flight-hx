@@ -18,7 +18,7 @@ typedef RenderTargetColorSpace = String;
 
 typedef RenderTargetAxes = { var width:Float; var height:Float; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var sampleCount:Float; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; };
 
-typedef RenderTargetAxisDifference = { var axis:RenderTargetAxes; var effective:Dynamic; var requested:Dynamic; };
+typedef RenderTargetAxisDifference = { var axis:RenderTargetAxes; var effective:flighthq._internal._IndexedAccess<RenderTargetAxes, RenderTargetAxes>; var requested:flighthq._internal._IndexedAccess<RenderTargetAxes, RenderTargetAxes>; };
 
 typedef RenderTargetExplanation = { var differences:Array<RenderTargetAxisDifference>; var effective:RenderTargetAxes; var requested:RenderTargetAxes; };
 

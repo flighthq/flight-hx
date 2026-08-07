@@ -9,7 +9,7 @@ import flighthq.types.TextureContainerFormat;
 class SelectTextureContainer {
   public static function selectTextureContainer(containers:Array<TextureContainer>, supportedFormats:Array<TextureContainerFormat>):Null<TextureContainer> {
     for (container in _Runtime.iterable(containers)) {
-      if ((cast _Runtime.includes(supportedFormats, _Runtime.field(container, 'format')) : Bool)) { return cast container; }
+      if ((cast _Runtime.includes(supportedFormats, (cast container : TextureContainer).format) : Bool)) { return cast container; }
     }
     return cast null;
     return cast null;

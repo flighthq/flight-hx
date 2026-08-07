@@ -10,12 +10,21 @@ import flighthq.lighting.SceneForwardLights.selectScene3DForwardLights;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.packScene3DLightBlock;
 import flighthq.scene3d.SceneNodeBounds.getNode3DWorldBounds;
+import flighthq.types.Aabb;
+import flighthq.types.AmbientLight;
+import flighthq.types.BoundingSphere;
+import flighthq.types.DirectionalLight;
+import flighthq.types.HemisphereLight;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Mesh;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DForwardLightSelection;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
+import flighthq.types.SpotLight;
 import flighthq.types.Types.SCENE_LIGHT_BLOCK_FLOATS;
+import flighthq.types.Vector3;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DForwardLightList;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
@@ -26,31 +35,31 @@ typedef Prepared__prepareWgpuScene3DForwardLights = { var blockCount:Float; var 
 
 class PrepareWgpuScene3DForwardLights {
   public static function prepareWgpuScene3DForwardLights(state:WgpuRenderState, sceneRenderList:Scene3DRenderList, lights:Scene3DLightsLike):WgpuScene3DForwardLightList {
-    var prepared:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    prepared = _Runtime.callValue(PrepareWgpuScene3DForwardLights.ensurePrepared__prepareWgpuScene3DForwardLights, cast ([state] : Array<Dynamic>));
-    out = _Runtime.field(prepared, 'list');
-    _Runtime.setField(prepared, 'blockCount', 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'meshLightBlocks'), _Runtime.field(sceneRenderList, 'meshCount'));
-    _Runtime.setField(out, 'meshCount', _Runtime.field(sceneRenderList, 'meshCount'));
+    var prepared:Prepared__prepareWgpuScene3DForwardLights = cast _Runtime.UNDEFINED;
+    var out:WgpuScene3DForwardLightList = cast _Runtime.UNDEFINED;
+    prepared = (cast PrepareWgpuScene3DForwardLights.ensurePrepared__prepareWgpuScene3DForwardLights((cast state : WgpuRenderState)) : Prepared__prepareWgpuScene3DForwardLights);
+    out = (cast prepared : Prepared__prepareWgpuScene3DForwardLights).list;
+    ((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blockCount = 0.0);
+    _Runtime.setLength((cast out : WgpuScene3DForwardLightList).meshLightBlocks, _Runtime.field(sceneRenderList, 'meshCount'));
+    ((cast out : WgpuScene3DForwardLightList).meshCount = _Runtime.field(sceneRenderList, 'meshCount'));
     {
-      var meshIndex:Dynamic = 0.0;
+      var meshIndex:Float = 0.0;
       while ((cast ((cast meshIndex : Float) < (cast _Runtime.field(sceneRenderList, 'meshCount') : Float)) : Bool)) {
-        _Runtime.callValue(PrepareWgpuScene3DForwardLights.setMeshWorldBoundingSphere__prepareWgpuScene3DForwardLights, cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(sceneRenderList, 'visibleMeshes'), meshIndex)] : Array<Dynamic>));
-        _Runtime.callValue(selectScene3DForwardLights, cast ([_Runtime.field(prepared, 'selection'), lights, PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights] : Array<Dynamic>));
-        var blockIndex:Dynamic = _Runtime.callValue(PrepareWgpuScene3DForwardLights.findPreparedBlock__prepareWgpuScene3DForwardLights, cast ([prepared, _Runtime.field(_Runtime.field(prepared, 'selection'), 'indices')] : Array<Dynamic>));
+        PrepareWgpuScene3DForwardLights.setMeshWorldBoundingSphere__prepareWgpuScene3DForwardLights((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(sceneRenderList, 'visibleMeshes'), meshIndex) : Mesh));
+        selectScene3DForwardLights((cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection), (cast lights : Scene3DLightsLike), PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights);
+        var blockIndex:Float = (cast PrepareWgpuScene3DForwardLights.findPreparedBlock__prepareWgpuScene3DForwardLights(prepared, (cast (cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection).indices : Array<Float>)) : Float);
         if ((cast ((cast blockIndex : Float) < (cast 0.0 : Float)) : Bool)) {
-          (blockIndex = cast (_Runtime.incrementField(prepared, 'blockCount', 1, true) : Dynamic));
-          var block:Dynamic = _Runtime.callValue(PrepareWgpuScene3DForwardLights.ensurePreparedBlock__prepareWgpuScene3DForwardLights, cast ([prepared, blockIndex] : Array<Dynamic>));
-          _Runtime.callValue(PrepareWgpuScene3DForwardLights.copyIndices__prepareWgpuScene3DForwardLights, cast ([_Runtime.field(block, 'indices'), _Runtime.field(_Runtime.field(prepared, 'selection'), 'indices')] : Array<Dynamic>));
+          (blockIndex = cast ((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blockCount++ : Dynamic));
+          var block:PreparedBlock__prepareWgpuScene3DForwardLights = (cast PrepareWgpuScene3DForwardLights.ensurePreparedBlock__prepareWgpuScene3DForwardLights(prepared, (cast blockIndex : Float)) : PreparedBlock__prepareWgpuScene3DForwardLights);
+          PrepareWgpuScene3DForwardLights.copyIndices__prepareWgpuScene3DForwardLights((cast (cast block : PreparedBlock__prepareWgpuScene3DForwardLights).indices : Array<Float>), (cast (cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection).indices : Array<Float>));
           _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'ambient', _Runtime.field(lights, 'ambient'));
           _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'directional', _Runtime.field(lights, 'directional'));
           _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'hemisphere', _Runtime.field(lights, 'hemisphere'));
-          _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'point', _Runtime.field(_Runtime.field(prepared, 'selection'), 'point'));
-          _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'spot', _Runtime.field(_Runtime.field(prepared, 'selection'), 'spot'));
-          _Runtime.callValue(packScene3DLightBlock, cast ([_Runtime.field(block, 'lights'), PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights] : Array<Dynamic>));
+          _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'point', (cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection).point);
+          _Runtime.setField(PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights, 'spot', (cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection).spot);
+          packScene3DLightBlock((cast (cast block : PreparedBlock__prepareWgpuScene3DForwardLights).lights : Scene3DLightBlock), (cast PrepareWgpuScene3DForwardLights.selectedLights__prepareWgpuScene3DForwardLights : Scene3DLightsLike));
         }
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(out, 'meshLightBlocks'), meshIndex, _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'blocks'), blockIndex), 'lights'));
+        flighthq._internal._StaticIndex.writeArray((cast out : WgpuScene3DForwardLightList).meshLightBlocks, meshIndex, (cast flighthq._internal._StaticIndex.readArray((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blocks, blockIndex) : PreparedBlock__prepareWgpuScene3DForwardLights).lights);
         meshIndex++;
       }
     }
@@ -64,22 +73,22 @@ class PrepareWgpuScene3DForwardLights {
   }
 
   public static function ensurePrepared__prepareWgpuScene3DForwardLights(state:WgpuRenderState):Prepared__prepareWgpuScene3DForwardLights {
-    var prepared:Dynamic = cast _Runtime.UNDEFINED;
-    prepared = ((cast PrepareWgpuScene3DForwardLights.preparedByState__prepareWgpuScene3DForwardLights : flighthq._internal._WeakMap).get(state));
+    var prepared:Null<Prepared__prepareWgpuScene3DForwardLights> = cast _Runtime.UNDEFINED;
+    prepared = ((cast PrepareWgpuScene3DForwardLights.preparedByState__prepareWgpuScene3DForwardLights : flighthq._internal._WeakMap<WgpuRenderState, Prepared__prepareWgpuScene3DForwardLights>).get(state));
     if ((cast _Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (prepared = cast ({ blockCount: 0.0, blocks: cast ([] : Array<Dynamic>), list: { meshCount: 0.0, meshLightBlocks: cast ([] : Array<Dynamic>) }, selection: { indices: cast ([] : Array<Dynamic>), point: cast ([] : Array<Dynamic>), spot: cast ([] : Array<Dynamic>) } } : Dynamic));
-      ((cast PrepareWgpuScene3DForwardLights.preparedByState__prepareWgpuScene3DForwardLights : flighthq._internal._WeakMap).set(state, prepared));
+      ((cast PrepareWgpuScene3DForwardLights.preparedByState__prepareWgpuScene3DForwardLights : flighthq._internal._WeakMap<WgpuRenderState, Prepared__prepareWgpuScene3DForwardLights>).set(state, prepared));
     }
     return cast prepared;
     return cast null;
   }
 
   public static function ensurePreparedBlock__prepareWgpuScene3DForwardLights(prepared:Prepared__prepareWgpuScene3DForwardLights, index:Float):PreparedBlock__prepareWgpuScene3DForwardLights {
-    var block:Dynamic = cast _Runtime.UNDEFINED;
-    block = flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'blocks'), index);
+    var block:PreparedBlock__prepareWgpuScene3DForwardLights = cast _Runtime.UNDEFINED;
+    block = flighthq._internal._StaticIndex.readArray((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blocks, index);
     if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (block = cast ({ indices: cast ([] : Array<Dynamic>), lights: _Runtime.callValue(PrepareWgpuScene3DForwardLights.createLightBlock__prepareWgpuScene3DForwardLights, cast ([] : Array<Dynamic>)) } : Dynamic));
-      flighthq._internal._StaticIndex.writeArray(_Runtime.field(prepared, 'blocks'), index, block);
+      (block = cast ({ indices: cast ([] : Array<Dynamic>), lights: (cast PrepareWgpuScene3DForwardLights.createLightBlock__prepareWgpuScene3DForwardLights() : Scene3DLightBlock) } : Dynamic));
+      flighthq._internal._StaticIndex.writeArray((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blocks, index, block);
     }
     return cast block;
     return cast null;
@@ -87,13 +96,13 @@ class PrepareWgpuScene3DForwardLights {
 
   public static function findPreparedBlock__prepareWgpuScene3DForwardLights(prepared:Prepared__prepareWgpuScene3DForwardLights, indices:Array<Float>):Float {
     {
-      var blockIndex:Dynamic = 0.0;
+      var blockIndex:Float = 0.0;
       while ((cast ((cast blockIndex : Float) < (cast _Runtime.field(prepared, 'blockCount') : Float)) : Bool)) {
-        var candidate:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'blocks'), blockIndex), 'indices');
+        var candidate:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(prepared, 'blocks'), blockIndex) : PreparedBlock__prepareWgpuScene3DForwardLights).indices;
         if ((cast !_Runtime.strictEquals(_Runtime.field(candidate, 'length'), _Runtime.field(indices, 'length')) : Bool)) { blockIndex++; continue; }
-        var equal:Dynamic = true;
+        var equal:Bool = true;
         {
-          var index:Dynamic = 0.0;
+          var index:Float = 0.0;
           while ((cast ((cast index : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
             if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(candidate, index), flighthq._internal._StaticIndex.readArray(indices, index)) : Bool)) {
               (equal = cast (false : Dynamic));
@@ -113,7 +122,7 @@ class PrepareWgpuScene3DForwardLights {
   public static function copyIndices__prepareWgpuScene3DForwardLights(out:Array<Float>, source:Array<Float>):Void {
     _Runtime.setLength(out, _Runtime.field(source, 'length'));
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(out, index, flighthq._internal._StaticIndex.readArray(source, index));
         index++;
@@ -122,22 +131,22 @@ class PrepareWgpuScene3DForwardLights {
   }
 
   public static function setMeshWorldBoundingSphere__prepareWgpuScene3DForwardLights(mesh:Mesh):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getNode3DWorldBounds, cast ([PrepareWgpuScene3DForwardLights.scratchWorldBounds__prepareWgpuScene3DForwardLights, mesh] : Array<Dynamic>));
-    _Runtime.callValue(setBoundingSphereFromAabb, cast ([PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights, PrepareWgpuScene3DForwardLights.scratchWorldBounds__prepareWgpuScene3DForwardLights] : Array<Dynamic>));
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    getNode3DWorldBounds(PrepareWgpuScene3DForwardLights.scratchWorldBounds__prepareWgpuScene3DForwardLights, mesh);
+    setBoundingSphereFromAabb(PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights, PrepareWgpuScene3DForwardLights.scratchWorldBounds__prepareWgpuScene3DForwardLights);
     if ((cast ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius : Float) >= (cast 0.0 : Float)) : Bool)) { return; }
-    world = _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)).m;
+    world = (cast getNodeWorldMatrix4(mesh) : Matrix4Like).m;
     (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center.x = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 12.0) : Dynamic));
     (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center.y = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 13.0) : Dynamic));
     (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center.z = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 14.0) : Dynamic));
     (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius = cast (0.0 : Dynamic));
   }
 
-  public static final preparedByState__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final preparedByState__prepareWgpuScene3DForwardLights:flighthq._internal._WeakMap<WgpuRenderState, Prepared__prepareWgpuScene3DForwardLights> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final scratchWorldBounds__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
+  public static final scratchWorldBounds__prepareWgpuScene3DForwardLights:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
 
-  public static final scratchWorldSphere__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.callValue(createBoundingSphere, cast ([] : Array<Dynamic>));
+  public static final scratchWorldSphere__prepareWgpuScene3DForwardLights:BoundingSphere = (cast createBoundingSphere((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : BoundingSphere);
 
   public static final selectedLights__prepareWgpuScene3DForwardLights:Scene3DLightsLike = { ambient: null, directional: null, hemisphere: cast ([] : Array<Dynamic>), point: cast ([] : Array<Dynamic>), spot: cast ([] : Array<Dynamic>) };
 }

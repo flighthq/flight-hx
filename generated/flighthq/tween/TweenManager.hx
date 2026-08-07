@@ -4,6 +4,7 @@ package flighthq.tween;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.easing.EaseExponential.easeOutExponential;
+import flighthq.types.EasingFunction;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 
@@ -14,5 +15,5 @@ class TweenManager {
   }
 
   @:noCompletion
-  public static final defaultManager:flighthq.types.TweenManager = _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>));
+  public static final defaultManager:flighthq.types.TweenManager = (cast createTweenManager((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<TweenManagerOptions>)) : flighthq.types.TweenManager);
 }

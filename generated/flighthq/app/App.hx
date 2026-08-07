@@ -12,68 +12,70 @@ import flighthq.types.App.AppLoginItem;
 import flighthq.types.App.AppLoginItemLike;
 import flighthq.types.App.AppPathKind;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.Signal;
+import flighthq.types.Signal.SignalData;
 
 class App {
   public static var _backend__app:Null<AppBackend> = _Runtime.explicitNull();
 
-  public static final _subscriptions__app:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _subscriptions__app:flighthq._internal._WeakMap<flighthq.types.App, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function addAppRecentDocument(path:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'addRecentDocument', cast ([path] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).addRecentDocument(path);
   }
 
   public static function attachApp(app:flighthq.types.App):Void {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeActivate:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeAllWindowsClosed:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeOpenFile:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeQuitRequest:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeReady:Dynamic = cast _Runtime.UNDEFINED;
-    var unsubscribeSecondInstance:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(detachApp, cast ([app] : Array<Dynamic>));
-    backend = _Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>));
-    unsubscribeActivate = _Runtime.callProperty(backend, 'subscribeActivate', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1)] : Array<Dynamic>));
-    unsubscribeAllWindowsClosed = _Runtime.callProperty(backend, 'subscribeAllWindowsClosed', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onAllWindowsClosed]]), 1)] : Array<Dynamic>));
-    unsubscribeOpenFile = _Runtime.callProperty(backend, 'subscribeOpenFile', cast ([function(path:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onOpenFile], [path]]), 1)] : Array<Dynamic>));
-    unsubscribeQuitRequest = _Runtime.callProperty(backend, 'subscribeQuitRequest', cast ([function(cancelHost:Dynamic) {
+    var backend:AppBackend = cast _Runtime.UNDEFINED;
+    var unsubscribeActivate:Void->Void = cast _Runtime.UNDEFINED;
+    var unsubscribeAllWindowsClosed:Void->Void = cast _Runtime.UNDEFINED;
+    var unsubscribeOpenFile:Void->Void = cast _Runtime.UNDEFINED;
+    var unsubscribeQuitRequest:Void->Void = cast _Runtime.UNDEFINED;
+    var unsubscribeReady:Void->Void = cast _Runtime.UNDEFINED;
+    var unsubscribeSecondInstance:Void->Void = cast _Runtime.UNDEFINED;
+    detachApp((cast app : flighthq.types.App));
+    backend = (cast getAppBackend() : AppBackend);
+    unsubscribeActivate = (cast backend : AppBackend).subscribeActivate(function():Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1));
+    unsubscribeAllWindowsClosed = (cast backend : AppBackend).subscribeAllWindowsClosed(function():Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onAllWindowsClosed]]), 1));
+    unsubscribeOpenFile = (cast backend : AppBackend).subscribeOpenFile(function(path:String):Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onOpenFile], [path]]), 1));
+    unsubscribeQuitRequest = (cast backend : AppBackend).subscribeQuitRequest(function(cancelHost:Void->Void):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onQuitRequest]]), 1);
       if ((cast _Runtime.strictEquals(({ final __typedStruct0 = app.onQuitRequest.data; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.cancelled; }), true) : Bool)) {
-        _Runtime.callValue(cancelHost, cast ([] : Array<Dynamic>));
+        cancelHost();
       } else {
-        _Runtime.callProperty(backend, 'quit', cast ([] : Array<Dynamic>));
+        (cast backend : AppBackend).quit();
       }
-    }] : Array<Dynamic>));
-    unsubscribeReady = _Runtime.callProperty(backend, 'subscribeReady', cast ([function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onReady]]), 1)] : Array<Dynamic>));
-    unsubscribeSecondInstance = _Runtime.callProperty(backend, 'subscribeSecondInstance', cast ([function(argv:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSecondInstance], [argv]]), 1)] : Array<Dynamic>));
-    ((cast App._subscriptions__app : flighthq._internal._WeakMap).set(app, function() {
-      _Runtime.callValue(unsubscribeActivate, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(unsubscribeAllWindowsClosed, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(unsubscribeOpenFile, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(unsubscribeQuitRequest, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(unsubscribeReady, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(unsubscribeSecondInstance, cast ([] : Array<Dynamic>));
+    });
+    unsubscribeReady = (cast backend : AppBackend).subscribeReady(function():Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onReady]]), 1));
+    unsubscribeSecondInstance = (cast backend : AppBackend).subscribeSecondInstance(function(argv:Array<String>):Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSecondInstance], [argv]]), 1));
+    ((cast App._subscriptions__app : flighthq._internal._WeakMap<flighthq.types.App, Void->Void>).set(app, function():Void {
+      unsubscribeActivate();
+      unsubscribeAllWindowsClosed();
+      unsubscribeOpenFile();
+      unsubscribeQuitRequest();
+      unsubscribeReady();
+      unsubscribeSecondInstance();
     }));
   }
 
   public static function bounceAppDock():Float {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'bounceDock', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).bounceDock();
     return cast null;
   }
 
   public static function cancelAppAttention(id:Float):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'cancelAttention', cast ([id] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).cancelAttention(id);
   }
 
   public static function cancelAppDockBounce(id:Float):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'cancelDockBounce', cast ([id] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).cancelDockBounce(id);
   }
 
   public static function clearAppRecentDocuments():Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'clearRecentDocuments', cast ([] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).clearRecentDocuments();
   }
 
   public static function createApp():flighthq.types.App {
-    return cast { onActivate: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAllWindowsClosed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOpenFile: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onQuitRequest: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onReady: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSecondInstance: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onActivate: (cast createSignal() : Signal<Void->Void>), onAllWindowsClosed: (cast createSignal() : Signal<Void->Void>), onOpenFile: (cast createSignal() : Signal<String->Void>), onQuitRequest: (cast createSignal() : Signal<Void->Void>), onReady: (cast createSignal() : Signal<Void->Void>), onSecondInstance: (cast createSignal() : Signal<Array<String>->Void>) };
     return cast null;
   }
 
@@ -84,123 +86,123 @@ class App {
 
   @:noCompletion
   public static function createWebAppBackend():AppBackend {
-    return cast { addRecentDocument: function() {
+    return cast { addRecentDocument: function():Void {
 
-    }, bounceDock: function() {
+    }, bounceDock: function():Float {
       return cast -1.0;
-    }, cancelAttention: function() {
+    }, cancelAttention: function():Void {
 
-    }, cancelDockBounce: function() {
+    }, cancelDockBounce: function():Void {
 
-    }, clearRecentDocuments: function() {
+    }, clearRecentDocuments: function():Void {
 
-    }, focus: function() {
+    }, focus: function():Void {
       if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
-    }, getAppDirectoryPath: function() {
+    }, getAppDirectoryPath: function():String {
       return cast '';
-    }, getAppPath: function() {
+    }, getAppPath: function():String {
       return cast '';
-    }, getCommandLine: function() {
+    }, getCommandLine: function():Array<flighthq._internal._Any> {
       return cast cast ([] : Array<Dynamic>);
-    }, getExecutablePath: function() {
+    }, getExecutablePath: function():String {
       return cast '';
-    }, getLocale: function() {
+    }, getLocale: function():String {
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic) : (cast '' : Dynamic));
-    }, getPreferredSystemLanguages: function() {
+    }, getPreferredSystemLanguages: function():Array<String> {
       if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages')) : Bool)) : Bool)) {
         return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages') : Array<String>);
       }
       return cast cast ([] : Array<Dynamic>);
-    }, getSystemLocale: function() {
+    }, getSystemLocale: function():String {
       try {
         return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
       } catch (__error:Dynamic) {
         return cast '';
       }
-    }, getLoginItem: function() {
+    }, getLoginItem: function():{ var args:Array<flighthq._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; } {
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
-    }, getName: function() {
+    }, getName: function():String {
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic) : (cast '' : Dynamic));
-    }, getVersion: function() {
+    }, getVersion: function():String {
       return cast '';
-    }, hasSingleInstanceLock: function() {
+    }, hasSingleInstanceLock: function():Bool {
       return cast true;
-    }, hideApp: function() {
+    }, hideApp: function():Bool {
       return cast false;
-    }, isAppHidden: function() {
+    }, isAppHidden: function():Bool {
       return cast false;
-    }, quit: function() {
+    }, quit: function():Void {
       if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
-    }, relaunch: function() {
+    }, relaunch: function():Void {
       if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) {
         try {
           (cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).reload();
         } catch (__error:Dynamic) {
         }
       }
-    }, releaseSingleInstanceLock: function() {
+    }, releaseSingleInstanceLock: function():Void {
 
-    }, requestAttention: function() {
+    }, requestAttention: function():Float {
       return cast -1.0;
-    }, requestSingleInstanceLock: function() {
+    }, requestSingleInstanceLock: function():Bool {
       return cast true;
-    }, setActivationPolicy: function() {
+    }, setActivationPolicy: function():Void {
 
-    }, setBadgeCount: function(count:Dynamic) {
+    }, setBadgeCount: function(count:Float):Bool {
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
-        (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic).setAppBadge(count);
+        (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { var setAppBadge:Float->flighthq._internal._Promise<flighthq._internal._Nothing>; }>).setAppBadge(count);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
-    }, setDockBadge: function() {
+    }, setDockBadge: function():Void {
 
-    }, setDockMenu: function() {
+    }, setDockMenu: function():Void {
 
-    }, setLoginItem: function() {
+    }, setLoginItem: function():Bool {
       return cast false;
-    }, setName: function() {
+    }, setName: function():Bool {
       return cast false;
-    }, setUserModelId: function() {
+    }, setUserModelId: function():Bool {
       return cast false;
-    }, showApp: function() {
+    }, showApp: function():Bool {
       return cast false;
-    }, subscribeActivate: function() {
-      return cast function() {
+    }, subscribeActivate: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeAllWindowsClosed: function() {
-      return cast function() {
+    }, subscribeAllWindowsClosed: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeOpenFile: function() {
-      return cast function() {
+    }, subscribeOpenFile: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeQuitRequest: function(_listener:Dynamic) {
-      return cast function() {
+    }, subscribeQuitRequest: function(_listener:Void->Void->Void):Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeReady: function(listener:Dynamic) {
-      var id:Dynamic = cast _Runtime.UNDEFINED;
-      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    }, subscribeReady: function(listener:Void->Void):Void->Void {
+      var id:flighthq._internal._Promise<flighthq._internal._Nothing> = cast _Runtime.UNDEFINED;
+      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function():Void return listener()] : Array<Dynamic>));
       _Runtime.voidValue(id);
-      return cast function() {
+      return cast function():Void {
 
       };
-    }, subscribeSecondInstance: function() {
-      return cast function() {
+    }, subscribeSecondInstance: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
@@ -208,39 +210,39 @@ class App {
   }
 
   public static function detachApp(app:flighthq.types.App):Void {
-    var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast App._subscriptions__app : flighthq._internal._WeakMap).get(app));
+    var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
+    unsubscribe = ((cast App._subscriptions__app : flighthq._internal._WeakMap<flighthq.types.App, Void->Void>).get(app));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(unsubscribe, cast ([] : Array<Dynamic>));
-      ((cast App._subscriptions__app : flighthq._internal._WeakMap).delete_(app));
+      unsubscribe();
+      ((cast App._subscriptions__app : flighthq._internal._WeakMap<flighthq.types.App, Void->Void>).delete_(app));
     }
   }
 
   public static function disposeApp(app:flighthq.types.App):Void {
-    _Runtime.callValue(detachApp, cast ([app] : Array<Dynamic>));
+    detachApp((cast app : flighthq.types.App));
   }
 
   public static function focusApp():Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'focus', cast ([] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).focus();
   }
 
   @:noCompletion
   public static function getAppBackend():AppBackend {
-    if ((cast _Runtime.strictEquals(App._backend__app, null) : Bool)) { (App._backend__app = cast (_Runtime.callValue(createWebAppBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(App._backend__app, null) : Bool)) { (App._backend__app = cast ((cast createWebAppBackend() : Null<AppBackend>) : Dynamic)); }
     return cast App._backend__app;
     return cast null;
   }
 
   public static function getAppCommandLine():Array<String> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getCommandLine', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getCommandLine();
     return cast null;
   }
 
   public static function getAppCommandLineSwitch(name:String):Null<String> {
-    var prefix:Dynamic = cast _Runtime.UNDEFINED;
-    var args:Dynamic = cast _Runtime.UNDEFINED;
+    var prefix:String = cast _Runtime.UNDEFINED;
+    var args:Array<String> = cast _Runtime.UNDEFINED;
     prefix = '--' + Std.string(name) + '=';
-    args = _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getCommandLine', cast ([] : Array<Dynamic>));
+    args = (cast (cast getAppBackend() : AppBackend) : AppBackend).getCommandLine();
     for (arg in _Runtime.iterable(args)) {
       if ((cast _Runtime.strictEquals(arg, '--' + Std.string(name) + '') : Bool)) { return cast ''; }
       if ((cast StringTools.startsWith(arg, prefix) : Bool)) { return cast _Runtime.slice(arg, _Runtime.field(prefix, 'length'), null); }
@@ -250,94 +252,94 @@ class App {
   }
 
   public static function getAppDirectoryPath(kind:AppPathKind):String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getAppDirectoryPath', cast ([kind] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppDirectoryPath(kind);
     return cast null;
   }
 
   public static function getAppExecutablePath():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getExecutablePath', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getExecutablePath();
     return cast null;
   }
 
   public static function getAppLocale():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getLocale', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getLocale();
     return cast null;
   }
 
   public static function getAppLoginItem():AppLoginItem {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getLoginItem', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getLoginItem();
     return cast null;
   }
 
   public static function getAppName():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getName', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getName();
     return cast null;
   }
 
   public static function getAppPath():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getAppPath', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppPath();
     return cast null;
   }
 
   public static function getAppPreferredSystemLanguages():Array<String> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getPreferredSystemLanguages', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getPreferredSystemLanguages();
     return cast null;
   }
 
   public static function getAppSystemLocale():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getSystemLocale', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getSystemLocale();
     return cast null;
   }
 
   public static function getAppVersion():String {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getVersion', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getVersion();
     return cast null;
   }
 
   public static function hasAppCommandLineSwitch(name:String):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.callValue(getAppCommandLineSwitch, cast ([name] : Array<Dynamic>)), null);
+    return cast !_Runtime.strictEquals((cast getAppCommandLineSwitch((cast name : String)) : Null<String>), null);
     return cast null;
   }
 
   public static function hasAppSingleInstanceLock():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'hasSingleInstanceLock', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).hasSingleInstanceLock();
     return cast null;
   }
 
   public static function hideApp():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'hideApp', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).hideApp();
     return cast null;
   }
 
   public static function isAppHidden():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'isAppHidden', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).isAppHidden();
     return cast null;
   }
 
   public static function quitApp():Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'quit', cast ([] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).quit();
   }
 
   public static function relaunchApp():Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'relaunch', cast ([] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).relaunch();
   }
 
   public static function releaseAppSingleInstanceLock():Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'releaseSingleInstanceLock', cast ([] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).releaseSingleInstanceLock();
   }
 
   public static function requestAppAttention(critical:Bool):Float {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'requestAttention', cast ([critical] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).requestAttention(critical);
     return cast null;
   }
 
   public static function requestAppSingleInstanceLock():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'requestSingleInstanceLock', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).requestSingleInstanceLock();
     return cast null;
   }
 
   public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setActivationPolicy', cast ([policy] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy(policy);
   }
 
   @:noCompletion
@@ -346,35 +348,35 @@ class App {
   }
 
   public static function setAppBadgeCount(count:Float):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setBadgeCount', cast ([count] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setBadgeCount(count);
     return cast null;
   }
 
   public static function setAppDockBadge(text:String):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setDockBadge', cast ([text] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockBadge(text);
   }
 
   public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
-    _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setDockMenu', cast ([items] : Array<Dynamic>));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockMenu(items);
   }
 
   public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setLoginItem', cast ([settings] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setLoginItem(settings);
     return cast null;
   }
 
   public static function setAppName(name:String):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setName', cast ([name] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setName(name);
     return cast null;
   }
 
   public static function setAppUserModelId(id:String):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setUserModelId', cast ([id] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setUserModelId(id);
     return cast null;
   }
 
   public static function showApp():Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'showApp', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).showApp();
     return cast null;
   }
 }

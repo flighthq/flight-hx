@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.GodRaysEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,14 +17,14 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuGodRaysEffect {
   @:noCompletion
   public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
-    var centerX:Dynamic = cast _Runtime.UNDEFINED;
-    var centerY:Dynamic = cast _Runtime.UNDEFINED;
-    var density:Dynamic = cast _Runtime.UNDEFINED;
-    var decay:Dynamic = cast _Runtime.UNDEFINED;
-    var weight:Dynamic = cast _Runtime.UNDEFINED;
-    var exposure:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var centerX:Float = cast _Runtime.UNDEFINED;
+    var centerY:Float = cast _Runtime.UNDEFINED;
+    var density:Float = cast _Runtime.UNDEFINED;
+    var decay:Float = cast _Runtime.UNDEFINED;
+    var weight:Float = cast _Runtime.UNDEFINED;
+    var exposure:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     centerX = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
     centerY = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 0.96);
@@ -29,23 +32,23 @@ class WgpuGodRaysEffect {
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
     samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.godRays.' + Std.string(samples) + '', _Runtime.callValue(WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect, cast ([samples] : Array<Dynamic>)), 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect((cast samples : Float)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, centerX);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, centerY);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, density);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, decay);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, weight);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, exposure);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGodRaysEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect)] : Array<Dynamic>));
+  public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyGodRaysEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : GodRaysEffect) : GodRaysEffect));
   };
 
   public static function registerWgpuGodRaysEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GodRaysEffect', defaultWgpuGodRaysEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'GodRaysEffect' : String), (cast defaultWgpuGodRaysEffectRunner : WgpuRenderEffectRunner));
   }
 
   public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {
@@ -53,7 +56,7 @@ class WgpuGodRaysEffect {
     return cast null;
   }
 
-  public static final GOD_RAYS_FRAGMENT_HEAD__wgpuGodRaysEffect:Dynamic = '\nstruct Uniforms {\n  u_centerX : f32,\n  u_centerY : f32,\n  u_density : f32,\n  u_decay : f32,\n  u_weight : f32,\n  u_exposure : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = ';
+  public static final GOD_RAYS_FRAGMENT_HEAD__wgpuGodRaysEffect:String = '\nstruct Uniforms {\n  u_centerX : f32,\n  u_centerY : f32,\n  u_density : f32,\n  u_decay : f32,\n  u_weight : f32,\n  u_exposure : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = ';
 
-  public static final GOD_RAYS_FRAGMENT_TAIL__wgpuGodRaysEffect:Dynamic = ';\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let light = vec2f(uni.u_centerX, uni.u_centerY);\n  let delta = (uv - light) * (uni.u_density / f32(SAMPLES));\n  var coord = uv;\n  let base = textureSampleLevel(tex, smp, uv, 0.0);\n  var accum = base.rgb;\n  var illumination = 1.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    coord = coord - delta;\n    var s = textureSampleLevel(tex, smp, coord, 0.0).rgb;\n    s = s * (illumination * uni.u_weight);\n    accum = accum + s;\n    illumination = illumination * uni.u_decay;\n  }\n  return vec4f(base.rgb + accum * uni.u_exposure, base.a);\n}';
+  public static final GOD_RAYS_FRAGMENT_TAIL__wgpuGodRaysEffect:String = ';\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let light = vec2f(uni.u_centerX, uni.u_centerY);\n  let delta = (uv - light) * (uni.u_density / f32(SAMPLES));\n  var coord = uv;\n  let base = textureSampleLevel(tex, smp, uv, 0.0);\n  var accum = base.rgb;\n  var illumination = 1.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    coord = coord - delta;\n    var s = textureSampleLevel(tex, smp, coord, 0.0).rgb;\n    s = s * (illumination * uni.u_weight);\n    accum = accum + s;\n    illumination = illumination * uni.u_decay;\n  }\n  return vec4f(base.rgb + accum * uni.u_exposure, base.a);\n}';
 }

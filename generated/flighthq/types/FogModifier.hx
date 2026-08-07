@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._FogModifierValues.FogModifierKind;
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 
-typedef FogModifierMode = Dynamic;
+typedef FogModifierMode = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef FogModifier = { var kind:ModifierKind; var slot:ModifierSlot; var color:Float; @:optional var mode:FogModifierMode; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };

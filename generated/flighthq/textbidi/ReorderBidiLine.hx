@@ -6,18 +6,18 @@ import flighthq._internal._Runtime;
 
 class ReorderBidiLine {
   public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var highest:Dynamic = cast _Runtime.UNDEFINED;
-    var lowestOdd:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var highest:Float = cast _Runtime.UNDEFINED;
+    var lowestOdd:Float = cast _Runtime.UNDEFINED;
     count = (end - start);
     _Runtime.setLength(out, count);
     if ((cast ((cast count : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     highest = 0.0;
     lowestOdd = 255.0;
     {
-      var i:Dynamic = start;
+      var i:Float = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        var level:Dynamic = flighthq._internal._StaticIndex.readUint8Array(levels, i);
+        var level:Float = flighthq._internal._StaticIndex.readUint8Array(levels, i);
         flighthq._internal._StaticIndex.writeArray(out, (i - start), i);
         if ((cast ((cast level : Float) > (cast highest : Float)) : Bool)) { (highest = cast (level : Dynamic)); }
         if ((cast ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 1.0) : Bool) && (cast ((cast level : Float) < (cast lowestOdd : Float)) : Bool)) : Bool)) { (lowestOdd = cast (level : Dynamic)); }
@@ -25,19 +25,19 @@ class ReorderBidiLine {
       }
     }
     {
-      var level:Dynamic = highest;
+      var level:Float = highest;
       while ((cast ((cast level : Float) >= (cast lowestOdd : Float)) : Bool)) {
         {
-          var k:Dynamic = 0.0;
+          var k:Float = 0.0;
           while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
             if ((cast ((cast flighthq._internal._StaticIndex.readUint8Array(levels, flighthq._internal._StaticIndex.readArray(out, k)) : Float) >= (cast level : Float)) : Bool)) {
-              var j:Dynamic = k;
+              var j:Float = k;
               while ((cast ((cast ((cast j : Float) < (cast count : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8Array(levels, flighthq._internal._StaticIndex.readArray(out, j)) : Float) >= (cast level : Float)) : Bool)) : Bool)) { j++; }
               {
-                var lo:Dynamic = k;
-                var hi:Dynamic = (j - 1.0);
+                var lo:Float = k;
+                var hi:Float = (j - 1.0);
                 while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
-                  var tmp:Dynamic = flighthq._internal._StaticIndex.readArray(out, lo);
+                  var tmp:Float = flighthq._internal._StaticIndex.readArray(out, lo);
                   flighthq._internal._StaticIndex.writeArray(out, lo, flighthq._internal._StaticIndex.readArray(out, hi));
                   flighthq._internal._StaticIndex.writeArray(out, hi, tmp);
                   ({ lo++; hi--; });

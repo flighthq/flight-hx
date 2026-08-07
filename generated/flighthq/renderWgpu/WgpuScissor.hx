@@ -5,43 +5,44 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 class WgpuScissor {
   @:noCompletion
   public static function applyWgpuScissorRect(state:WgpuRenderState, pass:flighthq._internal.dom.GPURenderPassEncoder):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var rect:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    rect = _Runtime.field(runtime, 'currentScissorRect');
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var rect:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    rect = (cast runtime : WgpuRenderStateRuntime).currentScissorRect;
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) { return; }
-    x = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'x')));
-    y = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'y')));
-    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'width')));
-    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'height')));
+    x = HxMath.max(0.0, HxMath.floor((cast rect : WgpuScissorRect).x));
+    y = HxMath.max(0.0, HxMath.floor((cast rect : WgpuScissorRect).y));
+    w = HxMath.max(1.0, HxMath.ceil((cast rect : WgpuScissorRect).width));
+    h = HxMath.max(1.0, HxMath.ceil((cast rect : WgpuScissorRect).height));
     pass.setScissorRect(x, y, w, h);
   }
 
   @:noCompletion
   public static function popWgpuScissorRect(state:WgpuRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var prev:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    prev = _Runtime.callProperty(_Runtime.field(runtime, 'scissorStack'), 'pop', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'currentScissorRect', _Runtime.coalesce(prev, function():Dynamic return cast null));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var prev:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    prev = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'pop', cast ([] : Array<Dynamic>));
+    ((cast runtime : WgpuRenderStateRuntime).currentScissorRect = _Runtime.coalesce(prev, function():Dynamic return cast null));
   }
 
   @:noCompletion
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentScissorRect'), null) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(runtime, 'scissorStack'), 'push', cast ([_Runtime.field(runtime, 'currentScissorRect')] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    if ((cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).currentScissorRect, null) : Bool)) {
+      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'push', cast ([(cast runtime : WgpuRenderStateRuntime).currentScissorRect] : Array<Dynamic>));
     }
-    _Runtime.setField(runtime, 'currentScissorRect', { x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y'), width: _Runtime.field(rect, 'width'), height: _Runtime.field(rect, 'height') });
+    ((cast runtime : WgpuRenderStateRuntime).currentScissorRect = { x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y'), width: _Runtime.field(rect, 'width'), height: _Runtime.field(rect, 'height') });
   }
 }

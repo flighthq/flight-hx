@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 
 class GaussianKernel {
   public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var twoSigmaSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
-    var inverseSum:Dynamic = cast _Runtime.UNDEFINED;
-    size = _Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>));
+    var size:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var twoSigmaSquared:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var inverseSum:Float = cast _Runtime.UNDEFINED;
+    size = (cast getGaussianKernelSize((cast sigma : Float)) : Float);
     _Runtime.setLength(out, size);
     if ((cast _Runtime.strictEquals(size, 1.0) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(out, 0.0, 1.0);
@@ -21,10 +21,10 @@ class GaussianKernel {
     twoSigmaSquared = ((2.0 * sigma) * sigma);
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
-        var x:Dynamic = (i - radius);
-        var weight:Dynamic = HxMath.exp((-(x * x) / twoSigmaSquared));
+        var x:Float = (i - radius);
+        var weight:Float = HxMath.exp((-(x * x) / twoSigmaSquared));
         flighthq._internal._StaticIndex.writeArray(out, i, weight);
         (sum = cast ((sum + weight) : Dynamic));
         i++;
@@ -32,7 +32,7 @@ class GaussianKernel {
     }
     inverseSum = (1.0 / sum);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
         ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), inverseSum)); });
         i++;
@@ -43,7 +43,7 @@ class GaussianKernel {
   }
 
   public static function getGaussianKernelSize(sigma:Float):Float {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sigma : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 1.0; }
     radius = HxMath.ceil((3.0 * sigma));
     return cast ((radius * 2.0) + 1.0);

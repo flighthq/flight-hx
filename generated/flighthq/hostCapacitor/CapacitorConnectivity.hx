@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
 import flighthq.types.CapacitorApi.CapacitorConnectionStatus;
+import flighthq.types.CapacitorApi.CapacitorNetworkPlugin;
 import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
@@ -12,23 +13,23 @@ import flighthq.types.Connectivity.ConnectivityStatus;
 
 class CapacitorConnectivity {
   public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
-    var network:Dynamic = cast _Runtime.UNDEFINED;
+    var network:CapacitorNetworkPlugin = cast _Runtime.UNDEFINED;
     var mirror:CapacitorConnectionStatus = cast _Runtime.UNDEFINED;
-    network = _Runtime.field(capacitor, 'network');
+    network = (cast capacitor : CapacitorApi).network;
     mirror = { connected: false, connectionType: 'unknown' };
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(network, 'getStatus', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast network : CapacitorNetworkPlugin).getStatus(), 'then', cast ([function(status:CapacitorConnectionStatus):Void {
       (mirror = cast (status : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    flighthq._internal._Async.recover(_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function(status:Dynamic) {
+    flighthq._internal._Async.recover((cast network : CapacitorNetworkPlugin).addListener('networkStatusChange', function(status:CapacitorConnectionStatus):Void {
       (mirror = cast (status : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }), function():Void {
 
     });
-    return cast { getStatus: function(out:ConnectivityStatus) {
-      (out.online = cast (_Runtime.field(mirror, 'connected') : Dynamic));
-      (out.type = cast (_Runtime.callValue(CapacitorConnectivity.toConnectionType__capacitorConnectivity, cast ([_Runtime.field(mirror, 'connectionType')] : Array<Dynamic>)) : Dynamic));
+    return cast { getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
+      (out.online = cast ((cast mirror : CapacitorConnectionStatus).connected : Dynamic));
+      (out.type = cast ((cast CapacitorConnectivity.toConnectionType__capacitorConnectivity((cast (cast mirror : CapacitorConnectionStatus).connectionType : String)) : ConnectivityConnectionType) : Dynamic));
       (out.downlink = cast (-1.0 : Dynamic));
       (out.downlinkMax = cast (-1.0 : Dynamic));
       (out.effectiveType = cast ('' : Dynamic));
@@ -36,8 +37,8 @@ class CapacitorConnectivity {
       (out.saveData = cast (false : Dynamic));
       (out.metered = cast (_Runtime.strictEquals(out.type, 'cellular') : Dynamic));
       return cast out;
-    }, subscribe: function(listener:Dynamic) {
-      return cast _Runtime.callValue(CapacitorConnectivity.toUnsubscribe__capacitorConnectivity, cast ([_Runtime.callProperty(network, 'addListener', cast (['networkStatusChange', function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    }, subscribe: function(listener:Void->Void):Void->Void {
+      return cast (cast CapacitorConnectivity.toUnsubscribe__capacitorConnectivity((cast (cast network : CapacitorNetworkPlugin).addListener('networkStatusChange', function(__unused0:CapacitorConnectionStatus):Void return listener()) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
     } };
     return cast null;
   }
@@ -50,22 +51,22 @@ class CapacitorConnectivity {
     return cast null;
   }
 
-  public static function toUnsubscribe__capacitorConnectivity(handlePromise:flighthq._internal._Promise<CapacitorPluginListenerHandle>):Dynamic {
-    var removed:Dynamic = cast _Runtime.UNDEFINED;
+  public static function toUnsubscribe__capacitorConnectivity(handlePromise:flighthq._internal._Promise<CapacitorPluginListenerHandle>):Void->Void {
+    var removed:Bool = cast _Runtime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast _Runtime.UNDEFINED;
     removed = false;
     handle = null;
-    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:CapacitorPluginListenerHandle):Void {
       (handle = cast (resolved : Dynamic));
-      if ((cast removed : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
 
       }); }
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast function() {
+    return cast function():Void {
       (removed = cast (true : Dynamic));
-      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover(_Runtime.callProperty(handle, 'remove', cast ([] : Array<Dynamic>)), function() {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
 
       }); }
     };

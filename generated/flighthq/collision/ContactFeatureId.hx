@@ -5,14 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class ContactFeatureId {
-  public static final FEATURE_INDEX_LIMIT:Dynamic = (1 << 25);
+  public static final FEATURE_INDEX_LIMIT:Float = (1 << 25);
 
   public static function packContactFeatureId(referenceIsA:Bool, referenceEdge:Float, incidentEdge:Float, secondPoint:Bool):Float {
     return cast _Runtime.addNumbers((_Runtime.addNumbers(((cast referenceIsA : Bool) ? (cast ContactFeatureId.FEATURE_REFERENCE_SCALE__contactFeatureId : Dynamic) : (cast 0.0 : Dynamic)), (referenceEdge * ContactFeatureId.FEATURE_EDGE_SCALE__contactFeatureId)) + (incidentEdge * 2.0)), ((cast secondPoint : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     return cast null;
   }
 
-  public static final FEATURE_EDGE_SCALE__contactFeatureId:Dynamic = (FEATURE_INDEX_LIMIT * 2.0);
+  public static final FEATURE_EDGE_SCALE__contactFeatureId:Float = (FEATURE_INDEX_LIMIT * 2.0);
 
-  public static final FEATURE_REFERENCE_SCALE__contactFeatureId:Dynamic = (FEATURE_INDEX_LIMIT * ContactFeatureId.FEATURE_EDGE_SCALE__contactFeatureId);
+  public static final FEATURE_REFERENCE_SCALE__contactFeatureId:Float = (FEATURE_INDEX_LIMIT * ContactFeatureId.FEATURE_EDGE_SCALE__contactFeatureId);
 }

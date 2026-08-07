@@ -9,23 +9,25 @@ import flighthq.shading.ModifierRegistry.registerModifier;
 import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.types.GlModifierSnippet;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.ModifierKind;
+import flighthq.types.ModifierRegistry;
 
 class GlShadedModifierSnippet {
   @:noCompletion
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'modifierSnippetRegistry'), null) : Bool)) { _Runtime.setField(runtime, 'modifierSnippetRegistry', _Runtime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
-    _Runtime.callValue(registerModifier, cast ([_Runtime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
+    var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).modifierSnippetRegistry, null) : Bool)) { ((cast runtime : GlScene3DRuntime).modifierSnippetRegistry = (cast createModifierRegistry() : Null<ModifierRegistry>)); }
+    registerModifier((cast runtime : GlScene3DRuntime).modifierSnippetRegistry, snippet);
   }
 
   @:noCompletion
   public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
+    var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
-    return cast (cast _Runtime.callValue(resolveModifier, cast ([registry, kind] : Array<Dynamic>)) : Null<GlModifierSnippet>);
+    return cast (cast (cast resolveModifier(registry, (cast kind : String)) : Null<GlModifierSnippet>) : Null<GlModifierSnippet>);
     return cast null;
   }
 }

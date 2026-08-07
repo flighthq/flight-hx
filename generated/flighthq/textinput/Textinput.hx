@@ -25,7 +25,7 @@ class Textinput {
     Facade_Textinput_flighthq_textinput_TextInputEditing.appendTextInput(source, text);
   }
 
-  public static function applyTextInputRestriction(source:RichText, text:String, ?replaceLength:Dynamic):String {
+  public static function applyTextInputRestriction(source:RichText, text:String, ?replaceLength:Float):String {
     return cast Facade_Textinput_flighthq_textinput_TextInputEditing.applyTextInputRestriction(source, text, replaceLength);
     return cast null;
   }
@@ -52,7 +52,7 @@ class Textinput {
     Facade_Textinput_flighthq_textinput_TextInputEditing.clearTextInputHistory(source);
   }
 
-  public static function connectInputToTextInput(input:TextInputSource, manager:TextInputManager):Dynamic {
+  public static function connectInputToTextInput(input:TextInputSource, manager:TextInputManager):Void->Void {
     return cast Facade_Textinput_flighthq_textinput_TextInputManager.connectInputToTextInput(input, manager);
     return cast null;
   }
@@ -87,12 +87,12 @@ class Textinput {
     Facade_Textinput_flighthq_textinput_TextInput.disableTextInput(node);
   }
 
-  public static function dispatchSelectableRichTextKeyDown(manager:SelectableRichTextManager, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
+  public static function dispatchSelectableRichTextKeyDown(manager:SelectableRichTextManager, data:InputKeyboardData, ?onCopy:String->Void):Bool {
     return cast Facade_Textinput_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextKeyDown(manager, data, onCopy);
     return cast null;
   }
 
-  public static function dispatchSelectableRichTextPointerDown(manager:SelectableRichTextManager, target:RichText, x:Float, y:Float, ?extend:Dynamic):Void {
+  public static function dispatchSelectableRichTextPointerDown(manager:SelectableRichTextManager, target:RichText, x:Float, y:Float, ?extend:Bool):Void {
     Facade_Textinput_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextPointerDown(manager, target, x, y, extend);
   }
 
@@ -109,12 +109,12 @@ class Textinput {
     return cast null;
   }
 
-  public static function dispatchTextInputKeyDown(manager:TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
+  public static function dispatchTextInputKeyDown(manager:TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:String->Void):Bool {
     return cast Facade_Textinput_flighthq_textinput_TextInputManager.dispatchTextInputKeyDown(manager, data, clipboardText, onCopy);
     return cast null;
   }
 
-  public static function dispatchTextInputPointerDown(manager:TextInputManager, target:RichText, x:Float, y:Float, ?extend:Dynamic, ?clickCount:Dynamic):Void {
+  public static function dispatchTextInputPointerDown(manager:TextInputManager, target:RichText, x:Float, y:Float, ?extend:Bool, ?clickCount:Float):Void {
     Facade_Textinput_flighthq_textinput_TextInputManager.dispatchTextInputPointerDown(manager, target, x, y, extend, clickCount);
   }
 
@@ -201,27 +201,27 @@ class Textinput {
     Facade_Textinput_flighthq_textinput_TextInputEditing.insertTextInput(source, text);
   }
 
-  public static function moveTextInputCaret(source:RichText, index:Float, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaret(source:RichText, index:Float, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaret(source, index, extendSelection);
   }
 
-  public static function moveTextInputCaretByWord(source:RichText, direction:Float, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretByWord(source:RichText, direction:Float, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaretByWord(source, direction, extendSelection);
   }
 
-  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaretDown(source, layout, extendSelection);
   }
 
-  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaretToLineEnd(source, layout, extendSelection);
   }
 
-  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaretToLineStart(source, layout, extendSelection);
   }
 
-  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Bool):Void {
     Facade_Textinput_flighthq_textinput_TextInputEditing.moveTextInputCaretUp(source, layout, extendSelection);
   }
 

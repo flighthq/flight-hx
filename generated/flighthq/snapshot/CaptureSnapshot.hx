@@ -6,39 +6,39 @@ import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
 class CaptureSnapshot {
-  public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
-    var clone:Dynamic = cast _Runtime.UNDEFINED;
+  public static function captureSnapshot<T>(source:T):Snapshot<T> {
+    var clone:T = cast _Runtime.UNDEFINED;
     _Runtime.callOptionalValue(CaptureSnapshot._captureGuard__captureSnapshot, cast ([source] : Array<Dynamic>));
-    clone = (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([source] : Array<Dynamic>)) : Dynamic);
-    _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([clone] : Array<Dynamic>));
-    return cast (cast clone : Snapshot<Dynamic>);
+    clone = (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([source] : Array<Dynamic>)) : T);
+    CaptureSnapshot.freezeSnapshotDeep__captureSnapshot((cast clone : flighthq._internal._Any));
+    return cast (cast clone : Snapshot<T>);
     return cast null;
   }
 
   @:noCompletion
-  public static function setSnapshotCaptureGuard(guard:Null<Dynamic>):Void {
+  public static function setSnapshotCaptureGuard(guard:Null<flighthq._internal._Any->Void>):Void {
     (CaptureSnapshot._captureGuard__captureSnapshot = cast (guard : Dynamic));
   }
 
-  public static var _captureGuard__captureSnapshot:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _captureGuard__captureSnapshot:Null<flighthq._internal._Any->Void> = _Runtime.explicitNull();
 
-  public static function freezeSnapshotDeep__captureSnapshot(value:Dynamic):Void {
+  public static function freezeSnapshotDeep__captureSnapshot(value:flighthq._internal._Any):Void {
     if ((cast ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool) || (cast flighthq._internal.DynamicObject.isFrozen(value) : Bool)) : Bool)) {
       return;
     }
     flighthq._internal.DynamicObject.freeze(value);
     if ((cast _Runtime.isArray(value) : Bool)) {
       {
-        var index:Dynamic = 0.0;
+        var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(value, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([flighthq._internal._StaticIndex.readArray(value, index)] : Array<Dynamic>));
+          CaptureSnapshot.freezeSnapshotDeep__captureSnapshot((cast flighthq._internal._StaticIndex.readArray(value, index) : flighthq._internal._Any));
           (index = cast ((index + 1.0) : Dynamic));
         }
       }
       return;
     }
-    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys((cast value : Dynamic)))) {
-      _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([_Runtime.getIndex((cast value : Dynamic), key)] : Array<Dynamic>));
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys((cast value : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
+      CaptureSnapshot.freezeSnapshotDeep__captureSnapshot((cast _Runtime.getIndex((cast value : flighthq._internal._Record<String, flighthq._internal._Any>), key) : flighthq._internal._Any));
     }
   }
 }

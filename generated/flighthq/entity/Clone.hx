@@ -12,19 +12,19 @@ import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 class Clone {
   @:noCompletion
   public static function cloneEntity<Type>(source:Type):Type {
-    var copy:Dynamic = cast _Runtime.UNDEFINED;
-    copy = (cast _Runtime.mergeObjects([source]) : Dynamic);
+    var copy:flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    copy = (cast _Runtime.mergeObjects([source]) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>);
     _Runtime.setIndex(copy, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast _Runtime.callValue(createEntity, cast ([(cast (cast copy : Dynamic) : Type)] : Array<Dynamic>));
+    return cast (cast createEntity((cast (cast copy : flighthq._internal._Any) : Type)) : Type);
     return cast null;
   }
 
   @:noCompletion
   public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
-    var copy:Dynamic = cast _Runtime.UNDEFINED;
-    copy = (cast _Runtime.mergeObjects([source]) : Dynamic);
+    var copy:flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    copy = (cast _Runtime.mergeObjects([source]) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>);
     _Runtime.deleteIndex(copy, EntityRuntimeKey);
-    return cast (cast (cast copy : Dynamic) : EntityWithoutRuntime<Type>);
+    return cast (cast (cast copy : flighthq._internal._Any) : EntityWithoutRuntime<Type>);
     return cast null;
   }
 }

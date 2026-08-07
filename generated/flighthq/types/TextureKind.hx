@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class TextureKind {
-  public static final SamplerKind:Dynamic = 'Sampler';
+  public static final SamplerKind:String = 'Sampler';
 
-  public static final TextureKind:Dynamic = 'Texture';
+  public static final TextureKind:String = 'Texture';
 }

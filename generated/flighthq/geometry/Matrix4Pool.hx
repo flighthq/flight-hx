@@ -9,9 +9,9 @@ import flighthq.types.Matrix4;
 
 class Matrix4Pool {
   public static function acquireIdentityMatrix4():Matrix4 {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrix4Identity, cast ([m] : Array<Dynamic>));
+    var m:Matrix4 = cast _Runtime.UNDEFINED;
+    m = (cast acquireMatrix4() : Matrix4);
+    setMatrix4Identity(m);
     return cast m;
     return cast null;
   }
@@ -21,7 +21,7 @@ class Matrix4Pool {
     if ((cast ((cast _Runtime.field(Matrix4Pool.pool__matrix4Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (m = cast ((cast _Runtime.callProperty(Matrix4Pool.pool__matrix4Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix4) : Dynamic));
     } else {
-      (m = cast (_Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic));
+      (m = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4) : Dynamic));
     }
     return cast m;
     return cast null;

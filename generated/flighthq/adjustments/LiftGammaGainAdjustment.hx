@@ -9,19 +9,19 @@ import flighthq.types.LiftGammaGainAdjustment;
 class LiftGammaGainAdjustment {
   public static function createLiftGammaGainAdjustment(?options:Dynamic):flighthq.types.LiftGammaGainAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var lift:Dynamic = cast _Runtime.UNDEFINED;
-    var gammaRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var gain:Dynamic = cast _Runtime.UNDEFINED;
+    var lift:Array<Float> = cast _Runtime.UNDEFINED;
+    var gammaRaw:Array<Float> = cast _Runtime.UNDEFINED;
+    var gain:Array<Float> = cast _Runtime.UNDEFINED;
     var gammaExp:Array<Float> = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
-    lift = _Runtime.callValue(LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0)] : Array<Dynamic>));
-    gammaRaw = _Runtime.callValue(LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0)] : Array<Dynamic>));
-    gain = _Runtime.callValue(LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0)] : Array<Dynamic>));
+    lift = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0) : Float)) : Array<Float>);
+    gammaRaw = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
+    gain = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
     gammaExp = cast ([_Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0), 2.0), 0.001))] : Array<Dynamic>);
-    transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment, cast ([HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(gain, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 0.0), (1.0 - r))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 0.0))] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment, cast ([HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(gain, 1.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 1.0), (1.0 - g))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 1.0))] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment, cast ([HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(gain, 2.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 2.0), (1.0 - b))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 2.0))] : Array<Dynamic>)));
+    transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(gain, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 0.0), (1.0 - r))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 0.0)) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(gain, 1.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 1.0), (1.0 - g))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 1.0)) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(gain, 2.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 2.0), (1.0 - b))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 2.0)) : Float)) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'LiftGammaGainAdjustment' }, options, { transform: transform }]);
     return cast null;

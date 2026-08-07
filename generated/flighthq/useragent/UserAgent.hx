@@ -13,9 +13,9 @@ import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {
-      var buf:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [2.0]);
+      var buf:haxe.io.Bytes = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [2.0]);
       flighthq._internal._StaticIndex.writeUint16Array(new flighthq._internal._UInt16Array(buf), 0.0, 258.0);
-      var bytes:Dynamic = new flighthq._internal._UInt8Array(buf);
+      var bytes:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(buf);
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 1.0) : Bool)) { return cast 'big'; }
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 2.0) : Bool)) { return cast 'little'; }
     } catch (__error:Dynamic) {
@@ -26,7 +26,7 @@ class UserAgent {
 
   public static function parseUserAgentArch(ua:String, ?uadPlatform:String):String {
     if (_Runtime.truthy(uadPlatform)) {
-      var p:Dynamic = _Runtime.callProperty(uadPlatform, 'toLowerCase', cast ([] : Array<Dynamic>));
+      var p:String = _Runtime.callProperty(uadPlatform, 'toLowerCase', cast ([] : Array<Dynamic>));
       if ((cast _Runtime.includes(p, 'arm') : Bool)) { return cast 'arm64'; }
       if ((cast ((cast ((cast ((cast ((cast _Runtime.includes(p, 'x86') : Bool) || (cast _Runtime.includes(p, 'windows') : Bool)) : Bool) || (cast _Runtime.includes(p, 'linux') : Bool)) : Bool) || (cast _Runtime.includes(p, 'mac') : Bool)) : Bool) || (cast _Runtime.includes(p, 'chrome') : Bool)) : Bool)) {
         return cast 'x64';
@@ -58,25 +58,25 @@ class UserAgent {
       var __switchValue = engine;
       if (__switchValue == 'gecko') {
         {
-          var m:Dynamic = _Runtime.callProperty(_Runtime.regexp('firefox\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var m:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('firefox\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           return cast _Runtime.select(m, function():Dynamic return cast _Runtime.getIndex(m, 1.0), function():Dynamic return cast '');
         }
       }
       else if (__switchValue == 'blink') {
         {
-          var edg:Dynamic = _Runtime.callProperty(_Runtime.regexp('edg\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var edg:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('edg\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           if (_Runtime.truthy(edg)) { return cast _Runtime.getIndex(edg, 1.0); }
-          var opr:Dynamic = _Runtime.callProperty(_Runtime.regexp('opr\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var opr:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('opr\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           if (_Runtime.truthy(opr)) { return cast _Runtime.getIndex(opr, 1.0); }
-          var chrome:Dynamic = _Runtime.callProperty(_Runtime.regexp('chrome\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var chrome:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('chrome\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           return cast _Runtime.select(chrome, function():Dynamic return cast _Runtime.getIndex(chrome, 1.0), function():Dynamic return cast '');
         }
       }
       else if (__switchValue == 'webkit') {
         {
-          var ver:Dynamic = _Runtime.callProperty(_Runtime.regexp('version\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var ver:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('version\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           if (_Runtime.truthy(ver)) { return cast _Runtime.getIndex(ver, 1.0); }
-          var wk:Dynamic = _Runtime.callProperty(_Runtime.regexp('applewebkit\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
+          var wk:Null<flighthq._internal._Any> = _Runtime.callProperty(_Runtime.regexp('applewebkit\\/([\\d.]+)', 'i'), 'exec', cast ([ua] : Array<Dynamic>));
           return cast _Runtime.select(wk, function():Dynamic return cast _Runtime.getIndex(wk, 1.0), function():Dynamic return cast '');
         }
       }
@@ -111,11 +111,11 @@ class UserAgent {
   }
 
   @:noCompletion
-  public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
-    var proc:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseUserAgentRuntime(win:Null<flighthq._internal._Record<String, flighthq._internal._Any>>):PlatformRuntime {
+    var proc:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(win, null) : Bool)) { return cast 'unknown'; }
-    proc = (cast _Runtime.field(win, 'process') : Null<Dynamic>);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.optionalField(proc, 'versions'), function():Dynamic return cast _Runtime.field((cast _Runtime.field(proc, 'versions') : Dynamic), 'electron')))) { return cast 'electron'; }
+    proc = (cast _Runtime.field(win, 'process') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.optionalField(proc, 'versions'), function():Dynamic return cast _Runtime.field((cast _Runtime.field(proc, 'versions') : flighthq._internal._Record<String, flighthq._internal._Any>), 'electron')))) { return cast 'electron'; }
     if (_Runtime.truthy(_Runtime.field(win, '__TAURI__'))) { return cast 'tauri'; }
     if (_Runtime.truthy(_Runtime.field(win, 'Capacitor'))) { return cast 'capacitor'; }
     return cast 'web';
@@ -124,8 +124,8 @@ class UserAgent {
 
   public static function parseUserAgentVersion(ua:String, name:PlatformName):String {
     if ((cast ((cast _Runtime.strictEquals(name, 'linux') : Bool) || (cast _Runtime.strictEquals(name, 'web') : Bool)) : Bool)) { return cast ''; }
-    if ((cast !_Runtime.strictEquals(_Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)), name) : Bool)) { return cast ''; }
-    return cast _Runtime.callValue(parseUserAgentOsVersion, cast ([ua] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast parseUserAgentName((cast ua : String)) : PlatformName), name) : Bool)) { return cast ''; }
+    return cast (cast parseUserAgentOsVersion((cast ua : String)) : String);
     return cast null;
   }
 }

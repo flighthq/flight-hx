@@ -12,33 +12,37 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderTarget.RenderTargetAxes;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTarget.RenderTargetDepth;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
+import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
 
 class GlRenderTargetPool {
   @:noCompletion
   public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
-    var requested:Dynamic = cast _Runtime.UNDEFINED;
-    var effective:Dynamic = cast _Runtime.UNDEFINED;
-    requested = _Runtime.callValue(resolveRenderTargetDescriptor, cast ([descriptor] : Array<Dynamic>));
-    effective = _Runtime.callValue(resolveGlRenderTargetAxes, cast ([state, requested, formatPolicy] : Array<Dynamic>));
+    var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
+    var effective:Null<RenderTargetAxes> = cast _Runtime.UNDEFINED;
+    requested = (cast resolveRenderTargetDescriptor((cast descriptor : RenderTargetDescriptor)) : ResolvedRenderTargetDescriptor);
+    effective = (cast resolveGlRenderTargetAxes((cast state : GlRenderState), (cast requested : RenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<RenderTargetAxes>);
     if ((cast !_Runtime.truthy(effective) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(pool, 'free'), 'length') : Float)) : Bool)) {
-        var candidate:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(pool, 'free'), i);
-        if ((cast _Runtime.callValue(GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool, cast ([candidate, effective] : Array<Dynamic>)) : Bool)) {
-          _Runtime.splice(_Runtime.field(pool, 'free'), Std.int(i), Std.int(1.0), []);
-          _Runtime.setField(candidate, 'requestedAxes', { width: _Runtime.field(requested, 'width'), height: _Runtime.field(requested, 'height'), format: _Runtime.field(requested, 'format'), colorAttachments: _Runtime.field(requested, 'colorAttachments'), colorFormats: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(requested, 'colorFormats'))]), sampleCount: _Runtime.field(requested, 'sampleCount'), depth: _Runtime.field(requested, 'depth'), colorSpace: _Runtime.field(requested, 'colorSpace') });
-          _Runtime.setField(candidate, 'clearColors', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(requested, 'clearColors'))]));
-          _Runtime.setField(candidate, 'clearDepth', _Runtime.field(requested, 'clearDepth'));
-          _Runtime.callValue(clearGlRenderTarget, cast ([state, candidate] : Array<Dynamic>));
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'length') : Float)) : Bool)) {
+        var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, i);
+        if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool((cast candidate : GlRenderTarget), (cast effective : RenderTargetAxes)) : Bool) : Bool)) {
+          _Runtime.splice((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
+          ((cast candidate : GlRenderTarget).requestedAxes = { width: (cast requested : ResolvedRenderTargetDescriptor).width, height: (cast requested : ResolvedRenderTargetDescriptor).height, format: (cast requested : ResolvedRenderTargetDescriptor).format, colorAttachments: (cast requested : ResolvedRenderTargetDescriptor).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).colorFormats)]), sampleCount: (cast requested : ResolvedRenderTargetDescriptor).sampleCount, depth: (cast requested : ResolvedRenderTargetDescriptor).depth, colorSpace: (cast requested : ResolvedRenderTargetDescriptor).colorSpace });
+          ((cast candidate : GlRenderTarget).clearColors = _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]));
+          ((cast candidate : GlRenderTarget).clearDepth = (cast requested : ResolvedRenderTargetDescriptor).clearDepth);
+          clearGlRenderTarget((cast state : GlRenderState), (cast candidate : GlRenderTarget));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast _Runtime.callValue(createGlRenderTarget, cast ([state, descriptor, formatPolicy] : Array<Dynamic>));
+    return cast (cast createGlRenderTarget((cast state : GlRenderState), (cast descriptor : RenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<GlRenderTarget>);
     return cast null;
   }
 
@@ -50,19 +54,19 @@ class GlRenderTargetPool {
 
   @:noCompletion
   public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
-    for (target in _Runtime.iterable(_Runtime.field(pool, 'free'))) {
-      _Runtime.callValue(destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
+    for (target in _Runtime.iterable((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free)) {
+      destroyGlRenderTarget((cast state : GlRenderState), (cast target : GlRenderTarget));
     }
-    _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
+    _Runtime.setLength((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 0.0);
   }
 
   @:noCompletion
   public static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, target:GlRenderTarget):Void {
-    _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
+    _Runtime.callProperty((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
   }
 
   public static function matchesGlRenderTargetAxes__glRenderTargetPool(target:GlRenderTarget, axes:RenderTargetAxes):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(target, 'width'), _Runtime.field(axes, 'width')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'height'), _Runtime.field(axes, 'height')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'format'), _Runtime.field(axes, 'format')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'colorAttachments'), _Runtime.field(axes, 'colorAttachments')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(target, 'colorFormats'), 'length'), _Runtime.field(_Runtime.field(axes, 'colorFormats'), 'length')) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.field(target, 'colorFormats'), 'every', cast ([function(format:Dynamic, index:Dynamic) return _Runtime.strictEquals(format, flighthq._internal._StaticIndex.readArray(_Runtime.field(axes, 'colorFormats'), index))] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'sampleCount'), _Runtime.field(axes, 'sampleCount')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'depth'), _Runtime.field(axes, 'depth')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), _Runtime.field(axes, 'colorSpace')));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(target, 'width'), _Runtime.field(axes, 'width')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'height'), _Runtime.field(axes, 'height')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'format'), _Runtime.field(axes, 'format')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'colorAttachments'), _Runtime.field(axes, 'colorAttachments')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(target, 'colorFormats'), 'length'), _Runtime.field(_Runtime.field(axes, 'colorFormats'), 'length')) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.field(target, 'colorFormats'), 'every', cast ([function(format:RenderTargetFormat, index:Float, __unused0:Array<RenderTargetFormat>):Bool return _Runtime.strictEquals(format, flighthq._internal._StaticIndex.readArray(_Runtime.field(axes, 'colorFormats'), index))] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'sampleCount'), _Runtime.field(axes, 'sampleCount')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(target, 'depth'), _Runtime.field(axes, 'depth')) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), _Runtime.field(axes, 'colorSpace')));
     return cast null;
   }
 }

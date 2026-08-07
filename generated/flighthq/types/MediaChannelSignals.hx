@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef MediaReadyState = String;
 
-typedef MediaChannelSignals = { var onBuffering:Signal<Dynamic>; var onError:Signal<Dynamic>; var onReady:Signal<Dynamic>; var onSeeked:Signal<Dynamic>; };
+typedef MediaChannelSignals = { var onBuffering:Signal<Void->Void>; var onError:Signal<String->Void>; var onReady:Signal<Void->Void>; var onSeeked:Signal<Void->Void>; };

@@ -13,27 +13,27 @@ import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
 
 class _Scene3DLightBlockValues {
-  public static final MAX_FORWARD_LIGHTS:Dynamic = 4.0;
+  public static final MAX_FORWARD_LIGHTS:Float = 4.0;
 
-  public static final SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET:Dynamic = 0.0;
+  public static final SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET:Float = 0.0;
 
-  public static final SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET:Dynamic = 4.0;
+  public static final SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET:Float = 4.0;
 
-  public static final SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET:Dynamic = 8.0;
+  public static final SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET:Float = 8.0;
 
-  public static final SCENE_LIGHT_HEAD_FLOATS:Dynamic = 12.0;
+  public static final SCENE_LIGHT_HEAD_FLOATS:Float = 12.0;
 
-  public static final SCENE_LIGHT_POINT_OFFSET:Dynamic = SCENE_LIGHT_HEAD_FLOATS;
+  public static final SCENE_LIGHT_POINT_OFFSET:Float = SCENE_LIGHT_HEAD_FLOATS;
 
-  public static final SCENE_LIGHT_POINT_STRIDE:Dynamic = 8.0;
+  public static final SCENE_LIGHT_POINT_STRIDE:Float = 8.0;
 
-  public static final SCENE_LIGHT_SPOT_OFFSET:Dynamic = (SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS));
+  public static final SCENE_LIGHT_SPOT_OFFSET:Float = (SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS));
 
-  public static final SCENE_LIGHT_SPOT_STRIDE:Dynamic = 16.0;
+  public static final SCENE_LIGHT_SPOT_STRIDE:Float = 16.0;
 
-  public static final SCENE_LIGHT_HEMISPHERE_OFFSET:Dynamic = (SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS));
+  public static final SCENE_LIGHT_HEMISPHERE_OFFSET:Float = (SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS));
 
-  public static final SCENE_LIGHT_HEMISPHERE_STRIDE:Dynamic = 12.0;
+  public static final SCENE_LIGHT_HEMISPHERE_STRIDE:Float = 12.0;
 
-  public static final SCENE_LIGHT_BLOCK_FLOATS:Dynamic = (SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS));
+  public static final SCENE_LIGHT_BLOCK_FLOATS:Float = (SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS));
 }

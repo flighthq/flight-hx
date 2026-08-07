@@ -6,21 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.mesh.UpdateMeshMorph.updateMeshMorph;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeRuntime;
 
 class PrepareScene3DMorph {
   public static function prepareScene3DMorph(scene:NodeAny):Void {
-    var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
+    var mesh:Mesh = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
-    mesh = (cast (cast scene : Dynamic) : Mesh);
-    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([scene] : Array<Dynamic>)), 'children');
+    mesh = (cast (cast scene : flighthq._internal._Any) : Mesh);
+    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { updateMeshMorph((cast mesh : Mesh)); }
+    children = _Runtime.field((cast getNodeRuntime(scene) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(prepareScene3DMorph, cast ([flighthq._internal._StaticIndex.readArray(children, i)] : Array<Dynamic>));
+          prepareScene3DMorph((cast flighthq._internal._StaticIndex.readArray(children, i) : NodeAny));
           i++;
         }
       }

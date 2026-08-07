@@ -16,13 +16,13 @@ typedef TexturePackerHashFrame = { var frame:TexturePackerRect; @:optional var p
 
 typedef TexturePackerArrayFrame = { var frame:TexturePackerRect; @:optional var pivot:TexturePackerPivot; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; };
 
-typedef TexturePackerMeta = { var app:String; var format:String; @:optional var frameTags:Array<TexturePackerFrameTag>; var image:String; var scale:Dynamic; var size:TexturePackerSize; var version:String; };
+typedef TexturePackerMeta = { var app:String; var format:String; @:optional var frameTags:Array<TexturePackerFrameTag>; var image:String; var scale:flighthq._internal._Union2<Float, String>; var size:TexturePackerSize; var version:String; };
 
-typedef TexturePackerHashDocument = { var frames:Dynamic; var meta:TexturePackerMeta; };
+typedef TexturePackerHashDocument = { var frames:flighthq._internal._Record<String, TexturePackerHashFrame>; var meta:TexturePackerMeta; };
 
 typedef TexturePackerArrayDocument = { var frames:Array<TexturePackerArrayFrame>; var meta:TexturePackerMeta; };
 
-typedef TexturePackerDocument = Dynamic;
+typedef TexturePackerDocument = flighthq._internal._Union2<TexturePackerArrayDocument, TexturePackerHashDocument>;
 
 typedef TexturePackerParsed = { var data:SpritesheetData; var document:TexturePackerDocument; };
 

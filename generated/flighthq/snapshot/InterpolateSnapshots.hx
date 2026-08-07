@@ -9,39 +9,39 @@ import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
 
 class InterpolateSnapshots {
-  public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
-    var paths:Dynamic = cast _Runtime.UNDEFINED;
+  public static function interpolateSnapshots<T>(a:Snapshot<T>, b:Snapshot<T>, t:Float, out:T, ?schema:SnapshotSchema):Void {
+    var paths:Null<flighthq._internal._Set<String>> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(out, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(out), 'object') : Bool)) : Bool)) {
       return;
     }
     paths = ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [schema]) : Dynamic));
-    _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([(cast out : Dynamic), (cast a : Dynamic), (cast b : Dynamic), _Runtime.callValue(clamp, cast ([t, 0.0, 1.0] : Array<Dynamic>)), paths, ''] : Array<Dynamic>));
+    InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast (cast out : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast a : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast b : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast clamp((cast t : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Float), (cast paths : Null<flighthq._internal._Set<String>>), (cast '' : String));
   }
 
-  public static function interpolateSnapshotsInto__interpolateSnapshots(out:Dynamic, a:Dynamic, b:Dynamic, t:Float, paths:Null<Dynamic>, prefix:String):Void {
-    var outRecord:Dynamic = cast _Runtime.UNDEFINED;
-    var aRecord:Dynamic = cast _Runtime.UNDEFINED;
-    var bRecord:Dynamic = cast _Runtime.UNDEFINED;
-    outRecord = (cast out : Dynamic);
-    aRecord = (cast a : Dynamic);
-    bRecord = (cast b : Dynamic);
+  public static function interpolateSnapshotsInto__interpolateSnapshots(out:flighthq._internal._Object, a:flighthq._internal._Object, b:flighthq._internal._Object, t:Float, paths:Null<flighthq._internal._Set<String>>, prefix:String):Void {
+    var outRecord:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var aRecord:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var bRecord:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    outRecord = (cast out : flighthq._internal._Record<String, flighthq._internal._Any>);
+    aRecord = (cast a : flighthq._internal._Record<String, flighthq._internal._Any>);
+    bRecord = (cast b : flighthq._internal._Record<String, flighthq._internal._Any>);
     if ((cast _Runtime.isArray(b) : Bool)) {
-      _Runtime.setLength((cast out : Array<Dynamic>), _Runtime.field((cast b : Array<Dynamic>), 'length'));
+      _Runtime.setLength((cast out : Array<flighthq._internal._Any>), _Runtime.field((cast b : Array<flighthq._internal._Any>), 'length'));
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRecord))) {
-      var aValue:Dynamic = _Runtime.getIndex(aRecord, key);
-      var bValue:Dynamic = _Runtime.getIndex(bRecord, key);
+      var aValue:flighthq._internal._Any = _Runtime.getIndex(aRecord, key);
+      var bValue:flighthq._internal._Any = _Runtime.getIndex(bRecord, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'number') : Bool)) : Bool)) {
-        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flighthq._internal._Set).has(_Runtime.callValue(InterpolateSnapshots.snapshotPath__interpolateSnapshots, cast ([prefix, key] : Array<Dynamic>)))) : Bool)) : Bool) ? (cast _Runtime.callValue(lerp, cast ([aValue, bValue, t] : Array<Dynamic>)) : Dynamic) : (cast bValue : Dynamic)));
+        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flighthq._internal._Set<String>).has((cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String))) : Bool)) : Bool) ? (cast lerp((cast aValue : Float), (cast bValue : Float), (cast t : Float)) : Dynamic) : (cast bValue : Dynamic)));
         continue;
       }
       if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(aValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(bValue, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(aValue), _Runtime.isArray(bValue)) : Bool)) : Bool)) {
-        var container:Dynamic = _Runtime.callValue(InterpolateSnapshots.ensureSnapshotContainer__interpolateSnapshots, cast ([_Runtime.getIndex(outRecord, key), _Runtime.isArray(bValue)] : Array<Dynamic>));
+        var container:flighthq._internal._Object = (cast InterpolateSnapshots.ensureSnapshotContainer__interpolateSnapshots((cast _Runtime.getIndex(outRecord, key) : flighthq._internal._Any), (cast _Runtime.isArray(bValue) : Bool)) : flighthq._internal._Object);
         _Runtime.setIndex(outRecord, key, container);
-        _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([container, aValue, bValue, t, paths, ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.callValue(InterpolateSnapshots.snapshotPath__interpolateSnapshots, cast ([prefix, key] : Array<Dynamic>)) : Dynamic))] : Array<Dynamic>));
+        InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast container : flighthq._internal._Object), (cast aValue : flighthq._internal._Object), (cast bValue : flighthq._internal._Object), (cast t : Float), (cast paths : Null<flighthq._internal._Set<String>>), (cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast (cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String) : Dynamic)) : String));
         continue;
       }
-      _Runtime.setIndex(outRecord, key, _Runtime.callValue(InterpolateSnapshots.cloneSnapshotValue__interpolateSnapshots, cast ([bValue] : Array<Dynamic>)));
+      _Runtime.setIndex(outRecord, key, InterpolateSnapshots.cloneSnapshotValue__interpolateSnapshots((cast bValue : flighthq._internal._Any)));
     }
   }
 
@@ -50,15 +50,15 @@ class InterpolateSnapshots {
     return cast null;
   }
 
-  public static function ensureSnapshotContainer__interpolateSnapshots(existing:Dynamic, isArray:Bool):Dynamic {
+  public static function ensureSnapshotContainer__interpolateSnapshots(existing:flighthq._internal._Any, isArray:Bool):flighthq._internal._Object {
     if ((cast ((cast ((cast !_Runtime.strictEquals(existing, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(existing), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(existing), isArray) : Bool)) : Bool)) {
-      return cast (cast existing : Dynamic);
+      return cast (cast existing : flighthq._internal._Object);
     }
     return cast ((cast isArray : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast {  } : Dynamic));
     return cast null;
   }
 
-  public static function cloneSnapshotValue__interpolateSnapshots(value:Dynamic):Dynamic {
+  public static function cloneSnapshotValue__interpolateSnapshots(value:flighthq._internal._Any):flighthq._internal._Any {
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
       return cast value;
     }

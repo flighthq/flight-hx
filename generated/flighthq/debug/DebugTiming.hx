@@ -12,44 +12,44 @@ import flighthq.types.Log.LogTimer;
 class DebugTiming {
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     if (channel == null) channel = cast (null : Dynamic);
-    return cast ((cast _Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>)) : Bool) ? (cast _Runtime.callValue(startLogTimer, cast ([name, channel] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast isDebugEnabled() : Bool) : Bool) ? (cast (cast startLogTimer((cast name : String), (cast channel : Null<String>)) : Null<LogTimer>) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
-    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callValue(endLogTimer, cast ([timer] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast endLogTimer((cast timer : LogTimer)) : Float) : Dynamic));
     return cast null;
   }
 
   public static function markDebugFrame(?label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
-    if ((cast !(cast _Runtime.callValue(isDebugEnabled, cast ([] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    _Runtime.callValue(logDebug, cast ([{ frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) }, channel] : Array<Dynamic>));
+    if ((cast !(cast (cast isDebugEnabled() : Bool) : Bool) : Bool)) { return; }
+    logDebug({ frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) }, (cast channel : Null<String>));
   }
 
-  public static function measureDebugSpan<T>(name:String, fn:Dynamic, ?channel:Null<String>):Dynamic {
+  public static function measureDebugSpan<T>(name:String, fn:Void->T, ?channel:Null<String>):T {
     if (channel == null) channel = cast (null : Dynamic);
-    var timer:Dynamic = cast _Runtime.UNDEFINED;
-    timer = _Runtime.callValue(beginDebugSpan, cast ([name, channel] : Array<Dynamic>));
+    var timer:Null<LogTimer> = cast _Runtime.UNDEFINED;
+    timer = (cast beginDebugSpan((cast name : String), (cast channel : Null<String>)) : Null<LogTimer>);
     try {
       try {
-        var __returnValue0:Dynamic = _Runtime.callValue(fn, cast ([] : Array<Dynamic>));
+        var __returnValue0:Dynamic = (cast fn() : T);
         {
-          _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));
+          (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
         }
         return cast __returnValue0;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError1:Dynamic) {
       {
-        _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));
+        (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
       }
       _Runtime.throwValue(__finallyError1);
     }
     {
-      _Runtime.callValue(endDebugSpan, cast ([timer] : Array<Dynamic>));
+      (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
     }
     return cast null;
   }
 
-  public static var _debugFrameNumber__debugTiming:Dynamic = 0.0;
+  public static var _debugFrameNumber__debugTiming:Float = 0.0;
 }

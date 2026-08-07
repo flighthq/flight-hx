@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.SharpenEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,24 +17,24 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuSharpenEffect {
   @:noCompletion
   public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
-    var amount:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var amount:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.sharpen', WgpuSharpenEffect.SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.sharpen' : String), (cast WgpuSharpenEffect.SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, amount);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuSharpenEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applySharpenEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SharpenEffect)] : Array<Dynamic>));
+  public static final defaultWgpuSharpenEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applySharpenEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : SharpenEffect) : SharpenEffect));
   };
 
   public static function registerWgpuSharpenEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SharpenEffect', defaultWgpuSharpenEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'SharpenEffect' : String), (cast defaultWgpuSharpenEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect:Dynamic = '\nstruct Uniforms {\n  u_amount : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let c = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let n = textureSampleLevel(tex, smp, uv + vec2f(0.0, -texel.y), 0.0).rgb;\n  let s = textureSampleLevel(tex, smp, uv + vec2f(0.0, texel.y), 0.0).rgb;\n  let e = textureSampleLevel(tex, smp, uv + vec2f(texel.x, 0.0), 0.0).rgb;\n  let w = textureSampleLevel(tex, smp, uv + vec2f(-texel.x, 0.0), 0.0).rgb;\n  let high = c * 4.0 - n - s - e - w;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(clamp(c + high * uni.u_amount, vec3f(0.0), vec3f(1.0)), a);\n}';
+  public static final SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect:String = '\nstruct Uniforms {\n  u_amount : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let c = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let n = textureSampleLevel(tex, smp, uv + vec2f(0.0, -texel.y), 0.0).rgb;\n  let s = textureSampleLevel(tex, smp, uv + vec2f(0.0, texel.y), 0.0).rgb;\n  let e = textureSampleLevel(tex, smp, uv + vec2f(texel.x, 0.0), 0.0).rgb;\n  let w = textureSampleLevel(tex, smp, uv + vec2f(-texel.x, 0.0), 0.0).rgb;\n  let high = c * 4.0 - n - s - e - w;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(clamp(c + high * uni.u_amount, vec3f(0.0), vec3f(1.0)), a);\n}';
 }

@@ -6,18 +6,27 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.WrappedDiffusePbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types.WrappedDiffusePbrExtension;
 import flighthq.types._internal._WrappedDiffusePbrExtensionValues.WrappedDiffusePbrExtensionKind;
 
 class WrappedDiffusePbrExtension {
   public static function createWrappedDiffusePbrExtension(?opts:Dynamic):flighthq.types.WrappedDiffusePbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ kind: WrappedDiffusePbrExtensionKind, thickness: _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 0.0), thicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMap'), function():Dynamic return cast null), thicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMapUvSet'), function():Dynamic return cast 0.0), wrappedDiffuseColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseColor'), function():Dynamic return cast 4294967295.0), wrappedDiffuseMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseMap'), function():Dynamic return cast null), wrappedDiffuseMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseMapUvSet'), function():Dynamic return cast 0.0), wrappedDiffuseStrength: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseStrength'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity({ kind: WrappedDiffusePbrExtensionKind, thickness: _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 0.0), thicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMap'), function():Dynamic return cast null), thicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMapUvSet'), function():Dynamic return cast 0.0), wrappedDiffuseColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseColor'), function():Dynamic return cast 4294967295.0), wrappedDiffuseMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseMap'), function():Dynamic return cast null), wrappedDiffuseMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseMapUvSet'), function():Dynamic return cast 0.0), wrappedDiffuseStrength: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrappedDiffuseStrength'), function():Dynamic return cast 0.0) }) : flighthq.types.WrappedDiffusePbrExtension);
     return cast null;
   }
 
   public static function isValidWrappedDiffusePbrExtension(value:flighthq.types.WrappedDiffusePbrExtension):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'wrappedDiffuseStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'thicknessMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'wrappedDiffuseMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'wrappedDiffuseStrength') : Float)) : Bool) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'thicknessMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'wrappedDiffuseMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

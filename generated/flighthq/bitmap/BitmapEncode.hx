@@ -8,13 +8,13 @@ import flighthq.types.ImageFormat;
 
 class BitmapEncode {
   public static function encodeBitmap(source:Bitmap, format:ImageFormat = 'png', quality:Float = 0.9):flighthq._internal._UInt8Array {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var domImageData:Dynamic = cast _Runtime.UNDEFINED;
-    var mimeType:Dynamic = cast _Runtime.UNDEFINED;
-    var dataUrl:Dynamic = cast _Runtime.UNDEFINED;
-    var base64:Dynamic = cast _Runtime.UNDEFINED;
-    var binary:Dynamic = cast _Runtime.UNDEFINED;
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var domImageData:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
+    var mimeType:String = cast _Runtime.UNDEFINED;
+    var dataUrl:String = cast _Runtime.UNDEFINED;
+    var base64:String = cast _Runtime.UNDEFINED;
+    var binary:String = cast _Runtime.UNDEFINED;
+    var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', source.width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', source.height);
@@ -27,7 +27,7 @@ class BitmapEncode {
     binary = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([base64] : Array<Dynamic>));
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeUint8Array(bytes, i, _Runtime.charCodeAt(binary, i));
         i++;

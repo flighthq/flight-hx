@@ -7,55 +7,58 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.FrameScript;
 import flighthq.types.Node2D;
+import flighthq.types.Signal;
 import flighthq.types.Timeline;
 import flighthq.types.TimelineCue;
+import flighthq.types.TimelineCue.TimelineCueRegistry;
 import flighthq.types.TimelineFrameEvent;
 import flighthq.types.TimelineLabel;
+import flighthq.types.TimelinePlayMode;
 import flighthq.types.TimelineSignals;
 import flighthq.types.TimelineSource;
 
 class Timeline {
-  public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic, script:FrameScript):Void {
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
-    resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    ((cast _Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(resolved, script));
+  public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>, script:FrameScript):Void {
+    var resolved:Float = cast _Runtime.UNDEFINED;
+    resolved = (cast Timeline.resolveFrame__timeline((cast timeline : flighthq.types.Timeline), (cast frame : flighthq._internal._Union2<String, Float>)) : Float);
+    ((cast ((cast timeline : flighthq.types.Timeline).frameScripts ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(resolved, script));
   }
 
   public static function advanceFrame__timeline(timeline:flighthq.types.Timeline, deltaTime:Float):Float {
-    var frameRate:Dynamic = cast _Runtime.UNDEFINED;
-    var totalFrames:Dynamic = cast _Runtime.UNDEFINED;
-    var next:Dynamic = cast _Runtime.UNDEFINED;
-    frameRate = _Runtime.callValue(Timeline.getTimelineFrameRate__timeline, cast ([timeline] : Array<Dynamic>));
-    totalFrames = _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>));
+    var frameRate:Null<Float> = cast _Runtime.UNDEFINED;
+    var totalFrames:Float = cast _Runtime.UNDEFINED;
+    var next:Float = cast _Runtime.UNDEFINED;
+    frameRate = (cast Timeline.getTimelineFrameRate__timeline((cast timeline : flighthq.types.Timeline)) : Null<Float>);
+    totalFrames = (cast Timeline.getTimelineTotalFrames__timeline((cast timeline : flighthq.types.Timeline)) : Float);
     if ((cast !_Runtime.strictEquals(frameRate, null) : Bool)) {
-      var frameTime:Dynamic = (1000.0 / frameRate);
-      _Runtime.setField(timeline, 'timeElapsed', _Runtime.addNumbers(_Runtime.field(timeline, 'timeElapsed'), deltaTime));
-      var next:Dynamic = _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), HxMath.floor(_Runtime.divideNumbers(_Runtime.field(timeline, 'timeElapsed'), frameTime)));
-      _Runtime.setField(timeline, 'timeElapsed', _Runtime.fmod(_Runtime.field(timeline, 'timeElapsed'), frameTime));
+      var frameTime:Float = (1000.0 / frameRate);
+      ((cast timeline : flighthq.types.Timeline).timeElapsed += deltaTime);
+      var next:Float = _Runtime.addNumbers((cast timeline : flighthq.types.Timeline).currentFrame, HxMath.floor(((cast timeline : flighthq.types.Timeline).timeElapsed / frameTime)));
+      ((cast timeline : flighthq.types.Timeline).timeElapsed = _Runtime.fmod((cast timeline : flighthq.types.Timeline).timeElapsed, frameTime));
       if ((cast ((cast next : Float) > (cast totalFrames : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once') : Bool)) {
-          _Runtime.setField(timeline, 'isPlaying', false);
-          var completed:Dynamic = totalFrames;
-          var signals:Dynamic = _Runtime.field(timeline, 'signals');
-          if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onComplete')]]), 1); }
+        if ((cast _Runtime.strictEquals((cast timeline : flighthq.types.Timeline).playMode, 'once') : Bool)) {
+          ((cast timeline : flighthq.types.Timeline).isPlaying = false);
+          var completed:Float = totalFrames;
+          var signals:Null<TimelineSignals> = (cast timeline : flighthq.types.Timeline).signals;
+          if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onComplete]]), 1); }
           return cast completed;
         }
         (next = cast ((_Runtime.fmod((next - 1.0), totalFrames) + 1.0) : Dynamic));
-        var signals:Dynamic = _Runtime.field(timeline, 'signals');
-        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onLoop')]]), 1); }
+        var signals:Null<TimelineSignals> = (cast timeline : flighthq.types.Timeline).signals;
+        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onLoop]]), 1); }
       }
       return cast next;
     }
-    next = _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0);
+    next = ((cast timeline : flighthq.types.Timeline).currentFrame + 1.0);
     if ((cast ((cast next : Float) > (cast totalFrames : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once') : Bool)) {
-        _Runtime.setField(timeline, 'isPlaying', false);
-        var signals:Dynamic = _Runtime.field(timeline, 'signals');
-        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onComplete')]]), 1); }
+      if ((cast _Runtime.strictEquals((cast timeline : flighthq.types.Timeline).playMode, 'once') : Bool)) {
+        ((cast timeline : flighthq.types.Timeline).isPlaying = false);
+        var signals:Null<TimelineSignals> = (cast timeline : flighthq.types.Timeline).signals;
+        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onComplete]]), 1); }
         return cast totalFrames;
       }
-      var signals:Dynamic = _Runtime.field(timeline, 'signals');
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onLoop')]]), 1); }
+      var signals:Null<TimelineSignals> = (cast timeline : flighthq.types.Timeline).signals;
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onLoop]]), 1); }
       return cast 1.0;
     }
     return cast next;
@@ -63,7 +66,7 @@ class Timeline {
   }
 
   public static function clearTimelineFrameScripts(timeline:flighthq.types.Timeline):Void {
-    _Runtime.setField(timeline, 'frameScripts', null);
+    ((cast timeline : flighthq.types.Timeline).frameScripts = null);
   }
 
   public static function createTimeline(?obj:Dynamic):flighthq.types.Timeline {
@@ -72,17 +75,17 @@ class Timeline {
   }
 
   public static function createTimelineSignals__timeline():TimelineSignals {
-    return cast { onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onEnterFrame: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onExitFrame: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFrameConstructed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLoop: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onComplete: (cast createSignal() : Signal<Void->Void>), onEnterFrame: (cast createSignal() : Signal<TimelineFrameEvent->Void>), onExitFrame: (cast createSignal() : Signal<TimelineFrameEvent->Void>), onFrameConstructed: (cast createSignal() : Signal<TimelineFrameEvent->Void>), onLoop: (cast createSignal() : Signal<Void->Void>) };
     return cast null;
   }
 
-  public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var cues:Array<TimelineCue>; @:optional var constructFrame:Dynamic; }):TimelineSource {
-    return cast { totalFrames: _Runtime.coalesce(_Runtime.field(obj, 'totalFrames'), function():Dynamic return cast 1.0), frameRate: _Runtime.coalesce(_Runtime.field(obj, 'frameRate'), function():Dynamic return cast null), labels: _Runtime.coalesce(_Runtime.field(obj, 'labels'), function():Dynamic return cast Timeline.EMPTY_LABELS__timeline), cues: _Runtime.coalesce(_Runtime.field(obj, 'cues'), function():Dynamic return cast Timeline.EMPTY_CUES__timeline), constructFrame: _Runtime.coalesce(_Runtime.field(obj, 'constructFrame'), function():Dynamic return cast Timeline.noopConstructFrame__timeline) };
+  public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var cues:Array<TimelineCue>; @:optional var constructFrame:Node2D->Float->Void; }):TimelineSource {
+    return cast { totalFrames: _Runtime.coalesce((cast obj : { @:optional var totalFrames:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var labels:Null<Array<TimelineLabel>>; @:optional var cues:Null<Array<TimelineCue>>; @:optional var constructFrame:Null<Node2D->Float->Void>; }).totalFrames, function():Dynamic return cast 1.0), frameRate: _Runtime.coalesce((cast obj : { @:optional var totalFrames:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var labels:Null<Array<TimelineLabel>>; @:optional var cues:Null<Array<TimelineCue>>; @:optional var constructFrame:Null<Node2D->Float->Void>; }).frameRate, function():Dynamic return cast null), labels: _Runtime.coalesce((cast obj : { @:optional var totalFrames:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var labels:Null<Array<TimelineLabel>>; @:optional var cues:Null<Array<TimelineCue>>; @:optional var constructFrame:Null<Node2D->Float->Void>; }).labels, function():Dynamic return cast Timeline.EMPTY_LABELS__timeline), cues: _Runtime.coalesce((cast obj : { @:optional var totalFrames:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var labels:Null<Array<TimelineLabel>>; @:optional var cues:Null<Array<TimelineCue>>; @:optional var constructFrame:Null<Node2D->Float->Void>; }).cues, function():Dynamic return cast Timeline.EMPTY_CUES__timeline), constructFrame: _Runtime.coalesce((cast obj : { @:optional var totalFrames:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var labels:Null<Array<TimelineLabel>>; @:optional var cues:Null<Array<TimelineCue>>; @:optional var constructFrame:Null<Node2D->Float->Void>; }).constructFrame, function():Dynamic return cast Timeline.noopConstructFrame__timeline) };
     return cast null;
   }
 
   public static function disposeTimelineSignals(timeline:flighthq.types.Timeline):Void {
-    _Runtime.setField(timeline, 'signals', null);
+    ((cast timeline : flighthq.types.Timeline).signals = null);
   }
 
   public static final EMPTY_CUES__timeline:Array<TimelineCue> = cast ([] : Array<Dynamic>);
@@ -92,50 +95,50 @@ class Timeline {
   public static final EMPTY_LABELS__timeline:Array<TimelineLabel> = cast ([] : Array<Dynamic>);
 
   public static function enableTimelineSignals(timeline:flighthq.types.Timeline):TimelineSignals {
-    return cast _Runtime.setField(timeline, 'signals', (_Runtime.field(timeline, 'signals') ?? _Runtime.callValue(Timeline.createTimelineSignals__timeline, cast ([] : Array<Dynamic>))));
+    return cast ((cast timeline : flighthq.types.Timeline).signals ??= (cast Timeline.createTimelineSignals__timeline() : Null<TimelineSignals>));
     return cast null;
   }
 
   public static function findTimelineLabel(timeline:flighthq.types.Timeline, name:String):Null<TimelineLabel> {
-    return cast _Runtime.coalesce(_Runtime.find(_Runtime.callValue(getTimelineLabels, cast ([timeline] : Array<Dynamic>)), function(l:Dynamic) return _Runtime.strictEquals(_Runtime.field(l, 'name'), name)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find((cast getTimelineLabels((cast timeline : flighthq.types.Timeline)) : Array<TimelineLabel>), function(l:TimelineLabel, __unused0:Float, __unused1:Array<TimelineLabel>):Bool return _Runtime.strictEquals((cast l : TimelineLabel).name, name)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function fireConstructFrame__timeline(timeline:flighthq.types.Timeline):Bool {
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
-    var current:Dynamic = cast _Runtime.UNDEFINED;
-    var signals:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
+    var previous:Float = cast _Runtime.UNDEFINED;
+    var current:Float = cast _Runtime.UNDEFINED;
+    var signals:Null<TimelineSignals> = cast _Runtime.UNDEFINED;
+    var target:Null<Node2D> = cast _Runtime.UNDEFINED;
     var frameEvent:TimelineFrameEvent = cast _Runtime.UNDEFINED;
-    previous = _Runtime.field(timeline, 'lastFrameUpdate');
-    current = _Runtime.field(timeline, 'currentFrame');
+    previous = (cast timeline : flighthq.types.Timeline).lastFrameUpdate;
+    current = (cast timeline : flighthq.types.Timeline).currentFrame;
     if ((cast _Runtime.strictEquals(current, previous) : Bool)) { return cast false; }
-    signals = _Runtime.field(timeline, 'signals');
-    target = _Runtime.field(timeline, 'target');
+    signals = (cast timeline : flighthq.types.Timeline).signals;
+    target = (cast timeline : flighthq.types.Timeline).target;
     frameEvent = { frame: current, previousFrame: previous };
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onExitFrame')], [frameEvent]]), 1); }
-    _Runtime.setField(timeline, 'lastFrameUpdate', current);
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onEnterFrame')], [frameEvent]]), 1); }
-    if ((cast !_Runtime.strictEquals(target, null) : Bool)) { _Runtime.callOptionalProperty(_Runtime.field(timeline, 'source'), 'constructFrame', cast ([target, current] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null) : Bool)) {
-      var script:Dynamic = ((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).get(current));
-      if ((cast ((cast !_Runtime.strictEquals(script, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(target, null) : Bool)) : Bool)) { _Runtime.callValue(script, cast ([target, current] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onExitFrame], [frameEvent]]), 1); }
+    ((cast timeline : flighthq.types.Timeline).lastFrameUpdate = current);
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onEnterFrame], [frameEvent]]), 1); }
+    if ((cast !_Runtime.strictEquals(target, null) : Bool)) { _Runtime.callOptionalProperty((cast timeline : flighthq.types.Timeline).source, 'constructFrame', cast ([target, current] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals((cast timeline : flighthq.types.Timeline).frameScripts, null) : Bool)) {
+      var script:Null<FrameScript> = ((cast (cast timeline : flighthq.types.Timeline).frameScripts : flighthq._internal._Map<Float, FrameScript>).get(current));
+      if ((cast ((cast !_Runtime.strictEquals(script, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(target, null) : Bool)) : Bool)) { script((cast target : Node2D), (cast current : Float)); }
     }
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onFrameConstructed')], [frameEvent]]), 1); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onFrameConstructed], [frameEvent]]), 1); }
     return cast true;
     return cast null;
   }
 
   public static function getTimelineCurrentLabel(timeline:flighthq.types.Timeline):Null<TimelineLabel> {
-    var labels:Dynamic = cast _Runtime.UNDEFINED;
-    var frame:Dynamic = cast _Runtime.UNDEFINED;
+    var labels:Array<TimelineLabel> = cast _Runtime.UNDEFINED;
+    var frame:Float = cast _Runtime.UNDEFINED;
     var result:Null<TimelineLabel> = cast _Runtime.UNDEFINED;
-    labels = _Runtime.callValue(getTimelineLabels, cast ([timeline] : Array<Dynamic>));
+    labels = (cast getTimelineLabels((cast timeline : flighthq.types.Timeline)) : Array<TimelineLabel>);
     frame = _Runtime.field(timeline, 'currentFrame');
     result = null;
     for (label in _Runtime.iterable(labels)) {
-      if ((cast ((cast _Runtime.field(label, 'frame') : Float) <= (cast frame : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.strictEquals(result, null) : Bool) || (cast ((cast _Runtime.field(label, 'frame') : Float) >= (cast _Runtime.field(result, 'frame') : Float)) : Bool)) : Bool)) { (result = cast (label : Dynamic)); }
+      if ((cast ((cast (cast label : TimelineLabel).frame : Float) <= (cast frame : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(result, null) : Bool) || (cast ((cast (cast label : TimelineLabel).frame : Float) >= (cast (cast result : TimelineLabel).frame : Float)) : Bool)) : Bool)) { (result = cast (label : Dynamic)); }
       }
     }
     return cast result;
@@ -147,16 +150,16 @@ class Timeline {
     return cast null;
   }
 
-  public static function getTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic):Null<FrameScript> {
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getTimelineFrameScript(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>):Null<FrameScript> {
+    var resolved:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null) : Bool)) { return cast null; }
-    resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    return cast _Runtime.coalesce(((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).get(resolved)), function():Dynamic return cast null);
+    resolved = (cast Timeline.resolveFrame__timeline((cast timeline : flighthq.types.Timeline), (cast frame : flighthq._internal._Union2<String, Float>)) : Float);
+    return cast _Runtime.coalesce(((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map<Float, FrameScript>).get(resolved)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getTimelineFrameScriptFrames(timeline:flighthq.types.Timeline):Array<Float> {
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null) : Bool) ? (cast Timeline.EMPTY_FRAMES__timeline : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).keys()))]) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null) : Bool) ? (cast Timeline.EMPTY_FRAMES__timeline : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map<Float, FrameScript>).keys()))]) : Dynamic));
     return cast null;
   }
 
@@ -170,72 +173,72 @@ class Timeline {
     return cast null;
   }
 
-  public static function gotoAndPlayTimeline(timeline:flighthq.types.Timeline, frame:Dynamic):Void {
-    _Runtime.callValue(playTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function gotoAndPlayTimeline(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>):Void {
+    playTimeline((cast timeline : flighthq.types.Timeline));
+    Timeline.seekTimeline__timeline((cast timeline : flighthq.types.Timeline), (cast (cast Timeline.resolveFrame__timeline((cast timeline : flighthq.types.Timeline), (cast frame : flighthq._internal._Union2<String, Float>)) : Float) : Float));
   }
 
-  public static function gotoAndStopTimeline(timeline:flighthq.types.Timeline, frame:Dynamic):Void {
-    _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function gotoAndStopTimeline(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>):Void {
+    stopTimeline((cast timeline : flighthq.types.Timeline));
+    Timeline.seekTimeline__timeline((cast timeline : flighthq.types.Timeline), (cast (cast Timeline.resolveFrame__timeline((cast timeline : flighthq.types.Timeline), (cast frame : flighthq._internal._Union2<String, Float>)) : Float) : Float));
   }
 
   public static function nextFrameTimeline(timeline:flighthq.types.Timeline):Void {
-    _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.addNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0)] : Array<Dynamic>));
+    stopTimeline((cast timeline : flighthq.types.Timeline));
+    Timeline.seekTimeline__timeline((cast timeline : flighthq.types.Timeline), (cast ((cast timeline : flighthq.types.Timeline).currentFrame + 1.0) : Float));
   }
 
   public static function noopConstructFrame__timeline():Void {
   }
 
   public static function playTimeline(timeline:flighthq.types.Timeline):Void {
-    if ((cast ((cast _Runtime.field(timeline, 'isPlaying') : Bool) || (cast ((cast _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>)) : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
-    _Runtime.setField(timeline, 'isPlaying', true);
-    _Runtime.setField(timeline, 'timeElapsed', 0.0);
+    if ((cast ((cast (cast timeline : flighthq.types.Timeline).isPlaying : Bool) || (cast ((cast (cast Timeline.getTimelineTotalFrames__timeline((cast timeline : flighthq.types.Timeline)) : Float) : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return; }
+    ((cast timeline : flighthq.types.Timeline).isPlaying = true);
+    ((cast timeline : flighthq.types.Timeline).timeElapsed = 0.0);
   }
 
   public static function prevFrameTimeline(timeline:flighthq.types.Timeline):Void {
-    _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
-    _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.subtractNumbers(_Runtime.field(timeline, 'currentFrame'), 1.0)] : Array<Dynamic>));
+    stopTimeline((cast timeline : flighthq.types.Timeline));
+    Timeline.seekTimeline__timeline((cast timeline : flighthq.types.Timeline), (cast ((cast timeline : flighthq.types.Timeline).currentFrame - 1.0) : Float));
   }
 
-  public static function removeTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic):Void {
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null) : Bool)) { return; }
-    resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    ((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).delete_(resolved));
-    if ((cast _Runtime.strictEquals((cast _Runtime.field(timeline, 'frameScripts') : flighthq._internal._Map).size, 0.0) : Bool)) { _Runtime.setField(timeline, 'frameScripts', null); }
+  public static function removeTimelineFrameScript(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>):Void {
+    var resolved:Float = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals((cast timeline : flighthq.types.Timeline).frameScripts, null) : Bool)) { return; }
+    resolved = (cast Timeline.resolveFrame__timeline((cast timeline : flighthq.types.Timeline), (cast frame : flighthq._internal._Union2<String, Float>)) : Float);
+    ((cast (cast timeline : flighthq.types.Timeline).frameScripts : flighthq._internal._Map<Float, FrameScript>).delete_(resolved));
+    if ((cast _Runtime.strictEquals((cast (cast timeline : flighthq.types.Timeline).frameScripts : flighthq._internal._Map<Float, FrameScript>).size, 0.0) : Bool)) { ((cast timeline : flighthq.types.Timeline).frameScripts = null); }
   }
 
-  public static function resolveFrame__timeline(timeline:flighthq.types.Timeline, frame:Dynamic):Float {
-    var label:Dynamic = cast _Runtime.UNDEFINED;
+  public static function resolveFrame__timeline(timeline:flighthq.types.Timeline, frame:flighthq._internal._Union2<Float, String>):Float {
+    var label:Null<TimelineLabel> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(frame), 'number') : Bool)) { return cast frame; }
-    label = _Runtime.callValue(findTimelineLabel, cast ([timeline, frame] : Array<Dynamic>));
+    label = (cast findTimelineLabel((cast timeline : flighthq.types.Timeline), (cast frame : String)) : Null<TimelineLabel>);
     if ((cast !_Runtime.truthy(label) : Bool)) { _Runtime.throwValue(_Runtime.error('Frame label "' + Std.string(frame) + '" not found')); }
-    return cast _Runtime.field(label, 'frame');
+    return cast (cast label : TimelineLabel).frame;
     return cast null;
   }
 
   public static function seekTimeline__timeline(timeline:flighthq.types.Timeline, frame:Float):Void {
-    _Runtime.setField(timeline, 'currentFrame', HxMath.max(1.0, HxMath.min(frame, _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>)))));
-    _Runtime.setField(timeline, 'lastFrameUpdate', -1.0);
-    _Runtime.callValue(Timeline.fireConstructFrame__timeline, cast ([timeline] : Array<Dynamic>));
+    ((cast timeline : flighthq.types.Timeline).currentFrame = HxMath.max(1.0, HxMath.min(frame, (cast Timeline.getTimelineTotalFrames__timeline((cast timeline : flighthq.types.Timeline)) : Float))));
+    ((cast timeline : flighthq.types.Timeline).lastFrameUpdate = -1.0);
+    (cast Timeline.fireConstructFrame__timeline((cast timeline : flighthq.types.Timeline)) : Bool);
   }
 
   public static function stopTimeline(timeline:flighthq.types.Timeline):Void {
-    _Runtime.setField(timeline, 'isPlaying', false);
+    ((cast timeline : flighthq.types.Timeline).isPlaying = false);
   }
 
   public static function updateTimeline(timeline:flighthq.types.Timeline, deltaTime:Float):Bool {
-    var frameRate:Dynamic = cast _Runtime.UNDEFINED;
-    var changed:Dynamic = cast _Runtime.UNDEFINED;
-    frameRate = _Runtime.callValue(Timeline.getTimelineFrameRate__timeline, cast ([timeline] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(timeline, 'isPlaying') : Bool) && (cast !_Runtime.strictEquals(frameRate, null) : Bool)) : Bool)) {
-      _Runtime.setField(timeline, 'currentFrame', _Runtime.callValue(Timeline.advanceFrame__timeline, cast ([timeline, deltaTime] : Array<Dynamic>)));
+    var frameRate:Null<Float> = cast _Runtime.UNDEFINED;
+    var changed:Bool = cast _Runtime.UNDEFINED;
+    frameRate = (cast Timeline.getTimelineFrameRate__timeline((cast timeline : flighthq.types.Timeline)) : Null<Float>);
+    if ((cast ((cast (cast timeline : flighthq.types.Timeline).isPlaying : Bool) && (cast !_Runtime.strictEquals(frameRate, null) : Bool)) : Bool)) {
+      ((cast timeline : flighthq.types.Timeline).currentFrame = (cast Timeline.advanceFrame__timeline((cast timeline : flighthq.types.Timeline), (cast deltaTime : Float)) : Float));
     }
-    changed = _Runtime.callValue(Timeline.fireConstructFrame__timeline, cast ([timeline] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(timeline, 'isPlaying') : Bool) && (cast _Runtime.strictEquals(frameRate, null) : Bool)) : Bool)) {
-      _Runtime.setField(timeline, 'currentFrame', _Runtime.callValue(Timeline.advanceFrame__timeline, cast ([timeline, deltaTime] : Array<Dynamic>)));
+    changed = (cast Timeline.fireConstructFrame__timeline((cast timeline : flighthq.types.Timeline)) : Bool);
+    if ((cast ((cast (cast timeline : flighthq.types.Timeline).isPlaying : Bool) && (cast _Runtime.strictEquals(frameRate, null) : Bool)) : Bool)) {
+      ((cast timeline : flighthq.types.Timeline).currentFrame = (cast Timeline.advanceFrame__timeline((cast timeline : flighthq.types.Timeline), (cast deltaTime : Float)) : Float));
     }
     return cast changed;
     return cast null;

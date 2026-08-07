@@ -8,27 +8,27 @@ import flighthq.types.RandomSource;
 
 class Hash {
   public static function createRandomSourceFromHash(x:Float, y:Float):RandomSource {
-    return cast _Runtime.callValue(createRandomSource, cast ([_Runtime.callValue(hash2D, cast ([x, y] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast createRandomSource((cast (cast hash2D((cast x : Float), (cast y : Float)) : Float) : Float)) : RandomSource);
     return cast null;
   }
 
   public static function hash2D(x:Float, y:Float):Float {
-    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hashUint32, cast ([(_Runtime.toInt32(x) | 0)] : Array<Dynamic>)), (_Runtime.toInt32(y) | 0)] : Array<Dynamic>));
+    return cast (cast hashCombine((cast (cast hashUint32((cast (_Runtime.toInt32(x) | 0) : Float)) : Float) : Float), (cast (_Runtime.toInt32(y) | 0) : Float)) : Float);
     return cast null;
   }
 
   public static function hash3D(x:Float, y:Float, z:Float):Float {
-    return cast _Runtime.callValue(hashCombine, cast ([_Runtime.callValue(hash2D, cast ([x, y] : Array<Dynamic>)), (_Runtime.toInt32(z) | 0)] : Array<Dynamic>));
+    return cast (cast hashCombine((cast (cast hash2D((cast x : Float), (cast y : Float)) : Float) : Float), (cast (_Runtime.toInt32(z) | 0) : Float)) : Float);
     return cast null;
   }
 
   public static function hashCombine(seed:Float, value:Float):Float {
-    return cast _Runtime.callValue(hashUint32, cast ([(_Runtime.toInt32(seed) ^ _Runtime.toInt32((((value + 2654435769.0) + (_Runtime.toInt32(seed) << 6)) + (_Runtime.toInt32(seed) >> 2))))] : Array<Dynamic>));
+    return cast (cast hashUint32((cast (_Runtime.toInt32(seed) ^ _Runtime.toInt32((((value + 2654435769.0) + (_Runtime.toInt32(seed) << 6)) + (_Runtime.toInt32(seed) >> 2)))) : Float)) : Float);
     return cast null;
   }
 
   public static function hashUint32(value:Float):Float {
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
     h = (_Runtime.toInt32(value) | 0);
     (h = (_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 16))));
     (h = cast ((_Runtime.toInt32(_Runtime.imul(_Runtime.toInt32(h), _Runtime.toInt32(2246822507.0))) | 0) : Dynamic));

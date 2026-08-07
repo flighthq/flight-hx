@@ -134,12 +134,12 @@ class Collision {
     return cast null;
   }
 
-  public static function raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit, ?maxFraction:Dynamic):Bool {
+  public static function raycastCollisionShape(shape:CollisionShape, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit, ?maxFraction:Float):Bool {
     return cast Facade_Collision_flighthq_collision_RaycastCollisionShape.raycastCollisionShape(shape, originX, originY, directionX, directionY, out, maxFraction);
     return cast null;
   }
 
-  public static function sweepCollisionShape(shapeA:CollisionShape, translationAX:Float, translationAY:Float, shapeB:CollisionShape, translationBX:Float, translationBY:Float, out:CollisionTimeOfImpact, ?maxFraction:Dynamic):Bool {
+  public static function sweepCollisionShape(shapeA:CollisionShape, translationAX:Float, translationAY:Float, shapeB:CollisionShape, translationBX:Float, translationBY:Float, out:CollisionTimeOfImpact, ?maxFraction:Float):Bool {
     return cast Facade_Collision_flighthq_collision_SweepCollisionShape.sweepCollisionShape(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, maxFraction);
     return cast null;
   }

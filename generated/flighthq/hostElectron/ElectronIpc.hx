@@ -4,21 +4,22 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronIpcMain;
 import flighthq.types.Ipc.IpcBackend;
 
 class ElectronIpc {
   public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
-    var ipcMain:Dynamic = cast _Runtime.UNDEFINED;
-    ipcMain = _Runtime.field(electron, 'ipcMain');
-    return cast { send: function() {
+    var ipcMain:ElectronIpcMain = cast _Runtime.UNDEFINED;
+    ipcMain = (cast electron : ElectronApi).ipcMain;
+    return cast { send: function():Void {
 
-    }, invoke: function() {
+    }, invoke: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
-    }, subscribe: function(channel:Dynamic, listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = _Runtime.haxeRest(function(_event:Dynamic, ...args:Dynamic) return _Runtime.callValue(listener, cast ([args] : Array<Dynamic>)), 1);
-      _Runtime.callProperty(ipcMain, 'on', cast ([channel, handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(ipcMain, 'removeListener', cast ([channel, handler] : Array<Dynamic>));
+    }, subscribe: function(channel:String, listener:Array<flighthq._internal._Any>->Void):Void->Void {
+      var handler:flighthq._internal._Any->Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(_event:flighthq._internal._Any, ...args:flighthq._internal._Any):Void return listener((cast args : Array<flighthq._internal._Any>)), 1) : flighthq._internal._Any->Array<flighthq._internal._Any>->Void);
+      (cast ipcMain : ElectronIpcMain).on(channel, handler);
+      return cast function():Void return (cast ipcMain : ElectronIpcMain).removeListener(channel, handler);
     } };
     return cast null;
   }

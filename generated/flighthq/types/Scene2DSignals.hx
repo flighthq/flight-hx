@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Scene2DSignals = { var onFullscreenChanged:Signal<Dynamic>; var onOrientationChanged:Signal<Dynamic>; var onResize:Signal<Dynamic>; };
+typedef Scene2DSignals = { var onFullscreenChanged:Signal<Void->Void>; var onOrientationChanged:Signal<Void->Void>; var onResize:Signal<Void->Void>; };

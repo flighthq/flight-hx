@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _SheenPbrExtensionValues {
-  public static final SheenPbrExtensionKind:Dynamic = 'SheenPbrExtension';
+  public static final SheenPbrExtensionKind:String = 'SheenPbrExtension';
 }

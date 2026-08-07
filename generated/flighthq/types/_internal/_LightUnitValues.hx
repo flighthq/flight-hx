@@ -5,11 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _LightUnitValues {
-  public static final CandelaLightUnit:Dynamic = 'Candela';
+  public static final CandelaLightUnit:String = 'Candela';
 
-  public static final LumenLightUnit:Dynamic = 'Lumen';
+  public static final LumenLightUnit:String = 'Lumen';
 
-  public static final LuxLightUnit:Dynamic = 'Lux';
+  public static final LuxLightUnit:String = 'Lux';
 
-  public static final UnitlessLightUnit:Dynamic = 'Unitless';
+  public static final UnitlessLightUnit:String = 'Unitless';
 }

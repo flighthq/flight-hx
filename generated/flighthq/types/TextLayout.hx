@@ -4,7 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextMeasureFunction = Dynamic;
+typedef TextMeasureFunction = String->TextFormat->Float;
 
 typedef TextLayoutGroup = { var ascent:Float; var descent:Float; var endIndex:Float; var format:TextFormat; var height:Float; var leading:Float; var lineIndex:Float; var offsetX:Float; var offsetY:Float; var positions:Array<Float>; var startIndex:Float; var width:Float; };
 

@@ -4,7 +4,9 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorDeviceId;
 import flighthq.types.CapacitorApi.CapacitorDeviceInfo;
+import flighthq.types.CapacitorApi.CapacitorDevicePlugin;
 import flighthq.types.Device.DeviceBackend;
 import flighthq.types.Device.DeviceInfo;
 import flighthq.types.Device.SafeAreaInsets;
@@ -17,28 +19,28 @@ import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 
 class CapacitorDevice {
   public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
-    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var device:CapacitorDevicePlugin = cast _Runtime.UNDEFINED;
     var cachedInfo:Null<CapacitorDeviceInfo> = cast _Runtime.UNDEFINED;
-    var cachedId:Dynamic = cast _Runtime.UNDEFINED;
-    device = _Runtime.field(capacitor, 'device');
+    var cachedId:String = cast _Runtime.UNDEFINED;
+    device = (cast capacitor : CapacitorApi).device;
     cachedInfo = null;
     cachedId = '';
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getInfo', cast ([] : Array<Dynamic>)), 'then', cast ([function(info:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast device : CapacitorDevicePlugin).getInfo(), 'then', cast ([function(info:CapacitorDeviceInfo):Void {
       (cachedInfo = cast (info : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(device, 'getId', cast ([] : Array<Dynamic>)), 'then', cast ([function(id:Dynamic) {
-      (cachedId = cast (_Runtime.field(id, 'identifier') : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast device : CapacitorDevicePlugin).getId(), 'then', cast ([function(id:CapacitorDeviceId):Void {
+      (cachedId = cast ((cast id : CapacitorDeviceId).identifier : Dynamic));
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { getCapabilities: function(out:DeviceCapabilities) {
+    return cast { getCapabilities: function(out:DeviceCapabilities):DeviceCapabilities {
       (out.hasKeyboard = cast (false : Dynamic));
       (out.hasMouse = cast (false : Dynamic));
       (out.hasStylus = cast (false : Dynamic));
       return cast out;
-    }, getDisplayMetrics: function(out:DeviceDisplayMetrics) {
+    }, getDisplayMetrics: function(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
       (out.colorDepth = cast (-1.0 : Dynamic));
       (out.densityDpi = cast (-1.0 : Dynamic));
       (out.logicalHeight = cast (-1.0 : Dynamic));
@@ -47,10 +49,10 @@ class CapacitorDevice {
       (out.physicalWidth = cast (-1.0 : Dynamic));
       (out.pixelRatio = cast (-1.0 : Dynamic));
       return cast out;
-    }, getId: function() {
+    }, getId: function():String {
       return cast cachedId;
-    }, getInfo: function(out:DeviceInfo) {
-      var info:Dynamic = cast _Runtime.UNDEFINED;
+    }, getInfo: function(out:DeviceInfo):DeviceInfo {
+      var info:Null<CapacitorDeviceInfo> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
       (out.arch = cast ('' : Dynamic));
       (out.availableMemory = cast (-1.0 : Dynamic));
@@ -58,7 +60,7 @@ class CapacitorDevice {
       (out.colorGamut = cast ('' : Dynamic));
       (out.cpuCores = cast (-1.0 : Dynamic));
       (out.fontScale = cast (-1.0 : Dynamic));
-      (out.formFactor = cast (_Runtime.callValue(CapacitorDevice.toFormFactor__capacitorDevice, cast ([info] : Array<Dynamic>)) : Dynamic));
+      (out.formFactor = cast ((cast CapacitorDevice.toFormFactor__capacitorDevice((cast info : Null<CapacitorDeviceInfo>)) : String) : Dynamic));
       (out.gpuRenderer = cast ('' : Dynamic));
       (out.gpuVendor = cast ('' : Dynamic));
       (out.isHdr = cast (false : Dynamic));
@@ -78,7 +80,7 @@ class CapacitorDevice {
       (out.totalMemory = cast (-1.0 : Dynamic));
       (out.webViewVersion = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'webViewVersion'), function():Dynamic return cast '') : Dynamic));
       return cast out;
-    }, getSafeAreaInsets: function(out:SafeAreaInsets) {
+    }, getSafeAreaInsets: function(out:SafeAreaInsets):SafeAreaInsets {
       (out.top = cast (0.0 : Dynamic));
       (out.right = cast (0.0 : Dynamic));
       (out.bottom = cast (0.0 : Dynamic));

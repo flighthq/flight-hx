@@ -18,73 +18,85 @@ import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
 import flighthq.types.BitmapText;
+import flighthq.types.BitmapText.BitmapTextPage;
 import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
+import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 class WgpuBitmapText {
-  public static final INSTANCE_STRIDE_FLOATS__wgpuBitmapText:Dynamic = QUAD_BATCH_INSTANCE_FLOATS;
+  public static final INSTANCE_STRIDE_FLOATS__wgpuBitmapText:Float = QUAD_BATCH_INSTANCE_FLOATS;
 
   public static function submitWgpuBitmapText__wgpuBitmapText(state:WgpuRenderState, node:RenderProxy2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var pages:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var materialRenderer:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeMaterialData:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeColorScaleBias:Dynamic = cast _Runtime.UNDEFINED;
-    var pt:Dynamic = cast _Runtime.UNDEFINED;
-    var pa:Dynamic = cast _Runtime.UNDEFINED;
-    var pb:Dynamic = cast _Runtime.UNDEFINED;
-    var pc:Dynamic = cast _Runtime.UNDEFINED;
-    var pd:Dynamic = cast _Runtime.UNDEFINED;
-    var ptx:Dynamic = cast _Runtime.UNDEFINED;
-    var pty:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return; }
-    source = (cast _Runtime.field(node, 'source') : BitmapText);
-    pages = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime), 'pages');
-    material = _Runtime.field(node, 'material');
-    materialRenderer = _Runtime.callValue(resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var source:BitmapText = cast _Runtime.UNDEFINED;
+    var pages:Array<BitmapTextPage> = cast _Runtime.UNDEFINED;
+    var material:Null<Material> = cast _Runtime.UNDEFINED;
+    var materialRenderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var nodeMaterialData:Null<flighthq._internal._Object> = cast _Runtime.UNDEFINED;
+    var nodeColorScaleBias:Null<flighthq._internal._Union2<Array<Float>, ColorScaleBias>> = cast _Runtime.UNDEFINED;
+    var pt:Matrix = cast _Runtime.UNDEFINED;
+    var pa:Float = cast _Runtime.UNDEFINED;
+    var pb:Float = cast _Runtime.UNDEFINED;
+    var pc:Float = cast _Runtime.UNDEFINED;
+    var pd:Float = cast _Runtime.UNDEFINED;
+    var ptx:Float = cast _Runtime.UNDEFINED;
+    var pty:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
+    source = (cast (cast node : RenderProxy2D).source : BitmapText);
+    pages = (cast (cast (cast getNode2DRuntime(source) : BitmapTextRuntime) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    material = (cast node : RenderProxy2D).material;
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    nodeMaterialData = _Runtime.field(node, 'materialData');
-    nodeColorScaleBias = _Runtime.coalesce(_Runtime.field(node, 'colorMatrix'), function():Dynamic return cast _Runtime.field(node, 'colorScaleBias'));
-    pt = _Runtime.field(node, 'transform2D');
+    nodeMaterialData = (cast node : RenderProxy2D).materialData;
+    nodeColorScaleBias = _Runtime.coalesce((cast node : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast node : RenderProxy2D).colorScaleBias);
+    pt = (cast node : RenderProxy2D).transform2D;
     pa = pt.a;
     pb = pt.b;
     pc = pt.c;
     pd = pt.d;
     ptx = pt.tx;
     pty = pt.ty;
-    alpha = _Runtime.field(node, 'alpha');
+    alpha = (cast node : RenderProxy2D).alpha;
     for (page in _Runtime.iterable(pages)) {
-      var atlas:Dynamic = _Runtime.field(page, 'atlas');
-      var texture:Dynamic = atlas.texture;
-      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(page, 'instanceCount'), 0.0) : Bool)) : Bool)) { continue; }
-      var textureEntry:Dynamic = _Runtime.callValue(resolveWgpuTexture, cast ([state, texture, true, SCENE2D_WORKING_COLOR_SPACE] : Array<Dynamic>));
+      var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
+      var texture:Null<Texture2D> = atlas.texture;
+      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource(texture) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
+      var textureEntry:Null<WgpuTextureEntry> = (cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>);
       if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { continue; }
-      var base:Dynamic = _Runtime.callValue(prepareWgpuQuadBatchWrite, cast ([state, textureEntry, _Runtime.field(texture, 'sampler'), _Runtime.field(node, 'blendMode'), material, materialRenderer, _Runtime.field(page, 'instanceCount')] : Array<Dynamic>));
-      var startCount:Dynamic = _Runtime.field(runtime, 'quadBatchWriterCount');
-      var regions:Dynamic = atlas.regions;
-      var numRegions:Dynamic = _Runtime.field(regions, 'length');
-      var iw:Dynamic = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))));
-      var ih:Dynamic = _Runtime.divideNumbers(1.0, HxMath.max(1.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))));
-      var instanceData:Dynamic = _Runtime.field(runtime, 'quadBatchWriterInstanceData');
-      var ids:Dynamic = _Runtime.field(page, 'ids');
-      var transforms:Dynamic = _Runtime.field(page, 'transforms');
-      var writeBase:Dynamic = base;
-      var drawCount:Dynamic = 0.0;
+      var base:Float = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, (cast texture : Texture2D).sampler, (cast (cast node : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+      var startCount:Float = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
+      var regions:Array<TextureAtlasRegion> = atlas.regions;
+      var numRegions:Float = _Runtime.field(regions, 'length');
+      var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
+      var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+      var instanceData:flighthq._internal._Float32Array = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
+      var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
+      var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
+      var writeBase:Float = base;
+      var drawCount:Float = 0.0;
       {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(page, 'instanceCount') : Float)) : Bool)) {
-          var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var i:Float = 0.0;
+        while ((cast ((cast i : Float) < (cast (cast page : BitmapTextPage).instanceCount : Float)) : Bool)) {
+          var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
+          var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
           if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
-          var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
-          var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
+          var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
+          var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, pa);
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 1.0), pb);
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 2.0), pc);
@@ -98,14 +110,14 @@ class WgpuBitmapText {
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-          _Runtime.callValue(packWgpuQuadBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
-          _Runtime.callValue(recordWgpuQuadBatchColorScaleBias, cast ([state, nodeColorScaleBias, (startCount + drawCount)] : Array<Dynamic>));
+          packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
+          recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), nodeColorScaleBias, (cast (startCount + drawCount) : Float));
           (writeBase = cast ((writeBase + WgpuBitmapText.INSTANCE_STRIDE_FLOATS__wgpuBitmapText) : Dynamic));
           drawCount++;
           i++;
         }
       }
-      _Runtime.setField(runtime, 'quadBatchWriterCount', _Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), drawCount));
+      ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount += drawCount);
     }
   }
 

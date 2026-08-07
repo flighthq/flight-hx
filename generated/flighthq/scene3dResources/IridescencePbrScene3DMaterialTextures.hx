@@ -4,19 +4,29 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.IridescencePbrExtension;
+import flighthq.types.PbrExtension;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.IridescencePbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._IridescencePbrExtensionValues.IridescencePbrExtensionKind;
 
 class IridescencePbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    _Runtime.callValue(registerScene3DPbrExtensionTextures, cast ([registry, IridescencePbrExtensionKind, function(extension:Dynamic, out:Dynamic) {
-      var iridescence:Dynamic = cast _Runtime.UNDEFINED;
+    registerScene3DPbrExtensionTextures((cast registry : Scene3DMaterialTextureRegistry), (cast IridescencePbrExtensionKind : String), function(extension:PbrExtension, out:Array<Texture>):Void {
+      var iridescence:IridescencePbrExtension = cast _Runtime.UNDEFINED;
       iridescence = (cast extension : IridescencePbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceThicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceThicknessMap')] : Array<Dynamic>)); }
-    }] : Array<Dynamic>));
+    });
   }
 }

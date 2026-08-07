@@ -12,8 +12,11 @@ import flighthq.scene3dGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.DepthMaterial;
+import flighthq.types.GlDebugProgram;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
@@ -23,26 +26,26 @@ import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 class DepthGlMeshMaterialRenderer {
   @:noCompletion
-  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var depth:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var depth:Null<DepthMaterial> = cast _Runtime.UNDEFINED;
+    var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);
-    program = _Runtime.callValue(ensureGlDebugProgram, cast ([state, { hasNormalMap: false, mode: 'depth' }] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
+    program = (cast ensureGlDebugProgram((cast state : GlRenderState), { hasNormalMap: false, mode: 'depth' }) : GlDebugProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlDebugProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      _Runtime.callValue(bindGlDebugRange, cast ([state, program, 0.0, 1.0] : Array<Dynamic>));
+      bindGlDebugRange((cast state : GlRenderState), program, (cast 0.0 : Float), (cast 1.0 : Float));
       return;
     }
-    _Runtime.callValue(bindGlDebugRange, cast ([state, program, _Runtime.field(depth, 'near'), _Runtime.field(depth, 'far')] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    bindGlDebugRange((cast state : GlRenderState), program, (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerGlDepthMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, DepthMaterialKind, depthGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast DepthMaterialKind : String), (cast depthGlMeshMaterialRenderer : GlMeshMaterialRenderer));
   }
 }

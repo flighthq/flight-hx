@@ -93,11 +93,22 @@ const typedArraySetReceiverNames = [
 ] as const satisfies readonly IrTypedArraySetReceiver[];
 
 const collectionBindingTypes = {
-  MapCollection: 'flighthq._internal._Map',
-  SetCollection: 'flighthq._internal._Set',
-  WeakMapCollection: 'flighthq._internal._WeakMap',
-  WeakSetCollection: 'flighthq._internal._WeakSet',
+  MapCollection: 'flighthq._internal._Map<Dynamic, Dynamic>',
+  SetCollection: 'flighthq._internal._Set<Dynamic>',
+  WeakMapCollection: 'flighthq._internal._WeakMap<Dynamic, Dynamic>',
+  WeakSetCollection: 'flighthq._internal._WeakSet<Dynamic>',
 } as const;
+
+function collectionReceiverType(expression: Extract<IrExpression, { kind: 'property' }>): string {
+  if (!expression.binding || !(expression.binding in collectionBindingTypes)) {
+    throw new Error(`Missing collection receiver binding: ${currentSourceIdentity}:${expression.name}`);
+  }
+  const inferred = expression.object.type;
+  const concrete = inferred?.kind === 'nullable' ? inferred.inner : inferred;
+  return concrete && concrete.kind !== 'dynamic' && concrete.kind !== 'union'
+    ? emitType(concrete)
+    : collectionBindingTypes[expression.binding as keyof typeof collectionBindingTypes];
+}
 
 const typedArrayBindingTypes = {
   Float32Array: 'flighthq._internal._Float32Array',
@@ -246,7 +257,7 @@ export function emitHaxeModule(module: IrModule): string {
 function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>): string[] {
   if (declaration.kind === 'variable') {
     const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';
-    const type = declaration.type ? `:${emitType(declaration.type)}` : ':Dynamic';
+    const type = declaration.type ? `:${emitType(declaration.type)}` : declaration.initializer ? '' : ':Dynamic';
     // Haxe omits null-valued static initializers, which changes an explicit
     // TypeScript `null` into `undefined`. Keep the initialization observable.
     const initializer = declaration.initializer
@@ -542,7 +553,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.kind === 'variable') {
     const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';
-    const type = declaration.type ? `:${emitType(declaration.type)}` : ':Dynamic';
+    const type = declaration.type ? `:${emitType(declaration.type)}` : declaration.initializer ? '' : ':Dynamic';
     // Haxe omits null-valued JS static initializers, which changes an explicit
     // TypeScript `null` into `undefined`. Keep the initialization observable.
     const initializer = declaration.initializer
@@ -1694,7 +1705,7 @@ function isPromiseNothingType(type: IrType): boolean {
 }
 
 function emitVariable(variable: IrVariable, includeSemicolon: boolean): string {
-  const type = variable.type ? `:${emitType(variable.type)}` : ':Dynamic';
+  const type = variable.type ? `:${emitType(variable.type)}` : variable.initializer ? '' : ':Dynamic';
   const initializer = variable.initializer ? ` = ${emitVariableInitializer(variable)}` : ' = cast _Runtime.UNDEFINED';
   const output = `var ${safeName(variable.name)}${type}${initializer}`;
   return includeSemicolon ? output : output;
@@ -1716,6 +1727,9 @@ function emitScopedVariable(variable: IrVariable): string[] {
 function emitVariableInitializer(variable: IrVariable): string {
   const initializer = variable.initializer!;
   const emitted = emitExpression(initializer);
+  if (variable.type?.kind === 'function' && initializer.kind === 'function') {
+    return `(cast ${emitted} : ${emitType(variable.type)})`;
+  }
   if (
     variable.type?.kind === 'array' &&
     initializer.kind === 'call' &&
@@ -1816,6 +1830,8 @@ function emitCompoundOperationFromText(
 }
 
 function propertyReadEmitsDynamic(expression: Extract<IrExpression, { kind: 'property' }>): boolean {
+  if (expression.generatedClass) return false;
+  if (expression.structuralReceiverType) return expression.type?.kind === 'dynamic';
   if (expression.typedStructBinding) {
     return !expression.typedStructBinding.receiverCast && expressionEmitsDynamic(expression.object);
   }
@@ -2244,6 +2260,36 @@ function emitExpression(expression: IrExpression): string {
           }
           return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
         }
+        if (expression.left.structuralReceiverType) {
+          if (expression.left.optional) {
+            throw new Error(`Optional structural assignment is not supported: ${expression.left.name}`);
+          }
+          const field = directStructuralField(expression.left, object);
+          const right = emitExpression(expression.right);
+          if (expression.operator === '=') return `(${field} = ${right})`;
+          if (expression.operator === '%=') {
+            return `(${field} = ${emitArithmeticOperation(field, '%', right)})`;
+          }
+          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
+            return `(${field} = ${emitCompoundOperationFromText(field, expression.operator.slice(0, -1), expression.right, right)})`;
+          }
+          return `(${field} ${expression.operator} ${right})`;
+        }
+        if (expression.left.generatedClass) {
+          if (expression.left.optional) {
+            throw new Error(`Optional generated-class assignment is not supported: ${expression.left.name}`);
+          }
+          const field = directGeneratedClassField(expression.left, object);
+          const right = emitExpression(expression.right);
+          if (expression.operator === '=') return `(${field} = ${right})`;
+          if (expression.operator === '%=') {
+            return `(${field} = ${emitArithmeticOperation(field, '%', right)})`;
+          }
+          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
+            return `(${field} = ${emitCompoundOperationFromText(field, expression.operator.slice(0, -1), expression.right, right)})`;
+          }
+          return `(${field} ${expression.operator} ${right})`;
+        }
         if (expression.left.object.kind === 'identifier' && expression.left.object.name === 'this') {
           if (expression.operator === '=') {
             return `(this.${safeName(expression.left.name)} = cast (${emitExpression(expression.right)} : Dynamic))`;
@@ -2590,7 +2636,7 @@ function emitExpression(expression: IrExpression): string {
           throw new Error(`Typed collection method references are not supported: ${expression.name}`);
         }
         const owner = emitExpression(expression.object);
-        const collectionType = collectionBindingTypes[expression.binding as keyof typeof collectionBindingTypes];
+        const collectionType = collectionReceiverType(expression);
         if (!expression.optional) return `(cast ${owner} : ${collectionType}).size`;
         const temporary = `__collection${String(temporaryIndex++)}`;
         return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : (cast ${temporary} : ${collectionType}).size; })`;
@@ -2611,6 +2657,8 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.hostTypeBinding) return emitHostTypeRead(expression);
       if (expression.typedStructBinding) return emitTypedStructRead(expression);
+      if (expression.structuralReceiverType) return emitStructuralRead(expression);
+      if (expression.generatedClass) return emitGeneratedClassRead(expression);
       if (
         expression.object.kind === 'identifier' &&
         expression.object.name === 'HxMath' &&
@@ -2704,6 +2752,20 @@ function emitExpression(expression: IrExpression): string {
           const field = directTypedStructField(expression.operand);
           return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
         }
+        if (expression.operand.structuralReceiverType) {
+          if (expression.operand.optional) {
+            throw new Error(`Optional structural mutation is not supported: ${expression.operand.name}`);
+          }
+          const field = directStructuralField(expression.operand);
+          return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
+        }
+        if (expression.operand.generatedClass) {
+          if (expression.operand.optional) {
+            throw new Error(`Optional generated-class mutation is not supported: ${expression.operand.name}`);
+          }
+          const field = directGeneratedClassField(expression.operand);
+          return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
+        }
         return `_Runtime.incrementField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`;
       }
       return expression.postfix
@@ -2782,6 +2844,40 @@ function directHostTypeField(
   return `${typedOwner}.${safeName(expression.name)}`;
 }
 
+function directGeneratedClassField(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+  owner = emitExpression(expression.object),
+): string {
+  if (!expression.generatedClass) {
+    throw new Error(`Missing generated-class field binding: ${currentSourceIdentity}:${expression.name}`);
+  }
+  return `(cast ${owner} : ${safeName(expression.generatedClass)}).${safeName(expression.name)}`;
+}
+
+function directStructuralField(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+  owner = emitExpression(expression.object),
+): string {
+  if (!expression.structuralReceiverType) {
+    throw new Error(`Missing structural receiver type: ${currentSourceIdentity}:${expression.name}`);
+  }
+  return `(cast ${owner} : ${emitType(expression.structuralReceiverType)}).${safeName(expression.name)}`;
+}
+
+function emitStructuralRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
+  const owner = emitExpression(expression.object);
+  if (!expression.optional) return directStructuralField(expression, owner);
+  const temporary = `__structural${String(temporaryIndex++)}`;
+  return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directStructuralField(expression, temporary)}; })`;
+}
+
+function emitGeneratedClassRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
+  const owner = emitExpression(expression.object);
+  if (!expression.optional) return directGeneratedClassField(expression, owner);
+  const temporary = `__generatedClass${String(temporaryIndex++)}`;
+  return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directGeneratedClassField(expression, temporary)}; })`;
+}
+
 function emitHostTypeRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
   const owner = emitExpression(expression.object);
   let direct: string;
@@ -2844,27 +2940,6 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'identifier' && currentDirectFunctions.has(expression.callee.name)) {
     return `${currentModuleName}.${safeName(expression.callee.name)}(cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
   }
-  if (expression.direct) {
-    if (
-      expression.callee.kind !== 'identifier' ||
-      expression.optional ||
-      expression.haxeRestIndex !== undefined ||
-      expression.arguments.some((argument) => argument.kind === 'spread')
-    ) {
-      throw new Error(`Invalid direct call: ${currentSourceIdentity}`);
-    }
-    return `${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
-  }
-  if (expression.callee.kind === 'element' && expression.callee.binding === 'WebGl2Backend') {
-    throw new Error('WebGL2 computed method calls have no typed backend endpoint');
-  }
-  if (
-    expression.callee.kind === 'element' &&
-    expression.callee.object.kind === 'identifier' &&
-    expression.callee.object.name === 'console'
-  ) {
-    return `_Runtime.console(Std.string(${emitExpression(expression.callee.index)}), [${expression.arguments.map(emitExpression).join(', ')}])`;
-  }
   if (expression.callee.kind === 'identifier') {
     if (expression.callee.name === 'Symbol') {
       return `_Runtime.symbol(${expression.arguments.map(emitExpression).join(', ')})`;
@@ -2887,6 +2962,40 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (expression.callee.name === 'String') {
       return `Std.string(${expression.arguments.map(emitExpression).join(', ')})`;
     }
+  }
+  if (expression.direct) {
+    if (
+      expression.callee.kind !== 'identifier' ||
+      expression.optional ||
+      expression.haxeRestIndex !== undefined ||
+      expression.arguments.some((argument) => argument.kind === 'spread')
+    ) {
+      throw new Error(`Invalid direct call: ${currentSourceIdentity}`);
+    }
+    const callee = expression.directCalleeType
+      ? `(cast ${emitExpression(expression.callee)} : ${emitType(expression.directCalleeType)})`
+      : emitExpression(expression.callee);
+    const arguments_ = expression.arguments.map((argument, index) => {
+      const emitted = emitExpression(argument);
+      const expected = expression.directArgumentTypes?.[index];
+      return expected ? `(cast ${emitted} : ${emitType(expected)})` : emitted;
+    });
+    const call = `${callee}(${arguments_.join(', ')})`;
+    return expression.type &&
+      expression.type.kind !== 'dynamic' &&
+      !(expression.type.kind === 'primitive' && expression.type.name === 'Void')
+      ? `(cast ${call} : ${emitType(expression.type)})`
+      : call;
+  }
+  if (expression.callee.kind === 'element' && expression.callee.binding === 'WebGl2Backend') {
+    throw new Error('WebGL2 computed method calls have no typed backend endpoint');
+  }
+  if (
+    expression.callee.kind === 'element' &&
+    expression.callee.object.kind === 'identifier' &&
+    expression.callee.object.name === 'console'
+  ) {
+    return `_Runtime.console(Std.string(${emitExpression(expression.callee.index)}), [${expression.arguments.map(emitExpression).join(', ')}])`;
   }
   if (
     expression.callee.kind === 'property' &&
@@ -2992,7 +3101,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `flighthq._internal.backend.WebGl2Backend.${endpoint}(${arguments_})`;
     }
     if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
-      const collectionType = collectionBindingTypes[expression.callee.binding as keyof typeof collectionBindingTypes];
+      const collectionType = collectionReceiverType(expression.callee);
       const method = expression.callee.name === 'delete' ? 'delete_' : safeName(expression.callee.name);
       const call = (target: string) =>
         `((cast ${target} : ${collectionType}).${method}(${expression.arguments.map(emitExpression).join(', ')}))`;
@@ -3018,8 +3127,16 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return emitHostTypeCall(expression, expression.callee, expression.arguments.map(emitExpression).join(', '));
     }
     if (expression.callee.typedStructBinding) {
-      const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'callValue';
-      return `_Runtime.${method}(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+      if (!(expression.optional || expression.callee.optional)) {
+        return `(${emitTypedStructRead(expression.callee)})(${expression.arguments.map(emitExpression).join(', ')})`;
+      }
+      return `_Runtime.callOptionalValue(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    }
+    if (expression.callee.structuralReceiverType) {
+      if (!(expression.optional || expression.callee.optional)) {
+        return `${directStructuralField(expression.callee, owner)}(${expression.arguments.map(emitExpression).join(', ')})`;
+      }
+      return `_Runtime.callOptionalValue(${emitStructuralRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.generatedClass) {
       const generatedClass = expression.callee.generatedClass;
@@ -3313,7 +3430,6 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
 export function emitType(type: IrType): string {
   switch (type.kind) {
     case 'anonymous': {
-      if (type.extends.length > 0) return 'Dynamic';
       const members = [
         ...type.extends.filter((parent) => parent.kind !== 'dynamic').map((parent) => `>${emitType(parent)},`),
         ...type.fields.map(
@@ -3325,7 +3441,7 @@ export function emitType(type: IrType): string {
     case 'array':
       return `Array<${emitType(type.element)}>`;
     case 'dynamic':
-      return 'Dynamic';
+      return type.reason && type.reason !== 'checker-known-unrepresentable' ? 'flighthq._internal._Any' : 'Dynamic';
     case 'function':
       return `${type.parameters.length === 0 ? 'Void' : type.parameters.map(emitType).join('->')}->${emitType(type.returns)}`;
     case 'named': {
@@ -3340,6 +3456,13 @@ export function emitType(type: IrType): string {
       return `Null<${emitType(type.inner)}>`;
     case 'primitive':
       return type.name;
+    case 'union':
+      return type.alternatives
+        .slice(1)
+        .reduce(
+          (left, right) => `flighthq._internal._Union2<${left}, ${emitType(right)}>`,
+          emitType(type.alternatives[0] ?? { kind: 'dynamic' }),
+        );
   }
 }
 

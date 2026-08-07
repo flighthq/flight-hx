@@ -8,22 +8,25 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEff
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RenderEffect;
 
 class CanvasBlendEffect {
   @:noCompletion
   public static function applyBlendEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlendEffect):Void {
-    var backdrop:Dynamic = cast _Runtime.UNDEFINED;
-    var operation:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    backdrop = _Runtime.callValue(getCanvasBlendEffectBackdrop, cast ([state, _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null)] : Array<Dynamic>));
+    var backdrop:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    var operation:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    backdrop = (cast getCanvasBlendEffectBackdrop((cast state : CanvasRenderState), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null) : Null<String>)) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(backdrop, null) : Bool)) {
-      _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
+      drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
       return;
     }
-    operation = _Runtime.callValue(getCanvasBlendEffectCompositeOperation, cast ([_Runtime.field(effect, 'mode')] : Array<Dynamic>));
+    operation = getCanvasBlendEffectCompositeOperation((cast _Runtime.field(effect, 'mode') : String));
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -31,20 +34,20 @@ class CanvasBlendEffect {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(backdrop, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : CanvasRenderTarget).canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', operation);
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBlendEffectToCanvas, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect)] : Array<Dynamic>));
+  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyBlendEffectToCanvas((cast _Runtime.field(ctx, 'state') : CanvasRenderState), (cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : BlendEffect) : BlendEffect));
   };
 
   public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasBlendEffectBackdrops'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -54,19 +57,19 @@ class CanvasBlendEffect {
   }
 
   public static function registerCanvasBlendEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BlendEffect', defaultCanvasBlendEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'BlendEffect' : String), (cast defaultCanvasBlendEffectRunner : CanvasRenderEffectRunner));
   }
 
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'canvasBlendEffectBackdrops', (_Runtime.field(runtime, 'canvasBlendEffectBackdrops') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(backdropKey, target));
+    var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime);
+    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasBlendEffectBackdrops ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, target));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasBlendEffectBackdrops'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 
-  public static final BLEND_MODE_OPERATION__canvasBlendEffect:Dynamic = { Color: 'color', ColorBurn: 'color-burn', ColorDodge: 'color-dodge', Difference: 'difference', Exclusion: 'exclusion', HardLight: 'hard-light', Hue: 'hue', Luminosity: 'luminosity', Overlay: 'overlay', Saturation: 'saturation', SoftLight: 'soft-light' };
+  public static final BLEND_MODE_OPERATION__canvasBlendEffect:flighthq._internal._Record<String, flighthq._internal.dom.GlobalCompositeOperation> = { Color: 'color', ColorBurn: 'color-burn', ColorDodge: 'color-dodge', Difference: 'difference', Exclusion: 'exclusion', HardLight: 'hard-light', Hue: 'hue', Luminosity: 'luminosity', Overlay: 'overlay', Saturation: 'saturation', SoftLight: 'soft-light' };
 }

@@ -5,22 +5,25 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.ColorScaleBias;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.TintMaterialData;
 
 class EnableGlColorAdjustmentGuards {
   @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentMaterialFeatureGuard'), null);
+    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentMaterialFeatureGuard', EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
+    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard = EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
   }
 
   public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
-    _Runtime.callValue(logOnce, cast (['scene2d-gl:color-adjustment-not-enabled', LogLevel.Warn, { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' }, 'scene2d-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), (cast LogLevel.Warn : LogLevel), { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' }, (cast 'scene2d-gl' : Null<String>)) : Bool);
   }
 }

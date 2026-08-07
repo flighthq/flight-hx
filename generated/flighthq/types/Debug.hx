@@ -8,6 +8,6 @@ import flighthq.types.Log.LogSink;
 
 typedef DebugSubsystemName = String;
 
-typedef DebugSubsystemHooks = { @:optional var channels:Array<String>; @:optional var enableGuards:Dynamic; @:optional var disableGuards:Dynamic; };
+typedef DebugSubsystemHooks = { @:optional var channels:Array<String>; @:optional var enableGuards:Void->Void; @:optional var disableGuards:Void->Void; };
 
 typedef DebugOptions = { @:optional var subsystems:Array<DebugSubsystemName>; @:optional var level:LogLevel; @:optional var channels:Array<String>; @:optional var sink:LogSink; };

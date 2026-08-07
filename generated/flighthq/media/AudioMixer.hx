@@ -14,32 +14,33 @@ import flighthq.types.AudioBus.AudioBusOptions;
 import flighthq.types.AudioBus.AudioMixer;
 import flighthq.types.AudioBus.AudioMixerOptions;
 import flighthq.types.AudioResource.AudioChannel;
+import flighthq.types.AudioResource.AudioChannelState;
 
-typedef AudioMixerRuntime__audioMixer = { var activeChannels:Dynamic; var channelsPausedByMixer:Dynamic; var buses:Dynamic; var busGainNodes:Dynamic; var busOutputNodes:Dynamic; var channelToBus:Dynamic; var context:flighthq._internal.dom.AudioContext; var masterGainNode:flighthq._internal.dom.GainNode; };
+typedef AudioMixerRuntime__audioMixer = { var activeChannels:flighthq._internal._Set<AudioChannel>; var channelsPausedByMixer:flighthq._internal._Set<AudioChannel>; var buses:flighthq._internal._Map<String, AudioBus>; var busGainNodes:flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>; var busOutputNodes:flighthq._internal._Map<AudioBus, flighthq._internal.dom.StereoPannerNode>; var channelToBus:flighthq._internal._WeakMap<AudioChannel, AudioBus>; var context:flighthq._internal.dom.AudioContext; var masterGainNode:flighthq._internal.dom.GainNode; };
 
 class AudioMixer {
   public static function addAudioBusToMixer(mixer:flighthq.types.AudioBus.AudioMixer, bus:AudioBus):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gainNode:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    var gainNode:flighthq._internal.dom.GainNode = cast _Runtime.UNDEFINED;
     var pannerNode:Null<flighthq._internal.dom.StereoPannerNode> = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast ((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).has(bus)) : Bool)) { return; }
-    gainNode = (cast _Runtime.field(runtime, 'context') : flighthq._internal.dom.AudioContext).createGain();
+    if ((cast ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).has(bus)) : Bool)) { return; }
+    gainNode = (cast (cast runtime : AudioMixerRuntime__audioMixer).context : flighthq._internal.dom.AudioContext).createGain();
     ((cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast bus.muted : Bool) ? (cast 0.0 : Dynamic) : (cast bus.gain : Dynamic)));
     pannerNode = null;
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast _Runtime.field(runtime, 'context') : flighthq._internal.dom.AudioContext).createStereoPanner), 'function') : Bool)) {
-      (pannerNode = cast ((cast _Runtime.field(runtime, 'context') : flighthq._internal.dom.AudioContext).createStereoPanner() : Dynamic));
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast runtime : AudioMixerRuntime__audioMixer).context : flighthq._internal.dom.AudioContext).createStereoPanner), 'function') : Bool)) {
+      (pannerNode = cast ((cast (cast runtime : AudioMixerRuntime__audioMixer).context : flighthq._internal.dom.AudioContext).createStereoPanner() : Dynamic));
       ((cast pannerNode.pan : flighthq._internal.dom.AudioParam).value = bus.pan);
       (cast gainNode : flighthq._internal.dom.GainNode).connect(pannerNode);
-      pannerNode.connect(_Runtime.field(runtime, 'masterGainNode'));
+      pannerNode.connect((cast runtime : AudioMixerRuntime__audioMixer).masterGainNode);
     } else {
-      (cast gainNode : flighthq._internal.dom.GainNode).connect(_Runtime.field(runtime, 'masterGainNode'));
+      (cast gainNode : flighthq._internal.dom.GainNode).connect((cast runtime : AudioMixerRuntime__audioMixer).masterGainNode);
     }
-    ((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).set(bus, gainNode));
-    if ((cast !_Runtime.strictEquals(pannerNode, null) : Bool)) { ((cast _Runtime.field(runtime, 'busOutputNodes') : flighthq._internal._Map).set(bus, pannerNode)); }
-    ((cast _Runtime.field(runtime, 'buses') : flighthq._internal._Map).set(bus.name, bus));
-    _Runtime.callValue(AudioMixer.registerBusInReverseMap__audioMixer, cast ([bus, runtime] : Array<Dynamic>));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).set(bus, gainNode));
+    if ((cast !_Runtime.strictEquals(pannerNode, null) : Bool)) { ((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.StereoPannerNode>).set(bus, pannerNode)); }
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).buses : flighthq._internal._Map<String, AudioBus>).set(bus.name, bus));
+    AudioMixer.registerBusInReverseMap__audioMixer((cast bus : AudioBus), runtime);
   }
 
   public static function createAudioBus(?options:AudioBusOptions):AudioBus {
@@ -48,52 +49,52 @@ class AudioMixer {
   }
 
   public static function createAudioMixer(context:flighthq._internal.dom.AudioContext, ?options:AudioMixerOptions):flighthq.types.AudioBus.AudioMixer {
-    var masterGainNode:Dynamic = cast _Runtime.UNDEFINED;
+    var masterGainNode:flighthq._internal.dom.GainNode = cast _Runtime.UNDEFINED;
     var mixer:flighthq.types.AudioBus.AudioMixer = cast _Runtime.UNDEFINED;
     masterGainNode = context.createGain();
     ((cast (cast masterGainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.masterGain; }), function():Dynamic return cast 1.0));
     (cast masterGainNode : flighthq._internal.dom.GainNode).connect(context.destination);
     mixer = { masterGain: _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.masterGain; }), function():Dynamic return cast 1.0), masterMuted: _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.masterMuted; }), function():Dynamic return cast false) };
-    ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).set(mixer, { activeChannels: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), channelsPausedByMixer: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), buses: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), busGainNodes: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), busOutputNodes: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), channelToBus: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), context: context, masterGainNode: masterGainNode }));
+    ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).set(mixer, { activeChannels: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), channelsPausedByMixer: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), buses: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), busGainNodes: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), busOutputNodes: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), channelToBus: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), context: context, masterGainNode: masterGainNode }));
     return cast mixer;
     return cast null;
   }
 
   public static function destroyAudioMixer(mixer:flighthq.types.AudioBus.AudioMixer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    for (channel in _Runtime.iterable(_Runtime.field(runtime, 'activeChannels'))) {
-      _Runtime.callValue(stopAudioChannel, cast ([channel] : Array<Dynamic>));
+    for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)) {
+      stopAudioChannel((cast channel : AudioChannel));
     }
-    ((cast _Runtime.field(runtime, 'activeChannels') : flighthq._internal._Set).clear());
-    for (pannerNode in _Runtime.iterable(((cast _Runtime.field(runtime, 'busOutputNodes') : flighthq._internal._Map).values()))) {
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flighthq._internal._Set<AudioChannel>).clear());
+    for (pannerNode in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.StereoPannerNode>).values()))) {
       (cast pannerNode : flighthq._internal.dom.StereoPannerNode).disconnect();
     }
-    for (bus in _Runtime.iterable(((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).keys()))) {
-      _Runtime.callValue(AudioMixer.unregisterBusFromReverseMap__audioMixer, cast ([bus, runtime] : Array<Dynamic>));
+    for (bus in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).keys()))) {
+      AudioMixer.unregisterBusFromReverseMap__audioMixer((cast bus : AudioBus), runtime);
     }
-    for (gainNode in _Runtime.iterable(((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).values()))) {
+    for (gainNode in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).values()))) {
       (cast gainNode : flighthq._internal.dom.GainNode).disconnect();
     }
-    (cast _Runtime.field(runtime, 'masterGainNode') : flighthq._internal.dom.GainNode).disconnect();
-    ((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).clear());
-    ((cast _Runtime.field(runtime, 'busOutputNodes') : flighthq._internal._Map).clear());
-    ((cast _Runtime.field(runtime, 'buses') : flighthq._internal._Map).clear());
-    ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).delete_(mixer));
+    (cast (cast runtime : AudioMixerRuntime__audioMixer).masterGainNode : flighthq._internal.dom.GainNode).disconnect();
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).clear());
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.StereoPannerNode>).clear());
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).buses : flighthq._internal._Map<String, AudioBus>).clear());
+    ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).delete_(mixer));
   }
 
   public static function fadeAudioBusGain(mixer:flighthq.types.AudioBus.AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gainNode:Dynamic = cast _Runtime.UNDEFINED;
-    var now:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
-    gainNode = ({ final __collection15:Dynamic = _Runtime.optionalField(runtime, 'busGainNodes'); __collection15 == null ? _Runtime.UNDEFINED : ((cast __collection15 : flighthq._internal._Map).get(bus)); });
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    var gainNode:Null<flighthq._internal.dom.GainNode> = cast _Runtime.UNDEFINED;
+    var now:Float = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
+    gainNode = ({ final __collection15:Dynamic = _Runtime.optionalField(runtime, 'busGainNodes'); __collection15 == null ? _Runtime.UNDEFINED : ((cast __collection15 : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).get(bus)); });
     if ((cast _Runtime.strictEquals(gainNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bus.gain = cast (targetGain : Dynamic));
       return;
     }
-    now = (cast _Runtime.field(runtime, 'context') : flighthq._internal.dom.AudioContext).currentTime;
+    now = (cast (cast runtime : AudioMixerRuntime__audioMixer).context : flighthq._internal.dom.AudioContext).currentTime;
     (cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).cancelScheduledValues(now);
     (cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).setValueAtTime((cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value, now);
     (cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).linearRampToValueAtTime(((cast bus.muted : Bool) ? (cast 0.0 : Dynamic) : (cast targetGain : Dynamic)), (now + (durationMs / 1000.0)));
@@ -101,52 +102,52 @@ class AudioMixer {
   }
 
   public static function getAudioMixerActiveChannels(mixer:flighthq.types.AudioBus.AudioMixer):Array<AudioChannel> {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    return cast _Runtime.toArray(_Runtime.field(runtime, 'activeChannels'));
+    return cast _Runtime.toArray((cast runtime : AudioMixerRuntime__audioMixer).activeChannels);
     return cast null;
   }
 
   public static function pauseAllAudioMixerChannels(mixer:flighthq.types.AudioBus.AudioMixer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    for (channel in _Runtime.iterable(_Runtime.field(runtime, 'activeChannels'))) {
+    for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)) {
       if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { continue; }
-      _Runtime.callValue(pauseAudioChannel, cast ([channel] : Array<Dynamic>));
-      ((cast _Runtime.field(runtime, 'channelsPausedByMixer') : flighthq._internal._Set).add(channel));
+      pauseAudioChannel((cast channel : AudioChannel));
+      ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flighthq._internal._Set<AudioChannel>).add(channel));
     }
   }
 
   public static function resumeAllAudioMixerChannels(mixer:flighthq.types.AudioBus.AudioMixer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    for (channel in _Runtime.iterable(_Runtime.field(runtime, 'channelsPausedByMixer'))) {
-      if ((cast _Runtime.strictEquals(channel.state, 'paused') : Bool)) { _Runtime.callValue(resumeAudioChannel, cast ([channel] : Array<Dynamic>)); }
+    for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer)) {
+      if ((cast _Runtime.strictEquals(channel.state, 'paused') : Bool)) { resumeAudioChannel((cast channel : AudioChannel)); }
     }
-    ((cast _Runtime.field(runtime, 'channelsPausedByMixer') : flighthq._internal._Set).clear());
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flighthq._internal._Set<AudioChannel>).clear());
   }
 
   public static function routeAudioChannelToMixerBus(mixer:flighthq.types.AudioBus.AudioMixer, channel:AudioChannel, bus:AudioBus):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var busGainNode:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    var busGainNode:Null<flighthq._internal.dom.GainNode> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    _Runtime.callValue(addAudioBusToMixer, cast ([mixer, bus] : Array<Dynamic>));
-    ((cast _Runtime.field(runtime, 'activeChannels') : flighthq._internal._Set).add(channel));
-    ((cast _Runtime.field(runtime, 'channelToBus') : flighthq._internal._WeakMap).set(channel, bus));
-    busGainNode = ((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).get(bus));
+    addAudioBusToMixer((cast mixer : flighthq.types.AudioBus.AudioMixer), (cast bus : AudioBus));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flighthq._internal._Set<AudioChannel>).add(channel));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelToBus : flighthq._internal._WeakMap<AudioChannel, AudioBus>).set(channel, bus));
+    busGainNode = ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).get(bus));
     if ((cast !_Runtime.strictEquals(busGainNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(connectAudioChannelToNode, cast ([channel, busGainNode] : Array<Dynamic>));
+      connectAudioChannelToNode((cast channel : AudioChannel), (cast busGainNode : flighthq._internal.dom.AudioNode));
     }
   }
 
   public static function setAudioBusGain(bus:AudioBus, value:Float):Float {
     (bus.gain = cast (value : Dynamic));
-    _Runtime.callValue(AudioMixer.reportUnmixedBus__audioMixer, cast ([bus, 'gain'] : Array<Dynamic>));
-    _Runtime.callValue(AudioMixer.updateBusGainNode__audioMixer, cast ([bus] : Array<Dynamic>));
+    AudioMixer.reportUnmixedBus__audioMixer((cast bus : AudioBus), (cast 'gain' : AudioBusMixerOperation));
+    AudioMixer.updateBusGainNode__audioMixer((cast bus : AudioBus));
     return cast bus.gain;
     return cast null;
   }
@@ -158,57 +159,57 @@ class AudioMixer {
 
   public static function setAudioBusMuted(bus:AudioBus, muted:Bool):Bool {
     (bus.muted = cast (muted : Dynamic));
-    _Runtime.callValue(AudioMixer.reportUnmixedBus__audioMixer, cast ([bus, 'mute'] : Array<Dynamic>));
-    _Runtime.callValue(AudioMixer.updateBusGainNode__audioMixer, cast ([bus] : Array<Dynamic>));
+    AudioMixer.reportUnmixedBus__audioMixer((cast bus : AudioBus), (cast 'mute' : AudioBusMixerOperation));
+    AudioMixer.updateBusGainNode__audioMixer((cast bus : AudioBus));
     return cast bus.muted;
     return cast null;
   }
 
   public static function setAudioBusPan(bus:AudioBus, value:Float):Float {
-    (bus.pan = cast (_Runtime.callValue(AudioMixer.clamp__audioMixer, cast ([value, -1.0, 1.0] : Array<Dynamic>)) : Dynamic));
-    _Runtime.callValue(AudioMixer.reportUnmixedBus__audioMixer, cast ([bus, 'pan'] : Array<Dynamic>));
-    _Runtime.callValue(AudioMixer.updateBusPannerNode__audioMixer, cast ([bus] : Array<Dynamic>));
+    (bus.pan = cast ((cast AudioMixer.clamp__audioMixer((cast value : Float), (cast -1.0 : Float), (cast 1.0 : Float)) : Float) : Dynamic));
+    AudioMixer.reportUnmixedBus__audioMixer((cast bus : AudioBus), (cast 'pan' : AudioBusMixerOperation));
+    AudioMixer.updateBusPannerNode__audioMixer((cast bus : AudioBus));
     return cast bus.pan;
     return cast null;
   }
 
   public static function setAudioMixerMasterGain(mixer:flighthq.types.AudioBus.AudioMixer, value:Float):Float {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
     (mixer.masterGain = cast (value : Dynamic));
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast _Runtime.field(runtime, 'masterGainNode') : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast mixer.masterMuted : Bool) ? (cast 0.0 : Dynamic) : (cast value : Dynamic)));
+      ((cast (cast (cast runtime : AudioMixerRuntime__audioMixer).masterGainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast mixer.masterMuted : Bool) ? (cast 0.0 : Dynamic) : (cast value : Dynamic)));
     }
     return cast mixer.masterGain;
     return cast null;
   }
 
   public static function setAudioMixerMasterMuted(mixer:flighthq.types.AudioBus.AudioMixer, muted:Bool):Bool {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
     (mixer.masterMuted = cast (muted : Dynamic));
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast _Runtime.field(runtime, 'masterGainNode') : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast muted : Bool) ? (cast 0.0 : Dynamic) : (cast mixer.masterGain : Dynamic)));
+      ((cast (cast (cast runtime : AudioMixerRuntime__audioMixer).masterGainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast muted : Bool) ? (cast 0.0 : Dynamic) : (cast mixer.masterGain : Dynamic)));
     }
     return cast mixer.masterMuted;
     return cast null;
   }
 
   public static function stopAllAudioMixerChannels(mixer:flighthq.types.AudioBus.AudioMixer):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    for (channel in _Runtime.iterable(_Runtime.field(runtime, 'activeChannels'))) {
+    for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)) {
       (channel.state = cast ('stopped' : Dynamic));
       (channel.currentTime = cast (0.0 : Dynamic));
     }
-    ((cast _Runtime.field(runtime, 'activeChannels') : flighthq._internal._Set).clear());
-    ((cast _Runtime.field(runtime, 'channelsPausedByMixer') : flighthq._internal._Set).clear());
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flighthq._internal._Set<AudioChannel>).clear());
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flighthq._internal._Set<AudioChannel>).clear());
   }
 
-  public static final mixerRuntimes__audioMixer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final mixerRuntimes__audioMixer:flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final busToMixerRuntimes__audioMixer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final busToMixerRuntimes__audioMixer:flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static function clamp__audioMixer(value:Float, min:Float, max:Float):Float {
     return cast HxMath.min(HxMath.max(value, min), max);
@@ -216,46 +217,46 @@ class AudioMixer {
   }
 
   public static function registerBusInReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
-    var runtimes:Dynamic = cast _Runtime.UNDEFINED;
-    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).get(bus));
+    var runtimes:Null<flighthq._internal._Set<AudioMixerRuntime__audioMixer>> = cast _Runtime.UNDEFINED;
+    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).get(bus));
     if ((cast _Runtime.strictEquals(runtimes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (runtimes = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) : Dynamic));
-      ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).set(bus, runtimes));
+      ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).set(bus, runtimes));
     }
-    ((cast runtimes : flighthq._internal._Set).add(runtime));
+    ((cast runtimes : flighthq._internal._Set<AudioMixerRuntime__audioMixer>).add(runtime));
   }
 
   public static function unregisterBusFromReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
-    var runtimes:Dynamic = cast _Runtime.UNDEFINED;
-    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).get(bus));
+    var runtimes:Null<flighthq._internal._Set<AudioMixerRuntime__audioMixer>> = cast _Runtime.UNDEFINED;
+    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).get(bus));
     if ((cast _Runtime.strictEquals(runtimes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast runtimes : flighthq._internal._Set).delete_(runtime));
-    if ((cast _Runtime.strictEquals((cast runtimes : flighthq._internal._Set).size, 0.0) : Bool)) { ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).delete_(bus)); }
+    ((cast runtimes : flighthq._internal._Set<AudioMixerRuntime__audioMixer>).delete_(runtime));
+    if ((cast _Runtime.strictEquals((cast runtimes : flighthq._internal._Set<AudioMixerRuntime__audioMixer>).size, 0.0) : Bool)) { ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).delete_(bus)); }
   }
 
   public static function unrouteAudioChannelFromMixerBus(mixer:flighthq.types.AudioBus.AudioMixer, channel:AudioChannel):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap).get(mixer));
+    var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
+    runtime = ((cast AudioMixer.mixerRuntimes__audioMixer : flighthq._internal._WeakMap<flighthq.types.AudioBus.AudioMixer, AudioMixerRuntime__audioMixer>).get(mixer));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast _Runtime.field(runtime, 'activeChannels') : flighthq._internal._Set).delete_(channel));
-    ((cast _Runtime.field(runtime, 'channelsPausedByMixer') : flighthq._internal._Set).delete_(channel));
-    ((cast _Runtime.field(runtime, 'channelToBus') : flighthq._internal._WeakMap).delete_(channel));
-    _Runtime.callValue(connectAudioChannelToNode, cast ([channel, (cast _Runtime.field(runtime, 'context') : flighthq._internal.dom.AudioContext).destination] : Array<Dynamic>));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flighthq._internal._Set<AudioChannel>).delete_(channel));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flighthq._internal._Set<AudioChannel>).delete_(channel));
+    ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelToBus : flighthq._internal._WeakMap<AudioChannel, AudioBus>).delete_(channel));
+    connectAudioChannelToNode((cast channel : AudioChannel), (cast (cast (cast runtime : AudioMixerRuntime__audioMixer).context : flighthq._internal.dom.AudioContext).destination : flighthq._internal.dom.AudioNode));
   }
 
   public static function reportUnmixedBus__audioMixer(bus:AudioBus, operation:AudioBusMixerOperation):Void {
     if ((cast _Runtime.strictEquals(AudioMixer._unmixedBusGuard__audioMixer, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).get(bus)), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(AudioMixer._unmixedBusGuard__audioMixer, cast ([operation, bus] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).get(bus)), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast AudioMixer._unmixedBusGuard__audioMixer : AudioBusMixerOperation->AudioBus->Void)((cast operation : AudioBusMixerOperation), (cast bus : AudioBus)); }
   }
 
   public static var _unmixedBusGuard__audioMixer:Null<AudioBusMixerGuard> = _Runtime.explicitNull();
 
   public static function updateBusGainNode__audioMixer(bus:AudioBus):Void {
-    var runtimes:Dynamic = cast _Runtime.UNDEFINED;
-    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).get(bus));
+    var runtimes:Null<flighthq._internal._Set<AudioMixerRuntime__audioMixer>> = cast _Runtime.UNDEFINED;
+    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).get(bus));
     if ((cast _Runtime.strictEquals(runtimes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (runtime in _Runtime.iterable(runtimes)) {
-      var gainNode:Dynamic = ((cast _Runtime.field(runtime, 'busGainNodes') : flighthq._internal._Map).get(bus));
+      var gainNode:Null<flighthq._internal.dom.GainNode> = ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.GainNode>).get(bus));
       if ((cast !_Runtime.strictEquals(gainNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast (cast gainNode : flighthq._internal.dom.GainNode).gain : flighthq._internal.dom.AudioParam).value = ((cast bus.muted : Bool) ? (cast 0.0 : Dynamic) : (cast bus.gain : Dynamic)));
       }
@@ -263,11 +264,11 @@ class AudioMixer {
   }
 
   public static function updateBusPannerNode__audioMixer(bus:AudioBus):Void {
-    var runtimes:Dynamic = cast _Runtime.UNDEFINED;
-    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map).get(bus));
+    var runtimes:Null<flighthq._internal._Set<AudioMixerRuntime__audioMixer>> = cast _Runtime.UNDEFINED;
+    runtimes = ((cast AudioMixer.busToMixerRuntimes__audioMixer : flighthq._internal._Map<AudioBus, flighthq._internal._Set<AudioMixerRuntime__audioMixer>>).get(bus));
     if ((cast _Runtime.strictEquals(runtimes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (runtime in _Runtime.iterable(runtimes)) {
-      var pannerNode:Dynamic = ((cast _Runtime.field(runtime, 'busOutputNodes') : flighthq._internal._Map).get(bus));
+      var pannerNode:Null<flighthq._internal.dom.StereoPannerNode> = ((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flighthq._internal._Map<AudioBus, flighthq._internal.dom.StereoPannerNode>).get(bus));
       if ((cast ((cast !_Runtime.strictEquals(pannerNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.hasField(pannerNode, 'pan') : Bool)) : Bool)) {
         ((cast (cast pannerNode : flighthq._internal.dom.StereoPannerNode).pan : flighthq._internal.dom.AudioParam).value = bus.pan);
       }

@@ -4,29 +4,34 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorShareCanResult;
+import flighthq.types.CapacitorApi.CapacitorShareOptions;
+import flighthq.types.CapacitorApi.CapacitorSharePlugin;
+import flighthq.types.CapacitorApi.CapacitorShareResult;
 import flighthq.types.Share.ShareBackend;
 import flighthq.types.Share.ShareContent;
+import flighthq.types.Share.ShareOptions;
 
 class CapacitorShare {
   public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
-    var share:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedAvailable:Dynamic = cast _Runtime.UNDEFINED;
-    share = _Runtime.field(capacitor, 'share');
+    var share:CapacitorSharePlugin = cast _Runtime.UNDEFINED;
+    var cachedAvailable:Bool = cast _Runtime.UNDEFINED;
+    share = (cast capacitor : CapacitorApi).share;
     cachedAvailable = false;
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(share, 'canShare', cast ([] : Array<Dynamic>)), 'then', cast ([function(result:Dynamic) {
-      (cachedAvailable = cast (_Runtime.field(result, 'value') : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast share : CapacitorSharePlugin).canShare(), 'then', cast ([function(result:CapacitorShareCanResult):Void {
+      (cachedAvailable = cast ((cast result : CapacitorShareCanResult).value : Dynamic));
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { isAvailable: function() {
+    return cast { isAvailable: function():Bool {
       return cast cachedAvailable;
-    }, canShare: function(content:Dynamic) {
-      return cast ((cast cachedAvailable : Bool) && (cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool));
-    }, share: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, canShare: function(content:ShareContent):Bool {
+      return cast ((cast cachedAvailable : Bool) && (cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content : ShareContent)) : Bool) : Bool));
+    }, share: function(content:ShareContent, options:Null<ShareOptions>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch0:Dynamic;
-          if ((cast !(cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
+          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content : ShareContent)) : Bool) : Bool) : Bool)) {
             __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -35,7 +40,7 @@ class CapacitorShare {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.chooserTitle; }) }] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share({ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : flighthq.types.Share.ShareOptions).chooserTitle; }) }), function(__awaitValue1:Dynamic):Dynamic {
                 __awaitValue1;
                 return flighthq._internal._Async.flowReturn(true);
               });
@@ -50,11 +55,11 @@ class CapacitorShare {
           });
         })
       );
-    }, shareWithResult: function(content:Dynamic, options:Dynamic):flighthq._internal._Promise<Dynamic> {
+    }, shareWithResult: function(content:ShareContent, options:Null<ShareOptions>):flighthq._internal._Promise<flighthq._internal._Union2<{ var completed:Bool; var activityType:flighthq._internal._Any; var dismissed:Bool; }, { var completed:Bool; var activityType:Null<String>; var dismissed:Bool; }>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch3:Dynamic;
-          if ((cast !(cast _Runtime.callValue(CapacitorShare.hasShareableText__capacitorShare, cast ([content] : Array<Dynamic>)) : Bool) : Bool)) {
+          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content : ShareContent)) : Bool) : Bool) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
@@ -63,10 +68,10 @@ class CapacitorShare {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              var result:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callProperty(share, 'share', cast ([{ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.chooserTitle; }) }] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+              var result:CapacitorShareResult = cast _Runtime.UNDEFINED;
+              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share({ title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : flighthq.types.Share.ShareOptions).chooserTitle; }) }), function(__awaitValue4:Dynamic):Dynamic {
                 result = __awaitValue4;
-                return flighthq._internal._Async.flowReturn({ completed: true, activityType: _Runtime.coalesce(_Runtime.field(result, 'activityType'), function():Dynamic return cast null), dismissed: false });
+                return flighthq._internal._Async.flowReturn({ completed: true, activityType: _Runtime.coalesce((cast result : CapacitorShareResult).activityType, function():Dynamic return cast null), dismissed: false });
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;

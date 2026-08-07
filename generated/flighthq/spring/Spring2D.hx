@@ -6,22 +6,23 @@ import flighthq._internal._Runtime;
 import flighthq.spring.Spring.createSpring;
 import flighthq.spring.Spring.isSpringSettled;
 import flighthq.spring.Spring.updateSpring;
+import flighthq.types.Spring;
 import flighthq.types.Spring.Spring2D;
 import flighthq.types.Spring.SpringConfig;
 
 class Spring2D {
   public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):flighthq.types.Spring.Spring2D {
-    return cast { x: _Runtime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: _Runtime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)) };
+    return cast { x: (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring), y: (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring) };
     return cast null;
   }
 
   public static function isSpring2DSettled(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring2D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring2D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
+    return cast _Runtime.andValue((cast isSpringSettled(_Runtime.field(spring2D, 'x'), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool), function():Dynamic return cast (cast isSpringSettled(_Runtime.field(spring2D, 'y'), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
     return cast null;
   }
 
   public static function updateSpring2D(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
-    _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring2D, 'x'), targetX, config, deltaTime] : Array<Dynamic>));
-    _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring2D, 'y'), targetY, config, deltaTime] : Array<Dynamic>));
+    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).x, (cast targetX : Float), (cast config : SpringConfig), (cast deltaTime : Float));
+    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).y, (cast targetY : Float), (cast config : SpringConfig), (cast deltaTime : Float));
   }
 }

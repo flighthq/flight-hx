@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary.setAssetAcquireGuard;
 import flighthq.log.Log.logOnce;
+import flighthq.types.Assets.AssetAcquireGuard;
 import flighthq.types.Assets.AssetLibrary;
+import flighthq.types.Assets.AssetLibraryRuntime;
 import flighthq.types.Assets.AssetLoadExplanation;
 import flighthq.types.Log.LogLevel;
 
@@ -16,17 +18,17 @@ class EnableAssetGuards {
   }
 
   public static function disableAssetGuards(library:AssetLibrary):Void {
-    _Runtime.callValue(setAssetAcquireGuard, cast ([library, null] : Array<Dynamic>));
+    setAssetAcquireGuard((cast library : AssetLibrary), null);
   }
 
   public static function enableAssetGuards(library:AssetLibrary):Void {
-    _Runtime.callValue(setAssetAcquireGuard, cast ([library, EnableAssetGuards.warnOnAssetAcquireFailure__enableAssetGuards] : Array<Dynamic>));
+    setAssetAcquireGuard((cast library : AssetLibrary), EnableAssetGuards.warnOnAssetAcquireFailure__enableAssetGuards);
   }
 
   public static function warnOnAssetAcquireFailure__enableAssetGuards(_library:AssetLibrary, explanation:AssetLoadExplanation):Void {
-    var message:Dynamic = cast _Runtime.UNDEFINED;
+    var message:String = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-descriptor') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-loader') : Bool)) : Bool)) { return; }
     message = ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-descriptor') : Bool) ? (cast 'acquireAsset: no descriptor is registered for id "' + Std.string(_Runtime.field(explanation, 'id')) + '"; call registerAssetDescriptor or registerAssetManifest before acquiring it.' : Dynamic) : (cast 'acquireAsset: no loader is registered for type "' + Std.string(_Runtime.field(explanation, 'type')) + '"; call registerAssetLoader before acquiring "' + Std.string(_Runtime.field(explanation, 'id')) + '".' : Dynamic));
-    _Runtime.callValue(logOnce, cast (['assets:acquire:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.coalesce(_Runtime.field(explanation, 'type'), function():Dynamic return cast '')) + ':' + Std.string(_Runtime.field(explanation, 'id')) + '', LogLevel.Warn, _Runtime.mergeObjects([explanation, { message: message }]), 'assets'] : Array<Dynamic>));
+    (cast logOnce((cast 'assets:acquire:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.coalesce(_Runtime.field(explanation, 'type'), function():Dynamic return cast '')) + ':' + Std.string(_Runtime.field(explanation, 'id')) + '' : String), (cast LogLevel.Warn : LogLevel), _Runtime.mergeObjects([explanation, { message: message }]), (cast 'assets' : Null<String>)) : Bool);
   }
 }

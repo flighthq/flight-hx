@@ -31,7 +31,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
+  public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }> {
     return cast Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.getSpritesheetFormat(kind);
     return cast null;
   }
@@ -86,7 +86,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
+  public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }):Void {
     Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.registerSpritesheetFormat(kind, entry);
   }
 

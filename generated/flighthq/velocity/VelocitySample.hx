@@ -9,21 +9,21 @@ import flighthq.types.Velocity.VelocitySample;
 
 class VelocitySample {
   public static function getVelocitySampleAt(sample:flighthq.types.Velocity.VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
+      ((cast out : Velocity2D).x = 0.0);
+      ((cast out : Velocity2D).y = 0.0);
       return cast out;
     }
     cx = (((currentWorldTransform.a * pointX) + (currentWorldTransform.c * pointY)) + currentWorldTransform.tx);
     cy = (((currentWorldTransform.b * pointX) + (currentWorldTransform.d * pointY)) + currentWorldTransform.ty);
     px = _Runtime.addNumbers((_Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').a, pointX) + _Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').c, pointY)), _Runtime.field(sample, 'previousWorldTransform').tx);
     py = _Runtime.addNumbers((_Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').b, pointX) + _Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').d, pointY)), _Runtime.field(sample, 'previousWorldTransform').ty);
-    _Runtime.setField(out, 'x', (cx - px));
-    _Runtime.setField(out, 'y', (cy - py));
+    ((cast out : Velocity2D).x = (cx - px));
+    ((cast out : Velocity2D).y = (cy - py));
     return cast out;
     return cast null;
   }

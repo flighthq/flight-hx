@@ -5,15 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _TextureSourceKindValues {
-  public static final BitmapTextureSourceKind:Dynamic = 'bitmap';
+  public static final BitmapTextureSourceKind:String = 'bitmap';
 
-  public static final CompressedImageTextureSourceKind:Dynamic = 'compressedImage';
+  public static final CompressedImageTextureSourceKind:String = 'compressedImage';
 
-  public static final ExternalTextureSourceKind:Dynamic = 'external';
+  public static final ExternalTextureSourceKind:String = 'external';
 
-  public static final ImageTextureSourceKind:Dynamic = 'image';
+  public static final ImageTextureSourceKind:String = 'image';
 
-  public static final RenderTargetTextureSourceKind:Dynamic = 'renderTarget';
+  public static final RenderTargetTextureSourceKind:String = 'renderTarget';
 
-  public static final VoxelGridTextureSourceKind:Dynamic = 'voxelGrid';
+  public static final VoxelGridTextureSourceKind:String = 'voxelGrid';
 }

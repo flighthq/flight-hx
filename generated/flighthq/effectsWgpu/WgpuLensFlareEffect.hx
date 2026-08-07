@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.LensFlareEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,31 +17,31 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuLensFlareEffect {
   @:noCompletion
   public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var ghosts:Dynamic = cast _Runtime.UNDEFINED;
-    var halo:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var ghosts:Float = cast _Runtime.UNDEFINED;
+    var halo:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     ghosts = _Runtime.coalesce(_Runtime.field(effect, 'ghosts'), function():Dynamic return cast 4.0);
     halo = _Runtime.coalesce(_Runtime.field(effect, 'halo'), function():Dynamic return cast 0.5);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.lensFlare', WgpuLensFlareEffect.LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.lensFlare' : String), (cast WgpuLensFlareEffect.LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, ghosts);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, halo);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuLensFlareEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyLensFlareEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensFlareEffect)] : Array<Dynamic>));
+  public static final defaultWgpuLensFlareEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyLensFlareEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : LensFlareEffect) : LensFlareEffect));
   };
 
   public static function registerWgpuLensFlareEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'LensFlareEffect', defaultWgpuLensFlareEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'LensFlareEffect' : String), (cast defaultWgpuLensFlareEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect:Dynamic = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_intensity : f32,\n  u_ghosts : f32,\n  u_halo : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn brightPass(uv : vec2f) -> vec3f {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { return vec3f(0.0); }\n  let c = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let l = dot(c, vec3f(0.2126, 0.7152, 0.0722));\n  return c * max(0.0, l - uni.u_threshold);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let scene = textureSampleLevel(tex, smp, uv, 0.0);\n  // Single-pass approximation of a flare: walk ghost samples along the vector toward the optical\n  // center and add a halo ring, all from the bright pass of the scene itself (no separate buffer).\n  let toCenter = vec2f(0.5) - uv;\n  var flare = vec3f(0.0);\n  let count = i32(clamp(uni.u_ghosts, 0.0, 8.0));\n  for (var i = 0; i < 8; i = i + 1) {\n    if (i >= count) { break; }\n    let t = (f32(i) + 1.0) / (f32(count) + 1.0);\n    let ghostUv = uv + toCenter * (2.0 * t);\n    flare = flare + brightPass(ghostUv);\n  }\n  let haloDir = normalize(toCenter + vec2f(1e-5));\n  flare = flare + brightPass(uv + haloDir * uni.u_halo) * uni.u_halo;\n  return vec4f(scene.rgb + flare * uni.u_intensity, scene.a);\n}';
+  public static final LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect:String = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_intensity : f32,\n  u_ghosts : f32,\n  u_halo : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn brightPass(uv : vec2f) -> vec3f {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { return vec3f(0.0); }\n  let c = textureSampleLevel(tex, smp, uv, 0.0).rgb;\n  let l = dot(c, vec3f(0.2126, 0.7152, 0.0722));\n  return c * max(0.0, l - uni.u_threshold);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let scene = textureSampleLevel(tex, smp, uv, 0.0);\n  // Single-pass approximation of a flare: walk ghost samples along the vector toward the optical\n  // center and add a halo ring, all from the bright pass of the scene itself (no separate buffer).\n  let toCenter = vec2f(0.5) - uv;\n  var flare = vec3f(0.0);\n  let count = i32(clamp(uni.u_ghosts, 0.0, 8.0));\n  for (var i = 0; i < 8; i = i + 1) {\n    if (i >= count) { break; }\n    let t = (f32(i) + 1.0) / (f32(count) + 1.0);\n    let ghostUv = uv + toCenter * (2.0 * t);\n    flare = flare + brightPass(ghostUv);\n  }\n  let haloDir = normalize(toCenter + vec2f(1e-5));\n  flare = flare + brightPass(uv + haloDir * uni.u_halo) * uni.u_halo;\n  return vec4f(scene.rgb + flare * uni.u_intensity, scene.a);\n}';
 }

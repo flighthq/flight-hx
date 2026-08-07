@@ -6,129 +6,132 @@ import flighthq._internal._Runtime;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriAppModule;
+import flighthq.types.TauriApi.TauriOsModule;
+import flighthq.types.TauriApi.TauriProcessPlugin;
 
 class TauriApp {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
-    var app:Dynamic = cast _Runtime.UNDEFINED;
-    var os:Dynamic = cast _Runtime.UNDEFINED;
-    var process:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedName:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedVersion:Dynamic = cast _Runtime.UNDEFINED;
-    app = _Runtime.field(tauri, 'app');
-    os = _Runtime.field(tauri, 'os');
-    process = _Runtime.field(tauri, 'process');
+    var app:TauriAppModule = cast _Runtime.UNDEFINED;
+    var os:TauriOsModule = cast _Runtime.UNDEFINED;
+    var process:TauriProcessPlugin = cast _Runtime.UNDEFINED;
+    var cachedName:String = cast _Runtime.UNDEFINED;
+    var cachedVersion:String = cast _Runtime.UNDEFINED;
+    app = (cast tauri : TauriApi).app;
+    os = (cast tauri : TauriApi).os;
+    process = (cast tauri : TauriApi).process;
     cachedName = '';
     cachedVersion = '';
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getName', cast ([] : Array<Dynamic>)), 'then', cast ([function(name:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getName(), 'then', cast ([function(name:String):Void {
       (cachedName = cast (name : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(app, 'getVersion', cast ([] : Array<Dynamic>)), 'then', cast ([function(version:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getVersion(), 'then', cast ([function(version:String):Void {
       (cachedVersion = cast (version : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { addRecentDocument: function() {
+    return cast { addRecentDocument: function():Void {
 
-    }, bounceDock: function() {
+    }, bounceDock: function():Float {
       return cast -1.0;
-    }, cancelAttention: function() {
+    }, cancelAttention: function():Void {
 
-    }, cancelDockBounce: function() {
+    }, cancelDockBounce: function():Void {
 
-    }, clearRecentDocuments: function() {
+    }, clearRecentDocuments: function():Void {
 
-    }, focus: function() {
+    }, focus: function():Void {
 
-    }, getAppDirectoryPath: function() {
+    }, getAppDirectoryPath: function():String {
       return cast '';
-    }, getAppPath: function() {
+    }, getAppPath: function():String {
       return cast '';
-    }, getCommandLine: function() {
+    }, getCommandLine: function():Array<flighthq._internal._Any> {
       return cast cast ([] : Array<Dynamic>);
-    }, getExecutablePath: function() {
+    }, getExecutablePath: function():String {
       return cast '';
-    }, getLocale: function() {
-      return cast _Runtime.coalesce(_Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>)), function():Dynamic return cast '');
-    }, getLoginItem: function() {
+    }, getLocale: function():String {
+      return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+    }, getLoginItem: function():AppLoginItem {
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
       out = { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) };
       return cast out;
-    }, getName: function() {
+    }, getName: function():String {
       return cast cachedName;
-    }, getPreferredSystemLanguages: function() {
-      var locale:Dynamic = cast _Runtime.UNDEFINED;
-      locale = _Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>));
+    }, getPreferredSystemLanguages: function():Array<String> {
+      var locale:Null<String> = cast _Runtime.UNDEFINED;
+      locale = (cast os : TauriOsModule).locale();
       return cast _Runtime.select(locale, function():Dynamic return cast cast ([locale] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    }, getSystemLocale: function() {
-      return cast _Runtime.coalesce(_Runtime.callProperty(os, 'locale', cast ([] : Array<Dynamic>)), function():Dynamic return cast '');
-    }, getVersion: function() {
+    }, getSystemLocale: function():String {
+      return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+    }, getVersion: function():String {
       return cast cachedVersion;
-    }, hasSingleInstanceLock: function() {
+    }, hasSingleInstanceLock: function():Bool {
       return cast false;
-    }, hideApp: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'hide', cast ([] : Array<Dynamic>)), function() {
+    }, hideApp: function():Bool {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).hide(), function():Void {
 
       });
       return cast true;
-    }, isAppHidden: function() {
+    }, isAppHidden: function():Bool {
       return cast false;
-    }, quit: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(process, 'exit', cast ([0.0] : Array<Dynamic>)), function() {
+    }, quit: function():Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit(0.0), function():Void {
 
       });
-    }, relaunch: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(process, 'relaunch', cast ([] : Array<Dynamic>)), function() {
+    }, relaunch: function():Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).relaunch(), function():Void {
 
       });
-    }, releaseSingleInstanceLock: function() {
+    }, releaseSingleInstanceLock: function():Void {
 
-    }, requestAttention: function() {
+    }, requestAttention: function():Float {
       return cast -1.0;
-    }, requestSingleInstanceLock: function() {
+    }, requestSingleInstanceLock: function():Bool {
       return cast true;
-    }, setActivationPolicy: function() {
+    }, setActivationPolicy: function():Void {
 
-    }, setBadgeCount: function() {
+    }, setBadgeCount: function():Bool {
       return cast false;
-    }, setDockBadge: function() {
+    }, setDockBadge: function():Void {
 
-    }, setDockMenu: function() {
+    }, setDockMenu: function():Void {
 
-    }, setLoginItem: function() {
+    }, setLoginItem: function():Bool {
       return cast false;
-    }, setName: function() {
+    }, setName: function():Bool {
       return cast false;
-    }, setUserModelId: function() {
+    }, setUserModelId: function():Bool {
       return cast false;
-    }, showApp: function() {
-      flighthq._internal._Async.recover(_Runtime.callProperty(app, 'show', cast ([] : Array<Dynamic>)), function() {
+    }, showApp: function():Bool {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).show(), function():Void {
 
       });
       return cast true;
-    }, subscribeActivate: function() {
-      return cast function() {
+    }, subscribeActivate: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeAllWindowsClosed: function() {
-      return cast function() {
+    }, subscribeAllWindowsClosed: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeOpenFile: function() {
-      return cast function() {
+    }, subscribeOpenFile: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeQuitRequest: function() {
-      return cast function() {
+    }, subscribeQuitRequest: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeReady: function() {
-      return cast function() {
+    }, subscribeReady: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeSecondInstance: function() {
-      return cast function() {
+    }, subscribeSecondInstance: function():Void->Void {
+      return cast function():Void {
 
       };
     } };

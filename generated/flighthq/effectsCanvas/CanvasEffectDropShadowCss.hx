@@ -9,13 +9,13 @@ import flighthq.types.OuterGlowEffect;
 class CanvasEffectDropShadowCss {
   @:noCompletion
   public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
-    var blurX:Dynamic = cast _Runtime.UNDEFINED;
-    var blurY:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var radians:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var blurX:Float = cast _Runtime.UNDEFINED;
+    var blurY:Float = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var radians:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
@@ -25,26 +25,26 @@ class CanvasEffectDropShadowCss {
     radians = ((angle * HxMath.PI) / 180.0);
     dx = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(radians), distance));
     dy = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(radians), distance));
-    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string(_Runtime.callValue(CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss, cast ([_Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>))) + ')';
+    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
   @:noCompletion
   public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
-    var blurX:Dynamic = cast _Runtime.UNDEFINED;
-    var blurY:Dynamic = cast _Runtime.UNDEFINED;
+    var blurX:Float = cast _Runtime.UNDEFINED;
+    var blurY:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0);
     if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
-    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string(_Runtime.callValue(CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss, cast ([_Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>))) + ')';
+    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
   public static function cssRgbaFromColor__canvasEffectDropShadowCss(color:Float, alpha:Float):String {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
     b = (_Runtime.toInt32(color) & 255);

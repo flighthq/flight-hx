@@ -8,22 +8,22 @@ import flighthq.types.Compression.Decompressor;
 
 class Decompressor {
   public static function getDecompressor(compression:Compression):Null<flighthq.types.Compression.Decompressor> {
-    return cast _Runtime.coalesce(((cast Decompressor._decompressors__decompressor : flighthq._internal._Map).get(compression)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).get(compression)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasDecompressor(compression:Compression):Bool {
-    return cast ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map).has(compression));
+    return cast ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).has(compression));
     return cast null;
   }
 
   public static function registerDecompressor(compression:Compression, decompress:flighthq.types.Compression.Decompressor):Void {
-    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map).set(compression, decompress));
+    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).set(compression, decompress));
   }
 
   public static function unregisterDecompressor(compression:Compression):Void {
-    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map).delete_(compression));
+    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).delete_(compression));
   }
 
-  public static final _decompressors__decompressor:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final _decompressors__decompressor:flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

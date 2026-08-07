@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlPbrExtensionRegistration = { var bind:Dynamic; var createShaderContribution:Dynamic; var isSupported:Dynamic; };
+typedef GlPbrExtensionRegistration = { var bind:GlPbrExtensionBindContext->PbrExtension->Void; var createShaderContribution:GlPbrExtensionShaderContext->PbrExtension->GlPbrExtensionShaderContribution; var isSupported:PbrExtension->Bool; };

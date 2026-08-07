@@ -11,4 +11,4 @@ typedef Material = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var 
 
 typedef MaterialLike = EntityWithoutRuntime<flighthq.types.Material>;
 
-typedef MaterialData = Dynamic;
+typedef MaterialData = flighthq._internal._Object;

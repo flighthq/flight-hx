@@ -17,9 +17,9 @@ class ParticleObjectsState {
   @:noCompletion
   public static function ensureParticleObjectsStateCapacity(state:flighthq.types.ParticleObjectsState, capacity:Float):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) { return; }
-    (state.lifetimes = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.lifetimes, (capacity * 2.0)] : Array<Dynamic>)) : Dynamic));
-    (state.velocities = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.velocities, (capacity * 2.0)] : Array<Dynamic>)) : Dynamic));
-    (state.scales = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.scales, capacity] : Array<Dynamic>)) : Dynamic));
-    (state.rotationSpeeds = cast (_Runtime.callValue(reserveFloat32Array, cast ([state.rotationSpeeds, capacity] : Array<Dynamic>)) : Dynamic));
+    (state.lifetimes = cast ((cast reserveFloat32Array((cast state.lifetimes : flighthq._internal._Float32Array), (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (state.velocities = cast ((cast reserveFloat32Array((cast state.velocities : flighthq._internal._Float32Array), (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (state.scales = cast ((cast reserveFloat32Array((cast state.scales : flighthq._internal._Float32Array), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (state.rotationSpeeds = cast ((cast reserveFloat32Array((cast state.rotationSpeeds : flighthq._internal._Float32Array), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
   }
 }

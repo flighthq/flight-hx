@@ -11,6 +11,7 @@ import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
 import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
+import flighthq.types.InputPointerData;
 import flighthq.types.InputState;
 import flighthq.types.MouseWheelMode;
 
@@ -48,7 +49,7 @@ class Input {
     Facade_Input_flighthq_input_InputManager.attachWheelInput(manager, element, options);
   }
 
-  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
+  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Void->Void {
     return cast Facade_Input_flighthq_input_InputManager.connectInputStateToInputManager(state, manager);
     return cast null;
   }
@@ -100,7 +101,7 @@ class Input {
     Facade_Input_flighthq_input_InputManager.exitInputPointerLock();
   }
 
-  public static function getCoalescedInputPointerEvents(event:flighthq._internal.dom.PointerEvent, callback:Dynamic):Void {
+  public static function getCoalescedInputPointerEvents(event:flighthq._internal.dom.PointerEvent, callback:InputPointerData->Void):Void {
     Facade_Input_flighthq_input_InputManager.getCoalescedInputPointerEvents(event, callback);
   }
 

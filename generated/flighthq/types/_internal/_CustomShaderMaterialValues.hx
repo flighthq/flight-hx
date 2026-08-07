@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _CustomShaderMaterialValues {
-  public static final CustomShaderMaterialKind:Dynamic = 'CustomShaderMaterial';
+  public static final CustomShaderMaterialKind:String = 'CustomShaderMaterial';
 }

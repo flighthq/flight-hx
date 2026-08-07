@@ -102,7 +102,7 @@ class HostElectron {
     return cast null;
   }
 
-  public static function createElectronStorageBackend(electron:ElectronApi, ?fileName:Dynamic):StorageBackend {
+  public static function createElectronStorageBackend(electron:ElectronApi, ?fileName:String):StorageBackend {
     return cast Facade_HostElectron_flighthq_hostElectron_ElectronStorage.createElectronStorageBackend(electron, fileName);
     return cast null;
   }

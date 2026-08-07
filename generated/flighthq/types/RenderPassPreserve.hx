@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef RenderPassPreserve = { @:optional var preserveColor:Dynamic; @:optional var preserveDepth:Bool; };
+typedef RenderPassPreserve = { @:optional var preserveColor:flighthq._internal._Union2<Bool, Array<Bool>>; @:optional var preserveDepth:Bool; };

@@ -10,76 +10,82 @@ import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
 import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationGuard;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationStatus;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
 import flighthq.types.GlRenderTexture.GlRenderTexturePool;
+import flighthq.types.GlRenderTexture.GlRenderTextureStatus;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
 class GlRenderTextureEffect {
   public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
-    var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
-    var operations:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceTarget:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
+    var operations:Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = _Runtime.callValue(getGlRenderTextureTarget, cast ([state, source] : Array<Dynamic>));
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:Dynamic) {
-      var runner:Dynamic = cast _Runtime.UNDEFINED;
-      runner = _Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>));
+    sourceTarget = (cast getGlRenderTextureTarget((cast state : GlRenderState), (cast source : RenderTexture)) : Null<GlRenderTarget>);
+    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }> {
+      var runner:Null<GlRenderEffectRunner> = cast _Runtime.UNDEFINED;
+      runner = (cast getGlRenderEffectRunner((cast state : GlRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
     }] : Array<Dynamic>));
-    _Runtime.callValue(GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect, cast ([state, _Runtime.callValue(explainGlRenderEffectApplication, cast ([state, effects, !_Runtime.strictEquals(sourceTarget, null), _Runtime.strictEquals(_Runtime.field(_Runtime.callValue(explainGlRenderTexture, cast ([state, dest] : Array<Dynamic>)), 'status'), 'ready')] : Array<Dynamic>))] : Array<Dynamic>));
+    GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect((cast state : GlRenderState), (cast (cast explainGlRenderEffectApplication((cast state : GlRenderState), (cast effects : Array<RenderEffect>), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture((cast state : GlRenderState), (cast dest : RenderTexture)) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation) : GlRenderEffectApplicationExplanation));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
-    _Runtime.callValue(withGlRenderState, cast ([state, function() {
-      var current:Dynamic = cast _Runtime.UNDEFINED;
+    withGlRenderState((cast state : GlRenderState), (cast function():Void {
+      var current:GlRenderTarget = cast _Runtime.UNDEFINED;
       current = sourceTarget;
       {
-        var index:Dynamic = 0.0;
+        var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(operations, 'length') : Float)) : Bool)) {
-          var operation:Dynamic = flighthq._internal._StaticIndex.readArray(operations, index);
-          var remaining:Dynamic = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
-          var output:Dynamic = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-          _Runtime.callValue(writeGlRenderTextureTarget, cast ([state, output, function(target:Dynamic) {
-            _Runtime.callProperty(operation, 'runner', cast ([{ state: state, source: current, dest: target, pool: _Runtime.field(pool, 'effectTargets'), sceneDepthTexture: null, sceneVelocityTexture: null }, _Runtime.field(operation, 'effect')] : Array<Dynamic>));
-          }] : Array<Dynamic>));
-          (current = cast (_Runtime.callValue(getGlRenderTextureTarget, cast ([state, output] : Array<Dynamic>)) : Dynamic));
+          var operation:{ var effect:RenderEffect; var runner:GlRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
+          var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
+          var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
+          writeGlRenderTextureTarget((cast state : GlRenderState), (cast output : RenderTexture), function(target:GlRenderTarget):Void {
+            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner({ state: state, source: current, dest: target, pool: (cast pool : GlRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }, (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
+          });
+          (current = cast ((cast getGlRenderTextureTarget((cast state : GlRenderState), (cast output : RenderTexture)) : GlRenderTarget) : Dynamic));
           index++;
         }
       }
-    }] : Array<Dynamic>));
+    } : Void->Void));
     return cast true;
     return cast null;
   }
 
-  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, destinationAvailable:Dynamic = false):GlRenderEffectApplicationExplanation {
-    var getStatus:Void->Dynamic = cast _Runtime.UNDEFINED;
-    var unregisteredKinds:Dynamic = cast _Runtime.UNDEFINED;
-    var requestedCount:Dynamic = cast _Runtime.UNDEFINED;
-    var registeredCount:Dynamic = cast _Runtime.UNDEFINED;
-    getStatus = function getStatus():Dynamic {
+  public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, destinationAvailable:Bool = false):GlRenderEffectApplicationExplanation {
+    var getStatus:Void->flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String> = cast _Runtime.UNDEFINED;
+    var unregisteredKinds:Array<String> = cast _Runtime.UNDEFINED;
+    var requestedCount:Float = cast _Runtime.UNDEFINED;
+    var registeredCount:Float = cast _Runtime.UNDEFINED;
+    getStatus = (cast function getStatus():flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String> {
       if ((cast _Runtime.strictEquals(requestedCount, 0.0) : Bool)) { return cast 'no-effects'; }
       if ((cast ((cast destinationAvailable : Bool) && (cast _Runtime.orValue(!(cast sourceAvailable : Bool), function():Dynamic return cast _Runtime.strictEquals(registeredCount, 0.0)) : Bool)) : Bool)) { return cast 'stale-destination'; }
       if ((cast !(cast sourceAvailable : Bool) : Bool)) { return cast 'source-unavailable'; }
       if ((cast _Runtime.strictEquals(registeredCount, 0.0) : Bool)) { return cast 'unregistered-effects'; }
       return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));
-    };
-    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:Dynamic) return _Runtime.strictEquals(_Runtime.callValue(getGlRenderEffectRunner, cast ([state, _Runtime.field(effect, 'kind')] : Array<Dynamic>)), null)] : Array<Dynamic>)), 'map', cast ([function(effect:Dynamic) return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
+    } : Void->flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String>);
+    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner((cast state : GlRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null)] : Array<Dynamic>)), 'map', cast ([function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
     requestedCount = _Runtime.field(effects, 'length');
     registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
-    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: _Runtime.callValue(getStatus, cast ([] : Array<Dynamic>)), unregisteredKinds: unregisteredKinds };
+    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: (cast getStatus() : GlRenderEffectApplicationStatus), unregisteredKinds: unregisteredKinds };
     return cast null;
   }
 
   @:noCompletion
   public static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
-    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).set(state, guard)); }
+    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set(state, guard)); }
   }
 
   public static function reportGlRenderEffectApplication__glRenderTextureEffect(state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'complete') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'no-effects') : Bool)) : Bool)) { return; }
-    _Runtime.callOptionalValue(((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).get(state)), cast ([state, explanation] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).get(state)), cast ([state, explanation] : Array<Dynamic>));
   }
 
-  public static final _guards__glRenderTextureEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _guards__glRenderTextureEffect:flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

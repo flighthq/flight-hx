@@ -6,23 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 
 class GlRenderEffectRegistry {
   @:noCompletion
   public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderEffectRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderEffectRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderEffectRegistry'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(kind)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderEffectRegistry; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, GlRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'glRenderEffectRegistry', (_Runtime.field(runtime, 'glRenderEffectRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, runner));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    ((cast ((cast runtime : GlRenderStateRuntime).glRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, runner));
   }
 }

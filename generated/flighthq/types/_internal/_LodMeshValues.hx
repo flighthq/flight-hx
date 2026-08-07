@@ -8,5 +8,5 @@ import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
 
 class _LodMeshValues {
-  public static final LodMeshKind:Dynamic = 'LodMesh';
+  public static final LodMeshKind:String = 'LodMesh';
 }

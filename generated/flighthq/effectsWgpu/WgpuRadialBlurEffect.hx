@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RadialBlurEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,31 +17,31 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuRadialBlurEffect {
   @:noCompletion
   public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
-    var centerX:Dynamic = cast _Runtime.UNDEFINED;
-    var centerY:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var centerX:Float = cast _Runtime.UNDEFINED;
+    var centerY:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     centerX = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
     centerY = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 0.2);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'motion.radialBlur', WgpuRadialBlurEffect.RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'motion.radialBlur' : String), (cast WgpuRadialBlurEffect.RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, centerX);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, centerY);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, strength);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, samples);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuRadialBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyRadialBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : RadialBlurEffect)] : Array<Dynamic>));
+  public static final defaultWgpuRadialBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyRadialBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : RadialBlurEffect) : RadialBlurEffect));
   };
 
   public static function registerWgpuRadialBlurEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'RadialBlurEffect', defaultWgpuRadialBlurEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'RadialBlurEffect' : String), (cast defaultWgpuRadialBlurEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect:Dynamic = '\nstruct Uniforms {\n  u_center : vec2f,\n  u_strength : f32,\n  u_samples : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let toCenter = uni.u_center - uv;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, f32(i) / (count - 1.0), count > 1.0);\n    let p = uv + toCenter * (t * uni.u_strength);\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
+  public static final RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect:String = '\nstruct Uniforms {\n  u_center : vec2f,\n  u_strength : f32,\n  u_samples : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let toCenter = uni.u_center - uv;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, f32(i) / (count - 1.0), count > 1.0);\n    let p = uv + toCenter * (t * uni.u_strength);\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
 }

@@ -9,19 +9,19 @@ import flighthq.types.Node.NodeAny;
 class SpriteHitTests {
   @:noCompletion
   public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(defaultSpriteHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast (cast defaultSpriteHitTestHandler((cast source : NodeAny), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
+    return cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast _Runtime.callValue(defaultSpriteHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
+    return cast (cast defaultSpriteHitTestHandler((cast source : NodeAny), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 }

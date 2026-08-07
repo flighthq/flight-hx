@@ -9,49 +9,57 @@ import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.BitmapText;
+import flighthq.types.BitmapText.BitmapTextPage;
 import flighthq.types.BitmapText.BitmapTextRuntime;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class CanvasBitmapText {
   @:noCompletion
   public static function drawCanvasSpriteText(state:CanvasRenderState, node:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var pages:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var roundPixels:Dynamic = cast _Runtime.UNDEFINED;
-    var restoreMaterial:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(node, 'source') : BitmapText);
-    pages = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime), 'pages');
-    context = _Runtime.field(state, 'context');
-    transform = _Runtime.field(node, 'transform2D');
-    roundPixels = _Runtime.field(state, 'roundPixels');
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(node, 'blendMode')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(node, 'alpha'));
-    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
-    restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(node, 'material')] : Array<Dynamic>));
+    var source:BitmapText = cast _Runtime.UNDEFINED;
+    var pages:Array<BitmapTextPage> = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var transform:Matrix = cast _Runtime.UNDEFINED;
+    var roundPixels:Bool = cast _Runtime.UNDEFINED;
+    var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
+    source = (cast (cast node : RenderProxy2D).source : BitmapText);
+    pages = (cast (cast (cast getNode2DRuntime(source) : BitmapTextRuntime) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    context = (cast state : CanvasRenderState).context;
+    transform = (cast node : RenderProxy2D).transform2D;
+    roundPixels = (cast state : CanvasRenderState).roundPixels;
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast node : RenderProxy2D).alpha);
+    if ((cast !(cast (cast state : CanvasRenderState).allowSmoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
+    restoreMaterial = (cast applyCanvasMaterial((cast state : CanvasRenderState), (cast node : RenderProxy2D).material) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     for (page in _Runtime.iterable(pages)) {
-      var atlas:Dynamic = _Runtime.field(page, 'atlas');
-      var texture:Dynamic = atlas.texture;
-      if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(page, 'instanceCount'), 0.0) : Bool)) : Bool)) { continue; }
-      var domImage:Dynamic = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), texture] : Array<Dynamic>));
+      var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
+      var texture:Null<Texture2D> = atlas.texture;
+      if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
+      var domImage:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
       if ((cast _Runtime.strictEquals(domImage, null) : Bool)) { continue; }
-      var regions:Dynamic = atlas.regions;
-      var numRegions:Dynamic = _Runtime.field(regions, 'length');
-      var ids:Dynamic = _Runtime.field(page, 'ids');
-      var transforms:Dynamic = _Runtime.field(page, 'transforms');
+      var regions:Array<TextureAtlasRegion> = atlas.regions;
+      var numRegions:Float = _Runtime.field(regions, 'length');
+      var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
+      var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
       {
-        var i:Dynamic = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(page, 'instanceCount') : Float)) : Bool)) {
-          var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var i:Float = 0.0;
+        while ((cast ((cast i : Float) < (cast (cast page : BitmapTextPage).instanceCount : Float)) : Bool)) {
+          var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
+          var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
           if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
-          var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
-          var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
+          var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
+          var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([domImage, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
           i++;
         }
@@ -59,7 +67,7 @@ class CanvasBitmapText {
     }
     if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(state, 'allowSmoothing') : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
+    if ((cast !(cast (cast state : CanvasRenderState).allowSmoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
   public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasSpriteText };

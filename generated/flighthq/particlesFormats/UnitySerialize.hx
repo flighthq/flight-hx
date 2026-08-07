@@ -5,19 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.Curve.particleColorCurveToKeyframes;
 import flighthq.particles.Curve.particleCurveToKeyframes;
+import flighthq.types.ParticleCurve;
+import flighthq.types.ParticleCurve.ColorKeyframe;
+import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
 import flighthq.types.UnitySchema.UnityAnimationCurve;
 import flighthq.types.UnitySchema.UnityColor;
+import flighthq.types.UnitySchema.UnityCurveKey;
 import flighthq.types.UnitySchema.UnityGradient;
 import flighthq.types.UnitySchema.UnityMinMaxValue;
 import flighthq.types.UnitySchema.UnityParticleDocument;
 import flighthq.types.UnitySchema.UnitySerializeOptions;
 
 class UnitySerialize {
-  public static final RAD2DEG__unitySerialize:Dynamic = (180.0 / HxMath.PI);
+  public static final RAD2DEG__unitySerialize:Float = (180.0 / HxMath.PI);
 
-  public static final DEFAULT_PPU__unitySerialize:Dynamic = 100.0;
+  public static final DEFAULT_PPU__unitySerialize:Float = 100.0;
 
   public static function color__unitySerialize(r:Float, g:Float, b:Float, a:Float):UnityColor {
     return cast { r: r, g: g, b: b, a: a };
@@ -30,23 +35,23 @@ class UnitySerialize {
   }
 
   public static function twoConst__unitySerialize(low:Float, high:Float):UnityMinMaxValue {
-    if ((cast _Runtime.strictEquals(low, high) : Bool)) { return cast _Runtime.callValue(UnitySerialize.constant__unitySerialize, cast ([low] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(low, high) : Bool)) { return cast (cast UnitySerialize.constant__unitySerialize((cast low : Float)) : UnityMinMaxValue); }
     return cast { mode: 'twoConstants', constantMin: low, constantMax: high };
     return cast null;
   }
 
   public static function configToDocument__unitySerialize(config:ParticleEmitterConfig, existing:Dynamic, ppu:Float):UnityParticleDocument {
-    var rotSpeedDegLow:Dynamic = cast _Runtime.UNDEFINED;
-    var rotSpeedDegHigh:Dynamic = cast _Runtime.UNDEFINED;
-    var hasRotation:Dynamic = cast _Runtime.UNDEFINED;
-    var hasBurst:Dynamic = cast _Runtime.UNDEFINED;
-    var gravWorldUnit:Dynamic = cast _Runtime.UNDEFINED;
-    var physicsGravity:Dynamic = cast _Runtime.UNDEFINED;
-    var gravModifier:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeType:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleXY:Dynamic = cast _Runtime.UNDEFINED;
+    var rotSpeedDegLow:Float = cast _Runtime.UNDEFINED;
+    var rotSpeedDegHigh:Float = cast _Runtime.UNDEFINED;
+    var hasRotation:Bool = cast _Runtime.UNDEFINED;
+    var hasBurst:Bool = cast _Runtime.UNDEFINED;
+    var gravWorldUnit:Float = cast _Runtime.UNDEFINED;
+    var physicsGravity:Float = cast _Runtime.UNDEFINED;
+    var gravModifier:Float = cast _Runtime.UNDEFINED;
+    var shapeType:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<UnityParticleDocument, String>, String> = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var scaleXY:Float = cast _Runtime.UNDEFINED;
     rotSpeedDegLow = (config.rotationSpeedMin * UnitySerialize.RAD2DEG__unitySerialize);
     rotSpeedDegHigh = (config.rotationSpeedMax * UnitySerialize.RAD2DEG__unitySerialize);
     hasRotation = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
@@ -65,38 +70,38 @@ class UnitySerialize {
     } else { if ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool)) {
       (shapeType = cast ('Box' : Dynamic));
     } }
-    return cast { name: _Runtime.coalesce(_Runtime.field(existing, 'name'), function():Dynamic return cast ''), duration: ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.duration : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'duration'), function():Dynamic return cast 5.0) : Dynamic)), looping: config.loop, prewarm: _Runtime.coalesce(_Runtime.field(existing, 'prewarm'), function():Dynamic return cast false), maxParticles: config.maxParticles, startLifetime: _Runtime.callValue(UnitySerialize.twoConst__unitySerialize, cast ([config.lifetimeMin, config.lifetimeMax] : Array<Dynamic>)), startSpeed: _Runtime.callValue(UnitySerialize.twoConst__unitySerialize, cast ([(config.speedMin / ppu), (config.speedMax / ppu)] : Array<Dynamic>)), startSize: _Runtime.callValue(UnitySerialize.twoConst__unitySerialize, cast ([config.scaleMin, config.scaleMax] : Array<Dynamic>)), startRotation: _Runtime.callValue(UnitySerialize.constant__unitySerialize, cast ([0.0] : Array<Dynamic>)), startColor: _Runtime.callValue(UnitySerialize.color__unitySerialize, cast ([config.colorStartR, config.colorStartG, config.colorStartB, config.alphaStart] : Array<Dynamic>)), gravityModifier: gravModifier, physicsGravity: physicsGravity, emission: { rateOverTime: _Runtime.callValue(UnitySerialize.constant__unitySerialize, cast ([config.spawnRate] : Array<Dynamic>)), bursts: ((cast hasBurst : Bool) ? (cast cast ([{ time: 0.0, count: config.burstCount, cycleCount: ((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)), repeatInterval: config.burstInterval }] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) }, shape: { enabled: !_Runtime.strictEquals(config.emitterShape, 'point'), shapeType: shapeType, radius: radius, angle: angle, scale: { x: ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool) ? (cast (config.emitterWidth / ppu) : Dynamic) : (cast scaleXY : Dynamic)), y: ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool) ? (cast (config.emitterHeight / ppu) : Dynamic) : (cast scaleXY : Dynamic)), z: 1.0 } }, colorOverLifetime: _Runtime.mergeObjects([{ enabled: true }, { colorStart: _Runtime.callValue(UnitySerialize.color__unitySerialize, cast ([config.colorStartR, config.colorStartG, config.colorStartB, config.alphaStart] : Array<Dynamic>)) }, { colorEnd: _Runtime.callValue(UnitySerialize.color__unitySerialize, cast ([config.colorEndR, config.colorEndG, config.colorEndB, config.alphaEnd] : Array<Dynamic>)) }, _Runtime.select(_Runtime.orValue(config.colorCurve, function():Dynamic return cast config.alphaCurve), function():Dynamic return cast { gradient: _Runtime.callValue(UnitySerialize.buildGradient__unitySerialize, cast ([config] : Array<Dynamic>)) }, function():Dynamic return cast {  })]), sizeOverLifetime: _Runtime.mergeObjects([{ enabled: ((cast !_Runtime.strictEquals(config.scaleEnd, 1.0) : Bool) || (cast !_Runtime.looseEquals(config.scaleCurve, null) : Bool)) }, { sizeStart: 1.0 }, { sizeEnd: config.scaleEnd }, _Runtime.select(config.scaleCurve, function():Dynamic return cast { curve: _Runtime.callValue(UnitySerialize.buildSizeCurve__unitySerialize, cast ([config.scaleCurve] : Array<Dynamic>)) }, function():Dynamic return cast {  })]), rotationOverLifetime: { enabled: hasRotation, angularVelocity: ((cast hasRotation : Bool) ? (cast _Runtime.callValue(UnitySerialize.twoConst__unitySerialize, cast ([rotSpeedDegLow, rotSpeedDegHigh] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(UnitySerialize.constant__unitySerialize, cast ([0.0] : Array<Dynamic>)) : Dynamic)) } };
+    return cast { name: _Runtime.coalesce(_Runtime.field(existing, 'name'), function():Dynamic return cast ''), duration: ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.duration : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'duration'), function():Dynamic return cast 5.0) : Dynamic)), looping: config.loop, prewarm: _Runtime.coalesce(_Runtime.field(existing, 'prewarm'), function():Dynamic return cast false), maxParticles: config.maxParticles, startLifetime: (cast UnitySerialize.twoConst__unitySerialize((cast config.lifetimeMin : Float), (cast config.lifetimeMax : Float)) : UnityMinMaxValue), startSpeed: (cast UnitySerialize.twoConst__unitySerialize((cast (config.speedMin / ppu) : Float), (cast (config.speedMax / ppu) : Float)) : UnityMinMaxValue), startSize: (cast UnitySerialize.twoConst__unitySerialize((cast config.scaleMin : Float), (cast config.scaleMax : Float)) : UnityMinMaxValue), startRotation: (cast UnitySerialize.constant__unitySerialize((cast 0.0 : Float)) : UnityMinMaxValue), startColor: (cast UnitySerialize.color__unitySerialize((cast config.colorStartR : Float), (cast config.colorStartG : Float), (cast config.colorStartB : Float), (cast config.alphaStart : Float)) : UnityColor), gravityModifier: gravModifier, physicsGravity: physicsGravity, emission: { rateOverTime: (cast UnitySerialize.constant__unitySerialize((cast config.spawnRate : Float)) : UnityMinMaxValue), bursts: ((cast hasBurst : Bool) ? (cast cast ([{ time: 0.0, count: config.burstCount, cycleCount: ((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)), repeatInterval: config.burstInterval }] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) }, shape: { enabled: !_Runtime.strictEquals(config.emitterShape, 'point'), shapeType: shapeType, radius: radius, angle: angle, scale: { x: ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool) ? (cast (config.emitterWidth / ppu) : Dynamic) : (cast scaleXY : Dynamic)), y: ((cast _Runtime.strictEquals(config.emitterShape, 'rect') : Bool) ? (cast (config.emitterHeight / ppu) : Dynamic) : (cast scaleXY : Dynamic)), z: 1.0 } }, colorOverLifetime: _Runtime.mergeObjects([{ enabled: true }, { colorStart: (cast UnitySerialize.color__unitySerialize((cast config.colorStartR : Float), (cast config.colorStartG : Float), (cast config.colorStartB : Float), (cast config.alphaStart : Float)) : UnityColor) }, { colorEnd: (cast UnitySerialize.color__unitySerialize((cast config.colorEndR : Float), (cast config.colorEndG : Float), (cast config.colorEndB : Float), (cast config.alphaEnd : Float)) : UnityColor) }, _Runtime.select(_Runtime.orValue(config.colorCurve, function():Dynamic return cast config.alphaCurve), function():Dynamic return cast { gradient: (cast UnitySerialize.buildGradient__unitySerialize((cast config : ParticleEmitterConfig)) : Null<UnityGradient>) }, function():Dynamic return cast {  })]), sizeOverLifetime: _Runtime.mergeObjects([{ enabled: ((cast !_Runtime.strictEquals(config.scaleEnd, 1.0) : Bool) || (cast !_Runtime.looseEquals(config.scaleCurve, null) : Bool)) }, { sizeStart: 1.0 }, { sizeEnd: config.scaleEnd }, _Runtime.select(config.scaleCurve, function():Dynamic return cast { curve: (cast UnitySerialize.buildSizeCurve__unitySerialize((cast config.scaleCurve : Array<Float>)) : Null<UnityAnimationCurve>) }, function():Dynamic return cast {  })]), rotationOverLifetime: { enabled: hasRotation, angularVelocity: ((cast hasRotation : Bool) ? (cast (cast UnitySerialize.twoConst__unitySerialize((cast rotSpeedDegLow : Float), (cast rotSpeedDegHigh : Float)) : UnityMinMaxValue) : Dynamic) : (cast (cast UnitySerialize.constant__unitySerialize((cast 0.0 : Float)) : UnityMinMaxValue) : Dynamic)) } };
     return cast null;
   }
 
   public static function buildGradient__unitySerialize(config:ParticleEmitterConfig):UnityGradient {
-    var colorKeys:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaKeys:Dynamic = cast _Runtime.UNDEFINED;
-    colorKeys = _Runtime.select(config.colorCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleColorCurveToKeyframes, cast ([config.colorCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, color: { r: k.r, g: k.g, b: k.b } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: config.colorStartR, g: config.colorStartG, b: config.colorStartB } }, { time: 1.0, color: { r: config.colorEndR, g: config.colorEndG, b: config.colorEndB } }] : Array<Dynamic>));
-    alphaKeys = _Runtime.select(config.alphaCurve, function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([config.alphaCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, alpha: k.value }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, alpha: config.alphaStart }, { time: 1.0, alpha: config.alphaEnd }] : Array<Dynamic>));
+    var colorKeys:Array<{ var time:Float; var color:{ var r:Float; var g:Float; var b:Float; }; }> = cast _Runtime.UNDEFINED;
+    var alphaKeys:Array<{ var time:Float; var alpha:Float; }> = cast _Runtime.UNDEFINED;
+    colorKeys = _Runtime.select(config.colorCurve, function():Dynamic return cast _Runtime.callProperty((cast particleColorCurveToKeyframes(config.colorCurve) : Array<ColorKeyframe>), 'map', cast ([function(k:ColorKeyframe, __unused0:Float, __unused1:Array<ColorKeyframe>):{ var time:Float; var color:{ var r:Float; var g:Float; var b:Float; }; } return { time: k.time, color: { r: k.r, g: k.g, b: k.b } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: config.colorStartR, g: config.colorStartG, b: config.colorStartB } }, { time: 1.0, color: { r: config.colorEndR, g: config.colorEndG, b: config.colorEndB } }] : Array<Dynamic>));
+    alphaKeys = _Runtime.select(config.alphaCurve, function():Dynamic return cast _Runtime.callProperty((cast particleCurveToKeyframes(config.alphaCurve) : Array<CurveKeyframe>), 'map', cast ([function(k:CurveKeyframe, __unused2:Float, __unused3:Array<CurveKeyframe>):{ var time:Float; var alpha:Float; } return { time: k.time, alpha: k.value }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, alpha: config.alphaStart }, { time: 1.0, alpha: config.alphaEnd }] : Array<Dynamic>));
     return cast { colorKeys: colorKeys, alphaKeys: alphaKeys };
     return cast null;
   }
 
   public static function buildSizeCurve__unitySerialize(scaleCurve:Array<Float>):UnityAnimationCurve {
-    return cast { keys: _Runtime.callProperty(_Runtime.callValue(particleCurveToKeyframes, cast ([scaleCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: k.time, value: k.value }] : Array<Dynamic>)) };
+    return cast { keys: _Runtime.callProperty((cast particleCurveToKeyframes(scaleCurve) : Array<CurveKeyframe>), 'map', cast ([function(k:CurveKeyframe, __unused4:Float, __unused5:Array<CurveKeyframe>):{ var time:Float; var value:Float; } return { time: k.time, value: k.value }] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
-    var ppu:Dynamic = cast _Runtime.UNDEFINED;
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
+    var ppu:Float = cast _Runtime.UNDEFINED;
+    var doc:UnityParticleDocument = cast _Runtime.UNDEFINED;
     ppu = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.pixelsPerUnit; }), function():Dynamic return cast UnitySerialize.DEFAULT_PPU__unitySerialize);
-    doc = _Runtime.callValue(UnitySerialize.configToDocument__unitySerialize, cast ([config, _Runtime.coalesce(existing, function():Dynamic return cast {  }), ppu] : Array<Dynamic>));
+    doc = (cast UnitySerialize.configToDocument__unitySerialize((cast config : ParticleEmitterConfig), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast ppu : Float)) : UnityParticleDocument);
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }
 
   public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var warnings:Dynamic = cast _Runtime.UNDEFINED;
-    text = _Runtime.callValue(serializeUnityParticle, cast ([config, existing, options] : Array<Dynamic>));
-    warnings = _Runtime.callValue(UnitySerialize.collectUnitySerializeWarnings__unitySerialize, cast ([config] : Array<Dynamic>));
+    var text:String = cast _Runtime.UNDEFINED;
+    var warnings:Array<String> = cast _Runtime.UNDEFINED;
+    text = (cast serializeUnityParticle((cast config : ParticleEmitterConfig), (cast existing : Null<flighthq._internal._Any>), (cast options : Null<UnitySerializeOptions>)) : String);
+    warnings = (cast UnitySerialize.collectUnitySerializeWarnings__unitySerialize((cast config : ParticleEmitterConfig)) : Array<String>);
     return cast { text: text, warnings: warnings };
     return cast null;
   }

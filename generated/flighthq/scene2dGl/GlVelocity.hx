@@ -14,14 +14,23 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlVelocityWriter;
 import flighthq.types.GlVelocityWriter.GlVelocityContext;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.Matrix;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.QuadBatch;
+import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
+import flighthq.types.QuadTransformType;
+import flighthq.types.Rectangle;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocityField;
@@ -32,39 +41,39 @@ typedef GlVelocityProgram__glVelocity = { var program:flighthq._internal.dom.Web
 
 class GlVelocity {
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
-    return cast _Runtime.callValue(createGlRenderTarget, cast ([state, { width: width, height: height, format: 'rgba16f' }] : Array<Dynamic>));
+    return cast (cast createGlRenderTarget((cast state : GlRenderState), { width: width, height: height, format: 'rgba16f' }) : GlRenderTarget);
     return cast null;
   }
 
-  public static final defaultGlNode2DVelocityWriter:GlVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
-    var spatial:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getVelocity, cast ([_Runtime.field(ctx, 'field'), node, GlVelocity._scratchVelocity__glVelocity] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0) : Bool)) : Bool)) { return; }
-    spatial = (cast (cast node : Dynamic) : Spatial2DNode<Dynamic>);
-    _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
-    bounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
-    _Runtime.callValue(drawGlVelocityQuad, cast ([ctx, _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'width'), _Runtime.field(bounds, 'height'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y')] : Array<Dynamic>));
+  public static final defaultGlNode2DVelocityWriter:GlVelocityWriter = function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
+    var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    (cast getVelocity((cast _Runtime.field(ctx, 'field') : VelocityField), (cast node : flighthq._internal._Object), (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D)) : Velocity2D);
+    if ((cast ((cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
+    spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
+    ensureNodeWorldBoundsRectangle(spatial);
+    bounds = (cast getNodeWorldBoundsRectangle(spatial) : Rectangle);
+    drawGlVelocityQuad((cast ctx : GlVelocityContext), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
   };
 
-  public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
-    var emitter:Dynamic = cast _Runtime.UNDEFINED;
+  public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
+    var emitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var ids:Dynamic = cast _Runtime.UNDEFINED;
-    var particleCount:Dynamic = cast _Runtime.UNDEFINED;
-    var transforms:Dynamic = cast _Runtime.UNDEFINED;
-    var velocities:Dynamic = cast _Runtime.UNDEFINED;
-    var worldSpace:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    var numRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var wa:Dynamic = cast _Runtime.UNDEFINED;
-    var wb:Dynamic = cast _Runtime.UNDEFINED;
-    var wc:Dynamic = cast _Runtime.UNDEFINED;
-    var wd:Dynamic = cast _Runtime.UNDEFINED;
-    var wtx:Dynamic = cast _Runtime.UNDEFINED;
-    var wty:Dynamic = cast _Runtime.UNDEFINED;
-    emitter = (cast (cast node : Dynamic) : ParticleEmitter2D);
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
+    var particleCount:Float = cast _Runtime.UNDEFINED;
+    var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var velocities:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var worldSpace:Bool = cast _Runtime.UNDEFINED;
+    var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
+    var numRegions:Float = cast _Runtime.UNDEFINED;
+    var wa:Float = cast _Runtime.UNDEFINED;
+    var wb:Float = cast _Runtime.UNDEFINED;
+    var wc:Float = cast _Runtime.UNDEFINED;
+    var wd:Float = cast _Runtime.UNDEFINED;
+    var wtx:Float = cast _Runtime.UNDEFINED;
+    var wty:Float = cast _Runtime.UNDEFINED;
+    emitter = (cast (cast node : flighthq._internal._Any) : ParticleEmitter2D);
     __destructure0 = emitter.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     ids = _Runtime.field(__destructure0, 'ids');
@@ -82,8 +91,8 @@ class GlVelocity {
     wtx = 0.0;
     wty = 0.0;
     if ((cast !(cast worldSpace : Bool) : Bool)) {
-      _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
-      var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
+      ensureNodeWorldMatrix((cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>));
+      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>)) : Matrix);
       (wa = cast (transform.a : Dynamic));
       (wb = cast (transform.b : Dynamic));
       (wc = cast (transform.c : Dynamic));
@@ -92,37 +101,37 @@ class GlVelocity {
       (wty = cast (transform.ty : Dynamic));
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
-        var velocityX:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(velocities, (i * 2.0));
-        var velocityY:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(velocities, ((i * 2.0) + 1.0));
+        var velocityX:Float = flighthq._internal._StaticIndex.readFloat32Array(velocities, (i * 2.0));
+        var velocityY:Float = flighthq._internal._StaticIndex.readFloat32Array(velocities, ((i * 2.0) + 1.0));
         if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-        var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-        var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-        var rw:Dynamic = region.width;
-        var rh:Dynamic = region.height;
+        var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
+        var rw:Float = region.width;
+        var rh:Float = region.height;
         if ((cast ((cast ((cast rw : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast rh : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
-        var tt:Dynamic = (i * 4.0);
-        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
-        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
-        var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
-        var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosScale:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
-        var sinScale:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
-        var minX:Dynamic = HxMath.POSITIVE_INFINITY;
-        var minY:Dynamic = HxMath.POSITIVE_INFINITY;
-        var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
-        var maxY:Dynamic = -HxMath.POSITIVE_INFINITY;
+        var tt:Float = (i * 4.0);
+        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
+        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
+        var rotation:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
+        var scale:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
+        var cosScale:Float = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinScale:Float = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
+        var minX:Float = HxMath.POSITIVE_INFINITY;
+        var minY:Float = HxMath.POSITIVE_INFINITY;
+        var maxX:Float = -HxMath.POSITIVE_INFINITY;
+        var maxY:Float = -HxMath.POSITIVE_INFINITY;
         {
-          var c:Dynamic = 0.0;
+          var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-            var lx:Dynamic = ((_Runtime.toInt32(c) & 1) * rw);
-            var ly:Dynamic = ((_Runtime.toInt32(c) >> 1) * rh);
-            var rx:Dynamic = (((cosScale * lx) - (sinScale * ly)) + px);
-            var ry:Dynamic = (((sinScale * lx) + (cosScale * ly)) + py);
-            var wx:Dynamic = ((cast worldSpace : Bool) ? (cast rx : Dynamic) : (cast (((wa * rx) + (wc * ry)) + wtx) : Dynamic));
-            var wy:Dynamic = ((cast worldSpace : Bool) ? (cast ry : Dynamic) : (cast (((wb * rx) + (wd * ry)) + wty) : Dynamic));
+            var lx:Float = ((_Runtime.toInt32(c) & 1) * rw);
+            var ly:Float = ((_Runtime.toInt32(c) >> 1) * rh);
+            var rx:Float = (((cosScale * lx) - (sinScale * ly)) + px);
+            var ry:Float = (((sinScale * lx) + (cosScale * ly)) + py);
+            var wx:Float = ((cast worldSpace : Bool) ? (cast rx : Dynamic) : (cast (((wa * rx) + (wc * ry)) + wtx) : Dynamic));
+            var wy:Float = ((cast worldSpace : Bool) ? (cast ry : Dynamic) : (cast (((wb * rx) + (wd * ry)) + wty) : Dynamic));
             if ((cast ((cast wx : Float) < (cast minX : Float)) : Bool)) { (minX = cast (wx : Dynamic)); }
             if ((cast ((cast wx : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (wx : Dynamic)); }
             if ((cast ((cast wy : Float) < (cast minY : Float)) : Bool)) { (minY = cast (wy : Dynamic)); }
@@ -130,30 +139,30 @@ class GlVelocity {
             c++;
           }
         }
-        _Runtime.callValue(drawGlVelocityQuad, cast ([ctx, minX, minY, (maxX - minX), (maxY - minY), velocityX, velocityY] : Array<Dynamic>));
+        drawGlVelocityQuad((cast ctx : GlVelocityContext), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
         i++;
       }
     }
   };
 
   @:noCompletion
-  public static final defaultGlQuadBatchVelocityWriter:GlVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
-    var batch:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceVelocities:Dynamic = cast _Runtime.UNDEFINED;
+  public static final defaultGlQuadBatchVelocityWriter:GlVelocityWriter = function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
+    var batch:QuadBatch = cast _Runtime.UNDEFINED;
+    var data:QuadBatchData = cast _Runtime.UNDEFINED;
+    var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
+    var instanceVelocities:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var ids:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceCount:Dynamic = cast _Runtime.UNDEFINED;
-    var transforms:Dynamic = cast _Runtime.UNDEFINED;
-    var transformType:Dynamic = cast _Runtime.UNDEFINED;
-    var spatial:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    batch = (cast (cast node : Dynamic) : QuadBatch);
-    data = _Runtime.field(batch, 'data');
-    runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:Dynamic; }), EntityRuntimeKey) : QuadBatchRuntime);
-    instanceVelocities = _Runtime.field(runtime, 'instanceVelocities');
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
+    var instanceCount:Float = cast _Runtime.UNDEFINED;
+    var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var transformType:QuadTransformType = cast _Runtime.UNDEFINED;
+    var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    batch = (cast (cast node : flighthq._internal._Any) : QuadBatch);
+    data = (cast batch : QuadBatch).data;
+    runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:flighthq._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
+    instanceVelocities = (cast runtime : QuadBatchRuntime).instanceVelocities;
     __destructure1 = data;
     atlas = _Runtime.field(__destructure1, 'atlas');
     ids = _Runtime.field(__destructure1, 'ids');
@@ -161,28 +170,28 @@ class GlVelocity {
     transforms = _Runtime.field(__destructure1, 'transforms');
     transformType = _Runtime.field(__destructure1, 'transformType');
     if ((cast ((cast ((cast !_Runtime.strictEquals(instanceVelocities, null) : Bool) && (cast !_Runtime.strictEquals(atlas, null) : Bool)) : Bool) && (cast ((cast instanceCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var regions:Dynamic = atlas.regions;
-      var numRegions:Dynamic = _Runtime.field(regions, 'length');
-      _Runtime.callValue(ensureNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
-      var transform:Dynamic = _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast node : Dynamic) : Transform2DNode<Dynamic>)] : Array<Dynamic>));
-      var pa:Dynamic = transform.a;
-      var pb:Dynamic = transform.b;
-      var pc:Dynamic = transform.c;
-      var pd:Dynamic = transform.d;
-      var ptx:Dynamic = transform.tx;
-      var pty:Dynamic = transform.ty;
-      var isVector2:Dynamic = _Runtime.strictEquals(transformType, 'vector2');
+      var regions:Array<TextureAtlasRegion> = atlas.regions;
+      var numRegions:Float = _Runtime.field(regions, 'length');
+      ensureNodeWorldMatrix((cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>));
+      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>)) : Matrix);
+      var pa:Float = transform.a;
+      var pb:Float = transform.b;
+      var pc:Float = transform.c;
+      var pd:Float = transform.d;
+      var ptx:Float = transform.tx;
+      var pty:Float = transform.ty;
+      var isVector2:Bool = _Runtime.strictEquals(transformType, 'vector2');
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-          var velocityX:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, (i * 2.0));
-          var velocityY:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, ((i * 2.0) + 1.0));
+          var velocityX:Float = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, (i * 2.0));
+          var velocityY:Float = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, ((i * 2.0) + 1.0));
           if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-          var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+          var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
-          var w:Dynamic = region.width;
-          var h:Dynamic = region.height;
+          var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
+          var w:Float = region.width;
+          var h:Float = region.height;
           if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
           var wa:Float = cast _Runtime.UNDEFINED;
           var wb:Float = cast _Runtime.UNDEFINED;
@@ -191,8 +200,8 @@ class GlVelocity {
           var wtx:Float = cast _Runtime.UNDEFINED;
           var wty:Float = cast _Runtime.UNDEFINED;
           if ((cast isVector2 : Bool)) {
-            var dx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
-            var dy:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
+            var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
+            var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
             (wa = cast (pa : Dynamic));
             (wb = cast (pb : Dynamic));
             (wc = cast (pc : Dynamic));
@@ -200,13 +209,13 @@ class GlVelocity {
             (wtx = cast ((((pa * dx) + (pc * dy)) + ptx) : Dynamic));
             (wty = cast ((((pb * dx) + (pd * dy)) + pty) : Dynamic));
           } else {
-            var o:Dynamic = (i * 6.0);
-            var la:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, o);
-            var lb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 1.0));
-            var lc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 2.0));
-            var ld:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 3.0));
-            var ltx:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 4.0));
-            var lty:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 5.0));
+            var o:Float = (i * 6.0);
+            var la:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, o);
+            var lb:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 1.0));
+            var lc:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 2.0));
+            var ld:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 3.0));
+            var ltx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 4.0));
+            var lty:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 5.0));
             (wa = cast (((pa * la) + (pc * lb)) : Dynamic));
             (wb = cast (((pb * la) + (pd * lb)) : Dynamic));
             (wc = cast (((pa * lc) + (pc * ld)) : Dynamic));
@@ -214,131 +223,131 @@ class GlVelocity {
             (wtx = cast ((((pa * ltx) + (pc * lty)) + ptx) : Dynamic));
             (wty = cast ((((pb * ltx) + (pd * lty)) + pty) : Dynamic));
           }
-          var x0:Dynamic = wtx;
-          var y0:Dynamic = wty;
-          var x1:Dynamic = ((wa * w) + wtx);
-          var y1:Dynamic = ((wb * w) + wty);
-          var x2:Dynamic = ((wc * h) + wtx);
-          var y2:Dynamic = ((wd * h) + wty);
-          var x3:Dynamic = (((wa * w) + (wc * h)) + wtx);
-          var y3:Dynamic = (((wb * w) + (wd * h)) + wty);
-          var minX:Dynamic = HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3);
-          var minY:Dynamic = HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3);
-          var maxX:Dynamic = HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3);
-          var maxY:Dynamic = HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3);
-          _Runtime.callValue(drawGlVelocityQuad, cast ([ctx, minX, minY, (maxX - minX), (maxY - minY), velocityX, velocityY] : Array<Dynamic>));
+          var x0:Float = wtx;
+          var y0:Float = wty;
+          var x1:Float = ((wa * w) + wtx);
+          var y1:Float = ((wb * w) + wty);
+          var x2:Float = ((wc * h) + wtx);
+          var y2:Float = ((wd * h) + wty);
+          var x3:Float = (((wa * w) + (wc * h)) + wtx);
+          var y3:Float = (((wb * w) + (wd * h)) + wty);
+          var minX:Float = HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3);
+          var minY:Float = HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3);
+          var maxX:Float = HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3);
+          var maxY:Float = HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3);
+          drawGlVelocityQuad((cast ctx : GlVelocityContext), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
           i++;
         }
       }
       return;
     }
-    _Runtime.callValue(getVelocity, cast ([_Runtime.field(ctx, 'field'), node, GlVelocity._scratchVelocity__glVelocity] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y'), 0.0) : Bool)) : Bool)) { return; }
-    spatial = (cast (cast node : Dynamic) : Spatial2DNode<Dynamic>);
-    _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
-    bounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([spatial] : Array<Dynamic>));
-    _Runtime.callValue(drawGlVelocityQuad, cast ([ctx, _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'width'), _Runtime.field(bounds, 'height'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'x'), _Runtime.field(GlVelocity._scratchVelocity__glVelocity, 'y')] : Array<Dynamic>));
+    (cast getVelocity((cast _Runtime.field(ctx, 'field') : VelocityField), (cast node : flighthq._internal._Object), (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D)) : Velocity2D);
+    if ((cast ((cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
+    spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
+    ensureNodeWorldBoundsRectangle(spatial);
+    bounds = (cast getNodeWorldBoundsRectangle(spatial) : Rectangle);
+    drawGlVelocityQuad((cast ctx : GlVelocityContext), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
   };
 
   @:noCompletion
   public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var clipX0:Dynamic = cast _Runtime.UNDEFINED;
-    var clipY0:Dynamic = cast _Runtime.UNDEFINED;
-    var clipWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var clipHeight:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(GlVelocity.ensureGlVelocityProgram__glVelocity, cast ([_Runtime.field(ctx, 'state')] : Array<Dynamic>));
-    gl = _Runtime.field(_Runtime.field(ctx, 'state'), 'gl');
+    var program:GlVelocityProgram__glVelocity = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var clipX0:Float = cast _Runtime.UNDEFINED;
+    var clipY0:Float = cast _Runtime.UNDEFINED;
+    var clipWidth:Float = cast _Runtime.UNDEFINED;
+    var clipHeight:Float = cast _Runtime.UNDEFINED;
+    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity((cast _Runtime.field(ctx, 'state') : GlRenderState)) : GlVelocityProgram__glVelocity);
+    gl = (cast _Runtime.field(ctx, 'state') : GlRenderState).gl;
     clipX0 = ((_Runtime.divideNumbers(x, _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
     clipY0 = (1.0 - (_Runtime.divideNumbers(y, _Runtime.field(ctx, 'height')) * 2.0));
     clipWidth = (_Runtime.divideNumbers(width, _Runtime.field(ctx, 'width')) * 2.0);
     clipHeight = -(_Runtime.divideNumbers(height, _Runtime.field(ctx, 'height')) * 2.0);
-    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight);
-    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, _Runtime.field(program, 'locVelocity'), _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')), _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast program : GlVelocityProgram__glVelocity).locClipRect, clipX0, clipY0, clipWidth, clipHeight);
+    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast program : GlVelocityProgram__glVelocity).locVelocity, _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')), _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 6.0);
   }
 
   @:noCompletion
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlVelocityWriter>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
-    var writers:Dynamic = cast _Runtime.UNDEFINED;
-    writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state));
+    var writers:Null<flighthq._internal._Map<String, GlVelocityWriter>> = cast _Runtime.UNDEFINED;
+    writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).get(state));
     if ((cast _Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (writers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).set(state, writers));
+      ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).set(state, writers));
     }
-    ((cast writers : flighthq._internal._Map).set(kind, writer));
+    ((cast writers : flighthq._internal._Map<String, GlVelocityWriter>).set(kind, writer));
   }
 
   public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var program:GlVelocityProgram__glVelocity = cast _Runtime.UNDEFINED;
     var ctx:GlVelocityContext = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
-    program = _Runtime.callValue(GlVelocity.ensureGlVelocityProgram__glVelocity, cast ([state] : Array<Dynamic>));
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    gl = (cast state : GlRenderState).gl;
+    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity((cast state : GlRenderState)) : GlVelocityProgram__glVelocity);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), _Runtime.field(target, 'framebuffer'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(program, 'quadBuffer'));
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(program, 'locCorner'));
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(program, 'locCorner'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
-    ctx = { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: _Runtime.field(state, 'pixelRatio') };
-    _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, root] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), _Runtime.field(runtime, 'currentFramebuffer'));
-    flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, _Runtime.field(program, 'locCorner'));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlVelocityProgram__glVelocity).program);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast program : GlVelocityProgram__glVelocity).quadBuffer);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast program : GlVelocityProgram__glVelocity).locCorner);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast program : GlVelocityProgram__glVelocity).locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
+    ctx = { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: (cast state : GlRenderState).pixelRatio };
+    GlVelocity.visitGlVelocity__glVelocity((cast ctx : GlVelocityContext), root);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast runtime : GlRenderStateRuntime).currentFramebuffer);
+    flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, (cast program : GlVelocityProgram__glVelocity).locCorner);
   }
 
   public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var glProgram:Dynamic = cast _Runtime.UNDEFINED;
-    var quadBuffer:Dynamic = cast _Runtime.UNDEFINED;
-    program = ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var program:Null<GlVelocityProgram__glVelocity> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var glProgram:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    var quadBuffer:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
+    program = ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlVelocityProgram__glVelocity>).get((cast state : GlRenderState).gl));
     if ((cast !_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast program; }
-    gl = _Runtime.field(state, 'gl');
-    glProgram = _Runtime.callValue(createGlProgram, cast ([gl, GlVelocity.VELOCITY_VERTEX_SRC__glVelocity, GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity, 'Velocity'] : Array<Dynamic>));
+    gl = (cast state : GlRenderState).gl;
+    glProgram = (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlVelocity.VELOCITY_VERTEX_SRC__glVelocity : String), (cast GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity : String), (cast 'Velocity' : String)) : flighthq._internal.dom.WebGLProgram);
     quadBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, glProgram, 'a_corner'), locClipRect: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_clipRect'), locVelocity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, glProgram, 'u_velocity') } : Dynamic));
-    ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), program));
+    ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlVelocityProgram__glVelocity>).set((cast state : GlRenderState).gl, program));
     return cast program;
     return cast null;
   }
 
   public static function visitGlVelocity__glVelocity<Traits>(ctx:GlVelocityContext, node:Transform2DNode<Traits>):Void {
-    var writer:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    writer = _Runtime.callValue(getGlVelocityWriter, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(node, 'kind')] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { _Runtime.callValue(writer, cast ([ctx, node] : Array<Dynamic>)); }
-    count = _Runtime.callValue(getNodeChildCount, cast ([node] : Array<Dynamic>));
+    var writer:Null<GlVelocityWriter> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    writer = (cast getGlVelocityWriter((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(node, 'kind') : String)) : Null<GlVelocityWriter>);
+    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer((cast ctx : GlVelocityContext), (cast node : flighthq._internal._Object)); }
+    count = (cast getNodeChildCount(node) : Float);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var child:Dynamic = _Runtime.callValue(getNodeChildAt, cast ([node, i] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, (cast (cast child : Dynamic) : Transform2DNode<Traits>)] : Array<Dynamic>)); }
+        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt(node, (cast i : Float)) : Null<NodeOf<Traits>>);
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { GlVelocity.visitGlVelocity__glVelocity((cast ctx : GlVelocityContext), (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>)); }
         i++;
       }
     }
   }
 
-  public static final VELOCITY_VERTEX_SRC__glVelocity:Dynamic = '#version 300 es\nin vec2 a_corner;\nuniform vec4 u_clipRect;\nvoid main() {\n  vec2 clip = u_clipRect.xy + a_corner * u_clipRect.zw;\n  gl_Position = vec4(clip, 0.0, 1.0);\n}';
+  public static final VELOCITY_VERTEX_SRC__glVelocity:String = '#version 300 es\nin vec2 a_corner;\nuniform vec4 u_clipRect;\nvoid main() {\n  vec2 clip = u_clipRect.xy + a_corner * u_clipRect.zw;\n  gl_Position = vec4(clip, 0.0, 1.0);\n}';
 
-  public static final VELOCITY_FRAGMENT_SRC__glVelocity:Dynamic = '#version 300 es\nprecision highp float;\nuniform vec2 u_velocity;\nout vec4 fragColor;\nvoid main() {\n  fragColor = vec4(u_velocity, 0.0, 1.0);\n}';
+  public static final VELOCITY_FRAGMENT_SRC__glVelocity:String = '#version 300 es\nprecision highp float;\nuniform vec2 u_velocity;\nout vec4 fragColor;\nvoid main() {\n  fragColor = vec4(u_velocity, 0.0, 1.0);\n}';
 
   public static final _scratchVelocity__glVelocity:Velocity2D = { x: 0.0, y: 0.0 };
 
-  public static final _velocityPrograms__glVelocity:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _velocityPrograms__glVelocity:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlVelocityProgram__glVelocity> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _velocityWriters__glVelocity:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _velocityWriters__glVelocity:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

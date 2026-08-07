@@ -59,7 +59,7 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderState.copyWgpuRenderStateRegistrations(target, source);
   }
 
-  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Dynamic):flighthq._internal._Promise<Bitmap> {
+  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Float):flighthq._internal._Promise<Bitmap> {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuSurface.createBitmapFromWgpuRenderState(state, timeoutMs);
     return cast null;
   }
@@ -178,7 +178,7 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTexturePool.releaseWgpuRenderTexture(state, pool, renderTexture);
   }
 
-  public static function renderIntoWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, callback:Dynamic):Void {
+  public static function renderIntoWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, callback:WgpuRenderState->Void):Void {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTexture.renderIntoWgpuRenderTexture(state, renderTexture, callback);
   }
 
@@ -191,7 +191,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<WgpuTextureEntry> {
+  public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, ?premultiply:Bool, ?workingColorSpace:RenderTargetColorSpace):Null<WgpuTextureEntry> {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver.resolveWgpuTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
@@ -204,7 +204,7 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuBackground.submitWgpuRenderPass(state);
   }
 
-  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
+  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTexturePool.withWgpuRenderTextures(state, pool, descriptors, callback);
     return cast null;
   }

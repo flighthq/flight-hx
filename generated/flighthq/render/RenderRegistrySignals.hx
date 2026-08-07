@@ -8,22 +8,24 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.types.RenderRegistrySignals;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.Signal;
 
-typedef RenderRegistryMissEmitter__renderRegistrySignals = Dynamic;
+typedef RenderRegistryMissEmitter__renderRegistrySignals = flighthq._internal._IndexedAccess<RenderStateRuntime, String>;
 
 class RenderRegistrySignals {
   public static function enableRenderRegistrySignals(state:RenderState):flighthq.types.RenderRegistrySignals {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var signals:flighthq.types.RenderRegistrySignals = cast _Runtime.UNDEFINED;
-    var emitter:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'registryMiss'), null) : Bool)) { return cast _Runtime.field(_Runtime.field(runtime, 'registryMiss'), 'signals'); }
-    signals = { onRegistryMiss: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
-    emitter = (cast function(registry:Dynamic, kind:Dynamic) return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(signals, 'onRegistryMiss')], [registry], [kind]]), 1) : RenderRegistryMissEmitter__renderRegistrySignals);
-    flighthq._internal.DynamicObject.assign(emitter, { clear: function() return _Runtime.callValue(clearSignal, cast ([_Runtime.field(signals, 'onRegistryMiss')] : Array<Dynamic>)), signals: signals });
-    _Runtime.setField(runtime, 'registryMiss', emitter);
+    var emitter:flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:flighthq.types.RenderRegistrySignals; }> = cast _Runtime.UNDEFINED;
+    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    if ((cast !_Runtime.strictEquals((cast runtime : RenderStateRuntime).registryMiss, null) : Bool)) { return cast (cast (cast runtime : RenderStateRuntime).registryMiss : { var signals:flighthq.types.RenderRegistrySignals; }).signals; }
+    signals = { onRegistryMiss: (cast createSignal() : Signal<RenderRegistry->String->Void>) };
+    emitter = (cast function(registry:RenderRegistry, kind:String):Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : flighthq.types.RenderRegistrySignals).onRegistryMiss], [registry], [kind]]), 1) : RenderRegistryMissEmitter__renderRegistrySignals);
+    flighthq._internal.DynamicObject.assign(emitter, { clear: function():Void return clearSignal((cast signals : flighthq.types.RenderRegistrySignals).onRegistryMiss), signals: signals });
+    ((cast runtime : RenderStateRuntime).registryMiss = emitter);
     return cast signals;
     return cast null;
   }

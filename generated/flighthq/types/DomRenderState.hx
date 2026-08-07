@@ -3,18 +3,22 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Entity.Kind;
+import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 import flighthq.types.ShapeCommand.PathWinding;
 
-typedef DomRenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<Dynamic>; var domCssFilterResolver:Null<Dynamic>; var element:flighthq._internal.dom.HTMLElement; };
+typedef DomRenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<flighthq._internal.dom.HTMLElement->Null<BlendMode>->Void>; var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; var element:flighthq._internal.dom.HTMLElement; };
 
-typedef DomRenderStateRuntime = { var binding:Null<Dynamic>; @:optional var canvasShapeCommandRegistry:Null<Dynamic>; var colorAdjustmentResolver:Null<Dynamic>; var colorAdjustmentUnsupportedGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var renderProxySources:Dynamic; var registryMiss:Null<{ var clear:Dynamic; var signals:RenderRegistrySignals; }>; @:optional var renderEffectPaddingResolverRegistry:Null<Dynamic>; var renderRootGuard:Null<Dynamic>; var strokeTessellator:Null<Dynamic>; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; var currentBlendMode:Null<BlendMode>; var domClipHooks:Null<DomClipHooks>; var domClipStack:Array<DomClipEntry>; var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; var domElementMap:Dynamic; @:optional var bitmapElementCache:Dynamic; @:optional var domTextureResolverRegistry:Null<Dynamic>; @:optional var shapeRasterizer:Null<ShapeRasterizer>; var domNextOrderList:Array<RenderProxy2D>; var domOrderLength:Float; var domOrderList:Array<RenderProxy2D>; };
+typedef DomRenderStateRuntime = { var binding:Null<flighthq._internal._Object>; @:optional var canvasShapeCommandRegistry:Null<flighthq._internal._Map<String, CanvasShapeCommand<Dynamic>>>; var colorAdjustmentResolver:Null<RenderState->RenderProxy->RenderProxy->Void>; var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; var currentFrameId:Float; var renderAdaptHook:Null<RenderState->Renderable->RenderProxy2D->Void>; var renderProxyAdapterMap:flighthq._internal._WeakMap<Renderable, RenderProxyAdapter>; var renderProxyMap:flighthq._internal._WeakMap<Renderable, RenderProxy>; var renderProxySources:flighthq._internal._Set<Renderable>; var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->Kind->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; @:optional var renderEffectPaddingResolverRegistry:Null<flighthq._internal._Map<Kind, RenderEffectPaddingResolver>>; var renderRootGuard:Null<RenderState->Renderable->Void>; var strokeTessellator:Null<Path->StrokeStyle->Float->Null<PathMesh>>; var rendererMap:flighthq._internal._Map<Kind, Renderer>; var rendererMapId:Float; var tempStack:Array<Renderable>; var currentBlendMode:Null<BlendMode>; var domClipHooks:Null<DomClipHooks>; var domClipStack:Array<DomClipEntry>; var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; var domElementMap:flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>; @:optional var bitmapElementCache:flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>; @:optional var domTextureResolverRegistry:Null<flighthq._internal._Map<TextureSourceKind, DomTextureResolver>>; @:optional var shapeRasterizer:Null<ShapeRasterizer>; var domNextOrderList:Array<RenderProxy2D>; var domOrderLength:Float; var domOrderList:Array<RenderProxy2D>; };
 
 typedef DomClipContourEntry = { var contours:Array<Array<Float>>; var kind:String; var winding:PathWinding; };
 
-typedef DomClipEntry = Dynamic;
+typedef DomClipEntry = flighthq._internal._Union2<DomClipContourEntry, DomScene2DRectangle>;
 
-typedef DomClipHooks = { var apply:Dynamic; };
+typedef DomClipHooks = { var apply:flighthq.types.DomRenderState->RenderProxy2D->Void; };

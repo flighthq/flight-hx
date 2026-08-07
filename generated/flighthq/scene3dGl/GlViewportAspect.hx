@@ -5,12 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlViewportRect;
 
 class GlViewportAspect {
   public static function getGlScene3DViewportAspect(state:GlRenderState):Float {
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    viewport = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    return cast ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
+    var viewport:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, GlViewportRect> = cast _Runtime.UNDEFINED;
+    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast _Runtime.field(state, 'canvas'));
+    return cast ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 }

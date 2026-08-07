@@ -8,43 +8,43 @@ import flighthq.types.Skeleton2D;
 import flighthq.types.Skin2D;
 
 class SkinAttachment2DPoints {
-  public static final MATRIX_STRIDE__skinAttachment2DPoints:Dynamic = 6.0;
+  public static final MATRIX_STRIDE__skinAttachment2DPoints:Float = 6.0;
 
   @:noCompletion
-  public static function skinSkeleton2DAttachmentPoints(out:Dynamic, skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, skeleton:Skeleton2D, boneIndex:Float, deform:Null<flighthq._internal._Float32Array>, subject:String):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var offsets:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var bb:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
+  public static function skinSkeleton2DAttachmentPoints(out:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, skeleton:Skeleton2D, boneIndex:Float, deform:Null<flighthq._internal._Float32Array>, subject:String):Void {
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var offsets:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var bb:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
     world = _Runtime.field(skeleton, 'worldMatrices');
     if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast !_Runtime.strictEquals(skin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      var counts:Dynamic = _Runtime.field(skin, 'influenceCounts');
-      var inf:Dynamic = _Runtime.field(skin, 'influences');
-      var offsets:Dynamic = ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.multiplyNumbers(_Runtime.field(deform, 'length'), 2.0), _Runtime.field(inf, 'length')) : Bool)) : Bool) ? (cast deform : Dynamic) : (cast null : Dynamic));
+      var counts:flighthq._internal._UInt16Array = _Runtime.field(skin, 'influenceCounts');
+      var inf:flighthq._internal._Float32Array = _Runtime.field(skin, 'influences');
+      var offsets:Null<flighthq._internal._Float32Array> = ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.multiplyNumbers(_Runtime.field(deform, 'length'), 2.0), _Runtime.field(inf, 'length')) : Bool)) : Bool) ? (cast deform : Dynamic) : (cast null : Dynamic));
       if ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(offsets, null) : Bool)) : Bool)) {
-        _Runtime.callValue(reportSkeleton2DDeformLengthMismatch, cast ([subject, _Runtime.field(deform, 'length'), _Runtime.divideNumbers(_Runtime.field(inf, 'length'), 2.0)] : Array<Dynamic>));
+        reportSkeleton2DDeformLengthMismatch((cast subject : String), (cast _Runtime.field(deform, 'length') : Float), (cast _Runtime.divideNumbers(_Runtime.field(inf, 'length'), 2.0) : Float));
       }
-      var vi:Dynamic = 0.0;
-      var di:Dynamic = 0.0;
-      var oi:Dynamic = 0.0;
+      var vi:Float = 0.0;
+      var di:Float = 0.0;
+      var oi:Float = 0.0;
       {
-        var v:Dynamic = 0.0;
+        var v:Float = 0.0;
         while ((cast ((cast v : Float) < (cast _Runtime.field(counts, 'length') : Float)) : Bool)) {
-          var wx:Dynamic = 0.0;
-          var wy:Dynamic = 0.0;
-          var n:Dynamic = flighthq._internal._StaticIndex.readUint16Array(counts, v);
+          var wx:Float = 0.0;
+          var wy:Float = 0.0;
+          var n:Float = flighthq._internal._StaticIndex.readUint16Array(counts, v);
           {
-            var k:Dynamic = 0.0;
+            var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast n : Float)) : Bool)) {
-              var b:Dynamic = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, vi), SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
-              var lx:Dynamic = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, di)) : Dynamic));
-              var ly:Dynamic = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (di + 1.0))) : Dynamic));
-              var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 3.0));
+              var b:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, vi), SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
+              var lx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, di)) : Dynamic));
+              var ly:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (di + 1.0))) : Dynamic));
+              var weight:Float = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 3.0));
               (wx = cast ((wx + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))))) : Dynamic));
               (wy = cast ((wy + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))))) : Dynamic));
               (vi = cast ((vi + 4.0) : Dynamic));
@@ -63,7 +63,7 @@ class SkinAttachment2DPoints {
     if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(vertices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     offsets = ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(deform, 'length'), _Runtime.field(vertices, 'length')) : Bool)) : Bool) ? (cast deform : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(offsets, null) : Bool)) : Bool)) {
-      _Runtime.callValue(reportSkeleton2DDeformLengthMismatch, cast ([subject, _Runtime.field(deform, 'length'), _Runtime.field(vertices, 'length')] : Array<Dynamic>));
+      reportSkeleton2DDeformLengthMismatch((cast subject : String), (cast _Runtime.field(deform, 'length') : Float), (cast _Runtime.field(vertices, 'length') : Float));
     }
     b = (boneIndex * SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
     a = flighthq._internal._StaticIndex.readFloat32Array(world, b);
@@ -73,10 +73,10 @@ class SkinAttachment2DPoints {
     tx = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0));
     ty = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-        var vx:Dynamic = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, i) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, i), flighthq._internal._StaticIndex.readFloat32Array(offsets, i)) : Dynamic));
-        var vy:Dynamic = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (i + 1.0))) : Dynamic));
+        var vx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, i) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, i), flighthq._internal._StaticIndex.readFloat32Array(offsets, i)) : Dynamic));
+        var vy:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (i + 1.0))) : Dynamic));
         flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, i, (((a * vx) + (c * vy)) + tx));
         flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (i + 1.0), (((bb * vx) + (d * vy)) + ty));
         (i = cast ((i + 2.0) : Dynamic));

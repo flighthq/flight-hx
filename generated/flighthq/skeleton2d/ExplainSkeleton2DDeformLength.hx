@@ -8,9 +8,9 @@ import flighthq.types.Skin2D;
 
 class ExplainSkeleton2DDeformLength {
   public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, deform:Null<flighthq._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
-    var weighted:Dynamic = cast _Runtime.UNDEFINED;
-    var addressed:Dynamic = cast _Runtime.UNDEFINED;
-    var offsets:Dynamic = cast _Runtime.UNDEFINED;
+    var weighted:Bool = cast _Runtime.UNDEFINED;
+    var addressed:Float = cast _Runtime.UNDEFINED;
+    var offsets:Float = cast _Runtime.UNDEFINED;
     weighted = ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast !_Runtime.strictEquals(skin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
     addressed = ((cast weighted : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(_Runtime.field(skin, 'influences'), 'length'), 2.0) : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(vertices, 'length'), function():Dynamic return cast 0.0) : Dynamic));
     offsets = ((cast _Runtime.strictEquals(deform, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(deform, 'length') : Dynamic));

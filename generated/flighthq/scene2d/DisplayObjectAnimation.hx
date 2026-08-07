@@ -6,85 +6,89 @@ import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
+import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationTrack;
+import flighthq.types.Node2D;
+import flighthq.types.Node2DAnimationPath;
 import flighthq.types.Node2DAnimationTarget;
 
 class DisplayObjectAnimation {
   public static function applyAnimationClipToNode2D(clip:AnimationClip, time:Float):Void {
     for (channel in _Runtime.iterable(clip.channels)) {
-      var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<Node2DAnimationTarget>);
-      if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      _Runtime.callValue(sampleAnimationTrack, cast ([DisplayObjectAnimation._scratch__displayObjectAnimation, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
-      var node:Dynamic = _Runtime.field(target, 'node');
+      var target:Null<Node2DAnimationTarget> = (cast (cast channel : AnimationChannel).targetRef : Null<Node2DAnimationTarget>);
+      if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : Node2DAnimationTarget).node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
+      sampleAnimationTrack((cast DisplayObjectAnimation._scratch__displayObjectAnimation : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast time : Float));
+      var node:Node2D = (cast target : Node2DAnimationTarget).node;
       {
-        var __switchValue = _Runtime.field(target, 'path');
+        var __switchValue = (cast target : Node2DAnimationTarget).path;
         if (__switchValue == 'Alpha') {
-          _Runtime.setField(node, 'alpha', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeAppearance, cast ([node] : Array<Dynamic>));
+          ((cast node : { var alpha:Float; }).alpha = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeAppearance(node);
         }
         else if (__switchValue == 'Pivot') {
-          _Runtime.setField(node, 'pivotX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.setField(node, 'pivotY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'PivotX') {
-          _Runtime.setField(node, 'pivotX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'PivotY') {
-          _Runtime.setField(node, 'pivotY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Position') {
-          _Runtime.setField(node, 'x', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.setField(node, 'y', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Rotation') {
-          _Runtime.setField(node, 'rotation', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var rotation:Float; }).rotation = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Scale') {
-          _Runtime.setField(node, 'scaleX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.setField(node, 'scaleY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'ScaleX') {
-          _Runtime.setField(node, 'scaleX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'ScaleY') {
-          _Runtime.setField(node, 'scaleY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Skew') {
-          _Runtime.setField(node, 'skewX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.setField(node, 'skewY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'SkewX') {
-          _Runtime.setField(node, 'skewX', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'SkewY') {
-          _Runtime.setField(node, 'skewY', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Visible') {
-          _Runtime.setField(node, 'visible', ((cast flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0) : Float) >= (cast 0.5 : Float)));
-          _Runtime.callValue(invalidateNodeAppearance, cast ([node] : Array<Dynamic>));
+          ((cast node : { var visible:Bool; }).visible = ((cast flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0) : Float) >= (cast 0.5 : Float)));
+          invalidateNodeAppearance(node);
         }
         else if (__switchValue == 'X') {
-          _Runtime.setField(node, 'x', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
         else if (__switchValue == 'Y') {
-          _Runtime.setField(node, 'y', flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
+          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          invalidateNodeLocalTransform(node);
         }
       }
     }
   }
 
-  public static final _scratch__displayObjectAnimation:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _scratch__displayObjectAnimation:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 }

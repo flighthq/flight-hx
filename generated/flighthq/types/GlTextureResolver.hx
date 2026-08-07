@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 
-typedef GlTextureResolver = Dynamic;
+typedef GlTextureResolver = GlRenderState->TextureLike->Bool->TextureColorSpace->Null<flighthq._internal.dom.WebGLTexture>;

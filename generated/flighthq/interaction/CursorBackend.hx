@@ -8,7 +8,7 @@ import flighthq.types.Cursor.CursorBackend;
 
 class CursorBackend {
   public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):flighthq.types.Cursor.CursorBackend {
-    return cast { setCursor: function(cursor:Null<Cursor>) {
+    return cast { setCursor: function(cursor:Null<Cursor>):Void {
       ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).cursor = _Runtime.coalesce(cursor, function():Dynamic return cast ''));
     } };
     return cast null;

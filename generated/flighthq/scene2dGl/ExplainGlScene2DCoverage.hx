@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.render.ExplainScene2DCoverage.explainScene2DCoverage;
 import flighthq.render.ExplainScene2DCoverage.hasScene2DCoverage;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlBlendRealization;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Scene2DKindUsage;
 import flighthq.types.SceneCoverageEntry;
@@ -18,55 +21,55 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class ExplainGlScene2DCoverage {
   @:noCompletion
   public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage):Void {
-    _Runtime.callValue(explainScene2DCoverage, cast ([out, state, usage] : Array<Dynamic>));
-    _Runtime.callValue(ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
+    explainScene2DCoverage((cast out : Array<SceneCoverageEntry>), state, (cast usage : Scene2DKindUsage));
+    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene2DKindUsage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast _Runtime.callValue(hasScene2DCoverage, cast ([state, usage] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    return cast !(cast _Runtime.callValue(ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(state, (cast usage : Scene2DKindUsage)) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene2DKindUsage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
   public static function collectGlScene2DCoverageGaps__explainGlScene2DCoverage(out:Null<Array<SceneCoverageEntry>>, state:GlRenderState, usage:Scene2DKindUsage, stopAtFirst:Bool):Bool {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var blendModes:Dynamic = cast _Runtime.UNDEFINED;
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
-    var hasStandard:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var blendModes:Null<flighthq._internal._Map<String, GlBlendRealization>> = cast _Runtime.UNDEFINED;
+    var materials:Null<flighthq._internal._Map<String, GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
+    var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    blendModes = _Runtime.field(runtime, 'glBlendModeRegistry');
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    blendModes = (cast runtime : GlRenderStateRuntime).glBlendModeRegistry;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'blendModes'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'blendModes'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = blendModes; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).has(kind)); }), true) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'blendModes'), i);
+        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = blendModes; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlBlendRealization>).has(kind)); }), true) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Fallback, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Fallback, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
         i++;
       }
     }
-    materials = _Runtime.field(runtime, 'materialRendererMap');
-    hasStandard = _Runtime.strictEquals(({ final __collection1:Dynamic = materials; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(StandardMaterialKindValue)); }), true);
+    materials = (cast runtime : GlRenderStateRuntime).materialRendererMap;
+    hasStandard = _Runtime.strictEquals(({ final __collection1:Dynamic = materials; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, GlMaterialRenderer>).has(StandardMaterialKindValue)); }), true);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection2:Dynamic = materials; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map).has(kind)); }), true) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+        if ((cast _Runtime.strictEquals(({ final __collection2:Dynamic = materials; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlMaterialRenderer>).has(kind)); }), true) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: ((cast hasStandard : Bool) ? (cast SceneCoverageValue.Fallback : Dynamic) : (cast SceneCoverageValue.Missing : Dynamic)), kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: ((cast hasStandard : Bool) ? (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Fallback : Dynamic) : (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing : Dynamic)), kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
         i++;
       }
     }

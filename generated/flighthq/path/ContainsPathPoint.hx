@@ -5,28 +5,29 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 class ContainsPathPoint {
-  public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
-    var winding:Dynamic = cast _Runtime.UNDEFINED;
-    winding = _Runtime.callValue(ContainsPathPoint.computePathWindingNumber__containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
+  public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float = 0.25):Bool {
+    var winding:Float = cast _Runtime.UNDEFINED;
+    winding = (cast ContainsPathPoint.computePathWindingNumber__containsPathPoint((cast path : Path), (cast px : Float), (cast py : Float), (cast tolerance : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd') : Bool)) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
     return cast !_Runtime.strictEquals(winding, 0.0);
     return cast null;
   }
 
   public static function chordDistSq__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var cross:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var cross:Float = cast _Runtime.UNDEFINED;
     dx = (x1 - x0);
     dy = (y1 - y0);
     lenSq = ((dx * dx) + (dy * dy));
     if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
-      var ax:Dynamic = (px - x0);
-      var ay:Dynamic = (py - y0);
+      var ax:Float = (px - x0);
+      var ay:Float = (py - y0);
       return cast ((ax * ax) + (ay * ay));
     }
     cross = ((dx * (y0 - py)) - (dy * (x0 - px)));
@@ -35,19 +36,19 @@ class ContainsPathPoint {
   }
 
   public static function computePathWindingNumber__containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Float {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
-    var windingNumber:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartX:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartY:Dynamic = cast _Runtime.UNDEFINED;
-    var hasContour:Dynamic = cast _Runtime.UNDEFINED;
-    var lastX:Dynamic = cast _Runtime.UNDEFINED;
-    var lastY:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
-    var flushContour:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var toleranceSq:Float = cast _Runtime.UNDEFINED;
+    var windingNumber:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var contourStartX:Float = cast _Runtime.UNDEFINED;
+    var contourStartY:Float = cast _Runtime.UNDEFINED;
+    var hasContour:Bool = cast _Runtime.UNDEFINED;
+    var lastX:Float = cast _Runtime.UNDEFINED;
+    var lastY:Float = cast _Runtime.UNDEFINED;
+    var di:Float = cast _Runtime.UNDEFINED;
+    var flushContour:Void->Void = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(path, 'commands');
     data = _Runtime.field(path, 'data');
     toleranceSq = (tolerance * tolerance);
@@ -60,17 +61,17 @@ class ContainsPathPoint {
     lastX = 0.0;
     lastY = 0.0;
     di = 0.0;
-    flushContour = function() {
+    flushContour = (cast function():Void {
       if ((cast hasContour : Bool)) {
-        (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, contourStartX, contourStartY] : Array<Dynamic>))) : Dynamic));
+        (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast contourStartX : Float), (cast contourStartY : Float)) : Float)) : Dynamic));
       }
-    };
+    } : Void->Void);
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
+        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
+          flushContour();
           (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
@@ -79,8 +80,8 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
+          flushContour();
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
@@ -89,59 +90,59 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
+          var nx:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var ny:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           if ((cast hasContour : Bool)) {
-            (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
+            (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast nx : Float), (cast ny : Float)) : Float)) : Dynamic));
           }
           (lastX = cast (nx : Dynamic));
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var nx:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var ny:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
+          var nx:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ny:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast hasContour : Bool)) {
-            (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, nx, ny] : Array<Dynamic>))) : Dynamic));
+            (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast nx : Float), (cast ny : Float)) : Float)) : Dynamic));
           }
           (lastX = cast (nx : Dynamic));
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var cx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var cy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
+          var cx:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var cy:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast hasContour : Bool)) {
-            (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, cx, cy, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));
+            (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), (cast toleranceSq : Float), (cast 0.0 : Float)) : Float)) : Dynamic));
           }
           (lastX = cast (ax : Dynamic));
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var c1x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var c1y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var c2x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var c2y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-          var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-          var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
+          var c1x:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var c1y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var c2x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var c2y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           if ((cast hasContour : Bool)) {
-            (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, lastX, lastY, c1x, c1y, c2x, c2y, ax, ay, toleranceSq, 0.0] : Array<Dynamic>))) : Dynamic));
+            (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), (cast toleranceSq : Float), (cast 0.0 : Float)) : Float)) : Dynamic));
           }
           (lastX = cast (ax : Dynamic));
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
           if ((cast hasContour : Bool)) {
-            (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, contourStartX, contourStartY] : Array<Dynamic>))) : Dynamic));
+            (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast contourStartX : Float), (cast contourStartY : Float)) : Float)) : Dynamic));
             (lastX = cast (contourStartX : Dynamic));
             (lastY = cast (contourStartY : Dynamic));
             (x = cast (contourStartX : Dynamic));
@@ -152,14 +153,14 @@ class ContainsPathPoint {
         ci++;
       }
     }
-    _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
+    flushContour();
     return cast HxMath.abs(windingNumber);
     return cast null;
   }
 
   public static function countSegmentCrossings__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
     if ((cast ((cast _Runtime.andValue(((cast y0 : Float) <= (cast py : Float)), function():Dynamic return cast ((cast y1 : Float) > (cast py : Float))) : Bool) || (cast _Runtime.andValue(((cast y1 : Float) <= (cast py : Float)), function():Dynamic return cast ((cast y0 : Float) > (cast py : Float))) : Bool)) : Bool)) {
-      var crossX:Dynamic = (x0 + (((py - y0) * (x1 - x0)) / (y1 - y0)));
+      var crossX:Float = (x0 + (((py - y0) * (x1 - x0)) / (y1 - y0)));
       if ((cast ((cast px : Float) < (cast crossX : Float)) : Bool)) {
         return cast ((cast ((cast y1 : Float) > (cast y0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
       }
@@ -169,24 +170,24 @@ class ContainsPathPoint {
   }
 
   public static function flattenCubicWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
-    var d1:Dynamic = cast _Runtime.UNDEFINED;
-    var d2:Dynamic = cast _Runtime.UNDEFINED;
-    var x01:Dynamic = cast _Runtime.UNDEFINED;
-    var y01:Dynamic = cast _Runtime.UNDEFINED;
-    var x12:Dynamic = cast _Runtime.UNDEFINED;
-    var y12:Dynamic = cast _Runtime.UNDEFINED;
-    var x23:Dynamic = cast _Runtime.UNDEFINED;
-    var y23:Dynamic = cast _Runtime.UNDEFINED;
-    var x012:Dynamic = cast _Runtime.UNDEFINED;
-    var y012:Dynamic = cast _Runtime.UNDEFINED;
-    var x123:Dynamic = cast _Runtime.UNDEFINED;
-    var y123:Dynamic = cast _Runtime.UNDEFINED;
-    var xm:Dynamic = cast _Runtime.UNDEFINED;
-    var ym:Dynamic = cast _Runtime.UNDEFINED;
-    d1 = _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([c1x, c1y, x0, y0, x1, y1] : Array<Dynamic>));
-    d2 = _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([c2x, c2y, x0, y0, x1, y1] : Array<Dynamic>));
+    var d1:Float = cast _Runtime.UNDEFINED;
+    var d2:Float = cast _Runtime.UNDEFINED;
+    var x01:Float = cast _Runtime.UNDEFINED;
+    var y01:Float = cast _Runtime.UNDEFINED;
+    var x12:Float = cast _Runtime.UNDEFINED;
+    var y12:Float = cast _Runtime.UNDEFINED;
+    var x23:Float = cast _Runtime.UNDEFINED;
+    var y23:Float = cast _Runtime.UNDEFINED;
+    var x012:Float = cast _Runtime.UNDEFINED;
+    var y012:Float = cast _Runtime.UNDEFINED;
+    var x123:Float = cast _Runtime.UNDEFINED;
+    var y123:Float = cast _Runtime.UNDEFINED;
+    var xm:Float = cast _Runtime.UNDEFINED;
+    var ym:Float = cast _Runtime.UNDEFINED;
+    d1 = (cast ContainsPathPoint.chordDistSq__containsPathPoint((cast c1x : Float), (cast c1y : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
+    d2 = (cast ContainsPathPoint.chordDistSq__containsPathPoint((cast c2x : Float), (cast c2y : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
     if ((cast ((cast ((cast depth : Float) >= (cast ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint : Float)) : Bool) || (cast _Runtime.andValue(((cast d1 : Float) <= (cast toleranceSq : Float)), function():Dynamic return cast ((cast d2 : Float) <= (cast toleranceSq : Float))) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, x0, y0, x1, y1] : Array<Dynamic>));
+      return cast (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
     }
     x01 = ((x0 + c1x) / 2.0);
     y01 = ((y0 + c1y) / 2.0);
@@ -200,19 +201,19 @@ class ContainsPathPoint {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    return cast _Runtime.addNumbers(_Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, x0, y0, x01, y01, x012, y012, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>)), _Runtime.callValue(ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint, cast ([px, py, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
+    return cast ((cast ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float)) : Float) + (cast ContainsPathPoint.flattenCubicWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float)) : Float));
     return cast null;
   }
 
   public static function flattenQuadraticWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
-    var mx01:Dynamic = cast _Runtime.UNDEFINED;
-    var my01:Dynamic = cast _Runtime.UNDEFINED;
-    var mx12:Dynamic = cast _Runtime.UNDEFINED;
-    var my12:Dynamic = cast _Runtime.UNDEFINED;
-    var mx:Dynamic = cast _Runtime.UNDEFINED;
-    var my:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast depth : Float) >= (cast ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint : Float)) : Bool) || (cast ((cast _Runtime.callValue(ContainsPathPoint.chordDistSq__containsPathPoint, cast ([cx, cy, x0, y0, x1, y1] : Array<Dynamic>)) : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, x0, y0, x1, y1] : Array<Dynamic>));
+    var mx01:Float = cast _Runtime.UNDEFINED;
+    var my01:Float = cast _Runtime.UNDEFINED;
+    var mx12:Float = cast _Runtime.UNDEFINED;
+    var my12:Float = cast _Runtime.UNDEFINED;
+    var mx:Float = cast _Runtime.UNDEFINED;
+    var my:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast depth : Float) >= (cast ContainsPathPoint.MAX_SUBDIVISION_DEPTH__containsPathPoint : Float)) : Bool) || (cast ((cast (cast ContainsPathPoint.chordDistSq__containsPathPoint((cast cx : Float), (cast cy : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float) : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
+      return cast (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
     }
     mx01 = ((x0 + cx) / 2.0);
     my01 = ((y0 + cy) / 2.0);
@@ -220,9 +221,9 @@ class ContainsPathPoint {
     my12 = ((cy + y1) / 2.0);
     mx = ((mx01 + mx12) / 2.0);
     my = ((my01 + my12) / 2.0);
-    return cast _Runtime.addNumbers(_Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, x0, y0, mx01, my01, mx, my, toleranceSq, (depth + 1.0)] : Array<Dynamic>)), _Runtime.callValue(ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint, cast ([px, py, mx, my, mx12, my12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>)));
+    return cast ((cast ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast x0 : Float), (cast y0 : Float), (cast mx01 : Float), (cast my01 : Float), (cast mx : Float), (cast my : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float)) : Float) + (cast ContainsPathPoint.flattenQuadraticWindingNumber__containsPathPoint((cast px : Float), (cast py : Float), (cast mx : Float), (cast my : Float), (cast mx12 : Float), (cast my12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float)) : Float));
     return cast null;
   }
 
-  public static final MAX_SUBDIVISION_DEPTH__containsPathPoint:Dynamic = 16.0;
+  public static final MAX_SUBDIVISION_DEPTH__containsPathPoint:Float = 16.0;
 }

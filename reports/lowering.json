@@ -3375,12 +3375,12 @@
         "asyncFlowForOfValues": 8
       },
       "indexedAccesses": {
-        "reads": 7245,
+        "reads": 7243,
         "writes": 3421
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 4590,
+          "reads": 4588,
           "writes": 715
         },
         "ArrayOrFloat32Array": {

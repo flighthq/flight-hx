@@ -4,10 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class CopyPath {
   public static function clonePath(source:Path):Path {
-    return cast _Runtime.callValue(copyPath, cast ([source] : Array<Dynamic>));
+    return cast (cast copyPath((cast source : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Path>)) : Path);
     return cast null;
   }
 
@@ -16,23 +17,23 @@ class CopyPath {
       return cast { commands: _Runtime.slice(_Runtime.field(source, 'commands'), 0, null), data: _Runtime.slice(_Runtime.field(source, 'data'), 0, null), winding: _Runtime.field(source, 'winding') };
     }
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
+      _Runtime.setLength((cast out : Path).commands, 0.0);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
           i++;
         }
       }
-      _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
+      _Runtime.setLength((cast out : Path).data, 0.0);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
           i++;
         }
       }
-      _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
+      ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     }
     return cast out;
     return cast null;

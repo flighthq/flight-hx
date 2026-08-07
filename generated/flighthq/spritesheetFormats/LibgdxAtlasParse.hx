@@ -12,6 +12,7 @@ import flighthq.types.LibgdxAtlasSchema.LibgdxAtlasParseOptions;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
+import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
 typedef LibgdxPage__libgdxAtlasParse = { var filename:String; var height:Float; var width:Float; };
@@ -20,7 +21,7 @@ typedef LibgdxRegion__libgdxAtlasParse = { var index:Float; var name:String; var
 
 class LibgdxAtlasParse {
   public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
-    var parts:Dynamic = cast _Runtime.UNDEFINED;
+    var parts:Array<String> = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
     return cast cast ([_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
@@ -32,7 +33,7 @@ class LibgdxAtlasParse {
   }
 
   public static function parseLibgdxAtlas__libgdxAtlasParse(text:String):{ var pages:Array<LibgdxPage__libgdxAtlasParse>; var regions:Array<LibgdxRegion__libgdxAtlasParse>; } {
-    var lines:Dynamic = cast _Runtime.UNDEFINED;
+    var lines:Array<String> = cast _Runtime.UNDEFINED;
     var pages:Array<LibgdxPage__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
     var regions:Array<LibgdxRegion__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
     var currentPage:Null<LibgdxPage__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
@@ -43,7 +44,7 @@ class LibgdxAtlasParse {
     currentPage = null;
     currentRegion = null;
     for (raw in _Runtime.iterable(lines)) {
-      var trimmed:Dynamic = StringTools.trim(Std.string(raw));
+      var trimmed:String = StringTools.trim(Std.string(raw));
       if ((cast _Runtime.strictEquals(trimmed, '') : Bool)) {
         if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
           _Runtime.callProperty(regions, 'push', cast ([currentRegion] : Array<Dynamic>));
@@ -51,56 +52,56 @@ class LibgdxAtlasParse {
         }
         continue;
       }
-      var isIndented:Dynamic = ((cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), ' ') : Bool) || (cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), '	') : Bool));
+      var isIndented:Bool = ((cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), ' ') : Bool) || (cast _Runtime.strictEquals(_Runtime.getIndex(raw, 0.0), '	') : Bool));
       if ((cast isIndented : Bool)) {
-        var colonIdx:Dynamic = _Runtime.callProperty(trimmed, 'indexOf', cast ([':'] : Array<Dynamic>));
+        var colonIdx:Float = _Runtime.callProperty(trimmed, 'indexOf', cast ([':'] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(colonIdx, -1.0) : Bool)) { continue; }
-        var key:Dynamic = StringTools.trim(Std.string(_Runtime.slice(trimmed, 0.0, colonIdx)));
-        var value:Dynamic = StringTools.trim(Std.string(_Runtime.slice(trimmed, (colonIdx + 1.0), null)));
+        var key:String = StringTools.trim(Std.string(_Runtime.slice(trimmed, 0.0, colonIdx)));
+        var value:String = StringTools.trim(Std.string(_Runtime.slice(trimmed, (colonIdx + 1.0), null)));
         if ((cast !_Runtime.strictEquals(currentRegion, null) : Bool)) {
           {
             var __switchValue = key;
             if (__switchValue == 'rotate') {
-              _Runtime.setField(currentRegion, 'rotated', _Runtime.strictEquals(value, 'true'));
+              ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).rotated = _Runtime.strictEquals(value, 'true'));
             }
             else if (__switchValue == 'xy') {
               {
-                var __destructure0:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var x:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
-                var y:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
-                _Runtime.setField(currentRegion, 'x', x);
-                _Runtime.setField(currentRegion, 'y', y);
+                var __destructure0 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var x:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+                var y:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).x = x);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).y = y);
               }
             }
             else if (__switchValue == 'size') {
               {
-                var __destructure1:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var w:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
-                var h:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
-                _Runtime.setField(currentRegion, 'spriteWidth', w);
-                _Runtime.setField(currentRegion, 'spriteHeight', h);
+                var __destructure1 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var w:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+                var h:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).spriteWidth = w);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).spriteHeight = h);
               }
             }
             else if (__switchValue == 'orig') {
               {
-                var __destructure2:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var sw:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
-                var sh:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
-                _Runtime.setField(currentRegion, 'sourceWidth', sw);
-                _Runtime.setField(currentRegion, 'sourceHeight', sh);
+                var __destructure2 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var sw:Float = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
+                var sh:Float = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).sourceWidth = sw);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).sourceHeight = sh);
               }
             }
             else if (__switchValue == 'offset') {
               {
-                var __destructure3:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var ox:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
-                var oy:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
-                _Runtime.setField(currentRegion, 'offsetX', ox);
-                _Runtime.setField(currentRegion, 'offsetY', oy);
+                var __destructure3 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var ox:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
+                var oy:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).offsetX = ox);
+                ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).offsetY = oy);
               }
             }
             else if (__switchValue == 'index') {
-              _Runtime.setField(currentRegion, 'index', _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([value, 10.0] : Array<Dynamic>)));
+              ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).index = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([value, 10.0] : Array<Dynamic>)));
             }
           }
         } else { if ((cast !_Runtime.strictEquals(currentPage, null) : Bool)) {
@@ -108,11 +109,11 @@ class LibgdxAtlasParse {
             var __switchValue = key;
             if (__switchValue == 'size') {
               {
-                var __destructure4:Dynamic = _Runtime.callValue(LibgdxAtlasParse.parseIntPair__libgdxAtlasParse, cast ([value] : Array<Dynamic>));
-                var w:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
-                var h:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
-                _Runtime.setField(currentPage, 'width', w);
-                _Runtime.setField(currentPage, 'height', h);
+                var __destructure4 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var w:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
+                var h:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
+                ((cast currentPage : LibgdxPage__libgdxAtlasParse).width = w);
+                ((cast currentPage : LibgdxPage__libgdxAtlasParse).height = h);
               }
             }
           }
@@ -122,10 +123,10 @@ class LibgdxAtlasParse {
           _Runtime.callProperty(regions, 'push', cast ([currentRegion] : Array<Dynamic>));
           (currentRegion = cast (null : Dynamic));
         }
-        if ((cast ((cast _Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)) : Bool) && (cast _Runtime.strictEquals(currentPage, null) : Bool)) : Bool)) {
+        if ((cast ((cast (cast LibgdxAtlasParse.isFilename__libgdxAtlasParse((cast trimmed : String)) : Bool) : Bool) && (cast _Runtime.strictEquals(currentPage, null) : Bool)) : Bool)) {
           (currentPage = cast ({ filename: trimmed, height: 0.0, width: 0.0 } : Dynamic));
           _Runtime.callProperty(pages, 'push', cast ([currentPage] : Array<Dynamic>));
-        } else { if ((cast ((cast ((cast _Runtime.callValue(LibgdxAtlasParse.isFilename__libgdxAtlasParse, cast ([trimmed] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(currentPage, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(trimmed, _Runtime.field(currentPage, 'filename')) : Bool)) : Bool)) {
+        } else { if ((cast ((cast ((cast (cast LibgdxAtlasParse.isFilename__libgdxAtlasParse((cast trimmed : String)) : Bool) : Bool) && (cast !_Runtime.strictEquals(currentPage, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(trimmed, (cast currentPage : LibgdxPage__libgdxAtlasParse).filename) : Bool)) : Bool)) {
           (currentPage = cast ({ filename: trimmed, height: 0.0, width: 0.0 } : Dynamic));
           _Runtime.callProperty(pages, 'push', cast ([currentPage] : Array<Dynamic>));
         } else {
@@ -145,61 +146,61 @@ class LibgdxAtlasParse {
   }
 
   public static function frameFromRegion__libgdxAtlasParse(region:TextureAtlasRegion):SpritesheetFrameData {
-    return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y }] : Array<Dynamic>));
+    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y } : Null<flighthq._internal._Any>)) : SpritesheetFrameData);
     return cast null;
   }
 
   public static function inferAnimations__libgdxAtlasParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
-    var groups:Dynamic = cast _Runtime.UNDEFINED;
+    var groups:flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>> = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     groups = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (name in _Runtime.iterable(frameNames)) {
-      var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
-      var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
+      var noExt:String = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
+      var match:Null<flighthq._internal._Any> = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
       if ((cast !_Runtime.truthy(match) : Bool)) { continue; }
-      var __destructure5:Dynamic = match;
-      var base:Dynamic = _Runtime.getIndex(__destructure5, 1.0);
-      var numStr:Dynamic = _Runtime.getIndex(__destructure5, 2.0);
-      var index:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
-      var bucket:Dynamic = ((cast groups : flighthq._internal._Map).get(base));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
+      var __destructure5 = match;
+      var base:String = _Runtime.getIndex(__destructure5, 1.0);
+      var numStr:String = _Runtime.getIndex(__destructure5, 2.0);
+      var index:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
+      var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get(base));
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
     }
     animations = cast ([] : Array<Dynamic>);
     for (__iteration6 in _Runtime.iterable(groups)) {
-      var base:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
-      var entries:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
+      var base:String = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
+      var entries:Array<{ var name:String; var index:Float; }> = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      _Runtime.sortAndReturn(entries, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(a, 'index'), _Runtime.field(b, 'index')));
-      _Runtime.callProperty(animations, 'push', cast ([_Runtime.callValue(createSpritesheetAnimationData, cast ([{ frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:Dynamic) return _Runtime.field(e, 'name')] : Array<Dynamic>)), name: base, repeatCount: -1.0 }] : Array<Dynamic>))] : Array<Dynamic>));
+      _Runtime.sortAndReturn(entries, function(a:{ var name:String; var index:Float; }, b:{ var name:String; var index:Float; }) return ((cast a : { var name:String; var index:Float; }).index - (cast b : { var name:String; var index:Float; }).index));
+      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused7:Float, __unused8:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 } : Null<flighthq._internal._Any>)) : SpritesheetAnimationData)] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
   }
 
   public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
-    var frameDuration:Dynamic = cast _Runtime.UNDEFINED;
-    var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
-    var pages:Dynamic = cast _Runtime.UNDEFINED;
-    var firstPage:Dynamic = cast _Runtime.UNDEFINED;
-    var imageFile:Dynamic = cast _Runtime.UNDEFINED;
-    var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var imageHeight:Dynamic = cast _Runtime.UNDEFINED;
+    var frameDuration:Float = cast _Runtime.UNDEFINED;
+    var __destructure9:Dynamic = cast _Runtime.UNDEFINED;
+    var pages:Array<LibgdxPage__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
+    var firstPage:LibgdxPage__libgdxAtlasParse = cast _Runtime.UNDEFINED;
+    var imageFile:String = cast _Runtime.UNDEFINED;
+    var imageWidth:Float = cast _Runtime.UNDEFINED;
+    var imageHeight:Float = cast _Runtime.UNDEFINED;
     var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
-    var frameNames:Dynamic = cast _Runtime.UNDEFINED;
-    var animations:Dynamic = cast _Runtime.UNDEFINED;
+    var frameNames:Array<String> = cast _Runtime.UNDEFINED;
+    var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     frameDuration = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.frameDuration; }), function():Dynamic return cast 100.0);
-    __destructure7 = _Runtime.callValue(LibgdxAtlasParse.parseLibgdxAtlas__libgdxAtlasParse, cast ([text] : Array<Dynamic>));
-    pages = _Runtime.field(__destructure7, 'pages');
+    __destructure9 = (cast LibgdxAtlasParse.parseLibgdxAtlas__libgdxAtlasParse((cast text : String)) : { var pages:Array<LibgdxPage__libgdxAtlasParse>; var regions:Array<LibgdxRegion__libgdxAtlasParse>; });
+    pages = _Runtime.field(__destructure9, 'pages');
     firstPage = flighthq._internal._StaticIndex.readArray(pages, 0.0);
-    imageFile = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'filename'), function():Dynamic return cast '');
-    imageWidth = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'width'), function():Dynamic return cast 0.0);
-    imageHeight = _Runtime.coalesce(_Runtime.optionalField(firstPage, 'height'), function():Dynamic return cast 0.0);
-    regions = _Runtime.callValue(parseTextureAtlasLibgdxAtlas, cast ([text, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
+    imageFile = _Runtime.coalesce(({ final __structural7 = firstPage; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : LibgdxPage__libgdxAtlasParse).filename; }), function():Dynamic return cast '');
+    imageWidth = _Runtime.coalesce(({ final __structural8 = firstPage; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : LibgdxPage__libgdxAtlasParse).width; }), function():Dynamic return cast 0.0);
+    imageHeight = _Runtime.coalesce(({ final __structural9 = firstPage; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : LibgdxPage__libgdxAtlasParse).height; }), function():Dynamic return cast 0.0);
+    regions = (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : TextureAtlas)) : TextureAtlas).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:Dynamic) return f.name] : Array<Dynamic>));
-    animations = _Runtime.callValue(LibgdxAtlasParse.inferAnimations__libgdxAtlasParse, cast ([frameNames, frameDuration] : Array<Dynamic>));
-    return cast _Runtime.callValue(createSpritesheetData, cast ([{ animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 }] : Array<Dynamic>));
+    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:SpritesheetFrameData, __unused10:Float, __unused11:Array<SpritesheetFrameData>):String return f.name] : Array<Dynamic>));
+    animations = (cast LibgdxAtlasParse.inferAnimations__libgdxAtlasParse((cast frameNames : Array<String>), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
+    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 } : Null<flighthq._internal._Any>)) : SpritesheetData);
     return cast null;
   }
 }

@@ -13,10 +13,12 @@ import flighthq.types.KeyCode;
 import flighthq.types.KeyboardEventData;
 import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
+import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputEditingOptions.HandleTextInputKeyboardOptions;
 import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
 import flighthq.types.TextInputState;
+import flighthq.types.TextInputState.TextInputHistoryEntry;
 import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
@@ -25,21 +27,21 @@ import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 typedef KeyboardCommand__textInputEditing = String;
 
 class TextInputEditing {
-  public static final DESIRED_CARET_X_UNSET__textInputEditing:Dynamic = -1.0;
+  public static final DESIRED_CARET_X_UNSET__textInputEditing:Float = -1.0;
 
   public static function appendTextInput(source:RichText, text:String):Void {
-    _Runtime.callValue(replaceTextInput, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), text] : Array<Dynamic>));
+    replaceTextInput((cast source : RichText), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast text : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
   }
 
-  public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Dynamic = 0.0):String {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+  public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Float = 0.0):String {
+    var data:RichTextData = cast _Runtime.UNDEFINED;
+    var value:String = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     value = text;
-    if ((cast !(cast _Runtime.field(data, 'multiline') : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
-    (value = cast (_Runtime.callValue(TextInputEditing.restrictTextInput__textInputEditing, cast ([value, _Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'restrict')] : Array<Dynamic>)) : Dynamic));
-    if ((cast ((cast _Runtime.field(data, 'maxChars') : Float) > (cast 0.0 : Float)) : Bool)) {
-      var maxLength:Dynamic = (_Runtime.subtractNumbers(_Runtime.field(data, 'maxChars'), _Runtime.field(_Runtime.field(data, 'text'), 'length')) + replaceLength);
+    if ((cast !(cast (cast data : RichTextData).multiline : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
+    (value = cast ((cast TextInputEditing.restrictTextInput__textInputEditing((cast value : String), (cast (cast (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState) : TextInputState).restrict : String)) : String) : Dynamic));
+    if ((cast ((cast (cast data : RichTextData).maxChars : Float) > (cast 0.0 : Float)) : Bool)) {
+      var maxLength:Float = (_Runtime.subtractNumbers((cast data : RichTextData).maxChars, _Runtime.field((cast data : RichTextData).text, 'length')) + replaceLength);
       if ((cast ((cast maxLength : Float) <= (cast 0.0 : Float)) : Bool)) { return cast ''; }
       if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast maxLength : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, maxLength) : Dynamic)); }
     }
@@ -48,118 +50,118 @@ class TextInputEditing {
   }
 
   public static function canRedoTextInput(source:RichText):Bool {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0) : Float));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    return cast ((cast (cast state : TextInputState).historyIndex : Float) < (cast _Runtime.subtractNumbers(_Runtime.field((cast state : TextInputState).history, 'length'), 1.0) : Float));
     return cast null;
   }
 
   public static function canUndoTextInput(source:RichText):Bool {
-    return cast ((cast _Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'historyIndex') : Float) >= (cast 0.0 : Float));
+    return cast ((cast (cast (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState) : TextInputState).historyIndex : Float) >= (cast 0.0 : Float));
     return cast null;
   }
 
   public static function clearTextInputHistory(source:RichText):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    _Runtime.setField(state, 'history', cast ([] : Array<Dynamic>));
-    _Runtime.setField(state, 'historyIndex', -1.0);
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    ((cast state : TextInputState).history = cast ([] : Array<Dynamic>));
+    ((cast state : TextInputState).historyIndex = -1.0);
   }
 
   public static function deleteTextInputBackward(source:RichText):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
-    end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    start = (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float);
+    end = (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
+      replaceTextInput((cast source : RichText), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
     } else { if ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, (start - 1.0), start, ''] : Array<Dynamic>));
+      replaceTextInput((cast source : RichText), (cast (start - 1.0) : Float), (cast start : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
     } }
-    _Runtime.setField(state, 'selectionIndex', _Runtime.field(state, 'caretIndex'));
+    ((cast state : TextInputState).selectionIndex = (cast state : TextInputState).caretIndex);
   }
 
   public static function deleteTextInputForward(source:RichText):Void {
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
-    end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    start = (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float);
+    end = (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
-    } else { if ((cast ((cast start : Float) < (cast _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length') : Float)) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, start, (start + 1.0), ''] : Array<Dynamic>));
+      replaceTextInput((cast source : RichText), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
+    } else { if ((cast ((cast start : Float) < (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Bool)) {
+      replaceTextInput((cast source : RichText), (cast start : Float), (cast (start + 1.0) : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
     } }
   }
 
   public static function deleteTextInputWordBackward(source:RichText):Void {
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var wordStart:Dynamic = cast _Runtime.UNDEFINED;
-    start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
-    end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var wordStart:Float = cast _Runtime.UNDEFINED;
+    start = (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float);
+    end = (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
+      replaceTextInput((cast source : RichText), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
       return;
     }
-    wordStart = _Runtime.callValue(TextInputEditing.findWordStartBefore__textInputEditing, cast ([_Runtime.field(_Runtime.field(source, 'data'), 'text'), start] : Array<Dynamic>));
-    if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { _Runtime.callValue(replaceTextInput, cast ([source, wordStart, start, ''] : Array<Dynamic>)); }
+    wordStart = (cast TextInputEditing.findWordStartBefore__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
+    if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { replaceTextInput((cast source : RichText), (cast wordStart : Float), (cast start : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>)); }
   }
 
   public static function deleteTextInputWordForward(source:RichText):Void {
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var wordEnd:Dynamic = cast _Runtime.UNDEFINED;
-    start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
-    end = _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var wordEnd:Float = cast _Runtime.UNDEFINED;
+    start = (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float);
+    end = (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      _Runtime.callValue(replaceTextInput, cast ([source, start, end, ''] : Array<Dynamic>));
+      replaceTextInput((cast source : RichText), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
       return;
     }
-    wordEnd = _Runtime.callValue(TextInputEditing.findWordEndAfter__textInputEditing, cast ([_Runtime.field(_Runtime.field(source, 'data'), 'text'), start] : Array<Dynamic>));
-    if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { _Runtime.callValue(replaceTextInput, cast ([source, start, wordEnd, ''] : Array<Dynamic>)); }
+    wordEnd = (cast TextInputEditing.findWordEndAfter__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
+    if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { replaceTextInput((cast source : RichText), (cast start : Float), (cast wordEnd : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>)); }
   }
 
   public static function getTextInputCaretIndex(source:RichText):Float {
-    return cast _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
+    return cast (cast TextInputEditing.clampIndex__textInputEditing((cast (cast (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState) : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float);
     return cast null;
   }
 
   public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:RichText, layout:TextLayoutResult):Void {
-    var caretIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var group:Dynamic = cast _Runtime.UNDEFINED;
-    caretIndex = _Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
-    group = _Runtime.callValue(TextInputEditing.getTextLayoutGroupAtIndex__textInputEditing, cast ([layout, caretIndex] : Array<Dynamic>));
+    var caretIndex:Float = cast _Runtime.UNDEFINED;
+    var group:Null<TextLayoutGroup> = cast _Runtime.UNDEFINED;
+    caretIndex = (cast getTextInputCaretIndex((cast source : RichText)) : Float);
+    group = (cast TextInputEditing.getTextLayoutGroupAtIndex__textInputEditing((cast layout : TextLayoutResult), (cast caretIndex : Float)) : Null<TextLayoutGroup>);
     if ((cast _Runtime.strictEquals(group, null) : Bool)) {
-      _Runtime.setField(out, 'x', TEXT_BOUNDS_GUTTER);
-      _Runtime.setField(out, 'y', TEXT_BOUNDS_GUTTER);
-      _Runtime.setField(out, 'width', 1.0);
-      _Runtime.setField(out, 'height', _Runtime.callValue(TextInputEditing.getFallbackLineHeight__textInputEditing, cast ([layout] : Array<Dynamic>)));
-      _Runtime.setField(out, 'lineIndex', 0.0);
+      ((cast out : TextSelectionRectangle).x = TEXT_BOUNDS_GUTTER);
+      ((cast out : TextSelectionRectangle).y = TEXT_BOUNDS_GUTTER);
+      ((cast out : TextSelectionRectangle).width = 1.0);
+      ((cast out : TextSelectionRectangle).height = (cast TextInputEditing.getFallbackLineHeight__textInputEditing((cast layout : TextLayoutResult)) : Float));
+      ((cast out : TextSelectionRectangle).lineIndex = 0.0);
       return;
     }
-    _Runtime.setField(out, 'x', _Runtime.callValue(TextInputEditing.getTextLayoutGroupCaretX__textInputEditing, cast ([group, caretIndex] : Array<Dynamic>)));
-    _Runtime.setField(out, 'y', _Runtime.field(group, 'offsetY'));
-    _Runtime.setField(out, 'width', 1.0);
-    _Runtime.setField(out, 'height', _Runtime.field(group, 'height'));
-    _Runtime.setField(out, 'lineIndex', _Runtime.field(group, 'lineIndex'));
+    ((cast out : TextSelectionRectangle).x = (cast TextInputEditing.getTextLayoutGroupCaretX__textInputEditing((cast group : TextLayoutGroup), (cast caretIndex : Float)) : Float));
+    ((cast out : TextSelectionRectangle).y = _Runtime.field(group, 'offsetY'));
+    ((cast out : TextSelectionRectangle).width = 1.0);
+    ((cast out : TextSelectionRectangle).height = _Runtime.field(group, 'height'));
+    ((cast out : TextSelectionRectangle).lineIndex = _Runtime.field(group, 'lineIndex'));
   }
 
   public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
-    var closestLineIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var closestLineDistance:Dynamic = cast _Runtime.UNDEFINED;
-    var lineStart:Dynamic = cast _Runtime.UNDEFINED;
-    var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
+    var closestLineIndex:Float = cast _Runtime.UNDEFINED;
+    var closestLineDistance:Float = cast _Runtime.UNDEFINED;
+    var lineStart:Float = cast _Runtime.UNDEFINED;
+    var lineEnd:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0) : Bool)) { return cast 0.0; }
     closestLineIndex = 0.0;
     closestLineDistance = HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
-        var lineTop:Dynamic = _Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, i] : Array<Dynamic>));
-        var lineBottom:Dynamic = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
-        var distance:Dynamic = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+        var lineTop:Float = (cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout : TextLayoutResult), (cast i : Float)) : Float);
+        var lineBottom:Float = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
+        var distance:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
           (closestLineIndex = cast (i : Dynamic));
@@ -167,142 +169,142 @@ class TextInputEditing {
         i++;
       }
     }
-    lineStart = _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length');
+    lineStart = _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length');
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex) : Bool)) { continue; }
-      (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
-      (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
-      if ((cast ((cast x : Float) <= (cast _Runtime.field(group, 'offsetX') : Float)) : Bool)) { return cast _Runtime.field(group, 'startIndex'); }
-      if ((cast ((cast x : Float) <= (cast _Runtime.addNumbers(_Runtime.field(group, 'offsetX'), _Runtime.field(group, 'width')) : Float)) : Bool)) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, closestLineIndex) : Bool)) { continue; }
+      (lineStart = cast (HxMath.min(lineStart, (cast group : TextLayoutGroup).startIndex) : Dynamic));
+      (lineEnd = cast (HxMath.max(lineEnd, (cast group : TextLayoutGroup).endIndex) : Dynamic));
+      if ((cast ((cast x : Float) <= (cast (cast group : TextLayoutGroup).offsetX : Float)) : Bool)) { return cast (cast group : TextLayoutGroup).startIndex; }
+      if ((cast ((cast x : Float) <= (cast ((cast group : TextLayoutGroup).offsetX + (cast group : TextLayoutGroup).width) : Float)) : Bool)) { return cast (cast TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing((cast group : TextLayoutGroup), (cast x : Float)) : Float); }
     }
     return cast ((cast ((cast lineEnd : Float) > (cast 0.0 : Float)) : Bool) ? (cast lineEnd : Dynamic) : (cast lineStart : Dynamic));
     return cast null;
   }
 
   public static function getTextInputDisplayText(source:RichText):String {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var passwordCharacter:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(state, 'displayAsPassword') : Bool) : Bool)) { return cast _Runtime.field(_Runtime.field(source, 'data'), 'text'); }
-    passwordCharacter = ((cast ((cast _Runtime.field(_Runtime.field(state, 'passwordCharacter'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.charAt(_Runtime.field(state, 'passwordCharacter'), 0.0) : Dynamic) : (cast '•' : Dynamic));
-    return cast _Runtime.repeat(passwordCharacter, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var passwordCharacter:String = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    if ((cast !(cast (cast state : TextInputState).displayAsPassword : Bool) : Bool)) { return cast (cast _Runtime.field(source, 'data') : RichTextData).text; }
+    passwordCharacter = ((cast ((cast _Runtime.field((cast state : TextInputState).passwordCharacter, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.charAt((cast state : TextInputState).passwordCharacter, 0.0) : Dynamic) : (cast '•' : Dynamic));
+    return cast _Runtime.repeat(passwordCharacter, _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length'));
     return cast null;
   }
 
   public static function getTextInputSelectionBeginIndex(source:RichText):Float {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast HxMath.min(_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    return cast HxMath.min((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float));
     return cast null;
   }
 
   public static function getTextInputSelectionEndIndex(source:RichText):Float {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast HxMath.max(_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    return cast HxMath.max((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float));
     return cast null;
   }
 
   public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:RichText, layout:TextLayoutResult):Void {
-    _Runtime.callValue(getRichTextSelectionRectangles, cast ([out, _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), layout] : Array<Dynamic>));
+    getRichTextSelectionRectangles((cast out : Array<TextSelectionRectangle>), (cast (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float) : Float), (cast (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float) : Float), (cast layout : TextLayoutResult));
   }
 
   public static function getTextInputSelectionText(source:RichText):String {
-    return cast _Runtime.slice(_Runtime.field(_Runtime.field(source, 'data'), 'text'), _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)));
+    return cast _Runtime.slice((cast _Runtime.field(source, 'data') : RichTextData).text, (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Null<Float>), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Null<Float>));
     return cast null;
   }
 
   public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
-    var command:Dynamic = cast _Runtime.UNDEFINED;
-    command = _Runtime.callValue(TextInputEditing.getKeyboardCommand__textInputEditing, cast ([data] : Array<Dynamic>));
+    var command:KeyboardCommand__textInputEditing = cast _Runtime.UNDEFINED;
+    command = (cast TextInputEditing.getKeyboardCommand__textInputEditing((cast data : KeyboardEventData)) : KeyboardCommand__textInputEditing);
     if ((cast _Runtime.strictEquals(command, 'none') : Bool)) { return cast false; }
     {
       var __switchValue = command;
       if (__switchValue == 'backspace') {
-        _Runtime.callValue(deleteTextInputBackward, cast ([source] : Array<Dynamic>));
+        deleteTextInputBackward((cast source : RichText));
         return cast true;
       }
       else if (__switchValue == 'copy') {
         {
-          var copyText:Dynamic = _Runtime.callValue(getTextInputSelectionText, cast ([source] : Array<Dynamic>));
+          var copyText:String = (cast getTextInputSelectionText((cast source : RichText)) : String);
           if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callOptionalProperty(options, 'onCopy', cast ([copyText] : Array<Dynamic>)); }
           return cast true;
         }
       }
       else if (__switchValue == 'cut') {
         {
-          var cutText:Dynamic = _Runtime.callValue(getTextInputSelectionText, cast ([source] : Array<Dynamic>));
+          var cutText:String = (cast getTextInputSelectionText((cast source : RichText)) : String);
           if ((cast ((cast _Runtime.field(cutText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
             _Runtime.callOptionalProperty(options, 'onCopy', cast ([cutText] : Array<Dynamic>));
-            _Runtime.callValue(replaceSelectedTextInput, cast ([source, ''] : Array<Dynamic>));
+            replaceSelectedTextInput((cast source : RichText), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<ReplaceTextInputOptions>));
           }
           return cast true;
         }
       }
       else if (__switchValue == 'delete') {
-        _Runtime.callValue(deleteTextInputForward, cast ([source] : Array<Dynamic>));
+        deleteTextInputForward((cast source : RichText));
         return cast true;
       }
       else if (__switchValue == 'deleteWordBackward') {
-        _Runtime.callValue(deleteTextInputWordBackward, cast ([source] : Array<Dynamic>));
+        deleteTextInputWordBackward((cast source : RichText));
         return cast true;
       }
       else if (__switchValue == 'deleteWordForward') {
-        _Runtime.callValue(deleteTextInputWordForward, cast ([source] : Array<Dynamic>));
+        deleteTextInputWordForward((cast source : RichText));
         return cast true;
       }
       else if (__switchValue == 'documentEnd') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaret((cast source : RichText), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'documentStart') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaret((cast source : RichText), (cast 0.0 : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'down') {
-        _Runtime.callValue(moveTextInputCaretDown, cast ([source, _Runtime.optionalField(options, 'layout'), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretDown((cast source : RichText), (cast _Runtime.optionalField(options, 'layout') : Null<TextLayoutResult>), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'end') {
-        _Runtime.callValue(moveTextInputCaretToLineEnd, cast ([source, _Runtime.optionalField(options, 'layout'), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretToLineEnd((cast source : RichText), (cast _Runtime.optionalField(options, 'layout') : Null<TextLayoutResult>), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'home') {
-        _Runtime.callValue(moveTextInputCaretToLineStart, cast ([source, _Runtime.optionalField(options, 'layout'), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretToLineStart((cast source : RichText), (cast _Runtime.optionalField(options, 'layout') : Null<TextLayoutResult>), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'left') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.subtractNumbers(_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)), 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaret((cast source : RichText), (cast ((cast getTextInputCaretIndex((cast source : RichText)) : Float) - 1.0) : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'paste') {
-        _Runtime.callValue(insertTextInput, cast ([source, _Runtime.coalesce(_Runtime.optionalField(options, 'clipboardText'), function():Dynamic return cast '')] : Array<Dynamic>));
+        insertTextInput((cast source : RichText), (cast _Runtime.coalesce(_Runtime.optionalField(options, 'clipboardText'), function():Dynamic return cast '') : String));
         return cast true;
       }
       else if (__switchValue == 'return') {
-        if ((cast !(cast _Runtime.field(_Runtime.field(source, 'data'), 'multiline') : Bool) : Bool)) { return cast false; }
-        _Runtime.callValue(insertTextInput, cast ([source, '\n'] : Array<Dynamic>));
+        if ((cast !(cast (cast (cast source : RichText).data : RichTextData).multiline : Bool) : Bool)) { return cast false; }
+        insertTextInput((cast source : RichText), (cast '\n' : String));
         return cast true;
       }
       else if (__switchValue == 'right') {
-        _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.addNumbers(_Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>)), 1.0), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaret((cast source : RichText), (cast ((cast getTextInputCaretIndex((cast source : RichText)) : Float) + 1.0) : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'selectAll') {
-        _Runtime.callValue(selectAllTextInput, cast ([source] : Array<Dynamic>));
+        selectAllTextInput((cast source : RichText));
         return cast true;
       }
       else if (__switchValue == 'up') {
-        _Runtime.callValue(moveTextInputCaretUp, cast ([source, _Runtime.optionalField(options, 'layout'), _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretUp((cast source : RichText), (cast _Runtime.optionalField(options, 'layout') : Null<TextLayoutResult>), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'wordLeft') {
-        _Runtime.callValue(moveTextInputCaretByWord, cast ([source, -1.0, _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretByWord((cast source : RichText), (cast -1.0 : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'wordRight') {
-        _Runtime.callValue(moveTextInputCaretByWord, cast ([source, 1.0, _Runtime.field(data, 'shiftKey')] : Array<Dynamic>));
+        moveTextInputCaretByWord((cast source : RichText), (cast 1.0 : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
     }
@@ -310,180 +312,180 @@ class TextInputEditing {
   }
 
   public static function insertTextInput(source:RichText, text:String):Void {
-    _Runtime.callValue(replaceSelectedTextInput, cast ([source, text, { applyInputRules: true }] : Array<Dynamic>));
+    replaceSelectedTextInput((cast source : RichText), (cast text : String), (cast { applyInputRules: true } : Null<ReplaceTextInputOptions>));
   }
 
-  public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Dynamic = false):Void {
-    var caret:Dynamic = cast _Runtime.UNDEFINED;
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    caret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([index, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    _Runtime.setField(state, 'caretIndex', caret);
-    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', caret); }
-    _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+  public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Bool = false):Void {
+    var caret:Float = cast _Runtime.UNDEFINED;
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    caret = (cast TextInputEditing.clampIndex__textInputEditing((cast index : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    ((cast state : TextInputState).caretIndex = caret);
+    if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = caret); }
+    ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
+    invalidateNodeAppearance(source);
   }
 
-  public static function moveTextInputCaretByWord(source:RichText, direction:Float, extendSelection:Dynamic = false):Void {
-    var caretIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var text:Dynamic = cast _Runtime.UNDEFINED;
+  public static function moveTextInputCaretByWord(source:RichText, direction:Float, extendSelection:Bool = false):Void {
+    var caretIndex:Float = cast _Runtime.UNDEFINED;
+    var text:String = cast _Runtime.UNDEFINED;
     var target:Float = cast _Runtime.UNDEFINED;
-    caretIndex = _Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
-    text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
+    caretIndex = (cast getTextInputCaretIndex((cast source : RichText)) : Float);
+    text = (cast (cast source : RichText).data : RichTextData).text;
     if ((cast ((cast direction : Float) < (cast 0.0 : Float)) : Bool)) {
-      (target = cast (_Runtime.callValue(TextInputEditing.findWordStartBefore__textInputEditing, cast ([text, caretIndex] : Array<Dynamic>)) : Dynamic));
+      (target = cast ((cast TextInputEditing.findWordStartBefore__textInputEditing((cast text : String), (cast caretIndex : Float)) : Float) : Dynamic));
     } else {
-      (target = cast (_Runtime.callValue(TextInputEditing.findWordEndAfter__textInputEditing, cast ([text, caretIndex] : Array<Dynamic>)) : Dynamic));
+      (target = cast ((cast TextInputEditing.findWordEndAfter__textInputEditing((cast text : String), (cast caretIndex : Float)) : Float) : Dynamic));
     }
-    _Runtime.callValue(moveTextInputCaret, cast ([source, target, extendSelection] : Array<Dynamic>));
+    moveTextInputCaret((cast source : RichText), (cast target : Float), (cast extendSelection : Bool));
   }
 
-  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var targetLineIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var targetY:Dynamic = cast _Runtime.UNDEFINED;
-    var targetIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var newCaret:Dynamic = cast _Runtime.UNDEFINED;
+  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Bool = false):Void {
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var out:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+    var targetLineIndex:Float = cast _Runtime.UNDEFINED;
+    var targetY:Float = cast _Runtime.UNDEFINED;
+    var targetIndex:Float = cast _Runtime.UNDEFINED;
+    var newCaret:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
     out = TextInputEditing.scratchRect__textInputEditing;
-    _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
-    targetLineIndex = _Runtime.addNumbers(_Runtime.field(out, 'lineIndex'), 1.0);
+    getTextInputCaretRectangle((cast out : TextSelectionRectangle), (cast source : RichText), (cast layout : TextLayoutResult));
+    if ((cast _Runtime.strictEquals((cast state : TextInputState).desiredCaretX, TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { ((cast state : TextInputState).desiredCaretX = (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x); }
+    targetLineIndex = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).lineIndex + 1.0);
     if ((cast ((cast targetLineIndex : Float) >= (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = _Runtime.addNumbers(_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
-    targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
-    newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
-    _Runtime.setField(state, 'caretIndex', newCaret);
-    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', newCaret); }
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout : TextLayoutResult), (cast targetLineIndex : Float)) : Float) + _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
+    targetIndex = (cast getTextInputCharacterIndexAtPoint((cast source : RichText), (cast layout : TextLayoutResult), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
+    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    ((cast state : TextInputState).caretIndex = newCaret);
+    if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = newCaret); }
+    invalidateNodeAppearance(source);
   }
 
-  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
-    var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
+  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Bool = false):Void {
+    var lineIndex:Float = cast _Runtime.UNDEFINED;
+    var lineEnd:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
-    lineIndex = _Runtime.callValue(TextInputEditing.getCaretLineIndex__textInputEditing, cast ([source, layout] : Array<Dynamic>));
-    lineEnd = _Runtime.callValue(TextInputEditing.getLineEndIndex__textInputEditing, cast ([layout, lineIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
-    _Runtime.callValue(moveTextInputCaret, cast ([source, lineEnd, extendSelection] : Array<Dynamic>));
+    lineIndex = (cast TextInputEditing.getCaretLineIndex__textInputEditing((cast source : RichText), (cast layout : TextLayoutResult)) : Float);
+    lineEnd = (cast TextInputEditing.getLineEndIndex__textInputEditing((cast layout : TextLayoutResult), (cast lineIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    moveTextInputCaret((cast source : RichText), (cast lineEnd : Float), (cast extendSelection : Bool));
   }
 
-  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
-    var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var lineStart:Dynamic = cast _Runtime.UNDEFINED;
+  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Bool = false):Void {
+    var lineIndex:Float = cast _Runtime.UNDEFINED;
+    var lineStart:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast 0.0 : Float), (cast extendSelection : Bool));
       return;
     }
-    lineIndex = _Runtime.callValue(TextInputEditing.getCaretLineIndex__textInputEditing, cast ([source, layout] : Array<Dynamic>));
-    lineStart = _Runtime.callValue(TextInputEditing.getLineStartIndex__textInputEditing, cast ([layout, lineIndex] : Array<Dynamic>));
-    _Runtime.callValue(moveTextInputCaret, cast ([source, lineStart, extendSelection] : Array<Dynamic>));
+    lineIndex = (cast TextInputEditing.getCaretLineIndex__textInputEditing((cast source : RichText), (cast layout : TextLayoutResult)) : Float);
+    lineStart = (cast TextInputEditing.getLineStartIndex__textInputEditing((cast layout : TextLayoutResult), (cast lineIndex : Float)) : Float);
+    moveTextInputCaret((cast source : RichText), (cast lineStart : Float), (cast extendSelection : Bool));
   }
 
-  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var targetLineIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var targetY:Dynamic = cast _Runtime.UNDEFINED;
-    var targetIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var newCaret:Dynamic = cast _Runtime.UNDEFINED;
+  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Bool = false):Void {
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var out:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+    var targetLineIndex:Float = cast _Runtime.UNDEFINED;
+    var targetY:Float = cast _Runtime.UNDEFINED;
+    var targetIndex:Float = cast _Runtime.UNDEFINED;
+    var newCaret:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast 0.0 : Float), (cast extendSelection : Bool));
       return;
     }
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
     out = TextInputEditing.scratchRect__textInputEditing;
-    _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(state, 'desiredCaretX'), TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { _Runtime.setField(state, 'desiredCaretX', _Runtime.field(out, 'x')); }
-    targetLineIndex = _Runtime.subtractNumbers(_Runtime.field(out, 'lineIndex'), 1.0);
+    getTextInputCaretRectangle((cast out : TextSelectionRectangle), (cast source : RichText), (cast layout : TextLayoutResult));
+    if ((cast _Runtime.strictEquals((cast state : TextInputState).desiredCaretX, TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { ((cast state : TextInputState).desiredCaretX = (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x); }
+    targetLineIndex = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).lineIndex - 1.0);
     if ((cast ((cast targetLineIndex : Float) < (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(moveTextInputCaret, cast ([source, 0.0, extendSelection] : Array<Dynamic>));
+      moveTextInputCaret((cast source : RichText), (cast 0.0 : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = _Runtime.addNumbers(_Runtime.callValue(TextInputEditing.getLineOffsetY__textInputEditing, cast ([layout, targetLineIndex] : Array<Dynamic>)), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
-    targetIndex = _Runtime.callValue(getTextInputCharacterIndexAtPoint, cast ([source, layout, _Runtime.field(state, 'desiredCaretX'), targetY] : Array<Dynamic>));
-    newCaret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([targetIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
-    _Runtime.setField(state, 'caretIndex', newCaret);
-    if ((cast !(cast extendSelection : Bool) : Bool)) { _Runtime.setField(state, 'selectionIndex', newCaret); }
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout : TextLayoutResult), (cast targetLineIndex : Float)) : Float) + _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
+    targetIndex = (cast getTextInputCharacterIndexAtPoint((cast source : RichText), (cast layout : TextLayoutResult), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
+    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    ((cast state : TextInputState).caretIndex = newCaret);
+    if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = newCaret); }
+    invalidateNodeAppearance(source);
   }
 
   public static function redoTextInput(source:RichText):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var record:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(canRedoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    _Runtime.incrementField(state, 'historyIndex', 1, true);
-    record = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
-    _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textAfter'), _Runtime.field(record, 'caretIndexAfter'), _Runtime.field(record, 'selectionIndexAfter')] : Array<Dynamic>));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var record:TextInputHistoryEntry = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    if ((cast !(cast (cast canRedoTextInput((cast source : RichText)) : Bool) : Bool) : Bool)) { return; }
+    (cast state : TextInputState).historyIndex++;
+    record = flighthq._internal._StaticIndex.readArray((cast state : TextInputState).history, (cast state : TextInputState).historyIndex);
+    TextInputEditing.applyHistoryRecord__textInputEditing((cast source : RichText), (cast state : TextInputState), (cast (cast record : TextInputHistoryEntry).textAfter : String), (cast (cast record : TextInputHistoryEntry).caretIndexAfter : Float), (cast (cast record : TextInputHistoryEntry).selectionIndexAfter : Float));
   }
 
   public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
-    _Runtime.callValue(replaceTextInput, cast ([source, _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), text, options] : Array<Dynamic>));
+    replaceTextInput((cast source : RichText), (cast (cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float) : Float), (cast (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float) : Float), (cast text : String), (cast options : Null<ReplaceTextInputOptions>));
   }
 
   public static function replaceTextInput(source:RichText, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var textBefore:Dynamic = cast _Runtime.UNDEFINED;
-    var caretBefore:Dynamic = cast _Runtime.UNDEFINED;
-    var selectionBefore:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    start = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([beginIndex, _Runtime.field(_Runtime.field(data, 'text'), 'length')] : Array<Dynamic>));
-    end = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([endIndex, _Runtime.field(_Runtime.field(data, 'text'), 'length')] : Array<Dynamic>));
+    var data:RichTextData = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    var value:String = cast _Runtime.UNDEFINED;
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var textBefore:String = cast _Runtime.UNDEFINED;
+    var caretBefore:Float = cast _Runtime.UNDEFINED;
+    var selectionBefore:Float = cast _Runtime.UNDEFINED;
+    data = (cast source : RichText).data;
+    start = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field((cast data : RichTextData).text, 'length') : Float)) : Float);
+    end = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field((cast data : RichTextData).text, 'length') : Float)) : Float);
     if ((cast ((cast end : Float) < (cast start : Float)) : Bool)) {
-      var swap:Dynamic = start;
+      var swap:Float = start;
       (start = cast (end : Dynamic));
       (end = cast (swap : Dynamic));
     }
-    value = ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'applyInputRules'), true) : Bool) ? (cast _Runtime.callValue(applyTextInputRestriction, cast ([source, text, (end - start)] : Array<Dynamic>)) : Dynamic) : (cast text : Dynamic));
+    value = ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'applyInputRules'), true) : Bool) ? (cast (cast applyTextInputRestriction((cast source : RichText), (cast text : String), (cast (end - start) : Float)) : String) : Dynamic) : (cast text : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(start, end) : Bool)) : Bool)) { return; }
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    textBefore = _Runtime.field(data, 'text');
-    caretBefore = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(textBefore, 'length')] : Array<Dynamic>));
-    selectionBefore = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(textBefore, 'length')] : Array<Dynamic>));
-    _Runtime.setField(data, 'text', ((_Runtime.slice(textBefore, 0.0, start) + value) + _Runtime.slice(textBefore, end, null)));
-    _Runtime.callValue(TextInputEditing.adjustTextFormatRanges__textInputEditing, cast ([_Runtime.field(data, 'textFormatRanges'), _Runtime.field(data, 'defaultTextFormat'), start, end, _Runtime.field(value, 'length')] : Array<Dynamic>));
-    _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
-    _Runtime.callValue(setTextInputSelection, cast ([source, _Runtime.addNumbers(start, _Runtime.field(value, 'length')), _Runtime.addNumbers(start, _Runtime.field(value, 'length'))] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'skipHistory'), true) : Bool) && (cast ((cast _Runtime.field(state, 'historyLimit') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(TextInputEditing.recordTextInputEdit__textInputEditing, cast ([state, textBefore, _Runtime.field(data, 'text'), caretBefore, selectionBefore, _Runtime.coalesce(_Runtime.optionalField(options, 'mergeKind'), function():Dynamic return cast null)] : Array<Dynamic>));
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    textBefore = (cast data : RichTextData).text;
+    caretBefore = (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field(textBefore, 'length') : Float)) : Float);
+    selectionBefore = (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field(textBefore, 'length') : Float)) : Float);
+    ((cast data : RichTextData).text = ((_Runtime.slice(textBefore, 0.0, start) + value) + _Runtime.slice(textBefore, end, null)));
+    TextInputEditing.adjustTextFormatRanges__textInputEditing((cast (cast data : RichTextData).textFormatRanges : Array<TextFormatRange>), (cast data : RichTextData).defaultTextFormat, (cast start : Float), (cast end : Float), (cast _Runtime.field(value, 'length') : Float));
+    ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
+    setTextInputSelection((cast source : RichText), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float));
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'skipHistory'), true) : Bool) && (cast ((cast (cast state : TextInputState).historyLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      TextInputEditing.recordTextInputEdit__textInputEditing((cast state : TextInputState), (cast textBefore : String), (cast (cast data : RichTextData).text : String), (cast caretBefore : Float), (cast selectionBefore : Float), (cast _Runtime.coalesce(_Runtime.optionalField(options, 'mergeKind'), function():Dynamic return cast null) : Null<String>));
     }
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    invalidateNodeAppearance(source);
   }
 
   public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var caretTop:Dynamic = cast _Runtime.UNDEFINED;
-    var caretBottom:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollVLine:Dynamic = cast _Runtime.UNDEFINED;
-    var viewTop:Dynamic = cast _Runtime.UNDEFINED;
-    var viewBottom:Dynamic = cast _Runtime.UNDEFINED;
-    var CARET_SCROLL_MARGIN:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollH:Dynamic = cast _Runtime.UNDEFINED;
-    var caretLeft:Dynamic = cast _Runtime.UNDEFINED;
-    var caretRight:Dynamic = cast _Runtime.UNDEFINED;
+    var out:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
+    var caretTop:Float = cast _Runtime.UNDEFINED;
+    var caretBottom:Float = cast _Runtime.UNDEFINED;
+    var scrollVLine:Float = cast _Runtime.UNDEFINED;
+    var viewTop:Float = cast _Runtime.UNDEFINED;
+    var viewBottom:Float = cast _Runtime.UNDEFINED;
+    var CARET_SCROLL_MARGIN:Float = cast _Runtime.UNDEFINED;
+    var scrollH:Float = cast _Runtime.UNDEFINED;
+    var caretLeft:Float = cast _Runtime.UNDEFINED;
+    var caretRight:Float = cast _Runtime.UNDEFINED;
     out = TextInputEditing.scratchRect__textInputEditing;
-    _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    caretTop = _Runtime.field(out, 'y');
-    caretBottom = _Runtime.addNumbers(_Runtime.field(out, 'y'), _Runtime.field(out, 'height'));
-    scrollVLine = _Runtime.subtractNumbers(_Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), function():Dynamic return cast 1.0), 1.0);
+    getTextInputCaretRectangle((cast out : TextSelectionRectangle), (cast source : RichText), (cast layout : TextLayoutResult));
+    caretTop = (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y;
+    caretBottom = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y + (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height);
+    scrollVLine = _Runtime.subtractNumbers(_Runtime.coalesce((cast (cast source : RichText).data : RichTextData).scrollV, function():Dynamic return cast 1.0), 1.0);
     viewTop = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast scrollVLine : Float)) : Bool)) {
         (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
@@ -491,12 +493,12 @@ class TextInputEditing {
     }
     viewBottom = (viewTop + viewportHeight);
     if ((cast ((cast caretTop : Float) < (cast viewTop : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollV, cast ([source, _Runtime.addNumbers(_Runtime.field(out, 'lineIndex'), 1.0), layout] : Array<Dynamic>));
+      setRichTextScrollV((cast source : RichText), (cast ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).lineIndex + 1.0) : Float), (cast layout : Null<TextLayoutResult>));
     } else { if ((cast ((cast caretBottom : Float) > (cast viewBottom : Float)) : Bool)) {
-      var pixelOffset:Dynamic = 0.0;
-      var firstVisibleLine:Dynamic = 0.0;
+      var pixelOffset:Float = 0.0;
+      var firstVisibleLine:Float = 0.0;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
           if ((cast ((cast _Runtime.addNumbers(pixelOffset, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
@@ -506,115 +508,115 @@ class TextInputEditing {
           i++;
         }
       }
-      _Runtime.callValue(setRichTextScrollV, cast ([source, (firstVisibleLine + 1.0), layout] : Array<Dynamic>));
+      setRichTextScrollV((cast source : RichText), (cast (firstVisibleLine + 1.0) : Float), (cast layout : Null<TextLayoutResult>));
     } }
     CARET_SCROLL_MARGIN = 8.0;
-    scrollH = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), function():Dynamic return cast 0.0);
-    caretLeft = _Runtime.subtractNumbers(_Runtime.field(out, 'x'), scrollH);
-    caretRight = _Runtime.addNumbers(caretLeft, _Runtime.field(out, 'width'));
+    scrollH = _Runtime.coalesce((cast (cast source : RichText).data : RichTextData).scrollH, function():Dynamic return cast 0.0);
+    caretLeft = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollH);
+    caretRight = (caretLeft + (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width);
     if ((cast ((cast caretLeft : Float) < (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollH, cast ([source, HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(out, 'x'), CARET_SCROLL_MARGIN)), layout] : Array<Dynamic>));
+      setRichTextScrollH((cast source : RichText), (cast HxMath.max(0.0, ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - CARET_SCROLL_MARGIN)) : Float), (cast layout : Null<TextLayoutResult>));
     } else { if ((cast ((cast (caretRight + CARET_SCROLL_MARGIN) : Float) > (cast viewportWidth : Float)) : Bool)) {
-      _Runtime.callValue(setRichTextScrollH, cast ([source, ((_Runtime.addNumbers(_Runtime.field(out, 'x'), _Runtime.field(out, 'width')) + CARET_SCROLL_MARGIN) - viewportWidth), layout] : Array<Dynamic>));
+      setRichTextScrollH((cast source : RichText), (cast ((((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x + (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width) + CARET_SCROLL_MARGIN) - viewportWidth) : Float), (cast layout : Null<TextLayoutResult>));
     } }
   }
 
   public static function selectAllTextInput(source:RichText):Void {
-    _Runtime.callValue(setTextInputSelection, cast ([source, 0.0, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
+    setTextInputSelection((cast source : RichText), (cast 0.0 : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float));
   }
 
   public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var clamped:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
+    var text:String = cast _Runtime.UNDEFINED;
+    var clamped:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    text = (cast (cast source : RichText).data : RichTextData).text;
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
     while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.charAt(text, (start - 1.0)), '\n') : Bool)) : Bool)) { start--; }
     while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.charAt(text, end), '\n') : Bool)) : Bool)) { end++; }
-    _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
+    setTextInputSelection((cast source : RichText), (cast start : Float), (cast end : Float));
   }
 
   public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var clamped:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    var end:Dynamic = cast _Runtime.UNDEFINED;
-    text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
+    var text:String = cast _Runtime.UNDEFINED;
+    var clamped:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
+    text = (cast (cast source : RichText).data : RichTextData).text;
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
-    while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) { start--; }
-    while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>)) : Bool)) : Bool)) { end++; }
+    while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, (start - 1.0)) : String)) : Bool) : Bool)) : Bool)) { start--; }
+    while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, end) : String)) : Bool) : Bool)) : Bool)) { end++; }
     if ((cast _Runtime.strictEquals(start, end) : Bool)) {
-      while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { start--; }
-      while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, end)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { end++; }
+      while ((cast ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, (start - 1.0)) : String)) : Bool) : Bool) : Bool)) : Bool)) { start--; }
+      while ((cast ((cast ((cast end : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, end) : String)) : Bool) : Bool) : Bool)) : Bool)) { end++; }
     }
-    _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
+    setTextInputSelection((cast source : RichText), (cast start : Float), (cast end : Float));
   }
 
   public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    _Runtime.setField(state, 'selectionIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([beginIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
-    _Runtime.setField(state, 'caretIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([endIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    ((cast state : TextInputState).selectionIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float));
+    ((cast state : TextInputState).caretIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float));
+    invalidateNodeAppearance(source);
   }
 
   public static function undoTextInput(source:RichText):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var record:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(canUndoTextInput, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return; }
-    record = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex'));
-    _Runtime.incrementField(state, 'historyIndex', -1, true);
-    _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textBefore'), _Runtime.field(record, 'caretIndexBefore'), _Runtime.field(record, 'selectionIndexBefore')] : Array<Dynamic>));
+    var state:TextInputState = cast _Runtime.UNDEFINED;
+    var record:TextInputHistoryEntry = cast _Runtime.UNDEFINED;
+    state = (cast TextInputEditing.getInputState__textInputEditing((cast source : RichText)) : TextInputState);
+    if ((cast !(cast (cast canUndoTextInput((cast source : RichText)) : Bool) : Bool) : Bool)) { return; }
+    record = flighthq._internal._StaticIndex.readArray((cast state : TextInputState).history, (cast state : TextInputState).historyIndex);
+    (cast state : TextInputState).historyIndex--;
+    TextInputEditing.applyHistoryRecord__textInputEditing((cast source : RichText), (cast state : TextInputState), (cast (cast record : TextInputHistoryEntry).textBefore : String), (cast (cast record : TextInputHistoryEntry).caretIndexBefore : Float), (cast (cast record : TextInputHistoryEntry).selectionIndexBefore : Float));
   }
 
-  public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:Dynamic, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
-    var removeLength:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
+  public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:flighthq._internal._IndexedAccess<RichTextData, String>, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
+    var removeLength:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
     removeLength = (endIndex - beginIndex);
     offset = (insertLength - removeLength);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) {
-        var range:Dynamic = flighthq._internal._StaticIndex.readArray(ranges, i);
+        var range:TextFormatRange = flighthq._internal._StaticIndex.readArray(ranges, i);
         if ((cast _Runtime.strictEquals(beginIndex, endIndex) : Bool)) {
-          if ((cast ((cast _Runtime.field(range, 'end') : Float) < (cast beginIndex : Float)) : Bool)) {
+          if ((cast ((cast (cast range : TextFormatRange).end : Float) < (cast beginIndex : Float)) : Bool)) {
             i++;
             continue;
-          } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool)) {
-            _Runtime.setField(range, 'start', _Runtime.addNumbers(_Runtime.field(range, 'start'), offset));
-            _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
-          } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) >= (cast beginIndex : Float)) : Bool)) : Bool)) {
-            _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
+          } else { if ((cast ((cast (cast range : TextFormatRange).start : Float) >= (cast beginIndex : Float)) : Bool)) {
+            ((cast range : TextFormatRange).start += offset);
+            ((cast range : TextFormatRange).end += offset);
+          } else { if ((cast ((cast ((cast (cast range : TextFormatRange).start : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast (cast range : TextFormatRange).end : Float) >= (cast beginIndex : Float)) : Bool)) : Bool)) {
+            ((cast range : TextFormatRange).end += offset);
           } } }
-        } else { if ((cast ((cast _Runtime.field(range, 'end') : Float) <= (cast beginIndex : Float)) : Bool)) {
+        } else { if ((cast ((cast (cast range : TextFormatRange).end : Float) <= (cast beginIndex : Float)) : Bool)) {
           i++;
           continue;
-        } else { if ((cast ((cast _Runtime.field(range, 'start') : Float) > (cast endIndex : Float)) : Bool)) {
-          _Runtime.setField(range, 'start', _Runtime.addNumbers(_Runtime.field(range, 'start'), offset));
-          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
-        } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) <= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool)) : Bool)) {
-          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
-        } else { if ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) >= (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
+        } else { if ((cast ((cast (cast range : TextFormatRange).start : Float) > (cast endIndex : Float)) : Bool)) {
+          ((cast range : TextFormatRange).start += offset);
+          ((cast range : TextFormatRange).end += offset);
+        } else { if ((cast ((cast ((cast (cast range : TextFormatRange).start : Float) <= (cast beginIndex : Float)) : Bool) && (cast ((cast (cast range : TextFormatRange).end : Float) > (cast endIndex : Float)) : Bool)) : Bool)) {
+          ((cast range : TextFormatRange).end += offset);
+        } else { if ((cast ((cast ((cast (cast range : TextFormatRange).start : Float) >= (cast beginIndex : Float)) : Bool) && (cast ((cast (cast range : TextFormatRange).end : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
           _Runtime.splice(ranges, Std.int(i--), Std.int(1.0), []);
-        } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'end') : Float) > (cast endIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'start') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
-          _Runtime.setField(range, 'start', beginIndex);
-          _Runtime.setField(range, 'end', _Runtime.addNumbers(_Runtime.field(range, 'end'), offset));
-        } else { if ((cast ((cast ((cast ((cast _Runtime.field(range, 'start') : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(range, 'end') : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
-          _Runtime.setField(range, 'end', beginIndex);
+        } else { if ((cast ((cast ((cast ((cast (cast range : TextFormatRange).end : Float) > (cast endIndex : Float)) : Bool) && (cast ((cast (cast range : TextFormatRange).start : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast (cast range : TextFormatRange).start : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
+          ((cast range : TextFormatRange).start = beginIndex);
+          ((cast range : TextFormatRange).end += offset);
+        } else { if ((cast ((cast ((cast ((cast (cast range : TextFormatRange).start : Float) < (cast beginIndex : Float)) : Bool) && (cast ((cast (cast range : TextFormatRange).end : Float) > (cast beginIndex : Float)) : Bool)) : Bool) && (cast ((cast (cast range : TextFormatRange).end : Float) <= (cast endIndex : Float)) : Bool)) : Bool)) {
+          ((cast range : TextFormatRange).end = beginIndex);
         } } } } } } }
         i++;
       }
     }
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'start') : Float) >= (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(ranges, i), 'end') : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
+        if ((cast ((cast (cast flighthq._internal._StaticIndex.readArray(ranges, i) : TextFormatRange).start : Float) >= (cast (cast flighthq._internal._StaticIndex.readArray(ranges, i) : TextFormatRange).end : Float)) : Bool)) { _Runtime.splice(ranges, Std.int(i), Std.int(1.0), []); }
         i--;
       }
     }
@@ -624,11 +626,11 @@ class TextInputEditing {
   }
 
   public static function applyHistoryRecord__textInputEditing(source:RichText, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
-    _Runtime.setField(_Runtime.field(source, 'data'), 'text', text);
-    _Runtime.setField(state, 'caretIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([caretIndex, _Runtime.field(text, 'length')] : Array<Dynamic>)));
-    _Runtime.setField(state, 'selectionIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([selectionIndex, _Runtime.field(text, 'length')] : Array<Dynamic>)));
-    _Runtime.setField(state, 'desiredCaretX', TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
-    _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
+    ((cast (cast source : RichText).data : RichTextData).text = text);
+    ((cast state : TextInputState).caretIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast caretIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float));
+    ((cast state : TextInputState).selectionIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast selectionIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float));
+    ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
+    invalidateNodeAppearance(source);
   }
 
   public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
@@ -638,10 +640,10 @@ class TextInputEditing {
   }
 
   public static function getCaretLineIndex__textInputEditing(source:RichText, layout:TextLayoutResult):Float {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var out:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
     out = TextInputEditing.scratchRect__textInputEditing;
-    _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
-    return cast _Runtime.field(out, 'lineIndex');
+    getTextInputCaretRectangle((cast out : TextSelectionRectangle), (cast source : RichText), (cast layout : TextLayoutResult));
+    return cast (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).lineIndex;
     return cast null;
   }
 
@@ -651,8 +653,8 @@ class TextInputEditing {
   }
 
   public static function getInputState__textInputEditing(source:RichText):TextInputState {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
+    var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
+    state = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(state, null) : Bool)) { _Runtime.throwValue(_Runtime.error('text input is not enabled on this RichText; call enableTextInput first')); }
     return cast state;
     return cast null;
@@ -660,56 +662,56 @@ class TextInputEditing {
 
   public static function getKeyboardCommand__textInputEditing(data:KeyboardEventData):KeyboardCommand__textInputEditing {
     if ((cast ((cast _Runtime.field(data, 'ctrlKey') : Bool) || (cast _Runtime.field(data, 'metaKey') : Bool)) : Bool)) {
-      var key:Dynamic = _Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(key, 'a') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.A) : Bool)) : Bool)) { return cast 'selectAll'; }
-      if ((cast ((cast _Runtime.strictEquals(key, 'c') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C) : Bool)) : Bool)) { return cast 'copy'; }
-      if ((cast ((cast _Runtime.strictEquals(key, 'v') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.V) : Bool)) : Bool)) { return cast 'paste'; }
-      if ((cast ((cast _Runtime.strictEquals(key, 'x') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.X) : Bool)) : Bool)) { return cast 'cut'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'documentStart'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'documentEnd'; }
+      var key:String = _Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>));
+      if ((cast ((cast _Runtime.strictEquals(key, 'a') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).A) : Bool)) : Bool)) { return cast 'selectAll'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'c') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).C) : Bool)) : Bool)) { return cast 'copy'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'v') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).V) : Bool)) : Bool)) { return cast 'paste'; }
+      if ((cast ((cast _Runtime.strictEquals(key, 'x') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).X) : Bool)) : Bool)) { return cast 'cut'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'documentStart'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'documentEnd'; }
       return cast 'none';
     }
     if ((cast _Runtime.field(data, 'altKey') : Bool)) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'wordLeft'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'wordRight'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'deleteWordBackward'; }
+      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'deleteWordForward'; }
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'backspace'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'delete'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DOWN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown') : Bool)) : Bool)) { return cast 'down'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'end'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'home'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'left'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RETURN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter') : Bool)) : Bool)) { return cast 'return'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'right'; }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.UP) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp') : Bool)) : Bool)) { return cast 'up'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).BACKSPACE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace') : Bool)) : Bool)) { return cast 'backspace'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).DELETE) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete') : Bool)) : Bool)) { return cast 'delete'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).DOWN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown') : Bool)) : Bool)) { return cast 'down'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).END) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End') : Bool)) : Bool)) { return cast 'end'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).HOME) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home') : Bool)) : Bool)) { return cast 'home'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).LEFT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft') : Bool)) : Bool)) { return cast 'left'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).RETURN) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter') : Bool)) : Bool)) { return cast 'return'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).RIGHT) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight') : Bool)) : Bool)) { return cast 'right'; }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), (cast KeyCodeValue : { var A:Float; var AGAIN:Float; var ALT_ERASE:Float; var AMPERSAND:Float; var APPLICATION:Float; var APP_CONTROL_BACK:Float; var APP_CONTROL_BOOKMARKS:Float; var APP_CONTROL_FORWARD:Float; var APP_CONTROL_HOME:Float; var APP_CONTROL_REFRESH:Float; var APP_CONTROL_SEARCH:Float; var APP_CONTROL_STOP:Float; var ASTERISK:Float; var AT:Float; var AUDIO_MUTE:Float; var AUDIO_NEXT:Float; var AUDIO_PLAY:Float; var AUDIO_PREVIOUS:Float; var AUDIO_STOP:Float; var B:Float; var BACKLIGHT_DOWN:Float; var BACKLIGHT_TOGGLE:Float; var BACKLIGHT_UP:Float; var BACKSLASH:Float; var BACKSPACE:Float; var BRIGHTNESS_DOWN:Float; var BRIGHTNESS_UP:Float; var C:Float; var CALCULATOR:Float; var CANCEL:Float; var CAPS_LOCK:Float; var CARET:Float; var CLEAR:Float; var CLEAR_AGAIN:Float; var COLON:Float; var COMMA:Float; var COMPUTER:Float; var COPY:Float; var CRSEL:Float; var CURRENCY_SUBUNIT:Float; var CURRENCY_UNIT:Float; var CUT:Float; var D:Float; var DECIMAL_SEPARATOR:Float; var DELETE:Float; var DISPLAY_SWITCH:Float; var DOLLAR:Float; var DOWN:Float; var E:Float; var EJECT:Float; var END:Float; var EQUALS:Float; var ESCAPE:Float; var EXCLAMATION:Float; var EXECUTE:Float; var EXSEL:Float; var F:Float; var F1:Float; var F2:Float; var F3:Float; var F4:Float; var F5:Float; var F6:Float; var F7:Float; var F8:Float; var F9:Float; var F10:Float; var F11:Float; var F12:Float; var F13:Float; var F14:Float; var F15:Float; var F16:Float; var F17:Float; var F18:Float; var F19:Float; var F20:Float; var F21:Float; var F22:Float; var F23:Float; var F24:Float; var FIND:Float; var G:Float; var GRAVE:Float; var GREATER_THAN:Float; var H:Float; var HASH:Float; var HELP:Float; var HOME:Float; var I:Float; var INSERT:Float; var J:Float; var K:Float; var L:Float; var LEFT:Float; var LEFT_ALT:Float; var LEFT_BRACKET:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_PARENTHESIS:Float; var LEFT_SHIFT:Float; var LESS_THAN:Float; var M:Float; var MAIL:Float; var MEDIA_SELECT:Float; var MENU:Float; var MINUS:Float; var MODE:Float; var MUTE:Float; var N:Float; var NUMPAD_0:Float; var NUMPAD_00:Float; var NUMPAD_000:Float; var NUMPAD_1:Float; var NUMPAD_2:Float; var NUMPAD_3:Float; var NUMPAD_4:Float; var NUMPAD_5:Float; var NUMPAD_6:Float; var NUMPAD_7:Float; var NUMPAD_8:Float; var NUMPAD_9:Float; var NUMPAD_A:Float; var NUMPAD_AMPERSAND:Float; var NUMPAD_AT:Float; var NUMPAD_B:Float; var NUMPAD_BACKSPACE:Float; var NUMPAD_BINARY:Float; var NUMPAD_C:Float; var NUMPAD_CLEAR:Float; var NUMPAD_CLEAR_ENTRY:Float; var NUMPAD_COLON:Float; var NUMPAD_COMMA:Float; var NUMPAD_D:Float; var NUMPAD_DECIMAL:Float; var NUMPAD_DIVIDE:Float; var NUMPAD_DOUBLE_AMPERSAND:Float; var NUMPAD_DOUBLE_VERTICAL_BAR:Float; var NUMPAD_E:Float; var NUMPAD_ENTER:Float; var NUMPAD_EQUALS:Float; var NUMPAD_EXCLAMATION:Float; var NUMPAD_F:Float; var NUMPAD_GREATER_THAN:Float; var NUMPAD_HASH:Float; var NUMPAD_HEXADECIMAL:Float; var NUMPAD_LEFT_BRACE:Float; var NUMPAD_LEFT_PARENTHESIS:Float; var NUMPAD_LESS_THAN:Float; var NUMPAD_MEM_ADD:Float; var NUMPAD_MEM_CLEAR:Float; var NUMPAD_MEM_DIVIDE:Float; var NUMPAD_MEM_MULTIPLY:Float; var NUMPAD_MEM_RECALL:Float; var NUMPAD_MEM_STORE:Float; var NUMPAD_MEM_SUBTRACT:Float; var NUMPAD_MINUS:Float; var NUMPAD_MULTIPLY:Float; var NUMPAD_OCTAL:Float; var NUMPAD_PERCENT:Float; var NUMPAD_PERIOD:Float; var NUMPAD_PLUS:Float; var NUMPAD_PLUS_MINUS:Float; var NUMPAD_POWER:Float; var NUMPAD_RIGHT_BRACE:Float; var NUMPAD_RIGHT_PARENTHESIS:Float; var NUMPAD_SPACE:Float; var NUMPAD_TAB:Float; var NUMPAD_VERTICAL_BAR:Float; var NUMPAD_XOR:Float; var NUM_LOCK:Float; var NUMBER_0:Float; var NUMBER_1:Float; var NUMBER_2:Float; var NUMBER_3:Float; var NUMBER_4:Float; var NUMBER_5:Float; var NUMBER_6:Float; var NUMBER_7:Float; var NUMBER_8:Float; var NUMBER_9:Float; var O:Float; var OPER:Float; var OUT:Float; var P:Float; var PAGE_DOWN:Float; var PAGE_UP:Float; var PASTE:Float; var PAUSE:Float; var PERCENT:Float; var PERIOD:Float; var PLUS:Float; var POWER:Float; var PRINT_SCREEN:Float; var PRIOR:Float; var Q:Float; var QUESTION:Float; var QUOTE:Float; var R:Float; var RETURN:Float; var RETURN2:Float; var RIGHT:Float; var RIGHT_ALT:Float; var RIGHT_BRACKET:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_PARENTHESIS:Float; var RIGHT_SHIFT:Float; var S:Float; var SCROLL_LOCK:Float; var SELECT:Float; var SEMICOLON:Float; var SEPARATOR:Float; var SINGLE_QUOTE:Float; var SLASH:Float; var SLEEP:Float; var SPACE:Float; var STOP:Float; var SYSTEM_REQUEST:Float; var T:Float; var TAB:Float; var THOUSAND_SEPARATOR:Float; var U:Float; var UNDO:Float; var UNDERSCORE:Float; var UNKNOWN:Float; var UP:Float; var V:Float; var VOLUME_DOWN:Float; var VOLUME_UP:Float; var W:Float; var WWW:Float; var X:Float; var Y:Float; var Z:Float; }).UP) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp') : Bool)) : Bool)) { return cast 'up'; }
     return cast 'none';
     return cast null;
   }
 
   public static function getLineEndIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float, textLength:Float):Float {
-    var end:Dynamic = cast _Runtime.UNDEFINED;
+    var end:Float = cast _Runtime.UNDEFINED;
     end = -1.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool) && (cast ((cast _Runtime.field(group, 'endIndex') : Float) > (cast end : Float)) : Bool)) : Bool)) { (end = cast (_Runtime.field(group, 'endIndex') : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool) && (cast ((cast (cast group : TextLayoutGroup).endIndex : Float) > (cast end : Float)) : Bool)) : Bool)) { (end = cast ((cast group : TextLayoutGroup).endIndex : Dynamic)); }
     }
     return cast ((cast ((cast end : Float) < (cast 0.0 : Float)) : Bool) ? (cast textLength : Dynamic) : (cast end : Dynamic));
     return cast null;
   }
 
   public static function getLineOffsetY__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool)) { return cast _Runtime.field(group, 'offsetY'); }
+      if ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool)) { return cast (cast group : TextLayoutGroup).offsetY; }
     }
     y = TEXT_BOUNDS_GUTTER;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
         (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
@@ -720,10 +722,10 @@ class TextInputEditing {
   }
 
   public static function getLineStartIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
-    var start:Dynamic = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
     start = -1.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex) : Bool) && (cast _Runtime.orValue(((cast start : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast _Runtime.field(group, 'startIndex') : Float) < (cast start : Float))) : Bool)) : Bool)) { (start = cast (_Runtime.field(group, 'startIndex') : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool) && (cast _Runtime.orValue(((cast start : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast group : TextLayoutGroup).startIndex : Float) < (cast start : Float))) : Bool)) : Bool)) { (start = cast ((cast group : TextLayoutGroup).startIndex : Dynamic)); }
     }
     return cast ((cast ((cast start : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast start : Dynamic));
     return cast null;
@@ -731,19 +733,19 @@ class TextInputEditing {
 
   public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast ((cast index : Float) >= (cast _Runtime.field(group, 'startIndex') : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(group, 'endIndex') : Float)) : Bool)) : Bool)) { return cast group; }
+      if ((cast ((cast ((cast index : Float) >= (cast (cast group : TextLayoutGroup).startIndex : Float)) : Bool) && (cast ((cast index : Float) <= (cast (cast group : TextLayoutGroup).endIndex : Float)) : Bool)) : Bool)) { return cast group; }
     }
     return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getTextLayoutGroupCaretX__textInputEditing(group:TextLayoutGroup, index:Float):Float {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var limit:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var limit:Float = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
     limit = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(index, _Runtime.field(group, 'endIndex')), _Runtime.field(group, 'startIndex')));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
         (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
@@ -754,12 +756,12 @@ class TextInputEditing {
   }
 
   public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:TextLayoutGroup, x:Float):Float {
-    var currentX:Dynamic = cast _Runtime.UNDEFINED;
+    var currentX:Float = cast _Runtime.UNDEFINED;
     currentX = _Runtime.field(group, 'offsetX');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
-        var advance:Dynamic = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
+        var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
         if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast _Runtime.addNumbers(_Runtime.field(group, 'startIndex'), i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;
@@ -770,39 +772,39 @@ class TextInputEditing {
   }
 
   public static function recordTextInputEdit__textInputEditing(state:TextInputState, textBefore:String, textAfter:String, caretIndexBefore:Float, selectionIndexBefore:Float, mergeKind:Null<String>):Void {
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0) : Float)) : Bool)) {
-      _Runtime.setLength(_Runtime.field(state, 'history'), _Runtime.addNumbers(_Runtime.field(state, 'historyIndex'), 1.0));
+    var previous:Null<TextInputHistoryEntry> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast (cast state : TextInputState).historyIndex : Float) < (cast _Runtime.subtractNumbers(_Runtime.field((cast state : TextInputState).history, 'length'), 1.0) : Float)) : Bool)) {
+      _Runtime.setLength((cast state : TextInputState).history, ((cast state : TextInputState).historyIndex + 1.0));
     }
-    previous = ((cast ((cast _Runtime.field(state, 'historyIndex') : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'history'), _Runtime.field(state, 'historyIndex')) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'mergeKind'), mergeKind) : Bool)) : Bool)) {
-      _Runtime.setField(previous, 'textAfter', textAfter);
-      _Runtime.setField(previous, 'caretIndexAfter', _Runtime.field(state, 'caretIndex'));
-      _Runtime.setField(previous, 'selectionIndexAfter', _Runtime.field(state, 'selectionIndex'));
+    previous = ((cast ((cast (cast state : TextInputState).historyIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast state : TextInputState).history, (cast state : TextInputState).historyIndex) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast previous : TextInputHistoryEntry).mergeKind, mergeKind) : Bool)) : Bool)) {
+      ((cast previous : TextInputHistoryEntry).textAfter = textAfter);
+      ((cast previous : TextInputHistoryEntry).caretIndexAfter = (cast state : TextInputState).caretIndex);
+      ((cast previous : TextInputHistoryEntry).selectionIndexAfter = (cast state : TextInputState).selectionIndex);
       return;
     }
-    _Runtime.callProperty(_Runtime.field(state, 'history'), 'push', cast ([{ caretIndexAfter: _Runtime.field(state, 'caretIndex'), caretIndexBefore: caretIndexBefore, mergeKind: mergeKind, selectionIndexAfter: _Runtime.field(state, 'selectionIndex'), selectionIndexBefore: selectionIndexBefore, textAfter: textAfter, textBefore: textBefore }] : Array<Dynamic>));
-    _Runtime.setField(state, 'historyIndex', _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0));
-    if ((cast ((cast _Runtime.field(_Runtime.field(state, 'history'), 'length') : Float) > (cast _Runtime.field(state, 'historyLimit') : Float)) : Bool)) {
-      var overflow:Dynamic = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), _Runtime.field(state, 'historyLimit'));
-      _Runtime.splice(_Runtime.field(state, 'history'), Std.int(0.0), Std.int(overflow), []);
-      _Runtime.setField(state, 'historyIndex', _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(state, 'history'), 'length'), 1.0));
+    _Runtime.callProperty((cast state : TextInputState).history, 'push', cast ([{ caretIndexAfter: (cast state : TextInputState).caretIndex, caretIndexBefore: caretIndexBefore, mergeKind: mergeKind, selectionIndexAfter: (cast state : TextInputState).selectionIndex, selectionIndexBefore: selectionIndexBefore, textAfter: textAfter, textBefore: textBefore }] : Array<Dynamic>));
+    ((cast state : TextInputState).historyIndex = _Runtime.subtractNumbers(_Runtime.field((cast state : TextInputState).history, 'length'), 1.0));
+    if ((cast ((cast _Runtime.field((cast state : TextInputState).history, 'length') : Float) > (cast (cast state : TextInputState).historyLimit : Float)) : Bool)) {
+      var overflow:Float = _Runtime.subtractNumbers(_Runtime.field((cast state : TextInputState).history, 'length'), (cast state : TextInputState).historyLimit);
+      _Runtime.splice((cast state : TextInputState).history, Std.int(0.0), Std.int(overflow), []);
+      ((cast state : TextInputState).historyIndex = _Runtime.subtractNumbers(_Runtime.field((cast state : TextInputState).history, 'length'), 1.0));
     }
   }
 
   public static function restrictTextInput__textInputEditing(text:String, restrict:String):String {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var accepted:Dynamic = cast _Runtime.UNDEFINED;
-    var declined:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var accepted:String = cast _Runtime.UNDEFINED;
+    var declined:String = cast _Runtime.UNDEFINED;
+    var out:String = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(restrict, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) : Bool)) { return cast text; }
-    __destructure0 = _Runtime.callValue(TextInputEditing.splitRestrictRanges__textInputEditing, cast ([restrict] : Array<Dynamic>));
+    __destructure0 = (cast TextInputEditing.splitRestrictRanges__textInputEditing((cast restrict : String)) : { var accepted:String; var declined:String; });
     accepted = _Runtime.field(__destructure0, 'accepted');
     declined = _Runtime.field(__destructure0, 'declined');
     out = '';
     for (char in _Runtime.iterable(text)) {
-      var acceptedMatch:Dynamic = ((cast _Runtime.strictEquals(accepted, '') : Bool) || (cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, accepted] : Array<Dynamic>)) : Bool));
-      var declinedMatch:Dynamic = ((cast !_Runtime.strictEquals(declined, '') : Bool) && (cast _Runtime.callValue(TextInputEditing.matchesRestrictRanges__textInputEditing, cast ([char, declined] : Array<Dynamic>)) : Bool));
+      var acceptedMatch:Bool = ((cast _Runtime.strictEquals(accepted, '') : Bool) || (cast (cast TextInputEditing.matchesRestrictRanges__textInputEditing((cast char : String), (cast accepted : String)) : Bool) : Bool));
+      var declinedMatch:Bool = ((cast !_Runtime.strictEquals(declined, '') : Bool) && (cast (cast TextInputEditing.matchesRestrictRanges__textInputEditing((cast char : String), (cast declined : String)) : Bool) : Bool));
       if ((cast ((cast acceptedMatch : Bool) && (cast !(cast declinedMatch : Bool) : Bool)) : Bool)) { (out = cast ((out + char) : Dynamic)); }
     }
     return cast out;
@@ -811,15 +813,15 @@ class TextInputEditing {
 
   public static function matchesRestrictRanges__textInputEditing(char:String, ranges:String):Bool {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) {
-        var current:Dynamic = _Runtime.charAt(ranges, i);
+        var current:String = _Runtime.charAt(ranges, i);
         if ((cast ((cast _Runtime.strictEquals(current, '\\') : Bool) && (cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) : Bool)) {
           if ((cast _Runtime.strictEquals(char, _Runtime.charAt(ranges, (i + 1.0))) : Bool)) { return cast true; }
           i++;
         } else { if ((cast ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(ranges, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.charAt(ranges, (i + 1.0)), '-') : Bool)) : Bool)) {
-          var end:Dynamic = _Runtime.charAt(ranges, (i + 2.0));
-          var code:Dynamic = _Runtime.charCodeAt(char, 0.0);
+          var end:String = _Runtime.charAt(ranges, (i + 2.0));
+          var code:Float = _Runtime.charCodeAt(char, 0.0);
           if ((cast ((cast ((cast code : Float) >= (cast _Runtime.charCodeAt(current, 0.0) : Float)) : Bool) && (cast ((cast code : Float) <= (cast _Runtime.charCodeAt(end, 0.0) : Float)) : Bool)) : Bool)) { return cast true; }
           (i = cast ((i + 2.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(char, current) : Bool)) {
@@ -833,18 +835,18 @@ class TextInputEditing {
   }
 
   public static function splitRestrictRanges__textInputEditing(restrict:String):{ var accepted:String; var declined:String; } {
-    var accepted:Dynamic = cast _Runtime.UNDEFINED;
-    var declined:Dynamic = cast _Runtime.UNDEFINED;
-    var declining:Dynamic = cast _Runtime.UNDEFINED;
+    var accepted:String = cast _Runtime.UNDEFINED;
+    var declined:String = cast _Runtime.UNDEFINED;
+    var declining:Bool = cast _Runtime.UNDEFINED;
     accepted = '';
     declined = '';
     declining = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(restrict, 'length') : Float)) : Bool)) {
-        var char:Dynamic = _Runtime.charAt(restrict, i);
+        var char:String = _Runtime.charAt(restrict, i);
         if ((cast ((cast _Runtime.strictEquals(char, '\\') : Bool) && (cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(restrict, 'length') : Float)) : Bool)) : Bool)) {
-          var escaped:Dynamic = (char + _Runtime.charAt(restrict, (i + 1.0)));
+          var escaped:String = (char + _Runtime.charAt(restrict, (i + 1.0)));
           if ((cast declining : Bool)) { (declined = cast ((declined + escaped) : Dynamic)); } else { (accepted = cast ((accepted + escaped) : Dynamic)); }
           i++;
         } else { if ((cast _Runtime.strictEquals(char, '^') : Bool)) {
@@ -862,19 +864,19 @@ class TextInputEditing {
   }
 
   public static function findWordStartBefore__textInputEditing(text:String, index:Float):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = index;
-    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i--; }
-    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (i - 1.0))] : Array<Dynamic>)) : Bool)) : Bool)) { i--; }
+    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, (i - 1.0)) : String)) : Bool) : Bool) : Bool)) : Bool)) { i--; }
+    while ((cast ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool) && (cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, (i - 1.0)) : String)) : Bool) : Bool)) : Bool)) { i--; }
     return cast i;
     return cast null;
   }
 
   public static function findWordEndAfter__textInputEditing(text:String, index:Float):Float {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = index;
-    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; }
-    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, i)] : Array<Dynamic>)) : Bool)) : Bool)) { i++; }
+    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast !(cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, i) : String)) : Bool) : Bool) : Bool)) : Bool)) { i++; }
+    while ((cast ((cast ((cast i : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast (cast TextInputEditing.isWordChar__textInputEditing((cast _Runtime.charAt(text, i) : String)) : Bool) : Bool)) : Bool)) { i++; }
     return cast i;
     return cast null;
   }

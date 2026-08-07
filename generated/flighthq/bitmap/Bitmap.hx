@@ -64,12 +64,14 @@ import flighthq.types.BitmapMismatch;
 import flighthq.types.BitmapReadback.BitmapReadbackExplanation;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapResizeMode;
+import flighthq.types.BitmapResizeOptions;
 import flighthq.types.BitmapSharpenOptions;
 import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
 import flighthq.types.GradientSpread;
 import flighthq.types.Image;
 import flighthq.types.ImageChannel;
 import flighthq.types.ImageFormat;
+import flighthq.types.PixelFormat;
 import flighthq.types.PixelOrder;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ThresholdOperation;
@@ -82,7 +84,7 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapTransform.applyBitmapColorScaleBias(dest, source, ct);
   }
 
-  public static function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
+  public static function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, greenLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, blueLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, ?alphaLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapTone.applyBitmapCurve(out, source, redLut, greenLut, blueLut, alphaLut);
   }
 
@@ -103,13 +105,13 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapBevel.bevelBitmap(out, scratch, source, options);
   }
 
-  public static final BITMAP_NOISE_CHANNEL_A:Dynamic = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_A;
+  public static final BITMAP_NOISE_CHANNEL_A:Float = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_A;
 
-  public static final BITMAP_NOISE_CHANNEL_B:Dynamic = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_B;
+  public static final BITMAP_NOISE_CHANNEL_B:Float = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_B;
 
-  public static final BITMAP_NOISE_CHANNEL_G:Dynamic = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_G;
+  public static final BITMAP_NOISE_CHANNEL_G:Float = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_G;
 
-  public static final BITMAP_NOISE_CHANNEL_R:Dynamic = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_R;
+  public static final BITMAP_NOISE_CHANNEL_R:Float = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_R;
 
   public static function blurBitmapPixelsHorizontal(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapBlur.blurBitmapPixelsHorizontal(out, source, width, height, radius);
@@ -169,7 +171,7 @@ class Bitmap {
   }
 
   public static function cloneBitmap(source:flighthq.types.Bitmap):flighthq.types.Bitmap {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width }] : Array<Dynamic>));
+    return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width }) : flighthq.types.Bitmap);
     return cast null;
   }
 
@@ -204,16 +206,16 @@ class Bitmap {
   }
 
   public static function convertBitmapAlphaType(out:flighthq.types.Bitmap, target:AlphaType):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(out.alphaType, target) : Bool)) { return; }
     data = out.data;
     len = ((out.width * out.height) * 4.0);
     if ((cast _Runtime.strictEquals(target, 'premultiplied') : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-          var a:Dynamic = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)), 255.0);
+          var a:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)), 255.0);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), a)));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), a)));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), a)));
@@ -222,15 +224,15 @@ class Bitmap {
       }
     } else {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-          var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+          var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
           if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) {
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, 0.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), 0.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), 0.0);
           } else {
-            var inv:Dynamic = (255.0 / a);
+            var inv:Float = (255.0 / a);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), inv))));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), inv))));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), HxMath.min(255.0, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), inv))));
@@ -240,7 +242,7 @@ class Bitmap {
       }
     }
     (out.alphaType = cast (target : Dynamic));
-    _Runtime.callValue(invalidateBitmap, cast ([out] : Array<Dynamic>));
+    invalidateBitmap((cast out : flighthq.types.Bitmap));
   }
 
   public static function convertBitmapPixelOrder(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float, from:PixelOrder, to:PixelOrder):Void {
@@ -264,15 +266,15 @@ class Bitmap {
   }
 
   public static function createBitmap(width:Float, height:Float, color:Float = 0.0):flighthq.types.Bitmap {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     data = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
     if ((cast !_Runtime.strictEquals(color, 0.0) : Bool)) {
-      var r:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
-      var g:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
-      var b:Dynamic = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
-      var a:Dynamic = (_Runtime.toInt32(color) & 255);
+      var r:Float = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+      var g:Float = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
+      var b:Float = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
+      var a:Float = (_Runtime.toInt32(color) & 255);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, r);
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), g);
@@ -282,7 +284,7 @@ class Bitmap {
         }
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : flighthq.types.Bitmap);
     return cast null;
   }
 
@@ -350,7 +352,7 @@ class Bitmap {
     return cast null;
   }
 
-  public static function extendBitmap(source:flighthq.types.Bitmap, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:BitmapEdgeMode, ?fillColor:Dynamic):flighthq.types.Bitmap {
+  public static function extendBitmap(source:flighthq.types.Bitmap, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:BitmapEdgeMode, ?fillColor:Float):flighthq.types.Bitmap {
     return cast Facade_Bitmap_flighthq_bitmap_BitmapCrop.extendBitmap(source, left, top, right, bottom, edgeMode, fillColor);
     return cast null;
   }
@@ -460,7 +462,7 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapGradient.gradientGlowBitmap(out, scratch, source, ramp, options);
   }
 
-  public static final ImageChannel:Dynamic = Facade_Bitmap_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
+  public static final ImageChannel:{ var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; } = Facade_Bitmap_flighthq_types__internal__ImageChannelValues.ImageChannelValue;
 
   public static function innerGlowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapShadow.innerGlowBitmap(out, scratch, source, options);
@@ -503,7 +505,7 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapFormat.premultiplyBitmapPixels(out, source, length);
   }
 
-  public static function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, ?options:Dynamic):Void {
+  public static function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, ?options:flighthq._internal._Union2<BitmapResizeMode, BitmapResizeOptions>):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapResize.resizeBitmap(dest, source, options);
   }
 

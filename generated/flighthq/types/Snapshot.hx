@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef DeepReadonly<T> = Dynamic;
 
-typedef Snapshot<T> = DeepReadonly<Dynamic>;
+typedef Snapshot<T> = DeepReadonly<T>;
 
 typedef SnapshotSchema = Array<String>;

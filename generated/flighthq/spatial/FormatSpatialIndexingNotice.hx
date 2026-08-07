@@ -4,7 +4,9 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
+import flighthq.types.SpatialIndexing.SpatialIndexingMode;
 import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
+import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
 
 class FormatSpatialIndexingNotice {
   public static function formatSpatialIndexingNotice(notice:SpatialIndexingNotice):String {

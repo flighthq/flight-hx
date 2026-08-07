@@ -5,15 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class ClipboardFormat {
-  public static final ClipboardFormatBookmark:Dynamic = 'text/x-moz-url';
+  public static final ClipboardFormatBookmark:String = 'text/x-moz-url';
 
-  public static final ClipboardFormatHtml:Dynamic = 'text/html';
+  public static final ClipboardFormatHtml:String = 'text/html';
 
-  public static final ClipboardFormatImage:Dynamic = 'image/png';
+  public static final ClipboardFormatImage:String = 'image/png';
 
-  public static final ClipboardFormatRtf:Dynamic = 'text/rtf';
+  public static final ClipboardFormatRtf:String = 'text/rtf';
 
-  public static final ClipboardFormatText:Dynamic = 'text/plain';
+  public static final ClipboardFormatText:String = 'text/plain';
 
-  public static final ClipboardFormatUriList:Dynamic = 'text/uri-list';
+  public static final ClipboardFormatUriList:String = 'text/uri-list';
 }

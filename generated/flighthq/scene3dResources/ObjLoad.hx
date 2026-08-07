@@ -14,9 +14,9 @@ class ObjLoad {
   public static function loadScene3DDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var source:Dynamic = cast _Runtime.UNDEFINED;
-        var document:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(loadScene3DDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        var source:Null<String> = cast _Runtime.UNDEFINED;
+        var document:Scene3DDocument = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : flighthq._internal._Promise<Null<String>>), function(__awaitValue0:Dynamic):Dynamic {
           source = __awaitValue0;
           var __flowBranch1:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
@@ -27,8 +27,8 @@ class ObjLoad {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            document = _Runtime.callValue(parseObj, cast ([source, materials] : Array<Dynamic>));
-            _Runtime.callValue(setScene3DDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
+            document = (cast parseObj((cast source : String), (cast materials : Null<ObjMaterialLibrary>), _Runtime.field(_Runtime, 'UNDEFINED')) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl((cast document : Scene3DDocument), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });
         });

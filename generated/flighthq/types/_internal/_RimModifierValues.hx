@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
 class _RimModifierValues {
-  public static final RimModifierKind:Dynamic = 'RimModifier';
+  public static final RimModifierKind:String = 'RimModifier';
 }

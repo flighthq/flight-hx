@@ -10,8 +10,8 @@ class ColorBlindSimulationAdjustment {
   public static function createColorBlindSimulationAdjustment(?options:Dynamic):flighthq.types.ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var type:ColorBlindType = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var m:Array<Float> = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'deuteranopia');
     m = _Runtime.getIndex(ColorBlindSimulationAdjustment.COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment, type);
     colorMatrix = cast ([flighthq._internal._StaticIndex.readArray(m, 0.0), flighthq._internal._StaticIndex.readArray(m, 1.0), flighthq._internal._StaticIndex.readArray(m, 2.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(m, 3.0), flighthq._internal._StaticIndex.readArray(m, 4.0), flighthq._internal._StaticIndex.readArray(m, 5.0), 0.0, 0.0, flighthq._internal._StaticIndex.readArray(m, 6.0), flighthq._internal._StaticIndex.readArray(m, 7.0), flighthq._internal._StaticIndex.readArray(m, 8.0), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
@@ -19,5 +19,5 @@ class ColorBlindSimulationAdjustment {
     return cast null;
   }
 
-  public static final COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment:Dynamic = { protanopia: cast ([0.567, 0.433, 0.0, 0.558, 0.442, 0.0, 0.0, 0.242, 0.758] : Array<Dynamic>), protanomaly: cast ([0.817, 0.183, 0.0, 0.333, 0.667, 0.0, 0.0, 0.125, 0.875] : Array<Dynamic>), deuteranopia: cast ([0.625, 0.375, 0.0, 0.7, 0.3, 0.0, 0.0, 0.3, 0.7] : Array<Dynamic>), deuteranomaly: cast ([0.8, 0.2, 0.0, 0.258, 0.742, 0.0, 0.0, 0.142, 0.858] : Array<Dynamic>), tritanopia: cast ([0.95, 0.05, 0.0, 0.0, 0.433, 0.567, 0.0, 0.475, 0.525] : Array<Dynamic>), tritanomaly: cast ([0.967, 0.033, 0.0, 0.0, 0.733, 0.267, 0.0, 0.183, 0.817] : Array<Dynamic>), achromatopsia: cast ([0.299, 0.587, 0.114, 0.299, 0.587, 0.114, 0.299, 0.587, 0.114] : Array<Dynamic>), achromatomaly: cast ([0.618, 0.32, 0.062, 0.163, 0.775, 0.062, 0.163, 0.32, 0.516] : Array<Dynamic>) };
+  public static final COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment:flighthq._internal._Record<ColorBlindType, Array<Float>> = { protanopia: cast ([0.567, 0.433, 0.0, 0.558, 0.442, 0.0, 0.0, 0.242, 0.758] : Array<Dynamic>), protanomaly: cast ([0.817, 0.183, 0.0, 0.333, 0.667, 0.0, 0.0, 0.125, 0.875] : Array<Dynamic>), deuteranopia: cast ([0.625, 0.375, 0.0, 0.7, 0.3, 0.0, 0.0, 0.3, 0.7] : Array<Dynamic>), deuteranomaly: cast ([0.8, 0.2, 0.0, 0.258, 0.742, 0.0, 0.0, 0.142, 0.858] : Array<Dynamic>), tritanopia: cast ([0.95, 0.05, 0.0, 0.0, 0.433, 0.567, 0.0, 0.475, 0.525] : Array<Dynamic>), tritanomaly: cast ([0.967, 0.033, 0.0, 0.0, 0.733, 0.267, 0.0, 0.183, 0.817] : Array<Dynamic>), achromatopsia: cast ([0.299, 0.587, 0.114, 0.299, 0.587, 0.114, 0.299, 0.587, 0.114] : Array<Dynamic>), achromatomaly: cast ([0.618, 0.32, 0.062, 0.163, 0.775, 0.062, 0.163, 0.32, 0.516] : Array<Dynamic>) };
 }

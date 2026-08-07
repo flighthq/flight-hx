@@ -9,57 +9,57 @@ import flighthq.types.Velocity.VelocitySample;
 
 class VelocityField {
   public static function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', _Runtime.addNumbers(ax, _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.addNumbers(ay, _Runtime.field(b, 'y')));
+    ((cast out : Velocity2D).x = _Runtime.addNumbers(ax, _Runtime.field(b, 'x')));
+    ((cast out : Velocity2D).y = _Runtime.addNumbers(ay, _Runtime.field(b, 'y')));
     return cast out;
     return cast null;
   }
 
   public static function beginVelocityFrame(field:flighthq.types.Velocity.VelocityField):Void {
-    _Runtime.incrementField(field, 'frameId', 1, true);
+    (cast field : flighthq.types.Velocity.VelocityField).frameId++;
   }
 
   public static function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Float):Velocity2D {
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var maxSq:Dynamic = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var maxSq:Float = cast _Runtime.UNDEFINED;
     vx = _Runtime.field(velocity, 'x');
     vy = _Runtime.field(velocity, 'y');
     lenSq = ((vx * vx) + (vy * vy));
     maxSq = (maxLength * maxLength);
     if ((cast ((cast ((cast lenSq : Float) > (cast maxSq : Float)) : Bool) && (cast ((cast lenSq : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var scale:Dynamic = _Runtime.divideNumbers(maxLength, HxMath.sqrt(lenSq));
-      _Runtime.setField(out, 'x', (vx * scale));
-      _Runtime.setField(out, 'y', (vy * scale));
+      var scale:Float = _Runtime.divideNumbers(maxLength, HxMath.sqrt(lenSq));
+      ((cast out : Velocity2D).x = (vx * scale));
+      ((cast out : Velocity2D).y = (vy * scale));
     } else {
-      _Runtime.setField(out, 'x', vx);
-      _Runtime.setField(out, 'y', vy);
+      ((cast out : Velocity2D).x = vx);
+      ((cast out : Velocity2D).y = vy);
     }
     return cast out;
     return cast null;
   }
 
-  public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic, x:Float, y:Float):Void {
-    var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = _Runtime.callValue(ensureVelocitySample, cast ([field, source] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', x);
-    _Runtime.setField(_Runtime.field(sample, 'velocity'), 'y', y);
-    _Runtime.setField(sample, 'lastFrameId', _Runtime.field(field, 'frameId'));
-    _Runtime.setField(sample, 'explicitFrameId', _Runtime.field(field, 'frameId'));
+  public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, x:Float, y:Float):Void {
+    var sample:VelocitySample = cast _Runtime.UNDEFINED;
+    sample = (cast ensureVelocitySample((cast field : flighthq.types.Velocity.VelocityField), (cast source : flighthq._internal._Object)) : VelocitySample);
+    ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = x);
+    ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = y);
+    ((cast sample : VelocitySample).lastFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
+    ((cast sample : VelocitySample).explicitFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
   }
 
   public static function copyVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
     sx = _Runtime.field(source, 'x');
     sy = _Runtime.field(source, 'y');
-    _Runtime.setField(out, 'x', sx);
-    _Runtime.setField(out, 'y', sy);
+    ((cast out : Velocity2D).x = sx);
+    ((cast out : Velocity2D).y = sy);
     return cast out;
     return cast null;
   }
@@ -70,55 +70,55 @@ class VelocityField {
   }
 
   public static function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Velocity2D, factor:Float):Velocity2D {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
     cx = _Runtime.field(current, 'x');
     cy = _Runtime.field(current, 'y');
     px = _Runtime.field(previous, 'x');
     py = _Runtime.field(previous, 'y');
-    _Runtime.setField(out, 'x', ((cx * factor) + (px * (1.0 - factor))));
-    _Runtime.setField(out, 'y', ((cy * factor) + (py * (1.0 - factor))));
+    ((cast out : Velocity2D).x = ((cx * factor) + (px * (1.0 - factor))));
+    ((cast out : Velocity2D).y = ((cy * factor) + (py * (1.0 - factor))));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:Dynamic):VelocitySample {
-    var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
+  public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):VelocitySample {
+    var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
+    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
     if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (sample = cast ({ previousWorldTransform: null, velocity: { x: 0.0, y: 0.0 }, lastFrameId: -1.0, explicitFrameId: -1.0 } : Dynamic));
-      ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).set(source, sample));
+      ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, sample));
     }
     return cast sample;
     return cast null;
   }
 
-  public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
-    var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
-    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId')) : Bool)) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
+  public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, out:Velocity2D):Velocity2D {
+    var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
+    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : VelocitySample).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)) : Bool)) {
+      ((cast out : Velocity2D).x = 0.0);
+      ((cast out : Velocity2D).y = 0.0);
       return cast out;
     }
-    _Runtime.setField(out, 'x', _Runtime.field(_Runtime.field(sample, 'velocity'), 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(_Runtime.field(sample, 'velocity'), 'y'));
+    ((cast out : Velocity2D).x = (cast (cast sample : VelocitySample).velocity : Velocity2D).x);
+    ((cast out : Velocity2D).y = (cast (cast sample : VelocitySample).velocity : Velocity2D).y);
     return cast out;
     return cast null;
   }
 
-  public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic):Bool {
-    var sample:Dynamic = cast _Runtime.UNDEFINED;
-    sample = ((cast _Runtime.field(field, 'samples') : flighthq._internal._WeakMap).get(source));
-    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId')) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'y'), 0.0)));
+  public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Bool {
+    var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
+    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : VelocitySample).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : VelocitySample).velocity : Velocity2D).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : VelocitySample).velocity : Velocity2D).y, 0.0)));
     return cast null;
   }
 
   public static function isVelocityZero(velocity:Velocity2D, ?epsilon:Float):Bool {
-    var e:Dynamic = cast _Runtime.UNDEFINED;
+    var e:Float = cast _Runtime.UNDEFINED;
     e = _Runtime.coalesce(epsilon, function():Dynamic return cast 0.0);
     return cast ((cast ((cast HxMath.abs(_Runtime.field(velocity, 'x')) : Float) <= (cast e : Float)) : Bool) && (cast ((cast HxMath.abs(_Runtime.field(velocity, 'y')) : Float) <= (cast e : Float)) : Bool));
     return cast null;
@@ -130,64 +130,64 @@ class VelocityField {
   }
 
   public static function lerpVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D, t:Float):Velocity2D {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', (ax + (_Runtime.subtractNumbers(_Runtime.field(b, 'x'), ax) * t)));
-    _Runtime.setField(out, 'y', (ay + (_Runtime.subtractNumbers(_Runtime.field(b, 'y'), ay) * t)));
+    ((cast out : Velocity2D).x = (ax + (_Runtime.subtractNumbers(_Runtime.field(b, 'x'), ax) * t)));
+    ((cast out : Velocity2D).y = (ay + (_Runtime.subtractNumbers(_Runtime.field(b, 'y'), ay) * t)));
     return cast out;
     return cast null;
   }
 
   public static function normalizeVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     sx = _Runtime.field(source, 'x');
     sy = _Runtime.field(source, 'y');
     len = HxMath.sqrt(((sx * sx) + (sy * sy)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      var inv:Dynamic = (1.0 / len);
-      _Runtime.setField(out, 'x', (sx * inv));
-      _Runtime.setField(out, 'y', (sy * inv));
+      var inv:Float = (1.0 / len);
+      ((cast out : Velocity2D).x = (sx * inv));
+      ((cast out : Velocity2D).y = (sy * inv));
     } else {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
+      ((cast out : Velocity2D).x = 0.0);
+      ((cast out : Velocity2D).y = 0.0);
     }
     return cast out;
     return cast null;
   }
 
   public static function scaleVelocity(out:Velocity2D, velocity:Velocity2D, scale:Float):Velocity2D {
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
     vx = _Runtime.field(velocity, 'x');
     vy = _Runtime.field(velocity, 'y');
-    _Runtime.setField(out, 'x', (vx * scale));
-    _Runtime.setField(out, 'y', (vy * scale));
+    ((cast out : Velocity2D).x = (vx * scale));
+    ((cast out : Velocity2D).y = (vy * scale));
     return cast out;
     return cast null;
   }
 
   public static function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Velocity2D {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
-    _Runtime.setField(out, 'x', _Runtime.subtractNumbers(ax, _Runtime.field(b, 'x')));
-    _Runtime.setField(out, 'y', _Runtime.subtractNumbers(ay, _Runtime.field(b, 'y')));
+    ((cast out : Velocity2D).x = _Runtime.subtractNumbers(ax, _Runtime.field(b, 'x')));
+    ((cast out : Velocity2D).y = _Runtime.subtractNumbers(ay, _Runtime.field(b, 'y')));
     return cast out;
     return cast null;
   }
 
-  public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic):Void {
-    _Runtime.callValue(contributeVelocity, cast ([field, source, 0.0, 0.0] : Array<Dynamic>));
+  public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Void {
+    contributeVelocity((cast field : flighthq.types.Velocity.VelocityField), (cast source : flighthq._internal._Object), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {
-    _Runtime.setField(out, 'x', 0.0);
-    _Runtime.setField(out, 'y', 0.0);
+    ((cast out : Velocity2D).x = 0.0);
+    ((cast out : Velocity2D).y = 0.0);
     return cast out;
     return cast null;
   }

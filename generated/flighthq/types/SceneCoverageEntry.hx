@@ -7,6 +7,6 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
-typedef SceneCoverage = Dynamic;
+typedef SceneCoverage = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef SceneCoverageEntry = { var coverage:SceneCoverage; var kind:Kind; var registry:RenderRegistry; };

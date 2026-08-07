@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomTextureResolver;
 import flighthq.types.Texture;
 import flighthq.types.TextureResolutionExplanation;
 
 class ExplainDomTextureResolution {
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
-    kind = _Runtime.callValue(getTextureSourceKind, cast ([texture] : Array<Dynamic>));
+    var kind:Null<String> = cast _Runtime.UNDEFINED;
+    kind = (cast getTextureSourceKind(texture) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domTextureResolverRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = (cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).domTextureResolverRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, DomTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

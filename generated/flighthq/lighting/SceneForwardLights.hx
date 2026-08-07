@@ -14,25 +14,25 @@ import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 class SceneForwardLights {
   public static function selectScene3DForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLightsLike, bounds:BoundingSphereLike):Void {
-    var points:Dynamic = cast _Runtime.UNDEFINED;
-    var spots:Dynamic = cast _Runtime.UNDEFINED;
-    var pointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var spotCount:Dynamic = cast _Runtime.UNDEFINED;
-    var outPoints:Dynamic = cast _Runtime.UNDEFINED;
-    var outSpots:Dynamic = cast _Runtime.UNDEFINED;
-    var outIndices:Dynamic = cast _Runtime.UNDEFINED;
+    var points:Null<Array<PointLight>> = cast _Runtime.UNDEFINED;
+    var spots:Null<Array<SpotLight>> = cast _Runtime.UNDEFINED;
+    var pointCount:Float = cast _Runtime.UNDEFINED;
+    var spotCount:Float = cast _Runtime.UNDEFINED;
+    var outPoints:Array<PointLight> = cast _Runtime.UNDEFINED;
+    var outSpots:Array<SpotLight> = cast _Runtime.UNDEFINED;
+    var outIndices:Array<Float> = cast _Runtime.UNDEFINED;
     points = _Runtime.field(lights, 'point');
     spots = _Runtime.field(lights, 'spot');
-    pointCount = _Runtime.callValue(SceneForwardLights.selectStrongestLights__sceneForwardLights, cast ([points, bounds, SceneForwardLights.scratchSelectedPointLights__sceneForwardLights, SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights, SceneForwardLights.scratchSelectedPointScores__sceneForwardLights] : Array<Dynamic>));
-    spotCount = _Runtime.callValue(SceneForwardLights.selectStrongestLights__sceneForwardLights, cast ([spots, bounds, SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights, SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights, SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights] : Array<Dynamic>));
-    outPoints = _Runtime.field(out, 'point');
-    outSpots = _Runtime.field(out, 'spot');
-    outIndices = _Runtime.field(out, 'indices');
+    pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast points : Null<Array<flighthq._internal._Union2<PointLight, SpotLight>>>), (cast bounds : BoundingSphereLike), (cast SceneForwardLights.scratchSelectedPointLights__sceneForwardLights : Array<flighthq._internal._Union2<PointLight, SpotLight>>), (cast SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast SceneForwardLights.scratchSelectedPointScores__sceneForwardLights : flighthq._internal._Float64Array)) : Float);
+    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast spots : Null<Array<flighthq._internal._Union2<PointLight, SpotLight>>>), (cast bounds : BoundingSphereLike), (cast SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights : Array<flighthq._internal._Union2<PointLight, SpotLight>>), (cast SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights : flighthq._internal._Float64Array)) : Float);
+    outPoints = (cast out : Scene3DForwardLightSelection).point;
+    outSpots = (cast out : Scene3DForwardLightSelection).spot;
+    outIndices = (cast out : Scene3DForwardLightSelection).indices;
     _Runtime.setLength(outIndices, 0.0);
     _Runtime.setLength(outPoints, 0.0);
     _Runtime.setLength(outSpots, 0.0);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pointCount : Float)) : Bool)) {
         _Runtime.callProperty(outIndices, 'push', cast ([flighthq._internal._StaticIndex.readInt32Array(SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights, i)] : Array<Dynamic>));
         _Runtime.callProperty(outPoints, 'push', cast ([(cast flighthq._internal._StaticIndex.readArray(SceneForwardLights.scratchSelectedPointLights__sceneForwardLights, i) : PointLight)] : Array<Dynamic>));
@@ -40,7 +40,7 @@ class SceneForwardLights {
       }
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast spotCount : Float)) : Bool)) {
         _Runtime.callProperty(outIndices, 'push', cast ([~_Runtime.toInt32(flighthq._internal._StaticIndex.readInt32Array(SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights, i))] : Array<Dynamic>));
         _Runtime.callProperty(outSpots, 'push', cast ([(cast flighthq._internal._StaticIndex.readArray(SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights, i) : SpotLight)] : Array<Dynamic>));
@@ -49,27 +49,27 @@ class SceneForwardLights {
     }
   }
 
-  public static function selectStrongestLights__sceneForwardLights(lights:Null<Array<Dynamic>>, bounds:BoundingSphereLike, selectedLights:Array<Dynamic>, selectedIndices:flighthq._internal._Int32Array, selectedScores:flighthq._internal._Float64Array):Float {
-    var selectedCount:Dynamic = cast _Runtime.UNDEFINED;
+  public static function selectStrongestLights__sceneForwardLights(lights:Null<Array<flighthq._internal._Union2<PointLight, SpotLight>>>, bounds:BoundingSphereLike, selectedLights:Array<flighthq._internal._Union2<PointLight, SpotLight>>, selectedIndices:flighthq._internal._Int32Array, selectedScores:flighthq._internal._Float64Array):Float {
+    var selectedCount:Float = cast _Runtime.UNDEFINED;
     selectedCount = 0.0;
     if ((cast _Runtime.strictEquals(lights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast selectedCount; }
     {
-      var inputIndex:Dynamic = 0.0;
+      var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
-        var light:Dynamic = flighthq._internal._StaticIndex.readArray(lights, inputIndex);
-        var score:Dynamic = _Runtime.callValue(getLightContributionAtBoundingSphere, cast ([light, bounds] : Array<Dynamic>));
+        var light:flighthq._internal._Union2<PointLight, SpotLight> = flighthq._internal._StaticIndex.readArray(lights, inputIndex);
+        var score:Float = (cast getLightContributionAtBoundingSphere((cast light : flighthq._internal._Union2<PointLight, SpotLight>), (cast bounds : BoundingSphereLike)) : Float);
         if ((cast !(cast _Runtime.compare(score, 0.0, '>') : Bool) : Bool)) { inputIndex++; continue; }
-        var insertAt:Dynamic = selectedCount;
+        var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {
-          var previous:Dynamic = (insertAt - 1.0);
+          var previous:Float = (insertAt - 1.0);
           if ((cast ((cast score : Float) < (cast flighthq._internal._StaticIndex.readFloat64Array(selectedScores, previous) : Float)) : Bool)) { break; }
           if ((cast ((cast _Runtime.strictEquals(score, flighthq._internal._StaticIndex.readFloat64Array(selectedScores, previous)) : Bool) && (cast ((cast inputIndex : Float) > (cast flighthq._internal._StaticIndex.readInt32Array(selectedIndices, previous) : Float)) : Bool)) : Bool)) { break; }
           insertAt--;
         }
         if ((cast ((cast insertAt : Float) >= (cast MAX_FORWARD_LIGHTS : Float)) : Bool)) { inputIndex++; continue; }
-        var nextCount:Dynamic = HxMath.min((selectedCount + 1.0), MAX_FORWARD_LIGHTS);
+        var nextCount:Float = HxMath.min((selectedCount + 1.0), MAX_FORWARD_LIGHTS);
         {
-          var i:Dynamic = (nextCount - 1.0);
+          var i:Float = (nextCount - 1.0);
           while ((cast ((cast i : Float) > (cast insertAt : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(selectedLights, i, flighthq._internal._StaticIndex.readArray(selectedLights, (i - 1.0)));
             flighthq._internal._StaticIndex.writeInt32Array(selectedIndices, i, flighthq._internal._StaticIndex.readInt32Array(selectedIndices, (i - 1.0)));
@@ -88,15 +88,15 @@ class SceneForwardLights {
     return cast null;
   }
 
-  public static final scratchSelectedPointIndices__sceneForwardLights:Dynamic = new flighthq._internal._Int32Array(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedPointIndices__sceneForwardLights:flighthq._internal._Int32Array = new flighthq._internal._Int32Array(MAX_FORWARD_LIGHTS);
 
-  public static final scratchSelectedPointLights__sceneForwardLights:Array<Dynamic> = _Runtime.createArray(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedPointLights__sceneForwardLights:Array<flighthq._internal._Union2<PointLight, SpotLight>> = _Runtime.createArray(MAX_FORWARD_LIGHTS);
 
-  public static final scratchSelectedPointScores__sceneForwardLights:Dynamic = new flighthq._internal._Float64Array(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedPointScores__sceneForwardLights:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(MAX_FORWARD_LIGHTS);
 
-  public static final scratchSelectedSpotIndices__sceneForwardLights:Dynamic = new flighthq._internal._Int32Array(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedSpotIndices__sceneForwardLights:flighthq._internal._Int32Array = new flighthq._internal._Int32Array(MAX_FORWARD_LIGHTS);
 
-  public static final scratchSelectedSpotLights__sceneForwardLights:Array<Dynamic> = _Runtime.createArray(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedSpotLights__sceneForwardLights:Array<flighthq._internal._Union2<PointLight, SpotLight>> = _Runtime.createArray(MAX_FORWARD_LIGHTS);
 
-  public static final scratchSelectedSpotScores__sceneForwardLights:Dynamic = new flighthq._internal._Float64Array(MAX_FORWARD_LIGHTS);
+  public static final scratchSelectedSpotScores__sceneForwardLights:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(MAX_FORWARD_LIGHTS);
 }

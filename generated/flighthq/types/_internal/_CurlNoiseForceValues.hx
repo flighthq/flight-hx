@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _CurlNoiseForceValues {
-  public static final CurlNoiseForceKind:Dynamic = 'CurlNoiseForce';
+  public static final CurlNoiseForceKind:String = 'CurlNoiseForce';
 }

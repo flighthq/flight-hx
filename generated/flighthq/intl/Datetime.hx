@@ -8,29 +8,29 @@ import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
 class Datetime {
-  public static function formatDate(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callValue(Datetime.formatDateValue__datetime, cast ([date, locale, _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateOptions__datetime)] : Array<Dynamic>));
+  public static function formatDate(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
-  public static function formatDateTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callValue(Datetime.formatDateValue__datetime, cast ([date, locale, _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime)] : Array<Dynamic>));
+  public static function formatDateTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
-  public static function formatTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
-    return cast _Runtime.callValue(Datetime.formatDateValue__datetime, cast ([date, locale, _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime)] : Array<Dynamic>));
+  public static function formatTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
-  public static function formatDateValue__datetime(date:Dynamic, locale:LocaleInput, options:Dynamic):String {
-    var time:Dynamic = cast _Runtime.UNDEFINED;
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var formatter:Dynamic = cast _Runtime.UNDEFINED;
+  public static function formatDateValue__datetime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, options:Dynamic):String {
+    var time:Float = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    var formatter:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     time = ((cast _Runtime.strictEquals(_Runtime.typeofValue(date), 'number') : Bool) ? (cast date : Dynamic) : (cast _Runtime.callProperty(date, 'getTime', cast ([] : Array<Dynamic>)) : Dynamic));
     if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([time] : Array<Dynamic>)) : Bool)) { return cast 'Invalid Date'; }
-    key = _Runtime.callValue(getCacheKey, cast (['datetime', locale, options] : Array<Dynamic>));
-    formatter = _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    key = (cast getCacheKey((cast 'datetime' : String), (cast locale : LocaleInput), (cast options : Null<flighthq._internal._Object>)) : String);
+    formatter = getCached((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]) : Void->flighthq._internal._Any));
     return cast _Runtime.callProperty(formatter, 'format', cast ([date] : Array<Dynamic>));
     return cast null;
   }

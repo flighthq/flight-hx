@@ -21,4 +21,4 @@ typedef RenderRegistryMiss = { var kind:Kind; var registry:RenderRegistry; };
 
 typedef RenderRegistryMissExplanation = { var misses:Array<RenderRegistryMiss>; var status:String; };
 
-typedef RenderRegistrySignals = { var onRegistryMiss:Signal<Dynamic>; };
+typedef RenderRegistrySignals = { var onRegistryMiss:Signal<RenderRegistry->Kind->Void>; };

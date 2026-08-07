@@ -123,7 +123,7 @@ class Lighting {
     return cast null;
   }
 
-  public static function getLightContributionAtBoundingSphere(light:Dynamic, bounds:BoundingSphereLike):Float {
+  public static function getLightContributionAtBoundingSphere(light:flighthq._internal._Union2<PointLight, SpotLight>, bounds:BoundingSphereLike):Float {
     return cast Facade_Lighting_flighthq_lighting_LightAnalysis.getLightContributionAtBoundingSphere(light, bounds);
     return cast null;
   }

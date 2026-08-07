@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _AdvancedBlendModeValues {
-  public static final AdvancedBlendModeValue:Dynamic = { Color: 'Color', ColorBurn: 'ColorBurn', ColorDodge: 'ColorDodge', Darken: 'Darken', Difference: 'Difference', Exclusion: 'Exclusion', HardLight: 'HardLight', Hue: 'Hue', Lighten: 'Lighten', Luminosity: 'Luminosity', Overlay: 'Overlay', Saturation: 'Saturation', SoftLight: 'SoftLight' };
+  public static final AdvancedBlendModeValue:{ var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; } = { Color: 'Color', ColorBurn: 'ColorBurn', ColorDodge: 'ColorDodge', Darken: 'Darken', Difference: 'Difference', Exclusion: 'Exclusion', HardLight: 'HardLight', Hue: 'Hue', Lighten: 'Lighten', Luminosity: 'Luminosity', Overlay: 'Overlay', Saturation: 'Saturation', SoftLight: 'SoftLight' };
 }

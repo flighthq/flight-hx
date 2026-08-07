@@ -8,5 +8,5 @@ import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types.Texture;
 
 class _AnisotropyPbrExtensionValues {
-  public static final AnisotropyPbrExtensionKind:Dynamic = 'AnisotropyPbrExtension';
+  public static final AnisotropyPbrExtensionKind:String = 'AnisotropyPbrExtension';
 }

@@ -7,7 +7,7 @@ import flighthq.types.Entity.Kind;
 
 typedef RenderEffectPadding = { var bottom:Float; var left:Float; var right:Float; var top:Float; };
 
-typedef RenderEffectPaddingResolver = Dynamic;
+typedef RenderEffectPaddingResolver = RenderEffect->flighthq.types.RenderEffectPadding;
 
 typedef RenderEffectPaddingStatus = String;
 

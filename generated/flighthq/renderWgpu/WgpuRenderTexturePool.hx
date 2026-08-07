@@ -11,67 +11,70 @@ import flighthq.texture.RenderTexture.createRenderTexture;
 import flighthq.texture.Texture.resetTextureUvTransform;
 import flighthq.types.RenderTarget;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTexture;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
 
 class WgpuRenderTexturePool {
   public static function acquireWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
-    var renderTexture:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
-    renderTexture = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(pool, 'free'), 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createRenderTexture, cast ([descriptor] : Array<Dynamic>)));
-    _Runtime.callValue(WgpuRenderTexturePool.applyRenderTargetDescriptor__wgpuRenderTexturePool, cast ([_Runtime.field(renderTexture, 'source'), descriptor] : Array<Dynamic>));
-    _Runtime.callValue(resetTextureUvTransform, cast ([renderTexture] : Array<Dynamic>));
-    _Runtime.setField(renderTexture, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    _Runtime.callValue(invalidateWgpuRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
-    ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).add(renderTexture));
+    var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
+    WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool));
+    renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(descriptor) : Null<RenderTexture>));
+    WgpuRenderTexturePool.applyRenderTargetDescriptor__wgpuRenderTexturePool((cast (cast renderTexture : RenderTexture).source : RenderTarget), (cast descriptor : RenderTargetDescriptor));
+    resetTextureUvTransform(renderTexture);
+    ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
+    invalidateWgpuRenderTexture((cast state : WgpuRenderState), (cast renderTexture : RenderTexture), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String));
+    ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;
     return cast null;
   }
 
   public static function createWgpuRenderTexturePool():flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool {
-    return cast { device: null, destroyed: false, effectTargets: _Runtime.callValue(createWgpuRenderTargetPool, cast ([] : Array<Dynamic>)), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
+    return cast { device: null, destroyed: false, effectTargets: (cast createWgpuRenderTargetPool() : WgpuRenderTargetPool), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
     return cast null;
   }
 
   public static function destroyWgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
-    var textures:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { return; }
-    _Runtime.callValue(WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
-    textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(pool, 'free')), _Runtime.toArray(_Runtime.field(pool, 'leased'))])]);
+    var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
+    if ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).destroyed : Bool)) { return; }
+    WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool));
+    textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).free), _Runtime.toArray((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased)])]);
     for (renderTexture in _Runtime.iterable(textures)) {
-      _Runtime.callValue(destroyWgpuRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
+      destroyWgpuRenderTexture((cast state : WgpuRenderState), (cast renderTexture : RenderTexture));
     }
-    _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
-    ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).clear());
-    _Runtime.callValue(destroyWgpuRenderTargetPool, cast ([state, _Runtime.field(pool, 'effectTargets')] : Array<Dynamic>));
-    _Runtime.setField(pool, 'destroyed', true);
+    _Runtime.setLength((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).free, 0.0);
+    ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).clear());
+    destroyWgpuRenderTargetPool((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).effectTargets);
+    ((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).destroyed = true);
   }
 
   public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
-    _Runtime.callValue(WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
-    if ((cast !(cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).delete_(renderTexture)) : Bool) : Bool)) {
+    WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool));
+    if ((cast !(cast ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseWgpuRenderTexture: texture is not leased from this pool'));
     }
-    _Runtime.callValue(invalidateWgpuRenderTexture, cast ([state, renderTexture, 'released'] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([renderTexture] : Array<Dynamic>));
+    invalidateWgpuRenderTexture((cast state : WgpuRenderState), (cast renderTexture : RenderTexture), (cast 'released' : String));
+    _Runtime.callProperty((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
-  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
+  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     var textures:Array<RenderTexture> = cast _Runtime.UNDEFINED;
     textures = cast ([] : Array<Dynamic>);
     try {
       try {
         for (descriptor in _Runtime.iterable(descriptors)) {
-          _Runtime.callProperty(textures, 'push', cast ([_Runtime.callValue(acquireWgpuRenderTexture, cast ([state, pool, descriptor] : Array<Dynamic>))] : Array<Dynamic>));
+          _Runtime.callProperty(textures, 'push', cast ([(cast acquireWgpuRenderTexture((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool), (cast descriptor : RenderTargetDescriptor)) : RenderTexture)] : Array<Dynamic>));
         }
-        var __returnValue4:Dynamic = _Runtime.callValue(callback, cast ([textures] : Array<Dynamic>));
+        var __returnValue4:Dynamic = (cast callback((cast textures : Array<RenderTexture>)) : T);
         {
           {
-            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
+            var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-              var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
-              if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseWgpuRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
+              var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
+              if ((cast ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseWgpuRenderTexture((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool), (cast texture : RenderTexture)); }
               i--;
             }
           }
@@ -81,10 +84,10 @@ class WgpuRenderTexturePool {
     } catch (__finallyError5:Dynamic) {
       {
         {
-          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
+          var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
-            if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseWgpuRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
+            var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
+            if ((cast ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseWgpuRenderTexture((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool), (cast texture : RenderTexture)); }
             i--;
           }
         }
@@ -93,10 +96,10 @@ class WgpuRenderTexturePool {
     }
     {
       {
-        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
+        var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          var texture:Dynamic = flighthq._internal._StaticIndex.readArray(textures, i);
-          if ((cast ((cast _Runtime.field(pool, 'leased') : flighthq._internal._Set).has(texture)) : Bool)) { _Runtime.callValue(releaseWgpuRenderTexture, cast ([state, pool, texture] : Array<Dynamic>)); }
+          var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
+          if ((cast ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseWgpuRenderTexture((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool), (cast texture : RenderTexture)); }
           i--;
         }
       }
@@ -105,28 +108,28 @@ class WgpuRenderTexturePool {
   }
 
   public static function applyRenderTargetDescriptor__wgpuRenderTexturePool(target:RenderTarget, descriptor:RenderTargetDescriptor):Void {
-    _Runtime.setField(target, 'width', _Runtime.field(descriptor, 'width'));
-    _Runtime.setField(target, 'height', _Runtime.field(descriptor, 'height'));
-    _Runtime.setField(target, 'format', _Runtime.field(descriptor, 'format'));
-    _Runtime.setField(target, 'colorAttachments', _Runtime.field(descriptor, 'colorAttachments'));
-    _Runtime.setField(target, 'colorFormats', ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'colorFormats'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'colorFormats'))]) : Dynamic)));
-    _Runtime.setField(target, 'sampleCount', _Runtime.field(descriptor, 'sampleCount'));
-    _Runtime.setField(target, 'depth', _Runtime.field(descriptor, 'depth'));
-    _Runtime.setField(target, 'colorSpace', _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    _Runtime.setField(target, 'clearColors', ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'clearColors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]) : Dynamic)));
-    _Runtime.setField(target, 'clearDepth', _Runtime.field(descriptor, 'clearDepth'));
-    _Runtime.setField(target, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(target, 'version'), 1.0)), 0));
+    ((cast target : RenderTarget).width = _Runtime.field(descriptor, 'width'));
+    ((cast target : RenderTarget).height = _Runtime.field(descriptor, 'height'));
+    ((cast target : RenderTarget).format = _Runtime.field(descriptor, 'format'));
+    ((cast target : RenderTarget).colorAttachments = _Runtime.field(descriptor, 'colorAttachments'));
+    ((cast target : RenderTarget).colorFormats = ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'colorFormats'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'colorFormats'))]) : Dynamic)));
+    ((cast target : RenderTarget).sampleCount = _Runtime.field(descriptor, 'sampleCount'));
+    ((cast target : RenderTarget).depth = _Runtime.field(descriptor, 'depth'));
+    ((cast target : RenderTarget).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
+    ((cast target : RenderTarget).clearColors = ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'clearColors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]) : Dynamic)));
+    ((cast target : RenderTarget).clearDepth = _Runtime.field(descriptor, 'clearDepth'));
+    ((cast target : RenderTarget).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast target : RenderTarget).version + 1.0)), 0));
   }
 
   public static function assertUsablePool__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
-    if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool has been destroyed')); }
-    _Runtime.callValue(WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
+    if ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool has been destroyed')); }
+    WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool((cast state : WgpuRenderState), (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool));
   }
 
   public static function assertPoolDevice__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
-    if ((cast _Runtime.strictEquals(_Runtime.field(pool, 'device'), null) : Bool)) {
-      _Runtime.setField(pool, 'device', _Runtime.field(state, 'device'));
-    } else { if ((cast !_Runtime.strictEquals(_Runtime.field(pool, 'device'), _Runtime.field(state, 'device')) : Bool)) {
+    if ((cast _Runtime.strictEquals((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).device, null) : Bool)) {
+      ((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).device = (cast state : WgpuRenderState).device);
+    } else { if ((cast !_Runtime.strictEquals((cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).device, (cast state : WgpuRenderState).device) : Bool)) {
       _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool cannot cross GPU devices'));
     } }
   }

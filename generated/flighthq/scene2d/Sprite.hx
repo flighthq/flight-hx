@@ -9,6 +9,7 @@ import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.PartialNode;
@@ -16,36 +17,43 @@ import flighthq.types.Rectangle;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Sampler;
 import flighthq.types.Sprite;
 import flighthq.types.Sprite.SpriteData;
 import flighthq.types.Sprite.SpriteRuntime;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpriteKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpriteValues.SpriteKind;
 
-typedef SpriteIdentityRendererData__sprite = Dynamic;
+typedef SpriteIdentityRendererData__sprite = { >RendererData, var textureIdentity:Null<Texture>; var textureVersion:Float; };
 
 class Sprite {
   public static function cloneSprite(source:flighthq.types.Sprite):flighthq.types.Sprite {
-    return cast _Runtime.callValue(createSprite, cast ([{ data: { texture: _Runtime.field(_Runtime.field(source, 'data'), 'texture') } }] : Array<Dynamic>));
+    return cast (cast createSprite((cast { data: { texture: (cast _Runtime.field(source, 'data') : SpriteData).texture } } : Null<PartialNode<flighthq.types.Sprite>>)) : flighthq.types.Sprite);
     return cast null;
   }
 
   public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
-    var sprite:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var sprite:flighthq.types.Sprite = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var runtime:SpriteRuntime = cast _Runtime.UNDEFINED;
     sprite = (cast source : flighthq.types.Sprite);
-    texture = _Runtime.field(_Runtime.field(sprite, 'data'), 'texture');
-    _Runtime.setField(out, 'width', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').x)) : Dynamic)));
-    _Runtime.setField(out, 'height', ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>))), HxMath.abs(_Runtime.field(texture, 'uvScale').y)) : Dynamic)));
-    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([sprite] : Array<Dynamic>)) : SpriteRuntime);
-    _Runtime.setField(runtime, 'localBoundsTexture', texture);
-    _Runtime.setField(runtime, 'localBoundsTextureVersion', _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0));
+    texture = (cast _Runtime.field(sprite, 'data') : SpriteData).texture;
+    ((cast out : Rectangle).width = ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(texture) : Float)), HxMath.abs((cast texture : { var uvScale:Vector2; }).uvScale.x)) : Dynamic)));
+    ((cast out : Rectangle).height = ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(texture) : Float)), HxMath.abs((cast texture : { var uvScale:Vector2; }).uvScale.y)) : Dynamic)));
+    runtime = (cast (cast getNode2DRuntime(sprite) : SpriteRuntime) : SpriteRuntime);
+    ((cast runtime : SpriteRuntime).localBoundsTexture = texture);
+    ((cast runtime : SpriteRuntime).localBoundsTextureVersion = _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0));
   }
 
   public static function createSprite(?obj:PartialNode<flighthq.types.Sprite>):flighthq.types.Sprite {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([SpriteKind, obj, createSpriteData, createSpriteRuntime] : Array<Dynamic>)) : flighthq.types.Sprite);
+    return cast (cast (cast createNode2D((cast SpriteKind : String), obj, createSpriteData, function(__unused0:Dynamic):SpriteRuntime return createSpriteRuntime()) : flighthq.types.Sprite) : flighthq.types.Sprite);
     return cast null;
   }
 
@@ -57,53 +65,53 @@ class Sprite {
 
   @:noCompletion
   public static function createSpriteRendererData(_state:RenderState, source:Renderable):RendererData {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    texture = _Runtime.field(_Runtime.field((cast source : flighthq.types.Sprite), 'data'), 'texture');
-    return cast _Runtime.callValue(createEntity, cast ([{ textureIdentity: texture, textureVersion: _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0) }] : Array<Dynamic>));
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    texture = (cast (cast (cast source : flighthq.types.Sprite) : flighthq.types.Sprite).data : SpriteData).texture;
+    return cast (cast createEntity({ textureIdentity: texture, textureVersion: _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0) }) : RendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function createSpriteRuntime():SpriteRuntime {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(createNode2DRuntime, cast ([Sprite.defaultMethods__sprite] : Array<Dynamic>)) : SpriteRuntime);
-    _Runtime.setField(runtime, 'localBoundsTexture', null);
-    _Runtime.setField(runtime, 'localBoundsTextureVersion', -1.0);
+    var runtime:SpriteRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast createNode2DRuntime((cast Sprite.defaultMethods__sprite : Null<flighthq._internal._Any>)) : SpriteRuntime) : SpriteRuntime);
+    ((cast runtime : SpriteRuntime).localBoundsTexture = null);
+    ((cast runtime : SpriteRuntime).localBoundsTextureVersion = -1.0);
     return cast runtime;
     return cast null;
   }
 
   @:noCompletion
   public static function getSpriteRuntime(source:flighthq.types.Sprite):SpriteRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : SpriteRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : SpriteRuntime) : SpriteRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function isSpriteRendererDirty(_state:RenderState, source:Renderable, rendererData:Null<RendererData>):Bool {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var dirty:Dynamic = cast _Runtime.UNDEFINED;
+    var data:SpriteIdentityRendererData__sprite = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var dirty:Bool = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(rendererData, null) : Bool)) { return cast false; }
     data = (cast rendererData : SpriteIdentityRendererData__sprite);
-    texture = _Runtime.field(_Runtime.field((cast source : flighthq.types.Sprite), 'data'), 'texture');
+    texture = (cast (cast (cast source : flighthq.types.Sprite) : flighthq.types.Sprite).data : SpriteData).texture;
     version = _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0);
-    dirty = ((cast !_Runtime.strictEquals(_Runtime.field(data, 'textureIdentity'), texture) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'textureVersion'), version) : Bool));
-    _Runtime.setField(data, 'textureIdentity', texture);
-    _Runtime.setField(data, 'textureVersion', version);
+    dirty = ((cast !_Runtime.strictEquals((cast data : { var textureIdentity:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).textureIdentity, texture) : Bool) || (cast !_Runtime.strictEquals((cast data : { var textureVersion:Float; }).textureVersion, version) : Bool));
+    ((cast data : { var textureIdentity:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).textureIdentity = texture);
+    ((cast data : { var textureVersion:Float; }).textureVersion = version);
     return cast dirty;
     return cast null;
   }
 
   public static function isSpriteLocalBoundsRectangleValid__sprite(source:Node<Dynamic>):Bool {
-    var sprite:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    var sprite:flighthq.types.Sprite = cast _Runtime.UNDEFINED;
+    var runtime:SpriteRuntime = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     sprite = (cast source : flighthq.types.Sprite);
-    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([sprite] : Array<Dynamic>)) : SpriteRuntime);
-    texture = _Runtime.field(_Runtime.field(sprite, 'data'), 'texture');
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsTexture'), texture) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsTextureVersion'), _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0)) : Bool));
+    runtime = (cast (cast getNode2DRuntime(sprite) : SpriteRuntime) : SpriteRuntime);
+    texture = (cast _Runtime.field(sprite, 'data') : SpriteData).texture;
+    return cast ((cast _Runtime.strictEquals((cast runtime : SpriteRuntime).localBoundsTexture, texture) : Bool) && (cast _Runtime.strictEquals((cast runtime : SpriteRuntime).localBoundsTextureVersion, _Runtime.coalesce(_Runtime.optionalField(texture, 'version'), function():Dynamic return cast -1.0)) : Bool));
     return cast null;
   }
 

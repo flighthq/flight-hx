@@ -3,6 +3,7 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapColorMatrix {
@@ -11,19 +12,19 @@ class BitmapColorMatrix {
   }
 
   public static function buildBitmapContrastColorMatrix(out:Array<Float>, amount:Float):Void {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     t = (127.5 * (1.0 - amount));
     _Runtime.callHaxeRestValue(BitmapColorMatrix.setColorMatrix__bitmapColorMatrix, _Runtime.concatArrays([[out], [amount], [0.0], [0.0], [0.0], [t], [0.0], [amount], [0.0], [0.0], [t], [0.0], [0.0], [amount], [0.0], [t], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
   public static function buildBitmapGrayscaleColorMatrix(out:Array<Float>):Void {
-    _Runtime.callValue(buildBitmapSaturationColorMatrix, cast ([out, 0.0] : Array<Dynamic>));
+    buildBitmapSaturationColorMatrix((cast out : Array<Float>), (cast 0.0 : Float));
   }
 
   public static function buildBitmapHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
-    var radians:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var radians:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
     radians = ((degrees * HxMath.PI) / 180.0);
     c = HxMath.cos(radians);
     s = HxMath.sin(radians);
@@ -35,10 +36,10 @@ class BitmapColorMatrix {
   }
 
   public static function buildBitmapSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
-    var inv:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     inv = (1.0 - amount);
     r = (BitmapColorMatrix.LUMA_R__bitmapColorMatrix * inv);
     g = (BitmapColorMatrix.LUMA_G__bitmapColorMatrix * inv);
@@ -53,25 +54,25 @@ class BitmapColorMatrix {
   public static function colorMatrixBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, matrix:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast 20.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Color matrix filter requires 20 values')); }
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var sourceY:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var sourceX:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
-            var di:Dynamic = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
-            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si);
-            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0));
-            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0));
-            var a:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, _Runtime.callValue(BitmapColorMatrix.clampByte__bitmapColorMatrix, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 0.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 1.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 2.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 3.0))), flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), _Runtime.callValue(BitmapColorMatrix.clampByte__bitmapColorMatrix, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 5.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 6.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 7.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 8.0))), flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), _Runtime.callValue(BitmapColorMatrix.clampByte__bitmapColorMatrix, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 10.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 11.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 12.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 13.0))), flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), _Runtime.callValue(BitmapColorMatrix.clampByte__bitmapColorMatrix, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 15.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 16.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 17.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 18.0))), flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>)));
+            var si:Float = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
+            var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
+            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si);
+            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0));
+            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0));
+            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 0.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 1.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 2.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 3.0))), flighthq._internal._StaticIndex.readArray(matrix, 4.0)) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 5.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 6.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 7.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 8.0))), flighthq._internal._StaticIndex.readArray(matrix, 9.0)) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 10.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 11.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 12.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 13.0))), flighthq._internal._StaticIndex.readArray(matrix, 14.0)) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 15.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 16.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 17.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 18.0))), flighthq._internal._StaticIndex.readArray(matrix, 19.0)) : Float)) : Float));
             px++;
           }
         }
@@ -82,14 +83,14 @@ class BitmapColorMatrix {
 
   public static function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
     {
-      var row:Dynamic = 0.0;
+      var row:Float = 0.0;
       while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
         {
-          var col:Dynamic = 0.0;
+          var col:Float = 0.0;
           while ((cast ((cast col : Float) < (cast 5.0 : Float)) : Bool)) {
-            var sum:Dynamic = ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(second, ((row * 5.0) + 4.0)) : Dynamic) : (cast 0.0 : Dynamic));
+            var sum:Float = ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(second, ((row * 5.0) + 4.0)) : Dynamic) : (cast 0.0 : Dynamic));
             {
-              var k:Dynamic = 0.0;
+              var k:Float = 0.0;
               while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
                 (sum = cast ((sum + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(second, ((row * 5.0) + k)), ((cast _Runtime.strictEquals(col, 4.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(first, ((k * 5.0) + 4.0)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(first, ((k * 5.0) + col)) : Dynamic)))) : Dynamic));
                 k++;
@@ -108,11 +109,11 @@ class BitmapColorMatrix {
     _Runtime.callHaxeRestValue(BitmapColorMatrix.setColorMatrix__bitmapColorMatrix, _Runtime.concatArrays([[out], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);
   }
 
-  public static final LUMA_R__bitmapColorMatrix:Dynamic = 0.213;
+  public static final LUMA_R__bitmapColorMatrix:Float = 0.213;
 
-  public static final LUMA_G__bitmapColorMatrix:Dynamic = 0.715;
+  public static final LUMA_G__bitmapColorMatrix:Float = 0.715;
 
-  public static final LUMA_B__bitmapColorMatrix:Dynamic = 0.072;
+  public static final LUMA_B__bitmapColorMatrix:Float = 0.072;
 
   public static function clampByte__bitmapColorMatrix(value:Float):Float {
     return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(value)));
@@ -121,7 +122,7 @@ class BitmapColorMatrix {
 
   public static function setColorMatrix__bitmapColorMatrix(out:Array<Float>, ...values:Float):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 20.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(out, i, flighthq._internal._StaticIndex.readArray(values, i));
         i++;

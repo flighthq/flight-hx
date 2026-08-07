@@ -16,8 +16,8 @@ class ConvolutionEffect {
   }
 
   public static function getConvolutionEffectPadding(effect:flighthq.types.ConvolutionEffect):RenderEffectPadding {
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
     offsetX = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.field(effect, 'matrixX')), 0.5));
     offsetY = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.field(effect, 'matrixY')), 0.5));
     return cast { bottom: offsetY, left: HxMath.max(0.0, (_Runtime.subtractNumbers(_Runtime.field(effect, 'matrixX'), 1.0) - offsetX)), right: offsetX, top: HxMath.max(0.0, (_Runtime.subtractNumbers(_Runtime.field(effect, 'matrixY'), 1.0) - offsetY)) };
@@ -25,11 +25,11 @@ class ConvolutionEffect {
   }
 
   public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'ConvolutionEffect', ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'ConvolutionEffect' : String), ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect);
   }
 
   public static function resolveConvolutionEffectPadding__convolutionEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getConvolutionEffectPadding, cast ([(cast effect : flighthq.types.ConvolutionEffect)] : Array<Dynamic>));
+    return cast (cast getConvolutionEffectPadding((cast (cast effect : flighthq.types.ConvolutionEffect) : flighthq.types.ConvolutionEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

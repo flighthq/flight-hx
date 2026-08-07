@@ -15,16 +15,18 @@ import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
+import flighthq.types.SpineParticleSchema.SpineBlendMode;
 import flighthq.types.SpineParticleSchema.SpineParsed;
 import flighthq.types.SpineParticleSchema.SpineParticleDocument;
+import flighthq.types.SpineParticleSchema.SpineRangeValue;
 import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class SpineParse {
-  public static final DEG2RAD__spineParse:Dynamic = (HxMath.PI / 180.0);
+  public static final DEG2RAD__spineParse:Float = (HxMath.PI / 180.0);
 
-  public static function parseSpineJson__spineParse(json:String):Dynamic {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+  public static function parseSpineJson__spineParse(json:String):flighthq._internal._Record<String, flighthq._internal._Any> {
+    var raw:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     try {
       (raw = cast (_Runtime.jsonParse(json) : Dynamic));
     } catch (e:Dynamic) {
@@ -33,33 +35,33 @@ class SpineParse {
     if ((cast ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(raw) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Invalid Spine particle document: expected a JSON object, got ' + Std.string(((cast _Runtime.strictEquals(raw, null) : Bool) ? (cast 'null' : Dynamic) : (cast ((cast _Runtime.isArray(raw) : Bool) ? (cast 'array' : Dynamic) : (cast _Runtime.typeofValue(raw) : Dynamic)) : Dynamic))) + ''));
     }
-    return cast (cast raw : Dynamic);
+    return cast (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>);
     return cast null;
   }
 
-  public static function rangeMid__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeMid__spineParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
     if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
-      var o:Dynamic = (cast obj : Dynamic);
-      var lo:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) ? (cast _Runtime.field(o, 'low') : Dynamic) : (cast def : Dynamic));
-      var hi:Dynamic = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool) ? (cast _Runtime.field(o, 'high') : Dynamic) : (cast def : Dynamic));
+      var o:flighthq._internal._Record<String, flighthq._internal._Any> = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
+      var lo:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) ? (cast _Runtime.field(o, 'low') : Dynamic) : (cast def : Dynamic));
+      var hi:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool) ? (cast _Runtime.field(o, 'high') : Dynamic) : (cast def : Dynamic));
       return cast ((lo + hi) * 0.5);
     }
     return cast def;
     return cast null;
   }
 
-  public static function rangeLow__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeLow__spineParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
     if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
-      var o:Dynamic = (cast obj : Dynamic);
+      var o:flighthq._internal._Record<String, flighthq._internal._Any> = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
       return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'low')), 'number') : Bool) ? (cast _Runtime.field(o, 'low') : Dynamic) : (cast def : Dynamic));
     }
     return cast def;
     return cast null;
   }
 
-  public static function rangeHigh__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeHigh__spineParse(obj:flighthq._internal._Any, def:Float = 0.0):Float {
     if ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool)) {
-      var o:Dynamic = (cast obj : Dynamic);
+      var o:flighthq._internal._Record<String, flighthq._internal._Any> = (cast obj : flighthq._internal._Record<String, flighthq._internal._Any>);
       return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(o, 'high')), 'number') : Bool) ? (cast _Runtime.field(o, 'high') : Dynamic) : (cast def : Dynamic));
     }
     return cast def;
@@ -67,139 +69,139 @@ class SpineParse {
   }
 
   public static function hexToRgb__spineParse(hex:String):Array<Float> {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var channel:Dynamic = cast _Runtime.UNDEFINED;
+    var s:String = cast _Runtime.UNDEFINED;
+    var channel:Float->Float = cast _Runtime.UNDEFINED;
     s = _Runtime.padEnd(_Runtime.replace(hex, '#', '', false), 6.0, 'f');
-    channel = function(i:Float) {
-      var v:Dynamic = cast _Runtime.UNDEFINED;
+    channel = (cast function(i:Float):Float {
+      var v:Float = cast _Runtime.UNDEFINED;
       v = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
       return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
-    };
-    return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
+    } : Float->Float);
+    return cast cast ([(cast channel((cast 0.0 : Float)) : Float), (cast channel((cast 2.0 : Float)) : Float), (cast channel((cast 4.0 : Float)) : Float)] : Array<Dynamic>);
     return cast null;
   }
 
-  public static function firstTintColor__spineParse(arr:Dynamic):Array<Float> {
-    return cast _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff') : Dynamic) : (cast 'ffffff' : Dynamic))] : Array<Dynamic>));
+  public static function firstTintColor__spineParse(arr:flighthq._internal._Any):Array<Float> {
+    return cast (cast SpineParse.hexToRgb__spineParse((cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : flighthq._internal._Record<String, flighthq._internal._Any>), 'color') : String), function():Dynamic return cast 'ffffff') : Dynamic) : (cast 'ffffff' : Dynamic)) : String)) : Array<Float>);
     return cast null;
   }
 
-  public static function lastTintColor__spineParse(arr:Dynamic):Array<Float> {
+  public static function lastTintColor__spineParse(arr:flighthq._internal._Any):Array<Float> {
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0) : Bool)) : Bool)) { return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>); }
-    return cast _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([_Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
+    return cast (cast SpineParse.hexToRgb__spineParse((cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : flighthq._internal._Record<String, flighthq._internal._Any>), 'color') : String), function():Dynamic return cast 'ffffff') : String)) : Array<Float>);
     return cast null;
   }
 
-  public static function firstAlpha__spineParse(arr:Dynamic):Float {
-    return cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : Dynamic), 'alpha') : Float), function():Dynamic return cast 1.0) : Dynamic) : (cast 1.0 : Dynamic));
+  public static function firstAlpha__spineParse(arr:flighthq._internal._Any):Float {
+    return cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : flighthq._internal._Record<String, flighthq._internal._Any>), 'alpha') : Float), function():Dynamic return cast 1.0) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
-  public static function lastAlpha__spineParse(arr:Dynamic):Float {
+  public static function lastAlpha__spineParse(arr:flighthq._internal._Any):Float {
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Dynamic), 'alpha') : Float), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce((cast _Runtime.field((cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : flighthq._internal._Record<String, flighthq._internal._Any>), 'alpha') : Float), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function rawToConfig__spineParse(raw:Dynamic):ParticleEmitterConfig {
-    var lifeLow:Dynamic = cast _Runtime.UNDEFINED;
-    var lifeHigh:Dynamic = cast _Runtime.UNDEFINED;
-    var angleLow:Dynamic = cast _Runtime.UNDEFINED;
-    var angleHigh:Dynamic = cast _Runtime.UNDEFINED;
-    var angleMid:Dynamic = cast _Runtime.UNDEFINED;
-    var spread:Dynamic = cast _Runtime.UNDEFINED;
-    var spawnShape:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterShape:Dynamic = cast _Runtime.UNDEFINED;
-    var spawnScaleMid:Dynamic = cast _Runtime.UNDEFINED;
-    var endScaleMid:Dynamic = cast _Runtime.UNDEFINED;
-    var startTint:Dynamic = cast _Runtime.UNDEFINED;
-    var endTint:Dynamic = cast _Runtime.UNDEFINED;
-    var colorCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaCurve:Dynamic = cast _Runtime.UNDEFINED;
-    var continuous:Dynamic = cast _Runtime.UNDEFINED;
-    var durationMs:Dynamic = cast _Runtime.UNDEFINED;
-    lifeLow = _Runtime.divideNumbers(_Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'life'), 500.0] : Array<Dynamic>)), 1000.0);
-    lifeHigh = _Runtime.divideNumbers(_Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'life'), 1500.0] : Array<Dynamic>)), 1000.0);
-    angleLow = _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'angle'), 60.0] : Array<Dynamic>));
-    angleHigh = _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'angle'), 120.0] : Array<Dynamic>));
+  public static function rawToConfig__spineParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):ParticleEmitterConfig {
+    var lifeLow:Float = cast _Runtime.UNDEFINED;
+    var lifeHigh:Float = cast _Runtime.UNDEFINED;
+    var angleLow:Float = cast _Runtime.UNDEFINED;
+    var angleHigh:Float = cast _Runtime.UNDEFINED;
+    var angleMid:Float = cast _Runtime.UNDEFINED;
+    var spread:Float = cast _Runtime.UNDEFINED;
+    var spawnShape:String = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var emitterShape:String = cast _Runtime.UNDEFINED;
+    var spawnScaleMid:Float = cast _Runtime.UNDEFINED;
+    var endScaleMid:Float = cast _Runtime.UNDEFINED;
+    var startTint:Array<Float> = cast _Runtime.UNDEFINED;
+    var endTint:Array<Float> = cast _Runtime.UNDEFINED;
+    var colorCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var alphaCurve:Null<ParticleCurve> = cast _Runtime.UNDEFINED;
+    var continuous:Bool = cast _Runtime.UNDEFINED;
+    var durationMs:Float = cast _Runtime.UNDEFINED;
+    lifeLow = ((cast SpineParse.rangeLow__spineParse((cast _Runtime.field(raw, 'life') : flighthq._internal._Any), (cast 500.0 : Float)) : Float) / 1000.0);
+    lifeHigh = ((cast SpineParse.rangeHigh__spineParse((cast _Runtime.field(raw, 'life') : flighthq._internal._Any), (cast 1500.0 : Float)) : Float) / 1000.0);
+    angleLow = (cast SpineParse.rangeLow__spineParse((cast _Runtime.field(raw, 'angle') : flighthq._internal._Any), (cast 60.0 : Float)) : Float);
+    angleHigh = (cast SpineParse.rangeHigh__spineParse((cast _Runtime.field(raw, 'angle') : flighthq._internal._Any), (cast 120.0 : Float)) : Float);
     angleMid = (((angleLow + angleHigh) * 0.5) * SpineParse.DEG2RAD__spineParse);
     spread = (((angleHigh - angleLow) * 0.5) * SpineParse.DEG2RAD__spineParse);
     spawnShape = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'spawnShape')), 'string') : Bool) ? (cast _Runtime.field(raw, 'spawnShape') : Dynamic) : (cast 'point' : Dynamic));
-    sx = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'spawnWidth'), 0.0] : Array<Dynamic>));
-    sy = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'spawnHeight'), 0.0] : Array<Dynamic>));
+    sx = (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'spawnWidth') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+    sy = (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'spawnHeight') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
     emitterShape = ((cast _Runtime.strictEquals(spawnShape, 'ellipse') : Bool) ? (cast ((cast _Runtime.strictEquals(sx, sy) : Bool) ? (cast 'circle' : Dynamic) : (cast 'rect' : Dynamic)) : Dynamic) : (cast 'point' : Dynamic));
-    spawnScaleMid = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>));
-    endScaleMid = _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'scaleEnd'), 0.0] : Array<Dynamic>));
-    startTint = _Runtime.callValue(SpineParse.firstTintColor__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
-    endTint = _Runtime.callValue(SpineParse.lastTintColor__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
-    colorCurve = _Runtime.callValue(SpineParse.tintKeyframesToCurve__spineParse, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>));
-    alphaCurve = _Runtime.callValue(SpineParse.alphaKeyframesToCurve__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>));
+    spawnScaleMid = (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'scale') : flighthq._internal._Any), (cast 1.0 : Float)) : Float);
+    endScaleMid = (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'scaleEnd') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+    startTint = (cast SpineParse.firstTintColor__spineParse((cast _Runtime.field(raw, 'tint') : flighthq._internal._Any)) : Array<Float>);
+    endTint = (cast SpineParse.lastTintColor__spineParse((cast _Runtime.field(raw, 'tint') : flighthq._internal._Any)) : Array<Float>);
+    colorCurve = (cast SpineParse.tintKeyframesToCurve__spineParse((cast _Runtime.field(raw, 'tint') : flighthq._internal._Any)) : Null<ParticleCurve>);
+    alphaCurve = (cast SpineParse.alphaKeyframesToCurve__spineParse((cast _Runtime.field(raw, 'alpha') : flighthq._internal._Any)) : Null<ParticleCurve>);
     continuous = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'continuous')), 'boolean') : Bool) ? (cast _Runtime.field(raw, 'continuous') : Dynamic) : (cast true : Dynamic));
     durationMs = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'duration')), 'number') : Bool) ? (cast _Runtime.field(raw, 'duration') : Dynamic) : (cast -1.0 : Dynamic));
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'maxParticles')), 'number') : Bool) ? (cast (_Runtime.toInt32(_Runtime.field(raw, 'maxParticles')) | 0) : Dynamic) : (cast 500.0 : Dynamic)), spawnRate: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'emission'), 20.0] : Array<Dynamic>)), loop: continuous, duration: ((cast ((cast !(cast continuous : Bool) : Bool) && (cast ((cast durationMs : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (durationMs / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), colorCurve: colorCurve, alphaCurve: alphaCurve, lifetimeMin: lifeLow, lifetimeMax: lifeHigh, speedMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'velocity'), 50.0] : Array<Dynamic>)), speedMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'velocity'), 150.0] : Array<Dynamic>)), directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'wind'), 0.0] : Array<Dynamic>)), gravityY: _Runtime.callValue(SpineParse.rangeMid__spineParse, cast ([_Runtime.field(raw, 'gravity'), 0.0] : Array<Dynamic>)), emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast (sx * 0.5) : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sx : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sy : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: _Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleMax: _Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'scale'), 1.0] : Array<Dynamic>)), scaleEnd: ((cast ((cast spawnScaleMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (endScaleMid / spawnScaleMid) : Dynamic) : (cast 0.0 : Dynamic)), colorStartR: flighthq._internal._StaticIndex.readArray(startTint, 0.0), colorStartG: flighthq._internal._StaticIndex.readArray(startTint, 1.0), colorStartB: flighthq._internal._StaticIndex.readArray(startTint, 2.0), colorEndR: flighthq._internal._StaticIndex.readArray(endTint, 0.0), colorEndG: flighthq._internal._StaticIndex.readArray(endTint, 1.0), colorEndB: flighthq._internal._StaticIndex.readArray(endTint, 2.0), alphaStart: _Runtime.callValue(SpineParse.firstAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), alphaEnd: _Runtime.callValue(SpineParse.lastAlpha__spineParse, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), rotationSpeedMin: _Runtime.multiplyNumbers(_Runtime.callValue(SpineParse.rangeLow__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)), SpineParse.DEG2RAD__spineParse), rotationSpeedMax: _Runtime.multiplyNumbers(_Runtime.callValue(SpineParse.rangeHigh__spineParse, cast ([_Runtime.field(raw, 'rotation'), 0.0] : Array<Dynamic>)), SpineParse.DEG2RAD__spineParse), blendMode: _Runtime.callValue(SpineParse.spineBlendMode__spineParse, cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string') : Bool) ? (cast _Runtime.field(raw, 'blendMode') : Dynamic) : (cast 'normal' : Dynamic))] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createParticleEmitterConfig((cast { maxParticles: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'maxParticles')), 'number') : Bool) ? (cast (_Runtime.toInt32(_Runtime.field(raw, 'maxParticles')) | 0) : Dynamic) : (cast 500.0 : Dynamic)), spawnRate: (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'emission') : flighthq._internal._Any), (cast 20.0 : Float)) : Null<Float>), loop: continuous, duration: ((cast ((cast !(cast continuous : Bool) : Bool) && (cast ((cast durationMs : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (durationMs / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), colorCurve: colorCurve, alphaCurve: alphaCurve, lifetimeMin: lifeLow, lifetimeMax: lifeHigh, speedMin: (cast SpineParse.rangeLow__spineParse((cast _Runtime.field(raw, 'velocity') : flighthq._internal._Any), (cast 50.0 : Float)) : Null<Float>), speedMax: (cast SpineParse.rangeHigh__spineParse((cast _Runtime.field(raw, 'velocity') : flighthq._internal._Any), (cast 150.0 : Float)) : Null<Float>), directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'wind') : flighthq._internal._Any), (cast 0.0 : Float)) : Null<Float>), gravityY: (cast SpineParse.rangeMid__spineParse((cast _Runtime.field(raw, 'gravity') : flighthq._internal._Any), (cast 0.0 : Float)) : Null<Float>), emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast (sx * 0.5) : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sx : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast sy : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: (cast SpineParse.rangeLow__spineParse((cast _Runtime.field(raw, 'scale') : flighthq._internal._Any), (cast 1.0 : Float)) : Null<Float>), scaleMax: (cast SpineParse.rangeHigh__spineParse((cast _Runtime.field(raw, 'scale') : flighthq._internal._Any), (cast 1.0 : Float)) : Null<Float>), scaleEnd: ((cast ((cast spawnScaleMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (endScaleMid / spawnScaleMid) : Dynamic) : (cast 0.0 : Dynamic)), colorStartR: flighthq._internal._StaticIndex.readArray(startTint, 0.0), colorStartG: flighthq._internal._StaticIndex.readArray(startTint, 1.0), colorStartB: flighthq._internal._StaticIndex.readArray(startTint, 2.0), colorEndR: flighthq._internal._StaticIndex.readArray(endTint, 0.0), colorEndG: flighthq._internal._StaticIndex.readArray(endTint, 1.0), colorEndB: flighthq._internal._StaticIndex.readArray(endTint, 2.0), alphaStart: (cast SpineParse.firstAlpha__spineParse((cast _Runtime.field(raw, 'alpha') : flighthq._internal._Any)) : Null<Float>), alphaEnd: (cast SpineParse.lastAlpha__spineParse((cast _Runtime.field(raw, 'alpha') : flighthq._internal._Any)) : Null<Float>), rotationSpeedMin: ((cast SpineParse.rangeLow__spineParse((cast _Runtime.field(raw, 'rotation') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * SpineParse.DEG2RAD__spineParse), rotationSpeedMax: ((cast SpineParse.rangeHigh__spineParse((cast _Runtime.field(raw, 'rotation') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * SpineParse.DEG2RAD__spineParse), blendMode: (cast SpineParse.spineBlendMode__spineParse((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'blendMode')), 'string') : Bool) ? (cast _Runtime.field(raw, 'blendMode') : Dynamic) : (cast 'normal' : Dynamic)) : String)) : Null<String>) } : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
     return cast null;
   }
 
-  public static function collectSpineDiagnostics__spineParse(raw:Dynamic):Array<ImportDiagnostic> {
+  public static function collectSpineDiagnostics__spineParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
-    var nonZeroRange:Dynamic = cast _Runtime.UNDEFINED;
+    var nonZeroRange:String->Bool = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
-    nonZeroRange = function(key:String) {
-      var o:Dynamic = cast _Runtime.UNDEFINED;
-      var r:Dynamic = cast _Runtime.UNDEFINED;
+    nonZeroRange = (cast function(key:String):Bool {
+      var o:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+      var r:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
       o = _Runtime.getIndex(raw, key);
       if ((cast ((cast _Runtime.looseEquals(o, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(o), 'object') : Bool)) : Bool)) { return cast false; }
-      r = (cast o : Dynamic);
+      r = (cast o : flighthq._internal._Record<String, flighthq._internal._Any>);
       return cast ((cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'low')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'low'), 0.0)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(r, 'high')), 'number'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(r, 'high'), 0.0)) : Bool));
-    };
-    if ((cast _Runtime.callValue(nonZeroRange, cast (['lifeOffset'] : Array<Dynamic>)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.life-offset-unsupported', 'collectSpineDiagnostics'] : Array<Dynamic>));
+    } : String->Bool);
+    if ((cast (cast nonZeroRange((cast 'lifeOffset' : String)) : Bool) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
-    if ((cast ((cast _Runtime.callValue(nonZeroRange, cast (['x'] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(nonZeroRange, cast (['y'] : Array<Dynamic>)) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.position-range-unsupported', 'collectSpineDiagnostics'] : Array<Dynamic>));
+    if ((cast ((cast (cast nonZeroRange((cast 'x' : String)) : Bool) : Bool) || (cast (cast nonZeroRange((cast 'y' : String)) : Bool) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(raw, 'premultiplied'), true) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'spine.premultiplied-informational', 'collectSpineDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast diagnostics;
     return cast null;
   }
 
-  public static function tintKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function tintKeyframesToCurve__spineParse(arr:flighthq._internal._Any):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
-        var __destructure0:Dynamic = _Runtime.callValue(SpineParse.hexToRgb__spineParse, cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'color')), 'string') : Bool) ? (cast _Runtime.field(k, 'color') : Dynamic) : (cast 'ffffff' : Dynamic))] : Array<Dynamic>));
-        var r:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
-        var g:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
-        var b:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+        var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast flighthq._internal._StaticIndex.readArray(arr, i) : flighthq._internal._Record<String, flighthq._internal._Any>);
+        var __destructure0 = (cast SpineParse.hexToRgb__spineParse((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'color')), 'string') : Bool) ? (cast _Runtime.field(k, 'color') : Dynamic) : (cast 'ffffff' : Dynamic)) : String)) : Array<flighthq._internal._Any>);
+        var r:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+        var g:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+        var b:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
         _Runtime.callProperty(keys, 'push', cast ([{ time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number') : Bool) ? (cast _Runtime.field(k, 'time') : Dynamic) : (cast (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Dynamic)), r: r, g: g, b: b }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(particleColorCurveFromKeyframes, cast ([keys] : Array<Dynamic>));
+    return cast (cast particleColorCurveFromKeyframes((cast keys : Array<ColorKeyframe>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ParticleCurve>);
     return cast null;
   }
 
-  public static function alphaKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function alphaKeyframesToCurve__spineParse(arr:flighthq._internal._Any):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast ((cast _Runtime.field(arr, 'length') : Float) <= (cast 2.0 : Float)) : Bool)) : Bool)) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(arr, 'length') : Float)) : Bool)) {
-        var k:Dynamic = (cast flighthq._internal._StaticIndex.readArray(arr, i) : Dynamic);
+        var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast flighthq._internal._StaticIndex.readArray(arr, i) : flighthq._internal._Record<String, flighthq._internal._Any>);
         _Runtime.callProperty(keys, 'push', cast ([{ time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'time')), 'number') : Bool) ? (cast _Runtime.field(k, 'time') : Dynamic) : (cast (i / _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : Dynamic)), value: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'alpha')), 'number') : Bool) ? (cast _Runtime.field(k, 'alpha') : Dynamic) : (cast 1.0 : Dynamic)) }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast _Runtime.callValue(particleCurveFromKeyframes, cast ([keys] : Array<Dynamic>));
+    return cast (cast particleCurveFromKeyframes((cast keys : Array<CurveKeyframe>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ParticleCurve>);
     return cast null;
   }
 
@@ -212,32 +214,32 @@ class SpineParse {
     return cast null;
   }
 
-  public static function rawToDocument__spineParse(raw:Dynamic):SpineParticleDocument {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var rv:Dynamic = cast _Runtime.UNDEFINED;
-    var tintKfs:Dynamic = cast _Runtime.UNDEFINED;
-    var alphaKfs:Dynamic = cast _Runtime.UNDEFINED;
-    s = function(k:String, def:String) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'string') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : String) : Dynamic) : (cast def : Dynamic));
-    n = function(k:String, def:Float) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'number') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Float) : Dynamic) : (cast def : Dynamic));
-    b = function(k:String, def:Bool) return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'boolean') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Bool) : Dynamic) : (cast def : Dynamic));
-    rv = function(obj:Dynamic, lo:Dynamic = 0.0, hi:Dynamic = 0.0) return { low: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'low')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : Dynamic), 'low') : Float) : Dynamic) : (cast lo : Dynamic)), high: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : Dynamic), 'high')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : Dynamic), 'high') : Float) : Dynamic) : (cast hi : Dynamic)) };
-    tintKfs = function(arr:Dynamic) return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), color: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'color')), 'string') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'color') : String) : Dynamic) : (cast 'ffffff' : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, color: 'ffffff' }] : Array<Dynamic>) : Dynamic));
-    alphaKfs = function(arr:Dynamic) return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:Dynamic) return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), alpha: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : Dynamic), 'alpha')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : Dynamic), 'alpha') : Float) : Dynamic) : (cast 1.0 : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, alpha: 1.0 }, { time: 1.0, alpha: 0.0 }] : Array<Dynamic>) : Dynamic));
-    return cast { name: _Runtime.callValue(s, cast (['name', ''] : Array<Dynamic>)), maxParticles: (_Runtime.toInt32(_Runtime.callValue(n, cast (['maxParticles', 500.0] : Array<Dynamic>))) | 0), continuous: _Runtime.callValue(b, cast (['continuous', true] : Array<Dynamic>)), duration: _Runtime.callValue(n, cast (['duration', -1.0] : Array<Dynamic>)), emission: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'emission'), 10.0, 30.0] : Array<Dynamic>)), life: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'life'), 500.0, 1500.0] : Array<Dynamic>)), lifeOffset: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'lifeOffset'), 0.0, 0.0] : Array<Dynamic>)), x: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'x'), 0.0, 0.0] : Array<Dynamic>)), y: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'y'), 0.0, 0.0] : Array<Dynamic>)), spawnShape: (cast _Runtime.callValue(s, cast (['spawnShape', 'point'] : Array<Dynamic>)) : Dynamic), spawnWidth: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnWidth'), 0.0, 0.0] : Array<Dynamic>)), spawnHeight: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'spawnHeight'), 0.0, 0.0] : Array<Dynamic>)), velocity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'velocity'), 50.0, 150.0] : Array<Dynamic>)), angle: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'angle'), 60.0, 120.0] : Array<Dynamic>)), rotation: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'rotation'), 0.0, 0.0] : Array<Dynamic>)), wind: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'wind'), 0.0, 0.0] : Array<Dynamic>)), gravity: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'gravity'), 0.0, 0.0] : Array<Dynamic>)), scale: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scale'), 1.0, 1.0] : Array<Dynamic>)), scaleEnd: _Runtime.callValue(rv, cast ([_Runtime.field(raw, 'scaleEnd'), 0.0, 0.0] : Array<Dynamic>)), tint: _Runtime.callValue(tintKfs, cast ([_Runtime.field(raw, 'tint')] : Array<Dynamic>)), alpha: _Runtime.callValue(alphaKfs, cast ([_Runtime.field(raw, 'alpha')] : Array<Dynamic>)), blendMode: (cast _Runtime.callValue(s, cast (['blendMode', 'normal'] : Array<Dynamic>)) : Dynamic), premultiplied: _Runtime.callValue(b, cast (['premultiplied', false] : Array<Dynamic>)), images: ((cast _Runtime.isArray(_Runtime.field(raw, 'images')) : Bool) ? (cast (cast _Runtime.field(raw, 'images') : Array<String>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) };
+  public static function rawToDocument__spineParse(raw:flighthq._internal._Record<String, flighthq._internal._Any>):SpineParticleDocument {
+    var s:String->String->String = cast _Runtime.UNDEFINED;
+    var n:String->Float->Float = cast _Runtime.UNDEFINED;
+    var b:String->Bool->Bool = cast _Runtime.UNDEFINED;
+    var rv:flighthq._internal._Any->Float->Float->{ var low:Float; var high:Float; } = cast _Runtime.UNDEFINED;
+    var tintKfs:flighthq._internal._Any->Array<SpineTintKeyframe> = cast _Runtime.UNDEFINED;
+    var alphaKfs:flighthq._internal._Any->Array<SpineAlphaKeyframe> = cast _Runtime.UNDEFINED;
+    s = (cast function(k:String, def:String):String return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'string') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : String) : Dynamic) : (cast def : Dynamic)) : String->String->String);
+    n = (cast function(k:String, def:Float):Float return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'number') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Float) : Dynamic) : (cast def : Dynamic)) : String->Float->Float);
+    b = (cast function(k:String, def:Bool):Bool return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(raw, k)), 'boolean') : Bool) ? (cast (cast _Runtime.getIndex(raw, k) : Bool) : Dynamic) : (cast def : Dynamic)) : String->Bool->Bool);
+    rv = (cast function(obj:flighthq._internal._Any, lo:Float = 0.0, hi:Float = 0.0):{ var low:Float; var high:Float; } return { low: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : flighthq._internal._Record<String, flighthq._internal._Any>), 'low')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : flighthq._internal._Record<String, flighthq._internal._Any>), 'low') : Float) : Dynamic) : (cast lo : Dynamic)), high: ((cast ((cast ((cast !_Runtime.looseEquals(obj, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast obj : flighthq._internal._Record<String, flighthq._internal._Any>), 'high')), 'number') : Bool)) : Bool) ? (cast (cast _Runtime.field((cast obj : flighthq._internal._Record<String, flighthq._internal._Any>), 'high') : Float) : Dynamic) : (cast hi : Dynamic)) } : flighthq._internal._Any->Float->Float->{ var low:Float; var high:Float; });
+    tintKfs = (cast function(arr:flighthq._internal._Any):Array<SpineTintKeyframe> return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:flighthq._internal._Any, __unused1:Float, __unused2:Array<flighthq._internal._Any>):{ var time:Float; var color:String; } return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), color: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'color')), 'string') : Bool) ? (cast (cast _Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'color') : String) : Dynamic) : (cast 'ffffff' : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, color: 'ffffff' }] : Array<Dynamic>) : Dynamic)) : flighthq._internal._Any->Array<SpineTintKeyframe>);
+    alphaKfs = (cast function(arr:flighthq._internal._Any):Array<SpineAlphaKeyframe> return ((cast _Runtime.isArray(arr) : Bool) ? (cast _Runtime.callProperty(arr, 'map', cast ([function(k:flighthq._internal._Any, __unused3:Float, __unused4:Array<flighthq._internal._Any>):{ var time:Float; var alpha:Float; } return { time: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'time')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'time') : Float) : Dynamic) : (cast 0.0 : Dynamic)), alpha: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'alpha')), 'number') : Bool) ? (cast (cast _Runtime.field((cast k : flighthq._internal._Record<String, flighthq._internal._Any>), 'alpha') : Float) : Dynamic) : (cast 1.0 : Dynamic)) }] : Array<Dynamic>)) : Dynamic) : (cast cast ([{ time: 0.0, alpha: 1.0 }, { time: 1.0, alpha: 0.0 }] : Array<Dynamic>) : Dynamic)) : flighthq._internal._Any->Array<SpineAlphaKeyframe>);
+    return cast { name: (cast s((cast 'name' : String), (cast '' : String)) : String), maxParticles: (_Runtime.toInt32((cast n((cast 'maxParticles' : String), (cast 500.0 : Float)) : Float)) | 0), continuous: (cast b((cast 'continuous' : String), (cast true : Bool)) : Bool), duration: (cast n((cast 'duration' : String), (cast -1.0 : Float)) : Float), emission: (cast rv((cast _Runtime.field(raw, 'emission') : flighthq._internal._Any), (cast 10.0 : Float), (cast 30.0 : Float)) : SpineRangeValue), life: (cast rv((cast _Runtime.field(raw, 'life') : flighthq._internal._Any), (cast 500.0 : Float), (cast 1500.0 : Float)) : SpineRangeValue), lifeOffset: (cast rv((cast _Runtime.field(raw, 'lifeOffset') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), x: (cast rv((cast _Runtime.field(raw, 'x') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), y: (cast rv((cast _Runtime.field(raw, 'y') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), spawnShape: (cast (cast s((cast 'spawnShape' : String), (cast 'point' : String)) : String) : flighthq._internal._IndexedAccess<SpineParticleDocument, String>), spawnWidth: (cast rv((cast _Runtime.field(raw, 'spawnWidth') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), spawnHeight: (cast rv((cast _Runtime.field(raw, 'spawnHeight') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), velocity: (cast rv((cast _Runtime.field(raw, 'velocity') : flighthq._internal._Any), (cast 50.0 : Float), (cast 150.0 : Float)) : SpineRangeValue), angle: (cast rv((cast _Runtime.field(raw, 'angle') : flighthq._internal._Any), (cast 60.0 : Float), (cast 120.0 : Float)) : SpineRangeValue), rotation: (cast rv((cast _Runtime.field(raw, 'rotation') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), wind: (cast rv((cast _Runtime.field(raw, 'wind') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), gravity: (cast rv((cast _Runtime.field(raw, 'gravity') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), scale: (cast rv((cast _Runtime.field(raw, 'scale') : flighthq._internal._Any), (cast 1.0 : Float), (cast 1.0 : Float)) : SpineRangeValue), scaleEnd: (cast rv((cast _Runtime.field(raw, 'scaleEnd') : flighthq._internal._Any), (cast 0.0 : Float), (cast 0.0 : Float)) : SpineRangeValue), tint: (cast tintKfs((cast _Runtime.field(raw, 'tint') : flighthq._internal._Any)) : Array<SpineTintKeyframe>), alpha: (cast alphaKfs((cast _Runtime.field(raw, 'alpha') : flighthq._internal._Any)) : Array<SpineAlphaKeyframe>), blendMode: (cast (cast s((cast 'blendMode' : String), (cast 'normal' : String)) : SpineBlendMode) : flighthq._internal._IndexedAccess<SpineParticleDocument, String>), premultiplied: (cast b((cast 'premultiplied' : String), (cast false : Bool)) : Bool), images: ((cast _Runtime.isArray(_Runtime.field(raw, 'images')) : Bool) ? (cast (cast _Runtime.field(raw, 'images') : Array<String>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) };
     return cast null;
   }
 
   public static function parseSpineParticle(json:String):ParticleEmitterConfig {
-    return cast _Runtime.callValue(SpineParse.rawToConfig__spineParse, cast ([_Runtime.callValue(SpineParse.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast SpineParse.rawToConfig__spineParse((cast (cast SpineParse.parseSpineJson__spineParse((cast json : String)) : flighthq._internal._Record<String, flighthq._internal._Any>) : flighthq._internal._Record<String, flighthq._internal._Any>)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static function parseSpineParticleDocument(json:String):SpineParsed {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callValue(SpineParse.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(SpineParse.rawToConfig__spineParse, cast ([raw] : Array<Dynamic>)), diagnostics: _Runtime.callValue(SpineParse.collectSpineDiagnostics__spineParse, cast ([raw] : Array<Dynamic>)), document: _Runtime.callValue(SpineParse.rawToDocument__spineParse, cast ([raw] : Array<Dynamic>)) };
+    var raw:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    raw = (cast SpineParse.parseSpineJson__spineParse((cast json : String)) : flighthq._internal._Record<String, flighthq._internal._Any>);
+    return cast { config: (cast SpineParse.rawToConfig__spineParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : ParticleEmitterConfig), diagnostics: (cast SpineParse.collectSpineDiagnostics__spineParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : Array<ImportDiagnostic>), document: (cast SpineParse.rawToDocument__spineParse((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : SpineParticleDocument) };
     return cast null;
   }
 }

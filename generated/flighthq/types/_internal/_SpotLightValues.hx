@@ -7,5 +7,5 @@ import flighthq.types.Light;
 import flighthq.types.Vector3;
 
 class _SpotLightValues {
-  public static final SpotLightKind:Dynamic = 'SpotLight';
+  public static final SpotLightKind:String = 'SpotLight';
 }

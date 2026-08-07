@@ -11,12 +11,12 @@ import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
 class AmbientLight {
   public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {
-    return cast _Runtime.callValue(createAmbientLight, cast ([{ color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') }] : Array<Dynamic>));
+    return cast (cast createAmbientLight((cast { color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') } : Null<AmbientLightOptions>)) : flighthq.types.AmbientLight);
     return cast null;
   }
 
   public static function createAmbientLight(?options:AmbientLightOptions):flighthq.types.AmbientLight {
-    return cast _Runtime.callValue(createEntity, cast ([{ color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: AmbientLightKind }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: AmbientLightKind } : Null<{ var color:Float; var intensity:Float; var kind:String; }>)) : flighthq.types.AmbientLight);
     return cast null;
   }
 }

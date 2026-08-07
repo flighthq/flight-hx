@@ -5,13 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class Constants {
-  public static final EPSILON:Dynamic = 0.000001;
+  public static final EPSILON:Float = 0.000001;
 
-  public static final TAU:Dynamic = (HxMath.PI * 2.0);
+  public static final TAU:Float = (HxMath.PI * 2.0);
 
-  public static final HALF_PI:Dynamic = (HxMath.PI / 2.0);
+  public static final HALF_PI:Float = (HxMath.PI / 2.0);
 
-  public static final DEG_TO_RAD:Dynamic = (HxMath.PI / 180.0);
+  public static final DEG_TO_RAD:Float = (HxMath.PI / 180.0);
 
-  public static final RAD_TO_DEG:Dynamic = (180.0 / HxMath.PI);
+  public static final RAD_TO_DEG:Float = (180.0 / HxMath.PI);
 }

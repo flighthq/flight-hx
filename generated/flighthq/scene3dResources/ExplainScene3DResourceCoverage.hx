@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.SceneCoverageEntry;
 import flighthq.types.SceneCoverageEntry.SceneCoverage;
@@ -15,30 +16,30 @@ class ExplainScene3DResourceCoverage {
   @:noCompletion
   public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    _Runtime.callValue(ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage, cast ([out, resolver, usage, false] : Array<Dynamic>));
+    (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast resolver : Scene3DResourceResolver), (cast usage : Scene3DKindUsage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
-    return cast !(cast _Runtime.callValue(ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage, cast ([null, resolver, usage, true] : Array<Dynamic>)) : Bool);
+    return cast !(cast (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast resolver : Scene3DResourceResolver), (cast usage : Scene3DKindUsage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
   public static function collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(out:Null<Array<SceneCoverageEntry>>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage, stopAtFirst:Bool):Bool {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
     found = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
-        if ((cast _Runtime.callValue(hasScene3DMaterialTextureLister, cast ([resolver.registry, kind] : Array<Dynamic>)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.MaterialTextureLister }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+        if ((cast (cast hasScene3DMaterialTextureLister(resolver.registry, (cast kind : String)) : Bool) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialTextureLister }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Missing, kind: kind, registry: RenderRegistry.MaterialTextureLister }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.MaterialTextureLister }] : Array<Dynamic>));
         i++;
       }
     }

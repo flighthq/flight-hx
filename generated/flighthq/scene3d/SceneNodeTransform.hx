@@ -5,26 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
+import flighthq.types.Matrix4;
 import flighthq.types.Node3D;
 import flighthq.types.Vector3.Vector3Like;
 
 class SceneNodeTransform {
   public static function setNode3DLookAt(node:Node3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    var eyeX:Dynamic = cast _Runtime.UNDEFINED;
-    var eyeY:Dynamic = cast _Runtime.UNDEFINED;
-    var eyeZ:Dynamic = cast _Runtime.UNDEFINED;
-    var zx:Dynamic = cast _Runtime.UNDEFINED;
-    var zy:Dynamic = cast _Runtime.UNDEFINED;
-    var zz:Dynamic = cast _Runtime.UNDEFINED;
-    var zl:Dynamic = cast _Runtime.UNDEFINED;
-    var xx:Dynamic = cast _Runtime.UNDEFINED;
-    var xy:Dynamic = cast _Runtime.UNDEFINED;
-    var xz:Dynamic = cast _Runtime.UNDEFINED;
-    var xl:Dynamic = cast _Runtime.UNDEFINED;
-    var yx:Dynamic = cast _Runtime.UNDEFINED;
-    var yy:Dynamic = cast _Runtime.UNDEFINED;
-    var yz:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var eyeX:Float = cast _Runtime.UNDEFINED;
+    var eyeY:Float = cast _Runtime.UNDEFINED;
+    var eyeZ:Float = cast _Runtime.UNDEFINED;
+    var zx:Float = cast _Runtime.UNDEFINED;
+    var zy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var zl:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var xl:Float = cast _Runtime.UNDEFINED;
+    var yx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     eyeX = eye.x;
     eyeY = eye.y;
     eyeZ = eye.z;
@@ -68,8 +69,8 @@ class SceneNodeTransform {
     flighthq._internal._StaticIndex.writeFloat32Array(m, 13.0, eyeY);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 14.0, eyeZ);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 15.0, 1.0);
-    _Runtime.callValue(setNodeLocalMatrix4, cast ([node, SceneNodeTransform._scratchMatrix__sceneNodeTransform] : Array<Dynamic>));
+    setNodeLocalMatrix4(node, SceneNodeTransform._scratchMatrix__sceneNodeTransform);
   }
 
-  public static final _scratchMatrix__sceneNodeTransform:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _scratchMatrix__sceneNodeTransform:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
 }

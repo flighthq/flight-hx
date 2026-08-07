@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.OutlineEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,14 +17,14 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuOutlineEffect {
   @:noCompletion
   public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var thickness:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var thickness:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.2);
     thickness = _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
@@ -29,8 +32,8 @@ class WgpuOutlineEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.outline', WgpuOutlineEffect.OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.outline' : String), (cast WgpuOutlineEffect.OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, thickness);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
@@ -39,16 +42,16 @@ class WgpuOutlineEffect {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, a);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuOutlineEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyOutlineEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : OutlineEffect)] : Array<Dynamic>));
+  public static final defaultWgpuOutlineEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyOutlineEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : OutlineEffect) : OutlineEffect));
   };
 
   public static function registerWgpuOutlineEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'OutlineEffect', defaultWgpuOutlineEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'OutlineEffect' : String), (cast defaultWgpuOutlineEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect:Dynamic = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_thickness : f32,\n  u_resolution : vec2f,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = uni.u_thickness / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let k = step(uni.u_threshold, edge);\n  return mix(c, uni.u_color, k * uni.u_color.a);\n}';
+  public static final OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect:String = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_thickness : f32,\n  u_resolution : vec2f,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = uni.u_thickness / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let k = step(uni.u_threshold, edge);\n  return mix(c, uni.u_color, k * uni.u_color.a);\n}';
 }

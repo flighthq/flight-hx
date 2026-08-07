@@ -9,17 +9,17 @@ import flighthq.types.Log.LogLevel;
 
 class EnableBitmapFontGuards {
   public static function disableBitmapFontGuards():Void {
-    _Runtime.callValue(setBitmapFontGuard, cast ([null] : Array<Dynamic>));
+    setBitmapFontGuard((cast null : Null<String->Float->Float->Void>));
   }
 
   public static function enableBitmapFontGuards():Void {
-    _Runtime.callValue(setBitmapFontGuard, cast ([EnableBitmapFontGuards.warnOnBitmapFontRepair__enableBitmapFontGuards] : Array<Dynamic>));
+    setBitmapFontGuard((cast EnableBitmapFontGuards.warnOnBitmapFontRepair__enableBitmapFontGuards : Null<String->Float->Float->Void>));
   }
 
   public static function warnOnBitmapFontRepair__enableBitmapFontGuards(reason:String, codepoint:Float, page:Float):Void {
-    var printable:Dynamic = cast _Runtime.UNDEFINED;
+    var printable:String = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(reason, 'page-out-of-range') : Bool)) { return; }
     printable = 'U+' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(codepoint, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + '';
-    _Runtime.callValue(logOnce, cast (['bitmapfont:page-out-of-range', LogLevel.Warn, { message: (('createBitmapFont: ' + Std.string(printable) + ' names page ' + Std.string(page) + ', which this font does not have, so it was ' + 'placed on page 0 and will sample whatever occupies those coordinates there. The font data is ') + 'wrong, not the atlas — check the page index the exporter wrote.') }, 'bitmapfont'] : Array<Dynamic>));
+    (cast logOnce((cast 'bitmapfont:page-out-of-range' : String), (cast LogLevel.Warn : LogLevel), { message: (('createBitmapFont: ' + Std.string(printable) + ' names page ' + Std.string(page) + ', which this font does not have, so it was ' + 'placed on page 0 and will sample whatever occupies those coordinates there. The font data is ') + 'wrong, not the atlas — check the page index the exporter wrote.') }, (cast 'bitmapfont' : Null<String>)) : Bool);
   }
 }

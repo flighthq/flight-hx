@@ -4,29 +4,32 @@ package flighthq.physics2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.World.findPhysics2DBody;
+import flighthq.types.Physics2D.Physics2DJoint;
 import flighthq.types.Physics2D.Physics2DJointResolution;
 import flighthq.types.Physics2D.Physics2DJointResolutionExplanation;
 import flighthq.types.Physics2D.Physics2DJointResolutionStatus;
+import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2D.RigidBody2D;
 
 class ExplainPhysics2DJoints {
   public static function explainPhysics2DJoints(world:Physics2DWorld):Physics2DJointResolutionExplanation {
     var joints:Array<Physics2DJointResolution> = cast _Runtime.UNDEFINED;
-    var readyCount:Dynamic = cast _Runtime.UNDEFINED;
+    var readyCount:Float = cast _Runtime.UNDEFINED;
     joints = cast ([] : Array<Dynamic>);
     readyCount = 0.0;
     {
-      var jointIndex:Dynamic = 0.0;
+      var jointIndex:Float = 0.0;
       while ((cast ((cast jointIndex : Float) < (cast _Runtime.field(_Runtime.field(world, 'joints'), 'length') : Float)) : Bool)) {
-        var joint:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), jointIndex);
-        var solver:Dynamic = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind')));
-        var solverRegistered:Dynamic = !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED'));
-        var bodyAUsed:Dynamic = !_Runtime.strictEquals(_Runtime.optionalField(solver, 'usesBodyA'), false);
-        var bodyAFound:Dynamic = !_Runtime.strictEquals(_Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(joint, 'bodyA')] : Array<Dynamic>)), null);
-        var bodyBFound:Dynamic = !_Runtime.strictEquals(_Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(joint, 'bodyB')] : Array<Dynamic>)), null);
-        var status:Dynamic = _Runtime.callValue(ExplainPhysics2DJoints.getJointResolutionStatus__explainPhysics2DJoints, cast ([solverRegistered, bodyAUsed, bodyAFound, bodyBFound] : Array<Dynamic>));
+        var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), jointIndex);
+        var solver:Null<Physics2DJointSolver> = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
+        var solverRegistered:Bool = !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED'));
+        var bodyAUsed:Bool = !_Runtime.strictEquals(_Runtime.optionalField(solver, 'usesBodyA'), false);
+        var bodyAFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>), null);
+        var bodyBFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>), null);
+        var status:Physics2DJointResolutionStatus = (cast ExplainPhysics2DJoints.getJointResolutionStatus__explainPhysics2DJoints((cast solverRegistered : Bool), (cast bodyAUsed : Bool), (cast bodyAFound : Bool), (cast bodyBFound : Bool)) : Physics2DJointResolutionStatus);
         if ((cast _Runtime.strictEquals(status, 'ready') : Bool)) { readyCount++; }
-        _Runtime.callProperty(joints, 'push', cast ([{ bodyA: _Runtime.field(joint, 'bodyA'), bodyAFound: bodyAFound, bodyAUsed: bodyAUsed, bodyB: _Runtime.field(joint, 'bodyB'), bodyBFound: bodyBFound, jointIndex: jointIndex, kind: _Runtime.field(joint, 'kind'), solverRegistered: solverRegistered, status: status }] : Array<Dynamic>));
+        _Runtime.callProperty(joints, 'push', cast ([{ bodyA: (cast joint : Physics2DJoint).bodyA, bodyAFound: bodyAFound, bodyAUsed: bodyAUsed, bodyB: (cast joint : Physics2DJoint).bodyB, bodyBFound: bodyBFound, jointIndex: jointIndex, kind: (cast joint : Physics2DJoint).kind, solverRegistered: solverRegistered, status: status }] : Array<Dynamic>));
         jointIndex++;
       }
     }

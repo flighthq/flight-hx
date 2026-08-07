@@ -11,43 +11,45 @@ import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.textlayout.TextMetrics.getTextMetrics;
 import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
+import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextMetrics;
 
 class TextLabelLayout {
   @:noCompletion
   public static function ensureTextLayout(source:TextLabel):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var contentId:Dynamic = cast _Runtime.UNDEFINED;
-    var measure:Dynamic = cast _Runtime.UNDEFINED;
-    var params:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
-    contentId = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'textLayout'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'textLayoutUsingContentId'), contentId) : Bool)) : Bool)) { return; }
-    measure = _Runtime.callValue(getTextLayoutMeasureProvider, cast ([] : Array<Dynamic>));
+    var runtime:TextLabelRuntime = cast _Runtime.UNDEFINED;
+    var contentId:Float = cast _Runtime.UNDEFINED;
+    var measure:Null<TextMeasureFunction> = cast _Runtime.UNDEFINED;
+    var params:TextLayoutParams = cast _Runtime.UNDEFINED;
+    var result:TextLayoutResult = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast getNode2DRuntime(source) : TextLabelRuntime) : TextLabelRuntime);
+    contentId = (cast getNodeLocalContentRevision(source) : Float);
+    if ((cast ((cast !_Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayout, null) : Bool) && (cast _Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayoutUsingContentId, contentId) : Bool)) : Bool)) { return; }
+    measure = (cast getTextLayoutMeasureProvider() : Null<TextMeasureFunction>);
     if ((cast _Runtime.strictEquals(measure, null) : Bool)) { return; }
-    params = _Runtime.callProperty(runtime, 'buildTextLayoutParams', cast ([source, measure] : Array<Dynamic>));
-    result = _Runtime.callValue(getTextLayoutResult, cast ([runtime] : Array<Dynamic>));
-    _Runtime.callValue(computeTextLayout, cast ([result, params] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'textLayoutUsingContentId', contentId);
+    params = (cast runtime : TextLabelRuntime).buildTextLayoutParams(source, measure);
+    result = (cast getTextLayoutResult((cast runtime : TextLabelRuntime)) : TextLayoutResult);
+    computeTextLayout((cast result : TextLayoutResult), params);
+    ((cast runtime : TextLabelRuntime).textLayoutUsingContentId = contentId);
   }
 
   public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
-    _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime), 'textLayout');
+    ensureTextLayout((cast source : TextLabel));
+    return cast (cast (cast (cast getNode2DRuntime(source) : TextLabelRuntime) : TextLabelRuntime) : TextLabelRuntime).textLayout;
     return cast null;
   }
 
   public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
+    var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
+    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
       (out.height = cast (0.0 : Dynamic));
       (out.numLines = cast (0.0 : Dynamic));
       (out.width = cast (0.0 : Dynamic));
       return;
     }
-    _Runtime.callValue(getTextMetrics, cast ([out, layout] : Array<Dynamic>));
+    getTextMetrics((cast out : TextMetrics), (cast layout : TextLayoutResult));
   }
 }

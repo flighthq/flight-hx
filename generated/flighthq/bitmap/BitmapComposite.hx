@@ -4,76 +4,77 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapCompositeMode;
 import flighthq.types.BitmapRegion;
 import flighthq.types._internal._BitmapCompositeModeValues.BitmapCompositeModeValue;
 
 class BitmapComposite {
   public static function compositeBitmapPixels(dest:BitmapRegion, pixels:flighthq._internal._UInt8ClampedArray, ?mode:BitmapCompositeMode):Void {
-    if (mode == null) mode = cast (BitmapCompositeModeValue.Normal : Dynamic);
+    if (mode == null) mode = cast ((cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Normal : Dynamic);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px) * 4.0);
-            _Runtime.callValue(BitmapComposite.compositePixelInto__bitmapComposite, cast ([_Runtime.field(dest, 'bitmap').data, ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, si), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 3.0)), mode] : Array<Dynamic>));
+            var si:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px) * 4.0);
+            BitmapComposite.compositePixelInto__bitmapComposite((cast _Runtime.field(dest, 'bitmap').data : flighthq._internal._UInt8ClampedArray), (cast ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, si) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 3.0)) : Float), (cast mode : String));
             px++;
           }
         }
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function compositeBitmapRegion(dest:BitmapRegion, source:BitmapRegion, ?mode:BitmapCompositeMode):Void {
-    if (mode == null) mode = cast (BitmapCompositeModeValue.Normal : Dynamic);
-    var sw:Dynamic = cast _Runtime.UNDEFINED;
-    var sh:Dynamic = cast _Runtime.UNDEFINED;
+    if (mode == null) mode = cast ((cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Normal : Dynamic);
+    var sw:Float = cast _Runtime.UNDEFINED;
+    var sh:Float = cast _Runtime.UNDEFINED;
     sw = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
     sh = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
-        var sourceY:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var sourceX:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
-            _Runtime.callValue(BitmapComposite.compositePixelInto__bitmapComposite, cast ([_Runtime.field(dest, 'bitmap').data, ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0)), mode] : Array<Dynamic>));
+            var si:Float = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
+            BitmapComposite.compositePixelInto__bitmapComposite((cast _Runtime.field(dest, 'bitmap').data : flighthq._internal._UInt8ClampedArray), (cast ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0)) : Float), (cast mode : String));
             px++;
           }
         }
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function extractBitmapPixels(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion):Void {
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var sourceY:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var sourceX:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
-            var di:Dynamic = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
+            var si:Float = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
+            var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0)));
@@ -88,16 +89,16 @@ class BitmapComposite {
 
   public static function extractBitmapPixels32(out:flighthq._internal._UInt32Array, source:BitmapRegion):Void {
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var sourceY:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var sourceX:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
+            var si:Float = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
             flighthq._internal._StaticIndex.writeUint32Array(out, (_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px), _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0))))), 0));
             px++;
           }
@@ -109,17 +110,17 @@ class BitmapComposite {
 
   public static function writeBitmapPixels(dest:BitmapRegion, pixels:flighthq._internal._UInt8ClampedArray):Void {
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = ((_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px) * 4.0);
-            var di:Dynamic = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
+            var si:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px) * 4.0);
+            var di:Float = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, di, flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, si));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(pixels, (si + 2.0)));
@@ -130,22 +131,22 @@ class BitmapComposite {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function writeBitmapPixels32(dest:BitmapRegion, pixels:flighthq._internal._UInt32Array):Void {
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast _Runtime.field(dest, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var color:Dynamic = flighthq._internal._StaticIndex.readUint32Array(pixels, (_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px));
-            var di:Dynamic = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
+            var color:Float = flighthq._internal._StaticIndex.readUint32Array(pixels, (_Runtime.multiplyNumbers(py, _Runtime.field(dest, 'width')) + px));
+            var di:Float = ((_Runtime.multiplyNumbers(y, _Runtime.field(dest, 'bitmap').width) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(_Runtime.field(dest, 'bitmap').data, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
@@ -156,40 +157,40 @@ class BitmapComposite {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function porterDuffFactors__bitmapComposite(mode:BitmapCompositeMode, srcA:Float, dstA:Float):Array<Float> {
     {
       var __switchValue = mode;
-      if (__switchValue == BitmapCompositeModeValue.DestinationOver) {
+      if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).DestinationOver) {
         return cast cast ([(1.0 - dstA), 1.0] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.SourceIn) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).SourceIn) {
         return cast cast ([dstA, 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.DestinationIn) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).DestinationIn) {
         return cast cast ([0.0, srcA] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.SourceOut) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).SourceOut) {
         return cast cast ([(1.0 - dstA), 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.DestinationOut) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).DestinationOut) {
         return cast cast ([0.0, (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.SourceAtop) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).SourceAtop) {
         return cast cast ([dstA, (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.DestinationAtop) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).DestinationAtop) {
         return cast cast ([(1.0 - dstA), srcA] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Xor) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Xor) {
         return cast cast ([(1.0 - dstA), (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Copy) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Copy) {
         return cast cast ([1.0, 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Clear) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Clear) {
         return cast cast ([0.0, 0.0] : Array<Dynamic>);
       }
       else  {
@@ -202,46 +203,46 @@ class BitmapComposite {
   public static function blendChannel__bitmapComposite(mode:BitmapCompositeMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
-      if (__switchValue == BitmapCompositeModeValue.Multiply) {
+      if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Multiply) {
         return cast ((cb * cs) / 255.0);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Screen) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Screen) {
         return cast ((cb + cs) - ((cb * cs) / 255.0));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Add) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Add) {
         return cast HxMath.min(255.0, (cb + cs));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Subtract) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Subtract) {
         return cast HxMath.max(0.0, (cb - cs));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Darken) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Darken) {
         return cast HxMath.min(cb, cs);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Lighten) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Lighten) {
         return cast HxMath.max(cb, cs);
       }
-      else if (__switchValue == BitmapCompositeModeValue.Difference) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Difference) {
         return cast HxMath.abs((cb - cs));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Exclusion) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Exclusion) {
         return cast ((cb + cs) - (((2.0 * cb) * cs) / 255.0));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Overlay) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Overlay) {
         return cast ((cast ((cast cb : Float) < (cast 128.0 : Float)) : Bool) ? (cast (((2.0 * cb) * cs) / 255.0) : Dynamic) : (cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)) : Dynamic));
       }
-      else if (__switchValue == BitmapCompositeModeValue.HardLight) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).HardLight) {
         return cast ((cast ((cast cs : Float) < (cast 128.0 : Float)) : Bool) ? (cast (((2.0 * cb) * cs) / 255.0) : Dynamic) : (cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)) : Dynamic));
       }
-      else if (__switchValue == BitmapCompositeModeValue.SoftLight) {
-        return cast _Runtime.callValue(BitmapComposite.softLightChannel__bitmapComposite, cast ([cb, cs] : Array<Dynamic>));
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).SoftLight) {
+        return cast (cast BitmapComposite.softLightChannel__bitmapComposite((cast cb : Float), (cast cs : Float)) : Float);
       }
-      else if (__switchValue == BitmapCompositeModeValue.ColorDodge) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).ColorDodge) {
         return cast ((cast ((cast cs : Float) >= (cast 255.0 : Float)) : Bool) ? (cast 255.0 : Dynamic) : (cast HxMath.min(255.0, ((cb * 255.0) / (255.0 - cs))) : Dynamic));
       }
-      else if (__switchValue == BitmapCompositeModeValue.ColorBurn) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).ColorBurn) {
         return cast ((cast ((cast cs : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.subtractNumbers(255.0, HxMath.min(255.0, (((255.0 - cb) * 255.0) / cs))) : Dynamic));
       }
-      else if (__switchValue == BitmapCompositeModeValue.Invert) {
+      else if (__switchValue == (cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Invert) {
         return cast (255.0 - cb);
       }
       else  {
@@ -252,10 +253,10 @@ class BitmapComposite {
   }
 
   public static function softLightChannel__bitmapComposite(cb:Float, cs:Float):Float {
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var out:Float = cast _Runtime.UNDEFINED;
     b = (cb / 255.0);
     s = (cs / 255.0);
     d = ((cast ((cast b : Float) <= (cast 0.25 : Float)) : Bool) ? (cast (((((16.0 * b) - 12.0) * b) + 4.0) * b) : Dynamic) : (cast HxMath.sqrt(b) : Dynamic));
@@ -265,21 +266,21 @@ class BitmapComposite {
   }
 
   public static function compositePixelInto__bitmapComposite(dest:flighthq._internal._UInt8ClampedArray, di:Float, r:Float, g:Float, b:Float, a:Float, mode:BitmapCompositeMode):Void {
-    var srcA:Dynamic = cast _Runtime.UNDEFINED;
-    var dstA:Dynamic = cast _Runtime.UNDEFINED;
+    var srcA:Float = cast _Runtime.UNDEFINED;
+    var dstA:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var fa:Dynamic = cast _Runtime.UNDEFINED;
-    var fb:Dynamic = cast _Runtime.UNDEFINED;
-    var outA:Dynamic = cast _Runtime.UNDEFINED;
-    var cbR:Dynamic = cast _Runtime.UNDEFINED;
-    var cbG:Dynamic = cast _Runtime.UNDEFINED;
-    var cbB:Dynamic = cast _Runtime.UNDEFINED;
-    var csR:Dynamic = cast _Runtime.UNDEFINED;
-    var csG:Dynamic = cast _Runtime.UNDEFINED;
-    var csB:Dynamic = cast _Runtime.UNDEFINED;
+    var fa:Float = cast _Runtime.UNDEFINED;
+    var fb:Float = cast _Runtime.UNDEFINED;
+    var outA:Float = cast _Runtime.UNDEFINED;
+    var cbR:Float = cast _Runtime.UNDEFINED;
+    var cbG:Float = cast _Runtime.UNDEFINED;
+    var cbB:Float = cast _Runtime.UNDEFINED;
+    var csR:Float = cast _Runtime.UNDEFINED;
+    var csG:Float = cast _Runtime.UNDEFINED;
+    var csB:Float = cast _Runtime.UNDEFINED;
     srcA = (a / 255.0);
     dstA = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dest, (di + 3.0)), 255.0);
-    __destructure0 = _Runtime.callValue(BitmapComposite.porterDuffFactors__bitmapComposite, cast ([mode, srcA, dstA] : Array<Dynamic>));
+    __destructure0 = (cast BitmapComposite.porterDuffFactors__bitmapComposite((cast mode : String), (cast srcA : Float), (cast dstA : Float)) : Array<flighthq._internal._Any>);
     fa = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     fb = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     outA = ((fa * srcA) + (fb * dstA));
@@ -293,9 +294,9 @@ class BitmapComposite {
     cbR = flighthq._internal._StaticIndex.readUint8ClampedArray(dest, di);
     cbG = flighthq._internal._StaticIndex.readUint8ClampedArray(dest, (di + 1.0));
     cbB = flighthq._internal._StaticIndex.readUint8ClampedArray(dest, (di + 2.0));
-    csR = (((1.0 - dstA) * r) + _Runtime.multiplyNumbers(dstA, _Runtime.callValue(BitmapComposite.blendChannel__bitmapComposite, cast ([mode, cbR, r] : Array<Dynamic>))));
-    csG = (((1.0 - dstA) * g) + _Runtime.multiplyNumbers(dstA, _Runtime.callValue(BitmapComposite.blendChannel__bitmapComposite, cast ([mode, cbG, g] : Array<Dynamic>))));
-    csB = (((1.0 - dstA) * b) + _Runtime.multiplyNumbers(dstA, _Runtime.callValue(BitmapComposite.blendChannel__bitmapComposite, cast ([mode, cbB, b] : Array<Dynamic>))));
+    csR = (((1.0 - dstA) * r) + (dstA * (cast BitmapComposite.blendChannel__bitmapComposite((cast mode : String), (cast cbR : Float), (cast r : Float)) : Float)));
+    csG = (((1.0 - dstA) * g) + (dstA * (cast BitmapComposite.blendChannel__bitmapComposite((cast mode : String), (cast cbG : Float), (cast g : Float)) : Float)));
+    csB = (((1.0 - dstA) * b) + (dstA * (cast BitmapComposite.blendChannel__bitmapComposite((cast mode : String), (cast cbB : Float), (cast b : Float)) : Float)));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, di, HxMath.round(((((fa * srcA) * csR) + ((fb * dstA) * cbR)) / outA)));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 1.0), HxMath.round(((((fa * srcA) * csG) + ((fb * dstA) * cbG)) / outA)));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 2.0), HxMath.round(((((fa * srcA) * csB) + ((fb * dstA) * cbB)) / outA)));

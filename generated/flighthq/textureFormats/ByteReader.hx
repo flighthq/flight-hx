@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ByteReader;
 
 class ByteReader {
-  public static function createByteReader(bytes:flighthq._internal._UInt8Array, offset:Dynamic = 0.0):flighthq.types.ByteReader {
+  public static function createByteReader(bytes:flighthq._internal._UInt8Array, offset:Float = 0.0):flighthq.types.ByteReader {
     return cast { view: _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), offset: offset };
     return cast null;
   }
@@ -17,7 +17,7 @@ class ByteReader {
   }
 
   public static function readByteReaderU16(reader:flighthq.types.ByteReader):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.callProperty(reader.view, 'getUint16', cast ([reader.offset, true] : Array<Dynamic>));
     (reader.offset += 2.0);
     return cast value;
@@ -25,9 +25,9 @@ class ByteReader {
   }
 
   public static function readByteReaderU24(reader:flighthq.types.ByteReader):Float {
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     view = reader.view;
     offset = reader.offset;
     value = (_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))) << 16)));
@@ -37,9 +37,9 @@ class ByteReader {
   }
 
   public static function readByteReaderU24BigEndian(reader:flighthq.types.ByteReader):Float {
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     view = reader.view;
     offset = reader.offset;
     value = (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([offset] : Array<Dynamic>))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 1.0)] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(_Runtime.callProperty(view, 'getUint8', cast ([(offset + 2.0)] : Array<Dynamic>))));
@@ -49,7 +49,7 @@ class ByteReader {
   }
 
   public static function readByteReaderU32(reader:flighthq.types.ByteReader):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.callProperty(reader.view, 'getUint32', cast ([reader.offset, true] : Array<Dynamic>));
     (reader.offset += 4.0);
     return cast value;
@@ -57,7 +57,7 @@ class ByteReader {
   }
 
   public static function readByteReaderU32BigEndian(reader:flighthq.types.ByteReader):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.callProperty(reader.view, 'getUint32', cast ([reader.offset, false] : Array<Dynamic>));
     (reader.offset += 4.0);
     return cast value;
@@ -65,8 +65,8 @@ class ByteReader {
   }
 
   public static function readByteReaderU64(reader:flighthq.types.ByteReader):Float {
-    var low:Dynamic = cast _Runtime.UNDEFINED;
-    var high:Dynamic = cast _Runtime.UNDEFINED;
+    var low:Float = cast _Runtime.UNDEFINED;
+    var high:Float = cast _Runtime.UNDEFINED;
     low = _Runtime.callProperty(reader.view, 'getUint32', cast ([reader.offset, true] : Array<Dynamic>));
     high = _Runtime.callProperty(reader.view, 'getUint32', cast ([(reader.offset + 4.0), true] : Array<Dynamic>));
     (reader.offset += 8.0);
@@ -75,7 +75,7 @@ class ByteReader {
   }
 
   public static function readByteReaderU8(reader:flighthq.types.ByteReader):Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.callProperty(reader.view, 'getUint8', cast ([reader.offset] : Array<Dynamic>));
     (reader.offset += 1.0);
     return cast value;

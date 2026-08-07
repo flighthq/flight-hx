@@ -15,52 +15,52 @@ import flighthq.types.StarlingPexSchema.StarlingPexParseOptions;
 import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
-typedef PexDict__starlingPexParse = Dynamic;
+typedef PexDict__starlingPexParse = flighthq._internal._Record<String, String>;
 
 class StarlingPexParse {
   public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
+    var d:PexDict__starlingPexParse = cast _Runtime.UNDEFINED;
+    var doc:StarlingPexDocument = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(xml), 'string') : Bool) || (cast !(cast StringTools.startsWith(StringTools.trim(Std.string(xml)), '<') : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <'));
     }
-    d = _Runtime.callValue(StarlingPexParse.parsePexXml__starlingPexParse, cast ([xml] : Array<Dynamic>));
-    doc = _Runtime.callValue(StarlingPexParse.dictToDocument__starlingPexParse, cast ([d] : Array<Dynamic>));
-    return cast _Runtime.callValue(StarlingPexParse.documentToConfig__starlingPexParse, cast ([doc, _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    d = (cast StarlingPexParse.parsePexXml__starlingPexParse((cast xml : String)) : PexDict__starlingPexParse);
+    doc = (cast StarlingPexParse.dictToDocument__starlingPexParse(d) : StarlingPexDocument);
+    return cast (cast StarlingPexParse.documentToConfig__starlingPexParse((cast doc : StarlingPexDocument), (cast _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0) : Float)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static function parseStarlingPexDocument(xml:String, ?options:StarlingPexParseOptions):StarlingPexParseResult {
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
+    var d:PexDict__starlingPexParse = cast _Runtime.UNDEFINED;
+    var doc:StarlingPexDocument = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(xml), 'string') : Bool) || (cast !(cast StringTools.startsWith(StringTools.trim(Std.string(xml)), '<') : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Invalid Starling PEX: input must be an XML string beginning with <'));
     }
-    d = _Runtime.callValue(StarlingPexParse.parsePexXml__starlingPexParse, cast ([xml] : Array<Dynamic>));
-    doc = _Runtime.callValue(StarlingPexParse.dictToDocument__starlingPexParse, cast ([d] : Array<Dynamic>));
-    return cast { config: _Runtime.callValue(StarlingPexParse.documentToConfig__starlingPexParse, cast ([doc, _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0)] : Array<Dynamic>)), diagnostics: _Runtime.callValue(StarlingPexParse.collectStarlingPexDiagnostics__starlingPexParse, cast ([doc] : Array<Dynamic>)), document: doc };
+    d = (cast StarlingPexParse.parsePexXml__starlingPexParse((cast xml : String)) : PexDict__starlingPexParse);
+    doc = (cast StarlingPexParse.dictToDocument__starlingPexParse(d) : StarlingPexDocument);
+    return cast { config: (cast StarlingPexParse.documentToConfig__starlingPexParse((cast doc : StarlingPexDocument), (cast _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0) : Float)) : ParticleEmitterConfig), diagnostics: (cast StarlingPexParse.collectStarlingPexDiagnostics__starlingPexParse((cast doc : StarlingPexDocument)) : Array<ImportDiagnostic>), document: doc };
     return cast null;
   }
 
-  public static final DEG2RAD__starlingPexParse:Dynamic = (HxMath.PI / 180.0);
+  public static final DEG2RAD__starlingPexParse:Float = (HxMath.PI / 180.0);
 
   public static function collectStarlingPexDiagnostics__starlingPexParse(doc:StarlingPexDocument):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     diagnostics = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(doc.emitterType, 1.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Recover, 'starlingpex.radial-approximated', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'starlingpex.radial-approximated' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.radialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.radialAccelVariance, 0.0) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.radial-acceleration-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'starlingpex.radial-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.tangentialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.tangentialAccelVariance, 0.0) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.tangential-acceleration-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'starlingpex.tangential-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast !_Runtime.strictEquals(doc.finishParticleSizeVariance, 0.0) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.finish-size-variance-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'starlingpex.finish-size-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.startColorVariance.alpha, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.finishColorVariance.alpha, 0.0) : Bool)) : Bool)) {
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'starlingpex.alpha-variance-unsupported', 'collectStarlingPexDiagnostics'] : Array<Dynamic>));
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'starlingpex.alpha-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
     }
     return cast diagnostics;
     return cast null;
@@ -73,30 +73,30 @@ class StarlingPexParse {
     WHITE = { red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 };
     CLEAR = { red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0 };
     ZERO = { red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0 };
-    return cast { maxParticles: (_Runtime.toInt32(_Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'maxParticles', 200.0] : Array<Dynamic>))) | 0), emitterType: (cast ((cast _Runtime.strictEquals(_Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'emitterType', 0.0] : Array<Dynamic>)), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float), duration: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'duration', -1.0] : Array<Dynamic>)), particleLifespan: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'particleLifespan', 1.0] : Array<Dynamic>)), particleLifespanVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'particleLifespanVariance', 0.0] : Array<Dynamic>)), speed: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'speed', 100.0] : Array<Dynamic>)), speedVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'speedVariance', 0.0] : Array<Dynamic>)), angle: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'angle', 90.0] : Array<Dynamic>)), angleVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'angleVariance', 0.0] : Array<Dynamic>)), gravityx: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'gravityx', 0.0] : Array<Dynamic>)), gravityy: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'gravityy', 0.0] : Array<Dynamic>)), sourcePositionVariancex: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'sourcePositionVariancex', 0.0] : Array<Dynamic>)), sourcePositionVariancey: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'sourcePositionVariancey', 0.0] : Array<Dynamic>)), startParticleSize: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'startParticleSize', 32.0] : Array<Dynamic>)), startParticleSizeVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'startParticleSizeVariance', 0.0] : Array<Dynamic>)), finishParticleSize: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'finishParticleSize', 16.0] : Array<Dynamic>)), finishParticleSizeVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'finishParticleSizeVariance', 0.0] : Array<Dynamic>)), startColor: _Runtime.callValue(StarlingPexParse.pColor__starlingPexParse, cast ([d, 'startColor', WHITE] : Array<Dynamic>)), startColorVariance: _Runtime.callValue(StarlingPexParse.pColor__starlingPexParse, cast ([d, 'startColorVariance', ZERO] : Array<Dynamic>)), finishColor: _Runtime.callValue(StarlingPexParse.pColor__starlingPexParse, cast ([d, 'finishColor', CLEAR] : Array<Dynamic>)), finishColorVariance: _Runtime.callValue(StarlingPexParse.pColor__starlingPexParse, cast ([d, 'finishColorVariance', ZERO] : Array<Dynamic>)), rotationStart: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotationStart', 0.0] : Array<Dynamic>)), rotationStartVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotationStartVariance', 0.0] : Array<Dynamic>)), rotationEnd: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotationEnd', 0.0] : Array<Dynamic>)), rotationEndVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotationEndVariance', 0.0] : Array<Dynamic>)), maxRadius: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'maxRadius', 0.0] : Array<Dynamic>)), maxRadiusVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'maxRadiusVariance', 0.0] : Array<Dynamic>)), minRadius: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'minRadius', 0.0] : Array<Dynamic>)), minRadiusVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'minRadiusVariance', 0.0] : Array<Dynamic>)), rotatePerSecond: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotatePerSecond', 0.0] : Array<Dynamic>)), rotatePerSecondVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'rotatePerSecondVariance', 0.0] : Array<Dynamic>)), radialAcceleration: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'radialAcceleration', 0.0] : Array<Dynamic>)), radialAccelVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'radialAccelVariance', 0.0] : Array<Dynamic>)), tangentialAcceleration: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'tangentialAcceleration', 0.0] : Array<Dynamic>)), tangentialAccelVariance: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'tangentialAccelVariance', 0.0] : Array<Dynamic>)), blendFuncSource: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'blendFuncSource', 770.0] : Array<Dynamic>)), blendFuncDestination: _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, 'blendFuncDestination', 771.0] : Array<Dynamic>)), textureFileName: _Runtime.callValue(StarlingPexParse.pStr__starlingPexParse, cast ([d, 'textureFileName', ''] : Array<Dynamic>)) };
+    return cast { maxParticles: (_Runtime.toInt32((cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'maxParticles' : String), (cast 200.0 : Float)) : Float)) | 0), emitterType: (cast ((cast _Runtime.strictEquals((cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'emitterType' : String), (cast 0.0 : Float)) : Float), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float), duration: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'duration' : String), (cast -1.0 : Float)) : Float), particleLifespan: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'particleLifespan' : String), (cast 1.0 : Float)) : Float), particleLifespanVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'particleLifespanVariance' : String), (cast 0.0 : Float)) : Float), speed: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'speed' : String), (cast 100.0 : Float)) : Float), speedVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'speedVariance' : String), (cast 0.0 : Float)) : Float), angle: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'angle' : String), (cast 90.0 : Float)) : Float), angleVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'angleVariance' : String), (cast 0.0 : Float)) : Float), gravityx: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'gravityx' : String), (cast 0.0 : Float)) : Float), gravityy: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'gravityy' : String), (cast 0.0 : Float)) : Float), sourcePositionVariancex: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'sourcePositionVariancex' : String), (cast 0.0 : Float)) : Float), sourcePositionVariancey: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'sourcePositionVariancey' : String), (cast 0.0 : Float)) : Float), startParticleSize: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'startParticleSize' : String), (cast 32.0 : Float)) : Float), startParticleSizeVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'startParticleSizeVariance' : String), (cast 0.0 : Float)) : Float), finishParticleSize: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'finishParticleSize' : String), (cast 16.0 : Float)) : Float), finishParticleSizeVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'finishParticleSizeVariance' : String), (cast 0.0 : Float)) : Float), startColor: (cast StarlingPexParse.pColor__starlingPexParse(d, (cast 'startColor' : String), (cast WHITE : StarlingPexColor)) : StarlingPexColor), startColorVariance: (cast StarlingPexParse.pColor__starlingPexParse(d, (cast 'startColorVariance' : String), (cast ZERO : StarlingPexColor)) : StarlingPexColor), finishColor: (cast StarlingPexParse.pColor__starlingPexParse(d, (cast 'finishColor' : String), (cast CLEAR : StarlingPexColor)) : StarlingPexColor), finishColorVariance: (cast StarlingPexParse.pColor__starlingPexParse(d, (cast 'finishColorVariance' : String), (cast ZERO : StarlingPexColor)) : StarlingPexColor), rotationStart: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotationStart' : String), (cast 0.0 : Float)) : Float), rotationStartVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotationStartVariance' : String), (cast 0.0 : Float)) : Float), rotationEnd: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotationEnd' : String), (cast 0.0 : Float)) : Float), rotationEndVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotationEndVariance' : String), (cast 0.0 : Float)) : Float), maxRadius: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'maxRadius' : String), (cast 0.0 : Float)) : Float), maxRadiusVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'maxRadiusVariance' : String), (cast 0.0 : Float)) : Float), minRadius: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'minRadius' : String), (cast 0.0 : Float)) : Float), minRadiusVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'minRadiusVariance' : String), (cast 0.0 : Float)) : Float), rotatePerSecond: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotatePerSecond' : String), (cast 0.0 : Float)) : Float), rotatePerSecondVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'rotatePerSecondVariance' : String), (cast 0.0 : Float)) : Float), radialAcceleration: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'radialAcceleration' : String), (cast 0.0 : Float)) : Float), radialAccelVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'radialAccelVariance' : String), (cast 0.0 : Float)) : Float), tangentialAcceleration: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'tangentialAcceleration' : String), (cast 0.0 : Float)) : Float), tangentialAccelVariance: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'tangentialAccelVariance' : String), (cast 0.0 : Float)) : Float), blendFuncSource: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'blendFuncSource' : String), (cast 770.0 : Float)) : Float), blendFuncDestination: (cast StarlingPexParse.pNum__starlingPexParse(d, (cast 'blendFuncDestination' : String), (cast 771.0 : Float)) : Float), textureFileName: (cast StarlingPexParse.pStr__starlingPexParse(d, (cast 'textureFileName' : String), (cast '' : String)) : String) };
     return cast null;
   }
 
   public static function documentToConfig__starlingPexParse(doc:StarlingPexDocument, textureSize:Float):ParticleEmitterConfig {
-    var angleRad:Dynamic = cast _Runtime.UNDEFINED;
-    var lifespan:Dynamic = cast _Runtime.UNDEFINED;
-    var lifespanVar:Dynamic = cast _Runtime.UNDEFINED;
-    var speed:Dynamic = cast _Runtime.UNDEFINED;
-    var speedVar:Dynamic = cast _Runtime.UNDEFINED;
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var emitterShape:Dynamic = cast _Runtime.UNDEFINED;
-    var startSize:Dynamic = cast _Runtime.UNDEFINED;
-    var startVar:Dynamic = cast _Runtime.UNDEFINED;
-    var finishSize:Dynamic = cast _Runtime.UNDEFINED;
-    var rotStart:Dynamic = cast _Runtime.UNDEFINED;
-    var rotEnd:Dynamic = cast _Runtime.UNDEFINED;
-    var rotStartVar:Dynamic = cast _Runtime.UNDEFINED;
-    var rotEndVar:Dynamic = cast _Runtime.UNDEFINED;
-    var lifetimeMid:Dynamic = cast _Runtime.UNDEFINED;
-    var rotSpeedMid:Dynamic = cast _Runtime.UNDEFINED;
-    var rotSpeedVar:Dynamic = cast _Runtime.UNDEFINED;
-    var pdDuration:Dynamic = cast _Runtime.UNDEFINED;
+    var angleRad:Float = cast _Runtime.UNDEFINED;
+    var lifespan:Float = cast _Runtime.UNDEFINED;
+    var lifespanVar:Float = cast _Runtime.UNDEFINED;
+    var speed:Float = cast _Runtime.UNDEFINED;
+    var speedVar:Float = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var emitterShape:String = cast _Runtime.UNDEFINED;
+    var startSize:Float = cast _Runtime.UNDEFINED;
+    var startVar:Float = cast _Runtime.UNDEFINED;
+    var finishSize:Float = cast _Runtime.UNDEFINED;
+    var rotStart:Float = cast _Runtime.UNDEFINED;
+    var rotEnd:Float = cast _Runtime.UNDEFINED;
+    var rotStartVar:Float = cast _Runtime.UNDEFINED;
+    var rotEndVar:Float = cast _Runtime.UNDEFINED;
+    var lifetimeMid:Float = cast _Runtime.UNDEFINED;
+    var rotSpeedMid:Float = cast _Runtime.UNDEFINED;
+    var rotSpeedVar:Float = cast _Runtime.UNDEFINED;
+    var pdDuration:Float = cast _Runtime.UNDEFINED;
     angleRad = (doc.angle * StarlingPexParse.DEG2RAD__starlingPexParse);
     lifespan = doc.particleLifespan;
     lifespanVar = doc.particleLifespanVariance;
@@ -116,13 +116,13 @@ class StarlingPexParse {
     rotSpeedMid = ((((rotStart + rotEnd) * 0.5) * StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
     rotSpeedVar = (_Runtime.multiplyNumbers(HxMath.max(rotStartVar, rotEndVar), StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
     pdDuration = doc.duration;
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: doc.maxParticles, loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (doc.angleVariance * StarlingPexParse.DEG2RAD__starlingPexParse), gravityX: doc.gravityx, gravityY: doc.gravityy, emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: doc.startColor.red, colorStartG: doc.startColor.green, colorStartB: doc.startColor.blue, colorStartVarianceR: doc.startColorVariance.red, colorStartVarianceG: doc.startColorVariance.green, colorStartVarianceB: doc.startColorVariance.blue, colorEndR: doc.finishColor.red, colorEndG: doc.finishColor.green, colorEndB: doc.finishColor.blue, colorEndVarianceR: doc.finishColorVariance.red, colorEndVarianceG: doc.finishColorVariance.green, colorEndVarianceB: doc.finishColorVariance.blue, alphaStart: doc.startColor.alpha, alphaEnd: doc.finishColor.alpha, rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: _Runtime.callValue(StarlingPexParse.pexBlendMode__starlingPexParse, cast ([doc.blendFuncSource, doc.blendFuncDestination] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createParticleEmitterConfig((cast { maxParticles: doc.maxParticles, loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (doc.angleVariance * StarlingPexParse.DEG2RAD__starlingPexParse), gravityX: doc.gravityx, gravityY: doc.gravityy, emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: doc.startColor.red, colorStartG: doc.startColor.green, colorStartB: doc.startColor.blue, colorStartVarianceR: doc.startColorVariance.red, colorStartVarianceG: doc.startColorVariance.green, colorStartVarianceB: doc.startColorVariance.blue, colorEndR: doc.finishColor.red, colorEndG: doc.finishColor.green, colorEndB: doc.finishColor.blue, colorEndVarianceR: doc.finishColorVariance.red, colorEndVarianceG: doc.finishColorVariance.green, colorEndVarianceB: doc.finishColorVariance.blue, alphaStart: doc.startColor.alpha, alphaEnd: doc.finishColor.alpha, rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: (cast StarlingPexParse.pexBlendMode__starlingPexParse((cast doc.blendFuncSource : Float), (cast doc.blendFuncDestination : Float)) : Null<String>) } : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static function extractAttr__starlingPexParse(tag:String, attrName:String):Null<String> {
-    var re:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
+    var re:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var m:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     re = _Runtime.construct(flighthq._internal._HostValueLut.get('RegExp'), ['' + Std.string(attrName) + '\\s*=\\s*["\']([^"\']*)["\']']);
     m = _Runtime.callProperty(re, 'exec', cast ([tag] : Array<Dynamic>));
     return cast _Runtime.select(m, function():Dynamic return cast _Runtime.getIndex(m, 1.0), function():Dynamic return cast null);
@@ -130,14 +130,14 @@ class StarlingPexParse {
   }
 
   public static function pColor__starlingPexParse(d:PexDict__starlingPexParse, prefix:String, defColor:StarlingPexColor):StarlingPexColor {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + '.red', _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + 'Red', defColor.red] : Array<Dynamic>))] : Array<Dynamic>));
-    g = _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + '.green', _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + 'Green', defColor.green] : Array<Dynamic>))] : Array<Dynamic>));
-    b = _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + '.blue', _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + 'Blue', defColor.blue] : Array<Dynamic>))] : Array<Dynamic>));
-    a = _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + '.alpha', _Runtime.callValue(StarlingPexParse.pNum__starlingPexParse, cast ([d, '' + Std.string(prefix) + 'Alpha', defColor.alpha] : Array<Dynamic>))] : Array<Dynamic>));
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    r = (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + '.red' : String), (cast (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + 'Red' : String), (cast defColor.red : Float)) : Null<Float>) : Float)) : Float);
+    g = (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + '.green' : String), (cast (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + 'Green' : String), (cast defColor.green : Float)) : Null<Float>) : Float)) : Float);
+    b = (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + '.blue' : String), (cast (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + 'Blue' : String), (cast defColor.blue : Float)) : Null<Float>) : Float)) : Float);
+    a = (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + '.alpha' : String), (cast (cast StarlingPexParse.pNum__starlingPexParse(d, (cast '' + Std.string(prefix) + 'Alpha' : String), (cast defColor.alpha : Float)) : Null<Float>) : Float)) : Float);
     return cast { red: r, green: g, blue: b, alpha: a };
     return cast null;
   }
@@ -150,9 +150,9 @@ class StarlingPexParse {
     return cast null;
   }
 
-  public static function pNum__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = 0.0):Float {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+  public static function pNum__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Float = 0.0):Float {
+    var v:String = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     v = _Runtime.getIndex(d, key);
     if ((cast _Runtime.strictEquals(v, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast def; }
     n = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([v] : Array<Dynamic>));
@@ -162,30 +162,30 @@ class StarlingPexParse {
 
   public static function parsePexXml__starlingPexParse(xml:String):PexDict__starlingPexParse {
     var dict:PexDict__starlingPexParse = cast _Runtime.UNDEFINED;
-    var ATTR_RE:Dynamic = cast _Runtime.UNDEFINED;
+    var ATTR_RE:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var m:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var COL_RE:Dynamic = cast _Runtime.UNDEFINED;
-    var TAG_RE:Dynamic = cast _Runtime.UNDEFINED;
+    var COL_RE:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var TAG_RE:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var currentKey:Null<String> = cast _Runtime.UNDEFINED;
     var inTag:Null<String> = cast _Runtime.UNDEFINED;
-    var lastTagEnd:Dynamic = cast _Runtime.UNDEFINED;
+    var lastTagEnd:Float = cast _Runtime.UNDEFINED;
     dict = {  };
     ATTR_RE = _Runtime.regexp('<attribute\\b([^>]*)\\/>', 'gi');
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(ATTR_RE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-      var tag:Dynamic = _Runtime.getIndex(m, 1.0);
-      var name:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'name'] : Array<Dynamic>));
-      var value:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'value'] : Array<Dynamic>));
+      var tag:String = _Runtime.getIndex(m, 1.0);
+      var name:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'name' : String)) : Null<String>);
+      var value:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'value' : String)) : Null<String>);
       if ((cast ((cast !_Runtime.strictEquals(name, null) : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool)) { _Runtime.setIndex(dict, name, value); }
     }
     COL_RE = _Runtime.regexp('<attribute\\b([^>]*)\\/>', 'gi');
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(COL_RE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-      var tag:Dynamic = _Runtime.getIndex(m, 1.0);
-      var name:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'name'] : Array<Dynamic>));
+      var tag:String = _Runtime.getIndex(m, 1.0);
+      var name:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'name' : String)) : Null<String>);
       if ((cast _Runtime.strictEquals(name, null) : Bool)) { continue; }
-      var red:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'red'] : Array<Dynamic>));
-      var green:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'green'] : Array<Dynamic>));
-      var blue:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'blue'] : Array<Dynamic>));
-      var alpha:Dynamic = _Runtime.callValue(StarlingPexParse.extractAttr__starlingPexParse, cast ([tag, 'alpha'] : Array<Dynamic>));
+      var red:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'red' : String)) : Null<String>);
+      var green:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'green' : String)) : Null<String>);
+      var blue:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'blue' : String)) : Null<String>);
+      var alpha:Null<String> = (cast StarlingPexParse.extractAttr__starlingPexParse((cast tag : String), (cast 'alpha' : String)) : Null<String>);
       if ((cast !_Runtime.strictEquals(red, null) : Bool)) { _Runtime.setIndex(dict, '' + Std.string(name) + '.red', red); }
       if ((cast !_Runtime.strictEquals(green, null) : Bool)) { _Runtime.setIndex(dict, '' + Std.string(name) + '.green', green); }
       if ((cast !_Runtime.strictEquals(blue, null) : Bool)) { _Runtime.setIndex(dict, '' + Std.string(name) + '.blue', blue); }
@@ -196,13 +196,13 @@ class StarlingPexParse {
     inTag = null;
     lastTagEnd = 0.0;
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(TAG_RE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-      var __destructure0:Dynamic = m;
-      var full:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
-      var close:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-      var name:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
-      var attrs:Dynamic = _Runtime.getIndex(__destructure0, 3.0);
-      var isSelfClose:Dynamic = ((cast StringTools.endsWith(Std.string(_Runtime.callProperty(attrs, 'trimEnd', cast ([] : Array<Dynamic>))), '/') : Bool) || (cast StringTools.endsWith(Std.string(full), '/>') : Bool));
-      var text:Dynamic = StringTools.trim(Std.string(_Runtime.slice(xml, lastTagEnd, _Runtime.field(m, 'index'))));
+      var __destructure0 = m;
+      var full:String = _Runtime.getIndex(__destructure0, 0.0);
+      var close:String = _Runtime.getIndex(__destructure0, 1.0);
+      var name:String = _Runtime.getIndex(__destructure0, 2.0);
+      var attrs:String = _Runtime.getIndex(__destructure0, 3.0);
+      var isSelfClose:Bool = ((cast StringTools.endsWith(Std.string(_Runtime.callProperty(attrs, 'trimEnd', cast ([] : Array<Dynamic>))), '/') : Bool) || (cast StringTools.endsWith(Std.string(full), '/>') : Bool));
+      var text:String = StringTools.trim(Std.string(_Runtime.slice(xml, lastTagEnd, _Runtime.field(m, 'index'))));
       (lastTagEnd = cast (_Runtime.addNumbers(_Runtime.field(m, 'index'), _Runtime.field(full, 'length')) : Dynamic));
       if ((cast ((cast !_Runtime.truthy(close) : Bool) && (cast !(cast isSelfClose : Bool) : Bool)) : Bool)) {
         if ((cast _Runtime.strictEquals(name, 'key') : Bool)) { (inTag = cast ('key' : Dynamic)); } else { if ((cast ((cast ((cast _Runtime.strictEquals(name, 'integer') : Bool) || (cast _Runtime.strictEquals(name, 'real') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'string') : Bool)) : Bool)) { (inTag = cast (name : Dynamic)); } }
@@ -228,7 +228,7 @@ class StarlingPexParse {
     return cast null;
   }
 
-  public static function pStr__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = ''):String {
+  public static function pStr__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:String = ''):String {
     return cast _Runtime.coalesce(_Runtime.getIndex(d, key), function():Dynamic return cast def);
     return cast null;
   }

@@ -46,7 +46,7 @@ class Spatial {
     return cast null;
   }
 
-  public static final MAX_INDEXED_CELLS_PER_OBJECT:Dynamic = Facade_Spatial_flighthq_spatial_UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
+  public static final MAX_INDEXED_CELLS_PER_OBJECT:Float = Facade_Spatial_flighthq_spatial_UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
 
   public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
     Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs(index, out);

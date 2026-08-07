@@ -11,29 +11,31 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.InteractionHitEligibility;
 import flighthq.types.InteractionManager.InteractionSignalName;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeRuntime;
 
 class EnableInteractionGuards {
   public static function disableInteractionGuards():Void {
-    _Runtime.callValue(setInteractionConnectGuard, cast ([null] : Array<Dynamic>));
+    setInteractionConnectGuard(null);
   }
 
   public static function enableInteractionGuards():Void {
-    _Runtime.callValue(setInteractionConnectGuard, cast ([EnableInteractionGuards.warnOnInertInteractionTarget__enableInteractionGuards] : Array<Dynamic>));
+    setInteractionConnectGuard(EnableInteractionGuards.warnOnInertInteractionTarget__enableInteractionGuards);
   }
 
   public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
-    return cast { eligible: _Runtime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)), hasEligibleInSubtree: _Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([node] : Array<Dynamic>)) };
+    return cast { eligible: (cast isNodeHitTestEnabled((cast node : NodeAny)) : Bool), hasEligibleInSubtree: (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast node : NodeAny)) : Bool) };
     return cast null;
   }
 
   public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)) : Bool)) { return cast true; }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    if ((cast (cast isNodeHitTestEnabled((cast node : NodeAny)) : Bool) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast _Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)) : Bool)) { return cast true; }
+        if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast child : NodeAny)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -41,12 +43,12 @@ class EnableInteractionGuards {
   }
 
   public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)) : Bool)) { return cast true; }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    if ((cast (cast isNodeFocusable((cast node : NodeAny)) : Bool) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast _Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([child] : Array<Dynamic>)) : Bool)) { return cast true; }
+        if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards((cast child : NodeAny)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -56,11 +58,11 @@ class EnableInteractionGuards {
   public static function warnOnInertInteractionTarget__enableInteractionGuards(target:NodeAny, name:InteractionSignalName):Void {
     if ((cast ((cast _Runtime.strictEquals(name, 'onKeyDown') : Bool) || (cast _Runtime.strictEquals(name, 'onKeyUp') : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(name, 'onFocusIn') : Bool) || (cast _Runtime.strictEquals(name, 'onFocusOut') : Bool)) : Bool)) {
-      if ((cast _Runtime.callValue(EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)) : Bool)) { return; }
-      _Runtime.callValue(logOnce, cast (['interaction:focus-listener-on-non-focusable', LogLevel.Warn, { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no focusable node in its subtree — call setNodeFocusable(node, true) so it can receive focus events' }, 'interaction'] : Array<Dynamic>));
+      if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards((cast target : NodeAny)) : Bool) : Bool)) { return; }
+      (cast logOnce((cast 'interaction:focus-listener-on-non-focusable' : String), (cast LogLevel.Warn : LogLevel), { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no focusable node in its subtree — call setNodeFocusable(node, true) so it can receive focus events' }, (cast 'interaction' : Null<String>)) : Bool);
       return;
     }
-    if ((cast _Runtime.callValue(EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)) : Bool)) { return; }
-    _Runtime.callValue(logOnce, cast (['interaction:listener-on-inert-node', LogLevel.Warn, { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no hit-testable node in its subtree — call setNodeHitTestEnabled(node, true) so it can receive pointer events' }, 'interaction'] : Array<Dynamic>));
+    if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast target : NodeAny)) : Bool) : Bool)) { return; }
+    (cast logOnce((cast 'interaction:listener-on-inert-node' : String), (cast LogLevel.Warn : LogLevel), { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no hit-testable node in its subtree — call setNodeHitTestEnabled(node, true) so it can receive pointer events' }, (cast 'interaction' : Null<String>)) : Bool);
   }
 }

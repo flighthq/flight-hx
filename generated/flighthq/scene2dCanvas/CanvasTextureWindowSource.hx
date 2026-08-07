@@ -7,34 +7,39 @@ import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
 
 class CanvasTextureWindowSource {
   @:noCompletion
   public static function resolveCanvasTextureWindowSource(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var uvOffsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var uvOffsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
-    var uvScaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var uvScaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var backingWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var backingHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var imageVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceX:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceY:Dynamic = cast _Runtime.UNDEFINED;
-    var flipX:Dynamic = cast _Runtime.UNDEFINED;
-    var flipY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { return cast null; }
+    var image:Null<TextureSource> = cast _Runtime.UNDEFINED;
+    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var uvOffsetX:Float = cast _Runtime.UNDEFINED;
+    var uvOffsetY:Float = cast _Runtime.UNDEFINED;
+    var uvRotation:Float = cast _Runtime.UNDEFINED;
+    var uvScaleX:Float = cast _Runtime.UNDEFINED;
+    var uvScaleY:Float = cast _Runtime.UNDEFINED;
+    var backingWidth:Float = cast _Runtime.UNDEFINED;
+    var backingHeight:Float = cast _Runtime.UNDEFINED;
+    var sourceWidth:Float = cast _Runtime.UNDEFINED;
+    var sourceHeight:Float = cast _Runtime.UNDEFINED;
+    var imageVersion:Float = cast _Runtime.UNDEFINED;
+    var cache:flighthq._internal._WeakMap<Texture, { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }> = cast _Runtime.UNDEFINED;
+    var entry:Null<{ var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }> = cast _Runtime.UNDEFINED;
+    var element:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var context:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
+    var sourceX:Float = cast _Runtime.UNDEFINED;
+    var sourceY:Float = cast _Runtime.UNDEFINED;
+    var flipX:Bool = cast _Runtime.UNDEFINED;
+    var flipY:Bool = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
     image = _Runtime.field(texture, 'source');
-    source = _Runtime.callValue(resolveCanvasTexture, cast ([resolvers, texture] : Array<Dynamic>));
+    source = (cast resolveCanvasTexture((cast resolvers : CanvasTextureResolvers), (cast texture : Texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     uvOffsetX = _Runtime.field(texture, 'uvOffset').x;
     uvOffsetY = _Runtime.field(texture, 'uvOffset').y;
@@ -44,23 +49,23 @@ class CanvasTextureWindowSource {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(uvOffsetX, 0.0) : Bool) && (cast _Runtime.strictEquals(uvOffsetY, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvScaleX, 1.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvScaleY, 1.0) : Bool)) : Bool) && (cast !(cast _Runtime.field(texture, 'flipX') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(texture, 'flipY') : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvRotation, 0.0) : Bool)) : Bool)) {
       return cast source;
     }
-    backingWidth = _Runtime.callValue(getTextureWidth, cast ([texture] : Array<Dynamic>));
-    backingHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
+    backingWidth = (cast getTextureWidth(texture) : Float);
+    backingHeight = (cast getTextureHeight(texture) : Float);
     sourceWidth = HxMath.abs((uvScaleX * backingWidth));
     sourceHeight = HxMath.abs((uvScaleY * backingHeight));
     if ((cast ((cast ((cast ((cast ((cast backingWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast backingHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     imageVersion = _Runtime.coalesce(_Runtime.optionalField(image, 'version'), function():Dynamic return cast -1.0);
-    cache = _Runtime.setField(resolvers, 'textureWindowElementCache', (_Runtime.field(resolvers, 'textureWindowElementCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])));
-    entry = ({ final __collection0:Dynamic = cache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap).get(texture)); });
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'source'), source) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'imageVersion'), imageVersion) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'textureVersion'), _Runtime.field(texture, 'version')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvOffsetX'), uvOffsetX) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvOffsetY'), uvOffsetY) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvRotation'), uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvScaleX'), uvScaleX) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'uvScaleY'), uvScaleY) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'flipX'), _Runtime.field(texture, 'flipX')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'flipY'), _Runtime.field(texture, 'flipY')) : Bool)) : Bool)) {
-      return cast _Runtime.field(entry, 'element');
+    cache = ((cast resolvers : CanvasTextureResolvers).textureWindowElementCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    entry = ({ final __collection0:Dynamic = cache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap<Texture, { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).get(texture)); });
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).source, source) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).imageVersion, imageVersion) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).textureVersion, _Runtime.field(texture, 'version')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvOffsetX, uvOffsetX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvOffsetY, uvOffsetY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvRotation, uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvScaleX, uvScaleX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvScaleY, uvScaleY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).flipX, _Runtime.field(texture, 'flipX')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).flipY, _Runtime.field(texture, 'flipY')) : Bool)) : Bool)) {
+      return cast (cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).element;
     }
     element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(element, 'width', HxMath.max(1.0, HxMath.ceil(sourceWidth)));
     flighthq._internal.backend.CanvasElementBackend.setField(element, 'height', HxMath.max(1.0, HxMath.ceil(sourceHeight)));
     context = flighthq._internal.backend.CanvasElementBackend.call(element, 'getContext', cast (['2d'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', !(cast (cast _Runtime.field(texture, 'sampler').magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool));
     sourceX = HxMath.min((uvOffsetX * backingWidth), ((uvOffsetX + uvScaleX) * backingWidth));
     sourceY = HxMath.min((uvOffsetY * backingHeight), ((uvOffsetY + uvScaleY) * backingHeight));
     flipX = !_Runtime.strictEquals(_Runtime.field(texture, 'flipX'), ((cast uvScaleX : Float) < (cast 0.0 : Float)));
@@ -71,7 +76,7 @@ class CanvasTextureWindowSource {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, sourceX, sourceY, sourceWidth, sourceHeight, 0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(element, 'width'), flighthq._internal.backend.CanvasElementBackend.field(element, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
     (entry = cast ({ element: element, flipX: _Runtime.field(texture, 'flipX'), flipY: _Runtime.field(texture, 'flipY'), imageVersion: imageVersion, source: source, textureVersion: _Runtime.field(texture, 'version'), uvOffsetX: uvOffsetX, uvOffsetY: uvOffsetY, uvRotation: uvRotation, uvScaleX: uvScaleX, uvScaleY: uvScaleY } : Dynamic));
-    ({ final __collection1:Dynamic = cache; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._WeakMap).set(texture, entry)); });
+    ({ final __collection1:Dynamic = cache; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._WeakMap<Texture, { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).set(texture, entry)); });
     return cast element;
     return cast null;
   }

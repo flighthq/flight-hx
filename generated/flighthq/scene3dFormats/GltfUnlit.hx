@@ -4,29 +4,53 @@ package flighthq.scene3dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.UnlitMaterials.createUnlitMaterial;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
 import flighthq.types.Material.MaterialLike;
+import flighthq.types.Sampler;
+import flighthq.types.Scene3DDocument;
 import flighthq.types.StandardPbrMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.UnlitMaterial;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfUnlit {
-  public static final GltfUnlitExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfUnlitExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_unlit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var existing:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(context, 'document'), 'materials'), i);
+        var existing:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
-        var standard:Dynamic = (cast (cast existing : Dynamic) : StandardPbrMaterial);
-        var replacement:Dynamic = _Runtime.callValue(createUnlitMaterial, cast ([{ baseColor: _Runtime.field(standard, 'baseColor'), baseColorMap: _Runtime.field(standard, 'baseColorMap') }] : Array<Dynamic>));
-        _Runtime.setField(replacement, 'alphaCutoff', _Runtime.field(standard, 'alphaCutoff'));
-        _Runtime.setField(replacement, 'alphaMode', _Runtime.field(standard, 'alphaMode'));
-        _Runtime.setField(replacement, 'doubleSided', _Runtime.field(standard, 'doubleSided'));
-        _Runtime.setField(replacement, 'name', _Runtime.field(standard, 'name'));
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(_Runtime.field(context, 'document'), 'materials'), i, (cast (cast replacement : Dynamic) : MaterialLike));
+        var standard:StandardPbrMaterial = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
+        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap } : Null<flighthq._internal._Any>)) : UnlitMaterial);
+        ((cast replacement : UnlitMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
+        ((cast replacement : UnlitMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
+        ((cast replacement : UnlitMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);
+        ((cast replacement : UnlitMaterial).name = (cast standard : StandardPbrMaterial).name);
+        flighthq._internal._StaticIndex.writeArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i, (cast (cast replacement : flighthq._internal._Any) : MaterialLike));
         i++;
       }
     }

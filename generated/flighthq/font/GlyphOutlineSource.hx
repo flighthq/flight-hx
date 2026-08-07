@@ -7,53 +7,56 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.path.GetPathBounds.getPathBounds;
 import flighthq.path.Path.createPath;
 import flighthq.types.GlyphOutlineSource;
+import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
 import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.GlyphSource.GlyphRasterizeOptions;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.Path;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class GlyphOutlineSource {
   public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:flighthq.types.GlyphOutlineSource):GlyphRasterizerBackend {
-    return cast { measureMetrics: function(options:Dynamic) {
-      var metrics:Dynamic = cast _Runtime.UNDEFINED;
-      var scale:Dynamic = cast _Runtime.UNDEFINED;
-      metrics = _Runtime.callProperty(source, 'getGlyphOutlineMetrics', cast ([] : Array<Dynamic>));
-      scale = _Runtime.callValue(GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource, cast ([_Runtime.field(metrics, 'unitsPerEm'), options.fontSize] : Array<Dynamic>));
+    return cast { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+      var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
+      var scale:Null<Float> = cast _Runtime.UNDEFINED;
+      metrics = (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineMetrics();
+      scale = (cast GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource((cast _Runtime.field(metrics, 'unitsPerEm') : Float), (cast options.fontSize : Float)) : Null<Float>);
       if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
       return cast { ascent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'ascent'), scale), descent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'descent'), scale), lineGap: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'lineGap'), scale) };
-    }, rasterize: function(codePoint:Dynamic, options:Dynamic) {
-      return cast _Runtime.callValue(GlyphOutlineSource.rasterizeGlyphOutlineSource__glyphOutlineSource, cast ([source, codePoint, options] : Array<Dynamic>));
+    }, rasterize: function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+      return cast (cast GlyphOutlineSource.rasterizeGlyphOutlineSource__glyphOutlineSource((cast source : flighthq.types.GlyphOutlineSource), (cast codePoint : Float), (cast options : GlyphRasterizeOptions)) : Null<GlyphRasterizedBitmap>);
     } };
     return cast null;
   }
 
   public static function rasterizeGlyphOutlineSource__glyphOutlineSource(source:flighthq.types.GlyphOutlineSource, codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
-    var glyphIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var metrics:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    var advance:Dynamic = cast _Runtime.UNDEFINED;
+    var glyphIndex:Float = cast _Runtime.UNDEFINED;
+    var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
+    var scale:Null<Float> = cast _Runtime.UNDEFINED;
+    var path:Path = cast _Runtime.UNDEFINED;
+    var advance:Float = cast _Runtime.UNDEFINED;
     var bounds:RectangleLike = cast _Runtime.UNDEFINED;
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var pixels:Dynamic = cast _Runtime.UNDEFINED;
-    glyphIndex = _Runtime.callProperty(source, 'getGlyphOutlineIndexForCodePoint', cast ([codePoint] : Array<Dynamic>));
+    var left:Float = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var pixels:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    glyphIndex = (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineIndexForCodePoint(codePoint);
     if ((cast ((cast glyphIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
-    metrics = _Runtime.callProperty(source, 'getGlyphOutlineMetrics', cast ([] : Array<Dynamic>));
-    scale = _Runtime.callValue(GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource, cast ([_Runtime.field(metrics, 'unitsPerEm'), options.fontSize] : Array<Dynamic>));
+    metrics = (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineMetrics();
+    scale = (cast GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource((cast _Runtime.field(metrics, 'unitsPerEm') : Float), (cast options.fontSize : Float)) : Null<Float>);
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
-    path = _Runtime.callValue(createPath, cast ([] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(source, 'getGlyphOutline', cast ([path, glyphIndex] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    advance = _Runtime.multiplyNumbers(_Runtime.callProperty(source, 'getGlyphOutlineAdvance', cast ([glyphIndex] : Array<Dynamic>)), scale);
+    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    if ((cast !(cast (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutline(path, glyphIndex) : Bool) : Bool)) { return cast null; }
+    advance = _Runtime.multiplyNumbers((cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineAdvance(glyphIndex), scale);
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = { height: 0.0, width: 0.0, x: 0.0, y: 0.0 };
-    if ((cast ((cast ((cast !(cast _Runtime.callValue(getPathBounds, cast ([path, bounds] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'height'), 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast (cast getPathBounds(path, (cast bounds : RectangleLike)) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'height'), 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flighthq._internal._UInt8ClampedArray(), width: 0.0 };
     }
     left = _Runtime.subtractNumbers(HxMath.floor(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'x'), scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
@@ -63,24 +66,24 @@ class GlyphOutlineSource {
     width = (right - left);
     height = (bottom - top);
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    contours = _Runtime.callValue(flattenPath, cast ([path, (0.25 / scale)] : Array<Dynamic>));
+    contours = (cast flattenPath(path, (cast (0.25 / scale) : Float)) : Array<Array<Float>>);
     pixels = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
     {
-      var pixelY:Dynamic = 0.0;
+      var pixelY:Float = 0.0;
       while ((cast ((cast pixelY : Float) < (cast height : Float)) : Bool)) {
         {
-          var pixelX:Dynamic = 0.0;
+          var pixelX:Float = 0.0;
           while ((cast ((cast pixelX : Float) < (cast width : Float)) : Bool)) {
-            var covered:Dynamic = 0.0;
+            var covered:Float = 0.0;
             {
-              var sampleY:Dynamic = 0.0;
+              var sampleY:Float = 0.0;
               while ((cast ((cast sampleY : Float) < (cast GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource : Float)) : Bool)) {
-                var y:Dynamic = (((top + pixelY) + ((sampleY + 0.5) / GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
+                var y:Float = (((top + pixelY) + ((sampleY + 0.5) / GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
                 {
-                  var sampleX:Dynamic = 0.0;
+                  var sampleX:Float = 0.0;
                   while ((cast ((cast sampleX : Float) < (cast GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource : Float)) : Bool)) {
-                    var x:Dynamic = (((left + pixelX) + ((sampleX + 0.5) / GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
-                    if ((cast _Runtime.callValue(GlyphOutlineSource.containsFlattenedGlyphOutlinePoint__glyphOutlineSource, cast ([contours, _Runtime.field(path, 'winding'), x, y] : Array<Dynamic>)) : Bool)) { covered++; }
+                    var x:Float = (((left + pixelX) + ((sampleX + 0.5) / GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
+                    if ((cast (cast GlyphOutlineSource.containsFlattenedGlyphOutlinePoint__glyphOutlineSource((cast contours : Array<Array<Float>>), (cast (cast path : Path).winding : String), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { covered++; }
                     sampleX++;
                   }
                 }
@@ -88,7 +91,7 @@ class GlyphOutlineSource {
               }
             }
             if ((cast _Runtime.strictEquals(covered, 0.0) : Bool)) { pixelX++; continue; }
-            var offset:Dynamic = (((pixelY * width) + pixelX) * 4.0);
+            var offset:Float = (((pixelY * width) + pixelX) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, offset, 255.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, (offset + 1.0), 255.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, (offset + 2.0), 255.0);
@@ -104,20 +107,20 @@ class GlyphOutlineSource {
   }
 
   public static function containsFlattenedGlyphOutlinePoint__glyphOutlineSource(contours:Array<Array<Float>>, winding:String, x:Float, y:Float):Bool {
-    var crossings:Dynamic = cast _Runtime.UNDEFINED;
+    var crossings:Float = cast _Runtime.UNDEFINED;
     crossings = 0.0;
     for (contour in _Runtime.iterable(contours)) {
-      var pointCount:Dynamic = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(contour, 'length'), 2.0)) | 0);
+      var pointCount:Float = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(contour, 'length'), 2.0)) | 0);
       if ((cast ((cast pointCount : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var fromX:Dynamic = flighthq._internal._StaticIndex.readArray(contour, ((pointCount - 1.0) * 2.0));
-      var fromY:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (((pointCount - 1.0) * 2.0) + 1.0));
+      var fromX:Float = flighthq._internal._StaticIndex.readArray(contour, ((pointCount - 1.0) * 2.0));
+      var fromY:Float = flighthq._internal._StaticIndex.readArray(contour, (((pointCount - 1.0) * 2.0) + 1.0));
       {
-        var pointIndex:Dynamic = 0.0;
+        var pointIndex:Float = 0.0;
         while ((cast ((cast pointIndex : Float) < (cast pointCount : Float)) : Bool)) {
-          var toX:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (pointIndex * 2.0));
-          var toY:Dynamic = flighthq._internal._StaticIndex.readArray(contour, ((pointIndex * 2.0) + 1.0));
+          var toX:Float = flighthq._internal._StaticIndex.readArray(contour, (pointIndex * 2.0));
+          var toY:Float = flighthq._internal._StaticIndex.readArray(contour, ((pointIndex * 2.0) + 1.0));
           if ((cast ((cast _Runtime.andValue(((cast fromY : Float) <= (cast y : Float)), function():Dynamic return cast ((cast toY : Float) > (cast y : Float))) : Bool) || (cast _Runtime.andValue(((cast toY : Float) <= (cast y : Float)), function():Dynamic return cast ((cast fromY : Float) > (cast y : Float))) : Bool)) : Bool)) {
-            var crossingX:Dynamic = (fromX + (((y - fromY) * (toX - fromX)) / (toY - fromY)));
+            var crossingX:Float = (fromX + (((y - fromY) * (toX - fromX)) / (toY - fromY)));
             if ((cast ((cast x : Float) < (cast crossingX : Float)) : Bool)) { (crossings = cast ((crossings + ((cast ((cast toY : Float) > (cast fromY : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic))) : Dynamic)); }
           }
           (fromX = cast (toX : Dynamic));
@@ -136,9 +139,9 @@ class GlyphOutlineSource {
     return cast null;
   }
 
-  public static final RASTER_GUARD__glyphOutlineSource:Dynamic = 1.0;
+  public static final RASTER_GUARD__glyphOutlineSource:Float = 1.0;
 
-  public static final RASTER_SAMPLE_AXIS__glyphOutlineSource:Dynamic = 4.0;
+  public static final RASTER_SAMPLE_AXIS__glyphOutlineSource:Float = 4.0;
 
-  public static final RASTER_SAMPLE_COUNT__glyphOutlineSource:Dynamic = (GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource * GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource);
+  public static final RASTER_SAMPLE_COUNT__glyphOutlineSource:Float = (GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource * GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource);
 }

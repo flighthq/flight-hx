@@ -15,36 +15,36 @@ class ShapeFill {
     {
       var __switchValue = name;
       if (__switchValue == 'moveTo') {
-        _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'lineTo') {
-        _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'curveTo') {
-        _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'cubicCurveTo') {
-        _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawCircle') {
-        _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.appendEllipseToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawEllipse') {
         {
-          var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float);
-          var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float);
-          _Runtime.callValue(ShapeFill.appendEllipseToPath__shapeFill, cast ([path, ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)), (w / 2.0), (h / 2.0)] : Array<Dynamic>));
+          var w:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float);
+          var h:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float);
+          ShapeFill.appendEllipseToPath__shapeFill((cast path : Path), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)) : Float), (cast (w / 2.0) : Float), (cast (h / 2.0) : Float));
         }
       }
       else if (__switchValue == 'drawRectangle') {
-        _Runtime.callValue(ShapeFill.appendRectangleToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float)] : Array<Dynamic>));
+        ShapeFill.appendRectangleToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawRoundRectangle') {
-        _Runtime.callValue(ShapeFill.appendRoundRectangleToPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0), ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0)] : Array<Dynamic>));
+        ShapeFill.appendRoundRectangleToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0) : Float));
       }
       else if (__switchValue == 'drawPath') {
-        _Runtime.setField(path, 'winding', (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : PathWinding));
-        _Runtime.callValue(ShapeFill.appendRawPath__shapeFill, cast ([path, (cast flighthq._internal._StaticIndex.readArray(commands, a) : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>)] : Array<Dynamic>));
+        ((cast path : Path).winding = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : PathWinding));
+        ShapeFill.appendRawPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Array<Float>) : Array<Float>), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>) : Array<Float>));
       }
       else  {
       }
@@ -54,13 +54,13 @@ class ShapeFill {
   public static function getPathCommandOperandCount(verb:Float):Float {
     {
       var __switchValue = verb;
-      if (__switchValue == PathCommandValue.MOVE_TO || __switchValue == PathCommandValue.LINE_TO) {
+      if (__switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO || __switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) {
         return cast 2.0;
       }
-      else if (__switchValue == PathCommandValue.CURVE_TO || __switchValue == PathCommandValue.WIDE_MOVE_TO || __switchValue == PathCommandValue.WIDE_LINE_TO) {
+      else if (__switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO || __switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO || __switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) {
         return cast 4.0;
       }
-      else if (__switchValue == PathCommandValue.CUBIC_CURVE_TO) {
+      else if (__switchValue == (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) {
         return cast 6.0;
       }
       else  {
@@ -73,11 +73,11 @@ class ShapeFill {
   public static function getShapeFillRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
     var regions:Array<ShapeFillRegion> = cast _Runtime.UNDEFINED;
     var path:Null<Path> = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
     var winding:PathWinding = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(hasNonSolidShapeFill, cast ([commands] : Array<Dynamic>)) : Bool)) { return cast null; }
+    var i:Float = cast _Runtime.UNDEFINED;
+    if ((cast (cast hasNonSolidShapeFill((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast null; }
     regions = cast ([] : Array<Dynamic>);
     path = null;
     color = 0.0;
@@ -85,15 +85,15 @@ class ShapeFill {
     winding = 'nonZero';
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var a:Dynamic = (i + 2.0);
+      var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var a:Float = (i + 2.0);
       (i = cast ((a + argCount) : Dynamic));
       {
         var __switchValue = name;
         if (__switchValue == 'beginFill') {
           {
-            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field((cast path : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
             (color = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
             (alpha = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Dynamic));
             (path = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: winding } : Dynamic));
@@ -101,26 +101,26 @@ class ShapeFill {
         }
         else if (__switchValue == 'endFill') {
           {
-            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+            if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field((cast path : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
             (path = cast (null : Dynamic));
           }
         }
         else  {
-          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { _Runtime.callValue(appendShapeGeometryCommand, cast ([path, name, commands, a] : Array<Dynamic>)); }
+          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { appendShapeGeometryCommand((cast path : Path), (cast name : String), (cast commands : Array<ShapeCommandToken>), (cast a : Float)); }
         }
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field(_Runtime.field(path, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
+    if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field((cast path : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
     return cast regions;
     return cast null;
   }
 
   public static function hasNonSolidShapeFill(commands:Array<ShapeCommandToken>):Bool {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       if ((cast ((cast _Runtime.strictEquals(name, 'beginGradientFill') : Bool) || (cast _Runtime.strictEquals(name, 'beginTextureFill') : Bool)) : Bool)) {
         return cast true;
       }
@@ -134,10 +134,10 @@ class ShapeFill {
   }
 
   public static function hasShapeFill(commands:Array<ShapeCommandToken>):Bool {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       if ((cast ((cast ((cast _Runtime.strictEquals(name, 'beginFill') : Bool) || (cast _Runtime.strictEquals(name, 'beginGradientFill') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'beginTextureFill') : Bool)) : Bool)) { return cast true; }
       (i = cast ((i + (2.0 + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float))) : Dynamic));
     }
@@ -145,33 +145,33 @@ class ShapeFill {
     return cast null;
   }
 
-  public static final KAPPA__shapeFill:Dynamic = 0.5522847498307936;
+  public static final KAPPA__shapeFill:Float = 0.5522847498307936;
 
   public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
-    var kx:Dynamic = cast _Runtime.UNDEFINED;
-    var ky:Dynamic = cast _Runtime.UNDEFINED;
+    var kx:Float = cast _Runtime.UNDEFINED;
+    var ky:Float = cast _Runtime.UNDEFINED;
     kx = (rx * ShapeFill.KAPPA__shapeFill);
     ky = (ry * ShapeFill.KAPPA__shapeFill);
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, (cx + rx), cy] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cx + rx), (cy + ky), (cx + kx), (cy + ry), cx, (cy + ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cx - kx), (cy + ry), (cx - rx), (cy + ky), (cx - rx), cy] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cx - rx), (cy - ky), (cx - kx), (cy - ry), cx, (cy - ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cx + kx), (cy - ry), (cx + rx), (cy - ky), (cx + rx), cy] : Array<Dynamic>));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
+    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
+    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
+    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
   }
 
   public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
-    var d:Dynamic = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
     d = 0.0;
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast _Runtime.field(verbs, 'length') : Float)) : Bool)) {
-        var verb:Dynamic = flighthq._internal._StaticIndex.readArray(verbs, v);
-        var args:Dynamic = _Runtime.callValue(getPathCommandOperandCount, cast ([verb] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
+        var verb:Float = flighthq._internal._StaticIndex.readArray(verbs, v);
+        var args:Float = (cast getPathCommandOperandCount((cast verb : Float)) : Float);
+        _Runtime.callProperty((cast path : Path).commands, 'push', cast ([verb] : Array<Dynamic>));
         {
-          var k:Dynamic = 0.0;
+          var k:Float = 0.0;
           while ((cast ((cast k : Float) < (cast args : Float)) : Bool)) {
-            _Runtime.callProperty(_Runtime.field(path, 'data'), 'push', cast ([flighthq._internal._StaticIndex.readArray(data, (d + k))] : Array<Dynamic>));
+            _Runtime.callProperty((cast path : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readArray(data, (d + k))] : Array<Dynamic>));
             k++;
           }
         }
@@ -182,41 +182,41 @@ class ShapeFill {
   }
 
   public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, x, y] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (x + w), y] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (x + w), (y + h)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, x, (y + h)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, x, y] : Array<Dynamic>));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast x : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast (y + h) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + h) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast y : Float));
   }
 
   public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
     right = (x + w);
     bottom = (y + h);
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.MOVE_TO, (x + rx), y] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (right - rx), y] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, right, y, right, (y + ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, right, (bottom - ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, right, bottom, (right - rx), bottom] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, (x + rx), bottom] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, x, bottom, x, (bottom - ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommandValue.LINE_TO, x, (y + ry)] : Array<Dynamic>));
-    _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, x, y, (x + rx), y] : Array<Dynamic>));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (x + rx) : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (right - rx) : Float), (cast y : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast right : Float), (cast y : Float), (cast right : Float), (cast (y + ry) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast right : Float), (cast (bottom - ry) : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast right : Float), (cast bottom : Float), (cast (right - rx) : Float), (cast bottom : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + rx) : Float), (cast bottom : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast x : Float), (cast bottom : Float), (cast x : Float), (cast (bottom - ry) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + ry) : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast x : Float), (cast y : Float), (cast (x + rx) : Float), (cast y : Float));
   }
 
   public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
+    _Runtime.callProperty((cast path : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO] : Array<Dynamic>));
+    _Runtime.pushMany((cast path : Path).data, cast ([c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
   }
 
   public static function pushQuadratic__shapeFill(path:Path, cx:Float, cy:Float, ax:Float, ay:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.CURVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([cx, cy, ax, ay] : Array<Dynamic>));
+    _Runtime.callProperty((cast path : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO] : Array<Dynamic>));
+    _Runtime.pushMany((cast path : Path).data, cast ([cx, cy, ax, ay] : Array<Dynamic>));
   }
 
   public static function pushVerb__shapeFill(path:Path, verb:Float, x:Float, y:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
+    _Runtime.callProperty((cast path : Path).commands, 'push', cast ([verb] : Array<Dynamic>));
+    _Runtime.pushMany((cast path : Path).data, cast ([x, y] : Array<Dynamic>));
   }
 }

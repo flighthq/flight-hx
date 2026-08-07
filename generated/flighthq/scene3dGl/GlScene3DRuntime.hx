@@ -7,65 +7,74 @@ import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlSkinPaletteTexture.createGlSkinPaletteTexture;
 import flighthq.renderGl.GlSkinPaletteTexture.destroyGlSkinPaletteTexture;
 import flighthq.scene3dGl.GlEnvironmentIblBake.destroyGlEnvironmentIblBakePrograms;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderTarget;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlScene3DRuntime.GlMeshUpload;
+import flighthq.types.GlScene3DRuntime.GlScene3DDrawEntry;
+import flighthq.types.GlScene3DRuntime.GlScene3DIbl;
+import flighthq.types.GlScene3DRuntime.GlScene3DShadow;
 import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.MeshGeometry;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class GlScene3DRuntime {
   @:noCompletion
   public static function destroyGlScene3DRuntime(state:GlRenderState):Void {
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    scene = ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap).get(state));
+    var scene:Null<flighthq.types.GlScene3DRuntime> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    scene = ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap<GlRenderState, flighthq.types.GlScene3DRuntime>).get(state));
     if ((cast _Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    gl = _Runtime.field(state, 'gl');
-    for (program in _Runtime.iterable(((cast _Runtime.field(scene, 'programCache') : flighthq._internal._Map).values()))) {
-      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(program, 'program'));
+    gl = (cast state : GlRenderState).gl;
+    for (program in _Runtime.iterable(((cast (cast scene : flighthq.types.GlScene3DRuntime).programCache : flighthq._internal._Map<String, GlMeshProgram>).values()))) {
+      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, (cast program : GlMeshProgram).program);
     }
-    ((cast _Runtime.field(scene, 'programCache') : flighthq._internal._Map).clear());
-    _Runtime.setField(scene, 'activeMeshProgram', null);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, _Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut'));
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, _Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube'));
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, _Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube'));
-      _Runtime.setField(scene, 'ibl', null);
+    ((cast (cast scene : flighthq.types.GlScene3DRuntime).programCache : flighthq._internal._Map<String, GlMeshProgram>).clear());
+    ((cast scene : flighthq.types.GlScene3DRuntime).activeMeshProgram = null);
+    if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).ibl, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : flighthq.types.GlScene3DRuntime).ibl : GlScene3DIbl).brdfLut);
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : flighthq.types.GlScene3DRuntime).ibl : GlScene3DIbl).irradianceCube);
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : flighthq.types.GlScene3DRuntime).ibl : GlScene3DIbl).prefilteredCube);
+      ((cast scene : flighthq.types.GlScene3DRuntime).ibl = null);
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblBakeFramebuffer'), null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteFramebuffer(gl, _Runtime.field(scene, 'iblBakeFramebuffer'));
-      _Runtime.setField(scene, 'iblBakeFramebuffer', null);
+    if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).iblBakeFramebuffer, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.deleteFramebuffer(gl, (cast scene : flighthq.types.GlScene3DRuntime).iblBakeFramebuffer);
+      ((cast scene : flighthq.types.GlScene3DRuntime).iblBakeFramebuffer = null);
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, _Runtime.field(scene, 'environmentSourceCube'));
-      _Runtime.setField(scene, 'environmentSourceCube', null);
+    if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).environmentSourceCube, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast scene : flighthq.types.GlScene3DRuntime).environmentSourceCube);
+      ((cast scene : flighthq.types.GlScene3DRuntime).environmentSourceCube = null);
     }
-    _Runtime.callValue(destroyGlEnvironmentIblBakePrograms, cast ([state] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadowTarget'), null) : Bool)) {
-      _Runtime.callValue(destroyGlRenderTarget, cast ([state, _Runtime.field(scene, 'shadowTarget')] : Array<Dynamic>));
-      _Runtime.setField(scene, 'shadowTarget', null);
+    destroyGlEnvironmentIblBakePrograms((cast state : GlRenderState));
+    if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).shadowTarget, null) : Bool)) {
+      destroyGlRenderTarget((cast state : GlRenderState), (cast scene : flighthq.types.GlScene3DRuntime).shadowTarget);
+      ((cast scene : flighthq.types.GlScene3DRuntime).shadowTarget = null);
     }
-    _Runtime.setField(scene, 'shadow', null);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(scene, 'skinPalette'), null) : Bool)) {
-      _Runtime.callValue(destroyGlSkinPaletteTexture, cast ([gl, _Runtime.field(scene, 'skinPalette')] : Array<Dynamic>));
-      _Runtime.setField(scene, 'skinPalette', null);
+    ((cast scene : flighthq.types.GlScene3DRuntime).shadow = null);
+    if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).skinPalette, null) : Bool)) {
+      destroyGlSkinPaletteTexture((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast scene : flighthq.types.GlScene3DRuntime).skinPalette : GlSkinPaletteTexture));
+      ((cast scene : flighthq.types.GlScene3DRuntime).skinPalette = null);
     }
-    _Runtime.setLength(_Runtime.field(scene, 'blendedDrawList'), 0.0);
-    _Runtime.setLength(_Runtime.field(scene, 'opaqueDrawList'), 0.0);
-    _Runtime.setLength(_Runtime.field(scene, 'blendedPool'), 0.0);
-    _Runtime.setLength(_Runtime.field(scene, 'opaquePool'), 0.0);
+    _Runtime.setLength((cast scene : flighthq.types.GlScene3DRuntime).blendedDrawList, 0.0);
+    _Runtime.setLength((cast scene : flighthq.types.GlScene3DRuntime).opaqueDrawList, 0.0);
+    _Runtime.setLength((cast scene : flighthq.types.GlScene3DRuntime).blendedPool, 0.0);
+    _Runtime.setLength((cast scene : flighthq.types.GlScene3DRuntime).opaquePool, 0.0);
   }
 
   @:noCompletion
   public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
-    var palette:Dynamic = cast _Runtime.UNDEFINED;
-    scene = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
-    palette = _Runtime.field(scene, 'skinPalette');
+    var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
+    var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
+    scene = (cast getGlScene3DRuntime((cast state : GlRenderState)) : flighthq.types.GlScene3DRuntime);
+    palette = (cast scene : flighthq.types.GlScene3DRuntime).skinPalette;
     if ((cast _Runtime.strictEquals(palette, null) : Bool)) {
-      (palette = cast (_Runtime.callValue(createGlSkinPaletteTexture, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)) : Dynamic));
-      _Runtime.setField(scene, 'skinPalette', palette);
+      (palette = cast ((cast createGlSkinPaletteTexture((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext)) : Null<GlSkinPaletteTexture>) : Dynamic));
+      ((cast scene : flighthq.types.GlScene3DRuntime).skinPalette = palette);
     }
     return cast palette;
     return cast null;
@@ -73,19 +82,19 @@ class GlScene3DRuntime {
 
   @:noCompletion
   public static function getGlScene3DRuntime(state:GlRenderState):flighthq.types.GlScene3DRuntime {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var stateRuntime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var scene:Null<flighthq.types.GlScene3DRuntime> = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);
-    scene = ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap).get(state));
+    scene = ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap<GlRenderState, flighthq.types.GlScene3DRuntime>).get(state));
     if ((cast _Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (scene = cast ({ activeColorAdjustmentRun: false, activeColorMatrixRun: false, activeMeshProgram: null, activeSkinnedRun: false, blendedDrawList: cast ([] : Array<Dynamic>), blendedPool: cast ([] : Array<Dynamic>), environmentSourceCube: null, environmentSourceCubeColorSpace: 'linear', ibl: null, iblBakeFramebuffer: null, materialRegistry: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), modifierSnippetRegistry: null, opaqueDrawList: cast ([] : Array<Dynamic>), opaquePool: cast ([] : Array<Dynamic>), pbrExtensionGuard: null, pbrExtensionRegistry: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), pbrExtensionRegistryVersion: 0.0, pbrTransmissionSceneColor: null, programCache: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), shadow: null, shadowTarget: null, skinPalette: null, time: 0.0, uploadCache: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) } : Dynamic));
-      ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap).set(state, scene));
-      _Runtime.setField(stateRuntime, 'sceneMeshMaterialRegistry', _Runtime.field(scene, 'materialRegistry'));
-      _Runtime.setField(stateRuntime, 'sceneMeshUploadCache', (cast (cast _Runtime.field(scene, 'uploadCache') : Dynamic) : Dynamic));
+      ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap<GlRenderState, flighthq.types.GlScene3DRuntime>).set(state, scene));
+      ((cast stateRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry = (cast scene : flighthq.types.GlScene3DRuntime).materialRegistry);
+      ((cast stateRuntime : GlRenderStateRuntime).sceneMeshUploadCache = (cast (cast (cast scene : flighthq.types.GlScene3DRuntime).uploadCache : flighthq._internal._Any) : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq._internal._Object>));
     }
     return cast scene;
     return cast null;
   }
 
-  public static final sceneRuntimes__glScene3DRuntime:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final sceneRuntimes__glScene3DRuntime:flighthq._internal._WeakMap<GlRenderState, flighthq.types.GlScene3DRuntime> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

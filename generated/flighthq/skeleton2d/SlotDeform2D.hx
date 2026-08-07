@@ -3,33 +3,34 @@ package flighthq.skeleton2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Attachment2D;
 import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Slot2D;
 
 class SlotDeform2D {
   public static function getSkeleton2DSlotDeformOffsets(slot:Slot2D):Null<flighthq._internal._Float32Array> {
-    var deform:Dynamic = cast _Runtime.UNDEFINED;
+    var deform:Null<Skeleton2DSlotDeform> = cast _Runtime.UNDEFINED;
     deform = _Runtime.field(slot, 'deform');
     if ((cast ((cast _Runtime.strictEquals(deform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(deform, null) : Bool)) : Bool)) { return cast null; }
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(deform, 'attachment'), _Runtime.coalesce(_Runtime.field(slot, 'attachment'), function():Dynamic return cast null)) : Bool) ? (cast _Runtime.field(deform, 'offsets') : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals((cast deform : Skeleton2DSlotDeform).attachment, _Runtime.coalesce(_Runtime.field(slot, 'attachment'), function():Dynamic return cast null)) : Bool) ? (cast (cast deform : Skeleton2DSlotDeform).offsets : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:Dynamic, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
+  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:flighthq._internal._IndexedAccess<Skeleton2DSlotDeform, String>, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
+    var existing:Null<Skeleton2DSlotDeform> = cast _Runtime.UNDEFINED;
     var record:Skeleton2DSlotDeform = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(offsets, null) : Bool)) {
-      _Runtime.setField(slot, 'deform', null);
+      ((cast slot : Slot2D).deform = null);
       return cast null;
     }
-    existing = _Runtime.field(slot, 'deform');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(existing, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(existing, 'offsets'), 'length'), _Runtime.field(offsets, 'length')) : Bool)) : Bool)) {
-      (cast _Runtime.field(existing, 'offsets') : flighthq._internal._Float32Array).set(offsets);
-      _Runtime.setField(existing, 'attachment', attachment);
+    existing = (cast slot : Slot2D).deform;
+    if ((cast ((cast ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(existing, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast existing : Skeleton2DSlotDeform).offsets, 'length'), _Runtime.field(offsets, 'length')) : Bool)) : Bool)) {
+      (cast (cast existing : Skeleton2DSlotDeform).offsets : flighthq._internal._Float32Array).set(offsets);
+      ((cast existing : Skeleton2DSlotDeform).attachment = attachment);
       return cast existing;
     }
     record = { attachment: attachment, offsets: new flighthq._internal._Float32Array(offsets) };
-    _Runtime.setField(slot, 'deform', record);
+    ((cast slot : Slot2D).deform = record);
     return cast record;
     return cast null;
   }

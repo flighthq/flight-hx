@@ -4,14 +4,16 @@ package flighthq.skeleton2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationInterpolation;
+import flighthq.types.AnimationTrack;
 import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolation;
 
 class ExplainSkeleton2DChannel {
   @:noCompletion
   public static function explainSkeleton2DChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
-    var stated:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(isSkeleton2DSteppedChannelSubject, cast ([subject] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    stated = _Runtime.field(_Runtime.field(channel, 'track'), 'interpolation');
+    var stated:AnimationInterpolation = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast isSkeleton2DSteppedChannelSubject((cast subject : String)) : Bool) : Bool) : Bool)) { return cast null; }
+    stated = (cast _Runtime.field(channel, 'track') : AnimationTrack).interpolation;
     if ((cast _Runtime.strictEquals(stated, ExplainSkeleton2DChannel.STEP_INTERPOLATION__explainSkeleton2DChannel) : Bool)) { return cast null; }
     return cast { applied: ExplainSkeleton2DChannel.STEP_INTERPOLATION__explainSkeleton2DChannel, stated: stated, subject: subject };
     return cast null;
@@ -23,9 +25,9 @@ class ExplainSkeleton2DChannel {
     return cast null;
   }
 
-  public static final ATTACHMENT_SUBJECT__explainSkeleton2DChannel:Dynamic = 'Attachment';
+  public static final ATTACHMENT_SUBJECT__explainSkeleton2DChannel:String = 'Attachment';
 
-  public static final DRAW_ORDER_SUBJECT__explainSkeleton2DChannel:Dynamic = 'DrawOrder';
+  public static final DRAW_ORDER_SUBJECT__explainSkeleton2DChannel:String = 'DrawOrder';
 
-  public static final STEP_INTERPOLATION__explainSkeleton2DChannel:Dynamic = 'Step';
+  public static final STEP_INTERPOLATION__explainSkeleton2DChannel:String = 'Step';
 }

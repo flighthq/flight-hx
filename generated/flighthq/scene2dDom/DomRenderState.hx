@@ -9,31 +9,36 @@ import flighthq.render.RenderState.createRenderState as _createRenderState;
 import flighthq.render.RenderState.createRenderStateRuntime;
 import flighthq.types.DomRenderOptions;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomClipEntry;
+import flighthq.types.DomRenderState.DomClipHooks;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Matrix;
+import flighthq.types.RenderProxy2D;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class DomRenderState {
   public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    state = (cast _Runtime.callValue(_createRenderState, cast ([{ pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.DomRenderState);
-    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
-    _Runtime.setField(state, 'applyBlendMode', null);
-    _Runtime.setField(state, 'domCssFilterResolver', null);
-    _Runtime.setField((cast state : { var element:flighthq._internal.dom.HTMLElement; }), 'element', element);
-    _Runtime.setField(state, 'allowSmoothing', _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
-    runtime = _Runtime.callValue(createDomRenderStateRuntime, cast ([] : Array<Dynamic>));
+    var state:flighthq.types.DomRenderState = cast _Runtime.UNDEFINED;
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    state = (cast (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') } : Null<flighthq._internal._Any>)) : flighthq.types.DomRenderState) : flighthq.types.DomRenderState);
+    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor(state, (cast _Runtime.field(options, 'backgroundColor') : Float)); }
+    ((cast state : flighthq.types.DomRenderState).applyBlendMode = null);
+    ((cast state : flighthq.types.DomRenderState).domCssFilterResolver = null);
+    ((cast (cast state : { var element:flighthq._internal.dom.HTMLElement; }) : { var element:flighthq._internal.dom.HTMLElement; }).element = element);
+    ((cast state : flighthq.types.DomRenderState).allowSmoothing = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
+    runtime = (cast createDomRenderStateRuntime() : DomRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
-    _Runtime.setField(runtime, 'currentBlendMode', null);
-    _Runtime.setField(runtime, 'domClipHooks', null);
-    _Runtime.setField(runtime, 'domClipStack', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'domCurrentElement', null);
-    _Runtime.setField(runtime, 'domElementMap', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    _Runtime.setField(runtime, 'domNextOrderList', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'domOrderLength', -1.0);
-    _Runtime.setField(runtime, 'domOrderList', cast ([] : Array<Dynamic>));
+    ((cast runtime : DomRenderStateRuntime).currentBlendMode = null);
+    ((cast runtime : DomRenderStateRuntime).domClipHooks = null);
+    ((cast runtime : DomRenderStateRuntime).domClipStack = cast ([] : Array<Dynamic>));
+    ((cast runtime : DomRenderStateRuntime).domCurrentElement = null);
+    ((cast runtime : DomRenderStateRuntime).domElementMap = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    ((cast runtime : DomRenderStateRuntime).domNextOrderList = cast ([] : Array<Dynamic>));
+    ((cast runtime : DomRenderStateRuntime).domOrderLength = -1.0);
+    ((cast runtime : DomRenderStateRuntime).domOrderList = cast ([] : Array<Dynamic>));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'relative');
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     return cast state;
@@ -42,7 +47,7 @@ class DomRenderState {
 
   @:noCompletion
   public static function createDomRenderStateRuntime():DomRenderStateRuntime {
-    return cast (cast _Runtime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : DomRenderStateRuntime);
+    return cast (cast (cast createRenderStateRuntime() : DomRenderStateRuntime) : DomRenderStateRuntime);
     return cast null;
   }
 

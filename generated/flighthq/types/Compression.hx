@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
-typedef Decompressor = Dynamic;
+typedef Decompressor = flighthq._internal._UInt8Array->Float->Null<flighthq._internal._UInt8Array>;
 
-typedef Compression = Dynamic;
+typedef Compression = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;

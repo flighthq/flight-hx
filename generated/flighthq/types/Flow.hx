@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef FlowState = { @:optional var name:String; @:optional var onEnter:Dynamic; @:optional var onExit:Dynamic; @:optional var onPause:Dynamic; @:optional var onResume:Dynamic; @:optional var onUpdate:Dynamic; @:optional var renderBelow:Bool; @:optional var updateBelow:Bool; };
+typedef FlowState = { @:optional var name:String; @:optional var onEnter:Void->Void; @:optional var onExit:Void->Void; @:optional var onPause:Void->Void; @:optional var onResume:Void->Void; @:optional var onUpdate:Float->Void; @:optional var renderBelow:Bool; @:optional var updateBelow:Bool; };
 
 typedef FlowStack = { var states:Array<FlowState>; };

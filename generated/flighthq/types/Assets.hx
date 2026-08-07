@@ -10,18 +10,18 @@ typedef AssetDescriptor = { var id:String; var url:String; var type:AssetType; @
 
 typedef AssetManifest = Array<AssetDescriptor>;
 
-typedef AssetLoaderAdapter<T> = { var load:Dynamic; var dispose:Dynamic; };
+typedef AssetLoaderAdapter<T> = { var load:AssetDescriptor->flighthq._internal._Promise<T>; var dispose:T->Void; };
 
-typedef AssetEntry = { var value:Dynamic; var refcount:Float; var loadPromise:Null<flighthq._internal._Promise<Dynamic>>; var resident:Bool; };
+typedef AssetEntry = { var value:flighthq._internal._Any; var refcount:Float; var loadPromise:Null<flighthq._internal._Promise<flighthq._internal._Any>>; var resident:Bool; };
 
-typedef AssetLibraryRuntime = { var acquireGuard:Null<AssetAcquireGuard>; var adapters:Dynamic; var descriptors:Dynamic; var entries:Dynamic; var freedIds:Dynamic; var groups:Dynamic; };
+typedef AssetLibraryRuntime = { var acquireGuard:Null<AssetAcquireGuard>; var adapters:flighthq._internal._Map<AssetType, AssetLoaderAdapter<Dynamic>>; var descriptors:flighthq._internal._Map<String, AssetDescriptor>; var entries:flighthq._internal._Map<String, AssetEntry>; var freedIds:flighthq._internal._Set<String>; var groups:flighthq._internal._Map<String, Array<String>>; };
 
 typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
 
 typedef AssetLoadExplanation = { var id:String; var refCount:Float; var status:String; var type:Null<AssetType>; };
 
-typedef AssetAcquireGuard = Dynamic;
+typedef AssetAcquireGuard = AssetLibrary->AssetLoadExplanation->Void;
 
 typedef AssetLoadProgress = { var loaded:Float; var total:Float; };
 
-typedef AssetGroupLoadOptions = { @:optional var progress:Signal<Dynamic>; };
+typedef AssetGroupLoadOptions = { @:optional var progress:Signal<AssetLoadProgress->Void>; };

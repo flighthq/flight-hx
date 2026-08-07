@@ -10,38 +10,42 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
 import flighthq.types.Path;
+import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
+import flighthq.types.PathBooleanFillRule;
+import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class UnionAllPaths {
   public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
-    var fillRule:Dynamic = cast _Runtime.UNDEFINED;
+    var fillRule:PathWinding = cast _Runtime.UNDEFINED;
     var contours:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var path:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
+    var path:Path = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
     contours = cast ([] : Array<Dynamic>);
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable(_Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; })] : Array<Dynamic>)))) {
+      for (contour in _Runtime.iterable((cast flattenPath((cast path : Path), (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float)) : Array<Array<Float>>))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }
-    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([contours, UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, 'union', fillRule] : Array<Dynamic>)) : Dynamic));
-    path = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>)));
-    _Runtime.setLength(_Runtime.field(path, 'commands'), 0.0);
-    _Runtime.setLength(_Runtime.field(path, 'data'), 0.0);
-    _Runtime.setField(path, 'winding', 'nonZero');
+    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(contours, UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, 'union', fillRule) : Dynamic));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath('nonZero') : Null<Path>));
+    _Runtime.setLength((cast path : Path).commands, 0.0);
+    _Runtime.setLength((cast path : Path).data, 0.0);
+    ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(result)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(ring, 0.0), flighthq._internal._StaticIndex.readArray(ring, 1.0)] : Array<Dynamic>));
+      appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
       {
-        var i:Dynamic = 2.0;
+        var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(ring, i), flighthq._internal._StaticIndex.readArray(ring, (i + 1.0))] : Array<Dynamic>));
+          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      _Runtime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
+      appendPathClose((cast path : Path));
     }
     return cast path;
     return cast null;

@@ -6,25 +6,28 @@ import flighthq._internal._Runtime;
 import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderTarget;
 
 class GlBackground {
   public static function renderGlBackground(state:GlRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var rgba:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
-    viewport = _Runtime.field(runtime, 'renderTargetViewport');
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width')), _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')));
-    rgba = _Runtime.field(state, 'backgroundColorRgba');
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var viewport:Null<GlViewportRect> = cast _Runtime.UNDEFINED;
+    var rgba:Array<Float> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    gl = (cast state : GlRenderState).gl;
+    viewport = (cast runtime : GlRenderStateRuntime).renderTargetViewport;
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width')), _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height')));
+    rgba = (cast state : GlRenderState).backgroundColorRgba;
     if ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var linear:Dynamic = _Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(runtime, 'currentRenderTarget'), 'colorSpace'), 'linear');
-      flighthq._internal.backend.WebGl2Backend.clearColor(gl, ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 0.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Dynamic)), ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 1.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Dynamic)), ((cast linear : Bool) ? (cast _Runtime.callValue(srgbChannelToLinear, cast ([flighthq._internal._StaticIndex.readArray(rgba, 2.0)] : Array<Dynamic>)) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Dynamic)), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
+      var linear:Bool = _Runtime.strictEquals(_Runtime.optionalField((cast runtime : GlRenderStateRuntime).currentRenderTarget, 'colorSpace'), 'linear');
+      flighthq._internal.backend.WebGl2Backend.clearColor(gl, ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Dynamic)), ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Dynamic)), ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Dynamic)), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
     } else {
       flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     }
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
-    _Runtime.setField(runtime, 'currentBlendMode', null);
+    ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
   }
 }

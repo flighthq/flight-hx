@@ -7,13 +7,13 @@ import flighthq._internal._Runtime;
 typedef SpritesheetFormatKind = String;
 
 class SpritesheetFormat {
-  public static final SpritesheetFormatKindAseprite:Dynamic = 'Aseprite';
+  public static final SpritesheetFormatKindAseprite:String = 'Aseprite';
 
-  public static final SpritesheetFormatKindCocosPlist:Dynamic = 'CocosPlist';
+  public static final SpritesheetFormatKindCocosPlist:String = 'CocosPlist';
 
-  public static final SpritesheetFormatKindLibgdxAtlas:Dynamic = 'LibgdxAtlas';
+  public static final SpritesheetFormatKindLibgdxAtlas:String = 'LibgdxAtlas';
 
-  public static final SpritesheetFormatKindStarling:Dynamic = 'Starling';
+  public static final SpritesheetFormatKindStarling:String = 'Starling';
 
-  public static final SpritesheetFormatKindTexturePacker:Dynamic = 'TexturePacker';
+  public static final SpritesheetFormatKindTexturePacker:String = 'TexturePacker';
 }

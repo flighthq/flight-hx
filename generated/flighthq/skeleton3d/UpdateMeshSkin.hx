@@ -10,23 +10,28 @@ import flighthq.skeleton3d.SkinMeshGeometry.captureMeshSkinBindPose;
 import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
 import flighthq.skeleton3d.SkinMeshGeometry.updateMeshSkinBindPoseDeformInput;
 import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
+import flighthq.types.MeshSkinBindPose;
+import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Skeleton3D;
+import flighthq.types.Skin;
 
 class UpdateMeshSkin {
   public static function updateMeshSkin(mesh:Mesh):Void {
-    var skin:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var bindPose:Dynamic = cast _Runtime.UNDEFINED;
+    var skin:Null<Skin> = cast _Runtime.UNDEFINED;
+    var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
+    var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     skin = mesh.skin;
     if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
-    _Runtime.callValue(computeSkeleton3DJointMatrices, cast ([_Runtime.field(skin, 'skeleton')] : Array<Dynamic>));
+    computeSkeleton3DJointMatrices((cast skin : Skin).skeleton);
     geometry = mesh.geometry;
-    bindPose = _Runtime.callValue(getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>));
+    bindPose = (cast getMeshGeometrySkinBindPose(geometry) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast (_Runtime.callValue(captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callValue(setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
+      (bindPose = cast ((cast captureMeshSkinBindPose(geometry) : Null<MeshSkinBindPose>) : Dynamic));
+      setMeshGeometrySkinBindPose(geometry, bindPose);
     } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
-      _Runtime.callValue(updateMeshSkinBindPoseDeformInput, cast ([bindPose, geometry] : Array<Dynamic>));
+      updateMeshSkinBindPoseDeformInput(bindPose, geometry);
     } }
-    _Runtime.callValue(skinMeshGeometry, cast ([geometry, _Runtime.field(skin, 'skeleton'), bindPose] : Array<Dynamic>));
+    skinMeshGeometry(geometry, (cast skin : Skin).skeleton, bindPose);
   }
 }

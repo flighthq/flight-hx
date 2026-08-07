@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetPlayer = { var animation:Null<SpritesheetAnimation>; var complete:Bool; var elapsed:Float; var paused:Bool; var speed:Float; var frameIndex:Float; var onComplete:Signal<Dynamic>; var onLoop:Signal<Dynamic>; var queue:Array<SpritesheetAnimation>; };
+typedef SpritesheetPlayer = { var animation:Null<SpritesheetAnimation>; var complete:Bool; var elapsed:Float; var paused:Bool; var speed:Float; var frameIndex:Float; var onComplete:Signal<Void->Void>; var onLoop:Signal<Void->Void>; var queue:Array<SpritesheetAnimation>; };

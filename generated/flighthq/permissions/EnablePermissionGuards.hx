@@ -17,18 +17,18 @@ class EnablePermissionGuards {
   }
 
   public static function disablePermissionGuards():Void {
-    _Runtime.callValue(setPermissionRequestFallbackGuard, cast ([null] : Array<Dynamic>));
+    setPermissionRequestFallbackGuard(null);
     (EnablePermissionGuards._enabled__enablePermissionGuards = cast (false : Dynamic));
   }
 
   public static function enablePermissionGuards():Void {
-    _Runtime.callValue(setPermissionRequestFallbackGuard, cast ([EnablePermissionGuards.warnPermissionRequestFallback__enablePermissionGuards] : Array<Dynamic>));
+    setPermissionRequestFallbackGuard(EnablePermissionGuards.warnPermissionRequestFallback__enablePermissionGuards);
     (EnablePermissionGuards._enabled__enablePermissionGuards = cast (true : Dynamic));
   }
 
   public static function warnPermissionRequestFallback__enablePermissionGuards(name:PermissionName, state:PermissionState):Void {
-    _Runtime.callValue(logOnce, cast (['permissions:request-fallback:' + Std.string(name) + '', LogLevel.Warn, { message: 'requestPermission(\'' + Std.string(name) + '\'): no request path for this name on this backend, so it fell back to a plain state query and NO prompt was shown; the resulting \'' + Std.string(state) + '\' is a read, not a decision', name: name, state: state }, 'permissions'] : Array<Dynamic>));
+    (cast logOnce((cast 'permissions:request-fallback:' + Std.string(name) + '' : String), (cast LogLevel.Warn : LogLevel), { message: 'requestPermission(\'' + Std.string(name) + '\'): no request path for this name on this backend, so it fell back to a plain state query and NO prompt was shown; the resulting \'' + Std.string(state) + '\' is a read, not a decision', name: name, state: state }, (cast 'permissions' : Null<String>)) : Bool);
   }
 
-  public static var _enabled__enablePermissionGuards:Dynamic = false;
+  public static var _enabled__enablePermissionGuards:Bool = false;
 }

@@ -5,163 +5,163 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class Awd2Schema {
-  public static final AWD2_MAGIC_0:Dynamic = 65.0;
+  public static final AWD2_MAGIC_0:Float = 65.0;
 
-  public static final AWD2_MAGIC_1:Dynamic = 87.0;
+  public static final AWD2_MAGIC_1:Float = 87.0;
 
-  public static final AWD2_MAGIC_2:Dynamic = 68.0;
+  public static final AWD2_MAGIC_2:Float = 68.0;
 
-  public static final AWD2_HEADER_BYTES:Dynamic = 12.0;
+  public static final AWD2_HEADER_BYTES:Float = 12.0;
 
-  public static final AWD2_VERSION_MAJOR_OFFSET:Dynamic = 3.0;
+  public static final AWD2_VERSION_MAJOR_OFFSET:Float = 3.0;
 
-  public static final AWD2_FORMAT_VERSION:Dynamic = 2.0;
+  public static final AWD2_FORMAT_VERSION:Float = 2.0;
 
-  public static final AWD2_BLOCK_HEADER_BYTES:Dynamic = 11.0;
+  public static final AWD2_BLOCK_HEADER_BYTES:Float = 11.0;
 
-  public static final AWD2_NAMESPACE_CORE:Dynamic = 0.0;
+  public static final AWD2_NAMESPACE_CORE:Float = 0.0;
 
-  public static final AWD2_BLOCK_TRIANGLE_GEOMETRY:Dynamic = 1.0;
+  public static final AWD2_BLOCK_TRIANGLE_GEOMETRY:Float = 1.0;
 
-  public static final AWD2_BLOCK_CONTAINER:Dynamic = 22.0;
+  public static final AWD2_BLOCK_CONTAINER:Float = 22.0;
 
-  public static final AWD2_BLOCK_MESH_INSTANCE:Dynamic = 23.0;
+  public static final AWD2_BLOCK_MESH_INSTANCE:Float = 23.0;
 
-  public static final AWD2_BLOCK_LIGHT:Dynamic = 41.0;
+  public static final AWD2_BLOCK_LIGHT:Float = 41.0;
 
-  public static final AWD2_BLOCK_CAMERA:Dynamic = 42.0;
+  public static final AWD2_BLOCK_CAMERA:Float = 42.0;
 
-  public static final AWD2_BLOCK_LIGHT_PICKER:Dynamic = 51.0;
+  public static final AWD2_BLOCK_LIGHT_PICKER:Float = 51.0;
 
-  public static final AWD2_BLOCK_MATERIAL:Dynamic = 81.0;
+  public static final AWD2_BLOCK_MATERIAL:Float = 81.0;
 
-  public static final AWD2_BLOCK_TEXTURE:Dynamic = 82.0;
+  public static final AWD2_BLOCK_TEXTURE:Float = 82.0;
 
-  public static final AWD2_BLOCK_SKELETON:Dynamic = 101.0;
+  public static final AWD2_BLOCK_SKELETON:Float = 101.0;
 
-  public static final AWD2_BLOCK_SKELETON_POSE:Dynamic = 102.0;
+  public static final AWD2_BLOCK_SKELETON_POSE:Float = 102.0;
 
-  public static final AWD2_BLOCK_SKELETON_ANIMATION:Dynamic = 103.0;
+  public static final AWD2_BLOCK_SKELETON_ANIMATION:Float = 103.0;
 
-  public static final AWD2_MATERIAL_TYPE_COLOR:Dynamic = 1.0;
+  public static final AWD2_MATERIAL_TYPE_COLOR:Float = 1.0;
 
-  public static final AWD2_MATERIAL_TYPE_TEXTURE:Dynamic = 2.0;
+  public static final AWD2_MATERIAL_TYPE_TEXTURE:Float = 2.0;
 
-  public static final AWD2_TEXTURE_TYPE_EXTERNAL:Dynamic = 0.0;
+  public static final AWD2_TEXTURE_TYPE_EXTERNAL:Float = 0.0;
 
-  public static final AWD2_TEXTURE_TYPE_EMBEDDED:Dynamic = 1.0;
+  public static final AWD2_TEXTURE_TYPE_EMBEDDED:Float = 1.0;
 
-  public static final AWD2_MATERIAL_PROP_COLOR:Dynamic = 1.0;
+  public static final AWD2_MATERIAL_PROP_COLOR:Float = 1.0;
 
-  public static final AWD2_MATERIAL_PROP_DIFFUSE_TEXTURE:Dynamic = 2.0;
+  public static final AWD2_MATERIAL_PROP_DIFFUSE_TEXTURE:Float = 2.0;
 
-  public static final AWD2_MATERIAL_PROP_NORMAL_TEXTURE:Dynamic = 3.0;
+  public static final AWD2_MATERIAL_PROP_NORMAL_TEXTURE:Float = 3.0;
 
-  public static final AWD2_MATERIAL_PROP_ALPHA:Dynamic = 10.0;
+  public static final AWD2_MATERIAL_PROP_ALPHA:Float = 10.0;
 
-  public static final AWD2_MATERIAL_PROP_SPECULAR_STRENGTH:Dynamic = 18.0;
+  public static final AWD2_MATERIAL_PROP_SPECULAR_STRENGTH:Float = 18.0;
 
-  public static final AWD2_MATERIAL_PROP_GLOSS:Dynamic = 19.0;
+  public static final AWD2_MATERIAL_PROP_GLOSS:Float = 19.0;
 
-  public static final AWD2_MATERIAL_PROP_SPECULAR_COLOR:Dynamic = 20.0;
+  public static final AWD2_MATERIAL_PROP_SPECULAR_COLOR:Float = 20.0;
 
-  public static final AWD2_MATERIAL_PROP_SPECULAR_TEXTURE:Dynamic = 21.0;
+  public static final AWD2_MATERIAL_PROP_SPECULAR_TEXTURE:Float = 21.0;
 
-  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_STRENGTH:Dynamic = 1.0;
+  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_STRENGTH:Float = 1.0;
 
-  public static final AWD2_MATERIAL_DEFAULT_GLOSS:Dynamic = 50.0;
+  public static final AWD2_MATERIAL_DEFAULT_GLOSS:Float = 50.0;
 
-  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_RGB:Dynamic = 16777215.0;
+  public static final AWD2_MATERIAL_DEFAULT_SPECULAR_RGB:Float = 16777215.0;
 
-  public static final AWD2_CAMERA_PROJECTION_PERSPECTIVE:Dynamic = 5001.0;
+  public static final AWD2_CAMERA_PROJECTION_PERSPECTIVE:Float = 5001.0;
 
-  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC:Dynamic = 5002.0;
+  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC:Float = 5002.0;
 
-  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC_OFFCENTER:Dynamic = 5003.0;
+  public static final AWD2_CAMERA_PROJECTION_ORTHOGRAPHIC_OFFCENTER:Float = 5003.0;
 
-  public static final AWD2_CAMERA_PROP_FOV:Dynamic = 101.0;
+  public static final AWD2_CAMERA_PROP_FOV:Float = 101.0;
 
-  public static final AWD2_CAMERA_PROP_ORTHO_LEFT:Dynamic = 101.0;
+  public static final AWD2_CAMERA_PROP_ORTHO_LEFT:Float = 101.0;
 
-  public static final AWD2_CAMERA_PROP_ORTHO_RIGHT:Dynamic = 102.0;
+  public static final AWD2_CAMERA_PROP_ORTHO_RIGHT:Float = 102.0;
 
-  public static final AWD2_CAMERA_PROP_ORTHO_BOTTOM:Dynamic = 103.0;
+  public static final AWD2_CAMERA_PROP_ORTHO_BOTTOM:Float = 103.0;
 
-  public static final AWD2_CAMERA_PROP_ORTHO_TOP:Dynamic = 104.0;
+  public static final AWD2_CAMERA_PROP_ORTHO_TOP:Float = 104.0;
 
-  public static final AWD2_LIGHT_TYPE_POINT:Dynamic = 1.0;
+  public static final AWD2_LIGHT_TYPE_POINT:Float = 1.0;
 
-  public static final AWD2_LIGHT_TYPE_DIRECTIONAL:Dynamic = 2.0;
+  public static final AWD2_LIGHT_TYPE_DIRECTIONAL:Float = 2.0;
 
-  public static final AWD2_LIGHT_PROP_RADIUS:Dynamic = 1.0;
+  public static final AWD2_LIGHT_PROP_RADIUS:Float = 1.0;
 
-  public static final AWD2_LIGHT_PROP_FALLOFF:Dynamic = 2.0;
+  public static final AWD2_LIGHT_PROP_FALLOFF:Float = 2.0;
 
-  public static final AWD2_LIGHT_PROP_COLOR:Dynamic = 3.0;
+  public static final AWD2_LIGHT_PROP_COLOR:Float = 3.0;
 
-  public static final AWD2_LIGHT_PROP_SPECULAR:Dynamic = 4.0;
+  public static final AWD2_LIGHT_PROP_SPECULAR:Float = 4.0;
 
-  public static final AWD2_LIGHT_PROP_DIFFUSE:Dynamic = 5.0;
+  public static final AWD2_LIGHT_PROP_DIFFUSE:Float = 5.0;
 
-  public static final AWD2_LIGHT_PROP_AMBIENT_COLOR:Dynamic = 7.0;
+  public static final AWD2_LIGHT_PROP_AMBIENT_COLOR:Float = 7.0;
 
-  public static final AWD2_LIGHT_PROP_AMBIENT:Dynamic = 8.0;
+  public static final AWD2_LIGHT_PROP_AMBIENT:Float = 8.0;
 
-  public static final AWD2_LIGHT_PROP_SHADOW_MAPPER:Dynamic = 9.0;
+  public static final AWD2_LIGHT_PROP_SHADOW_MAPPER:Float = 9.0;
 
-  public static final AWD2_LIGHT_PROP_DIRECTION_X:Dynamic = 21.0;
+  public static final AWD2_LIGHT_PROP_DIRECTION_X:Float = 21.0;
 
-  public static final AWD2_LIGHT_PROP_DIRECTION_Y:Dynamic = 22.0;
+  public static final AWD2_LIGHT_PROP_DIRECTION_Y:Float = 22.0;
 
-  public static final AWD2_LIGHT_PROP_DIRECTION_Z:Dynamic = 23.0;
+  public static final AWD2_LIGHT_PROP_DIRECTION_Z:Float = 23.0;
 
-  public static final AWD2_LIGHT_DEFAULT_RADIUS:Dynamic = 90000.0;
+  public static final AWD2_LIGHT_DEFAULT_RADIUS:Float = 90000.0;
 
-  public static final AWD2_LIGHT_DEFAULT_FALLOFF:Dynamic = 100000.0;
+  public static final AWD2_LIGHT_DEFAULT_FALLOFF:Float = 100000.0;
 
-  public static final AWD2_LIGHT_DEFAULT_RGB:Dynamic = 16777215.0;
+  public static final AWD2_LIGHT_DEFAULT_RGB:Float = 16777215.0;
 
-  public static final AWD2_LIGHT_DEFAULT_SPECULAR:Dynamic = 1.0;
+  public static final AWD2_LIGHT_DEFAULT_SPECULAR:Float = 1.0;
 
-  public static final AWD2_LIGHT_DEFAULT_DIFFUSE:Dynamic = 1.0;
+  public static final AWD2_LIGHT_DEFAULT_DIFFUSE:Float = 1.0;
 
-  public static final AWD2_LIGHT_DEFAULT_AMBIENT:Dynamic = 0.0;
+  public static final AWD2_LIGHT_DEFAULT_AMBIENT:Float = 0.0;
 
-  public static final AWD2_COMPRESSION_NONE:Dynamic = 0.0;
+  public static final AWD2_COMPRESSION_NONE:Float = 0.0;
 
-  public static final AWD2_COMPRESSION_DEFLATE:Dynamic = 1.0;
+  public static final AWD2_COMPRESSION_DEFLATE:Float = 1.0;
 
-  public static final AWD2_COMPRESSION_LZMA:Dynamic = 2.0;
+  public static final AWD2_COMPRESSION_LZMA:Float = 2.0;
 
-  public static final AWD2_STREAM_POSITIONS:Dynamic = 1.0;
+  public static final AWD2_STREAM_POSITIONS:Float = 1.0;
 
-  public static final AWD2_STREAM_INDICES:Dynamic = 2.0;
+  public static final AWD2_STREAM_INDICES:Float = 2.0;
 
-  public static final AWD2_STREAM_UVS:Dynamic = 3.0;
+  public static final AWD2_STREAM_UVS:Float = 3.0;
 
-  public static final AWD2_STREAM_NORMALS:Dynamic = 4.0;
+  public static final AWD2_STREAM_NORMALS:Float = 4.0;
 
-  public static final AWD2_STREAM_TANGENTS:Dynamic = 5.0;
+  public static final AWD2_STREAM_TANGENTS:Float = 5.0;
 
-  public static final AWD2_STREAM_JOINT_INDICES:Dynamic = 6.0;
+  public static final AWD2_STREAM_JOINT_INDICES:Float = 6.0;
 
-  public static final AWD2_STREAM_JOINT_WEIGHTS:Dynamic = 7.0;
+  public static final AWD2_STREAM_JOINT_WEIGHTS:Float = 7.0;
 
-  public static final AWD2_ROOT_JOINT_PARENT:Dynamic = 65535.0;
+  public static final AWD2_ROOT_JOINT_PARENT:Float = 65535.0;
 
-  public static final AWD2_DATA_INT8:Dynamic = 1.0;
+  public static final AWD2_DATA_INT8:Float = 1.0;
 
-  public static final AWD2_DATA_INT16:Dynamic = 2.0;
+  public static final AWD2_DATA_INT16:Float = 2.0;
 
-  public static final AWD2_DATA_INT32:Dynamic = 3.0;
+  public static final AWD2_DATA_INT32:Float = 3.0;
 
-  public static final AWD2_DATA_UINT8:Dynamic = 4.0;
+  public static final AWD2_DATA_UINT8:Float = 4.0;
 
-  public static final AWD2_DATA_UINT16:Dynamic = 5.0;
+  public static final AWD2_DATA_UINT16:Float = 5.0;
 
-  public static final AWD2_DATA_UINT32:Dynamic = 6.0;
+  public static final AWD2_DATA_UINT32:Float = 6.0;
 
-  public static final AWD2_DATA_FLOAT32:Dynamic = 7.0;
+  public static final AWD2_DATA_FLOAT32:Float = 7.0;
 
-  public static final AWD2_DATA_FLOAT64:Dynamic = 8.0;
+  public static final AWD2_DATA_FLOAT64:Float = 8.0;
 }

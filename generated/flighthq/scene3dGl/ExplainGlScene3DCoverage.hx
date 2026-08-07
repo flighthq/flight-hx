@@ -6,7 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.shading.ModifierRegistry.resolveModifier;
+import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlTextureResolver;
+import flighthq.types.ModifierDefinition;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Scene3DKindUsage;
 import flighthq.types.SceneCoverageEntry;
@@ -18,67 +24,67 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class ExplainGlScene3DCoverage {
   public static function explainGlScene3DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    _Runtime.callValue(ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
+    (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene3DKindUsage), (cast false : Bool)) : Bool);
   }
 
   public static function hasGlScene3DCoverage(state:GlRenderState, usage:Scene3DKindUsage):Bool {
-    return cast !(cast _Runtime.callValue(ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
+    return cast !(cast (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene3DKindUsage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
   public static function collectGlScene3DCoverageGaps__explainGlScene3DCoverage(out:Null<Array<SceneCoverageEntry>>, state:GlRenderState, usage:Scene3DKindUsage, stopAtFirst:Bool):Bool {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
-    var hasStandard:Dynamic = cast _Runtime.UNDEFINED;
-    var resolvers:Dynamic = cast _Runtime.UNDEFINED;
-    var snippets:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
+    var materials:flighthq._internal._Map<String, GlMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var hasStandard:Bool = cast _Runtime.UNDEFINED;
+    var resolvers:Null<flighthq._internal._Map<String, GlTextureResolver>> = cast _Runtime.UNDEFINED;
+    var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
-    hasStandard = ((cast materials : flighthq._internal._Map).has(StandardMaterialKindValue));
+    materials = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
+    hasStandard = ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
-        if ((cast ((cast materials : flighthq._internal._Map).has(kind)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+        if ((cast ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(kind)) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: ((cast hasStandard : Bool) ? (cast SceneCoverageValue.Fallback : Dynamic) : (cast SceneCoverageValue.Missing : Dynamic)), kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: ((cast hasStandard : Bool) ? (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Fallback : Dynamic) : (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing : Dynamic)), kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
         i++;
       }
     }
-    resolvers = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glTextureResolverRegistry');
+    resolvers = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glTextureResolverRegistry;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'textureSourceKinds'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = resolvers; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).has(kind)); }), true) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'textureSourceKinds'), i);
+        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = resolvers; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlTextureResolver>).has(kind)); }), true) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Missing, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
         i++;
       }
     }
-    snippets = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
+    snippets = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'modifierKinds'), i);
-        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveModifier, cast ([snippets, kind] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'modifierKinds'), i);
+        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier(snippets, (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Missing, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
         i++;
       }
     }

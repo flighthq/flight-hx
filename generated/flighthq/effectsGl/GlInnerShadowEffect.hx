@@ -13,41 +13,45 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
+import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.InnerShadowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef InnerClipLocations__glInnerShadowEffect = GlFullscreenProgram;
 
 class GlInnerShadowEffect {
-  public static final INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 shadow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = shadow * srcAlpha;\n}';
+  public static final INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 shadow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = shadow * srcAlpha;\n}';
 
-  public static final clipShaders__glInnerShadowEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final clipShaders__glInnerShadowEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var s0:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s1:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s2:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var src:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -59,53 +63,53 @@ class GlInnerShadowEffect {
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    _Runtime.callValue(applyGlEffectInvertTintPass, cast ([state, src, s0, color, alpha, strength] : Array<Dynamic>));
-    _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), edgeColor: _Runtime.callValue(GlInnerShadowEffect.getInvertTintEdgeColor__glInnerShadowEffect, cast ([color, alpha, strength] : Array<Dynamic>)), passes: quality }] : Array<Dynamic>));
-    _Runtime.callValue(clearGlRenderTarget, cast ([state, s0] : Array<Dynamic>));
-    _Runtime.callValue(applyGlEffectBlitOffsetPass, cast ([state, s1, s0, dx, dy] : Array<Dynamic>));
-    _Runtime.callValue(clearGlRenderTarget, cast ([state, s1] : Array<Dynamic>));
-    _Runtime.callValue(GlInnerShadowEffect.applyGlInnerClipPass__glInnerShadowEffect, cast ([state, s0, src, s1] : Array<Dynamic>));
-    _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
+    applyGlEffectInvertTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast s0 : GlRenderTarget), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyGlEffectBoxBlur((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast s1 : GlRenderTarget), (cast s2 : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), edgeColor: (cast GlInnerShadowEffect.getInvertTintEdgeColor__glInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Null<Array<Float>>), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    clearGlRenderTarget((cast state : GlRenderState), (cast s0 : GlRenderTarget));
+    applyGlEffectBlitOffsetPass((cast state : GlRenderState), (cast s1 : GlRenderTarget), (cast s0 : GlRenderTarget), (cast dx : Float), (cast dy : Float));
+    clearGlRenderTarget((cast state : GlRenderState), (cast s1 : GlRenderTarget));
+    GlInnerShadowEffect.applyGlInnerClipPass__glInnerShadowEffect((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast src : GlRenderTarget), (cast s1 : GlRenderTarget));
+    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
+      applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
     }
-    _Runtime.callValue(applyGlEffectBlitPass, cast ([state, s1, dst] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s0] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s1] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
+    applyGlEffectBlitPass((cast state : GlRenderState), (cast s1 : GlRenderTarget), (cast dst : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
   }
 
-  public static final defaultGlInnerShadowEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyInnerShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect)] : Array<Dynamic>));
+  public static final defaultGlInnerShadowEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyInnerShadowEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : InnerShadowEffect) : InnerShadowEffect));
   };
 
   public static function registerGlInnerShadowEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'InnerShadowEffect', defaultGlInnerShadowEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'InnerShadowEffect' : String), (cast defaultGlInnerShadowEffectRunner : GlRenderEffectRunner));
   }
 
   public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = _Runtime.callValue(GlInnerShadowEffect.getClipShader__glInnerShadowEffect, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(shadow, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
+    var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    loc = (cast GlInnerShadowEffect.getClipShader__glInnerShadowEffect((cast state : GlRenderState)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast shadow : GlRenderTarget).texture, (cast source : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    loc = ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var loc:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
+    loc = ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var gl:Dynamic = _Runtime.field(state, 'gl');
-      var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlInnerShadowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect] : Array<Dynamic>));
+      var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlInnerShadowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), loc));
+      ((cast GlInnerShadowEffect.clipShaders__glInnerShadowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, loc));
     }
     return cast loc;
     return cast null;
   }
 
   public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
-    var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
+    var edgeAlpha:Float = cast _Runtime.UNDEFINED;
     edgeAlpha = HxMath.min(1.0, (alpha * strength));
     return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & 255) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;

@@ -9,27 +9,29 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
 import flighthq.types.Path;
+import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
+import flighthq.types.PathBooleanOperation;
 
 class ResolvePathRegions {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
-    path = _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
+    var path:Path = cast _Runtime.UNDEFINED;
+    var resolved:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
+    path = (cast createPath('nonZero') : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0) : Bool)) { return cast path; }
-    resolved = _Runtime.callProperty(_Runtime.callValue(getPathBooleanBackend, cast ([] : Array<Dynamic>)), 'computePathBoolean', cast ([rings, ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions, 'union', fillRule] : Array<Dynamic>));
+    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(rings, ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions, 'union', fillRule);
     for (ring in _Runtime.iterable(resolved)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      _Runtime.callValue(appendPathMoveTo, cast ([path, flighthq._internal._StaticIndex.readArray(ring, 0.0), flighthq._internal._StaticIndex.readArray(ring, 1.0)] : Array<Dynamic>));
+      appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
       {
-        var i:Dynamic = 2.0;
+        var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(appendPathLineTo, cast ([path, flighthq._internal._StaticIndex.readArray(ring, i), flighthq._internal._StaticIndex.readArray(ring, (i + 1.0))] : Array<Dynamic>));
+          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      _Runtime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
+      appendPathClose((cast path : Path));
     }
     return cast path;
     return cast null;

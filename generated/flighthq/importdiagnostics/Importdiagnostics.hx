@@ -9,7 +9,7 @@ import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 
 class Importdiagnostics {
-  public static function collectImportDiagnostics(run:Dynamic):Array<ImportDiagnostic> {
+  public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {
     return cast Facade_Importdiagnostics_flighthq_importdiagnostics_ImportDiagnosticCollector.collectImportDiagnostics(run);
     return cast null;
   }
@@ -19,7 +19,7 @@ class Importdiagnostics {
     return cast null;
   }
 
-  public static function reportImportDiagnostic(sink:Null<Array<ImportDiagnostic>>, severity:ImportDiagnosticSeverity, kind:String, origin:String, ?detail:Dynamic):Void {
+  public static function reportImportDiagnostic(sink:Null<Array<ImportDiagnostic>>, severity:ImportDiagnosticSeverity, kind:String, origin:String, ?detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>):Void {
     Facade_Importdiagnostics_flighthq_importdiagnostics_ImportDiagnosticCollector.reportImportDiagnostic(sink, severity, kind, origin, detail);
   }
 }

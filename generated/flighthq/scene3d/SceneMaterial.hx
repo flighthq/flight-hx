@@ -7,39 +7,42 @@ import flighthq.node.Traversal.findNode;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.types.Material;
 import flighthq.types.Mesh;
+import flighthq.types.Node;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DTraits;
 
 class SceneMaterial {
   public static function findScene3DMaterialByName(root:Node3D, name:String):Null<Material> {
-    var rootMatch:Dynamic = cast _Runtime.UNDEFINED;
+    var rootMatch:Null<Material> = cast _Runtime.UNDEFINED;
     var found:Null<Material> = cast _Runtime.UNDEFINED;
-    rootMatch = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([root, name] : Array<Dynamic>));
+    rootMatch = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast root : Node3D), (cast name : String)) : Null<Material>);
     if ((cast !_Runtime.strictEquals(rootMatch, null) : Bool)) { return cast rootMatch; }
     found = null;
-    _Runtime.callValue(findNode, cast ([root, function(node:Dynamic) {
-      var match:Dynamic = cast _Runtime.UNDEFINED;
-      match = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([(cast node : Node3D), name] : Array<Dynamic>));
+    (cast findNode(root, function(node:Node<Node3DTraits>):Bool {
+      var match:Null<Material> = cast _Runtime.UNDEFINED;
+      match = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast (cast node : Node3D) : Node3D), (cast name : String)) : Null<Material>);
       if ((cast _Runtime.strictEquals(match, null) : Bool)) { return cast false; }
       (found = cast (match : Dynamic));
       return cast true;
-    }] : Array<Dynamic>));
+    }) : Null<NodeOf<Node3DTraits>>);
     return cast found;
     return cast null;
   }
 
   public static function getScene3DMaterials(root:Node3D, out:Array<Material>):Void {
-    _Runtime.callValue(SceneMaterial.collectNodeMaterials__sceneMaterial, cast ([root, out] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([root, function(node:Dynamic) return _Runtime.callValue(SceneMaterial.collectNodeMaterials__sceneMaterial, cast ([(cast node : Node3D), out] : Array<Dynamic>))] : Array<Dynamic>));
+    SceneMaterial.collectNodeMaterials__sceneMaterial((cast root : Node3D), (cast out : Array<Material>));
+    forEachNodeDescendant(root, function(node:Node<Node3DTraits>):Void return SceneMaterial.collectNodeMaterials__sceneMaterial((cast (cast node : Node3D) : Node3D), (cast out : Array<Material>)));
   }
 
   public static function collectNodeMaterials__sceneMaterial(node:Node3D, out:Array<Material>):Void {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+    var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
     materials = _Runtime.field((cast node : Dynamic), 'materials');
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var material:Dynamic = flighthq._internal._StaticIndex.readArray(materials, i);
+        var material:Null<Material> = flighthq._internal._StaticIndex.readArray(materials, i);
         if ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !(cast _Runtime.includes(out, material) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([material] : Array<Dynamic>)); }
         i++;
       }
@@ -47,14 +50,14 @@ class SceneMaterial {
   }
 
   public static function getNamedNodeMaterial__sceneMaterial(node:Node3D, name:String):Null<Material> {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+    var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
     materials = _Runtime.field((cast node : Dynamic), 'materials');
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var material:Dynamic = flighthq._internal._StaticIndex.readArray(materials, i);
-        if ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'name'), name) : Bool)) : Bool)) { return cast material; }
+        var material:Null<Material> = flighthq._internal._StaticIndex.readArray(materials, i);
+        if ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast material : Material).name, name) : Bool)) : Bool)) { return cast material; }
         i++;
       }
     }

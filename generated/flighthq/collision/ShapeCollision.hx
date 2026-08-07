@@ -14,26 +14,27 @@ import flighthq.types.Collision.CollisionCircle;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
+import flighthq.types.Vector2;
 
 class ShapeCollision {
-  public static final RELATIVE_EPSILON__shapeCollision:Dynamic = 1e-9;
+  public static final RELATIVE_EPSILON__shapeCollision:Float = 1e-9;
 
   public static function testAabbAabbCollision(a:CollisionAabb, b:CollisionAabb, out:CollisionManifold):Bool {
-    var aMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var aMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var bMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var penLeftX:Dynamic = cast _Runtime.UNDEFINED;
-    var penRightX:Dynamic = cast _Runtime.UNDEFINED;
-    var overlapX:Dynamic = cast _Runtime.UNDEFINED;
-    var penDownY:Dynamic = cast _Runtime.UNDEFINED;
-    var penUpY:Dynamic = cast _Runtime.UNDEFINED;
-    var overlapY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidAabb__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidAabb__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
+    var aMinX:Float = cast _Runtime.UNDEFINED;
+    var aMinY:Float = cast _Runtime.UNDEFINED;
+    var aMaxX:Float = cast _Runtime.UNDEFINED;
+    var aMaxY:Float = cast _Runtime.UNDEFINED;
+    var bMinX:Float = cast _Runtime.UNDEFINED;
+    var bMinY:Float = cast _Runtime.UNDEFINED;
+    var bMaxX:Float = cast _Runtime.UNDEFINED;
+    var bMaxY:Float = cast _Runtime.UNDEFINED;
+    var penLeftX:Float = cast _Runtime.UNDEFINED;
+    var penRightX:Float = cast _Runtime.UNDEFINED;
+    var overlapX:Float = cast _Runtime.UNDEFINED;
+    var penDownY:Float = cast _Runtime.UNDEFINED;
+    var penUpY:Float = cast _Runtime.UNDEFINED;
+    var overlapY:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidAabb__shapeCollision((cast a : CollisionAabb)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidAabb__shapeCollision((cast b : CollisionAabb)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
     aMinX = _Runtime.field(a, 'minX');
     aMinY = _Runtime.field(a, 'minY');
     aMaxX = _Runtime.field(a, 'maxX');
@@ -49,59 +50,59 @@ class ShapeCollision {
     penUpY = (bMaxY - aMinY);
     overlapY = ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast penDownY : Dynamic) : (cast penUpY : Dynamic));
     if ((cast ((cast ((cast overlapX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast overlapY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionManifold((cast out : CollisionManifold));
       return cast false;
     }
     if ((cast ((cast overlapX : Float) <= (cast overlapY : Float)) : Bool)) {
-      _Runtime.setField(out, 'normalX', ((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
-      _Runtime.setField(out, 'normalY', 0.0);
-      _Runtime.setField(out, 'depth', overlapX);
+      ((cast out : CollisionManifold).normalX = ((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
+      ((cast out : CollisionManifold).normalY = 0.0);
+      ((cast out : CollisionManifold).depth = overlapX);
     } else {
-      _Runtime.setField(out, 'normalX', 0.0);
-      _Runtime.setField(out, 'normalY', ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
-      _Runtime.setField(out, 'depth', overlapY);
+      ((cast out : CollisionManifold).normalX = 0.0);
+      ((cast out : CollisionManifold).normalY = ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
+      ((cast out : CollisionManifold).depth = overlapY);
     }
-    _Runtime.setField(out, 'overlapping', true);
+    ((cast out : CollisionManifold).overlapping = true);
     return cast true;
     return cast null;
   }
 
   public static function testAabbObbCollision(a:CollisionAabb, b:CollisionObb, out:CollisionManifold):Bool {
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidAabb__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidObb__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
-    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
-    _Runtime.callValue(writeObbVertices, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, ShapeCollision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidAabb__shapeCollision((cast a : CollisionAabb)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidObb__shapeCollision((cast b : CollisionObb)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
+    writeAabbVertices((cast a : CollisionAabb), (cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._Float64Array));
+    writeObbVertices((cast b : CollisionObb), (cast ShapeCollision.scratchB__shapeCollision : flighthq._internal._Float64Array));
+    return cast (cast ShapeCollision.satConvexOverlap__shapeCollision((cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast ShapeCollision.scratchB__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testAabbPolygonCollision(a:CollisionAabb, b:CollisionPolygon, out:CollisionManifold):Bool {
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidAabb__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(b, 'points')] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>));
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidAabb__shapeCollision((cast a : CollisionAabb)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast _Runtime.field(b, 'points') : Array<Float>)) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool);
     }
-    _Runtime.callValue(writeAabbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    writeAabbVertices((cast a : CollisionAabb), (cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._Float64Array));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeCollision.satConvexOverlap__shapeCollision((cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testCircleAabbCollision(a:CollisionCircle, b:CollisionAabb, out:CollisionManifold):Bool {
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidCircle__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidAabb__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(ShapeCollision.circleAabbOverlap__shapeCollision, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), _Runtime.field(b, 'minX'), _Runtime.field(b, 'minY'), _Runtime.field(b, 'maxX'), _Runtime.field(b, 'maxY'), out] : Array<Dynamic>));
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidCircle__shapeCollision((cast a : CollisionCircle)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidAabb__shapeCollision((cast b : CollisionAabb)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
+    return cast (cast ShapeCollision.circleAabbOverlap__shapeCollision((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast _Runtime.field(b, 'minX') : Float), (cast _Runtime.field(b, 'minY') : Float), (cast _Runtime.field(b, 'maxX') : Float), (cast _Runtime.field(b, 'maxY') : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testCircleCircleCollision(a:CollisionCircle, b:CollisionCircle, out:CollisionManifold):Bool {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var radiusSum:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var distSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidCircle__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidCircle__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var radiusSum:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var distSquared:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidCircle__shapeCollision((cast a : CollisionCircle)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidCircle__shapeCollision((cast b : CollisionCircle)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
     bx = _Runtime.field(b, 'x');
@@ -111,40 +112,40 @@ class ShapeCollision {
     dy = (ay - by);
     distSquared = ((dx * dx) + (dy * dy));
     if ((cast ((cast distSquared : Float) >= (cast (radiusSum * radiusSum) : Float)) : Bool)) {
-      _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionManifold((cast out : CollisionManifold));
       return cast false;
     }
     dist = HxMath.sqrt(distSquared);
-    if ((cast ((cast dist : Float) > (cast _Runtime.callValue(ShapeCollision.relativeEpsilon__shapeCollision, cast ([radiusSum] : Array<Dynamic>)) : Float)) : Bool)) {
-      var inv:Dynamic = (1.0 / dist);
-      _Runtime.setField(out, 'normalX', (dx * inv));
-      _Runtime.setField(out, 'normalY', (dy * inv));
-      _Runtime.setField(out, 'depth', (radiusSum - dist));
+    if ((cast ((cast dist : Float) > (cast (cast ShapeCollision.relativeEpsilon__shapeCollision((cast radiusSum : Float)) : Float) : Float)) : Bool)) {
+      var inv:Float = (1.0 / dist);
+      ((cast out : CollisionManifold).normalX = (dx * inv));
+      ((cast out : CollisionManifold).normalY = (dy * inv));
+      ((cast out : CollisionManifold).depth = (radiusSum - dist));
     } else {
-      _Runtime.setField(out, 'normalX', 1.0);
-      _Runtime.setField(out, 'normalY', 0.0);
-      _Runtime.setField(out, 'depth', radiusSum);
+      ((cast out : CollisionManifold).normalX = 1.0);
+      ((cast out : CollisionManifold).normalY = 0.0);
+      ((cast out : CollisionManifold).depth = radiusSum);
     }
-    _Runtime.setField(out, 'overlapping', true);
+    ((cast out : CollisionManifold).overlapping = true);
     return cast true;
     return cast null;
   }
 
   public static function testCircleObbCollision(a:CollisionCircle, b:CollisionObb, out:CollisionManifold):Bool {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var halfW:Dynamic = cast _Runtime.UNDEFINED;
-    var halfH:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var localX:Dynamic = cast _Runtime.UNDEFINED;
-    var localY:Dynamic = cast _Runtime.UNDEFINED;
-    var localNormalX:Dynamic = cast _Runtime.UNDEFINED;
-    var localNormalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidCircle__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidObb__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var halfW:Float = cast _Runtime.UNDEFINED;
+    var halfH:Float = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var localX:Float = cast _Runtime.UNDEFINED;
+    var localY:Float = cast _Runtime.UNDEFINED;
+    var localNormalX:Float = cast _Runtime.UNDEFINED;
+    var localNormalY:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidCircle__shapeCollision((cast a : CollisionCircle)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidObb__shapeCollision((cast b : CollisionObb)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
     cx = _Runtime.field(a, 'x');
     cy = _Runtime.field(a, 'y');
     radius = _Runtime.field(a, 'radius');
@@ -156,89 +157,89 @@ class ShapeCollision {
     dy = _Runtime.subtractNumbers(cy, _Runtime.field(b, 'y'));
     localX = ((dx * cos) + (dy * sin));
     localY = ((-dx * sin) + (dy * cos));
-    if ((cast !(cast _Runtime.callValue(ShapeCollision.circleAabbOverlap__shapeCollision, cast ([localX, localY, radius, -halfW, -halfH, halfW, halfH, out] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast ShapeCollision.circleAabbOverlap__shapeCollision((cast localX : Float), (cast localY : Float), (cast radius : Float), (cast -halfW : Float), (cast -halfH : Float), (cast halfW : Float), (cast halfH : Float), (cast out : CollisionManifold)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    localNormalX = _Runtime.field(out, 'normalX');
-    localNormalY = _Runtime.field(out, 'normalY');
-    _Runtime.setField(out, 'normalX', ((localNormalX * cos) - (localNormalY * sin)));
-    _Runtime.setField(out, 'normalY', ((localNormalX * sin) + (localNormalY * cos)));
+    localNormalX = (cast out : CollisionManifold).normalX;
+    localNormalY = (cast out : CollisionManifold).normalY;
+    ((cast out : CollisionManifold).normalX = ((localNormalX * cos) - (localNormalY * sin)));
+    ((cast out : CollisionManifold).normalY = ((localNormalX * sin) + (localNormalY * cos)));
     return cast true;
     return cast null;
   }
 
   public static function testCirclePolygonCollision(a:CollisionCircle, b:CollisionPolygon, out:CollisionManifold):Bool {
-    var points:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidCircle__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(b, 'points')] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>));
+    var points:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidCircle__shapeCollision((cast a : CollisionCircle)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast _Runtime.field(b, 'points') : Array<Float>)) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool);
     }
     points = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satCircleConvexOverlap__shapeCollision, cast ([_Runtime.field(a, 'x'), _Runtime.field(a, 'y'), _Runtime.field(a, 'radius'), points, (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeCollision.satCircleConvexOverlap__shapeCollision((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast points : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1) : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testObbObbCollision(a:CollisionObb, b:CollisionObb, out:CollisionManifold):Bool {
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidObb__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callValue(ShapeCollision.isValidObb__shapeCollision, cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>)); }
-    _Runtime.callValue(writeObbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
-    _Runtime.callValue(writeObbVertices, cast ([b, ShapeCollision.scratchB__shapeCollision] : Array<Dynamic>));
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, ShapeCollision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidObb__shapeCollision((cast a : CollisionObb)) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision.isValidObb__shapeCollision((cast b : CollisionObb)) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool); }
+    writeObbVertices((cast a : CollisionObb), (cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._Float64Array));
+    writeObbVertices((cast b : CollisionObb), (cast ShapeCollision.scratchB__shapeCollision : flighthq._internal._Float64Array));
+    return cast (cast ShapeCollision.satConvexOverlap__shapeCollision((cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast ShapeCollision.scratchB__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testObbPolygonCollision(a:CollisionObb, b:CollisionPolygon, out:CollisionManifold):Bool {
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callValue(ShapeCollision.isValidObb__shapeCollision, cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(b, 'points')] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>));
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast ShapeCollision.isValidObb__shapeCollision((cast a : CollisionObb)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast _Runtime.field(b, 'points') : Array<Float>)) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool);
     }
-    _Runtime.callValue(writeObbVertices, cast ([a, ShapeCollision.scratchA__shapeCollision] : Array<Dynamic>));
+    writeObbVertices((cast a : CollisionObb), (cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._Float64Array));
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([ShapeCollision.scratchA__shapeCollision, 4.0, bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeCollision.satConvexOverlap__shapeCollision((cast ShapeCollision.scratchA__shapeCollision : flighthq._internal._ArrayLike<Float>), (cast 4.0 : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function testPolygonPolygonCollision(a:CollisionPolygon, b:CollisionPolygon, out:CollisionManifold):Bool {
-    var aPoints:Dynamic = cast _Runtime.UNDEFINED;
-    var bPoints:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(a, 'points')] : Array<Dynamic>)), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([_Runtime.field(b, 'points')] : Array<Dynamic>)), null) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(ShapeCollision.clearInvalidCollisionManifold__shapeCollision, cast ([out] : Array<Dynamic>));
+    var aPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast _Runtime.field(a, 'points') : Array<Float>)) : Null<String>), null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast _Runtime.field(b, 'points') : Array<Float>)) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision.clearInvalidCollisionManifold__shapeCollision((cast out : CollisionManifold)) : Bool);
     }
     aPoints = _Runtime.field(a, 'points');
     bPoints = _Runtime.field(b, 'points');
-    return cast _Runtime.callValue(ShapeCollision.satConvexOverlap__shapeCollision, cast ([aPoints, (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1), bPoints, (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1), out] : Array<Dynamic>));
+    return cast (cast ShapeCollision.satConvexOverlap__shapeCollision((cast aPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), (cast bPoints : flighthq._internal._ArrayLike<Float>), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), (cast out : CollisionManifold)) : Bool);
     return cast null;
   }
 
   public static function circleAabbOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, minX:Float, minY:Float, maxX:Float, maxY:Float, out:CollisionManifold):Bool {
-    var closestX:Dynamic = cast _Runtime.UNDEFINED;
-    var closestY:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var distSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
+    var closestX:Float = cast _Runtime.UNDEFINED;
+    var closestY:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var distSquared:Float = cast _Runtime.UNDEFINED;
+    var epsilon:Float = cast _Runtime.UNDEFINED;
+    var left:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var min:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
     closestX = ((cast ((cast cx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast cx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast cx : Dynamic)) : Dynamic));
     closestY = ((cast ((cast cy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast cy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast cy : Dynamic)) : Dynamic));
     dx = (cx - closestX);
     dy = (cy - closestY);
     distSquared = ((dx * dx) + (dy * dy));
-    epsilon = _Runtime.callValue(ShapeCollision.relativeEpsilon__shapeCollision, cast ([HxMath.max(HxMath.max((maxX - minX), (maxY - minY)), radius)] : Array<Dynamic>));
+    epsilon = (cast ShapeCollision.relativeEpsilon__shapeCollision((cast HxMath.max(HxMath.max((maxX - minX), (maxY - minY)), radius) : Float)) : Float);
     if ((cast ((cast distSquared : Float) > (cast (epsilon * epsilon) : Float)) : Bool)) {
-      var dist:Dynamic = HxMath.sqrt(distSquared);
+      var dist:Float = HxMath.sqrt(distSquared);
       if ((cast ((cast dist : Float) >= (cast radius : Float)) : Bool)) {
-        _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+        clearCollisionManifold((cast out : CollisionManifold));
         return cast false;
       }
-      var inv:Dynamic = (1.0 / dist);
-      _Runtime.setField(out, 'normalX', (dx * inv));
-      _Runtime.setField(out, 'normalY', (dy * inv));
-      _Runtime.setField(out, 'depth', (radius - dist));
-      _Runtime.setField(out, 'overlapping', true);
+      var inv:Float = (1.0 / dist);
+      ((cast out : CollisionManifold).normalX = (dx * inv));
+      ((cast out : CollisionManifold).normalY = (dy * inv));
+      ((cast out : CollisionManifold).depth = (radius - dist));
+      ((cast out : CollisionManifold).overlapping = true);
       return cast true;
     }
     left = (cx - minX);
@@ -263,52 +264,52 @@ class ShapeCollision {
       (normalX = cast (0.0 : Dynamic));
       (normalY = cast (1.0 : Dynamic));
     }
-    _Runtime.setField(out, 'normalX', ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    _Runtime.setField(out, 'normalY', ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    _Runtime.setField(out, 'depth', (min + radius));
-    _Runtime.setField(out, 'overlapping', true);
+    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
+    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
+    ((cast out : CollisionManifold).depth = (min + radius));
+    ((cast out : CollisionManifold).overlapping = true);
     return cast true;
     return cast null;
   }
 
-  public static function satCircleConvexOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float, out:CollisionManifold):Bool {
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
-    var minOverlap:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    var nearestX:Dynamic = cast _Runtime.UNDEFINED;
-    var nearestY:Dynamic = cast _Runtime.UNDEFINED;
-    var nearestDistSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexAxisLen:Dynamic = cast _Runtime.UNDEFINED;
-    var originX:Dynamic = cast _Runtime.UNDEFINED;
-    var originY:Dynamic = cast _Runtime.UNDEFINED;
-    var centroidX:Dynamic = cast _Runtime.UNDEFINED;
-    var centroidY:Dynamic = cast _Runtime.UNDEFINED;
-    epsilon = _Runtime.callValue(ShapeCollision.relativeEpsilon__shapeCollision, cast ([HxMath.max(_Runtime.callValue(ShapeCollision.getPolygonExtent__shapeCollision, cast ([px, pn] : Array<Dynamic>)), radius)] : Array<Dynamic>));
+  public static function satCircleConvexOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, px:flighthq._internal._ArrayLike<Float>, pn:Float, out:CollisionManifold):Bool {
+    var epsilon:Float = cast _Runtime.UNDEFINED;
+    var minOverlap:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
+    var nearestX:Float = cast _Runtime.UNDEFINED;
+    var nearestY:Float = cast _Runtime.UNDEFINED;
+    var nearestDistSquared:Float = cast _Runtime.UNDEFINED;
+    var vertexAxisLen:Float = cast _Runtime.UNDEFINED;
+    var originX:Float = cast _Runtime.UNDEFINED;
+    var originY:Float = cast _Runtime.UNDEFINED;
+    var centroidX:Float = cast _Runtime.UNDEFINED;
+    var centroidY:Float = cast _Runtime.UNDEFINED;
+    epsilon = (cast ShapeCollision.relativeEpsilon__shapeCollision((cast HxMath.max((cast ShapeCollision.getPolygonExtent__shapeCollision((cast px : flighthq._internal._ArrayLike<Float>), (cast pn : Float)) : Float), radius) : Float)) : Float);
     minOverlap = HxMath.POSITIVE_INFINITY;
     normalX = 0.0;
     normalY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
-        var x0:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
-        var y1:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var j:Float = _Runtime.fmod((i + 1.0), pn);
+        var x0:Float = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
+        var y0:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Float = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
+        var y1:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
         (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
-        var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
+        var len:Float = (cast normalizeVector2(ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
-        _Runtime.callValue(ShapeCollision.canonicalizeScratchAxis__shapeCollision, cast ([] : Array<Dynamic>));
-        var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
-        var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
-        var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
+        ShapeCollision.canonicalizeScratchAxis__shapeCollision();
+        var axisX:Float = ShapeCollision.scratchAxis__shapeCollision.x;
+        var axisY:Float = ShapeCollision.scratchAxis__shapeCollision.y;
+        var overlap:Float = (cast ShapeCollision.circlePolygonAxisOverlap__shapeCollision((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast px : flighthq._internal._ArrayLike<Float>), (cast pn : Float)) : Float);
         if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-          _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+          clearCollisionManifold((cast out : CollisionManifold));
           return cast false;
         }
-        if ((cast _Runtime.callValue(ShapeCollision.isPreferredAxis__shapeCollision, cast ([overlap, axisX, axisY, minOverlap, normalX, normalY, epsilon] : Array<Dynamic>)) : Bool)) {
+        if ((cast (cast ShapeCollision.isPreferredAxis__shapeCollision((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast minOverlap : Float), (cast normalX : Float), (cast normalY : Float), (cast epsilon : Float)) : Bool) : Bool)) {
           (minOverlap = cast (overlap : Dynamic));
           (normalX = cast (axisX : Dynamic));
           (normalY = cast (axisY : Dynamic));
@@ -320,13 +321,13 @@ class ShapeCollision {
     nearestY = 0.0;
     nearestDistSquared = HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var vx:Dynamic = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
-        var vy:Dynamic = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var ddx:Dynamic = (cx - vx);
-        var ddy:Dynamic = (cy - vy);
-        var d2:Dynamic = ((ddx * ddx) + (ddy * ddy));
+        var vx:Float = _Runtime.getIndex(px, (_Runtime.toInt32(i) << 1));
+        var vy:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var ddx:Float = (cx - vx);
+        var ddy:Float = (cy - vy);
+        var d2:Float = ((ddx * ddx) + (ddy * ddy));
         if ((cast ((cast d2 : Float) < (cast nearestDistSquared : Float)) : Bool)) {
           (nearestDistSquared = cast (d2 : Dynamic));
           (nearestX = cast (vx : Dynamic));
@@ -337,24 +338,24 @@ class ShapeCollision {
     }
     (ShapeCollision.scratchAxis__shapeCollision.x = cast ((cx - nearestX) : Dynamic));
     (ShapeCollision.scratchAxis__shapeCollision.y = cast ((cy - nearestY) : Dynamic));
-    vertexAxisLen = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
+    vertexAxisLen = (cast normalizeVector2(ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision) : Float);
     if ((cast ((cast vertexAxisLen : Float) > (cast epsilon : Float)) : Bool)) {
-      _Runtime.callValue(ShapeCollision.canonicalizeScratchAxis__shapeCollision, cast ([] : Array<Dynamic>));
-      var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
-      var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
-      var overlap:Dynamic = _Runtime.callValue(ShapeCollision.circlePolygonAxisOverlap__shapeCollision, cast ([axisX, axisY, cx, cy, radius, px, pn] : Array<Dynamic>));
+      ShapeCollision.canonicalizeScratchAxis__shapeCollision();
+      var axisX:Float = ShapeCollision.scratchAxis__shapeCollision.x;
+      var axisY:Float = ShapeCollision.scratchAxis__shapeCollision.y;
+      var overlap:Float = (cast ShapeCollision.circlePolygonAxisOverlap__shapeCollision((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast px : flighthq._internal._ArrayLike<Float>), (cast pn : Float)) : Float);
       if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-        _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+        clearCollisionManifold((cast out : CollisionManifold));
         return cast false;
       }
-      if ((cast _Runtime.callValue(ShapeCollision.isPreferredAxis__shapeCollision, cast ([overlap, axisX, axisY, minOverlap, normalX, normalY, epsilon] : Array<Dynamic>)) : Bool)) {
+      if ((cast (cast ShapeCollision.isPreferredAxis__shapeCollision((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast minOverlap : Float), (cast normalX : Float), (cast normalY : Float), (cast epsilon : Float)) : Bool) : Bool)) {
         (minOverlap = cast (overlap : Dynamic));
         (normalX = cast (axisX : Dynamic));
         (normalY = cast (axisY : Dynamic));
       }
     }
     if ((cast _Runtime.strictEquals(minOverlap, HxMath.POSITIVE_INFINITY) : Bool)) {
-      _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+      clearCollisionManifold((cast out : CollisionManifold));
       return cast false;
     }
     originX = _Runtime.getIndex(px, 0.0);
@@ -362,7 +363,7 @@ class ShapeCollision {
     centroidX = 0.0;
     centroidY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         (centroidX = cast ((centroidX + _Runtime.subtractNumbers(_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
         (centroidY = cast ((centroidY + _Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
@@ -375,32 +376,32 @@ class ShapeCollision {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    _Runtime.setField(out, 'normalX', ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    _Runtime.setField(out, 'normalY', ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    _Runtime.setField(out, 'depth', minOverlap);
-    _Runtime.setField(out, 'overlapping', true);
+    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
+    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
+    ((cast out : CollisionManifold).depth = minOverlap);
+    ((cast out : CollisionManifold).overlapping = true);
     return cast true;
     return cast null;
   }
 
-  public static function circlePolygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float):Float {
-    var originX:Dynamic = cast _Runtime.UNDEFINED;
-    var originY:Dynamic = cast _Runtime.UNDEFINED;
-    var minP:Dynamic = cast _Runtime.UNDEFINED;
-    var maxP:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var cMin:Dynamic = cast _Runtime.UNDEFINED;
-    var cMax:Dynamic = cast _Runtime.UNDEFINED;
-    var penLow:Dynamic = cast _Runtime.UNDEFINED;
-    var penHigh:Dynamic = cast _Runtime.UNDEFINED;
+  public static function circlePolygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, cx:Float, cy:Float, radius:Float, px:flighthq._internal._ArrayLike<Float>, pn:Float):Float {
+    var originX:Float = cast _Runtime.UNDEFINED;
+    var originY:Float = cast _Runtime.UNDEFINED;
+    var minP:Float = cast _Runtime.UNDEFINED;
+    var maxP:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var cMin:Float = cast _Runtime.UNDEFINED;
+    var cMax:Float = cast _Runtime.UNDEFINED;
+    var penLow:Float = cast _Runtime.UNDEFINED;
+    var penHigh:Float = cast _Runtime.UNDEFINED;
     originX = _Runtime.getIndex(px, 0.0);
     originY = _Runtime.getIndex(px, 1.0);
     minP = HxMath.POSITIVE_INFINITY;
     maxP = -HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
+        var d:Float = ((_Runtime.subtractNumbers(_Runtime.getIndex(px, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minP : Float)) : Bool)) { (minP = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxP : Float)) : Bool)) { (maxP = cast (d : Dynamic)); }
         i++;
@@ -415,24 +416,24 @@ class ShapeCollision {
     return cast null;
   }
 
-  public static function satConvexOverlap__shapeCollision(ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
-    var originX:Dynamic = cast _Runtime.UNDEFINED;
-    var originY:Dynamic = cast _Runtime.UNDEFINED;
-    var aCentroidX:Dynamic = cast _Runtime.UNDEFINED;
-    var aCentroidY:Dynamic = cast _Runtime.UNDEFINED;
-    var bCentroidX:Dynamic = cast _Runtime.UNDEFINED;
-    var bCentroidY:Dynamic = cast _Runtime.UNDEFINED;
-    var normalX:Dynamic = cast _Runtime.UNDEFINED;
-    var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    epsilon = _Runtime.callValue(ShapeCollision.relativeEpsilon__shapeCollision, cast ([HxMath.max(_Runtime.callValue(ShapeCollision.getPolygonExtent__shapeCollision, cast ([ax, an] : Array<Dynamic>)), _Runtime.callValue(ShapeCollision.getPolygonExtent__shapeCollision, cast ([bx, bn] : Array<Dynamic>)))] : Array<Dynamic>));
-    _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap', HxMath.POSITIVE_INFINITY);
-    _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'x', 0.0);
-    _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'y', 0.0);
-    if ((cast !(cast _Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([ax, an, ax, an, bx, bn, epsilon, out] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(ShapeCollision.accumulatePolygonAxes__shapeCollision, cast ([bx, bn, ax, an, bx, bn, epsilon, out] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'), HxMath.POSITIVE_INFINITY) : Bool)) {
-      _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+  public static function satConvexOverlap__shapeCollision(ax:flighthq._internal._ArrayLike<Float>, an:Float, bx:flighthq._internal._ArrayLike<Float>, bn:Float, out:CollisionManifold):Bool {
+    var epsilon:Float = cast _Runtime.UNDEFINED;
+    var originX:Float = cast _Runtime.UNDEFINED;
+    var originY:Float = cast _Runtime.UNDEFINED;
+    var aCentroidX:Float = cast _Runtime.UNDEFINED;
+    var aCentroidY:Float = cast _Runtime.UNDEFINED;
+    var bCentroidX:Float = cast _Runtime.UNDEFINED;
+    var bCentroidY:Float = cast _Runtime.UNDEFINED;
+    var normalX:Float = cast _Runtime.UNDEFINED;
+    var normalY:Float = cast _Runtime.UNDEFINED;
+    epsilon = (cast ShapeCollision.relativeEpsilon__shapeCollision((cast HxMath.max((cast ShapeCollision.getPolygonExtent__shapeCollision((cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float)) : Float), (cast ShapeCollision.getPolygonExtent__shapeCollision((cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float)) : Float)) : Float)) : Float);
+    ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap = HxMath.POSITIVE_INFINITY);
+    ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).x = 0.0);
+    ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).y = 0.0);
+    if ((cast !(cast (cast ShapeCollision.accumulatePolygonAxes__shapeCollision((cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float), (cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float), (cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float), (cast epsilon : Float), (cast out : CollisionManifold)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast ShapeCollision.accumulatePolygonAxes__shapeCollision((cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float), (cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float), (cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float), (cast epsilon : Float), (cast out : CollisionManifold)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap, HxMath.POSITIVE_INFINITY) : Bool)) {
+      clearCollisionManifold((cast out : CollisionManifold));
       return cast false;
     }
     originX = _Runtime.getIndex(ax, 0.0);
@@ -440,7 +441,7 @@ class ShapeCollision {
     aCentroidX = 0.0;
     aCentroidY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
         (aCentroidX = cast ((aCentroidX + _Runtime.subtractNumbers(_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
         (aCentroidY = cast ((aCentroidY + _Runtime.subtractNumbers(_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
@@ -452,7 +453,7 @@ class ShapeCollision {
     bCentroidX = 0.0;
     bCentroidY = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
         (bCentroidX = cast ((bCentroidX + _Runtime.subtractNumbers(_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)), originX)) : Dynamic));
         (bCentroidY = cast ((bCentroidY + _Runtime.subtractNumbers(_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)), originY)) : Dynamic));
@@ -461,45 +462,45 @@ class ShapeCollision {
     }
     (bCentroidX = cast ((bCentroidX / bn) : Dynamic));
     (bCentroidY = cast ((bCentroidY / bn) : Dynamic));
-    normalX = _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'x');
-    normalY = _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'y');
+    normalX = (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).x;
+    normalY = (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).y;
     if ((cast ((cast ((normalX * (aCentroidX - bCentroidX)) + (normalY * (aCentroidY - bCentroidY))) : Float) < (cast -epsilon : Float)) : Bool)) {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    _Runtime.setField(out, 'normalX', ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    _Runtime.setField(out, 'normalY', ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    _Runtime.setField(out, 'depth', _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'));
-    _Runtime.setField(out, 'overlapping', true);
+    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
+    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
+    ((cast out : CollisionManifold).depth = (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap);
+    ((cast out : CollisionManifold).overlapping = true);
     return cast true;
     return cast null;
   }
 
-  public static function accumulatePolygonAxes__shapeCollision(sx:Dynamic, sn:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float, epsilon:Float, out:CollisionManifold):Bool {
+  public static function accumulatePolygonAxes__shapeCollision(sx:flighthq._internal._ArrayLike<Float>, sn:Float, ax:flighthq._internal._ArrayLike<Float>, an:Float, bx:flighthq._internal._ArrayLike<Float>, bn:Float, epsilon:Float, out:CollisionManifold):Bool {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sn : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), sn);
-        var x0:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Dynamic = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1));
-        var y1:Dynamic = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var j:Float = _Runtime.fmod((i + 1.0), sn);
+        var x0:Float = _Runtime.getIndex(sx, (_Runtime.toInt32(i) << 1));
+        var y0:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Float = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1));
+        var y1:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0));
         (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
         (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
-        var len:Dynamic = _Runtime.callValue(normalizeVector2, cast ([ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision] : Array<Dynamic>));
+        var len:Float = (cast normalizeVector2(ShapeCollision.scratchAxis__shapeCollision, ShapeCollision.scratchAxis__shapeCollision) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
-        _Runtime.callValue(ShapeCollision.canonicalizeScratchAxis__shapeCollision, cast ([] : Array<Dynamic>));
-        var axisX:Dynamic = ShapeCollision.scratchAxis__shapeCollision.x;
-        var axisY:Dynamic = ShapeCollision.scratchAxis__shapeCollision.y;
-        var overlap:Dynamic = _Runtime.callValue(ShapeCollision.polygonAxisOverlap__shapeCollision, cast ([axisX, axisY, ax, an, bx, bn] : Array<Dynamic>));
+        ShapeCollision.canonicalizeScratchAxis__shapeCollision();
+        var axisX:Float = ShapeCollision.scratchAxis__shapeCollision.x;
+        var axisY:Float = ShapeCollision.scratchAxis__shapeCollision.y;
+        var overlap:Float = (cast ShapeCollision.polygonAxisOverlap__shapeCollision((cast axisX : Float), (cast axisY : Float), (cast ax : flighthq._internal._ArrayLike<Float>), (cast an : Float), (cast bx : flighthq._internal._ArrayLike<Float>), (cast bn : Float)) : Float);
         if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-          _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+          clearCollisionManifold((cast out : CollisionManifold));
           return cast false;
         }
-        if ((cast _Runtime.callValue(ShapeCollision.isPreferredAxis__shapeCollision, cast ([overlap, axisX, axisY, _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap'), _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'x'), _Runtime.field(ShapeCollision.minOverlapAxis__shapeCollision, 'y'), epsilon] : Array<Dynamic>)) : Bool)) {
-          _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'overlap', overlap);
-          _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'x', axisX);
-          _Runtime.setField(ShapeCollision.minOverlapAxis__shapeCollision, 'y', axisY);
+        if ((cast (cast ShapeCollision.isPreferredAxis__shapeCollision((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap : Float), (cast (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).x : Float), (cast (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).y : Float), (cast epsilon : Float)) : Bool) : Bool)) {
+          ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap = overlap);
+          ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).x = axisX);
+          ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).y = axisY);
         }
         i++;
       }
@@ -508,23 +509,23 @@ class ShapeCollision {
     return cast null;
   }
 
-  public static function polygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float):Float {
-    var originX:Dynamic = cast _Runtime.UNDEFINED;
-    var originY:Dynamic = cast _Runtime.UNDEFINED;
-    var minA:Dynamic = cast _Runtime.UNDEFINED;
-    var maxA:Dynamic = cast _Runtime.UNDEFINED;
-    var minB:Dynamic = cast _Runtime.UNDEFINED;
-    var maxB:Dynamic = cast _Runtime.UNDEFINED;
-    var penLow:Dynamic = cast _Runtime.UNDEFINED;
-    var penHigh:Dynamic = cast _Runtime.UNDEFINED;
+  public static function polygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, ax:flighthq._internal._ArrayLike<Float>, an:Float, bx:flighthq._internal._ArrayLike<Float>, bn:Float):Float {
+    var originX:Float = cast _Runtime.UNDEFINED;
+    var originY:Float = cast _Runtime.UNDEFINED;
+    var minA:Float = cast _Runtime.UNDEFINED;
+    var maxA:Float = cast _Runtime.UNDEFINED;
+    var minB:Float = cast _Runtime.UNDEFINED;
+    var maxB:Float = cast _Runtime.UNDEFINED;
+    var penLow:Float = cast _Runtime.UNDEFINED;
+    var penHigh:Float = cast _Runtime.UNDEFINED;
     originX = _Runtime.getIndex(ax, 0.0);
     originY = _Runtime.getIndex(ax, 1.0);
     minA = HxMath.POSITIVE_INFINITY;
     maxA = -HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast an : Float)) : Bool)) {
-        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
+        var d:Float = ((_Runtime.subtractNumbers(_Runtime.getIndex(ax, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(ax, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minA : Float)) : Bool)) { (minA = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxA : Float)) : Bool)) { (maxA = cast (d : Dynamic)); }
         i++;
@@ -533,9 +534,9 @@ class ShapeCollision {
     minB = HxMath.POSITIVE_INFINITY;
     maxB = -HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast bn : Float)) : Bool)) {
-        var d:Dynamic = ((_Runtime.subtractNumbers(_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
+        var d:Float = ((_Runtime.subtractNumbers(_Runtime.getIndex(bx, (_Runtime.toInt32(i) << 1)), originX) * axisX) + (_Runtime.subtractNumbers(_Runtime.getIndex(bx, ((_Runtime.toInt32(i) << 1) + 1.0)), originY) * axisY));
         if ((cast ((cast d : Float) < (cast minB : Float)) : Bool)) { (minB = cast (d : Dynamic)); }
         if ((cast ((cast d : Float) > (cast maxB : Float)) : Bool)) { (maxB = cast (d : Dynamic)); }
         i++;
@@ -555,25 +556,25 @@ class ShapeCollision {
   }
 
   public static function clearInvalidCollisionManifold__shapeCollision(out:CollisionManifold):Bool {
-    _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
+    clearCollisionManifold((cast out : CollisionManifold));
     return cast false;
     return cast null;
   }
 
-  public static function getPolygonExtent__shapeCollision(points:Dynamic, count:Float):Float {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getPolygonExtent__shapeCollision(points:flighthq._internal._ArrayLike<Float>, count:Float):Float {
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var x:Dynamic = _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1));
-        var y:Dynamic = _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x:Float = _Runtime.getIndex(points, (_Runtime.toInt32(i) << 1));
+        var y:Float = _Runtime.getIndex(points, ((_Runtime.toInt32(i) << 1) + 1.0));
         if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
         if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
         if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
@@ -613,11 +614,11 @@ class ShapeCollision {
     return cast null;
   }
 
-  public static final scratchA__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);
+  public static final scratchA__shapeCollision:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(8.0);
 
-  public static final scratchB__shapeCollision:Dynamic = new flighthq._internal._Float64Array(8.0);
+  public static final scratchB__shapeCollision:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(8.0);
 
-  public static final scratchAxis__shapeCollision:Dynamic = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));
+  public static final scratchAxis__shapeCollision:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2);
 
-  public static final minOverlapAxis__shapeCollision:Dynamic = { overlap: HxMath.POSITIVE_INFINITY, x: 0.0, y: 0.0 };
+  public static final minOverlapAxis__shapeCollision:{ var overlap:Float; var x:Float; var y:Float; } = { overlap: HxMath.POSITIVE_INFINITY, x: 0.0, y: 0.0 };
 }

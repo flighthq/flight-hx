@@ -8,6 +8,6 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRenderTarget; var dest:WgpuRenderTarget; var pool:WgpuRenderTargetPool; var sceneDepthTexture:Null<flighthq._internal.dom.GPUTexture>; var sceneVelocityTexture:Null<flighthq._internal.dom.GPUTexture>; };
 
-typedef WgpuRenderEffectRunner = Dynamic;
+typedef WgpuRenderEffectRunner = WgpuRenderEffectContext->RenderEffect->Void;
 
 typedef WgpuRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<WgpuRenderTarget>; var pool:WgpuRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<flighthq._internal.dom.GPUTexture>; };

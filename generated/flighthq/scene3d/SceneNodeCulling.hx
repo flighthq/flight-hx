@@ -12,53 +12,60 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene3d.Mesh.isMesh;
+import flighthq.types.Aabb;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
+import flighthq.types.Node;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Vector3;
 
 class SceneNodeCulling {
   public static function buildScene3DFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
-    _Runtime.callValue(setFrustumFromMatrix4, cast ([out, viewProjection] : Array<Dynamic>));
+    setFrustumFromMatrix4((cast out : FrustumLike), (cast viewProjection : Matrix4Like));
   }
 
   public static function cullNode3DByFrustum(out:Array<Node3D>, root:Node3D, frustum:FrustumLike):Array<Node3D> {
-    _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, root, frustum] : Array<Dynamic>));
+    SceneNodeCulling._cullNode__sceneNodeCulling((cast out : Array<Node3D>), (cast root : Node3D), (cast frustum : FrustumLike));
     return cast out;
     return cast null;
   }
 
   public static function _cullNode__sceneNodeCulling(out:Array<Node3D>, node:Node3D, frustum:FrustumLike):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
-    if ((cast _Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)) : Bool)) {
-      var geom:Dynamic = (cast node : flighthq.types.Mesh).geometry;
-      var localBounds:Dynamic = geom.bounds;
+    if ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool)) {
+      var geom:MeshGeometry = node.geometry;
+      var localBounds:Null<Aabb> = geom.bounds;
       if ((cast _Runtime.strictEquals(localBounds, null) : Bool)) {
-        _Runtime.callValue(computeMeshGeometryBounds, cast ([SceneNodeCulling._scratchLocalAabb__sceneNodeCulling, geom] : Array<Dynamic>));
+        computeMeshGeometryBounds(SceneNodeCulling._scratchLocalAabb__sceneNodeCulling, geom);
         (localBounds = cast (SceneNodeCulling._scratchLocalAabb__sceneNodeCulling : Dynamic));
       }
-      if ((cast ((cast localBounds.min.x : Float) <= (cast localBounds.max.x : Float)) : Bool)) {
-        _Runtime.callValue(ensureNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
-        var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
-        _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeCulling._scratchWorldAabb__sceneNodeCulling, localBounds, worldMatrix] : Array<Dynamic>));
-        if ((cast _Runtime.callValue(isFrustumIntersectingAabb, cast ([frustum, SceneNodeCulling._scratchWorldAabb__sceneNodeCulling] : Array<Dynamic>)) : Bool)) {
+      if ((cast ((cast (cast localBounds : flighthq.types.Aabb).min.x : Float) <= (cast (cast localBounds : flighthq.types.Aabb).max.x : Float)) : Bool)) {
+        ensureNodeWorldMatrix4(node);
+        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4(node) : Matrix4Like);
+        transformAabbByMatrix4(SceneNodeCulling._scratchWorldAabb__sceneNodeCulling, localBounds, (cast worldMatrix : Matrix4Like));
+        if ((cast (cast isFrustumIntersectingAabb((cast frustum : FrustumLike), SceneNodeCulling._scratchWorldAabb__sceneNodeCulling) : Bool) : Bool)) {
           _Runtime.callProperty(out, 'push', cast ([(cast node : Node3D)] : Array<Dynamic>));
         }
       }
     }
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
+    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D), frustum] : Array<Dynamic>));
+          SceneNodeCulling._cullNode__sceneNodeCulling((cast out : Array<Node3D>), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D) : Node3D), (cast frustum : FrustumLike));
           i++;
         }
       }
     }
   }
 
-  public static final _scratchLocalAabb__sceneNodeCulling:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
+  public static final _scratchLocalAabb__sceneNodeCulling:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
 
-  public static final _scratchWorldAabb__sceneNodeCulling:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
+  public static final _scratchWorldAabb__sceneNodeCulling:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
 }

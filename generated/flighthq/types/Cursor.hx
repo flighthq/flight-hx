@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef Cursor = String;
 
-typedef CursorBackend = { var setCursor:Dynamic; };
+typedef CursorBackend = { var setCursor:Null<Cursor>->Void; };

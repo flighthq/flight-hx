@@ -4,19 +4,22 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronApp;
 import flighthq.types.Platform.PlatformBackend;
+import flighthq.types.Platform.PlatformInfo;
+import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
 
 class ElectronPlatform {
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
-    return cast { getInfo: function(out:Dynamic) {
-      var proc:Dynamic = cast _Runtime.UNDEFINED;
-      proc = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('process'), 'undefined') : Bool) ? (cast (cast flighthq._internal._HostValueLut.get('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }) : Dynamic) : (cast null : Dynamic));
-      (out.name = cast (_Runtime.callValue(ElectronPlatform.toPlatformName__electronPlatform, cast ([_Runtime.optionalField(proc, 'platform')] : Array<Dynamic>)) : Dynamic));
+    return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
+      var proc:Null<{ @:optional var platform:Null<String>; @:optional var arch:Null<String>; @:optional var getSystemVersion:Null<Void->String>; }> = cast _Runtime.UNDEFINED;
+      proc = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('process'), 'undefined') : Bool) ? (cast (cast flighthq._internal._HostValueLut.get('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Void->String; }) : Dynamic) : (cast null : Dynamic));
+      (out.name = cast ((cast ElectronPlatform.toPlatformName__electronPlatform((cast _Runtime.optionalField(proc, 'platform') : Null<String>)) : PlatformName) : Dynamic));
       (out.kind = cast ('desktop' : Dynamic));
       (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalProperty(proc, 'getSystemVersion', cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));
       (out.arch = cast (_Runtime.coalesce(_Runtime.optionalField(proc, 'arch'), function():Dynamic return cast '') : Dynamic));
-      (out.locale = cast (_Runtime.callProperty(_Runtime.field(electron, 'app'), 'getLocale', cast ([] : Array<Dynamic>)) : Dynamic));
+      (out.locale = cast ((cast (cast electron : ElectronApi).app : ElectronApp).getLocale() : Dynamic));
       (out.isTouch = cast (false : Dynamic));
       return cast out;
     } };

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef EasingFunction = Dynamic;
+typedef EasingFunction = Float->Float;

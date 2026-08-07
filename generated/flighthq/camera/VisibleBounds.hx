@@ -8,16 +8,17 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.matrixTransformBounds;
 import flighthq.types.Camera2D;
+import flighthq.types.Matrix;
 import flighthq.types.Rectangle.RectangleLike;
 
 class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
-    _Runtime.callValue(getCamera2DViewMatrix, cast ([camera, VisibleBounds.scratchMatrix__visibleBounds] : Array<Dynamic>));
-    _Runtime.callValue(inverseMatrix, cast ([VisibleBounds.scratchInverse__visibleBounds, VisibleBounds.scratchMatrix__visibleBounds] : Array<Dynamic>));
-    _Runtime.callValue(matrixTransformBounds, cast ([out, VisibleBounds.scratchInverse__visibleBounds, 0.0, 0.0, camera.viewportWidth, camera.viewportHeight] : Array<Dynamic>));
+    getCamera2DViewMatrix((cast camera : Camera2D), VisibleBounds.scratchMatrix__visibleBounds);
+    (cast inverseMatrix(VisibleBounds.scratchInverse__visibleBounds, VisibleBounds.scratchMatrix__visibleBounds) : Bool);
+    matrixTransformBounds((cast out : RectangleLike), VisibleBounds.scratchInverse__visibleBounds, (cast 0.0 : Float), (cast 0.0 : Float), (cast camera.viewportWidth : Float), (cast camera.viewportHeight : Float));
   }
 
-  public static final scratchInverse__visibleBounds:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final scratchInverse__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
 
-  public static final scratchMatrix__visibleBounds:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final scratchMatrix__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
 }

@@ -11,8 +11,8 @@ package flighthq._internal;
 // Constructed through `_Runtime` and used as the typed receiver surface for
 // generated WeakMap operations.
 @:keep
-class _WeakMap {
-  final entries:haxe.ds.ObjectMap<{}, Dynamic> = new haxe.ds.ObjectMap();
+class _WeakMap<K, V> {
+  final entries:haxe.ds.ObjectMap<{}, V> = new haxe.ds.ObjectMap();
 
   public function new(?source:Dynamic) {
     if (source != null) for (pair in (cast source : Array<Dynamic>)) set(pair[0], pair[1]);
@@ -21,19 +21,19 @@ class _WeakMap {
   #if js
   @:native("delete")
   #end
-  public function delete_(key:Dynamic):Bool {
+  public function delete_(key:K):Bool {
     return key != null && entries.remove(cast key);
   }
 
-  public function get(key:Dynamic):Dynamic {
+  public function get(key:K):Null<V> {
     return key == null ? null : entries.get(cast key);
   }
 
-  public function has(key:Dynamic):Bool {
+  public function has(key:K):Bool {
     return key != null && entries.exists(cast key);
   }
 
-  public function set(key:Dynamic, value:Dynamic):_WeakMap {
+  public function set(key:K, value:V):_WeakMap<K, V> {
     entries.set(cast key, value);
     return this;
   }

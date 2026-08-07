@@ -8,27 +8,27 @@ import flighthq.types.AudioResourceReference.AudioDecoder;
 
 class AudioDecoderRegistry {
   public static function getAudioDecoder(mimeType:String):Null<AudioDecoder> {
-    return cast _Runtime.coalesce(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).get(_Runtime.callValue(getAudioMimeTypeEssence, cast ([mimeType] : Array<Dynamic>)))), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).get((cast getAudioMimeTypeEssence((cast mimeType : String)) : String))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getAudioDecoderMimeTypes():Array<String> {
-    return cast _Runtime.toArray(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).keys()));
+    return cast _Runtime.toArray(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).keys()));
     return cast null;
   }
 
   public static function hasAudioDecoder(mimeType:String):Bool {
-    return cast ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).has(_Runtime.callValue(getAudioMimeTypeEssence, cast ([mimeType] : Array<Dynamic>))));
+    return cast ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).has((cast getAudioMimeTypeEssence((cast mimeType : String)) : String)));
     return cast null;
   }
 
   public static function registerAudioDecoder(mimeType:String, decoder:AudioDecoder):Void {
-    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).set(_Runtime.callValue(getAudioMimeTypeEssence, cast ([mimeType] : Array<Dynamic>)), decoder));
+    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).set((cast getAudioMimeTypeEssence((cast mimeType : String)) : String), decoder));
   }
 
   public static function unregisterAudioDecoder(mimeType:String):Void {
-    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).delete_(_Runtime.callValue(getAudioMimeTypeEssence, cast ([mimeType] : Array<Dynamic>))));
+    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).delete_((cast getAudioMimeTypeEssence((cast mimeType : String)) : String)));
   }
 
-  public static final decoders__audioDecoderRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final decoders__audioDecoderRegistry:flighthq._internal._Map<String, AudioDecoder> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

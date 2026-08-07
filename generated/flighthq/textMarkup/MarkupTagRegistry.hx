@@ -18,41 +18,41 @@ class MarkupTagRegistry {
   }
 
   public static function registerMarkupTag(registry:flighthq.types.MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
-    ((cast _Runtime.field(registry, 'handlers') : flighthq._internal._Map).set(_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler));
+    ((cast _Runtime.field(registry, 'handlers') : flighthq._internal._Map<String, MarkupTagHandler>).set(_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler));
   }
 
   public static function registerStandardMarkupTags(registry:flighthq.types.MarkupTagRegistry):Void {
-    _Runtime.setField(registry, 'colorResolver', resolveMarkupHexColor);
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'a', MarkupTagRegistry.markupAnchorTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'b', MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'br', MarkupTagRegistry.markupBreakTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'em', MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'font', _Runtime.callValue(MarkupTagRegistry.createMarkupFontTagHandler__markupTagRegistry, cast ([registry] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'i', MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'li', MarkupTagRegistry.markupListItemTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'p', MarkupTagRegistry.markupParagraphTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 's', MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'span', _Runtime.callValue(MarkupTagRegistry.createMarkupSpanTagHandler__markupTagRegistry, cast ([registry] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'strike', MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'strong', MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'textformat', MarkupTagRegistry.markupTextformatTagHandler__markupTagRegistry] : Array<Dynamic>));
-    _Runtime.callValue(registerMarkupTag, cast ([registry, 'u', MarkupTagRegistry.markupUnderlineTagHandler__markupTagRegistry] : Array<Dynamic>));
+    ((cast registry : flighthq.types.MarkupTagRegistry).colorResolver = resolveMarkupHexColor);
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'a' : String), (cast MarkupTagRegistry.markupAnchorTagHandler__markupTagRegistry : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'b' : String), (cast function(__unused0:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'br' : String), (cast function(__unused1:flighthq._internal._Record<String, String>):{ var text:String; } return MarkupTagRegistry.markupBreakTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'em' : String), (cast function(__unused2:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'font' : String), (cast (cast MarkupTagRegistry.createMarkupFontTagHandler__markupTagRegistry((cast registry : flighthq.types.MarkupTagRegistry)) : MarkupTagHandler) : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'i' : String), (cast function(__unused3:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'li' : String), (cast MarkupTagRegistry.markupListItemTagHandler__markupTagRegistry : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'p' : String), (cast MarkupTagRegistry.markupParagraphTagHandler__markupTagRegistry : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 's' : String), (cast function(__unused4:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'span' : String), (cast (cast MarkupTagRegistry.createMarkupSpanTagHandler__markupTagRegistry((cast registry : flighthq.types.MarkupTagRegistry)) : MarkupTagHandler) : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'strike' : String), (cast function(__unused5:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'strong' : String), (cast function(__unused6:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry() : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'textformat' : String), (cast MarkupTagRegistry.markupTextformatTagHandler__markupTagRegistry : MarkupTagHandler));
+    registerMarkupTag((cast registry : flighthq.types.MarkupTagRegistry), (cast 'u' : String), (cast function(__unused7:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupUnderlineTagHandler__markupTagRegistry() : MarkupTagHandler));
   }
 
   public static function resolveMarkupHexColor(value:String):Null<Float> {
-    var color:Dynamic = cast _Runtime.UNDEFINED;
+    var color:String = cast _Runtime.UNDEFINED;
     color = _Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>));
     if ((cast StringTools.startsWith(color, '#') : Bool)) {
-      var hex:Dynamic = _Runtime.slice(color, 1.0, null);
+      var hex:String = _Runtime.slice(color, 1.0, null);
       if ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool)) {
-        var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
+        var parsed:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
         return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
       }
-      var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
+      var parsed:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
       return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     }
     if ((cast StringTools.startsWith(color, '0x') : Bool)) {
-      var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
+      var parsed:Float = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
       return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     }
     return cast null;
@@ -60,9 +60,9 @@ class MarkupTagRegistry {
   }
 
   public static function createMarkupSpanTagHandler__markupTagRegistry(registry:flighthq.types.MarkupTagRegistry):MarkupTagHandler {
-    return cast function(attributes:Dynamic) {
+    return cast function(attributes:flighthq._internal._Record<String, String>):Dynamic {
       var resolve:Null<MarkupClassResolver> = cast _Runtime.UNDEFINED;
-      var classes:Dynamic = cast _Runtime.UNDEFINED;
+      var classes:String = cast _Runtime.UNDEFINED;
       var format:TextFormat = cast _Runtime.UNDEFINED;
       resolve = _Runtime.field(registry, 'classResolver');
       classes = _Runtime.field(attributes, 'class');
@@ -70,7 +70,7 @@ class MarkupTagRegistry {
       format = {  };
       for (name in _Runtime.iterable(_Runtime.callProperty(classes, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)))) {
         if ((cast _Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0) : Bool)) { continue; }
-        var contribution:Dynamic = _Runtime.callValue(resolve, cast ([name] : Array<Dynamic>));
+        var contribution:Null<flighthq._internal._Any> = (cast (cast resolve : String->Null<flighthq._internal._Any>)((cast name : String)) : Null<flighthq._internal._Any>);
         if ((cast !_Runtime.strictEquals(contribution, null) : Bool)) { flighthq._internal.DynamicObject.assign(format, contribution); }
       }
       return cast format;
@@ -79,25 +79,25 @@ class MarkupTagRegistry {
   }
 
   public static function createMarkupFontTagHandler__markupTagRegistry(registry:flighthq.types.MarkupTagRegistry):MarkupTagHandler {
-    return cast function(attributes:Dynamic) {
+    return cast function(attributes:flighthq._internal._Record<String, String>):Dynamic {
       var format:TextFormat = cast _Runtime.UNDEFINED;
-      var color:Dynamic = cast _Runtime.UNDEFINED;
-      var size:Dynamic = cast _Runtime.UNDEFINED;
-      var face:Dynamic = cast _Runtime.UNDEFINED;
+      var color:String = cast _Runtime.UNDEFINED;
+      var size:String = cast _Runtime.UNDEFINED;
+      var face:String = cast _Runtime.UNDEFINED;
       format = {  };
       color = _Runtime.field(attributes, 'color');
       if ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var resolve:MarkupColorResolver = _Runtime.coalesce(_Runtime.field(registry, 'colorResolver'), function():Dynamic return cast resolveMarkupHexColor);
-        var parsed:Dynamic = _Runtime.callValue(resolve, cast ([color] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { _Runtime.setField(format, 'color', parsed); }
+        var parsed:Null<Float> = (cast resolve((cast color : String)) : Null<Float>);
+        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { ((cast format : TextFormat).color = parsed); }
       }
       size = _Runtime.field(attributes, 'size');
       if ((cast !_Runtime.strictEquals(size, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var parsed:Dynamic = _Runtime.callValue(MarkupTagRegistry.parseMarkupNumber__markupTagRegistry, cast ([size] : Array<Dynamic>));
-        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { _Runtime.setField(format, 'size', parsed); }
+        var parsed:Null<Float> = (cast MarkupTagRegistry.parseMarkupNumber__markupTagRegistry((cast size : String)) : Null<Float>);
+        if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { ((cast format : TextFormat).size = parsed); }
       }
       face = _Runtime.coalesce(_Runtime.field(attributes, 'face'), function():Dynamic return cast _Runtime.field(attributes, 'font'));
-      if ((cast ((cast !_Runtime.strictEquals(face, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(face, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.setField(format, 'font', face); }
+      if ((cast ((cast !_Runtime.strictEquals(face, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(face, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { ((cast format : TextFormat).font = face); }
       return cast format;
     };
     return cast null;
@@ -129,11 +129,11 @@ class MarkupTagRegistry {
     return cast null;
   }
 
-  public static function markupAnchorTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
+  public static function markupAnchorTagHandler__markupTagRegistry(attributes:flighthq._internal._Record<String, String>):Dynamic {
     var format:TextFormat = cast _Runtime.UNDEFINED;
     format = {  };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(attributes, 'href'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(format, 'url', _Runtime.field(attributes, 'href')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(attributes, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(format, 'target', _Runtime.field(attributes, 'target')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(attributes, 'href'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast format : TextFormat).url = _Runtime.field(attributes, 'href')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(attributes, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast format : TextFormat).target = _Runtime.field(attributes, 'target')); }
     return cast format;
     return cast null;
   }
@@ -153,22 +153,22 @@ class MarkupTagRegistry {
     return cast null;
   }
 
-  public static function markupListItemTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
+  public static function markupListItemTagHandler__markupTagRegistry(attributes:flighthq._internal._Record<String, String>):{ var breakBefore:Bool; var format:Dynamic; } {
     var format:TextFormat = cast _Runtime.UNDEFINED;
-    var marker:Dynamic = cast _Runtime.UNDEFINED;
+    var marker:String = cast _Runtime.UNDEFINED;
     format = { bullet: true };
     marker = _Runtime.field(attributes, 'type');
-    if ((cast ((cast !_Runtime.strictEquals(marker, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(MarkupTagRegistry.isMarkupListMarker__markupTagRegistry, cast ([marker] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.setField(format, 'listMarker', (cast _Runtime.callProperty(marker, 'toLowerCase', cast ([] : Array<Dynamic>)) : TextFormatListMarker)); }
+    if ((cast ((cast !_Runtime.strictEquals(marker, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast MarkupTagRegistry.isMarkupListMarker__markupTagRegistry((cast marker : String)) : Bool) : Bool)) : Bool)) { ((cast format : TextFormat).listMarker = (cast _Runtime.callProperty(marker, 'toLowerCase', cast ([] : Array<Dynamic>)) : TextFormatListMarker)); }
     return cast { breakBefore: true, format: format };
     return cast null;
   }
 
-  public static function markupParagraphTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
+  public static function markupParagraphTagHandler__markupTagRegistry(attributes:flighthq._internal._Record<String, String>):{ var breakBefore:Bool; var format:Dynamic; } {
     var format:TextFormat = cast _Runtime.UNDEFINED;
-    var align:Dynamic = cast _Runtime.UNDEFINED;
+    var align:String = cast _Runtime.UNDEFINED;
     format = {  };
     align = _Runtime.field(attributes, 'align');
-    if ((cast ((cast !_Runtime.strictEquals(align, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(MarkupTagRegistry.isMarkupAlign__markupTagRegistry, cast ([align] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.setField(format, 'align', (cast _Runtime.callProperty(align, 'toLowerCase', cast ([] : Array<Dynamic>)) : TextFormatAlign)); }
+    if ((cast ((cast !_Runtime.strictEquals(align, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast MarkupTagRegistry.isMarkupAlign__markupTagRegistry((cast align : String)) : Bool) : Bool)) : Bool)) { ((cast format : TextFormat).align = (cast _Runtime.callProperty(align, 'toLowerCase', cast ([] : Array<Dynamic>)) : TextFormatAlign)); }
     return cast { breakBefore: true, format: format };
     return cast null;
   }
@@ -178,27 +178,27 @@ class MarkupTagRegistry {
     return cast null;
   }
 
-  public static function markupTextformatTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
+  public static function markupTextformatTagHandler__markupTagRegistry(attributes:flighthq._internal._Record<String, String>):Dynamic {
     var format:TextFormat = cast _Runtime.UNDEFINED;
-    var blockIndent:Dynamic = cast _Runtime.UNDEFINED;
-    var indent:Dynamic = cast _Runtime.UNDEFINED;
-    var leading:Dynamic = cast _Runtime.UNDEFINED;
-    var leftMargin:Dynamic = cast _Runtime.UNDEFINED;
-    var rightMargin:Dynamic = cast _Runtime.UNDEFINED;
-    var tabStops:Dynamic = cast _Runtime.UNDEFINED;
+    var blockIndent:Null<Float> = cast _Runtime.UNDEFINED;
+    var indent:Null<Float> = cast _Runtime.UNDEFINED;
+    var leading:Null<Float> = cast _Runtime.UNDEFINED;
+    var leftMargin:Null<Float> = cast _Runtime.UNDEFINED;
+    var rightMargin:Null<Float> = cast _Runtime.UNDEFINED;
+    var tabStops:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     format = {  };
-    blockIndent = _Runtime.callValue(MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry, cast ([attributes, 'blockindent'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(blockIndent, null) : Bool)) { _Runtime.setField(format, 'blockIndent', blockIndent); }
-    indent = _Runtime.callValue(MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry, cast ([attributes, 'indent'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(indent, null) : Bool)) { _Runtime.setField(format, 'indent', indent); }
-    leading = _Runtime.callValue(MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry, cast ([attributes, 'leading'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(leading, null) : Bool)) { _Runtime.setField(format, 'leading', leading); }
-    leftMargin = _Runtime.callValue(MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry, cast ([attributes, 'leftmargin'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(leftMargin, null) : Bool)) { _Runtime.setField(format, 'leftMargin', leftMargin); }
-    rightMargin = _Runtime.callValue(MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry, cast ([attributes, 'rightmargin'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(rightMargin, null) : Bool)) { _Runtime.setField(format, 'rightMargin', rightMargin); }
-    tabStops = _Runtime.callValue(MarkupTagRegistry.readMarkupTabStopsAttribute__markupTagRegistry, cast ([attributes, 'tabstops'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(tabStops, null) : Bool)) { _Runtime.setField(format, 'tabStops', tabStops); }
+    blockIndent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'blockindent' : String)) : Null<Float>);
+    if ((cast !_Runtime.strictEquals(blockIndent, null) : Bool)) { ((cast format : TextFormat).blockIndent = blockIndent); }
+    indent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'indent' : String)) : Null<Float>);
+    if ((cast !_Runtime.strictEquals(indent, null) : Bool)) { ((cast format : TextFormat).indent = indent); }
+    leading = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'leading' : String)) : Null<Float>);
+    if ((cast !_Runtime.strictEquals(leading, null) : Bool)) { ((cast format : TextFormat).leading = leading); }
+    leftMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'leftmargin' : String)) : Null<Float>);
+    if ((cast !_Runtime.strictEquals(leftMargin, null) : Bool)) { ((cast format : TextFormat).leftMargin = leftMargin); }
+    rightMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'rightmargin' : String)) : Null<Float>);
+    if ((cast !_Runtime.strictEquals(rightMargin, null) : Bool)) { ((cast format : TextFormat).rightMargin = rightMargin); }
+    tabStops = (cast MarkupTagRegistry.readMarkupTabStopsAttribute__markupTagRegistry((cast attributes : flighthq._internal._Record<String, String>), (cast 'tabstops' : String)) : Null<Array<Float>>);
+    if ((cast !_Runtime.strictEquals(tabStops, null) : Bool)) { ((cast format : TextFormat).tabStops = tabStops); }
     return cast format;
     return cast null;
   }
@@ -209,27 +209,27 @@ class MarkupTagRegistry {
   }
 
   public static function parseMarkupNumber__markupTagRegistry(value:String):Null<Float> {
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function readMarkupNumberAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Float> {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readMarkupNumberAttribute__markupTagRegistry(attributes:flighthq._internal._Record<String, String>, name:String):Null<Float> {
+    var raw:String = cast _Runtime.UNDEFINED;
     raw = _Runtime.getIndex(attributes, name);
-    return cast ((cast _Runtime.strictEquals(raw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(MarkupTagRegistry.parseMarkupNumber__markupTagRegistry, cast ([raw] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(raw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast MarkupTagRegistry.parseMarkupNumber__markupTagRegistry((cast raw : String)) : Null<Float>) : Dynamic));
     return cast null;
   }
 
-  public static function readMarkupTabStopsAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Array<Float>> {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readMarkupTabStopsAttribute__markupTagRegistry(attributes:flighthq._internal._Record<String, String>, name:String):Null<Array<Float>> {
+    var raw:String = cast _Runtime.UNDEFINED;
     var stops:Array<Float> = cast _Runtime.UNDEFINED;
     raw = _Runtime.getIndex(attributes, name);
     if ((cast _Runtime.strictEquals(raw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     stops = cast ([] : Array<Dynamic>);
     for (part in _Runtime.iterable(_Runtime.callProperty(raw, 'split', cast ([','] : Array<Dynamic>)))) {
-      var parsed:Dynamic = _Runtime.callValue(MarkupTagRegistry.parseMarkupNumber__markupTagRegistry, cast ([StringTools.trim(Std.string(part))] : Array<Dynamic>));
+      var parsed:Null<Float> = (cast MarkupTagRegistry.parseMarkupNumber__markupTagRegistry((cast StringTools.trim(Std.string(part)) : String)) : Null<Float>);
       if ((cast !_Runtime.strictEquals(parsed, null) : Bool)) { _Runtime.callProperty(stops, 'push', cast ([parsed] : Array<Dynamic>)); }
     }
     return cast stops;

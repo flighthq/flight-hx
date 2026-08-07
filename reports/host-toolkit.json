@@ -2,15 +2,15 @@
   "moduleValues": [],
   "schemaVersion": 1,
   "summary": {
-    "dynamicTypeEntries": 197,
+    "dynamicTypeEntries": 218,
     "externalTypeKeys": 4,
     "globalValueKeys": 68,
-    "hostTypeKeys": 194,
+    "hostTypeKeys": 218,
     "jsOnlyGlobalValueKeys": 53,
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 15,
-    "typeUses": 6519,
+    "typeUses": 9128,
     "valueUses": 1562
   },
   "types": [
@@ -75,7 +75,7 @@
         "upstream/packages/types/src/Scene3DResources.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AbortController.hx",
-      "uses": 29
+      "uses": 37
     },
     {
       "coverage": "dynamic-stub",
@@ -90,10 +90,16 @@
         "upstream/packages/image/src/imageResourceReference.ts",
         "upstream/packages/loader/src/resourceLoader.ts",
         "upstream/packages/net/src/net.ts",
+        "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts",
+        "upstream/packages/scene2d-resources/src/loadScene2DImageResources.ts",
+        "upstream/packages/scene2d-resources/src/scene2DDocumentSource.ts",
         "upstream/packages/scene3d-resources/src/imageResourceFetch.ts",
         "upstream/packages/scene3d-resources/src/resolveScene3DResources.ts",
+        "upstream/packages/scene3d-resources/src/sceneDocumentSource.ts",
         "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
+        "upstream/packages/types/src/AudioResourceReference.ts",
         "upstream/packages/types/src/Connectivity.ts",
+        "upstream/packages/types/src/ImageResourceReference.ts",
         "upstream/packages/types/src/Net.ts",
         "upstream/packages/types/src/ResourceLoadItem.ts",
         "upstream/packages/types/src/Scene2DResources.ts",
@@ -101,21 +107,23 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AbortSignal.hx",
-      "uses": 73
+      "uses": 110
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.AudioBuffer",
       "key": "host:AudioBuffer",
       "kind": "host",
       "locations": [
         "upstream/packages/audio/src/audioResource.ts",
         "upstream/packages/audio/src/audioResourceFrom.ts",
+        "upstream/packages/audio/src/audioResourceReference.ts",
         "upstream/packages/media/src/audioChannel.ts",
+        "upstream/packages/swf/src/swfDocument.ts",
         "upstream/packages/types/src/AudioResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AudioBuffer.hx",
-      "uses": 12
+      "uses": 23
     },
     {
       "coverage": "dynamic-stub",
@@ -126,7 +134,7 @@
         "upstream/packages/media/src/audioChannel.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AudioBufferSourceNode.hx",
-      "uses": 9
+      "uses": 13
     },
     {
       "coverage": "dynamic-stub",
@@ -138,10 +146,23 @@
         "upstream/packages/audio/src/audioResourceReference.ts",
         "upstream/packages/media/src/audioChannel.ts",
         "upstream/packages/media/src/audioMixer.ts",
+        "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts",
         "upstream/packages/types/src/Scene2DResources.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AudioContext.hx",
-      "uses": 28
+      "uses": 35
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.AudioDestinationNode",
+      "key": "host:AudioDestinationNode",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/media/src/audioChannel.ts",
+        "upstream/packages/media/src/audioMixer.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/AudioDestinationNode.hx",
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -149,10 +170,11 @@
       "key": "host:AudioNode",
       "kind": "host",
       "locations": [
-        "upstream/packages/media/src/audioChannel.ts"
+        "upstream/packages/media/src/audioChannel.ts",
+        "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AudioNode.hx",
-      "uses": 4
+      "uses": 7
     },
     {
       "coverage": "dynamic-stub",
@@ -164,7 +186,7 @@
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AudioParam.hx",
-      "uses": 19
+      "uses": 21
     },
     {
       "coverage": "dynamic-stub",
@@ -175,7 +197,7 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/BeforeUnloadEvent.hx",
-      "uses": 3
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -187,14 +209,16 @@
         "upstream/packages/clipboard/src/clipboard.ts",
         "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/filesystem/src/filesystem.ts",
+        "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
+        "upstream/packages/net/src/net.ts",
         "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
         "upstream/packages/types/src/Net.ts",
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Blob.hx",
-      "uses": 16
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -230,17 +254,33 @@
       "uses": 1
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.CanvasGradient",
       "key": "host:CanvasGradient",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
         "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
+        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
         "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShape.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextInput.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
+        "upstream/packages/scene2d-gl/src/glRichText.ts",
+        "upstream/packages/scene2d-gl/src/glTextInput.ts",
+        "upstream/packages/scene2d-gl/src/glTextLabel.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTextInput.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
         "upstream/packages/types/src/CanvasShapeDrawState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CanvasGradient.hx",
-      "uses": 14
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -263,6 +303,7 @@
         "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
         "upstream/packages/types/src/CanvasShapeDrawState.ts",
         "upstream/packages/types/src/CanvasTextureResolver.ts",
+        "upstream/packages/types/src/DomTextureResolver.ts",
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/HostImageSource.ts",
         "upstream/packages/types/src/Image.ts",
@@ -270,7 +311,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CanvasImageSource.hx",
-      "uses": 21
+      "uses": 23
     },
     {
       "coverage": "dynamic-stub",
@@ -300,11 +341,28 @@
       "key": "host:CanvasPattern",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
+        "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
+        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
         "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShape.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextInput.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
+        "upstream/packages/scene2d-gl/src/glRichText.ts",
+        "upstream/packages/scene2d-gl/src/glTextInput.ts",
+        "upstream/packages/scene2d-gl/src/glTextLabel.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTextInput.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
         "upstream/packages/types/src/CanvasShapeDrawState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CanvasPattern.hx",
-      "uses": 5
+      "uses": 28
     },
     {
       "coverage": "dynamic-stub",
@@ -344,6 +402,7 @@
         "upstream/packages/scene2d-canvas/src/canvasScale9Shape.ts",
         "upstream/packages/scene2d-canvas/src/canvasShape.ts",
         "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeRasterizer.ts",
         "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextInput.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
@@ -359,21 +418,27 @@
         "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts",
         "upstream/packages/scene2d-gl/src/glRichText.ts",
         "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+        "upstream/packages/scene2d-gl/src/glShapeData.ts",
         "upstream/packages/scene2d-gl/src/glTextInput.ts",
         "upstream/packages/scene2d-gl/src/glTextLabel.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuTextInput.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts",
         "upstream/packages/types/src/CanvasRenderState.ts",
         "upstream/packages/types/src/CanvasRenderTarget.ts",
+        "upstream/packages/types/src/CanvasShapeRegistry.ts",
+        "upstream/packages/types/src/GlRichTextOverlay.ts",
         "upstream/packages/types/src/GlShapeRendererData.ts",
+        "upstream/packages/types/src/ShapeRasterizer.ts",
+        "upstream/packages/types/src/WgpuRichTextOverlay.ts",
         "upstream/packages/types/src/WgpuShapeRendererData.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CanvasRenderingContext2D.hx",
-      "uses": 514
+      "uses": 599
     },
     {
       "coverage": "dynamic-stub",
@@ -386,7 +451,7 @@
         "upstream/packages/types/src/CanvasRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CanvasRenderingContext2DSettings.hx",
-      "uses": 3
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -398,7 +463,7 @@
         "upstream/packages/scene2d-dom/src/domReconcile.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ChildNode.hx",
-      "uses": 4
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -409,7 +474,7 @@
         "upstream/packages/clipboard/src/clipboard.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Clipboard.hx",
-      "uses": 18
+      "uses": 20
     },
     {
       "coverage": "dynamic-stub",
@@ -420,7 +485,7 @@
         "upstream/packages/clipboard/src/clipboard.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ClipboardItem.hx",
-      "uses": 7
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -431,7 +496,7 @@
         "upstream/packages/socket/src/socket.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CloseEvent.hx",
-      "uses": 4
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -442,7 +507,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CompositionEvent.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -453,7 +518,7 @@
         "upstream/packages/log/src/log.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Console.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -464,7 +529,7 @@
         "upstream/packages/device/src/device.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Crypto.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -496,7 +561,7 @@
         "upstream/packages/scene2d-dom/src/domTransform.ts"
       ],
       "provider": "src/flighthq/_internal/dom/CSSStyleDeclaration.hx",
-      "uses": 135
+      "uses": 157
     },
     {
       "coverage": "dynamic-stub",
@@ -518,7 +583,7 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/DataTransfer.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -574,7 +639,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Document.hx",
-      "uses": 116
+      "uses": 162
     },
     {
       "coverage": "dynamic-stub",
@@ -586,7 +651,7 @@
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/DOMException.hx",
-      "uses": 4
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -600,7 +665,7 @@
         "upstream/packages/scene2d-dom/src/domRichText.ts"
       ],
       "provider": "src/flighthq/_internal/dom/DOMRect.hx",
-      "uses": 13
+      "uses": 17
     },
     {
       "coverage": "dynamic-stub",
@@ -611,7 +676,18 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/DOMRectReadOnly.hx",
-      "uses": 2
+      "uses": 3
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.DOMStringMap",
+      "key": "host:DOMStringMap",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/menu/src/menu.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/DOMStringMap.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -622,7 +698,7 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/DragEvent.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -630,11 +706,13 @@
       "key": "host:Element",
       "kind": "host",
       "locations": [
+        "upstream/packages/accessibility/src/accessibility.ts",
+        "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/scene2d-dom/src/domTextInput.ts",
         "upstream/packages/statusbar/src/statusbar.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Element.hx",
-      "uses": 4
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -643,11 +721,14 @@
       "kind": "host",
       "locations": [
         "upstream/packages/application/src/window.ts",
+        "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/input/src/inputManager.ts",
-        "upstream/packages/lifecycle/src/lifecycle.ts"
+        "upstream/packages/lifecycle/src/lifecycle.ts",
+        "upstream/packages/loader/src/resourceLoader.ts",
+        "upstream/packages/scene3d-resources/src/resolveScene3DResources.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Event.hx",
-      "uses": 21
+      "uses": 41
     },
     {
       "coverage": "dynamic-stub",
@@ -671,7 +752,41 @@
         "upstream/packages/keyboard/src/keyboard.ts"
       ],
       "provider": "src/flighthq/_internal/dom/EventTarget.hx",
-      "uses": 9
+      "uses": 13
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.EXT_color_buffer_float",
+      "key": "host:EXT_color_buffer_float",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glRenderTarget.ts",
+        "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/EXT_color_buffer_float.hx",
+      "uses": 2
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.EXT_texture_compression_bptc",
+      "key": "host:EXT_texture_compression_bptc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/EXT_texture_compression_bptc.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.EXT_texture_compression_rgtc",
+      "key": "host:EXT_texture_compression_rgtc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/EXT_texture_compression_rgtc.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -680,10 +795,11 @@
       "kind": "host",
       "locations": [
         "upstream/packages/render-gl/src/glDraw.ts",
+        "upstream/packages/render-gl/src/glRenderState.ts",
         "upstream/packages/types/src/GlRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/EXT_texture_filter_anisotropic.hx",
-      "uses": 4
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -698,7 +814,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/File.hx",
-      "uses": 21
+      "uses": 35
     },
     {
       "coverage": "dynamic-stub",
@@ -706,10 +822,12 @@
       "key": "host:FileList",
       "kind": "host",
       "locations": [
-        "upstream/packages/dialog/src/dialog.ts"
+        "upstream/packages/application/src/window.ts",
+        "upstream/packages/dialog/src/dialog.ts",
+        "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FileList.hx",
-      "uses": 4
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -721,7 +839,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FileReader.hx",
-      "uses": 15
+      "uses": 17
     },
     {
       "coverage": "dynamic-stub",
@@ -732,7 +850,7 @@
         "upstream/packages/filesystem/src/filesystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FileSystemDirectoryHandle.hx",
-      "uses": 11
+      "uses": 20
     },
     {
       "coverage": "dynamic-stub",
@@ -743,7 +861,7 @@
         "upstream/packages/filesystem/src/filesystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FileSystemFileHandle.hx",
-      "uses": 15
+      "uses": 23
     },
     {
       "coverage": "dynamic-stub",
@@ -754,7 +872,7 @@
         "upstream/packages/filesystem/src/filesystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FileSystemWritableFileStream.hx",
-      "uses": 3
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -774,10 +892,12 @@
       "kind": "host",
       "locations": [
         "upstream/packages/font/src/_fontFaceLoad.ts",
+        "upstream/packages/font/src/fontFrom.ts",
+        "upstream/packages/font/src/fontResourceFrom.ts",
         "upstream/packages/types/src/FontResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FontFace.hx",
-      "uses": 7
+      "uses": 20
     },
     {
       "coverage": "dynamic-stub",
@@ -789,7 +909,18 @@
         "upstream/packages/font/src/fontStatus.ts"
       ],
       "provider": "src/flighthq/_internal/dom/FontFaceSet.hx",
-      "uses": 4
+      "uses": 7
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.FormData",
+      "key": "host:FormData",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/net/src/net.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/FormData.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -801,7 +932,7 @@
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GainNode.hx",
-      "uses": 26
+      "uses": 34
     },
     {
       "coverage": "dynamic-stub",
@@ -812,7 +943,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Gamepad.hx",
-      "uses": 24
+      "uses": 26
     },
     {
       "coverage": "dynamic-stub",
@@ -823,7 +954,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GamepadButton.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -846,7 +977,7 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Geolocation.hx",
-      "uses": 12
+      "uses": 16
     },
     {
       "coverage": "dynamic-stub",
@@ -857,7 +988,7 @@
         "upstream/packages/geolocation/src/geolocation.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GeolocationCoordinates.hx",
-      "uses": 7
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -865,10 +996,11 @@
       "key": "host:GeolocationPosition",
       "kind": "host",
       "locations": [
-        "upstream/packages/geolocation/src/geolocation.ts"
+        "upstream/packages/geolocation/src/geolocation.ts",
+        "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GeolocationPosition.hx",
-      "uses": 2
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -879,7 +1011,7 @@
         "upstream/packages/geolocation/src/geolocation.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GeolocationPositionError.hx",
-      "uses": 2
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -907,7 +1039,7 @@
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPU.hx",
-      "uses": 4
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -920,7 +1052,7 @@
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUAdapter.hx",
-      "uses": 8
+      "uses": 15
     },
     {
       "coverage": "dynamic-stub",
@@ -928,10 +1060,24 @@
       "key": "host:GPUBindGroup",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/blinnPhongWgpuMeshMaterialRenderer.ts",
@@ -942,6 +1088,9 @@
         "upstream/packages/scene3d-wgpu/src/matcapWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/normalWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/phongWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/shadedWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/specularGlossinessPbrWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/toonWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/unlitWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/vertexColorWgpuMeshMaterialRenderer.ts",
@@ -953,6 +1102,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
@@ -960,10 +1110,11 @@
         "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
         "upstream/packages/types/src/WgpuRenderTarget.ts",
-        "upstream/packages/types/src/WgpuScene3DRuntime.ts"
+        "upstream/packages/types/src/WgpuScene3DRuntime.ts",
+        "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBindGroup.hx",
-      "uses": 70
+      "uses": 137
     },
     {
       "coverage": "dynamic-stub",
@@ -976,7 +1127,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBindGroupEntry.hx",
-      "uses": 6
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -986,26 +1137,48 @@
       "locations": [
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts",
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
         "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuPbrPipelineCache.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts",
         "upstream/packages/types/src/WgpuFullscreenPipeline.ts",
         "upstream/packages/types/src/WgpuMeshPipeline.ts",
         "upstream/packages/types/src/WgpuQuadBatchResources.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
-        "upstream/packages/types/src/WgpuScene3DRuntime.ts"
+        "upstream/packages/types/src/WgpuScene3DRuntime.ts",
+        "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBindGroupLayout.hx",
-      "uses": 56
+      "uses": 130
     },
     {
       "coverage": "dynamic-stub",
@@ -1017,7 +1190,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBindGroupLayoutEntry.hx",
-      "uses": 2
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -1061,10 +1234,14 @@
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBlendState.hx",
-      "uses": 10
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -1072,32 +1249,66 @@
       "key": "host:GPUBuffer",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
         "upstream/packages/render-wgpu/src/wgpuBackground.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuSurface.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuWireframeUpload.ts",
+        "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
         "upstream/packages/types/src/WgpuScene3DRuntime.ts",
         "upstream/packages/types/src/WgpuWireframePipeline.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUBuffer.hx",
-      "uses": 71
+      "uses": 133
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.GPUBufferBinding",
+      "key": "host:GPUBufferBinding",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/GPUBufferBinding.hx",
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -1143,7 +1354,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUCanvasContext.hx",
-      "uses": 8
+      "uses": 13
     },
     {
       "coverage": "dynamic-stub",
@@ -1157,6 +1368,17 @@
       ],
       "provider": "src/flighthq/_internal/dom/GPUColor.hx",
       "uses": 4
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.GPUColorDict",
+      "key": "host:GPUColorDict",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/GPUColorDict.hx",
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -1176,10 +1398,13 @@
       "key": "host:GPUCommandBuffer",
       "kind": "host",
       "locations": [
-        "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
+        "upstream/packages/render-wgpu/src/wgpuBackground.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUCommandBuffer.hx",
-      "uses": 1
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -1188,18 +1413,21 @@
       "kind": "host",
       "locations": [
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuRenderEffectPipeline.ts",
         "upstream/packages/render-wgpu/src/wgpuBackground.ts",
         "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
         "upstream/packages/render-wgpu/src/wgpuSurface.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUCommandEncoder.hx",
-      "uses": 17
+      "uses": 34
     },
     {
       "coverage": "dynamic-stub",
@@ -1207,10 +1435,12 @@
       "key": "host:GPUCopyExternalImageDestInfo",
       "kind": "host",
       "locations": [
-        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts"
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUCopyExternalImageDestInfo.hx",
-      "uses": 1
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -1231,10 +1461,12 @@
       "key": "host:GPUCopyExternalImageSourceInfo",
       "kind": "host",
       "locations": [
-        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts"
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUCopyExternalImageSourceInfo.hx",
-      "uses": 1
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -1255,6 +1487,7 @@
         "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderTexturePool.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuSurface.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
@@ -1292,7 +1525,7 @@
         "upstream/packages/types/src/WgpuRenderTexture.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUDevice.hx",
-      "uses": 322
+      "uses": 379
     },
     {
       "coverage": "dynamic-stub",
@@ -1303,7 +1536,38 @@
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUDeviceDescriptor.hx",
-      "uses": 3
+      "uses": 4
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.GPUDeviceLostInfo",
+      "key": "host:GPUDeviceLostInfo",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/types/src/WgpuRenderStateSignals.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/GPUDeviceLostInfo.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.GPUExternalTexture",
+      "key": "host:GPUExternalTexture",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/GPUExternalTexture.hx",
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -1391,20 +1655,47 @@
       "uses": 3
     },
     {
+      "coverage": "typed",
+      "haxeType": "flighthq._internal.dom.GPUOrigin3DDict",
+      "key": "host:GPUOrigin3DDict",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentCube.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/GPUOrigin3DDict.hx",
+      "uses": 2
+    },
+    {
       "coverage": "dynamic-stub",
       "haxeType": "flighthq._internal.dom.GPUPipelineLayout",
       "key": "host:GPUPipelineLayout",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/types/src/WgpuFullscreenPipeline.ts",
         "upstream/packages/types/src/WgpuQuadBatchResources.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUPipelineLayout.hx",
-      "uses": 8
+      "uses": 28
     },
     {
       "coverage": "dynamic-stub",
@@ -1466,7 +1757,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuWireframeUpload.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUQueue.hx",
-      "uses": 50
+      "uses": 80
     },
     {
       "coverage": "dynamic-stub",
@@ -1482,14 +1773,25 @@
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
         "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
         "upstream/packages/render-wgpu/src/wgpuScissor.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuBitmapText.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuClipRectangle.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuMeshShapeRenderer.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatch.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuSprite.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuTilemap.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/blinnPhongWgpuMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
@@ -1514,7 +1816,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPURenderPassEncoder.hx",
-      "uses": 161
+      "uses": 246
     },
     {
       "coverage": "dynamic-stub",
@@ -1522,15 +1824,26 @@
       "key": "host:GPURenderPipeline",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
         "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/types/src/WgpuEffectPipeline.ts",
@@ -1541,7 +1854,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPURenderPipeline.hx",
-      "uses": 32
+      "uses": 79
     },
     {
       "coverage": "dynamic-stub",
@@ -1552,7 +1865,7 @@
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPURenderPipelineDescriptor.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -1560,22 +1873,38 @@
       "key": "host:GPUSampler",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
         "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUSampler.hx",
-      "uses": 32
+      "uses": 87
     },
     {
       "coverage": "dynamic-stub",
@@ -1586,7 +1915,7 @@
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUSamplerDescriptor.hx",
-      "uses": 3
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -1594,17 +1923,41 @@
       "key": "host:GPUShaderModule",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuStandardMaterial.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
+        "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuPbrPipelineCache.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts",
+        "upstream/packages/types/src/WgpuMaterialRenderer.ts",
         "upstream/packages/types/src/WgpuQuadBatchResources.ts",
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUShaderModule.hx",
-      "uses": 11
+      "uses": 56
     },
     {
       "coverage": "dynamic-stub",
@@ -1651,7 +2004,7 @@
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUStencilFaceState.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -1675,7 +2028,7 @@
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUSupportedFeatures.hx",
-      "uses": 6
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -1689,7 +2042,7 @@
         "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUSupportedLimits.hx",
-      "uses": 6
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -1713,14 +2066,21 @@
         "upstream/packages/render-wgpu/src/wgpuSurface.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
         "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentCube.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
         "upstream/packages/types/src/WgpuColorLutTextureCache.ts",
@@ -1730,7 +2090,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUTexture.hx",
-      "uses": 107
+      "uses": 161
     },
     {
       "coverage": "dynamic-stub",
@@ -1803,26 +2163,45 @@
       "key": "host:GPUTextureView",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
+        "upstream/packages/effects-wgpu/src/wgpuMotionBlurEffect.ts",
+        "upstream/packages/render-wgpu/src/wgpuBackground.ts",
+        "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
+        "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts",
+        "upstream/packages/render-wgpu/src/wgpuMipmap.ts",
+        "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
         "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentCube.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
+        "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
         "upstream/packages/types/src/WgpuRenderTarget.ts",
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUTextureView.hx",
-      "uses": 49
+      "uses": 117
     },
     {
       "coverage": "dynamic-stub",
@@ -1838,7 +2217,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flighthq/_internal/dom/GPUVertexBufferLayout.hx",
-      "uses": 6
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -1850,7 +2229,7 @@
         "upstream/packages/net/src/net.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Headers.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -1861,7 +2240,7 @@
         "upstream/packages/audio/src/audioFormat.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLAudioElement.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -1876,57 +2255,91 @@
         "upstream/packages/bitmap/src/bitmapFrom.ts",
         "upstream/packages/bitmap/src/explainBitmapReadback.ts",
         "upstream/packages/device/src/device.ts",
+        "upstream/packages/effects-canvas/src/canvasBlendEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasBloomEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasCompositeEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts",
+        "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts",
+        "upstream/packages/effects-canvas/src/canvasPixelateEffect.ts",
         "upstream/packages/effects-canvas/src/canvasRenderEffectPipeline.ts",
+        "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
         "upstream/packages/effects-gl/src/glRenderEffectPipeline.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuRenderEffectPipeline.ts",
         "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
         "upstream/packages/image/src/imageResource.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
+        "upstream/packages/media/src/videoChannel.ts",
         "upstream/packages/render-gl/src/glBackground.ts",
         "upstream/packages/render-gl/src/glDraw.ts",
         "upstream/packages/render-gl/src/glElement.ts",
         "upstream/packages/render-gl/src/glFullscreenPass.ts",
         "upstream/packages/render-gl/src/glRenderPass.ts",
         "upstream/packages/render-gl/src/glRenderState.ts",
+        "upstream/packages/render-gl/src/glRenderTarget.ts",
+        "upstream/packages/render-gl/src/glShader.ts",
         "upstream/packages/render-wgpu/src/wgpuBackground.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuElement.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
+        "upstream/packages/render-wgpu/src/wgpuShader.ts",
         "upstream/packages/render-wgpu/src/wgpuSurface.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
         "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
         "upstream/packages/scene2d-canvas/src/canvasBitmapTextureResolver.ts",
         "upstream/packages/scene2d-canvas/src/canvasCache.ts",
         "upstream/packages/scene2d-canvas/src/canvasElement.ts",
         "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderTexture.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextMeasure.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
         "upstream/packages/scene2d-dom/src/domBitmapTextureResolver.ts",
         "upstream/packages/scene2d-dom/src/domCache.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
         "upstream/packages/scene2d-dom/src/domRichText.ts",
         "upstream/packages/scene2d-dom/src/domScale9Shape.ts",
         "upstream/packages/scene2d-dom/src/domShape.ts",
         "upstream/packages/scene2d-dom/src/domSprite.ts",
         "upstream/packages/scene2d-dom/src/domTextLabel.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/scene2d-gl/src/glClipContours.ts",
         "upstream/packages/scene2d-gl/src/glClipRectangle.ts",
+        "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts",
+        "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts",
         "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts",
         "upstream/packages/scene2d-gl/src/glRichText.ts",
         "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
         "upstream/packages/scene2d-gl/src/glShapeData.ts",
+        "upstream/packages/scene2d-gl/src/glShapeMesh.ts",
         "upstream/packages/scene2d-gl/src/glTextLabel.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuClipRectangle.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuRasterShapeRenderer.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
+        "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+        "upstream/packages/scene3d-gl/src/glViewportAspect.ts",
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
         "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
         "upstream/packages/types/src/CanvasRenderState.ts",
         "upstream/packages/types/src/CanvasRenderTarget.ts",
@@ -1935,10 +2348,11 @@
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/GlShapeRendererData.ts",
         "upstream/packages/types/src/WgpuRenderState.ts",
-        "upstream/packages/types/src/WgpuShapeRendererData.ts"
+        "upstream/packages/types/src/WgpuShapeRendererData.ts",
+        "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 234
+      "uses": 363
     },
     {
       "coverage": "dynamic-stub",
@@ -1954,7 +2368,7 @@
         "upstream/packages/scene2d-dom/src/domTextLabel.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLDivElement.hx",
-      "uses": 27
+      "uses": 37
     },
     {
       "coverage": "dynamic-stub",
@@ -1969,22 +2383,30 @@
         "upstream/packages/interaction/src/cursorBackend.ts",
         "upstream/packages/menu/src/menu.ts",
         "upstream/packages/scene2d-dom/src/domBackground.ts",
+        "upstream/packages/scene2d-dom/src/domCache.ts",
         "upstream/packages/scene2d-dom/src/domClipRectangle.ts",
         "upstream/packages/scene2d-dom/src/domHtmlView.ts",
         "upstream/packages/scene2d-dom/src/domMaterials.ts",
         "upstream/packages/scene2d-dom/src/domNativeText.ts",
+        "upstream/packages/scene2d-dom/src/domNode2D.ts",
         "upstream/packages/scene2d-dom/src/domReconcile.ts",
         "upstream/packages/scene2d-dom/src/domRenderState.ts",
         "upstream/packages/scene2d-dom/src/domRichText.ts",
         "upstream/packages/scene2d-dom/src/domScale9Shape.ts",
+        "upstream/packages/scene2d-dom/src/domShape.ts",
+        "upstream/packages/scene2d-dom/src/domSprite.ts",
         "upstream/packages/scene2d-dom/src/domStyle.ts",
+        "upstream/packages/scene2d-dom/src/domTextInput.ts",
+        "upstream/packages/scene2d-dom/src/domTextLabel.ts",
         "upstream/packages/scene2d-dom/src/domTransform.ts",
+        "upstream/packages/scene2d/src/htmlView.ts",
+        "upstream/packages/text/src/nativeText.ts",
         "upstream/packages/types/src/DomRenderState.ts",
         "upstream/packages/types/src/HtmlView.ts",
         "upstream/packages/types/src/NativeText.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLElement.hx",
-      "uses": 205
+      "uses": 257
     },
     {
       "coverage": "dynamic-stub",
@@ -1997,7 +2419,7 @@
         "upstream/packages/statusbar/src/statusbar.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLHeadElement.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2007,14 +2429,31 @@
       "locations": [
         "upstream/packages/image/src/imageResource.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
+        "upstream/packages/media/src/videoChannel.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
         "upstream/packages/scene2d-dom/src/domSprite.ts",
-        "upstream/packages/textureatlas/src/textureAtlasFrom.ts"
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
+        "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
+        "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLImageElement.hx",
-      "uses": 25
+      "uses": 56
     },
     {
       "coverage": "dynamic-stub",
@@ -2026,7 +2465,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLInputElement.hx",
-      "uses": 29
+      "uses": 31
     },
     {
       "coverage": "dynamic-stub",
@@ -2037,7 +2476,7 @@
         "upstream/packages/menu/src/menu.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLLIElement.hx",
-      "uses": 21
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -2048,7 +2487,18 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLLinkElement.hx",
-      "uses": 3
+      "uses": 5
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.HTMLMediaElement",
+      "key": "host:HTMLMediaElement",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/video/src/videoResourceFrom.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/HTMLMediaElement.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -2060,7 +2510,7 @@
         "upstream/packages/scene2d-dom/src/domRichText.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLSpanElement.hx",
-      "uses": 13
+      "uses": 15
     },
     {
       "coverage": "dynamic-stub",
@@ -2071,7 +2521,7 @@
         "upstream/packages/scene2d-dom/src/domTextInput.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLStyleElement.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -2082,7 +2532,7 @@
         "upstream/packages/menu/src/menu.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLUListElement.hx",
-      "uses": 12
+      "uses": 13
     },
     {
       "coverage": "dynamic-stub",
@@ -2095,7 +2545,21 @@
         "upstream/packages/render-gl/src/glTextureVideoUpload.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
         "upstream/packages/scene2d-dom/src/domSprite.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
         "upstream/packages/texture/src/videoTexture.ts",
         "upstream/packages/types/src/WebcamStreamRuntime.ts",
         "upstream/packages/video/src/videoFormat.ts",
@@ -2103,7 +2567,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLVideoElement.hx",
-      "uses": 80
+      "uses": 120
     },
     {
       "coverage": "dynamic-stub",
@@ -2114,12 +2578,30 @@
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image/src/imageResource.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
+        "upstream/packages/media/src/videoChannel.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
-        "upstream/packages/textureatlas/src/textureAtlasFrom.ts"
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
+        "upstream/packages/scene2d-dom/src/domSprite.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
+        "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
+        "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ImageBitmap.hx",
-      "uses": 12
+      "uses": 42
     },
     {
       "coverage": "dynamic-stub",
@@ -2130,13 +2612,18 @@
         "upstream/packages/bitmap/src/bitmapDraw.ts",
         "upstream/packages/bitmap/src/bitmapEncode.ts",
         "upstream/packages/bitmap/src/bitmapFrom.ts",
+        "upstream/packages/bitmap/src/explainBitmapReadback.ts",
         "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts",
         "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
-        "upstream/packages/image/src/imageResourceFrom.ts"
+        "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
+        "upstream/packages/image/src/imageResourceFrom.ts",
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ImageData.hx",
-      "uses": 15
+      "uses": 27
     },
     {
       "coverage": "dynamic-stub",
@@ -2171,7 +2658,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flighthq/_internal/dom/InputEvent.hx",
-      "uses": 3
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2183,7 +2670,7 @@
         "upstream/packages/menu/src/menu.ts"
       ],
       "provider": "src/flighthq/_internal/dom/KeyboardEvent.hx",
-      "uses": 26
+      "uses": 29
     },
     {
       "coverage": "dynamic-stub",
@@ -2196,7 +2683,7 @@
         "upstream/packages/protocol/src/protocol.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Location.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2207,7 +2694,18 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaDevices.hx",
-      "uses": 3
+      "uses": 5
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.MediaMetadata",
+      "key": "host:MediaMetadata",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/mediasession/src/mediasession.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/MediaMetadata.hx",
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -2218,7 +2716,7 @@
         "upstream/packages/screen/src/screen.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaQueryList.hx",
-      "uses": 3
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2229,7 +2727,18 @@
         "upstream/packages/mediasession/src/mediasession.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaSession.hx",
-      "uses": 7
+      "uses": 9
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.MediaSource",
+      "key": "host:MediaSource",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/video/src/videoResourceFrom.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/MediaSource.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -2242,7 +2751,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaStream.hx",
-      "uses": 3
+      "uses": 7
     },
     {
       "coverage": "dynamic-stub",
@@ -2253,7 +2762,7 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaStreamTrack.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2264,7 +2773,7 @@
         "upstream/packages/socket/src/socket.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MessageEvent.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2272,10 +2781,11 @@
       "key": "host:MouseEvent",
       "kind": "host",
       "locations": [
-        "upstream/packages/input/src/inputManager.ts"
+        "upstream/packages/input/src/inputManager.ts",
+        "upstream/packages/menu/src/menu.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MouseEvent.hx",
-      "uses": 5
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2298,6 +2808,7 @@
         "upstream/packages/power/src/power.ts",
         "upstream/packages/protocol/src/protocol.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
+        "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
         "upstream/packages/screen/src/screen.ts",
         "upstream/packages/sensors/src/sensors.ts",
         "upstream/packages/share/src/share.ts",
@@ -2306,7 +2817,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Navigator.hx",
-      "uses": 67
+      "uses": 91
     },
     {
       "coverage": "dynamic-stub",
@@ -2321,6 +2832,18 @@
     },
     {
       "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.NodeListOf",
+      "key": "host:NodeListOf",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/menu/src/menu.ts",
+        "upstream/packages/scene2d-dom/src/domTextInput.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/NodeListOf.hx",
+      "uses": 2
+    },
+    {
+      "coverage": "dynamic-stub",
       "haxeType": "flighthq._internal.dom.Notification",
       "key": "host:Notification",
       "kind": "host",
@@ -2328,7 +2851,7 @@
         "upstream/packages/notification/src/notification.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Notification.hx",
-      "uses": 7
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -2339,7 +2862,7 @@
         "upstream/packages/notification/src/notification.ts"
       ],
       "provider": "src/flighthq/_internal/dom/NotificationOptions.hx",
-      "uses": 3
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2354,6 +2877,17 @@
     },
     {
       "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.OES_texture_float_linear",
+      "key": "host:OES_texture_float_linear",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/OES_texture_float_linear.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
       "haxeType": "flighthq._internal.dom.OffscreenCanvas",
       "key": "host:OffscreenCanvas",
       "kind": "host",
@@ -2361,12 +2895,30 @@
         "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
+        "upstream/packages/media/src/videoChannel.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
-        "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
+        "upstream/packages/scene2d-dom/src/domSprite.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
+        "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/OffscreenCanvas.hx",
-      "uses": 9
+      "uses": 38
     },
     {
       "coverage": "dynamic-stub",
@@ -2380,7 +2932,7 @@
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
       ],
       "provider": "src/flighthq/_internal/dom/OffscreenCanvasRenderingContext2D.hx",
-      "uses": 9
+      "uses": 17
     },
     {
       "coverage": "dynamic-stub",
@@ -2389,10 +2941,11 @@
       "kind": "host",
       "locations": [
         "upstream/packages/accessibility/src/accessibility.ts",
-        "upstream/packages/device/src/device.ts"
+        "upstream/packages/device/src/device.ts",
+        "upstream/packages/scene2d-dom/src/domReconcile.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ParentNode.hx",
-      "uses": 2
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -2407,7 +2960,7 @@
         "upstream/packages/scene2d-canvas/src/canvasTextInput.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Performance.hx",
-      "uses": 7
+      "uses": 12
     },
     {
       "coverage": "dynamic-stub",
@@ -2418,7 +2971,7 @@
         "upstream/packages/lifecycle/src/lifecycle.ts"
       ],
       "provider": "src/flighthq/_internal/dom/PerformanceNavigationTiming.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2457,7 +3010,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Permissions.hx",
-      "uses": 15
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -2472,7 +3025,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/PermissionStatus.hx",
-      "uses": 16
+      "uses": 29
     },
     {
       "coverage": "dynamic-stub",
@@ -2485,7 +3038,7 @@
         "upstream/packages/screen/src/screen.ts"
       ],
       "provider": "src/flighthq/_internal/dom/PointerEvent.hx",
-      "uses": 30
+      "uses": 39
     },
     {
       "coverage": "dynamic-stub",
@@ -2496,7 +3049,7 @@
         "upstream/packages/geolocation/src/geolocation.ts"
       ],
       "provider": "src/flighthq/_internal/dom/PositionOptions.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -2505,10 +3058,11 @@
       "kind": "host",
       "locations": [
         "upstream/packages/filesystem/src/filesystem.ts",
-        "upstream/packages/net/src/net.ts"
+        "upstream/packages/net/src/net.ts",
+        "upstream/packages/types/src/FileSystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ReadableStream.hx",
-      "uses": 4
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -2519,7 +3073,7 @@
         "upstream/packages/net/src/net.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ReadableStreamDefaultReader.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -2530,7 +3084,7 @@
         "upstream/packages/net/src/net.ts"
       ],
       "provider": "src/flighthq/_internal/dom/RequestInit.hx",
-      "uses": 6
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2542,7 +3096,7 @@
         "upstream/packages/device/src/device.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ResizeObserver.hx",
-      "uses": 4
+      "uses": 7
     },
     {
       "coverage": "dynamic-stub",
@@ -2553,7 +3107,7 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ResizeObserverEntry.hx",
-      "uses": 2
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -2567,7 +3121,7 @@
         "upstream/packages/net/src/net.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Response.hx",
-      "uses": 23
+      "uses": 31
     },
     {
       "coverage": "dynamic-stub",
@@ -2580,7 +3134,7 @@
         "upstream/packages/screen/src/screen.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Screen.hx",
-      "uses": 20
+      "uses": 25
     },
     {
       "coverage": "dynamic-stub",
@@ -2591,7 +3145,7 @@
         "upstream/packages/application/src/window.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ScreenOrientation.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -2602,7 +3156,7 @@
         "upstream/packages/share/src/share.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ShareData.hx",
-      "uses": 6
+      "uses": 7
     },
     {
       "coverage": "dynamic-stub",
@@ -2613,7 +3167,7 @@
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flighthq/_internal/dom/StereoPannerNode.hx",
-      "uses": 6
+      "uses": 11
     },
     {
       "coverage": "dynamic-stub",
@@ -2625,7 +3179,7 @@
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Storage.hx",
-      "uses": 9
+      "uses": 12
     },
     {
       "coverage": "dynamic-stub",
@@ -2637,7 +3191,7 @@
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/StorageEstimate.hx",
-      "uses": 7
+      "uses": 11
     },
     {
       "coverage": "dynamic-stub",
@@ -2648,7 +3202,7 @@
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/StorageEvent.hx",
-      "uses": 4
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -2661,7 +3215,35 @@
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/StorageManager.hx",
-      "uses": 9
+      "uses": 13
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.SVGImageElement",
+      "key": "host:SVGImageElement",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/media/src/videoChannel.ts",
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
+        "upstream/packages/scene2d-dom/src/domSprite.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
+        "upstream/packages/video/src/videoResource.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/SVGImageElement.hx",
+      "uses": 19
     },
     {
       "coverage": "dynamic-stub",
@@ -2675,6 +3257,18 @@
       ],
       "provider": "src/flighthq/_internal/dom/TexImageSource.hx",
       "uses": 5
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.Text",
+      "key": "host:Text",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/accessibility/src/accessibility.ts",
+        "upstream/packages/scene2d-dom/src/domRichText.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/Text.hx",
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -2692,7 +3286,7 @@
         "upstream/packages/swf/src/swfReader.ts"
       ],
       "provider": "src/flighthq/_internal/dom/TextDecoder.hx",
-      "uses": 8
+      "uses": 16
     },
     {
       "coverage": "dynamic-stub",
@@ -2703,7 +3297,7 @@
         "upstream/packages/share/src/share.ts"
       ],
       "provider": "src/flighthq/_internal/dom/TextEncoder.hx",
-      "uses": 1
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -2724,7 +3318,28 @@
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
       ],
       "provider": "src/flighthq/_internal/dom/TextMetrics.hx",
-      "uses": 26
+      "uses": 38
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.Timeout",
+      "key": "host:Timeout",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/connectivity/src/connectivity.ts",
+        "upstream/packages/input/src/inputManager.ts",
+        "upstream/packages/ipc/src/ipc.ts",
+        "upstream/packages/loader/src/resourceLoader.ts",
+        "upstream/packages/log/src/log.ts",
+        "upstream/packages/net/src/net.ts",
+        "upstream/packages/notification/src/notification.ts",
+        "upstream/packages/power/src/power.ts",
+        "upstream/packages/render-wgpu/src/wgpuSurface.ts",
+        "upstream/packages/signals/src/throttle.ts",
+        "upstream/packages/tray/src/tray.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/Timeout.hx",
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -2736,7 +3351,7 @@
         "upstream/packages/shell/src/shell.ts"
       ],
       "provider": "src/flighthq/_internal/dom/URL.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2744,10 +3359,11 @@
       "key": "host:URLSearchParams",
       "kind": "host",
       "locations": [
+        "upstream/packages/net/src/net.ts",
         "upstream/packages/protocol/src/protocol.ts"
       ],
       "provider": "src/flighthq/_internal/dom/URLSearchParams.hx",
-      "uses": 1
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -2755,10 +3371,29 @@
       "key": "host:VideoFrame",
       "kind": "host",
       "locations": [
-        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts"
+        "upstream/packages/media/src/videoChannel.ts",
+        "upstream/packages/render-wgpu/src/wgpuDraw.ts",
+        "upstream/packages/render-wgpu/src/wgpuExternalImageSource.ts",
+        "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts",
+        "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
+        "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
+        "upstream/packages/scene2d-canvas/src/canvasImageTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
+        "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
+        "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
+        "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
+        "upstream/packages/scene2d-dom/src/domImageTextureResolver.ts",
+        "upstream/packages/scene2d-dom/src/domSprite.ts",
+        "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
+        "upstream/packages/texture/src/videoTexture.ts",
+        "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/VideoFrame.hx",
-      "uses": 2
+      "uses": 25
     },
     {
       "coverage": "dynamic-stub",
@@ -2769,7 +3404,7 @@
         "upstream/packages/keyboard/src/keyboard.ts"
       ],
       "provider": "src/flighthq/_internal/dom/VisualViewport.hx",
-      "uses": 6
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2781,7 +3416,7 @@
         "upstream/packages/power/src/power.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WakeLock.hx",
-      "uses": 4
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -2792,7 +3427,62 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WakeLockSentinel.hx",
-      "uses": 2
+      "uses": 4
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_astc",
+      "key": "host:WEBGL_compressed_texture_astc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/WEBGL_compressed_texture_astc.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_etc",
+      "key": "host:WEBGL_compressed_texture_etc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/WEBGL_compressed_texture_etc.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_pvrtc",
+      "key": "host:WEBGL_compressed_texture_pvrtc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/WEBGL_compressed_texture_pvrtc.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_s3tc",
+      "key": "host:WEBGL_compressed_texture_s3tc",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_s3tc_srgb",
+      "key": "host:WEBGL_compressed_texture_s3tc_srgb",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/render-gl/src/glCompressedTexture.ts"
+      ],
+      "provider": "src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc_srgb.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -2803,7 +3493,7 @@
         "upstream/packages/device/src/device.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WEBGL_debug_renderer_info.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -2863,11 +3553,14 @@
         "upstream/packages/effects-gl/src/glVignetteEffect.ts",
         "upstream/packages/effects-gl/src/glWhiteBalanceEffect.ts",
         "upstream/packages/render-gl/src/enableGlRenderStateGuards.ts",
+        "upstream/packages/render-gl/src/enableGlRenderTextureGuards.ts",
         "upstream/packages/render-gl/src/glBackground.ts",
         "upstream/packages/render-gl/src/glCompressedTexture.ts",
         "upstream/packages/render-gl/src/glDraw.ts",
         "upstream/packages/render-gl/src/glExternalTexture.ts",
         "upstream/packages/render-gl/src/glFullscreenPass.ts",
+        "upstream/packages/render-gl/src/glLinearToSrgbPass.ts",
+        "upstream/packages/render-gl/src/glPresentRenderTarget.ts",
         "upstream/packages/render-gl/src/glProgram.ts",
         "upstream/packages/render-gl/src/glReadback.ts",
         "upstream/packages/render-gl/src/glRenderPass.ts",
@@ -2875,6 +3568,7 @@
         "upstream/packages/render-gl/src/glRenderStateBracket.ts",
         "upstream/packages/render-gl/src/glRenderTarget.ts",
         "upstream/packages/render-gl/src/glRenderTexture.ts",
+        "upstream/packages/render-gl/src/glRenderTexturePool.ts",
         "upstream/packages/render-gl/src/glShader.ts",
         "upstream/packages/render-gl/src/glSkinPaletteTexture.ts",
         "upstream/packages/render-gl/src/glTextureUpload.ts",
@@ -2894,6 +3588,7 @@
         "upstream/packages/scene3d-gl/src/blinnPhongGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/customShaderGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/drawGlScene3D.ts",
+        "upstream/packages/scene3d-gl/src/emissiveGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/enableGlScene3DCustomShaderGuards.ts",
         "upstream/packages/scene3d-gl/src/extendedPbrGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/glClassicPrelude.ts",
@@ -2924,14 +3619,16 @@
         "upstream/packages/scene3d-gl/src/specularGlossinessPbrGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/standardPbrGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/toonGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/unlitGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/vertexColorGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/wireframeGlMeshMaterialRenderer.ts",
+        "upstream/packages/types/src/GlCompressedTextureUploader.ts",
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/GlRenderTexture.ts",
         "upstream/packages/types/src/GlShader.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGL2RenderingContext.hx",
-      "uses": 2279
+      "uses": 2550
     },
     {
       "coverage": "dynamic-stub",
@@ -2942,7 +3639,7 @@
         "upstream/packages/scene3d-gl/src/enableGlScene3DCustomShaderGuards.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLActiveInfo.hx",
-      "uses": 6
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -2950,17 +3647,29 @@
       "key": "host:WebGLBuffer",
       "kind": "host",
       "locations": [
+        "upstream/packages/render-gl/src/glDraw.ts",
+        "upstream/packages/render-gl/src/glFullscreenPass.ts",
+        "upstream/packages/render-gl/src/glRenderState.ts",
         "upstream/packages/scene2d-gl/src/glClipContours.ts",
+        "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts",
+        "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts",
+        "upstream/packages/scene2d-gl/src/glShapeMesh.ts",
         "upstream/packages/scene2d-gl/src/glVelocity.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-gl/src/glMeshProgram.ts",
+        "upstream/packages/scene3d-gl/src/glMeshUpload.ts",
         "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts",
+        "upstream/packages/scene3d-gl/src/glShadowMap.ts",
+        "upstream/packages/scene3d-gl/src/glWireframeUpload.ts",
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/GlScene3DRuntime.ts",
         "upstream/packages/types/src/GlShapeMeshBinding.ts",
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLBuffer.hx",
-      "uses": 19
+      "uses": 44
     },
     {
       "coverage": "dynamic-stub",
@@ -2972,7 +3681,7 @@
         "upstream/packages/types/src/GlRenderOptions.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLContextAttributes.hx",
-      "uses": 2
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -2980,16 +3689,22 @@
       "key": "host:WebGLFramebuffer",
       "kind": "host",
       "locations": [
+        "upstream/packages/render-gl/src/glFullscreenPass.ts",
+        "upstream/packages/render-gl/src/glReadback.ts",
         "upstream/packages/render-gl/src/glRenderPass.ts",
+        "upstream/packages/render-gl/src/glRenderState.ts",
         "upstream/packages/render-gl/src/glRenderStateBracket.ts",
+        "upstream/packages/render-gl/src/glRenderTarget.ts",
+        "upstream/packages/scene2d-gl/src/glVelocity.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-gl/src/glScene3DRuntime.ts",
         "upstream/packages/scene3d-gl/src/glShadowMap.ts",
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/GlRenderTarget.ts",
         "upstream/packages/types/src/GlScene3DRuntime.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLFramebuffer.hx",
-      "uses": 14
+      "uses": 33
     },
     {
       "coverage": "dynamic-stub",
@@ -3008,31 +3723,96 @@
       "key": "host:WebGLProgram",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-gl/src/glBevelEffect.ts",
+        "upstream/packages/effects-gl/src/glBloomEffect.ts",
+        "upstream/packages/effects-gl/src/glBokehDepthOfFieldEffect.ts",
+        "upstream/packages/effects-gl/src/glCameraMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glChromaticAberrationEffect.ts",
+        "upstream/packages/effects-gl/src/glColorLutPass.ts",
+        "upstream/packages/effects-gl/src/glColorMatrixPass.ts",
+        "upstream/packages/effects-gl/src/glConvolutionEffect.ts",
+        "upstream/packages/effects-gl/src/glCrtEffect.ts",
+        "upstream/packages/effects-gl/src/glDirectionalBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glDisplacementEffect.ts",
+        "upstream/packages/effects-gl/src/glDitherEffect.ts",
+        "upstream/packages/effects-gl/src/glEffectBlitShader.ts",
+        "upstream/packages/effects-gl/src/glEffectBoxBlur.ts",
+        "upstream/packages/effects-gl/src/glEffectProgramCache.ts",
+        "upstream/packages/effects-gl/src/glEffectTintShader.ts",
+        "upstream/packages/effects-gl/src/glFilmGrainEffect.ts",
+        "upstream/packages/effects-gl/src/glFxaaEffect.ts",
+        "upstream/packages/effects-gl/src/glGlitchEffect.ts",
+        "upstream/packages/effects-gl/src/glGodRaysEffect.ts",
+        "upstream/packages/effects-gl/src/glGradientBevelEffect.ts",
+        "upstream/packages/effects-gl/src/glGradientGlowEffect.ts",
+        "upstream/packages/effects-gl/src/glHalftoneEffect.ts",
+        "upstream/packages/effects-gl/src/glKuwaharaEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDirtEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDistortionEffect.ts",
+        "upstream/packages/effects-gl/src/glLensFlareEffect.ts",
+        "upstream/packages/effects-gl/src/glMedianEffect.ts",
+        "upstream/packages/effects-gl/src/glMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glOutlineEffect.ts",
+        "upstream/packages/effects-gl/src/glPixelateEffect.ts",
+        "upstream/packages/effects-gl/src/glPosterizeEffect.ts",
+        "upstream/packages/effects-gl/src/glRadialBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glScanlinesEffect.ts",
+        "upstream/packages/effects-gl/src/glScreenSpaceFogEffect.ts",
+        "upstream/packages/effects-gl/src/glSharpenEffect.ts",
+        "upstream/packages/effects-gl/src/glSketchEffect.ts",
+        "upstream/packages/effects-gl/src/glSmaaEffect.ts",
+        "upstream/packages/effects-gl/src/glSsaoEffect.ts",
+        "upstream/packages/effects-gl/src/glTiltShiftEffect.ts",
+        "upstream/packages/effects-gl/src/glToneMapEffect.ts",
+        "upstream/packages/effects-gl/src/glVignetteEffect.ts",
+        "upstream/packages/effects-gl/src/glWhiteBalanceEffect.ts",
         "upstream/packages/render-gl/src/enableGlRenderStateGuards.ts",
+        "upstream/packages/render-gl/src/glDraw.ts",
+        "upstream/packages/render-gl/src/glFullscreenPass.ts",
         "upstream/packages/render-gl/src/glProgram.ts",
+        "upstream/packages/render-gl/src/glRenderPass.ts",
+        "upstream/packages/render-gl/src/glRenderState.ts",
         "upstream/packages/render-gl/src/glRenderStateBracket.ts",
+        "upstream/packages/render-gl/src/glShader.ts",
         "upstream/packages/scene2d-gl/src/glClipContours.ts",
+        "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts",
         "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts",
         "upstream/packages/scene2d-gl/src/glShapeMesh.ts",
+        "upstream/packages/scene2d-gl/src/glStandardMaterial.ts",
         "upstream/packages/scene2d-gl/src/glVelocity.ts",
         "upstream/packages/scene3d-gl/src/customShaderGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/enableGlScene3DCustomShaderGuards.ts",
+        "upstream/packages/scene3d-gl/src/extendedPbrGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/glClassicPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glDebugPrelude.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
         "upstream/packages/scene3d-gl/src/glLitProgram.ts",
+        "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts",
         "upstream/packages/scene3d-gl/src/glMeshProgram.ts",
         "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts",
         "upstream/packages/scene3d-gl/src/glPbrExtensionRegistry.ts",
+        "upstream/packages/scene3d-gl/src/glPbrProgramCache.ts",
+        "upstream/packages/scene3d-gl/src/glScene3DRuntime.ts",
+        "upstream/packages/scene3d-gl/src/glShadedBuiltInModifiers.ts",
+        "upstream/packages/scene3d-gl/src/glShadedPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glShadowMap.ts",
+        "upstream/packages/scene3d-gl/src/glToonPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glWireframePrelude.ts",
+        "upstream/packages/scene3d-gl/src/shadedGlMeshMaterialRenderer.ts",
         "upstream/packages/types/src/GlFullscreenProgram.ts",
         "upstream/packages/types/src/GlMeshProgram.ts",
         "upstream/packages/types/src/GlModifierSnippet.ts",
         "upstream/packages/types/src/GlRenderState.ts",
+        "upstream/packages/types/src/GlScene3DRuntime.ts",
         "upstream/packages/types/src/GlShader.ts",
         "upstream/packages/types/src/GlShaderLocations.ts",
         "upstream/packages/types/src/GlShapeMeshBinding.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLProgram.hx",
-      "uses": 35
+      "uses": 130
     },
     {
       "coverage": "dynamic-stub",
@@ -3040,10 +3820,12 @@
       "key": "host:WebGLRenderbuffer",
       "kind": "host",
       "locations": [
+        "upstream/packages/render-gl/src/glRenderPass.ts",
+        "upstream/packages/render-gl/src/glRenderTarget.ts",
         "upstream/packages/types/src/GlRenderTarget.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLRenderbuffer.hx",
-      "uses": 2
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -3051,10 +3833,12 @@
       "key": "host:WebGLRenderingContext",
       "kind": "host",
       "locations": [
-        "upstream/packages/device/src/device.ts"
+        "upstream/packages/device/src/device.ts",
+        "upstream/packages/scene2d-gl/src/glClipContours.ts",
+        "upstream/packages/scene2d-gl/src/glShapeMesh.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLRenderingContext.hx",
-      "uses": 5
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -3065,7 +3849,7 @@
         "upstream/packages/render-gl/src/glProgram.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLShader.hx",
-      "uses": 1
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -3073,39 +3857,113 @@
       "key": "host:WebGLTexture",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-gl/src/glBevelEffect.ts",
         "upstream/packages/effects-gl/src/glBlendEffect.ts",
+        "upstream/packages/effects-gl/src/glBloomEffect.ts",
+        "upstream/packages/effects-gl/src/glBlurEffect.ts",
         "upstream/packages/effects-gl/src/glBokehDepthOfFieldEffect.ts",
+        "upstream/packages/effects-gl/src/glCameraMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glChromaticAberrationEffect.ts",
         "upstream/packages/effects-gl/src/glColorLutPass.ts",
+        "upstream/packages/effects-gl/src/glColorMatrixPass.ts",
         "upstream/packages/effects-gl/src/glCompositeEffect.ts",
+        "upstream/packages/effects-gl/src/glConvolutionEffect.ts",
+        "upstream/packages/effects-gl/src/glCrtEffect.ts",
+        "upstream/packages/effects-gl/src/glCustomShaderEffect.ts",
+        "upstream/packages/effects-gl/src/glDirectionalBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glDisplacementEffect.ts",
+        "upstream/packages/effects-gl/src/glDitherEffect.ts",
+        "upstream/packages/effects-gl/src/glEffectBlitShader.ts",
+        "upstream/packages/effects-gl/src/glEffectBoxBlur.ts",
         "upstream/packages/effects-gl/src/glEffectGradientRamp.ts",
+        "upstream/packages/effects-gl/src/glEffectTintShader.ts",
+        "upstream/packages/effects-gl/src/glFilmGrainEffect.ts",
+        "upstream/packages/effects-gl/src/glFxaaEffect.ts",
+        "upstream/packages/effects-gl/src/glGlitchEffect.ts",
+        "upstream/packages/effects-gl/src/glGodRaysEffect.ts",
         "upstream/packages/effects-gl/src/glGradientBevelEffect.ts",
         "upstream/packages/effects-gl/src/glGradientGlowEffect.ts",
+        "upstream/packages/effects-gl/src/glHalftoneEffect.ts",
+        "upstream/packages/effects-gl/src/glInnerGlowEffect.ts",
+        "upstream/packages/effects-gl/src/glInnerShadowEffect.ts",
+        "upstream/packages/effects-gl/src/glKuwaharaEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDirtEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDistortionEffect.ts",
+        "upstream/packages/effects-gl/src/glLensFlareEffect.ts",
+        "upstream/packages/effects-gl/src/glMedianEffect.ts",
         "upstream/packages/effects-gl/src/glMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glOutlineEffect.ts",
+        "upstream/packages/effects-gl/src/glPixelateEffect.ts",
+        "upstream/packages/effects-gl/src/glPosterizeEffect.ts",
+        "upstream/packages/effects-gl/src/glRadialBlurEffect.ts",
         "upstream/packages/effects-gl/src/glRenderEffectPipeline.ts",
+        "upstream/packages/effects-gl/src/glScanlinesEffect.ts",
         "upstream/packages/effects-gl/src/glScreenSpaceFogEffect.ts",
+        "upstream/packages/effects-gl/src/glSharpenEffect.ts",
+        "upstream/packages/effects-gl/src/glSketchEffect.ts",
+        "upstream/packages/effects-gl/src/glSmaaEffect.ts",
+        "upstream/packages/effects-gl/src/glSsaoEffect.ts",
+        "upstream/packages/effects-gl/src/glTiltShiftEffect.ts",
+        "upstream/packages/effects-gl/src/glToneMapEffect.ts",
+        "upstream/packages/effects-gl/src/glVignetteEffect.ts",
+        "upstream/packages/effects-gl/src/glWhiteBalanceEffect.ts",
         "upstream/packages/render-gl/src/glDraw.ts",
         "upstream/packages/render-gl/src/glExternalTexture.ts",
         "upstream/packages/render-gl/src/glFullscreenPass.ts",
+        "upstream/packages/render-gl/src/glLinearToSrgbPass.ts",
+        "upstream/packages/render-gl/src/glPresentRenderTarget.ts",
+        "upstream/packages/render-gl/src/glRenderPass.ts",
+        "upstream/packages/render-gl/src/glRenderState.ts",
         "upstream/packages/render-gl/src/glRenderStateBracket.ts",
         "upstream/packages/render-gl/src/glRenderTarget.ts",
         "upstream/packages/render-gl/src/glRenderTexture.ts",
+        "upstream/packages/render-gl/src/glSkinPaletteTexture.ts",
         "upstream/packages/render-gl/src/glTextureResolver.ts",
+        "upstream/packages/scene2d-gl/src/glBitmapText.ts",
+        "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts",
+        "upstream/packages/scene2d-gl/src/glQuadBatch.ts",
         "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts",
+        "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts",
         "upstream/packages/scene2d-gl/src/glRichText.ts",
         "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+        "upstream/packages/scene2d-gl/src/glShapeData.ts",
+        "upstream/packages/scene2d-gl/src/glSprite.ts",
+        "upstream/packages/scene2d-gl/src/glTextLabel.ts",
+        "upstream/packages/scene2d-gl/src/glTilemap.ts",
+        "upstream/packages/scene3d-gl/src/blinnPhongGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/customShaderGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/emissiveGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/glDebugPrelude.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentCube.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
+        "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
         "upstream/packages/scene3d-gl/src/glLitProgram.ts",
+        "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts",
+        "upstream/packages/scene3d-gl/src/glPbrExtensionRegistry.ts",
+        "upstream/packages/scene3d-gl/src/glPbrStandardBlock.ts",
+        "upstream/packages/scene3d-gl/src/glScene3DRuntime.ts",
+        "upstream/packages/scene3d-gl/src/glShadedBuiltInModifiers.ts",
+        "upstream/packages/scene3d-gl/src/glShadowMap.ts",
+        "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts",
+        "upstream/packages/scene3d-gl/src/lambertGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/matcapGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/normalGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/phongGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/shadedGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/toonGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/unlitGlMeshMaterialRenderer.ts",
         "upstream/packages/types/src/GlColorLutTextureCache.ts",
         "upstream/packages/types/src/GlPbrTransmissionSceneColor.ts",
         "upstream/packages/types/src/GlRenderEffectPipeline.ts",
         "upstream/packages/types/src/GlRenderState.ts",
         "upstream/packages/types/src/GlRenderTarget.ts",
         "upstream/packages/types/src/GlScene3DRuntime.ts",
-        "upstream/packages/types/src/GlSkinPaletteTexture.ts"
+        "upstream/packages/types/src/GlSkinPaletteTexture.ts",
+        "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLTexture.hx",
-      "uses": 73
+      "uses": 287
     },
     {
       "coverage": "dynamic-stub",
@@ -3114,22 +3972,94 @@
       "kind": "host",
       "locations": [
         "upstream/packages/effects-gl/src/glBevelEffect.ts",
+        "upstream/packages/effects-gl/src/glBlendEffect.ts",
+        "upstream/packages/effects-gl/src/glBloomEffect.ts",
+        "upstream/packages/effects-gl/src/glBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glBokehDepthOfFieldEffect.ts",
+        "upstream/packages/effects-gl/src/glCameraMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glChromaticAberrationEffect.ts",
+        "upstream/packages/effects-gl/src/glColorLutPass.ts",
+        "upstream/packages/effects-gl/src/glColorMatrixPass.ts",
+        "upstream/packages/effects-gl/src/glCompositeEffect.ts",
+        "upstream/packages/effects-gl/src/glConvolutionEffect.ts",
+        "upstream/packages/effects-gl/src/glCrtEffect.ts",
+        "upstream/packages/effects-gl/src/glCustomShaderEffect.ts",
+        "upstream/packages/effects-gl/src/glDirectionalBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glDisplacementEffect.ts",
+        "upstream/packages/effects-gl/src/glDitherEffect.ts",
         "upstream/packages/effects-gl/src/glEffectBlitShader.ts",
         "upstream/packages/effects-gl/src/glEffectBoxBlur.ts",
         "upstream/packages/effects-gl/src/glEffectProgramCache.ts",
         "upstream/packages/effects-gl/src/glEffectTintShader.ts",
+        "upstream/packages/effects-gl/src/glFilmGrainEffect.ts",
+        "upstream/packages/effects-gl/src/glFxaaEffect.ts",
+        "upstream/packages/effects-gl/src/glGlitchEffect.ts",
+        "upstream/packages/effects-gl/src/glGodRaysEffect.ts",
         "upstream/packages/effects-gl/src/glGradientBevelEffect.ts",
         "upstream/packages/effects-gl/src/glGradientGlowEffect.ts",
+        "upstream/packages/effects-gl/src/glHalftoneEffect.ts",
+        "upstream/packages/effects-gl/src/glKuwaharaEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDirtEffect.ts",
+        "upstream/packages/effects-gl/src/glLensDistortionEffect.ts",
+        "upstream/packages/effects-gl/src/glLensFlareEffect.ts",
+        "upstream/packages/effects-gl/src/glMedianEffect.ts",
+        "upstream/packages/effects-gl/src/glMotionBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glOutlineEffect.ts",
+        "upstream/packages/effects-gl/src/glPixelateEffect.ts",
+        "upstream/packages/effects-gl/src/glPosterizeEffect.ts",
+        "upstream/packages/effects-gl/src/glRadialBlurEffect.ts",
+        "upstream/packages/effects-gl/src/glScanlinesEffect.ts",
+        "upstream/packages/effects-gl/src/glScreenSpaceFogEffect.ts",
+        "upstream/packages/effects-gl/src/glSharpenEffect.ts",
+        "upstream/packages/effects-gl/src/glSketchEffect.ts",
+        "upstream/packages/effects-gl/src/glSmaaEffect.ts",
+        "upstream/packages/effects-gl/src/glSsaoEffect.ts",
+        "upstream/packages/effects-gl/src/glTiltShiftEffect.ts",
+        "upstream/packages/effects-gl/src/glToneMapEffect.ts",
+        "upstream/packages/effects-gl/src/glVignetteEffect.ts",
+        "upstream/packages/effects-gl/src/glWhiteBalanceEffect.ts",
         "upstream/packages/render-gl/src/glFullscreenPass.ts",
+        "upstream/packages/render-gl/src/glShader.ts",
         "upstream/packages/scene2d-gl/src/glClipContours.ts",
+        "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts",
+        "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts",
         "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts",
+        "upstream/packages/scene2d-gl/src/glShapeMesh.ts",
+        "upstream/packages/scene2d-gl/src/glStandardMaterial.ts",
         "upstream/packages/scene2d-gl/src/glVelocity.ts",
+        "upstream/packages/scene3d-gl/src/blinnPhongGlMeshMaterialRenderer.ts",
         "upstream/packages/scene3d-gl/src/customShaderGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/depthGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/emissiveGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/extendedPbrGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/glClassicPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glDebugPrelude.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-gl/src/glLitProgram.ts",
+        "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts",
         "upstream/packages/scene3d-gl/src/glMeshProgram.ts",
         "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts",
+        "upstream/packages/scene3d-gl/src/glPbrExtensionRegistry.ts",
+        "upstream/packages/scene3d-gl/src/glPbrProgramCache.ts",
         "upstream/packages/scene3d-gl/src/glPbrStandardBlock.ts",
+        "upstream/packages/scene3d-gl/src/glShadedBuiltInModifiers.ts",
+        "upstream/packages/scene3d-gl/src/glShadedPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glShadowMap.ts",
+        "upstream/packages/scene3d-gl/src/glToonPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts",
+        "upstream/packages/scene3d-gl/src/glWireframePrelude.ts",
+        "upstream/packages/scene3d-gl/src/lambertGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/matcapGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/normalGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/phongGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/shadedGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/specularGlossinessPbrGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/standardPbrGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/toonGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/unlitGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/vertexColorGlMeshMaterialRenderer.ts",
+        "upstream/packages/scene3d-gl/src/wireframeGlMeshMaterialRenderer.ts",
         "upstream/packages/types/src/GlClassicProgram.ts",
         "upstream/packages/types/src/GlDebugProgram.ts",
         "upstream/packages/types/src/GlFullscreenProgram.ts",
@@ -3146,7 +4076,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLUniformLocation.hx",
-      "uses": 162
+      "uses": 269
     },
     {
       "coverage": "dynamic-stub",
@@ -3154,15 +4084,19 @@
       "key": "host:WebGLVertexArrayObject",
       "kind": "host",
       "locations": [
+        "upstream/packages/render-gl/src/glFullscreenPass.ts",
         "upstream/packages/render-gl/src/glRenderStateBracket.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
         "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
+        "upstream/packages/scene3d-gl/src/glMeshUpload.ts",
         "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts",
+        "upstream/packages/scene3d-gl/src/glShadowMap.ts",
+        "upstream/packages/scene3d-gl/src/glWireframeUpload.ts",
         "upstream/packages/types/src/GlScene3DRuntime.ts",
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebGLVertexArrayObject.hx",
-      "uses": 7
+      "uses": 15
     },
     {
       "coverage": "dynamic-stub",
@@ -3173,7 +4107,7 @@
         "upstream/packages/socket/src/socket.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WebSocket.hx",
-      "uses": 8
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -3184,7 +4118,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WheelEvent.hx",
-      "uses": 6
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -3210,7 +4144,7 @@
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Window.hx",
-      "uses": 102
+      "uses": 122
     },
     {
       "coverage": "dynamic-stub",
@@ -3229,10 +4163,11 @@
       "key": "host:WritableStream",
       "kind": "host",
       "locations": [
-        "upstream/packages/filesystem/src/filesystem.ts"
+        "upstream/packages/filesystem/src/filesystem.ts",
+        "upstream/packages/types/src/FileSystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WritableStream.hx",
-      "uses": 3
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -3243,7 +4178,7 @@
         "upstream/packages/filesystem/src/filesystem.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WritableStreamDefaultWriter.hx",
-      "uses": 3
+      "uses": 4
     }
   ],
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d",

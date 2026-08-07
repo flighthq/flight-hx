@@ -10,19 +10,19 @@ import flighthq.types.Transform2D.Transform2DLike;
 
 class Transform2d {
   public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
-    return cast _Runtime.callValue(createEntity, cast ([{ pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: _Runtime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: _Runtime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: _Runtime.coalesce(skewY, function():Dynamic return cast 0.0), x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: _Runtime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: _Runtime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: _Runtime.coalesce(skewY, function():Dynamic return cast 0.0), x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) } : Null<{ var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; }>)) : Transform2D);
     return cast null;
   }
 
   public static function decomposeMatrixToTransform2D(out:Transform2DLike, source:MatrixLike):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var skewXDegrees:Dynamic = cast _Runtime.UNDEFINED;
-    var skewYDegrees:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
+    var skewXDegrees:Float = cast _Runtime.UNDEFINED;
+    var skewYDegrees:Float = cast _Runtime.UNDEFINED;
     a = source.a;
     b = source.b;
     c = source.c;
@@ -48,5 +48,5 @@ class Transform2d {
     _Runtime.setField(out, 'y', source.ty);
   }
 
-  public static final RAD_TO_DEG__transform2d:Dynamic = (180.0 / HxMath.PI);
+  public static final RAD_TO_DEG__transform2d:Float = (180.0 / HxMath.PI);
 }

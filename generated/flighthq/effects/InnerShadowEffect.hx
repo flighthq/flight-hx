@@ -18,20 +18,20 @@ class InnerShadowEffect {
   }
 
   public static function getInnerShadowEffectPadding(effect:flighthq.types.InnerShadowEffect):RenderEffectPadding {
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), _Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.multiplyNumbers(HxMath.sin(angle), distance)] : Array<Dynamic>));
+    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerInnerShadowEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'InnerShadowEffect', InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'InnerShadowEffect' : String), InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect);
   }
 
   public static function resolveInnerShadowEffectPadding__innerShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getInnerShadowEffectPadding, cast ([(cast effect : flighthq.types.InnerShadowEffect)] : Array<Dynamic>));
+    return cast (cast getInnerShadowEffectPadding((cast (cast effect : flighthq.types.InnerShadowEffect) : flighthq.types.InnerShadowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

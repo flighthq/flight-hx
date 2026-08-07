@@ -9,6 +9,7 @@ import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Camera3D;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class Intersection {
@@ -16,26 +17,26 @@ class Intersection {
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
-    if ((cast !(cast _Runtime.callValue(getCamera3DWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, sphere.center, aspect] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast getCamera3DWorldToScreen((cast Intersection.__scratchNdc__intersection : Vector3Like), (cast camera : Camera3D), (cast sphere.center : Vector3Like), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    return cast _Runtime.callValue(getCamera3DScreenToWorldRay, cast ([out, camera, Intersection.__scratchNdc__intersection.x, Intersection.__scratchNdc__intersection.y, aspect] : Array<Dynamic>));
+    return cast (cast getCamera3DScreenToWorldRay((cast out : Ray3DLike), (cast camera : Camera3D), (cast Intersection.__scratchNdc__intersection.x : Float), (cast Intersection.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 
   public static function intersectCamera3DRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     dx = ray.direction.x;
     dy = ray.direction.y;
     dz = ray.direction.z;

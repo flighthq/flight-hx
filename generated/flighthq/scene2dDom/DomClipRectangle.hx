@@ -9,6 +9,7 @@ import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomClipContourEntry;
 import flighthq.types.DomRenderState.DomClipEntry;
 import flighthq.types.DomRenderState.DomClipHooks;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.DomScene2DRectangle;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
@@ -17,18 +18,18 @@ import flighthq.types.RenderProxy2D;
 class DomClipRectangle {
   @:noCompletion
   public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
+    var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var contour:Null<DomClipContourEntry> = cast _Runtime.UNDEFINED;
-    var rect:Dynamic = cast _Runtime.UNDEFINED;
-    var local:Dynamic = cast _Runtime.UNDEFINED;
-    var clipPath:Dynamic = cast _Runtime.UNDEFINED;
-    element = ((cast _Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domElementMap') : flighthq._internal._WeakMap).get(data));
+    var rect:Null<DomScene2DRectangle> = cast _Runtime.UNDEFINED;
+    var local:DomScene2DRectangle = cast _Runtime.UNDEFINED;
+    var clipPath:String = cast _Runtime.UNDEFINED;
+    element = ((cast (cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(data));
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     contour = null;
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(entries, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(entries, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var entry:Dynamic = flighthq._internal._StaticIndex.readArray(entries, i);
+        var entry:DomClipEntry = flighthq._internal._StaticIndex.readArray(entries, i);
         if ((cast _Runtime.hasField(entry, 'kind') : Bool)) {
           (contour = cast (entry : Dynamic));
           break;
@@ -37,39 +38,39 @@ class DomClipRectangle {
       }
     }
     if ((cast !_Runtime.strictEquals(contour, null) : Bool)) {
-      var mapPoint:Dynamic = _Runtime.callValue(DomClipRectangle.createScene2DToElementPointMapper__domClipRectangle, cast ([element] : Array<Dynamic>));
-      var clipPath:Dynamic = _Runtime.callValue(buildDomContourClipPath, cast ([contour, mapPoint] : Array<Dynamic>));
+      var mapPoint:Float->Float->Array<Float> = (cast DomClipRectangle.createScene2DToElementPointMapper__domClipRectangle((cast element : flighthq._internal.dom.HTMLElement)) : Float->Float->Array<Float>);
+      var clipPath:String = (cast buildDomContourClipPath((cast contour : DomClipContourEntry), (cast mapPoint : Float->Float->Array<Float>)) : String);
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = clipPath);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal._Intersection2<flighthq._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>).webkitClipPath = clipPath);
       return;
     }
-    rect = _Runtime.callValue(DomClipRectangle.intersectDomScene2DRectangles__domClipRectangle, cast ([(cast entries : Array<DomScene2DRectangle>)] : Array<Dynamic>));
+    rect = (cast DomClipRectangle.intersectDomScene2DRectangles__domClipRectangle((cast (cast entries : Array<DomScene2DRectangle>) : Array<DomScene2DRectangle>)) : Null<DomScene2DRectangle>);
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = '');
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal._Intersection2<flighthq._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>).webkitClipPath = '');
       return;
     }
-    if ((cast ((cast ((cast _Runtime.field(rect, 'right') : Float) <= (cast _Runtime.field(rect, 'left') : Float)) : Bool) || (cast ((cast _Runtime.field(rect, 'bottom') : Float) <= (cast _Runtime.field(rect, 'top') : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast (cast rect : DomScene2DRectangle).right : Float) <= (cast (cast rect : DomScene2DRectangle).left : Float)) : Bool) || (cast ((cast (cast rect : DomScene2DRectangle).bottom : Float) <= (cast (cast rect : DomScene2DRectangle).top : Float)) : Bool)) : Bool)) {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal._Intersection2<flighthq._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>).webkitClipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
       return;
     }
-    local = _Runtime.callValue(DomClipRectangle.mapScene2DRectangleToElement__domClipRectangle, cast ([rect, element] : Array<Dynamic>));
-    clipPath = 'polygon(' + Std.string(_Runtime.field(local, 'left')) + 'px ' + Std.string(_Runtime.field(local, 'top')) + 'px, ' + Std.string(_Runtime.field(local, 'right')) + 'px ' + Std.string(_Runtime.field(local, 'top')) + 'px, ' + Std.string(_Runtime.field(local, 'right')) + 'px ' + Std.string(_Runtime.field(local, 'bottom')) + 'px, ' + Std.string(_Runtime.field(local, 'left')) + 'px ' + Std.string(_Runtime.field(local, 'bottom')) + 'px)';
+    local = (cast DomClipRectangle.mapScene2DRectangleToElement__domClipRectangle((cast rect : DomScene2DRectangle), (cast element : flighthq._internal.dom.HTMLElement)) : DomScene2DRectangle);
+    clipPath = 'polygon(' + Std.string((cast local : DomScene2DRectangle).left) + 'px ' + Std.string((cast local : DomScene2DRectangle).top) + 'px, ' + Std.string((cast local : DomScene2DRectangle).right) + 'px ' + Std.string((cast local : DomScene2DRectangle).top) + 'px, ' + Std.string((cast local : DomScene2DRectangle).right) + 'px ' + Std.string((cast local : DomScene2DRectangle).bottom) + 'px, ' + Std.string((cast local : DomScene2DRectangle).left) + 'px ' + Std.string((cast local : DomScene2DRectangle).bottom) + 'px)';
     ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
-    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = clipPath);
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal._Intersection2<flighthq._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>).webkitClipPath = clipPath);
   }
 
   @:noCompletion
   public static function createDomScene2DRectangle(rect:RectangleLike, transform:MatrixLike):DomScene2DRectangle {
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var x3:Dynamic = cast _Runtime.UNDEFINED;
-    var y3:Dynamic = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var x3:Float = cast _Runtime.UNDEFINED;
+    var y3:Float = cast _Runtime.UNDEFINED;
     x0 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
     y0 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
     x1 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
@@ -84,90 +85,90 @@ class DomClipRectangle {
 
   @:noCompletion
   public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
-    _Runtime.callProperty(stack, 'push', cast ([_Runtime.callValue(createDomScene2DRectangle, cast ([rect, transform] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(stack, 'push', cast ([(cast createDomScene2DRectangle((cast rect : RectangleLike), (cast transform : MatrixLike)) : DomClipEntry)] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function setDomClipHooks(state:DomRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'domClipHooks'), null) : Bool)) { _Runtime.setField(runtime, 'domClipHooks', DomClipRectangle.domClipHooksImpl__domClipRectangle); }
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : DomRenderStateRuntime).domClipHooks, null) : Bool)) { ((cast runtime : DomRenderStateRuntime).domClipHooks = DomClipRectangle.domClipHooksImpl__domClipRectangle); }
   }
 
-  public static function createScene2DToElementPointMapper__domClipRectangle(element:flighthq._internal.dom.HTMLElement):Dynamic {
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    var det:Dynamic = cast _Runtime.UNDEFINED;
-    var invA:Dynamic = cast _Runtime.UNDEFINED;
-    var invB:Dynamic = cast _Runtime.UNDEFINED;
-    var invC:Dynamic = cast _Runtime.UNDEFINED;
-    var invD:Dynamic = cast _Runtime.UNDEFINED;
-    var invTx:Dynamic = cast _Runtime.UNDEFINED;
-    var invTy:Dynamic = cast _Runtime.UNDEFINED;
-    matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
+  public static function createScene2DToElementPointMapper__domClipRectangle(element:flighthq._internal.dom.HTMLElement):Float->Float->Array<Float> {
+    var matrix:MatrixLike = cast _Runtime.UNDEFINED;
+    var det:Float = cast _Runtime.UNDEFINED;
+    var invA:Float = cast _Runtime.UNDEFINED;
+    var invB:Float = cast _Runtime.UNDEFINED;
+    var invC:Float = cast _Runtime.UNDEFINED;
+    var invD:Float = cast _Runtime.UNDEFINED;
+    var invTx:Float = cast _Runtime.UNDEFINED;
+    var invTy:Float = cast _Runtime.UNDEFINED;
+    matrix = (cast DomClipRectangle.getElementMatrix__domClipRectangle((cast element : flighthq._internal.dom.HTMLElement)) : MatrixLike);
     det = ((matrix.a * matrix.d) - (matrix.b * matrix.c));
-    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast function() return cast ([0.0, 0.0] : Array<Dynamic>); }
+    if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast function(__unused0:Float, __unused1:Float):Array<Float> return cast ([0.0, 0.0] : Array<Dynamic>); }
     invA = (matrix.d / det);
     invB = (-matrix.b / det);
     invC = (-matrix.c / det);
     invD = (matrix.a / det);
     invTx = (((matrix.c * matrix.ty) - (matrix.d * matrix.tx)) / det);
     invTy = (((matrix.b * matrix.tx) - (matrix.a * matrix.ty)) / det);
-    return cast function(x:Dynamic, y:Dynamic) return cast ([(((invA * x) + (invC * y)) + invTx), (((invB * x) + (invD * y)) + invTy)] : Array<Dynamic>);
+    return cast function(x:Float, y:Float):Array<Float> return cast ([(((invA * x) + (invC * y)) + invTx), (((invB * x) + (invD * y)) + invTy)] : Array<Dynamic>);
     return cast null;
   }
 
   public static function getElementMatrix__domClipRectangle(element:flighthq._internal.dom.HTMLElement):MatrixLike {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var match:Dynamic = cast _Runtime.UNDEFINED;
-    var parts:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:String = cast _Runtime.UNDEFINED;
+    var match:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var parts:Array<Float> = cast _Runtime.UNDEFINED;
     transform = (cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform;
     match = _Runtime.callProperty(_Runtime.regexp('^matrix\\(([^)]+)\\)$$', ''), 'exec', cast ([transform] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(match, null) : Bool)) {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
-    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
+    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:String, __unused2:Float, __unused3:Array<String>):Float return _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { a: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 5.0), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
   public static function intersectDomScene2DRectangles__domClipRectangle(rectangles:Array<DomScene2DRectangle>):Null<DomScene2DRectangle> {
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
+    var left:Float = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(rectangles, 'length'), 0.0) : Bool)) { return cast null; }
     left = -HxMath.POSITIVE_INFINITY;
     top = -HxMath.POSITIVE_INFINITY;
     right = HxMath.POSITIVE_INFINITY;
     bottom = HxMath.POSITIVE_INFINITY;
     for (rect in _Runtime.iterable(rectangles)) {
-      if ((cast ((cast _Runtime.field(rect, 'left') : Float) > (cast left : Float)) : Bool)) { (left = cast (_Runtime.field(rect, 'left') : Dynamic)); }
-      if ((cast ((cast _Runtime.field(rect, 'top') : Float) > (cast top : Float)) : Bool)) { (top = cast (_Runtime.field(rect, 'top') : Dynamic)); }
-      if ((cast ((cast _Runtime.field(rect, 'right') : Float) < (cast right : Float)) : Bool)) { (right = cast (_Runtime.field(rect, 'right') : Dynamic)); }
-      if ((cast ((cast _Runtime.field(rect, 'bottom') : Float) < (cast bottom : Float)) : Bool)) { (bottom = cast (_Runtime.field(rect, 'bottom') : Dynamic)); }
+      if ((cast ((cast (cast rect : DomScene2DRectangle).left : Float) > (cast left : Float)) : Bool)) { (left = cast ((cast rect : DomScene2DRectangle).left : Dynamic)); }
+      if ((cast ((cast (cast rect : DomScene2DRectangle).top : Float) > (cast top : Float)) : Bool)) { (top = cast ((cast rect : DomScene2DRectangle).top : Dynamic)); }
+      if ((cast ((cast (cast rect : DomScene2DRectangle).right : Float) < (cast right : Float)) : Bool)) { (right = cast ((cast rect : DomScene2DRectangle).right : Dynamic)); }
+      if ((cast ((cast (cast rect : DomScene2DRectangle).bottom : Float) < (cast bottom : Float)) : Bool)) { (bottom = cast ((cast rect : DomScene2DRectangle).bottom : Dynamic)); }
     }
     return cast { bottom: bottom, left: left, right: right, top: top };
     return cast null;
   }
 
   public static function mapScene2DRectangleToElement__domClipRectangle(rect:DomScene2DRectangle, element:flighthq._internal.dom.HTMLElement):DomScene2DRectangle {
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
-    var det:Dynamic = cast _Runtime.UNDEFINED;
-    var invA:Dynamic = cast _Runtime.UNDEFINED;
-    var invB:Dynamic = cast _Runtime.UNDEFINED;
-    var invC:Dynamic = cast _Runtime.UNDEFINED;
-    var invD:Dynamic = cast _Runtime.UNDEFINED;
-    var invTx:Dynamic = cast _Runtime.UNDEFINED;
-    var invTy:Dynamic = cast _Runtime.UNDEFINED;
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var x3:Dynamic = cast _Runtime.UNDEFINED;
-    var y3:Dynamic = cast _Runtime.UNDEFINED;
-    matrix = _Runtime.callValue(DomClipRectangle.getElementMatrix__domClipRectangle, cast ([element] : Array<Dynamic>));
+    var matrix:MatrixLike = cast _Runtime.UNDEFINED;
+    var det:Float = cast _Runtime.UNDEFINED;
+    var invA:Float = cast _Runtime.UNDEFINED;
+    var invB:Float = cast _Runtime.UNDEFINED;
+    var invC:Float = cast _Runtime.UNDEFINED;
+    var invD:Float = cast _Runtime.UNDEFINED;
+    var invTx:Float = cast _Runtime.UNDEFINED;
+    var invTy:Float = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var x3:Float = cast _Runtime.UNDEFINED;
+    var y3:Float = cast _Runtime.UNDEFINED;
+    matrix = (cast DomClipRectangle.getElementMatrix__domClipRectangle((cast element : flighthq._internal.dom.HTMLElement)) : MatrixLike);
     det = ((matrix.a * matrix.d) - (matrix.b * matrix.c));
     if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) { return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 }; }
     invA = (matrix.d / det);
@@ -176,21 +177,21 @@ class DomClipRectangle {
     invD = (matrix.a / det);
     invTx = (((matrix.c * matrix.ty) - (matrix.d * matrix.tx)) / det);
     invTy = (((matrix.b * matrix.tx) - (matrix.a * matrix.ty)) / det);
-    x0 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'top'))) + invTx);
-    y0 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'top'))) + invTy);
-    x1 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'top'))) + invTx);
-    y1 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'top'))) + invTy);
-    x2 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'bottom'))) + invTx);
-    y2 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'left')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'bottom'))) + invTy);
-    x3 = ((_Runtime.multiplyNumbers(invA, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invC, _Runtime.field(rect, 'bottom'))) + invTx);
-    y3 = ((_Runtime.multiplyNumbers(invB, _Runtime.field(rect, 'right')) + _Runtime.multiplyNumbers(invD, _Runtime.field(rect, 'bottom'))) + invTy);
+    x0 = (((invA * (cast rect : DomScene2DRectangle).left) + (invC * (cast rect : DomScene2DRectangle).top)) + invTx);
+    y0 = (((invB * (cast rect : DomScene2DRectangle).left) + (invD * (cast rect : DomScene2DRectangle).top)) + invTy);
+    x1 = (((invA * (cast rect : DomScene2DRectangle).right) + (invC * (cast rect : DomScene2DRectangle).top)) + invTx);
+    y1 = (((invB * (cast rect : DomScene2DRectangle).right) + (invD * (cast rect : DomScene2DRectangle).top)) + invTy);
+    x2 = (((invA * (cast rect : DomScene2DRectangle).left) + (invC * (cast rect : DomScene2DRectangle).bottom)) + invTx);
+    y2 = (((invB * (cast rect : DomScene2DRectangle).left) + (invD * (cast rect : DomScene2DRectangle).bottom)) + invTy);
+    x3 = (((invA * (cast rect : DomScene2DRectangle).right) + (invC * (cast rect : DomScene2DRectangle).bottom)) + invTx);
+    y3 = (((invB * (cast rect : DomScene2DRectangle).right) + (invD * (cast rect : DomScene2DRectangle).bottom)) + invTy);
     return cast { bottom: HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3), left: HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3), right: HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3), top: HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3) };
     return cast null;
   }
 
-  public static final EMPTY_CLIP_PATH__domClipRectangle:Dynamic = 'inset(0 100% 100% 0)';
+  public static final EMPTY_CLIP_PATH__domClipRectangle:String = 'inset(0 100% 100% 0)';
 
-  public static final domClipHooksImpl__domClipRectangle:DomClipHooks = { apply: function(state:Dynamic, data:Dynamic) {
-    _Runtime.callValue(applyDomClipRectangles, cast ([state, data, _Runtime.field(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domClipStack')] : Array<Dynamic>));
+  public static final domClipHooksImpl__domClipRectangle:DomClipHooks = { apply: function(state:DomRenderState, data:RenderProxy2D):Void {
+    applyDomClipRectangles((cast state : DomRenderState), (cast data : RenderProxy2D), (cast (cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).domClipStack : Array<DomClipEntry>));
   } };
 }

@@ -9,6 +9,8 @@ import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.NodeInteractionState;
+import flighthq.types.Path;
+import flighthq.types.Rectangle;
 
 class NodeInteractionState {
   public static function createNodeInteractionState():flighthq.types.NodeInteractionState {
@@ -17,59 +19,59 @@ class NodeInteractionState {
   }
 
   public static function enableNodeInteractionState(source:NodeAny):flighthq.types.NodeInteractionState {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>);
-    return cast _Runtime.setField(runtime, 'interactionState', (_Runtime.field(runtime, 'interactionState') ?? _Runtime.callValue(createNodeInteractionState, cast ([] : Array<Dynamic>))));
+    var runtime:NodeRuntime<NodeAny> = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast getNodeRuntime(source) : NodeRuntime<NodeAny>) : NodeRuntime<NodeAny>);
+    return cast ((cast runtime : NodeRuntime<NodeAny>).interactionState ??= (cast createNodeInteractionState() : Null<flighthq.types.NodeInteractionState>));
     return cast null;
   }
 
   public static function getNodeCursor(source:NodeAny):Null<Cursor> {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'cursor'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast getNodeInteractionState((cast source : NodeAny)) : Null<flighthq.types.NodeInteractionState>), 'cursor'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast getNodeInteractionState((cast source : NodeAny)) : Null<flighthq.types.NodeInteractionState>), 'hitArea'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getNodeInteractionState(source:NodeAny):Null<flighthq.types.NodeInteractionState> {
-    return cast _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>), 'interactionState');
+    return cast (cast (cast (cast getNodeRuntime(source) : NodeRuntime<NodeAny>) : NodeRuntime<NodeAny>) : NodeRuntime<NodeAny>).interactionState;
     return cast null;
   }
 
   public static function getNodeTabIndex(source:NodeAny):Float {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'tabIndex'), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast getNodeInteractionState((cast source : NodeAny)) : Null<flighthq.types.NodeInteractionState>), 'tabIndex'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function isNodeFocusable(source:NodeAny):Bool {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'focusable'), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast getNodeInteractionState((cast source : NodeAny)) : Null<flighthq.types.NodeInteractionState>), 'focusable'), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function isNodeHitTestEnabled(source:NodeAny):Bool {
-    return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitTestEnabled'), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast getNodeInteractionState((cast source : NodeAny)) : Null<flighthq.types.NodeInteractionState>), 'hitTestEnabled'), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function setNodeCursor(source:NodeAny, cursor:Null<Cursor>):Void {
-    _Runtime.setField(_Runtime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'cursor', cursor);
+    ((cast (cast enableNodeInteractionState((cast source : NodeAny)) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).cursor = cursor);
   }
 
   public static function setNodeFocusable(source:NodeAny, focusable:Bool):Void {
-    _Runtime.setField(_Runtime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'focusable', focusable);
+    ((cast (cast enableNodeInteractionState((cast source : NodeAny)) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).focusable = focusable);
   }
 
   public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
-    _Runtime.setField(_Runtime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea', hitArea);
+    ((cast (cast enableNodeInteractionState((cast source : NodeAny)) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).hitArea = hitArea);
   }
 
   public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
-    _Runtime.setField(_Runtime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitTestEnabled', enabled);
+    ((cast (cast enableNodeInteractionState((cast source : NodeAny)) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).hitTestEnabled = enabled);
   }
 
   public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
-    _Runtime.setField(_Runtime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'tabIndex', tabIndex);
+    ((cast (cast enableNodeInteractionState((cast source : NodeAny)) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).tabIndex = tabIndex);
   }
 }

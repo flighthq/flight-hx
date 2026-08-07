@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _EmissiveMaterialValues {
-  public static final EmissiveMaterialKind:Dynamic = 'EmissiveMaterial';
+  public static final EmissiveMaterialKind:String = 'EmissiveMaterial';
 }

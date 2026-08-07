@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CaptureBaseline = Dynamic;
+typedef CaptureBaseline = flighthq._internal._Record<String, CaptureColumnBaseline>;

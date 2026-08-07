@@ -7,4 +7,4 @@ import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.PrimitiveTopology;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
-typedef MeshGeometryOptions = { @:optional var indices:Null<Dynamic>; var layout:VertexAttributeLayout; @:optional var subsets:Array<MeshSubset>; @:optional var topology:PrimitiveTopology; var vertices:flighthq._internal._Float32Array; };
+typedef MeshGeometryOptions = { @:optional var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>; var layout:VertexAttributeLayout; @:optional var subsets:Array<MeshSubset>; @:optional var topology:PrimitiveTopology; var vertices:flighthq._internal._Float32Array; };

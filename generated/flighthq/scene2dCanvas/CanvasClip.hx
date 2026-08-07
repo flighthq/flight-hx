@@ -7,43 +7,47 @@ import flighthq.scene2dCanvas.CanvasClipRectangle.popCanvasClipRectangle;
 import flighthq.scene2dCanvas.CanvasClipRectangle.pushCanvasClipContours;
 import flighthq.scene2dCanvas.CanvasClipRectangle.pushCanvasClipRectangle;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.ClipRegion;
+import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class CanvasClip {
   public static function enableCanvasClip(state:CanvasRenderState):Void {
-    _Runtime.setField(state, 'displayObjectClipHooks', CanvasClip.canvasClipHooks__canvasClip);
+    ((cast state : CanvasRenderState).displayObjectClipHooks = CanvasClip.canvasClipHooks__canvasClip);
   }
 
-  public static final canvasClipHooks__canvasClip:Scene2DClipHooks = { finalize: function(state:RenderState) {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+  public static final canvasClipHooks__canvasClip:Scene2DClipHooks = { finalize: function(state:RenderState):Void {
+    var s:CanvasRenderState = cast _Runtime.UNDEFINED;
     s = (cast state : CanvasRenderState);
-    while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
-      _Runtime.incrementField(s, 'currentClipDepth', -1, true);
+    while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast 0.0 : Float)) : Bool)) {
+      popCanvasClipRectangle((cast s : CanvasRenderState));
+      (cast s : CanvasRenderState).currentClipDepth--;
     }
-  }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
+  }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
+    var s:CanvasRenderState = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
     s = (cast state : CanvasRenderState);
-    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast target : Float)) : Bool)) {
-      _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
-      _Runtime.incrementField(s, 'currentClipDepth', -1, true);
+    target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast target : Float)) : Bool)) {
+      popCanvasClipRectangle((cast s : CanvasRenderState));
+      (cast s : CanvasRenderState).currentClipDepth--;
     }
-  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var clip:Dynamic = cast _Runtime.UNDEFINED;
+  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
+    var s:CanvasRenderState = cast _Runtime.UNDEFINED;
+    var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
     s = (cast state : CanvasRenderState);
-    clip = _Runtime.field(source, 'clip');
+    clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
-      _Runtime.callValue(pushCanvasClipRectangle, cast ([s, _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
+      pushCanvasClipRectangle((cast s : CanvasRenderState), (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
     } else {
-      _Runtime.callValue(pushCanvasClipContours, cast ([s, _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
+      pushCanvasClipContours((cast s : CanvasRenderState), (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
     }
-    _Runtime.incrementField(s, 'currentClipDepth', 1, true);
+    (cast s : CanvasRenderState).currentClipDepth++;
   } };
 }

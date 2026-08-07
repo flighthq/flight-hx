@@ -13,20 +13,20 @@ enum abstract LogLevel(Int) from Int to Int {
   public static inline var Verbose:LogLevel = 5;
 }
 
-typedef LogData = Dynamic;
+typedef LogData = flighthq._internal._Union2<String, flighthq._internal._Record<String, flighthq._internal._Any>>;
 
-typedef LogContext = { var channel:Null<String>; var fields:Dynamic; };
+typedef LogContext = { var channel:Null<String>; var fields:flighthq._internal._Record<String, flighthq._internal._Any>; };
 
-typedef LogDataProvider = Dynamic;
+typedef LogDataProvider = Void->LogData;
 
-typedef LogFormatter = Dynamic;
+typedef LogFormatter = LogEntry->String;
 
-typedef LogSpan = { var name:String; var fields:Dynamic; var channel:Null<String>; };
+typedef LogSpan = { var name:String; var fields:flighthq._internal._Record<String, flighthq._internal._Any>; var channel:Null<String>; };
 
 typedef LogTimer = { var label:String; var channel:Null<String>; var startedAt:Float; };
 
-typedef LogTransportBackend = { var write:Dynamic; @:optional var flush:Dynamic; @:optional var dispose:Dynamic; };
+typedef LogTransportBackend = { var write:String->Void; @:optional var flush:Void->Void; @:optional var dispose:Void->Void; };
 
 typedef LogEntry = { var level:LogLevel; var channel:Null<String>; var data:LogData; };
 
-typedef LogSink = Dynamic;
+typedef LogSink = LogEntry->Void;

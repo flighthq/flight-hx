@@ -15,60 +15,65 @@ import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.node.Revision.invalidateNodeParentReference;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node;
+import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeSignals;
+import flighthq.types.Signal;
 
 class Hierarchy {
   public static function addNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
-    return cast _Runtime.callValue(addNodeChildAt, cast ([target, child, _Runtime.callValue(getNodeChildCount, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast addNodeChildAt(target, child, (cast (cast getNodeChildCount(target) : Float) : Float)) : NodeOf<Traits>);
     return cast null;
   }
 
   public static function addNodeChildAt<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):NodeOf<Traits> {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    var childRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
-    var targetSignals:Dynamic = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    children = _Runtime.field(targetRuntime, 'children');
+    var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    var childRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var parent:Node<Traits> = cast _Runtime.UNDEFINED;
+    var targetSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast (cast getNodeRuntime(target) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    children = (cast targetRuntime : NodeRuntime<Traits>).children;
     if ((cast !_Runtime.truthy(child) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('Parameter child must be non-null'));
     } else { if ((cast _Runtime.strictEquals(child, target) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('An object cannot be added as a child of itself'));
     } else { if ((cast ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast _Runtime.field(children, 'length') : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
-      _Runtime.callValue(Hierarchy.throwOutOfBoundsError__hierarchy, cast ([] : Array<Dynamic>));
+      Hierarchy.throwOutOfBoundsError__hierarchy();
     } } }
-    if ((cast !(cast _Runtime.callProperty(targetRuntime, 'canAddChild', cast ([target, child] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast (cast targetRuntime : NodeRuntime<Traits>).canAddChild(target, child) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('The specified parent object cannot add this child'));
     }
     if ((cast _Runtime.strictEquals(children, null) : Bool)) {
-      (children = cast (_Runtime.setField(targetRuntime, 'children', (cast cast ([] : Array<Dynamic>) : Array<Node<Traits>>)) : Dynamic));
+      (children = cast (((cast targetRuntime : NodeRuntime<Traits>).children = (cast cast ([] : Array<Dynamic>) : Array<Node<Traits>>)) : Dynamic));
     }
-    childRuntime = (cast _Runtime.callValue(getNodeRuntime, cast ([child] : Array<Dynamic>)) : NodeRuntime<Traits>);
-    parent = (cast _Runtime.field(childRuntime, 'parent') : Node<Traits>);
+    childRuntime = (cast (cast getNodeRuntime(child) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    parent = (cast (cast childRuntime : NodeRuntime<Traits>).parent : Node<Traits>);
     if ((cast _Runtime.strictEquals(parent, target) : Bool)) {
-      var i:Dynamic = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
+      var i:Float = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(i, -1.0) : Bool)) {
         if ((cast _Runtime.strictEquals(i, HxMath.min(index, _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0))) : Bool)) { return cast (cast child : NodeOf<Traits>); }
         _Runtime.splice(children, Std.int(i), Std.int(1.0), []);
       }
     } else {
       if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-        _Runtime.callValue(removeNodeChild, cast ([parent, child] : Array<Dynamic>));
+        (cast removeNodeChild(parent, child) : NodeOf<Traits>);
       }
     }
     _Runtime.splice(children, Std.int(index), Std.int(0.0), [child]);
-    _Runtime.callValue(Hierarchy.invalidateNodeChildren__hierarchy, cast ([targetRuntime] : Array<Dynamic>));
-    targetSignals = _Runtime.field(targetRuntime, 'nodeSignals');
-    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildrenChanged]]), 1); }
+    Hierarchy.invalidateNodeChildren__hierarchy(targetRuntime);
+    targetSignals = (cast targetRuntime : NodeRuntime<Traits>).nodeSignals;
+    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenChanged]]), 1); }
     if ((cast !_Runtime.strictEquals(parent, target) : Bool)) {
-      _Runtime.setField(childRuntime, 'parent', target);
-      if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildAdded], [child]]), 1); }
-      var childSignals:Dynamic = _Runtime.field(childRuntime, 'nodeSignals');
-      if ((cast !_Runtime.strictEquals(childSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[childSignals.onParentChanged]]), 1); }
-      _Runtime.callValue(invalidateNodeParentReference, cast ([child] : Array<Dynamic>));
+      ((cast childRuntime : NodeRuntime<Traits>).parent = target);
+      if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildAdded], [child]]), 1); }
+      var childSignals:Null<NodeSignals> = (cast childRuntime : NodeRuntime<Traits>).nodeSignals;
+      if ((cast !_Runtime.strictEquals(childSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast childSignals : flighthq.types.NodeSignals).onParentChanged]]), 1); }
+      invalidateNodeParentReference(child);
     }
     return cast (cast child : NodeOf<Traits>);
     return cast null;
@@ -76,9 +81,9 @@ class Hierarchy {
 
   public static function addNodeChildren<Traits>(target:Node<Traits>, ...children:Node<Traits>):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(addNodeChild, cast ([target, flighthq._internal._StaticIndex.readArray(children, i)] : Array<Dynamic>));
+        (cast addNodeChild(target, flighthq._internal._StaticIndex.readArray(children, i)) : NodeOf<Traits>);
         i++;
       }
     }
@@ -88,20 +93,20 @@ class Hierarchy {
     var current:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
     current = child;
     while ((cast ((cast !_Runtime.strictEquals(current, source) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-      (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
+      (current = cast ((cast getNodeParent(current) : Null<Node<Traits>>) : Dynamic));
     }
     return cast _Runtime.strictEquals(current, source);
     return cast null;
   }
 
-  public static function forEachNodeChild<Traits>(source:Node<Traits>, callback:Dynamic):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
+  public static function forEachNodeChild<Traits>(source:Node<Traits>, callback:Node<Traits>->Float->flighthq._internal._Union2<Bool, Void>):Void {
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.callValue(callback, cast ([(cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>), i] : Array<Dynamic>)), false) : Bool)) { return; }
+        if ((cast _Runtime.strictEquals((cast callback((cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>), (cast i : Float)) : flighthq._internal._Union2<Bool, Void>), false) : Bool)) { return; }
         i++;
       }
     }
@@ -109,20 +114,20 @@ class Hierarchy {
 
   public static function getNodeAncestors<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
     var result:Array<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
-    var current:Dynamic = cast _Runtime.UNDEFINED;
+    var current:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
-    current = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
+    current = (cast getNodeParent((cast source : Node<Traits>)) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([current] : Array<Dynamic>));
-      (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
+      (current = cast ((cast getNodeParent(current) : Null<NodeOf<Traits>>) : Dynamic));
     }
     return cast result;
     return cast null;
   }
 
   public static function getNodeChildAt<Traits>(source:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
     if ((cast ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool)) {
       return cast (cast flighthq._internal._StaticIndex.readArray(children, index) : NodeOf<Traits>);
     }
@@ -131,13 +136,13 @@ class Hierarchy {
   }
 
   public static function getNodeChildByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(children, i), 'name'), name) : Bool)) { return cast (cast flighthq._internal._StaticIndex.readArray(children, i) : NodeOf<Traits>); }
+          if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>).name, name) : Bool)) { return cast (cast flighthq._internal._StaticIndex.readArray(children, i) : NodeOf<Traits>); }
           i++;
         }
       }
@@ -147,18 +152,18 @@ class Hierarchy {
   }
 
   public static function getNodeChildCount<Traits>(source:Node<Traits>):Float {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
     return cast ((cast !_Runtime.strictEquals(children, null) : Bool) ? (cast _Runtime.field(children, 'length') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getNodeChildIndex<Traits>(source:Node<Traits>, child:Node<Traits>):Float {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
           if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(children, i), child) : Bool)) { return cast i; }
           i++;
@@ -170,38 +175,38 @@ class Hierarchy {
   }
 
   public static function getNodeCommonAncestor<Traits>(a:Node<Traits>, b:Node<Traits>):Null<NodeOf<Traits>> {
-    var aAncestors:Dynamic = cast _Runtime.UNDEFINED;
-    var cur:Dynamic = cast _Runtime.UNDEFINED;
+    var aAncestors:flighthq._internal._Set<Node<Traits>> = cast _Runtime.UNDEFINED;
+    var cur:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     var bCur:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
     aAncestors = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    ((cast aAncestors : flighthq._internal._Set).add((cast a : Node<Traits>)));
-    cur = _Runtime.callValue(getNodeParent, cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
+    ((cast aAncestors : flighthq._internal._Set<Node<Traits>>).add((cast a : Node<Traits>)));
+    cur = (cast getNodeParent((cast a : Node<Traits>)) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(cur, null) : Bool)) {
-      ((cast aAncestors : flighthq._internal._Set).add(cur));
-      (cur = cast (_Runtime.callValue(getNodeParent, cast ([cur] : Array<Dynamic>)) : Dynamic));
+      ((cast aAncestors : flighthq._internal._Set<Node<Traits>>).add(cur));
+      (cur = cast ((cast getNodeParent(cur) : Null<NodeOf<Traits>>) : Dynamic));
     }
     bCur = (cast b : Node<Traits>);
     while ((cast !_Runtime.strictEquals(bCur, null) : Bool)) {
-      if ((cast ((cast aAncestors : flighthq._internal._Set).has(bCur)) : Bool)) { return cast (cast bCur : NodeOf<Traits>); }
-      (bCur = cast (_Runtime.callValue(getNodeParent, cast ([bCur] : Array<Dynamic>)) : Dynamic));
+      if ((cast ((cast aAncestors : flighthq._internal._Set<Node<Traits>>).has(bCur)) : Bool)) { return cast (cast bCur : NodeOf<Traits>); }
+      (bCur = cast ((cast getNodeParent(bCur) : Null<Node<Traits>>) : Dynamic));
     }
     return cast null;
     return cast null;
   }
 
   public static function getNodeParent<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
-    return cast (cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'parent') : NodeOf<Traits>);
+    return cast (cast _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'parent') : NodeOf<Traits>);
     return cast null;
   }
 
   public static function getNodeRoot<Traits>(source:Node<Traits>):NodeOf<Traits> {
     var current:NodeOf<Traits> = cast _Runtime.UNDEFINED;
-    var parent:Dynamic = cast _Runtime.UNDEFINED;
+    var parent:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     current = (cast source : NodeOf<Traits>);
-    parent = _Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>));
+    parent = (cast getNodeParent(current) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       (current = cast (parent : Dynamic));
-      (parent = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
+      (parent = cast ((cast getNodeParent(current) : Null<NodeOf<Traits>>) : Dynamic));
     }
     return cast (cast current : NodeOf<Traits>);
     return cast null;
@@ -212,34 +217,34 @@ class Hierarchy {
     current = (cast descendant : Node<Traits>);
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       if ((cast _Runtime.strictEquals(current, ancestor) : Bool)) { return cast true; }
-      (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
+      (current = cast ((cast getNodeParent(current) : Null<Node<Traits>>) : Dynamic));
     }
     return cast false;
     return cast null;
   }
 
   public static function removeNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var childRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
+    var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var childRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(child) : Bool)) { return cast child; }
-    targetRuntime = _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
-    childRuntime = (cast _Runtime.callValue(getNodeRuntime, cast ([child] : Array<Dynamic>)) : NodeRuntime<Traits>);
+    targetRuntime = (cast getNodeRuntime(target) : NodeRuntime<Traits>);
+    childRuntime = (cast (cast getNodeRuntime(child) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
     children = _Runtime.field(targetRuntime, 'children');
-    if ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(childRuntime, 'parent'), target) : Bool)) : Bool)) {
-      _Runtime.setField(childRuntime, 'parent', null);
-      var childSignals:Dynamic = _Runtime.field(childRuntime, 'nodeSignals');
-      if ((cast !_Runtime.strictEquals(childSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[childSignals.onParentChanged]]), 1); }
-      _Runtime.callValue(invalidateNodeParentReference, cast ([child] : Array<Dynamic>));
-      var i:Dynamic = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast _Runtime.strictEquals((cast childRuntime : NodeRuntime<Traits>).parent, target) : Bool)) : Bool)) {
+      ((cast childRuntime : NodeRuntime<Traits>).parent = null);
+      var childSignals:Null<NodeSignals> = (cast childRuntime : NodeRuntime<Traits>).nodeSignals;
+      if ((cast !_Runtime.strictEquals(childSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast childSignals : flighthq.types.NodeSignals).onParentChanged]]), 1); }
+      invalidateNodeParentReference(child);
+      var i:Float = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(i, -1.0) : Bool)) {
         _Runtime.splice(children, Std.int(i), Std.int(1.0), []);
-        _Runtime.callValue(Hierarchy.invalidateNodeChildren__hierarchy, cast ([(cast targetRuntime : NodeRuntime<Traits>)] : Array<Dynamic>));
+        Hierarchy.invalidateNodeChildren__hierarchy((cast targetRuntime : NodeRuntime<Traits>));
       }
-      var targetSignals:Dynamic = _Runtime.field(targetRuntime, 'nodeSignals');
+      var targetSignals:Null<NodeSignals> = _Runtime.field(targetRuntime, 'nodeSignals');
       if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildRemoved], [child]]), 1);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildrenChanged]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildRemoved], [child]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenChanged]]), 1);
       }
     }
     return cast (cast child : NodeOf<Traits>);
@@ -247,150 +252,150 @@ class Hierarchy {
   }
 
   public static function removeNodeChildAt<Traits>(target:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(target) : NodeRuntime<Traits>), 'children');
     if ((cast ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool)) {
-      return cast _Runtime.callValue(removeNodeChild, cast ([target, (cast flighthq._internal._StaticIndex.readArray(children, index) : NodeOf<Traits>)] : Array<Dynamic>));
+      return cast (cast removeNodeChild(target, (cast flighthq._internal._StaticIndex.readArray(children, index) : NodeOf<Traits>)) : Null<NodeOf<Traits>>);
     }
     return cast null;
     return cast null;
   }
 
   public static function removeNodeChildren<Traits>(target:Node<Traits>, beginIndex:Float = 0.0, ?endIndex:Float):Void {
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    var numRemovals:Dynamic = cast _Runtime.UNDEFINED;
-    children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)), 'children');
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    var numRemovals:Float = cast _Runtime.UNDEFINED;
+    children = _Runtime.field((cast getNodeRuntime(target) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
     if ((cast ((cast beginIndex : Float) > (cast _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0) : Float)) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(endIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (endIndex = cast (_Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0) : Dynamic));
     }
     if ((cast ((cast ((cast ((cast endIndex : Float) < (cast beginIndex : Float)) : Bool) || (cast ((cast beginIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast endIndex : Float) > (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(Hierarchy.throwOutOfBoundsError__hierarchy, cast ([] : Array<Dynamic>));
+      Hierarchy.throwOutOfBoundsError__hierarchy();
     }
     numRemovals = (endIndex - beginIndex);
     while ((cast ((cast numRemovals : Float) >= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(removeNodeChildAt, cast ([target, beginIndex] : Array<Dynamic>));
+      (cast removeNodeChildAt(target, (cast beginIndex : Float)) : Null<NodeOf<Traits>>);
       numRemovals--;
     }
   }
 
   public static function reparentNode<Traits>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
-    var oldWorld:Dynamic = cast _Runtime.UNDEFINED;
-    var localM:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(ensureNodeWorldMatrix, cast ([child] : Array<Dynamic>));
-    oldWorld = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
-    localM = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
+    var oldWorld:Matrix = cast _Runtime.UNDEFINED;
+    var localM:Matrix = cast _Runtime.UNDEFINED;
+    ensureNodeWorldMatrix(child);
+    oldWorld = (cast acquireMatrix() : Matrix);
+    localM = (cast acquireMatrix() : Matrix);
     try {
       try {
-        _Runtime.callValue(copyMatrix, cast ([oldWorld, _Runtime.callValue(getNodeWorldMatrix, cast ([child] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(addNodeChild, cast ([newParent, child] : Array<Dynamic>));
-        _Runtime.callValue(inverseMatrix, cast ([localM, _Runtime.callValue(getNodeWorldMatrix, cast ([newParent] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callValue(multiplyMatrix, cast ([localM, localM, oldWorld] : Array<Dynamic>));
-        var a:Dynamic = localM.a;
-        var b:Dynamic = localM.b;
-        var c:Dynamic = localM.c;
-        var d:Dynamic = localM.d;
+        copyMatrix(oldWorld, (cast getNodeWorldMatrix(child) : MatrixLike));
+        (cast addNodeChild(newParent, child) : NodeOf<Traits>);
+        (cast inverseMatrix(localM, (cast getNodeWorldMatrix(newParent) : MatrixLike)) : Bool);
+        multiplyMatrix(localM, localM, oldWorld);
+        var a:Float = localM.a;
+        var b:Float = localM.b;
+        var c:Float = localM.c;
+        var d:Float = localM.d;
         (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Dynamic));
         (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
         if ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool)) {
           (child.scaleY = cast (-child.scaleY : Dynamic));
         }
-        var skewYRad:Dynamic = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
+        var skewYRad:Float = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
         (child.rotation = cast ((_Runtime.subtractNumbers(HxMath.atan2(b, a), skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
         (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
         (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
-        _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));
+        invalidateNodeLocalTransform(child);
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError0:Dynamic) {
       {
-        _Runtime.callValue(releaseMatrix, cast ([oldWorld] : Array<Dynamic>));
-        _Runtime.callValue(releaseMatrix, cast ([localM] : Array<Dynamic>));
+        releaseMatrix(oldWorld);
+        releaseMatrix(localM);
       }
       _Runtime.throwValue(__finallyError0);
     }
     {
-      _Runtime.callValue(releaseMatrix, cast ([oldWorld] : Array<Dynamic>));
-      _Runtime.callValue(releaseMatrix, cast ([localM] : Array<Dynamic>));
+      releaseMatrix(oldWorld);
+      releaseMatrix(localM);
     }
-    return cast (cast (cast child : Dynamic) : NodeOf<Traits>);
+    return cast (cast (cast child : flighthq._internal._Any) : NodeOf<Traits>);
     return cast null;
   }
 
   public static function replaceNodeChild<Traits>(target:Node<Traits>, oldChild:Node<Traits>, newChild:Node<Traits>):Void {
-    var index:Dynamic = cast _Runtime.UNDEFINED;
-    index = _Runtime.callValue(getNodeChildIndex, cast ([target, oldChild] : Array<Dynamic>));
+    var index:Float = cast _Runtime.UNDEFINED;
+    index = (cast getNodeChildIndex(target, oldChild) : Float);
     if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { return; }
-    _Runtime.callValue(removeNodeChild, cast ([target, oldChild] : Array<Dynamic>));
-    _Runtime.callValue(addNodeChildAt, cast ([target, newChild, index] : Array<Dynamic>));
+    (cast removeNodeChild(target, oldChild) : NodeOf<Traits>);
+    (cast addNodeChildAt(target, newChild, (cast index : Float)) : NodeOf<Traits>);
   }
 
   public static function setNodeChildIndex<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):Void {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    targetRuntime = _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
+    var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast getNodeRuntime(target) : NodeRuntime<Traits>);
     children = _Runtime.field(targetRuntime, 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
-    if ((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([child] : Array<Dynamic>)), target) : Bool)) : Bool)) {
-      var i:Dynamic = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
-      var destination:Dynamic = HxMath.min(index, _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0));
+    if ((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) <= (cast _Runtime.field(children, 'length') : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast getNodeParent(child) : Null<NodeOf<Traits>>), target) : Bool)) : Bool)) {
+      var i:Float = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
+      var destination:Float = HxMath.min(index, _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0));
       if ((cast ((cast !_Runtime.strictEquals(i, -1.0) : Bool) && (cast !_Runtime.strictEquals(i, destination) : Bool)) : Bool)) {
         _Runtime.splice(children, Std.int(i), Std.int(1.0), []);
         _Runtime.splice(children, Std.int(destination), Std.int(0.0), [child]);
-        _Runtime.callValue(Hierarchy.invalidateNodeChildren__hierarchy, cast ([(cast targetRuntime : NodeRuntime<Traits>)] : Array<Dynamic>));
-        var targetSignals:Dynamic = _Runtime.field(targetRuntime, 'nodeSignals');
-        if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildrenOrderChanged]]), 1); }
+        Hierarchy.invalidateNodeChildren__hierarchy((cast targetRuntime : NodeRuntime<Traits>));
+        var targetSignals:Null<NodeSignals> = _Runtime.field(targetRuntime, 'nodeSignals');
+        if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenOrderChanged]]), 1); }
       }
     }
   }
 
   public static function swapNodeChildren<Traits>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    targetRuntime = _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
+    var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast getNodeRuntime(target) : NodeRuntime<Traits>);
     children = _Runtime.field(targetRuntime, 'children');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([child1] : Array<Dynamic>)), target) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getNodeParent, cast ([child2] : Array<Dynamic>)), target) : Bool)) : Bool)) {
-      var index1:Dynamic = _Runtime.callProperty(children, 'indexOf', cast ([child1] : Array<Dynamic>));
-      var index2:Dynamic = _Runtime.callProperty(children, 'indexOf', cast ([child2] : Array<Dynamic>));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(children, null) : Bool) && (cast _Runtime.strictEquals((cast getNodeParent(child1) : Null<NodeOf<Traits>>), target) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast getNodeParent(child2) : Null<NodeOf<Traits>>), target) : Bool)) : Bool)) {
+      var index1:Float = _Runtime.callProperty(children, 'indexOf', cast ([child1] : Array<Dynamic>));
+      var index2:Float = _Runtime.callProperty(children, 'indexOf', cast ([child2] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(index1, index2) : Bool)) { return; }
       flighthq._internal._StaticIndex.writeArray(children, index1, child2);
       flighthq._internal._StaticIndex.writeArray(children, index2, child1);
-      _Runtime.callValue(Hierarchy.invalidateNodeChildren__hierarchy, cast ([(cast targetRuntime : NodeRuntime<Traits>)] : Array<Dynamic>));
-      var targetSignals:Dynamic = _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>), 'nodeSignals');
-      if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildrenOrderChanged]]), 1); }
+      Hierarchy.invalidateNodeChildren__hierarchy((cast targetRuntime : NodeRuntime<Traits>));
+      var targetSignals:Null<NodeSignals> = (cast (cast (cast getNodeRuntime(target) : NodeRuntime<Traits>) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
+      if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenOrderChanged]]), 1); }
     }
   }
 
   public static function swapNodeChildrenAt<Traits>(target:Node<Traits>, index1:Float, index2:Float):Void {
-    var targetRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var children:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
-    var swap:Dynamic = cast _Runtime.UNDEFINED;
-    var targetSignals:Dynamic = cast _Runtime.UNDEFINED;
-    targetRuntime = _Runtime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
+    var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
+    var swap:Node<Traits> = cast _Runtime.UNDEFINED;
+    var targetSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast getNodeRuntime(target) : NodeRuntime<Traits>);
     children = _Runtime.field(targetRuntime, 'children');
     if ((cast ((cast _Runtime.strictEquals(children, null) : Bool) || (cast _Runtime.strictEquals(index1, index2) : Bool)) : Bool)) { return; }
     len = _Runtime.field(children, 'length');
     if ((cast ((cast ((cast ((cast ((cast index1 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index2 : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast index1 : Float) >= (cast len : Float)) : Bool)) : Bool) || (cast ((cast index2 : Float) >= (cast len : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(Hierarchy.throwOutOfBoundsError__hierarchy, cast ([] : Array<Dynamic>));
+      Hierarchy.throwOutOfBoundsError__hierarchy();
     }
     swap = (cast flighthq._internal._StaticIndex.readArray(children, index1) : Node<Traits>);
     flighthq._internal._StaticIndex.writeArray(children, index1, flighthq._internal._StaticIndex.readArray(children, index2));
     flighthq._internal._StaticIndex.writeArray(children, index2, swap);
-    _Runtime.callValue(Hierarchy.invalidateNodeChildren__hierarchy, cast ([(cast targetRuntime : NodeRuntime<Traits>)] : Array<Dynamic>));
+    Hierarchy.invalidateNodeChildren__hierarchy((cast targetRuntime : NodeRuntime<Traits>));
     targetSignals = _Runtime.field(targetRuntime, 'nodeSignals');
-    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[targetSignals.onChildrenOrderChanged]]), 1); }
+    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenOrderChanged]]), 1); }
   }
 
   public static function invalidateNodeChildren__hierarchy<Traits>(runtime:NodeRuntime<Traits>):Void {
-    _Runtime.setField(runtime, 'childrenId', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(runtime, 'childrenId'), 1.0)), 0));
+    ((cast runtime : NodeRuntime<Traits>).childrenId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).childrenId + 1.0)), 0));
   }
 
   public static function throwOutOfBoundsError__hierarchy():Void {
     _Runtime.throwValue(_Runtime.rangeError('The supplied index is out of bounds.'));
   }
 
-  public static final DEG_TO_RAD__hierarchy:Dynamic = (HxMath.PI / 180.0);
+  public static final DEG_TO_RAD__hierarchy:Float = (HxMath.PI / 180.0);
 
-  public static final RAD_TO_DEG__hierarchy:Dynamic = (180.0 / HxMath.PI);
+  public static final RAD_TO_DEG__hierarchy:Float = (180.0 / HxMath.PI);
 }

@@ -8,24 +8,30 @@ import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.RenderTarget;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTexture;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Types.RenderTargetTextureSourceKind;
+import flighthq.types.Vector2;
+import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
 class RenderTexture {
   public static function createRenderTexture(options:CreateRenderTextureOptions):flighthq.types.RenderTexture {
-    var colorSpace:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    var colorSpace:TextureColorSpace = cast _Runtime.UNDEFINED;
+    var texture:flighthq.types.RenderTexture = cast _Runtime.UNDEFINED;
     colorSpace = _Runtime.coalesce(_Runtime.field(options, 'colorSpace'), function():Dynamic return cast 'linear');
-    texture = (cast _Runtime.callValue(createTexture, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.field(options, 'colorSpace'), function():Dynamic return cast 'linear'), flipX: _Runtime.coalesce(_Runtime.field(options, 'flipX'), function():Dynamic return cast false), flipY: _Runtime.coalesce(_Runtime.field(options, 'flipY'), function():Dynamic return cast false), dimension: '2d', source: (cast _Runtime.callValue(createEntity, cast ([{ colorAttachments: _Runtime.field(options, 'colorAttachments'), colorFormats: _Runtime.field(options, 'colorFormats'), colorSpace: colorSpace, clearColors: _Runtime.field(options, 'clearColors'), clearDepth: _Runtime.field(options, 'clearDepth'), depth: _Runtime.field(options, 'depth'), format: _Runtime.field(options, 'format'), height: _Runtime.field(options, 'height'), kind: RenderTargetTextureSourceKind, sampleCount: _Runtime.field(options, 'sampleCount'), version: 0.0, width: _Runtime.field(options, 'width') }] : Array<Dynamic>)) : RenderTarget), uvRotation: _Runtime.field(options, 'uvRotation') }] : Array<Dynamic>)) : flighthq.types.RenderTexture);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'sampler'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(copySampler, cast ([_Runtime.field(texture, 'sampler'), _Runtime.field(options, 'sampler')] : Array<Dynamic>)); }
+    texture = (cast (cast createTexture({ colorSpace: _Runtime.coalesce(_Runtime.field(options, 'colorSpace'), function():Dynamic return cast 'linear'), flipX: _Runtime.coalesce(_Runtime.field(options, 'flipX'), function():Dynamic return cast false), flipY: _Runtime.coalesce(_Runtime.field(options, 'flipY'), function():Dynamic return cast false), dimension: '2d', source: (cast (cast createEntity({ colorAttachments: _Runtime.field(options, 'colorAttachments'), colorFormats: _Runtime.field(options, 'colorFormats'), colorSpace: colorSpace, clearColors: _Runtime.field(options, 'clearColors'), clearDepth: _Runtime.field(options, 'clearDepth'), depth: _Runtime.field(options, 'depth'), format: _Runtime.field(options, 'format'), height: _Runtime.field(options, 'height'), kind: RenderTargetTextureSourceKind, sampleCount: _Runtime.field(options, 'sampleCount'), version: 0.0, width: _Runtime.field(options, 'width') }) : RenderTarget) : RenderTarget), uvRotation: _Runtime.field(options, 'uvRotation') }) : flighthq.types.RenderTexture) : flighthq.types.RenderTexture);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'sampler'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { copySampler((cast texture : flighthq.types.RenderTexture).sampler, _Runtime.field(options, 'sampler')); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'uvOffset'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(texture, 'uvOffset').x = cast (_Runtime.field(options, 'uvOffset').x : Dynamic));
-      (_Runtime.field(texture, 'uvOffset').y = cast (_Runtime.field(options, 'uvOffset').y : Dynamic));
+      ((cast texture : flighthq.types.RenderTexture).uvOffset.x = cast (_Runtime.field(options, 'uvOffset').x : Dynamic));
+      ((cast texture : flighthq.types.RenderTexture).uvOffset.y = cast (_Runtime.field(options, 'uvOffset').y : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'uvScale'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (_Runtime.field(texture, 'uvScale').x = cast (_Runtime.field(options, 'uvScale').x : Dynamic));
-      (_Runtime.field(texture, 'uvScale').y = cast (_Runtime.field(options, 'uvScale').y : Dynamic));
+      ((cast texture : flighthq.types.RenderTexture).uvScale.x = cast (_Runtime.field(options, 'uvScale').x : Dynamic));
+      ((cast texture : flighthq.types.RenderTexture).uvScale.y = cast (_Runtime.field(options, 'uvScale').y : Dynamic));
     }
     return cast texture;
     return cast null;

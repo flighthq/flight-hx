@@ -4,19 +4,19 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef LottieBezierHandle = { var x:Dynamic; var y:Dynamic; };
+typedef LottieBezierHandle = { var x:flighthq._internal._Union2<Float, Array<Float>>; var y:flighthq._internal._Union2<Float, Array<Float>>; };
 
-typedef LottieKeyframe<T> = { @:optional var e:Dynamic; @:optional var h:Float; @:optional var i:LottieBezierHandle; @:optional var ti:Array<Float>; @:optional var o:LottieBezierHandle; @:optional var s:Dynamic; var t:Float; @:optional var to:Array<Float>; };
+typedef LottieKeyframe<T> = { @:optional var e:T; @:optional var h:Float; @:optional var i:LottieBezierHandle; @:optional var ti:Array<Float>; @:optional var o:LottieBezierHandle; @:optional var s:T; var t:Float; @:optional var to:Array<Float>; };
 
-typedef LottieStaticProperty<T> = { @:optional var a:Float; var k:Dynamic; @:optional var x:String; };
+typedef LottieStaticProperty<T> = { @:optional var a:Float; var k:T; @:optional var x:String; };
 
-typedef LottieAnimatedProperty<T> = { var a:Float; var k:Array<LottieKeyframe<Dynamic>>; @:optional var x:String; };
+typedef LottieAnimatedProperty<T> = { var a:Float; var k:Array<LottieKeyframe<T>>; @:optional var x:String; };
 
-typedef LottieAnimatable<T> = Dynamic;
+typedef LottieAnimatable<T> = flighthq._internal._Union2<LottieAnimatedProperty<T>, LottieStaticProperty<T>>;
 
 typedef LottieSeparatedPositionProperty = { var s:Bool; var x:LottieAnimatable<Float>; var y:LottieAnimatable<Float>; @:optional var z:LottieAnimatable<Float>; };
 
-typedef LottiePositionProperty = Dynamic;
+typedef LottiePositionProperty = flighthq._internal._Union2<LottieAnimatable<Array<Float>>, LottieSeparatedPositionProperty>;
 
 typedef LottieTransform = { @:optional var a:LottieAnimatable<Array<Float>>; @:optional var o:LottieAnimatable<Float>; @:optional var p:LottiePositionProperty; @:optional var r:LottieAnimatable<Float>; @:optional var rz:LottieAnimatable<Float>; @:optional var s:LottieAnimatable<Array<Float>>; @:optional var sa:LottieAnimatable<Float>; @:optional var sk:LottieAnimatable<Float>; };
 
@@ -48,7 +48,7 @@ typedef LottieTransformShapeItem = { @:optional var hd:Bool; @:optional var ix:F
 
 typedef LottieTrimPathShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var e:LottieAnimatable<Float>; var m:Float; var o:LottieAnimatable<Float>; var s:LottieAnimatable<Float>; };
 
-typedef LottieRepeaterShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var c:LottieAnimatable<Float>; @:optional var m:Float; var o:LottieAnimatable<Float>; var tr:Dynamic; };
+typedef LottieRepeaterShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var c:LottieAnimatable<Float>; @:optional var m:Float; var o:LottieAnimatable<Float>; var tr:{ >LottieTransform, @:optional var eo:LottieAnimatable<Float>; @:optional var so:LottieAnimatable<Float>; }; };
 
 typedef LottieMergePathShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var mm:Float; };
 
@@ -56,15 +56,15 @@ typedef LottieRoundedCornersShapeItem = { @:optional var hd:Bool; @:optional var
 
 typedef LottieUnknownShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; };
 
-typedef LottieShapeItem = Dynamic;
+typedef LottieShapeItem = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<LottieEllipseShapeItem, LottieFillShapeItem>, LottieGradientShapeItem>, LottieMergePathShapeItem>, LottiePolystarShapeItem>, LottieRectangleShapeItem>, LottieRepeaterShapeItem>, LottieRoundedCornersShapeItem>, LottieShapeGroup>, LottieShapePathItem>, LottieStrokeShapeItem>, LottieTransformShapeItem>, LottieTrimPathShapeItem>, LottieUnknownShapeItem>;
 
 typedef LottieMask = { @:optional var inv:Bool; var mode:String; @:optional var nm:String; var o:LottieAnimatable<Float>; var pt:LottieAnimatable<LottieShapePath>; @:optional var f:LottieAnimatable<Array<Float>>; @:optional var x:LottieAnimatable<Float>; };
 
 typedef LottieTextDocument = { @:optional var fc:Array<Float>; @:optional var f:String; @:optional var s:Float; @:optional var sc:Array<Float>; @:optional var sw:Float; var t:String; @:optional var tr:Float; @:optional var lh:Float; @:optional var j:Float; };
 
-typedef LottieTextData = { var d:{ var k:Array<LottieKeyframe<LottieTextDocument>>; }; @:optional var a:Array<Dynamic>; @:optional var m:Dynamic; @:optional var p:Dynamic; };
+typedef LottieTextData = { var d:{ var k:Array<LottieKeyframe<LottieTextDocument>>; }; @:optional var a:Array<flighthq._internal._Any>; @:optional var m:flighthq._internal._Any; @:optional var p:flighthq._internal._Any; };
 
-typedef LottieEffect = { @:optional var ef:Array<LottieEffect>; @:optional var ix:Float; @:optional var mn:String; @:optional var nm:String; @:optional var ty:Float; @:optional var v:LottieAnimatable<Dynamic>; };
+typedef LottieEffect = { @:optional var ef:Array<LottieEffect>; @:optional var ix:Float; @:optional var mn:String; @:optional var nm:String; @:optional var ty:Float; @:optional var v:LottieAnimatable<flighthq._internal._Union2<Float, Array<Float>>>; };
 
 typedef LottieLayer = { @:optional var bm:Float; @:optional var ddd:Float; @:optional var ef:Array<LottieEffect>; @:optional var ind:Float; @:optional var parent:Float; @:optional var ip:Float; @:optional var op:Float; @:optional var st:Float; @:optional var sr:Float; @:optional var ks:LottieTransform; @:optional var masksProperties:Array<LottieMask>; @:optional var nm:String; @:optional var refId:String; @:optional var shapes:Array<LottieShapeItem>; @:optional var sc:String; @:optional var sh:Float; @:optional var sw:Float; @:optional var t:LottieTextData; @:optional var tt:Float; @:optional var td:Float; var ty:Float; @:optional var tm:LottieAnimatable<Float>; };
 
@@ -72,10 +72,10 @@ typedef LottieImageAsset = { @:optional var e:Float; @:optional var h:Float; var
 
 typedef LottiePrecompositionAsset = { @:optional var h:Float; var id:String; var layers:Array<LottieLayer>; @:optional var nm:String; @:optional var w:Float; };
 
-typedef LottieAsset = Dynamic;
+typedef LottieAsset = flighthq._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>;
 
 typedef LottieFont = { @:optional var fFamily:String; var fName:String; @:optional var fStyle:String; @:optional var ascent:Float; };
 
 typedef LottieMarker = { var cm:String; var dr:Float; var tm:Float; };
 
-typedef LottieDocument = { @:optional var assets:Array<LottieAsset>; @:optional var chars:Array<Dynamic>; @:optional var ddd:Float; @:optional var fonts:{ var list:Array<LottieFont>; }; var fr:Float; var ip:Float; var op:Float; var h:Float; var layers:Array<LottieLayer>; @:optional var markers:Array<LottieMarker>; @:optional var nm:String; @:optional var v:String; var w:Float; };
+typedef LottieDocument = { @:optional var assets:Array<LottieAsset>; @:optional var chars:Array<flighthq._internal._Any>; @:optional var ddd:Float; @:optional var fonts:{ var list:Array<LottieFont>; }; var fr:Float; var ip:Float; var op:Float; var h:Float; var layers:Array<LottieLayer>; @:optional var markers:Array<LottieMarker>; @:optional var nm:String; @:optional var v:String; var w:Float; };

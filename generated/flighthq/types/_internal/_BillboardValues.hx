@@ -9,5 +9,5 @@ import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
 
 class _BillboardValues {
-  public static final BillboardKind:Dynamic = 'Billboard';
+  public static final BillboardKind:String = 'Billboard';
 }

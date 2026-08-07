@@ -5,17 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _DeviceFormFactorValues {
-  public static final DeviceFormFactorCar:Dynamic = 'Car';
+  public static final DeviceFormFactorCar:String = 'Car';
 
-  public static final DeviceFormFactorDesktop:Dynamic = 'Desktop';
+  public static final DeviceFormFactorDesktop:String = 'Desktop';
 
-  public static final DeviceFormFactorPhone:Dynamic = 'Phone';
+  public static final DeviceFormFactorPhone:String = 'Phone';
 
-  public static final DeviceFormFactorTablet:Dynamic = 'Tablet';
+  public static final DeviceFormFactorTablet:String = 'Tablet';
 
-  public static final DeviceFormFactorTV:Dynamic = 'TV';
+  public static final DeviceFormFactorTV:String = 'TV';
 
-  public static final DeviceFormFactorUnknown:Dynamic = 'Unknown';
+  public static final DeviceFormFactorUnknown:String = 'Unknown';
 
-  public static final DeviceFormFactorWatch:Dynamic = 'Watch';
+  public static final DeviceFormFactorWatch:String = 'Watch';
 }

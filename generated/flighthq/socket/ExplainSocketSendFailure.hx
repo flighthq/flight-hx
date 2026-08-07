@@ -4,18 +4,21 @@ package flighthq.socket;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Socket;
+import flighthq.types.Socket.SocketConnection;
+import flighthq.types.Socket.SocketReadyState;
+import flighthq.types.Socket.SocketRuntime;
 import flighthq.types.Socket.SocketSendFailureExplanation;
 
 class ExplainSocketSendFailure {
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if ((cast _Runtime.field(runtime, 'disposed') : Bool)) { return cast { reason: 'disposed', readyState: 'closed', url: _Runtime.field(socket, 'url') }; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'connection'), null) : Bool)) {
-      return cast { reason: 'no-connection', readyState: _Runtime.field(runtime, 'readyState'), url: _Runtime.field(socket, 'url') };
+    if ((cast (cast runtime : SocketRuntime).disposed : Bool)) { return cast { reason: 'disposed', readyState: 'closed', url: _Runtime.field(socket, 'url') }; }
+    if ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) {
+      return cast { reason: 'no-connection', readyState: (cast runtime : SocketRuntime).readyState, url: _Runtime.field(socket, 'url') };
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'open') : Bool)) {
-      return cast { reason: 'not-open', readyState: _Runtime.field(runtime, 'readyState'), url: _Runtime.field(socket, 'url') };
+    if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'open') : Bool)) {
+      return cast { reason: 'not-open', readyState: (cast runtime : SocketRuntime).readyState, url: _Runtime.field(socket, 'url') };
     }
     return cast null;
     return cast null;

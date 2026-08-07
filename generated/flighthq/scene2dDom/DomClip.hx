@@ -7,41 +7,47 @@ import flighthq.scene2dDom.DomClipContours.pushDomClipContours;
 import flighthq.scene2dDom.DomClipRectangle.pushDomClipRectangle;
 import flighthq.scene2dDom.DomClipRectangle.setDomClipHooks;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.types.ClipRegion;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomClipEntry;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class DomClip {
   public static function enableDomClipSupport(state:DomRenderState):Void {
-    _Runtime.setField(state, 'displayObjectClipHooks', DomClip.domScene2DClipHooks__domClip);
-    _Runtime.callValue(setDomClipHooks, cast ([state] : Array<Dynamic>));
+    ((cast state : DomRenderState).displayObjectClipHooks = DomClip.domScene2DClipHooks__domClip);
+    setDomClipHooks((cast state : DomRenderState));
   }
 
-  public static final domScene2DClipHooks__domClip:Scene2DClipHooks = { finalize: function(state:RenderState) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), 0.0);
-    _Runtime.setField(state, 'currentClipDepth', 0.0);
-  }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    if ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), target); }
-    _Runtime.setField(state, 'currentClipDepth', _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'));
-  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
-    var clip:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    clip = _Runtime.field(source, 'clip');
+  public static final domScene2DClipHooks__domClip:Scene2DClipHooks = { finalize: function(state:RenderState):Void {
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getDomRenderStateRuntime((cast (cast state : DomRenderState) : DomRenderState)) : DomRenderStateRuntime);
+    _Runtime.setLength((cast runtime : DomRenderStateRuntime).domClipStack, 0.0);
+    ((cast state : RenderState).currentClipDepth = 0.0);
+  }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getDomRenderStateRuntime((cast (cast state : DomRenderState) : DomRenderState)) : DomRenderStateRuntime);
+    target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    if ((cast ((cast _Runtime.field((cast runtime : DomRenderStateRuntime).domClipStack, 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.setLength((cast runtime : DomRenderStateRuntime).domClipStack, target); }
+    ((cast state : RenderState).currentClipDepth = _Runtime.field((cast runtime : DomRenderStateRuntime).domClipStack, 'length'));
+  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
+    var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
-      _Runtime.callValue(pushDomClipRectangle, cast ([_Runtime.field(runtime, 'domClipStack'), _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
+    runtime = (cast getDomRenderStateRuntime((cast (cast state : DomRenderState) : DomRenderState)) : DomRenderStateRuntime);
+    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
+      pushDomClipRectangle((cast runtime : DomRenderStateRuntime).domClipStack, (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
     } else {
-      _Runtime.callValue(pushDomClipContours, cast ([_Runtime.field(runtime, 'domClipStack'), _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
+      pushDomClipContours((cast runtime : DomRenderStateRuntime).domClipStack, (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
     }
-    _Runtime.incrementField(state, 'currentClipDepth', 1, true);
+    (cast state : RenderState).currentClipDepth++;
   } };
 }

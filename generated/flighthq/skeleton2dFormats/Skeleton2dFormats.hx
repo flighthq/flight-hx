@@ -31,7 +31,7 @@ class Skeleton2dFormats {
     return cast null;
   }
 
-  public static function registerSkeleton2DFormat(kind:String, detect:Dynamic, parse:Dynamic):Void {
+  public static function registerSkeleton2DFormat(kind:String, detect:String->Bool, parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>):Void {
     Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.registerSkeleton2DFormat(kind, detect, parse);
   }
 

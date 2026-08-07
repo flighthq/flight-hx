@@ -8,12 +8,12 @@ import flighthq.types.Flow.FlowState;
 
 class Flow {
   public static function clearFlowStack(stack:FlowStack):Void {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    states = _Runtime.field(stack, 'states');
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    states = (cast stack : FlowStack).states;
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, i), 'onExit', cast ([] : Array<Dynamic>));
+        _Runtime.callOptionalValue((cast flighthq._internal._StaticIndex.readArray(states, i) : FlowState).onExit, cast ([] : Array<Dynamic>));
         i--;
       }
     }
@@ -26,7 +26,7 @@ class Flow {
   }
 
   public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
     return cast ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
     return cast null;
@@ -38,9 +38,9 @@ class Flow {
   }
 
   public static function getFlowStackVisibleStates(stack:FlowStack, out:Array<FlowState>):Void {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var lowest:Dynamic = cast _Runtime.UNDEFINED;
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var lowest:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     states = _Runtime.field(stack, 'states');
     top = _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0);
@@ -48,11 +48,11 @@ class Flow {
       return;
     }
     lowest = top;
-    while (_Runtime.truthy(_Runtime.andValue(((cast lowest : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, lowest), 'renderBelow')))) {
+    while (_Runtime.truthy(_Runtime.andValue(((cast lowest : Float) > (cast 0.0 : Float)), function():Dynamic return cast (cast flighthq._internal._StaticIndex.readArray(states, lowest) : FlowState).renderBelow))) {
       lowest--;
     }
     {
-      var i:Dynamic = lowest;
+      var i:Float = lowest;
       while ((cast ((cast i : Float) <= (cast top : Float)) : Bool)) {
         _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(states, i)] : Array<Dynamic>));
         i++;
@@ -61,15 +61,15 @@ class Flow {
   }
 
   public static function popFlowState(stack:FlowStack):Null<FlowState> {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    var popped:Dynamic = cast _Runtime.UNDEFINED;
-    var revealed:Dynamic = cast _Runtime.UNDEFINED;
-    states = _Runtime.field(stack, 'states');
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    var popped:FlowState = cast _Runtime.UNDEFINED;
+    var revealed:Null<FlowState> = cast _Runtime.UNDEFINED;
+    states = (cast stack : FlowStack).states;
     if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) {
       return cast null;
     }
     popped = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
-    _Runtime.callOptionalProperty(popped, 'onExit', cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast popped : FlowState).onExit, cast ([] : Array<Dynamic>));
     revealed = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.callOptionalProperty(revealed, 'onResume', cast ([] : Array<Dynamic>));
     return cast popped;
@@ -77,9 +77,9 @@ class Flow {
   }
 
   public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    var previousTop:Dynamic = cast _Runtime.UNDEFINED;
-    states = _Runtime.field(stack, 'states');
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    var previousTop:Null<FlowState> = cast _Runtime.UNDEFINED;
+    states = (cast stack : FlowStack).states;
     previousTop = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
     _Runtime.callOptionalProperty(previousTop, 'onPause', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
@@ -87,28 +87,28 @@ class Flow {
   }
 
   public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    states = _Runtime.field(stack, 'states');
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    states = (cast stack : FlowStack).states;
     if ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      var previousTop:Dynamic = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
-      _Runtime.callOptionalProperty(previousTop, 'onExit', cast ([] : Array<Dynamic>));
+      var previousTop:FlowState = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
+      _Runtime.callOptionalValue((cast previousTop : FlowState).onExit, cast ([] : Array<Dynamic>));
     }
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }
 
   public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
-    var states:Dynamic = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+    var states:Array<FlowState> = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     states = _Runtime.field(stack, 'states');
     index = _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0);
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
       return;
     }
-    _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
-    while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, index), 'updateBelow')))) {
+    _Runtime.callOptionalValue((cast flighthq._internal._StaticIndex.readArray(states, index) : FlowState).onUpdate, cast ([deltaTime] : Array<Dynamic>));
+    while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast (cast flighthq._internal._StaticIndex.readArray(states, index) : FlowState).updateBelow))) {
       index--;
-      _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast flighthq._internal._StaticIndex.readArray(states, index) : FlowState).onUpdate, cast ([deltaTime] : Array<Dynamic>));
     }
   }
 }

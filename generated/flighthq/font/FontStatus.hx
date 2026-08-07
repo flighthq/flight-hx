@@ -7,7 +7,7 @@ import flighthq.font.FontShorthand.getFontShorthand;
 
 class FontStatus {
   public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).check(_Runtime.callValue(getFontShorthand, cast ([family, style] : Array<Dynamic>)));
+    return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).check((cast getFontShorthand((cast family : String), (cast style : Null<String>)) : String));
     return cast null;
   }
 

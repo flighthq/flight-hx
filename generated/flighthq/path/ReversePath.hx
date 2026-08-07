@@ -6,83 +6,85 @@ import flighthq._internal._Runtime;
 import flighthq.path.ForEachPathSegment.forEachPathSegment;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
+import flighthq.types.PathSegment;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef Subpath__reversePath = { var closed:Bool; var points:Array<SubpathPoint__reversePath>; };
 
-typedef SubpathPoint__reversePath = Dynamic;
+typedef SubpathPoint__reversePath = flighthq._internal._Union2<flighthq._internal._Union2<{ var kind:String; var x:Float; var y:Float; }, { var kind:String; var x:Float; var y:Float; var cx:Float; var cy:Float; }>, { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }>;
 
 class ReversePath {
   public static function reversePath(source:Path, out:Path):Void {
-    var subpaths:Dynamic = cast _Runtime.UNDEFINED;
-    subpaths = _Runtime.callValue(ReversePath.decodeSubpaths__reversePath, cast ([source] : Array<Dynamic>));
-    _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
-    _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
+    var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
+    subpaths = (cast ReversePath.decodeSubpaths__reversePath((cast source : Path)) : Array<Subpath__reversePath>);
+    _Runtime.setLength((cast out : Path).commands, 0.0);
+    _Runtime.setLength((cast out : Path).data, 0.0);
+    ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     for (subpath in _Runtime.iterable(subpaths)) {
-      _Runtime.callValue(ReversePath.encodeReversedSubpath__reversePath, cast ([subpath, out] : Array<Dynamic>));
+      ReversePath.encodeReversedSubpath__reversePath(subpath, (cast out : Path));
     }
   }
 
   public static function decodeSubpaths__reversePath(path:Path):Array<Subpath__reversePath> {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
     var current:Null<Subpath__reversePath> = cast _Runtime.UNDEFINED;
-    var ensureCurrent:Dynamic = cast _Runtime.UNDEFINED;
+    var ensureCurrent:Void->Subpath__reversePath = cast _Runtime.UNDEFINED;
     subpaths = cast ([] : Array<Dynamic>);
     current = null;
-    ensureCurrent = function() {
+    ensureCurrent = (cast function():Subpath__reversePath {
       if ((cast _Runtime.strictEquals(current, null) : Bool)) {
         (current = cast ({ points: cast ([{ x: 0.0, y: 0.0, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
       }
       return cast current;
-    };
-    _Runtime.callValue(forEachPathSegment, cast ([path, function(segment:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'moveTo') : Bool)) {
-        (current = cast ({ points: cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
+    } : Void->Subpath__reversePath);
+    forEachPathSegment((cast path : Path), function(segment:PathSegment):Void {
+      if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
+        (current = cast ({ points: cast ([{ x: (cast segment : { var kind:String; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var x:Float; var y:Float; }).y, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'lineTo') : Bool)) {
-        _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'line' }] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'curveTo') : Bool)) {
-        _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'quad', cx: _Runtime.field(segment, 'controlX'), cy: _Runtime.field(segment, 'controlY') }] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'cubicCurveTo') : Bool)) {
-        _Runtime.callProperty(_Runtime.field(_Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>)), 'points'), 'push', cast ([{ x: _Runtime.field(segment, 'x'), y: _Runtime.field(segment, 'y'), kind: 'cubic', c1x: _Runtime.field(segment, 'control1X'), c1y: _Runtime.field(segment, 'control1Y'), c2x: _Runtime.field(segment, 'control2X'), c2y: _Runtime.field(segment, 'control2Y') }] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'close') : Bool)) {
-        if ((cast !_Runtime.strictEquals(current, null) : Bool)) { _Runtime.setField(current, 'closed', true); }
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'lineTo') : Bool)) {
+        _Runtime.callProperty((cast (cast ensureCurrent() : Subpath__reversePath) : Subpath__reversePath).points, 'push', cast ([{ x: (cast segment : { var kind:String; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var x:Float; var y:Float; }).y, kind: 'line' }] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'curveTo') : Bool)) {
+        _Runtime.callProperty((cast (cast ensureCurrent() : Subpath__reversePath) : Subpath__reversePath).points, 'push', cast ([{ x: (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y, kind: 'quad', cx: (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX, cy: (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY }] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'cubicCurveTo') : Bool)) {
+        _Runtime.callProperty((cast (cast ensureCurrent() : Subpath__reversePath) : Subpath__reversePath).points, 'push', cast ([{ x: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y, kind: 'cubic', c1x: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X, c1y: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y, c2x: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X, c2y: (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y }] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'close') : Bool)) {
+        if ((cast !_Runtime.strictEquals(current, null) : Bool)) { ((cast current : Subpath__reversePath).closed = true); }
       } } } } }
-    }] : Array<Dynamic>));
+    });
     return cast subpaths;
     return cast null;
   }
 
   public static function encodeReversedSubpath__reversePath(subpath:Subpath__reversePath, out:Path):Void {
-    var pts:Dynamic = cast _Runtime.UNDEFINED;
-    var last:Dynamic = cast _Runtime.UNDEFINED;
+    var pts:Array<SubpathPoint__reversePath> = cast _Runtime.UNDEFINED;
+    var last:SubpathPoint__reversePath = cast _Runtime.UNDEFINED;
     pts = _Runtime.field(subpath, 'points');
     if ((cast _Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0) : Bool)) { return; }
     last = flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0));
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(last, 'x'), _Runtime.field(last, 'y')] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+    _Runtime.pushMany((cast out : Path).data, cast ([(cast last : { var x:Float; }).x, (cast last : { var y:Float; }).y] : Array<Dynamic>));
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 1.0 : Float)) : Bool)) {
-        var from:Dynamic = flighthq._internal._StaticIndex.readArray(pts, i);
-        var to:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i - 1.0));
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'line') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'move') : Bool)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'quad') : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CURVE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'cx'), _Runtime.field(from, 'cy'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'cubic') : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'c2x'), _Runtime.field(from, 'c2y'), _Runtime.field(from, 'c1x'), _Runtime.field(from, 'c1y'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
+        var from:SubpathPoint__reversePath = flighthq._internal._StaticIndex.readArray(pts, i);
+        var to:SubpathPoint__reversePath = flighthq._internal._StaticIndex.readArray(pts, (i - 1.0));
+        if ((cast ((cast _Runtime.strictEquals((cast from : { var kind:String; }).kind, 'line') : Bool) || (cast _Runtime.strictEquals((cast from : { var kind:String; }).kind, 'move') : Bool)) : Bool)) {
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([(cast to : { var x:Float; }).x, (cast to : { var y:Float; }).y] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals((cast from : { var kind:String; }).kind, 'quad') : Bool)) {
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([(cast from : { var kind:String; var x:Float; var y:Float; var cx:Float; var cy:Float; }).cx, (cast from : { var kind:String; var x:Float; var y:Float; var cx:Float; var cy:Float; }).cy, (cast to : { var x:Float; }).x, (cast to : { var y:Float; }).y] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals((cast from : { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }).kind, 'cubic') : Bool)) {
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([(cast from : { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }).c2x, (cast from : { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }).c2y, (cast from : { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }).c1x, (cast from : { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }).c1y, (cast to : { var x:Float; }).x, (cast to : { var y:Float; }).y] : Array<Dynamic>));
         } } }
         i--;
       }
     }
     if ((cast _Runtime.field(subpath, 'closed') : Bool)) {
-      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
+      _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>));
     }
   }
 }

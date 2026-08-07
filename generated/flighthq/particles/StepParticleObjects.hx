@@ -16,11 +16,11 @@ import flighthq.types.ParticleObjectsUpdateOptions;
 class StepParticleObjects {
   public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(applyParticleObjectForces, cast ([objects, state, forces, deltaTime] : Array<Dynamic>));
+      applyParticleObjectForces((cast objects : Array<ParticleObject>), (cast state : ParticleObjectsState), (cast forces : Array<ParticleForce>), (cast deltaTime : Float));
     }
-    _Runtime.callValue(updateParticleObjects, cast ([objects, state, config, deltaTime, updateOptions] : Array<Dynamic>));
+    updateParticleObjects((cast objects : Array<ParticleObject>), (cast state : ParticleObjectsState), (cast config : ParticleEmitterConfig), (cast deltaTime : Float), (cast updateOptions : Null<ParticleObjectsUpdateOptions>));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.callValue(applyParticleObjectCollisions, cast ([objects, state, colliders] : Array<Dynamic>));
+      applyParticleObjectCollisions((cast objects : Array<ParticleObject>), (cast state : ParticleObjectsState), (cast colliders : Array<ParticleCollider>));
     }
   }
 }

@@ -6,37 +6,40 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderEffect;
 import flighthq.types.TiltShiftEffect;
 
 class GlTiltShiftEffect {
   @:noCompletion
   public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
-    var center:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var blur:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var center:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var blur:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     center = _Runtime.coalesce(_Runtime.field(effect, 'center'), function():Dynamic return cast 0.5);
     width = _Runtime.coalesce(_Runtime.field(effect, 'width'), function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.tiltShift', GlTiltShiftEffect.TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.tiltShift' : String), (cast GlTiltShiftEffect.TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_center'), center);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_width'), width);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_blur'), blur);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlTiltShiftEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyTiltShiftEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TiltShiftEffect)] : Array<Dynamic>));
+  public static final defaultGlTiltShiftEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyTiltShiftEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : TiltShiftEffect) : TiltShiftEffect));
   };
 
   public static function registerGlTiltShiftEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'TiltShiftEffect', defaultGlTiltShiftEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'TiltShiftEffect' : String), (cast defaultGlTiltShiftEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_center;\nuniform float u_width;\nuniform float u_blur;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float dist = abs(v_texCoord.y - u_center);\n  float edge = u_width * 0.5;\n  float amount = smoothstep(edge, edge + u_width, dist);\n  float radius = amount * u_blur;\n  vec4 sum = vec4(0.0);\n  float total = 0.0;\n  for (int i = -3; i <= 3; i++) {\n    vec2 offset = vec2(0.0, float(i)) * radius * texel;\n    sum += texture(u_texture0, v_texCoord + offset);\n    total += 1.0;\n  }\n  o_color = sum / total;\n}';
+  public static final TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_center;\nuniform float u_width;\nuniform float u_blur;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float dist = abs(v_texCoord.y - u_center);\n  float edge = u_width * 0.5;\n  float amount = smoothstep(edge, edge + u_width, dist);\n  float radius = amount * u_blur;\n  vec4 sum = vec4(0.0);\n  float total = 0.0;\n  for (int i = -3; i <= 3; i++) {\n    vec2 offset = vec2(0.0, float(i)) * radius * texel;\n    sum += texture(u_texture0, v_texCoord + offset);\n    total += 1.0;\n  }\n  o_color = sum / total;\n}';
 }

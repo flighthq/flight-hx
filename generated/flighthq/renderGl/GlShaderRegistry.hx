@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
 
 class GlShaderRegistry {
   public static function registerGlBitmapShader(state:GlRenderState, shader:GlBitmapShader):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'defaultBitmapShader', shader);
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    ((cast runtime : GlRenderStateRuntime).defaultBitmapShader = shader);
   }
 }

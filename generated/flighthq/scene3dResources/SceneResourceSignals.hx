@@ -5,32 +5,35 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Scene3DResources.Scene3DResourceEvent;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
+import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
 import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.Signal;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
 class SceneResourceSignals {
   @:noCompletion
   public static function createScene3DResourceSignals():Scene3DResourceSignals {
-    return cast _Runtime.callValue(createEntity, cast ([{ onResourceFailed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResourceResolved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) }) : Scene3DResourceSignals);
     return cast null;
   }
 
   public static function enableScene3DResourceSignals(resolver:Scene3DResourceResolver):Scene3DResourceSignals {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var signals:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
+    var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null) : Bool)) { return cast _Runtime.field(runtime, 'signals'); }
-    signals = _Runtime.callValue(createScene3DResourceSignals, cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'signals', signals);
+    if ((cast !_Runtime.strictEquals((cast runtime : Scene3DResourceResolverRuntime).signals, null) : Bool)) { return cast (cast runtime : Scene3DResourceResolverRuntime).signals; }
+    signals = (cast createScene3DResourceSignals() : Scene3DResourceSignals);
+    ((cast runtime : Scene3DResourceResolverRuntime).signals = signals);
     return cast signals;
     return cast null;
   }
 
   public static function getScene3DResourceSignals(resolver:Scene3DResourceResolver):Null<Scene3DResourceSignals> {
-    return cast _Runtime.field(_Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey), 'signals');
+    return cast (cast _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey) : Scene3DResourceResolverRuntime).signals;
     return cast null;
   }
 }

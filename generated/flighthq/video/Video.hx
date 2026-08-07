@@ -26,7 +26,7 @@ class Video {
     return cast null;
   }
 
-  public static function detectVideoMimeType(data:Dynamic):Null<String> {
+  public static function detectVideoMimeType(data:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
     return cast Facade_Video_flighthq_video_VideoFormat.detectVideoMimeType(data);
     return cast null;
   }

@@ -6,23 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 
 class GlVignetteEffect {
   @:noCompletion
   public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var softness:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var softness:Float = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
     softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
@@ -31,22 +34,22 @@ class GlVignetteEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.vignette', GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.vignette' : String), (cast GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_softness'), softness);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_color'), r, g, b, a);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlVignetteEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyVignetteEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
+  public static final defaultGlVignetteEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
   };
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'VignetteEffect', defaultGlVignetteEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'VignetteEffect' : String), (cast defaultGlVignetteEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';
+  public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';
 }

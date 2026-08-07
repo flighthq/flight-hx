@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Scale9Mapper = { var mapX:Dynamic; var mapY:Dynamic; };
+typedef Scale9Mapper = { var mapX:Float->Float; var mapY:Float->Float; };

@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.imageCodec.ImageEncoderRegistry.getImageEncoder;
 import flighthq.types.ImageEncodeFailureExplanation;
+import flighthq.types.ImageEncoder;
 
 class ExplainImageEncodeFailure {
   public static function explainImageEncodeFailure(mimeType:String):Null<ImageEncodeFailureExplanation> {
-    if ((cast !_Runtime.strictEquals(_Runtime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>)), null) : Bool)) { return cast null; }
+    if ((cast !_Runtime.strictEquals((cast getImageEncoder((cast mimeType : String)) : Null<ImageEncoder>), null) : Bool)) { return cast null; }
     return cast { mimeType: mimeType, reason: 'encoder-not-registered' };
     return cast null;
   }

@@ -4,46 +4,47 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronApp;
 import flighthq.types.Protocol.ProtocolBackend;
 
 class ElectronProtocol {
   public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
-    var app:Dynamic = cast _Runtime.UNDEFINED;
-    var registered:Dynamic = cast _Runtime.UNDEFINED;
-    app = _Runtime.field(electron, 'app');
+    var app:ElectronApp = cast _Runtime.UNDEFINED;
+    var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    app = (cast electron : ElectronApi).app;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    return cast { register: function(scheme:Dynamic) {
-      var ok:Dynamic = cast _Runtime.UNDEFINED;
-      ok = _Runtime.callProperty(app, 'setAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set).add(scheme)); }
+    return cast { register: function(scheme:String):Bool {
+      var ok:Bool = cast _Runtime.UNDEFINED;
+      ok = (cast app : ElectronApp).setAsDefaultProtocolClient(scheme);
+      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set<String>).add(scheme)); }
       return cast ok;
-    }, unregister: function(scheme:Dynamic) {
-      var ok:Dynamic = cast _Runtime.UNDEFINED;
-      ok = _Runtime.callProperty(app, 'removeAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      ((cast registered : flighthq._internal._Set).delete_(scheme));
+    }, unregister: function(scheme:String):Bool {
+      var ok:Bool = cast _Runtime.UNDEFINED;
+      ok = (cast app : ElectronApp).removeAsDefaultProtocolClient(scheme);
+      ((cast registered : flighthq._internal._Set<String>).delete_(scheme));
       return cast ok;
-    }, isRegistered: function(scheme:Dynamic) {
-      return cast _Runtime.callProperty(app, 'isDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-    }, getRegisteredSchemes: function() {
+    }, isRegistered: function(scheme:String):Bool {
+      return cast (cast app : ElectronApp).isDefaultProtocolClient(scheme);
+    }, getRegisteredSchemes: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
-    }, setAsDefault: function(scheme:Dynamic) {
-      var ok:Dynamic = cast _Runtime.UNDEFINED;
-      ok = _Runtime.callProperty(app, 'setAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set).add(scheme)); }
+    }, setAsDefault: function(scheme:String):Bool {
+      var ok:Bool = cast _Runtime.UNDEFINED;
+      ok = (cast app : ElectronApp).setAsDefaultProtocolClient(scheme);
+      if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set<String>).add(scheme)); }
       return cast ok;
-    }, isDefault: function(scheme:Dynamic) {
-      return cast _Runtime.callProperty(app, 'isDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-    }, removeAsDefault: function(scheme:Dynamic) {
-      return cast _Runtime.callProperty(app, 'removeAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));
-    }, getLaunchUrl: function() {
+    }, isDefault: function(scheme:String):Bool {
+      return cast (cast app : ElectronApp).isDefaultProtocolClient(scheme);
+    }, removeAsDefault: function(scheme:String):Bool {
+      return cast (cast app : ElectronApp).removeAsDefaultProtocolClient(scheme);
+    }, getLaunchUrl: function():flighthq._internal._Any {
       return cast null;
-    }, drainPendingUrls: function() {
+    }, drainPendingUrls: function():Array<flighthq._internal._Any> {
       return cast cast ([] : Array<Dynamic>);
-    }, subscribe: function(listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = _Runtime.haxeRest(function(...args:Dynamic) return _Runtime.callValue(listener, cast ([Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast ''))] : Array<Dynamic>)), 0);
-      _Runtime.callProperty(app, 'on', cast (['open-url', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(app, 'removeListener', cast (['open-url', handler] : Array<Dynamic>));
+    }, subscribe: function(listener:String->Void):Void->Void {
+      var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void return listener((cast Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)), 0) : Array<flighthq._internal._Any>->Void);
+      (cast app : ElectronApp).on('open-url', handler);
+      return cast function():Void return (cast app : ElectronApp).removeListener('open-url', handler);
     } };
     return cast null;
   }

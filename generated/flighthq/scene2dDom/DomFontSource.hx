@@ -6,25 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.types.FontResource;
 
 class DomFontSource {
-  public static final _domFontAscentCache__domFontSource:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final _domFontAscentCache__domFontSource:flighthq._internal._Map<String, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static function getDomFontAscentCached(font:String):Null<Float> {
-    return cast ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).get(font));
+    return cast ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).get(font));
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateDomFontResource(source:FontResource):Void {
-    var family:Dynamic = cast _Runtime.UNDEFINED;
+    var family:String = cast _Runtime.UNDEFINED;
     family = source.family;
-    for (key in _Runtime.iterable(((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).keys()))) {
+    for (key in _Runtime.iterable(((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).keys()))) {
       if ((cast ((cast _Runtime.includes(key, '\'' + Std.string(family) + '\'') : Bool) || (cast _Runtime.includes(key, '"' + Std.string(family) + '"') : Bool)) : Bool)) {
-        ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).delete_(key));
+        ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).delete_(key));
       }
     }
   }
 
   public static function setDomFontAscentCached(font:String, ascent:Float):Void {
-    ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map).set(font, ascent));
+    ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).set(font, ascent));
   }
 }

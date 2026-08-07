@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ImageEncoder = Dynamic;
+typedef ImageEncoder = DecodedImage->ImageEncodeOptions->flighthq._internal._Promise<flighthq._internal._UInt8Array>;

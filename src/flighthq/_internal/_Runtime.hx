@@ -389,7 +389,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('new Map({0} ?? undefined)', source);
     #else
-    return new _Map(source);
+    return new _Map<Dynamic, Dynamic>(source);
     #end
   }
 
@@ -397,7 +397,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('new WeakMap({0} ?? undefined)', source);
     #else
-    return new _WeakMap(source);
+    return new _WeakMap<Dynamic, Dynamic>(source);
     #end
   }
 
@@ -405,7 +405,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('new Set({0} ?? undefined)', source);
     #else
-    return new _Set(source);
+    return new _Set<Dynamic>(source);
     #end
   }
 
@@ -413,7 +413,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('new WeakSet({0} ?? undefined)', source);
     #else
-    return new _WeakSet(source);
+    return new _WeakSet<Dynamic>(source);
     #end
   }
 
@@ -1070,8 +1070,9 @@ class _Runtime {
     return end == null ? text.substring(Std.int(start)) : text.substring(Std.int(start), Std.int(end));
   }
 
-  public static function find(values:Dynamic, predicate:Dynamic->Bool):Dynamic {
-    for (value in iterable(values)) if (predicate(value)) return value;
+  public static function find<T>(values:Dynamic, predicate:(T, Float, Array<T>)->Bool):Dynamic {
+    final items:Array<T> = cast iterable(values);
+    for (index in 0...items.length) if (predicate(items[index], index, items)) return items[index];
     return UNDEFINED;
   }
 
@@ -1128,8 +1129,9 @@ class _Runtime {
     // Never blind-cast Dynamic to Array here: hxcpp's unchecked cast does not
     // throw for a wrong type — it yields a garbage pointer that segfaults on
     // use. Dispatch the collection wrappers by real type instead.
-    if (Std.isOfType(value, _Set)) return (cast value : _Set).values();
-    if (Std.isOfType(value, _Map)) return [for (entry in (cast value : _Map).entries()) entry];
+    if (Std.isOfType(value, _Set)) return (cast value : _Set<Dynamic>).values();
+    if (Std.isOfType(value, _Map))
+      return [for (entry in (cast value : _Map<Dynamic, Dynamic>).entries()) entry];
     if (Std.isOfType(value, String)) return [for (i in 0...(value : String).length) (value : String).charAt(i)];
     final iteratorFn = Reflect.field(value, 'iterator');
     if (iteratorFn == null) {

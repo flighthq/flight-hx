@@ -8,58 +8,58 @@ import flighthq.types.WgpuRenderState;
 class WgpuEffectGradientRamp {
   @:noCompletion
   public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.GPUTexture {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    cache = ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).get(state));
+    var cache:Null<flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>> = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
+    cache = ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>>).get(state));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).set(state, cache));
+      ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>>).set(state, cache));
     }
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
-    texture = ((cast cache : flighthq._internal._Map).get(key));
+    texture = ((cast cache : flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>).get(key));
     if ((cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (texture = cast (_Runtime.callValue(WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp, cast ([state, colors, alphas, ratios] : Array<Dynamic>)) : Dynamic));
-      ((cast cache : flighthq._internal._Map).set(key, texture));
+      (texture = cast ((cast WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp((cast state : WgpuRenderState), (cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>)) : Null<flighthq._internal.dom.GPUTexture>) : Dynamic));
+      ((cast cache : flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>).set(key, texture));
     }
     return cast texture;
     return cast null;
   }
 
   public static function buildRampData__wgpuEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     out = new flighthq._internal._UInt8ClampedArray((256.0 * 4.0));
     if ((cast _Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0) : Bool)) { return cast out; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
-        var t:Dynamic = i;
-        var r:Dynamic = 0.0;
-        var g:Dynamic = 0.0;
-        var b:Dynamic = 0.0;
-        var a:Dynamic = 0.0;
+        var t:Float = i;
+        var r:Float = 0.0;
+        var g:Float = 0.0;
+        var b:Float = 0.0;
+        var a:Float = 0.0;
         if ((cast ((cast t : Float) <= (cast flighthq._internal._StaticIndex.readArray(ratios, 0.0) : Float)) : Bool)) {
-          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, 0.0);
+          var c:Float = flighthq._internal._StaticIndex.readArray(colors, 0.0);
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
           (a = cast (HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, 0.0), 255.0)) : Dynamic));
         } else { if ((cast ((cast t : Float) >= (cast flighthq._internal._StaticIndex.readArray(ratios, _Runtime.subtractNumbers(_Runtime.field(ratios, 'length'), 1.0)) : Float)) : Bool)) {
-          var c:Dynamic = flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0));
+          var c:Float = flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0));
           (r = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 16)) & 255) : Dynamic));
           (g = cast ((_Runtime.toInt32((_Runtime.toInt32(c) >> 8)) & 255) : Dynamic));
           (b = cast ((_Runtime.toInt32(c) & 255) : Dynamic));
           (a = cast (HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0)), 255.0)) : Dynamic));
         } else {
           {
-            var j:Dynamic = 0.0;
+            var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(ratios, 'length'), 1.0) : Float)) : Bool)) {
-              var r0:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, j);
-              var r1:Dynamic = flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0));
+              var r0:Float = flighthq._internal._StaticIndex.readArray(ratios, j);
+              var r1:Float = flighthq._internal._StaticIndex.readArray(ratios, (j + 1.0));
               if ((cast ((cast ((cast t : Float) >= (cast r0 : Float)) : Bool) && (cast ((cast t : Float) <= (cast r1 : Float)) : Bool)) : Bool)) {
-                var blend:Dynamic = ((cast ((cast r1 : Float) > (cast r0 : Float)) : Bool) ? (cast ((t - r0) / (r1 - r0)) : Dynamic) : (cast 0.0 : Dynamic));
-                var c0:Dynamic = flighthq._internal._StaticIndex.readArray(colors, j);
-                var c1:Dynamic = flighthq._internal._StaticIndex.readArray(colors, (j + 1.0));
+                var blend:Float = ((cast ((cast r1 : Float) > (cast r0 : Float)) : Bool) ? (cast ((t - r0) / (r1 - r0)) : Dynamic) : (cast 0.0 : Dynamic));
+                var c0:Float = flighthq._internal._StaticIndex.readArray(colors, j);
+                var c1:Float = flighthq._internal._StaticIndex.readArray(colors, (j + 1.0));
                 (r = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 16)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 16)) & 255) * blend))) : Dynamic));
                 (g = cast (HxMath.round((((_Runtime.toInt32((_Runtime.toInt32(c0) >> 8)) & 255) * (1.0 - blend)) + ((_Runtime.toInt32((_Runtime.toInt32(c1) >> 8)) & 255) * blend))) : Dynamic));
                 (b = cast (HxMath.round((((_Runtime.toInt32(c0) & 255) * (1.0 - blend)) + ((_Runtime.toInt32(c1) & 255) * blend))) : Dynamic));
@@ -82,11 +82,11 @@ class WgpuEffectGradientRamp {
   }
 
   public static function createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.GPUTexture {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.callValue(WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
+    data = (cast WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp((cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>)) : flighthq._internal._UInt8ClampedArray);
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));
@@ -95,5 +95,5 @@ class WgpuEffectGradientRamp {
     return cast null;
   }
 
-  public static final rampCaches__wgpuEffectGradientRamp:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final rampCaches__wgpuEffectGradientRamp:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

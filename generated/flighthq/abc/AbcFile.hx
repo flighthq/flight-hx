@@ -24,31 +24,31 @@ import flighthq.types.Abc.AbcTraitKindValue;
 
 @:keep
 class AbcReader__abcFile {
-  public var pos:Dynamic = 0.0;
-  public var valid:Dynamic = true;
+  public var pos:Float = 0.0;
+  public var valid:Bool = true;
   public final source:flighthq._internal._UInt8Array;
   public function new(source:flighthq._internal._UInt8Array):Void {
     (this.source = cast (source : Dynamic));
   }
   public function readBytes(count:Float):flighthq._internal._UInt8Array {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(this, 'pos'), count) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
-      (this.valid = cast (false : Dynamic));
+    var value:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast this : AbcReader__abcFile).pos + count) : Float) > (cast _Runtime.field((cast this : AbcReader__abcFile).source, 'length') : Float)) : Bool)) {
+      ((cast this : AbcReader__abcFile).valid = false);
       return cast new flighthq._internal._UInt8Array(0.0);
     }
-    value = (cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(this, 'pos')), Std.int(_Runtime.addNumbers(_Runtime.field(this, 'pos'), count)));
-    (this.pos += count);
+    value = (cast (cast this : AbcReader__abcFile).source : flighthq._internal._UInt8Array).subarray(Std.int((cast this : AbcReader__abcFile).pos), Std.int(((cast this : AbcReader__abcFile).pos + count)));
+    ((cast this : AbcReader__abcFile).pos += count);
     return cast value;
     return cast null;
   }
   public function readDouble():Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.addNumbers(_Runtime.field(this, 'pos'), 8.0) : Float) > (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
-      (this.valid = cast (false : Dynamic));
+    var value:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast this : AbcReader__abcFile).pos + 8.0) : Float) > (cast _Runtime.field((cast this : AbcReader__abcFile).source, 'length') : Float)) : Bool)) {
+      ((cast this : AbcReader__abcFile).valid = false);
       return cast 0.0;
     }
-    value = _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(_Runtime.field(this, 'source'), 'buffer'), _Runtime.addNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'byteOffset'), _Runtime.field(this, 'pos')), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
-    (this.pos += 8.0);
+    value = _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field((cast this : AbcReader__abcFile).source, 'buffer'), _Runtime.addNumbers(_Runtime.field((cast this : AbcReader__abcFile).source, 'byteOffset'), (cast this : AbcReader__abcFile).pos), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
+    ((cast this : AbcReader__abcFile).pos += 8.0);
     return cast value;
     return cast null;
   }
@@ -57,76 +57,76 @@ class AbcReader__abcFile {
     return cast null;
   }
   public function readString():String {
-    var length:Dynamic = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
     length = (cast this : AbcReader__abcFile).readVarUint();
-    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast (cast AbcFile._decoder__abcFile : flighthq._internal.dom.TextDecoder).decode((cast this : AbcReader__abcFile).readBytes(length)) : Dynamic) : (cast '' : Dynamic));
+    return cast ((cast (cast this : AbcReader__abcFile).valid : Bool) ? (cast (cast AbcFile._decoder__abcFile : flighthq._internal.dom.TextDecoder).decode((cast this : AbcReader__abcFile).readBytes(length)) : Dynamic) : (cast '' : Dynamic));
     return cast null;
   }
   public function readUint8():Float {
-    if ((cast ((cast _Runtime.field(this, 'pos') : Float) >= (cast _Runtime.field(_Runtime.field(this, 'source'), 'length') : Float)) : Bool)) {
-      (this.valid = cast (false : Dynamic));
+    if ((cast ((cast (cast this : AbcReader__abcFile).pos : Float) >= (cast _Runtime.field((cast this : AbcReader__abcFile).source, 'length') : Float)) : Bool)) {
+      ((cast this : AbcReader__abcFile).valid = false);
       return cast 0.0;
     }
-    return cast flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(this, 'source'), _Runtime.incrementField(this, 'pos', 1, true));
+    return cast flighthq._internal._StaticIndex.readUint8Array((cast this : AbcReader__abcFile).source, (cast this : AbcReader__abcFile).pos++);
     return cast null;
   }
   public function readUint16():Float {
-    var low:Dynamic = cast _Runtime.UNDEFINED;
+    var low:Float = cast _Runtime.UNDEFINED;
     low = (cast this : AbcReader__abcFile).readUint8();
     return cast (low + _Runtime.multiplyNumbers((cast this : AbcReader__abcFile).readUint8(), 256.0));
     return cast null;
   }
   public function readVarUint():Float {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
     value = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast AbcFile.VAR_UINT_MAX_BYTES__abcFile : Float)) : Bool)) {
-        var byte:Dynamic = (cast this : AbcReader__abcFile).readUint8();
+        var byte:Float = (cast this : AbcReader__abcFile).readUint8();
         (value = cast ((value + ((_Runtime.toInt32(byte) & 127) * HxMath.pow(2.0, (7.0 * i)))) : Dynamic));
         if ((cast _Runtime.strictEquals((_Runtime.toInt32(byte) & 128), 0.0) : Bool)) { break; }
         i++;
       }
     }
-    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast (cast this : AbcReader__abcFile).valid : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
   public function remaining():Float {
-    return cast _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'length'), _Runtime.field(this, 'pos'));
+    return cast _Runtime.subtractNumbers(_Runtime.field((cast this : AbcReader__abcFile).source, 'length'), (cast this : AbcReader__abcFile).pos);
     return cast null;
   }
 }
 
 class AbcFile {
   public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<flighthq.types.Abc.AbcFile> {
-    var reader:Dynamic = cast _Runtime.UNDEFINED;
-    var minorVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var majorVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var constantPool:Dynamic = cast _Runtime.UNDEFINED;
+    var reader:AbcReader__abcFile = cast _Runtime.UNDEFINED;
+    var minorVersion:Float = cast _Runtime.UNDEFINED;
+    var majorVersion:Float = cast _Runtime.UNDEFINED;
+    var constantPool:Null<AbcConstantPool> = cast _Runtime.UNDEFINED;
     var methods:Array<AbcMethod> = cast _Runtime.UNDEFINED;
-    var methodCount:Dynamic = cast _Runtime.UNDEFINED;
+    var methodCount:Float = cast _Runtime.UNDEFINED;
     var metadata:Array<AbcMetadata> = cast _Runtime.UNDEFINED;
-    var metadataCount:Dynamic = cast _Runtime.UNDEFINED;
-    var classCount:Dynamic = cast _Runtime.UNDEFINED;
+    var metadataCount:Float = cast _Runtime.UNDEFINED;
+    var classCount:Float = cast _Runtime.UNDEFINED;
     var instances:Array<AbcInstance> = cast _Runtime.UNDEFINED;
     var classes:Array<AbcClass> = cast _Runtime.UNDEFINED;
     var scripts:Array<AbcScript> = cast _Runtime.UNDEFINED;
-    var scriptCount:Dynamic = cast _Runtime.UNDEFINED;
+    var scriptCount:Float = cast _Runtime.UNDEFINED;
     var methodBodies:Array<AbcMethodBody> = cast _Runtime.UNDEFINED;
-    var bodyCount:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyCount:Float = cast _Runtime.UNDEFINED;
     reader = new AbcReader__abcFile(source);
     minorVersion = (cast reader : AbcReader__abcFile).readUint16();
     majorVersion = (cast reader : AbcReader__abcFile).readUint16();
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    constantPool = _Runtime.callValue(AbcFile.readAbcConstantPool__abcFile, cast ([reader] : Array<Dynamic>));
+    if ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool)) { return cast null; }
+    constantPool = (cast AbcFile.readAbcConstantPool__abcFile(reader) : Null<AbcConstantPool>);
     if ((cast _Runtime.strictEquals(constantPool, null) : Bool)) { return cast null; }
     methods = cast ([] : Array<Dynamic>);
     methodCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast methodCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast methodCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast methodCount : Float)) : Bool)) {
-        var method:Dynamic = _Runtime.callValue(AbcFile.readAbcMethod__abcFile, cast ([reader] : Array<Dynamic>));
+        var method:Null<AbcMethod> = (cast AbcFile.readAbcMethod__abcFile(reader) : Null<AbcMethod>);
         if ((cast _Runtime.strictEquals(method, null) : Bool)) { return cast null; }
         _Runtime.callProperty(methods, 'push', cast ([method] : Array<Dynamic>));
         i++;
@@ -134,23 +134,23 @@ class AbcFile {
     }
     metadata = cast ([] : Array<Dynamic>);
     metadataCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast metadataCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast metadataCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast metadataCount : Float)) : Bool)) {
-        var entry:Dynamic = _Runtime.callValue(AbcFile.readAbcMetadata__abcFile, cast ([reader] : Array<Dynamic>));
+        var entry:Null<AbcMetadata> = (cast AbcFile.readAbcMetadata__abcFile(reader) : Null<AbcMetadata>);
         if ((cast _Runtime.strictEquals(entry, null) : Bool)) { return cast null; }
         _Runtime.callProperty(metadata, 'push', cast ([entry] : Array<Dynamic>));
         i++;
       }
     }
     classCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast classCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast classCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     instances = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast classCount : Float)) : Bool)) {
-        var instance:Dynamic = _Runtime.callValue(AbcFile.readAbcInstance__abcFile, cast ([reader] : Array<Dynamic>));
+        var instance:Null<AbcInstance> = (cast AbcFile.readAbcInstance__abcFile(reader) : Null<AbcInstance>);
         if ((cast _Runtime.strictEquals(instance, null) : Bool)) { return cast null; }
         _Runtime.callProperty(instances, 'push', cast ([instance] : Array<Dynamic>));
         i++;
@@ -158,10 +158,10 @@ class AbcFile {
     }
     classes = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast classCount : Float)) : Bool)) {
-        var initializer:Dynamic = (cast reader : AbcReader__abcFile).readVarUint();
-        var traits:Dynamic = _Runtime.callValue(AbcFile.readAbcTraits__abcFile, cast ([reader] : Array<Dynamic>));
+        var initializer:Float = (cast reader : AbcReader__abcFile).readVarUint();
+        var traits:Null<Array<AbcTrait>> = (cast AbcFile.readAbcTraits__abcFile(reader) : Null<Array<AbcTrait>>);
         if ((cast _Runtime.strictEquals(traits, null) : Bool)) { return cast null; }
         _Runtime.callProperty(classes, 'push', cast ([{ initializer: initializer, traits: traits }] : Array<Dynamic>));
         i++;
@@ -169,12 +169,12 @@ class AbcFile {
     }
     scripts = cast ([] : Array<Dynamic>);
     scriptCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast scriptCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast scriptCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast scriptCount : Float)) : Bool)) {
-        var initializer:Dynamic = (cast reader : AbcReader__abcFile).readVarUint();
-        var traits:Dynamic = _Runtime.callValue(AbcFile.readAbcTraits__abcFile, cast ([reader] : Array<Dynamic>));
+        var initializer:Float = (cast reader : AbcReader__abcFile).readVarUint();
+        var traits:Null<Array<AbcTrait>> = (cast AbcFile.readAbcTraits__abcFile(reader) : Null<Array<AbcTrait>>);
         if ((cast _Runtime.strictEquals(traits, null) : Bool)) { return cast null; }
         _Runtime.callProperty(scripts, 'push', cast ([{ initializer: initializer, traits: traits }] : Array<Dynamic>));
         i++;
@@ -182,71 +182,71 @@ class AbcFile {
     }
     methodBodies = cast ([] : Array<Dynamic>);
     bodyCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast bodyCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast bodyCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast bodyCount : Float)) : Bool)) {
-        var body:Dynamic = _Runtime.callValue(AbcFile.readAbcMethodBody__abcFile, cast ([reader] : Array<Dynamic>));
+        var body:Null<AbcMethodBody> = (cast AbcFile.readAbcMethodBody__abcFile(reader) : Null<AbcMethodBody>);
         if ((cast _Runtime.strictEquals(body, null) : Bool)) { return cast null; }
         _Runtime.callProperty(methodBodies, 'push', cast ([body] : Array<Dynamic>));
         i++;
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { classes: classes, constantPool: constantPool, instances: instances, majorVersion: majorVersion, metadata: metadata, methodBodies: methodBodies, methods: methods, minorVersion: minorVersion, scripts: scripts } : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast { classes: classes, constantPool: constantPool, instances: instances, majorVersion: majorVersion, metadata: metadata, methodBodies: methodBodies, methods: methods, minorVersion: minorVersion, scripts: scripts } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readAbcConstantPool__abcFile(reader:AbcReader__abcFile):Null<AbcConstantPool> {
-    var integers:Dynamic = cast _Runtime.UNDEFINED;
-    var unsignedIntegers:Dynamic = cast _Runtime.UNDEFINED;
-    var doubles:Dynamic = cast _Runtime.UNDEFINED;
-    var strings:Dynamic = cast _Runtime.UNDEFINED;
+    var integers:Array<Float> = cast _Runtime.UNDEFINED;
+    var unsignedIntegers:Array<Float> = cast _Runtime.UNDEFINED;
+    var doubles:Array<Float> = cast _Runtime.UNDEFINED;
+    var strings:Array<String> = cast _Runtime.UNDEFINED;
     var namespaces:Array<AbcNamespace> = cast _Runtime.UNDEFINED;
     var namespaceSets:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var multinames:Array<AbcMultiname> = cast _Runtime.UNDEFINED;
     integers = cast ([0.0] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, integers, function() return (cast reader : AbcReader__abcFile).readVarInt()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast integers : Array<Float>), (cast function():Float return (cast reader : AbcReader__abcFile).readVarInt() : Void->Null<Float>)) : Bool) : Bool) : Bool)) { return cast null; }
     unsignedIntegers = cast ([0.0] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, unsignedIntegers, function() return (cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast unsignedIntegers : Array<Float>), (cast function():Float return (cast reader : AbcReader__abcFile).readVarUint() : Void->Null<Float>)) : Bool) : Bool) : Bool)) { return cast null; }
     doubles = cast ([_Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN')] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, doubles, function() return (cast reader : AbcReader__abcFile).readDouble()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast doubles : Array<Float>), (cast function():Float return (cast reader : AbcReader__abcFile).readDouble() : Void->Null<Float>)) : Bool) : Bool) : Bool)) { return cast null; }
     strings = cast ([''] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, strings, function() return (cast reader : AbcReader__abcFile).readString()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast strings : Array<String>), (cast function():String return (cast reader : AbcReader__abcFile).readString() : Void->Null<String>)) : Bool) : Bool) : Bool)) { return cast null; }
     namespaces = cast ([{ kind: 0.0, name: 0.0 }] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, namespaces, function() return { kind: (cast reader : AbcReader__abcFile).readUint8(), name: (cast reader : AbcReader__abcFile).readVarUint() }] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast namespaces : Array<{ var kind:Float; var name:Float; }>), (cast function():{ var kind:Float; var name:Float; } return { kind: (cast reader : AbcReader__abcFile).readUint8(), name: (cast reader : AbcReader__abcFile).readVarUint() } : Void->Null<{ var kind:Float; var name:Float; }>)) : Bool) : Bool) : Bool)) { return cast null; }
     namespaceSets = cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, namespaceSets, function() {
-      var count:Dynamic = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast namespaceSets : Array<Array<Float>>), (cast function():Null<Array<Float>> {
+      var count:Float = cast _Runtime.UNDEFINED;
       var set:Array<Float> = cast _Runtime.UNDEFINED;
       count = (cast reader : AbcReader__abcFile).readVarUint();
       if ((cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) { return cast null; }
       set = cast ([] : Array<Dynamic>);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           _Runtime.callProperty(set, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
           i++;
         }
       }
       return cast set;
-    }] : Array<Dynamic>)) : Bool) : Bool)) {
+    } : Void->Null<Array<Float>>)) : Bool) : Bool) : Bool)) {
       return cast null;
     }
-    multinames = cast ([_Runtime.callValue(AbcFile.createAbcMultiname__abcFile, cast ([0.0] : Array<Dynamic>))] : Array<Dynamic>);
-    if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, multinames, function() return _Runtime.callValue(AbcFile.readAbcMultiname__abcFile, cast ([reader] : Array<Dynamic>))] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { doubles: doubles, integers: integers, multinames: multinames, namespaceSets: namespaceSets, namespaces: namespaces, strings: strings, unsignedIntegers: unsignedIntegers } : Dynamic) : (cast null : Dynamic));
+    multinames = cast ([(cast AbcFile.createAbcMultiname__abcFile((cast 0.0 : Float)) : AbcMultiname)] : Array<Dynamic>);
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile(reader, (cast multinames : Array<AbcMultiname>), (cast function():Null<AbcMultiname> return (cast AbcFile.readAbcMultiname__abcFile(reader) : Null<AbcMultiname>) : Void->Null<AbcMultiname>)) : Bool) : Bool) : Bool)) { return cast null; }
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast { doubles: doubles, integers: integers, multinames: multinames, namespaceSets: namespaceSets, namespaces: namespaces, strings: strings, unsignedIntegers: unsignedIntegers } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function readAbcPool__abcFile<T>(reader:AbcReader__abcFile, out:Array<Dynamic>, read:Dynamic):Bool {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+  public static function readAbcPool__abcFile<T>(reader:AbcReader__abcFile, out:Array<T>, read:Void->Null<T>):Bool {
+    var count:Float = cast _Runtime.UNDEFINED;
     count = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var entry:Dynamic = _Runtime.callValue(read, cast ([] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) : Bool)) { return cast false; }
+        var entry:Null<T> = (cast read() : Null<T>);
+        if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool)) : Bool)) { return cast false; }
         _Runtime.callProperty(out, 'push', cast ([entry] : Array<Dynamic>));
         i++;
       }
@@ -261,51 +261,51 @@ class AbcFile {
   }
 
   public static function readAbcMultiname__abcFile(reader:AbcReader__abcFile):Null<AbcMultiname> {
-    var multiname:Dynamic = cast _Runtime.UNDEFINED;
-    multiname = _Runtime.callValue(AbcFile.createAbcMultiname__abcFile, cast ([(cast reader : AbcReader__abcFile).readUint8()] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.QName) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.QNameA) : Bool)) : Bool)) {
-      _Runtime.setField(multiname, 'namespace', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(multiname, 'name', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.RtqName) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.RtqNameA) : Bool)) : Bool)) {
-      _Runtime.setField(multiname, 'name', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.RtqNameL) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.RtqNameLA) : Bool)) : Bool)) {
-    } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.Multiname) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.MultinameA) : Bool)) : Bool)) {
-      _Runtime.setField(multiname, 'name', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(multiname, 'namespaceSet', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.MultinameL) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.MultinameLA) : Bool)) : Bool)) {
-      _Runtime.setField(multiname, 'namespaceSet', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(multiname, 'kind'), AbcMultinameKindValue.TypeName) : Bool)) {
-      _Runtime.setField(multiname, 'typeName', (cast reader : AbcReader__abcFile).readVarUint());
-      var count:Dynamic = (cast reader : AbcReader__abcFile).readVarUint();
+    var multiname:AbcMultiname = cast _Runtime.UNDEFINED;
+    multiname = (cast AbcFile.createAbcMultiname__abcFile((cast (cast reader : AbcReader__abcFile).readUint8() : Float)) : AbcMultiname);
+    if ((cast ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).QName) : Bool) || (cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).QNameA) : Bool)) : Bool)) {
+      ((cast multiname : AbcMultiname).namespace = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast multiname : AbcMultiname).name = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).RtqName) : Bool) || (cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).RtqNameA) : Bool)) : Bool)) {
+      ((cast multiname : AbcMultiname).name = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).RtqNameL) : Bool) || (cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).RtqNameLA) : Bool)) : Bool)) {
+    } else { if ((cast ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).Multiname) : Bool) || (cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).MultinameA) : Bool)) : Bool)) {
+      ((cast multiname : AbcMultiname).name = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast multiname : AbcMultiname).namespaceSet = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).MultinameL) : Bool) || (cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).MultinameLA) : Bool)) : Bool)) {
+      ((cast multiname : AbcMultiname).namespaceSet = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast _Runtime.strictEquals((cast multiname : AbcMultiname).kind, (cast AbcMultinameKindValue : { var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; }).TypeName) : Bool)) {
+      ((cast multiname : AbcMultiname).typeName = (cast reader : AbcReader__abcFile).readVarUint());
+      var count:Float = (cast reader : AbcReader__abcFile).readVarUint();
       if ((cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) { return cast null; }
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(multiname, 'parameters'), 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
+          _Runtime.callProperty((cast multiname : AbcMultiname).parameters, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
           i++;
         }
       }
     } else {
       return cast null;
     } } } } } }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast multiname : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast multiname : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readAbcMethod__abcFile(reader:AbcReader__abcFile):Null<AbcMethod> {
-    var parameterCount:Dynamic = cast _Runtime.UNDEFINED;
-    var returnType:Dynamic = cast _Runtime.UNDEFINED;
+    var parameterCount:Float = cast _Runtime.UNDEFINED;
+    var returnType:Float = cast _Runtime.UNDEFINED;
     var parameterTypes:Array<Float> = cast _Runtime.UNDEFINED;
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var flags:Dynamic = cast _Runtime.UNDEFINED;
+    var name:Float = cast _Runtime.UNDEFINED;
+    var flags:Float = cast _Runtime.UNDEFINED;
     var optionalValues:Array<AbcOptionalValue> = cast _Runtime.UNDEFINED;
     var parameterNames:Array<Float> = cast _Runtime.UNDEFINED;
     parameterCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast parameterCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast parameterCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     returnType = (cast reader : AbcReader__abcFile).readVarUint();
     parameterTypes = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast parameterCount : Float)) : Bool)) {
         _Runtime.callProperty(parameterTypes, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
         i++;
@@ -313,95 +313,95 @@ class AbcFile {
     }
     name = (cast reader : AbcReader__abcFile).readVarUint();
     flags = (cast reader : AbcReader__abcFile).readUint8();
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool)) { return cast null; }
     optionalValues = cast ([] : Array<Dynamic>);
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(AbcFile.METHOD_HAS_OPTIONAL__abcFile)), 0.0) : Bool)) {
-      var count:Dynamic = (cast reader : AbcReader__abcFile).readVarUint();
-      if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+      var count:Float = (cast reader : AbcReader__abcFile).readVarUint();
+      if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           _Runtime.callProperty(optionalValues, 'push', cast ([{ kind: 0.0, value: (cast reader : AbcReader__abcFile).readVarUint() }] : Array<Dynamic>));
           i++;
         }
       }
       for (optional in _Runtime.iterable(optionalValues)) {
-        _Runtime.setField(optional, 'kind', (cast reader : AbcReader__abcFile).readUint8());
+        ((cast optional : AbcOptionalValue).kind = (cast reader : AbcReader__abcFile).readUint8());
       }
     }
     parameterNames = cast ([] : Array<Dynamic>);
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(AbcFile.METHOD_HAS_PARAM_NAMES__abcFile)), 0.0) : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast parameterCount : Float)) : Bool)) {
           _Runtime.callProperty(parameterNames, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
           i++;
         }
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { flags: flags, name: name, optionalValues: optionalValues, parameterNames: parameterNames, parameterTypes: parameterTypes, returnType: returnType } : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast { flags: flags, name: name, optionalValues: optionalValues, parameterNames: parameterNames, parameterTypes: parameterTypes, returnType: returnType } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readAbcMetadata__abcFile(reader:AbcReader__abcFile):Null<AbcMetadata> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var name:Float = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var items:Array<AbcMetadataItem> = cast _Runtime.UNDEFINED;
     name = (cast reader : AbcReader__abcFile).readVarUint();
     count = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     items = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         _Runtime.callProperty(items, 'push', cast ([{ key: (cast reader : AbcReader__abcFile).readVarUint(), value: (cast reader : AbcReader__abcFile).readVarUint() }] : Array<Dynamic>));
         i++;
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { items: items, name: name } : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast { items: items, name: name } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readAbcInstance__abcFile(reader:AbcReader__abcFile):Null<AbcInstance> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var superName:Dynamic = cast _Runtime.UNDEFINED;
-    var flags:Dynamic = cast _Runtime.UNDEFINED;
-    var protectedNamespace:Dynamic = cast _Runtime.UNDEFINED;
-    var interfaceCount:Dynamic = cast _Runtime.UNDEFINED;
+    var name:Float = cast _Runtime.UNDEFINED;
+    var superName:Float = cast _Runtime.UNDEFINED;
+    var flags:Float = cast _Runtime.UNDEFINED;
+    var protectedNamespace:Float = cast _Runtime.UNDEFINED;
+    var interfaceCount:Float = cast _Runtime.UNDEFINED;
     var interfaces:Array<Float> = cast _Runtime.UNDEFINED;
-    var initializer:Dynamic = cast _Runtime.UNDEFINED;
-    var traits:Dynamic = cast _Runtime.UNDEFINED;
+    var initializer:Float = cast _Runtime.UNDEFINED;
+    var traits:Null<Array<AbcTrait>> = cast _Runtime.UNDEFINED;
     name = (cast reader : AbcReader__abcFile).readVarUint();
     superName = (cast reader : AbcReader__abcFile).readVarUint();
     flags = (cast reader : AbcReader__abcFile).readUint8();
     protectedNamespace = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(AbcFile.INSTANCE_PROTECTED_NAMESPACE__abcFile)), 0.0) : Bool) ? (cast (cast reader : AbcReader__abcFile).readVarUint() : Dynamic) : (cast 0.0 : Dynamic));
     interfaceCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast interfaceCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast interfaceCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     interfaces = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast interfaceCount : Float)) : Bool)) {
         _Runtime.callProperty(interfaces, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
         i++;
       }
     }
     initializer = (cast reader : AbcReader__abcFile).readVarUint();
-    traits = _Runtime.callValue(AbcFile.readAbcTraits__abcFile, cast ([reader] : Array<Dynamic>));
+    traits = (cast AbcFile.readAbcTraits__abcFile(reader) : Null<Array<AbcTrait>>);
     if ((cast _Runtime.strictEquals(traits, null) : Bool)) { return cast null; }
     return cast { flags: flags, initializer: initializer, interfaces: interfaces, name: name, protectedNamespace: protectedNamespace, superName: superName, traits: traits };
     return cast null;
   }
 
   public static function readAbcTraits__abcFile(reader:AbcReader__abcFile):Null<Array<AbcTrait>> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var traits:Array<AbcTrait> = cast _Runtime.UNDEFINED;
     count = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     traits = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var trait:Dynamic = _Runtime.callValue(AbcFile.readAbcTrait__abcFile, cast ([reader] : Array<Dynamic>));
+        var trait:Null<AbcTrait> = (cast AbcFile.readAbcTrait__abcFile(reader) : Null<AbcTrait>);
         if ((cast _Runtime.strictEquals(trait, null) : Bool)) { return cast null; }
         _Runtime.callProperty(traits, 'push', cast ([trait] : Array<Dynamic>));
         i++;
@@ -412,97 +412,97 @@ class AbcFile {
   }
 
   public static function readAbcTrait__abcFile(reader:AbcReader__abcFile):Null<AbcTrait> {
-    var name:Dynamic = cast _Runtime.UNDEFINED;
-    var packed:Dynamic = cast _Runtime.UNDEFINED;
-    var kind:Dynamic = cast _Runtime.UNDEFINED;
+    var name:Float = cast _Runtime.UNDEFINED;
+    var packed:Float = cast _Runtime.UNDEFINED;
+    var kind:Float = cast _Runtime.UNDEFINED;
     var trait:AbcTrait = cast _Runtime.UNDEFINED;
     name = (cast reader : AbcReader__abcFile).readVarUint();
     packed = (cast reader : AbcReader__abcFile).readUint8();
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool)) { return cast null; }
     kind = (_Runtime.toInt32(packed) & 15);
     trait = { attributes: (_Runtime.toInt32(packed) >> 4), classIndex: 0.0, dispatchId: 0.0, kind: kind, metadata: cast ([] : Array<Dynamic>), methodIndex: 0.0, name: name, slotId: 0.0, typeName: 0.0, valueIndex: 0.0, valueKind: 0.0 };
-    if ((cast ((cast _Runtime.strictEquals(kind, AbcTraitKindValue.Slot) : Bool) || (cast _Runtime.strictEquals(kind, AbcTraitKindValue.Const) : Bool)) : Bool)) {
-      _Runtime.setField(trait, 'slotId', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(trait, 'typeName', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(trait, 'valueIndex', (cast reader : AbcReader__abcFile).readVarUint());
-      if ((cast !_Runtime.strictEquals(_Runtime.field(trait, 'valueIndex'), 0.0) : Bool)) { _Runtime.setField(trait, 'valueKind', (cast reader : AbcReader__abcFile).readUint8()); }
-    } else { if ((cast _Runtime.strictEquals(kind, AbcTraitKindValue.Class) : Bool)) {
-      _Runtime.setField(trait, 'slotId', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(trait, 'classIndex', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast _Runtime.strictEquals(kind, AbcTraitKindValue.Function) : Bool)) {
-      _Runtime.setField(trait, 'slotId', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(trait, 'methodIndex', (cast reader : AbcReader__abcFile).readVarUint());
-    } else { if ((cast ((cast ((cast _Runtime.strictEquals(kind, AbcTraitKindValue.Method) : Bool) || (cast _Runtime.strictEquals(kind, AbcTraitKindValue.Getter) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, AbcTraitKindValue.Setter) : Bool)) : Bool)) {
-      _Runtime.setField(trait, 'dispatchId', (cast reader : AbcReader__abcFile).readVarUint());
-      _Runtime.setField(trait, 'methodIndex', (cast reader : AbcReader__abcFile).readVarUint());
+    if ((cast ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Slot) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Const) : Bool)) : Bool)) {
+      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast trait : AbcTrait).typeName = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast trait : AbcTrait).valueIndex = (cast reader : AbcReader__abcFile).readVarUint());
+      if ((cast !_Runtime.strictEquals((cast trait : AbcTrait).valueIndex, 0.0) : Bool)) { ((cast trait : AbcTrait).valueKind = (cast reader : AbcReader__abcFile).readUint8()); }
+    } else { if ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Class) : Bool)) {
+      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast trait : AbcTrait).classIndex = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Function) : Bool)) {
+      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast trait : AbcTrait).methodIndex = (cast reader : AbcReader__abcFile).readVarUint());
+    } else { if ((cast ((cast ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Method) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Getter) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Setter) : Bool)) : Bool)) {
+      ((cast trait : AbcTrait).dispatchId = (cast reader : AbcReader__abcFile).readVarUint());
+      ((cast trait : AbcTrait).methodIndex = (cast reader : AbcReader__abcFile).readVarUint());
     } else {
       return cast null;
     } } } }
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(trait, 'attributes')) & _Runtime.toInt32(AbcFile.TRAIT_ATTRIBUTE_METADATA__abcFile)), 0.0) : Bool)) {
-      var count:Dynamic = (cast reader : AbcReader__abcFile).readVarUint();
-      if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast trait : AbcTrait).attributes) & _Runtime.toInt32(AbcFile.TRAIT_ATTRIBUTE_METADATA__abcFile)), 0.0) : Bool)) {
+      var count:Float = (cast reader : AbcReader__abcFile).readVarUint();
+      if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(trait, 'metadata'), 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
+          _Runtime.callProperty((cast trait : AbcTrait).metadata, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
           i++;
         }
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast trait : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast trait : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readAbcMethodBody__abcFile(reader:AbcReader__abcFile):Null<AbcMethodBody> {
-    var method:Dynamic = cast _Runtime.UNDEFINED;
-    var maxStack:Dynamic = cast _Runtime.UNDEFINED;
-    var localCount:Dynamic = cast _Runtime.UNDEFINED;
-    var initScopeDepth:Dynamic = cast _Runtime.UNDEFINED;
-    var maxScopeDepth:Dynamic = cast _Runtime.UNDEFINED;
-    var codeLength:Dynamic = cast _Runtime.UNDEFINED;
-    var code:Dynamic = cast _Runtime.UNDEFINED;
-    var exceptionCount:Dynamic = cast _Runtime.UNDEFINED;
+    var method:Float = cast _Runtime.UNDEFINED;
+    var maxStack:Float = cast _Runtime.UNDEFINED;
+    var localCount:Float = cast _Runtime.UNDEFINED;
+    var initScopeDepth:Float = cast _Runtime.UNDEFINED;
+    var maxScopeDepth:Float = cast _Runtime.UNDEFINED;
+    var codeLength:Float = cast _Runtime.UNDEFINED;
+    var code:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var exceptionCount:Float = cast _Runtime.UNDEFINED;
     var exceptions:Array<AbcException> = cast _Runtime.UNDEFINED;
-    var traits:Dynamic = cast _Runtime.UNDEFINED;
+    var traits:Null<Array<AbcTrait>> = cast _Runtime.UNDEFINED;
     method = (cast reader : AbcReader__abcFile).readVarUint();
     maxStack = (cast reader : AbcReader__abcFile).readVarUint();
     localCount = (cast reader : AbcReader__abcFile).readVarUint();
     initScopeDepth = (cast reader : AbcReader__abcFile).readVarUint();
     maxScopeDepth = (cast reader : AbcReader__abcFile).readVarUint();
     codeLength = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast codeLength : Float) > (cast (cast reader : AbcReader__abcFile).remaining() : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast codeLength : Float) > (cast (cast reader : AbcReader__abcFile).remaining() : Float)) : Bool)) : Bool)) { return cast null; }
     code = (cast reader : AbcReader__abcFile).readBytes(codeLength);
     exceptionCount = (cast reader : AbcReader__abcFile).readVarUint();
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast exceptionCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast exceptionCount : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
     exceptions = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast exceptionCount : Float)) : Bool)) {
         _Runtime.callProperty(exceptions, 'push', cast ([{ exceptionType: 0.0, from: (cast reader : AbcReader__abcFile).readVarUint(), target: 0.0, to: (cast reader : AbcReader__abcFile).readVarUint(), variableName: 0.0 }] : Array<Dynamic>));
-        var exception:Dynamic = flighthq._internal._StaticIndex.readArray(exceptions, i);
-        _Runtime.setField(exception, 'target', (cast reader : AbcReader__abcFile).readVarUint());
-        _Runtime.setField(exception, 'exceptionType', (cast reader : AbcReader__abcFile).readVarUint());
-        _Runtime.setField(exception, 'variableName', (cast reader : AbcReader__abcFile).readVarUint());
+        var exception:AbcException = flighthq._internal._StaticIndex.readArray(exceptions, i);
+        ((cast exception : AbcException).target = (cast reader : AbcReader__abcFile).readVarUint());
+        ((cast exception : AbcException).exceptionType = (cast reader : AbcReader__abcFile).readVarUint());
+        ((cast exception : AbcException).variableName = (cast reader : AbcReader__abcFile).readVarUint());
         i++;
       }
     }
-    traits = _Runtime.callValue(AbcFile.readAbcTraits__abcFile, cast ([reader] : Array<Dynamic>));
+    traits = (cast AbcFile.readAbcTraits__abcFile(reader) : Null<Array<AbcTrait>>);
     if ((cast _Runtime.strictEquals(traits, null) : Bool)) { return cast null; }
     return cast { code: code, exceptions: exceptions, initScopeDepth: initScopeDepth, localCount: localCount, maxScopeDepth: maxScopeDepth, maxStack: maxStack, method: method, traits: traits };
     return cast null;
   }
 
-  public static final INSTANCE_PROTECTED_NAMESPACE__abcFile:Dynamic = 8.0;
+  public static final INSTANCE_PROTECTED_NAMESPACE__abcFile:Float = 8.0;
 
-  public static final MAX_ENTRIES__abcFile:Dynamic = 1000000.0;
+  public static final MAX_ENTRIES__abcFile:Float = 1000000.0;
 
-  public static final METHOD_HAS_OPTIONAL__abcFile:Dynamic = 8.0;
+  public static final METHOD_HAS_OPTIONAL__abcFile:Float = 8.0;
 
-  public static final METHOD_HAS_PARAM_NAMES__abcFile:Dynamic = 128.0;
+  public static final METHOD_HAS_PARAM_NAMES__abcFile:Float = 128.0;
 
-  public static final TRAIT_ATTRIBUTE_METADATA__abcFile:Dynamic = 4.0;
+  public static final TRAIT_ATTRIBUTE_METADATA__abcFile:Float = 4.0;
 
-  public static final VAR_UINT_MAX_BYTES__abcFile:Dynamic = 5.0;
+  public static final VAR_UINT_MAX_BYTES__abcFile:Float = 5.0;
 
-  public static final _decoder__abcFile:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
+  public static final _decoder__abcFile:flighthq._internal.dom.TextDecoder = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

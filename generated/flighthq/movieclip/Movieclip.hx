@@ -17,7 +17,7 @@ import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSource;
 
 class Movieclip {
-  public static function addMovieClipFrameScript(clip:MovieClip, frame:Dynamic, script:FrameScript):Void {
+  public static function addMovieClipFrameScript(clip:MovieClip, frame:flighthq._internal._Union2<Float, String>, script:FrameScript):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.addMovieClipFrameScript(clip, frame, script);
   }
 
@@ -68,7 +68,7 @@ class Movieclip {
     return cast null;
   }
 
-  public static function getMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Null<FrameScript> {
+  public static function getMovieClipFrameScript(clip:MovieClip, frame:flighthq._internal._Union2<Float, String>):Null<FrameScript> {
     return cast Facade_Movieclip_flighthq_movieclip_MovieClip.getMovieClipFrameScript(clip, frame);
     return cast null;
   }
@@ -83,11 +83,11 @@ class Movieclip {
     return cast null;
   }
 
-  public static function gotoAndPlayMovieClip(clip:MovieClip, frame:Dynamic):Void {
+  public static function gotoAndPlayMovieClip(clip:MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndPlayMovieClip(clip, frame);
   }
 
-  public static function gotoAndStopMovieClip(clip:MovieClip, frame:Dynamic):Void {
+  public static function gotoAndStopMovieClip(clip:MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.gotoAndStopMovieClip(clip, frame);
   }
 
@@ -108,7 +108,7 @@ class Movieclip {
     Facade_Movieclip_flighthq_movieclip_MovieClip.prevFrameMovieClip(clip);
   }
 
-  public static function removeMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Void {
+  public static function removeMovieClipFrameScript(clip:MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
     Facade_Movieclip_flighthq_movieclip_MovieClip.removeMovieClipFrameScript(clip, frame);
   }
 

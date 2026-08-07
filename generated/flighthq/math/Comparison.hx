@@ -12,8 +12,8 @@ class Comparison {
   }
 
   public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float = 0.000001):Bool {
-    var diff:Dynamic = cast _Runtime.UNDEFINED;
-    var largest:Dynamic = cast _Runtime.UNDEFINED;
+    var diff:Float = cast _Runtime.UNDEFINED;
+    var largest:Float = cast _Runtime.UNDEFINED;
     diff = HxMath.abs((a - b));
     largest = HxMath.max(HxMath.abs(a), HxMath.abs(b));
     return cast ((cast diff : Float) <= (cast HxMath.max((relativeEpsilon * largest), EPSILON) : Float));

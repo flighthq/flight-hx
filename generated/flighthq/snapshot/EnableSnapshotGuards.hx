@@ -9,54 +9,54 @@ import flighthq.types.Log.LogLevel;
 
 class EnableSnapshotGuards {
   public static function disableSnapshotGuards():Void {
-    _Runtime.callValue(setSnapshotCaptureGuard, cast ([null] : Array<Dynamic>));
+    setSnapshotCaptureGuard((cast null : Null<flighthq._internal._Any->Void>));
   }
 
   public static function enableSnapshotGuards():Void {
-    _Runtime.callValue(setSnapshotCaptureGuard, cast ([EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards] : Array<Dynamic>));
+    setSnapshotCaptureGuard((cast EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards : Null<flighthq._internal._Any->Void>));
   }
 
-  public static function warnOnUnsupportedSnapshotSource__enableSnapshotGuards(source:Dynamic):Void {
-    var seen:Dynamic = cast _Runtime.UNDEFINED;
-    var nonPlain:Dynamic = cast _Runtime.UNDEFINED;
-    var cyclic:Dynamic = cast _Runtime.UNDEFINED;
-    var visit:Dynamic = cast _Runtime.UNDEFINED;
+  public static function warnOnUnsupportedSnapshotSource__enableSnapshotGuards(source:flighthq._internal._Any):Void {
+    var seen:flighthq._internal._Set<flighthq._internal._Object> = cast _Runtime.UNDEFINED;
+    var nonPlain:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var cyclic:Bool = cast _Runtime.UNDEFINED;
+    var visit:flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
     seen = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     nonPlain = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     cyclic = false;
-    visit = function(value:Dynamic) {
-      var kind:Dynamic = cast _Runtime.UNDEFINED;
+    visit = (cast function(value:flighthq._internal._Any):Void {
+      var kind:Null<String> = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) { return; }
-      if ((cast ((cast seen : flighthq._internal._Set).has(value)) : Bool)) {
+      if ((cast ((cast seen : flighthq._internal._Set<flighthq._internal._Object>).has(value)) : Bool)) {
         (cyclic = cast (true : Dynamic));
         return;
       }
-      ((cast seen : flighthq._internal._Set).add(value));
-      kind = _Runtime.callValue(EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards, cast ([value] : Array<Dynamic>));
+      ((cast seen : flighthq._internal._Set<flighthq._internal._Object>).add(value));
+      kind = (cast EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards((cast value : flighthq._internal._Object)) : Null<String>);
       if ((cast !_Runtime.strictEquals(kind, null) : Bool)) {
-        ((cast nonPlain : flighthq._internal._Set).add(kind));
+        ((cast nonPlain : flighthq._internal._Set<String>).add(kind));
         return;
       }
       if ((cast _Runtime.isArray(value) : Bool)) {
         for (entry in _Runtime.iterable(value)) {
-          _Runtime.callValue(visit, cast ([entry] : Array<Dynamic>));
+          visit((cast entry : flighthq._internal._Any));
         }
         return;
       }
-      for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys((cast value : Dynamic)))) {
-        _Runtime.callValue(visit, cast ([_Runtime.getIndex((cast value : Dynamic), key)] : Array<Dynamic>));
+      for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys((cast value : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
+        visit((cast _Runtime.getIndex((cast value : flighthq._internal._Record<String, flighthq._internal._Any>), key) : flighthq._internal._Any));
       }
-    };
-    _Runtime.callValue(visit, cast ([source] : Array<Dynamic>));
-    if ((cast ((cast (cast nonPlain : flighthq._internal._Set).size : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(logOnce, cast (['snapshot:non-plain-source', LogLevel.Warn, { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty(_Runtime.toArray(nonPlain), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') }, 'snapshot'] : Array<Dynamic>));
+    } : flighthq._internal._Any->Void);
+    visit((cast source : flighthq._internal._Any));
+    if ((cast ((cast (cast nonPlain : flighthq._internal._Set<String>).size : Float) > (cast 0.0 : Float)) : Bool)) {
+      (cast logOnce((cast 'snapshot:non-plain-source' : String), (cast LogLevel.Warn : LogLevel), { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty(_Runtime.toArray(nonPlain), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') }, (cast 'snapshot' : Null<String>)) : Bool);
     }
     if ((cast cyclic : Bool)) {
-      _Runtime.callValue(logOnce, cast (['snapshot:cyclic-source', LogLevel.Warn, { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') }, 'snapshot'] : Array<Dynamic>));
+      (cast logOnce((cast 'snapshot:cyclic-source' : String), (cast LogLevel.Warn : LogLevel), { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') }, (cast 'snapshot' : Null<String>)) : Bool);
     }
   }
 
-  public static function nonPlainSnapshotKind__enableSnapshotGuards(value:Dynamic):Null<String> {
+  public static function nonPlainSnapshotKind__enableSnapshotGuards(value:flighthq._internal._Object):Null<String> {
     if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Map')) : Bool)) { return cast 'Map'; }
     if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Set')) : Bool)) { return cast 'Set'; }
     if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Date')) : Bool)) { return cast 'Date'; }

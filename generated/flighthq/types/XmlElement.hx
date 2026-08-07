@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef XmlElement = { var attributes:Dynamic; var children:Array<XmlElement>; var content:Array<Dynamic>; var name:String; var text:String; };
+typedef XmlElement = { var attributes:flighthq._internal._Record<String, String>; var children:Array<XmlElement>; var content:Array<flighthq._internal._Union2<String, XmlElement>>; var name:String; var text:String; };

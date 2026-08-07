@@ -14,6 +14,6 @@ typedef StatusBarInfo = { var color:Float; var height:Float; var overlaysContent
 
 typedef StatusBarStyleEntry = { @:optional var animation:StatusBarAnimation; @:optional var color:Float; @:optional var overlaysContent:Bool; @:optional var style:StatusBarStyle; @:optional var visible:Bool; };
 
-typedef StatusBarBackend = { var getInfo:Dynamic; var setBackgroundColor:Dynamic; var setOverlaysContent:Dynamic; var setStyle:Dynamic; var setVisible:Dynamic; var subscribe:Dynamic; };
+typedef StatusBarBackend = { var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Bool->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->StatusBarAnimation->Void; var subscribe:Void->Void->Void->Void; };
 
-typedef StatusBar = { var onChange:Signal<Dynamic>; };
+typedef StatusBar = { var onChange:Signal<StatusBarInfo->Void>; };

@@ -19,14 +19,14 @@ import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
 class HtmlView {
   public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field((cast source : flighthq.types.HtmlView), 'data');
-    _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(data, 'height'));
+    var data:HtmlViewData = cast _Runtime.UNDEFINED;
+    data = (cast (cast source : flighthq.types.HtmlView) : flighthq.types.HtmlView).data;
+    ((cast out : Rectangle).width = (cast data : HtmlViewData).width);
+    ((cast out : Rectangle).height = (cast data : HtmlViewData).height);
   }
 
   public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([HtmlViewKind, obj, createHtmlViewData, createHtmlViewRuntime] : Array<Dynamic>)) : flighthq.types.HtmlView);
+    return cast (cast (cast createNode2D((cast HtmlViewKind : String), obj, createHtmlViewData, function(__unused0:Dynamic):HtmlViewRuntime return createHtmlViewRuntime()) : flighthq.types.HtmlView) : flighthq.types.HtmlView);
     return cast null;
   }
 
@@ -38,21 +38,21 @@ class HtmlView {
 
   @:noCompletion
   public static function createHtmlViewRuntime():HtmlViewRuntime {
-    return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([HtmlView.defaultMethods__htmlView] : Array<Dynamic>)) : HtmlViewRuntime);
+    return cast (cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView : Null<flighthq._internal._Any>)) : HtmlViewRuntime) : HtmlViewRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : HtmlViewRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : HtmlViewRuntime) : HtmlViewRuntime);
     return cast null;
   }
 
   public static function setHtmlViewSize(source:flighthq.types.HtmlView, width:Float, height:Float):Void {
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), width) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), height) : Bool)) : Bool)) { return; }
-    _Runtime.setField(_Runtime.field(source, 'data'), 'width', width);
-    _Runtime.setField(_Runtime.field(source, 'data'), 'height', height);
-    _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width, width) : Bool) && (cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height, height) : Bool)) : Bool)) { return; }
+    ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width = width);
+    ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height = height);
+    invalidateNodeLocalBounds(source);
   }
 
   public static final defaultMethods__htmlView:Dynamic = { computeLocalBoundsRectangle: computeHtmlViewLocalBoundsRectangle };

@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.SsaoEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,27 +17,27 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuSsaoEffect {
   @:noCompletion
   public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.ssao', WgpuSsaoEffect.SSAO_FRAGMENT_WGSL__wgpuSsaoEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'atmospheric.ssao' : String), (cast WgpuSsaoEffect.SSAO_FRAGMENT_WGSL__wgpuSsaoEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, radius);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuSsaoEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applySsaoEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsaoEffect)] : Array<Dynamic>));
+  public static final defaultWgpuSsaoEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applySsaoEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : SsaoEffect) : SsaoEffect));
   };
 
   public static function registerWgpuSsaoEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SsaoEffect', defaultWgpuSsaoEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'SsaoEffect' : String), (cast defaultWgpuSsaoEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final SSAO_FRAGMENT_WGSL__wgpuSsaoEffect:Dynamic = '\nstruct Uniforms {\n  u_radius : f32,\n  u_intensity : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = (1.0 / uni.u_resolution) * max(uni.u_radius, 1.0);\n  let center = textureSampleLevel(tex, smp, uv, 0.0);\n  let lc = luma(center.rgb);\n  var variation = 0.0;\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(-1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, -1.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, 1.0) * texel, 0.0).rgb));\n  variation = variation * 0.25;\n  let occlusion = clamp(variation * uni.u_intensity, 0.0, 1.0);\n  return vec4f(center.rgb * (1.0 - occlusion), center.a);\n}';
+  public static final SSAO_FRAGMENT_WGSL__wgpuSsaoEffect:String = '\nstruct Uniforms {\n  u_radius : f32,\n  u_intensity : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = (1.0 / uni.u_resolution) * max(uni.u_radius, 1.0);\n  let center = textureSampleLevel(tex, smp, uv, 0.0);\n  let lc = luma(center.rgb);\n  var variation = 0.0;\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(-1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(1.0, 0.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, -1.0) * texel, 0.0).rgb));\n  variation = variation + abs(lc - luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, 1.0) * texel, 0.0).rgb));\n  variation = variation * 0.25;\n  let occlusion = clamp(variation * uni.u_intensity, 0.0, 1.0);\n  return vec4f(center.rgb * (1.0 - occlusion), center.a);\n}';
 }

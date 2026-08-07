@@ -12,6 +12,8 @@ import flighthq.skeleton2d.Skeleton2dAnimationTarget.registerSkeleton2DAnimation
 import flighthq.skeleton2d.Skeleton2dAnimationTarget.unregisterSkeleton2DAnimationTargetBinder;
 import flighthq.skeleton2d.Skeleton2dGuards.reportSkeleton2DCoercedInterpolation;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationInterpolation;
+import flighthq.types.AnimationTrack;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeOrderList;
@@ -22,68 +24,68 @@ import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DA
 class Skeleton2dDrawOrderTarget {
   @:noCompletion
   public static function createSkeleton2DDrawOrderAnimationTarget<Traits>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
-    return cast { kind: TargetKind.DrawOrder, nodes: nodes, orderList: orderList };
+    return cast { kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder, nodes: nodes, orderList: orderList };
     return cast null;
   }
 
   @:noCompletion
   public static function createSkeleton2DDrawOrderChannel<Traits>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
-    var keyframes:Dynamic = cast _Runtime.UNDEFINED;
-    var slotCount:Dynamic = cast _Runtime.UNDEFINED;
+    var keyframes:Float = cast _Runtime.UNDEFINED;
+    var slotCount:Float = cast _Runtime.UNDEFINED;
     keyframes = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
     if ((cast _Runtime.strictEquals(keyframes, 0.0) : Bool)) { return cast null; }
     slotCount = _Runtime.divideNumbers(_Runtime.field(_Runtime.field(timeline, 'orderings'), 'length'), keyframes);
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotCount] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(slotCount, 0.0) : Bool)) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(createAnimationTrack, cast ([{ components: slotCount, interpolation: Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget, times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'orderings') }] : Array<Dynamic>)), _Runtime.callValue(createSkeleton2DDrawOrderAnimationTarget, cast ([nodes, orderList] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast createAnimationChannel((cast createAnimationTrack({ components: slotCount, interpolation: Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget, times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'orderings') }) : AnimationTrack), (cast createSkeleton2DDrawOrderAnimationTarget(nodes, orderList) : flighthq._internal._Any)) : Null<AnimationChannel>);
     return cast null;
   }
 
   @:noCompletion
   public static function registerSkeleton2DDrawOrderAnimationBinder():Void {
-    _Runtime.callValue(registerSkeleton2DAnimationTargetBinder, cast ([TargetKind.DrawOrder, Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget] : Array<Dynamic>));
+    registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget);
   }
 
   @:noCompletion
   public static function unregisterSkeleton2DDrawOrderAnimationBinder():Void {
-    _Runtime.callValue(unregisterSkeleton2DAnimationTargetBinder, cast ([TargetKind.DrawOrder] : Array<Dynamic>));
+    unregisterSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String));
   }
 
-  public static function bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget(channel:AnimationChannel, _setup:Dynamic, _pose:Dynamic, target:Dynamic, time:Float):Void {
-    var drawTarget:Dynamic = cast _Runtime.UNDEFINED;
-    var nodes:Dynamic = cast _Runtime.UNDEFINED;
-    var orderList:Dynamic = cast _Runtime.UNDEFINED;
-    var track:Dynamic = cast _Runtime.UNDEFINED;
-    var components:Dynamic = cast _Runtime.UNDEFINED;
-    var keyframe:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+  public static function bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget(channel:AnimationChannel, _setup:flighthq._internal._Any, _pose:flighthq._internal._Any, target:flighthq._internal._Any, time:Float):Void {
+    var drawTarget:Skeleton2DDrawOrderAnimationTarget<NodeTraits> = cast _Runtime.UNDEFINED;
+    var nodes:Array<Null<Node<NodeTraits>>> = cast _Runtime.UNDEFINED;
+    var orderList:NodeOrderList<NodeTraits> = cast _Runtime.UNDEFINED;
+    var track:AnimationTrack = cast _Runtime.UNDEFINED;
+    var components:Float = cast _Runtime.UNDEFINED;
+    var keyframe:Float = cast _Runtime.UNDEFINED;
+    var base:Float = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     drawTarget = (cast target : Skeleton2DDrawOrderAnimationTarget<Dynamic>);
     nodes = _Runtime.field(drawTarget, 'nodes');
     orderList = _Runtime.field(drawTarget, 'orderList');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(nodes, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(orderList, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast _Runtime.strictEquals(orderList, null) : Bool)) : Bool)) { return; }
     track = _Runtime.field(channel, 'track');
-    components = _Runtime.field(track, 'components');
+    components = (cast track : AnimationTrack).components;
     if ((cast _Runtime.strictEquals(components, 0.0) : Bool)) { return; }
-    keyframe = _Runtime.callValue(findSkeleton2DStepKeyframe, cast ([_Runtime.field(track, 'times'), time] : Array<Dynamic>));
+    keyframe = (cast findSkeleton2DStepKeyframe((cast (cast track : AnimationTrack).times : flighthq._internal._ArrayLike<Float>), (cast time : Float)) : Float);
     if ((cast ((cast keyframe : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget) : Bool)) {
-      _Runtime.callValue(reportSkeleton2DCoercedInterpolation, cast ([Skeleton2dDrawOrderTarget.DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget, _Runtime.field(track, 'interpolation'), Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast track : AnimationTrack).interpolation, Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget) : Bool)) {
+      reportSkeleton2DCoercedInterpolation((cast Skeleton2dDrawOrderTarget.DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget : String), (cast (cast track : AnimationTrack).interpolation : String), (cast Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget : String));
     }
-    _Runtime.callValue(clearNodeOrderList, cast ([orderList] : Array<Dynamic>));
+    clearNodeOrderList((cast orderList : NodeOrderList<NodeTraits>));
     base = (keyframe * components);
     count = ((cast ((cast components : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool) ? (cast components : Dynamic) : (cast _Runtime.field(nodes, 'length') : Dynamic));
     {
-      var slot:Dynamic = 0.0;
+      var slot:Float = 0.0;
       while ((cast ((cast slot : Float) < (cast count : Float)) : Bool)) {
-        var node:Dynamic = flighthq._internal._StaticIndex.readArray(nodes, slot);
+        var node:Null<Node<NodeTraits>> = flighthq._internal._StaticIndex.readArray(nodes, slot);
         if ((cast ((cast _Runtime.strictEquals(node, null) : Bool) || (cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { slot++; continue; }
-        _Runtime.callValue(addNodeOrderListEntry, cast ([orderList, node, _Runtime.getIndex(_Runtime.field(track, 'values'), (base + slot))] : Array<Dynamic>));
+        addNodeOrderListEntry((cast orderList : NodeOrderList<NodeTraits>), (cast node : Node<NodeTraits>), (cast _Runtime.getIndex((cast track : AnimationTrack).values, (base + slot)) : Float));
         slot++;
       }
     }
   }
 
-  public static final DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget:Dynamic = 'DrawOrder';
+  public static final DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget:String = 'DrawOrder';
 
-  public static final STEP_INTERPOLATION__skeleton2dDrawOrderTarget:Dynamic = 'Step';
+  public static final STEP_INTERPOLATION__skeleton2dDrawOrderTarget:String = 'Step';
 }

@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _BlinnPhongMaterialValues {
-  public static final BlinnPhongMaterialKind:Dynamic = 'BlinnPhongMaterial';
+  public static final BlinnPhongMaterialKind:String = 'BlinnPhongMaterial';
 }

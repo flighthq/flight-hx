@@ -4,20 +4,21 @@ package flighthq.camera;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
+import flighthq.types.Camera3D.Projection;
 
 class Depth {
   public static function getCamera3DLinearDepth(camera:Camera3D, ndcZ:Float):Float {
-    var near:Dynamic = cast _Runtime.UNDEFINED;
-    var far:Dynamic = cast _Runtime.UNDEFINED;
-    var range:Dynamic = cast _Runtime.UNDEFINED;
-    var denominator:Dynamic = cast _Runtime.UNDEFINED;
+    var near:Float = cast _Runtime.UNDEFINED;
+    var far:Float = cast _Runtime.UNDEFINED;
+    var range:Float = cast _Runtime.UNDEFINED;
+    var denominator:Float = cast _Runtime.UNDEFINED;
     near = camera.near;
     far = camera.far;
     range = (far - near);
     if ((cast _Runtime.strictEquals(range, 0.0) : Bool)) {
       return cast 0.0;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(camera.projection, 'kind'), 'orthographic') : Bool)) {
+    if ((cast _Runtime.strictEquals((cast camera.projection : { var kind:String; }).kind, 'orthographic') : Bool)) {
       return cast -(near + (((ndcZ + 1.0) * range) / 2.0));
     }
     denominator = ((ndcZ * range) - (far + near));
@@ -29,7 +30,7 @@ class Depth {
   }
 
   public static function getCamera3DViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
-    return cast -_Runtime.callValue(getCamera3DLinearDepth, cast ([camera, ndcZ] : Array<Dynamic>));
+    return cast -(cast getCamera3DLinearDepth((cast camera : Camera3D), (cast ndcZ : Float)) : Float);
     return cast null;
   }
 }

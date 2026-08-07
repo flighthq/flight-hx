@@ -5,20 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFontGlyphExplanation;
+import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.TextureAtlas;
 
 class ExplainBitmapFontGlyph {
   public static function explainBitmapFontGlyph(font:BitmapFont, codepoint:Float):BitmapFontGlyphExplanation {
-    var pageCount:Dynamic = cast _Runtime.UNDEFINED;
-    var glyph:Dynamic = cast _Runtime.UNDEFINED;
-    var shared:Dynamic = cast _Runtime.UNDEFINED;
+    var pageCount:Float = cast _Runtime.UNDEFINED;
+    var glyph:Null<GlyphEntry> = cast _Runtime.UNDEFINED;
+    var shared:{ var glyphHeight:Float; var glyphWidth:Float; var page:Float; var pageCount:Float; } = cast _Runtime.UNDEFINED;
     pageCount = _Runtime.field(font.pages, 'length');
-    glyph = ((cast font.glyphs : flighthq._internal._Map).get(codepoint));
+    glyph = ((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint));
     if ((cast _Runtime.strictEquals(glyph, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { glyphHeight: 0.0, glyphWidth: 0.0, page: -1.0, pageCount: pageCount, reason: 'no-glyph', renderable: false };
     }
-    shared = { glyphHeight: glyph.height, glyphWidth: glyph.width, page: glyph.page, pageCount: pageCount };
+    shared = { glyphHeight: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).height, glyphWidth: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).width, page: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).page, pageCount: pageCount };
     if ((cast _Runtime.strictEquals(pageCount, 0.0) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'no-pages' }, { renderable: false }]); }
-    if ((cast ((cast ((cast glyph.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast glyph.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'empty-glyph' }, { renderable: false }]); }
+    if ((cast ((cast ((cast (cast glyph : flighthq.types.GlyphSource.GlyphEntry).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast glyph : flighthq.types.GlyphSource.GlyphEntry).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'empty-glyph' }, { renderable: false }]); }
     return cast _Runtime.mergeObjects([shared, { reason: 'ok' }, { renderable: true }]);
     return cast null;
   }

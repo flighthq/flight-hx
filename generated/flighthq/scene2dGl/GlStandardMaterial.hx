@@ -10,21 +10,22 @@ import flighthq.scene2dGl.GlQuadBatchWriter.setGlQuadBatchWorldAndTexture;
 import flighthq.scene2dGl.GlQuadBatchWriter.useGlQuadBatchProgram;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlQuadBatchShader;
 import flighthq.types.Material;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class GlStandardMaterial {
   public static function registerGlStandardMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMaterialRenderer, cast ([state, StandardMaterialKindValue, standardGlMaterialRenderer] : Array<Dynamic>));
+    registerGlMaterialRenderer((cast state : GlRenderState), (cast StandardMaterialKindValue : String), (cast standardGlMaterialRenderer : GlMaterialRenderer));
   }
 
   @:noCompletion
-  public static final standardGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>) {
-    var shader:Dynamic = cast _Runtime.UNDEFINED;
-    shader = _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(useGlQuadBatchProgram, cast ([state, _Runtime.field(shader, 'program')] : Array<Dynamic>));
-    _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture'), _Runtime.field(shader, 'locStraightTextureAlpha')] : Array<Dynamic>));
-    _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
+  public static final standardGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
+    var shader:GlQuadBatchShader = cast _Runtime.UNDEFINED;
+    shader = (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
+    useGlQuadBatchProgram((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).program : flighthq._internal.dom.WebGLProgram));
+    setGlQuadBatchWorldAndTexture((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).locWorldMatrix : flighthq._internal.dom.WebGLUniformLocation), (cast (cast shader : GlQuadBatchShader).locTexture : flighthq._internal.dom.WebGLUniformLocation), (cast (cast shader : GlQuadBatchShader).locStraightTextureAlpha : Null<flighthq._internal.dom.WebGLUniformLocation>));
+    bindGlQuadBatchBaseAttributes((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
   } };
 }

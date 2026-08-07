@@ -7,15 +7,15 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 
 class GetPathLength {
-  public static function getPathLength(path:Path, tolerance:Dynamic = 0.25):Float {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+  public static function getPathLength(path:Path, tolerance:Float = 0.25):Float {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.callValue(GetPathLength.contourLength__getPathLength, cast ([flighthq._internal._StaticIndex.readArray(contours, ci)] : Array<Dynamic>))) : Dynamic));
+        (total = cast ((total + (cast GetPathLength.contourLength__getPathLength((cast flighthq._internal._StaticIndex.readArray(contours, ci) : Array<Float>)) : Float)) : Dynamic));
         ci++;
       }
     }
@@ -24,13 +24,13 @@ class GetPathLength {
   }
 
   public static function contourLength__getPathLength(contour:Array<Float>):Float {
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     len = 0.0;
     {
-      var i:Dynamic = 2.0;
+      var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
         (len = cast ((len + HxMath.sqrt(((dx * dx) + (dy * dy)))) : Dynamic));
         (i = cast ((i + 2.0) : Dynamic));
       }

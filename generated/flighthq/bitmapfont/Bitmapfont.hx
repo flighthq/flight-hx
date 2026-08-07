@@ -63,7 +63,7 @@ class Bitmapfont {
     return cast null;
   }
 
-  public static function getBitmapFontPage(font:BitmapFont, ?page:Dynamic):Null<TextureAtlas> {
+  public static function getBitmapFontPage(font:BitmapFont, ?page:Float):Null<TextureAtlas> {
     return cast Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPage(font, page);
     return cast null;
   }

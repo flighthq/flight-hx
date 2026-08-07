@@ -5,11 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _Scene3DAnimationPathValues {
-  public static final Scene3DAnimationPathRotation:Dynamic = 'Rotation';
+  public static final Scene3DAnimationPathRotation:String = 'Rotation';
 
-  public static final Scene3DAnimationPathScale:Dynamic = 'Scale';
+  public static final Scene3DAnimationPathScale:String = 'Scale';
 
-  public static final Scene3DAnimationPathTranslation:Dynamic = 'Translation';
+  public static final Scene3DAnimationPathTranslation:String = 'Translation';
 
-  public static final Scene3DAnimationPathWeights:Dynamic = 'Weights';
+  public static final Scene3DAnimationPathWeights:String = 'Weights';
 }

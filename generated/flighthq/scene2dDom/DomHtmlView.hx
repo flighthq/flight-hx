@@ -8,18 +8,21 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransform;
 import flighthq.types.DomRenderState;
 import flighthq.types.HtmlView;
+import flighthq.types.HtmlView.HtmlViewData;
+import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
 import flighthq.types.Scene2DRenderer;
 
 class DomHtmlView {
   @:noCompletion
   public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : HtmlView);
-    data = _Runtime.field(source, 'data');
-    element = _Runtime.field(data, 'element');
+    var source:HtmlView = cast _Runtime.UNDEFINED;
+    var data:HtmlViewData = cast _Runtime.UNDEFINED;
+    var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
+    source = (cast (cast renderProxy : RenderProxy2D).source : HtmlView);
+    data = (cast source : HtmlView).data;
+    element = (cast data : HtmlViewData).element;
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).position, 'absolute') : Bool)) {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).left = '0');
@@ -28,12 +31,12 @@ class DomHtmlView {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).transformOrigin = '0 0');
     }
-    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(data, 'width')) + 'px');
-    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(data, 'height')) + 'px');
-    _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string((cast data : HtmlViewData).width) + 'px');
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string((cast data : HtmlViewData).height) + 'px');
+    setDomTransform((cast element : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
+    _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    setDomRendererElement((cast state : DomRenderState), (cast element : flighthq._internal.dom.HTMLElement));
   }
 
   public static final defaultDomHtmlViewRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawDomHtmlView };

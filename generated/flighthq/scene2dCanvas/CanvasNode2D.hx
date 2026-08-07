@@ -10,9 +10,18 @@ import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dCanvas.CanvasCSSFilterBinding.resolveCanvasCssFilter;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
 class CanvasNode2D {
   @:noCompletion
@@ -23,30 +32,30 @@ class CanvasNode2D {
   public static final defaultCanvasScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasScene2D };
 
   public static function renderCanvasScene2D(state:CanvasRenderState, source:Node2D):Void {
-    var tempStack:Dynamic = cast _Runtime.UNDEFINED;
-    var clipHooks:Dynamic = cast _Runtime.UNDEFINED;
-    var stackLength:Dynamic = cast _Runtime.UNDEFINED;
-    tempStack = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
-    clipHooks = _Runtime.field(state, 'displayObjectClipHooks');
+    var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
+    var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
+    var stackLength:Float = cast _Runtime.UNDEFINED;
+    tempStack = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).tempStack;
+    clipHooks = (cast state : CanvasRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
-      if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
-      var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
+      var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
+      if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(state, current) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
+      if ((cast !(cast (cast isRenderProxyVisible((cast data : RenderProxy2D)) : Bool) : Bool) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
-      var filter:Dynamic = _Runtime.callValue(resolveCanvasCssFilter, cast ([state, data] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'filter', filter); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(data, 'renderer'), null) : Bool)) { _Runtime.callProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'filter', 'none'); }
-      if ((cast _Runtime.field(data, 'traverseChildren') : Bool)) {
-        var children:Dynamic = _Runtime.field(_Runtime.callValue(getNode2DRuntime, cast ([current] : Array<Dynamic>)), 'children');
+      var filter:Null<String> = (cast resolveCanvasCssFilter((cast state : CanvasRenderState), (cast data : RenderProxy2D)) : Null<String>);
+      if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', filter); }
+      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(state, data); }
+      if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', 'none'); }
+      if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current : Node2D)) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
-            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
+            var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node2D));
               i--;

@@ -14,7 +14,11 @@ import flighthq.scene3dGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrProgram;
+import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
@@ -23,23 +27,23 @@ import flighthq.types.StandardPbrMaterial;
 
 class StandardPbrGlMeshMaterialRenderer {
   @:noCompletion
-  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var pbr:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var pbr:Null<StandardPbrMaterial> = cast _Runtime.UNDEFINED;
+    var program:GlPbrProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     pbr = (cast material : Null<StandardPbrMaterial>);
-    program = _Runtime.callValue(ensureGlPbrProgram, cast ([state, _Runtime.callValue(buildGlPbrStandardDefineKey, cast ([state, pbr, pbr] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
-    _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
-    _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, pbr] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    program = (cast ensureGlPbrProgram((cast state : GlRenderState), (cast buildGlPbrStandardDefineKey((cast state : GlRenderState), pbr, pbr) : GlPbrDefineKey), _Runtime.field(_Runtime, 'UNDEFINED')) : GlPbrProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlPbrProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    setGlMeshCameraPosition((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast program : GlPbrProgram).locCameraPosition : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    bindGlMeshLightBlock((cast state : GlRenderState), program, (cast lights : Scene3DLightBlock));
+    bindGlPbrStandardBlock((cast state : GlRenderState), program, pbr);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 }

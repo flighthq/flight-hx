@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.Skeleton2DConstraint;
 
 class _Skeleton2DPathConstraintValues {
-  public static final Skeleton2DPathPositionModeValue:Dynamic = { Fixed: 'Fixed', Percent: 'Percent' };
+  public static final Skeleton2DPathPositionModeValue:{ var Fixed:String; var Percent:String; } = { Fixed: 'Fixed', Percent: 'Percent' };
 
-  public static final Skeleton2DPathRotateModeValue:Dynamic = { Chain: 'Chain', Tangent: 'Tangent' };
+  public static final Skeleton2DPathRotateModeValue:{ var Chain:String; var Tangent:String; } = { Chain: 'Chain', Tangent: 'Tangent' };
 
-  public static final Skeleton2DPathSpacingModeValue:Dynamic = { Fixed: 'Fixed', Length: 'Length', Percent: 'Percent' };
+  public static final Skeleton2DPathSpacingModeValue:{ var Fixed:String; var Length:String; var Percent:String; } = { Fixed: 'Fixed', Length: 'Length', Percent: 'Percent' };
 }

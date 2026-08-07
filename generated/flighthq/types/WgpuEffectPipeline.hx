@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuEffectPipeline = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:Dynamic; @:optional var variants:Dynamic; };
+typedef WgpuEffectPipeline = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:flighthq._internal.dom.GPUTextureFormat->flighthq._internal.dom.GPURenderPipeline; @:optional var variants:flighthq._internal._Map<flighthq._internal.dom.GPUTextureFormat, flighthq._internal.dom.GPURenderPipeline>; };

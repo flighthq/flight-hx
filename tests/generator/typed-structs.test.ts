@@ -459,7 +459,9 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter3D = { var data:Null<NodeData>;',
     );
-    expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain('typedef NodeData = Dynamic;');
+    expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain(
+      'typedef NodeData = flighthq._internal._Object;',
+    );
 
     expect(report.summary).toMatchObject({
       auditOnlySchemas: 1_604,
@@ -557,7 +559,7 @@ describe('typed struct analysis', () => {
     );
   }, 180_000);
 
-  it('keeps eligible audit-only schemas reflective until review enables them', () => {
+  it('preserves source typing for audit-only schemas without enabling registry bindings', () => {
     const result = lowerFixture(
       `
         export interface Vector2 { x: number; y: number; }
@@ -582,7 +584,7 @@ describe('typed struct analysis', () => {
       reflectiveSurvivors: [],
     });
     expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([]);
-    expect(output).toContain("_Runtime.field(value, 'x')");
+    expect(output).toContain('(cast value : Vector2).x');
   });
 
   it('preserves a partial options literal while reading its omitted field directly', () => {
@@ -705,9 +707,9 @@ describe('typed struct analysis', () => {
     expect(output).toContain('(value.y = cast (value.x : Dynamic))');
     expect(output).toContain('(value.y += 1.0)');
     expect(output).toContain('value.y++');
-    expect(output).toContain('_Runtime.callValue(value.callback');
-    expect(output).toContain("_Runtime.callProperty(value, 'method'");
-    expect(output).toContain('final __typedStruct0 = _Runtime.callValue(factory');
+    expect(output).toContain('(value.callback)(value.y)');
+    expect(output).toContain('(cast value : Vector2).method()');
+    expect(output).toContain('final __typedStruct0 = (cast factory() : Null<Vector2>)');
     expect(output).toContain('__typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.optional');
     expect(output).not.toContain("_Runtime.field(value, '");
     expect(output).not.toContain("_Runtime.setField(value, '");
@@ -785,8 +787,8 @@ describe('typed struct analysis', () => {
       expect.objectContaining({ member: 'collision', reason: 'unknown-member' }),
     ]);
     expect(output).toContain('value.own');
-    expect(output).toContain("_Runtime.field(value, 'sibling')");
-    expect(output).toContain("_Runtime.field(value, 'collision')");
+    expect(output).toContain('(cast value : { var sibling:Float; }).sibling');
+    expect(output).toContain('(cast value : { var collision:Float; }).collision');
   });
 
   it('rejects unknown and readonly named writes before an emitter can trust them', () => {
@@ -811,7 +813,7 @@ describe('typed struct analysis', () => {
     expect(readonly.lowered.declarations.some((declaration) => declaration.name === 'invalid')).toBe(false);
   });
 
-  it('keeps computed, incompatible-union, and presence-sensitive accesses dynamic', () => {
+  it('keeps computed and presence-sensitive accesses dynamic while typing a common union field', () => {
     const result = lowerFixture(`
       export interface Vector2 { x: number; y: number; }
       export interface Other { x: number; label: string; }
@@ -835,7 +837,7 @@ describe('typed struct analysis', () => {
       expect.arrayContaining(['computed-key', 'incompatible-union', 'presence-sensitive']),
     );
     expect(output).toContain('_Runtime.getIndex(value, key)');
-    expect(output).toContain("_Runtime.field(value, 'x')");
+    expect(output).toContain('(cast value : { var x:Float; }).x');
     expect(output).toContain("_Runtime.hasField(value, 'x')");
   });
 

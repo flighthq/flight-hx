@@ -7,38 +7,38 @@ import flighthq.types.EasingFunction;
 
 class EaseCubicBezier {
   public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleX:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleY:Dynamic = cast _Runtime.UNDEFINED;
-    var sampleDerivativeX:Dynamic = cast _Runtime.UNDEFINED;
-    var solveParameterForX:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var sampleX:Float->Float = cast _Runtime.UNDEFINED;
+    var sampleY:Float->Float = cast _Runtime.UNDEFINED;
+    var sampleDerivativeX:Float->Float = cast _Runtime.UNDEFINED;
+    var solveParameterForX:Float->Float->Float = cast _Runtime.UNDEFINED;
     cx = (3.0 * x1);
     bx = ((3.0 * (x2 - x1)) - cx);
     ax = ((1.0 - cx) - bx);
     cy = (3.0 * y1);
     by = ((3.0 * (y2 - y1)) - cy);
     ay = ((1.0 - cy) - by);
-    sampleX = function(s:Float) return (((((ax * s) + bx) * s) + cx) * s);
-    sampleY = function(s:Float) return (((((ay * s) + by) * s) + cy) * s);
-    sampleDerivativeX = function(s:Float) return (((((3.0 * ax) * s) + (2.0 * bx)) * s) + cx);
-    solveParameterForX = function(x:Float, epsilon:Float) {
-      var s:Dynamic = cast _Runtime.UNDEFINED;
-      var low:Dynamic = cast _Runtime.UNDEFINED;
-      var high:Dynamic = cast _Runtime.UNDEFINED;
+    sampleX = (cast function(s:Float):Float return (((((ax * s) + bx) * s) + cx) * s) : Float->Float);
+    sampleY = (cast function(s:Float):Float return (((((ay * s) + by) * s) + cy) * s) : Float->Float);
+    sampleDerivativeX = (cast function(s:Float):Float return (((((3.0 * ax) * s) + (2.0 * bx)) * s) + cx) : Float->Float);
+    solveParameterForX = (cast function(x:Float, epsilon:Float):Float {
+      var s:Float = cast _Runtime.UNDEFINED;
+      var low:Float = cast _Runtime.UNDEFINED;
+      var high:Float = cast _Runtime.UNDEFINED;
       s = x;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-          var xError:Dynamic = _Runtime.subtractNumbers(_Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>)), x);
+          var xError:Float = ((cast sampleX((cast s : Float)) : Float) - x);
           if ((cast ((cast HxMath.abs(xError) : Float) < (cast epsilon : Float)) : Bool)) {
             return cast s;
           }
-          var derivative:Dynamic = _Runtime.callValue(sampleDerivativeX, cast ([s] : Array<Dynamic>));
+          var derivative:Float = (cast sampleDerivativeX((cast s : Float)) : Float);
           if ((cast ((cast HxMath.abs(derivative) : Float) < (cast 0.000001 : Float)) : Bool)) {
             break;
           }
@@ -56,7 +56,7 @@ class EaseCubicBezier {
         return cast high;
       }
       while ((cast ((cast low : Float) < (cast high : Float)) : Bool)) {
-        var sampled:Dynamic = _Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>));
+        var sampled:Float = (cast sampleX((cast s : Float)) : Float);
         if ((cast ((cast HxMath.abs((sampled - x)) : Float) < (cast epsilon : Float)) : Bool)) {
           return cast s;
         }
@@ -68,15 +68,15 @@ class EaseCubicBezier {
         (s = cast ((((high - low) * 0.5) + low) : Dynamic));
       }
       return cast s;
-    };
-    return cast function(t:Dynamic) {
+    } : Float->Float->Float);
+    return cast function(t:Float):Float {
       if ((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool)) {
         return cast 0.0;
       }
       if ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool)) {
         return cast 1.0;
       }
-      return cast _Runtime.callValue(sampleY, cast ([_Runtime.callValue(solveParameterForX, cast ([t, 1e-7] : Array<Dynamic>))] : Array<Dynamic>));
+      return cast (cast sampleY((cast (cast solveParameterForX((cast t : Float), (cast 1e-7 : Float)) : Float) : Float)) : Float);
     };
     return cast null;
   }

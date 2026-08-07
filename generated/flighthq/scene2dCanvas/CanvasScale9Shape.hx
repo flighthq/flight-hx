@@ -11,9 +11,15 @@ import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
+import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 
@@ -22,50 +28,50 @@ class CanvasScale9Shape {
 
   @:noCompletion
   public static function drawCanvasScale9Shape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var scale9Grid:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var scale9Grid:RectangleLike = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleX:Dynamic = cast _Runtime.UNDEFINED;
-    var scaleY:Dynamic = cast _Runtime.UNDEFINED;
-    var mapper:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(drawCanvasScene2D, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
-    __destructure0 = _Runtime.field(source, 'data');
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
+    var mapper:Null<Scale9Mapper> = cast _Runtime.UNDEFINED;
+    drawCanvasScene2D((cast state : CanvasRenderState), (cast renderProxy : RenderProxy2D));
+    source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
+    __destructure0 = (cast source : Scale9Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    context = _Runtime.field(state, 'context');
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
+    context = (cast state : CanvasRenderState).context;
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
     __destructure1 = source;
     scaleX = _Runtime.field(__destructure1, 'scaleX');
     scaleY = _Runtime.field(__destructure1, 'scaleY');
-    mapper = _Runtime.callValue(buildScale9Mapper, cast ([commands, scale9Grid, scaleX, scaleY] : Array<Dynamic>));
+    mapper = (cast buildScale9Mapper((cast commands : Array<flighthq._internal._Any>), scale9Grid, (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, commands, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+      setCanvasTransform((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast renderProxy : RenderProxy2D).transform2D);
+      renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), state, (cast commands : Array<flighthq._internal._Any>), (cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers));
     } else {
-      _Runtime.callValue(CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape, cast ([state, context, _Runtime.field(renderProxy, 'transform2D'), scaleX, scaleY] : Array<Dynamic>));
-      _Runtime.callValue(mapScale9ShapeCommands, cast ([CanvasScale9Shape._remappedCommands__canvasScale9Shape, commands, mapper] : Array<Dynamic>));
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, CanvasScale9Shape._remappedCommands__canvasScale9Shape, _Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+      CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast (cast renderProxy : RenderProxy2D).transform2D : MatrixLike), (cast scaleX : Float), (cast scaleY : Float));
+      mapScale9ShapeCommands((cast CanvasScale9Shape._remappedCommands__canvasScale9Shape : Array<ShapeCommandToken>), (cast commands : Array<ShapeCommandToken>), mapper);
+      renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), state, (cast CanvasScale9Shape._remappedCommands__canvasScale9Shape : Array<flighthq._internal._Any>), (cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers));
     }
   }
 
   public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasScale9Shape };
 
   public static function applyStrippedTransform__canvasScale9Shape(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
     a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.a / scaleX) : Dynamic) : (cast t.a : Dynamic));
     b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
     c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
-    if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
+    if ((cast (cast state : CanvasRenderState).roundPixels : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.fround(t.tx), _Runtime.fround(t.ty)] : Array<Dynamic>));
     } else {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, t.tx, t.ty] : Array<Dynamic>));

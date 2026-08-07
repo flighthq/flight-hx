@@ -7,29 +7,29 @@ import flighthq.types.EasingFunction;
 
 class CreateEasingSamples {
   public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flighthq._internal._Float32Array):flighthq._internal._Float32Array {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    var step:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var result:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var step:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('createEasingSamples: count must be a finite integer >= 1'));
     }
     n = HxMath.floor(count);
     result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));
     if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, (cast ease((cast 0.5 : Float)) : Float));
       return cast result;
     }
     step = (1.0 / (n - 1.0));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var t:Dynamic = (i * step);
-        flighthq._internal._StaticIndex.writeFloat32Array(result, i, _Runtime.callValue(ease, cast ([((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic))] : Array<Dynamic>)));
+        var t:Float = (i * step);
+        flighthq._internal._StaticIndex.writeFloat32Array(result, i, (cast ease((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Float)) : Float));
         i++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, _Runtime.callValue(ease, cast ([0.0] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeFloat32Array(result, (n - 1.0), _Runtime.callValue(ease, cast ([1.0] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, (cast ease((cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32Array(result, (n - 1.0), (cast ease((cast 1.0 : Float)) : Float));
     return cast result;
     return cast null;
   }

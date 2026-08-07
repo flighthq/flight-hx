@@ -11,54 +11,56 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEff
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasInvertedTintedAlphaMask;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.InnerGlowEffect;
+import flighthq.types.RenderEffect;
 
 class CanvasInnerGlowEffect {
   @:noCompletion
-  public static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:InnerGlowEffect):Void {
-    var effect:Dynamic = cast _Runtime.UNDEFINED;
-    var pool:Dynamic = cast _Runtime.UNDEFINED;
+  public static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, InnerGlowEffect>, ?maybeEffect:InnerGlowEffect):Void {
+    var effect:InnerGlowEffect = cast _Runtime.UNDEFINED;
+    var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerGlowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _Runtime.callValue(CanvasInnerGlowEffect.applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    CanvasInnerGlowEffect.applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect((cast source : CanvasRenderTarget), (cast dest : CanvasRenderTarget), (cast pool : CanvasRenderTargetPool), (cast effect : InnerGlowEffect));
   }
 
-  public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyInnerGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect)] : Array<Dynamic>));
+  public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyInnerGlowEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : InnerGlowEffect) : InnerGlowEffect));
   };
 
   public static function registerCanvasInnerGlowEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'InnerGlowEffect', defaultCanvasInnerGlowEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'InnerGlowEffect' : String), (cast defaultCanvasInnerGlowEffectRunner : CanvasRenderEffectRunner));
   }
 
   public static function applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerGlowEffect):Void {
-    var mask:Dynamic = cast _Runtime.UNDEFINED;
-    var glow:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var glowPasses:Dynamic = cast _Runtime.UNDEFINED;
-    var blur:Dynamic = cast _Runtime.UNDEFINED;
-    mask = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-    glow = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    var mask:CanvasRenderTarget = cast _Runtime.UNDEFINED;
+    var glow:CanvasRenderTarget = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var glowPasses:Float = cast _Runtime.UNDEFINED;
+    var blur:Float = cast _Runtime.UNDEFINED;
+    mask = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    glow = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0));
-    _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([mask, source, _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16777215.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0), HxMath.min(1.0, strength)] : Array<Dynamic>));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([glow, mask, ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic))] : Array<Dynamic>));
-    _Runtime.callValue(compositeCanvasImage, cast ([glow, source, 0.0, 0.0, 'destination-in'] : Array<Dynamic>));
-    _Runtime.callValue(clearCanvasTarget, cast ([dest] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { _Runtime.callValue(compositeCanvasImage, cast ([dest, source] : Array<Dynamic>)); }
+    drawCanvasInvertedTintedAlphaMask((cast mask : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16777215.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+    drawCanvasEffectPass((cast glow : CanvasRenderTarget), (cast mask : CanvasRenderTarget), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    compositeCanvasImage((cast glow : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-in' : flighthq._internal._Any));
+    clearCanvasTarget((cast dest : CanvasRenderTarget));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)); }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        _Runtime.callValue(compositeCanvasImage, cast ([dest, glow] : Array<Dynamic>));
+        compositeCanvasImage((cast dest : CanvasRenderTarget), (cast glow : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
         i++;
       }
     }
-    _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, mask] : Array<Dynamic>));
-    _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, glow] : Array<Dynamic>));
+    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast mask : CanvasRenderTarget));
+    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast glow : CanvasRenderTarget));
   }
 }

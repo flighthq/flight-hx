@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef PathSegment = Dynamic;
+typedef PathSegment = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<{ var kind:String; var x:Float; var y:Float; }, { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }>, { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }>, { var kind:String; }>;

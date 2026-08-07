@@ -8,46 +8,51 @@ import flighthq.scene2dWgpu.WgpuClipContours.popWgpuClipContours;
 import flighthq.scene2dWgpu.WgpuClipContours.pushWgpuClipContours;
 import flighthq.scene2dWgpu.WgpuClipRectangle.popWgpuClipRectangle;
 import flighthq.scene2dWgpu.WgpuClipRectangle.pushWgpuClipRectangle;
+import flighthq.types.ClipRegion;
+import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class WgpuClip {
   public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
-    _Runtime.setField(state, 'displayObjectClipHooks', WgpuClip.webgpuClipHooks__wgpuClip);
+    ((cast state : WgpuRenderState).displayObjectClipHooks = WgpuClip.webgpuClipHooks__wgpuClip);
   }
 
   public static function popOneWgpuClip__wgpuClip(state:WgpuRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var form:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    form = _Runtime.callProperty(_Runtime.field(runtime, 'clipForms'), 'pop', cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { _Runtime.callValue(popWgpuClipContours, cast ([state] : Array<Dynamic>)); } else { _Runtime.callValue(popWgpuClipRectangle, cast ([state] : Array<Dynamic>)); }
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var form:Null<String> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    form = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'pop', cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { popWgpuClipContours((cast state : WgpuRenderState)); } else { popWgpuClipRectangle((cast state : WgpuRenderState)); }
   }
 
-  public static final webgpuClipHooks__wgpuClip:Scene2DClipHooks = { finalize: function(state:WgpuRenderState) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(WgpuClip.popOneWgpuClip__wgpuClip, cast ([state] : Array<Dynamic>)); }
-  }, popClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.callValue(WgpuClip.popOneWgpuClip__wgpuClip, cast ([state] : Array<Dynamic>)); }
-  }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var clip:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    clip = _Runtime.field(source, 'clip');
+  public static final webgpuClipHooks__wgpuClip:Scene2DClipHooks = { finalize: function(state:WgpuRenderState):Void {
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state : WgpuRenderState)); }
+  }, popClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state : WgpuRenderState)); }
+  }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
-      _Runtime.callValue(pushWgpuClipRectangle, cast ([state, _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'clipForms'), 'push', cast (['rect'] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
+      pushWgpuClipRectangle((cast state : WgpuRenderState), (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
+      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(pushWgpuClipContours, cast ([state, _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'clipForms'), 'push', cast (['contour'] : Array<Dynamic>));
+      pushWgpuClipContours((cast state : WgpuRenderState), (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
   } };
 }

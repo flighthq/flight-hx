@@ -11,13 +11,14 @@ import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
+import flighthq.types.Renderable;
 
 class RenderViewport {
   @:noCompletion
-  public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
-    var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(RenderViewport.isSpatial2DNode__renderViewport, cast ([source] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    worldBounds = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
+  public static function computeRenderProxyWorldBounds(out:Dynamic, source:flighthq._internal._Any):Bool {
+    var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
+    worldBounds = (cast getNodeWorldBoundsRectangle(source) : Rectangle);
     _Runtime.setField(out, 'x', _Runtime.field(worldBounds, 'x'));
     _Runtime.setField(out, 'y', _Runtime.field(worldBounds, 'y'));
     _Runtime.setField(out, 'width', _Runtime.field(worldBounds, 'width'));
@@ -33,26 +34,26 @@ class RenderViewport {
   }
 
   @:noCompletion
-  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var objMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var objMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var objMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var objMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var vpMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var vpMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var vpMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var vpMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(computeRenderProxyWorldBounds, cast ([RenderViewport._scratchBounds__renderViewport, source] : Array<Dynamic>)) : Bool) : Bool)) { return cast true; }
+  public static function isRenderableInViewport(source:flighthq._internal._Any, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    var objMinX:Float = cast _Runtime.UNDEFINED;
+    var objMinY:Float = cast _Runtime.UNDEFINED;
+    var objMaxX:Float = cast _Runtime.UNDEFINED;
+    var objMaxY:Float = cast _Runtime.UNDEFINED;
+    var vpMinX:Float = cast _Runtime.UNDEFINED;
+    var vpMinY:Float = cast _Runtime.UNDEFINED;
+    var vpMaxX:Float = cast _Runtime.UNDEFINED;
+    var vpMaxY:Float = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast computeRenderProxyWorldBounds((cast RenderViewport._scratchBounds__renderViewport : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
     if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
-      _Runtime.callValue(matrixTransformRectangle, cast ([RenderViewport._scratchTransformed__renderViewport, renderTransform2D, RenderViewport._scratchBounds__renderViewport] : Array<Dynamic>));
+      matrixTransformRectangle(RenderViewport._scratchTransformed__renderViewport, renderTransform2D, RenderViewport._scratchBounds__renderViewport);
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
-    objMinX = _Runtime.field(bounds, 'x');
-    objMinY = _Runtime.field(bounds, 'y');
-    objMaxX = _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width'));
-    objMaxY = _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height'));
+    objMinX = (cast bounds : Rectangle).x;
+    objMinY = (cast bounds : Rectangle).y;
+    objMaxX = ((cast bounds : Rectangle).x + (cast bounds : Rectangle).width);
+    objMaxY = ((cast bounds : Rectangle).y + (cast bounds : Rectangle).height);
     vpMinX = _Runtime.field(viewport, 'x');
     vpMinY = _Runtime.field(viewport, 'y');
     vpMaxX = _Runtime.addNumbers(_Runtime.field(viewport, 'x'), _Runtime.field(viewport, 'width'));
@@ -63,16 +64,16 @@ class RenderViewport {
 
   @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast _Runtime.callValue(isRenderableInViewport, cast ([_Runtime.field(proxy, 'source'), viewport, renderTransform2D] : Array<Dynamic>));
+    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), (cast viewport : RenderViewport2D), (cast renderTransform2D : Null<Matrix>)) : Bool);
     return cast null;
   }
 
-  public static function isSpatial2DNode__renderViewport(source:Dynamic):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(source, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool)) : Bool) && (cast _Runtime.hasField((cast source : Dynamic), 'pivotX') : Bool));
+  public static function isSpatial2DNode__renderViewport(source:flighthq._internal._Any):Bool {
+    return cast ((cast ((cast !_Runtime.strictEquals(source, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool)) : Bool) && (cast _Runtime.hasField((cast source : flighthq._internal._Object), 'pivotX') : Bool));
     return cast null;
   }
 
-  public static final _scratchBounds__renderViewport:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
 
-  public static final _scratchTransformed__renderViewport:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
 }

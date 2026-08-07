@@ -11,36 +11,40 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
+import flighthq.types.EffectSourceMode;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.OuterGlowEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
 class GlOuterGlowEffect {
   @:noCompletion
   public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var s0:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
-    var tintStrength:Dynamic = cast _Runtime.UNDEFINED;
-    var glowPasses:Dynamic = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s1:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var s2:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var src:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
+    var tintStrength:Float = cast _Runtime.UNDEFINED;
+    var glowPasses:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var mask:Dynamic = cast _Runtime.UNDEFINED;
-    var blurred:Dynamic = cast _Runtime.UNDEFINED;
-    var blurTemp:Dynamic = cast _Runtime.UNDEFINED;
+    var mask:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurTemp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
@@ -54,31 +58,31 @@ class GlOuterGlowEffect {
     mask = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-    _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, mask, color, alpha, tintStrength] : Array<Dynamic>));
-    _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, mask, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
-    _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
+    applyGlEffectTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast mask : GlRenderTarget), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyGlEffectBoxBlur((cast state : GlRenderState), (cast mask : GlRenderTarget), (cast blurred : GlRenderTarget), (cast blurTemp : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        _Runtime.callValue(applyGlEffectBlitPass, cast ([state, blurred, dst] : Array<Dynamic>));
+        applyGlEffectBlitPass((cast state : GlRenderState), (cast blurred : GlRenderTarget), (cast dst : GlRenderTarget));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      _Runtime.callValue(applyGlEffectErasePass, cast ([state, src, dst] : Array<Dynamic>));
+      applyGlEffectErasePass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
+      applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
     } }
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s0] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s1] : Array<Dynamic>));
-    _Runtime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
   }
 
-  public static final defaultGlOuterGlowEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyOuterGlowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
+  public static final defaultGlOuterGlowEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyOuterGlowEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : OuterGlowEffect) : OuterGlowEffect));
   };
 
   public static function registerGlOuterGlowEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'OuterGlowEffect', defaultGlOuterGlowEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'OuterGlowEffect' : String), (cast defaultGlOuterGlowEffectRunner : GlRenderEffectRunner));
   }
 }

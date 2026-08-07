@@ -19,10 +19,13 @@ import flighthq.scene3dGl.GlShadedPrelude.ensureGlShadedProgram;
 import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.types.Camera3D;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlModifierSnippet;
 import flighthq.types.GlModifierSnippet.GlModifierBindContext;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlShadedProgram;
 import flighthq.types.GlShadedProgram.GlShadedDefineKey;
 import flighthq.types.LinearColor;
@@ -30,70 +33,79 @@ import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierRegistry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.ShadedMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedGlMeshMaterialRenderer {
   @:noCompletion
-  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var shaded:Dynamic = cast _Runtime.UNDEFINED;
-    var modifiers:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var shaded:Null<ShadedMaterial> = cast _Runtime.UNDEFINED;
+    var modifiers:Array<Modifier> = cast _Runtime.UNDEFINED;
+    var program:GlShadedProgram = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     shaded = (cast material : Null<ShadedMaterial>);
     modifiers = ((cast !_Runtime.strictEquals(shaded, null) : Bool) ? (cast _Runtime.field(shaded, 'modifiers') : Dynamic) : (cast ShadedGlMeshMaterialRenderer.EMPTY_MODIFIERS__shadedGlMeshMaterialRenderer : Dynamic));
-    program = _Runtime.callValue(ensureGlShadedProgram, cast ([state, _Runtime.callValue(ShadedGlMeshMaterialRenderer.defineKeyForMaterial__shadedGlMeshMaterialRenderer, cast ([state, shaded] : Array<Dynamic>)), modifiers] : Array<Dynamic>));
-    _Runtime.callValue(beginGlMeshDraw, cast ([state, program, ((cast !_Runtime.strictEquals(shaded, null) : Bool) && (cast _Runtime.field(shaded, 'doubleSided') : Bool))] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshViewProjection, cast ([state, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
-    _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
-    _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer, cast ([state, program, shaded] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locTime'), _Runtime.callValue(getGlScene3DTime, cast ([state] : Array<Dynamic>)));
-    if ((cast ((cast _Runtime.field(modifiers, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer, cast ([state, program, modifiers] : Array<Dynamic>)); }
-  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
+    program = (cast ensureGlShadedProgram((cast state : GlRenderState), (cast (cast ShadedGlMeshMaterialRenderer.defineKeyForMaterial__shadedGlMeshMaterialRenderer((cast state : GlRenderState), (cast shaded : Null<ShadedMaterial>)) : GlShadedDefineKey) : GlShadedDefineKey), (cast modifiers : Array<Modifier>)) : GlShadedProgram);
+    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(shaded, null) : Bool) && (cast _Runtime.field(shaded, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlShadedProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    setGlMeshCameraPosition((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast program : GlShadedProgram).locCameraPosition : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    bindGlMeshLightBlock((cast state : GlRenderState), program, (cast lights : Scene3DLightBlock));
+    ShadedGlMeshMaterialRenderer.bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer((cast state : GlRenderState), (cast program : GlShadedProgram), (cast shaded : Null<ShadedMaterial>));
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlShadedProgram).locTime, (cast getGlScene3DTime((cast state : GlRenderState)) : Float));
+    if ((cast ((cast _Runtime.field(modifiers, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer((cast state : GlRenderState), (cast program : GlShadedProgram), (cast modifiers : Array<Modifier>)); }
+  }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerGlShadedMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, ShadedMaterialKind, shadedGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast ShadedMaterialKind : String), (cast shadedGlMeshMaterialRenderer : GlMeshMaterialRenderer));
   }
 
   public static function bindGlShadedModifiers__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, modifiers:Array<Modifier>):Void {
     var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
-    var ordered:Dynamic = cast _Runtime.UNDEFINED;
-    var nextTextureUnit:Dynamic = cast _Runtime.UNDEFINED;
+    var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;
+    var nextTextureUnit:Float = cast _Runtime.UNDEFINED;
     var context:GlModifierBindContext = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return; }
-    ordered = _Runtime.callValue(orderModifierStack, cast ([modifiers] : Array<Dynamic>));
+    ordered = (cast orderModifierStack((cast modifiers : Array<Modifier>)) : Array<Modifier>);
     nextTextureUnit = ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer;
-    context = { acquireModifierTextureUnit: function() return ((cast ((cast nextTextureUnit : Float) < (cast ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer : Float)) : Bool) ? (cast nextTextureUnit++ : Dynamic) : (cast -1.0 : Dynamic)), index: 0.0, program: _Runtime.field(program, 'program'), state: state };
+    context = { acquireModifierTextureUnit: function():Float return ((cast ((cast nextTextureUnit : Float) < (cast ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer : Float)) : Bool) ? (cast nextTextureUnit++ : Dynamic) : (cast -1.0 : Dynamic)), index: 0.0, program: _Runtime.field(program, 'program'), state: state };
     {
-      var index:Dynamic = 0.0;
+      var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
-        var modifier:Dynamic = flighthq._internal._StaticIndex.readArray(ordered, index);
-        var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(snippet, 'bind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
-        _Runtime.setField(context, 'index', index);
-        _Runtime.callProperty(snippet, 'bind', cast ([modifier, context] : Array<Dynamic>));
+        var modifier:Modifier = flighthq._internal._StaticIndex.readArray(ordered, index);
+        var snippet:Null<GlModifierSnippet> = (cast (cast resolveModifier((cast registry : ModifierRegistry), (cast (cast modifier : Modifier).kind : String)) : Null<GlModifierSnippet>) : Null<GlModifierSnippet>);
+        if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals((cast snippet : GlModifierSnippet).bind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
+        ((cast context : GlModifierBindContext).index = index);
+        (cast snippet : GlModifierSnippet).bind(modifier, context);
         index++;
       }
     }
   }
 
   public static function bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, material:Null<ShadedMaterial>):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
-    var specularMap:Dynamic = cast _Runtime.UNDEFINED;
-    var normalMap:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var diffuseMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var specularMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var normalMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     if ((cast _Runtime.strictEquals(material, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), 1.0, 1.0, 1.0, 1.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locSpecular'), 1.0, 1.0, 1.0, 1.0);
@@ -102,9 +114,9 @@ class ShadedGlMeshMaterialRenderer {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), 0.5);
       return;
     }
-    _Runtime.callValue(unpackColorToLinear, cast ([ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, _Runtime.field(material, 'diffuse')] : Array<Dynamic>));
+    (cast unpackColorToLinear((cast ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
-    _Runtime.callValue(unpackColorToLinear, cast ([ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, _Runtime.field(material, 'specular')] : Array<Dynamic>));
+    (cast unpackColorToLinear((cast ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(material, 'specular') : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locSpecular'), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(ShadedGlMeshMaterialRenderer.scratchRgba__shadedGlMeshMaterialRenderer, 3.0));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShininess'), _Runtime.field(material, 'shininess'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), _Runtime.field(material, 'normalScale'));
@@ -112,29 +124,29 @@ class ShadedGlMeshMaterialRenderer {
     diffuseMap = _Runtime.field(material, 'diffuseMap');
     if ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, diffuseMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), diffuseMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0); }
     }
     specularMap = _Runtime.field(material, 'specularMap');
     if ((cast !_Runtime.strictEquals(specularMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, specularMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpecularMap'), 1.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), specularMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpecularMap'), 1.0); }
     }
     normalMap = _Runtime.field(material, 'normalMap');
     if ((cast !_Runtime.strictEquals(normalMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE2', flighthq._internal.backend.WebGl2Backend.TEXTURE2));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, normalMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 2.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), normalMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 2.0); }
     }
-    _Runtime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
+    bindGlUvTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, diffuseMap);
   }
 
   public static function defineKeyForMaterial__shadedGlMeshMaterialRenderer(state:GlRenderState, material:Null<ShadedMaterial>):GlShadedDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, _Runtime.field(material, 'diffuseMap')] : Array<Dynamic>)), null) : Bool)), hasNormalMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, _Runtime.field(material, 'normalMap')] : Array<Dynamic>)), null) : Bool)), hasSpecularMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, _Runtime.field(material, 'specularMap')] : Array<Dynamic>)), null) : Bool)), hasUvTransform: _Runtime.callValue(hasGlUvTransform, cast ([((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(material, 'diffuseMap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasNormalMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(material, 'normalMap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasSpecularMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'specularMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(material, 'specularMap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasUvTransform: (cast hasGlUvTransform(((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic))) : Bool) };
     return cast null;
   }
 
-  public static final MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer:Dynamic = 3.0;
+  public static final MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer:Float = 3.0;
 
-  public static final MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer:Dynamic = 8.0;
+  public static final MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer:Float = 8.0;
 
   public static final EMPTY_MODIFIERS__shadedGlMeshMaterialRenderer:Array<Modifier> = cast ([] : Array<Dynamic>);
 

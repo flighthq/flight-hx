@@ -11,7 +11,7 @@ class NextPowerOfTwo {
   }
 
   public static function nextMultipleOf(value:Float, multiple:Float):Float {
-    var remainder:Dynamic = cast _Runtime.UNDEFINED;
+    var remainder:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast multiple : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
     remainder = _Runtime.fmod(value, multiple);
     return cast ((cast _Runtime.strictEquals(remainder, 0.0) : Bool) ? (cast value : Dynamic) : (cast ((value + multiple) - remainder) : Dynamic));

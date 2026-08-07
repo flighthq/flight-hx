@@ -317,7 +317,7 @@ class Materials {
     return cast null;
   }
 
-  public static function getMaterialOfKind<T>(material:Null<Material>, kind:Kind):Null<Dynamic> {
+  public static function getMaterialOfKind<T>(material:Null<Material>, kind:Kind):Null<T> {
     return cast Facade_Materials_flighthq_materials_Material.getMaterialOfKind(material, kind);
     return cast null;
   }

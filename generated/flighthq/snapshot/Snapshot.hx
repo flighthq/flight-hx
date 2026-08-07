@@ -12,7 +12,7 @@ import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
 
 class Snapshot {
-  public static function captureSnapshot<T>(source:Dynamic):flighthq.types.Snapshot<Dynamic> {
+  public static function captureSnapshot<T>(source:T):flighthq.types.Snapshot<T> {
     return cast Facade_Snapshot_flighthq_snapshot_CaptureSnapshot.captureSnapshot(source);
     return cast null;
   }
@@ -25,16 +25,16 @@ class Snapshot {
     Facade_Snapshot_flighthq_snapshot_EnableSnapshotGuards.enableSnapshotGuards();
   }
 
-  public static function equalsSnapshot<T>(a:flighthq.types.Snapshot<Dynamic>, b:flighthq.types.Snapshot<Dynamic>):Bool {
+  public static function equalsSnapshot<T>(a:flighthq.types.Snapshot<T>, b:flighthq.types.Snapshot<T>):Bool {
     return cast Facade_Snapshot_flighthq_snapshot_EqualsSnapshot.equalsSnapshot(a, b);
     return cast null;
   }
 
-  public static function interpolateSnapshots<T>(a:flighthq.types.Snapshot<Dynamic>, b:flighthq.types.Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
+  public static function interpolateSnapshots<T>(a:flighthq.types.Snapshot<T>, b:flighthq.types.Snapshot<T>, t:Float, out:T, ?schema:SnapshotSchema):Void {
     Facade_Snapshot_flighthq_snapshot_InterpolateSnapshots.interpolateSnapshots(a, b, t, out, schema);
   }
 
-  public static function restoreSnapshot<T>(snapshot:flighthq.types.Snapshot<Dynamic>, target:Dynamic):Void {
+  public static function restoreSnapshot<T>(snapshot:flighthq.types.Snapshot<T>, target:T):Void {
     Facade_Snapshot_flighthq_snapshot_RestoreSnapshot.restoreSnapshot(snapshot, target);
   }
 }

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef InputState = { var axisValues:Dynamic; var gamepadButtonsDown:Dynamic; var justPressedGamepadButtons:Dynamic; var justPressedKeys:Dynamic; var justReleasedGamepadButtons:Dynamic; var justReleasedKeys:Dynamic; var keysDown:Dynamic; var pointerButtonsDown:Dynamic; };
+typedef InputState = { var axisValues:flighthq._internal._Map<Float, Float>; var gamepadButtonsDown:flighthq._internal._Set<Float>; var justPressedGamepadButtons:flighthq._internal._Set<Float>; var justPressedKeys:flighthq._internal._Set<Float>; var justReleasedGamepadButtons:flighthq._internal._Set<Float>; var justReleasedKeys:flighthq._internal._Set<Float>; var keysDown:flighthq._internal._Set<Float>; var pointerButtonsDown:flighthq._internal._Map<Float, Float>; };

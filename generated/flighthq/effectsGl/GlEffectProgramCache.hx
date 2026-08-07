@@ -10,41 +10,41 @@ import flighthq.types.GlRenderState;
 class GlEffectProgramCache {
   @:noCompletion
   public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var compiled:Dynamic = cast _Runtime.UNDEFINED;
-    cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var cache:Null<flighthq._internal._Map<String, GlFullscreenProgram>> = cast _Runtime.UNDEFINED;
+    var existing:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
+    var compiled:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal._Map<String, GlFullscreenProgram>>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), cache));
+      ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal._Map<String, GlFullscreenProgram>>).set((cast state : GlRenderState).gl, cache));
     }
-    existing = ((cast cache : flighthq._internal._Map).get(key));
+    existing = ((cast cache : flighthq._internal._Map<String, GlFullscreenProgram>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    compiled = _Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), fragmentSource] : Array<Dynamic>));
-    ((cast cache : flighthq._internal._Map).set(key, compiled));
+    compiled = (cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fragmentSource : String)) : GlFullscreenProgram);
+    ((cast cache : flighthq._internal._Map<String, GlFullscreenProgram>).set(key, compiled));
     return cast compiled;
     return cast null;
   }
 
   @:noCompletion
   public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<flighthq._internal.dom.WebGLUniformLocation> {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var loc:Dynamic = cast _Runtime.UNDEFINED;
-    cache = ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).get(program));
+    var cache:Null<flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>> = cast _Runtime.UNDEFINED;
+    var existing:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
+    var loc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
+    cache = ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap<GlFullscreenProgram, flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>>).get(program));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).set(program, cache));
+      ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap<GlFullscreenProgram, flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>>).set(program, cache));
     }
-    existing = ((cast cache : flighthq._internal._Map).get(name));
+    existing = ((cast cache : flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>).get(name));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    loc = flighthq._internal.backend.WebGl2Backend.getUniformLocation(_Runtime.field(state, 'gl'), _Runtime.field(program, 'program'), name);
-    ((cast cache : flighthq._internal._Map).set(name, loc));
+    loc = flighthq._internal.backend.WebGl2Backend.getUniformLocation((cast state : GlRenderState).gl, _Runtime.field(program, 'program'), name);
+    ((cast cache : flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>).set(name, loc));
     return cast loc;
     return cast null;
   }
 
-  public static final _programs__glEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _programs__glEffectProgramCache:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal._Map<String, GlFullscreenProgram>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uniformLocations__glEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _uniformLocations__glEffectProgramCache:flighthq._internal._WeakMap<GlFullscreenProgram, flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

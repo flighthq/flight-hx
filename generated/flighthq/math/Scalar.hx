@@ -8,17 +8,17 @@ import flighthq.math.NextPowerOfTwo.previousPowerOfTwo;
 
 class Scalar {
   public static function ceilPowerOfTwo(n:Float):Float {
-    return cast _Runtime.callValue(nextPowerOfTwo, cast ([n] : Array<Dynamic>));
+    return cast (cast nextPowerOfTwo((cast n : Float)) : Float);
     return cast null;
   }
 
   public static function floorPowerOfTwo(n:Float):Float {
-    return cast _Runtime.callValue(previousPowerOfTwo, cast ([n] : Array<Dynamic>));
+    return cast (cast previousPowerOfTwo((cast n : Float)) : Float);
     return cast null;
   }
 
   public static function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast steps : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(min, max) : Bool)) : Bool)) { return cast min; }
     t = ((value - min) / (max - min));
     return cast (min + (_Runtime.divideNumbers(HxMath.round(_Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(1.0, t)), steps)), steps) * (max - min)));

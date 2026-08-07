@@ -18,14 +18,24 @@ import flighthq.scene2dGl.GlShape.drawGlShape;
 import flighthq.scene2dGl.GlShapeRasterizer.getGlShapeRasterizer;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlShaderLocations;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
+import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
@@ -36,120 +46,120 @@ class GlScale9Shape {
 
   @:noCompletion
   public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    texture = _Runtime.callValue(createGlTexture, cast ([state] : Array<Dynamic>));
-    return cast (cast (cast { canvas: canvas, ctx: ctx, lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, texture: texture } : Dynamic) : RendererData);
+    texture = (cast createGlTexture((cast state : GlRenderState)) : flighthq._internal.dom.WebGLTexture);
+    return cast (cast (cast { canvas: canvas, ctx: ctx, lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, texture: texture } : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    __destructure0 = (cast (cast data : Dynamic) : GlScale9ShapeData__glScale9Shape);
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    __destructure0 = (cast (cast data : flighthq._internal._Any) : GlScale9ShapeData__glScale9Shape);
     texture = _Runtime.field(__destructure0, 'texture');
-    flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), texture);
+    flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, texture);
   }
 
   @:noCompletion
   public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var scale9Grid:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    var rasterizer:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var mapper:Dynamic = cast _Runtime.UNDEFINED;
-    var shapeData:Dynamic = cast _Runtime.UNDEFINED;
-    var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var scale9Grid:RectangleLike = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var rasterizer:Null<ShapeRasterizer> = cast _Runtime.UNDEFINED;
+    var bounds:Rectangle = cast _Runtime.UNDEFINED;
+    var mapper:Null<Scale9Mapper> = cast _Runtime.UNDEFINED;
+    var shapeData:GlScale9ShapeData__glScale9Shape = cast _Runtime.UNDEFINED;
+    var pixelRatio:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var shaderLoc:Dynamic = cast _Runtime.UNDEFINED;
-    var matrixArray:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
-    __destructure1 = _Runtime.field(source, 'data');
+    var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
+    var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var t:Matrix = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter((cast state : GlRenderState));
+    source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
+    __destructure1 = (cast source : Scale9Shape).data;
     commands = _Runtime.field(__destructure1, 'commands');
     scale9Grid = _Runtime.field(__destructure1, 'scale9Grid');
-    version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
+    version = (cast getNodeLocalContentRevision(source) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) { return; }
-    rasterizer = _Runtime.callValue(getGlShapeRasterizer, cast ([state] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
+    rasterizer = (cast getGlShapeRasterizer((cast state : GlRenderState)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalProperty(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss', cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
-    bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
-    mapper = _Runtime.callValue(buildGlScale9Mapper, cast ([bounds, scale9Grid, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY')] : Array<Dynamic>));
+    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
+    mapper = (cast buildGlScale9Mapper(bounds, scale9Grid, (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      _Runtime.callValue(drawGlShape, cast ([state, renderProxy] : Array<Dynamic>));
+      drawGlShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D));
       return;
     }
-    shapeData = (cast (cast _Runtime.field(renderProxy, 'rendererData') : Dynamic) : GlScale9ShapeData__glScale9Shape);
-    pixelRatio = _Runtime.field(state, 'pixelRatio');
-    w = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), _Runtime.field(source, 'scaleX')));
-    h = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), _Runtime.field(source, 'scaleY')));
+    shapeData = (cast (cast (cast renderProxy : RenderProxy2D).rendererData : flighthq._internal._Any) : GlScale9ShapeData__glScale9Shape);
+    pixelRatio = (cast state : GlRenderState).pixelRatio;
+    w = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), (cast source : Scale9Shape).scaleX));
+    h = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), (cast source : Scale9Shape).scaleY));
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(shapeData, 'lastPixelRatio')) : Bool)) : Bool)) {
-      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', HxMath.ceil((w * pixelRatio)));
-      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', HxMath.ceil((h * pixelRatio)));
-      var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleX, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleY, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio) : Bool)) : Bool)) {
+      flighthq._internal.backend.CanvasElementBackend.setField((cast shapeData : GlScale9ShapeData__glScale9Shape).canvas, 'width', HxMath.ceil((w * pixelRatio)));
+      flighthq._internal.backend.CanvasElementBackend.setField((cast shapeData : GlScale9ShapeData__glScale9Shape).canvas, 'height', HxMath.ceil((h * pixelRatio)));
+      var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast shapeData : GlScale9ShapeData__glScale9Shape).ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
-      _Runtime.callValue(mapScale9ShapeCommands, cast ([GlScale9Shape._remappedCommands__glScale9Shape, commands, mapper] : Array<Dynamic>));
-      _Runtime.callValue(rasterizer, cast ([ctx, GlScale9Shape._remappedCommands__glScale9Shape, state] : Array<Dynamic>));
+      mapScale9ShapeCommands((cast GlScale9Shape._remappedCommands__glScale9Shape : Array<ShapeCommandToken>), (cast commands : Array<ShapeCommandToken>), mapper);
+      rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast GlScale9Shape._remappedCommands__glScale9Shape : Array<ShapeCommandToken>), state);
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callValue(updateGlTexture, cast ([state, _Runtime.field(shapeData, 'texture'), _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>));
-      _Runtime.setField(shapeData, 'lastH', h);
-      _Runtime.setField(shapeData, 'lastScaleX', _Runtime.field(source, 'scaleX'));
-      _Runtime.setField(shapeData, 'lastScaleY', _Runtime.field(source, 'scaleY'));
-      _Runtime.setField(shapeData, 'lastContentId', version);
-      _Runtime.setField(shapeData, 'lastPixelRatio', pixelRatio);
-      _Runtime.setField(shapeData, 'lastW', w);
+      updateGlTexture((cast state : GlRenderState), (cast (cast shapeData : GlScale9ShapeData__glScale9Shape).texture : flighthq._internal.dom.WebGLTexture), (cast (cast shapeData : GlScale9ShapeData__glScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement));
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastH = h);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX = (cast source : Scale9Shape).scaleX);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY = (cast source : Scale9Shape).scaleY);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastContentId = version);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio = pixelRatio);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastW = w);
     }
-    _Runtime.callValue(useGlProgram, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentTexture'), _Runtime.field(shapeData, 'texture')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(shapeData, 'texture'));
-      _Runtime.setField(runtime, 'currentTexture', _Runtime.field(shapeData, 'texture'));
+    useGlProgram((cast state : GlRenderState), _Runtime.field(_Runtime, 'UNDEFINED'));
+    gl = (cast state : GlRenderState).gl;
+    if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).currentTexture, (cast shapeData : GlScale9ShapeData__glScale9Shape).texture) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shapeData : GlScale9ShapeData__glScale9Shape).texture);
+      ((cast runtime : GlRenderStateRuntime).currentTexture = (cast shapeData : GlScale9ShapeData__glScale9Shape).texture);
     }
     __destructure2 = runtime;
     shaderLoc = _Runtime.field(__destructure2, 'shaderLoc');
     matrixArray = _Runtime.field(__destructure2, 'matrixArray');
-    _Runtime.callValue(setGlBaseUniforms, cast ([gl, shaderLoc, renderProxy] : Array<Dynamic>));
-    t = _Runtime.field(renderProxy, 'transform2D');
-    _Runtime.callValue(GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape, cast ([gl, shaderLoc, matrixArray, t, _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY'), _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'))] : Array<Dynamic>));
-    _Runtime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
+    setGlBaseUniforms((cast gl : flighthq._internal.dom.WebGL2RenderingContext), shaderLoc, renderProxy);
+    t = (cast renderProxy : RenderProxy2D).transform2D;
+    GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape((cast gl : flighthq._internal.dom.WebGL2RenderingContext), shaderLoc, (cast matrixArray : flighthq._internal._Float32Array), (cast t : MatrixLike), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas) : { var width:Float; var height:Float; }));
+    drawGlQuad((cast state : GlRenderState), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
   public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
-    _Runtime.callValue(drawGlScale9Shape, cast ([state, data] : Array<Dynamic>));
+    drawGlScale9Shape((cast state : GlRenderState), (cast data : RenderProxy2D));
   }
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = { createData: createGlScale9ShapeData, destroyData: destroyGlScale9ShapeData, submit: drawGlScale9Shape };
 
-  public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:Dynamic, m:flighthq._internal._Float32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
+  public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:flighthq._internal._IndexedAccess<Array<Dynamic>, Float>, m:flighthq._internal._Float32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
     a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.a / scaleX) : Dynamic) : (cast t.a : Dynamic));
     b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
     c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
-    _Runtime.callValue(setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, t.tx, t.ty, viewport] : Array<Dynamic>));
+    setGlMatrixFromValues((cast gl : flighthq._internal.dom.WebGL2RenderingContext), loc, (cast m : flighthq._internal._Float32Array), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast t.tx : Float), (cast t.ty : Float), (cast viewport : { var width:Float; var height:Float; }));
   }
 }

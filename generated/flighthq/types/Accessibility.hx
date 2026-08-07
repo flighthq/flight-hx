@@ -12,4 +12,4 @@ typedef AccessibilityState = { @:optional var disabled:Bool; @:optional var chec
 
 typedef AccessibilityNode = { var id:String; var role:AccessibilityRole; @:optional var label:String; @:optional var description:String; @:optional var value:String; @:optional var parentId:String; @:optional var bounds:Rectangle; @:optional var states:AccessibilityState; };
 
-typedef AccessibilityBackend = { var setNode:Dynamic; var removeNode:Dynamic; var clear:Dynamic; var setFocus:Dynamic; var announce:Dynamic; };
+typedef AccessibilityBackend = { var setNode:AccessibilityNode->Void; var removeNode:String->Void; var clear:Void->Void; var setFocus:String->Bool; var announce:String->AccessibilityLiveness->Void; };

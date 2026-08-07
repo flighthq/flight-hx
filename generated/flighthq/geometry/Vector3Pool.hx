@@ -8,8 +8,8 @@ import flighthq.types.Vector3;
 
 class Vector3Pool {
   public static function acquireEmptyVector3():Vector3 {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    v = _Runtime.callValue(acquireVector3, cast ([] : Array<Dynamic>));
+    var v:Vector3 = cast _Runtime.UNDEFINED;
+    v = (cast acquireVector3() : Vector3);
     (v.x = cast (0.0 : Dynamic));
     (v.y = cast (0.0 : Dynamic));
     (v.z = cast (0.0 : Dynamic));
@@ -22,7 +22,7 @@ class Vector3Pool {
     if ((cast ((cast _Runtime.field(Vector3Pool.pool__vector3Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (v = cast ((cast _Runtime.callProperty(Vector3Pool.pool__vector3Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector3) : Dynamic));
     } else {
-      (v = cast (_Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) : Dynamic));
+      (v = cast ((cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3) : Dynamic));
     }
     return cast v;
     return cast null;

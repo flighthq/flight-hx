@@ -7,22 +7,24 @@ import flighthq.camera.Camera.setCamera3DViewMatrix4FromLookAt;
 import flighthq.camera.Projection.createOrthographicProjection;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Camera3D;
+import flighthq.types.Camera3D.Projection;
+import flighthq.types.Matrix4;
 import flighthq.types.Vector3.Vector3Like;
 
 class ShadowCamera {
   public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var dl:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var up:Dynamic = cast _Runtime.UNDEFINED;
+    var min:Vector3Like = cast _Runtime.UNDEFINED;
+    var max:Vector3Like = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var dl:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var up:Vector3Like = cast _Runtime.UNDEFINED;
     min = sceneBounds.min;
     max = sceneBounds.max;
     cx = ((min.x + max.x) * 0.5);
@@ -42,36 +44,36 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.y = cast (cy : Dynamic));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
     up = ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic));
-    _Runtime.callValue(setCamera3DViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
+    setCamera3DViewMatrix4FromLookAt((cast camera : Camera3D), (cast ShadowCamera._eye__shadowCamera : Vector3Like), (cast ShadowCamera._target__shadowCamera : Vector3Like), (cast up : Vector3Like));
     (camera.near = cast (radius : Dynamic));
     (camera.far = cast ((radius * 3.0) : Dynamic));
-    (camera.projection = cast (_Runtime.callValue(createOrthographicProjection, cast ([{ halfHeight: radius, halfWidth: radius }] : Array<Dynamic>)) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection({ halfHeight: radius, halfWidth: radius }) : Projection) : Dynamic));
   }
 
-  public static function configureDirectionalShadowCamera3DTightFit(camera:Camera3D, lightDirection:Vector3Like, worldBounds:AabbLike, padding:Dynamic = 1.0):Void {
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
-    var hasBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var ez:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var extentScale:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var directionLength:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var view:Dynamic = cast _Runtime.UNDEFINED;
-    var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var minViewZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxViewZ:Dynamic = cast _Runtime.UNDEFINED;
-    var depthCenter:Dynamic = cast _Runtime.UNDEFINED;
-    var halfDepth:Dynamic = cast _Runtime.UNDEFINED;
+  public static function configureDirectionalShadowCamera3DTightFit(camera:Camera3D, lightDirection:Vector3Like, worldBounds:AabbLike, padding:Float = 1.0):Void {
+    var min:Vector3Like = cast _Runtime.UNDEFINED;
+    var max:Vector3Like = cast _Runtime.UNDEFINED;
+    var hasBounds:Bool = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var ez:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var extentScale:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var directionLength:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var halfWidth:Float = cast _Runtime.UNDEFINED;
+    var halfHeight:Float = cast _Runtime.UNDEFINED;
+    var minViewZ:Float = cast _Runtime.UNDEFINED;
+    var maxViewZ:Float = cast _Runtime.UNDEFINED;
+    var depthCenter:Float = cast _Runtime.UNDEFINED;
+    var halfDepth:Float = cast _Runtime.UNDEFINED;
     min = worldBounds.min;
     max = worldBounds.max;
     hasBounds = ((cast ((cast ((cast min.x : Float) <= (cast max.x : Float)) : Bool) && (cast ((cast min.y : Float) <= (cast max.y : Float)) : Bool)) : Bool) && (cast ((cast min.z : Float) <= (cast max.z : Float)) : Bool));
@@ -103,21 +105,21 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.x = cast (cx : Dynamic));
     (ShadowCamera._target__shadowCamera.y = cast (cy : Dynamic));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
-    _Runtime.callValue(setCamera3DViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic))] : Array<Dynamic>));
+    setCamera3DViewMatrix4FromLookAt((cast camera : Camera3D), (cast ShadowCamera._eye__shadowCamera : Vector3Like), (cast ShadowCamera._target__shadowCamera : Vector3Like), (cast ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic)) : Vector3Like));
     view = camera.view.m;
     halfWidth = 0.0;
     halfHeight = 0.0;
     minViewZ = HxMath.POSITIVE_INFINITY;
     maxViewZ = HxMath.NEGATIVE_INFINITY;
     {
-      var corner:Dynamic = 0.0;
+      var corner:Float = 0.0;
       while ((cast ((cast corner : Float) < (cast 8.0 : Float)) : Bool)) {
-        var x:Dynamic = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast (cx - ex) : Dynamic) : (cast (cx + ex) : Dynamic));
-        var y:Dynamic = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast (cy - ey) : Dynamic) : (cast (cy + ey) : Dynamic));
-        var z:Dynamic = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast (cz - ez) : Dynamic) : (cast (cz + ez) : Dynamic));
-        var viewX:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 0.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 4.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 8.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 12.0));
-        var viewY:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 1.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 5.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 9.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 13.0));
-        var viewZ:Dynamic = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 6.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 10.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 14.0));
+        var x:Float = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast (cx - ex) : Dynamic) : (cast (cx + ex) : Dynamic));
+        var y:Float = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast (cy - ey) : Dynamic) : (cast (cy + ey) : Dynamic));
+        var z:Float = ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast (cz - ez) : Dynamic) : (cast (cz + ez) : Dynamic));
+        var viewX:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 0.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 4.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 8.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 12.0));
+        var viewY:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 1.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 5.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 9.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 13.0));
+        var viewZ:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 6.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(view, 10.0), z)), flighthq._internal._StaticIndex.readFloat32Array(view, 14.0));
         (halfWidth = cast (HxMath.max(halfWidth, HxMath.abs(viewX)) : Dynamic));
         (halfHeight = cast (HxMath.max(halfHeight, HxMath.abs(viewY)) : Dynamic));
         (minViewZ = cast (HxMath.min(minViewZ, viewZ) : Dynamic));
@@ -129,7 +131,7 @@ class ShadowCamera {
     halfDepth = HxMath.max((((maxViewZ - minViewZ) * 0.5) * extentScale), 0.0001);
     (camera.near = cast (HxMath.max((-depthCenter - halfDepth), 0.0001) : Dynamic));
     (camera.far = cast (HxMath.max((-depthCenter + halfDepth), (camera.near + 0.0001)) : Dynamic));
-    (camera.projection = cast (_Runtime.callValue(createOrthographicProjection, cast ([{ halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }] : Array<Dynamic>)) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection({ halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }) : Projection) : Dynamic));
   }
 
   public static final _eye__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 0.0 };

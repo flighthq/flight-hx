@@ -12,30 +12,30 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class ImageResourceFrom {
   public static function createImageResourceFromBitmap(bitmap:Bitmap):Image {
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var domImageData:Dynamic = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var domImageData:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', bitmap.width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', bitmap.height);
     domImageData = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'ImageData'), [bitmap.width, bitmap.height]);
     (cast (cast domImageData : flighthq._internal.dom.ImageData).data : flighthq._internal._UInt8ClampedArray).set(bitmap.data);
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.callValue(createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
+    return cast (cast createImageResourceFromCanvas((cast canvas : flighthq._internal.dom.HTMLCanvasElement)) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') } : Null<{ var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; }>)) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width } : Null<{ var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.ImageBitmap; var version:Float; var width:Float; }>)) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width } : Null<{ var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLImageElement; var version:Float; var width:Float; }>)) : Image);
     return cast null;
   }
 
@@ -51,17 +51,17 @@ class ImageResourceFrom {
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.resolve(_Runtime.callValue(loadImageResourceFromUrl, cast (['data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '', _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
+      return flighthq._internal._Async.resolve(loadImageResourceFromUrl((cast 'data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)));
     }));
   }
 
   public static function loadImageResourceFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var url:Dynamic = cast _Runtime.UNDEFINED;
+        var url:String = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap(loadImageResourceFromUrl((cast url : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue2:Dynamic):Dynamic {
             return flighthq._internal._Async.flowReturn(__awaitValue2);
           });
         }), function():Dynamic {
@@ -76,14 +76,14 @@ class ImageResourceFrom {
 
   public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      var type:Dynamic = cast _Runtime.UNDEFINED;
-      var buf:Dynamic = cast _Runtime.UNDEFINED;
-      type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
+      var type:Null<String> = cast _Runtime.UNDEFINED;
+      var buf:haxe.io.Bytes = cast _Runtime.UNDEFINED;
+      type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>));
       if ((cast _Runtime.strictEquals(type, null) : Bool)) {
         _Runtime.throwValue(_Runtime.error('Unable to determine image type from bytes'));
       }
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
-      return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
+      return cast loadImageResourceFromBlob((cast _Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]) : flighthq._internal.dom.Blob), (cast signal : Null<flighthq._internal.dom.AbortSignal>));
       return cast null;
     }));
   }
@@ -91,7 +91,7 @@ class ImageResourceFrom {
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var img:Dynamic = cast _Runtime.UNDEFINED;
+        var img:flighthq._internal.dom.HTMLImageElement = cast _Runtime.UNDEFINED;
         ({ final __hostTypeCall5 = signal; __hostTypeCall5 == null ? _Runtime.UNDEFINED : __hostTypeCall5.throwIfAborted(); });
         img = _Runtime.construct(flighthq._internal._HostValueLut.get('Image'), []);
         var __flowBranch6:Dynamic;
@@ -108,18 +108,18 @@ class ImageResourceFrom {
           var __flowBranch7:Dynamic;
           if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
-              var rejectAbort:Dynamic = cast _Runtime.UNDEFINED;
-              var abortPromise:Dynamic = cast _Runtime.UNDEFINED;
-              var onAbort:Dynamic = cast _Runtime.UNDEFINED;
-              rejectAbort = function() {
+              var rejectAbort:flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
+              var abortPromise:flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+              var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+              rejectAbort = function(__unused0:flighthq._internal._Any):Void {
 
               };
-              abortPromise = flighthq._internal._Async.create(function(_:Dynamic, reject:Dynamic) {
+              abortPromise = flighthq._internal._Async.create(function(_:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
                 (rejectAbort = cast (reject : Dynamic));
               });
-              onAbort = function() {
+              onAbort = function():Void {
                 ((cast img : flighthq._internal.dom.HTMLImageElement).src = '');
-                _Runtime.callValue(rejectAbort, cast ([signal.reason] : Array<Dynamic>));
+                rejectAbort((cast signal.reason : flighthq._internal._Any));
               };
               signal.addEventListener('abort', onAbort, { once: true });
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
@@ -143,14 +143,14 @@ class ImageResourceFrom {
             });
           }
           return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.callValue(createImageResourceFromImageElement, cast ([img] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn(createImageResourceFromImageElement((cast img : flighthq._internal.dom.HTMLImageElement)));
           });
         });
       })
     );
   }
 
-  public static final DECODED_ALPHA_TYPE__imageResourceFrom:Dynamic = 'straight';
+  public static final DECODED_ALPHA_TYPE__imageResourceFrom:String = 'straight';
 
-  public static final DECODED_GAMUT__imageResourceFrom:Dynamic = 'srgb';
+  public static final DECODED_GAMUT__imageResourceFrom:String = 'srgb';
 }

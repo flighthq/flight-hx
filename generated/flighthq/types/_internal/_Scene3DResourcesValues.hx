@@ -17,5 +17,5 @@ import flighthq.types.Signal;
 import flighthq.types.Texture;
 
 class _Scene3DResourcesValues {
-  public static final Scene3DResourceResolverRuntimeKey:Dynamic = _Runtime.symbol('Scene3DResourceResolverRuntime');
+  public static final Scene3DResourceResolverRuntimeKey:flighthq._internal._Symbol = _Runtime.symbol('Scene3DResourceResolverRuntime');
 }

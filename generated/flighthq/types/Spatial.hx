@@ -11,7 +11,7 @@ typedef SpatialAabb = { var minX:Float; var minY:Float; var maxX:Float; var maxY
 
 typedef SpatialPair = { var a:SpatialObjectId; var b:SpatialObjectId; };
 
-typedef SpatialIndexBackend = { var insertSpatialObject:Dynamic; var updateSpatialObject:Dynamic; var removeSpatialObject:Dynamic; var clearSpatialIndex:Dynamic; var explainSpatialIndexing:Dynamic; var querySpatialPairs:Dynamic; var querySpatialRegion:Dynamic; var querySpatialPoint:Dynamic; var querySpatialRay:Dynamic; };
+typedef SpatialIndexBackend = { var insertSpatialObject:SpatialObjectId->SpatialAabb->Bool; var updateSpatialObject:SpatialObjectId->SpatialAabb->Bool; var removeSpatialObject:SpatialObjectId->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:SpatialObjectId->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb->Array<SpatialObjectId>->Void; var querySpatialPoint:Float->Float->Array<SpatialObjectId>->Void; var querySpatialRay:Float->Float->Float->Float->Array<SpatialObjectId>->Void; };
 
 typedef SpatialIndexRuntime = { var backend:SpatialIndexBackend; };
 

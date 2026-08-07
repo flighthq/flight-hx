@@ -9,19 +9,19 @@ import flighthq.types.Bidi.BidiRun;
 
 class GetBidiRuns {
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
-    var levels:Dynamic = cast _Runtime.UNDEFINED;
+    var levels:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var runs:Array<BidiRun> = cast _Runtime.UNDEFINED;
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var start:Dynamic = cast _Runtime.UNDEFINED;
-    levels = _Runtime.callValue(resolveBidiLevels, cast ([text, baseDirection] : Array<Dynamic>));
+    var length:Float = cast _Runtime.UNDEFINED;
+    var start:Float = cast _Runtime.UNDEFINED;
+    levels = (cast resolveBidiLevels((cast text : String), (cast baseDirection : BidiDirection)) : flighthq._internal._UInt8Array);
     runs = cast ([] : Array<Dynamic>);
     length = _Runtime.field(levels, 'length');
     start = 0.0;
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) <= (cast length : Float)) : Bool)) {
         if ((cast ((cast _Runtime.strictEquals(i, length) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(levels, i), flighthq._internal._StaticIndex.readUint8Array(levels, start)) : Bool)) : Bool)) {
-          var level:Dynamic = flighthq._internal._StaticIndex.readUint8Array(levels, start);
+          var level:Float = flighthq._internal._StaticIndex.readUint8Array(levels, start);
           _Runtime.callProperty(runs, 'push', cast ([{ start: start, end: i, level: level, direction: ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 0.0) : Bool) ? (cast 'ltr' : Dynamic) : (cast 'rtl' : Dynamic)) }] : Array<Dynamic>));
           (start = cast (i : Dynamic));
         }

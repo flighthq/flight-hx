@@ -8,4 +8,4 @@ typedef SpritesheetTimelineSourceUnsupportedField = String;
 
 typedef SpritesheetTimelineSourceExplanation = { var directionMaterialized:Bool; var unsupportedFields:Array<SpritesheetTimelineSourceUnsupportedField>; };
 
-typedef SpritesheetTimelineSourceGuard = Dynamic;
+typedef SpritesheetTimelineSourceGuard = SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void;

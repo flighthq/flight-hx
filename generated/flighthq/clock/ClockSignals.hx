@@ -8,11 +8,11 @@ import flighthq.types.Clock;
 import flighthq.types.Signal;
 
 class ClockSignals {
-  public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
-    if ((cast _Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null) : Bool)) {
-      _Runtime.setField(clock, 'onTick', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)));
+  public static function enableClockSignals(clock:Clock):Signal<Float->Void> {
+    if ((cast _Runtime.strictEquals((cast clock : Clock).onTick, null) : Bool)) {
+      ((cast clock : Clock).onTick = (cast createSignal() : Null<Signal<Float->Void>>));
     }
-    return cast _Runtime.field(clock, 'onTick');
+    return cast (cast clock : Clock).onTick;
     return cast null;
   }
 }

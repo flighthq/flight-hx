@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _ModifierSlotValues {
-  public static final ModifierSlotValue:Dynamic = { Diffuse: 'Diffuse', Effect: 'Effect', Emissive: 'Emissive', Normal: 'Normal', Specular: 'Specular', Vertex: 'Vertex' };
+  public static final ModifierSlotValue:{ var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; } = { Diffuse: 'Diffuse', Effect: 'Effect', Emissive: 'Emissive', Normal: 'Normal', Specular: 'Specular', Vertex: 'Vertex' };
 }

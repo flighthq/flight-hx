@@ -8,9 +8,14 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node2D;
+import flighthq.types.Path;
 import flighthq.types.Shape;
+import flighthq.types.Shape.ShapeData;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeFillRegion;
 import flighthq.types.Types.MorphShapeKind;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.Types.ShapeKind;
@@ -20,22 +25,22 @@ import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class RegisterShapeHitTest {
   public static function registerShapeHitTest():Void {
-    _Runtime.callValue(registerHitTestPrecise, cast ([MorphShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
-    _Runtime.callValue(registerHitTestPrecise, cast ([ShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
-    _Runtime.callValue(registerHitTestPrecise, cast ([Scale9ShapeKind, RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
+    registerHitTestPrecise((cast MorphShapeKind : String), RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest);
+    registerHitTestPrecise((cast ShapeKind : String), RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest);
+    registerHitTestPrecise((cast Scale9ShapeKind : String), RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest);
   }
 
   public static function hitTestShapeFill__registerShapeHitTest(source:NodeAny, x:Float, y:Float):Float {
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    regions = _Runtime.callValue(getShapeFillRegions, cast ([_Runtime.field(_Runtime.field((cast source : Shape), 'data'), 'commands')] : Array<Dynamic>));
+    var regions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
+    regions = (cast getShapeFillRegions((cast (cast (cast source : Shape) : Shape).data : ShapeData).commands) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast -1.0; }
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Node2D)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    inverseMatrixTransformPointXY(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, (cast getNodeWorldMatrix((cast source : Node2D)) : MatrixLike), (cast x : Float), (cast y : Float));
     for (region in _Runtime.iterable(regions)) {
-      if ((cast _Runtime.callValue(containsPathPoint, cast ([_Runtime.field(region, 'path'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'x'), _Runtime.field(RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest, 'y')] : Array<Dynamic>)) : Bool)) { return cast 0.0; }
+      if ((cast (cast containsPathPoint((cast region : ShapeFillRegion).path, (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).y : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool) : Bool)) { return cast 0.0; }
     }
     return cast -1.0;
     return cast null;
   }
 
-  public static final shapeHitTestLocalPoint__registerShapeHitTest:Dynamic = { x: 0.0, y: 0.0 };
+  public static final shapeHitTestLocalPoint__registerShapeHitTest:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
 }

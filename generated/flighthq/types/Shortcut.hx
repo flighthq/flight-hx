@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ShortcutBackend = { var getRegistered:Dynamic; var isRegistered:Dynamic; var register:Dynamic; var setAllEnabled:Dynamic; var setEnabled:Dynamic; var unregister:Dynamic; var unregisterAll:Dynamic; };
+typedef ShortcutBackend = { var getRegistered:Void->Array<String>; var isRegistered:String->Bool; var register:String->ShortcutEvent->Void->Bool; var setAllEnabled:Bool->Void; var setEnabled:String->Bool->Bool; var unregister:String->Bool; var unregisterAll:Void->Void; };

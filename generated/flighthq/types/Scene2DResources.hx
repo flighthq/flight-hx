@@ -10,36 +10,36 @@ import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 
 typedef Scene2DDocumentFetchProgress = { var loaded:Float; var total:Float; var url:String; };
 
-typedef Scene2DDocumentFetcher = Dynamic;
+typedef Scene2DDocumentFetcher = String->flighthq._internal.dom.AbortSignal->Null<Signal<Scene2DDocumentFetchProgress->Void>>->flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>;
 
 typedef Scene2DDocumentImportContext = { var mimeType:Null<String>; var url:Null<String>; };
 
-typedef Scene2DDocumentImporter = Dynamic;
+typedef Scene2DDocumentImporter = flighthq._internal._UInt8Array->Scene2DDocumentImportContext->Null<Scene2DDocument>;
 
-typedef Scene2DDocumentImporterMatcher = Dynamic;
+typedef Scene2DDocumentImporterMatcher = flighthq._internal._UInt8Array->Scene2DDocumentImportContext->Bool;
 
 typedef Scene2DDocumentImporterEntry = { var importDocument:Scene2DDocumentImporter; var kind:String; var matches:Scene2DDocumentImporterMatcher; };
 
 typedef Scene2DDocumentImporterRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var entries:Array<Scene2DDocumentImporterEntry>; };
 
-typedef Scene2DDocumentLoadOptions = { @:optional var mimeType:Null<String>; @:optional var progress:Signal<Dynamic>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
+typedef Scene2DDocumentLoadOptions = { @:optional var mimeType:Null<String>; @:optional var progress:Signal<Scene2DDocumentFetchProgress->Void>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
-typedef Scene2DSlotContentResolver = Dynamic;
+typedef Scene2DSlotContentResolver = Scene2DSlotReference->Null<Node2D>;
 
 typedef Scene2DSlotResolution = { var content:Node2D; var reference:Scene2DSlotReference; };
 
 typedef Scene2DResources = { var document:Scene2DDocument; var resolved:Array<Scene2DSlotResolution>; var root:Node2D; var unresolved:Array<Scene2DSlotReference>; };
 
-typedef ResolveScene2DResourcesOptions = { @:optional var resolveSlotContent:Scene2DSlotContentResolver; @:optional var select:Dynamic; };
+typedef ResolveScene2DResourcesOptions = { @:optional var resolveSlotContent:Scene2DSlotContentResolver; @:optional var select:Scene2DSlotReference->Bool; };
 
 typedef Scene2DImageResourceLoadProgress = { var loaded:Float; var reference:ImageResourceReference; var total:Float; };
 
 typedef Scene2DImageResources = { var document:Scene2DDocument; var resolved:Array<ImageResourceReference>; var unresolved:Array<ImageResourceReference>; };
 
-typedef LoadScene2DImageResourcesOptions = { @:optional var fetch:ImageResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:flighthq._internal.dom.AbortSignal; };
+typedef LoadScene2DImageResourcesOptions = { @:optional var fetch:ImageResourceFetch; @:optional var progress:Signal<Scene2DImageResourceLoadProgress->Void>; @:optional var select:ImageResourceReference->Bool; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
 typedef Scene2DAudioResourceLoadProgress = { var loaded:Float; var reference:AudioResourceReference; var total:Float; };
 
 typedef Scene2DAudioResources = { var document:Scene2DDocument; var resolved:Array<AudioResourceReference>; var unresolved:Array<AudioResourceReference>; };
 
-typedef LoadScene2DAudioResourcesOptions = { @:optional var context:Null<flighthq._internal.dom.AudioContext>; @:optional var fetch:AudioResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:flighthq._internal.dom.AbortSignal; };
+typedef LoadScene2DAudioResourcesOptions = { @:optional var context:Null<flighthq._internal.dom.AudioContext>; @:optional var fetch:AudioResourceFetch; @:optional var progress:Signal<Scene2DAudioResourceLoadProgress->Void>; @:optional var select:AudioResourceReference->Bool; @:optional var signal:flighthq._internal.dom.AbortSignal; };

@@ -11,67 +11,69 @@ import flighthq.types.SpotLight;
 import flighthq.types.SpotLightConeAngles;
 import flighthq.types.SpotLightOptions;
 import flighthq.types.Types.SpotLightKind;
+import flighthq.types.Vector3;
+import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
 class SpotLight {
   public static function cloneSpotLight(source:flighthq.types.SpotLight):flighthq.types.SpotLight {
-    return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), innerConeCos: _Runtime.field(source, 'innerConeCos'), intensity: _Runtime.field(source, 'intensity'), kind: SpotLightKind, normalBias: _Runtime.field(source, 'normalBias'), outerConeCos: _Runtime.field(source, 'outerConeCos'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));
+    return cast (cast createEntity({ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3(_Runtime.field(source, 'direction')) : Vector3), innerConeCos: _Runtime.field(source, 'innerConeCos'), intensity: _Runtime.field(source, 'intensity'), kind: SpotLightKind, normalBias: _Runtime.field(source, 'normalBias'), outerConeCos: _Runtime.field(source, 'outerConeCos'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: (cast cloneVector3(_Runtime.field(source, 'position')) : Vector3), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }) : flighthq.types.SpotLight);
     return cast null;
   }
 
   public static function createSpotLight(?options:SpotLightOptions):flighthq.types.SpotLight {
-    var position:Dynamic = cast _Runtime.UNDEFINED;
-    var direction:Dynamic = cast _Runtime.UNDEFINED;
+    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
     var light:flighthq.types.SpotLight = cast _Runtime.UNDEFINED;
     position = _Runtime.optionalField(options, 'position');
     direction = _Runtime.optionalField(options, 'direction');
-    light = _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([direction] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, -1.0, 0.0] : Array<Dynamic>))), innerConeCos: 1.0, intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: SpotLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), outerConeCos: 1.0, pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([position] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>))), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
-    _Runtime.callValue(setSpotLightCone, cast ([light, _Runtime.coalesce(_Runtime.optionalField(options, 'innerConeDegrees'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(options, 'outerConeDegrees'), function():Dynamic return cast 45.0)] : Array<Dynamic>));
+    light = (cast createEntity({ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(direction) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast -1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), innerConeCos: 1.0, intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: SpotLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), outerConeCos: 1.0, pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(position) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }) : flighthq.types.SpotLight);
+    setSpotLightCone((cast light : flighthq.types.SpotLight), (cast _Runtime.coalesce(_Runtime.optionalField(options, 'innerConeDegrees'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.optionalField(options, 'outerConeDegrees'), function():Dynamic return cast 45.0) : Float));
     return cast light;
     return cast null;
   }
 
   public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:flighthq.types.SpotLight):Void {
-    _Runtime.setField(out, 'innerDegrees', (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'innerConeCos')), 180.0) / HxMath.PI));
-    _Runtime.setField(out, 'outerDegrees', (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'outerConeCos')), 180.0) / HxMath.PI));
+    ((cast out : SpotLightConeAngles).innerDegrees = (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'innerConeCos')), 180.0) / HxMath.PI));
+    ((cast out : SpotLightConeAngles).outerDegrees = (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'outerConeCos')), 180.0) / HxMath.PI));
   }
 
   public static function setSpotLightCone(out:flighthq.types.SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
-    _Runtime.setField(out, 'innerConeCos', HxMath.cos(((innerDegrees * HxMath.PI) / 180.0)));
-    _Runtime.setField(out, 'outerConeCos', HxMath.cos(((outerDegrees * HxMath.PI) / 180.0)));
+    ((cast out : flighthq.types.SpotLight).innerConeCos = HxMath.cos(((innerDegrees * HxMath.PI) / 180.0)));
+    ((cast out : flighthq.types.SpotLight).outerConeCos = HxMath.cos(((outerDegrees * HxMath.PI) / 180.0)));
   }
 
   public static function setSpotLightDirection(out:flighthq.types.SpotLight, x:Float, y:Float, z:Float):Void {
-    var lx:Dynamic = cast _Runtime.UNDEFINED;
-    var ly:Dynamic = cast _Runtime.UNDEFINED;
-    var lz:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
+    var lx:Float = cast _Runtime.UNDEFINED;
+    var ly:Float = cast _Runtime.UNDEFINED;
+    var lz:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
     lx = x;
     ly = y;
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (lx / len), (ly / len), (lz / len)] : Array<Dynamic>));
+      setVector3((cast out : flighthq.types.SpotLight).direction, (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
   public static function setSpotLightTarget(out:flighthq.types.SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var len:Dynamic = cast _Runtime.UNDEFINED;
-    px = _Runtime.field(out, 'position').x;
-    py = _Runtime.field(out, 'position').y;
-    pz = _Runtime.field(out, 'position').z;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
+    px = (cast out : flighthq.types.SpotLight).position.x;
+    py = (cast out : flighthq.types.SpotLight).position.y;
+    pz = (cast out : flighthq.types.SpotLight).position.z;
     dx = (targetX - px);
     dy = (targetY - py);
     dz = (targetZ - pz);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (dx / len), (dy / len), (dz / len)] : Array<Dynamic>));
+      setVector3((cast out : flighthq.types.SpotLight).direction, (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 }

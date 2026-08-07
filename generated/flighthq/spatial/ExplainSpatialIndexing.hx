@@ -4,12 +4,14 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Spatial.SpatialIndex;
+import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Spatial.SpatialIndexRuntime;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 
 class ExplainSpatialIndexing {
   public static function explainSpatialIndexing(index:SpatialIndex, id:SpatialObjectId):SpatialIndexingExplanation {
-    return cast _Runtime.callProperty(_Runtime.field(_Runtime.field(index, 'runtime'), 'backend'), 'explainSpatialIndexing', cast ([id] : Array<Dynamic>));
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).explainSpatialIndexing(id);
     return cast null;
   }
 }

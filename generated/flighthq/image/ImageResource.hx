@@ -4,9 +4,11 @@ package flighthq.image;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.AlphaType;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
 import flighthq.types.Image;
+import flighthq.types.TextureContainer;
 import flighthq.types.Types.CompressedImageTextureSourceKind;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
@@ -14,27 +16,27 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class ImageResource {
   public static function cloneImageResource(resource:Image):Image {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
+    return cast (cast createEntity({ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }) : Image);
     return cast null;
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: _Runtime.field(compressed.container, 'height'), kind: CompressedImageTextureSourceKind, version: 0.0, width: _Runtime.field(compressed.container, 'width') }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: (cast compressed.container : TextureContainer).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : TextureContainer).width } : Null<{ var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : CompressedImage);
     return cast null;
   }
 
   public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }] : Array<Dynamic>));
-    _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
+    resource = (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 } : Null<{ var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; }>)) : Image);
+    ImageResource.updateImageResourceSize__imageResource((cast resource : Image));
     return cast resource;
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateImageResource(resource:Image):Void {
-    _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
-    _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(resource, 'version'), 1.0)), 0));
+    ImageResource.updateImageResourceSize__imageResource((cast resource : Image));
+    ((cast resource : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast resource : Image).version + 1.0)), 0));
   }
 
   public static function isImageResourceEmpty(resource:Image):Bool {
@@ -43,20 +45,20 @@ class ImageResource {
   }
 
   public static function updateImageResourceSize__imageResource(resource:Image):Void {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.field(resource, 'source');
+    var element:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    element = (cast resource : Image).source;
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
     if ((cast _Runtime.isInstanceOf(element, flighthq._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) {
-      _Runtime.setField(resource, 'width', (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth);
-      _Runtime.setField(resource, 'height', (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight);
+      ((cast resource : Image).width = (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth);
+      ((cast resource : Image).height = (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight);
     } else {
-      var sized:Dynamic = (cast element : Dynamic);
-      _Runtime.setField(resource, 'width', flighthq._internal.backend.CanvasElementBackend.field(sized, 'width'));
-      _Runtime.setField(resource, 'height', flighthq._internal.backend.CanvasElementBackend.field(sized, 'height'));
+      var sized:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.ImageBitmap> = (cast element : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>);
+      ((cast resource : Image).width = flighthq._internal.backend.CanvasElementBackend.field(sized, 'width'));
+      ((cast resource : Image).height = flighthq._internal.backend.CanvasElementBackend.field(sized, 'height'));
     }
   }
 
-  public static final DECODED_ALPHA_TYPE__imageResource:Dynamic = 'straight';
+  public static final DECODED_ALPHA_TYPE__imageResource:String = 'straight';
 
-  public static final DECODED_GAMUT__imageResource:Dynamic = 'srgb';
+  public static final DECODED_GAMUT__imageResource:String = 'srgb';
 }

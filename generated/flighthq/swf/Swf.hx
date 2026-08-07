@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.swf.EnableSwfGuards as Facade_Swf_flighthq_swf_EnableSwfGuards;
 import flighthq.swf.SwfDocument as Facade_Swf_flighthq_swf_SwfDocument;
+import flighthq.types.GlyphOutlineSource;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.SwfDocumentImport;
@@ -15,7 +16,7 @@ class Swf {
     return cast null;
   }
 
-  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array):Null<Dynamic> {
+  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array):Null<flighthq._internal._Map<Float, GlyphOutlineSource>> {
     return cast Facade_Swf_flighthq_swf_SwfDocument.createGlyphOutlineSourcesFromSwf(source);
     return cast null;
   }

@@ -13,8 +13,8 @@ import flighthq.types.FontResource;
 class FontResourceFrom {
   public static function loadFontResourceFromBytes(out:FontResource, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      var face:Dynamic = cast _Runtime.UNDEFINED;
-      return flighthq._internal._Async.flatMap(_Runtime.callValue(_loadFontFaceFromBytes, cast ([out.family, bytes] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+      var face:flighthq._internal.dom.FontFace = cast _Runtime.UNDEFINED;
+      return flighthq._internal._Async.flatMap((cast _loadFontFaceFromBytes((cast out.family : String), (cast bytes : flighthq._internal._UInt8Array)) : flighthq._internal._Promise<flighthq._internal.dom.FontFace>), function(__awaitValue0:Dynamic):Dynamic {
         face = __awaitValue0;
         (out.face = cast (face : Dynamic));
         return flighthq._internal._Async.resolve(out);
@@ -25,8 +25,8 @@ class FontResourceFrom {
   public static function loadFontResourceFromName(out:FontResource):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var faces:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(_loadFontFacesFromName, cast ([out.family] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
+        var faces:Array<flighthq._internal.dom.FontFace> = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast _loadFontFacesFromName((cast out.family : String)) : flighthq._internal._Promise<Array<flighthq._internal.dom.FontFace>>), function(__awaitValue1:Dynamic):Dynamic {
           faces = __awaitValue1;
           var __flowBranch2:Dynamic;
           if ((cast ((cast _Runtime.field(faces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -47,8 +47,8 @@ class FontResourceFrom {
 
   public static function loadFontResourceFromUrl(out:FontResource, url:String):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      var face:Dynamic = cast _Runtime.UNDEFINED;
-      return flighthq._internal._Async.flatMap(_Runtime.callValue(_loadFontFaceFromUrl, cast ([out.family, url] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+      var face:flighthq._internal.dom.FontFace = cast _Runtime.UNDEFINED;
+      return flighthq._internal._Async.flatMap((cast _loadFontFaceFromUrl((cast out.family : String), (cast url : String)) : flighthq._internal._Promise<flighthq._internal.dom.FontFace>), function(__awaitValue3:Dynamic):Dynamic {
         face = __awaitValue3;
         (out.face = cast (face : Dynamic));
         return flighthq._internal._Async.resolve(out);
@@ -58,8 +58,8 @@ class FontResourceFrom {
 
   public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      var face:Dynamic = cast _Runtime.UNDEFINED;
-      return flighthq._internal._Async.flatMap(_Runtime.callValue(_loadFontFaceFromUrls, cast ([out.family, sources] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+      var face:flighthq._internal.dom.FontFace = cast _Runtime.UNDEFINED;
+      return flighthq._internal._Async.flatMap((cast _loadFontFaceFromUrls((cast out.family : String), (cast sources : Array<FontUrl>)) : flighthq._internal._Promise<flighthq._internal.dom.FontFace>), function(__awaitValue4:Dynamic):Dynamic {
         face = __awaitValue4;
         (out.face = cast (face : Dynamic));
         return flighthq._internal._Async.resolve(out);

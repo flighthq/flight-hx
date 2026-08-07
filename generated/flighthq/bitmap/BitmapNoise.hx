@@ -4,40 +4,41 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapNoise {
   public static function fillBitmapNoise(dest:BitmapRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    var lo:Dynamic = cast _Runtime.UNDEFINED;
-    var span:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
+    var state:Float = cast _Runtime.UNDEFINED;
+    var lo:Float = cast _Runtime.UNDEFINED;
+    var span:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
     state = _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(seed) | 0)), 0), function():Dynamic return cast 1.0);
     lo = HxMath.max(0.0, HxMath.min(255.0, low));
     span = _Runtime.subtractNumbers(HxMath.max(0.0, HxMath.min(255.0, high)), lo);
     data = _Runtime.field(dest, 'bitmap').data;
     bitmapWidth = _Runtime.field(dest, 'bitmap').width;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            (state = cast (_Runtime.callValue(BitmapNoise.nextRandomState__bitmapNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
-            var r:Dynamic = (lo + ((state / 4294967296.0) * span));
-            var g:Dynamic = r;
-            var b:Dynamic = r;
+            (state = cast ((cast BitmapNoise.nextRandomState__bitmapNoise((cast state : Float)) : Float) : Dynamic));
+            var r:Float = (lo + ((state / 4294967296.0) * span));
+            var g:Float = r;
+            var b:Float = r;
             if ((cast !(cast grayScale : Bool) : Bool)) {
-              (state = cast (_Runtime.callValue(BitmapNoise.nextRandomState__bitmapNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
+              (state = cast ((cast BitmapNoise.nextRandomState__bitmapNoise((cast state : Float)) : Float) : Dynamic));
               (g = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
-              (state = cast (_Runtime.callValue(BitmapNoise.nextRandomState__bitmapNoise, cast ([state] : Array<Dynamic>)) : Dynamic));
+              (state = cast ((cast BitmapNoise.nextRandomState__bitmapNoise((cast state : Float)) : Float) : Dynamic));
               (b = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
             }
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
+            var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(r));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.round(g));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), HxMath.round(b));
@@ -48,17 +49,17 @@ class BitmapNoise {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
-    var fx0:Dynamic = cast _Runtime.UNDEFINED;
-    var fy0:Dynamic = cast _Runtime.UNDEFINED;
-    var passes:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var fx0:Float = cast _Runtime.UNDEFINED;
+    var fy0:Float = cast _Runtime.UNDEFINED;
+    var passes:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
@@ -67,37 +68,37 @@ class BitmapNoise {
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var di:Dynamic = (((y * bitmapWidth) + x) * 4.0);
-            var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
-            var ny:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)) : Dynamic) : (cast (py * fy0) : Dynamic));
+            var di:Float = (((y * bitmapWidth) + x) * 4.0);
+            var nx:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (px * fx0) : Float), (cast (w * fx0) : Float)) : Float) : Dynamic) : (cast (px * fx0) : Dynamic));
+            var ny:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (py * fy0) : Float), (cast (h * fy0) : Float)) : Float) : Dynamic) : (cast (py * fy0) : Dynamic));
             if ((cast grayScale : Bool)) {
-              var value:Dynamic = _Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
-              var byte:Dynamic = HxMath.round((value * 255.0));
+              var value:Float = (cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float);
+              var byte:Float = HxMath.round((value * 255.0));
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.fractalValueNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)), 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)));
             } else {
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
@@ -107,17 +108,17 @@ class BitmapNoise {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
-    var fx0:Dynamic = cast _Runtime.UNDEFINED;
-    var fy0:Dynamic = cast _Runtime.UNDEFINED;
-    var passes:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var fx0:Float = cast _Runtime.UNDEFINED;
+    var fy0:Float = cast _Runtime.UNDEFINED;
+    var passes:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
@@ -126,37 +127,37 @@ class BitmapNoise {
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(dest, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var di:Dynamic = (((y * bitmapWidth) + x) * 4.0);
-            var nx:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(px * fx0), (w * fx0)] : Array<Dynamic>)) : Dynamic) : (cast (px * fx0) : Dynamic));
-            var ny:Dynamic = ((cast stitch : Bool) ? (cast _Runtime.callValue(BitmapNoise.stitchedCoord__bitmapNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)) : Dynamic) : (cast (py * fy0) : Dynamic));
+            var di:Float = (((y * bitmapWidth) + x) * 4.0);
+            var nx:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (px * fx0) : Float), (cast (w * fx0) : Float)) : Float) : Dynamic) : (cast (px * fx0) : Dynamic));
+            var ny:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (py * fy0) : Float), (cast (h * fy0) : Float)) : Float) : Dynamic) : (cast (py * fy0) : Dynamic));
             if ((cast grayScale : Bool)) {
-              var value:Dynamic = _Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>));
-              var byte:Dynamic = HxMath.round((value * 255.0));
+              var value:Float = (cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float);
+              var byte:Float = HxMath.round((value * 255.0));
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, (_Runtime.toInt32(seed) | 0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435761.0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435762.0)] : Array<Dynamic>)), 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.turbulenceNoise__bitmapNoise, cast ([nx, ny, passes, ((_Runtime.toInt32(seed) | 0) + 2654435763.0)] : Array<Dynamic>)), 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)));
             } else {
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
             }
@@ -166,30 +167,30 @@ class BitmapNoise {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
-  public static final BITMAP_NOISE_CHANNEL_A:Dynamic = 8.0;
+  public static final BITMAP_NOISE_CHANNEL_A:Float = 8.0;
 
-  public static final BITMAP_NOISE_CHANNEL_B:Dynamic = 4.0;
+  public static final BITMAP_NOISE_CHANNEL_B:Float = 4.0;
 
-  public static final BITMAP_NOISE_CHANNEL_G:Dynamic = 2.0;
+  public static final BITMAP_NOISE_CHANNEL_G:Float = 2.0;
 
-  public static final BITMAP_NOISE_CHANNEL_R:Dynamic = 1.0;
+  public static final BITMAP_NOISE_CHANNEL_R:Float = 1.0;
 
   public static function fractalValueNoise__bitmapNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
-    var amplitude:Dynamic = cast _Runtime.UNDEFINED;
-    var amplitudeSum:Dynamic = cast _Runtime.UNDEFINED;
-    var frequency:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var amplitude:Float = cast _Runtime.UNDEFINED;
+    var amplitudeSum:Float = cast _Runtime.UNDEFINED;
+    var frequency:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     amplitude = 1.0;
     amplitudeSum = 0.0;
     frequency = 1.0;
     {
-      var o:Dynamic = 0.0;
+      var o:Float = 0.0;
       while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)), amplitude)) : Dynamic));
+        (sum = cast ((sum + ((cast BitmapNoise.valueNoise__bitmapNoise((cast (x * frequency) : Float), (cast (y * frequency) : Float), (cast (seed + (o * 2246822507.0)) : Float)) : Float) * amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
         (frequency = cast ((frequency * 2.0) : Dynamic));
@@ -201,7 +202,7 @@ class BitmapNoise {
   }
 
   public static function hashLattice__bitmapNoise(ix:Float, iy:Float, seed:Float):Float {
-    var h:Dynamic = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
     h = (_Runtime.toInt32(_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.imul(_Runtime.toInt32(ix), 374761393), _Runtime.imul(_Runtime.toInt32(iy), 668265263)), _Runtime.imul(_Runtime.toInt32(seed), _Runtime.toInt32(2654435761.0)))) | 0);
     (h = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 13)))), 1274126177) : Dynamic));
     return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(h) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(h), 16)))), 0) / 4294967296.0);
@@ -209,7 +210,7 @@ class BitmapNoise {
   }
 
   public static function nextRandomState__bitmapNoise(state:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     t = (_Runtime.toInt32((state + 1831565813.0)) | 0);
     (t = cast (_Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 15)))), _Runtime.toInt32((_Runtime.toInt32(t) | 1))) : Dynamic));
     (t = (_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.addNumbers(t, _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((_Runtime.toInt32(t) | 61)))))));
@@ -229,18 +230,18 @@ class BitmapNoise {
   }
 
   public static function turbulenceNoise__bitmapNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
-    var amplitude:Dynamic = cast _Runtime.UNDEFINED;
-    var amplitudeSum:Dynamic = cast _Runtime.UNDEFINED;
-    var frequency:Dynamic = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var amplitude:Float = cast _Runtime.UNDEFINED;
+    var amplitudeSum:Float = cast _Runtime.UNDEFINED;
+    var frequency:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     amplitude = 1.0;
     amplitudeSum = 0.0;
     frequency = 1.0;
     {
-      var o:Dynamic = 0.0;
+      var o:Float = 0.0;
       while ((cast ((cast o : Float) < (cast octaves : Float)) : Bool)) {
-        (sum = cast ((sum + _Runtime.multiplyNumbers(HxMath.abs((_Runtime.multiplyNumbers(_Runtime.callValue(BitmapNoise.valueNoise__bitmapNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)), 2.0) - 1.0)), amplitude)) : Dynamic));
+        (sum = cast ((sum + _Runtime.multiplyNumbers(HxMath.abs((((cast BitmapNoise.valueNoise__bitmapNoise((cast (x * frequency) : Float), (cast (y * frequency) : Float), (cast (seed + (o * 2246822507.0)) : Float)) : Float) * 2.0) - 1.0)), amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
         (frequency = cast ((frequency * 2.0) : Dynamic));
@@ -252,24 +253,24 @@ class BitmapNoise {
   }
 
   public static function valueNoise__bitmapNoise(x:Float, y:Float, seed:Float):Float {
-    var ix:Dynamic = cast _Runtime.UNDEFINED;
-    var iy:Dynamic = cast _Runtime.UNDEFINED;
-    var fx:Dynamic = cast _Runtime.UNDEFINED;
-    var fy:Dynamic = cast _Runtime.UNDEFINED;
-    var v00:Dynamic = cast _Runtime.UNDEFINED;
-    var v10:Dynamic = cast _Runtime.UNDEFINED;
-    var v01:Dynamic = cast _Runtime.UNDEFINED;
-    var v11:Dynamic = cast _Runtime.UNDEFINED;
-    var top:Dynamic = cast _Runtime.UNDEFINED;
-    var bottom:Dynamic = cast _Runtime.UNDEFINED;
+    var ix:Float = cast _Runtime.UNDEFINED;
+    var iy:Float = cast _Runtime.UNDEFINED;
+    var fx:Float = cast _Runtime.UNDEFINED;
+    var fy:Float = cast _Runtime.UNDEFINED;
+    var v00:Float = cast _Runtime.UNDEFINED;
+    var v10:Float = cast _Runtime.UNDEFINED;
+    var v01:Float = cast _Runtime.UNDEFINED;
+    var v11:Float = cast _Runtime.UNDEFINED;
+    var top:Float = cast _Runtime.UNDEFINED;
+    var bottom:Float = cast _Runtime.UNDEFINED;
     ix = HxMath.floor(x);
     iy = HxMath.floor(y);
-    fx = _Runtime.callValue(BitmapNoise.smoothStep__bitmapNoise, cast ([(x - ix)] : Array<Dynamic>));
-    fy = _Runtime.callValue(BitmapNoise.smoothStep__bitmapNoise, cast ([(y - iy)] : Array<Dynamic>));
-    v00 = _Runtime.callValue(BitmapNoise.hashLattice__bitmapNoise, cast ([ix, iy, seed] : Array<Dynamic>));
-    v10 = _Runtime.callValue(BitmapNoise.hashLattice__bitmapNoise, cast ([(ix + 1.0), iy, seed] : Array<Dynamic>));
-    v01 = _Runtime.callValue(BitmapNoise.hashLattice__bitmapNoise, cast ([ix, (iy + 1.0), seed] : Array<Dynamic>));
-    v11 = _Runtime.callValue(BitmapNoise.hashLattice__bitmapNoise, cast ([(ix + 1.0), (iy + 1.0), seed] : Array<Dynamic>));
+    fx = (cast BitmapNoise.smoothStep__bitmapNoise((cast (x - ix) : Float)) : Float);
+    fy = (cast BitmapNoise.smoothStep__bitmapNoise((cast (y - iy) : Float)) : Float);
+    v00 = (cast BitmapNoise.hashLattice__bitmapNoise((cast ix : Float), (cast iy : Float), (cast seed : Float)) : Float);
+    v10 = (cast BitmapNoise.hashLattice__bitmapNoise((cast (ix + 1.0) : Float), (cast iy : Float), (cast seed : Float)) : Float);
+    v01 = (cast BitmapNoise.hashLattice__bitmapNoise((cast ix : Float), (cast (iy + 1.0) : Float), (cast seed : Float)) : Float);
+    v11 = (cast BitmapNoise.hashLattice__bitmapNoise((cast (ix + 1.0) : Float), (cast (iy + 1.0) : Float), (cast seed : Float)) : Float);
     top = (v00 + ((v10 - v00) * fx));
     bottom = (v01 + ((v11 - v01) * fx));
     return cast (top + ((bottom - top) * fy));

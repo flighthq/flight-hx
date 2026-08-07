@@ -10,5 +10,5 @@ import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.TextureAtlas;
 
 class _TilemapValues {
-  public static final TilemapKind:Dynamic = 'Tilemap';
+  public static final TilemapKind:String = 'Tilemap';
 }

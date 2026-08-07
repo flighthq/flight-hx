@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.TiltShiftEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,30 +17,30 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuTiltShiftEffect {
   @:noCompletion
   public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
-    var center:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var blur:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var center:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var blur:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     center = _Runtime.coalesce(_Runtime.field(effect, 'center'), function():Dynamic return cast 0.5);
     width = _Runtime.coalesce(_Runtime.field(effect, 'width'), function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.tiltShift', WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.tiltShift' : String), (cast WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, center);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, width);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, blur);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyTiltShiftEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TiltShiftEffect)] : Array<Dynamic>));
+  public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyTiltShiftEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : TiltShiftEffect) : TiltShiftEffect));
   };
 
   public static function registerWgpuTiltShiftEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'TiltShiftEffect', defaultWgpuTiltShiftEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'TiltShiftEffect' : String), (cast defaultWgpuTiltShiftEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect:Dynamic = '\nstruct Uniforms {\n  u_center : f32,\n  u_width : f32,\n  u_blur : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = vec2f(1.0) / uni.u_resolution;\n  let dist = abs(uv.y - uni.u_center);\n  let edge = uni.u_width * 0.5;\n  let amount = smoothstep(edge, edge + uni.u_width, dist);\n  let radius = amount * uni.u_blur;\n  var sum = vec4f(0.0);\n  var total = 0.0;\n  for (var i = -3; i <= 3; i = i + 1) {\n    let offset = vec2f(0.0, f32(i)) * radius * texel;\n    sum = sum + textureSampleLevel(tex, smp, uv + offset, 0.0);\n    total = total + 1.0;\n  }\n  return sum / total;\n}';
+  public static final TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect:String = '\nstruct Uniforms {\n  u_center : f32,\n  u_width : f32,\n  u_blur : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = vec2f(1.0) / uni.u_resolution;\n  let dist = abs(uv.y - uni.u_center);\n  let edge = uni.u_width * 0.5;\n  let amount = smoothstep(edge, edge + uni.u_width, dist);\n  let radius = amount * uni.u_blur;\n  var sum = vec4f(0.0);\n  var total = 0.0;\n  for (var i = -3; i <= 3; i = i + 1) {\n    let offset = vec2f(0.0, f32(i)) * radius * texel;\n    sum = sum + textureSampleLevel(tex, smp, uv + offset, 0.0);\n    total = total + 1.0;\n  }\n  return sum / total;\n}';
 }

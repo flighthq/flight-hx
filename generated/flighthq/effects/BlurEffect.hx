@@ -18,16 +18,16 @@ class BlurEffect {
   }
 
   public static function getBlurEffectPadding(effect:flighthq.types.BlurEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)] : Array<Dynamic>));
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BlurEffect', BlurEffect.resolveBlurEffectPadding__blurEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BlurEffect' : String), BlurEffect.resolveBlurEffectPadding__blurEffect);
   }
 
   public static function resolveBlurEffectPadding__blurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getBlurEffectPadding, cast ([(cast effect : flighthq.types.BlurEffect)] : Array<Dynamic>));
+    return cast (cast getBlurEffectPadding((cast (cast effect : flighthq.types.BlurEffect) : flighthq.types.BlurEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

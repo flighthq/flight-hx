@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.FilmGrainEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,28 +17,28 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuFilmGrainEffect {
   @:noCompletion
   public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var seed:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var seed:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.1);
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.filmGrain', WgpuFilmGrainEffect.FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.filmGrain' : String), (cast WgpuFilmGrainEffect.FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, HxMath.max(0.0001, size));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuFilmGrainEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyFilmGrainEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FilmGrainEffect)] : Array<Dynamic>));
+  public static final defaultWgpuFilmGrainEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyFilmGrainEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : FilmGrainEffect) : FilmGrainEffect));
   };
 
   public static function registerWgpuFilmGrainEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'FilmGrainEffect', defaultWgpuFilmGrainEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'FilmGrainEffect' : String), (cast defaultWgpuFilmGrainEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_size : f32,\n  u_seed : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn hash(pIn : vec2f) -> f32 {\n  let p = floor(pIn / uni.u_size);\n  return fract(sin(dot(p, vec2f(127.1, 311.7)) + uni.u_seed) * 43758.5453123);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let n = hash(uv * 1024.0) - 0.5;\n  return vec4f(c.rgb + n * uni.u_intensity, c.a);\n}';
+  public static final FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_size : f32,\n  u_seed : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn hash(pIn : vec2f) -> f32 {\n  let p = floor(pIn / uni.u_size);\n  return fract(sin(dot(p, vec2f(127.1, 311.7)) + uni.u_seed) * 43758.5453123);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let n = hash(uv * 1024.0) - 0.5;\n  return vec4f(c.rgb + n * uni.u_intensity, c.a);\n}';
 }

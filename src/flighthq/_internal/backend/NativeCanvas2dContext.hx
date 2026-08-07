@@ -26,8 +26,8 @@ import lime.utils.UInt8Array;
  * exists. `textAlign`/`textBaseline` are stored but only 'left'/alphabetic
  * rendering is applied.
  */
-// Gradient handles and `measureText` results are reached reflectively from
-// generated code, so full DCE must not strip these classes.
+// Gradient handles implement the standard toolkit contract directly;
+// `measureText` results remain structural.
 @:keep
 class NativeCanvas2dContext {
   public var width(default, null):Int = 0;
@@ -638,9 +638,9 @@ class NativeCanvas2dContext {
   }
 }
 
-/** Canvas gradient/pattern handle; `addColorStop` is reached reflectively. */
+/** Canvas gradient/pattern handle implementing the maintained host contract. */
 @:keep
-class NativeCanvasGradient {
+class NativeCanvasGradient implements flighthq._internal.dom.CanvasGradient {
   public final pattern:CairoPattern;
 
   public function new(pattern:CairoPattern) {

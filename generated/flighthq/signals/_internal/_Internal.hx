@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _Internal {
-  public static final nullSignalEmit:Dynamic = function() {
+  public static final nullSignalEmit:Void->Void = function():Void {
 
   };
 }

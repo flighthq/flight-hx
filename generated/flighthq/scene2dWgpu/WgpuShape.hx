@@ -15,8 +15,8 @@ import flighthq.types.WgpuRenderState;
 class WgpuShape {
   @:noCompletion
   public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
-    if ((cast _Runtime.callValue(drawWgpuMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
-    _Runtime.callValue(drawWgpuRasterShape, cast ([state, renderProxy] : Array<Dynamic>));
+    if ((cast (cast drawWgpuMeshShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
+    drawWgpuRasterShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D));
   }
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape };

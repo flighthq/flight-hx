@@ -9,9 +9,9 @@ import flighthq.types.Matrix;
 
 class MatrixPool {
   public static function acquireIdentityMatrix():Matrix {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
-    _Runtime.callValue(setMatrixIdentity, cast ([m] : Array<Dynamic>));
+    var m:Matrix = cast _Runtime.UNDEFINED;
+    m = (cast acquireMatrix() : Matrix);
+    setMatrixIdentity(m);
     return cast m;
     return cast null;
   }
@@ -21,7 +21,7 @@ class MatrixPool {
     if ((cast ((cast _Runtime.field(MatrixPool.pool__matrixPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (m = cast ((cast _Runtime.callProperty(MatrixPool.pool__matrixPool, 'pop', cast ([] : Array<Dynamic>)) : Matrix) : Dynamic));
     } else {
-      (m = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic));
+      (m = cast ((cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Dynamic));
     }
     return cast m;
     return cast null;

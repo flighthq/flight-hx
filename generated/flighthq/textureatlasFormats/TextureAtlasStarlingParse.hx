@@ -5,34 +5,36 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TextureAtlasStarlingParseOptions;
+import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
 class TextureAtlasStarlingParse {
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
-    var root:Dynamic = cast _Runtime.UNDEFINED;
-    var atlasEl:Dynamic = cast _Runtime.UNDEFINED;
-    var id:Dynamic = cast _Runtime.UNDEFINED;
+    var root:Null<XmlElement> = cast _Runtime.UNDEFINED;
+    var atlasEl:XmlElement = cast _Runtime.UNDEFINED;
+    var id:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(atlas.regions, 0.0);
-    root = _Runtime.callValue(parseXmlDocument, cast ([xml] : Array<Dynamic>));
+    root = (cast parseXmlDocument((cast xml : String)) : Null<XmlElement>);
     if ((cast !_Runtime.truthy(root) : Bool)) { return cast atlas; }
-    atlasEl = ((cast _Runtime.strictEquals(root.name, 'TextureAtlas') : Bool) ? (cast root : Dynamic) : (cast _Runtime.coalesce(_Runtime.find(root.children, function(c:Dynamic) return _Runtime.strictEquals(c.name, 'TextureAtlas')), function():Dynamic return cast root) : Dynamic));
+    atlasEl = ((cast _Runtime.strictEquals((cast root : flighthq.types.XmlElement).name, 'TextureAtlas') : Bool) ? (cast root : Dynamic) : (cast _Runtime.coalesce(_Runtime.find((cast root : flighthq.types.XmlElement).children, function(c:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(c.name, 'TextureAtlas')), function():Dynamic return cast root) : Dynamic));
     id = 0.0;
     for (el in _Runtime.iterable(atlasEl.children)) {
       if ((cast !_Runtime.strictEquals(el.name, 'SubTexture') : Bool)) { continue; }
-      var a:Dynamic = el.attributes;
+      var a:flighthq._internal._Record<String, String> = el.attributes;
       if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
-      var x:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>));
-      var y:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>));
-      var width:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>));
-      var height:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>));
-      var frameWidth:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-      var frameHeight:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-      var trimmed:Dynamic = ((cast !_Runtime.strictEquals(frameWidth, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
-      var rotated:Dynamic = _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true');
-      var pivotX:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-      var pivotY:Dynamic = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-      _Runtime.callProperty(atlas.regions, 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: height, id: id, name: _Runtime.getIndex(a, 'name'), originalHeight: ((cast trimmed : Bool) ? (cast _Runtime.coalesce(frameHeight, function():Dynamic return cast height) : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast _Runtime.coalesce(frameWidth, function():Dynamic return cast width) : Dynamic) : (cast null : Dynamic)), pivotX: pivotX, pivotY: pivotY, rotated: rotated, sourceX: ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast -_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)), sourceY: ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast -_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)), trimmed: trimmed, width: width, x: x, y: y }] : Array<Dynamic>))] : Array<Dynamic>));
+      var x:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>));
+      var y:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>));
+      var width:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>));
+      var height:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>));
+      var frameWidth:Null<Float> = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+      var frameHeight:Null<Float> = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+      var trimmed:Bool = ((cast !_Runtime.strictEquals(frameWidth, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool));
+      var rotated:Bool = _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true');
+      var pivotX:Null<Float> = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+      var pivotY:Null<Float> = ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
+      _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: height, id: id, name: _Runtime.getIndex(a, 'name'), originalHeight: ((cast trimmed : Bool) ? (cast _Runtime.coalesce(frameHeight, function():Dynamic return cast height) : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast _Runtime.coalesce(frameWidth, function():Dynamic return cast width) : Dynamic) : (cast null : Dynamic)), pivotX: pivotX, pivotY: pivotY, rotated: rotated, sourceX: ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast -_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)), sourceY: ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast -_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic)), trimmed: trimmed, width: width, x: x, y: y } : Null<flighthq._internal._Any>)) : TextureAtlasRegion)] : Array<Dynamic>));
       id++;
     }
     return cast atlas;

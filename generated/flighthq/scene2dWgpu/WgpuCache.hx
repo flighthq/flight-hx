@@ -29,104 +29,125 @@ import flighthq.renderWgpu.WgpuRenderTarget.resizeWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.setWgpuRenderTransform2D;
 import flighthq.scene2dWgpu.WgpuNode2D.renderWgpuScene2D;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
+import flighthq.types.ColorScaleBias;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.TintMaterialData;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuBitmapShader;
+import flighthq.types.WgpuRenderState.WgpuClipContourEntry;
+import flighthq.types.WgpuRenderState.WgpuClipContourPipelines;
+import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuRenderState.WgpuQuadBatchWriterBufferSlot;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState.WgpuSavedPassState;
+import flighthq.types.WgpuRenderState.WgpuScissorRect;
+import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
+import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuCache {
   public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
-    var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var cacheState:Dynamic = cast _Runtime.UNDEFINED;
-    var cacheRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    screenRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    cacheState = (cast _Runtime.callValue(createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : WgpuRenderState);
-    cacheRuntime = _Runtime.callValue(createWgpuRenderStateRuntime, cast ([] : Array<Dynamic>));
+    var screenRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var cacheState:WgpuRenderState = cast _Runtime.UNDEFINED;
+    var cacheRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    screenRuntime = (cast getWgpuRenderStateRuntime((cast screenState : WgpuRenderState)) : WgpuRenderStateRuntime);
+    cacheState = (cast (cast createRenderState((cast { allowSmoothing: (cast screenState : WgpuRenderState).allowSmoothing, pixelRatio: (cast screenState : WgpuRenderState).pixelRatio, renderTransform2D: (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>), roundPixels: (cast screenState : WgpuRenderState).roundPixels, sceneGraphSyncPolicy: (cast screenState : WgpuRenderState).sceneGraphSyncPolicy } : Null<flighthq._internal._Any>)) : WgpuRenderState) : WgpuRenderState);
+    cacheRuntime = (cast createWgpuRenderStateRuntime(_Runtime.field(_Runtime, 'UNDEFINED')) : WgpuRenderStateRuntime);
     _Runtime.setIndex(cacheState, EntityRuntimeKey, cacheRuntime);
-    _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
-    _Runtime.setField(cacheState, 'applyBlendMode', _Runtime.field(screenState, 'applyBlendMode'));
-    _Runtime.setField((cast cacheState : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }), 'canvas', _Runtime.field(screenState, 'canvas'));
-    _Runtime.setField((cast cacheState : { var context:flighthq._internal.dom.GPUCanvasContext; }), 'context', _Runtime.field(screenState, 'context'));
-    _Runtime.setField((cast cacheState : { var device:flighthq._internal.dom.GPUDevice; }), 'device', _Runtime.field(screenState, 'device'));
-    _Runtime.setField((cast cacheState : { var format:flighthq._internal.dom.GPUTextureFormat; }), 'format', _Runtime.field(screenState, 'format'));
-    _Runtime.setField(cacheRuntime, 'uniformBindGroupLayout', _Runtime.field(screenRuntime, 'uniformBindGroupLayout'));
-    _Runtime.setField(cacheRuntime, 'textureBindGroupLayout', _Runtime.field(screenRuntime, 'textureBindGroupLayout'));
-    _Runtime.setField(cacheRuntime, 'uniformBuffer', _Runtime.field(screenRuntime, 'uniformBuffer'));
-    _Runtime.setField(cacheRuntime, 'uniformData', _Runtime.field(screenRuntime, 'uniformData'));
-    _Runtime.setField(cacheRuntime, 'uniformDataU32', _Runtime.field(screenRuntime, 'uniformDataU32'));
-    _Runtime.setField(cacheRuntime, 'uniformStride', _Runtime.field(screenRuntime, 'uniformStride'));
-    _Runtime.setField(cacheRuntime, 'uniformBindGroup', _Runtime.field(screenRuntime, 'uniformBindGroup'));
-    _Runtime.setField(cacheRuntime, 'matrixArray', _Runtime.field(screenRuntime, 'matrixArray'));
-    _Runtime.setField(cacheRuntime, 'pipelineCache', _Runtime.field(screenRuntime, 'pipelineCache'));
-    _Runtime.setField(cacheRuntime, 'linearSampler', _Runtime.field(screenRuntime, 'linearSampler'));
-    _Runtime.setField(cacheRuntime, 'nearestSampler', _Runtime.field(screenRuntime, 'nearestSampler'));
-    _Runtime.setField(cacheRuntime, 'textureCache', _Runtime.field(screenRuntime, 'textureCache'));
-    _Runtime.setField(cacheRuntime, 'defaultBitmapShader', _Runtime.field(screenRuntime, 'defaultBitmapShader'));
-    _Runtime.setField(cacheRuntime, 'particleInstanceBuffer', _Runtime.field(screenRuntime, 'particleInstanceBuffer'));
-    _Runtime.setField(cacheRuntime, 'particleInstanceData', _Runtime.field(screenRuntime, 'particleInstanceData'));
-    _Runtime.setField(cacheRuntime, 'particleInstanceCapacity', _Runtime.field(screenRuntime, 'particleInstanceCapacity'));
-    _Runtime.setField(cacheRuntime, 'commandEncoder', _Runtime.field(screenRuntime, 'commandEncoder'));
-    _Runtime.setField(cacheRuntime, 'renderPass', _Runtime.field(screenRuntime, 'renderPass'));
-    _Runtime.setField(cacheRuntime, 'canvasTextureView', _Runtime.field(screenRuntime, 'canvasTextureView'));
-    _Runtime.setField(cacheRuntime, 'canvasViewCleared', _Runtime.field(screenRuntime, 'canvasViewCleared'));
-    _Runtime.setField(cacheRuntime, 'depthStencilTexture', _Runtime.field(screenRuntime, 'depthStencilTexture'));
-    _Runtime.setField(cacheRuntime, 'depthStencilView', _Runtime.field(screenRuntime, 'depthStencilView'));
-    _Runtime.setField(cacheRuntime, 'depthStencilWidth', _Runtime.field(screenRuntime, 'depthStencilWidth'));
-    _Runtime.setField(cacheRuntime, 'depthStencilHeight', _Runtime.field(screenRuntime, 'depthStencilHeight'));
-    _Runtime.setField(cacheRuntime, 'materialRendererMap', _Runtime.field(screenRuntime, 'materialRendererMap'));
-    _Runtime.setField(cacheRuntime, 'uniformOffset', 0.0);
-    _Runtime.setField(cacheRuntime, 'currentBlendMode', null);
-    _Runtime.setField(cacheRuntime, 'currentMaskDepth', 0.0);
-    _Runtime.setField(cacheRuntime, 'clipContourPipelines', _Runtime.field(_Runtime, 'UNDEFINED'));
-    _Runtime.setField(cacheRuntime, 'clipContourStack', cast ([] : Array<Dynamic>));
-    _Runtime.setField(cacheRuntime, 'clipForms', cast ([] : Array<Dynamic>));
-    _Runtime.setField(cacheRuntime, 'shapeMeshPipelines', _Runtime.field(_Runtime, 'UNDEFINED'));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterBlendMode', null);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterMaterial', null);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterMaterialRenderer', null);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterMaterialFloats', 0.0);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterCount', 0.0);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(0.0));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(0.0));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterTexture', null);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterSampler', null);
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterSmoothing', null);
-    _Runtime.setField(cacheRuntime, 'colorAdjustmentResolver', _Runtime.field(screenRuntime, 'colorAdjustmentResolver'));
-    _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentMaterialFeature', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentMaterialFeature'));
-    _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard'));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterBufferPool', cast ([] : Array<Dynamic>));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterBufferCursor', 0.0);
-    _Runtime.setField(cacheRuntime, 'maskWriteMode', false);
-    _Runtime.setField(cacheRuntime, 'currentScissorRect', null);
-    _Runtime.setField(cacheRuntime, 'scissorStack', cast ([] : Array<Dynamic>));
-    _Runtime.setField(cacheRuntime, 'renderTargetViewport', null);
-    _Runtime.setField(cacheRuntime, 'renderTargetStack', cast ([] : Array<Dynamic>));
-    ((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap).set(cacheState, screenState));
+    copyAllRenderersFromRenderState(cacheState, screenState);
+    ((cast cacheState : WgpuRenderState).applyBlendMode = (cast screenState : WgpuRenderState).applyBlendMode);
+    ((cast (cast cacheState : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }) : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = (cast screenState : WgpuRenderState).canvas);
+    ((cast (cast cacheState : { var context:flighthq._internal.dom.GPUCanvasContext; }) : { var context:flighthq._internal.dom.GPUCanvasContext; }).context = (cast screenState : WgpuRenderState).context);
+    ((cast (cast cacheState : { var device:flighthq._internal.dom.GPUDevice; }) : { var device:flighthq._internal.dom.GPUDevice; }).device = (cast screenState : WgpuRenderState).device);
+    ((cast (cast cacheState : { var format:flighthq._internal.dom.GPUTextureFormat; }) : { var format:String; }).format = (cast screenState : WgpuRenderState).format);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformBindGroupLayout = (cast screenRuntime : WgpuRenderStateRuntime).uniformBindGroupLayout);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).textureBindGroupLayout = (cast screenRuntime : WgpuRenderStateRuntime).textureBindGroupLayout);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformBuffer = (cast screenRuntime : WgpuRenderStateRuntime).uniformBuffer);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformData = (cast screenRuntime : WgpuRenderStateRuntime).uniformData);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformDataU32 = (cast screenRuntime : WgpuRenderStateRuntime).uniformDataU32);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformStride = (cast screenRuntime : WgpuRenderStateRuntime).uniformStride);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformBindGroup = (cast screenRuntime : WgpuRenderStateRuntime).uniformBindGroup);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).matrixArray = (cast screenRuntime : WgpuRenderStateRuntime).matrixArray);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).pipelineCache = (cast screenRuntime : WgpuRenderStateRuntime).pipelineCache);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).linearSampler = (cast screenRuntime : WgpuRenderStateRuntime).linearSampler);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).nearestSampler = (cast screenRuntime : WgpuRenderStateRuntime).nearestSampler);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).textureCache = (cast screenRuntime : WgpuRenderStateRuntime).textureCache);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).defaultBitmapShader = (cast screenRuntime : WgpuRenderStateRuntime).defaultBitmapShader);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).particleInstanceBuffer = (cast screenRuntime : WgpuRenderStateRuntime).particleInstanceBuffer);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).particleInstanceData = (cast screenRuntime : WgpuRenderStateRuntime).particleInstanceData);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).particleInstanceCapacity = (cast screenRuntime : WgpuRenderStateRuntime).particleInstanceCapacity);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).commandEncoder = (cast screenRuntime : WgpuRenderStateRuntime).commandEncoder);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).renderPass = (cast screenRuntime : WgpuRenderStateRuntime).renderPass);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).canvasTextureView = (cast screenRuntime : WgpuRenderStateRuntime).canvasTextureView);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).canvasViewCleared = (cast screenRuntime : WgpuRenderStateRuntime).canvasViewCleared);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilTexture = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilTexture);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilView = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilView);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilWidth = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilWidth);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilHeight = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilHeight);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).materialRendererMap = (cast screenRuntime : WgpuRenderStateRuntime).materialRendererMap);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformOffset = 0.0);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).currentBlendMode = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).currentMaskDepth = 0.0);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).clipContourPipelines = _Runtime.field(_Runtime, 'UNDEFINED'));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).clipContourStack = cast ([] : Array<Dynamic>));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).clipForms = cast ([] : Array<Dynamic>));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).shapeMeshPipelines = _Runtime.field(_Runtime, 'UNDEFINED'));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterBlendMode = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterMaterial = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterMaterialRenderer = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterMaterialFloats = 0.0);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterCount = 0.0);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterInstanceData = new flighthq._internal._Float32Array(0.0));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterMaterialData = new flighthq._internal._Float32Array(0.0));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterTexture = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterSampler = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterSmoothing = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).colorAdjustmentResolver = (cast screenRuntime : WgpuRenderStateRuntime).colorAdjustmentResolver);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature = (cast screenRuntime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard = (cast screenRuntime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterBufferPool = cast ([] : Array<Dynamic>));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor = 0.0);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).maskWriteMode = false);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).currentScissorRect = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).scissorStack = cast ([] : Array<Dynamic>));
+    ((cast cacheRuntime : WgpuRenderStateRuntime).renderTargetViewport = null);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).renderTargetStack = cast ([] : Array<Dynamic>));
+    ((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderState>).set(cacheState, screenState));
     return cast cacheState;
     return cast null;
   }
 
   public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
+    registerRenderCacheRenderer(state, defaultWgpuRenderCacheRenderer);
   }
 
   @:noCompletion
   public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
-    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
+    var targets:flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    var target:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    targets = (cast WgpuCache.getTargets__wgpuCache((cast state : WgpuRenderState)) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>);
+    target = ((cast targets : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (target = cast (_Runtime.callValue(createWgpuRenderTarget, cast ([state, width, height] : Array<Dynamic>)) : Dynamic));
-      ((cast targets : flighthq._internal._WeakMap).set(cache, target));
+      (target = cast ((cast createWgpuRenderTarget((cast state : WgpuRenderState), (cast width : Float), (cast height : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<WgpuRenderTarget>) : Dynamic));
+      ((cast targets : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).set(cache, target));
     } else {
-      _Runtime.callValue(resizeWgpuRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
+      resizeWgpuRenderTarget((cast state : WgpuRenderState), (cast target : WgpuRenderTarget), (cast width : Float), (cast height : Float));
     }
     return cast target;
     return cast null;
@@ -134,107 +155,107 @@ class WgpuCache {
 
   @:noCompletion
   public static function getWgpuRenderCacheScreenState(state:WgpuRenderState):WgpuRenderState {
-    return cast _Runtime.coalesce(((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast state);
+    return cast _Runtime.coalesce(((cast WgpuCache._cacheStateScreen__wgpuCache : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderState>).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
   @:noCompletion
   public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
-    return cast _Runtime.coalesce(((cast _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast WgpuCache.getTargets__wgpuCache((cast state : WgpuRenderState)) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    var screenState:Dynamic = cast _Runtime.UNDEFINED;
-    var cacheRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var ownsFrame:Dynamic = cast _Runtime.UNDEFINED;
-    var padding:Dynamic = cast _Runtime.UNDEFINED;
-    var minWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var minHeight:Dynamic = cast _Runtime.UNDEFINED;
+    var screenState:WgpuRenderState = cast _Runtime.UNDEFINED;
+    var cacheRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var screenRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var ownsFrame:Bool = cast _Runtime.UNDEFINED;
+    var padding:Float = cast _Runtime.UNDEFINED;
+    var minWidth:Float = cast _Runtime.UNDEFINED;
+    var minHeight:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var resized:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    var dirty:Dynamic = cast _Runtime.UNDEFINED;
-    screenState = _Runtime.callValue(getWgpuRenderCacheScreenState, cast ([cacheState] : Array<Dynamic>));
-    cacheRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([cacheState] : Array<Dynamic>));
-    screenRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    ownsFrame = _Runtime.strictEquals(_Runtime.field(screenRuntime, 'commandEncoder'), null);
-    if ((cast ownsFrame : Bool)) { _Runtime.callValue(beginWgpuFrame, cast ([screenState] : Array<Dynamic>)); }
-    _Runtime.setField(cacheRuntime, 'commandEncoder', _Runtime.field(screenRuntime, 'commandEncoder'));
-    _Runtime.setField(cacheRuntime, 'renderPass', _Runtime.field(screenRuntime, 'renderPass'));
-    _Runtime.setField(cacheRuntime, 'canvasTextureView', _Runtime.field(screenRuntime, 'canvasTextureView'));
-    _Runtime.setField(cacheRuntime, 'canvasViewCleared', _Runtime.field(screenRuntime, 'canvasViewCleared'));
-    _Runtime.setField(cacheRuntime, 'depthStencilTexture', _Runtime.field(screenRuntime, 'depthStencilTexture'));
-    _Runtime.setField(cacheRuntime, 'depthStencilView', _Runtime.field(screenRuntime, 'depthStencilView'));
-    _Runtime.setField(cacheRuntime, 'depthStencilWidth', _Runtime.field(screenRuntime, 'depthStencilWidth'));
-    _Runtime.setField(cacheRuntime, 'depthStencilHeight', _Runtime.field(screenRuntime, 'depthStencilHeight'));
-    _Runtime.setField(cacheRuntime, 'uniformOffset', _Runtime.field(screenRuntime, 'uniformOffset'));
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var existing:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    var resized:Bool = cast _Runtime.UNDEFINED;
+    var target:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var dirty:Bool = cast _Runtime.UNDEFINED;
+    screenState = (cast getWgpuRenderCacheScreenState((cast cacheState : WgpuRenderState)) : WgpuRenderState);
+    cacheRuntime = (cast getWgpuRenderStateRuntime((cast cacheState : WgpuRenderState)) : WgpuRenderStateRuntime);
+    screenRuntime = (cast getWgpuRenderStateRuntime((cast screenState : WgpuRenderState)) : WgpuRenderStateRuntime);
+    ownsFrame = _Runtime.strictEquals((cast screenRuntime : WgpuRenderStateRuntime).commandEncoder, null);
+    if ((cast ownsFrame : Bool)) { beginWgpuFrame((cast screenState : WgpuRenderState)); }
+    ((cast cacheRuntime : WgpuRenderStateRuntime).commandEncoder = (cast screenRuntime : WgpuRenderStateRuntime).commandEncoder);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).renderPass = (cast screenRuntime : WgpuRenderStateRuntime).renderPass);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).canvasTextureView = (cast screenRuntime : WgpuRenderStateRuntime).canvasTextureView);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).canvasViewCleared = (cast screenRuntime : WgpuRenderStateRuntime).canvasViewCleared);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilTexture = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilTexture);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilView = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilView);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilWidth = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilWidth);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).depthStencilHeight = (cast screenRuntime : WgpuRenderStateRuntime).depthStencilHeight);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).uniformOffset = (cast screenRuntime : WgpuRenderStateRuntime).uniformOffset);
     padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
     minWidth = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.minWidth; }), function():Dynamic return cast 1.0);
     minHeight = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.minHeight; }), function():Dynamic return cast 1.0);
-    _Runtime.callValue(computeNodeBoundsRectangle, cast ([WgpuCache._bounds__wgpuCache, source, source] : Array<Dynamic>));
-    __destructure0 = _Runtime.callValue(computeRenderTargetSize, cast ([WgpuCache._bounds__wgpuCache, padding, minWidth, minHeight] : Array<Dynamic>));
+    computeNodeBoundsRectangle(WgpuCache._bounds__wgpuCache, source, source);
+    __destructure0 = (cast computeRenderTargetSize(WgpuCache._bounds__wgpuCache, padding, (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
-    existing = _Runtime.callValue(getWgpuRenderCacheTarget, cast ([screenState, cache] : Array<Dynamic>));
-    resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'width'), width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'height'), height) : Bool));
-    target = _Runtime.callValue(ensureWgpuRenderCacheTarget, cast ([screenState, cache, width, height] : Array<Dynamic>));
-    _Runtime.callValue(computeScene2DRenderTargetTransform, cast ([WgpuCache._renderTransform__wgpuCache, source, WgpuCache._bounds__wgpuCache, padding, padding] : Array<Dynamic>));
-    _Runtime.callValue(computeRenderCacheTransform, cast ([_Runtime.field(cache, 'transform'), WgpuCache._bounds__wgpuCache, padding, padding] : Array<Dynamic>));
+    existing = (cast getWgpuRenderCacheTarget((cast screenState : WgpuRenderState), (cast cache : RenderCache)) : Null<WgpuRenderTarget>);
+    resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : WgpuRenderTarget).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : WgpuRenderTarget).height, height) : Bool));
+    target = (cast ensureWgpuRenderCacheTarget((cast screenState : WgpuRenderState), (cast cache : RenderCache), (cast width : Float), (cast height : Float)) : WgpuRenderTarget);
+    computeScene2DRenderTargetTransform(WgpuCache._renderTransform__wgpuCache, (cast source : Node2D), WgpuCache._bounds__wgpuCache, (cast padding : Float), (cast padding : Float));
+    computeRenderCacheTransform((cast cache : RenderCache).transform, WgpuCache._bounds__wgpuCache, (cast padding : Float), (cast padding : Float));
     (WgpuCache._yInvert__wgpuCache.d = cast (-1.0 : Dynamic));
-    (WgpuCache._yInvert__wgpuCache.ty = cast (_Runtime.field(target, 'height') : Dynamic));
-    _Runtime.callValue(multiplyMatrix, cast ([WgpuCache._bakeTransform__wgpuCache, WgpuCache._yInvert__wgpuCache, WgpuCache._renderTransform__wgpuCache] : Array<Dynamic>));
-    _Runtime.setField(cacheRuntime, 'quadBatchWriterBufferCursor', 0.0);
-    _Runtime.callValue(beginWgpuRenderPass, cast ([cacheState, target] : Array<Dynamic>));
-    _Runtime.callValue(setWgpuRenderTransform2D, cast ([cacheState, WgpuCache._bakeTransform__wgpuCache] : Array<Dynamic>));
-    dirty = _Runtime.callValue(prepareScene2DRender, cast ([cacheState, source] : Array<Dynamic>));
+    (WgpuCache._yInvert__wgpuCache.ty = cast ((cast target : WgpuRenderTarget).height : Dynamic));
+    multiplyMatrix(WgpuCache._bakeTransform__wgpuCache, WgpuCache._yInvert__wgpuCache, WgpuCache._renderTransform__wgpuCache);
+    ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor = 0.0);
+    beginWgpuRenderPass((cast cacheState : WgpuRenderState), (cast target : WgpuRenderTarget), _Runtime.field(_Runtime, 'UNDEFINED'));
+    setWgpuRenderTransform2D((cast cacheState : WgpuRenderState), (cast WgpuCache._bakeTransform__wgpuCache : Matrix));
+    dirty = (cast prepareScene2DRender(cacheState, source) : Bool);
     if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {
-      _Runtime.callValue(renderWgpuScene2D, cast ([cacheState, source] : Array<Dynamic>));
+      renderWgpuScene2D((cast cacheState : WgpuRenderState), (cast source : Node2D));
     }
-    _Runtime.callValue(endWgpuRenderPass, cast ([cacheState] : Array<Dynamic>));
-    _Runtime.setField(screenRuntime, 'commandEncoder', _Runtime.field(cacheRuntime, 'commandEncoder'));
-    _Runtime.setField(screenRuntime, 'renderPass', _Runtime.field(cacheRuntime, 'renderPass'));
-    _Runtime.setField(screenRuntime, 'canvasTextureView', _Runtime.field(cacheRuntime, 'canvasTextureView'));
-    _Runtime.setField(screenRuntime, 'canvasViewCleared', _Runtime.field(cacheRuntime, 'canvasViewCleared'));
-    _Runtime.setField(screenRuntime, 'currentBlendMode', null);
-    _Runtime.setField(screenRuntime, 'uniformOffset', _Runtime.field(cacheRuntime, 'uniformOffset'));
-    if ((cast ownsFrame : Bool)) { _Runtime.callValue(submitWgpuRenderPass, cast ([screenState] : Array<Dynamic>)); }
+    endWgpuRenderPass((cast cacheState : WgpuRenderState));
+    ((cast screenRuntime : WgpuRenderStateRuntime).commandEncoder = (cast cacheRuntime : WgpuRenderStateRuntime).commandEncoder);
+    ((cast screenRuntime : WgpuRenderStateRuntime).renderPass = (cast cacheRuntime : WgpuRenderStateRuntime).renderPass);
+    ((cast screenRuntime : WgpuRenderStateRuntime).canvasTextureView = (cast cacheRuntime : WgpuRenderStateRuntime).canvasTextureView);
+    ((cast screenRuntime : WgpuRenderStateRuntime).canvasViewCleared = (cast cacheRuntime : WgpuRenderStateRuntime).canvasViewCleared);
+    ((cast screenRuntime : WgpuRenderStateRuntime).currentBlendMode = null);
+    ((cast screenRuntime : WgpuRenderStateRuntime).uniformOffset = (cast cacheRuntime : WgpuRenderStateRuntime).uniformOffset);
+    if ((cast ownsFrame : Bool)) { submitWgpuRenderPass((cast screenState : WgpuRenderState)); }
     return cast ((cast dirty : Bool) || (cast resized : Bool));
     return cast null;
   }
 
   @:noCompletion
   public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
-    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
+    var targets:flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    var target:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    targets = (cast WgpuCache.getTargets__wgpuCache((cast state : WgpuRenderState)) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>);
+    target = ((cast targets : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    _Runtime.callValue(destroyWgpuRenderTarget, cast ([state, target] : Array<Dynamic>));
-    ((cast targets : flighthq._internal._WeakMap).delete_(cache));
+    destroyWgpuRenderTarget((cast state : WgpuRenderState), (cast target : WgpuRenderTarget));
+    ((cast targets : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).delete_(cache));
   }
 
   public static function drawWgpuRenderCache__wgpuCache(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
+    var cache:Null<RenderCache> = cast _Runtime.UNDEFINED;
+    var target:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
+    cache = (cast getRenderProxyCache(state, (cast renderProxy : RenderProxy2D).source) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
-    target = ((cast _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
+    target = ((cast (cast WgpuCache.getTargets__wgpuCache((cast state : WgpuRenderState)) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>) : flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuRenderTargetResult, cast ([state, renderProxy, target, WgpuCache._identity__wgpuCache] : Array<Dynamic>));
+    flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
+    drawWgpuRenderTargetResult((cast state : WgpuRenderState), renderProxy, (cast target : WgpuRenderTarget), (cast WgpuCache._identity__wgpuCache : Matrix));
   }
 
-  public static function getTargets__wgpuCache(state:WgpuRenderState):Dynamic {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).get(state));
+  public static function getTargets__wgpuCache(state:WgpuRenderState):flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget> {
+    var targets:Null<flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>> = cast _Runtime.UNDEFINED;
+    targets = ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>>).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
-      ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).set(state, targets));
+      ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>>).set(state, targets));
     }
     return cast targets;
     return cast null;
@@ -243,17 +264,17 @@ class WgpuCache {
   @:noCompletion
   public static final defaultWgpuRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: WgpuCache.drawWgpuRenderCache__wgpuCache };
 
-  public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _renderCacheTargets__wgpuCache:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._WeakMap<RenderCache, WgpuRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _cacheStateScreen__wgpuCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _cacheStateScreen__wgpuCache:flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _bounds__wgpuCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+  public static final _bounds__wgpuCache:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
 
-  public static final _renderTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
+  public static final _renderTransform__wgpuCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
 
-  public static final _bakeTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
+  public static final _bakeTransform__wgpuCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
 
-  public static final _yInvert__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
+  public static final _yInvert__wgpuCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
 
-  public static final _identity__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
+  public static final _identity__wgpuCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
 }

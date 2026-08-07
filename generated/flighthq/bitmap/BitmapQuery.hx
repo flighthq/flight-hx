@@ -3,18 +3,19 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 import flighthq.types.Rectangle.RectangleLike;
 
 class BitmapQuery {
   public static function getBitmapColorBoundsRectangle(source:BitmapRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var maskedColor:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var maskedColor:Float = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'bitmap').data;
     bitmapWidth = _Runtime.field(source, 'bitmap').width;
     maskedColor = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
@@ -23,18 +24,18 @@ class BitmapQuery {
     maxX = -1.0;
     maxY = -1.0;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
-            var pixel:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
-            var matches:Dynamic = _Runtime.strictEquals(pixel, maskedColor);
+            var i:Float = (((y * bitmapWidth) + x) * 4.0);
+            var pixel:Float = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0))))), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
+            var matches:Bool = _Runtime.strictEquals(pixel, maskedColor);
             if ((cast _Runtime.strictEquals(matches, findColor) : Bool)) {
               if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
               if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }

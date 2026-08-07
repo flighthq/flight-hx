@@ -8,5 +8,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _ShadedMaterialValues {
-  public static final ShadedMaterialKind:Dynamic = 'ShadedMaterial';
+  public static final ShadedMaterialKind:String = 'ShadedMaterial';
 }

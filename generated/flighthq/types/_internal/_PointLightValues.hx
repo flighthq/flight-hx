@@ -7,5 +7,5 @@ import flighthq.types.Light;
 import flighthq.types.Vector3;
 
 class _PointLightValues {
-  public static final PointLightKind:Dynamic = 'PointLight';
+  public static final PointLightKind:String = 'PointLight';
 }

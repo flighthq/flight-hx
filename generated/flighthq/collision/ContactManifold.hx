@@ -8,15 +8,15 @@ import flighthq.types.Collision.CollisionContactPoint;
 
 class ContactManifold {
   public static function clearCollisionContactManifold(out:CollisionContactManifold):Void {
-    _Runtime.setField(out, 'overlapping', false);
-    _Runtime.setField(out, 'normalX', 0.0);
-    _Runtime.setField(out, 'normalY', 0.0);
-    _Runtime.setField(out, 'depth', 0.0);
-    _Runtime.setField(out, 'pointCount', 0.0);
+    ((cast out : CollisionContactManifold).overlapping = false);
+    ((cast out : CollisionContactManifold).normalX = 0.0);
+    ((cast out : CollisionContactManifold).normalY = 0.0);
+    ((cast out : CollisionContactManifold).depth = 0.0);
+    ((cast out : CollisionContactManifold).pointCount = 0.0);
   }
 
   public static function createCollisionContactManifold():CollisionContactManifold {
-    return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0, pointCount: 0.0, points: cast ([_Runtime.callValue(ContactManifold.createContactPoint__contactManifold, cast ([] : Array<Dynamic>)), _Runtime.callValue(ContactManifold.createContactPoint__contactManifold, cast ([] : Array<Dynamic>))] : Array<Dynamic>) };
+    return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0, pointCount: 0.0, points: cast ([(cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint), (cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint)] : Array<Dynamic>) };
     return cast null;
   }
 

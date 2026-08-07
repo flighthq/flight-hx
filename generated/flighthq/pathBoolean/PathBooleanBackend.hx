@@ -9,13 +9,13 @@ import flighthq.types.PathBooleanBackend;
 class PathBooleanBackend {
   @:noCompletion
   public static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
-    return cast _Runtime.callValue(createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
+    return cast (cast createMartinezPathBooleanBackend() : flighthq.types.PathBooleanBackend);
     return cast null;
   }
 
   @:noCompletion
   public static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
-    if ((cast _Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null) : Bool)) { (PathBooleanBackend._backend__pathBooleanBackend = cast (_Runtime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null) : Bool)) { (PathBooleanBackend._backend__pathBooleanBackend = cast ((cast createDefaultPathBooleanBackend() : Null<flighthq.types.PathBooleanBackend>) : Dynamic)); }
     return cast PathBooleanBackend._backend__pathBooleanBackend;
     return cast null;
   }

@@ -5,9 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _SwfReaderValues {
-  public static final ENCODED_UINT32_MAX_BYTES__swfReader:Dynamic = 5.0;
+  public static final ENCODED_UINT32_MAX_BYTES__swfReader:Float = 5.0;
 
-  public static final FIXED_8_8_ONE__swfReader:Dynamic = 256.0;
+  public static final FIXED_8_8_ONE__swfReader:Float = 256.0;
 
-  public static final _decoder__swfReader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
+  public static final _decoder__swfReader:flighthq._internal.dom.TextDecoder = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

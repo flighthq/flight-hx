@@ -10,6 +10,8 @@ import flighthq.types.Material.MaterialLike;
 import flighthq.types.PbrExtension;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.StandardPbrMaterial;
+import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
@@ -18,37 +20,37 @@ import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKi
 class GltfMaterialExtension {
   @:noCompletion
   public static function attachGltfPbrExtension(document:Scene3DDocument, index:Float, extension:PbrExtension):Bool {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var standard:Dynamic = cast _Runtime.UNDEFINED;
-    var promoted:Dynamic = cast _Runtime.UNDEFINED;
-    existing = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'materials'), index);
+    var existing:MaterialLike = cast _Runtime.UNDEFINED;
+    var standard:StandardPbrMaterial = cast _Runtime.UNDEFINED;
+    var promoted:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
+    existing = flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).materials, index);
     if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(existing, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
-      var extended:Dynamic = (cast (cast existing : Dynamic) : ExtendedPbrMaterial);
-      if ((cast _Runtime.callProperty(_Runtime.field(extended, 'extensions'), 'some', cast ([function(entry:Dynamic) return _Runtime.strictEquals(_Runtime.field(entry, 'kind'), _Runtime.field(extension, 'kind'))] : Array<Dynamic>)) : Bool)) { return cast false; }
-      _Runtime.setField(extended, 'extensions', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(extended, 'extensions')), [extension]]));
+      var extended:ExtendedPbrMaterial = (cast (cast existing : flighthq._internal._Any) : ExtendedPbrMaterial);
+      if ((cast _Runtime.callProperty((cast extended : ExtendedPbrMaterial).extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, (cast extension : PbrExtension).kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
+      ((cast extended : ExtendedPbrMaterial).extensions = _Runtime.concatArrays([_Runtime.toArray((cast extended : ExtendedPbrMaterial).extensions), [extension]]));
       return cast true;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) { return cast false; }
-    standard = (cast (cast existing : Dynamic) : StandardPbrMaterial);
-    promoted = _Runtime.callValue(createExtendedPbrMaterial, cast ([{ extensions: cast ([extension] : Array<Dynamic>), standard: _Runtime.callValue(createStandardPbrMaterialProperties, cast ([standard] : Array<Dynamic>)) }] : Array<Dynamic>));
-    _Runtime.setField(promoted, 'alphaCutoff', _Runtime.field(standard, 'alphaCutoff'));
-    _Runtime.setField(promoted, 'alphaMode', _Runtime.field(standard, 'alphaMode'));
-    _Runtime.setField(promoted, 'doubleSided', _Runtime.field(standard, 'doubleSided'));
-    _Runtime.setField(promoted, 'name', _Runtime.field(standard, 'name'));
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(document, 'materials'), index, (cast (cast promoted : Dynamic) : MaterialLike));
+    standard = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
+    promoted = (cast createExtendedPbrMaterial((cast { extensions: cast ([extension] : Array<Dynamic>), standard: (cast createStandardPbrMaterialProperties((cast standard : Null<flighthq._internal._Any>)) : Null<StandardPbrMaterialProperties>) } : Null<flighthq._internal._Any>)) : ExtendedPbrMaterial);
+    ((cast promoted : ExtendedPbrMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
+    ((cast promoted : ExtendedPbrMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
+    ((cast promoted : ExtendedPbrMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);
+    ((cast promoted : ExtendedPbrMaterial).name = (cast standard : StandardPbrMaterial).name);
+    flighthq._internal._StaticIndex.writeArray((cast document : Scene3DDocument).materials, index, (cast (cast promoted : flighthq._internal._Any) : MaterialLike));
     return cast true;
     return cast null;
   }
 
   @:noCompletion
   public static function findGltfPbrExtension(document:Scene3DDocument, index:Float, kind:String):Null<PbrExtension> {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var extended:Dynamic = cast _Runtime.UNDEFINED;
+    var material:MaterialLike = cast _Runtime.UNDEFINED;
+    var extended:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
     material = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'materials'), index);
     if ((cast ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) : Bool)) { return cast null; }
-    extended = (cast (cast material : Dynamic) : ExtendedPbrMaterial);
-    return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(extended, 'extensions'), function(entry:Dynamic) return _Runtime.strictEquals(_Runtime.field(entry, 'kind'), kind)), function():Dynamic return cast null);
+    extended = (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial);
+    return cast _Runtime.coalesce(_Runtime.find((cast extended : ExtendedPbrMaterial).extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, kind)), function():Dynamic return cast null);
     return cast null;
   }
 }

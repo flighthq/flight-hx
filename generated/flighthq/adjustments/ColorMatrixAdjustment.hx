@@ -16,14 +16,14 @@ class ColorMatrixAdjustment {
   }
 
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
+    var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     matrix = _Runtime.field((cast operation : Dynamic), 'colorMatrix');
     return cast ((cast ((cast _Runtime.isArray(matrix) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(matrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) : Bool) ? (cast matrix : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null);
+    return cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix((cast operation : { var kind:String; })) : Null<Array<Float>>), null);
     return cast null;
   }
 }

@@ -12,15 +12,15 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 class TransformPath {
   public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var di:Float = cast _Runtime.UNDEFINED;
     __destructure0 = matrix;
     a = _Runtime.field(__destructure0, 'a');
     b = _Runtime.field(__destructure0, 'b');
@@ -28,47 +28,47 @@ class TransformPath {
     d = _Runtime.field(__destructure0, 'd');
     tx = _Runtime.field(__destructure0, 'tx');
     ty = _Runtime.field(__destructure0, 'ty');
-    _Runtime.callValue(copyPath, cast ([source, out] : Array<Dynamic>));
-    data = _Runtime.field(out, 'data');
+    (cast copyPath((cast source : Path), (cast out : Null<Path>)) : Path);
+    data = (cast out : Path).data;
     commands = _Runtime.field(source, 'commands');
     di = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        if ((cast ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           flighthq._internal._StaticIndex.writeArray(data, di, (((a * x) + (c * y)) + tx));
           flighthq._internal._StaticIndex.writeArray(data, (di + 1.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
           {
-            var k:Dynamic = 0.0;
+            var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-              var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + k));
-              var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
+              var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + k));
+              var y:Float = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
               flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
               flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
           {
-            var k:Dynamic = 0.0;
+            var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast 6.0 : Float)) : Bool)) {
-              var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + k));
-              var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
+              var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + k));
+              var y:Float = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
               flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
               flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if ((cast ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+        } else { if ((cast ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           flighthq._internal._StaticIndex.writeArray(data, (di + 2.0), (((a * x) + (c * y)) + tx));
           flighthq._internal._StaticIndex.writeArray(data, (di + 3.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 4.0) : Dynamic));
@@ -79,6 +79,6 @@ class TransformPath {
   }
 
   public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
-    _Runtime.callValue(transformPath, cast ([source, { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }, out] : Array<Dynamic>));
+    transformPath((cast source : Path), (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy } : MatrixLike), (cast out : Path));
   }
 }

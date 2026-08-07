@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node.NodeTraits;
 
-typedef NodeDescendantVisitor<Traits> = Dynamic;
+typedef NodeDescendantVisitor<Traits> = Node<Traits>->Bool;

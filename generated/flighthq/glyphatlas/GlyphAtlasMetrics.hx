@@ -4,6 +4,7 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlyphSource.GlyphAtlas;
+import flighthq.types.GlyphSource.GlyphAtlasRuntime;
 import flighthq.types.GlyphSource.GlyphMetrics;
 
 class GlyphAtlasMetrics {

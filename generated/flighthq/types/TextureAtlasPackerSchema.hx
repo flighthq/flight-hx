@@ -16,10 +16,10 @@ typedef TextureAtlasPackerHashFrame = { var frame:TextureAtlasPackerRect; @:opti
 
 typedef TextureAtlasPackerArrayFrame = { var frame:TextureAtlasPackerRect; @:optional var pivot:TextureAtlasPackerPivot; var rotated:Bool; var sourceSize:TextureAtlasPackerSize; var spriteSourceSize:TextureAtlasPackerRect; var trimmed:Bool; var filename:String; };
 
-typedef TextureAtlasPackerMeta = { var app:String; var format:String; @:optional var frameTags:Array<TextureAtlasPackerFrameTag>; var image:String; var scale:Dynamic; var size:TextureAtlasPackerSize; var version:String; };
+typedef TextureAtlasPackerMeta = { var app:String; var format:String; @:optional var frameTags:Array<TextureAtlasPackerFrameTag>; var image:String; var scale:flighthq._internal._Union2<Float, String>; var size:TextureAtlasPackerSize; var version:String; };
 
-typedef TextureAtlasPackerHashDocument = { var frames:Dynamic; var meta:TextureAtlasPackerMeta; };
+typedef TextureAtlasPackerHashDocument = { var frames:flighthq._internal._Record<String, TextureAtlasPackerHashFrame>; var meta:TextureAtlasPackerMeta; };
 
 typedef TextureAtlasPackerArrayDocument = { var frames:Array<TextureAtlasPackerArrayFrame>; var meta:TextureAtlasPackerMeta; };
 
-typedef TextureAtlasPackerDocument = Dynamic;
+typedef TextureAtlasPackerDocument = flighthq._internal._Union2<TextureAtlasPackerArrayDocument, TextureAtlasPackerHashDocument>;

@@ -5,15 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class TextureCubeFace {
-  public static final CubeFacePositiveX:Dynamic = 0.0;
+  public static final CubeFacePositiveX:Float = 0.0;
 
-  public static final CubeFaceNegativeX:Dynamic = 1.0;
+  public static final CubeFaceNegativeX:Float = 1.0;
 
-  public static final CubeFacePositiveY:Dynamic = 2.0;
+  public static final CubeFacePositiveY:Float = 2.0;
 
-  public static final CubeFaceNegativeY:Dynamic = 3.0;
+  public static final CubeFaceNegativeY:Float = 3.0;
 
-  public static final CubeFacePositiveZ:Dynamic = 4.0;
+  public static final CubeFacePositiveZ:Float = 4.0;
 
-  public static final CubeFaceNegativeZ:Dynamic = 5.0;
+  public static final CubeFaceNegativeZ:Float = 5.0;
 }

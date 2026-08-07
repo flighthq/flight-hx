@@ -8,6 +8,7 @@ import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
+import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleFormatCodec;
 import flighthq.types.ParticleFormatKind;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
@@ -15,10 +16,10 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 class FormatRegistry {
   public static function detectRegisteredParticleFormat(text:String):Null<String> {
     for (__iteration0 in _Runtime.iterable(FormatRegistry._registry__formatRegistry)) {
-      var kind:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var codec:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var kind:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var codec:ParticleFormatCodec = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       try {
-        if ((cast _Runtime.callProperty(codec, 'detect', cast ([text] : Array<Dynamic>)) : Bool)) { return cast kind; }
+        if ((cast (cast codec : ParticleFormatCodec).detect(text) : Bool)) { return cast kind; }
       } catch (__error:Dynamic) {
       }
     }
@@ -27,42 +28,42 @@ class FormatRegistry {
   }
 
   public static function getParticleFormatCodec(kind:ParticleFormatKind):Null<ParticleFormatCodec> {
-    return cast _Runtime.coalesce(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map<String, ParticleFormatCodec>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getRegisteredParticleFormats():Array<String> {
-    return cast _Runtime.concatArrays([_Runtime.toArray(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).keys()))]);
+    return cast _Runtime.concatArrays([_Runtime.toArray(((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map<String, ParticleFormatCodec>).keys()))]);
     return cast null;
   }
 
   public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
-    var codec:Dynamic = cast _Runtime.UNDEFINED;
-    codec = ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).get(kind));
+    var codec:Null<ParticleFormatCodec> = cast _Runtime.UNDEFINED;
+    codec = ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map<String, ParticleFormatCodec>).get(kind));
     if ((cast !_Runtime.truthy(codec) : Bool)) {
       var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.unknown-format', 'parseRegisteredParticleFormat', { reason: 'no-registered-codec' }] : Array<Dynamic>));
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: kind };
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'particles.unknown-format' : String), (cast 'parseRegisteredParticleFormat' : String), (cast { reason: 'no-registered-codec' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast { config: (cast createParticleEmitterConfig((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : ParticleEmitterConfig), diagnostics: diagnostics, format: kind };
     }
     try {
-      var result:Dynamic = _Runtime.callProperty(codec, 'parseToDocument', cast ([text] : Array<Dynamic>));
-      return cast { config: _Runtime.field(result, 'config'), diagnostics: _Runtime.field(result, 'diagnostics'), format: kind };
+      var result:{ var config:ParticleEmitterConfig; var diagnostics:Array<ImportDiagnostic>; } = (cast codec : ParticleFormatCodec).parseToDocument(text);
+      return cast { config: (cast result : { var config:ParticleEmitterConfig; var diagnostics:Array<ImportDiagnostic>; }).config, diagnostics: (cast result : { var config:ParticleEmitterConfig; var diagnostics:Array<ImportDiagnostic>; }).diagnostics, format: kind };
     } catch (err:Dynamic) {
       var diagnostics:Array<ImportDiagnostic> = cast ([] : Array<Dynamic>);
-      _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'particles.parse-error', 'parseRegisteredParticleFormat', { message: _Runtime.field((cast err : haxe.Exception), 'message') }] : Array<Dynamic>));
-      return cast { config: _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)), diagnostics: diagnostics, format: kind };
+      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'particles.parse-error' : String), (cast 'parseRegisteredParticleFormat' : String), (cast { message: _Runtime.field((cast err : haxe.Exception), 'message') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      return cast { config: (cast createParticleEmitterConfig((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : ParticleEmitterConfig), diagnostics: diagnostics, format: kind };
     }
     return cast null;
   }
 
   public static function registerParticleFormat(kind:ParticleFormatKind, codec:ParticleFormatCodec):Void {
-    ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).set(kind, codec));
+    ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map<String, ParticleFormatCodec>).set(kind, codec));
   }
 
   public static function unregisterParticleFormat(kind:ParticleFormatKind):Bool {
-    return cast ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map).delete_(kind));
+    return cast ((cast FormatRegistry._registry__formatRegistry : flighthq._internal._Map<String, ParticleFormatCodec>).delete_(kind));
     return cast null;
   }
 
-  public static final _registry__formatRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final _registry__formatRegistry:flighthq._internal._Map<String, ParticleFormatCodec> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

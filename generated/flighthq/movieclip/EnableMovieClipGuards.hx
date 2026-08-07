@@ -7,7 +7,9 @@ import flighthq.log.Log.logOnce;
 import flighthq.movieclip.SpritesheetTimelineSource.setSpritesheetTimelineSourceGuard;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetTimelineSourceExplanation;
+import flighthq.types.SpritesheetTimelineSourceExplanation.SpritesheetTimelineSourceUnsupportedField;
 
 class EnableMovieClipGuards {
   public static function areMovieClipGuardsEnabled():Bool {
@@ -16,19 +18,19 @@ class EnableMovieClipGuards {
   }
 
   public static function disableMovieClipGuards():Void {
-    _Runtime.callValue(setSpritesheetTimelineSourceGuard, cast ([null] : Array<Dynamic>));
+    setSpritesheetTimelineSourceGuard(null);
     (EnableMovieClipGuards.movieClipGuardsEnabled__enableMovieClipGuards = cast (false : Dynamic));
   }
 
   public static function enableMovieClipGuards():Void {
-    _Runtime.callValue(setSpritesheetTimelineSourceGuard, cast ([EnableMovieClipGuards.warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards] : Array<Dynamic>));
+    setSpritesheetTimelineSourceGuard(EnableMovieClipGuards.warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards);
     (EnableMovieClipGuards.movieClipGuardsEnabled__enableMovieClipGuards = cast (true : Dynamic));
   }
 
   public static function warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards(animation:SpritesheetAnimation, explanation:SpritesheetTimelineSourceExplanation):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(explanation, 'unsupportedFields'), 'length'), 0.0) : Bool)) { return; }
-    _Runtime.callValue(logOnce, cast (['movieclip:spritesheet-timeline-source:' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unsupportedFields'), ',')) + '', LogLevel.Warn, { direction: animation.direction, message: 'createSpritesheetTimelineSource: authored repeat or per-frame timing cannot be represented by TimelineSource and will not control MovieClip playback — call explainSpritesheetTimelineSource(animation), or use playSpritesheetAnimation with a SpritesheetPlayer when those semantics must be preserved.', repeatCount: animation.repeatCount, unsupportedFields: _Runtime.field(explanation, 'unsupportedFields') }, 'movieclip'] : Array<Dynamic>));
+    (cast logOnce((cast 'movieclip:spritesheet-timeline-source:' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unsupportedFields'), ',')) + '' : String), (cast LogLevel.Warn : LogLevel), { direction: animation.direction, message: 'createSpritesheetTimelineSource: authored repeat or per-frame timing cannot be represented by TimelineSource and will not control MovieClip playback — call explainSpritesheetTimelineSource(animation), or use playSpritesheetAnimation with a SpritesheetPlayer when those semantics must be preserved.', repeatCount: animation.repeatCount, unsupportedFields: _Runtime.field(explanation, 'unsupportedFields') }, (cast 'movieclip' : Null<String>)) : Bool);
   }
 
-  public static var movieClipGuardsEnabled__enableMovieClipGuards:Dynamic = false;
+  public static var movieClipGuardsEnabled__enableMovieClipGuards:Bool = false;
 }

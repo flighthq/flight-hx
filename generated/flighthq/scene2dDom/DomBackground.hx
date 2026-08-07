@@ -7,10 +7,10 @@ import flighthq.types.DomRenderState;
 
 class DomBackground {
   public static function renderDomBackground(state:DomRenderState):Void {
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0) : Bool)) {
-      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = _Runtime.field(state, 'backgroundColorString'));
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast state : DomRenderState).backgroundColor) & 255), 0.0) : Bool)) {
+      ((cast (cast (cast state : DomRenderState).element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = (cast state : DomRenderState).backgroundColorString);
     } else {
-      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = '');
+      ((cast (cast (cast state : DomRenderState).element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = '');
     }
   }
 }

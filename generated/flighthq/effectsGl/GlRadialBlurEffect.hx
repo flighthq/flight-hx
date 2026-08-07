@@ -6,38 +6,41 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RadialBlurEffect;
+import flighthq.types.RenderEffect;
 
 class GlRadialBlurEffect {
   @:noCompletion
   public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
-    var centerX:Dynamic = cast _Runtime.UNDEFINED;
-    var centerY:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var centerX:Float = cast _Runtime.UNDEFINED;
+    var centerY:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     centerX = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
     centerY = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 0.2);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'radialBlur', GlRadialBlurEffect.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'radialBlur' : String), (cast GlRadialBlurEffect.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_center'), centerX, centerY);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_strength'), strength);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_samples'), samples);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlRadialBlurEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyRadialBlurEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : RadialBlurEffect)] : Array<Dynamic>));
+  public static final defaultGlRadialBlurEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyRadialBlurEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : RadialBlurEffect) : RadialBlurEffect));
   };
 
   public static function registerGlRadialBlurEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'RadialBlurEffect', defaultGlRadialBlurEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'RadialBlurEffect' : String), (cast defaultGlRadialBlurEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_center;\nuniform float u_strength;\nuniform float u_samples;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 toCenter = u_center - v_texCoord;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? float(i) / (count - 1.0) : 0.0;\n    vec2 uv = v_texCoord + toCenter * (t * u_strength);\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
+  public static final RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_center;\nuniform float u_strength;\nuniform float u_samples;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 toCenter = u_center - v_texCoord;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? float(i) / (count - 1.0) : 0.0;\n    vec2 uv = v_texCoord + toCenter * (t * u_strength);\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
 }

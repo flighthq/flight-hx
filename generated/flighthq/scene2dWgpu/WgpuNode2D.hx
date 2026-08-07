@@ -9,10 +9,19 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
+import flighthq.types.Node;
 import flighthq.types.Node2D;
+import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class WgpuNode2D {
   @:noCompletion
@@ -20,27 +29,27 @@ class WgpuNode2D {
   }
 
   public static function renderWgpuScene2D(state:WgpuRenderState, source:Node2D):Void {
-    var tempStack:Dynamic = cast _Runtime.UNDEFINED;
-    var clipHooks:Dynamic = cast _Runtime.UNDEFINED;
-    var stackLength:Dynamic = cast _Runtime.UNDEFINED;
-    tempStack = _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
-    clipHooks = _Runtime.field(state, 'displayObjectClipHooks');
+    var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
+    var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
+    var stackLength:Float = cast _Runtime.UNDEFINED;
+    tempStack = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
+    clipHooks = (cast state : WgpuRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
-      if ((cast !(cast _Runtime.field(current, 'enabled') : Bool) : Bool)) { continue; }
-      var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
+      var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
+      if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(state, current) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !(cast _Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
+      if ((cast !(cast (cast isRenderProxyVisible((cast data : RenderProxy2D)) : Bool) : Bool) : Bool)) { continue; }
       _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
-      _Runtime.callOptionalProperty(_Runtime.field(data, 'renderer'), 'submit', cast ([state, data] : Array<Dynamic>));
-      if ((cast _Runtime.field(data, 'traverseChildren') : Bool)) {
-        var children:Dynamic = _Runtime.field(_Runtime.callValue(getNode2DRuntime, cast ([current] : Array<Dynamic>)), 'children');
+      _Runtime.callOptionalProperty((cast data : RenderProxy2D).renderer, 'submit', cast ([state, data] : Array<Dynamic>));
+      if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current : Node2D)) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
-            var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
+            var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               flighthq._internal._StaticIndex.writeArray(tempStack, stackLength++, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node2D));
               i--;
@@ -49,7 +58,7 @@ class WgpuNode2D {
         }
       }
     }
-    _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
+    flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
     _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
   }
 

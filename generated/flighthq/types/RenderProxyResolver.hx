@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderProxyResolver = { var resolve:Dynamic; };
+typedef RenderProxyResolver = { var resolve:RenderState->Node2D->RenderProxy2D->Null<Bool>; };

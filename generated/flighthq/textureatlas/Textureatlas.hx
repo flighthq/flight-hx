@@ -39,7 +39,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function buildTextureAtlasRegionIndex(atlas:TextureAtlas):Dynamic {
+  public static function buildTextureAtlasRegionIndex(atlas:TextureAtlas):flighthq._internal._Map<String, TextureAtlasRegion> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.buildTextureAtlasRegionIndex(atlas);
     return cast null;
   }

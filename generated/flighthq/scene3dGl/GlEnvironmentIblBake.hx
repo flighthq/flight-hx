@@ -9,95 +9,97 @@ import flighthq.scene3dGl.GlEnvironmentCube.getGlCubeFaceTarget;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlScene3DRuntime.GlScene3DIbl;
 
 typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:flighthq._internal.dom.WebGLBuffer; var locEnvCube:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceForward:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceRight:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceUp:Null<flighthq._internal.dom.WebGLUniformLocation>; var locRoughness:Null<flighthq._internal.dom.WebGLUniformLocation>; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
 class GlEnvironmentIblBake {
   public static function bakeGlEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
-    var sourceCube:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var fbo:Dynamic = cast _Runtime.UNDEFINED;
-    var prevFramebuffer:Dynamic = cast _Runtime.UNDEFINED;
-    var prevViewport:Dynamic = cast _Runtime.UNDEFINED;
-    var irradianceCube:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceCube:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
+    var fbo:flighthq._internal.dom.WebGLFramebuffer = cast _Runtime.UNDEFINED;
+    var prevFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;
+    var prevViewport:flighthq._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var irradianceCube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var prefilteredCube:Dynamic = cast _Runtime.UNDEFINED;
-    var prefilteredMipCount:Dynamic = cast _Runtime.UNDEFINED;
-    var brdfLut:Dynamic = cast _Runtime.UNDEFINED;
-    sourceCube = _Runtime.callValue(ensureGlEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
+    var prefilteredCube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var prefilteredMipCount:Float = cast _Runtime.UNDEFINED;
+    var brdfLut:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    sourceCube = (cast ensureGlEnvironmentSourceCube((cast state : GlRenderState), (cast environment : Environment)) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(sourceCube, null) : Bool)) { return; }
-    gl = _Runtime.field(state, 'gl');
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float');
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'OES_texture_float_linear');
-    runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'iblBakeFramebuffer'), null) : Bool)) { _Runtime.setField(runtime, 'iblBakeFramebuffer', flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
-    fbo = _Runtime.field(runtime, 'iblBakeFramebuffer');
+    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).iblBakeFramebuffer, null) : Bool)) { ((cast runtime : GlScene3DRuntime).iblBakeFramebuffer = flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
+    fbo = (cast runtime : GlScene3DRuntime).iblBakeFramebuffer;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
-    irradianceCube = _Runtime.callValue(GlEnvironmentIblBake.bakeGlIrradiance__glEnvironmentIblBake, cast ([state, fbo, sourceCube] : Array<Dynamic>));
-    __destructure0 = _Runtime.callValue(GlEnvironmentIblBake.bakeGlPrefiltered__glEnvironmentIblBake, cast ([state, fbo, sourceCube] : Array<Dynamic>));
+    irradianceCube = (cast GlEnvironmentIblBake.bakeGlIrradiance__glEnvironmentIblBake((cast state : GlRenderState), (cast fbo : flighthq._internal.dom.WebGLFramebuffer), (cast sourceCube : flighthq._internal.dom.WebGLTexture)) : flighthq._internal.dom.WebGLTexture);
+    __destructure0 = (cast GlEnvironmentIblBake.bakeGlPrefiltered__glEnvironmentIblBake((cast state : GlRenderState), (cast fbo : flighthq._internal.dom.WebGLFramebuffer), (cast sourceCube : flighthq._internal.dom.WebGLTexture)) : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; });
     prefilteredCube = _Runtime.field(__destructure0, 'prefilteredCube');
     prefilteredMipCount = _Runtime.field(__destructure0, 'prefilteredMipCount');
-    brdfLut = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'ibl'), 'brdfLut'), function():Dynamic return cast _Runtime.callValue(GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake, cast ([state, fbo] : Array<Dynamic>)));
+    brdfLut = _Runtime.coalesce(_Runtime.optionalField((cast runtime : GlScene3DRuntime).ibl, 'brdfLut'), function():Dynamic return cast (cast GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake((cast state : GlRenderState), (cast fbo : flighthq._internal.dom.WebGLFramebuffer)) : Null<flighthq._internal.dom.WebGLTexture>));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), prevFramebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32Array(prevViewport, 0.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 1.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 2.0), flighthq._internal._StaticIndex.readInt32Array(prevViewport, 3.0));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
-    _Runtime.setField(runtime, 'ibl', { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
+    ((cast runtime : GlScene3DRuntime).ibl = { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
   }
 
   @:noCompletion
   public static function destroyGlEnvironmentIblBakePrograms(state:GlRenderState):Void {
-    var byState:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
+    var byState:Null<flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>>).get(state));
     if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    gl = _Runtime.field(state, 'gl');
-    for (baked in _Runtime.iterable(((cast byState : flighthq._internal._Map).values()))) {
-      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, _Runtime.field(baked, 'program'));
-      flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, _Runtime.field(baked, 'vao'));
-      flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(baked, 'buffer'));
+    gl = (cast state : GlRenderState).gl;
+    for (baked in _Runtime.iterable(((cast byState : flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>).values()))) {
+      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, (cast baked : GlBakeProgram__glEnvironmentIblBake).program);
+      flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, (cast baked : GlBakeProgram__glEnvironmentIblBake).vao);
+      flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast baked : GlBakeProgram__glEnvironmentIblBake).buffer);
     }
-    ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).delete_(state));
+    ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>>).delete_(state));
   }
 
   public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, sourceCube:flighthq._internal.dom.WebGLTexture):flighthq._internal.dom.WebGLTexture {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var cube:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    cube = _Runtime.callValue(GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake, cast ([gl, GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake, false] : Array<Dynamic>));
-    program = _Runtime.callValue(GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake, cast ([state, 'irradiance', GlEnvironmentIblBake.IRRADIANCE_FRAGMENT__glEnvironmentIblBake] : Array<Dynamic>));
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var cube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var program:GlBakeProgram__glEnvironmentIblBake = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast false : Bool)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake((cast state : GlRenderState), (cast 'irradiance' : String), (cast GlEnvironmentIblBake.IRRADIANCE_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-    _Runtime.callValue(GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake, cast ([gl, program, sourceCube] : Array<Dynamic>));
-    _Runtime.callValue(GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake, cast ([state, fbo, program, cube, GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
+    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, (cast sourceCube : flighthq._internal.dom.WebGLTexture));
+    GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake((cast state : GlRenderState), (cast fbo : flighthq._internal.dom.WebGLFramebuffer), program, (cast cube : flighthq._internal.dom.WebGLTexture), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast 0.0 : Float));
     return cast cube;
     return cast null;
   }
 
   public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, sourceCube:flighthq._internal.dom.WebGLTexture):{ var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; } {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var cube:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var mipCount:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    cube = _Runtime.callValue(GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake, cast ([gl, GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake, true] : Array<Dynamic>));
-    program = _Runtime.callValue(GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake, cast ([state, 'prefiltered', GlEnvironmentIblBake.PREFILTERED_FRAGMENT__glEnvironmentIblBake] : Array<Dynamic>));
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var cube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var program:GlBakeProgram__glEnvironmentIblBake = cast _Runtime.UNDEFINED;
+    var mipCount:Float = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake : Float), (cast true : Bool)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake((cast state : GlRenderState), (cast 'prefiltered' : String), (cast GlEnvironmentIblBake.PREFILTERED_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-    _Runtime.callValue(GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake, cast ([gl, program, sourceCube] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
+    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, (cast sourceCube : flighthq._internal.dom.WebGLTexture));
     mipCount = GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake;
     {
-      var mip:Dynamic = 0.0;
+      var mip:Float = 0.0;
       while ((cast ((cast mip : Float) < (cast mipCount : Float)) : Bool)) {
-        var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> _Runtime.toInt32(mip)));
-        var roughness:Dynamic = ((cast ((cast mipCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (mipCount - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
-        flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locRoughness'), roughness);
-        _Runtime.callValue(GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake, cast ([state, fbo, program, cube, mipSize, mip] : Array<Dynamic>));
+        var mipSize:Float = HxMath.max(1.0, (_Runtime.toInt32(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> _Runtime.toInt32(mip)));
+        var roughness:Float = ((cast ((cast mipCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (mipCount - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
+        flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locRoughness, roughness);
+        GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake((cast state : GlRenderState), (cast fbo : flighthq._internal.dom.WebGLFramebuffer), program, (cast cube : flighthq._internal.dom.WebGLTexture), (cast mipSize : Float), (cast mip : Float));
         mip++;
       }
     }
@@ -106,10 +108,10 @@ class GlEnvironmentIblBake {
   }
 
   public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer):flighthq._internal.dom.WebGLTexture {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var program:GlBakeProgram__glEnvironmentIblBake = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA16F', flighthq._internal.backend.WebGl2Backend.RGBA16F), GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake, GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'HALF_FLOAT', flighthq._internal.backend.WebGl2Backend.HALF_FLOAT), null);
@@ -117,29 +119,29 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_S', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
-    program = _Runtime.callValue(GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake, cast ([state, 'brdf', GlEnvironmentIblBake.BRDF_LUT_FRAGMENT__glEnvironmentIblBake] : Array<Dynamic>));
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake((cast state : GlRenderState), (cast 'brdf' : String), (cast GlEnvironmentIblBake.BRDF_LUT_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
     flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture, 0.0);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake, GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake);
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
-    _Runtime.callValue(GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake, cast ([state, program] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
+    GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake((cast state : GlRenderState), program);
     return cast texture;
     return cast null;
   }
 
   public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, program:GlBakeProgram__glEnvironmentIblBake, cube:flighthq._internal.dom.WebGLTexture, size:Float, mipLevel:Float):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, size, size);
     {
-      var face:Dynamic = 0.0;
+      var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), cube, mipLevel);
-        var b:Dynamic = flighthq._internal._StaticIndex.readArray(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceForward'), flighthq._internal._StaticIndex.readArray(b, 0.0), flighthq._internal._StaticIndex.readArray(b, 1.0), flighthq._internal._StaticIndex.readArray(b, 2.0));
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceRight'), flighthq._internal._StaticIndex.readArray(b, 3.0), flighthq._internal._StaticIndex.readArray(b, 4.0), flighthq._internal._StaticIndex.readArray(b, 5.0));
-        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locFaceUp'), flighthq._internal._StaticIndex.readArray(b, 6.0), flighthq._internal._StaticIndex.readArray(b, 7.0), flighthq._internal._StaticIndex.readArray(b, 8.0));
-        _Runtime.callValue(GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake, cast ([state, program] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), (cast getGlCubeFaceTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast face : Float)) : Float), cube, mipLevel);
+        var b:Array<Float> = flighthq._internal._StaticIndex.readArray(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceForward, flighthq._internal._StaticIndex.readArray(b, 0.0), flighthq._internal._StaticIndex.readArray(b, 1.0), flighthq._internal._StaticIndex.readArray(b, 2.0));
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceRight, flighthq._internal._StaticIndex.readArray(b, 3.0), flighthq._internal._StaticIndex.readArray(b, 4.0), flighthq._internal._StaticIndex.readArray(b, 5.0));
+        flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceUp, flighthq._internal._StaticIndex.readArray(b, 6.0), flighthq._internal._StaticIndex.readArray(b, 7.0), flighthq._internal._StaticIndex.readArray(b, 8.0));
+        GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake((cast state : GlRenderState), program);
         face++;
       }
     }
@@ -147,20 +149,20 @@ class GlEnvironmentIblBake {
   }
 
   public static function createGlBakeCube__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, size:Float, mipped:Bool):flighthq._internal.dom.WebGLTexture {
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var levels:Dynamic = cast _Runtime.UNDEFINED;
-    var minFilter:Dynamic = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var levels:Float = cast _Runtime.UNDEFINED;
+    var minFilter:Float = cast _Runtime.UNDEFINED;
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), texture);
     levels = ((cast mipped : Bool) ? (cast GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake : Dynamic) : (cast 1.0 : Dynamic));
     {
-      var mip:Dynamic = 0.0;
+      var mip:Float = 0.0;
       while ((cast ((cast mip : Float) < (cast levels : Float)) : Bool)) {
-        var mipSize:Dynamic = HxMath.max(1.0, (_Runtime.toInt32(size) >> _Runtime.toInt32(mip)));
+        var mipSize:Float = HxMath.max(1.0, (_Runtime.toInt32(size) >> _Runtime.toInt32(mip)));
         {
-          var face:Dynamic = 0.0;
+          var face:Float = 0.0;
           while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-            flighthq._internal.backend.WebGl2Backend.texImage2D(gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), mip, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA16F', flighthq._internal.backend.WebGl2Backend.RGBA16F), mipSize, mipSize, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'HALF_FLOAT', flighthq._internal.backend.WebGl2Backend.HALF_FLOAT), null);
+            flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (cast getGlCubeFaceTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast face : Float)) : Float), mip, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA16F', flighthq._internal.backend.WebGl2Backend.RGBA16F), mipSize, mipSize, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'HALF_FLOAT', flighthq._internal.backend.WebGl2Backend.HALF_FLOAT), null);
             face++;
           }
         }
@@ -181,25 +183,25 @@ class GlEnvironmentIblBake {
   public static function bindGlBakeSourceCube__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlBakeProgram__glEnvironmentIblBake, sourceCube:flighthq._internal.dom.WebGLTexture):Void {
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), sourceCube);
-    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locEnvCube'), 0.0);
+    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locEnvCube, 0.0);
   }
 
   public static function ensureGlBakeProgram__glEnvironmentIblBake(state:GlRenderState, key:String, fragment:String):GlBakeProgram__glEnvironmentIblBake {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var byState:Dynamic = cast _Runtime.UNDEFINED;
-    var baked:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    var vao:Dynamic = cast _Runtime.UNDEFINED;
-    var buffer:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var byState:Null<flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>> = cast _Runtime.UNDEFINED;
+    var baked:Null<GlBakeProgram__glEnvironmentIblBake> = cast _Runtime.UNDEFINED;
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    var vao:flighthq._internal.dom.WebGLVertexArrayObject = cast _Runtime.UNDEFINED;
+    var buffer:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>>).get(state));
     if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (byState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).set(state, byState));
+      ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>>).set(state, byState));
     }
-    baked = ((cast byState : flighthq._internal._Map).get(key));
+    baked = ((cast byState : flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>).get(key));
     if ((cast !_Runtime.strictEquals(baked, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast baked; }
-    program = _Runtime.callValue(GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake, cast ([gl, fragment] : Array<Dynamic>));
+    program = (cast GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fragment : String)) : flighthq._internal.dom.WebGLProgram);
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);
     buffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
@@ -209,44 +211,44 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     (baked = cast ({ buffer: buffer, locEnvCube: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_envCube'), locFaceForward: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceForward'), locFaceRight: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceRight'), locFaceUp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_faceUp'), locRoughness: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_roughness'), program: program, vao: vao } : Dynamic));
-    ((cast byState : flighthq._internal._Map).set(key, baked));
+    ((cast byState : flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>).set(key, baked));
     return cast baked;
     return cast null;
   }
 
   public static function drawGlBakeQuad__glEnvironmentIblBake(state:GlRenderState, program:GlBakeProgram__glEnvironmentIblBake):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(program, 'vao'));
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).vao);
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLE_STRIP', flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP), 0.0, 4.0);
   }
 
   public static function linkGlBakeProgram__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, fragment:String):flighthq._internal.dom.WebGLProgram {
-    return cast _Runtime.callValue(createGlProgram, cast ([gl, GlEnvironmentIblBake.BAKE_VERTEX__glEnvironmentIblBake, fragment, 'IBL bake'] : Array<Dynamic>));
+    return cast (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEnvironmentIblBake.BAKE_VERTEX__glEnvironmentIblBake : String), (cast fragment : String), (cast 'IBL bake' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
-  public static final IRRADIANCE_SIZE__glEnvironmentIblBake:Dynamic = 16.0;
+  public static final IRRADIANCE_SIZE__glEnvironmentIblBake:Float = 16.0;
 
-  public static final PREFILTERED_SIZE__glEnvironmentIblBake:Dynamic = 64.0;
+  public static final PREFILTERED_SIZE__glEnvironmentIblBake:Float = 64.0;
 
-  public static final PREFILTERED_MIPS__glEnvironmentIblBake:Dynamic = 5.0;
+  public static final PREFILTERED_MIPS__glEnvironmentIblBake:Float = 5.0;
 
-  public static final BRDF_LUT_SIZE__glEnvironmentIblBake:Dynamic = 128.0;
+  public static final BRDF_LUT_SIZE__glEnvironmentIblBake:Float = 128.0;
 
   public static final CUBE_FACE_BASIS__glEnvironmentIblBake:Array<Array<Float>> = cast ([cast ([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([-1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>), cast ([0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0] : Array<Dynamic>), cast ([0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, -1.0, 0.0] : Array<Dynamic>)] : Array<Dynamic>);
 
-  public static final _quad__glEnvironmentIblBake:Dynamic = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+  public static final _quad__glEnvironmentIblBake:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
-  public static final _bakePrograms__glEnvironmentIblBake:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _bakePrograms__glEnvironmentIblBake:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final BAKE_VERTEX__glEnvironmentIblBake:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_uv;\nvoid main() {\n  v_uv = a_position;\n  gl_Position = vec4(a_position, 0.0, 1.0);\n}\n';
+  public static final BAKE_VERTEX__glEnvironmentIblBake:String = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_uv;\nvoid main() {\n  v_uv = a_position;\n  gl_Position = vec4(a_position, 0.0, 1.0);\n}\n';
 
-  public static final BAKE_COMMON__glEnvironmentIblBake:Dynamic = 'precision highp float;\nin vec2 v_uv;\nuniform samplerCube u_envCube;\nuniform vec3 u_faceForward;\nuniform vec3 u_faceRight;\nuniform vec3 u_faceUp;\nout vec4 fragColor;\nconst float PI = 3.14159265359;\n\nvec3 faceDirection() {\n  return normalize(u_faceForward + v_uv.x * u_faceRight + v_uv.y * u_faceUp);\n}\n';
+  public static final BAKE_COMMON__glEnvironmentIblBake:String = 'precision highp float;\nin vec2 v_uv;\nuniform samplerCube u_envCube;\nuniform vec3 u_faceForward;\nuniform vec3 u_faceRight;\nuniform vec3 u_faceUp;\nout vec4 fragColor;\nconst float PI = 3.14159265359;\n\nvec3 faceDirection() {\n  return normalize(u_faceForward + v_uv.x * u_faceRight + v_uv.y * u_faceUp);\n}\n';
 
-  public static final IRRADIANCE_FRAGMENT__glEnvironmentIblBake:Dynamic = '#version 300 es\n' + Std.string(GlEnvironmentIblBake.BAKE_COMMON__glEnvironmentIblBake) + '\nvoid main() {\n  vec3 N = faceDirection();\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 right = normalize(cross(up, N));\n  up = normalize(cross(N, right));\n\n  vec3 irradiance = vec3(0.0);\n  float samples = 0.0;\n  const float delta = 0.15;\n  for (float phi = 0.0; phi < 2.0 * PI; phi += delta) {\n    for (float theta = 0.0; theta < 0.5 * PI; theta += delta) {\n      vec3 tangent = vec3(sin(theta) * cos(phi), sin(theta) * sin(phi), cos(theta));\n      vec3 sampleVec = tangent.x * right + tangent.y * up + tangent.z * N;\n      irradiance += texture(u_envCube, sampleVec).rgb * cos(theta) * sin(theta);\n      samples += 1.0;\n    }\n  }\n  fragColor = vec4(PI * irradiance / samples, 1.0);\n}\n';
+  public static final IRRADIANCE_FRAGMENT__glEnvironmentIblBake:String = '#version 300 es\n' + Std.string(GlEnvironmentIblBake.BAKE_COMMON__glEnvironmentIblBake) + '\nvoid main() {\n  vec3 N = faceDirection();\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 right = normalize(cross(up, N));\n  up = normalize(cross(N, right));\n\n  vec3 irradiance = vec3(0.0);\n  float samples = 0.0;\n  const float delta = 0.15;\n  for (float phi = 0.0; phi < 2.0 * PI; phi += delta) {\n    for (float theta = 0.0; theta < 0.5 * PI; theta += delta) {\n      vec3 tangent = vec3(sin(theta) * cos(phi), sin(theta) * sin(phi), cos(theta));\n      vec3 sampleVec = tangent.x * right + tangent.y * up + tangent.z * N;\n      irradiance += texture(u_envCube, sampleVec).rgb * cos(theta) * sin(theta);\n      samples += 1.0;\n    }\n  }\n  fragColor = vec4(PI * irradiance / samples, 1.0);\n}\n';
 
-  public static final PREFILTERED_FRAGMENT__glEnvironmentIblBake:Dynamic = '#version 300 es\n' + Std.string(GlEnvironmentIblBake.BAKE_COMMON__glEnvironmentIblBake) + '\nuniform float u_roughness;\n\nfloat radicalInverse(uint bits) {\n  bits = (bits << 16u) | (bits >> 16u);\n  bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);\n  bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);\n  bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);\n  bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);\n  return float(bits) * 2.3283064365386963e-10;\n}\nvec2 hammersley(uint i, uint n) {\n  return vec2(float(i) / float(n), radicalInverse(i));\n}\nvec3 importanceSampleGGX(vec2 Xi, vec3 N, float roughness) {\n  float a = roughness * roughness;\n  float phi = 2.0 * PI * Xi.x;\n  float cosTheta = sqrt((1.0 - Xi.y) / (1.0 + (a * a - 1.0) * Xi.y));\n  float sinTheta = sqrt(1.0 - cosTheta * cosTheta);\n  vec3 H = vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 tangent = normalize(cross(up, N));\n  vec3 bitangent = cross(N, tangent);\n  return normalize(tangent * H.x + bitangent * H.y + N * H.z);\n}\nvoid main() {\n  vec3 N = faceDirection();\n  vec3 V = N;\n  const uint SAMPLE_COUNT = 48u;\n  vec3 prefiltered = vec3(0.0);\n  float totalWeight = 0.0;\n  for (uint i = 0u; i < SAMPLE_COUNT; i++) {\n    vec2 Xi = hammersley(i, SAMPLE_COUNT);\n    vec3 H = importanceSampleGGX(Xi, N, u_roughness);\n    vec3 L = normalize(2.0 * dot(V, H) * H - V);\n    float nDotL = max(dot(N, L), 0.0);\n    if (nDotL > 0.0) {\n      prefiltered += texture(u_envCube, L).rgb * nDotL;\n      totalWeight += nDotL;\n    }\n  }\n  fragColor = vec4(totalWeight > 0.0 ? prefiltered / totalWeight : texture(u_envCube, N).rgb, 1.0);\n}\n';
+  public static final PREFILTERED_FRAGMENT__glEnvironmentIblBake:String = '#version 300 es\n' + Std.string(GlEnvironmentIblBake.BAKE_COMMON__glEnvironmentIblBake) + '\nuniform float u_roughness;\n\nfloat radicalInverse(uint bits) {\n  bits = (bits << 16u) | (bits >> 16u);\n  bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);\n  bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);\n  bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);\n  bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);\n  return float(bits) * 2.3283064365386963e-10;\n}\nvec2 hammersley(uint i, uint n) {\n  return vec2(float(i) / float(n), radicalInverse(i));\n}\nvec3 importanceSampleGGX(vec2 Xi, vec3 N, float roughness) {\n  float a = roughness * roughness;\n  float phi = 2.0 * PI * Xi.x;\n  float cosTheta = sqrt((1.0 - Xi.y) / (1.0 + (a * a - 1.0) * Xi.y));\n  float sinTheta = sqrt(1.0 - cosTheta * cosTheta);\n  vec3 H = vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 tangent = normalize(cross(up, N));\n  vec3 bitangent = cross(N, tangent);\n  return normalize(tangent * H.x + bitangent * H.y + N * H.z);\n}\nvoid main() {\n  vec3 N = faceDirection();\n  vec3 V = N;\n  const uint SAMPLE_COUNT = 48u;\n  vec3 prefiltered = vec3(0.0);\n  float totalWeight = 0.0;\n  for (uint i = 0u; i < SAMPLE_COUNT; i++) {\n    vec2 Xi = hammersley(i, SAMPLE_COUNT);\n    vec3 H = importanceSampleGGX(Xi, N, u_roughness);\n    vec3 L = normalize(2.0 * dot(V, H) * H - V);\n    float nDotL = max(dot(N, L), 0.0);\n    if (nDotL > 0.0) {\n      prefiltered += texture(u_envCube, L).rgb * nDotL;\n      totalWeight += nDotL;\n    }\n  }\n  fragColor = vec4(totalWeight > 0.0 ? prefiltered / totalWeight : texture(u_envCube, N).rgb, 1.0);\n}\n';
 
-  public static final BRDF_LUT_FRAGMENT__glEnvironmentIblBake:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_uv;\nout vec4 fragColor;\nconst float PI = 3.14159265359;\n\nfloat radicalInverse(uint bits) {\n  bits = (bits << 16u) | (bits >> 16u);\n  bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);\n  bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);\n  bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);\n  bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);\n  return float(bits) * 2.3283064365386963e-10;\n}\nvec2 hammersley(uint i, uint n) {\n  return vec2(float(i) / float(n), radicalInverse(i));\n}\nvec3 importanceSampleGGX(vec2 Xi, vec3 N, float roughness) {\n  float a = roughness * roughness;\n  float phi = 2.0 * PI * Xi.x;\n  float cosTheta = sqrt((1.0 - Xi.y) / (1.0 + (a * a - 1.0) * Xi.y));\n  float sinTheta = sqrt(1.0 - cosTheta * cosTheta);\n  vec3 H = vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 tangent = normalize(cross(up, N));\n  vec3 bitangent = cross(N, tangent);\n  return normalize(tangent * H.x + bitangent * H.y + N * H.z);\n}\nfloat geometrySchlickGGX(float nDotV, float roughness) {\n  float k = roughness * roughness / 2.0;\n  return nDotV / (nDotV * (1.0 - k) + k);\n}\nfloat geometrySmith(vec3 N, vec3 V, vec3 L, float roughness) {\n  return geometrySchlickGGX(max(dot(N, L), 0.0), roughness) * geometrySchlickGGX(max(dot(N, V), 0.0), roughness);\n}\nvoid main() {\n  vec2 uv = v_uv * 0.5 + 0.5;\n  float nDotV = max(uv.x, 0.001);\n  float roughness = uv.y;\n  vec3 V = vec3(sqrt(1.0 - nDotV * nDotV), 0.0, nDotV);\n  vec3 N = vec3(0.0, 0.0, 1.0);\n  float A = 0.0;\n  float B = 0.0;\n  const uint SAMPLE_COUNT = 256u;\n  for (uint i = 0u; i < SAMPLE_COUNT; i++) {\n    vec2 Xi = hammersley(i, SAMPLE_COUNT);\n    vec3 H = importanceSampleGGX(Xi, N, roughness);\n    vec3 L = normalize(2.0 * dot(V, H) * H - V);\n    float nDotL = max(L.z, 0.0);\n    float nDotH = max(H.z, 0.0);\n    float vDotH = max(dot(V, H), 0.0);\n    if (nDotL > 0.0) {\n      float G = geometrySmith(N, V, L, roughness);\n      float gVis = (G * vDotH) / (nDotH * nDotV);\n      float Fc = pow(1.0 - vDotH, 5.0);\n      A += (1.0 - Fc) * gVis;\n      B += Fc * gVis;\n    }\n  }\n  fragColor = vec4(A / float(SAMPLE_COUNT), B / float(SAMPLE_COUNT), 0.0, 1.0);\n}\n';
+  public static final BRDF_LUT_FRAGMENT__glEnvironmentIblBake:String = '#version 300 es\nprecision highp float;\nin vec2 v_uv;\nout vec4 fragColor;\nconst float PI = 3.14159265359;\n\nfloat radicalInverse(uint bits) {\n  bits = (bits << 16u) | (bits >> 16u);\n  bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);\n  bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);\n  bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);\n  bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);\n  return float(bits) * 2.3283064365386963e-10;\n}\nvec2 hammersley(uint i, uint n) {\n  return vec2(float(i) / float(n), radicalInverse(i));\n}\nvec3 importanceSampleGGX(vec2 Xi, vec3 N, float roughness) {\n  float a = roughness * roughness;\n  float phi = 2.0 * PI * Xi.x;\n  float cosTheta = sqrt((1.0 - Xi.y) / (1.0 + (a * a - 1.0) * Xi.y));\n  float sinTheta = sqrt(1.0 - cosTheta * cosTheta);\n  vec3 H = vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);\n  vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);\n  vec3 tangent = normalize(cross(up, N));\n  vec3 bitangent = cross(N, tangent);\n  return normalize(tangent * H.x + bitangent * H.y + N * H.z);\n}\nfloat geometrySchlickGGX(float nDotV, float roughness) {\n  float k = roughness * roughness / 2.0;\n  return nDotV / (nDotV * (1.0 - k) + k);\n}\nfloat geometrySmith(vec3 N, vec3 V, vec3 L, float roughness) {\n  return geometrySchlickGGX(max(dot(N, L), 0.0), roughness) * geometrySchlickGGX(max(dot(N, V), 0.0), roughness);\n}\nvoid main() {\n  vec2 uv = v_uv * 0.5 + 0.5;\n  float nDotV = max(uv.x, 0.001);\n  float roughness = uv.y;\n  vec3 V = vec3(sqrt(1.0 - nDotV * nDotV), 0.0, nDotV);\n  vec3 N = vec3(0.0, 0.0, 1.0);\n  float A = 0.0;\n  float B = 0.0;\n  const uint SAMPLE_COUNT = 256u;\n  for (uint i = 0u; i < SAMPLE_COUNT; i++) {\n    vec2 Xi = hammersley(i, SAMPLE_COUNT);\n    vec3 H = importanceSampleGGX(Xi, N, roughness);\n    vec3 L = normalize(2.0 * dot(V, H) * H - V);\n    float nDotL = max(L.z, 0.0);\n    float nDotH = max(H.z, 0.0);\n    float vDotH = max(dot(V, H), 0.0);\n    if (nDotL > 0.0) {\n      float G = geometrySmith(N, V, L, roughness);\n      float gVis = (G * vDotH) / (nDotH * nDotV);\n      float Fc = pow(1.0 - vDotH, 5.0);\n      A += (1.0 - Fc) * gVis;\n      B += Fc * gVis;\n    }\n  }\n  fragColor = vec4(A / float(SAMPLE_COUNT), B / float(SAMPLE_COUNT), 0.0, 1.0);\n}\n';
 }

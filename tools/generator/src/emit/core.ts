@@ -61,8 +61,25 @@ export interface CoreGenerationReport {
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 5;
+  schemaVersion: 6;
   staticLowering: StaticLoweringEmissionCounts;
+  typeErasures: TypeErasureAudit;
+}
+
+export interface TypeErasureAudit {
+  modules: Array<{
+    byReason: Record<string, number>;
+    module: string;
+    source: string | null;
+    total: number;
+  }>;
+  schemaVersion: 1;
+  summary: {
+    byReason: Record<string, number>;
+    checkerKnownUnrepresentable: number;
+    modules: number;
+    total: number;
+  };
 }
 
 interface LoweredSource {
@@ -342,8 +359,9 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 5,
+    schemaVersion: 6,
     staticLowering: staticLoweringEmissionCounts(),
+    typeErasures: auditTypeErasures(modules),
   };
   const coreReport: Omit<CoreGenerationReport, 'hostTypes'> = {
     contractSurface: report.contractSurface,
@@ -351,10 +369,96 @@ export function generateCoreModules(
     modules: report.modules,
     schemaVersion: report.schemaVersion,
     staticLowering: report.staticLowering,
+    typeErasures: report.typeErasures,
   };
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(coreReport), check);
+  writeOrCheck(path.join(workspaceDirectory, 'reports', 'type-erasures.json'), stableJson(report.typeErasures), check);
+  writeOrCheck(
+    path.join(workspaceDirectory, 'reports', 'type-erasures.md'),
+    typeErasureSummary(report.typeErasures),
+    check,
+  );
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'patches.json'), stableJson(patchAudit), check);
+  if (report.typeErasures.summary.checkerKnownUnrepresentable > 0) {
+    const offenders = report.typeErasures.modules
+      .filter((module) => (module.byReason['checker-known-unrepresentable'] ?? 0) > 0)
+      .slice(0, 12)
+      .map((module) => `${module.module}: ${String(module.byReason['checker-known-unrepresentable'] ?? 0)}`);
+    throw new Error(
+      `Checker-known TypeScript types reached Dynamic lowering (${String(report.typeErasures.summary.checkerKnownUnrepresentable)}):\n${offenders.map((item) => `- ${item}`).join('\n')}\nSee reports/type-erasures.json.`,
+    );
+  }
   return report;
+}
+
+function auditTypeErasures(modules: IrModule[]): TypeErasureAudit {
+  const results = modules.flatMap((module) => {
+    const byReason = new Map<string, number>();
+    const visit = (value: unknown): void => {
+      if (Array.isArray(value)) {
+        value.forEach(visit);
+        return;
+      }
+      if (!value || typeof value !== 'object') return;
+      const record = value as Record<string, unknown>;
+      if (record.kind === 'dynamic') {
+        const reason = typeof record.reason === 'string' ? record.reason : 'unclassified';
+        byReason.set(reason, (byReason.get(reason) ?? 0) + 1);
+      }
+      Object.values(record).forEach(visit);
+    };
+    visit(module.declarations);
+    const total = [...byReason.values()].reduce((sum, count) => sum + count, 0);
+    return total === 0
+      ? []
+      : [
+          {
+            byReason: Object.fromEntries([...byReason].sort(([left], [right]) => left.localeCompare(right))),
+            module: modulePath(module),
+            source: module.source ?? null,
+            total,
+          },
+        ];
+  });
+  const summaryByReason = new Map<string, number>();
+  for (const module of results) {
+    for (const [reason, count] of Object.entries(module.byReason)) {
+      summaryByReason.set(reason, (summaryByReason.get(reason) ?? 0) + count);
+    }
+  }
+  const byReason = Object.fromEntries([...summaryByReason].sort(([left], [right]) => left.localeCompare(right)));
+  return {
+    modules: results.sort((left, right) => left.module.localeCompare(right.module)),
+    schemaVersion: 1,
+    summary: {
+      byReason,
+      checkerKnownUnrepresentable: byReason['checker-known-unrepresentable'] ?? 0,
+      modules: results.length,
+      total: results.reduce((sum, module) => sum + module.total, 0),
+    },
+  };
+}
+
+function typeErasureSummary(audit: TypeErasureAudit): string {
+  const lines = [
+    '# Type Erasure Audit',
+    '',
+    'This report counts explicit `IrType.dynamic` nodes after module construction, including expression type metadata.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Total erasures | ${String(audit.summary.total)} |`,
+    `| Modules with erasure | ${String(audit.summary.modules)} |`,
+    `| Checker-known unrepresentable erasures | ${String(audit.summary.checkerKnownUnrepresentable)} |`,
+    '',
+    '## Reasons',
+    '',
+    '| Reason | Count |',
+    '| --- | ---: |',
+    ...Object.entries(audit.summary.byReason).map(([reason, count]) => `| \`${reason}\` | ${String(count)} |`),
+    '',
+  ];
+  return lines.join('\n');
 }
 
 function markCppStructInitTypes(
@@ -1309,6 +1413,8 @@ function flattenStructuralTypes(declarations: IrDeclaration[]): void {
       }
       case 'nullable':
         return { inner: substitute(type.inner, substitutions), kind: 'nullable' };
+      case 'union':
+        return { alternatives: type.alternatives.map((item) => substitute(item, substitutions)), kind: 'union' };
       case 'dynamic':
       case 'primitive':
         return type;
@@ -1382,6 +1488,8 @@ function typeSpecificity(type: IrType): number {
       return 1 + typeSpecificity(type.inner);
     case 'primitive':
       return 1;
+    case 'union':
+      return 2 + type.alternatives.reduce((total, item) => total + typeSpecificity(item), 0);
     case 'dynamic':
       return 0;
   }
@@ -1406,7 +1514,7 @@ export function padContextualObjectFunctionParameters(declarations: IrDeclaratio
     Boolean(
       value &&
       typeof value === 'object' &&
-      ['anonymous', 'array', 'dynamic', 'function', 'named', 'nullable', 'primitive'].includes(
+      ['anonymous', 'array', 'dynamic', 'function', 'named', 'nullable', 'primitive', 'union'].includes(
         (value as { kind?: string }).kind ?? '',
       ),
     );
@@ -1470,6 +1578,9 @@ function fillGenericArguments(declarations: IrDeclaration[]): void {
       }
       case 'nullable':
         visit(type.inner);
+        break;
+      case 'union':
+        type.alternatives.forEach(visit);
         break;
       case 'dynamic':
       case 'primitive':
@@ -2173,6 +2284,9 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
       case 'nullable':
         type(value.inner);
         break;
+      case 'union':
+        value.alternatives.forEach(type);
+        break;
       case 'dynamic':
       case 'primitive':
         break;
@@ -2184,6 +2298,7 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
       if (item.initializer) expression(item.initializer);
     });
   const expression = (value: IrExpression): void => {
+    if (value.type) type(value.type);
     switch (value.kind) {
       case 'array':
         value.elements.forEach(expression);
@@ -2238,6 +2353,7 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
       case 'property':
         expression(value.object);
         if (value.generatedClass) value.generatedClass = typeNames.get(value.generatedClass) ?? value.generatedClass;
+        if (value.structuralReceiverType) type(value.structuralReceiverType);
         break;
       case 'spread':
         expression(value.expression);

@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Material;
 
 class _StandardMaterialValues {
-  public static final StandardMaterialKindValue:Dynamic = 'StandardMaterial';
+  public static final StandardMaterialKindValue:String = 'StandardMaterial';
 }

@@ -12,12 +12,12 @@ class Oklab {
   }
 
   public static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
-    var lc:Dynamic = cast _Runtime.UNDEFINED;
-    var mc:Dynamic = cast _Runtime.UNDEFINED;
-    var sc:Dynamic = cast _Runtime.UNDEFINED;
+    var l:Float = cast _Runtime.UNDEFINED;
+    var m:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var lc:Float = cast _Runtime.UNDEFINED;
+    var mc:Float = cast _Runtime.UNDEFINED;
+    var sc:Float = cast _Runtime.UNDEFINED;
     l = (((0.4122214708 * r) + (0.5363325363 * g)) + (0.0514459929 * b));
     m = (((0.2119034982 * r) + (0.6806995451 * g)) + (0.1073969566 * b));
     s = (((0.0883024619 * r) + (0.2817188376 * g)) + (0.6299787005 * b));
@@ -30,12 +30,12 @@ class Oklab {
   }
 
   public static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
-    var lc:Dynamic = cast _Runtime.UNDEFINED;
-    var mc:Dynamic = cast _Runtime.UNDEFINED;
-    var sc:Dynamic = cast _Runtime.UNDEFINED;
-    var l:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var lc:Float = cast _Runtime.UNDEFINED;
+    var mc:Float = cast _Runtime.UNDEFINED;
+    var sc:Float = cast _Runtime.UNDEFINED;
+    var l:Float = cast _Runtime.UNDEFINED;
+    var m:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
     lc = ((L + (0.3963377774 * a)) + (0.2158037573 * b));
     mc = ((L - (0.1055613458 * a)) - (0.0638541728 * b));
     sc = ((L - (0.0894841775 * a)) - (1.291485548 * b));

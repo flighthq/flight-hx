@@ -10,11 +10,11 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 
 class GetPathSegmentAtParameter {
   public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    var u:Dynamic = cast _Runtime.UNDEFINED;
-    var u2:Dynamic = cast _Runtime.UNDEFINED;
-    var u3:Dynamic = cast _Runtime.UNDEFINED;
-    var t2:Dynamic = cast _Runtime.UNDEFINED;
-    var t3:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
+    var u2:Float = cast _Runtime.UNDEFINED;
+    var u3:Float = cast _Runtime.UNDEFINED;
+    var t2:Float = cast _Runtime.UNDEFINED;
+    var t3:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
     u2 = (u * u);
     u3 = (u2 * u);
@@ -27,9 +27,9 @@ class GetPathSegmentAtParameter {
   }
 
   public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    var u:Dynamic = cast _Runtime.UNDEFINED;
-    var u2:Dynamic = cast _Runtime.UNDEFINED;
-    var t2:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
+    var u2:Float = cast _Runtime.UNDEFINED;
+    var t2:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
     u2 = (u * u);
     t2 = (t * t);
@@ -40,17 +40,17 @@ class GetPathSegmentAtParameter {
   }
 
   public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast _Runtime.callValue(GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, false] : Array<Dynamic>));
+    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path : Path), (cast segmentIndex : Float), (cast t : Float), (cast out : Vector2Like), (cast false : Bool)) : Bool);
     return cast null;
   }
 
   public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast _Runtime.callValue(GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, true] : Array<Dynamic>));
+    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path : Path), (cast segmentIndex : Float), (cast t : Float), (cast out : Vector2Like), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
     (out.x = cast (((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)) : Dynamic));
     (out.y = cast (((((u * u) * y0) + (((2.0 * u) * t) * cy)) + ((t * t) * y1)) : Dynamic));
@@ -59,7 +59,7 @@ class GetPathSegmentAtParameter {
   }
 
   public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
-    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
     (out.x = cast ((2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))) : Dynamic));
     (out.y = cast ((2.0 * ((u * (cy - y0)) + (t * (y1 - cy)))) : Dynamic));
@@ -68,12 +68,12 @@ class GetPathSegmentAtParameter {
   }
 
   public static function walkPathSegment__getPathSegmentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like, wantTangent:Bool):Bool {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var currentSegment:Dynamic = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var currentSegment:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var di:Float = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(path, 'commands');
     data = _Runtime.field(path, 'data');
     currentSegment = 0.0;
@@ -81,20 +81,20 @@ class GetPathSegmentAtParameter {
     y = 0.0;
     di = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
+        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
           (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var x1:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var y1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
+          var x1:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var y1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
@@ -109,9 +109,9 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var x1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
+          var x1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
@@ -126,43 +126,43 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var cx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var cy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var x1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
+          var cx:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var cy:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var x1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              _Runtime.callValue(getQuadraticBezierTangent, cast ([x, y, cx, cy, x1, y1, t, out] : Array<Dynamic>));
+              (cast getQuadraticBezierTangent((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
             } else {
-              _Runtime.callValue(getQuadraticBezierPoint, cast ([x, y, cx, cy, x1, y1, t, out] : Array<Dynamic>));
+              (cast getQuadraticBezierPoint((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
             }
             return cast true;
           }
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var c1x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var c1y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var c2x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var c2y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-          var x1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-          var y1:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
+          var c1x:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var c1y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var c2x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var c2y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var x1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var y1:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              _Runtime.callValue(getCubicBezierTangent, cast ([x, y, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
+              (cast getCubicBezierTangent((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
             } else {
-              _Runtime.callValue(getCubicBezierPoint, cast ([x, y, c1x, c1y, c2x, c2y, x1, y1, t, out] : Array<Dynamic>));
+              (cast getCubicBezierPoint((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
             }
             return cast true;
           }
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
         } } } } } } }
         ci++;
       }

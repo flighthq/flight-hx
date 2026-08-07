@@ -1577,7 +1577,7 @@ class Geometry {
     Facade_Geometry_flighthq_geometry_Vector4.setVector4FromFloat32Array(out, offset, source);
   }
 
-  public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, ?w:Dynamic):Void {
+  public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, ?w:Float):Void {
     Facade_Geometry_flighthq_geometry_Vector4.setVector4FromVector3(out, source, w);
   }
 

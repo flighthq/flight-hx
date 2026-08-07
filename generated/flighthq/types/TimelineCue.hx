@@ -13,7 +13,7 @@ import flighthq.types._internal._TimelineCueValues.TimelinePreviousFrameCueKind;
 import flighthq.types._internal._TimelineCueValues.TimelineStopCueKind;
 import flighthq.types._internal._TimelineCueValues.TimelineStreamAudioCueKind;
 
-typedef TimelineFrameEntryCause = Dynamic;
+typedef TimelineFrameEntryCause = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef TimelineCue = { var frame:Float; var kind:String; };
 
@@ -27,7 +27,7 @@ typedef TimelineGotoCue = { var frame:Float; var kind:String; var targetFrame:Nu
 
 typedef TimelinePlaybackCue = { var frame:Float; var kind:String; };
 
-typedef TimelineCueHandler = Dynamic;
+typedef TimelineCueHandler = Timeline->TimelineCue->TimelineFrameEntryCause->Void;
 
 typedef TimelineCueHandlerEntry = { var dispatchOnSeek:Bool; var handle:TimelineCueHandler; var kind:String; };
 

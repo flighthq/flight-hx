@@ -7,9 +7,9 @@ import flighthq.types.GodRaysEffect;
 
 class GodRaysMath {
   public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var weight:Dynamic = cast _Runtime.UNDEFINED;
-    var exposure:Dynamic = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var weight:Float = cast _Runtime.UNDEFINED;
+    var exposure:Float = cast _Runtime.UNDEFINED;
     samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
     weight = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4));
     exposure = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1));
@@ -23,9 +23,9 @@ class GodRaysMath {
   }
 
   public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
-    var decay:Dynamic = cast _Runtime.UNDEFINED;
-    var weight:Dynamic = cast _Runtime.UNDEFINED;
-    var exposure:Dynamic = cast _Runtime.UNDEFINED;
+    var decay:Float = cast _Runtime.UNDEFINED;
+    var weight:Float = cast _Runtime.UNDEFINED;
+    var exposure:Float = cast _Runtime.UNDEFINED;
     decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.96);
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1);
@@ -34,12 +34,12 @@ class GodRaysMath {
   }
 
   public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var density:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var density:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
     cx = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
     cy = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 0.96);

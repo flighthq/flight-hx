@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _UnlitMaterialValues {
-  public static final UnlitMaterialKind:Dynamic = 'UnlitMaterial';
+  public static final UnlitMaterialKind:String = 'UnlitMaterial';
 }

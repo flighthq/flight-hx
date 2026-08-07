@@ -3,7 +3,10 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.InputGamepadData.InputGamepadAxisData;
+import flighthq.types.InputGamepadData.InputGamepadButtonData;
+import flighthq.types.InputGamepadData.InputGamepadConnectData;
 
 typedef AttachInputOptions = { @:optional var preventDefault:Bool; };
 
-typedef InputManager = { var onGamepadAxisMove:Signal<Dynamic>; var onGamepadButtonDown:Signal<Dynamic>; var onGamepadButtonUp:Signal<Dynamic>; var onGamepadConnect:Signal<Dynamic>; var onGamepadDisconnect:Signal<Dynamic>; var onKeyDown:Signal<Dynamic>; var onKeyUp:Signal<Dynamic>; var onPointerCancel:Signal<Dynamic>; var onPointerDown:Signal<Dynamic>; var onPointerMove:Signal<Dynamic>; var onPointerMoveRelative:Signal<Dynamic>; var onPointerUp:Signal<Dynamic>; var onTextEdit:Signal<Dynamic>; var onTextInput:Signal<Dynamic>; var onWheel:Signal<Dynamic>; var enabled:Bool; };
+typedef InputManager = { var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; var enabled:Bool; };

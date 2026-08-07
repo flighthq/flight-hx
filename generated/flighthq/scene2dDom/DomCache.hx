@@ -13,28 +13,30 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransformWithOffset;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DomRenderState;
+import flighthq.types.Matrix;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
+import flighthq.types.Renderable;
 import flighthq.types.Scene2DRenderer;
 
 class DomCache {
   public static function enableDomRenderCache(state:RenderState):Void {
-    _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultDomRenderCacheRenderer] : Array<Dynamic>));
+    registerRenderCacheRenderer((cast state : RenderState), defaultDomRenderCacheRenderer);
   }
 
   @:noCompletion
   public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>));
-    target = ((cast targets : flighthq._internal._WeakMap).get(cache));
+    var targets:flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    targets = (cast DomCache.getTargets__domCache((cast state : DomRenderState)) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>);
+    target = ((cast targets : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (target = cast (_Runtime.callValue(createCanvasRenderTarget, cast ([width, height] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(target, 'canvas')] : Array<Dynamic>));
-      ((cast targets : flighthq._internal._WeakMap).set(cache, target));
+      (target = cast ((cast createCanvasRenderTarget((cast width : Float), (cast height : Float)) : Null<CanvasRenderTarget>) : Dynamic));
+      prepareDomElement((cast (cast target : CanvasRenderTarget).canvas : flighthq._internal.dom.HTMLElement));
+      ((cast targets : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).set(cache, target));
     } else {
-      _Runtime.callValue(resizeCanvasRenderTarget, cast ([target, width, height] : Array<Dynamic>));
+      resizeCanvasRenderTarget((cast target : CanvasRenderTarget), (cast width : Float), (cast height : Float));
     }
     return cast target;
     return cast null;
@@ -42,39 +44,39 @@ class DomCache {
 
   @:noCompletion
   public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
-    return cast _Runtime.coalesce(((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast DomCache.getTargets__domCache((cast state : DomRenderState)) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
-    ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).delete_(cache));
+    ((cast (cast DomCache.getTargets__domCache((cast state : DomRenderState)) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).delete_(cache));
   }
 
   public static function drawDomRenderCache__domCache(state:RenderState, data:RenderProxy2D):Void {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var domState:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(data, 'source')] : Array<Dynamic>));
+    var cache:Null<RenderCache> = cast _Runtime.UNDEFINED;
+    var domState:DomRenderState = cast _Runtime.UNDEFINED;
+    var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    cache = (cast getRenderProxyCache((cast state : RenderState), (cast data : RenderProxy2D).source) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
     domState = (cast state : DomRenderState);
-    target = ((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([domState] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
+    target = ((cast (cast DomCache.getTargets__domCache((cast domState : DomRenderState)) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    canvas = _Runtime.field(target, 'canvas');
-    _Runtime.callValue(setDomTransformWithOffset, cast ([canvas, _Runtime.field(data, 'transform2D'), 0.0, 0.0, _Runtime.field(domState, 'roundPixels')] : Array<Dynamic>));
-    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    _Runtime.callOptionalProperty(domState, 'applyBlendMode', cast ([canvas, _Runtime.field(data, 'blendMode')] : Array<Dynamic>));
-    _Runtime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
+    canvas = (cast target : CanvasRenderTarget).canvas;
+    setDomTransformWithOffset((cast canvas : flighthq._internal.dom.HTMLElement), (cast data : RenderProxy2D).transform2D, (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast domState : DomRenderState).roundPixels : Bool));
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast data : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast data : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : RenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
+    _Runtime.callOptionalValue((cast domState : DomRenderState).applyBlendMode, cast ([canvas, (cast data : RenderProxy2D).blendMode] : Array<Dynamic>));
+    setDomRendererElement((cast domState : DomRenderState), (cast canvas : flighthq._internal.dom.HTMLElement));
   }
 
-  public static function getTargets__domCache(state:DomRenderState):Dynamic {
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).get(state));
+  public static function getTargets__domCache(state:DomRenderState):flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget> {
+    var targets:Null<flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>> = cast _Runtime.UNDEFINED;
+    targets = ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap<DomRenderState, flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>>).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
-      ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).set(state, targets));
+      ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap<DomRenderState, flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>>).set(state, targets));
     }
     return cast targets;
     return cast null;
@@ -83,5 +85,5 @@ class DomCache {
   @:noCompletion
   public static final defaultDomRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache };
 
-  public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _renderCacheTargets__domCache:flighthq._internal._WeakMap<DomRenderState, flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

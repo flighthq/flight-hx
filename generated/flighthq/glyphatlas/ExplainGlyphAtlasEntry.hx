@@ -4,31 +4,37 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
+import flighthq.types.Bitmap;
 import flighthq.types.GlyphAtlasEntryExplanation;
 import flighthq.types.GlyphSource.GlyphAtlas;
+import flighthq.types.GlyphSource.GlyphAtlasRuntime;
+import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphSource.GlyphRasterizeOptions;
+import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
+import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class ExplainGlyphAtlasEntry {
   public static function explainGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):GlyphAtlasEntryExplanation {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var padding:Dynamic = cast _Runtime.UNDEFINED;
-    var usableWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var usableHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmap:Dynamic = cast _Runtime.UNDEFINED;
-    var fits:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
+    var padding:Float = cast _Runtime.UNDEFINED;
+    var usableWidth:Float = cast _Runtime.UNDEFINED;
+    var usableHeight:Float = cast _Runtime.UNDEFINED;
+    var bitmap:Null<GlyphRasterizedBitmap> = cast _Runtime.UNDEFINED;
+    var fits:Bool = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     padding = runtime.padding;
     usableWidth = (runtime.bitmap.width - (2.0 * padding));
     usableHeight = (runtime.bitmap.height - (2.0 * padding));
-    if ((cast ((cast runtime.entries : flighthq._internal._Map).has(codepoint)) : Bool)) {
-      var entry:Dynamic = ((cast runtime.entries : flighthq._internal._Map).get(codepoint));
+    if ((cast ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).has(codepoint)) : Bool)) {
+      var entry:GlyphEntry = ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint));
       return cast { renderable: true, reason: 'ok', glyphWidth: entry.width, glyphHeight: entry.height, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    bitmap = _Runtime.callProperty(_Runtime.callValue(getGlyphRasterizerBackend, cast ([] : Array<Dynamic>)), 'rasterize', cast ([codepoint, runtime.rasterizeOptions] : Array<Dynamic>));
+    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize(codepoint, runtime.rasterizeOptions);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) {
       return cast { renderable: false, reason: 'rasterizer-returned-null', glyphWidth: 0.0, glyphHeight: 0.0, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    fits = ((cast ((cast bitmap.width : Float) <= (cast usableWidth : Float)) : Bool) && (cast ((cast bitmap.height : Float) <= (cast usableHeight : Float)) : Bool));
-    return cast { renderable: fits, reason: ((cast fits : Bool) ? (cast 'ok' : Dynamic) : (cast 'glyph-larger-than-atlas' : Dynamic)), glyphWidth: bitmap.width, glyphHeight: bitmap.height, usableWidth: usableWidth, usableHeight: usableHeight };
+    fits = ((cast ((cast (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).width : Float) <= (cast usableWidth : Float)) : Bool) && (cast ((cast (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).height : Float) <= (cast usableHeight : Float)) : Bool));
+    return cast { renderable: fits, reason: ((cast fits : Bool) ? (cast 'ok' : Dynamic) : (cast 'glyph-larger-than-atlas' : Dynamic)), glyphWidth: (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).width, glyphHeight: (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).height, usableWidth: usableWidth, usableHeight: usableHeight };
     return cast null;
   }
 }

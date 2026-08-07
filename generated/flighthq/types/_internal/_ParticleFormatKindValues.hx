@@ -5,17 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _ParticleFormatKindValues {
-  public static final ParticleDesignerFormatKind:Dynamic = 'ParticleDesigner';
+  public static final ParticleDesignerFormatKind:String = 'ParticleDesigner';
 
-  public static final SpineParticleFormatKind:Dynamic = 'Spine';
+  public static final SpineParticleFormatKind:String = 'Spine';
 
-  public static final UnityParticleFormatKind:Dynamic = 'Unity';
+  public static final UnityParticleFormatKind:String = 'Unity';
 
-  public static final LibgdxParticleFormatKind:Dynamic = 'Libgdx';
+  public static final LibgdxParticleFormatKind:String = 'Libgdx';
 
-  public static final StarlingPexFormatKind:Dynamic = 'StarlingPex';
+  public static final StarlingPexFormatKind:String = 'StarlingPex';
 
-  public static final PixiParticleFormatKind:Dynamic = 'Pixi';
+  public static final PixiParticleFormatKind:String = 'Pixi';
 
-  public static final PhaserParticleFormatKind:Dynamic = 'Phaser';
+  public static final PhaserParticleFormatKind:String = 'Phaser';
 }

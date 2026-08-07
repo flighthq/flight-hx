@@ -4,8 +4,8 @@ package flighthq._internal;
 // Constructed through `_Runtime` and used as the typed receiver surface for
 // generated Set operations.
 @:keep
-class _Set {
-  private final items:Array<Dynamic> = [];
+class _Set<T> {
+  private final items:Array<T> = [];
 
   public var size(default, null):Int = 0;
 
@@ -13,7 +13,7 @@ class _Set {
     if (source != null) for (item in (cast source : Array<Dynamic>)) add(item);
   }
 
-  public function add(value:Dynamic):_Set {
+  public function add(value:T):_Set<T> {
     if (!has(value)) items.push(value);
     size = items.length;
     return this;
@@ -27,7 +27,7 @@ class _Set {
   #if js
   @:native("delete")
   #end
-  public function delete_(value:Dynamic):Bool {
+  public function delete_(value:T):Bool {
     final removed = items.remove(value);
     size = items.length;
     return removed;
@@ -39,11 +39,11 @@ class _Set {
     for (item in items) _Runtime.callValue(callback, [item, item, this]);
   }
 
-  public function has(value:Dynamic):Bool return items.indexOf(value) >= 0;
+  public function has(value:T):Bool return items.indexOf(value) >= 0;
 
-  public function iterator():Iterator<Dynamic> return items.iterator();
+  public function iterator():Iterator<T> return items.iterator();
 
-  public function keys():Array<Dynamic> return items.copy();
+  public function keys():Array<T> return items.copy();
 
-  public function values():Array<Dynamic> return items.copy();
+  public function values():Array<T> return items.copy();
 }

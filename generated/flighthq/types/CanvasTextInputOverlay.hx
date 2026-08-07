@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CanvasTextInputOverlay = Dynamic;
+typedef CanvasTextInputOverlay = CanvasRenderState->RenderProxy2D->Void;

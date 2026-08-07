@@ -19,7 +19,7 @@ import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class Font {
   public static function createFont(name:String):flighthq.types.Font {
-    return cast _Runtime.callValue(createEntity, cast ([{ name: name }] : Array<Dynamic>));
+    return cast (cast createEntity((cast { name: name } : Null<{ var name:String; }>)) : flighthq.types.Font);
     return cast null;
   }
 
@@ -33,7 +33,7 @@ class Font {
     return cast null;
   }
 
-  public static function detectFontFormat(bytes:Dynamic):Null<String> {
+  public static function detectFontFormat(bytes:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
     return cast Facade_Font_flighthq_font_FontFormat.detectFontFormat(bytes);
     return cast null;
   }

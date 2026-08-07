@@ -7,20 +7,29 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.materials.MaterialValidation.isValidMaterialIor;
 import flighthq.materials.MaterialValidation.isValidMaterialWeight;
 import flighthq.materials.PbrExtension.isValidPbrUvSet;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.TransmissionVolumePbrExtension;
 import flighthq.types.Types.TransmissionVolumePbrExtensionKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
 class TransmissionVolumePbrExtension {
   public static function createTransmissionVolumePbrExtension(?opts:Dynamic):flighthq.types.TransmissionVolumePbrExtension {
-    return cast _Runtime.callValue(createEntity, cast ([{ attenuationColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'attenuationColor'), function():Dynamic return cast 4294967295.0), attenuationDistance: _Runtime.coalesce(_Runtime.optionalField(opts, 'attenuationDistance'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), ior: _Runtime.coalesce(_Runtime.optionalField(opts, 'ior'), function():Dynamic return cast 1.5), kind: TransmissionVolumePbrExtensionKind, thickness: _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 0.0), thicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMap'), function():Dynamic return cast null), thicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMapUvSet'), function():Dynamic return cast 0.0), transmission: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmission'), function():Dynamic return cast 0.0), transmissionMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmissionMap'), function():Dynamic return cast null), transmissionMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmissionMapUvSet'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+    return cast (cast createEntity({ attenuationColor: _Runtime.coalesce(_Runtime.optionalField(opts, 'attenuationColor'), function():Dynamic return cast 4294967295.0), attenuationDistance: _Runtime.coalesce(_Runtime.optionalField(opts, 'attenuationDistance'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), ior: _Runtime.coalesce(_Runtime.optionalField(opts, 'ior'), function():Dynamic return cast 1.5), kind: TransmissionVolumePbrExtensionKind, thickness: _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 0.0), thicknessMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMap'), function():Dynamic return cast null), thicknessMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'thicknessMapUvSet'), function():Dynamic return cast 0.0), transmission: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmission'), function():Dynamic return cast 0.0), transmissionMap: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmissionMap'), function():Dynamic return cast null), transmissionMapUvSet: _Runtime.coalesce(_Runtime.optionalField(opts, 'transmissionMapUvSet'), function():Dynamic return cast 0.0) }) : flighthq.types.TransmissionVolumePbrExtension);
     return cast null;
   }
 
   public static function isValidTransmissionVolumePbrExtension(value:flighthq.types.TransmissionVolumePbrExtension):Bool {
-    var validAttenuationDistance:Dynamic = cast _Runtime.UNDEFINED;
+    var validAttenuationDistance:Bool = cast _Runtime.UNDEFINED;
     validAttenuationDistance = ((cast _Runtime.strictEquals(_Runtime.field(value, 'attenuationDistance'), HxMath.POSITIVE_INFINITY) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'attenuationDistance')] : Array<Dynamic>)), function():Dynamic return cast ((cast _Runtime.field(value, 'attenuationDistance') : Float) > (cast 0.0 : Float))) : Bool));
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'transmission')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(isValidMaterialIor, cast ([_Runtime.field(value, 'ior')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast validAttenuationDistance : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'thicknessMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'transmissionMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'transmission') : Float)) : Bool) : Bool) && (cast (cast isValidMaterialIor((cast _Runtime.field(value, 'ior') : Float)) : Bool) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast validAttenuationDistance : Bool)) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'thicknessMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'transmissionMapUvSet') : Float)) : Bool));
     return cast null;
   }
 }

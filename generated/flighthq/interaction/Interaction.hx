@@ -44,25 +44,25 @@ import flighthq.types.Rectangle;
 import flighthq.types.SignalConnectOptions;
 
 class Interaction {
-  public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
+  public static function captureInteractionPointer<N>(manager:InteractionManager<N>, pointerId:Float, target:N):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.captureInteractionPointer(manager, pointerId, target);
   }
 
-  public static function clearFocus<N>(manager:FocusManager<Dynamic>):Void {
+  public static function clearFocus<N>(manager:FocusManager<N>):Void {
     Facade_Interaction_flighthq_interaction_FocusManager.clearFocus(manager);
   }
 
-  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
+  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<N>, ?options:FocusNavigationOptions):Void->Void {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.connectFocusNavigation(input, manager, options);
     return cast null;
   }
 
-  public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<Dynamic>, ?coordScale:Float):Dynamic {
+  public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<N>, ?coordScale:Float):Void->Void {
     return cast Facade_Interaction_flighthq_interaction_InteractionManager.connectInputToInteraction(input, manager, coordScale);
     return cast null;
   }
 
-  public static function connectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
+  public static function connectInteractionSignal<N, Name>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.connectInteractionSignal(manager, target, name, slot, options);
   }
 
@@ -71,12 +71,12 @@ class Interaction {
     return cast null;
   }
 
-  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):FocusManager<Dynamic> {
+  public static function createFocusManager<N>(root:N, ?options:FocusManagerOptions):FocusManager<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.createFocusManager(root, options);
     return cast null;
   }
 
-  public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):InteractionManager<Dynamic> {
+  public static function createInteractionManager<N>(root:N, ?options:InteractionManagerOptions):InteractionManager<N> {
     return cast Facade_Interaction_flighthq_interaction_InteractionManager.createInteractionManager(root, options);
     return cast null;
   }
@@ -99,39 +99,39 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_EnableInteractionGuards.disableInteractionGuards();
   }
 
-  public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
+  public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.disconnectInteractionSignal(manager, target, name, slot);
   }
 
-  public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionContextMenu(manager, x, y, button, options);
   }
 
-  public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyDown(manager, key, keyCode, modifiers);
   }
 
-  public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyUp(manager, key, keyCode, modifiers);
   }
 
-  public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<N>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerCancel(manager, x, y, options);
   }
 
-  public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerDown(manager, x, y, button, options);
   }
 
-  public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerMove(manager, x, y, button, options);
   }
 
-  public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?time:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<N>, x:Float, y:Float, ?button:Float, ?time:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionPointerUp(manager, x, y, button, time, options);
   }
 
-  public static function dispatchInteractionWheel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionWheel<N>(manager:InteractionManager<N>, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:InteractionPointerOptions):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionWheel(manager, x, y, deltaX, deltaY, options);
   }
 
@@ -139,7 +139,7 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_EnableInteractionGuards.enableInteractionGuards();
   }
 
-  public static function enableInteractionSignals<N>(source:Dynamic):InteractionSignals {
+  public static function enableInteractionSignals<N>(source:N):InteractionSignals {
     return cast Facade_Interaction_flighthq_interaction_InteractionManager.enableInteractionSignals(source);
     return cast null;
   }
@@ -174,37 +174,37 @@ class Interaction {
     return cast null;
   }
 
-  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?precise:Bool):Null<Dynamic> {
+  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<N>, x:Float, y:Float, ?precise:Bool):Null<N> {
     return cast Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.findSpatialInteractionTarget(manager, x, y, precise);
     return cast null;
   }
 
-  public static function focusNextNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusNextNode<N>(manager:FocusManager<N>):Null<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.focusNextNode(manager);
     return cast null;
   }
 
-  public static function focusNodeInDirection<N>(manager:FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
+  public static function focusNodeInDirection<N>(manager:FocusManager<N>, direction:FocusDirection):Null<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.focusNodeInDirection(manager, direction);
     return cast null;
   }
 
-  public static function focusPreviousNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusPreviousNode<N>(manager:FocusManager<N>):Null<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.focusPreviousNode(manager);
     return cast null;
   }
 
-  public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function getFocusedNode<N>(manager:FocusManager<N>):Null<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.getFocusedNode(manager);
     return cast null;
   }
 
-  public static function getFocusOrder<N>(manager:FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
+  public static function getFocusOrder<N>(manager:FocusManager<N>, ?out:Array<N>):Array<N> {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.getFocusOrder(manager, out);
     return cast null;
   }
 
-  public static function getInteractionSignals<N>(source:Dynamic):Null<InteractionSignals> {
+  public static function getInteractionSignals<N>(source:N):Null<InteractionSignals> {
     return cast Facade_Interaction_flighthq_interaction_InteractionManager.getInteractionSignals(source);
     return cast null;
   }
@@ -279,7 +279,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function isNodeFocused<N>(manager:FocusManager<Dynamic>, node:Dynamic):Bool {
+  public static function isNodeFocused<N>(manager:FocusManager<N>, node:N):Bool {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.isNodeFocused(manager, node);
     return cast null;
   }
@@ -289,7 +289,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
+  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<N>):Void {
     Facade_Interaction_flighthq_interaction_InteractionSpatialIndex.refreshInteractionSpatialIndex(manager);
   }
 
@@ -317,11 +317,11 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_RegisterTextHitTest.registerTextHitTest();
   }
 
-  public static function releaseInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float):Void {
+  public static function releaseInteractionPointer<N>(manager:InteractionManager<N>, pointerId:Float):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.releaseInteractionPointer(manager, pointerId);
   }
 
-  public static function setFocusedNode<N>(manager:FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
+  public static function setFocusedNode<N>(manager:FocusManager<N>, node:Null<N>):Bool {
     return cast Facade_Interaction_flighthq_interaction_FocusManager.setFocusedNode(manager, node);
     return cast null;
   }

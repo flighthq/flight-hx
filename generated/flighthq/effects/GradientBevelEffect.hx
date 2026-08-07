@@ -17,20 +17,20 @@ class GradientBevelEffect {
   }
 
   public static function getGradientBevelEffectPadding(effect:flighthq.types.GradientBevelEffect):RenderEffectPadding {
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    return cast _Runtime.callValue(getDirectionalRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), _Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.multiplyNumbers(HxMath.sin(angle), distance)] : Array<Dynamic>));
+    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'GradientBevelEffect', GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'GradientBevelEffect' : String), GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect);
   }
 
   public static function resolveGradientBevelEffectPadding__gradientBevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGradientBevelEffectPadding, cast ([(cast effect : flighthq.types.GradientBevelEffect)] : Array<Dynamic>));
+    return cast (cast getGradientBevelEffectPadding((cast (cast effect : flighthq.types.GradientBevelEffect) : flighthq.types.GradientBevelEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

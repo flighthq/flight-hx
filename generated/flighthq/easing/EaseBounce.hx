@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseBounce {
-  public static final easeInBounce:EasingFunction = function(t:Dynamic) return _Runtime.subtractNumbers(1.0, _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - t)] : Array<Dynamic>)));
+  public static final easeInBounce:EasingFunction = function(t:Float):Float return (1.0 - (cast EaseBounce.bounceOut__easeBounce((cast (1.0 - t) : Float)) : Float));
 
-  public static final easeInOutBounce:EasingFunction = function(t:Dynamic) return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(1.0, _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([(1.0 - (2.0 * t))] : Array<Dynamic>))) / 2.0) : Dynamic) : (cast (_Runtime.addNumbers(1.0, _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([((2.0 * t) - 1.0)] : Array<Dynamic>))) / 2.0) : Dynamic));
+  public static final easeInOutBounce:EasingFunction = function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast ((1.0 - (cast EaseBounce.bounceOut__easeBounce((cast (1.0 - (2.0 * t)) : Float)) : Float)) / 2.0) : Dynamic) : (cast ((1.0 + (cast EaseBounce.bounceOut__easeBounce((cast ((2.0 * t) - 1.0) : Float)) : Float)) / 2.0) : Dynamic));
 
-  public static final easeOutBounce:EasingFunction = function(t:Dynamic) return _Runtime.callValue(EaseBounce.bounceOut__easeBounce, cast ([t] : Array<Dynamic>));
+  public static final easeOutBounce:EasingFunction = function(t:Float):Float return (cast EaseBounce.bounceOut__easeBounce((cast t : Float)) : Float);
 
   public static function bounceOut__easeBounce(t:Float):Float {
     if ((cast ((cast t : Float) < (cast (1.0 / 2.75) : Float)) : Bool)) { return cast ((7.5625 * t) * t); }

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleFormatCodec = { var detect:Dynamic; var parseToConfig:Dynamic; var parseToDocument:Dynamic; var serialize:Dynamic; };
+typedef ParticleFormatCodec = { var detect:String->Bool; var parseToConfig:String->ParticleEmitterConfig; var parseToDocument:String->{ var config:ParticleEmitterConfig; var diagnostics:Array<ImportDiagnostic>; }; var serialize:ParticleEmitterConfig->ParticleSerializeResult; };

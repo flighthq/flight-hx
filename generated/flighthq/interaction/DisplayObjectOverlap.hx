@@ -10,34 +10,35 @@ import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 
 class DisplayObjectOverlap {
   public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
-    return cast _Runtime.callValue(enclosesRectangle, cast ([_Runtime.callValue(getNodeWorldBoundsRectangle, cast ([outer] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([inner] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast enclosesRectangle((cast getNodeWorldBoundsRectangle(outer) : RectangleLike), (cast getNodeWorldBoundsRectangle(inner) : RectangleLike)) : Bool);
     return cast null;
   }
 
   public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
-    _Runtime.callValue(computeRectangleIntersection, cast ([out, _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
+    computeRectangleIntersection(out, (cast getNodeWorldBoundsRectangle(source) : RectangleLike), (cast getNodeWorldBoundsRectangle(other) : RectangleLike));
     return cast out;
     return cast null;
   }
 
   public static function hitTestNode2DsShape(source:Node2D, other:Node2D):Bool {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var aCenterX:Dynamic = cast _Runtime.UNDEFINED;
-    var aCenterY:Dynamic = cast _Runtime.UNDEFINED;
-    var bCenterX:Dynamic = cast _Runtime.UNDEFINED;
-    var bCenterY:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
-    b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(intersectsRectangle, cast ([a, b] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    var a:Rectangle = cast _Runtime.UNDEFINED;
+    var b:Rectangle = cast _Runtime.UNDEFINED;
+    var aCenterX:Float = cast _Runtime.UNDEFINED;
+    var aCenterY:Float = cast _Runtime.UNDEFINED;
+    var bCenterX:Float = cast _Runtime.UNDEFINED;
+    var bCenterY:Float = cast _Runtime.UNDEFINED;
+    a = (cast getNodeWorldBoundsRectangle(source) : Rectangle);
+    b = (cast getNodeWorldBoundsRectangle(other) : Rectangle);
+    if ((cast !(cast (cast intersectsRectangle(a, b) : Bool) : Bool) : Bool)) { return cast false; }
     aCenterX = _Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.multiplyNumbers(_Runtime.field(a, 'width'), 0.5));
     aCenterY = _Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.multiplyNumbers(_Runtime.field(a, 'height'), 0.5));
     bCenterX = _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.multiplyNumbers(_Runtime.field(b, 'width'), 0.5));
     bCenterY = _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.multiplyNumbers(_Runtime.field(b, 'height'), 0.5));
-    return cast ((cast _Runtime.callValue(containsRectanglePointXY, cast ([a, bCenterX, bCenterY] : Array<Dynamic>)) : Bool) || (cast _Runtime.callValue(containsRectanglePointXY, cast ([b, aCenterX, aCenterY] : Array<Dynamic>)) : Bool));
+    return cast ((cast (cast containsRectanglePointXY(a, (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY(b, (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
     return cast null;
   }
 }

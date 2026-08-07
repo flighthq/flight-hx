@@ -147,11 +147,11 @@ class Particleemitter {
     return cast null;
   }
 
-  public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter2D.prewarmParticleEmitter2D(emitter, state, config, duration, stepDeltaTime, callbacks);
   }
 
-  public static function prewarmParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter3D.prewarmParticleEmitter3D(emitter, state, config, duration, stepDeltaTime, callbacks);
   }
 

@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _AnimationLoopModeValues {
-  public static final AnimationLoopModePingPong:Dynamic = 'PingPong';
+  public static final AnimationLoopModePingPong:String = 'PingPong';
 
-  public static final AnimationLoopModeRepeat:Dynamic = 'Repeat';
+  public static final AnimationLoopModeRepeat:String = 'Repeat';
 }

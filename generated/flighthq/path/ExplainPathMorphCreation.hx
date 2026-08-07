@@ -10,14 +10,15 @@ import flighthq.path.PathMorphGeometry.PathMorphIssueNone;
 import flighthq.path.PathMorphGeometry.PathMorphIssueWindingMismatch;
 import flighthq.path.PathMorphGeometry.buildPathMorph;
 import flighthq.types.Path;
+import flighthq.types.PathMorph;
 import flighthq.types.PathMorphCreationExplanation;
 import flighthq.types.PathMorphCreationReason;
 
 class ExplainPathMorphCreation {
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callValue(buildPathMorph, cast ([start, end] : Array<Dynamic>));
-    return cast { contour: _Runtime.field(result, 'contour'), reason: _Runtime.callValue(ExplainPathMorphCreation.getReason__explainPathMorphCreation, cast ([_Runtime.field(result, 'issue')] : Array<Dynamic>)), supported: _Runtime.strictEquals(_Runtime.field(result, 'issue'), PathMorphIssueNone) };
+    var result:{ var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; } = cast _Runtime.UNDEFINED;
+    result = (cast buildPathMorph((cast start : Path), (cast end : Path)) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; });
+    return cast { contour: (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).contour, reason: (cast ExplainPathMorphCreation.getReason__explainPathMorphCreation((cast (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue : Float)) : PathMorphCreationReason), supported: _Runtime.strictEquals((cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue, PathMorphIssueNone) };
     return cast null;
   }
 

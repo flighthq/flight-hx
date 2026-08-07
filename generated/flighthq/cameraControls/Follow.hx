@@ -9,19 +9,20 @@ import flighthq.math.Clamp.clamp;
 import flighthq.math.InterpolationAdvanced.damp;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera2D.Camera2DFollowOptions;
+import flighthq.types.Rectangle;
 
 class Follow {
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
-    var camX:Dynamic = cast _Runtime.UNDEFINED;
-    var camY:Dynamic = cast _Runtime.UNDEFINED;
-    var deadHalfW:Dynamic = cast _Runtime.UNDEFINED;
-    var deadHalfH:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothTime:Dynamic = cast _Runtime.UNDEFINED;
-    var worldBounds:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var goalX:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var goalY:Dynamic = cast _Runtime.UNDEFINED;
+    var camX:Float = cast _Runtime.UNDEFINED;
+    var camY:Float = cast _Runtime.UNDEFINED;
+    var deadHalfW:Float = cast _Runtime.UNDEFINED;
+    var deadHalfH:Float = cast _Runtime.UNDEFINED;
+    var smoothTime:Float = cast _Runtime.UNDEFINED;
+    var worldBounds:Null<Rectangle> = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var goalX:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var goalY:Float = cast _Runtime.UNDEFINED;
     var nextX:Float = cast _Runtime.UNDEFINED;
     var nextY:Float = cast _Runtime.UNDEFINED;
     camX = camera.x;
@@ -37,31 +38,31 @@ class Follow {
     goalY = camY;
     if ((cast ((cast dy : Float) > (cast deadHalfH : Float)) : Bool)) { (goalY = cast ((targetY - deadHalfH) : Dynamic)); } else { if ((cast ((cast dy : Float) < (cast -deadHalfH : Float)) : Bool)) { (goalY = cast ((targetY + deadHalfH) : Dynamic)); } }
     if ((cast ((cast ((cast smoothTime : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var lambda:Dynamic = (1.0 / smoothTime);
-      (nextX = cast (_Runtime.callValue(damp, cast ([camX, goalX, lambda, deltaTime] : Array<Dynamic>)) : Dynamic));
-      (nextY = cast (_Runtime.callValue(damp, cast ([camY, goalY, lambda, deltaTime] : Array<Dynamic>)) : Dynamic));
+      var lambda:Float = (1.0 / smoothTime);
+      (nextX = cast ((cast damp((cast camX : Float), (cast goalX : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float) : Dynamic));
+      (nextY = cast ((cast damp((cast camY : Float), (cast goalY : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float) : Dynamic));
     } else {
       (nextX = cast (goalX : Dynamic));
       (nextY = cast (goalY : Dynamic));
     }
     if (_Runtime.truthy(worldBounds)) {
-      _Runtime.callValue(getCamera2DVisibleBounds, cast ([camera, Follow.scratchBounds__follow] : Array<Dynamic>));
-      var halfVisW:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(Follow.scratchBounds__follow, 'width'), 0.5);
-      var halfVisH:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(Follow.scratchBounds__follow, 'height'), 0.5);
-      if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'width') : Float)) : Bool)) {
+      getCamera2DVisibleBounds((cast camera : Camera2D), Follow.scratchBounds__follow);
+      var halfVisW:Float = ((cast Follow.scratchBounds__follow : Rectangle).width * 0.5);
+      var halfVisH:Float = ((cast Follow.scratchBounds__follow : Rectangle).height * 0.5);
+      if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).width : Float)) : Bool)) {
         (nextX = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'width'), 0.5)) : Dynamic));
       } else {
-        (nextX = cast (_Runtime.callValue(clamp, cast ([nextX, _Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), halfVisW), (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.field(worldBounds, 'width')) - halfVisW)] : Array<Dynamic>)) : Dynamic));
+        (nextX = cast ((cast clamp((cast nextX : Float), (cast _Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), halfVisW) : Float), (cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.field(worldBounds, 'width')) - halfVisW) : Float)) : Float) : Dynamic));
       }
-      if ((cast ((cast _Runtime.field(worldBounds, 'height') : Float) <= (cast _Runtime.field(Follow.scratchBounds__follow, 'height') : Float)) : Bool)) {
+      if ((cast ((cast _Runtime.field(worldBounds, 'height') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).height : Float)) : Bool)) {
         (nextY = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'height'), 0.5)) : Dynamic));
       } else {
-        (nextY = cast (_Runtime.callValue(clamp, cast ([nextY, _Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), halfVisH), (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.field(worldBounds, 'height')) - halfVisH)] : Array<Dynamic>)) : Dynamic));
+        (nextY = cast ((cast clamp((cast nextY : Float), (cast _Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), halfVisH) : Float), (cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.field(worldBounds, 'height')) - halfVisH) : Float)) : Float) : Dynamic));
       }
     }
     (camera.x = cast (nextX : Dynamic));
     (camera.y = cast (nextY : Dynamic));
   }
 
-  public static final scratchBounds__follow:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+  public static final scratchBounds__follow:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
 }

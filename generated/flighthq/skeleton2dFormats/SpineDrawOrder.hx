@@ -6,17 +6,17 @@ import flighthq._internal._Runtime;
 
 class SpineDrawOrder {
   public static function resolveSpineDrawOrdering(moves:Array<{ var offset:Float; var slotIndex:Float; }>, slotCount:Float):Null<Array<Float>> {
-    var occupants:Dynamic = cast _Runtime.UNDEFINED;
-    var moved:Dynamic = cast _Runtime.UNDEFINED;
-    var next:Dynamic = cast _Runtime.UNDEFINED;
-    var sortKeys:Dynamic = cast _Runtime.UNDEFINED;
+    var occupants:Array<Float> = cast _Runtime.UNDEFINED;
+    var moved:Array<Bool> = cast _Runtime.UNDEFINED;
+    var next:Float = cast _Runtime.UNDEFINED;
+    var sortKeys:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast slotCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
     occupants = _Runtime.fill(_Runtime.createArray(slotCount), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder, 0, null, 1);
     moved = _Runtime.fill(_Runtime.createArray(slotCount), false, 0, null, 1);
     for (move in _Runtime.iterable(moves)) {
-      var slotIndex:Dynamic = _Runtime.field(move, 'slotIndex');
+      var slotIndex:Float = (cast move : { var offset:Float; var slotIndex:Float; }).slotIndex;
       if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
-      var destination:Dynamic = _Runtime.addNumbers(slotIndex, _Runtime.field(move, 'offset'));
+      var destination:Float = (slotIndex + (cast move : { var offset:Float; var slotIndex:Float; }).offset);
       if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([destination] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast destination : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast destination : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
       if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(occupants, destination), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool) || (cast flighthq._internal._StaticIndex.readArray(moved, slotIndex) : Bool)) : Bool)) { return cast null; }
       flighthq._internal._StaticIndex.writeArray(occupants, destination, slotIndex);
@@ -24,7 +24,7 @@ class SpineDrawOrder {
     }
     next = 0.0;
     {
-      var position:Dynamic = 0.0;
+      var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast slotCount : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(occupants, position), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool)) { position++; continue; }
         while ((cast ((cast ((cast next : Float) < (cast slotCount : Float)) : Bool) && (cast flighthq._internal._StaticIndex.readArray(moved, next) : Bool)) : Bool)) { next++; }
@@ -36,7 +36,7 @@ class SpineDrawOrder {
     }
     sortKeys = _Runtime.fill(_Runtime.createArray(slotCount), 0.0, 0, null, 1);
     {
-      var position:Dynamic = 0.0;
+      var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast slotCount : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(sortKeys, flighthq._internal._StaticIndex.readArray(occupants, position), position);
         position++;
@@ -46,5 +46,5 @@ class SpineDrawOrder {
     return cast null;
   }
 
-  public static final UNCLAIMED_POSITION__spineDrawOrder:Dynamic = -1.0;
+  public static final UNCLAIMED_POSITION__spineDrawOrder:Float = -1.0;
 }

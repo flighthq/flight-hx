@@ -17,10 +17,10 @@ typedef VertexAttributeLayout = { var attributes:Array<VertexAttribute>; var str
 
 typedef MeshSubset = { var indexCount:Float; var indexOffset:Float; };
 
-typedef MeshGeometry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounds:Null<Aabb>; var indices:Null<Dynamic>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flighthq._internal._Float32Array; };
+typedef MeshGeometry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounds:Null<Aabb>; var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flighthq._internal._Float32Array; };
 
-typedef MeshGeometryGlData = { var __meshGeometryGlData:Dynamic; };
+typedef MeshGeometryGlData = { var __meshGeometryGlData:flighthq._internal._Symbol; };
 
-typedef MeshGeometryWgpuData = { var __meshGeometryWgpuData:Dynamic; };
+typedef MeshGeometryWgpuData = { var __meshGeometryWgpuData:flighthq._internal._Symbol; };
 
-typedef MeshGeometryRuntime = { var binding:Null<Dynamic>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flighthq._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };
+typedef MeshGeometryRuntime = { var binding:Null<flighthq._internal._Object>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flighthq._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };

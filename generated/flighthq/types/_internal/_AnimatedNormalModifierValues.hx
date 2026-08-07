@@ -8,5 +8,5 @@ import flighthq.types.Texture;
 import flighthq.types.Vector2.Vector2Like;
 
 class _AnimatedNormalModifierValues {
-  public static final AnimatedNormalModifierKind:Dynamic = 'AnimatedNormalModifier';
+  public static final AnimatedNormalModifierKind:String = 'AnimatedNormalModifier';
 }

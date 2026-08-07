@@ -24,9 +24,11 @@ import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.Matrix;
 import flighthq.types.MorphShape;
 import flighthq.types.MorphShape.MorphShapeColorEndpoint;
+import flighthq.types.MorphShape.MorphShapeData;
 import flighthq.types.MorphShape.MorphShapeGradientEndpoint;
 import flighthq.types.MorphShape.MorphShapeGradientEndpointExplanation;
 import flighthq.types.MorphShape.MorphShapeLineEndpoint;
+import flighthq.types.MorphShape.MorphShapePaintBinding;
 import flighthq.types.MorphShapeAnimationTarget;
 import flighthq.types.PartialNode;
 import flighthq.types.Path;
@@ -76,7 +78,7 @@ class Shape {
     return cast null;
   }
 
-  public static function appendMorphShapeLineStyle(shape:MorphShape, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
+  public static function appendMorphShapeLineStyle(shape:MorphShape, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, ?pixelHinting:Bool, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Float):Void {
     Facade_Shape_flighthq_shape_MorphShapePaint.appendMorphShapeLineStyle(shape, start, end, pixelHinting, scaleMode, caps, joints, miterLimit);
   }
 
@@ -89,7 +91,7 @@ class Shape {
     return cast null;
   }
 
-  public static function appendShapeArc(shape:flighthq.types.Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
+  public static function appendShapeArc(shape:flighthq.types.Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArc(shape, cx, cy, radius, startAngle, endAngle, anticlockwise);
   }
 
@@ -97,11 +99,11 @@ class Shape {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArcTo(shape, x1, y1, x2, y2, radius);
   }
 
-  public static function appendShapeBeginFill(shape:flighthq.types.Shape, ?color:Dynamic, ?alpha:Dynamic):Void {
+  public static function appendShapeBeginFill(shape:flighthq.types.Shape, ?color:Float, ?alpha:Float):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginFill(shape, color, alpha);
   }
 
-  public static function appendShapeBeginGradientFill(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeBeginGradientFill(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Float):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginGradientFill(shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio);
   }
 
@@ -137,11 +139,11 @@ class Shape {
     Facade_Shape_flighthq_shape_ShapeFill.appendShapeGeometryCommand(path, name, commands, a);
   }
 
-  public static function appendShapeLineGradientStyle(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeLineGradientStyle(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Float):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineGradientStyle(shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio);
   }
 
-  public static function appendShapeLineStyle(shape:flighthq.types.Shape, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
+  public static function appendShapeLineStyle(shape:flighthq.types.Shape, ?thickness:Float, ?color:Float, ?alpha:Float, ?pixelHinting:Bool, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Float):Void {
     Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineStyle(shape, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit);
   }
 
@@ -185,15 +187,15 @@ class Shape {
     Facade_Shape_flighthq_shape_MorphShapeAnimation.applyAnimationClipToMorphShape(clip, time);
   }
 
-  public static function applyMorphShapeAnimationSample(sampled:Dynamic, channel:AnimationChannel):Bool {
+  public static function applyMorphShapeAnimationSample(sampled:flighthq._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
     return cast Facade_Shape_flighthq_shape_MorphShapeAnimation.applyMorphShapeAnimationSample(sampled, channel);
     return cast null;
   }
 
   public static function clearShapeCommands(shape:flighthq.types.Shape):Void {
-    _Runtime.setLength(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), 0.0);
-    if ((cast _Runtime.strictEquals(_Runtime.field(shape, 'kind'), MorphShapeKind) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field((cast shape : MorphShape), 'data'), 'paintBindings'), 0.0); }
-    _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
+    _Runtime.setLength((cast (cast shape : flighthq.types.Shape).data : ShapeData).commands, 0.0);
+    if ((cast _Runtime.strictEquals((cast shape : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast shape : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
+    invalidateContent(shape);
   }
 
   public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
@@ -202,21 +204,21 @@ class Shape {
     var cubicPoint:Float->Float->Float->Float->Float->Float = cast _Runtime.UNDEFINED;
     var expandCubicExtrema:Float->Float->Float->Float->Float->Float->Float->Float->Void = cast _Runtime.UNDEFINED;
     var expandCubicAxis:Float->Float->Float->Float->Float->Float->Float->Float->Void = cast _Runtime.UNDEFINED;
-    var shape:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var strokeHalf:Dynamic = cast _Runtime.UNDEFINED;
-    var penX:Dynamic = cast _Runtime.UNDEFINED;
-    var penY:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    expand = function expand(x:Float, y:Float):Void {
-      var lo_x:Dynamic = cast _Runtime.UNDEFINED;
-      var hi_x:Dynamic = cast _Runtime.UNDEFINED;
-      var lo_y:Dynamic = cast _Runtime.UNDEFINED;
-      var hi_y:Dynamic = cast _Runtime.UNDEFINED;
+    var shape:flighthq.types.Shape = cast _Runtime.UNDEFINED;
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var strokeHalf:Float = cast _Runtime.UNDEFINED;
+    var penX:Float = cast _Runtime.UNDEFINED;
+    var penY:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    expand = (cast function expand(x:Float, y:Float):Void {
+      var lo_x:Float = cast _Runtime.UNDEFINED;
+      var hi_x:Float = cast _Runtime.UNDEFINED;
+      var lo_y:Float = cast _Runtime.UNDEFINED;
+      var hi_y:Float = cast _Runtime.UNDEFINED;
       lo_x = (x - strokeHalf);
       hi_x = (x + strokeHalf);
       lo_y = (y - strokeHalf);
@@ -225,36 +227,36 @@ class Shape {
       if ((cast ((cast lo_y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (lo_y : Dynamic)); }
       if ((cast ((cast hi_x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (hi_x : Dynamic)); }
       if ((cast ((cast hi_y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (hi_y : Dynamic)); }
-    };
-    quadPoint = function quadPoint(t:Float, p0:Float, p1:Float, p2:Float):Float {
-      var u:Dynamic = cast _Runtime.UNDEFINED;
+    } : Float->Float->Void);
+    quadPoint = (cast function quadPoint(t:Float, p0:Float, p1:Float, p2:Float):Float {
+      var u:Float = cast _Runtime.UNDEFINED;
       u = (1.0 - t);
       return cast ((((u * u) * p0) + (((2.0 * u) * t) * p1)) + ((t * t) * p2));
-    };
-    cubicPoint = function cubicPoint(t:Float, p0:Float, p1:Float, p2:Float, p3:Float):Float {
-      var u:Dynamic = cast _Runtime.UNDEFINED;
+    } : Float->Float->Float->Float->Float);
+    cubicPoint = (cast function cubicPoint(t:Float, p0:Float, p1:Float, p2:Float, p3:Float):Float {
+      var u:Float = cast _Runtime.UNDEFINED;
       u = (1.0 - t);
       return cast ((((((u * u) * u) * p0) + ((((3.0 * u) * u) * t) * p1)) + ((((3.0 * u) * t) * t) * p2)) + (((t * t) * t) * p3));
-    };
-    expandCubicExtrema = function expandCubicExtrema(p0x:Float, p0y:Float, p1x:Float, p1y:Float, p2x:Float, p2y:Float, p3x:Float, p3y:Float):Void {
-      _Runtime.callValue(expandCubicAxis, cast ([p0x, p1x, p2x, p3x, p0y, p1y, p2y, p3y] : Array<Dynamic>));
-      _Runtime.callValue(expandCubicAxis, cast ([p0y, p1y, p2y, p3y, p0x, p1x, p2x, p3x] : Array<Dynamic>));
-    };
-    expandCubicAxis = function expandCubicAxis(p0:Float, p1:Float, p2:Float, p3:Float, q0:Float, q1:Float, q2:Float, q3:Float):Void {
-      var a:Dynamic = cast _Runtime.UNDEFINED;
-      var b:Dynamic = cast _Runtime.UNDEFINED;
-      var c:Dynamic = cast _Runtime.UNDEFINED;
-      var disc:Dynamic = cast _Runtime.UNDEFINED;
-      var sqrtDisc:Dynamic = cast _Runtime.UNDEFINED;
-      var t1:Dynamic = cast _Runtime.UNDEFINED;
-      var t2:Dynamic = cast _Runtime.UNDEFINED;
+    } : Float->Float->Float->Float->Float->Float);
+    expandCubicExtrema = (cast function expandCubicExtrema(p0x:Float, p0y:Float, p1x:Float, p1y:Float, p2x:Float, p2y:Float, p3x:Float, p3y:Float):Void {
+      expandCubicAxis((cast p0x : Float), (cast p1x : Float), (cast p2x : Float), (cast p3x : Float), (cast p0y : Float), (cast p1y : Float), (cast p2y : Float), (cast p3y : Float));
+      expandCubicAxis((cast p0y : Float), (cast p1y : Float), (cast p2y : Float), (cast p3y : Float), (cast p0x : Float), (cast p1x : Float), (cast p2x : Float), (cast p3x : Float));
+    } : Float->Float->Float->Float->Float->Float->Float->Float->Void);
+    expandCubicAxis = (cast function expandCubicAxis(p0:Float, p1:Float, p2:Float, p3:Float, q0:Float, q1:Float, q2:Float, q3:Float):Void {
+      var a:Float = cast _Runtime.UNDEFINED;
+      var b:Float = cast _Runtime.UNDEFINED;
+      var c:Float = cast _Runtime.UNDEFINED;
+      var disc:Float = cast _Runtime.UNDEFINED;
+      var sqrtDisc:Float = cast _Runtime.UNDEFINED;
+      var t1:Float = cast _Runtime.UNDEFINED;
+      var t2:Float = cast _Runtime.UNDEFINED;
       a = (((-p0 + (3.0 * p1)) - (3.0 * p2)) + p3);
       b = (2.0 * ((p0 - (2.0 * p1)) + p2));
       c = (-p0 + p1);
       if ((cast ((cast HxMath.abs(a) : Float) < (cast 1e-12 : Float)) : Bool)) {
         if ((cast ((cast HxMath.abs(b) : Float) > (cast 1e-12 : Float)) : Bool)) {
-          var t:Dynamic = (-c / b);
-          if ((cast ((cast ((cast t : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
+          var t:Float = (-c / b);
+          if ((cast ((cast ((cast t : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
         }
         return;
       }
@@ -263,11 +265,11 @@ class Shape {
       sqrtDisc = HxMath.sqrt(disc);
       t1 = ((-b + sqrtDisc) / (2.0 * a));
       t2 = ((-b - sqrtDisc) / (2.0 * a));
-      if ((cast ((cast ((cast t1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t1 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t1, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t1, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
-      if ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t2, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t2, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
-    };
-    shape = (cast (cast source : Dynamic) : flighthq.types.Shape);
-    commands = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
+      if ((cast ((cast ((cast t1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t1 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t1 : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t1 : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
+      if ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t2 : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t2 : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
+    } : Float->Float->Float->Float->Float->Float->Float->Float->Void);
+    shape = (cast (cast source : flighthq._internal._Any) : flighthq.types.Shape);
+    commands = (cast (cast shape : flighthq.types.Shape).data : ShapeData).commands;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
@@ -277,38 +279,38 @@ class Shape {
     penY = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var b:Dynamic = (i + 2.0);
+      var key:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var b:Float = (i + 2.0);
       {
         var __switchValue = key;
         if (__switchValue == 'drawRectangle' || __switchValue == 'drawRoundRectangle') {
           {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
-            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
-            _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([(x + w), (y + h)] : Array<Dynamic>));
+            var x:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var w:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var h:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
+            expand((cast x : Float), (cast y : Float));
+            expand((cast (x + w) : Float), (cast (y + h) : Float));
           }
         }
         else if (__switchValue == 'drawCircle') {
           {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            var r:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
-            _Runtime.callValue(expand, cast ([(x - r), (y - r)] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([(x + r), (y + r)] : Array<Dynamic>));
+            var x:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var r:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            expand((cast (x - r) : Float), (cast (y - r) : Float));
+            expand((cast (x + r) : Float), (cast (y + r) : Float));
           }
         }
         else if (__switchValue == 'drawEllipse') {
           {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            var w:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
-            var h:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
-            _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([(x + w), (y + h)] : Array<Dynamic>));
+            var x:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var w:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var h:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
+            expand((cast x : Float), (cast y : Float));
+            expand((cast (x + w) : Float), (cast (y + h) : Float));
           }
         }
         else if (__switchValue == 'moveTo') {
@@ -319,47 +321,47 @@ class Shape {
         }
         else if (__switchValue == 'lineTo') {
           {
-            var x:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([x, y] : Array<Dynamic>));
+            var x:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            expand((cast penX : Float), (cast penY : Float));
+            expand((cast x : Float), (cast y : Float));
             (penX = cast (x : Dynamic));
             (penY = cast (y : Dynamic));
           }
         }
         else if (__switchValue == 'curveTo') {
           {
-            var controlX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var controlY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            var anchorX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
-            var anchorY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
-            _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-            var denomX:Dynamic = ((penX - (2.0 * controlX)) + anchorX);
+            var controlX:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var controlY:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var anchorX:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var anchorY:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
+            expand((cast penX : Float), (cast penY : Float));
+            var denomX:Float = ((penX - (2.0 * controlX)) + anchorX);
             if ((cast !_Runtime.strictEquals(denomX, 0.0) : Bool)) {
-              var tx:Dynamic = ((penX - controlX) / denomX);
-              if ((cast ((cast ((cast tx : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast tx : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([tx, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([tx, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
+              var tx:Float = ((penX - controlX) / denomX);
+              if ((cast ((cast ((cast tx : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast tx : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast quadPoint((cast tx : Float), (cast penX : Float), (cast controlX : Float), (cast anchorX : Float)) : Float) : Float), (cast (cast quadPoint((cast tx : Float), (cast penY : Float), (cast controlY : Float), (cast anchorY : Float)) : Float) : Float)); }
             }
-            var denomY:Dynamic = ((penY - (2.0 * controlY)) + anchorY);
+            var denomY:Float = ((penY - (2.0 * controlY)) + anchorY);
             if ((cast !_Runtime.strictEquals(denomY, 0.0) : Bool)) {
-              var ty:Dynamic = ((penY - controlY) / denomY);
-              if ((cast ((cast ((cast ty : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast ty : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([ty, penX, controlX, anchorX] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([ty, penY, controlY, anchorY] : Array<Dynamic>))] : Array<Dynamic>)); }
+              var ty:Float = ((penY - controlY) / denomY);
+              if ((cast ((cast ((cast ty : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast ty : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast quadPoint((cast ty : Float), (cast penX : Float), (cast controlX : Float), (cast anchorX : Float)) : Float) : Float), (cast (cast quadPoint((cast ty : Float), (cast penY : Float), (cast controlY : Float), (cast anchorY : Float)) : Float) : Float)); }
             }
-            _Runtime.callValue(expand, cast ([anchorX, anchorY] : Array<Dynamic>));
+            expand((cast anchorX : Float), (cast anchorY : Float));
             (penX = cast (anchorX : Dynamic));
             (penY = cast (anchorY : Dynamic));
           }
         }
         else if (__switchValue == 'cubicCurveTo') {
           {
-            var control1X:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
-            var control1Y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
-            var control2X:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
-            var control2Y:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
-            var anchorX:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 4.0)) : Float);
-            var anchorY:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 5.0)) : Float);
-            _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([anchorX, anchorY] : Array<Dynamic>));
-            _Runtime.callValue(expandCubicExtrema, cast ([penX, penY, control1X, control1Y, control2X, control2Y, anchorX, anchorY] : Array<Dynamic>));
+            var control1X:Float = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Float);
+            var control1Y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Float);
+            var control2X:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 2.0)) : Float);
+            var control2Y:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 3.0)) : Float);
+            var anchorX:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 4.0)) : Float);
+            var anchorY:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 5.0)) : Float);
+            expand((cast penX : Float), (cast penY : Float));
+            expand((cast anchorX : Float), (cast anchorY : Float));
+            expandCubicExtrema((cast penX : Float), (cast penY : Float), (cast control1X : Float), (cast control1Y : Float), (cast control2X : Float), (cast control2Y : Float), (cast anchorX : Float), (cast anchorY : Float));
             (penX = cast (anchorX : Dynamic));
             (penY = cast (anchorY : Dynamic));
           }
@@ -371,9 +373,9 @@ class Shape {
         }
         else if (__switchValue == 'drawPath') {
           {
-            var pathCmds:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
-            var data:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Array<Float>);
-            var di:Dynamic = 0.0;
+            var pathCmds:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
+            var data:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(commands, (b + 1.0)) : Array<Float>);
+            var di:Float = 0.0;
             for (pc in _Runtime.iterable(pathCmds)) {
               {
                 var __switchValue = pc;
@@ -383,30 +385,30 @@ class Shape {
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 2.0) {
-                  _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+                  expand((cast penX : Float), (cast penY : Float));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float));
                   (penX = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
                   (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 3.0) {
                   {
-                    var qcx:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-                    var qcy:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-                    var qax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-                    var qay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-                    _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                    var qdx:Dynamic = ((penX - (2.0 * qcx)) + qax);
+                    var qcx:Float = flighthq._internal._StaticIndex.readArray(data, di);
+                    var qcy:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+                    var qax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+                    var qay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+                    expand((cast penX : Float), (cast penY : Float));
+                    var qdx:Float = ((penX - (2.0 * qcx)) + qax);
                     if ((cast !_Runtime.strictEquals(qdx, 0.0) : Bool)) {
-                      var qt:Dynamic = ((penX - qcx) / qdx);
-                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
+                      var qt:Float = ((penX - qcx) / qdx);
+                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast quadPoint((cast qt : Float), (cast penX : Float), (cast qcx : Float), (cast qax : Float)) : Float) : Float), (cast (cast quadPoint((cast qt : Float), (cast penY : Float), (cast qcy : Float), (cast qay : Float)) : Float) : Float)); }
                     }
-                    var qdy:Dynamic = ((penY - (2.0 * qcy)) + qay);
+                    var qdy:Float = ((penY - (2.0 * qcy)) + qay);
                     if ((cast !_Runtime.strictEquals(qdy, 0.0) : Bool)) {
-                      var qt:Dynamic = ((penY - qcy) / qdy);
-                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.callValue(expand, cast ([_Runtime.callValue(quadPoint, cast ([qt, penX, qcx, qax] : Array<Dynamic>)), _Runtime.callValue(quadPoint, cast ([qt, penY, qcy, qay] : Array<Dynamic>))] : Array<Dynamic>)); }
+                      var qt:Float = ((penY - qcy) / qdy);
+                      if ((cast ((cast ((cast qt : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast qt : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast quadPoint((cast qt : Float), (cast penX : Float), (cast qcx : Float), (cast qax : Float)) : Float) : Float), (cast (cast quadPoint((cast qt : Float), (cast penY : Float), (cast qcy : Float), (cast qay : Float)) : Float) : Float)); }
                     }
-                    _Runtime.callValue(expand, cast ([qax, qay] : Array<Dynamic>));
+                    expand((cast qax : Float), (cast qay : Float));
                     (penX = cast (qax : Dynamic));
                     (penY = cast (qay : Dynamic));
                     (di = cast ((di + 4.0) : Dynamic));
@@ -418,19 +420,19 @@ class Shape {
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 5.0) {
-                  _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+                  expand((cast penX : Float), (cast penY : Float));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float));
                   (penX = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
                   (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 6.0) {
                   {
-                    _Runtime.callValue(expand, cast ([penX, penY] : Array<Dynamic>));
-                    var ax:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-                    var ay:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
-                    _Runtime.callValue(expand, cast ([ax, ay] : Array<Dynamic>));
-                    _Runtime.callValue(expandCubicExtrema, cast ([penX, penY, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), ax, ay] : Array<Dynamic>));
+                    expand((cast penX : Float), (cast penY : Float));
+                    var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+                    var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+                    expand((cast ax : Float), (cast ay : Float));
+                    expandCubicExtrema((cast penX : Float), (cast penY : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast ax : Float), (cast ay : Float));
                     (penX = cast (ax : Dynamic));
                     (penY = cast (ay : Dynamic));
                     (di = cast ((di + 6.0) : Dynamic));
@@ -442,11 +444,11 @@ class Shape {
         }
         else if (__switchValue == 'drawTriangles') {
           {
-            var vertices:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
+            var vertices:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(commands, b) : Array<Float>);
             {
-              var vi:Dynamic = 0.0;
+              var vi:Float = 0.0;
               while ((cast ((cast vi : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-                _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(vertices, vi), flighthq._internal._StaticIndex.readArray(vertices, (vi + 1.0))] : Array<Dynamic>));
+                expand((cast flighthq._internal._StaticIndex.readArray(vertices, vi) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, (vi + 1.0)) : Float));
                 (vi = cast ((vi + 2.0) : Dynamic));
               }
             }
@@ -456,35 +458,35 @@ class Shape {
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'width', 0.0);
-      _Runtime.setField(out, 'height', 0.0);
+      ((cast out : Rectangle).x = 0.0);
+      ((cast out : Rectangle).y = 0.0);
+      ((cast out : Rectangle).width = 0.0);
+      ((cast out : Rectangle).height = 0.0);
     } else {
-      _Runtime.setField(out, 'x', minX);
-      _Runtime.setField(out, 'y', minY);
-      _Runtime.setField(out, 'width', (maxX - minX));
-      _Runtime.setField(out, 'height', (maxY - minY));
+      ((cast out : Rectangle).x = minX);
+      ((cast out : Rectangle).y = minY);
+      ((cast out : Rectangle).width = (maxX - minX));
+      ((cast out : Rectangle).height = (maxY - minY));
     }
   }
 
   public static function copyShapeCommands(out:flighthq.types.Shape, source:flighthq.types.Shape):Void {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceCommands:Dynamic = cast _Runtime.UNDEFINED;
-    commands = _Runtime.field(_Runtime.field(out, 'data'), 'commands');
-    sourceCommands = _Runtime.field(_Runtime.field(source, 'data'), 'commands');
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var sourceCommands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    commands = (cast (cast out : flighthq.types.Shape).data : ShapeData).commands;
+    sourceCommands = (cast _Runtime.field(source, 'data') : ShapeData).commands;
     if ((cast !_Runtime.strictEquals(commands, sourceCommands) : Bool)) {
       _Runtime.setLength(commands, _Runtime.field(sourceCommands, 'length'));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(sourceCommands, 'length') : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(commands, i, flighthq._internal._StaticIndex.readArray(sourceCommands, i));
           i++;
         }
       }
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(out, 'kind'), MorphShapeKind) : Bool)) { _Runtime.setLength(_Runtime.field(_Runtime.field((cast out : MorphShape), 'data'), 'paintBindings'), 0.0); }
-    _Runtime.callValue(invalidateContent, cast ([out] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast out : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast out : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
+    invalidateContent(out);
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<MorphShape>):MorphShape {
@@ -503,7 +505,7 @@ class Shape {
   }
 
   public static function createShape(?obj:PartialNode<flighthq.types.Shape>):flighthq.types.Shape {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : flighthq.types.Shape);
+    return cast (cast (cast createNode2D((cast ShapeKind : String), obj, createShapeData, function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime()) : flighthq.types.Shape) : flighthq.types.Shape);
     return cast null;
   }
 
@@ -515,7 +517,7 @@ class Shape {
 
   @:noCompletion
   public static function createShapeRuntime():ShapeRuntime {
-    return cast (cast _Runtime.callValue(createNode2DRuntime, cast ([{ computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }] : Array<Dynamic>)) : ShapeRuntime);
+    return cast (cast (cast createNode2DRuntime((cast { computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle } : Null<flighthq._internal._Any>)) : ShapeRuntime) : ShapeRuntime);
     return cast null;
   }
 
@@ -524,7 +526,7 @@ class Shape {
     return cast null;
   }
 
-  public static function explainShapeTessellation(commands:Array<ShapeCommandToken>, ?strokePathTessellationEnabled:Dynamic):ShapeTessellationExplanation {
+  public static function explainShapeTessellation(commands:Array<ShapeCommandToken>, ?strokePathTessellationEnabled:Bool):ShapeTessellationExplanation {
     return cast Facade_Shape_flighthq_shape_ExplainShapeTessellation.explainShapeTessellation(commands, strokePathTessellationEnabled);
     return cast null;
   }
@@ -535,18 +537,18 @@ class Shape {
   }
 
   public static function getShapeBounds(out:Rectangle, source:flighthq.types.Shape):Void {
-    _Runtime.callValue(computeShapeLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
+    computeShapeLocalBoundsRectangle((cast out : Rectangle), (cast source : BoundsNodeAny));
   }
 
   public static function getShapeCommandCount(source:flighthq.types.Shape):Float {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    commands = _Runtime.field(_Runtime.field(source, 'data'), 'commands');
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    commands = (cast _Runtime.field(source, 'data') : ShapeData).commands;
     count = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       count++;
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
@@ -561,7 +563,7 @@ class Shape {
 
   @:noCompletion
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : ShapeRuntime) : ShapeRuntime);
     return cast null;
   }
 
@@ -591,7 +593,7 @@ class Shape {
   }
 
   public static function isShapeEmpty(source:flighthq.types.Shape):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'commands'), 'length'), 0.0);
+    return cast _Runtime.strictEquals(_Runtime.field((cast _Runtime.field(source, 'data') : ShapeData).commands, 'length'), 0.0);
     return cast null;
   }
 
@@ -599,7 +601,7 @@ class Shape {
     Facade_Shape_flighthq_shape_Scale9ShapeCommands.mapScale9ShapeCommands(out, source, mapper);
   }
 
-  public static final PathCommand:Dynamic = Facade_Shape_flighthq_types__internal__PathValues.PathCommandValue;
+  public static final PathCommand:{ var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; } = Facade_Shape_flighthq_types__internal__PathValues.PathCommandValue;
 
   public static function setMorphShapeProgress(shape:MorphShape, progress:Float):Void {
     Facade_Shape_flighthq_shape_MorphShape.setMorphShapeProgress(shape, progress);

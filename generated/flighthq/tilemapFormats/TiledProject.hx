@@ -6,25 +6,29 @@ import flighthq._internal._Runtime;
 import flighthq.tilemap.Tilemap.createTilemapData;
 import flighthq.tilemapFormats.TiledGid.decodeTiledGid;
 import flighthq.tilemapFormats.TiledGid.getTiledTilesetRefForGid;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TiledGid;
+import flighthq.types.TiledLayer;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledParseOptions.TiledTilesetResolver;
+import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.Tilemap.TilemapData;
 
 typedef TilesetGroup__tiledProject = { var firstGid:Float; var layout:Dynamic; var tiles:flighthq._internal._Int16Array; };
 
 class TiledProject {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
-    var layer:Dynamic = cast _Runtime.UNDEFINED;
+    var layer:TiledLayer = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var cellCount:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var cellCount:Float = cast _Runtime.UNDEFINED;
     var groups:Array<TilesetGroup__tiledProject> = cast _Runtime.UNDEFINED;
-    var byFirstGid:Dynamic = cast _Runtime.UNDEFINED;
-    var anyResolved:Dynamic = cast _Runtime.UNDEFINED;
+    var byFirstGid:flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>> = cast _Runtime.UNDEFINED;
+    var anyResolved:Bool = cast _Runtime.UNDEFINED;
     layer = flighthq._internal._StaticIndex.readArray(_Runtime.field(map, 'layers'), layerIndex);
-    if ((cast ((cast _Runtime.strictEquals(layer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(layer, 'type'), 'tilelayer') : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(layer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) : Bool)) { return cast null; }
     __destructure0 = layer;
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
@@ -34,33 +38,33 @@ class TiledProject {
     byFirstGid = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     anyResolved = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast cellCount : Float)) : Bool)) {
-        var __destructure1:Dynamic = _Runtime.callValue(decodeTiledGid, cast ([flighthq._internal._StaticIndex.readUint32Array(data, i)] : Array<Dynamic>));
-        var tileId:Dynamic = _Runtime.field(__destructure1, 'tileId');
+        var __destructure1 = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32Array(data, i) : Float)) : TiledGid);
+        var tileId:Float = _Runtime.field(__destructure1, 'tileId');
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
-        var ref:Dynamic = _Runtime.callValue(getTiledTilesetRefForGid, cast ([map, tileId] : Array<Dynamic>));
+        var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid((cast map : TiledMap), (cast tileId : Float)) : Null<TiledTilesetRef>);
         if ((cast _Runtime.strictEquals(ref, null) : Bool)) { i++; continue; }
-        var group:Dynamic = ((cast byFirstGid : flighthq._internal._Map).get(_Runtime.field(ref, 'firstGid')));
+        var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : TiledTilesetRef).firstGid));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var layout:Dynamic = _Runtime.callValue(resolveTileset, cast ([ref] : Array<Dynamic>));
+          var layout:Null<flighthq._internal._Any> = (cast resolveTileset(ref) : Null<flighthq._internal._Any>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-            ((cast byFirstGid : flighthq._internal._Map).set(_Runtime.field(ref, 'firstGid'), null));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, null));
             (group = cast (null : Dynamic));
           } else {
             (anyResolved = cast (true : Dynamic));
-            (group = cast ({ firstGid: _Runtime.field(ref, 'firstGid'), layout: layout, tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
-            ((cast byFirstGid : flighthq._internal._Map).set(_Runtime.field(ref, 'firstGid'), group));
+            (group = cast ({ firstGid: (cast ref : TiledTilesetRef).firstGid, layout: layout, tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, group));
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }
         if ((cast _Runtime.strictEquals(group, null) : Bool)) { i++; continue; }
-        flighthq._internal._StaticIndex.writeInt16Array(_Runtime.field(group, 'tiles'), i, _Runtime.subtractNumbers(tileId, _Runtime.field(group, 'firstGid')));
+        flighthq._internal._StaticIndex.writeInt16Array((cast group : TilesetGroup__tiledProject).tiles, i, (tileId - (cast group : TilesetGroup__tiledProject).firstGid));
         i++;
       }
     }
     if ((cast !(cast anyResolved : Bool) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty(groups, 'map', cast ([function(group:Dynamic) return _Runtime.callValue(createTilemapData, cast ([{ atlas: _Runtime.field(_Runtime.field(group, 'layout'), 'atlas'), columns: width, rows: height, tileHeight: _Runtime.field(_Runtime.field(group, 'layout'), 'tileHeight'), tileWidth: _Runtime.field(_Runtime.field(group, 'layout'), 'tileWidth'), tiles: _Runtime.field(group, 'tiles') }] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(groups, 'map', cast ([function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData((cast { atlas: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'atlas'), columns: width, rows: height, tileHeight: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileHeight'), tileWidth: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileWidth'), tiles: (cast group : TilesetGroup__tiledProject).tiles } : Null<flighthq._internal._Any>)) : TilemapData)] : Array<Dynamic>));
     return cast null;
   }
 }

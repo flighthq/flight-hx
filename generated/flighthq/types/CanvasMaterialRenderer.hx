@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CanvasMaterialRenderer = { var getState:Dynamic; };
+typedef CanvasMaterialRenderer = { var getState:Material->CanvasMaterialState; };

@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.skeleton2d.Skeleton2dGuards.reportSkeleton2DCoercedInterpolation;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationInterpolation;
+import flighthq.types.AnimationTrack;
 import flighthq.types.Attachment2D;
+import flighthq.types.Bone2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DAnimationTarget;
@@ -21,23 +24,23 @@ import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DS
 
 class Skeleton2dAnimationTarget {
   public static function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:Skeleton2DAnimationPath):Skeleton2DAnimationTarget {
-    return cast { boneIndex: boneIndex, kind: TargetKind.Bone, path: path };
+    return cast { boneIndex: boneIndex, kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone, path: path };
     return cast null;
   }
 
   public static function createSkeleton2DSlotAnimationTarget(slotIndex:Float, path:Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<Attachment2D>>>):Skeleton2DSlotAnimationTarget {
     if (attachments == null) attachments = cast (null : Dynamic);
-    return cast { attachments: attachments, kind: TargetKind.Slot, path: path, slotIndex: slotIndex };
+    return cast { attachments: attachments, kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot, path: path, slotIndex: slotIndex };
     return cast null;
   }
 
   @:noCompletion
-  public static function findSkeleton2DStepKeyframe(times:Dynamic, time:Float):Float {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+  public static function findSkeleton2DStepKeyframe(times:flighthq._internal._ArrayLike<Float>, time:Float):Float {
+    var count:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(times, 'length');
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return cast -1.0; }
     {
-      var i:Dynamic = (count - 1.0);
+      var i:Float = (count - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         if ((cast ((cast _Runtime.getIndex(times, i) : Float) <= (cast time : Float)) : Bool)) { return cast i; }
         i--;
@@ -49,106 +52,106 @@ class Skeleton2dAnimationTarget {
 
   @:noCompletion
   public static function getSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Null<Skeleton2DAnimationTargetBinder> {
-    return cast _Runtime.coalesce(((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map<String, Skeleton2DAnimationTargetBinder>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind, bind:Skeleton2DAnimationTargetBinder):Void {
-    ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).set(kind, bind));
+    ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map<String, Skeleton2DAnimationTargetBinder>).set(kind, bind));
   }
 
   @:noCompletion
   public static function unregisterSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Void {
-    ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map).delete_(kind));
+    ((cast Skeleton2dAnimationTarget._binders__skeleton2dAnimationTarget : flighthq._internal._Map<String, Skeleton2DAnimationTargetBinder>).delete_(kind));
   }
 
-  public static function bindSkeleton2DBoneChannel__skeleton2dAnimationTarget(channel:AnimationChannel, setup:Skeleton2D, pose:Skeleton2D, target:Dynamic, time:Float):Void {
-    var boneTarget:Dynamic = cast _Runtime.UNDEFINED;
-    var boneIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var setupBones:Dynamic = cast _Runtime.UNDEFINED;
-    var poseBones:Dynamic = cast _Runtime.UNDEFINED;
-    var setupBone:Dynamic = cast _Runtime.UNDEFINED;
-    var poseBone:Dynamic = cast _Runtime.UNDEFINED;
+  public static function bindSkeleton2DBoneChannel__skeleton2dAnimationTarget(channel:AnimationChannel, setup:Skeleton2D, pose:Skeleton2D, target:flighthq._internal._Any, time:Float):Void {
+    var boneTarget:Skeleton2DAnimationTarget = cast _Runtime.UNDEFINED;
+    var boneIndex:Float = cast _Runtime.UNDEFINED;
+    var setupBones:Array<Bone2D> = cast _Runtime.UNDEFINED;
+    var poseBones:Array<Bone2D> = cast _Runtime.UNDEFINED;
+    var setupBone:Bone2D = cast _Runtime.UNDEFINED;
+    var poseBone:Bone2D = cast _Runtime.UNDEFINED;
     boneTarget = (cast target : Skeleton2DAnimationTarget);
     boneIndex = _Runtime.field(boneTarget, 'boneIndex');
     setupBones = _Runtime.field(setup, 'bones');
-    poseBones = _Runtime.field(pose, 'bones');
+    poseBones = (cast pose : Skeleton2D).bones;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(boneIndex), 'number') : Bool)) { return; }
     if ((cast ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(poseBones, 'length') : Float)) : Bool)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(setupBones, 'length') : Float)) : Bool)) : Bool)) { return; }
-    _Runtime.callValue(sampleAnimationTrack, cast ([Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
+    sampleAnimationTrack((cast Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), _Runtime.field(channel, 'track'), (cast time : Float));
     setupBone = flighthq._internal._StaticIndex.readArray(setupBones, boneIndex);
     poseBone = flighthq._internal._StaticIndex.readArray(poseBones, boneIndex);
     {
       var __switchValue = _Runtime.field(boneTarget, 'path');
-      if (__switchValue == BonePath.Translation) {
-        _Runtime.setField(poseBone, 'x', _Runtime.addNumbers(_Runtime.field(setupBone, 'x'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
-        _Runtime.setField(poseBone, 'y', _Runtime.addNumbers(_Runtime.field(setupBone, 'y'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
+      if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation) {
+        ((cast poseBone : Bone2D).x = _Runtime.addNumbers((cast setupBone : Bone2D).x, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+        ((cast poseBone : Bone2D).y = _Runtime.addNumbers((cast setupBone : Bone2D).y, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
       }
-      else if (__switchValue == BonePath.Rotation) {
-        _Runtime.setField(poseBone, 'rotation', _Runtime.addNumbers(_Runtime.field(setupBone, 'rotation'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Rotation) {
+        ((cast poseBone : Bone2D).rotation = _Runtime.addNumbers((cast setupBone : Bone2D).rotation, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.Scale) {
-        _Runtime.setField(poseBone, 'scaleX', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleX'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
-        _Runtime.setField(poseBone, 'scaleY', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleY'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale) {
+        ((cast poseBone : Bone2D).scaleX = _Runtime.multiplyNumbers((cast setupBone : Bone2D).scaleX, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+        ((cast poseBone : Bone2D).scaleY = _Runtime.multiplyNumbers((cast setupBone : Bone2D).scaleY, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
       }
-      else if (__switchValue == BonePath.Shear) {
-        _Runtime.setField(poseBone, 'shearX', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearX'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
-        _Runtime.setField(poseBone, 'shearY', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearY'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Shear) {
+        ((cast poseBone : Bone2D).shearX = _Runtime.addNumbers((cast setupBone : Bone2D).shearX, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+        ((cast poseBone : Bone2D).shearY = _Runtime.addNumbers((cast setupBone : Bone2D).shearY, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)));
       }
-      else if (__switchValue == BonePath.TranslationX) {
-        _Runtime.setField(poseBone, 'x', _Runtime.addNumbers(_Runtime.field(setupBone, 'x'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationX) {
+        ((cast poseBone : Bone2D).x = _Runtime.addNumbers((cast setupBone : Bone2D).x, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.TranslationY) {
-        _Runtime.setField(poseBone, 'y', _Runtime.addNumbers(_Runtime.field(setupBone, 'y'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationY) {
+        ((cast poseBone : Bone2D).y = _Runtime.addNumbers((cast setupBone : Bone2D).y, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.ScaleX) {
-        _Runtime.setField(poseBone, 'scaleX', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleX'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleX) {
+        ((cast poseBone : Bone2D).scaleX = _Runtime.multiplyNumbers((cast setupBone : Bone2D).scaleX, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.ScaleY) {
-        _Runtime.setField(poseBone, 'scaleY', _Runtime.multiplyNumbers(_Runtime.field(setupBone, 'scaleY'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleY) {
+        ((cast poseBone : Bone2D).scaleY = _Runtime.multiplyNumbers((cast setupBone : Bone2D).scaleY, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.ShearX) {
-        _Runtime.setField(poseBone, 'shearX', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearX'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearX) {
+        ((cast poseBone : Bone2D).shearX = _Runtime.addNumbers((cast setupBone : Bone2D).shearX, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
-      else if (__switchValue == BonePath.ShearY) {
-        _Runtime.setField(poseBone, 'shearY', _Runtime.addNumbers(_Runtime.field(setupBone, 'shearY'), flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
+      else if (__switchValue == (cast BonePath : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearY) {
+        ((cast poseBone : Bone2D).shearY = _Runtime.addNumbers((cast setupBone : Bone2D).shearY, flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)));
       }
       else  {
       }
     }
   }
 
-  public static function bindSkeleton2DSlotChannel__skeleton2dAnimationTarget(channel:AnimationChannel, _setup:Skeleton2D, pose:Skeleton2D, target:Dynamic, time:Float):Void {
-    var slotTarget:Dynamic = cast _Runtime.UNDEFINED;
-    var slots:Dynamic = cast _Runtime.UNDEFINED;
-    var slotIndex:Dynamic = cast _Runtime.UNDEFINED;
+  public static function bindSkeleton2DSlotChannel__skeleton2dAnimationTarget(channel:AnimationChannel, _setup:Skeleton2D, pose:Skeleton2D, target:flighthq._internal._Any, time:Float):Void {
+    var slotTarget:Skeleton2DSlotAnimationTarget = cast _Runtime.UNDEFINED;
+    var slots:Null<Array<Slot2D>> = cast _Runtime.UNDEFINED;
+    var slotIndex:Float = cast _Runtime.UNDEFINED;
     slotTarget = (cast target : Skeleton2DSlotAnimationTarget);
-    slots = _Runtime.field(pose, 'slots');
+    slots = (cast pose : Skeleton2D).slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
     slotIndex = _Runtime.field(slotTarget, 'slotIndex');
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(slotIndex), 'number') : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), SlotPath.Attachment) : Bool)) {
-      _Runtime.callValue(Skeleton2dAnimationTarget.bindSkeleton2DSlotAttachment__skeleton2dAnimationTarget, cast ([channel, flighthq._internal._StaticIndex.readArray(slots, slotIndex), slotTarget, time] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), (cast SlotPath : { var Attachment:String; var Color:String; }).Attachment) : Bool)) {
+      Skeleton2dAnimationTarget.bindSkeleton2DSlotAttachment__skeleton2dAnimationTarget((cast channel : AnimationChannel), (cast flighthq._internal._StaticIndex.readArray(slots, slotIndex) : Slot2D), (cast slotTarget : Skeleton2DSlotAnimationTarget), (cast time : Float));
       return;
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), SlotPath.Color) : Bool)) { return; }
-    _Runtime.callValue(sampleAnimationTrack, cast ([Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
-    _Runtime.setField(flighthq._internal._StaticIndex.readArray(slots, slotIndex), 'color', _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget, cast ([flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0)] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget, cast ([flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0)] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget, cast ([flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 2.0)] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(_Runtime.callValue(Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget, cast ([flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 3.0)] : Array<Dynamic>))))), 0));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), (cast SlotPath : { var Attachment:String; var Color:String; }).Color) : Bool)) { return; }
+    sampleAnimationTrack((cast Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), _Runtime.field(channel, 'track'), (cast time : Float));
+    ((cast flighthq._internal._StaticIndex.readArray(slots, slotIndex) : Slot2D).color = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget((cast flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 0.0) : Float)) : Float)) << 24)) | _Runtime.toInt32((_Runtime.toInt32((cast Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget((cast flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 1.0) : Float)) : Float)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32((cast Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget((cast flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 2.0) : Float)) : Float)) << 8)))) | _Runtime.toInt32((cast Skeleton2dAnimationTarget.clampColorChannel__skeleton2dAnimationTarget((cast flighthq._internal._StaticIndex.readArray(Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget, 3.0) : Float)) : Float)))), 0));
   }
 
   public static function bindSkeleton2DSlotAttachment__skeleton2dAnimationTarget(channel:AnimationChannel, slot:Slot2D, target:Skeleton2DSlotAnimationTarget, time:Float):Void {
-    var table:Dynamic = cast _Runtime.UNDEFINED;
-    var keyframe:Dynamic = cast _Runtime.UNDEFINED;
-    var index:Dynamic = cast _Runtime.UNDEFINED;
+    var table:Null<Array<Null<Attachment2D>>> = cast _Runtime.UNDEFINED;
+    var keyframe:Float = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     table = _Runtime.field(target, 'attachments');
     if ((cast ((cast _Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(table, null) : Bool)) : Bool)) { return; }
-    keyframe = _Runtime.callValue(findSkeleton2DStepKeyframe, cast ([_Runtime.field(_Runtime.field(channel, 'track'), 'times'), time] : Array<Dynamic>));
+    keyframe = (cast findSkeleton2DStepKeyframe((cast (cast _Runtime.field(channel, 'track') : AnimationTrack).times : flighthq._internal._ArrayLike<Float>), (cast time : Float)) : Float);
     if ((cast ((cast keyframe : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(channel, 'track'), 'interpolation'), Skeleton2dAnimationTarget.STEP_INTERPOLATION__skeleton2dAnimationTarget) : Bool)) {
-      _Runtime.callValue(reportSkeleton2DCoercedInterpolation, cast (['Attachment', _Runtime.field(_Runtime.field(channel, 'track'), 'interpolation'), Skeleton2dAnimationTarget.STEP_INTERPOLATION__skeleton2dAnimationTarget] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast _Runtime.field(channel, 'track') : AnimationTrack).interpolation, Skeleton2dAnimationTarget.STEP_INTERPOLATION__skeleton2dAnimationTarget) : Bool)) {
+      reportSkeleton2DCoercedInterpolation((cast 'Attachment' : String), (cast (cast _Runtime.field(channel, 'track') : AnimationTrack).interpolation : String), (cast Skeleton2dAnimationTarget.STEP_INTERPOLATION__skeleton2dAnimationTarget : String));
     }
-    index = HxMath.round(_Runtime.getIndex(_Runtime.field(_Runtime.field(channel, 'track'), 'values'), _Runtime.multiplyNumbers(keyframe, _Runtime.field(_Runtime.field(channel, 'track'), 'components'))));
-    _Runtime.setField(slot, 'attachment', ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(table, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(table, index) : Dynamic) : (cast null : Dynamic)));
+    index = HxMath.round(_Runtime.getIndex((cast _Runtime.field(channel, 'track') : AnimationTrack).values, (keyframe * (cast _Runtime.field(channel, 'track') : AnimationTrack).components)));
+    ((cast slot : Slot2D).attachment = ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(table, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(table, index) : Dynamic) : (cast null : Dynamic)));
   }
 
   public static function clampColorChannel__skeleton2dAnimationTarget(value:Float):Float {
@@ -156,9 +159,9 @@ class Skeleton2dAnimationTarget {
     return cast null;
   }
 
-  public static final _binders__skeleton2dAnimationTarget:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([TargetKind.Bone, Skeleton2dAnimationTarget.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget] : Array<Dynamic>), cast ([TargetKind.Slot, Skeleton2dAnimationTarget.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _binders__skeleton2dAnimationTarget:flighthq._internal._Map<String, Skeleton2DAnimationTargetBinder> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([(cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone, Skeleton2dAnimationTarget.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget] : Array<Dynamic>), cast ([(cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot, Skeleton2dAnimationTarget.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget] : Array<Dynamic>)] : Array<Dynamic>)]);
 
-  public static final _scratch__skeleton2dAnimationTarget:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _scratch__skeleton2dAnimationTarget:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final STEP_INTERPOLATION__skeleton2dAnimationTarget:Dynamic = 'Step';
+  public static final STEP_INTERPOLATION__skeleton2dAnimationTarget:String = 'Step';
 }

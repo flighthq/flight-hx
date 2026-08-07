@@ -12,21 +12,21 @@ import flighthq.types.GlWireframeProgram;
 
 class GlWireframePrelude {
   @:noCompletion
-  public static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlWireframeVertexSource, cast ([] : Array<Dynamic>)), _Runtime.callValue(getGlWireframeFragmentSource, cast ([alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Bool = false):GlWireframeProgram {
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlWireframeVertexSource() : String) : String), (cast (cast getGlWireframeFragmentSource((cast alphaMaskEnabled : Bool)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
-    return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlWireframeProgram, cast ([gl, alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
+  public static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Bool = false):GlWireframeProgram {
+    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlWireframeProgram return (cast compileGlWireframeProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast alphaMaskEnabled : Bool)) : GlWireframeProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlWireframeProgram)) : GlWireframeProgram);
     return cast null;
   }
 
   @:noCompletion
-  public static function getGlWireframeFragmentSource(alphaMaskEnabled:Dynamic = false):String {
+  public static function getGlWireframeFragmentSource(alphaMaskEnabled:Bool = false):String {
     return cast '#version 300 es\n' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast '#define ALPHA_MASK\n' : Dynamic) : (cast '' : Dynamic))) + '' + Std.string(GlWireframePrelude.WIREFRAME_FRAGMENT__glWireframePrelude) + '';
     return cast null;
   }
@@ -37,7 +37,7 @@ class GlWireframePrelude {
     return cast null;
   }
 
-  public static final WIREFRAME_VERTEX__glWireframePrelude:Dynamic = '#version 300 es\nlayout(location = 0) in vec3 a_position;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\n\nvoid main() {\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n}\n';
+  public static final WIREFRAME_VERTEX__glWireframePrelude:String = '#version 300 es\nlayout(location = 0) in vec3 a_position;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\n\nvoid main() {\n  gl_Position = u_viewProjection * u_model * vec4(a_position, 1.0);\n}\n';
 
-  public static final WIREFRAME_FRAGMENT__glWireframePrelude:Dynamic = 'precision highp float;\n\nuniform vec4 u_color;\n\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n  fragColor = u_color;\n#ifdef ALPHA_MASK\n  if (fragColor.a < u_alphaCutoff) discard;\n  fragColor.a = 1.0;\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
+  public static final WIREFRAME_FRAGMENT__glWireframePrelude:String = 'precision highp float;\n\nuniform vec4 u_color;\n\n#ifdef ALPHA_MASK\nuniform float u_alphaCutoff;\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n  fragColor = u_color;\n#ifdef ALPHA_MASK\n  if (fragColor.a < u_alphaCutoff) discard;\n  fragColor.a = 1.0;\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
 }

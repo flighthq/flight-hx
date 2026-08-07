@@ -5,26 +5,28 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RenderEffect;
 import flighthq.types.ScanlinesEffect;
 
 class CanvasScanlinesEffect {
   @:noCompletion
   public static function applyScanlinesEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:ScanlinesEffect):Void {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var spacing:Dynamic = cast _Runtime.UNDEFINED;
-    var lineHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var dark:Dynamic = cast _Runtime.UNDEFINED;
-    var channel:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var spacing:Float = cast _Runtime.UNDEFINED;
+    var lineHeight:Float = cast _Runtime.UNDEFINED;
+    var dark:Float = cast _Runtime.UNDEFINED;
+    var channel:Float = cast _Runtime.UNDEFINED;
     count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
     intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
-    _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
+    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
@@ -38,7 +40,7 @@ class CanvasScanlinesEffect {
     channel = HxMath.round((dark * 255.0));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
     {
-      var y:Dynamic = 0.0;
+      var y:Float = 0.0;
       while ((cast ((cast y : Float) < (cast h : Float)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, HxMath.round(y), w, lineHeight] : Array<Dynamic>));
         (y = cast ((y + spacing) : Dynamic));
@@ -47,11 +49,11 @@ class CanvasScanlinesEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScanlinesEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect)] : Array<Dynamic>));
+  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyScanlinesEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : ScanlinesEffect) : ScanlinesEffect));
   };
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
-    _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'ScanlinesEffect', defaultCanvasScanlinesEffectRunner] : Array<Dynamic>));
+    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'ScanlinesEffect' : String), (cast defaultCanvasScanlinesEffectRunner : CanvasRenderEffectRunner));
   }
 }

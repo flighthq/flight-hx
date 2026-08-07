@@ -10,11 +10,11 @@ import flighthq.types.DomRenderState;
 class EnableDomTextureResolverGuards {
   @:noCompletion
   public static function areDomTextureResolverGuardsEnabled(state:DomRenderState):Bool {
-    return cast _Runtime.callValue(areRenderRegistryGuardsEnabled, cast ([state] : Array<Dynamic>));
+    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
     return cast null;
   }
 
   public static function enableDomTextureResolverGuards(state:DomRenderState):Void {
-    _Runtime.callValue(enableRenderRegistryGuards, cast ([state] : Array<Dynamic>));
+    enableRenderRegistryGuards(state);
   }
 }

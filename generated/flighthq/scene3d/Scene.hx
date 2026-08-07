@@ -12,9 +12,9 @@ import flighthq.types._internal._Node3DValues.Node3DKind;
 
 class Scene {
   public static function createScene3D(?obj:Dynamic):Scene3D {
-    var root:Dynamic = cast _Runtime.UNDEFINED;
-    root = _Runtime.callValue(createNode3D, cast ([Node3DKind, obj] : Array<Dynamic>));
-    return cast (cast _Runtime.callValue(createEntity, cast ([{ animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root }] : Array<Dynamic>)) : Scene3D);
+    var root:Node3D = cast _Runtime.UNDEFINED;
+    root = (cast createNode3D((cast Node3DKind : String), (cast obj : Null<flighthq._internal._Any>)) : Node3D);
+    return cast (cast (cast createEntity((cast { animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root } : Null<{ var animations:{  }; var metadata:flighthq._internal._Any; var resources:Array<flighthq._internal._Any>; var root:Node3D; }>)) : Scene3D) : Scene3D);
     return cast null;
   }
 }

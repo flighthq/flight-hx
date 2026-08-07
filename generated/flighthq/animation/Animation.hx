@@ -34,11 +34,11 @@ import flighthq.types.AnimationTrackValidationDiagnostic;
 import flighthq.types.EasingFunction;
 
 class Animation {
-  public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, weight:Float):Void {
+  public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:flighthq._internal._ArrayLike<Float>, weight:Float):Void {
     Facade_Animation_flighthq_animation_AnimationBlend.accumulateAnimationSample(accumulator, sample, weight);
   }
 
-  public static function addAnimationSample(out:Dynamic, base:Dynamic, delta:Dynamic, weight:Float, ?quaternion:Dynamic):Void {
+  public static function addAnimationSample(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, base:flighthq._internal._ArrayLike<Float>, delta:flighthq._internal._ArrayLike<Float>, weight:Float, ?quaternion:Bool):Void {
     Facade_Animation_flighthq_animation_AnimationBlend.addAnimationSample(out, base, delta, weight, quaternion);
   }
 
@@ -62,7 +62,7 @@ class Animation {
     Facade_Animation_flighthq_animation_AnimationStateMachine.advanceAnimationStateMachine(machine, dt);
   }
 
-  public static function blendAnimationSamples(out:Dynamic, a:Dynamic, b:Dynamic, alpha:Float, ?quaternion:Dynamic):Void {
+  public static function blendAnimationSamples(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, a:flighthq._internal._ArrayLike<Float>, b:flighthq._internal._ArrayLike<Float>, alpha:Float, ?quaternion:Bool):Void {
     Facade_Animation_flighthq_animation_AnimationBlend.blendAnimationSamples(out, a, b, alpha, quaternion);
   }
 
@@ -86,7 +86,7 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationBlendTreeInput(player:AnimationPlayer, ?weight:Dynamic, ?additive:Dynamic):AnimationBlendTreeInput {
+  public static function createAnimationBlendTreeInput(player:AnimationPlayer, ?weight:Float, ?additive:Bool):AnimationBlendTreeInput {
     return cast Facade_Animation_flighthq_animation_AnimationBlendTree.createAnimationBlendTreeInput(player, weight, additive);
     return cast null;
   }
@@ -96,7 +96,7 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
+  public static function createAnimationChannel(track:AnimationTrack, targetRef:flighthq._internal._Any):AnimationChannel {
     return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationChannel(track, targetRef);
     return cast null;
   }
@@ -106,7 +106,7 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):AnimationClipEvent {
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:flighthq._internal._Any):AnimationClipEvent {
     return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClipEvent(time, name, payload);
     return cast null;
   }
@@ -131,12 +131,12 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationSampleAccumulator(components:Float, ?quaternion:Dynamic):AnimationSampleAccumulator {
+  public static function createAnimationSampleAccumulator(components:Float, ?quaternion:Bool):AnimationSampleAccumulator {
     return cast Facade_Animation_flighthq_animation_AnimationBlend.createAnimationSampleAccumulator(components, quaternion);
     return cast null;
   }
 
-  public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, ?initialState:Dynamic):AnimationStateMachine {
+  public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, ?initialState:flighthq._internal._Union2<String, Float>):AnimationStateMachine {
     return cast Facade_Animation_flighthq_animation_AnimationStateMachine.createAnimationStateMachine(states, initialState);
     return cast null;
   }
@@ -151,7 +151,7 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; @:optional var segmentEasings:Dynamic; }):AnimationTrack {
+  public static function createAnimationTrack(opts:{ var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:flighthq._internal._IndexedAccess<AnimationTrack, String>; @:optional var segmentEasings:flighthq._internal._IndexedAccess<AnimationTrack, String>; }):AnimationTrack {
     return cast Facade_Animation_flighthq_animation_AnimationTrack.createAnimationTrack(opts);
     return cast null;
   }
@@ -160,12 +160,12 @@ class Animation {
     Facade_Animation_flighthq_animation_AnimationPlayer.enableAnimationPlayerSignals(player);
   }
 
-  public static function extractAnimationRootMotion(out:Dynamic, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
+  public static function extractAnimationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationRootMotion.extractAnimationRootMotion(out, extractor, startTime, endTime);
     return cast null;
   }
 
-  public static function finishAnimationSample(out:Dynamic, accumulator:AnimationSampleAccumulator):Bool {
+  public static function finishAnimationSample(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, accumulator:AnimationSampleAccumulator):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationBlend.finishAnimationSample(out, accumulator);
     return cast null;
   }
@@ -203,42 +203,42 @@ class Animation {
     Facade_Animation_flighthq_animation_AnimationBlend.resetAnimationSampleAccumulator(accumulator);
   }
 
-  public static function sampleAnimationBlendTree(out:Dynamic, tree:AnimationBlendTree, visit:Dynamic):Void {
+  public static function sampleAnimationBlendTree(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, tree:AnimationBlendTree, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     Facade_Animation_flighthq_animation_AnimationBlendTree.sampleAnimationBlendTree(out, tree, visit);
   }
 
-  public static function sampleAnimationBlendTreeChannel(out:Dynamic, tree:AnimationBlendTree, channelIndex:Float):Bool {
+  public static function sampleAnimationBlendTreeChannel(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, tree:AnimationBlendTree, channelIndex:Float):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationBlendTree.sampleAnimationBlendTreeChannel(out, tree, channelIndex);
     return cast null;
   }
 
-  public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
+  public static function sampleAnimationClip(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, clip:AnimationClip, time:Float, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     Facade_Animation_flighthq_animation_AnimationClip.sampleAnimationClip(out, clip, time, visit);
   }
 
-  public static function sampleAnimationCrossfade(out:Dynamic, state:AnimationCrossfade, visit:Dynamic):Void {
+  public static function sampleAnimationCrossfade(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, state:AnimationCrossfade, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     Facade_Animation_flighthq_animation_AnimationCrossfade.sampleAnimationCrossfade(out, state, visit);
   }
 
-  public static function sampleAnimationLayerStack(out:Dynamic, stack:AnimationLayerStack, visit:Dynamic):Void {
+  public static function sampleAnimationLayerStack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, stack:AnimationLayerStack, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     Facade_Animation_flighthq_animation_AnimationLayerStack.sampleAnimationLayerStack(out, stack, visit);
   }
 
-  public static function sampleAnimationLayerStackChannel(out:Dynamic, stack:AnimationLayerStack, channelIndex:Float):Bool {
+  public static function sampleAnimationLayerStackChannel(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, stack:AnimationLayerStack, channelIndex:Float):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationLayerStack.sampleAnimationLayerStackChannel(out, stack, channelIndex);
     return cast null;
   }
 
-  public static function sampleAnimationStateMachine(out:Dynamic, machine:AnimationStateMachine, visit:Dynamic):Void {
+  public static function sampleAnimationStateMachine(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, machine:AnimationStateMachine, visit:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void):Void {
     Facade_Animation_flighthq_animation_AnimationStateMachine.sampleAnimationStateMachine(out, machine, visit);
   }
 
-  public static function sampleAnimationStateMachineChannel(out:Dynamic, machine:AnimationStateMachine, channelIndex:Float):Bool {
+  public static function sampleAnimationStateMachineChannel(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, machine:AnimationStateMachine, channelIndex:Float):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationStateMachine.sampleAnimationStateMachineChannel(out, machine, channelIndex);
     return cast null;
   }
 
-  public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
+  public static function sampleAnimationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, track:AnimationTrack, t:Float):Void {
     Facade_Animation_flighthq_animation_AnimationTrack.sampleAnimationTrack(out, track, t);
   }
 
@@ -260,7 +260,7 @@ class Animation {
     Facade_Animation_flighthq_animation_AnimationPlayer.stopAnimationPlayer(player);
   }
 
-  public static function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:Dynamic, duration:Float, ?curve:EasingFunction):Bool {
+  public static function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:flighthq._internal._Union2<String, Float>, duration:Float, ?curve:EasingFunction):Bool {
     return cast Facade_Animation_flighthq_animation_AnimationStateMachine.transitionAnimationStateMachine(machine, toState, duration, curve);
     return cast null;
   }

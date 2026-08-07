@@ -16,4 +16,4 @@ typedef MediaSessionPlaybackState = String;
 
 typedef MediaSessionPositionState = { var duration:Float; var playbackRate:Float; var position:Float; };
 
-typedef MediaSessionBackend = { var setMetadata:Dynamic; var setPlaybackState:Dynamic; var setPositionState:Dynamic; var setActionHandler:Dynamic; };
+typedef MediaSessionBackend = { var setMetadata:Null<MediaSessionMetadata>->Void; var setPlaybackState:MediaSessionPlaybackState->Void; var setPositionState:Null<MediaSessionPositionState>->Void; var setActionHandler:MediaSessionAction->Null<MediaSessionActionDetails->Void>->Void; };

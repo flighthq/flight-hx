@@ -7,68 +7,71 @@ import flighthq._internal.WebExterns.GLenum;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlScissorRect;
+import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderTarget;
 
 typedef GlBox__glRenderStateBracket = Array<Float>;
 
-typedef SavedGlRenderState__glRenderStateBracket = { var activeTexture:Float; var blend:Bool; var blendDstAlpha:Float; var blendDstRgb:Float; var blendEquationAlpha:Float; var blendEquationRgb:Float; var blendSrcAlpha:Float; var blendSrcRgb:Float; var cullFace:Bool; var cullFaceMode:Float; var currentFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var currentBlendMode:Dynamic; var currentRenderTarget:Dynamic; var currentProgram:Dynamic; var currentScissorRect:Dynamic; var currentTexture:Dynamic; var currentTextureStraightAlpha:Bool; var depthFunc:Float; var depthMask:Bool; var depthTest:Bool; var framebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var program:Null<flighthq._internal.dom.WebGLProgram>; var renderTargetViewport:Dynamic; var scissorBox:GlBox__glRenderStateBracket; var scissorTest:Bool; var texture2DByUnit:Array<Null<flighthq._internal.dom.WebGLTexture>>; var vertexArray:Null<flighthq._internal.dom.WebGLVertexArrayObject>; var viewport:GlBox__glRenderStateBracket; };
+typedef SavedGlRenderState__glRenderStateBracket = { var activeTexture:Float; var blend:Bool; var blendDstAlpha:Float; var blendDstRgb:Float; var blendEquationAlpha:Float; var blendEquationRgb:Float; var blendSrcAlpha:Float; var blendSrcRgb:Float; var cullFace:Bool; var cullFaceMode:Float; var currentFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var currentBlendMode:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var currentRenderTarget:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var currentProgram:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var currentScissorRect:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var currentTexture:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var currentTextureStraightAlpha:Bool; var depthFunc:Float; var depthMask:Bool; var depthTest:Bool; var framebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var program:Null<flighthq._internal.dom.WebGLProgram>; var renderTargetViewport:flighthq._internal._IndexedAccess<GlRenderStateRuntime, String>; var scissorBox:GlBox__glRenderStateBracket; var scissorTest:Bool; var texture2DByUnit:Array<Null<flighthq._internal.dom.WebGLTexture>>; var vertexArray:Null<flighthq._internal.dom.WebGLVertexArrayObject>; var viewport:GlBox__glRenderStateBracket; };
 
 class GlRenderStateBracket {
   @:noCompletion
   public static function popGlRenderState(state:GlRenderState):Void {
-    var saved:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    saved = _Runtime.callOptionalProperty(((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap).get(state)), 'pop', cast ([] : Array<Dynamic>));
+    var saved:Null<SavedGlRenderState__glRenderStateBracket> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    saved = _Runtime.callOptionalProperty(((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap<GlRenderState, Array<SavedGlRenderState__glRenderStateBracket>>).get(state)), 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    gl = _Runtime.field(state, 'gl');
-    _Runtime.callValue(GlRenderStateBracket.restoreGlCapability__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST), _Runtime.field(saved, 'depthTest')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.depthMask(gl, _Runtime.field(saved, 'depthMask'));
-    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, _Runtime.field(saved, 'depthFunc'));
-    _Runtime.callValue(GlRenderStateBracket.restoreGlCapability__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE), _Runtime.field(saved, 'cullFace')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.cullFace(gl, _Runtime.field(saved, 'cullFaceMode'));
-    _Runtime.callValue(GlRenderStateBracket.restoreGlCapability__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND), _Runtime.field(saved, 'blend')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.blendFuncSeparate(gl, _Runtime.field(saved, 'blendSrcRgb'), _Runtime.field(saved, 'blendDstRgb'), _Runtime.field(saved, 'blendSrcAlpha'), _Runtime.field(saved, 'blendDstAlpha'));
-    flighthq._internal.backend.WebGl2Backend.blendEquationSeparate(gl, _Runtime.field(saved, 'blendEquationRgb'), _Runtime.field(saved, 'blendEquationAlpha'));
-    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, _Runtime.field(saved, 'vertexArray'));
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(saved, 'program'));
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), _Runtime.field(saved, 'framebuffer'));
+    gl = (cast state : GlRenderState).gl;
+    GlRenderStateBracket.restoreGlCapability__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST) : Float), (cast (cast saved : SavedGlRenderState__glRenderStateBracket).depthTest : Bool));
+    flighthq._internal.backend.WebGl2Backend.depthMask(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).depthMask);
+    flighthq._internal.backend.WebGl2Backend.depthFunc(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).depthFunc);
+    GlRenderStateBracket.restoreGlCapability__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE) : Float), (cast (cast saved : SavedGlRenderState__glRenderStateBracket).cullFace : Bool));
+    flighthq._internal.backend.WebGl2Backend.cullFace(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).cullFaceMode);
+    GlRenderStateBracket.restoreGlCapability__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND) : Float), (cast (cast saved : SavedGlRenderState__glRenderStateBracket).blend : Bool));
+    flighthq._internal.backend.WebGl2Backend.blendFuncSeparate(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).blendSrcRgb, (cast saved : SavedGlRenderState__glRenderStateBracket).blendDstRgb, (cast saved : SavedGlRenderState__glRenderStateBracket).blendSrcAlpha, (cast saved : SavedGlRenderState__glRenderStateBracket).blendDstAlpha);
+    flighthq._internal.backend.WebGl2Backend.blendEquationSeparate(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).blendEquationRgb, (cast saved : SavedGlRenderState__glRenderStateBracket).blendEquationAlpha);
+    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).vertexArray);
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).program);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast saved : SavedGlRenderState__glRenderStateBracket).framebuffer);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(saved, 'texture2DByUnit'), 'length') : Float)) : Bool)) {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast saved : SavedGlRenderState__glRenderStateBracket).texture2DByUnit, 'length') : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + i));
-        flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'texture2DByUnit'), i));
+        flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).texture2DByUnit, i));
         i++;
       }
     }
-    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, _Runtime.field(saved, 'activeTexture'));
-    _Runtime.callValue(GlRenderStateBracket.restoreGlCapability__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST), _Runtime.field(saved, 'scissorTest')] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.scissor(gl, flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'scissorBox'), 0.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'scissorBox'), 1.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'scissorBox'), 2.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'scissorBox'), 3.0));
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'viewport'), 0.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'viewport'), 1.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'viewport'), 2.0), flighthq._internal._StaticIndex.readArray(_Runtime.field(saved, 'viewport'), 3.0));
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(saved, 'currentFramebuffer'));
-    _Runtime.setField(runtime, 'currentProgram', _Runtime.field(saved, 'currentProgram'));
-    _Runtime.setField(runtime, 'currentRenderTarget', _Runtime.field(saved, 'currentRenderTarget'));
-    _Runtime.setField(runtime, 'currentTexture', _Runtime.field(saved, 'currentTexture'));
-    _Runtime.setField(runtime, 'currentBlendMode', _Runtime.field(saved, 'currentBlendMode'));
-    _Runtime.setField(runtime, 'currentScissorRect', _Runtime.field(saved, 'currentScissorRect'));
-    _Runtime.setField(runtime, 'currentTextureStraightAlpha', _Runtime.field(saved, 'currentTextureStraightAlpha'));
-    _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.field(saved, 'renderTargetViewport'));
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (cast saved : SavedGlRenderState__glRenderStateBracket).activeTexture);
+    GlRenderStateBracket.restoreGlCapability__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST) : Float), (cast (cast saved : SavedGlRenderState__glRenderStateBracket).scissorTest : Bool));
+    flighthq._internal.backend.WebGl2Backend.scissor(gl, flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).scissorBox, 0.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).scissorBox, 1.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).scissorBox, 2.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).scissorBox, 3.0));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).viewport, 0.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).viewport, 1.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).viewport, 2.0), flighthq._internal._StaticIndex.readArray((cast saved : SavedGlRenderState__glRenderStateBracket).viewport, 3.0));
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = (cast saved : SavedGlRenderState__glRenderStateBracket).currentFramebuffer);
+    ((cast runtime : GlRenderStateRuntime).currentProgram = (cast saved : SavedGlRenderState__glRenderStateBracket).currentProgram);
+    ((cast runtime : GlRenderStateRuntime).currentRenderTarget = (cast saved : SavedGlRenderState__glRenderStateBracket).currentRenderTarget);
+    ((cast runtime : GlRenderStateRuntime).currentTexture = (cast saved : SavedGlRenderState__glRenderStateBracket).currentTexture);
+    ((cast runtime : GlRenderStateRuntime).currentBlendMode = (cast saved : SavedGlRenderState__glRenderStateBracket).currentBlendMode);
+    ((cast runtime : GlRenderStateRuntime).currentScissorRect = (cast saved : SavedGlRenderState__glRenderStateBracket).currentScissorRect);
+    ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = (cast saved : SavedGlRenderState__glRenderStateBracket).currentTextureStraightAlpha);
+    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = (cast saved : SavedGlRenderState__glRenderStateBracket).renderTargetViewport);
   }
 
   @:noCompletion
   public static function pushGlRenderState(state:GlRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var activeTexture:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var activeTexture:Float = cast _Runtime.UNDEFINED;
     var texture2DByUnit:Array<Null<flighthq._internal.dom.WebGLTexture>> = cast _Runtime.UNDEFINED;
-    var stack:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callOptionalProperty(runtime, 'flushPendingDraws', cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
+    var stack:Null<Array<SavedGlRenderState__glRenderStateBracket>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    _Runtime.callOptionalValue((cast runtime : GlRenderStateRuntime).flushPendingDraws, cast ([state] : Array<Dynamic>));
+    gl = (cast state : GlRenderState).gl;
     activeTexture = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ACTIVE_TEXTURE', flighthq._internal.backend.WebGl2Backend.ACTIVE_TEXTURE)) : Float);
     texture2DByUnit = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast GlRenderStateBracket.GL_RENDER_STATE_TEXTURE_UNIT_COUNT__glRenderStateBracket : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + i));
         _Runtime.callProperty(texture2DByUnit, 'push', cast ([(cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_BINDING_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_BINDING_2D)) : Null<flighthq._internal.dom.WebGLTexture>)] : Array<Dynamic>));
@@ -76,40 +79,40 @@ class GlRenderStateBracket {
       }
     }
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, activeTexture);
-    stack = ((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap).get(state));
+    stack = ((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap<GlRenderState, Array<SavedGlRenderState__glRenderStateBracket>>).get(state));
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (stack = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      ((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap).set(state, stack));
+      ((cast GlRenderStateBracket._renderStateStack__glRenderStateBracket : flighthq._internal._WeakMap<GlRenderState, Array<SavedGlRenderState__glRenderStateBracket>>).set(state, stack));
     }
-    _Runtime.callProperty(stack, 'push', cast ([{ activeTexture: activeTexture, blend: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND)), blendDstAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_DST_ALPHA)) : Float), blendDstRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_DST_RGB)) : Float), blendEquationAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_EQUATION_ALPHA)) : Float), blendEquationRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_EQUATION_RGB)) : Float), blendSrcAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_SRC_ALPHA)) : Float), blendSrcRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_SRC_RGB)) : Float), cullFace: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE)), cullFaceMode: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE_MODE', flighthq._internal.backend.WebGl2Backend.CULL_FACE_MODE)) : Float), currentFramebuffer: _Runtime.field(runtime, 'currentFramebuffer'), currentBlendMode: _Runtime.field(runtime, 'currentBlendMode'), currentRenderTarget: _Runtime.field(runtime, 'currentRenderTarget'), currentProgram: _Runtime.field(runtime, 'currentProgram'), currentScissorRect: _Runtime.field(runtime, 'currentScissorRect'), currentTexture: _Runtime.field(runtime, 'currentTexture'), currentTextureStraightAlpha: _Runtime.field(runtime, 'currentTextureStraightAlpha'), depthFunc: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_FUNC', flighthq._internal.backend.WebGl2Backend.DEPTH_FUNC)) : Float), depthMask: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_WRITEMASK', flighthq._internal.backend.WebGl2Backend.DEPTH_WRITEMASK)) : Bool), depthTest: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)), framebuffer: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>), program: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), scissorBox: _Runtime.callValue(GlRenderStateBracket.readGlBox__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_BOX', flighthq._internal.backend.WebGl2Backend.SCISSOR_BOX)] : Array<Dynamic>)), scissorTest: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST)), texture2DByUnit: texture2DByUnit, vertexArray: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_ARRAY_BINDING', flighthq._internal.backend.WebGl2Backend.VERTEX_ARRAY_BINDING)) : Null<flighthq._internal.dom.WebGLVertexArrayObject>), viewport: _Runtime.callValue(GlRenderStateBracket.readGlBox__glRenderStateBracket, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)] : Array<Dynamic>)) }] : Array<Dynamic>));
+    _Runtime.callProperty(stack, 'push', cast ([{ activeTexture: activeTexture, blend: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND)), blendDstAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_DST_ALPHA)) : Float), blendDstRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_DST_RGB)) : Float), blendEquationAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_EQUATION_ALPHA)) : Float), blendEquationRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_EQUATION_RGB)) : Float), blendSrcAlpha: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.BLEND_SRC_ALPHA)) : Float), blendSrcRgb: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_RGB', flighthq._internal.backend.WebGl2Backend.BLEND_SRC_RGB)) : Float), cullFace: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE)), cullFaceMode: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE_MODE', flighthq._internal.backend.WebGl2Backend.CULL_FACE_MODE)) : Float), currentFramebuffer: (cast runtime : GlRenderStateRuntime).currentFramebuffer, currentBlendMode: (cast runtime : GlRenderStateRuntime).currentBlendMode, currentRenderTarget: (cast runtime : GlRenderStateRuntime).currentRenderTarget, currentProgram: (cast runtime : GlRenderStateRuntime).currentProgram, currentScissorRect: (cast runtime : GlRenderStateRuntime).currentScissorRect, currentTexture: (cast runtime : GlRenderStateRuntime).currentTexture, currentTextureStraightAlpha: (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha, depthFunc: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_FUNC', flighthq._internal.backend.WebGl2Backend.DEPTH_FUNC)) : Float), depthMask: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_WRITEMASK', flighthq._internal.backend.WebGl2Backend.DEPTH_WRITEMASK)) : Bool), depthTest: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)), framebuffer: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>), program: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>), renderTargetViewport: (cast runtime : GlRenderStateRuntime).renderTargetViewport, scissorBox: (cast GlRenderStateBracket.readGlBox__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_BOX', flighthq._internal.backend.WebGl2Backend.SCISSOR_BOX) : Float)) : GlBox__glRenderStateBracket), scissorTest: flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST)), texture2DByUnit: texture2DByUnit, vertexArray: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_ARRAY_BINDING', flighthq._internal.backend.WebGl2Backend.VERTEX_ARRAY_BINDING)) : Null<flighthq._internal.dom.WebGLVertexArrayObject>), viewport: (cast GlRenderStateBracket.readGlBox__glRenderStateBracket((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT) : Float)) : GlBox__glRenderStateBracket) }] : Array<Dynamic>));
   }
 
   @:noCompletion
-  public static function withGlRenderState<T>(state:GlRenderState, callback:Dynamic):Dynamic {
-    _Runtime.callValue(pushGlRenderState, cast ([state] : Array<Dynamic>));
+  public static function withGlRenderState<T>(state:GlRenderState, callback:Void->T):T {
+    pushGlRenderState((cast state : GlRenderState));
     try {
       try {
-        var __returnValue0:Dynamic = _Runtime.callValue(callback, cast ([] : Array<Dynamic>));
+        var __returnValue0:Dynamic = (cast callback() : T);
         {
-          _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
+          popGlRenderState((cast state : GlRenderState));
         }
         return cast __returnValue0;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError1:Dynamic) {
       {
-        _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
+        popGlRenderState((cast state : GlRenderState));
       }
       _Runtime.throwValue(__finallyError1);
     }
     {
-      _Runtime.callValue(popGlRenderState, cast ([state] : Array<Dynamic>));
+      popGlRenderState((cast state : GlRenderState));
     }
     return cast null;
   }
 
   public static function readGlBox__glRenderStateBracket(gl:flighthq._internal.dom.WebGL2RenderingContext, parameter:GLenum):GlBox__glRenderStateBracket {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    value = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, parameter) : Null<Dynamic>);
+    var value:Null<flighthq._internal._ArrayLike<Float>> = cast _Runtime.UNDEFINED;
+    value = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, parameter) : Null<flighthq._internal._ArrayLike<Float>>);
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
     return cast cast ([_Runtime.getIndex(value, 0.0), _Runtime.getIndex(value, 1.0), _Runtime.getIndex(value, 2.0), _Runtime.getIndex(value, 3.0)] : Array<Dynamic>);
     return cast null;
@@ -123,7 +126,7 @@ class GlRenderStateBracket {
     }
   }
 
-  public static final _renderStateStack__glRenderStateBracket:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _renderStateStack__glRenderStateBracket:flighthq._internal._WeakMap<GlRenderState, Array<SavedGlRenderState__glRenderStateBracket>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final GL_RENDER_STATE_TEXTURE_UNIT_COUNT__glRenderStateBracket:Dynamic = 3.0;
+  public static final GL_RENDER_STATE_TEXTURE_UNIT_COUNT__glRenderStateBracket:Float = 3.0;
 }

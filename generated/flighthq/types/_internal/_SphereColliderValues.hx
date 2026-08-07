@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
 class _SphereColliderValues {
-  public static final SphereColliderKind:Dynamic = 'SphereCollider';
+  public static final SphereColliderKind:String = 'SphereCollider';
 }

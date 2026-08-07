@@ -8,35 +8,35 @@ import flighthq.types.EasingSegment;
 
 class EasePiecewise {
   public static function easePiecewise(segments:Array<EasingSegment>):EasingFunction {
-    var totalWeight:Dynamic = cast _Runtime.UNDEFINED;
+    var totalWeight:Float = cast _Runtime.UNDEFINED;
     var breakpoints:Array<{ var ease:EasingFunction; var end:Float; var start:Float; }> = cast _Runtime.UNDEFINED;
-    var accumulated:Dynamic = cast _Runtime.UNDEFINED;
+    var accumulated:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
       _Runtime.throwValue(_Runtime.error('easePiecewise: segments array must not be empty'));
     }
-    totalWeight = _Runtime.reduce(segments, function(sum:Dynamic, seg:Dynamic) return _Runtime.addNumbers(sum, _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
+    totalWeight = _Runtime.reduce(segments, function(sum:Float, seg:EasingSegment, __unused0:Float, __unused1:Array<EasingSegment>):Float return _Runtime.addNumbers(sum, _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0)), 0.0);
     if ((cast ((cast totalWeight : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('easePiecewise: total segment weight must be greater than zero'));
     }
     breakpoints = cast ([] : Array<Dynamic>);
     accumulated = 0.0;
     for (seg in _Runtime.iterable(segments)) {
-      var weight:Dynamic = _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0);
-      var start:Dynamic = (accumulated / totalWeight);
+      var weight:Float = _Runtime.coalesce(_Runtime.field(seg, 'weight'), function():Dynamic return cast 1.0);
+      var start:Float = (accumulated / totalWeight);
       (accumulated = cast ((accumulated + weight) : Dynamic));
-      var end:Dynamic = (accumulated / totalWeight);
+      var end:Float = (accumulated / totalWeight);
       _Runtime.callProperty(breakpoints, 'push', cast ([{ ease: _Runtime.field(seg, 'ease'), end: end, start: start }] : Array<Dynamic>));
     }
-    return cast function(t:Dynamic) {
+    return cast function(t:Float):Float {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(breakpoints, 'length') : Float)) : Bool)) {
-          var bp:Dynamic = flighthq._internal._StaticIndex.readArray(breakpoints, i);
-          if ((cast ((cast ((cast t : Float) <= (cast _Runtime.field(bp, 'end') : Float)) : Bool) || (cast _Runtime.strictEquals(i, _Runtime.subtractNumbers(_Runtime.field(breakpoints, 'length'), 1.0)) : Bool)) : Bool)) {
-            var span:Dynamic = _Runtime.subtractNumbers(_Runtime.field(bp, 'end'), _Runtime.field(bp, 'start'));
-            var localT:Dynamic = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(t, _Runtime.field(bp, 'start')) / span) : Dynamic) : (cast 1.0 : Dynamic));
-            var clampedT:Dynamic = ((cast ((cast localT : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast localT : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast localT : Dynamic)) : Dynamic));
-            return cast _Runtime.callProperty(bp, 'ease', cast ([clampedT] : Array<Dynamic>));
+          var bp:{ var ease:EasingFunction; var end:Float; var start:Float; } = flighthq._internal._StaticIndex.readArray(breakpoints, i);
+          if ((cast ((cast ((cast t : Float) <= (cast (cast bp : { var ease:EasingFunction; var end:Float; var start:Float; }).end : Float)) : Bool) || (cast _Runtime.strictEquals(i, _Runtime.subtractNumbers(_Runtime.field(breakpoints, 'length'), 1.0)) : Bool)) : Bool)) {
+            var span:Float = ((cast bp : { var ease:EasingFunction; var end:Float; var start:Float; }).end - (cast bp : { var ease:EasingFunction; var end:Float; var start:Float; }).start);
+            var localT:Float = ((cast ((cast span : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - (cast bp : { var ease:EasingFunction; var end:Float; var start:Float; }).start) / span) : Dynamic) : (cast 1.0 : Dynamic));
+            var clampedT:Float = ((cast ((cast localT : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast localT : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast localT : Dynamic)) : Dynamic));
+            return cast (cast bp : { var ease:EasingFunction; var end:Float; var start:Float; }).ease(clampedT);
           }
           i++;
         }

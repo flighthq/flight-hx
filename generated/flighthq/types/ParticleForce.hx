@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleForce = Dynamic;
+typedef ParticleForce = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<AttractorForce, DragForce>, TurbulenceForce>, VortexForce>, WindForce>;

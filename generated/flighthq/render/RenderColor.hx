@@ -8,23 +8,23 @@ import flighthq.types.RenderState;
 class RenderColor {
   @:noCompletion
   public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
-    var _state:Dynamic = cast _Runtime.UNDEFINED;
-    var uint:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var _state:{ var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; } = cast _Runtime.UNDEFINED;
+    var uint:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     _state = (cast state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; });
     uint = _Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0);
-    _Runtime.setField(_state, 'backgroundColor', uint);
+    ((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColor = uint);
     r = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & _Runtime.toInt32(4278190080.0))), 24);
     g = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 16711680)), 16);
     b = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 65280)), 8);
     a = (_Runtime.toInt32(uint) & 255);
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 0.0, (r / 255.0));
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 1.0, (g / 255.0));
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 2.0, (b / 255.0));
-    flighthq._internal._StaticIndex.writeArray(_Runtime.field(_state, 'backgroundColorRgba'), 3.0, (a / 255.0));
-    _Runtime.setField(_state, 'backgroundColorString', ('#' + _Runtime.callProperty(_Runtime.padStart(_Runtime.numberToString(uint, 16.0), 8.0, '0'), 'toUpperCase', cast ([] : Array<Dynamic>))));
+    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 0.0, (r / 255.0));
+    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 1.0, (g / 255.0));
+    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 2.0, (b / 255.0));
+    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 3.0, (a / 255.0));
+    ((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorString = ('#' + _Runtime.callProperty(_Runtime.padStart(_Runtime.numberToString(uint, 16.0), 8.0, '0'), 'toUpperCase', cast ([] : Array<Dynamic>))));
   }
 }

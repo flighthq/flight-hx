@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef LocaleInput = Dynamic;
+typedef LocaleInput = flighthq._internal._Union2<String, Array<String>>;

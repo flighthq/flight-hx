@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderCacheAdapterSignals = { var onPrepare:Signal<Dynamic>; };
+typedef RenderCacheAdapterSignals = { var onPrepare:Signal<Void->Void>; };

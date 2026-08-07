@@ -4,8 +4,11 @@ package flighthq.render;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderState.getRenderStateRuntime;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DKindUsage;
 import flighthq.types.SceneCoverageEntry;
 import flighthq.types.SceneCoverageEntry.SceneCoverage;
@@ -15,49 +18,49 @@ class ExplainScene2DCoverage {
   @:noCompletion
   public static function explainScene2DCoverage(out:Array<SceneCoverageEntry>, state:RenderState, usage:Scene2DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    _Runtime.callValue(ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
+    (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : RenderState), (cast usage : Scene2DKindUsage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasScene2DCoverage(state:RenderState, usage:Scene2DKindUsage):Bool {
-    return cast !(cast _Runtime.callValue(ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
+    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : RenderState), (cast usage : Scene2DKindUsage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
   public static function collectScene2DCoverageGaps__explainScene2DCoverage(out:Null<Array<SceneCoverageEntry>>, state:RenderState, usage:Scene2DKindUsage, stopAtFirst:Bool):Bool {
-    var found:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
+    var found:Bool = cast _Runtime.UNDEFINED;
+    var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    var commands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'nodeKinds'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'nodeKinds'), i);
-        if ((cast ((cast _Runtime.field(runtime, 'rendererMap') : flighthq._internal._Map).has(kind)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'nodeKinds'), i);
+        if ((cast ((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, Renderer>).has(kind)) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Missing, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
         i++;
       }
     }
-    commands = _Runtime.field(runtime, 'canvasShapeCommandRegistry');
+    commands = (cast runtime : RenderStateRuntime).canvasShapeCommandRegistry;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'shapeCommandKeys'), 'length') : Float)) : Bool)) {
-        var kind:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'shapeCommandKeys'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = commands; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).has(kind)); }), true) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Satisfied, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
+        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'shapeCommandKeys'), i);
+        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = commands; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).has(kind)); }), true) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: SceneCoverageValue.Missing, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
         i++;
       }
     }

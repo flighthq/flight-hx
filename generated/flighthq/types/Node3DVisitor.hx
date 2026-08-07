@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Node3DVisitor = Dynamic;
+typedef Node3DVisitor = Node3D->Float->flighthq._internal._Union2<Bool, Void>;

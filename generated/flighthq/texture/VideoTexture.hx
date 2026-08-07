@@ -9,112 +9,115 @@ import flighthq.texture.Texture.cloneTexture;
 import flighthq.texture.Texture.copyTexture;
 import flighthq.texture.Texture.createTexture;
 import flighthq.texture.Texture.getTextureUvMatrix;
+import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Image;
 import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.VideoResource;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class VideoTexture {
   public static function advanceVideoTexture(texture:TextureLike):Float {
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    image = _Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>));
-    if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast _Runtime.field(texture, 'version'); }
-    _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
-    _Runtime.setField(image, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(image, 'version'), 1.0)), 0));
-    _Runtime.setField(texture, 'version', _Runtime.field(image, 'version'));
-    return cast _Runtime.field(texture, 'version');
+    var image:Null<Image> = cast _Runtime.UNDEFINED;
+    image = (cast VideoTexture.getVideoImage__videoTexture((cast texture : TextureLike)) : Null<Image>);
+    if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast (cast texture : { var version:Float; }).version; }
+    VideoTexture.updateVideoImageSize__videoTexture((cast image : Image));
+    ((cast image : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast image : Image).version + 1.0)), 0));
+    ((cast texture : { var version:Float; }).version = (cast image : Image).version);
+    return cast (cast texture : { var version:Float; }).version;
     return cast null;
   }
 
   public static function cloneVideoTexture(source:TextureLike):Texture {
-    return cast _Runtime.callValue(cloneTexture, cast ([source] : Array<Dynamic>));
+    return cast (cast cloneTexture((cast source : TextureLike)) : Texture);
     return cast null;
   }
 
   public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
-    _Runtime.callValue(copyTexture, cast ([out, source] : Array<Dynamic>));
+    copyTexture((cast out : TextureLike), (cast source : TextureLike));
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):Texture {
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    image = _Runtime.callValue(VideoTexture.createVideoImageResource__videoTexture, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.callValue(createTexture, cast ([_Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(_Runtime.optionalField(image, 'version'), function():Dynamic return cast VideoTexture.INITIAL_VIDEO_VERSION__videoTexture) }])] : Array<Dynamic>));
+    var image:Null<Image> = cast _Runtime.UNDEFINED;
+    image = (cast VideoTexture.createVideoImageResource__videoTexture((cast source : VideoResource)) : Null<Image>);
+    return cast (cast createTexture(_Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(_Runtime.optionalField(image, 'version'), function():Dynamic return cast VideoTexture.INITIAL_VIDEO_VERSION__videoTexture) }])) : Texture);
     return cast null;
   }
 
   public static function getVideoTextureHeight(texture:TextureLike):Float {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
+    var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
+    element = (cast VideoTexture.getVideoElement__videoTexture((cast texture : TextureLike)) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    _Runtime.callValue(getVideoTextureUvMatrix, cast ([out, texture] : Array<Dynamic>));
-    _Runtime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
+    getVideoTextureUvMatrix((cast out : Matrix3Like), (cast texture : TextureLike));
+    (cast inverseMatrix3((cast out : Matrix3Like), (cast out : Matrix3Like)) : Bool);
   }
 
   public static function getVideoTextureUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    _Runtime.callValue(getTextureUvMatrix, cast ([out, texture] : Array<Dynamic>));
+    getTextureUvMatrix((cast out : Matrix3Like), texture);
   }
 
   public static function getVideoTextureWidth(texture:TextureLike):Float {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
+    var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
+    element = (cast VideoTexture.getVideoElement__videoTexture((cast texture : TextureLike)) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callValue(VideoTexture.getVideoElement__videoTexture, cast ([texture] : Array<Dynamic>));
+    var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
+    element = (cast VideoTexture.getVideoElement__videoTexture((cast texture : TextureLike)) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
-    var image:Dynamic = cast _Runtime.UNDEFINED;
-    image = _Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>));
-    if ((cast !_Runtime.looseEquals(image, null) : Bool)) { _Runtime.setField(image, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture); }
-    _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
+    var image:Null<Image> = cast _Runtime.UNDEFINED;
+    image = (cast VideoTexture.getVideoImage__videoTexture((cast texture : TextureLike)) : Null<Image>);
+    if ((cast !_Runtime.looseEquals(image, null) : Bool)) { ((cast image : Image).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture); }
+    ((cast texture : { var version:Float; }).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
-    _Runtime.setField(texture, 'source', _Runtime.callValue(VideoTexture.createVideoImageResource__videoTexture, cast ([source] : Array<Dynamic>)));
+    if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
+    _Runtime.setField(texture, 'source', (cast VideoTexture.createVideoImageResource__videoTexture((cast source : VideoResource)) : Null<TextureSource>));
     _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
-    var image:Dynamic = cast _Runtime.UNDEFINED;
+    var image:Image = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast _Runtime.callValue(createEntity, cast ([{ height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }] : Array<Dynamic>)) : Image);
-    _Runtime.callValue(VideoTexture.updateVideoImageSize__videoTexture, cast ([image] : Array<Dynamic>));
+    image = (cast (cast createEntity((cast { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 } : Null<{ var height:Float; var alphaType:String; var gamut:String; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; }>)) : Image) : Image);
+    VideoTexture.updateVideoImageSize__videoTexture((cast image : Image));
     return cast image;
     return cast null;
   }
 
   public static function getVideoElement__videoTexture(texture:TextureLike):Null<flighthq._internal.dom.HTMLVideoElement> {
-    return cast _Runtime.coalesce((cast _Runtime.optionalField(_Runtime.callValue(VideoTexture.getVideoImage__videoTexture, cast ([texture] : Array<Dynamic>)), 'source') : Null<flighthq._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast _Runtime.optionalField((cast VideoTexture.getVideoImage__videoTexture((cast texture : TextureLike)) : Null<Image>), 'source') : Null<flighthq._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getVideoImage__videoTexture(texture:TextureLike):Null<Image> {
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool) ? (cast (cast _Runtime.field(texture, 'source') : Null<Image>) : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast _Runtime.field(texture, 'source') : Null<Image>) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function updateVideoImageSize__videoTexture(image:Image):Void {
-    var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = (cast _Runtime.field(image, 'source') : flighthq._internal.dom.HTMLVideoElement);
-    _Runtime.setField(image, 'width', _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth, function():Dynamic return cast 0.0));
-    _Runtime.setField(image, 'height', _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight, function():Dynamic return cast 0.0));
+    var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
+    element = (cast (cast image : Image).source : flighthq._internal.dom.HTMLVideoElement);
+    ((cast image : Image).width = _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth, function():Dynamic return cast 0.0));
+    ((cast image : Image).height = _Runtime.orValue((cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight, function():Dynamic return cast 0.0));
   }
 
-  public static final HAVE_CURRENT_DATA__videoTexture:Dynamic = 2.0;
+  public static final HAVE_CURRENT_DATA__videoTexture:Float = 2.0;
 
-  public static final INITIAL_VIDEO_VERSION__videoTexture:Dynamic = 4294967295.0;
+  public static final INITIAL_VIDEO_VERSION__videoTexture:Float = 4294967295.0;
 }

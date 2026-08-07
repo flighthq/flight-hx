@@ -9,15 +9,15 @@ import flighthq.types.ColorTransformFunction;
 class ColorGradeAdjustment {
   public static function createColorGradeAdjustment(?options:Dynamic):flighthq.types.ColorGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var exposure:Dynamic = cast _Runtime.UNDEFINED;
-    var brightness:Dynamic = cast _Runtime.UNDEFINED;
-    var contrast:Dynamic = cast _Runtime.UNDEFINED;
-    var saturation:Dynamic = cast _Runtime.UNDEFINED;
-    var temperature:Dynamic = cast _Runtime.UNDEFINED;
-    var tint:Dynamic = cast _Runtime.UNDEFINED;
-    var lift:Dynamic = cast _Runtime.UNDEFINED;
-    var gammaRaw:Dynamic = cast _Runtime.UNDEFINED;
-    var gain:Dynamic = cast _Runtime.UNDEFINED;
+    var exposure:Float = cast _Runtime.UNDEFINED;
+    var brightness:Float = cast _Runtime.UNDEFINED;
+    var contrast:Float = cast _Runtime.UNDEFINED;
+    var saturation:Float = cast _Runtime.UNDEFINED;
+    var temperature:Float = cast _Runtime.UNDEFINED;
+    var tint:Float = cast _Runtime.UNDEFINED;
+    var lift:Array<Float> = cast _Runtime.UNDEFINED;
+    var gammaRaw:Array<Float> = cast _Runtime.UNDEFINED;
+    var gain:Array<Float> = cast _Runtime.UNDEFINED;
     var gammaExp:Array<Float> = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
     exposure = HxMath.pow(2.0, _Runtime.coalesce(_Runtime.field(options, 'exposure'), function():Dynamic return cast 0.0));
@@ -26,15 +26,15 @@ class ColorGradeAdjustment {
     saturation = _Runtime.coalesce(_Runtime.field(options, 'saturation'), function():Dynamic return cast 1.0);
     temperature = _Runtime.coalesce(_Runtime.field(options, 'temperature'), function():Dynamic return cast 0.0);
     tint = _Runtime.coalesce(_Runtime.field(options, 'tint'), function():Dynamic return cast 0.0);
-    lift = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0)] : Array<Dynamic>));
-    gammaRaw = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0)] : Array<Dynamic>));
-    gain = _Runtime.callValue(ColorGradeAdjustment.unpackRgb__colorGradeAdjustment, cast ([_Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0)] : Array<Dynamic>));
+    lift = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0) : Float)) : Array<Float>);
+    gammaRaw = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
+    gain = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
     gammaExp = cast ([_Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0), 2.0), 0.001))] : Array<Dynamic>);
-    transform = function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
-      var cr:Dynamic = cast _Runtime.UNDEFINED;
-      var cg:Dynamic = cast _Runtime.UNDEFINED;
-      var cb:Dynamic = cast _Runtime.UNDEFINED;
-      var luma:Dynamic = cast _Runtime.UNDEFINED;
+    transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+      var cr:Float = cast _Runtime.UNDEFINED;
+      var cg:Float = cast _Runtime.UNDEFINED;
+      var cb:Float = cast _Runtime.UNDEFINED;
+      var luma:Float = cast _Runtime.UNDEFINED;
       cr = (((r * exposure) + brightness) + (temperature * 0.5));
       cg = (((g * exposure) + brightness) + (tint * 0.5));
       cb = (((b * exposure) + brightness) - (temperature * 0.5));
@@ -48,9 +48,9 @@ class ColorGradeAdjustment {
       (cr = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cr, flighthq._internal._StaticIndex.readArray(gain, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 0.0), (1.0 - cr))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 0.0)) : Dynamic));
       (cg = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cg, flighthq._internal._StaticIndex.readArray(gain, 1.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 1.0), (1.0 - cg))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 1.0)) : Dynamic));
       (cb = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cb, flighthq._internal._StaticIndex.readArray(gain, 2.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 2.0), (1.0 - cb))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 2.0)) : Dynamic));
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cr] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cg] : Array<Dynamic>)));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(ColorGradeAdjustment.clamp01__colorGradeAdjustment, cast ([cb] : Array<Dynamic>)));
+      flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cr : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cg : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cb : Float)) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'ColorGradeAdjustment' }, options, { transform: transform }]);
     return cast null;

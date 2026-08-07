@@ -8,29 +8,29 @@ import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
 class GetPathNearestPoint {
-  public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Float {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var bestDistSq:Dynamic = cast _Runtime.UNDEFINED;
-    var bestX:Dynamic = cast _Runtime.UNDEFINED;
-    var bestY:Dynamic = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+  public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, tolerance:Float = 0.25):Float {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var bestDistSq:Float = cast _Runtime.UNDEFINED;
+    var bestX:Float = cast _Runtime.UNDEFINED;
+    var bestY:Float = cast _Runtime.UNDEFINED;
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     bestDistSq = HxMath.POSITIVE_INFINITY;
     bestX = 0.0;
     bestY = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        var contour:Dynamic = flighthq._internal._StaticIndex.readArray(contours, ci);
+        var contour:Array<Float> = flighthq._internal._StaticIndex.readArray(contours, ci);
         {
-          var i:Dynamic = 2.0;
+          var i:Float = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var ax:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i - 2.0));
-            var ay:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i - 1.0));
-            var bx:Dynamic = flighthq._internal._StaticIndex.readArray(contour, i);
-            var by:Dynamic = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
-            var dx:Dynamic = (bx - ax);
-            var dy:Dynamic = (by - ay);
-            var lenSq:Dynamic = ((dx * dx) + (dy * dy));
+            var ax:Float = flighthq._internal._StaticIndex.readArray(contour, (i - 2.0));
+            var ay:Float = flighthq._internal._StaticIndex.readArray(contour, (i - 1.0));
+            var bx:Float = flighthq._internal._StaticIndex.readArray(contour, i);
+            var by:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+            var dx:Float = (bx - ax);
+            var dy:Float = (by - ay);
+            var lenSq:Float = ((dx * dx) + (dy * dy));
             var t:Float = cast _Runtime.UNDEFINED;
             if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
               (t = cast (0.0 : Dynamic));
@@ -38,9 +38,9 @@ class GetPathNearestPoint {
               (t = cast (((((px - ax) * dx) + ((py - ay) * dy)) / lenSq) : Dynamic));
               if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast (0.0 : Dynamic)); } else { if ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool)) { (t = cast (1.0 : Dynamic)); } }
             }
-            var cx:Dynamic = (ax + (t * dx));
-            var cy:Dynamic = (ay + (t * dy));
-            var distSq:Dynamic = (((px - cx) * (px - cx)) + ((py - cy) * (py - cy)));
+            var cx:Float = (ax + (t * dx));
+            var cy:Float = (ay + (t * dy));
+            var distSq:Float = (((px - cx) * (px - cx)) + ((py - cy) * (py - cy)));
             if ((cast ((cast distSq : Float) < (cast bestDistSq : Float)) : Bool)) {
               (bestDistSq = cast (distSq : Dynamic));
               (bestX = cast (cx : Dynamic));

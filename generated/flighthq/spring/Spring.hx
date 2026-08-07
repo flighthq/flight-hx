@@ -40,7 +40,7 @@ class Spring {
     return cast null;
   }
 
-  public static final CRITICAL_BAND__spring:Dynamic = 0.0001;
+  public static final CRITICAL_BAND__spring:Float = 0.0001;
 
   public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast Facade_Spring_flighthq_spring_Spring2D.isSpring2DSettled(spring2D, targetX, targetY, positionEpsilon, velocityEpsilon);
@@ -53,24 +53,24 @@ class Spring {
   }
 
   public static function isSpringSettled(spring:flighthq.types.Spring, target:Float, positionEpsilon:Float = 0.001, velocityEpsilon:Float = 0.001):Bool {
-    return cast ((cast _Runtime.callValue(approxEqual, cast ([_Runtime.field(spring, 'value'), target, positionEpsilon] : Array<Dynamic>)) : Bool) && (cast _Runtime.callValue(approxZero, cast ([_Runtime.field(spring, 'velocity'), velocityEpsilon] : Array<Dynamic>)) : Bool));
+    return cast ((cast (cast approxEqual((cast _Runtime.field(spring, 'value') : Float), (cast target : Float), (cast positionEpsilon : Float)) : Bool) : Bool) && (cast (cast approxZero((cast _Runtime.field(spring, 'velocity') : Float), (cast velocityEpsilon : Float)) : Bool) : Bool));
     return cast null;
   }
 
   public static function resetSpring(spring:flighthq.types.Spring, value:Float, velocity:Float = 0.0):Void {
-    _Runtime.setField(spring, 'value', value);
-    _Runtime.setField(spring, 'velocity', velocity);
+    ((cast spring : flighthq.types.Spring).value = value);
+    ((cast spring : flighthq.types.Spring).velocity = velocity);
   }
 
-  public static final SPRING_SETTLE_EPSILON__spring:Dynamic = 0.001;
+  public static final SPRING_SETTLE_EPSILON__spring:Float = 0.001;
 
   public static function updateSpring(spring:flighthq.types.Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
-    var frequency:Dynamic = cast _Runtime.UNDEFINED;
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    var velocity:Dynamic = cast _Runtime.UNDEFINED;
-    var dampingRatio:Dynamic = cast _Runtime.UNDEFINED;
-    var omega:Dynamic = cast _Runtime.UNDEFINED;
-    var c0:Dynamic = cast _Runtime.UNDEFINED;
+    var frequency:Float = cast _Runtime.UNDEFINED;
+    var value:Float = cast _Runtime.UNDEFINED;
+    var velocity:Float = cast _Runtime.UNDEFINED;
+    var dampingRatio:Float = cast _Runtime.UNDEFINED;
+    var omega:Float = cast _Runtime.UNDEFINED;
+    var c0:Float = cast _Runtime.UNDEFINED;
     var posPosCoef:Float = cast _Runtime.UNDEFINED;
     var posVelCoef:Float = cast _Runtime.UNDEFINED;
     var velPosCoef:Float = cast _Runtime.UNDEFINED;
@@ -78,44 +78,44 @@ class Spring {
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     frequency = _Runtime.field(config, 'frequency');
     if ((cast ((cast frequency : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    value = _Runtime.field(spring, 'value');
-    velocity = _Runtime.field(spring, 'velocity');
+    value = (cast spring : flighthq.types.Spring).value;
+    velocity = (cast spring : flighthq.types.Spring).velocity;
     dampingRatio = ((cast ((cast _Runtime.field(config, 'dampingRatio') : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.field(config, 'dampingRatio') : Dynamic));
     omega = (TAU * frequency);
     c0 = (value - target);
     if ((cast ((cast dampingRatio : Float) > (cast (1.0 + Spring.CRITICAL_BAND__spring) : Float)) : Bool)) {
-      var zb:Dynamic = _Runtime.multiplyNumbers(omega, HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
-      var za:Dynamic = (-omega * dampingRatio);
-      var z1:Dynamic = (za - zb);
-      var z2:Dynamic = (za + zb);
-      var e1:Dynamic = HxMath.exp((z1 * deltaTime));
-      var e2:Dynamic = HxMath.exp((z2 * deltaTime));
-      var invDenominator:Dynamic = (1.0 / (z2 - z1));
+      var zb:Float = _Runtime.multiplyNumbers(omega, HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
+      var za:Float = (-omega * dampingRatio);
+      var z1:Float = (za - zb);
+      var z2:Float = (za + zb);
+      var e1:Float = HxMath.exp((z1 * deltaTime));
+      var e2:Float = HxMath.exp((z2 * deltaTime));
+      var invDenominator:Float = (1.0 / (z2 - z1));
       (posPosCoef = cast ((((z2 * e1) - (z1 * e2)) * invDenominator) : Dynamic));
       (posVelCoef = cast (((e2 - e1) * invDenominator) : Dynamic));
       (velPosCoef = cast ((((z1 * z2) * (e1 - e2)) * invDenominator) : Dynamic));
       (velVelCoef = cast ((((z2 * e2) - (z1 * e1)) * invDenominator) : Dynamic));
     } else { if ((cast ((cast dampingRatio : Float) < (cast (1.0 - Spring.CRITICAL_BAND__spring) : Float)) : Bool)) {
-      var alpha:Dynamic = (dampingRatio * omega);
-      var beta:Dynamic = _Runtime.multiplyNumbers(omega, HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
-      var envelope:Dynamic = HxMath.exp((-alpha * deltaTime));
-      var cosine:Dynamic = HxMath.cos((beta * deltaTime));
-      var sine:Dynamic = HxMath.sin((beta * deltaTime));
-      var invBeta:Dynamic = (1.0 / beta);
+      var alpha:Float = (dampingRatio * omega);
+      var beta:Float = _Runtime.multiplyNumbers(omega, HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
+      var envelope:Float = HxMath.exp((-alpha * deltaTime));
+      var cosine:Float = HxMath.cos((beta * deltaTime));
+      var sine:Float = HxMath.sin((beta * deltaTime));
+      var invBeta:Float = (1.0 / beta);
       (posPosCoef = cast ((envelope * (cosine + ((alpha * invBeta) * sine))) : Dynamic));
       (posVelCoef = cast (((envelope * invBeta) * sine) : Dynamic));
       (velPosCoef = cast (((((-envelope * omega) * omega) * invBeta) * sine) : Dynamic));
       (velVelCoef = cast ((envelope * (cosine - ((alpha * invBeta) * sine))) : Dynamic));
     } else {
-      var envelope:Dynamic = HxMath.exp((-omega * deltaTime));
-      var omegaDt:Dynamic = (omega * deltaTime);
+      var envelope:Float = HxMath.exp((-omega * deltaTime));
+      var omegaDt:Float = (omega * deltaTime);
       (posPosCoef = cast ((envelope * (1.0 + omegaDt)) : Dynamic));
       (posVelCoef = cast ((envelope * deltaTime) : Dynamic));
       (velPosCoef = cast ((((-envelope * omega) * omega) * deltaTime) : Dynamic));
       (velVelCoef = cast ((envelope * (1.0 - omegaDt)) : Dynamic));
     } }
-    _Runtime.setField(spring, 'value', ((target + (posPosCoef * c0)) + (posVelCoef * velocity)));
-    _Runtime.setField(spring, 'velocity', ((velPosCoef * c0) + (velVelCoef * velocity)));
+    ((cast spring : flighthq.types.Spring).value = ((target + (posPosCoef * c0)) + (posVelCoef * velocity)));
+    ((cast spring : flighthq.types.Spring).velocity = ((velPosCoef * c0) + (velVelCoef * velocity)));
   }
 
   public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {

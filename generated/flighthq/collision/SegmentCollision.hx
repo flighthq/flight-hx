@@ -11,24 +11,24 @@ import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 
 class SegmentCollision {
-  public static final RELATIVE_EPSILON__segmentCollision:Dynamic = 1e-9;
+  public static final RELATIVE_EPSILON__segmentCollision:Float = 1e-9;
 
   public static function testSegmentAabbCollision(a:CollisionSegment, b:CollisionAabb):Bool {
-    return cast _Runtime.callValue(SegmentCollision.isSegmentOverlappingBox__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.field(b, 'minX'), _Runtime.field(b, 'minY'), _Runtime.field(b, 'maxX'), _Runtime.field(b, 'maxY')] : Array<Dynamic>));
+    return cast (cast SegmentCollision.isSegmentOverlappingBox__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast _Runtime.field(b, 'minX') : Float), (cast _Runtime.field(b, 'minY') : Float), (cast _Runtime.field(b, 'maxX') : Float), (cast _Runtime.field(b, 'maxY') : Float)) : Bool);
     return cast null;
   }
 
   public static function testSegmentCircleCollision(a:CollisionSegment, b:CollisionCircle):Bool {
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var closestX:Dynamic = cast _Runtime.UNDEFINED;
-    var closestY:Dynamic = cast _Runtime.UNDEFINED;
-    var ddx:Dynamic = cast _Runtime.UNDEFINED;
-    var ddy:Dynamic = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var lengthSquared:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var closestX:Float = cast _Runtime.UNDEFINED;
+    var closestY:Float = cast _Runtime.UNDEFINED;
+    var ddx:Float = cast _Runtime.UNDEFINED;
+    var ddy:Float = cast _Runtime.UNDEFINED;
     x0 = _Runtime.field(a, 'x0');
     y0 = _Runtime.field(a, 'y0');
     dx = _Runtime.subtractNumbers(_Runtime.field(a, 'x1'), x0);
@@ -48,16 +48,16 @@ class SegmentCollision {
   }
 
   public static function testSegmentObbCollision(a:CollisionSegment, b:CollisionObb):Bool {
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var d0x:Dynamic = cast _Runtime.UNDEFINED;
-    var d0y:Dynamic = cast _Runtime.UNDEFINED;
-    var d1x:Dynamic = cast _Runtime.UNDEFINED;
-    var d1y:Dynamic = cast _Runtime.UNDEFINED;
-    var localX0:Dynamic = cast _Runtime.UNDEFINED;
-    var localY0:Dynamic = cast _Runtime.UNDEFINED;
-    var localX1:Dynamic = cast _Runtime.UNDEFINED;
-    var localY1:Dynamic = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var d0x:Float = cast _Runtime.UNDEFINED;
+    var d0y:Float = cast _Runtime.UNDEFINED;
+    var d1x:Float = cast _Runtime.UNDEFINED;
+    var d1y:Float = cast _Runtime.UNDEFINED;
+    var localX0:Float = cast _Runtime.UNDEFINED;
+    var localY0:Float = cast _Runtime.UNDEFINED;
+    var localX1:Float = cast _Runtime.UNDEFINED;
+    var localY1:Float = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(_Runtime.field(b, 'rotation'));
     sin = HxMath.sin(_Runtime.field(b, 'rotation'));
     d0x = _Runtime.subtractNumbers(_Runtime.field(a, 'x0'), _Runtime.field(b, 'x'));
@@ -68,23 +68,23 @@ class SegmentCollision {
     localY0 = ((-d0x * sin) + (d0y * cos));
     localX1 = ((d1x * cos) + (d1y * sin));
     localY1 = ((-d1x * sin) + (d1y * cos));
-    return cast _Runtime.callValue(SegmentCollision.isSegmentOverlappingBox__segmentCollision, cast ([localX0, localY0, localX1, localY1, -_Runtime.field(b, 'halfW'), -_Runtime.field(b, 'halfH'), _Runtime.field(b, 'halfW'), _Runtime.field(b, 'halfH')] : Array<Dynamic>));
+    return cast (cast SegmentCollision.isSegmentOverlappingBox__segmentCollision((cast localX0 : Float), (cast localY0 : Float), (cast localX1 : Float), (cast localY1 : Float), (cast -_Runtime.field(b, 'halfW') : Float), (cast -_Runtime.field(b, 'halfH') : Float), (cast _Runtime.field(b, 'halfW') : Float), (cast _Runtime.field(b, 'halfH') : Float)) : Bool);
     return cast null;
   }
 
   public static function testSegmentPolygonCollision(a:CollisionSegment, b:CollisionPolygon):Bool {
-    var points:Dynamic = cast _Runtime.UNDEFINED;
-    var pn:Dynamic = cast _Runtime.UNDEFINED;
+    var points:Array<Float> = cast _Runtime.UNDEFINED;
+    var pn:Float = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
-    if ((cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionPolygonValidationStatus, cast ([points] : Array<Dynamic>)), null) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast points : Array<Float>)) : Null<String>), null) : Bool)) { return cast false; }
     pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    if ((cast _Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), points, pn] : Array<Dynamic>)) : Bool)) { return cast true; }
-    if ((cast _Runtime.callValue(SegmentCollision.isPointInConvexPolygon__segmentCollision, cast ([_Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), points, pn] : Array<Dynamic>)) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast points : Array<Float>), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast points : Array<Float>), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
-        if ((cast _Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1)), flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0)), flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(j) << 1)), flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(j) << 1) + 1.0))] : Array<Dynamic>)) : Bool)) {
+        var j:Float = _Runtime.fmod((i + 1.0), pn);
+        if ((cast (cast SegmentCollision.isSegmentsIntersecting__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(j) << 1)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(j) << 1) + 1.0)) : Float)) : Bool) : Bool)) {
           return cast true;
         }
         i++;
@@ -95,27 +95,27 @@ class SegmentCollision {
   }
 
   public static function testSegmentSegmentCollision(a:CollisionSegment, b:CollisionSegment):Bool {
-    return cast _Runtime.callValue(SegmentCollision.isSegmentsIntersecting__segmentCollision, cast ([_Runtime.field(a, 'x0'), _Runtime.field(a, 'y0'), _Runtime.field(a, 'x1'), _Runtime.field(a, 'y1'), _Runtime.field(b, 'x0'), _Runtime.field(b, 'y0'), _Runtime.field(b, 'x1'), _Runtime.field(b, 'y1')] : Array<Dynamic>));
+    return cast (cast SegmentCollision.isSegmentsIntersecting__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast _Runtime.field(b, 'x0') : Float), (cast _Runtime.field(b, 'y0') : Float), (cast _Runtime.field(b, 'x1') : Float), (cast _Runtime.field(b, 'y1') : Float)) : Bool);
     return cast null;
   }
 
   public static function isPointInConvexPolygon__segmentCollision(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
-    var positive:Dynamic = cast _Runtime.UNDEFINED;
-    var negative:Dynamic = cast _Runtime.UNDEFINED;
-    epsilon = _Runtime.callValue(SegmentCollision.relativeEpsilon__segmentCollision, cast ([_Runtime.callValue(SegmentCollision.getPolygonExtent__segmentCollision, cast ([px, pn] : Array<Dynamic>))] : Array<Dynamic>));
+    var epsilon:Float = cast _Runtime.UNDEFINED;
+    var positive:Bool = cast _Runtime.UNDEFINED;
+    var negative:Bool = cast _Runtime.UNDEFINED;
+    epsilon = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast (cast SegmentCollision.getPolygonExtent__segmentCollision((cast px : Array<Float>), (cast pn : Float)) : Float) : Float)) : Float);
     positive = false;
     negative = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), pn);
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(i) << 1));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
-        var cross:Dynamic = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
-        var edgeEpsilon:Dynamic = _Runtime.multiplyNumbers(_Runtime.hypot((x1 - x0), (y1 - y0)), epsilon);
+        var j:Float = _Runtime.fmod((i + 1.0), pn);
+        var x0:Float = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(i) << 1));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x1:Float = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
+        var y1:Float = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var cross:Float = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
+        var edgeEpsilon:Float = _Runtime.multiplyNumbers(_Runtime.hypot((x1 - x0), (y1 - y0)), epsilon);
         if ((cast ((cast cross : Float) > (cast edgeEpsilon : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -edgeEpsilon : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
         if ((cast ((cast positive : Bool) && (cast negative : Bool)) : Bool)) { return cast false; }
         i++;
@@ -126,17 +126,17 @@ class SegmentCollision {
   }
 
   public static function isSegmentsIntersecting__segmentCollision(ax0:Float, ay0:Float, ax1:Float, ay1:Float, bx0:Float, by0:Float, bx1:Float, by1:Float):Bool {
-    var d1x:Dynamic = cast _Runtime.UNDEFINED;
-    var d1y:Dynamic = cast _Runtime.UNDEFINED;
-    var d2x:Dynamic = cast _Runtime.UNDEFINED;
-    var d2y:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var d1LengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var d2LengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var d1x:Float = cast _Runtime.UNDEFINED;
+    var d1y:Float = cast _Runtime.UNDEFINED;
+    var d2x:Float = cast _Runtime.UNDEFINED;
+    var d2y:Float = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var d1LengthSquared:Float = cast _Runtime.UNDEFINED;
+    var d2LengthSquared:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
     d1x = (ax1 - ax0);
     d1y = (ay1 - ay0);
     d2x = (bx1 - bx0);
@@ -147,18 +147,18 @@ class SegmentCollision {
     d1LengthSquared = ((d1x * d1x) + (d1y * d1y));
     d2LengthSquared = ((d2x * d2x) + (d2y * d2y));
     if ((cast _Runtime.strictEquals(d1LengthSquared, 0.0) : Bool)) {
-      return cast _Runtime.callValue(SegmentCollision.isPointOnSegment__segmentCollision, cast ([ax0, ay0, bx0, by0, bx1, by1] : Array<Dynamic>));
+      return cast (cast SegmentCollision.isPointOnSegment__segmentCollision((cast ax0 : Float), (cast ay0 : Float), (cast bx0 : Float), (cast by0 : Float), (cast bx1 : Float), (cast by1 : Float)) : Bool);
     }
     if ((cast _Runtime.strictEquals(d2LengthSquared, 0.0) : Bool)) {
-      return cast _Runtime.callValue(SegmentCollision.isPointOnSegment__segmentCollision, cast ([bx0, by0, ax0, ay0, ax1, ay1] : Array<Dynamic>));
+      return cast (cast SegmentCollision.isPointOnSegment__segmentCollision((cast bx0 : Float), (cast by0 : Float), (cast ax0 : Float), (cast ay0 : Float), (cast ax1 : Float), (cast ay1 : Float)) : Bool);
     }
     if ((cast ((cast (denom * denom) : Float) <= (cast (((SegmentCollision.RELATIVE_EPSILON__segmentCollision * SegmentCollision.RELATIVE_EPSILON__segmentCollision) * d1LengthSquared) * d2LengthSquared) : Float)) : Bool)) {
-      var epsilon:Dynamic = _Runtime.callValue(SegmentCollision.relativeEpsilon__segmentCollision, cast ([HxMath.max(HxMath.sqrt(d1LengthSquared), HxMath.sqrt(d2LengthSquared))] : Array<Dynamic>));
+      var epsilon:Float = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast HxMath.max(HxMath.sqrt(d1LengthSquared), HxMath.sqrt(d2LengthSquared)) : Float)) : Float);
       if ((cast ((cast HxMath.abs(((ex * d1y) - (ey * d1x))) : Float) > (cast _Runtime.multiplyNumbers(HxMath.sqrt(d1LengthSquared), epsilon) : Float)) : Bool)) { return cast false; }
-      var t0:Dynamic = (((ex * d1x) + (ey * d1y)) / d1LengthSquared);
-      var t1:Dynamic = ((((bx1 - ax0) * d1x) + ((by1 - ay0) * d1y)) / d1LengthSquared);
-      var lo:Dynamic = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t0 : Dynamic) : (cast t1 : Dynamic));
-      var hi:Dynamic = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t1 : Dynamic) : (cast t0 : Dynamic));
+      var t0:Float = (((ex * d1x) + (ey * d1y)) / d1LengthSquared);
+      var t1:Float = ((((bx1 - ax0) * d1x) + ((by1 - ay0) * d1y)) / d1LengthSquared);
+      var lo:Float = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t0 : Dynamic) : (cast t1 : Dynamic));
+      var hi:Float = ((cast ((cast t0 : Float) < (cast t1 : Float)) : Bool) ? (cast t1 : Dynamic) : (cast t0 : Dynamic));
       return cast ((cast ((cast hi : Float) >= (cast -SegmentCollision.RELATIVE_EPSILON__segmentCollision : Float)) : Bool) && (cast ((cast lo : Float) <= (cast (1.0 + SegmentCollision.RELATIVE_EPSILON__segmentCollision) : Float)) : Bool));
     }
     t = (((ex * d2y) - (ey * d2x)) / denom);
@@ -168,53 +168,53 @@ class SegmentCollision {
   }
 
   public static function isSegmentOverlappingBox__segmentCollision(x0:Float, y0:Float, x1:Float, y1:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Bool {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var epsilon:Float = cast _Runtime.UNDEFINED;
     dx = (x1 - x0);
     dy = (y1 - y0);
-    epsilon = _Runtime.callValue(SegmentCollision.relativeEpsilon__segmentCollision, cast ([HxMath.max(HxMath.max(HxMath.max(HxMath.abs(dx), HxMath.abs(dy)), (maxX - minX)), (maxY - minY))] : Array<Dynamic>));
-    _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't0', 0.0);
-    _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't1', 1.0);
-    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dx, (x0 - minX), epsilon] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dx, (maxX - x0), epsilon] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([-dy, (y0 - minY), epsilon] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast _Runtime.callValue(SegmentCollision.clipSegmentSlab__segmentCollision, cast ([dy, (maxY - y0), epsilon] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    return cast ((cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float) <= (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float));
+    epsilon = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast HxMath.max(HxMath.max(HxMath.max(HxMath.abs(dx), HxMath.abs(dy)), (maxX - minX)), (maxY - minY)) : Float)) : Float);
+    ((cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t0 = 0.0);
+    ((cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t1 = 1.0);
+    if ((cast !(cast (cast SegmentCollision.clipSegmentSlab__segmentCollision((cast -dx : Float), (cast (x0 - minX) : Float), (cast epsilon : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast SegmentCollision.clipSegmentSlab__segmentCollision((cast dx : Float), (cast (maxX - x0) : Float), (cast epsilon : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast SegmentCollision.clipSegmentSlab__segmentCollision((cast -dy : Float), (cast (y0 - minY) : Float), (cast epsilon : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast SegmentCollision.clipSegmentSlab__segmentCollision((cast dy : Float), (cast (maxY - y0) : Float), (cast epsilon : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast ((cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t0 : Float) <= (cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t1 : Float));
     return cast null;
   }
 
   public static function clipSegmentSlab__segmentCollision(p:Float, q:Float, epsilon:Float):Bool {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast HxMath.abs(p) : Float) <= (cast epsilon : Float)) : Bool)) {
       return cast ((cast q : Float) >= (cast -epsilon : Float));
     }
     r = (q / p);
     if ((cast ((cast p : Float) < (cast 0.0 : Float)) : Bool)) {
-      if ((cast ((cast r : Float) > (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float)) : Bool)) { return cast false; }
-      if ((cast ((cast r : Float) > (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float)) : Bool)) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't0', r); }
+      if ((cast ((cast r : Float) > (cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t1 : Float)) : Bool)) { return cast false; }
+      if ((cast ((cast r : Float) > (cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t0 : Float)) : Bool)) { ((cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t0 = r); }
     } else {
-      if ((cast ((cast r : Float) < (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't0') : Float)) : Bool)) { return cast false; }
-      if ((cast ((cast r : Float) < (cast _Runtime.field(SegmentCollision.clipRange__segmentCollision, 't1') : Float)) : Bool)) { _Runtime.setField(SegmentCollision.clipRange__segmentCollision, 't1', r); }
+      if ((cast ((cast r : Float) < (cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t0 : Float)) : Bool)) { return cast false; }
+      if ((cast ((cast r : Float) < (cast (cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t1 : Float)) : Bool)) { ((cast SegmentCollision.clipRange__segmentCollision : { var t0:Float; var t1:Float; }).t1 = r); }
     }
     return cast true;
     return cast null;
   }
 
   public static function getPolygonExtent__segmentCollision(points:Array<Float>, count:Float):Float {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var x:Dynamic = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
-        var y:Dynamic = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
+        var y:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
         if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
         if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
         if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
@@ -227,13 +227,13 @@ class SegmentCollision {
   }
 
   public static function isPointOnSegment__segmentCollision(x:Float, y:Float, x0:Float, y0:Float, x1:Float, y1:Float):Bool {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lengthSquared:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var ddx:Dynamic = cast _Runtime.UNDEFINED;
-    var ddy:Dynamic = cast _Runtime.UNDEFINED;
-    var epsilon:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var lengthSquared:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var ddx:Float = cast _Runtime.UNDEFINED;
+    var ddy:Float = cast _Runtime.UNDEFINED;
+    var epsilon:Float = cast _Runtime.UNDEFINED;
     dx = (x1 - x0);
     dy = (y1 - y0);
     lengthSquared = ((dx * dx) + (dy * dy));
@@ -242,7 +242,7 @@ class SegmentCollision {
     (t = cast (((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Dynamic));
     ddx = (x - (x0 + (t * dx)));
     ddy = (y - (y0 + (t * dy)));
-    epsilon = _Runtime.callValue(SegmentCollision.relativeEpsilon__segmentCollision, cast ([HxMath.sqrt(lengthSquared)] : Array<Dynamic>));
+    epsilon = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast HxMath.sqrt(lengthSquared) : Float)) : Float);
     return cast ((cast ((ddx * ddx) + (ddy * ddy)) : Float) <= (cast (epsilon * epsilon) : Float));
     return cast null;
   }
@@ -252,5 +252,5 @@ class SegmentCollision {
     return cast null;
   }
 
-  public static final clipRange__segmentCollision:Dynamic = { t0: 0.0, t1: 1.0 };
+  public static final clipRange__segmentCollision:{ var t0:Float; var t1:Float; } = { t0: 0.0, t1: 1.0 };
 }

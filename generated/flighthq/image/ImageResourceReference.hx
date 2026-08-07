@@ -21,33 +21,33 @@ import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutio
 class ImageResourceReference {
   public static function createEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>):EmbeddedImageResourceReference {
     if (mimeType == null) mimeType = cast (null : Dynamic);
-    return cast { bytes: bytes, failure: null, kind: ImageResourceReferenceKindValue.Embedded, mimeType: mimeType, state: ResourceResolutionStateValue.Unresolved, textures: cast ([] : Array<Dynamic>) };
+    return cast { bytes: bytes, failure: null, kind: (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded, mimeType: mimeType, state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved, textures: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
   public static function createExternalImageResourceReference(uri:String, ?basePath:Null<String>):ExternalImageResourceReference {
     if (basePath == null) basePath = cast (null : Dynamic);
-    return cast { basePath: basePath, failure: null, kind: ImageResourceReferenceKindValue.External, mimeType: null, state: ResourceResolutionStateValue.Unresolved, textures: cast ([] : Array<Dynamic>), uri: uri };
+    return cast { basePath: basePath, failure: null, kind: (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External, mimeType: null, state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved, textures: cast ([] : Array<Dynamic>), uri: uri };
     return cast null;
   }
 
-  public static function createImageResourceFailure(cause:Dynamic):ImageResourceFailure {
+  public static function createImageResourceFailure(cause:flighthq._internal._Any):ImageResourceFailure {
     if ((cast _Runtime.isError(cause) : Bool)) {
-      return cast { kind: ImageResourceFailureKindValue.Error, message: _Runtime.field(cause, 'message'), name: _Runtime.field(cause, 'name') };
+      return cast { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error, message: _Runtime.field(cause, 'message'), name: _Runtime.field(cause, 'name') };
     }
-    return cast { kind: ImageResourceFailureKindValue.Error, message: Std.string(cause), name: null };
+    return cast { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error, message: Std.string(cause), name: null };
     return cast null;
   }
 
   public static function explainImageResourceReferenceResolution(ref:flighthq.types.ImageResourceReference):ImageResourceReferenceResolutionExplanation {
-    return cast { failure: ((cast _Runtime.strictEquals(_Runtime.field(ref, 'failure'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.mergeObjects([_Runtime.field(ref, 'failure')]) : Dynamic)), kind: _Runtime.field(ref, 'kind'), retryable: _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed), state: _Runtime.field(ref, 'state') };
+    return cast { failure: ((cast _Runtime.strictEquals((cast ref : { var failure:Null<ImageResourceFailure>; }).failure, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.mergeObjects([(cast ref : { var failure:Null<ImageResourceFailure>; }).failure]) : Dynamic)), kind: (cast ref : { var kind:String; }).kind, retryable: _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed), state: (cast ref : { var state:ResourceResolutionState; }).state };
     return cast null;
   }
 
   public static function resetFailedImageResourceReference(ref:flighthq.types.ImageResourceReference):Bool {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed) : Bool)) { return cast false; }
-    _Runtime.setField(ref, 'failure', null);
-    _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
+    if ((cast !_Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) { return cast false; }
+    ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
+    ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
     return cast true;
     return cast null;
   }
@@ -55,43 +55,43 @@ class ImageResourceReference {
   public static function resolveImageResourceReference(ref:flighthq.types.ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        _Runtime.setField(ref, 'failure', null);
-        _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Loading);
+        ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
+        ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Loading);
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          var image:Dynamic = cast _Runtime.UNDEFINED;
-          if ((cast _Runtime.strictEquals(_Runtime.field(ref, 'kind'), ImageResourceReferenceKindValue.Embedded) : Bool)) {
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromBytes, cast ([ref.bytes, _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          var image:Null<Image> = cast _Runtime.UNDEFINED;
+          if ((cast _Runtime.strictEquals((cast ref : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool)) {
+            return flighthq._internal._Async.flatMap((cast loadImageResourceFromBytes((cast (cast ref : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).bytes : flighthq._internal._UInt8Array), (cast _Runtime.coalesce((cast ref : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)) : flighthq._internal._Promise<Image>), function(__awaitValue0:Dynamic):Dynamic {
               image = __awaitValue0;
               var __flowBranch1:Dynamic;
               if ((cast _Runtime.strictEquals(image, null) : Bool)) {
                 __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
-                  _Runtime.setField(ref, 'failure', { kind: ImageResourceFailureKindValue.Unavailable, message: 'Image resource unavailable', name: null });
-                  _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
+                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource unavailable', name: null });
+                  ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flighthq._internal._Async.flowReturn(null);
                 });
               } else {
                 __flowBranch1 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-                _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
+                ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flighthq._internal._Async.flowReturn(image);
               });
             });
           } else {
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(fetch, cast ([ref, signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast fetch((cast ref : ExternalImageResourceReference), (cast signal : flighthq._internal.dom.AbortSignal)) : flighthq._internal._Promise<Null<Image>>), function(__awaitValue2:Dynamic):Dynamic {
               image = __awaitValue2;
               var __flowBranch3:Dynamic;
               if ((cast _Runtime.strictEquals(image, null) : Bool)) {
                 __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
-                  _Runtime.setField(ref, 'failure', { kind: ImageResourceFailureKindValue.Unavailable, message: 'Image resource unavailable', name: null });
-                  _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
+                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource unavailable', name: null });
+                  ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flighthq._internal._Async.flowReturn(null);
                 });
               } else {
                 __flowBranch3 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-                _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
+                ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flighthq._internal._Async.flowReturn(image);
               });
             });
@@ -102,15 +102,15 @@ class ImageResourceReference {
             var __flowBranch4:Dynamic;
             if ((cast signal.aborted : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
+                ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
                 return flighthq._internal._Async.reject(cause);
               });
             } else {
               __flowBranch4 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
-              _Runtime.setField(ref, 'failure', _Runtime.callValue(createImageResourceFailure, cast ([cause] : Array<Dynamic>)));
-              _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
+              ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flighthq._internal._Any)) : Null<ImageResourceFailure>));
+              ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
               return flighthq._internal._Async.flowReturn(null);
             });
           });

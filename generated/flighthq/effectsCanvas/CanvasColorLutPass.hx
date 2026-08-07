@@ -13,18 +13,18 @@ class CanvasColorLutPass {
   public static function applyColorLutPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, lut:ColorLut):Void {
     var rgb:Array<Float> = cast _Runtime.UNDEFINED;
     rgb = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
-    _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
+    drawCanvasImageDataPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
-          var p:Dynamic = (i * 4.0);
-          _Runtime.callValue(sampleColorLut, cast ([lut, rgb, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, p), 255.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0)), 255.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0)), 255.0)] : Array<Dynamic>));
+          var p:Float = (i * 4.0);
+          sampleColorLut((cast lut : ColorLut), (cast rgb : Array<Float>), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, p), 255.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0)), 255.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0)), 255.0) : Float));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 0.0), 255.0));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 1.0), 255.0));
           flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 2.0), 255.0));
           i++;
         }
       }
-    }] : Array<Dynamic>));
+    } : flighthq._internal._UInt8ClampedArray->Float->Void));
   }
 }

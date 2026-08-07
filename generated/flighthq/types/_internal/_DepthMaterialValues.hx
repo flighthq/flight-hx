@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.SurfaceMaterial;
 
 class _DepthMaterialValues {
-  public static final DepthMaterialKind:Dynamic = 'DepthMaterial';
+  public static final DepthMaterialKind:String = 'DepthMaterial';
 }

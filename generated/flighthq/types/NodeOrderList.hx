@@ -7,4 +7,4 @@ import flighthq.types.Node.NodeTraits;
 
 typedef NodeOrderList<Traits> = { var entryCount:Float; var nodes:Array<Node<Traits>>; var sortKeys:Array<Float>; };
 
-typedef NodeOrderListEntryVisitor<Traits> = Dynamic;
+typedef NodeOrderListEntryVisitor<Traits> = Node<Traits>->Float->Float->flighthq._internal._Union2<Bool, Void>;

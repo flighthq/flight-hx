@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.effectsWgpu.WgpuSsaoEffect.applySsaoEffectToWgpu;
 import flighthq.types.ContactShadowsEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -13,14 +15,14 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuContactShadowsEffect {
   @:noCompletion
   public static function applyContactShadowsEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ContactShadowsEffect):Void {
-    _Runtime.callValue(applySsaoEffectToWgpu, cast ([state, source, dest, { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }] : Array<Dynamic>));
+    applySsaoEffectToWgpu((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) });
   }
 
-  public static final defaultWgpuContactShadowsEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyContactShadowsEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ContactShadowsEffect)] : Array<Dynamic>));
+  public static final defaultWgpuContactShadowsEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyContactShadowsEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ContactShadowsEffect) : ContactShadowsEffect));
   };
 
   public static function registerWgpuContactShadowsEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ContactShadowsEffect', defaultWgpuContactShadowsEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ContactShadowsEffect' : String), (cast defaultWgpuContactShadowsEffectRunner : WgpuRenderEffectRunner));
   }
 }

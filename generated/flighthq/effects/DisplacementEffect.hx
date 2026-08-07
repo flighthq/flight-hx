@@ -17,9 +17,9 @@ class DisplacementEffect {
   }
 
   public static function getDisplacementEffectPadding(effect:flighthq.types.DisplacementEffect):RenderEffectPadding {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
-    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var horizontal:Float = cast _Runtime.UNDEFINED;
+    var vertical:Float = cast _Runtime.UNDEFINED;
     intensity = HxMath.abs(_Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0));
     horizontal = HxMath.ceil((intensity * 1.5));
     vertical = HxMath.ceil(intensity);
@@ -28,11 +28,11 @@ class DisplacementEffect {
   }
 
   public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DisplacementEffect', DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DisplacementEffect' : String), DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect);
   }
 
   public static function resolveDisplacementEffectPadding__displacementEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getDisplacementEffectPadding, cast ([(cast effect : flighthq.types.DisplacementEffect)] : Array<Dynamic>));
+    return cast (cast getDisplacementEffectPadding((cast (cast effect : flighthq.types.DisplacementEffect) : flighthq.types.DisplacementEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

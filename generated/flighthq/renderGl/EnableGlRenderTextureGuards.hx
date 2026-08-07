@@ -7,35 +7,36 @@ import flighthq.log.Log.logOnce;
 import flighthq.renderGl.GlRenderTexture.setGlRenderTextureGuard;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
+import flighthq.types.GlRenderTexture.GlRenderTextureStatus;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.RenderTexture;
 
 class EnableGlRenderTextureGuards {
   @:noCompletion
   public static function areGlRenderTextureGuardsEnabled(state:GlRenderState):Bool {
-    var enabled:Dynamic = cast _Runtime.UNDEFINED;
+    var enabled:Bool = cast _Runtime.UNDEFINED;
     enabled = false;
-    _Runtime.callValue(EnableGlRenderTextureGuards.setGlRenderTextureGuardProbe__enableGlRenderTextureGuards, cast ([state, function() {
+    EnableGlRenderTextureGuards.setGlRenderTextureGuardProbe__enableGlRenderTextureGuards((cast state : GlRenderState), (cast function():Void {
       (enabled = cast (true : Dynamic));
-    }] : Array<Dynamic>));
+    } : Void->Void));
     return cast enabled;
     return cast null;
   }
 
   public static function enableGlRenderTextureGuards(state:GlRenderState):Void {
-    _Runtime.callValue(setGlRenderTextureGuard, cast ([state, EnableGlRenderTextureGuards.warnGlRenderTextureUnavailable__enableGlRenderTextureGuards] : Array<Dynamic>));
-    ((cast EnableGlRenderTextureGuards._guardedContexts__enableGlRenderTextureGuards : flighthq._internal._WeakSet).add(_Runtime.field(state, 'gl')));
+    setGlRenderTextureGuard((cast state : GlRenderState), EnableGlRenderTextureGuards.warnGlRenderTextureUnavailable__enableGlRenderTextureGuards);
+    ((cast EnableGlRenderTextureGuards._guardedContexts__enableGlRenderTextureGuards : flighthq._internal._WeakSet<flighthq._internal.dom.WebGL2RenderingContext>).add((cast state : GlRenderState).gl));
   }
 
-  public static function setGlRenderTextureGuardProbe__enableGlRenderTextureGuards(state:GlRenderState, onEnabled:Dynamic):Void {
-    if ((cast ((cast EnableGlRenderTextureGuards._guardedContexts__enableGlRenderTextureGuards : flighthq._internal._WeakSet).has(_Runtime.field(state, 'gl'))) : Bool)) { _Runtime.callValue(onEnabled, cast ([] : Array<Dynamic>)); }
+  public static function setGlRenderTextureGuardProbe__enableGlRenderTextureGuards(state:GlRenderState, onEnabled:Void->Void):Void {
+    if ((cast ((cast EnableGlRenderTextureGuards._guardedContexts__enableGlRenderTextureGuards : flighthq._internal._WeakSet<flighthq._internal.dom.WebGL2RenderingContext>).has((cast state : GlRenderState).gl)) : Bool)) { onEnabled(); }
   }
 
   public static function warnGlRenderTextureUnavailable__enableGlRenderTextureGuards(_state:GlRenderState, renderTexture:RenderTexture, explanation:GlRenderTextureExplanation):Void {
-    var writing:Dynamic = cast _Runtime.UNDEFINED;
+    var writing:Bool = cast _Runtime.UNDEFINED;
     writing = _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'writing');
-    _Runtime.callValue(logOnce, cast (['render-gl:render-texture-' + Std.string(_Runtime.field(explanation, 'status')) + '', LogLevel.Warn, { height: _Runtime.field(explanation, 'height'), message: ((cast writing : Bool) ? (cast 'bindGlRenderTexture: the render Texture is still bound for writing; sampling it would be a read-after-write feedback hazard.' : Dynamic) : (cast 'bindGlRenderTexture: the render Texture has not completed renderIntoGlRenderTexture; sampling uses the empty sentinel.' : Dynamic)), renderTexture: renderTexture, status: _Runtime.field(explanation, 'status'), width: _Runtime.field(explanation, 'width') }, 'render-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'render-gl:render-texture-' + Std.string(_Runtime.field(explanation, 'status')) + '' : String), (cast LogLevel.Warn : LogLevel), { height: _Runtime.field(explanation, 'height'), message: ((cast writing : Bool) ? (cast 'bindGlRenderTexture: the render Texture is still bound for writing; sampling it would be a read-after-write feedback hazard.' : Dynamic) : (cast 'bindGlRenderTexture: the render Texture has not completed renderIntoGlRenderTexture; sampling uses the empty sentinel.' : Dynamic)), renderTexture: renderTexture, status: _Runtime.field(explanation, 'status'), width: _Runtime.field(explanation, 'width') }, (cast 'render-gl' : Null<String>)) : Bool);
   }
 
-  public static final _guardedContexts__enableGlRenderTextureGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+  public static final _guardedContexts__enableGlRenderTextureGuards:flighthq._internal._WeakSet<flighthq._internal.dom.WebGL2RenderingContext> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

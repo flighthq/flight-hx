@@ -4,14 +4,14 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef StorageBackend = { var getItem:Dynamic; var setItem:Dynamic; var removeItem:Dynamic; var clear:Dynamic; var keys:Dynamic; @:optional var byteSize:Dynamic; @:optional var subscribeChanges:Dynamic; };
+typedef StorageBackend = { var getItem:String->Null<String>; var setItem:String->String->Bool; var removeItem:String->Bool; var clear:Void->Bool; var keys:Void->Array<String>; @:optional var byteSize:Void->Float; @:optional var subscribeChanges:StorageChange->Void->Void->Void; };
 
 typedef StorageChange = { var key:Null<String>; var newValue:Null<String>; var oldValue:Null<String>; };
 
-typedef StorageMigration = { var migrate:Dynamic; var version:Float; };
+typedef StorageMigration = { var migrate:Null<String>->Void; var version:Float; };
 
 typedef StorageNamespace = { var prefix:String; };
 
 typedef StorageQuota = { var available:Float; var used:Float; };
 
-typedef StorageSignals = { var onChange:Signal<Dynamic>; };
+typedef StorageSignals = { var onChange:Signal<StorageChange->Void>; };

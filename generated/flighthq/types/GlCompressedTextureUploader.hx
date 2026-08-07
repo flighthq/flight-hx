@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Texture.TextureColorSpace;
 
-typedef GlCompressedTextureUploader = Dynamic;
+typedef GlCompressedTextureUploader = flighthq._internal.dom.WebGL2RenderingContext->CompressedImage->Null<GlCompressedTextureDecoder>->TextureColorSpace->Bool;

@@ -12,8 +12,8 @@ class InterpolationAdvanced {
   }
 
   public static function lerpAngle(a:Float, b:Float, t:Float):Float {
-    var TAU:Dynamic = cast _Runtime.UNDEFINED;
-    var diff:Dynamic = cast _Runtime.UNDEFINED;
+    var TAU:Float = cast _Runtime.UNDEFINED;
+    var diff:Float = cast _Runtime.UNDEFINED;
     TAU = (HxMath.PI * 2.0);
     diff = _Runtime.fmod((_Runtime.fmod((b - a), TAU) + TAU), TAU);
     if ((cast ((cast diff : Float) > (cast HxMath.PI : Float)) : Bool)) { (diff = cast ((diff - TAU) : Dynamic)); }
@@ -22,7 +22,7 @@ class InterpolationAdvanced {
   }
 
   public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
-    var delta:Dynamic = cast _Runtime.UNDEFINED;
+    var delta:Float = cast _Runtime.UNDEFINED;
     delta = (target - current);
     if ((cast ((cast HxMath.abs(delta) : Float) <= (cast maxDelta : Float)) : Bool)) { return cast target; }
     return cast (current + _Runtime.multiplyNumbers(_Runtime.sign(delta), maxDelta));
@@ -30,8 +30,8 @@ class InterpolationAdvanced {
   }
 
   public static function pingPong(t:Float, length:Float):Float {
-    var cycle:Dynamic = cast _Runtime.UNDEFINED;
-    var mod:Dynamic = cast _Runtime.UNDEFINED;
+    var cycle:Float = cast _Runtime.UNDEFINED;
+    var mod:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     cycle = (2.0 * length);
     mod = _Runtime.fmod((_Runtime.fmod(t, cycle) + cycle), cycle);
@@ -46,8 +46,8 @@ class InterpolationAdvanced {
   }
 
   public static function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
     s = ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
     return cast (((s * s) * s) * ((s * ((s * 6.0) - 15.0)) + 10.0));

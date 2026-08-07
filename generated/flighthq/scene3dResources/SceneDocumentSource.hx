@@ -7,18 +7,23 @@ import flighthq.net.Net.sendNetRequest;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
 import flighthq.types.Net.NetProgress;
 import flighthq.types.Net.NetRequestOptions;
+import flighthq.types.Net.NetResponse;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
+import flighthq.types.Scene3DResources.Scene3DDocumentLoadProgress;
+import flighthq.types.Signal;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
 class SceneDocumentSource {
   public static function getScene3DDocumentBasePathFromUrl(url:String):Null<String> {
-    var query:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var slash:Dynamic = cast _Runtime.UNDEFINED;
+    var query:Float = cast _Runtime.UNDEFINED;
+    var source:String = cast _Runtime.UNDEFINED;
+    var slash:Float = cast _Runtime.UNDEFINED;
     query = _Runtime.callProperty(url, 'search', cast ([_Runtime.regexp('[?#]', '')] : Array<Dynamic>));
     source = ((cast ((cast query : Float) >= (cast 0.0 : Float)) : Bool) ? (cast _Runtime.slice(url, 0.0, query) : Dynamic) : (cast url : Dynamic));
     slash = _Runtime.callProperty(source, 'lastIndexOf', cast (['/'] : Array<Dynamic>));
@@ -29,11 +34,11 @@ class SceneDocumentSource {
   public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var response:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'arraybuffer', url: url }, _Runtime.callValue(SceneDocumentSource.createScene3DDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+        var response:NetResponse = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast sendNetRequest({ method: 'GET', responseType: 'arraybuffer', url: url }, (cast (cast SceneDocumentSource.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : Null<NetRequestOptions>) : Null<NetRequestOptions>)) : flighthq._internal._Promise<NetResponse>), function(__awaitValue0:Dynamic):Dynamic {
           response = __awaitValue0;
           var __flowBranch1:Dynamic;
-          if ((cast ((cast !(cast _Runtime.field(response, 'ok') : Bool) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(response, 'body'), flighthq._internal._HostValueLut.get('ArrayBuffer')) : Bool) : Bool)) : Bool)) {
+          if ((cast ((cast !(cast (cast response : NetResponse).ok : Bool) : Bool) || (cast !(cast _Runtime.isInstanceOf((cast response : NetResponse).body, flighthq._internal._HostValueLut.get('ArrayBuffer')) : Bool) : Bool)) : Bool)) {
             __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
@@ -41,7 +46,7 @@ class SceneDocumentSource {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(new flighthq._internal._UInt8Array(_Runtime.field(response, 'body')));
+            return flighthq._internal._Async.flowReturn(new flighthq._internal._UInt8Array((cast response : NetResponse).body));
           });
         });
       })
@@ -51,11 +56,11 @@ class SceneDocumentSource {
   public static function loadScene3DDocumentTextFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<String>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var response:Dynamic = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'text', url: url }, _Runtime.callValue(SceneDocumentSource.createScene3DDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+        var response:NetResponse = cast _Runtime.UNDEFINED;
+        return flighthq._internal._Async.flatMap((cast sendNetRequest({ method: 'GET', responseType: 'text', url: url }, (cast (cast SceneDocumentSource.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), (cast options : Null<Scene3DDocumentLoadOptions>)) : Null<NetRequestOptions>) : Null<NetRequestOptions>)) : flighthq._internal._Promise<NetResponse>), function(__awaitValue2:Dynamic):Dynamic {
           response = __awaitValue2;
           var __flowBranch3:Dynamic;
-          if ((cast ((cast !(cast _Runtime.field(response, 'ok') : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(response, 'body')), 'string') : Bool)) : Bool)) {
+          if ((cast ((cast !(cast (cast response : NetResponse).ok : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast response : NetResponse).body), 'string') : Bool)) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
@@ -63,7 +68,7 @@ class SceneDocumentSource {
             __flowBranch3 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.field(response, 'body'));
+            return flighthq._internal._Async.flowReturn((cast response : NetResponse).body);
           });
         });
       })
@@ -71,28 +76,28 @@ class SceneDocumentSource {
   }
 
   public static function setScene3DDocumentResourceBasePathFromUrl(document:Scene3DDocument, url:String):Void {
-    var basePath:Dynamic = cast _Runtime.UNDEFINED;
-    basePath = _Runtime.callValue(getScene3DDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>));
+    var basePath:Null<String> = cast _Runtime.UNDEFINED;
+    basePath = (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(basePath, null) : Bool)) { return; }
-    for (resource in _Runtime.iterable(_Runtime.field(document, 'resources'))) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(resource, 'kind'), ImageResourceReferenceKindValue.External) : Bool) && (cast _Runtime.strictEquals(resource.basePath, null) : Bool)) : Bool)) {
-        (resource.basePath = cast (basePath : Dynamic));
+    for (resource in _Runtime.iterable((cast document : Scene3DDocument).resources)) {
+      if ((cast ((cast _Runtime.strictEquals((cast resource : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast resource : flighthq.types.ImageResourceReference.ExternalImageResourceReference).basePath, null) : Bool)) : Bool)) {
+        ((cast resource : flighthq.types.ImageResourceReference.ExternalImageResourceReference).basePath = cast (basePath : Dynamic));
       }
     }
   }
 
   public static function createScene3DDocumentNetRequestOptions__sceneDocumentSource(url:String, ?options:Scene3DDocumentLoadOptions):Null<NetRequestOptions> {
     var out:NetRequestOptions = cast _Runtime.UNDEFINED;
-    var outputProgress:Dynamic = cast _Runtime.UNDEFINED;
+    var outputProgress:Null<Signal<Scene3DDocumentLoadProgress->Void>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
     out = { signal: _Runtime.field(options, 'signal') };
     outputProgress = _Runtime.field(options, 'progress');
     if ((cast !_Runtime.strictEquals(outputProgress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var progress:Dynamic = _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>));
-      _Runtime.callValue(connectSignal, cast ([progress, function(event:Dynamic) {
+      var progress:Signal<NetProgress->Void> = (cast createSignal() : Signal<NetProgress->Void>);
+      connectSignal(progress, (cast function(event:NetProgress):Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[outputProgress], [{ loaded: _Runtime.field(event, 'loaded'), phase: _Runtime.field(event, 'phase'), total: _Runtime.field(event, 'total'), url: url }]]), 1);
-      }] : Array<Dynamic>));
-      _Runtime.setField(out, 'progress', progress);
+      } : NetProgress->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
+      ((cast out : NetRequestOptions).progress = progress);
     }
     return cast out;
     return cast null;

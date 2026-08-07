@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Material.MaterialData;
 
-typedef GlMaterialRenderer = { var instanceFloatCount:Float; var bind:Dynamic; @:optional var packInstance:Dynamic; };
+typedef GlMaterialRenderer = { var instanceFloatCount:Float; var bind:GlRenderState->Null<Material>->Void; @:optional var packInstance:GlRenderState->Null<MaterialData>->flighthq._internal._Float32Array->Float->Void; };

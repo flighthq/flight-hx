@@ -20,44 +20,47 @@ import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.MatcapMaterialKind;
+import flighthq.types.WgpuMatcapPipeline;
 import flighthq.types.WgpuMatcapPipeline.WgpuMatcapDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 class MatcapWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D) {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    var matcap:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+  public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var matcap:Null<MatcapMaterial> = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuMatcapPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.field(stateRuntime, 'renderPass');
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     matcap = (cast material : Null<MatcapMaterial>);
-    format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuMatcapPipeline, cast ([state, _Runtime.callValue(MatcapWgpuMeshMaterialRenderer.defineKeyForMaterial__matcapWgpuMeshMaterialRenderer, cast ([matcap] : Array<Dynamic>)), format] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, _lights] : Array<Dynamic>));
+    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    pipeline = (cast ensureWgpuMatcapPipeline((cast state : WgpuRenderState), (cast (cast MatcapWgpuMeshMaterialRenderer.defineKeyForMaterial__matcapWgpuMeshMaterialRenderer((cast matcap : Null<MatcapMaterial>)) : WgpuMatcapDefineKey) : WgpuMatcapDefineKey), (cast format : String)) : WgpuMatcapPipeline);
+    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast _lights : Scene3DLightBlock));
     if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
-      (group = cast (_Runtime.callValue(bindWgpuMatcapSurface, cast ([state, pipeline, MatcapWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer, MatcapWgpuMeshMaterialRenderer.WHITE__matcapWgpuMeshMaterialRenderer, 0.5] : Array<Dynamic>)) : Dynamic));
+      (group = cast ((cast bindWgpuMatcapSurface((cast state : WgpuRenderState), pipeline, (cast MatcapWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast MatcapWgpuMeshMaterialRenderer.WHITE__matcapWgpuMeshMaterialRenderer : Array<Float>), (cast 0.5 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      _Runtime.callValue(unpackColorToLinear, cast ([MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer, _Runtime.field(matcap, 'tint')] : Array<Dynamic>));
-      (group = cast (_Runtime.callValue(bindWgpuMatcapSurface, cast ([state, pipeline, matcap, MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer, _Runtime.field(matcap, 'alphaCutoff')] : Array<Dynamic>)) : Dynamic));
+      (cast unpackColorToLinear((cast MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuMatcapSurface((cast state : WgpuRenderState), pipeline, (cast matcap : flighthq._internal._Object), (cast MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(matcap, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
+    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
-  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
+  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
   public static function registerWgpuMatcapMaterial(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuBitmapTextureResolver, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerWgpuImageTextureResolver, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, MatcapMaterialKind, matcapWgpuMeshMaterialRenderer] : Array<Dynamic>));
+    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
+    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
+    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast MatcapMaterialKind : String), (cast matcapWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__matcapWgpuMeshMaterialRenderer(material:Null<MatcapMaterial>):WgpuMatcapDefineKey {
@@ -69,5 +72,5 @@ class MatcapWgpuMeshMaterialRenderer {
 
   public static final WHITE__matcapWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
 
-  public static final FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer:Dynamic = (cast {  } : MatcapMaterial);
+  public static final FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer:MatcapMaterial = (cast {  } : MatcapMaterial);
 }

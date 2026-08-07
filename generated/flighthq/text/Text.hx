@@ -281,7 +281,7 @@ class Text {
     Facade_Text_flighthq_text_RichText.setRichTextDefaultTextFormat(source, value);
   }
 
-  public static function setRichTextFormatRange(source:RichText, format:TextFormat, ?start:Dynamic, ?end:Dynamic):Void {
+  public static function setRichTextFormatRange(source:RichText, format:TextFormat, ?start:Float, ?end:Float):Void {
     Facade_Text_flighthq_text_RichText.setRichTextFormatRange(source, format, start, end);
   }
 

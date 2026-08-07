@@ -15,8 +15,8 @@ import flighthq.types.Scene2DRenderer;
 class GlShape {
   @:noCompletion
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    if ((cast _Runtime.callValue(drawGlMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
-    _Runtime.callValue(drawGlRasterShape, cast ([state, renderProxy] : Array<Dynamic>));
+    if ((cast (cast drawGlMeshShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
+    drawGlRasterShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D));
   }
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };

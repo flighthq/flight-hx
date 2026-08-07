@@ -15,6 +15,7 @@ import flighthq.tween.TweenStagger as Facade_Tween_flighthq_tween_TweenStagger;
 import flighthq.tween.UpdateTweens as Facade_Tween_flighthq_tween_UpdateTweens;
 import flighthq.tween._internal._Internal.initializeTween;
 import flighthq.types.EasingFunction;
+import flighthq.types.Signal;
 import flighthq.types.StopTweenOptions;
 import flighthq.types.Tween;
 import flighthq.types.Tween.NumericProps;
@@ -25,49 +26,49 @@ import flighthq.types.TweenPropertyDetail;
 import flighthq.types.TweenStaggerOptions;
 
 class Tween {
-  public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(stopTweens, cast ([manager, target, propertyMap] : Array<Dynamic>));
-    t = (cast target : Dynamic);
-    p = (cast propertyMap : Dynamic);
+  public static function applyTween<T>(manager:TweenManager, target:T, propertyMap:NumericProps<T>):Void {
+    var t:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
+    var p:flighthq._internal._Record<String, Null<Float>> = cast _Runtime.UNDEFINED;
+    stopTweens((cast manager : TweenManager), (cast target : flighthq._internal._Object), (cast propertyMap : Null<NumericProps<flighthq._internal._Any>>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<StopTweenOptions>));
+    t = (cast target : flighthq._internal._Record<String, Float>);
+    p = (cast propertyMap : flighthq._internal._Record<String, Null<Float>>);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
-      var val:Dynamic = _Runtime.getIndex(p, key);
+      var val:Null<Float> = _Runtime.getIndex(p, key);
       if ((cast !_Runtime.strictEquals(val, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setIndex(t, key, val); }
     }
   }
 
-  public static function completeTween<T>(tween:flighthq.types.Tween<Dynamic>):Void {
+  public static function completeTween<T>(tween:flighthq.types.Tween<T>):Void {
     Facade_Tween_flighthq_tween_UpdateTweens.completeTween(tween);
   }
 
-  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):flighthq.types.Tween<ColorComponents__colorTween> {
+  public static function createColorTween(manager:TweenManager, target:flighthq._internal._Record<String, Float>, property:String, duration:Float, toColor:Float, ?options:TweenOptions):flighthq.types.Tween<ColorComponents__colorTween> {
     return cast Facade_Tween_flighthq_tween_ColorTween.createColorTween(manager, target, property, duration, toColor, options);
     return cast null;
   }
 
-  public static function createTween<T>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:TweenOptions):flighthq.types.Tween<Dynamic> {
+  public static function createTween<T>(managerOrTarget:flighthq._internal._Union2<TweenManager, T>, targetOrDuration:flighthq._internal._Union2<T, Float>, durationOrProps:flighthq._internal._Union2<Float, NumericProps<T>>, ?propsOrOptions:flighthq._internal._Union2<NumericProps<T>, TweenOptions>, ?maybeOptions:TweenOptions):flighthq.types.Tween<T> {
     var manager:TweenManager = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
+    var target:T = cast _Runtime.UNDEFINED;
     var duration:Float = cast _Runtime.UNDEFINED;
-    var propertyMap:NumericProps<Dynamic> = cast _Runtime.UNDEFINED;
+    var propertyMap:NumericProps<T> = cast _Runtime.UNDEFINED;
     var options:Null<TweenOptions> = cast _Runtime.UNDEFINED;
-    var tween:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(Tween.isTweenManager__tween, cast ([managerOrTarget] : Array<Dynamic>)) : Bool)) {
+    var tween:flighthq.types.Tween<T> = cast _Runtime.UNDEFINED;
+    if ((cast (cast Tween.isTweenManager__tween((cast managerOrTarget : flighthq._internal._Any)) : Bool) : Bool)) {
       (manager = cast (managerOrTarget : Dynamic));
-      (target = cast ((cast targetOrDuration : Dynamic) : Dynamic));
+      (target = cast ((cast targetOrDuration : T) : Dynamic));
       (duration = cast ((cast durationOrProps : Float) : Dynamic));
-      (propertyMap = cast ((cast propsOrOptions : NumericProps<Dynamic>) : Dynamic));
+      (propertyMap = cast ((cast propsOrOptions : NumericProps<T>) : Dynamic));
       (options = cast (maybeOptions : Dynamic));
     } else {
       (manager = cast (defaultManager : Dynamic));
-      (target = cast ((cast managerOrTarget : Dynamic) : Dynamic));
+      (target = cast ((cast managerOrTarget : T) : Dynamic));
       (duration = cast ((cast targetOrDuration : Float) : Dynamic));
-      (propertyMap = cast ((cast durationOrProps : NumericProps<Dynamic>) : Dynamic));
+      (propertyMap = cast ((cast durationOrProps : NumericProps<T>) : Dynamic));
       (options = cast ((cast propsOrOptions : Null<TweenOptions>) : Dynamic));
     }
-    tween = _Runtime.callValue(Tween.makeTween__tween, cast ([target, duration, propertyMap, options, manager.defaultEase] : Array<Dynamic>));
-    _Runtime.callValue(Tween.registerTween__tween, cast ([manager, tween, _Runtime.coalesce(_Runtime.optionalField(options, 'overwrite'), function():Dynamic return cast true)] : Array<Dynamic>));
+    tween = (cast Tween.makeTween__tween(target, (cast duration : Float), propertyMap, (cast options : Null<TweenOptions>), (cast manager.defaultEase : EasingFunction)) : flighthq.types.Tween<T>);
+    Tween.registerTween__tween((cast manager : TweenManager), tween, (cast _Runtime.coalesce(_Runtime.optionalField(options, 'overwrite'), function():Dynamic return cast true) : Bool));
     return cast tween;
     return cast null;
   }
@@ -77,108 +78,108 @@ class Tween {
     return cast null;
   }
 
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<flighthq.types.Tween<Dynamic>> {
+  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<flighthq.types.Tween<T>> {
     return cast Facade_Tween_flighthq_tween_TweenStagger.createTweenStagger(manager, targets, duration, propertyMap, stagger, options);
     return cast null;
   }
 
-  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):flighthq.types.Tween<Dynamic> {
+  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):flighthq.types.Tween<flighthq._internal._Object> {
     return cast Facade_Tween_flighthq_tween_Timer.createTweenTimer(manager, duration, options);
     return cast null;
   }
 
   public static function getActiveTweenCount(manager:TweenManager):Float {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
-    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map).values()))) {
+    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).values()))) {
       (count = cast ((count + _Runtime.field(list, 'length')) : Dynamic));
     }
     return cast count;
     return cast null;
   }
 
-  public static function getTweenProgress(tween:flighthq.types.Tween<Dynamic>):Float {
+  public static function getTweenProgress(tween:flighthq.types.Tween<flighthq._internal._Any>):Float {
     return cast Facade_Tween_flighthq_tween_TweenProgress.getTweenProgress(tween);
     return cast null;
   }
 
-  public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<flighthq.types.Tween<Dynamic>> {
-    return cast _Runtime.coalesce(((cast manager.tweens : flighthq._internal._Map).get(target)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+  public static function getTweensOf(manager:TweenManager, target:flighthq._internal._Object):Array<flighthq.types.Tween<flighthq._internal._Any>> {
+    return cast _Runtime.coalesce(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get(target)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasTweensOf(manager:TweenManager, target:Dynamic):Bool {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flighthq._internal._Map).get(target));
+  public static function hasTweensOf(manager:TweenManager, target:flighthq._internal._Object):Bool {
+    var list:Null<Array<flighthq.types.Tween<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    list = ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get(target));
     return cast ((cast !_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(list, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
-  public static function isTweenManager__tween(value:Dynamic):Bool {
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast value : Dynamic), '__brand'), 'TweenManager') : Bool));
+  public static function isTweenManager__tween(value:flighthq._internal._Any):Bool {
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast value : flighthq._internal._Any), '__brand'), 'TweenManager') : Bool));
     return cast null;
   }
 
   public static function killTweensOfProperty(manager:TweenManager, key:String):Void {
-    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map).values()))) {
+    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).values()))) {
       for (tween in _Runtime.iterable(list)) {
-        var p:Dynamic = (cast _Runtime.field(tween, 'propertyMap') : Dynamic);
-        if ((cast _Runtime.hasField(p, key) : Bool)) { _Runtime.setField(tween, 'complete', true); }
+        var p:flighthq._internal._Record<String, flighthq._internal._Any> = (cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).propertyMap : flighthq._internal._Record<String, flighthq._internal._Any>);
+        if ((cast _Runtime.hasField(p, key) : Bool)) { ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).complete = true); }
       }
     }
   }
 
-  public static function makeTween__tween<T>(target:Dynamic, duration:Float, propertyMap:NumericProps<Dynamic>, options:Null<TweenOptions>, defaultEase:EasingFunction):flighthq.types.Tween<Dynamic> {
-    var keys:Dynamic = cast _Runtime.UNDEFINED;
+  public static function makeTween__tween<T>(target:T, duration:Float, propertyMap:NumericProps<T>, options:Null<TweenOptions>, defaultEase:EasingFunction):flighthq.types.Tween<T> {
+    var keys:Array<String> = cast _Runtime.UNDEFINED;
     var properties:Array<TweenPropertyDetail> = cast _Runtime.UNDEFINED;
     keys = flighthq._internal.DynamicObject.keys(propertyMap);
-    properties = _Runtime.callProperty(keys, 'map', cast ([function(key:Dynamic) return { change: 0.0, key: key, start: 0.0 }] : Array<Dynamic>));
-    return cast { complete: false, delay: _Runtime.coalesce(_Runtime.optionalField(options, 'delay'), function():Dynamic return cast 0.0), duration: duration, ease: _Runtime.coalesce(_Runtime.optionalField(options, 'ease'), function():Dynamic return cast defaultEase), elapsed: 0.0, initialized: false, onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRepeat: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdate: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onYoyo: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), paused: false, properties: properties, propertyMap: propertyMap, reflect: _Runtime.coalesce(_Runtime.optionalField(options, 'reflect'), function():Dynamic return cast false), repeat: _Runtime.coalesce(_Runtime.optionalField(options, 'repeat'), function():Dynamic return cast 0.0), reverse: _Runtime.coalesce(_Runtime.optionalField(options, 'reverse'), function():Dynamic return cast false), smartRotation: _Runtime.coalesce(_Runtime.optionalField(options, 'smartRotation'), function():Dynamic return cast false), snapping: _Runtime.coalesce(_Runtime.optionalField(options, 'snapping'), function():Dynamic return cast false), target: target };
+    properties = _Runtime.callProperty(keys, 'map', cast ([function(key:String, __unused0:Float, __unused1:Array<String>):{ var change:Float; var key:String; var start:Float; } return { change: 0.0, key: key, start: 0.0 }] : Array<Dynamic>));
+    return cast { complete: false, delay: _Runtime.coalesce(_Runtime.optionalField(options, 'delay'), function():Dynamic return cast 0.0), duration: duration, ease: _Runtime.coalesce(_Runtime.optionalField(options, 'ease'), function():Dynamic return cast defaultEase), elapsed: 0.0, initialized: false, onComplete: (cast createSignal() : Signal<Void->Void>), onRepeat: (cast createSignal() : Signal<Void->Void>), onUpdate: (cast createSignal() : Signal<Void->Void>), onYoyo: (cast createSignal() : Signal<Void->Void>), paused: false, properties: properties, propertyMap: propertyMap, reflect: _Runtime.coalesce(_Runtime.optionalField(options, 'reflect'), function():Dynamic return cast false), repeat: _Runtime.coalesce(_Runtime.optionalField(options, 'repeat'), function():Dynamic return cast 0.0), reverse: _Runtime.coalesce(_Runtime.optionalField(options, 'reverse'), function():Dynamic return cast false), smartRotation: _Runtime.coalesce(_Runtime.optionalField(options, 'smartRotation'), function():Dynamic return cast false), snapping: _Runtime.coalesce(_Runtime.optionalField(options, 'snapping'), function():Dynamic return cast false), target: target };
     return cast null;
   }
 
   public static function pauseAllTweens(manager:TweenManager):Void {
-    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map).values()))) {
+    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).values()))) {
       for (tween in _Runtime.iterable(list)) {
-        _Runtime.setField(tween, 'paused', true);
+        ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = true);
       }
     }
   }
 
-  public static function pauseTween(tween:flighthq.types.Tween<Dynamic>):Void {
-    _Runtime.setField(tween, 'paused', true);
+  public static function pauseTween(tween:flighthq.types.Tween<flighthq._internal._Any>):Void {
+    ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = true);
   }
 
-  public static function pauseTweens(manager:TweenManager, target:Dynamic):Void {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flighthq._internal._Map).get(target));
+  public static function pauseTweens(manager:TweenManager, target:flighthq._internal._Object):Void {
+    var list:Null<Array<flighthq.types.Tween<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    list = ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get(target));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
-      _Runtime.setField(tween, 'paused', true);
+      ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = true);
     }
   }
 
-  public static function registerTween__tween<T>(manager:TweenManager, tween:flighthq.types.Tween<Dynamic>, overwrite:Bool):Void {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flighthq._internal._Map).get(_Runtime.field(tween, 'target')));
+  public static function registerTween__tween<T>(manager:TweenManager, tween:flighthq.types.Tween<T>, overwrite:Bool):Void {
+    var list:Null<Array<flighthq.types.Tween<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    list = ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get((cast tween : flighthq.types.Tween<T>).target));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (list = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      ((cast manager.tweens : flighthq._internal._Map).set(_Runtime.field(tween, 'target'), list));
+      ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).set((cast tween : flighthq.types.Tween<T>).target, list));
     }
     if ((cast overwrite : Bool)) {
       {
-        var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(list, 'length'), 1.0);
+        var i:Float = _Runtime.subtractNumbers(_Runtime.field(list, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          var existing:Dynamic = flighthq._internal._StaticIndex.readArray(list, i);
-          var existingMap:Dynamic = (cast _Runtime.field(existing, 'propertyMap') : Dynamic);
-          var overlaps:Dynamic = false;
-          for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-            if ((cast _Runtime.hasField(existingMap, _Runtime.field(detail, 'key')) : Bool)) {
+          var existing:flighthq.types.Tween<flighthq._internal._Any> = flighthq._internal._StaticIndex.readArray(list, i);
+          var existingMap:flighthq._internal._Record<String, flighthq._internal._Any> = (cast (cast existing : flighthq.types.Tween<flighthq._internal._Any>).propertyMap : flighthq._internal._Record<String, flighthq._internal._Any>);
+          var overlaps:Bool = false;
+          for (detail in _Runtime.iterable((cast tween : flighthq.types.Tween<T>).properties)) {
+            if ((cast _Runtime.hasField(existingMap, (cast detail : TweenPropertyDetail).key) : Bool)) {
               (overlaps = cast (true : Dynamic));
               break;
             }
           }
-          if ((cast overlaps : Bool)) { _Runtime.setField(existing, 'complete', true); }
+          if ((cast overlaps : Bool)) { ((cast existing : flighthq.types.Tween<flighthq._internal._Any>).complete = true); }
           i--;
         }
       }
@@ -187,79 +188,79 @@ class Tween {
   }
 
   public static function resetAllTweens(manager:TweenManager):Void {
-    ((cast manager.tweens : flighthq._internal._Map).clear());
+    ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).clear());
   }
 
-  public static function restartTween(tween:flighthq.types.Tween<Dynamic>, ?includeDelay:Dynamic):Void {
+  public static function restartTween(tween:flighthq.types.Tween<flighthq._internal._Any>, ?includeDelay:Bool):Void {
     Facade_Tween_flighthq_tween_TweenProgress.restartTween(tween, includeDelay);
   }
 
   public static function resumeAllTweens(manager:TweenManager):Void {
-    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map).values()))) {
+    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).values()))) {
       for (tween in _Runtime.iterable(list)) {
-        _Runtime.setField(tween, 'paused', false);
+        ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = false);
       }
     }
   }
 
-  public static function resumeTween(tween:flighthq.types.Tween<Dynamic>):Void {
-    _Runtime.setField(tween, 'paused', false);
+  public static function resumeTween(tween:flighthq.types.Tween<flighthq._internal._Any>):Void {
+    ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = false);
   }
 
-  public static function resumeTweens(manager:TweenManager, target:Dynamic):Void {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flighthq._internal._Map).get(target));
+  public static function resumeTweens(manager:TweenManager, target:flighthq._internal._Object):Void {
+    var list:Null<Array<flighthq.types.Tween<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    list = ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get(target));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
-      _Runtime.setField(tween, 'paused', false);
+      ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).paused = false);
     }
   }
 
-  public static function seekTween(tween:flighthq.types.Tween<Dynamic>, timeSeconds:Float):Void {
+  public static function seekTween(tween:flighthq.types.Tween<flighthq._internal._Any>, timeSeconds:Float):Void {
     Facade_Tween_flighthq_tween_TweenProgress.seekTween(tween, timeSeconds);
   }
 
-  public static function setTweenProgress(tween:flighthq.types.Tween<Dynamic>, progress:Float):Void {
+  public static function setTweenProgress(tween:flighthq.types.Tween<flighthq._internal._Any>, progress:Float):Void {
     Facade_Tween_flighthq_tween_TweenProgress.setTweenProgress(tween, progress);
   }
 
   public static function stopAllTweens(manager:TweenManager, ?options:StopTweenOptions):Void {
-    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map).values()))) {
+    for (list in _Runtime.iterable(((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).values()))) {
       for (tween in _Runtime.iterable(list)) {
-        _Runtime.callValue(stopTween, cast ([tween, options] : Array<Dynamic>));
+        stopTween((cast tween : flighthq.types.Tween<flighthq._internal._Any>), (cast options : Null<StopTweenOptions>));
       }
     }
   }
 
-  public static function stopTween(tween:flighthq.types.Tween<Dynamic>, ?options:StopTweenOptions):Void {
-    var doComplete:Dynamic = cast _Runtime.UNDEFINED;
-    var doSendEvent:Dynamic = cast _Runtime.UNDEFINED;
+  public static function stopTween(tween:flighthq.types.Tween<flighthq._internal._Any>, ?options:StopTweenOptions):Void {
+    var doComplete:Bool = cast _Runtime.UNDEFINED;
+    var doSendEvent:Bool = cast _Runtime.UNDEFINED;
     doComplete = _Runtime.coalesce(_Runtime.optionalField(options, 'complete'), function():Dynamic return cast false);
     doSendEvent = _Runtime.coalesce(_Runtime.optionalField(options, 'sendEvent'), function():Dynamic return cast true);
     if ((cast doComplete : Bool)) {
-      if ((cast !(cast _Runtime.field(tween, 'initialized') : Bool) : Bool)) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
-      var effectiveT:Dynamic = ((cast _Runtime.field(tween, 'reverse') : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
-      var easedT:Dynamic = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
-      var t:Dynamic = (cast _Runtime.field(tween, 'target') : Dynamic);
-      for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
-        var value:Dynamic = _Runtime.addNumbers(_Runtime.field(detail, 'start'), _Runtime.multiplyNumbers(_Runtime.field(detail, 'change'), easedT));
-        if ((cast _Runtime.field(tween, 'snapping') : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
-        _Runtime.setIndex(t, _Runtime.field(detail, 'key'), value);
+      if ((cast !(cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).initialized : Bool) : Bool)) { initializeTween((cast tween : flighthq.types.Tween<flighthq._internal._Any>)); }
+      var effectiveT:Float = ((cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).reverse : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
+      var easedT:Float = (cast tween : flighthq.types.Tween<flighthq._internal._Any>).ease(effectiveT);
+      var t:flighthq._internal._Record<String, Float> = (cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).target : flighthq._internal._Record<String, Float>);
+      for (detail in _Runtime.iterable((cast tween : flighthq.types.Tween<flighthq._internal._Any>).properties)) {
+        var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
+        if ((cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
+        _Runtime.setIndex(t, (cast detail : TweenPropertyDetail).key, value);
       }
-      if ((cast doSendEvent : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(tween, 'onComplete')]]), 1); }
+      if ((cast doSendEvent : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast tween : flighthq.types.Tween<flighthq._internal._Any>).onComplete]]), 1); }
     }
-    _Runtime.setField(tween, 'complete', true);
+    ((cast tween : flighthq.types.Tween<flighthq._internal._Any>).complete = true);
   }
 
-  public static function stopTweens(manager:TweenManager, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
-    var list:Dynamic = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flighthq._internal._Map).get(target));
+  public static function stopTweens(manager:TweenManager, target:flighthq._internal._Object, ?propertyMap:NumericProps<flighthq._internal._Any>, ?options:StopTweenOptions):Void {
+    var list:Null<Array<flighthq.types.Tween<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
+    list = ((cast manager.tweens : flighthq._internal._Map<flighthq._internal._Object, Array<flighthq.types.Tween<flighthq._internal._Any>>>).get(target));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       if ((cast !_Runtime.strictEquals(propertyMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var p:Dynamic = (cast propertyMap : Dynamic);
-        var tweenMap:Dynamic = (cast _Runtime.field(tween, 'propertyMap') : Dynamic);
-        var overlaps:Dynamic = false;
+        var p:flighthq._internal._Record<String, flighthq._internal._Any> = (cast propertyMap : flighthq._internal._Record<String, flighthq._internal._Any>);
+        var tweenMap:flighthq._internal._Record<String, flighthq._internal._Any> = (cast (cast tween : flighthq.types.Tween<flighthq._internal._Any>).propertyMap : flighthq._internal._Record<String, flighthq._internal._Any>);
+        var overlaps:Bool = false;
         for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
           if ((cast _Runtime.hasField(tweenMap, key) : Bool)) {
             (overlaps = cast (true : Dynamic));
@@ -268,7 +269,7 @@ class Tween {
         }
         if ((cast !(cast overlaps : Bool) : Bool)) { continue; }
       }
-      _Runtime.callValue(stopTween, cast ([tween, options] : Array<Dynamic>));
+      stopTween((cast tween : flighthq.types.Tween<flighthq._internal._Any>), (cast options : Null<StopTweenOptions>));
     }
   }
 

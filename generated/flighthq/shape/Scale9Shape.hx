@@ -6,17 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.scene2d.DisplayObject.createNode2D;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.shape.Shape.createShapeRuntime;
+import flighthq.types.Node2D.Node2DData;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 class Scale9Shape {
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<flighthq.types.Scale9Shape>):flighthq.types.Scale9Shape {
-    return cast (cast _Runtime.callValue(createNode2D, cast ([Scale9ShapeKind, (cast obj : PartialNode<flighthq.types.Scale9Shape>), function(data:Dynamic) return _Runtime.callValue(createScale9ShapeData, cast ([scale9Grid, data] : Array<Dynamic>)), createScale9ShapeRuntime] : Array<Dynamic>)) : flighthq.types.Scale9Shape);
+    return cast (cast (cast createNode2D((cast Scale9ShapeKind : String), (cast obj : PartialNode<flighthq.types.Scale9Shape>), function(data:Null<flighthq._internal._Any>):Scale9ShapeData return (cast createScale9ShapeData((cast scale9Grid : RectangleLike), (cast data : Null<flighthq._internal._Any>)) : Node2DData), function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime()) : flighthq.types.Scale9Shape) : flighthq.types.Scale9Shape);
     return cast null;
   }
 
@@ -28,13 +30,13 @@ class Scale9Shape {
 
   @:noCompletion
   public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
-    return cast (cast _Runtime.callValue(createShapeRuntime, cast ([] : Array<Dynamic>)) : Scale9ShapeRuntime);
+    return cast (cast (cast createShapeRuntime() : Scale9ShapeRuntime) : Scale9ShapeRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
-    return cast (cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : Scale9ShapeRuntime);
+    return cast (cast (cast getNode2DRuntime(source) : Scale9ShapeRuntime) : Scale9ShapeRuntime);
     return cast null;
   }
 }

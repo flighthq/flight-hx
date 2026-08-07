@@ -33,18 +33,18 @@ class BloomEffect {
   }
 
   public static function getBloomEffectPadding(effect:flighthq.types.BloomEffect):RenderEffectPadding {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    radius = _Runtime.callValue(computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
-    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([radius, radius] : Array<Dynamic>));
+    var radius:Float = cast _Runtime.UNDEFINED;
+    radius = (cast computeBloomBlurRadius((cast effect : flighthq.types.BloomEffect)) : Float);
+    return cast (cast getGaussianRenderEffectPadding((cast radius : Float), (cast radius : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BloomEffect', BloomEffect.resolveBloomEffectPadding__bloomEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BloomEffect' : String), BloomEffect.resolveBloomEffectPadding__bloomEffect);
   }
 
   public static function resolveBloomEffectPadding__bloomEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getBloomEffectPadding, cast ([(cast effect : flighthq.types.BloomEffect)] : Array<Dynamic>));
+    return cast (cast getBloomEffectPadding((cast (cast effect : flighthq.types.BloomEffect) : flighthq.types.BloomEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

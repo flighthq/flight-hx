@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.types.GlyphSource.GlyphAtlas;
+import flighthq.types.GlyphSource.GlyphAtlasRuntime;
 import flighthq.types.Rectangle;
 
 class GlyphAtlasDirty {
@@ -13,10 +14,10 @@ class GlyphAtlasDirty {
   }
 
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     if ((cast !(cast runtime.dirty : Bool) : Bool)) { return cast null; }
-    return cast _Runtime.callValue(createRectangle, cast ([runtime.dirtyMinX, runtime.dirtyMinY, (runtime.dirtyMaxX - runtime.dirtyMinX), (runtime.dirtyMaxY - runtime.dirtyMinY)] : Array<Dynamic>));
+    return cast (cast createRectangle((cast runtime.dirtyMinX : Null<Float>), (cast runtime.dirtyMinY : Null<Float>), (cast (runtime.dirtyMaxX - runtime.dirtyMinX) : Null<Float>), (cast (runtime.dirtyMaxY - runtime.dirtyMinY) : Null<Float>)) : Null<Rectangle>);
     return cast null;
   }
 }

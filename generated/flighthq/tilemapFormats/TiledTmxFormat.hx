@@ -5,41 +5,50 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tilemapFormats.TiledColor.formatTiledColor;
 import flighthq.types.TiledLayer;
+import flighthq.types.TiledLayer.TiledGroupLayer;
+import flighthq.types.TiledLayer.TiledImageLayer;
+import flighthq.types.TiledLayer.TiledObjectGroup;
+import flighthq.types.TiledLayer.TiledTileLayer;
 import flighthq.types.TiledMap;
+import flighthq.types.TiledMap.TiledOrientation;
+import flighthq.types.TiledMap.TiledRenderOrder;
 import flighthq.types.TiledObject;
 import flighthq.types.TiledProperty;
+import flighthq.types.TiledProperty.TiledPropertyType;
 import flighthq.types.TiledTileset;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.TiledTileset.TiledTilesetTile;
+import flighthq.types.TiledTileset.TiledTilesetTileFrame;
+import flighthq.types.Vector2.Vector2Like;
 
 class TiledTmxFormat {
   public static function formatTiledTmx(map:TiledMap):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    var open:Dynamic = cast _Runtime.UNDEFINED;
+    var open:String = cast _Runtime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>'] : Array<Dynamic>);
-    open = '<map' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['version', _Runtime.field(map, 'version')] : Array<Dynamic>))) + '';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(map, 'tiledVersion'), null) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tiledversion', _Runtime.field(map, 'tiledVersion')] : Array<Dynamic>))) : Dynamic)); }
-    (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['orientation', _Runtime.field(map, 'orientation')] : Array<Dynamic>))) : Dynamic));
-    (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['renderorder', _Runtime.field(map, 'renderOrder')] : Array<Dynamic>))) : Dynamic));
-    (open = cast ((open + (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['width', _Runtime.field(map, 'width')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['height', _Runtime.field(map, 'height')] : Array<Dynamic>)))) : Dynamic));
-    (open = cast ((open + (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tilewidth', _Runtime.field(map, 'tileWidth')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tileheight', _Runtime.field(map, 'tileHeight')] : Array<Dynamic>)))) : Dynamic));
-    (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['infinite', ((cast _Runtime.field(map, 'infinite') : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(map, 'backgroundColor'), null) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['backgroundcolor', _Runtime.callValue(formatTiledColor, cast ([_Runtime.field(map, 'backgroundColor')] : Array<Dynamic>))] : Array<Dynamic>))) : Dynamic)); }
+    open = '<map' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'version' : String), (cast _Runtime.field(map, 'version') : flighthq._internal._Union2<String, Float>)) : String)) + '';
+    if ((cast !_Runtime.strictEquals(_Runtime.field(map, 'tiledVersion'), null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tiledversion' : String), (cast _Runtime.field(map, 'tiledVersion') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'orientation' : String), (cast _Runtime.field(map, 'orientation') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic));
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'renderorder' : String), (cast _Runtime.field(map, 'renderOrder') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), (cast _Runtime.field(map, 'width') : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), (cast _Runtime.field(map, 'height') : flighthq._internal._Union2<String, Float>)) : String))) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), (cast _Runtime.field(map, 'tileWidth') : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), (cast _Runtime.field(map, 'tileHeight') : flighthq._internal._Union2<String, Float>)) : String))) : Dynamic));
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'infinite' : String), (cast ((cast _Runtime.field(map, 'infinite') : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(map, 'backgroundColor'), null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'backgroundcolor' : String), (cast (cast formatTiledColor((cast _Runtime.field(map, 'backgroundColor') : Float)) : flighthq._internal._Union2<String, Float>) : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     for (ref in _Runtime.iterable(_Runtime.field(map, 'tilesets'))) {
-      _Runtime.callValue(TiledTmxFormat.writeTilesetRef__tiledTmxFormat, cast ([lines, ref] : Array<Dynamic>));
+      TiledTmxFormat.writeTilesetRef__tiledTmxFormat((cast lines : Array<String>), (cast ref : TiledTilesetRef));
     }
     for (layer in _Runtime.iterable(_Runtime.field(map, 'layers'))) {
-      _Runtime.callValue(TiledTmxFormat.writeLayer__tiledTmxFormat, cast ([lines, layer] : Array<Dynamic>));
+      TiledTmxFormat.writeLayer__tiledTmxFormat((cast lines : Array<String>), (cast layer : TiledLayer));
     }
-    _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(map, 'properties')] : Array<Dynamic>));
+    TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(map, 'properties') : Array<TiledProperty>));
     _Runtime.callProperty(lines, 'push', cast (['</map>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;
   }
 
-  public static function attr__tiledTmxFormat(name:String, value:Dynamic):String {
-    return cast ' ' + Std.string(name) + '="' + Std.string(_Runtime.callValue(TiledTmxFormat.escapeXml__tiledTmxFormat, cast ([Std.string(value)] : Array<Dynamic>))) + '"';
+  public static function attr__tiledTmxFormat(name:String, value:flighthq._internal._Union2<String, Float>):String {
+    return cast ' ' + Std.string(name) + '="' + Std.string((cast TiledTmxFormat.escapeXml__tiledTmxFormat((cast Std.string(value) : String)) : String)) + '"';
     return cast null;
   }
 
@@ -49,66 +58,66 @@ class TiledTmxFormat {
   }
 
   public static function formatLayerBaseAttrs__tiledTmxFormat(layer:TiledLayer):String {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['id', _Runtime.field(layer, 'id')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['name', _Runtime.field(layer, 'name')] : Array<Dynamic>)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'opacity'), 1.0) : Bool)) { (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['opacity', _Runtime.field(layer, 'opacity')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !(cast _Runtime.field(layer, 'visible') : Bool) : Bool)) { (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['visible', 0.0] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'offsetX'), 0.0) : Bool)) { (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['offsetx', _Runtime.field(layer, 'offsetX')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'offsetY'), 0.0) : Bool)) { (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['offsety', _Runtime.field(layer, 'offsetY')] : Array<Dynamic>))) : Dynamic)); }
+    var out:String = cast _Runtime.UNDEFINED;
+    out = ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), (cast (cast layer : { var id:Float; }).id : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), (cast (cast layer : { var name:String; }).name : flighthq._internal._Union2<String, Float>)) : String));
+    if ((cast !_Runtime.strictEquals((cast layer : { var opacity:Float; }).opacity, 1.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'opacity' : String), (cast (cast layer : { var opacity:Float; }).opacity : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !(cast (cast layer : { var visible:Bool; }).visible : Bool) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'visible' : String), (cast 0.0 : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsetx' : String), (cast (cast layer : { var offsetX:Float; }).offsetX : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsety' : String), (cast (cast layer : { var offsetY:Float; }).offsetY : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
     return cast out;
     return cast null;
   }
 
   public static function formatPoints__tiledTmxFormat(points:Array<{ var x:Float; var y:Float; }>):String {
-    return cast _Runtime.join(_Runtime.callProperty(points, 'map', cast ([function(p:Dynamic) return '' + Std.string(_Runtime.field(p, 'x')) + ',' + Std.string(_Runtime.field(p, 'y')) + ''] : Array<Dynamic>)), ' ');
+    return cast _Runtime.join(_Runtime.callProperty(points, 'map', cast ([function(p:{ var x:Float; var y:Float; }, __unused0:Float, __unused1:Array<{ var x:Float; var y:Float; }>):String return '' + Std.string((cast p : { var x:Float; var y:Float; }).x) + ',' + Std.string((cast p : { var x:Float; var y:Float; }).y) + ''] : Array<Dynamic>)), ' ');
     return cast null;
   }
 
   public static function writeLayer__tiledTmxFormat(lines:Array<String>, layer:TiledLayer):Void {
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    base = _Runtime.callValue(TiledTmxFormat.formatLayerBaseAttrs__tiledTmxFormat, cast ([layer] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'type'), 'tilelayer') : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['width', _Runtime.field(layer, 'width')] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['height', _Runtime.field(layer, 'height')] : Array<Dynamic>))) + '>'] : Array<Dynamic>));
+    var base:String = cast _Runtime.UNDEFINED;
+    base = (cast TiledTmxFormat.formatLayerBaseAttrs__tiledTmxFormat((cast layer : TiledLayer)) : String);
+    if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) {
+      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), (cast _Runtime.field(layer, 'width') : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), (cast _Runtime.field(layer, 'height') : flighthq._internal._Union2<String, Float>)) : String)) + '>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['<data encoding="csv">'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast ([_Runtime.join(_Runtime.toArray(_Runtime.field(layer, 'data')), ',')] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['</data>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['</layer>'] : Array<Dynamic>));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'type'), 'objectgroup') : Bool)) {
+    if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'objectgroup') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup' + Std.string(base) + '>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(_Runtime.field(layer, 'objects'))) {
-        _Runtime.callValue(TiledTmxFormat.writeObject__tiledTmxFormat, cast ([lines, object] : Array<Dynamic>));
+        TiledTmxFormat.writeObject__tiledTmxFormat((cast lines : Array<String>), (cast object : TiledObject));
       }
-      _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(layer, 'properties')] : Array<Dynamic>));
+      TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(layer, 'properties') : Array<TiledProperty>));
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'type'), 'imagelayer') : Bool)) {
+    if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'imagelayer') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<imagelayer' + Std.string(base) + '>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['source', _Runtime.field(layer, 'image')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
-      _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(layer, 'properties')] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), (cast _Runtime.field(layer, 'image') : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>));
+      TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(layer, 'properties') : Array<TiledProperty>));
       _Runtime.callProperty(lines, 'push', cast (['</imagelayer>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['<group' + Std.string(base) + '>'] : Array<Dynamic>));
     for (child in _Runtime.iterable(_Runtime.field(layer, 'layers'))) {
-      _Runtime.callValue(TiledTmxFormat.writeLayer__tiledTmxFormat, cast ([lines, child] : Array<Dynamic>));
+      TiledTmxFormat.writeLayer__tiledTmxFormat((cast lines : Array<String>), (cast child : TiledLayer));
     }
-    _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(layer, 'properties')] : Array<Dynamic>));
+    TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(layer, 'properties') : Array<TiledProperty>));
     _Runtime.callProperty(lines, 'push', cast (['</group>'] : Array<Dynamic>));
   }
 
   public static function writeObject__tiledTmxFormat(lines:Array<String>, object:TiledObject):Void {
-    var open:Dynamic = cast _Runtime.UNDEFINED;
-    var hasBody:Dynamic = cast _Runtime.UNDEFINED;
-    open = '<object' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['id', _Runtime.field(object, 'id')] : Array<Dynamic>))) + '';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'name'), '') : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['name', _Runtime.field(object, 'name')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'type'), '') : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['type', _Runtime.field(object, 'type')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'gid'), null) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['gid', _Runtime.field(object, 'gid')] : Array<Dynamic>))) : Dynamic)); }
-    (open = cast ((open + (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['x', _Runtime.field(object, 'x')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['y', _Runtime.field(object, 'y')] : Array<Dynamic>)))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'width'), 0.0) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['width', _Runtime.field(object, 'width')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'height'), 0.0) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['height', _Runtime.field(object, 'height')] : Array<Dynamic>))) : Dynamic)); }
+    var open:String = cast _Runtime.UNDEFINED;
+    var hasBody:Bool = cast _Runtime.UNDEFINED;
+    open = '<object' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), (cast _Runtime.field(object, 'id') : flighthq._internal._Union2<String, Float>)) : String)) + '';
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'name'), '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), (cast _Runtime.field(object, 'name') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'type'), '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), (cast _Runtime.field(object, 'type') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'gid'), null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'gid' : String), (cast _Runtime.field(object, 'gid') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'x' : String), (cast _Runtime.field(object, 'x') : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'y' : String), (cast _Runtime.field(object, 'y') : flighthq._internal._Union2<String, Float>)) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'width'), 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), (cast _Runtime.field(object, 'width') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'height'), 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), (cast _Runtime.field(object, 'height') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast ((cast _Runtime.field(object, 'point') : Bool) || (cast _Runtime.field(object, 'ellipse') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(object, 'polygon'), null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(object, 'polyline'), null) : Bool)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(object, 'properties'), 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
@@ -117,9 +126,9 @@ class TiledTmxFormat {
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast _Runtime.field(object, 'point') : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<point/>'] : Array<Dynamic>)); }
     if ((cast _Runtime.field(object, 'ellipse') : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<ellipse/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'polygon'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['points', _Runtime.callValue(TiledTmxFormat.formatPoints__tiledTmxFormat, cast ([_Runtime.field(object, 'polygon')] : Array<Dynamic>))] : Array<Dynamic>))) + '/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'polyline'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['points', _Runtime.callValue(TiledTmxFormat.formatPoints__tiledTmxFormat, cast ([_Runtime.field(object, 'polyline')] : Array<Dynamic>))] : Array<Dynamic>))) + '/>'] : Array<Dynamic>)); }
-    _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(object, 'properties')] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'polygon'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), (cast (cast TiledTmxFormat.formatPoints__tiledTmxFormat((cast _Runtime.field(object, 'polygon') : Array<{ var x:Float; var y:Float; }>)) : flighthq._internal._Union2<String, Float>) : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(object, 'polyline'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), (cast (cast TiledTmxFormat.formatPoints__tiledTmxFormat((cast _Runtime.field(object, 'polyline') : Array<{ var x:Float; var y:Float; }>)) : flighthq._internal._Union2<String, Float>) : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>)); }
+    TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(object, 'properties') : Array<TiledProperty>));
     _Runtime.callProperty(lines, 'push', cast (['</object>'] : Array<Dynamic>));
   }
 
@@ -127,67 +136,67 @@ class TiledTmxFormat {
     if ((cast _Runtime.strictEquals(_Runtime.field(properties, 'length'), 0.0) : Bool)) { return; }
     _Runtime.callProperty(lines, 'push', cast (['<properties>'] : Array<Dynamic>));
     for (property in _Runtime.iterable(properties)) {
-      var out:Dynamic = '<property' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['name', _Runtime.field(property, 'name')] : Array<Dynamic>))) + '';
-      if ((cast !_Runtime.strictEquals(_Runtime.field(property, 'type'), 'string') : Bool)) { (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['type', _Runtime.field(property, 'type')] : Array<Dynamic>))) : Dynamic)); }
-      (out = cast ((out + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['value', Std.string(_Runtime.field(property, 'value'))] : Array<Dynamic>))) : Dynamic));
+      var out:String = '<property' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), (cast (cast property : TiledProperty).name : flighthq._internal._Union2<String, Float>)) : String)) + '';
+      if ((cast !_Runtime.strictEquals((cast property : TiledProperty).type, 'string') : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), (cast (cast property : TiledProperty).type : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+      (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'value' : String), (cast Std.string((cast property : TiledProperty).value) : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic));
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(out) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</properties>'] : Array<Dynamic>));
   }
 
   public static function writeTileset__tiledTmxFormat(lines:Array<String>, tileset:TiledTileset, firstGid:Float):Void {
-    var open:Dynamic = cast _Runtime.UNDEFINED;
-    open = '<tileset' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['firstgid', firstGid] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['name', _Runtime.field(tileset, 'name')] : Array<Dynamic>))) + '';
-    (open = cast ((open + (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tilewidth', _Runtime.field(tileset, 'tileWidth')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tileheight', _Runtime.field(tileset, 'tileHeight')] : Array<Dynamic>)))) : Dynamic));
-    (open = cast ((open + (_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tilecount', _Runtime.field(tileset, 'tileCount')] : Array<Dynamic>)) + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['columns', _Runtime.field(tileset, 'columns')] : Array<Dynamic>)))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(tileset, 'margin'), 0.0) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['margin', _Runtime.field(tileset, 'margin')] : Array<Dynamic>))) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(tileset, 'spacing'), 0.0) : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['spacing', _Runtime.field(tileset, 'spacing')] : Array<Dynamic>))) : Dynamic)); }
+    var open:String = cast _Runtime.UNDEFINED;
+    open = '<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), (cast firstGid : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), (cast _Runtime.field(tileset, 'name') : flighthq._internal._Union2<String, Float>)) : String)) + '';
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), (cast _Runtime.field(tileset, 'tileWidth') : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), (cast _Runtime.field(tileset, 'tileHeight') : flighthq._internal._Union2<String, Float>)) : String))) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilecount' : String), (cast _Runtime.field(tileset, 'tileCount') : flighthq._internal._Union2<String, Float>)) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'columns' : String), (cast _Runtime.field(tileset, 'columns') : flighthq._internal._Union2<String, Float>)) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(tileset, 'margin'), 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'margin' : String), (cast _Runtime.field(tileset, 'margin') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(tileset, 'spacing'), 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'spacing' : String), (cast _Runtime.field(tileset, 'spacing') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(tileset, 'image'), null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['source', _Runtime.field(tileset, 'image')] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['width', _Runtime.field(tileset, 'imageWidth')] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['height', _Runtime.field(tileset, 'imageHeight')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), (cast _Runtime.field(tileset, 'image') : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), (cast _Runtime.field(tileset, 'imageWidth') : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), (cast _Runtime.field(tileset, 'imageHeight') : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>));
     }
     for (tile in _Runtime.iterable(_Runtime.field(tileset, 'tiles'))) {
-      _Runtime.callValue(TiledTmxFormat.writeTilesetTile__tiledTmxFormat, cast ([lines, tile] : Array<Dynamic>));
+      TiledTmxFormat.writeTilesetTile__tiledTmxFormat((cast lines : Array<String>), (cast tile : TiledTilesetTile));
     }
-    _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(tileset, 'properties')] : Array<Dynamic>));
+    TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(tileset, 'properties') : Array<TiledProperty>));
     _Runtime.callProperty(lines, 'push', cast (['</tileset>'] : Array<Dynamic>));
   }
 
   public static function writeTilesetRef__tiledTmxFormat(lines:Array<String>, ref:TiledTilesetRef):Void {
     if ((cast !_Runtime.strictEquals(_Runtime.field(ref, 'source'), null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['firstgid', _Runtime.field(ref, 'firstGid')] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['source', _Runtime.field(ref, 'source')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), (cast _Runtime.field(ref, 'firstGid') : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), (cast _Runtime.field(ref, 'source') : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>));
       return;
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(ref, 'tileset'), null) : Bool)) { _Runtime.callValue(TiledTmxFormat.writeTileset__tiledTmxFormat, cast ([lines, _Runtime.field(ref, 'tileset'), _Runtime.field(ref, 'firstGid')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(ref, 'tileset'), null) : Bool)) { TiledTmxFormat.writeTileset__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(ref, 'tileset') : TiledTileset), (cast _Runtime.field(ref, 'firstGid') : Float)); }
   }
 
   public static function writeTilesetTile__tiledTmxFormat(lines:Array<String>, tile:TiledTilesetTile):Void {
-    var open:Dynamic = cast _Runtime.UNDEFINED;
-    var hasBody:Dynamic = cast _Runtime.UNDEFINED;
-    open = '<tile' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['id', _Runtime.field(tile, 'id')] : Array<Dynamic>))) + '';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'type'), '') : Bool)) { (open = cast ((open + _Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['type', _Runtime.field(tile, 'type')] : Array<Dynamic>))) : Dynamic)); }
+    var open:String = cast _Runtime.UNDEFINED;
+    var hasBody:Bool = cast _Runtime.UNDEFINED;
+    open = '<tile' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), (cast _Runtime.field(tile, 'id') : flighthq._internal._Union2<String, Float>)) : String)) + '';
+    if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'type'), '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), (cast _Runtime.field(tile, 'type') : flighthq._internal._Union2<String, Float>)) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'image'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(tile, 'animation'), null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(tile, 'objects'), null) : Bool)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(tile, 'properties'), 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'image'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['source', _Runtime.field(tile, 'image')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'image'), null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), (cast _Runtime.field(tile, 'image') : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'animation'), null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<animation>'] : Array<Dynamic>));
       for (frame in _Runtime.iterable(_Runtime.field(tile, 'animation'))) {
-        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['tileid', _Runtime.field(frame, 'tileId')] : Array<Dynamic>))) + '' + Std.string(_Runtime.callValue(TiledTmxFormat.attr__tiledTmxFormat, cast (['duration', _Runtime.field(frame, 'duration')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
+        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileid' : String), (cast (cast frame : TiledTilesetTileFrame).tileId : flighthq._internal._Union2<String, Float>)) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'duration' : String), (cast (cast frame : TiledTilesetTileFrame).duration : flighthq._internal._Union2<String, Float>)) : String)) + '/>'] : Array<Dynamic>));
       }
       _Runtime.callProperty(lines, 'push', cast (['</animation>'] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(tile, 'objects'), null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(_Runtime.field(tile, 'objects'))) {
-        _Runtime.callValue(TiledTmxFormat.writeObject__tiledTmxFormat, cast ([lines, object] : Array<Dynamic>));
+        TiledTmxFormat.writeObject__tiledTmxFormat((cast lines : Array<String>), (cast object : TiledObject));
       }
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
     }
-    _Runtime.callValue(TiledTmxFormat.writeProperties__tiledTmxFormat, cast ([lines, _Runtime.field(tile, 'properties')] : Array<Dynamic>));
+    TiledTmxFormat.writeProperties__tiledTmxFormat((cast lines : Array<String>), (cast _Runtime.field(tile, 'properties') : Array<TiledProperty>));
     _Runtime.callProperty(lines, 'push', cast (['</tile>'] : Array<Dynamic>));
   }
 }

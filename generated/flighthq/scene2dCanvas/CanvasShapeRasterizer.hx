@@ -5,12 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.RenderState;
+import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
 
 class CanvasShapeRasterizer {
   public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
-    return cast function(context:Dynamic, commands:Dynamic, state:Dynamic) {
-      _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, (cast commands : Array<Dynamic>), resolvers] : Array<Dynamic>));
+    return cast function(context:flighthq._internal.dom.CanvasRenderingContext2D, commands:Array<ShapeCommandToken>, state:RenderState):Void {
+      renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), state, (cast (cast commands : Array<flighthq._internal._Any>) : Array<flighthq._internal._Any>), (cast resolvers : CanvasTextureResolvers));
     };
     return cast null;
   }

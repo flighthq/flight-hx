@@ -12,37 +12,42 @@ import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.Sampler.TextureFilter;
+import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.TintMaterialData;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFlush;
+import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuRenderState.WgpuQuadBatchWriterBufferSlot;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 class WgpuQuadBatchWriter {
   @:noCompletion
-  public static final QUAD_BATCH_INSTANCE_FLOATS:Dynamic = 13.0;
+  public static final QUAD_BATCH_INSTANCE_FLOATS:Float = 13.0;
 
-  public static final QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter:Dynamic = (QUAD_BATCH_INSTANCE_FLOATS * 4.0);
+  public static final QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter:Float = (QUAD_BATCH_INSTANCE_FLOATS * 4.0);
 
-  public static final QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  straightTextureAlpha : u32,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
+  public static final QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter:String = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  straightTextureAlpha : u32,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
 
   @:noCompletion
   public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var existing:Null<WgpuQuadBatchResources> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var textureBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var basePipelineLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var materialPipelineLayout:Dynamic = cast _Runtime.UNDEFINED;
+    var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var textureBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var instanceBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var basePipelineLayout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
+    var materialPipelineLayout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
     var resources:WgpuQuadBatchResources = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    existing = ((cast WgpuQuadBatchWriter._quadBatchResources__wgpuQuadBatchWriter : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    existing = ((cast WgpuQuadBatchWriter._quadBatchResources__wgpuQuadBatchWriter : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, WgpuQuadBatchResources>).get((cast state : WgpuRenderState).device));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
@@ -54,114 +59,114 @@ class WgpuQuadBatchWriter {
     basePipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     materialPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout, materialBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) };
-    ((cast WgpuQuadBatchWriter._quadBatchResources__wgpuQuadBatchWriter : flighthq._internal._WeakMap).set(device, resources));
+    ((cast WgpuQuadBatchWriter._quadBatchResources__wgpuQuadBatchWriter : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, WgpuQuadBatchResources>).set(device, resources));
     return cast resources;
     return cast null;
   }
 
-  public static final _quadBatchResources__wgpuQuadBatchWriter:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _quadBatchResources__wgpuQuadBatchWriter:flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, WgpuQuadBatchResources> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function flushWgpuQuadBatchWriter(state:WgpuRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothing:Dynamic = cast _Runtime.UNDEFINED;
-    var renderer:Dynamic = cast _Runtime.UNDEFINED;
-    var ctFlush:Dynamic = cast _Runtime.UNDEFINED;
-    var group3Floats:Dynamic = cast _Runtime.UNDEFINED;
-    var group3Data:Dynamic = cast _Runtime.UNDEFINED;
-    var resources:Dynamic = cast _Runtime.UNDEFINED;
-    var slot:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceBytes:Dynamic = cast _Runtime.UNDEFINED;
-    var textureBindGroup:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var instanceBindGroup:Dynamic = cast _Runtime.UNDEFINED;
-    var module:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    count = _Runtime.field(runtime, 'quadBatchWriterCount');
-    if ((cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) : Bool)) {
-      _Runtime.callValue(WgpuQuadBatchWriter.resetWgpuQuadBatchWriter__wgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var texture:WgpuTextureEntry = cast _Runtime.UNDEFINED;
+    var sampler:Null<SamplerLike> = cast _Runtime.UNDEFINED;
+    var blendMode:Null<String> = cast _Runtime.UNDEFINED;
+    var smoothing:Null<Bool> = cast _Runtime.UNDEFINED;
+    var renderer:WgpuMaterialRenderer = cast _Runtime.UNDEFINED;
+    var ctFlush:Null<WgpuColorAdjustmentFlush> = cast _Runtime.UNDEFINED;
+    var group3Floats:Float = cast _Runtime.UNDEFINED;
+    var group3Data:flighthq._internal._Union2<flighthq._internal._Float32Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    var resources:WgpuQuadBatchResources = cast _Runtime.UNDEFINED;
+    var slot:WgpuQuadBatchWriterBufferSlot = cast _Runtime.UNDEFINED;
+    var instanceBytes:Float = cast _Runtime.UNDEFINED;
+    var textureBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var uniformOffset:Float = cast _Runtime.UNDEFINED;
+    var instanceBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    count = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
+    if ((cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) || (cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) : Bool)) {
+      WgpuQuadBatchWriter.resetWgpuQuadBatchWriter__wgpuQuadBatchWriter((cast state : WgpuRenderState));
       return;
     }
-    texture = _Runtime.field(runtime, 'quadBatchWriterTexture');
-    sampler = _Runtime.field(runtime, 'quadBatchWriterSampler');
-    blendMode = _Runtime.field(runtime, 'quadBatchWriterBlendMode');
-    smoothing = _Runtime.field(runtime, 'quadBatchWriterSmoothing');
-    renderer = _Runtime.field(runtime, 'quadBatchWriterMaterialRenderer');
-    ctFlush = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'wgpuColorAdjustmentMaterialFeature'), 'resolveFlush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast null);
-    group3Floats = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'floats') : Dynamic) : (cast _Runtime.field(runtime, 'quadBatchWriterMaterialFloats') : Dynamic));
-    group3Data = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'data') : Dynamic) : (cast _Runtime.field(runtime, 'quadBatchWriterMaterialData') : Dynamic));
-    _Runtime.callValue(WgpuQuadBatchWriter.resetWgpuQuadBatchWriter__wgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
-    resources = _Runtime.callValue(ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
-    slot = _Runtime.callValue(WgpuQuadBatchWriter.acquireWgpuQuadBatchWriterBufferSlot__wgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
+    texture = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterTexture;
+    sampler = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterSampler;
+    blendMode = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBlendMode;
+    smoothing = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterSmoothing;
+    renderer = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialRenderer;
+    ctFlush = _Runtime.coalesce(_Runtime.callOptionalProperty((cast runtime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature, 'resolveFlush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast null);
+    group3Floats = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast (cast ctFlush : WgpuColorAdjustmentFlush).floats : Dynamic) : (cast (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialFloats : Dynamic));
+    group3Data = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast (cast ctFlush : WgpuColorAdjustmentFlush).data : Dynamic) : (cast (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialData : Dynamic));
+    WgpuQuadBatchWriter.resetWgpuQuadBatchWriter__wgpuQuadBatchWriter((cast state : WgpuRenderState));
+    resources = (cast ensureWgpuQuadBatchResources((cast state : WgpuRenderState)) : WgpuQuadBatchResources);
+    slot = (cast WgpuQuadBatchWriter.acquireWgpuQuadBatchWriterBufferSlot__wgpuQuadBatchWriter((cast state : WgpuRenderState)) : WgpuQuadBatchWriterBufferSlot);
     instanceBytes = (count * WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter);
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'instanceBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'instanceCapacity') : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
-      var capacity:Dynamic = HxMath.max(HxMath.max(instanceBytes, _Runtime.multiplyNumbers(_Runtime.field(slot, 'instanceCapacity'), 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
-      _Runtime.setField(slot, 'instanceBuffer', _Runtime.callValue(WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter, cast ([state, capacity] : Array<Dynamic>)));
-      _Runtime.setField(slot, 'instanceCapacity', capacity);
+    if ((cast ((cast _Runtime.strictEquals((cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer, null) : Bool) || (cast ((cast (cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
+      var capacity:Float = HxMath.max(HxMath.max(instanceBytes, ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity * 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
+      ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer = (cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter((cast state : WgpuRenderState), (cast capacity : Float)) : Null<flighthq._internal.dom.GPUBuffer>));
+      ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity = capacity);
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(slot, 'instanceBuffer'), 0.0, _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'buffer'), 0.0, instanceBytes] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer, 0.0, _Runtime.field((cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData, 'buffer'), 0.0, instanceBytes] : Array<Dynamic>));
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var group3Bytes:Dynamic = ((count * group3Floats) * 4.0);
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.field(slot, 'materialBuffer'), null) : Bool) || (cast ((cast _Runtime.field(slot, 'materialCapacity') : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
-        var capacity:Dynamic = HxMath.max(HxMath.max(group3Bytes, _Runtime.multiplyNumbers(_Runtime.field(slot, 'materialCapacity'), 2.0)), ((group3Floats * 4.0) * 256.0));
-        _Runtime.setField(slot, 'materialBuffer', _Runtime.callValue(WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter, cast ([state, capacity] : Array<Dynamic>)));
-        _Runtime.setField(slot, 'materialCapacity', capacity);
+      var group3Bytes:Float = ((count * group3Floats) * 4.0);
+      if ((cast ((cast _Runtime.strictEquals((cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer, null) : Bool) || (cast ((cast (cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
+        var capacity:Float = HxMath.max(HxMath.max(group3Bytes, ((cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity * 2.0)), ((group3Floats * 4.0) * 256.0));
+        ((cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer = (cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter((cast state : WgpuRenderState), (cast capacity : Float)) : Null<flighthq._internal.dom.GPUBuffer>));
+        ((cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity = capacity);
       }
-      flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(slot, 'materialBuffer'), 0.0, _Runtime.field(group3Data, 'buffer'), 0.0, group3Bytes] : Array<Dynamic>));
+      flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer, 0.0, (cast group3Data : { var buffer:flighthq._internal._Any; }).buffer, 0.0, group3Bytes] : Array<Dynamic>));
     }
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
-    textureBindGroup = ((cast !_Runtime.strictEquals(sampler, null) : Bool) ? (cast _Runtime.callValue(WgpuQuadBatchWriter.createWgpuTextureSamplerBindGroup__wgpuQuadBatchWriter, cast ([state, _Runtime.field(texture, 'view'), sampler] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(resolveWgpuSmoothingBindGroup, cast ([state, texture, smoothing] : Array<Dynamic>)) : Dynamic));
-    uniformOffset = _Runtime.callValue(WgpuQuadBatchWriter.writeWgpuQuadBatchWriterUniforms__wgpuQuadBatchWriter, cast ([state, _Runtime.strictEquals(_Runtime.field(texture, 'straightAlpha'), true)] : Array<Dynamic>));
-    instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'instanceBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(slot, 'instanceBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    module = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'module') : Dynamic) : (cast _Runtime.callProperty(renderer, 'getShaderModule', cast ([state] : Array<Dynamic>)) : Dynamic));
-    pipeline = _Runtime.callValue(getWgpuQuadBatchPipeline, cast ([state, resources, module, ((cast group3Floats : Float) > (cast 0.0 : Float)), blendMode] : Array<Dynamic>));
-    pass = _Runtime.field(runtime, 'renderPass');
+    _Runtime.callOptionalValue((cast state : WgpuRenderState).applyBlendMode, cast ([state, blendMode] : Array<Dynamic>));
+    textureBindGroup = ((cast !_Runtime.strictEquals(sampler, null) : Bool) ? (cast (cast WgpuQuadBatchWriter.createWgpuTextureSamplerBindGroup__wgpuQuadBatchWriter((cast state : WgpuRenderState), (cast (cast texture : WgpuTextureEntry).view : flighthq._internal.dom.GPUTextureView), (cast sampler : SamplerLike)) : flighthq._internal.dom.GPUBindGroup) : Dynamic) : (cast (cast resolveWgpuSmoothingBindGroup((cast state : WgpuRenderState), (cast texture : WgpuTextureEntry), (cast smoothing : Null<Bool>)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+    uniformOffset = (cast WgpuQuadBatchWriter.writeWgpuQuadBatchWriterUniforms__wgpuQuadBatchWriter((cast state : WgpuRenderState), (cast _Runtime.strictEquals((cast texture : WgpuTextureEntry).straightAlpha, true) : Bool)) : Float);
+    instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).instanceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: (cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    module = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast (cast ctFlush : WgpuColorAdjustmentFlush).module : Dynamic) : (cast (cast renderer : WgpuMaterialRenderer).getShaderModule(state) : Dynamic));
+    pipeline = (cast getWgpuQuadBatchPipeline((cast state : WgpuRenderState), (cast resources : WgpuQuadBatchResources), (cast module : flighthq._internal.dom.GPUShaderModule), (cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool), (cast blendMode : Null<String>)) : flighthq._internal.dom.GPURenderPipeline);
+    pass = (cast runtime : WgpuRenderStateRuntime).renderPass;
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast runtime : WgpuRenderStateRuntime).uniformBindGroup, cast ([uniformOffset] : Array<Dynamic>));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup);
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialBindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(slot, 'materialBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
+      var materialBindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).materialBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: (cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, materialBindGroup);
     }
-    if ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.field(runtime, 'currentMaskDepth')); }
+    if ((cast ((cast (cast runtime : WgpuRenderStateRuntime).currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference((cast runtime : WgpuRenderStateRuntime).currentMaskDepth); }
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0, count, 0.0, 0.0);
   }
 
   @:noCompletion
   public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:flighthq._internal.dom.GPUShaderModule, hasMaterialData:Bool, blendMode:Null<BlendMode>):flighthq._internal.dom.GPURenderPipeline {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var perModule:Dynamic = cast _Runtime.UNDEFINED;
-    var stencilMode:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var cached:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var perModule:Null<flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>> = cast _Runtime.UNDEFINED;
+    var stencilMode:String = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    var cached:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
-    var blend:Dynamic = cast _Runtime.UNDEFINED;
-    var isMaskWrite:Dynamic = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var blend:flighthq._internal.dom.GPUBlendState = cast _Runtime.UNDEFINED;
+    var isMaskWrite:Bool = cast _Runtime.UNDEFINED;
     var stencilFace:flighthq._internal.dom.GPUStencilFaceState = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    perModule = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).get(module));
+    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    perModule = ((cast (cast resources : WgpuQuadBatchResources).pipelines : flighthq._internal._WeakMap<flighthq._internal.dom.GPUShaderModule, flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>>).get(module));
     if ((cast _Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perModule = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).set(module, perModule));
+      ((cast (cast resources : WgpuQuadBatchResources).pipelines : flighthq._internal._WeakMap<flighthq._internal.dom.GPUShaderModule, flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>>).set(module, perModule));
     }
-    stencilMode = ((cast _Runtime.field(runtime, 'maskWriteMode') : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
-    format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
+    stencilMode = ((cast (cast runtime : WgpuRenderStateRuntime).maskWriteMode : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast (cast runtime : WgpuRenderStateRuntime).currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
+    format = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
-    cached = ((cast perModule : flighthq._internal._Map).get(key));
+    cached = ((cast perModule : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure2 = state;
     device = _Runtime.field(__destructure2, 'device');
-    blend = _Runtime.callValue(getWgpuBlendState, cast ([blendMode] : Array<Dynamic>));
+    blend = (cast getWgpuBlendState((cast blendMode : Null<String>)) : flighthq._internal.dom.GPUBlendState);
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
     if ((cast isMaskWrite : Bool)) {
       (stencilFace = cast ({ compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
@@ -170,8 +175,8 @@ class WgpuQuadBatchWriter {
     } else {
       (stencilFace = cast ({ compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
     } }
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: ((cast hasMaterialData : Bool) ? (cast _Runtime.field(resources, 'materialPipelineLayout') : Dynamic) : (cast _Runtime.field(resources, 'basePipelineLayout') : Dynamic)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    ((cast perModule : flighthq._internal._Map).set(key, pipeline));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: ((cast hasMaterialData : Bool) ? (cast (cast resources : WgpuQuadBatchResources).materialPipelineLayout : Dynamic) : (cast (cast resources : WgpuQuadBatchResources).basePipelineLayout : Dynamic)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+    ((cast perModule : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(key, pipeline));
     return cast pipeline;
     return cast null;
   }
@@ -184,133 +189,133 @@ class WgpuQuadBatchWriter {
 
   @:noCompletion
   public static function packWgpuQuadBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var floats:Dynamic = cast _Runtime.UNDEFINED;
-    var renderer:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    floats = _Runtime.field(runtime, 'quadBatchWriterMaterialFloats');
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var floats:Float = cast _Runtime.UNDEFINED;
+    var renderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    floats = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialFloats;
     if ((cast _Runtime.strictEquals(floats, 0.0) : Bool)) { return; }
-    renderer = _Runtime.field(runtime, 'quadBatchWriterMaterialRenderer');
-    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    _Runtime.callProperty(renderer, 'packInstance', cast ([state, _Runtime.field(runtime, 'quadBatchWriterMaterial'), materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), (instanceIndex * floats)] : Array<Dynamic>));
+    renderer = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialRenderer;
+    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals((cast renderer : WgpuMaterialRenderer).packInstance, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    (cast renderer : WgpuMaterialRenderer).packInstance(state, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterial, materialData, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialData, (instanceIndex * floats));
   }
 
   @:noCompletion
   public static function prepareWgpuQuadBatchWrite(state:WgpuRenderState, texture:WgpuTextureEntry, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var floats:Dynamic = cast _Runtime.UNDEFINED;
-    var needed:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(runtime, 'quadBatchWriterTexture')) : Bool) || (cast !_Runtime.strictEquals(sampler, _Runtime.field(runtime, 'quadBatchWriterSampler')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'quadBatchWriterBlendMode')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'quadBatchWriterMaterial')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(smoothing, _Runtime.field(runtime, 'quadBatchWriterSmoothing')) : Bool)) : Bool)) {
-      _Runtime.callValue(flushWgpuQuadBatchWriter, cast ([state] : Array<Dynamic>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var floats:Float = cast _Runtime.UNDEFINED;
+    var needed:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(texture, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterTexture) : Bool) || (cast !_Runtime.strictEquals(sampler, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterSampler) : Bool)) : Bool) || (cast !_Runtime.strictEquals(blendMode, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBlendMode) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(smoothing, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterSmoothing) : Bool)) : Bool)) {
+      flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
     }
-    _Runtime.setField(runtime, 'quadBatchWriterTexture', texture);
-    _Runtime.setField(runtime, 'quadBatchWriterSampler', sampler);
-    _Runtime.setField(runtime, 'quadBatchWriterSmoothing', smoothing);
-    _Runtime.setField(runtime, 'quadBatchWriterBlendMode', blendMode);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterial', material);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', materialRenderer);
-    floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', floats);
-    needed = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * QUAD_BATCH_INSTANCE_FLOATS);
-    if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') : Float)) : Bool)) {
-      var newSize:Dynamic = HxMath.max(HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length'), 2.0)), (QUAD_BATCH_INSTANCE_FLOATS * 256.0));
-      _Runtime.setField(runtime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(newSize));
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterTexture = texture);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterSampler = sampler);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterSmoothing = smoothing);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterBlendMode = blendMode);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterial = material);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialRenderer = materialRenderer);
+    floats = (cast materialRenderer : WgpuMaterialRenderer).instanceFloatCount;
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialFloats = floats);
+    needed = (((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount + maxInstances) * QUAD_BATCH_INSTANCE_FLOATS);
+    if ((cast ((cast needed : Float) > (cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData, 'length') : Float)) : Bool)) {
+      var newSize:Float = HxMath.max(HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field((cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData, 'length'), 2.0)), (QUAD_BATCH_INSTANCE_FLOATS * 256.0));
+      ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData = new flighthq._internal._Float32Array(newSize));
     }
     if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialNeeded:Dynamic = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * floats);
-      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') : Float)) : Bool)) {
-        var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length'), 2.0)), (floats * 256.0));
-        _Runtime.setField(runtime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(newSize));
+      var materialNeeded:Float = (((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount + maxInstances) * floats);
+      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialData, 'length') : Float)) : Bool)) {
+        var newSize:Float = HxMath.max(HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialData, 'length'), 2.0)), (floats * 256.0));
+        ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialData = new flighthq._internal._Float32Array(newSize));
       }
     }
-    return cast _Runtime.multiplyNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), QUAD_BATCH_INSTANCE_FLOATS);
+    return cast ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount * QUAD_BATCH_INSTANCE_FLOATS);
     return cast null;
   }
 
   @:noCompletion
-  public static function recordWgpuQuadBatchColorScaleBias(state:WgpuRenderState, colorScaleBias:Null<Dynamic>, instanceIndex:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var fold:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    fold = _Runtime.field(runtime, 'wgpuColorAdjustmentMaterialFeature');
+  public static function recordWgpuQuadBatchColorScaleBias(state:WgpuRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var fold:Null<WgpuColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    fold = (cast runtime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature;
     if ((cast !_Runtime.looseEquals(fold, null) : Bool)) {
-      _Runtime.callProperty(fold, 'record', cast ([runtime, colorScaleBias, instanceIndex] : Array<Dynamic>));
+      (cast fold : WgpuColorAdjustmentMaterialFeature).record(runtime, colorScaleBias, instanceIndex);
       return;
     }
-    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'wgpuColorAdjustmentMaterialFeatureGuard', cast ([state, colorScaleBias] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast runtime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard, cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
   @:noCompletion
   public static function resetWgpuQuadBatchWriterBufferPool(state:WgpuRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'quadBatchWriterBufferCursor', 0.0);
+    ((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).quadBatchWriterBufferCursor = 0.0);
   }
 
   public static function acquireWgpuQuadBatchWriterBufferSlot__wgpuQuadBatchWriter(state:WgpuRenderState):WgpuQuadBatchWriterBufferSlot {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var pool:Dynamic = cast _Runtime.UNDEFINED;
-    var slot:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pool = _Runtime.field(runtime, 'quadBatchWriterBufferPool');
-    slot = flighthq._internal._StaticIndex.readArray(pool, _Runtime.field(runtime, 'quadBatchWriterBufferCursor'));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pool:Array<WgpuQuadBatchWriterBufferSlot> = cast _Runtime.UNDEFINED;
+    var slot:WgpuQuadBatchWriterBufferSlot = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pool = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBufferPool;
+    slot = flighthq._internal._StaticIndex.readArray(pool, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor);
     if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (slot = cast ({ instanceBuffer: null, instanceCapacity: 0.0, materialBuffer: null, materialCapacity: 0.0 } : Dynamic));
-      flighthq._internal._StaticIndex.writeArray(pool, _Runtime.field(runtime, 'quadBatchWriterBufferCursor'), slot);
+      flighthq._internal._StaticIndex.writeArray(pool, (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor, slot);
     }
-    _Runtime.incrementField(runtime, 'quadBatchWriterBufferCursor', 1, true);
+    (cast runtime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor++;
     return cast slot;
     return cast null;
   }
 
   public static function createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter(state:WgpuRenderState, size:Float):flighthq._internal.dom.GPUBuffer {
-    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+    return cast flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: size, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function resetWgpuQuadBatchWriter__wgpuQuadBatchWriter(state:WgpuRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'quadBatchWriterCount', 0.0);
-    _Runtime.setField(runtime, 'quadBatchWriterTexture', null);
-    _Runtime.setField(runtime, 'quadBatchWriterSampler', null);
-    _Runtime.setField(runtime, 'quadBatchWriterSmoothing', null);
-    _Runtime.setField(runtime, 'quadBatchWriterBlendMode', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterial', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', 0.0);
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount = 0.0);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterTexture = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterSampler = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterSmoothing = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterBlendMode = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterial = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialRenderer = null);
+    ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterMaterialFloats = 0.0);
   }
 
   public static function createWgpuTextureSamplerBindGroup__wgpuQuadBatchWriter(state:WgpuRenderState, view:flighthq._internal.dom.GPUTextureView, sampler:SamplerLike):flighthq._internal.dom.GPUBindGroup {
     var minFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var magFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<flighthq._internal.dom.GPUFilterMode> = cast _Runtime.UNDEFINED;
-    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    mipmapFilter = ((cast ((cast sampler.mipmaps : Bool) && (cast _Runtime.includes(sampler.minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    return cast flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: _Runtime.callValue(getWgpuSampler, cast ([state, minFilter, magFilter, sampler.wrapU, sampler.wrapV, mipmapFilter, sampler.anisotropy] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
+    minFilter = ((cast (cast sampler.minFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast (cast sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    mipmapFilter = ((cast ((cast sampler.mipmaps : Bool) && (cast (cast sampler.minFilter : { var includes:flighthq._internal._Any; }).includes('mipmap') : Bool)) : Bool) ? (cast ((cast (cast sampler.minFilter : { var endsWith:flighthq._internal._Any; }).endsWith('nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    return cast flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: (cast getWgpuSampler((cast state : WgpuRenderState), (cast minFilter : String), (cast magFilter : String), sampler.wrapU, sampler.wrapV, (cast mipmapFilter : Null<String>), (cast sampler.anisotropy : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.GPUTexture, flighthq._internal.dom.GPUSampler>, flighthq._internal.dom.GPUTextureView>, flighthq._internal.dom.GPUBuffer>, flighthq._internal.dom.GPUBufferBinding>, flighthq._internal.dom.GPUExternalTexture>) }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function writeWgpuQuadBatchWriterUniforms__wgpuQuadBatchWriter(state:WgpuRenderState, straightTextureAlpha:Bool):Float {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var floatBase:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var uniformOffset:Float = cast _Runtime.UNDEFINED;
+    var floatBase:Float = cast _Runtime.UNDEFINED;
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformData:Dynamic = cast _Runtime.UNDEFINED;
-    var uniformDataU32:Dynamic = cast _Runtime.UNDEFINED;
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var iw:Dynamic = cast _Runtime.UNDEFINED;
-    var ih:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    uniformOffset = _Runtime.field(runtime, 'uniformOffset');
+    var uniformData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var uniformDataU32:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
+    var viewport:{ var width:Float; var height:Float; } = cast _Runtime.UNDEFINED;
+    var iw:Float = cast _Runtime.UNDEFINED;
+    var ih:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    uniformOffset = (cast runtime : WgpuRenderStateRuntime).uniformOffset;
     floatBase = (_Runtime.toInt32(uniformOffset) >> 2);
     __destructure3 = runtime;
     uniformData = _Runtime.field(__destructure3, 'uniformData');
     uniformDataU32 = _Runtime.field(__destructure3, 'uniformDataU32');
-    viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    iw = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'width'));
-    ih = _Runtime.divideNumbers(2.0, _Runtime.field(viewport, 'height'));
+    viewport = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
+    iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
+    ih = (2.0 / (cast viewport : { var width:Float; var height:Float; }).height);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 0.0), iw);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 1.0), 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 2.0), 0.0);
@@ -324,7 +329,7 @@ class WgpuQuadBatchWriter {
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 10.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 11.0), 0.0);
     flighthq._internal._StaticIndex.writeUint32Array(uniformDataU32, (floatBase + 12.0), ((cast straightTextureAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    _Runtime.setField(runtime, 'uniformOffset', _Runtime.addNumbers(_Runtime.field(runtime, 'uniformOffset'), _Runtime.field(runtime, 'uniformStride')));
+    ((cast runtime : WgpuRenderStateRuntime).uniformOffset += (cast runtime : WgpuRenderStateRuntime).uniformStride);
     return cast uniformOffset;
     return cast null;
   }

@@ -6,50 +6,51 @@ import flighthq._internal._Runtime;
 import flighthq.path.PathMorphGeometry.buildPathMorph;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class PathMorph {
   public static function createPathMorph(start:Path, end:Path):Null<flighthq.types.PathMorph> {
-    return cast _Runtime.field(_Runtime.callValue(buildPathMorph, cast ([start, end] : Array<Dynamic>)), 'morph');
+    return cast (cast (cast buildPathMorph((cast start : Path), (cast end : Path)) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }).morph;
     return cast null;
   }
 
   public static function samplePathMorph(out:Path, morph:flighthq.types.PathMorph, progress:Float):Void {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var startData:Dynamic = cast _Runtime.UNDEFINED;
-    var endData:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var startData:Array<Float> = cast _Runtime.UNDEFINED;
+    var endData:Array<Float> = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(morph, 'commands');
-    _Runtime.setLength(_Runtime.field(out, 'commands'), _Runtime.field(commands, 'length'));
+    _Runtime.setLength((cast out : Path).commands, _Runtime.field(commands, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(out, 'commands'), i, flighthq._internal._StaticIndex.readArray(commands, i));
+        flighthq._internal._StaticIndex.writeArray((cast out : Path).commands, i, flighthq._internal._StaticIndex.readArray(commands, i));
         i++;
       }
     }
     startData = _Runtime.field(morph, 'startData');
     endData = _Runtime.field(morph, 'endData');
-    _Runtime.setLength(_Runtime.field(out, 'data'), _Runtime.field(startData, 'length'));
+    _Runtime.setLength((cast out : Path).data, _Runtime.field(startData, 'length'));
     if ((cast ((cast _Runtime.strictEquals(progress, 0.0) : Bool) || (cast _Runtime.strictEquals(progress, 1.0) : Bool)) : Bool)) {
-      var endpoint:Dynamic = ((cast _Runtime.strictEquals(progress, 0.0) : Bool) ? (cast startData : Dynamic) : (cast endData : Dynamic));
+      var endpoint:Array<Float> = ((cast _Runtime.strictEquals(progress, 0.0) : Bool) ? (cast startData : Dynamic) : (cast endData : Dynamic));
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(endpoint, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray(_Runtime.field(out, 'data'), i, flighthq._internal._StaticIndex.readArray(endpoint, i));
+          flighthq._internal._StaticIndex.writeArray((cast out : Path).data, i, flighthq._internal._StaticIndex.readArray(endpoint, i));
           i++;
         }
       }
-      _Runtime.setField(out, 'winding', _Runtime.field(morph, 'winding'));
+      ((cast out : Path).winding = _Runtime.field(morph, 'winding'));
       return;
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(startData, 'length') : Float)) : Bool)) {
-        var start:Dynamic = flighthq._internal._StaticIndex.readArray(startData, i);
-        var end:Dynamic = flighthq._internal._StaticIndex.readArray(endData, i);
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(out, 'data'), i, (start + ((end - start) * progress)));
+        var start:Float = flighthq._internal._StaticIndex.readArray(startData, i);
+        var end:Float = flighthq._internal._StaticIndex.readArray(endData, i);
+        flighthq._internal._StaticIndex.writeArray((cast out : Path).data, i, (start + ((end - start) * progress)));
         i++;
       }
     }
-    _Runtime.setField(out, 'winding', _Runtime.field(morph, 'winding'));
+    ((cast out : Path).winding = _Runtime.field(morph, 'winding'));
   }
 }

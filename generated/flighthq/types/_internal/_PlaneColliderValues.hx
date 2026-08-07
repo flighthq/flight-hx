@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.CollisionResponse;
 
 class _PlaneColliderValues {
-  public static final PlaneColliderKind:Dynamic = 'PlaneCollider';
+  public static final PlaneColliderKind:String = 'PlaneCollider';
 }

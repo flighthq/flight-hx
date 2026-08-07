@@ -9,19 +9,19 @@ import flighthq.types.LocaleInput;
 
 class Plural {
   public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(_Runtime.callValue(Plural.getPluralRules__plural, cast ([locale, _Runtime.mergeObjects([{ type: 'ordinal' }, options])] : Array<Dynamic>)), 'select', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Plural.getPluralRules__plural((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ type: 'ordinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function selectPluralCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(_Runtime.callValue(Plural.getPluralRules__plural, cast ([locale, _Runtime.mergeObjects([{ type: 'cardinal' }, options])] : Array<Dynamic>)), 'select', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Plural.getPluralRules__plural((cast locale : LocaleInput), (cast _Runtime.mergeObjects([{ type: 'cardinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getPluralRules__plural(locale:LocaleInput, options:Dynamic):Dynamic {
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    key = _Runtime.callValue(getCacheKey, cast (['plural', locale, options] : Array<Dynamic>));
-    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'PluralRules'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    var key:String = cast _Runtime.UNDEFINED;
+    key = (cast getCacheKey((cast 'plural' : String), (cast locale : LocaleInput), (cast options : Null<flighthq._internal._Object>)) : String);
+    return cast getCached((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'PluralRules'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]) : Void->flighthq._internal._Any));
     return cast null;
   }
 }

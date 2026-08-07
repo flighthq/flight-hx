@@ -17,18 +17,18 @@ class BokehDepthOfFieldEffect {
   }
 
   public static function getBokehDepthOfFieldEffectPadding(effect:flighthq.types.BokehDepthOfFieldEffect):RenderEffectPadding {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
     radius = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'maxBlur'), function():Dynamic return cast 4.0)));
     return cast { bottom: radius, left: radius, right: radius, top: radius };
     return cast null;
   }
 
   public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'BokehDepthOfFieldEffect', BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BokehDepthOfFieldEffect' : String), BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect);
   }
 
   public static function resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getBokehDepthOfFieldEffectPadding, cast ([(cast effect : flighthq.types.BokehDepthOfFieldEffect)] : Array<Dynamic>));
+    return cast (cast getBokehDepthOfFieldEffectPadding((cast (cast effect : flighthq.types.BokehDepthOfFieldEffect) : flighthq.types.BokehDepthOfFieldEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

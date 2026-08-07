@@ -17,19 +17,19 @@ import flighthq.types.Texture;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
 class Shared {
-  public static final CANONICAL_FLOATS_PER_VERTEX:Dynamic = 12.0;
+  public static final CANONICAL_FLOATS_PER_VERTEX:Float = 12.0;
 
   public static final CANONICAL_LAYOUT:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };
 
-  public static final SKINNED_FLOATS_PER_VERTEX:Dynamic = (CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT.stride / 4.0);
+  public static final SKINNED_FLOATS_PER_VERTEX:Float = (CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT.stride / 4.0);
 
-  public static final MAX_SKIN_INFLUENCES:Dynamic = 4.0;
+  public static final MAX_SKIN_INFLUENCES:Float = 4.0;
 
-  public static function convertPositionsZUpToYUp(values:{  }, stride:Dynamic = 3.0, offset:Dynamic = 0.0):Void {
+  public static function convertPositionsZUpToYUp(values:flighthq._internal._Intersection2<flighthq._internal._ArrayLike<Float>, {  }>, stride:Float = 3.0, offset:Float = 0.0):Void {
     {
-      var i:Dynamic = offset;
-      while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.getIndex(values, (i + 1.0));
+      var i:Float = offset;
+      while ((cast ((cast (i + 2.0) : Float) < (cast (cast values : { var length:Float; }).length : Float)) : Bool)) {
+        var y:Float = _Runtime.getIndex(values, (i + 1.0));
         _Runtime.setIndex(values, (i + 1.0), _Runtime.getIndex(values, (i + 2.0)));
         _Runtime.setIndex(values, (i + 2.0), _Runtime.normalizeZero(-y));
         (i = cast ((i + stride) : Dynamic));
@@ -37,11 +37,11 @@ class Shared {
     }
   }
 
-  public static function convertQuaternionsZUpToYUp(values:Array<Float>, stride:Dynamic = 4.0, offset:Dynamic = 0.0):Void {
+  public static function convertQuaternionsZUpToYUp(values:Array<Float>, stride:Float = 4.0, offset:Float = 0.0):Void {
     {
-      var i:Dynamic = offset;
+      var i:Float = offset;
       while ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var qy:Dynamic = flighthq._internal._StaticIndex.readArray(values, (i + 1.0));
+        var qy:Float = flighthq._internal._StaticIndex.readArray(values, (i + 1.0));
         flighthq._internal._StaticIndex.writeArray(values, (i + 1.0), flighthq._internal._StaticIndex.readArray(values, (i + 2.0)));
         flighthq._internal._StaticIndex.writeArray(values, (i + 2.0), _Runtime.normalizeZero(-qy));
         (i = cast ((i + stride) : Dynamic));
@@ -58,31 +58,31 @@ class Shared {
   }
 
   public static function createEmbeddedTextureRef(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:Dynamic) return ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'kind'), ImageResourceReferenceKindValue.Embedded) : Bool) && (cast _Runtime.strictEquals(candidate.bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.mimeType, mimeType) : Bool))] : Array<Dynamic>));
+    var resource:Null<EmbeddedImageResourceReference> = cast _Runtime.UNDEFINED;
+    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).mimeType, mimeType) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast (_Runtime.callValue(createEmbeddedImageResourceReference, cast ([bytes, mimeType] : Array<Dynamic>)) : Dynamic));
+      (resource = cast ((cast createEmbeddedImageResourceReference((cast bytes : flighthq._internal._UInt8Array), (cast mimeType : Null<String>)) : Null<EmbeddedImageResourceReference>) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast _Runtime.callValue(createTexture, cast ([{ resource: resource }] : Array<Dynamic>));
+    return cast (cast createTexture((cast { resource: resource } : Null<{ @:optional var dimension:Null<String>; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }>)) : Texture);
     return cast null;
   }
 
   public static function createExternalTextureRef(uri:String, ?basePath:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
     if (basePath == null) basePath = cast (null : Dynamic);
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:Dynamic) return ((cast ((cast _Runtime.strictEquals(_Runtime.field(candidate, 'kind'), ImageResourceReferenceKindValue.External) : Bool) && (cast _Runtime.strictEquals(candidate.uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.basePath, basePath) : Bool))] : Array<Dynamic>));
+    var resource:Null<ExternalImageResourceReference> = cast _Runtime.UNDEFINED;
+    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.ExternalImageResourceReference).uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.ExternalImageResourceReference).basePath, basePath) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast (_Runtime.callValue(createExternalImageResourceReference, cast ([uri, basePath] : Array<Dynamic>)) : Dynamic));
+      (resource = cast ((cast createExternalImageResourceReference((cast uri : String), (cast basePath : Null<String>)) : Null<ExternalImageResourceReference>) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast _Runtime.callValue(createTexture, cast ([{ resource: resource }] : Array<Dynamic>));
+    return cast (cast createTexture((cast { resource: resource } : Null<{ @:optional var dimension:Null<String>; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }>)) : Texture);
     return cast null;
   }
 
   public static function negateVec3Z(values:Array<Float>):Void {
     {
-      var i:Dynamic = 2.0;
+      var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(values, i, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readArray(values, i)));
         (i = cast ((i + 3.0) : Dynamic));
@@ -91,28 +91,28 @@ class Shared {
   }
 
   public static function packSkinInfluences(influences:Array<SkinInfluence>, outJoints:Array<Float>, outWeights:Array<Float>):Void {
-    var kept:Dynamic = cast _Runtime.UNDEFINED;
-    var sum:Dynamic = cast _Runtime.UNDEFINED;
+    var kept:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast MAX_SKIN_INFLUENCES : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(outJoints, i, 0.0);
         flighthq._internal._StaticIndex.writeArray(outWeights, i, 0.0);
         i++;
       }
     }
-    _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return (b.weight - a.weight));
+    _Runtime.sortAndReturn(influences, function(a:SkinInfluence, b:SkinInfluence) return (b.weight - a.weight));
     kept = HxMath.min(_Runtime.field(influences, 'length'), MAX_SKIN_INFLUENCES);
     sum = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
         (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(influences, i).weight) : Dynamic));
         i++;
       }
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(outJoints, i, flighthq._internal._StaticIndex.readArray(influences, i).jointIndex);
         flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(influences, i).weight, sum) : Dynamic) : (cast 0.0 : Dynamic)));
@@ -123,9 +123,9 @@ class Shared {
 
   public static function reverseTriangleWinding(indices:Array<Float>):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        var tmp:Dynamic = flighthq._internal._StaticIndex.readArray(indices, (i + 1.0));
+        var tmp:Float = flighthq._internal._StaticIndex.readArray(indices, (i + 1.0));
         flighthq._internal._StaticIndex.writeArray(indices, (i + 1.0), flighthq._internal._StaticIndex.readArray(indices, (i + 2.0)));
         flighthq._internal._StaticIndex.writeArray(indices, (i + 2.0), tmp);
         (i = cast ((i + 3.0) : Dynamic));

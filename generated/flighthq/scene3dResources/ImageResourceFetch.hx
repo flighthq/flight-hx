@@ -11,10 +11,10 @@ class ImageResourceFetch {
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var url:Dynamic = cast _Runtime.UNDEFINED;
-        url = _Runtime.callValue(resolveImageResourceUri, cast ([ref.uri, ref.basePath] : Array<Dynamic>));
+        var url:String = cast _Runtime.UNDEFINED;
+        url = (cast resolveImageResourceUri((cast ref.uri : String), (cast ref.basePath : Null<String>)) : String);
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)) : Null<flighthq._internal._Any>), function(__awaitValue0:Dynamic):Dynamic {
             return flighthq._internal._Async.flowReturn(__awaitValue0);
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -40,7 +40,7 @@ class ImageResourceFetch {
   }
 
   public static function resolveImageResourceUri(uri:String, basePath:Null<String>):String {
-    if ((cast ((cast _Runtime.strictEquals(basePath, null) : Bool) || (cast _Runtime.callValue(ImageResourceFetch.isAbsoluteImageResourceUri__imageResourceFetch, cast ([uri] : Array<Dynamic>)) : Bool)) : Bool)) { return cast uri; }
+    if ((cast ((cast _Runtime.strictEquals(basePath, null) : Bool) || (cast (cast ImageResourceFetch.isAbsoluteImageResourceUri__imageResourceFetch((cast uri : String)) : Bool) : Bool)) : Bool)) { return cast uri; }
     if ((cast ((cast StringTools.endsWith(Std.string(basePath), '/') : Bool) || (cast StringTools.startsWith(uri, '/') : Bool)) : Bool)) { return cast '' + Std.string(basePath) + '' + Std.string(uri) + ''; }
     return cast '' + Std.string(basePath) + '/' + Std.string(uri) + '';
     return cast null;

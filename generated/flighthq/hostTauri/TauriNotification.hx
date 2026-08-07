@@ -6,27 +6,31 @@ import flighthq._internal._Runtime;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
+import flighthq.types.Notification.NotificationRequest;
 import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriNotificationOptions;
+import flighthq.types.TauriApi.TauriNotificationPermission;
+import flighthq.types.TauriApi.TauriNotificationPlugin;
 
 class TauriNotification {
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
-    var notification:Dynamic = cast _Runtime.UNDEFINED;
-    var nextId:Dynamic = cast _Runtime.UNDEFINED;
+    var notification:TauriNotificationPlugin = cast _Runtime.UNDEFINED;
+    var nextId:Float = cast _Runtime.UNDEFINED;
     var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
-    notification = _Runtime.field(tauri, 'notification');
+    notification = (cast tauri : TauriApi).notification;
     nextId = 0.0;
     cachedPermission = 'default';
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(notification, 'isPermissionGranted', cast ([] : Array<Dynamic>)), 'then', cast ([function(granted:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast notification : TauriNotificationPlugin).isPermissionGranted(), 'then', cast ([function(granted:Bool):Void {
       (cachedPermission = cast (((cast granted : Bool) ? (cast 'granted' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
-    }] : Array<Dynamic>)), function() {
+    }] : Array<Dynamic>)), function():Void {
 
     });
-    return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
+    return cast { notify: function(request:NotificationRequest):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        var id:Dynamic = cast _Runtime.UNDEFINED;
+        var id:String = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         try {
-          _Runtime.callProperty(notification, 'sendNotification', cast ([{ title: request.title, body: request.body, icon: request.icon }] : Array<Dynamic>));
+          (cast notification : TauriNotificationPlugin).sendNotification({ title: request.title, body: request.body, icon: request.icon });
           return cast id;
         } catch (__error:Dynamic) {
           return cast '';
@@ -37,8 +41,8 @@ class TauriNotification {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            var permission:Dynamic = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
+            var permission:TauriNotificationPermission = cast _Runtime.UNDEFINED;
+            return flighthq._internal._Async.flatMap((cast notification : TauriNotificationPlugin).requestPermission(), function(__awaitValue0:Dynamic):Dynamic {
               permission = __awaitValue0;
               (cachedPermission = cast (((cast _Runtime.strictEquals(permission, 'granted') : Bool) ? (cast 'granted' : Dynamic) : (cast ((cast _Runtime.strictEquals(permission, 'denied') : Bool) ? (cast 'denied' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic)) : Dynamic));
               return flighthq._internal._Async.flowReturn(cachedPermission);
@@ -53,56 +57,56 @@ class TauriNotification {
           });
         })
       );
-    }, getPermission: function() {
+    }, getPermission: function():NotificationPermission {
       return cast cachedPermission;
-    }, isSupported: function() {
+    }, isSupported: function():Bool {
       return cast true;
-    }, getCapabilities: function() {
+    }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
-    }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
+    }, getLaunchNotification: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
+    }, getActiveNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
+    }, getPendingNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, scheduleNotification: function():flighthq._internal._Promise<Dynamic> {
+    }, scheduleNotification: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, cancelScheduledNotification: function() {
+    }, cancelScheduledNotification: function():Void {
 
-    }, closeNotification: function() {
+    }, closeNotification: function():Void {
 
-    }, closeAllNotifications: function() {
+    }, closeAllNotifications: function():Void {
 
-    }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
+    }, updateNotification: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, subscribeClick: function() {
-      return cast function() {
+    }, subscribeClick: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeAction: function() {
-      return cast function() {
+    }, subscribeAction: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeDismiss: function() {
-      return cast function() {
+    }, subscribeDismiss: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeReply: function() {
-      return cast function() {
+    }, subscribeReply: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeShow: function() {
-      return cast function() {
+    }, subscribeShow: function():Void->Void {
+      return cast function():Void {
 
       };
     } };

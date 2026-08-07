@@ -45,12 +45,12 @@ class Particles {
     Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleObjectForces(objects, state, forces, deltaTime);
   }
 
-  public static function buildParticleColorCurve(f:Dynamic, ?samples:Dynamic):Array<Float> {
+  public static function buildParticleColorCurve(f:Float->Array<Float>, ?samples:Float):Array<Float> {
     return cast Facade_Particles_flighthq_particles_Curve.buildParticleColorCurve(f, samples);
     return cast null;
   }
 
-  public static function buildParticleCurve(f:Dynamic, ?samples:Dynamic):Array<Float> {
+  public static function buildParticleCurve(f:Float->Float, ?samples:Float):Array<Float> {
     return cast Facade_Particles_flighthq_particles_Curve.buildParticleCurve(f, samples);
     return cast null;
   }
@@ -70,12 +70,12 @@ class Particles {
     return cast null;
   }
 
-  public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
+  public static function enableParticleEmitterSignals(state:flighthq._internal._Object):ParticleEmitterSignals {
     return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals(state);
     return cast null;
   }
 
-  public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
+  public static function getParticleEmitterSignals(state:flighthq._internal._Object):Null<ParticleEmitterSignals> {
     return cast Facade_Particles_flighthq_particles_ParticleEmitterSignals.getParticleEmitterSignals(state);
     return cast null;
   }
@@ -85,11 +85,11 @@ class Particles {
     return cast null;
   }
 
-  public static function lerpHsvDirect(out:Dynamic, offset:Float, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
+  public static function lerpHsvDirect(out:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, offset:Float, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
     Facade_Particles_flighthq_particles_Curve.lerpHsvDirect(out, offset, r0, g0, b0, r1, g1, b1, t);
   }
 
-  public static function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flighthq._internal._Float32Array, death:flighthq._internal._Float32Array, t:Float):Void {
+  public static function lerpHsvInPlace(colorsOut:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, offset:Float, birth:flighthq._internal._Float32Array, death:flighthq._internal._Float32Array, t:Float):Void {
     Facade_Particles_flighthq_particles_Curve.lerpHsvInPlace(colorsOut, offset, birth, death, t);
   }
 
@@ -98,7 +98,7 @@ class Particles {
     return cast null;
   }
 
-  public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, ?samples:Dynamic):Array<Float> {
+  public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, ?samples:Float):Array<Float> {
     return cast Facade_Particles_flighthq_particles_Curve.particleColorCurveFromKeyframes(keys, samples);
     return cast null;
   }
@@ -108,7 +108,7 @@ class Particles {
     return cast null;
   }
 
-  public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, ?samples:Dynamic):Array<Float> {
+  public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, ?samples:Float):Array<Float> {
     return cast Facade_Particles_flighthq_particles_Curve.particleCurveFromKeyframes(keys, samples);
     return cast null;
   }

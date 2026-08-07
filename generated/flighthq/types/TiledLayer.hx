@@ -14,4 +14,4 @@ typedef TiledImageLayer = { var id:Float; var name:String; var opacity:Float; va
 
 typedef TiledGroupLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var layers:Array<TiledLayer>; };
 
-typedef TiledLayer = Dynamic;
+typedef TiledLayer = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>;

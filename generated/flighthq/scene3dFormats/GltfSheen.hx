@@ -6,19 +6,43 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.packLinearToColor;
 import flighthq.materials.SheenPbrExtension.createSheenPbrExtension;
 import flighthq.scene3dFormats.GltfMaterialExtension.attachGltfPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
+import flighthq.types.GltfSchema.GltfTextureInfo;
+import flighthq.types.PbrExtension;
+import flighthq.types.Sampler;
+import flighthq.types.Scene3DDocument;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class GltfSheen {
-  public static final GltfSheenExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfSheenExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_sheen');
+        var block:Null<GltfMaterialsSheen> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_sheen');
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var color:Dynamic = _Runtime.coalesce(_Runtime.field(block, 'sheenColorFactor'), function():Dynamic return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
-        _Runtime.callValue(attachGltfPbrExtension, cast ([_Runtime.field(context, 'document'), i, _Runtime.callValue(createSheenPbrExtension, cast ([{ sheenColor: _Runtime.callValue(packLinearToColor, cast ([cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 0.0), 1.0] : Array<Dynamic>)] : Array<Dynamic>)), sheenColorMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'sheenColorTexture'), 'srgb'] : Array<Dynamic>)), sheenRoughness: _Runtime.coalesce(_Runtime.field(block, 'sheenRoughnessFactor'), function():Dynamic return cast 0.0), sheenRoughnessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'sheenRoughnessTexture'), 'linear'] : Array<Dynamic>)) }] : Array<Dynamic>))] : Array<Dynamic>));
+        var color:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsSheen).sheenColorFactor, function():Dynamic return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createSheenPbrExtension((cast { sheenColor: (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 0.0), 1.0] : Array<Dynamic>) : Array<Float>)) : Null<Float>), sheenColorMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSheen).sheenColorTexture, 'srgb'] : Array<Dynamic>)), sheenRoughness: _Runtime.coalesce((cast block : GltfMaterialsSheen).sheenRoughnessFactor, function():Dynamic return cast 0.0), sheenRoughnessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSheen).sheenRoughnessTexture, 'linear'] : Array<Dynamic>)) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
         i++;
       }
     }

@@ -15,49 +15,59 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
 import flighthq.types.Camera3D;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuPbrPipeline;
 import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
 class StandardPbrWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Dynamic = 48.0;
+  public static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Float = 48.0;
 
   @:noCompletion
   public static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):WgpuPbrDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'mask') : Bool)), anisotropyEnabled: false, clearcoatEnabled: false, doubleSided: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.field(surface, 'doubleSided') : Bool)), hasAlphaMap: ((cast ((cast ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'opaque') : Bool)) : Bool) && (cast !_Runtime.strictEquals(standard, null) : Bool)) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'alphaMap')] : Array<Dynamic>)) : Bool)), hasBaseColorMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'baseColorMap')] : Array<Dynamic>)) : Bool)), hasEmissiveMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'emissiveMap')] : Array<Dynamic>)) : Bool)), hasMetallicRoughnessMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'metallicRoughnessMap')] : Array<Dynamic>)) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'normalMap')] : Array<Dynamic>)) : Bool)), hasOcclusionMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast _Runtime.callValue(isWgpuTextureReady, cast ([_Runtime.field(standard, 'occlusionMap')] : Array<Dynamic>)) : Bool)), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'mask') : Bool)), anisotropyEnabled: false, clearcoatEnabled: false, doubleSided: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.field(surface, 'doubleSided') : Bool)), hasAlphaMap: ((cast ((cast ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'opaque') : Bool)) : Bool) && (cast !_Runtime.strictEquals(standard, null) : Bool)) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'alphaMap')) : Bool) : Bool)), hasBaseColorMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'baseColorMap')) : Bool) : Bool)), hasEmissiveMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'emissiveMap')) : Bool) : Bool)), hasMetallicRoughnessMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'metallicRoughnessMap')) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'normalMap')) : Bool) : Bool)), hasOcclusionMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(standard, 'occlusionMap')) : Bool) : Bool)), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:Dynamic, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
-    var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
-    var binding:Dynamic = cast _Runtime.UNDEFINED;
+  public static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:flighthq._internal._Object, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
+    var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     baseColorMap = ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'baseColorMap') : Dynamic) : (cast null : Dynamic));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, baseColorMap] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 1.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'metallicRoughnessMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 2.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'normalMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 3.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'occlusionMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 4.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'emissiveMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 5.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'alphaMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, baseColorMap] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 1.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'metallicRoughnessMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 2.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'normalMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 3.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'occlusionMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 4.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'emissiveMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 5.0, _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'alphaMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)));
-    binding = _Runtime.callValue(ensureWgpuPerMapMaterialBinding, cast ([state, key, _Runtime.field(pipeline, 'materialBindGroupLayout'), (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0), StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer] : Array<Dynamic>));
-    _Runtime.callValue(stashWgpuUvTransform, cast ([state, ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'baseColorMap') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), baseColorMap) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 1.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'metallicRoughnessMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 2.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'normalMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 3.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'occlusionMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 4.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'emissiveMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer, 5.0, (cast getWgpuMaterialSampler((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'alphaMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUSampler));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), baseColorMap) : flighthq._internal.dom.GPUTextureView));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 1.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'metallicRoughnessMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUTextureView));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 2.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'normalMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUTextureView));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 3.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'occlusionMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUTextureView));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 4.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'emissiveMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUTextureView));
+    flighthq._internal._StaticIndex.writeArray(StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer, 5.0, (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'alphaMap') : Dynamic) : (cast null : Dynamic))) : flighthq._internal.dom.GPUTextureView));
+    binding = (cast ensureWgpuPerMapMaterialBinding((cast state : WgpuRenderState), (cast key : flighthq._internal._Object), (cast _Runtime.field(pipeline, 'materialBindGroupLayout') : flighthq._internal.dom.GPUBindGroupLayout), (cast (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0) : Float), (cast StandardPbrWgpuMeshMaterialRenderer._samplerScratch__standardPbrWgpuMeshMaterialRenderer : Array<flighthq._internal.dom.GPUSampler>), (cast StandardPbrWgpuMeshMaterialRenderer._viewScratch__standardPbrWgpuMeshMaterialRenderer : Array<flighthq._internal.dom.GPUTextureView>)) : WgpuMaterialBinding);
+    stashWgpuUvTransform((cast state : WgpuRenderState), ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast _Runtime.field(standard, 'baseColorMap') : Dynamic) : (cast null : Dynamic)));
     return cast binding;
     return cast null;
   }
@@ -70,12 +80,12 @@ class StandardPbrWgpuMeshMaterialRenderer {
 
   @:noCompletion
   public static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 1.0);
       flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 1.0);
@@ -95,12 +105,12 @@ class StandardPbrWgpuMeshMaterialRenderer {
       flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
       return;
     }
-    _Runtime.callValue(unpackColorToLinear, cast ([StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, _Runtime.field(standard, 'baseColor')] : Array<Dynamic>));
+    (cast unpackColorToLinear((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(standard, 'baseColor') : Float)) : LinearColor);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 3.0));
-    _Runtime.callValue(unpackColorToLinear, cast ([StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, _Runtime.field(standard, 'emissive')] : Array<Dynamic>));
+    (cast unpackColorToLinear((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(standard, 'emissive') : Float)) : LinearColor);
     strength = _Runtime.field(standard, 'emissiveStrength');
     flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0), strength));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0), strength));
@@ -116,37 +126,37 @@ class StandardPbrWgpuMeshMaterialRenderer {
     flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
   }
 
-  public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D) {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var pass:Dynamic = cast _Runtime.UNDEFINED;
-    var pbr:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var binding:Dynamic = cast _Runtime.UNDEFINED;
-    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    pass = _Runtime.field(stateRuntime, 'renderPass');
+  public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var pbr:Null<StandardPbrMaterial> = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuPbrPipeline = cast _Runtime.UNDEFINED;
+    var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     pbr = (cast material : Null<StandardPbrMaterial>);
-    format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    pipeline = _Runtime.callValue(ensureWgpuPbrPipeline, cast ([state, _Runtime.callValue(buildWgpuPbrStandardDefineKey, cast ([pbr, pbr] : Array<Dynamic>)), format] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
-    binding = _Runtime.callValue(ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, _Runtime.coalesce(pbr, function():Dynamic return cast StandardPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__standardPbrWgpuMeshMaterialRenderer), pbr] : Array<Dynamic>));
-    _Runtime.callValue(writeWgpuPbrStandardBlock, cast ([StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, pbr, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic))] : Array<Dynamic>));
+    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    pipeline = (cast ensureWgpuPbrPipeline((cast state : WgpuRenderState), (cast (cast buildWgpuPbrStandardDefineKey((cast pbr : Null<StandardPbrMaterialProperties>), (cast pbr : Null<SurfaceMaterial>)) : WgpuPbrDefineKey) : WgpuPbrDefineKey), (cast format : String)) : WgpuPbrPipeline);
+    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast lights : Scene3DLightBlock));
+    binding = (cast ensureWgpuPbrMaterialBindGroup((cast state : WgpuRenderState), (cast pipeline : WgpuPbrPipeline), (cast _Runtime.coalesce(pbr, function():Dynamic return cast StandardPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__standardPbrWgpuMeshMaterialRenderer) : flighthq._internal._Object), (cast pbr : Null<StandardPbrMaterialProperties>)) : WgpuMaterialBinding);
+    writeWgpuPbrStandardBlock((cast StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer : flighthq._internal._Float32Array), (cast pbr : Null<StandardPbrMaterialProperties>), (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)) : Float));
     _Runtime.fill(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, 16.0, null, 2);
-    _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
-    _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'bindGroup'));
-  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
-    _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
+    writeWgpuPbrMaterialUniform((cast state : WgpuRenderState), (cast binding : WgpuMaterialBinding));
+    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, (cast binding : WgpuMaterialBinding).bindGroup);
+  }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
   } };
 
-  public static final FALLBACK_MATERIAL__standardPbrWgpuMeshMaterialRenderer:Dynamic = (cast {  } : StandardPbrMaterial);
+  public static final FALLBACK_MATERIAL__standardPbrWgpuMeshMaterialRenderer:StandardPbrMaterial = (cast {  } : StandardPbrMaterial);
 
   public static final _colorScratch__standardPbrWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final _materialScratch__standardPbrWgpuMeshMaterialRenderer:Dynamic = new flighthq._internal._Float32Array(WGPU_PBR_MATERIAL_UNIFORM_FLOATS);
+  public static final _materialScratch__standardPbrWgpuMeshMaterialRenderer:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(WGPU_PBR_MATERIAL_UNIFORM_FLOATS);
 
-  public static final _samplerScratch__standardPbrWgpuMeshMaterialRenderer:Dynamic = _Runtime.createArray(6.0);
+  public static final _samplerScratch__standardPbrWgpuMeshMaterialRenderer:Array<flighthq._internal.dom.GPUSampler> = _Runtime.createArray(6.0);
 
-  public static final _viewScratch__standardPbrWgpuMeshMaterialRenderer:Dynamic = _Runtime.createArray(6.0);
+  public static final _viewScratch__standardPbrWgpuMeshMaterialRenderer:Array<flighthq._internal.dom.GPUTextureView> = _Runtime.createArray(6.0);
 }

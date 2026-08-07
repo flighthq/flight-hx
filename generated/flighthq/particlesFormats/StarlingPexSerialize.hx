@@ -3,7 +3,10 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
 import flighthq.types.StarlingPexSchema.StarlingPexColor;
 import flighthq.types.StarlingPexSchema.StarlingPexDocument;
@@ -11,24 +14,24 @@ import flighthq.types.StarlingPexSchema.StarlingPexSerializeOptions;
 
 class StarlingPexSerialize {
   public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
-    var textureSize:Dynamic = cast _Runtime.UNDEFINED;
-    var doc:Dynamic = cast _Runtime.UNDEFINED;
+    var textureSize:Float = cast _Runtime.UNDEFINED;
+    var doc:StarlingPexDocument = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0);
-    doc = _Runtime.callValue(StarlingPexSerialize.configToDocument__starlingPexSerialize, cast ([config, _Runtime.coalesce(existing, function():Dynamic return cast {  }), textureSize] : Array<Dynamic>));
-    return cast _Runtime.callValue(StarlingPexSerialize.documentToXml__starlingPexSerialize, cast ([doc] : Array<Dynamic>));
+    doc = (cast StarlingPexSerialize.configToDocument__starlingPexSerialize((cast config : ParticleEmitterConfig), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast textureSize : Float)) : StarlingPexDocument);
+    return cast (cast StarlingPexSerialize.documentToXml__starlingPexSerialize((cast doc : StarlingPexDocument)) : String);
     return cast null;
   }
 
   public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var warnings:Dynamic = cast _Runtime.UNDEFINED;
-    text = _Runtime.callValue(serializeStarlingPex, cast ([config, existing, options] : Array<Dynamic>));
-    warnings = _Runtime.callValue(StarlingPexSerialize.collectStarlingPexSerializeWarnings__starlingPexSerialize, cast ([config] : Array<Dynamic>));
+    var text:String = cast _Runtime.UNDEFINED;
+    var warnings:Array<String> = cast _Runtime.UNDEFINED;
+    text = (cast serializeStarlingPex((cast config : ParticleEmitterConfig), (cast existing : Null<flighthq._internal._Any>), (cast options : Null<StarlingPexSerializeOptions>)) : String);
+    warnings = (cast StarlingPexSerialize.collectStarlingPexSerializeWarnings__starlingPexSerialize((cast config : ParticleEmitterConfig)) : Array<String>);
     return cast { text: text, warnings: warnings };
     return cast null;
   }
 
-  public static final RAD2DEG__starlingPexSerialize:Dynamic = (180.0 / HxMath.PI);
+  public static final RAD2DEG__starlingPexSerialize:Float = (180.0 / HxMath.PI);
 
   public static function collectStarlingPexSerializeWarnings__starlingPexSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
@@ -61,20 +64,20 @@ class StarlingPexSerialize {
   }
 
   public static function configToDocument__starlingPexSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):StarlingPexDocument {
-    var angleDeg:Dynamic = cast _Runtime.UNDEFINED;
-    var startSize:Dynamic = cast _Runtime.UNDEFINED;
-    var startVar:Dynamic = cast _Runtime.UNDEFINED;
-    var finishSize:Dynamic = cast _Runtime.UNDEFINED;
-    var rotSpeedMid:Dynamic = cast _Runtime.UNDEFINED;
-    var rotSpeedVar:Dynamic = cast _Runtime.UNDEFINED;
-    var lifetimeMid:Dynamic = cast _Runtime.UNDEFINED;
-    var rotStart:Dynamic = cast _Runtime.UNDEFINED;
-    var rotVar:Dynamic = cast _Runtime.UNDEFINED;
-    var vx:Dynamic = cast _Runtime.UNDEFINED;
-    var vy:Dynamic = cast _Runtime.UNDEFINED;
-    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
+    var angleDeg:Float = cast _Runtime.UNDEFINED;
+    var startSize:Float = cast _Runtime.UNDEFINED;
+    var startVar:Float = cast _Runtime.UNDEFINED;
+    var finishSize:Float = cast _Runtime.UNDEFINED;
+    var rotSpeedMid:Float = cast _Runtime.UNDEFINED;
+    var rotSpeedVar:Float = cast _Runtime.UNDEFINED;
+    var lifetimeMid:Float = cast _Runtime.UNDEFINED;
+    var rotStart:Float = cast _Runtime.UNDEFINED;
+    var rotVar:Float = cast _Runtime.UNDEFINED;
+    var vx:Float = cast _Runtime.UNDEFINED;
+    var vy:Float = cast _Runtime.UNDEFINED;
+    var blendMode:Null<String> = cast _Runtime.UNDEFINED;
+    var src:Float = cast _Runtime.UNDEFINED;
+    var dst:Float = cast _Runtime.UNDEFINED;
     angleDeg = _Runtime.multiplyNumbers(HxMath.atan2(-config.directionY, config.directionX), StarlingPexSerialize.RAD2DEG__starlingPexSerialize);
     startSize = (((config.scaleMin + config.scaleMax) * 0.5) * textureSize);
     startVar = (((config.scaleMax - config.scaleMin) * 0.5) * textureSize);
@@ -102,9 +105,9 @@ class StarlingPexSerialize {
 
   public static function documentToXml__starlingPexSerialize(doc:StarlingPexDocument):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<particleEmitterConfig>', '  <attribute name="maxParticles" value="' + Std.string(doc.maxParticles) + '"/>', '  <attribute name="emitterType" value="' + Std.string(doc.emitterType) + '"/>', _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['duration', doc.duration] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['particleLifespan', doc.particleLifespan] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['particleLifespanVariance', doc.particleLifespanVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['speed', doc.speed] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['speedVariance', doc.speedVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['angle', doc.angle] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['angleVariance', doc.angleVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['gravityx', doc.gravityx] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['gravityy', doc.gravityy] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['sourcePositionVariancex', doc.sourcePositionVariancex] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['sourcePositionVariancey', doc.sourcePositionVariancey] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['startParticleSize', doc.startParticleSize] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['startParticleSizeVariance', doc.startParticleSizeVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['finishParticleSize', doc.finishParticleSize] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['finishParticleSizeVariance', doc.finishParticleSizeVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.colorAttr__starlingPexSerialize, cast (['startColor', doc.startColor] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.colorAttr__starlingPexSerialize, cast (['startColorVariance', doc.startColorVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.colorAttr__starlingPexSerialize, cast (['finishColor', doc.finishColor] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.colorAttr__starlingPexSerialize, cast (['finishColorVariance', doc.finishColorVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotationStart', doc.rotationStart] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotationStartVariance', doc.rotationStartVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotationEnd', doc.rotationEnd] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotationEndVariance', doc.rotationEndVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['maxRadius', doc.maxRadius] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['maxRadiusVariance', doc.maxRadiusVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['minRadius', doc.minRadius] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['minRadiusVariance', doc.minRadiusVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotatePerSecond', doc.rotatePerSecond] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['rotatePerSecondVariance', doc.rotatePerSecondVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['radialAcceleration', doc.radialAcceleration] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['radialAccelVariance', doc.radialAccelVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['tangentialAcceleration', doc.tangentialAcceleration] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['tangentialAccelVariance', doc.tangentialAccelVariance] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['blendFuncSource', doc.blendFuncSource] : Array<Dynamic>)), _Runtime.callValue(StarlingPexSerialize.numAttr__starlingPexSerialize, cast (['blendFuncDestination', doc.blendFuncDestination] : Array<Dynamic>))] : Array<Dynamic>);
+    lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<particleEmitterConfig>', '  <attribute name="maxParticles" value="' + Std.string(doc.maxParticles) + '"/>', '  <attribute name="emitterType" value="' + Std.string(doc.emitterType) + '"/>', (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'duration' : String), (cast doc.duration : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'particleLifespan' : String), (cast doc.particleLifespan : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'particleLifespanVariance' : String), (cast doc.particleLifespanVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'speed' : String), (cast doc.speed : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'speedVariance' : String), (cast doc.speedVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'angle' : String), (cast doc.angle : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'angleVariance' : String), (cast doc.angleVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'gravityx' : String), (cast doc.gravityx : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'gravityy' : String), (cast doc.gravityy : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'sourcePositionVariancex' : String), (cast doc.sourcePositionVariancex : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'sourcePositionVariancey' : String), (cast doc.sourcePositionVariancey : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'startParticleSize' : String), (cast doc.startParticleSize : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'startParticleSizeVariance' : String), (cast doc.startParticleSizeVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'finishParticleSize' : String), (cast doc.finishParticleSize : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'finishParticleSizeVariance' : String), (cast doc.finishParticleSizeVariance : Float)) : String), (cast StarlingPexSerialize.colorAttr__starlingPexSerialize((cast 'startColor' : String), (cast doc.startColor : StarlingPexColor)) : String), (cast StarlingPexSerialize.colorAttr__starlingPexSerialize((cast 'startColorVariance' : String), (cast doc.startColorVariance : StarlingPexColor)) : String), (cast StarlingPexSerialize.colorAttr__starlingPexSerialize((cast 'finishColor' : String), (cast doc.finishColor : StarlingPexColor)) : String), (cast StarlingPexSerialize.colorAttr__starlingPexSerialize((cast 'finishColorVariance' : String), (cast doc.finishColorVariance : StarlingPexColor)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotationStart' : String), (cast doc.rotationStart : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotationStartVariance' : String), (cast doc.rotationStartVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotationEnd' : String), (cast doc.rotationEnd : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotationEndVariance' : String), (cast doc.rotationEndVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'maxRadius' : String), (cast doc.maxRadius : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'maxRadiusVariance' : String), (cast doc.maxRadiusVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'minRadius' : String), (cast doc.minRadius : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'minRadiusVariance' : String), (cast doc.minRadiusVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotatePerSecond' : String), (cast doc.rotatePerSecond : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'rotatePerSecondVariance' : String), (cast doc.rotatePerSecondVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'radialAcceleration' : String), (cast doc.radialAcceleration : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'radialAccelVariance' : String), (cast doc.radialAccelVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'tangentialAcceleration' : String), (cast doc.tangentialAcceleration : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'tangentialAccelVariance' : String), (cast doc.tangentialAccelVariance : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'blendFuncSource' : String), (cast doc.blendFuncSource : Float)) : String), (cast StarlingPexSerialize.numAttr__starlingPexSerialize((cast 'blendFuncDestination' : String), (cast doc.blendFuncDestination : Float)) : String)] : Array<Dynamic>);
     if (_Runtime.truthy(doc.textureFileName)) {
-      _Runtime.callProperty(lines, 'push', cast (['  <attribute name="textureFileName" value="' + Std.string(_Runtime.callValue(StarlingPexSerialize.escapeXml__starlingPexSerialize, cast ([doc.textureFileName] : Array<Dynamic>))) + '"/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['  <attribute name="textureFileName" value="' + Std.string((cast StarlingPexSerialize.escapeXml__starlingPexSerialize((cast doc.textureFileName : String)) : String)) + '"/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</particleEmitterConfig>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');

@@ -6,29 +6,29 @@ import flighthq._internal._Runtime;
 import flighthq.types.LocaleInput;
 
 class Cache {
-  public static function getCached<T>(key:String, build:Dynamic):Dynamic {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var built:Dynamic = cast _Runtime.UNDEFINED;
-    existing = ((cast Cache.formatterCache__cache : flighthq._internal._Map).get(key));
-    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : Dynamic); }
-    built = _Runtime.callValue(build, cast ([] : Array<Dynamic>));
-    if ((cast ((cast (cast Cache.formatterCache__cache : flighthq._internal._Map).size : Float) >= (cast Cache.cacheCapacity__cache : Float)) : Bool)) {
-      var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast Cache.formatterCache__cache : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
-      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast Cache.formatterCache__cache : flighthq._internal._Map).delete_(oldest)); }
+  public static function getCached<T>(key:String, build:Void->T):T {
+    var existing:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var built:T = cast _Runtime.UNDEFINED;
+    existing = ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).get(key));
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : T); }
+    built = (cast build() : T);
+    if ((cast ((cast (cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).size : Float) >= (cast Cache.cacheCapacity__cache : Float)) : Bool)) {
+      var oldest:Null<String> = (cast _Runtime.callProperty(((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).keys()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<String>; }).value;
+      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).delete_(oldest)); }
     }
-    ((cast Cache.formatterCache__cache : flighthq._internal._Map).set(key, built));
+    ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).set(key, built));
     return cast built;
     return cast null;
   }
 
-  public static function getCacheKey(kind:String, locale:LocaleInput, options:Null<Dynamic>):String {
-    var localeKey:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getCacheKey(kind:String, locale:LocaleInput, options:Null<flighthq._internal._Object>):String {
+    var localeKey:String = cast _Runtime.UNDEFINED;
     localeKey = ((cast _Runtime.strictEquals(_Runtime.typeofValue(locale), 'string') : Bool) ? (cast locale : Dynamic) : (cast _Runtime.join(locale, ',') : Dynamic));
     return cast '' + Std.string(kind) + '|' + Std.string(localeKey) + '|' + Std.string(((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.jsonStringify(options) : Dynamic))) + '';
     return cast null;
   }
 
-  public static final formatterCache__cache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final formatterCache__cache:flighthq._internal._Map<String, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static final cacheCapacity__cache:Dynamic = 256.0;
+  public static final cacheCapacity__cache:Float = 256.0;
 }

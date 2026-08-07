@@ -4,7 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ShellBackend = { var beep:Dynamic; var moveItemsToTrash:Dynamic; var moveToTrash:Dynamic; var openExternal:Dynamic; var openPath:Dynamic; var openPathResult:Dynamic; var readShortcutLink:Dynamic; var showItemInFolder:Dynamic; var writeShortcutLink:Dynamic; };
+typedef ShellBackend = { var beep:Void->Void; var moveItemsToTrash:Array<String>->flighthq._internal._Promise<Array<Bool>>; var moveToTrash:String->flighthq._internal._Promise<Bool>; var openExternal:String->ShellOpenExternalOptions->flighthq._internal._Promise<Bool>; var openPath:String->ShellOpenPathOptions->flighthq._internal._Promise<Bool>; var openPathResult:String->ShellOpenPathOptions->flighthq._internal._Promise<String>; var readShortcutLink:String->flighthq._internal._Promise<Null<ShellShortcutLink>>; var showItemInFolder:String->flighthq._internal._Promise<Bool>; var writeShortcutLink:String->ShellShortcutLink->ShellShortcutWriteOperation->flighthq._internal._Promise<Bool>; };
 
 typedef ShellOpenExternalOptions = { @:optional var activate:Bool; };
 

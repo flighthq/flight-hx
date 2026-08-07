@@ -4,11 +4,12 @@ package flighthq.spritesheetFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SpritesheetData;
+import flighthq.types.SpritesheetFrameData;
 import flighthq.types.StarlingSchema.StarlingDocument;
 import flighthq.types.StarlingSchema.StarlingSubTexture;
 
 class StarlingSerialize {
-  public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
+  public static function frameToSubTexture__starlingSerialize(frame:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<SpritesheetData, String>, Float>):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
     st = { height: frame.height, name: frame.name, width: frame.width, x: frame.x, y: frame.y };
     if ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool)) { (st.frameX = cast (-frame.offsetX : Dynamic)); }
@@ -45,7 +46,7 @@ class StarlingSerialize {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(doc.imagePath) + '">'] : Array<Dynamic>);
     for (st in _Runtime.iterable(doc.subTextures)) {
-      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string(_Runtime.callValue(StarlingSerialize.subTextureToAttr__starlingSerialize, cast ([st] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string((cast StarlingSerialize.subTextureToAttr__starlingSerialize((cast st : StarlingSubTexture)) : String)) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</TextureAtlas>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
@@ -55,7 +56,7 @@ class StarlingSerialize {
   public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
     doc = { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(data.frames, 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
-    return cast _Runtime.callValue(StarlingSerialize.documentToXml__starlingSerialize, cast ([doc] : Array<Dynamic>));
+    return cast (cast StarlingSerialize.documentToXml__starlingSerialize((cast doc : StarlingDocument)) : String);
     return cast null;
   }
 }

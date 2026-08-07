@@ -9,55 +9,55 @@ import flighthq.types.PathSegment;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 class ForEachPathSegment {
-  public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
+  public static function forEachPathSegment(path:Path, visitor:PathSegment->Void):Void {
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var di:Float = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(path, 'commands');
     data = _Runtime.field(path, 'data');
     di = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          visitor((cast { kind: 'moveTo', x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'moveTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          visitor((cast { kind: 'moveTo', x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          visitor((cast { kind: 'lineTo', x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'lineTo', x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var controlX:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var controlY:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          visitor((cast { kind: 'lineTo', x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
+          var controlX:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var controlY:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var control1X:Dynamic = flighthq._internal._StaticIndex.readArray(data, di);
-          var control1Y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var control2X:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var control2Y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+          visitor((cast { kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
+          var control1X:Float = flighthq._internal._StaticIndex.readArray(data, di);
+          var control1Y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var control2X:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
+          var control2Y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
+          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
           (di = cast ((di + 6.0) : Dynamic));
-          _Runtime.callValue(visitor, cast ([{ kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y }] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
-          _Runtime.callValue(visitor, cast ([{ kind: 'close' }] : Array<Dynamic>));
+          visitor((cast { kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y } : PathSegment));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
+          visitor((cast { kind: 'close' } : PathSegment));
         } } } } } } }
         ci++;
       }

@@ -8,8 +8,8 @@ import flighthq.types.Vector2;
 
 class Vector2Pool {
   public static function acquireEmptyVector2():Vector2 {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    v = _Runtime.callValue(acquireVector2, cast ([] : Array<Dynamic>));
+    var v:Vector2 = cast _Runtime.UNDEFINED;
+    v = (cast acquireVector2() : Vector2);
     (v.x = cast (0.0 : Dynamic));
     (v.y = cast (0.0 : Dynamic));
     return cast v;
@@ -17,7 +17,7 @@ class Vector2Pool {
   }
 
   public static function acquireVector2():Vector2 {
-    return cast ((cast ((cast _Runtime.field(Vector2Pool.pool__vector2Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2) : Dynamic) : (cast _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast ((cast _Runtime.field(Vector2Pool.pool__vector2Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2) : Dynamic) : (cast (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2) : Dynamic));
     return cast null;
   }
 

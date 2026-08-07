@@ -11,6 +11,6 @@ import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKi
 
 class RegisterGlStandardPbrMaterial {
   public static function registerGlStandardPbrMaterial(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, StandardPbrMaterialKind, standardPbrGlMeshMaterialRenderer] : Array<Dynamic>));
+    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast StandardPbrMaterialKind : String), standardPbrGlMeshMaterialRenderer);
   }
 }

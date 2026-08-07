@@ -5,26 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ParticleConfigIssue;
+import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
 
 class ValidateParticleEmitterConfig {
-  public static final NUMERIC_FIELDS__validateParticleEmitterConfig:Dynamic = cast (['alphaEnd', 'alphaStart', 'burstCount', 'burstInterval', 'duration', 'colorEndB', 'colorEndG', 'colorEndR', 'colorEndVarianceB', 'colorEndVarianceG', 'colorEndVarianceR', 'colorStartB', 'colorStartG', 'colorStartR', 'colorStartVarianceB', 'colorStartVarianceG', 'colorStartVarianceR', 'directionX', 'directionY', 'directionZ', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameCount', 'frameRate', 'gravityX', 'gravityY', 'gravityZ', 'lifetimeMax', 'lifetimeMin', 'maxParticles', 'regionIdMax', 'regionIdMin', 'rotationSpeedMax', 'rotationSpeedMin', 'scaleEnd', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate', 'spread', 'velocityInheritance'] : Array<Dynamic>);
+  public static final NUMERIC_FIELDS__validateParticleEmitterConfig:Array<String> = cast (['alphaEnd', 'alphaStart', 'burstCount', 'burstInterval', 'duration', 'colorEndB', 'colorEndG', 'colorEndR', 'colorEndVarianceB', 'colorEndVarianceG', 'colorEndVarianceR', 'colorStartB', 'colorStartG', 'colorStartR', 'colorStartVarianceB', 'colorStartVarianceG', 'colorStartVarianceR', 'directionX', 'directionY', 'directionZ', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameCount', 'frameRate', 'gravityX', 'gravityY', 'gravityZ', 'lifetimeMax', 'lifetimeMin', 'maxParticles', 'regionIdMax', 'regionIdMin', 'rotationSpeedMax', 'rotationSpeedMin', 'scaleEnd', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate', 'spread', 'velocityInheritance'] : Array<Dynamic>);
 
-  public static final NON_NEGATIVE_FIELDS__validateParticleEmitterConfig:Dynamic = cast (['burstCount', 'burstInterval', 'duration', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameRate', 'lifetimeMin', 'lifetimeMax', 'maxParticles', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate'] : Array<Dynamic>);
+  public static final NON_NEGATIVE_FIELDS__validateParticleEmitterConfig:Array<String> = cast (['burstCount', 'burstInterval', 'duration', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameRate', 'lifetimeMin', 'lifetimeMax', 'maxParticles', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate'] : Array<Dynamic>);
 
   public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var defaults:Dynamic = cast _Runtime.UNDEFINED;
-    var mutable:Dynamic = cast _Runtime.UNDEFINED;
-    var defaultsRec:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.callValue(createParticleEmitterConfig, cast ([config] : Array<Dynamic>));
-    defaults = _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>));
-    mutable = (cast (cast out : Dynamic) : Dynamic);
-    defaultsRec = (cast (cast defaults : Dynamic) : Dynamic);
+    var out:ParticleEmitterConfig = cast _Runtime.UNDEFINED;
+    var defaults:ParticleEmitterConfig = cast _Runtime.UNDEFINED;
+    var mutable:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
+    var defaultsRec:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
+    out = (cast createParticleEmitterConfig((cast config : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
+    defaults = (cast createParticleEmitterConfig((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
+    mutable = (cast (cast out : flighthq._internal._Any) : flighthq._internal._Record<String, Float>);
+    defaultsRec = (cast (cast defaults : flighthq._internal._Any) : flighthq._internal._Record<String, Float>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.getIndex(mutable, field)] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.setIndex(mutable, field, _Runtime.getIndex(defaultsRec, field)); }
     }
-    return cast _Runtime.mergeObjects([out, { alphaCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.alphaCurve] : Array<Dynamic>)) : Bool) ? (cast out.alphaCurve : Dynamic) : (cast null : Dynamic)) }, { colorCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.colorCurve] : Array<Dynamic>)) : Bool) ? (cast out.colorCurve : Dynamic) : (cast null : Dynamic)) }, { scaleCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.scaleCurve] : Array<Dynamic>)) : Bool) ? (cast out.scaleCurve : Dynamic) : (cast null : Dynamic)) }, { maxParticles: HxMath.max(0.0, HxMath.floor(out.maxParticles)) }, { burstCount: HxMath.max(0.0, HxMath.floor(out.burstCount)) }, { burstInterval: HxMath.max(0.0, out.burstInterval) }, { duration: HxMath.max(0.0, out.duration) }, { frameCount: HxMath.max(1.0, HxMath.floor(out.frameCount)) }, { frameRate: HxMath.max(0.0, out.frameRate) }, { regionIdMin: HxMath.max(0.0, HxMath.floor(out.regionIdMin)) }, { regionIdMax: HxMath.max(HxMath.max(0.0, HxMath.floor(out.regionIdMin)), HxMath.floor(out.regionIdMax)) }, { spawnRate: HxMath.max(0.0, out.spawnRate) }, { lifetimeMin: HxMath.max(0.0, out.lifetimeMin) }, { lifetimeMax: HxMath.max(0.0, out.lifetimeMax) }, { speedMin: HxMath.max(0.0, out.speedMin) }, { speedMax: HxMath.max(0.0, out.speedMax) }, { scaleMin: HxMath.max(0.0, out.scaleMin) }, { scaleMax: HxMath.max(0.0, out.scaleMax) }, { emitterConeAngle: HxMath.max(0.0, out.emitterConeAngle) }, { emitterDepth: HxMath.max(0.0, out.emitterDepth) }, { emitterRadius: HxMath.max(0.0, out.emitterRadius) }, { emitterWidth: HxMath.max(0.0, out.emitterWidth) }, { emitterHeight: HxMath.max(0.0, out.emitterHeight) }]);
+    return cast _Runtime.mergeObjects([out, { alphaCurve: ((cast (cast ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig((cast out.alphaCurve : Null<Array<Float>>)) : Bool) : Bool) ? (cast out.alphaCurve : Dynamic) : (cast null : Dynamic)) }, { colorCurve: ((cast (cast ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig((cast out.colorCurve : Null<Array<Float>>)) : Bool) : Bool) ? (cast out.colorCurve : Dynamic) : (cast null : Dynamic)) }, { scaleCurve: ((cast (cast ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig((cast out.scaleCurve : Null<Array<Float>>)) : Bool) : Bool) ? (cast out.scaleCurve : Dynamic) : (cast null : Dynamic)) }, { maxParticles: HxMath.max(0.0, HxMath.floor(out.maxParticles)) }, { burstCount: HxMath.max(0.0, HxMath.floor(out.burstCount)) }, { burstInterval: HxMath.max(0.0, out.burstInterval) }, { duration: HxMath.max(0.0, out.duration) }, { frameCount: HxMath.max(1.0, HxMath.floor(out.frameCount)) }, { frameRate: HxMath.max(0.0, out.frameRate) }, { regionIdMin: HxMath.max(0.0, HxMath.floor(out.regionIdMin)) }, { regionIdMax: HxMath.max(HxMath.max(0.0, HxMath.floor(out.regionIdMin)), HxMath.floor(out.regionIdMax)) }, { spawnRate: HxMath.max(0.0, out.spawnRate) }, { lifetimeMin: HxMath.max(0.0, out.lifetimeMin) }, { lifetimeMax: HxMath.max(0.0, out.lifetimeMax) }, { speedMin: HxMath.max(0.0, out.speedMin) }, { speedMax: HxMath.max(0.0, out.speedMax) }, { scaleMin: HxMath.max(0.0, out.scaleMin) }, { scaleMax: HxMath.max(0.0, out.scaleMax) }, { emitterConeAngle: HxMath.max(0.0, out.emitterConeAngle) }, { emitterDepth: HxMath.max(0.0, out.emitterDepth) }, { emitterRadius: HxMath.max(0.0, out.emitterRadius) }, { emitterWidth: HxMath.max(0.0, out.emitterWidth) }, { emitterHeight: HxMath.max(0.0, out.emitterHeight) }]);
     return cast null;
   }
 
@@ -32,13 +33,13 @@ class ValidateParticleEmitterConfig {
     var issues:Array<ParticleConfigIssue> = cast _Runtime.UNDEFINED;
     issues = cast ([] : Array<Dynamic>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
-      var value:Dynamic = _Runtime.getIndex(config, field);
+      var value:Float = _Runtime.getIndex(config, field);
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must be a finite number (got ' + Std.string(Std.string(value)) + ')', severity: 'error' }] : Array<Dynamic>));
       }
     }
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NON_NEGATIVE_FIELDS__validateParticleEmitterConfig)) {
-      var value:Dynamic = _Runtime.getIndex(config, field);
+      var value:Float = _Runtime.getIndex(config, field);
       if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must not be negative (got ' + Std.string(value) + ')', severity: 'warning' }] : Array<Dynamic>));
       }
@@ -52,15 +53,15 @@ class ValidateParticleEmitterConfig {
     if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.frameCount] : Array<Dynamic>)) : Bool) && (cast ((cast config.frameCount : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'frameCount', message: 'frameCount must be >= 1', severity: 'warning' }] : Array<Dynamic>));
     }
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'lifetimeMin', 'lifetimeMax'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'speedMin', 'speedMax'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'scaleMin', 'scaleMax'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'rotationSpeedMin', 'rotationSpeedMax'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportUnitRange__validateParticleEmitterConfig, cast ([issues, config, 'alphaStart'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportUnitRange__validateParticleEmitterConfig, cast ([issues, config, 'alphaEnd'] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig, cast ([issues, config.alphaCurve, 'alphaCurve', 1.0] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig, cast ([issues, config.colorCurve, 'colorCurve', 3.0] : Array<Dynamic>));
-    _Runtime.callValue(ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig, cast ([issues, config.scaleCurve, 'scaleCurve', 1.0] : Array<Dynamic>));
+    ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'lifetimeMin' : String), (cast 'lifetimeMax' : String));
+    ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'speedMin' : String), (cast 'speedMax' : String));
+    ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'scaleMin' : String), (cast 'scaleMax' : String));
+    ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'rotationSpeedMin' : String), (cast 'rotationSpeedMax' : String));
+    ValidateParticleEmitterConfig.reportUnitRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'alphaStart' : String));
+    ValidateParticleEmitterConfig.reportUnitRange__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config : ParticleEmitterConfig), (cast 'alphaEnd' : String));
+    ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config.alphaCurve : Null<Array<Float>>), (cast 'alphaCurve' : String), (cast 1.0 : Float));
+    ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config.colorCurve : Null<Array<Float>>), (cast 'colorCurve' : String), (cast 3.0 : Float));
+    ValidateParticleEmitterConfig.reportCurve__validateParticleEmitterConfig((cast issues : Array<ParticleConfigIssue>), (cast config.scaleCurve : Null<Array<Float>>), (cast 'scaleCurve' : String), (cast 1.0 : Float));
     return cast issues;
     return cast null;
   }
@@ -68,7 +69,7 @@ class ValidateParticleEmitterConfig {
   public static function isFiniteCurve__validateParticleEmitterConfig(curve:Null<Array<Float>>):Bool {
     if ((cast ((cast _Runtime.looseEquals(curve, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
@@ -88,7 +89,7 @@ class ValidateParticleEmitterConfig {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' length (' + Std.string(_Runtime.field(curve, 'length')) + ') is not a multiple of ' + Std.string(stride) + '', severity: 'warning' }] : Array<Dynamic>));
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' contains a non-finite sample at index ' + Std.string(i) + '', severity: 'error' }] : Array<Dynamic>));
@@ -100,8 +101,8 @@ class ValidateParticleEmitterConfig {
   }
 
   public static function reportInvertedRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, minField:ParticleEmitterConfig, maxField:ParticleEmitterConfig):Void {
-    var min:Dynamic = cast _Runtime.UNDEFINED;
-    var max:Dynamic = cast _Runtime.UNDEFINED;
+    var min:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Float, Bool>, String>, ParticleCurve>> = cast _Runtime.UNDEFINED;
+    var max:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Float, Bool>, String>, ParticleCurve>> = cast _Runtime.UNDEFINED;
     min = _Runtime.getIndex(config, minField);
     max = _Runtime.getIndex(config, maxField);
     if ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([min] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([max] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast min : Float) : Float) > (cast (cast max : Float) : Float)) : Bool)) : Bool)) {
@@ -110,7 +111,7 @@ class ValidateParticleEmitterConfig {
   }
 
   public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Float, Bool>, String>, ParticleCurve>> = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(config, field);
     if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(((cast (cast value : Float) : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 1.0 : Float))) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' (' + Std.string(value) + ') is outside the expected 0–1 range', severity: 'warning' }] : Array<Dynamic>));

@@ -10,36 +10,37 @@ import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D;
 import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class Ray3d {
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
-    return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(directionX, function():Dynamic return cast 0.0), _Runtime.coalesce(directionY, function():Dynamic return cast 0.0), _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0)] : Array<Dynamic>)), origin: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(originX, function():Dynamic return cast 0.0), _Runtime.coalesce(originY, function():Dynamic return cast 0.0), _Runtime.coalesce(originZ, function():Dynamic return cast 0.0)] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ direction: (cast createVector3((cast _Runtime.coalesce(directionX, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(directionY, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0) : Null<Float>)) : Vector3), origin: (cast createVector3((cast _Runtime.coalesce(originX, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(originY, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(originZ, function():Dynamic return cast 0.0) : Null<Float>)) : Vector3) }) : Ray3D);
     return cast null;
   }
 
   public static function getClosestPointBetweenRay3Ds(outA:Vector3Like, outB:Vector3Like, a:Ray3DLike, b:Ray3DLike):Void {
-    var aox:Dynamic = cast _Runtime.UNDEFINED;
-    var aoy:Dynamic = cast _Runtime.UNDEFINED;
-    var aoz:Dynamic = cast _Runtime.UNDEFINED;
-    var adx:Dynamic = cast _Runtime.UNDEFINED;
-    var ady:Dynamic = cast _Runtime.UNDEFINED;
-    var adz:Dynamic = cast _Runtime.UNDEFINED;
-    var box:Dynamic = cast _Runtime.UNDEFINED;
-    var boy:Dynamic = cast _Runtime.UNDEFINED;
-    var boz:Dynamic = cast _Runtime.UNDEFINED;
-    var bdx:Dynamic = cast _Runtime.UNDEFINED;
-    var bdy:Dynamic = cast _Runtime.UNDEFINED;
-    var bdz:Dynamic = cast _Runtime.UNDEFINED;
-    var aa:Dynamic = cast _Runtime.UNDEFINED;
-    var bb:Dynamic = cast _Runtime.UNDEFINED;
-    var ab:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var rz:Dynamic = cast _Runtime.UNDEFINED;
-    var ar:Dynamic = cast _Runtime.UNDEFINED;
-    var br:Dynamic = cast _Runtime.UNDEFINED;
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
+    var aox:Float = cast _Runtime.UNDEFINED;
+    var aoy:Float = cast _Runtime.UNDEFINED;
+    var aoz:Float = cast _Runtime.UNDEFINED;
+    var adx:Float = cast _Runtime.UNDEFINED;
+    var ady:Float = cast _Runtime.UNDEFINED;
+    var adz:Float = cast _Runtime.UNDEFINED;
+    var box:Float = cast _Runtime.UNDEFINED;
+    var boy:Float = cast _Runtime.UNDEFINED;
+    var boz:Float = cast _Runtime.UNDEFINED;
+    var bdx:Float = cast _Runtime.UNDEFINED;
+    var bdy:Float = cast _Runtime.UNDEFINED;
+    var bdz:Float = cast _Runtime.UNDEFINED;
+    var aa:Float = cast _Runtime.UNDEFINED;
+    var bb:Float = cast _Runtime.UNDEFINED;
+    var ab:Float = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var rz:Float = cast _Runtime.UNDEFINED;
+    var ar:Float = cast _Runtime.UNDEFINED;
+    var br:Float = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
     var ta:Float = cast _Runtime.UNDEFINED;
     var tb:Float = cast _Runtime.UNDEFINED;
     aox = a.origin.x;
@@ -84,17 +85,17 @@ class Ray3d {
   }
 
   public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var px:Dynamic = cast _Runtime.UNDEFINED;
-    var py:Dynamic = cast _Runtime.UNDEFINED;
-    var pz:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     ox = ray.origin.x;
     oy = ray.origin.y;
     oz = ray.origin.z;
@@ -113,12 +114,12 @@ class Ray3d {
   }
 
   public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
     ox = ray.origin.x;
     oy = ray.origin.y;
     oz = ray.origin.z;
@@ -131,14 +132,14 @@ class Ray3d {
   }
 
   public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var tMin:Dynamic = cast _Runtime.UNDEFINED;
-    var tMax:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var tMin:Float = cast _Runtime.UNDEFINED;
+    var tMax:Float = cast _Runtime.UNDEFINED;
     ox = ray.origin.x;
     oy = ray.origin.y;
     oz = ray.origin.z;
@@ -148,11 +149,11 @@ class Ray3d {
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(dx, 0.0) : Bool)) {
-      var invDx:Dynamic = (1.0 / dx);
-      var t1:Dynamic = ((aabb.min.x - ox) * invDx);
-      var t2:Dynamic = ((aabb.max.x - ox) * invDx);
+      var invDx:Float = (1.0 / dx);
+      var t1:Float = ((aabb.min.x - ox) * invDx);
+      var t2:Float = ((aabb.max.x - ox) * invDx);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-        var tmp:Dynamic = t1;
+        var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
@@ -163,11 +164,11 @@ class Ray3d {
       return cast -1.0;
     } }
     if ((cast !_Runtime.strictEquals(dy, 0.0) : Bool)) {
-      var invDy:Dynamic = (1.0 / dy);
-      var t1:Dynamic = ((aabb.min.y - oy) * invDy);
-      var t2:Dynamic = ((aabb.max.y - oy) * invDy);
+      var invDy:Float = (1.0 / dy);
+      var t1:Float = ((aabb.min.y - oy) * invDy);
+      var t2:Float = ((aabb.max.y - oy) * invDy);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-        var tmp:Dynamic = t1;
+        var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
@@ -178,11 +179,11 @@ class Ray3d {
       return cast -1.0;
     } }
     if ((cast !_Runtime.strictEquals(dz, 0.0) : Bool)) {
-      var invDz:Dynamic = (1.0 / dz);
-      var t1:Dynamic = ((aabb.min.z - oz) * invDz);
-      var t2:Dynamic = ((aabb.max.z - oz) * invDz);
+      var invDz:Float = (1.0 / dz);
+      var t1:Float = ((aabb.min.z - oz) * invDz);
+      var t2:Float = ((aabb.max.z - oz) * invDz);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-        var tmp:Dynamic = t1;
+        var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
@@ -197,8 +198,8 @@ class Ray3d {
   }
 
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
-    var denom:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var denom:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     denom = (((plane.a * ray.direction.x) + (plane.b * ray.direction.y)) + (plane.c * ray.direction.z));
     if ((cast ((cast HxMath.abs(denom) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
     t = (-((((plane.a * ray.origin.x) + (plane.b * ray.origin.y)) + (plane.c * ray.origin.z)) + plane.d) / denom);
@@ -207,19 +208,19 @@ class Ray3d {
   }
 
   public static function intersectRay3DSphere(ray:Ray3DLike, sphere:BoundingSphereLike):Float {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var c:Dynamic = cast _Runtime.UNDEFINED;
-    var disc:Dynamic = cast _Runtime.UNDEFINED;
-    var sqrtDisc:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var t2:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var disc:Float = cast _Runtime.UNDEFINED;
+    var sqrtDisc:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
+    var t2:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
     ox = (ray.origin.x - sphere.center.x);
     oy = (ray.origin.y - sphere.center.y);
@@ -242,29 +243,29 @@ class Ray3d {
   }
 
   public static function intersectRay3DTriangle(ray:Ray3DLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Float {
-    var e1x:Dynamic = cast _Runtime.UNDEFINED;
-    var e1y:Dynamic = cast _Runtime.UNDEFINED;
-    var e1z:Dynamic = cast _Runtime.UNDEFINED;
-    var e2x:Dynamic = cast _Runtime.UNDEFINED;
-    var e2y:Dynamic = cast _Runtime.UNDEFINED;
-    var e2z:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var hx:Dynamic = cast _Runtime.UNDEFINED;
-    var hy:Dynamic = cast _Runtime.UNDEFINED;
-    var hz:Dynamic = cast _Runtime.UNDEFINED;
-    var det:Dynamic = cast _Runtime.UNDEFINED;
-    var invDet:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
-    var u:Dynamic = cast _Runtime.UNDEFINED;
-    var qx:Dynamic = cast _Runtime.UNDEFINED;
-    var qy:Dynamic = cast _Runtime.UNDEFINED;
-    var qz:Dynamic = cast _Runtime.UNDEFINED;
-    var v:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var e1x:Float = cast _Runtime.UNDEFINED;
+    var e1y:Float = cast _Runtime.UNDEFINED;
+    var e1z:Float = cast _Runtime.UNDEFINED;
+    var e2x:Float = cast _Runtime.UNDEFINED;
+    var e2y:Float = cast _Runtime.UNDEFINED;
+    var e2z:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var hx:Float = cast _Runtime.UNDEFINED;
+    var hy:Float = cast _Runtime.UNDEFINED;
+    var hz:Float = cast _Runtime.UNDEFINED;
+    var det:Float = cast _Runtime.UNDEFINED;
+    var invDet:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var u:Float = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var v:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     e1x = (b.x - a.x);
     e1y = (b.y - a.y);
     e1z = (b.z - a.z);
@@ -296,12 +297,12 @@ class Ray3d {
   }
 
   public static function setRay3D(out:Ray3DLike, origin:Vector3Like, direction:Vector3Like):Void {
-    var ox:Dynamic = cast _Runtime.UNDEFINED;
-    var oy:Dynamic = cast _Runtime.UNDEFINED;
-    var oz:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
     ox = origin.x;
     oy = origin.y;
     oz = origin.z;

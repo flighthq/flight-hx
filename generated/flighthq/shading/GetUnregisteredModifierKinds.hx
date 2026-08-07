@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.types.Modifier;
+import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 
@@ -13,9 +14,9 @@ class GetUnregisteredModifierKinds {
     var unregistered:Array<ModifierKind> = cast _Runtime.UNDEFINED;
     unregistered = cast ([] : Array<Dynamic>);
     for (modifier in _Runtime.iterable(stack)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)), null) : Bool)) { continue; }
-      if ((cast _Runtime.includes(unregistered, _Runtime.field(modifier, 'kind')) : Bool)) { continue; }
-      _Runtime.callProperty(unregistered, 'push', cast ([_Runtime.field(modifier, 'kind')] : Array<Dynamic>));
+      if ((cast !_Runtime.strictEquals((cast resolveModifier((cast registry : ModifierRegistry), (cast (cast modifier : Modifier).kind : String)) : Null<ModifierDefinition>), null) : Bool)) { continue; }
+      if ((cast _Runtime.includes(unregistered, (cast modifier : Modifier).kind) : Bool)) { continue; }
+      _Runtime.callProperty(unregistered, 'push', cast ([(cast modifier : Modifier).kind] : Array<Dynamic>));
     }
     return cast unregistered;
     return cast null;

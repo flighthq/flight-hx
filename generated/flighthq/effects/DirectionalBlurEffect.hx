@@ -17,12 +17,12 @@ class DirectionalBlurEffect {
   }
 
   public static function getDirectionalBlurEffectPadding(effect:flighthq.types.DirectionalBlurEffect):RenderEffectPadding {
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var halfLength:Dynamic = cast _Runtime.UNDEFINED;
-    var projectedX:Dynamic = cast _Runtime.UNDEFINED;
-    var projectedY:Dynamic = cast _Runtime.UNDEFINED;
-    var horizontal:Dynamic = cast _Runtime.UNDEFINED;
-    var vertical:Dynamic = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var halfLength:Float = cast _Runtime.UNDEFINED;
+    var projectedX:Float = cast _Runtime.UNDEFINED;
+    var projectedY:Float = cast _Runtime.UNDEFINED;
+    var horizontal:Float = cast _Runtime.UNDEFINED;
+    var vertical:Float = cast _Runtime.UNDEFINED;
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.0);
     halfLength = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'length'), function():Dynamic return cast 8.0)), 0.5);
     projectedX = HxMath.abs(_Runtime.multiplyNumbers(HxMath.cos(angle), halfLength));
@@ -34,11 +34,11 @@ class DirectionalBlurEffect {
   }
 
   public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'DirectionalBlurEffect', DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DirectionalBlurEffect' : String), DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect);
   }
 
   public static function resolveDirectionalBlurEffectPadding__directionalBlurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getDirectionalBlurEffectPadding, cast ([(cast effect : flighthq.types.DirectionalBlurEffect)] : Array<Dynamic>));
+    return cast (cast getDirectionalBlurEffectPadding((cast (cast effect : flighthq.types.DirectionalBlurEffect) : flighthq.types.DirectionalBlurEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

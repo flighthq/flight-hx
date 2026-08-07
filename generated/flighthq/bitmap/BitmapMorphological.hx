@@ -3,25 +3,26 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
 class BitmapMorphological {
   public static function dilateBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    _Runtime.callValue(BitmapMorphological.applyMorphological__bitmapMorphological, cast ([out, source, radius, true] : Array<Dynamic>));
+    BitmapMorphological.applyMorphological__bitmapMorphological((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), (cast radius : Float), (cast true : Bool));
   }
 
   public static function erodeBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    _Runtime.callValue(BitmapMorphological.applyMorphological__bitmapMorphological, cast ([out, source, radius, false] : Array<Dynamic>));
+    BitmapMorphological.applyMorphological__bitmapMorphological((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), (cast radius : Float), (cast false : Bool));
   }
 
   public static function applyMorphological__bitmapMorphological(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float, dilate:Bool):Void {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var identity:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var identity:Float = cast _Runtime.UNDEFINED;
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
@@ -30,24 +31,24 @@ class BitmapMorphological {
     data = _Runtime.field(source, 'bitmap').data;
     identity = ((cast dilate : Bool) ? (cast 0.0 : Dynamic) : (cast 255.0 : Dynamic));
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var vR:Dynamic = identity;
-            var vG:Dynamic = identity;
-            var vB:Dynamic = identity;
-            var vA:Dynamic = identity;
+            var vR:Float = identity;
+            var vG:Float = identity;
+            var vB:Float = identity;
+            var vA:Float = identity;
             {
-              var ky:Dynamic = -r;
+              var ky:Float = -r;
               while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
-                var sy:Dynamic = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
+                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
                 {
-                  var kx:Dynamic = -r;
+                  var kx:Float = -r;
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
-                    var sx:Dynamic = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
-                    var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
+                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
+                    var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     if ((cast dilate : Bool)) {
                       if ((cast ((cast flighthq._internal._StaticIndex.readUint8ClampedArray(data, si) : Float) > (cast vR : Float)) : Bool)) { (vR = cast (flighthq._internal._StaticIndex.readUint8ClampedArray(data, si) : Dynamic)); }
                       if ((cast ((cast flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0)) : Float) > (cast vG : Float)) : Bool)) { (vG = cast (flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0)) : Dynamic)); }
@@ -65,7 +66,7 @@ class BitmapMorphological {
                 ky++;
               }
             }
-            var di:Dynamic = (((py * w) + px) * 4.0);
+            var di:Float = (((py * w) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, vR);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), vG);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), vB);

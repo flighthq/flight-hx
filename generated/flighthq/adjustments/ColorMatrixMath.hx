@@ -6,31 +6,31 @@ import flighthq._internal._Runtime;
 
 class ColorMatrixMath {
   @:noCompletion
-  public static final COLOR_MATRIX_LENGTH:Dynamic = 20.0;
+  public static final COLOR_MATRIX_LENGTH:Float = 20.0;
 
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var rOut:Dynamic = cast _Runtime.UNDEFINED;
-    var gOut:Dynamic = cast _Runtime.UNDEFINED;
-    var bOut:Dynamic = cast _Runtime.UNDEFINED;
-    var aOut:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var rOut:Float = cast _Runtime.UNDEFINED;
+    var gOut:Float = cast _Runtime.UNDEFINED;
+    var bOut:Float = cast _Runtime.UNDEFINED;
+    var aOut:Float = cast _Runtime.UNDEFINED;
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(packedRgba) & 255) / 255.0);
-    rOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 0.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 1.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 2.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 3.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 4.0))] : Array<Dynamic>));
-    gOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 5.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 6.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 7.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 8.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 9.0))] : Array<Dynamic>));
-    bOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 10.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 11.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 12.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 13.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 14.0))] : Array<Dynamic>));
-    aOut = _Runtime.callValue(ColorMatrixMath.clampNormalizedByte__colorMatrixMath, cast ([_Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 15.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 16.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 17.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 18.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 19.0))] : Array<Dynamic>));
+    rOut = (cast ColorMatrixMath.clampNormalizedByte__colorMatrixMath((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 0.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 1.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 2.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 3.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 4.0)) : Float)) : Float);
+    gOut = (cast ColorMatrixMath.clampNormalizedByte__colorMatrixMath((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 5.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 6.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 7.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 8.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 9.0)) : Float)) : Float);
+    bOut = (cast ColorMatrixMath.clampNormalizedByte__colorMatrixMath((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 10.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 11.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 12.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 13.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 14.0)) : Float)) : Float);
+    aOut = (cast ColorMatrixMath.clampNormalizedByte__colorMatrixMath((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 15.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 16.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 17.0), b)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(matrix, 18.0), a)), flighthq._internal._StaticIndex.readArray(matrix, 19.0)) : Float)) : Float);
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rOut) << 24)) | _Runtime.toInt32((_Runtime.toInt32(gOut) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(bOut) << 8)))) | _Runtime.toInt32(aOut))), 0);
     return cast null;
   }
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-    _Runtime.callValue(multiplyColorMatrix, cast ([target, source, target] : Array<Dynamic>));
+    (cast multiplyColorMatrix((cast target : Array<Float>), (cast source : Array<Float>), (cast target : Null<Array<Float>>)) : Array<Float>);
   }
 
   public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
@@ -46,10 +46,10 @@ class ColorMatrixMath {
 
   @:noCompletion
   public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var rOff:Dynamic = cast _Runtime.UNDEFINED;
-    var gOff:Dynamic = cast _Runtime.UNDEFINED;
-    var bOff:Dynamic = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var rOff:Float = cast _Runtime.UNDEFINED;
+    var gOff:Float = cast _Runtime.UNDEFINED;
+    var bOff:Float = cast _Runtime.UNDEFINED;
     scale = (1.0 / 100.0);
     rOff = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(shadows, 0.0), 0.25) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(midtones, 0.0), 0.5)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(highlights, 0.0), 0.25)) * scale);
     gOff = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(shadows, 1.0), 0.25) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(midtones, 1.0), 0.5)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(highlights, 1.0), 0.25)) * scale);
@@ -59,10 +59,10 @@ class ColorMatrixMath {
   }
 
   public static function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
-    var tr:Dynamic = cast _Runtime.UNDEFINED;
-    var tg:Dynamic = cast _Runtime.UNDEFINED;
-    var tb:Dynamic = cast _Runtime.UNDEFINED;
-    var keep:Dynamic = cast _Runtime.UNDEFINED;
+    var tr:Float = cast _Runtime.UNDEFINED;
+    var tg:Float = cast _Runtime.UNDEFINED;
+    var tb:Float = cast _Runtime.UNDEFINED;
+    var keep:Float = cast _Runtime.UNDEFINED;
     tr = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 24)) & 255) / 255.0) * amount);
     tg = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 16)) & 255) / 255.0) * amount);
     tb = (((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packedRgba), 8)) & 255) / 255.0) * amount);
@@ -72,7 +72,7 @@ class ColorMatrixMath {
   }
 
   public static function createContrastColorMatrix(amount:Float):Array<Float> {
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
     offset = (0.5 * (1.0 - amount));
     return cast cast ([amount, 0.0, 0.0, 0.0, offset, 0.0, amount, 0.0, 0.0, offset, 0.0, 0.0, amount, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
@@ -80,15 +80,15 @@ class ColorMatrixMath {
 
   @:noCompletion
   public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
-    return cast _Runtime.callValue(createSaturationColorMatrix, cast ([(1.0 - amount)] : Array<Dynamic>));
+    return cast (cast createSaturationColorMatrix((cast (1.0 - amount) : Float)) : Array<Float>);
     return cast null;
   }
 
   @:noCompletion
   public static function createGrayscaleColorMatrix():Array<Float> {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     r = 0.299;
     g = 0.587;
     b = 0.114;
@@ -97,12 +97,12 @@ class ColorMatrixMath {
   }
 
   public static function createHueRotateColorMatrix(degrees:Float):Array<Float> {
-    var rad:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var lumR:Dynamic = cast _Runtime.UNDEFINED;
-    var lumG:Dynamic = cast _Runtime.UNDEFINED;
-    var lumB:Dynamic = cast _Runtime.UNDEFINED;
+    var rad:Float = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var lumR:Float = cast _Runtime.UNDEFINED;
+    var lumG:Float = cast _Runtime.UNDEFINED;
+    var lumB:Float = cast _Runtime.UNDEFINED;
     rad = ((degrees * HxMath.PI) / 180.0);
     cos = HxMath.cos(rad);
     sin = HxMath.sin(rad);
@@ -125,11 +125,11 @@ class ColorMatrixMath {
   }
 
   @:noCompletion
-  public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Dynamic = 1.0):Array<Float> {
-    var inRange:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var gammaCorrectedScale:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float = 1.0):Array<Float> {
+    var inRange:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var gammaCorrectedScale:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
     inRange = (inWhite - inBlack);
     scale = ((cast _Runtime.strictEquals(inRange, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast ((outWhite - outBlack) / inRange) : Dynamic));
     gammaCorrectedScale = _Runtime.multiplyNumbers(scale, ((cast _Runtime.strictEquals(gamma, 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0)) : Dynamic)));
@@ -151,9 +151,9 @@ class ColorMatrixMath {
   }
 
   public static function createSaturationColorMatrix(amount:Float):Array<Float> {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     r = (0.299 * (1.0 - amount));
     g = (0.587 * (1.0 - amount));
     b = (0.114 * (1.0 - amount));
@@ -181,11 +181,11 @@ class ColorMatrixMath {
 
   @:noCompletion
   public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
-    var tempScale:Dynamic = cast _Runtime.UNDEFINED;
-    var tintScale:Dynamic = cast _Runtime.UNDEFINED;
-    var rGain:Dynamic = cast _Runtime.UNDEFINED;
-    var gGain:Dynamic = cast _Runtime.UNDEFINED;
-    var bGain:Dynamic = cast _Runtime.UNDEFINED;
+    var tempScale:Float = cast _Runtime.UNDEFINED;
+    var tintScale:Float = cast _Runtime.UNDEFINED;
+    var rGain:Float = cast _Runtime.UNDEFINED;
+    var gGain:Float = cast _Runtime.UNDEFINED;
+    var bGain:Float = cast _Runtime.UNDEFINED;
     tempScale = (temperature / 100.0);
     tintScale = (tint / 100.0);
     rGain = (1.0 + (tempScale * 0.3));
@@ -196,13 +196,13 @@ class ColorMatrixMath {
   }
 
   public static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(matrices, 'length'), 0.0) : Bool)) { return cast _Runtime.callValue(createIdentityColorMatrix, cast ([] : Array<Dynamic>)); }
+    var out:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(matrices, 'length'), 0.0) : Bool)) { return cast (cast createIdentityColorMatrix() : Array<Float>); }
     out = _Runtime.slice(flighthq._internal._StaticIndex.readArray(matrices, 0.0), 0, null);
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(multiplyColorMatrix, cast ([flighthq._internal._StaticIndex.readArray(matrices, i), out, out] : Array<Dynamic>));
+        (cast multiplyColorMatrix((cast flighthq._internal._StaticIndex.readArray(matrices, i) : Array<Float>), (cast out : Array<Float>), (cast out : Null<Array<Float>>)) : Array<Float>);
         i++;
       }
     }
@@ -211,47 +211,47 @@ class ColorMatrixMath {
   }
 
   public static function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
-    var a0:Dynamic = cast _Runtime.UNDEFINED;
-    var a1:Dynamic = cast _Runtime.UNDEFINED;
-    var a2:Dynamic = cast _Runtime.UNDEFINED;
-    var a3:Dynamic = cast _Runtime.UNDEFINED;
-    var a4:Dynamic = cast _Runtime.UNDEFINED;
-    var a5:Dynamic = cast _Runtime.UNDEFINED;
-    var a6:Dynamic = cast _Runtime.UNDEFINED;
-    var a7:Dynamic = cast _Runtime.UNDEFINED;
-    var a8:Dynamic = cast _Runtime.UNDEFINED;
-    var a9:Dynamic = cast _Runtime.UNDEFINED;
-    var a10:Dynamic = cast _Runtime.UNDEFINED;
-    var a11:Dynamic = cast _Runtime.UNDEFINED;
-    var a12:Dynamic = cast _Runtime.UNDEFINED;
-    var a13:Dynamic = cast _Runtime.UNDEFINED;
-    var a14:Dynamic = cast _Runtime.UNDEFINED;
-    var a15:Dynamic = cast _Runtime.UNDEFINED;
-    var a16:Dynamic = cast _Runtime.UNDEFINED;
-    var a17:Dynamic = cast _Runtime.UNDEFINED;
-    var a18:Dynamic = cast _Runtime.UNDEFINED;
-    var a19:Dynamic = cast _Runtime.UNDEFINED;
-    var b0:Dynamic = cast _Runtime.UNDEFINED;
-    var b1:Dynamic = cast _Runtime.UNDEFINED;
-    var b2:Dynamic = cast _Runtime.UNDEFINED;
-    var b3:Dynamic = cast _Runtime.UNDEFINED;
-    var b4:Dynamic = cast _Runtime.UNDEFINED;
-    var b5:Dynamic = cast _Runtime.UNDEFINED;
-    var b6:Dynamic = cast _Runtime.UNDEFINED;
-    var b7:Dynamic = cast _Runtime.UNDEFINED;
-    var b8:Dynamic = cast _Runtime.UNDEFINED;
-    var b9:Dynamic = cast _Runtime.UNDEFINED;
-    var b10:Dynamic = cast _Runtime.UNDEFINED;
-    var b11:Dynamic = cast _Runtime.UNDEFINED;
-    var b12:Dynamic = cast _Runtime.UNDEFINED;
-    var b13:Dynamic = cast _Runtime.UNDEFINED;
-    var b14:Dynamic = cast _Runtime.UNDEFINED;
-    var b15:Dynamic = cast _Runtime.UNDEFINED;
-    var b16:Dynamic = cast _Runtime.UNDEFINED;
-    var b17:Dynamic = cast _Runtime.UNDEFINED;
-    var b18:Dynamic = cast _Runtime.UNDEFINED;
-    var b19:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+    var a0:Float = cast _Runtime.UNDEFINED;
+    var a1:Float = cast _Runtime.UNDEFINED;
+    var a2:Float = cast _Runtime.UNDEFINED;
+    var a3:Float = cast _Runtime.UNDEFINED;
+    var a4:Float = cast _Runtime.UNDEFINED;
+    var a5:Float = cast _Runtime.UNDEFINED;
+    var a6:Float = cast _Runtime.UNDEFINED;
+    var a7:Float = cast _Runtime.UNDEFINED;
+    var a8:Float = cast _Runtime.UNDEFINED;
+    var a9:Float = cast _Runtime.UNDEFINED;
+    var a10:Float = cast _Runtime.UNDEFINED;
+    var a11:Float = cast _Runtime.UNDEFINED;
+    var a12:Float = cast _Runtime.UNDEFINED;
+    var a13:Float = cast _Runtime.UNDEFINED;
+    var a14:Float = cast _Runtime.UNDEFINED;
+    var a15:Float = cast _Runtime.UNDEFINED;
+    var a16:Float = cast _Runtime.UNDEFINED;
+    var a17:Float = cast _Runtime.UNDEFINED;
+    var a18:Float = cast _Runtime.UNDEFINED;
+    var a19:Float = cast _Runtime.UNDEFINED;
+    var b0:Float = cast _Runtime.UNDEFINED;
+    var b1:Float = cast _Runtime.UNDEFINED;
+    var b2:Float = cast _Runtime.UNDEFINED;
+    var b3:Float = cast _Runtime.UNDEFINED;
+    var b4:Float = cast _Runtime.UNDEFINED;
+    var b5:Float = cast _Runtime.UNDEFINED;
+    var b6:Float = cast _Runtime.UNDEFINED;
+    var b7:Float = cast _Runtime.UNDEFINED;
+    var b8:Float = cast _Runtime.UNDEFINED;
+    var b9:Float = cast _Runtime.UNDEFINED;
+    var b10:Float = cast _Runtime.UNDEFINED;
+    var b11:Float = cast _Runtime.UNDEFINED;
+    var b12:Float = cast _Runtime.UNDEFINED;
+    var b13:Float = cast _Runtime.UNDEFINED;
+    var b14:Float = cast _Runtime.UNDEFINED;
+    var b15:Float = cast _Runtime.UNDEFINED;
+    var b16:Float = cast _Runtime.UNDEFINED;
+    var b17:Float = cast _Runtime.UNDEFINED;
+    var b18:Float = cast _Runtime.UNDEFINED;
+    var b19:Float = cast _Runtime.UNDEFINED;
+    var result:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     a0 = flighthq._internal._StaticIndex.readArray(a, 0.0);
     a1 = flighthq._internal._StaticIndex.readArray(a, 1.0);
     a2 = flighthq._internal._StaticIndex.readArray(a, 2.0);

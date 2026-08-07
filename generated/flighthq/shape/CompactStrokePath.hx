@@ -14,31 +14,31 @@ typedef DashSegment__compactStrokePath = { var closed:Bool; var points:Array<Flo
 typedef StrokeSubpath__compactStrokePath = { var closed:Bool; var points:Array<Float>; };
 
 class CompactStrokePath {
-  public static function compactStrokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var join:Dynamic = cast _Runtime.UNDEFINED;
-    var cap:Dynamic = cast _Runtime.UNDEFINED;
-    var miterLimit:Dynamic = cast _Runtime.UNDEFINED;
-    var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
+  public static function compactStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Path {
+    var width:Float = cast _Runtime.UNDEFINED;
+    var join:String = cast _Runtime.UNDEFINED;
+    var cap:String = cast _Runtime.UNDEFINED;
+    var miterLimit:Float = cast _Runtime.UNDEFINED;
+    var halfWidth:Float = cast _Runtime.UNDEFINED;
     var result:Path = cast _Runtime.UNDEFINED;
-    var subpaths:Dynamic = cast _Runtime.UNDEFINED;
-    var dash:Dynamic = cast _Runtime.UNDEFINED;
-    var dashOffset:Dynamic = cast _Runtime.UNDEFINED;
+    var subpaths:Array<StrokeSubpath__compactStrokePath> = cast _Runtime.UNDEFINED;
+    var dash:Null<Array<Float>> = cast _Runtime.UNDEFINED;
+    var dashOffset:Float = cast _Runtime.UNDEFINED;
     width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
     join = _Runtime.coalesce(_Runtime.field(style, 'join'), function():Dynamic return cast 'miter');
     cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
     halfWidth = (width / 2.0);
     result = { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' };
-    subpaths = _Runtime.callValue(CompactStrokePath.decodeSubpaths__compactStrokePath, cast ([path, tolerance] : Array<Dynamic>));
+    subpaths = (cast CompactStrokePath.decodeSubpaths__compactStrokePath((cast path : Path), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
     dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(style, 'dash'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
     dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
     for (subpath in _Runtime.iterable(subpaths)) {
-      if ((cast ((cast _Runtime.field(_Runtime.field(subpath, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var segments:Dynamic = _Runtime.select(dash, function():Dynamic return cast _Runtime.callValue(CompactStrokePath.applyDash__compactStrokePath, cast ([_Runtime.field(subpath, 'points'), _Runtime.field(subpath, 'closed'), dash, dashOffset] : Array<Dynamic>)), function():Dynamic return cast cast ([{ points: _Runtime.field(subpath, 'points'), closed: _Runtime.field(subpath, 'closed') }] : Array<Dynamic>));
+      if ((cast ((cast _Runtime.field((cast subpath : StrokeSubpath__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+      var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast CompactStrokePath.applyDash__compactStrokePath((cast (cast subpath : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), (cast dash : Array<Float>), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));
       for (seg in _Runtime.iterable(segments)) {
-        if ((cast ((cast _Runtime.field(_Runtime.field(seg, 'points'), 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-        _Runtime.callValue(CompactStrokePath.strokeSubpath__compactStrokePath, cast ([_Runtime.field(seg, 'points'), _Runtime.field(seg, 'closed'), halfWidth, join, cap, miterLimit, result, tolerance] : Array<Dynamic>));
+        if ((cast ((cast _Runtime.field((cast seg : DashSegment__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+        CompactStrokePath.strokeSubpath__compactStrokePath((cast (cast seg : DashSegment__compactStrokePath).points : Array<Float>), (cast (cast seg : DashSegment__compactStrokePath).closed : Bool), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), (cast result : Path), (cast tolerance : Float));
       }
     }
     return cast result;
@@ -46,11 +46,11 @@ class CompactStrokePath {
   }
 
   public static function addArcPoints__compactStrokePath(cx:Float, cy:Float, r:Float, startAngle:Float, endAngle:Float, ccw:Bool, tolerance:Float, out:Array<Float>):Void {
-    var ratio:Dynamic = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var delta:Dynamic = cast _Runtime.UNDEFINED;
-    var steps:Dynamic = cast _Runtime.UNDEFINED;
-    var stepAngle:Dynamic = cast _Runtime.UNDEFINED;
+    var ratio:Float = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var delta:Float = cast _Runtime.UNDEFINED;
+    var steps:Float = cast _Runtime.UNDEFINED;
+    var stepAngle:Float = cast _Runtime.UNDEFINED;
     ratio = HxMath.max(0.0, HxMath.min(1.0, (tolerance / r)));
     n = HxMath.max(4.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.PI, HxMath.acos((1.0 - ratio)))));
     delta = (endAngle - startAngle);
@@ -63,9 +63,9 @@ class CompactStrokePath {
     if ((cast ((cast steps : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     stepAngle = (delta / steps);
     {
-      var i:Dynamic = 1.0;
+      var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast steps : Float)) : Bool)) {
-        var angle:Dynamic = (startAngle + (i * stepAngle));
+        var angle:Float = (startAngle + (i * stepAngle));
         _Runtime.pushMany(out, cast ([(cx + _Runtime.multiplyNumbers(HxMath.cos(angle), r)), (cy + _Runtime.multiplyNumbers(HxMath.sin(angle), r))] : Array<Dynamic>));
         i++;
       }
@@ -73,10 +73,10 @@ class CompactStrokePath {
   }
 
   public static function addCap__compactStrokePath(px:Float, py:Float, nx:Float, ny:Float, edx:Float, edy:Float, halfWidth:Float, cap:String, left:Array<Float>, right:Array<Float>, tolerance:Float, isStart:Bool):Void {
-    var lx:Dynamic = cast _Runtime.UNDEFINED;
-    var ly:Dynamic = cast _Runtime.UNDEFINED;
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
+    var lx:Float = cast _Runtime.UNDEFINED;
+    var ly:Float = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
     lx = (px + (nx * halfWidth));
     ly = (py + (ny * halfWidth));
     rx = (px - (nx * halfWidth));
@@ -91,26 +91,26 @@ class CompactStrokePath {
       if ((cast isStart : Bool)) {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-        var startAngle:Dynamic = HxMath.atan2(-ny, -nx);
-        var endAngle:Dynamic = HxMath.atan2(ny, nx);
-        _Runtime.callValue(CompactStrokePath.addArcPoints__compactStrokePath, cast ([px, py, halfWidth, startAngle, endAngle, false, tolerance, right] : Array<Dynamic>));
+        var startAngle:Float = HxMath.atan2(-ny, -nx);
+        var endAngle:Float = HxMath.atan2(ny, nx);
+        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast startAngle : Float), (cast endAngle : Float), (cast false : Bool), (cast tolerance : Float), (cast right : Array<Float>));
       } else {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        _Runtime.callValue(CompactStrokePath.addArcPoints__compactStrokePath, cast ([px, py, halfWidth, HxMath.atan2(ny, nx), HxMath.atan2(-ny, -nx), true, tolerance, left] : Array<Dynamic>));
+        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny, nx) : Float), (cast HxMath.atan2(-ny, -nx) : Float), (cast true : Bool), (cast tolerance : Float), (cast left : Array<Float>));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
       }
     } }
   }
 
   public static function addJoin__compactStrokePath(px:Float, py:Float, nx0:Float, ny0:Float, nx1:Float, ny1:Float, halfWidth:Float, join:String, miterLimit:Float, left:Array<Float>, right:Array<Float>, tolerance:Float):Void {
-    var lx0:Dynamic = cast _Runtime.UNDEFINED;
-    var ly0:Dynamic = cast _Runtime.UNDEFINED;
-    var rx0:Dynamic = cast _Runtime.UNDEFINED;
-    var ry0:Dynamic = cast _Runtime.UNDEFINED;
-    var lx1:Dynamic = cast _Runtime.UNDEFINED;
-    var ly1:Dynamic = cast _Runtime.UNDEFINED;
-    var rx1:Dynamic = cast _Runtime.UNDEFINED;
-    var ry1:Dynamic = cast _Runtime.UNDEFINED;
+    var lx0:Float = cast _Runtime.UNDEFINED;
+    var ly0:Float = cast _Runtime.UNDEFINED;
+    var rx0:Float = cast _Runtime.UNDEFINED;
+    var ry0:Float = cast _Runtime.UNDEFINED;
+    var lx1:Float = cast _Runtime.UNDEFINED;
+    var ly1:Float = cast _Runtime.UNDEFINED;
+    var rx1:Float = cast _Runtime.UNDEFINED;
+    var ry1:Float = cast _Runtime.UNDEFINED;
     lx0 = (px + (nx0 * halfWidth));
     ly0 = (py + (ny0 * halfWidth));
     rx0 = (px - (nx0 * halfWidth));
@@ -120,21 +120,21 @@ class CompactStrokePath {
     rx1 = (px - (nx1 * halfWidth));
     ry1 = (py - (ny1 * halfWidth));
     if ((cast _Runtime.strictEquals(join, 'miter') : Bool)) {
-      var cross:Dynamic = ((nx0 * ny1) - (ny0 * nx1));
+      var cross:Float = ((nx0 * ny1) - (ny0 * nx1));
       if ((cast ((cast HxMath.abs(cross) : Float) < (cast 1e-8 : Float)) : Bool)) {
         _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
       } else {
-        var dx:Dynamic = (lx1 - lx0);
-        var dy:Dynamic = (ly1 - ly0);
-        var t:Dynamic = (-((dx * nx1) + (dy * ny1)) / cross);
-        var mx:Dynamic = (lx0 + (t * ny0));
-        var my:Dynamic = (ly0 - (t * nx0));
-        var miterLen:Dynamic = HxMath.sqrt((((mx - px) * (mx - px)) + ((my - py) * (my - py))));
+        var dx:Float = (lx1 - lx0);
+        var dy:Float = (ly1 - ly0);
+        var t:Float = (-((dx * nx1) + (dy * ny1)) / cross);
+        var mx:Float = (lx0 + (t * ny0));
+        var my:Float = (ly0 - (t * nx0));
+        var miterLen:Float = HxMath.sqrt((((mx - px) * (mx - px)) + ((my - py) * (my - py))));
         if ((cast ((cast miterLen : Float) <= (cast (halfWidth * miterLimit) : Float)) : Bool)) {
           _Runtime.pushMany(left, cast ([mx, my] : Array<Dynamic>));
-          var rmx:Dynamic = ((px * 2.0) - mx);
-          var rmy:Dynamic = ((py * 2.0) - my);
+          var rmx:Float = ((px * 2.0) - mx);
+          var rmy:Float = ((py * 2.0) - my);
           _Runtime.pushMany(right, cast ([rmx, rmy] : Array<Dynamic>));
         } else {
           _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
@@ -143,10 +143,10 @@ class CompactStrokePath {
       }
     } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
       _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-      _Runtime.callValue(CompactStrokePath.addArcPoints__compactStrokePath, cast ([px, py, halfWidth, HxMath.atan2(ny0, nx0), HxMath.atan2(ny1, nx1), true, tolerance, left] : Array<Dynamic>));
+      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny0, nx0) : Float), (cast HxMath.atan2(ny1, nx1) : Float), (cast true : Bool), (cast tolerance : Float), (cast left : Array<Float>));
       _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      _Runtime.callValue(CompactStrokePath.addArcPoints__compactStrokePath, cast ([px, py, halfWidth, HxMath.atan2(-ny0, -nx0), HxMath.atan2(-ny1, -nx1), false, tolerance, right] : Array<Dynamic>));
+      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-ny0, -nx0) : Float), (cast HxMath.atan2(-ny1, -nx1) : Float), (cast false : Bool), (cast tolerance : Float), (cast right : Array<Float>));
       _Runtime.pushMany(right, cast ([rx1, ry1] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
@@ -156,19 +156,19 @@ class CompactStrokePath {
 
   public static function applyDash__compactStrokePath(pts:Array<Float>, closed:Bool, dash:Array<Float>, dashOffset:Float):Array<DashSegment__compactStrokePath> {
     var result:Array<DashSegment__compactStrokePath> = cast _Runtime.UNDEFINED;
-    var totalDashLength:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var dashIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var remaining:Dynamic = cast _Runtime.UNDEFINED;
-    var isOn:Dynamic = cast _Runtime.UNDEFINED;
+    var totalDashLength:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var dashIndex:Float = cast _Runtime.UNDEFINED;
+    var remaining:Float = cast _Runtime.UNDEFINED;
+    var isOn:Bool = cast _Runtime.UNDEFINED;
     var current:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
     if ((cast _Runtime.strictEquals(_Runtime.field(dash, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
     }
-    totalDashLength = _Runtime.reduce(dash, function(s:Dynamic, d:Dynamic) return (s + d), 0.0);
+    totalDashLength = _Runtime.reduce(dash, function(s:Float, d:Float, __unused0:Float, __unused1:Array<Float>):Float return (s + d), 0.0);
     if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
@@ -178,9 +178,9 @@ class CompactStrokePath {
     remaining = 0.0;
     isOn = true;
     {
-      var acc:Dynamic = 0.0;
+      var acc:Float = 0.0;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
           if ((cast ((cast _Runtime.addNumbers(acc, flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
@@ -196,24 +196,24 @@ class CompactStrokePath {
     current = null;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
-        var dx:Dynamic = (x1 - x0);
-        var dy:Dynamic = (y1 - y0);
-        var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
+        var x0:Float = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
+        var x1:Float = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
+        var y1:Float = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
+        var dx:Float = (x1 - x0);
+        var dy:Float = (y1 - y0);
+        var segLen:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast isOn : Bool) && (cast _Runtime.strictEquals(current, null) : Bool)) : Bool)) {
           (current = cast (cast ([x0, y0] : Array<Dynamic>) : Dynamic));
         }
-        var consumed:Dynamic = 0.0;
+        var consumed:Float = 0.0;
         while ((cast ((cast consumed : Float) < (cast segLen : Float)) : Bool)) {
-          var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
-          var t:Dynamic = ((consumed + step) / segLen);
-          var ix:Dynamic = (x0 + (t * dx));
-          var iy:Dynamic = (y0 + (t * dy));
+          var step:Float = HxMath.min(remaining, (segLen - consumed));
+          var t:Float = ((consumed + step) / segLen);
+          var ix:Float = (x0 + (t * dx));
+          var iy:Float = (y0 + (t * dy));
           if ((cast isOn : Bool)) {
             if ((cast _Runtime.strictEquals(current, null) : Bool)) { (current = cast (cast ([(x0 + ((consumed / segLen) * dx)), (y0 + ((consumed / segLen) * dy))] : Array<Dynamic>) : Dynamic)); }
             _Runtime.pushMany(current, cast ([ix, iy] : Array<Dynamic>));
@@ -251,17 +251,17 @@ class CompactStrokePath {
   }
 
   public static function decodeSubpaths__compactStrokePath(path:Path, tolerance:Float):Array<StrokeSubpath__compactStrokePath> {
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var toleranceSq:Float = cast _Runtime.UNDEFINED;
     var subpaths:Array<StrokeSubpath__compactStrokePath> = cast _Runtime.UNDEFINED;
     var current:Null<StrokeSubpath__compactStrokePath> = cast _Runtime.UNDEFINED;
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartX:Dynamic = cast _Runtime.UNDEFINED;
-    var contourStartY:Dynamic = cast _Runtime.UNDEFINED;
-    var di:Dynamic = cast _Runtime.UNDEFINED;
-    var ensureCurrent:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var contourStartX:Float = cast _Runtime.UNDEFINED;
+    var contourStartY:Float = cast _Runtime.UNDEFINED;
+    var di:Float = cast _Runtime.UNDEFINED;
+    var ensureCurrent:Void->StrokeSubpath__compactStrokePath = cast _Runtime.UNDEFINED;
     commands = _Runtime.field(path, 'commands');
     data = _Runtime.field(path, 'data');
     toleranceSq = (tolerance * tolerance);
@@ -272,7 +272,7 @@ class CompactStrokePath {
     contourStartX = 0.0;
     contourStartY = 0.0;
     di = 0.0;
-    ensureCurrent = function() {
+    ensureCurrent = (cast function():StrokeSubpath__compactStrokePath {
       if ((cast _Runtime.strictEquals(current, null) : Bool)) {
         (current = cast ({ points: cast ([0.0, 0.0] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
@@ -280,12 +280,12 @@ class CompactStrokePath {
         (y = cast (0.0 : Dynamic));
       }
       return cast current;
-    };
+    } : Void->StrokeSubpath__compactStrokePath);
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Dynamic = flighthq._internal._StaticIndex.readArray(commands, ci);
-        if ((cast _Runtime.strictEquals(command, PathCommandValue.MOVE_TO) : Bool)) {
+        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
           (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
@@ -293,7 +293,7 @@ class CompactStrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
@@ -301,33 +301,33 @@ class CompactStrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
+          var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
           (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
-          _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
+          _Runtime.pushMany((cast sp : StrokeSubpath__compactStrokePath).points, cast ([x, y] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
+          var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-          _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CURVE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(CompactStrokePath.flattenQuadratic__compactStrokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
+          _Runtime.pushMany((cast sp : StrokeSubpath__compactStrokePath).points, cast ([x, y] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
+          var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
+          CompactStrokePath.flattenQuadratic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO) : Bool)) {
-          var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
-          _Runtime.callValue(CompactStrokePath.flattenCubic__compactStrokePath, cast ([_Runtime.field(sp, 'points'), x, y, flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
+          var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
+          CompactStrokePath.flattenCubic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if ((cast _Runtime.strictEquals(command, PathCommandValue.CLOSE) : Bool)) {
+        } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
           if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-            _Runtime.setField(current, 'closed', true);
+            ((cast current : StrokeSubpath__compactStrokePath).closed = true);
             (x = cast (contourStartX : Dynamic));
             (y = cast (contourStartY : Dynamic));
             (current = cast (null : Dynamic));
@@ -341,16 +341,16 @@ class CompactStrokePath {
   }
 
   public static function distChordSq__compactStrokePath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var cross:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var cross:Float = cast _Runtime.UNDEFINED;
     dx = (x1 - x0);
     dy = (y1 - y0);
     lenSq = ((dx * dx) + (dy * dy));
     if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
-      var ax:Dynamic = (px - x0);
-      var ay:Dynamic = (py - y0);
+      var ax:Float = (px - x0);
+      var ay:Float = (py - y0);
       return cast ((ax * ax) + (ay * ay));
     }
     cross = ((dx * (y0 - py)) - (dy * (x0 - px)));
@@ -359,22 +359,22 @@ class CompactStrokePath {
   }
 
   public static function flattenCubic__compactStrokePath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
-    var dxc1:Dynamic = cast _Runtime.UNDEFINED;
-    var dxc2:Dynamic = cast _Runtime.UNDEFINED;
-    var x01:Dynamic = cast _Runtime.UNDEFINED;
-    var y01:Dynamic = cast _Runtime.UNDEFINED;
-    var x12:Dynamic = cast _Runtime.UNDEFINED;
-    var y12:Dynamic = cast _Runtime.UNDEFINED;
-    var x23:Dynamic = cast _Runtime.UNDEFINED;
-    var y23:Dynamic = cast _Runtime.UNDEFINED;
-    var x012:Dynamic = cast _Runtime.UNDEFINED;
-    var y012:Dynamic = cast _Runtime.UNDEFINED;
-    var x123:Dynamic = cast _Runtime.UNDEFINED;
-    var y123:Dynamic = cast _Runtime.UNDEFINED;
-    var xm:Dynamic = cast _Runtime.UNDEFINED;
-    var ym:Dynamic = cast _Runtime.UNDEFINED;
-    dxc1 = _Runtime.callValue(CompactStrokePath.distChordSq__compactStrokePath, cast ([c1x, c1y, x0, y0, x1, y1] : Array<Dynamic>));
-    dxc2 = _Runtime.callValue(CompactStrokePath.distChordSq__compactStrokePath, cast ([c2x, c2y, x0, y0, x1, y1] : Array<Dynamic>));
+    var dxc1:Float = cast _Runtime.UNDEFINED;
+    var dxc2:Float = cast _Runtime.UNDEFINED;
+    var x01:Float = cast _Runtime.UNDEFINED;
+    var y01:Float = cast _Runtime.UNDEFINED;
+    var x12:Float = cast _Runtime.UNDEFINED;
+    var y12:Float = cast _Runtime.UNDEFINED;
+    var x23:Float = cast _Runtime.UNDEFINED;
+    var y23:Float = cast _Runtime.UNDEFINED;
+    var x012:Float = cast _Runtime.UNDEFINED;
+    var y012:Float = cast _Runtime.UNDEFINED;
+    var x123:Float = cast _Runtime.UNDEFINED;
+    var y123:Float = cast _Runtime.UNDEFINED;
+    var xm:Float = cast _Runtime.UNDEFINED;
+    var ym:Float = cast _Runtime.UNDEFINED;
+    dxc1 = (cast CompactStrokePath.distChordSq__compactStrokePath((cast c1x : Float), (cast c1y : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
+    dxc2 = (cast CompactStrokePath.distChordSq__compactStrokePath((cast c2x : Float), (cast c2y : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float)) : Float);
     if ((cast ((cast ((cast depth : Float) >= (cast CompactStrokePath.MAX_SUBDIVISION_DEPTH__compactStrokePath : Float)) : Bool) || (cast _Runtime.andValue(((cast dxc1 : Float) <= (cast toleranceSq : Float)), function():Dynamic return cast ((cast dxc2 : Float) <= (cast toleranceSq : Float))) : Bool)) : Bool)) {
       _Runtime.pushMany(out, cast ([x1, y1] : Array<Dynamic>));
       return;
@@ -391,30 +391,30 @@ class CompactStrokePath {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    _Runtime.callValue(CompactStrokePath.flattenCubic__compactStrokePath, cast ([out, x0, y0, x01, y01, x012, y012, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-    _Runtime.callValue(CompactStrokePath.flattenCubic__compactStrokePath, cast ([out, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
+    CompactStrokePath.flattenCubic__compactStrokePath((cast out : Array<Float>), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenCubic__compactStrokePath((cast out : Array<Float>), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function flattenQuadratic__compactStrokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var lengthSq:Dynamic = cast _Runtime.UNDEFINED;
-    var distSq:Dynamic = cast _Runtime.UNDEFINED;
-    var x01:Dynamic = cast _Runtime.UNDEFINED;
-    var y01:Dynamic = cast _Runtime.UNDEFINED;
-    var x12:Dynamic = cast _Runtime.UNDEFINED;
-    var y12:Dynamic = cast _Runtime.UNDEFINED;
-    var xm:Dynamic = cast _Runtime.UNDEFINED;
-    var ym:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var lengthSq:Float = cast _Runtime.UNDEFINED;
+    var distSq:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var x01:Float = cast _Runtime.UNDEFINED;
+    var y01:Float = cast _Runtime.UNDEFINED;
+    var x12:Float = cast _Runtime.UNDEFINED;
+    var y12:Float = cast _Runtime.UNDEFINED;
+    var xm:Float = cast _Runtime.UNDEFINED;
+    var ym:Float = cast _Runtime.UNDEFINED;
     dx = (x1 - x0);
     dy = (y1 - y0);
     lengthSq = ((dx * dx) + (dy * dy));
     if ((cast _Runtime.strictEquals(lengthSq, 0.0) : Bool)) {
-      var ax:Dynamic = (cx - x0);
-      var ay:Dynamic = (cy - y0);
+      var ax:Float = (cx - x0);
+      var ay:Float = (cy - y0);
       (distSq = cast (((ax * ax) + (ay * ay)) : Dynamic));
     } else {
-      var cross:Dynamic = ((dx * (y0 - cy)) - (dy * (x0 - cx)));
+      var cross:Float = ((dx * (y0 - cy)) - (dy * (x0 - cx)));
       (distSq = cast (((cross * cross) / lengthSq) : Dynamic));
     }
     if ((cast ((cast ((cast depth : Float) >= (cast CompactStrokePath.MAX_SUBDIVISION_DEPTH__compactStrokePath : Float)) : Bool) || (cast ((cast distSq : Float) <= (cast toleranceSq : Float)) : Bool)) : Bool)) {
@@ -427,26 +427,26 @@ class CompactStrokePath {
     y12 = ((cy + y1) / 2.0);
     xm = ((x01 + x12) / 2.0);
     ym = ((y01 + y12) / 2.0);
-    _Runtime.callValue(CompactStrokePath.flattenQuadratic__compactStrokePath, cast ([out, x0, y0, x01, y01, xm, ym, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
-    _Runtime.callValue(CompactStrokePath.flattenQuadratic__compactStrokePath, cast ([out, xm, ym, x12, y12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
+    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out : Array<Float>), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out : Array<Float>), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function strokeSubpath__compactStrokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     var left:Array<Float> = cast _Runtime.UNDEFINED;
     var right:Array<Float> = cast _Runtime.UNDEFINED;
-    var normals:Dynamic = cast _Runtime.UNDEFINED;
+    var normals:Array<Float> = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     left = cast ([] : Array<Dynamic>);
     right = cast ([] : Array<Dynamic>);
     normals = _Runtime.createArray(((n - 1.0) * 2.0));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var dx:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
-        var dy:Dynamic = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
-        var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
+        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)));
+        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)));
+        var len:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(normals, (i * 2.0), (-dy / len));
           flighthq._internal._StaticIndex.writeArray(normals, ((i * 2.0) + 1.0), (dx / len));
@@ -459,58 +459,58 @@ class CompactStrokePath {
     }
     if ((cast closed : Bool)) {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-          var prev:Dynamic = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
-          var curr:Dynamic = i;
-          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (prev * 2.0));
-          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((prev * 2.0) + 1.0));
-          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (curr * 2.0));
-          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((curr * 2.0) + 1.0));
-          _Runtime.callValue(CompactStrokePath.addJoin__compactStrokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
+          var prev:Float = _Runtime.fmod(((i + n) - 2.0), (n - 1.0));
+          var curr:Float = i;
+          var nx0:Float = flighthq._internal._StaticIndex.readArray(normals, (prev * 2.0));
+          var ny0:Float = flighthq._internal._StaticIndex.readArray(normals, ((prev * 2.0) + 1.0));
+          var nx1:Float = flighthq._internal._StaticIndex.readArray(normals, (curr * 2.0));
+          var ny1:Float = flighthq._internal._StaticIndex.readArray(normals, ((curr * 2.0) + 1.0));
+          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float));
           i++;
         }
       }
     } else {
-      var sn0x:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 0.0);
-      var sn0y:Dynamic = flighthq._internal._StaticIndex.readArray(normals, 1.0);
-      _Runtime.callValue(CompactStrokePath.addCap__compactStrokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, 0.0), flighthq._internal._StaticIndex.readArray(pts, 1.0), sn0x, sn0y, -sn0y, sn0x, halfWidth, cap, left, right, tolerance, true] : Array<Dynamic>));
+      var sn0x:Float = flighthq._internal._StaticIndex.readArray(normals, 0.0);
+      var sn0y:Float = flighthq._internal._StaticIndex.readArray(normals, 1.0);
+      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, 1.0) : Float), (cast sn0x : Float), (cast sn0y : Float), (cast -sn0y : Float), (cast sn0x : Float), (cast halfWidth : Float), (cast cap : String), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float), (cast true : Bool));
       {
-        var i:Dynamic = 1.0;
+        var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-          var nx0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0));
-          var ny0:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0));
-          var nx1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (i * 2.0));
-          var ny1:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((i * 2.0) + 1.0));
-          _Runtime.callValue(CompactStrokePath.addJoin__compactStrokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)), flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)), nx0, ny0, nx1, ny1, halfWidth, join, miterLimit, left, right, tolerance] : Array<Dynamic>));
+          var nx0:Float = flighthq._internal._StaticIndex.readArray(normals, ((i - 1.0) * 2.0));
+          var ny0:Float = flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0));
+          var nx1:Float = flighthq._internal._StaticIndex.readArray(normals, (i * 2.0));
+          var ny1:Float = flighthq._internal._StaticIndex.readArray(normals, ((i * 2.0) + 1.0));
+          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float));
           i++;
         }
       }
-      var snLx:Dynamic = flighthq._internal._StaticIndex.readArray(normals, ((n - 2.0) * 2.0));
-      var snLy:Dynamic = flighthq._internal._StaticIndex.readArray(normals, (((n - 2.0) * 2.0) + 1.0));
-      _Runtime.callValue(CompactStrokePath.addCap__compactStrokePath, cast ([flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
+      var snLx:Float = flighthq._internal._StaticIndex.readArray(normals, ((n - 2.0) * 2.0));
+      var snLy:Float = flighthq._internal._StaticIndex.readArray(normals, (((n - 2.0) * 2.0) + 1.0));
+      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)) : Float), (cast snLx : Float), (cast snLy : Float), (cast snLy : Float), (cast -snLx : Float), (cast halfWidth : Float), (cast cap : String), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float), (cast false : Bool));
     }
     if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-    _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, 0.0), flighthq._internal._StaticIndex.readArray(left, 1.0)] : Array<Dynamic>));
+    _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+    _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(left, 0.0), flighthq._internal._StaticIndex.readArray(left, 1.0)] : Array<Dynamic>));
     {
-      var i:Dynamic = 2.0;
+      var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(left, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(left, i), flighthq._internal._StaticIndex.readArray(left, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+        _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(left, i), flighthq._internal._StaticIndex.readArray(left, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
     {
-      var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(right, 'length'), 2.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(right, 'length'), 2.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-        _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([flighthq._internal._StaticIndex.readArray(right, i), flighthq._internal._StaticIndex.readArray(right, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+        _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(right, i), flighthq._internal._StaticIndex.readArray(right, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));
       }
     }
-    _Runtime.callValue(appendPathClose, cast ([out] : Array<Dynamic>));
+    appendPathClose((cast out : Path));
   }
 
-  public static final MAX_SUBDIVISION_DEPTH__compactStrokePath:Dynamic = 16.0;
+  public static final MAX_SUBDIVISION_DEPTH__compactStrokePath:Float = 16.0;
 }

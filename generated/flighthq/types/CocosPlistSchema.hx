@@ -8,6 +8,6 @@ typedef CocosPlistFrame = { var frame:String; var spriteOffset:String; var sprit
 
 typedef CocosPlistMetadata = { var format:Float; var size:String; var textureFileName:String; };
 
-typedef CocosPlistDocument = { var frames:Dynamic; var metadata:CocosPlistMetadata; };
+typedef CocosPlistDocument = { var frames:flighthq._internal._Record<String, CocosPlistFrame>; var metadata:CocosPlistMetadata; };
 
 typedef CocosPlistParsed = { var data:SpritesheetData; var document:CocosPlistDocument; };

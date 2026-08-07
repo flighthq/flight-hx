@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.DisplacementEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,30 +17,30 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuDisplacementEffect {
   @:noCompletion
   public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var frequency:Dynamic = cast _Runtime.UNDEFINED;
-    var seed:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var frequency:Float = cast _Runtime.UNDEFINED;
+    var seed:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.displacement', WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.displacement' : String), (cast WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, frequency);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDisplacementEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DisplacementEffect)] : Array<Dynamic>));
+  public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyDisplacementEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : DisplacementEffect) : DisplacementEffect));
   };
 
   public static function registerWgpuDisplacementEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'DisplacementEffect', defaultWgpuDisplacementEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'DisplacementEffect' : String), (cast defaultWgpuDisplacementEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_frequency : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let f = uni.u_frequency;\n  let warp = vec2f(\n    sin(uv.y * f + uni.u_seed) + sin(uv.y * f * 2.3 + uni.u_seed * 1.7) * 0.5,\n    cos(uv.x * f * 0.8 + uni.u_seed * 1.3)\n  );\n  let displaced = uv + warp * (uni.u_intensity / uni.u_resolution);\n  return textureSampleLevel(tex, smp, displaced, 0.0);\n}';
+  public static final DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_frequency : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let f = uni.u_frequency;\n  let warp = vec2f(\n    sin(uv.y * f + uni.u_seed) + sin(uv.y * f * 2.3 + uni.u_seed * 1.7) * 0.5,\n    cos(uv.x * f * 0.8 + uni.u_seed * 1.3)\n  );\n  let displaced = uv + warp * (uni.u_intensity / uni.u_resolution);\n  return textureSampleLevel(tex, smp, displaced, 0.0);\n}';
 }

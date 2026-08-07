@@ -7,15 +7,15 @@ import flighthq.types.XmlElement;
 
 class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
+    var value:String = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(element.attributes, name);
     return cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
-    var value:Dynamic = cast _Runtime.UNDEFINED;
-    var parsed:Dynamic = cast _Runtime.UNDEFINED;
+    var value:String = cast _Runtime.UNDEFINED;
+    var parsed:Float = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(element.attributes, name);
     if ((cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
     parsed = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([value] : Array<Dynamic>));
@@ -32,7 +32,7 @@ class XmlQuery {
   }
 
   public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
-    return cast _Runtime.callProperty(element.children, 'filter', cast ([function(child:Dynamic) return _Runtime.strictEquals(child.name, name)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(element.children, 'filter', cast ([function(child:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(child.name, name)] : Array<Dynamic>));
     return cast null;
   }
 }

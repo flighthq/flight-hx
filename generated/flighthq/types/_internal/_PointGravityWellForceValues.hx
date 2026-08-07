@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.ForceFalloff;
 
 class _PointGravityWellForceValues {
-  public static final PointGravityWellForceKind:Dynamic = 'PointGravityWellForce';
+  public static final PointGravityWellForceKind:String = 'PointGravityWellForce';
 }

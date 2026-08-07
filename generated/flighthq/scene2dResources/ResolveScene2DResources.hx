@@ -4,29 +4,32 @@ package flighthq.scene2dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dResources.Scene2DSlotReference.setScene2DSlotReferenceContent;
+import flighthq.types.Node2D;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Scene2DResources;
 import flighthq.types.Scene2DResources.ResolveScene2DResourcesOptions;
+import flighthq.types.Scene2DResources.Scene2DSlotContentResolver;
+import flighthq.types.Scene2DResources.Scene2DSlotResolution;
 
 class ResolveScene2DResources {
   public static function resolveScene2DResources(document:Scene2DDocument, ?options:ResolveScene2DResourcesOptions):Scene2DResources {
-    var resolved:Dynamic = cast _Runtime.UNDEFINED;
+    var resolved:flighthq._internal._IndexedAccess<Scene2DResources, String> = cast _Runtime.UNDEFINED;
     var unresolved:Array<Scene2DSlotReference> = cast _Runtime.UNDEFINED;
     resolved = cast ([] : Array<Dynamic>);
     unresolved = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'slots'), 'length') : Float)) : Bool)) {
-        var reference:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'slots'), i);
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast document : Scene2DDocument).slots, 'length') : Float)) : Bool)) {
+        var reference:Scene2DSlotReference = flighthq._internal._StaticIndex.readArray((cast document : Scene2DDocument).slots, i);
         if ((cast ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
-        var content:Dynamic = _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null);
-        _Runtime.callValue(setScene2DSlotReferenceContent, cast ([reference, content] : Array<Dynamic>));
+        var content:Null<Node2D> = _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'resolveSlotContent', cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null);
+        setScene2DSlotReferenceContent((cast reference : Scene2DSlotReference), content);
         if ((cast _Runtime.strictEquals(content, null) : Bool)) { _Runtime.callProperty(unresolved, 'push', cast ([reference] : Array<Dynamic>)); } else { _Runtime.callProperty(resolved, 'push', cast ([{ content: content, reference: reference }] : Array<Dynamic>)); }
         i++;
       }
     }
-    return cast { document: document, resolved: resolved, root: _Runtime.field(document, 'root'), unresolved: unresolved };
+    return cast { document: document, resolved: resolved, root: (cast document : Scene2DDocument).root, unresolved: unresolved };
     return cast null;
   }
 }

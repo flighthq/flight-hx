@@ -17,19 +17,23 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.AnimationClip;
 import flighthq.types.ClipRegion;
 import flighthq.types.DisplayObject;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HtmlView;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DDataFactory;
 import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DRuntimeFactory;
+import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Scene2D;
 import flighthq.types.Scene2D.Scene2DRuntime;
 import flighthq.types.Scene2DSignals;
+import flighthq.types.Signal;
 import flighthq.types.Sprite;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
@@ -62,17 +66,17 @@ class Scene2d {
     return cast null;
   }
 
-  public static function createNode2D<R>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<Dynamic>):Node2D {
+  public static function createNode2D<R>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
     return cast Facade_Scene2d_flighthq_scene2d_DisplayObject.createNode2D(kind, obj, createData, createNode2DRuntimeFactory);
     return cast null;
   }
 
   public static function createScene2D(?obj:Dynamic):Scene2D {
-    var root:Dynamic = cast _Runtime.UNDEFINED;
-    var scene2d:Dynamic = cast _Runtime.UNDEFINED;
-    root = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
-    scene2d = (cast _Runtime.callValue(createEntity, cast ([{ align: _Runtime.coalesce(_Runtime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), color: _Runtime.coalesce(_Runtime.optionalField(obj, 'color'), function():Dynamic return cast null), root: root, scaleMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale'), scene2dHeight: _Runtime.coalesce(_Runtime.optionalField(obj, 'scene2dHeight'), function():Dynamic return cast 550.0), scene2dWidth: _Runtime.coalesce(_Runtime.optionalField(obj, 'scene2dWidth'), function():Dynamic return cast 400.0) }] : Array<Dynamic>)) : Scene2D);
-    _Runtime.setField((cast _Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)) : Node2DRuntime), 'scene2d', scene2d);
+    var root:DisplayObject = cast _Runtime.UNDEFINED;
+    var scene2d:Scene2D = cast _Runtime.UNDEFINED;
+    root = (cast createDisplayObject(_Runtime.field(_Runtime, 'UNDEFINED')) : DisplayObject);
+    scene2d = (cast (cast createEntity({ align: _Runtime.coalesce(_Runtime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), color: _Runtime.coalesce(_Runtime.optionalField(obj, 'color'), function():Dynamic return cast null), root: root, scaleMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale'), scene2dHeight: _Runtime.coalesce(_Runtime.optionalField(obj, 'scene2dHeight'), function():Dynamic return cast 550.0), scene2dWidth: _Runtime.coalesce(_Runtime.optionalField(obj, 'scene2dWidth'), function():Dynamic return cast 400.0) }) : Scene2D) : Scene2D);
+    ((cast (cast (cast getNodeRuntime(root) : Node2DRuntime) : Node2DRuntime) : { var scene2d:Null<Scene2D>; }).scene2d = scene2d);
     return cast scene2d;
     return cast null;
   }
@@ -85,7 +89,7 @@ class Scene2d {
 
   @:noCompletion
   public static function createScene2DSignals():Scene2DSignals {
-    return cast { onFullscreenChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOrientationChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResize: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    return cast { onFullscreenChanged: (cast createSignal() : Signal<Void->Void>), onOrientationChanged: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Void->Void>) };
     return cast null;
   }
 
@@ -95,38 +99,38 @@ class Scene2d {
   }
 
   public static function enableScene2DSignals(source:Scene2D):Scene2DSignals {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(Scene2d.ensureScene2DRuntime__scene2d, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.setField(runtime, 'scene2dSignals', (_Runtime.field(runtime, 'scene2dSignals') ?? _Runtime.callValue(createScene2DSignals, cast ([] : Array<Dynamic>))));
+    var runtime:Scene2DRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast Scene2d.ensureScene2DRuntime__scene2d((cast source : Scene2D)) : Scene2DRuntime);
+    return cast ((cast runtime : Scene2DRuntime).scene2dSignals ??= (cast createScene2DSignals() : Null<Scene2DSignals>));
     return cast null;
   }
 
   public static function ensureScene2DRuntime__scene2d(source:Scene2D):Scene2DRuntime {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var existing:Null<Scene2DRuntime> = cast _Runtime.UNDEFINED;
+    var runtime:Scene2DRuntime = cast _Runtime.UNDEFINED;
     existing = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<Scene2DRuntime>);
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    runtime = _Runtime.callValue(createScene2DRuntime, cast ([] : Array<Dynamic>));
+    runtime = (cast createScene2DRuntime() : Scene2DRuntime);
     _Runtime.setIndex(source, EntityRuntimeKey, runtime);
     return cast runtime;
     return cast null;
   }
 
   public static function getScene2DRoot(source:Node2D):Null<Scene2D> {
-    var root:Dynamic = cast _Runtime.UNDEFINED;
-    root = _Runtime.callValue(getNodeRoot, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)) : Node2DRuntime), 'scene2d');
+    var root:NodeOf<Node2DTraits> = cast _Runtime.UNDEFINED;
+    root = (cast getNodeRoot(source) : NodeOf<Node2DTraits>);
+    return cast (cast (cast (cast getNodeRuntime(root) : Node2DRuntime) : Node2DRuntime) : { var scene2d:Null<Scene2D>; }).scene2d;
     return cast null;
   }
 
   @:noCompletion
   public static function getScene2DRuntime(source:Scene2D):Scene2DRuntime {
-    return cast _Runtime.callValue(Scene2d.ensureScene2DRuntime__scene2d, cast ([(cast source : Scene2D)] : Array<Dynamic>));
+    return cast (cast Scene2d.ensureScene2DRuntime__scene2d((cast (cast source : Scene2D) : Scene2D)) : Scene2DRuntime);
     return cast null;
   }
 
   public static function getScene2DSignals(source:Scene2D):Null<Scene2DSignals> {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:Null<Scene2DRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<Scene2DRuntime>);
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'scene2dSignals'), function():Dynamic return cast null);
     return cast null;
@@ -146,11 +150,11 @@ class Scene2d {
   }
 
   public static function setScene2DSize(source:Scene2D, width:Float, height:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'scene2dWidth'), width) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'scene2dHeight'), height) : Bool)) : Bool)) { return; }
-    _Runtime.setField(source, 'scene2dWidth', width);
-    _Runtime.setField(source, 'scene2dHeight', height);
+    var runtime:Null<Scene2DRuntime> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals((cast source : Scene2D).scene2dWidth, width) : Bool) && (cast _Runtime.strictEquals((cast source : Scene2D).scene2dHeight, height) : Bool)) : Bool)) { return; }
+    ((cast source : Scene2D).scene2dWidth = width);
+    ((cast source : Scene2D).scene2dHeight = height);
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<Scene2DRuntime>);
-    if (_Runtime.truthy(_Runtime.optionalField(runtime, 'scene2dSignals'))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(_Runtime.field(runtime, 'scene2dSignals'), 'onResize')]]), 1); }
+    if (_Runtime.truthy(_Runtime.optionalField(runtime, 'scene2dSignals'))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : Scene2DRuntime).scene2dSignals : Scene2DSignals).onResize]]), 1); }
   }
 }

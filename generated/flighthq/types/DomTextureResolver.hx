@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef DomTextureResolver = Dynamic;
+typedef DomTextureResolver = DomRenderState->Texture->Null<flighthq._internal.dom.CanvasImageSource>;

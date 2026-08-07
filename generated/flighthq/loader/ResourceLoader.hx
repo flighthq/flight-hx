@@ -13,23 +13,25 @@ import flighthq.types.ResourceLoadHandle;
 import flighthq.types.ResourceLoadItem;
 import flighthq.types.ResourceLoadItemStatus;
 import flighthq.types.ResourceLoadReport;
+import flighthq.types.ResourceLoadReport.ResourceLoadReportStatus;
 import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
 import flighthq.types.ResourceLoaderOptions;
+import flighthq.types.Signal;
 
-typedef PendingEntry__resourceLoader = { var abortController:flighthq._internal.dom.AbortController; var bytesHint:Float; var bytesLoaded:Float; var generation:Float; var group:Null<String>; var key:String; var onBytesProgress:Null<Dynamic>; var priority:Float; var reject:Dynamic; var resolve:Dynamic; var retries:Float; var startedAt:Float; var timeoutMs:Float; var weight:Float; var wrappedLoad:Dynamic; };
+typedef PendingEntry__resourceLoader = { var abortController:flighthq._internal.dom.AbortController; var bytesHint:Float; var bytesLoaded:Float; var generation:Float; var group:Null<String>; var key:String; var onBytesProgress:Null<Float->Float->Void>; var priority:Float; var reject:flighthq._internal._Any->Void; var resolve:flighthq._internal._Any->Void; var retries:Float; var startedAt:Float; var timeoutMs:Float; var weight:Float; var wrappedLoad:flighthq._internal.dom.AbortSignal->ResourceLoadBytesReporter->flighthq._internal._Promise<flighthq._internal._Any>; };
 
 typedef TokenBucket__resourceLoader = { var lastRefillMs:Float; var maxBytesPerSecond:Float; var tokens:Float; };
 
-typedef ResourceLoaderInternal__resourceLoader = Dynamic;
+typedef ResourceLoaderInternal__resourceLoader = { >flighthq.types.ResourceLoader, var cancelled:Bool; var dedupeMap:flighthq._internal._Map<String, ResourceLoadHandle<flighthq._internal._Any>>; var errorPolicy:String; var generation:Float; var inFlight:flighthq._internal._Set<PendingEntry__resourceLoader>; var itemCounter:Float; var itemSignals:Null<ResourceLoaderItemSignals>; var loaded:Float; var maxConcurrent:Float; var options:ResourceLoaderOptions; var paused:Bool; var pending:Array<PendingEntry__resourceLoader>; var reports:Array<ResourceLoadReport>; var started:Bool; var streaming:Bool; var throttle:Null<TokenBucket__resourceLoader>; var total:Float; var totalWeight:Float; var weightLoaded:Float; };
 
 class ResourceLoader {
-  public static final AUTO_KEY_PREFIX__resourceLoader:Dynamic = '__item_';
+  public static final AUTO_KEY_PREFIX__resourceLoader:String = '__item_';
 
   public static final pendingEntryPool__resourceLoader:Array<PendingEntry__resourceLoader> = cast ([] : Array<Dynamic>);
 
   public static function acquirePendingEntry__resourceLoader():PendingEntry__resourceLoader {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    var entry:Null<PendingEntry__resourceLoader> = cast _Runtime.UNDEFINED;
     entry = _Runtime.callProperty(ResourceLoader.pendingEntryPool__resourceLoader, 'pop', cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast entry; }
     return cast { abortController: _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []), bytesHint: 0.0, bytesLoaded: 0.0, generation: 0.0, group: _Runtime.field(_Runtime, 'UNDEFINED'), key: '', onBytesProgress: _Runtime.field(_Runtime, 'UNDEFINED'), priority: 0.0, reject: ResourceLoader._noop__resourceLoader, resolve: ResourceLoader._noop__resourceLoader, retries: 0.0, startedAt: 0.0, timeoutMs: 0.0, weight: 1.0, wrappedLoad: ResourceLoader._noopLoad__resourceLoader };
@@ -37,18 +39,18 @@ class ResourceLoader {
   }
 
   public static function releasePendingEntry__resourceLoader(entry:PendingEntry__resourceLoader):Void {
-    _Runtime.setField(entry, 'onBytesProgress', _Runtime.field(_Runtime, 'UNDEFINED'));
-    _Runtime.setField(entry, 'reject', ResourceLoader._noop__resourceLoader);
-    _Runtime.setField(entry, 'resolve', ResourceLoader._noop__resourceLoader);
-    _Runtime.setField(entry, 'wrappedLoad', ResourceLoader._noopLoad__resourceLoader);
-    _Runtime.setField(entry, 'abortController', _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []));
+    ((cast entry : PendingEntry__resourceLoader).onBytesProgress = _Runtime.field(_Runtime, 'UNDEFINED'));
+    ((cast entry : PendingEntry__resourceLoader).reject = ResourceLoader._noop__resourceLoader);
+    ((cast entry : PendingEntry__resourceLoader).resolve = ResourceLoader._noop__resourceLoader);
+    ((cast entry : PendingEntry__resourceLoader).wrappedLoad = ResourceLoader._noopLoad__resourceLoader);
+    ((cast entry : PendingEntry__resourceLoader).abortController = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []));
     _Runtime.callProperty(ResourceLoader.pendingEntryPool__resourceLoader, 'push', cast ([entry] : Array<Dynamic>));
   }
 
-  public static function _noop__resourceLoader(?_value:Dynamic):Void {
+  public static function _noop__resourceLoader(?_value:flighthq._internal._Any):Void {
   }
 
-  public static function _noopLoad__resourceLoader(_signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Dynamic> {
+  public static function _noopLoad__resourceLoader(_signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq._internal._Any> {
     return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
     return cast null;
   }
@@ -59,117 +61,117 @@ class ResourceLoader {
   }
 
   public static function refillTokens__resourceLoader(bucket:TokenBucket__resourceLoader):Void {
-    var now:Dynamic = cast _Runtime.UNDEFINED;
-    var elapsed:Dynamic = cast _Runtime.UNDEFINED;
+    var now:Float = cast _Runtime.UNDEFINED;
+    var elapsed:Float = cast _Runtime.UNDEFINED;
     now = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>));
-    elapsed = (_Runtime.subtractNumbers(now, _Runtime.field(bucket, 'lastRefillMs')) / 1000.0);
-    _Runtime.setField(bucket, 'tokens', HxMath.min(_Runtime.field(bucket, 'maxBytesPerSecond'), _Runtime.addNumbers(_Runtime.field(bucket, 'tokens'), _Runtime.multiplyNumbers(elapsed, _Runtime.field(bucket, 'maxBytesPerSecond')))));
-    _Runtime.setField(bucket, 'lastRefillMs', now);
+    elapsed = ((now - (cast bucket : TokenBucket__resourceLoader).lastRefillMs) / 1000.0);
+    ((cast bucket : TokenBucket__resourceLoader).tokens = HxMath.min((cast bucket : TokenBucket__resourceLoader).maxBytesPerSecond, ((cast bucket : TokenBucket__resourceLoader).tokens + (elapsed * (cast bucket : TokenBucket__resourceLoader).maxBytesPerSecond))));
+    ((cast bucket : TokenBucket__resourceLoader).lastRefillMs = now);
   }
 
   public static function tokenBucketDelayMs__resourceLoader(bucket:TokenBucket__resourceLoader, cost:Float):Float {
-    var deficit:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(ResourceLoader.refillTokens__resourceLoader, cast ([bucket] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(cost, 0.0) : Bool) || (cast ((cast _Runtime.field(bucket, 'tokens') : Float) >= (cast cost : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    deficit = _Runtime.subtractNumbers(cost, _Runtime.field(bucket, 'tokens'));
-    return cast HxMath.ceil((_Runtime.divideNumbers(deficit, _Runtime.field(bucket, 'maxBytesPerSecond')) * 1000.0));
+    var deficit:Float = cast _Runtime.UNDEFINED;
+    ResourceLoader.refillTokens__resourceLoader(bucket);
+    if ((cast ((cast _Runtime.strictEquals(cost, 0.0) : Bool) || (cast ((cast (cast bucket : TokenBucket__resourceLoader).tokens : Float) >= (cast cost : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    deficit = (cost - (cast bucket : TokenBucket__resourceLoader).tokens);
+    return cast HxMath.ceil(((deficit / (cast bucket : TokenBucket__resourceLoader).maxBytesPerSecond) * 1000.0));
     return cast null;
   }
 
   public static function consumeTokens__resourceLoader(bucket:TokenBucket__resourceLoader, cost:Float):Void {
-    _Runtime.setField(bucket, 'tokens', HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(bucket, 'tokens'), cost)));
+    ((cast bucket : TokenBucket__resourceLoader).tokens = HxMath.max(0.0, ((cast bucket : TokenBucket__resourceLoader).tokens - cost)));
   }
 
   public static function cancelResourceLoad(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var cancelError:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var cancelError:flighthq._internal.dom.DOMException = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast _Runtime.field(internal, 'cancelled') : Bool)) { return; }
-    _Runtime.setField(internal, 'cancelled', true);
+    if ((cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) { return; }
+    ((cast internal : ResourceLoaderInternal__resourceLoader).cancelled = true);
     cancelError = _Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Load cancelled', 'AbortError']);
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError);
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
+      (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort(cancelError);
     }
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(cancelError);
-      var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
-      _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
-      _Runtime.callProperty(entry, 'reject', cast ([cancelError] : Array<Dynamic>));
-      _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-      _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).pending)) {
+      (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort(cancelError);
+      var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: (cast entry : PendingEntry__resourceLoader).group, key: (cast entry : PendingEntry__resourceLoader).key, status: 'cancelled' };
+      _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'push', cast ([report] : Array<Dynamic>));
+      (cast entry : PendingEntry__resourceLoader).reject(cancelError);
+      ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+      ResourceLoader.releasePendingEntry__resourceLoader(entry);
     }
-    _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).pending = cast ([] : Array<Dynamic>));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onCancel]]), 1);
-    if ((cast _Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0) : Bool)) {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [_Runtime.callValue(getResourceLoadProgress, cast ([loader] : Array<Dynamic>))]]), 1);
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [_Runtime.field(internal, 'reports')]]), 1);
+    if ((cast _Runtime.strictEquals((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).size, 0.0) : Bool)) {
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [(cast getResourceLoadProgress((cast loader : flighthq.types.ResourceLoader), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : Float)]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [(cast internal : ResourceLoaderInternal__resourceLoader).reports]]), 1);
     }
   }
 
   public static function createResourceLoader(?options:ResourceLoaderOptions):flighthq.types.ResourceLoader {
-    var opts:Dynamic = cast _Runtime.UNDEFINED;
-    var throttle:Dynamic = cast _Runtime.UNDEFINED;
+    var opts:ResourceLoaderOptions = cast _Runtime.UNDEFINED;
+    var throttle:Null<TokenBucket__resourceLoader> = cast _Runtime.UNDEFINED;
     var out:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     opts = _Runtime.coalesce(options, function():Dynamic return cast {  });
-    throttle = ((cast ((cast !_Runtime.strictEquals(opts.maxBytesPerSecond, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast opts.maxBytesPerSecond : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.callValue(ResourceLoader.createTokenBucket__resourceLoader, cast ([opts.maxBytesPerSecond] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    out = { cancelled: false, dedupeMap: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), errorPolicy: _Runtime.coalesce(opts.errorPolicy, function():Dynamic return cast 'continue'), generation: 0.0, inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), itemCounter: 0.0, itemSignals: null, loaded: 0.0, maxConcurrent: _Runtime.coalesce(opts.maxConcurrent, function():Dynamic return cast 6.0), onCancel: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onError: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPause: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onProgress: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResume: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), options: opts, paused: false, pending: cast ([] : Array<Dynamic>), reports: cast ([] : Array<Dynamic>), started: false, streaming: _Runtime.coalesce(opts.streaming, function():Dynamic return cast false), throttle: throttle, total: 0.0, totalWeight: 0.0, weightLoaded: 0.0 };
+    throttle = ((cast ((cast !_Runtime.strictEquals(opts.maxBytesPerSecond, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast opts.maxBytesPerSecond : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast ResourceLoader.createTokenBucket__resourceLoader((cast opts.maxBytesPerSecond : Float)) : TokenBucket__resourceLoader) : Dynamic) : (cast null : Dynamic));
+    out = { cancelled: false, dedupeMap: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), errorPolicy: _Runtime.coalesce(opts.errorPolicy, function():Dynamic return cast 'continue'), generation: 0.0, inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), itemCounter: 0.0, itemSignals: null, loaded: 0.0, maxConcurrent: _Runtime.coalesce(opts.maxConcurrent, function():Dynamic return cast 6.0), onCancel: (cast createSignal() : Signal<Void->Void>), onComplete: (cast createSignal() : Signal<Array<ResourceLoadReport>->Void>), onError: (cast createSignal() : Signal<flighthq._internal._Any->String->Void>), onPause: (cast createSignal() : Signal<Void->Void>), onProgress: (cast createSignal() : Signal<Float->Void>), onResume: (cast createSignal() : Signal<Void->Void>), options: opts, paused: false, pending: cast ([] : Array<Dynamic>), reports: cast ([] : Array<Dynamic>), started: false, streaming: _Runtime.coalesce(opts.streaming, function():Dynamic return cast false), throttle: throttle, total: 0.0, totalWeight: 0.0, weightLoaded: 0.0 };
     return cast out;
     return cast null;
   }
 
   public static function disposeResourceLoader(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(clearSignal, cast ([loader.onCancel] : Array<Dynamic>));
-    _Runtime.callValue(clearSignal, cast ([loader.onComplete] : Array<Dynamic>));
-    _Runtime.callValue(clearSignal, cast ([loader.onError] : Array<Dynamic>));
-    _Runtime.callValue(clearSignal, cast ([loader.onPause] : Array<Dynamic>));
-    _Runtime.callValue(clearSignal, cast ([loader.onProgress] : Array<Dynamic>));
-    _Runtime.callValue(clearSignal, cast ([loader.onResume] : Array<Dynamic>));
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    clearSignal(loader.onCancel);
+    clearSignal(loader.onComplete);
+    clearSignal(loader.onError);
+    clearSignal(loader.onPause);
+    clearSignal(loader.onProgress);
+    clearSignal(loader.onResume);
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(internal, 'itemSignals').onItemComplete] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(internal, 'itemSignals').onItemError] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(internal, 'itemSignals').onItemRetry] : Array<Dynamic>));
-      _Runtime.callValue(clearSignal, cast ([_Runtime.field(internal, 'itemSignals').onItemStart] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
+      clearSignal((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemComplete);
+      clearSignal((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemError);
+      clearSignal((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemRetry);
+      clearSignal((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemStart);
     }
   }
 
   public static function enableResourceLoaderItemSignals(loader:flighthq.types.ResourceLoader):ResourceLoaderItemSignals {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
-      _Runtime.setField(internal, 'itemSignals', { onItemComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onItemError: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onItemRetry: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onItemStart: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) });
+    if ((cast _Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
+      ((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals = { onItemComplete: (cast createSignal() : Signal<String->flighthq._internal._Any->Void>), onItemError: (cast createSignal() : Signal<String->flighthq._internal._Any->Float->Void>), onItemRetry: (cast createSignal() : Signal<String->Float->Float->Void>), onItemStart: (cast createSignal() : Signal<String->Void>) });
     }
-    return cast _Runtime.field(internal, 'itemSignals');
+    return cast (cast internal : ResourceLoaderInternal__resourceLoader).itemSignals;
     return cast null;
   }
 
   public static function getResourceLoadBytes(loader:flighthq.types.ResourceLoader):ResourceLoadBytes {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var bytesLoaded:Dynamic = cast _Runtime.UNDEFINED;
-    var bytesTotalKnown:Dynamic = cast _Runtime.UNDEFINED;
-    var itemsWithKnownBytes:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var bytesLoaded:Float = cast _Runtime.UNDEFINED;
+    var bytesTotalKnown:Float = cast _Runtime.UNDEFINED;
+    var itemsWithKnownBytes:Float = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     bytesLoaded = 0.0;
     bytesTotalKnown = 0.0;
     itemsWithKnownBytes = 0.0;
-    for (report in _Runtime.iterable(_Runtime.field(internal, 'reports'))) {
+    for (report in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).reports)) {
       (bytesLoaded = cast ((bytesLoaded + report.bytes) : Dynamic));
       if ((cast ((cast report.bytes : Float) > (cast 0.0 : Float)) : Bool)) {
         (bytesTotalKnown = cast ((bytesTotalKnown + report.bytes) : Dynamic));
         itemsWithKnownBytes++;
       }
     }
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      (bytesLoaded = cast ((bytesLoaded + _Runtime.field(entry, 'bytesLoaded')) : Dynamic));
-      if ((cast ((cast _Runtime.field(entry, 'bytesHint') : Float) > (cast 0.0 : Float)) : Bool)) {
-        (bytesTotalKnown = cast ((bytesTotalKnown + _Runtime.field(entry, 'bytesHint')) : Dynamic));
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
+      (bytesLoaded = cast ((bytesLoaded + (cast entry : PendingEntry__resourceLoader).bytesLoaded) : Dynamic));
+      if ((cast ((cast (cast entry : PendingEntry__resourceLoader).bytesHint : Float) > (cast 0.0 : Float)) : Bool)) {
+        (bytesTotalKnown = cast ((bytesTotalKnown + (cast entry : PendingEntry__resourceLoader).bytesHint) : Dynamic));
         itemsWithKnownBytes++;
       }
     }
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      if ((cast ((cast _Runtime.field(entry, 'bytesHint') : Float) > (cast 0.0 : Float)) : Bool)) {
-        (bytesTotalKnown = cast ((bytesTotalKnown + _Runtime.field(entry, 'bytesHint')) : Dynamic));
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).pending)) {
+      if ((cast ((cast (cast entry : PendingEntry__resourceLoader).bytesHint : Float) > (cast 0.0 : Float)) : Bool)) {
+        (bytesTotalKnown = cast ((bytesTotalKnown + (cast entry : PendingEntry__resourceLoader).bytesHint) : Dynamic));
         itemsWithKnownBytes++;
       }
     }
@@ -178,215 +180,215 @@ class ResourceLoader {
   }
 
   public static function getResourceLoadCounts(loader:flighthq.types.ResourceLoader):ResourceLoadCounts {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var settledItems:Dynamic = cast _Runtime.UNDEFINED;
-    var inFlightItems:Dynamic = cast _Runtime.UNDEFINED;
-    var queuedItems:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var settledItems:Float = cast _Runtime.UNDEFINED;
+    var inFlightItems:Float = cast _Runtime.UNDEFINED;
+    var queuedItems:Float = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    settledItems = _Runtime.field(_Runtime.field(internal, 'reports'), 'length');
-    inFlightItems = (cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size;
-    queuedItems = _Runtime.field(_Runtime.field(internal, 'pending'), 'length');
+    settledItems = _Runtime.field((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'length');
+    inFlightItems = (cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).size;
+    queuedItems = _Runtime.field((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'length');
     return cast { settledItems: settledItems, inFlightItems: inFlightItems, queuedItems: queuedItems, totalItems: ((settledItems + inFlightItems) + queuedItems) };
     return cast null;
   }
 
   public static function getResourceLoadItemStatus(loader:flighthq.types.ResourceLoader, key:String):ResourceLoadItemStatus {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var report:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var report:Null<ResourceLoadReport> = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    report = _Runtime.find(_Runtime.field(internal, 'reports'), function(r:Dynamic) return _Runtime.strictEquals(r.key, key));
-    if ((cast !_Runtime.strictEquals(report, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast report.status; }
-    if ((cast _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'some', cast ([function(p:Dynamic) return _Runtime.strictEquals(_Runtime.field(p, 'key'), key)] : Array<Dynamic>)) : Bool)) { return cast 'pending'; }
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'key'), key) : Bool)) { return cast 'running'; }
+    report = _Runtime.find((cast internal : ResourceLoaderInternal__resourceLoader).reports, function(r:ResourceLoadReport, __unused0:Float, __unused1:Array<ResourceLoadReport>):Bool return _Runtime.strictEquals(r.key, key));
+    if ((cast !_Runtime.strictEquals(report, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast report : flighthq.types.ResourceLoadReport).status; }
+    if ((cast _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'some', cast ([function(p:PendingEntry__resourceLoader, __unused2:Float, __unused3:Array<PendingEntry__resourceLoader>):Bool return _Runtime.strictEquals((cast p : PendingEntry__resourceLoader).key, key)] : Array<Dynamic>)) : Bool)) { return cast 'pending'; }
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
+      if ((cast _Runtime.strictEquals((cast entry : PendingEntry__resourceLoader).key, key) : Bool)) { return cast 'running'; }
     }
     return cast 'pending';
     return cast null;
   }
 
   public static function getResourceLoadProgress(loader:flighthq.types.ResourceLoader, ?group:String):Float {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast !(cast _Runtime.field(internal, 'started') : Bool) : Bool)) { return cast 0.0; }
+    if ((cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) : Bool)) { return cast 0.0; }
     if ((cast !_Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var groupReports:Dynamic = _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'filter', cast ([function(r:Dynamic) return _Runtime.strictEquals(r.group, group)] : Array<Dynamic>));
-      var groupPending:Dynamic = _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'filter', cast ([function(p:Dynamic) return _Runtime.strictEquals(_Runtime.field(p, 'group'), group)] : Array<Dynamic>));
-      var groupInFlight:Dynamic = 0.0;
-      for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'group'), group) : Bool)) { groupInFlight++; }
+      var groupReports:Array<ResourceLoadReport> = _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'filter', cast ([function(r:ResourceLoadReport, __unused4:Float, __unused5:Array<ResourceLoadReport>):Bool return _Runtime.strictEquals(r.group, group)] : Array<Dynamic>));
+      var groupPending:Array<PendingEntry__resourceLoader> = _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'filter', cast ([function(p:PendingEntry__resourceLoader, __unused6:Float, __unused7:Array<PendingEntry__resourceLoader>):Bool return _Runtime.strictEquals((cast p : PendingEntry__resourceLoader).group, group)] : Array<Dynamic>));
+      var groupInFlight:Float = 0.0;
+      for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
+        if ((cast _Runtime.strictEquals((cast entry : PendingEntry__resourceLoader).group, group) : Bool)) { groupInFlight++; }
       }
-      var groupTotal:Dynamic = (_Runtime.addNumbers(_Runtime.field(groupReports, 'length'), _Runtime.field(groupPending, 'length')) + groupInFlight);
+      var groupTotal:Float = (_Runtime.addNumbers(_Runtime.field(groupReports, 'length'), _Runtime.field(groupPending, 'length')) + groupInFlight);
       if ((cast _Runtime.strictEquals(groupTotal, 0.0) : Bool)) { return cast 0.0; }
       return cast _Runtime.divideNumbers(_Runtime.field(groupReports, 'length'), groupTotal);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'total'), 0.0) : Bool)) { return cast 1.0; }
-    if ((cast ((cast _Runtime.field(internal, 'totalWeight') : Float) > (cast 0.0 : Float)) : Bool)) {
-      return cast _Runtime.divideNumbers(_Runtime.field(internal, 'weightLoaded'), _Runtime.field(internal, 'totalWeight'));
+    if ((cast _Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).total, 0.0) : Bool)) { return cast 1.0; }
+    if ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).totalWeight : Float) > (cast 0.0 : Float)) : Bool)) {
+      return cast ((cast internal : ResourceLoaderInternal__resourceLoader).weightLoaded / (cast internal : ResourceLoaderInternal__resourceLoader).totalWeight);
     }
-    return cast _Runtime.divideNumbers(_Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total'));
+    return cast ((cast internal : ResourceLoaderInternal__resourceLoader).loaded / (cast internal : ResourceLoaderInternal__resourceLoader).total);
     return cast null;
   }
 
   public static function pauseResourceLoad(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast ((cast ((cast !(cast _Runtime.field(internal, 'started') : Bool) : Bool) || (cast _Runtime.field(internal, 'paused') : Bool)) : Bool) || (cast _Runtime.field(internal, 'cancelled') : Bool)) : Bool)) { return; }
-    _Runtime.setField(internal, 'paused', true);
+    if ((cast ((cast ((cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) : Bool) || (cast (cast internal : ResourceLoaderInternal__resourceLoader).paused : Bool)) : Bool) || (cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) : Bool)) { return; }
+    ((cast internal : ResourceLoaderInternal__resourceLoader).paused = true);
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onPause]]), 1);
   }
 
-  public static function queueResourceLoad<T>(loader:flighthq.types.ResourceLoader, item:Dynamic):ResourceLoadHandle<Dynamic> {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:ResourceLoadItem<Dynamic> = cast _Runtime.UNDEFINED;
-    var key:Dynamic = cast _Runtime.UNDEFINED;
-    var weight:Dynamic = cast _Runtime.UNDEFINED;
-    var priority:Dynamic = cast _Runtime.UNDEFINED;
-    var retries:Dynamic = cast _Runtime.UNDEFINED;
-    var timeoutMs:Dynamic = cast _Runtime.UNDEFINED;
-    var group:Dynamic = cast _Runtime.UNDEFINED;
-    var bytesHint:Dynamic = cast _Runtime.UNDEFINED;
-    var onBytesProgress:Dynamic = cast _Runtime.UNDEFINED;
-    var dedupe:Dynamic = cast _Runtime.UNDEFINED;
-    var resolve:Dynamic = cast _Runtime.UNDEFINED;
-    var reject:Dynamic = cast _Runtime.UNDEFINED;
-    var promise:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    var handle:ResourceLoadHandle<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function queueResourceLoad<T>(loader:flighthq.types.ResourceLoader, item:flighthq._internal._Union2<ResourceLoadItem<T>, Void->flighthq._internal._Promise<T>>):ResourceLoadHandle<T> {
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var descriptor:ResourceLoadItem<T> = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    var weight:Float = cast _Runtime.UNDEFINED;
+    var priority:Float = cast _Runtime.UNDEFINED;
+    var retries:Float = cast _Runtime.UNDEFINED;
+    var timeoutMs:Float = cast _Runtime.UNDEFINED;
+    var group:Null<String> = cast _Runtime.UNDEFINED;
+    var bytesHint:Float = cast _Runtime.UNDEFINED;
+    var onBytesProgress:Null<Float->Float->Void> = cast _Runtime.UNDEFINED;
+    var dedupe:Bool = cast _Runtime.UNDEFINED;
+    var resolve:flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
+    var reject:flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
+    var promise:flighthq._internal._Promise<T> = cast _Runtime.UNDEFINED;
+    var entry:PendingEntry__resourceLoader = cast _Runtime.UNDEFINED;
+    var handle:ResourceLoadHandle<T> = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast ((cast _Runtime.field(internal, 'started') : Bool) && (cast !(cast _Runtime.field(internal, 'streaming') : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).streaming : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Cannot queue resources after loading has started'));
     }
-    descriptor = ((cast _Runtime.strictEquals(_Runtime.typeofValue(item), 'function') : Bool) ? (cast { load: function(_signal:flighthq._internal.dom.AbortSignal) return _Runtime.callValue((cast item : Dynamic), cast ([] : Array<Dynamic>)) } : Dynamic) : (cast item : Dynamic));
-    key = _Runtime.coalesce(descriptor.key, function():Dynamic return cast '' + Std.string(ResourceLoader.AUTO_KEY_PREFIX__resourceLoader) + '' + Std.string(_Runtime.incrementField(internal, 'itemCounter', 1, true)) + '');
+    descriptor = ((cast _Runtime.strictEquals(_Runtime.typeofValue(item), 'function') : Bool) ? (cast { load: function(_signal:flighthq._internal.dom.AbortSignal, __unused8:ResourceLoadBytesReporter):flighthq._internal._Promise<T> return _Runtime.callValue((cast item : Void->flighthq._internal._Promise<T>), cast ([] : Array<Dynamic>)) } : Dynamic) : (cast item : Dynamic));
+    key = _Runtime.coalesce(descriptor.key, function():Dynamic return cast '' + Std.string(ResourceLoader.AUTO_KEY_PREFIX__resourceLoader) + '' + Std.string((cast internal : ResourceLoaderInternal__resourceLoader).itemCounter++) + '');
     weight = _Runtime.coalesce(descriptor.weight, function():Dynamic return cast 1.0);
     priority = _Runtime.coalesce(descriptor.priority, function():Dynamic return cast 0.0);
-    retries = _Runtime.coalesce(_Runtime.coalesce(descriptor.retries, function():Dynamic return cast _Runtime.field(internal, 'options').retries), function():Dynamic return cast 0.0);
-    timeoutMs = _Runtime.coalesce(_Runtime.coalesce(descriptor.timeoutMs, function():Dynamic return cast _Runtime.field(internal, 'options').timeoutMs), function():Dynamic return cast 0.0);
+    retries = _Runtime.coalesce(_Runtime.coalesce(descriptor.retries, function():Dynamic return cast (cast internal : ResourceLoaderInternal__resourceLoader).options.retries), function():Dynamic return cast 0.0);
+    timeoutMs = _Runtime.coalesce(_Runtime.coalesce(descriptor.timeoutMs, function():Dynamic return cast (cast internal : ResourceLoaderInternal__resourceLoader).options.timeoutMs), function():Dynamic return cast 0.0);
     group = descriptor.group;
     bytesHint = _Runtime.coalesce(descriptor.bytesHint, function():Dynamic return cast 0.0);
     onBytesProgress = descriptor.onBytesProgress;
-    dedupe = !_Runtime.strictEquals(_Runtime.field(internal, 'options').dedupe, false);
+    dedupe = !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).options.dedupe, false);
     if ((cast ((cast dedupe : Bool) && (cast !_Runtime.strictEquals(descriptor.key, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      var existing:Dynamic = ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).get(key));
-      if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : ResourceLoadHandle<Dynamic>); }
+      var existing:Null<ResourceLoadHandle<flighthq._internal._Any>> = ((cast (cast internal : ResourceLoaderInternal__resourceLoader).dedupeMap : flighthq._internal._Map<String, ResourceLoadHandle<flighthq._internal._Any>>).get(key));
+      if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : ResourceLoadHandle<T>); }
     }
-    promise = flighthq._internal._Async.create(function(res:Dynamic, rej:Dynamic) {
-      (resolve = cast ((cast res : Dynamic) : Dynamic));
+    promise = flighthq._internal._Async.create(function(res:flighthq._internal._Any, rej:flighthq._internal._Any):Void {
+      (resolve = cast ((cast res : flighthq._internal._Any->Void) : Dynamic));
       (reject = cast (rej : Dynamic));
     });
-    entry = _Runtime.callValue(ResourceLoader.acquirePendingEntry__resourceLoader, cast ([] : Array<Dynamic>));
-    _Runtime.setField(entry, 'bytesHint', bytesHint);
-    _Runtime.setField(entry, 'bytesLoaded', 0.0);
-    _Runtime.setField(entry, 'generation', _Runtime.field(internal, 'generation'));
-    _Runtime.setField(entry, 'group', group);
-    _Runtime.setField(entry, 'key', key);
-    _Runtime.setField(entry, 'onBytesProgress', onBytesProgress);
-    _Runtime.setField(entry, 'priority', priority);
-    _Runtime.setField(entry, 'reject', reject);
-    _Runtime.setField(entry, 'resolve', resolve);
-    _Runtime.setField(entry, 'retries', retries);
-    _Runtime.setField(entry, 'startedAt', 0.0);
-    _Runtime.setField(entry, 'timeoutMs', timeoutMs);
-    _Runtime.setField(entry, 'weight', weight);
-    _Runtime.setField(entry, 'wrappedLoad', (cast descriptor.load : Dynamic));
-    _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'push', cast ([entry] : Array<Dynamic>));
-    _Runtime.incrementField(internal, 'total', 1, true);
-    _Runtime.setField(internal, 'totalWeight', _Runtime.addNumbers(_Runtime.field(internal, 'totalWeight'), weight));
+    entry = (cast ResourceLoader.acquirePendingEntry__resourceLoader() : PendingEntry__resourceLoader);
+    ((cast entry : PendingEntry__resourceLoader).bytesHint = bytesHint);
+    ((cast entry : PendingEntry__resourceLoader).bytesLoaded = 0.0);
+    ((cast entry : PendingEntry__resourceLoader).generation = (cast internal : ResourceLoaderInternal__resourceLoader).generation);
+    ((cast entry : PendingEntry__resourceLoader).group = group);
+    ((cast entry : PendingEntry__resourceLoader).key = key);
+    ((cast entry : PendingEntry__resourceLoader).onBytesProgress = onBytesProgress);
+    ((cast entry : PendingEntry__resourceLoader).priority = priority);
+    ((cast entry : PendingEntry__resourceLoader).reject = reject);
+    ((cast entry : PendingEntry__resourceLoader).resolve = resolve);
+    ((cast entry : PendingEntry__resourceLoader).retries = retries);
+    ((cast entry : PendingEntry__resourceLoader).startedAt = 0.0);
+    ((cast entry : PendingEntry__resourceLoader).timeoutMs = timeoutMs);
+    ((cast entry : PendingEntry__resourceLoader).weight = weight);
+    ((cast entry : PendingEntry__resourceLoader).wrappedLoad = (cast descriptor.load : flighthq._internal.dom.AbortSignal->ResourceLoadBytesReporter->flighthq._internal._Promise<flighthq._internal._Any>));
+    _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'push', cast ([entry] : Array<Dynamic>));
+    (cast internal : ResourceLoaderInternal__resourceLoader).total++;
+    ((cast internal : ResourceLoaderInternal__resourceLoader).totalWeight += weight);
     handle = { key: key, promise: promise };
     if ((cast ((cast dedupe : Bool) && (cast !_Runtime.strictEquals(descriptor.key, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).set(key, (cast handle : ResourceLoadHandle<Dynamic>)));
+      ((cast (cast internal : ResourceLoaderInternal__resourceLoader).dedupeMap : flighthq._internal._Map<String, ResourceLoadHandle<flighthq._internal._Any>>).set(key, (cast handle : ResourceLoadHandle<flighthq._internal._Any>)));
     }
-    if ((cast ((cast _Runtime.field(internal, 'started') : Bool) && (cast _Runtime.field(internal, 'streaming') : Bool)) : Bool)) {
-      _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
+    if ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) && (cast (cast internal : ResourceLoaderInternal__resourceLoader).streaming : Bool)) : Bool)) {
+      _Runtime.voidValue((cast ResourceLoader.drainQueue__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
     }
     return cast handle;
     return cast null;
   }
 
   public static function resetResourceLoader(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    _Runtime.incrementField(internal, 'generation', 1, true);
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'inFlight'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
+    (cast internal : ResourceLoaderInternal__resourceLoader).generation++;
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
+      (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort();
     }
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
-      _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).pending)) {
+      (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort();
+      ResourceLoader.releasePendingEntry__resourceLoader(entry);
     }
-    _Runtime.setField(internal, 'cancelled', false);
-    ((cast _Runtime.field(internal, 'dedupeMap') : flighthq._internal._Map).clear());
-    ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).clear());
-    _Runtime.setField(internal, 'loaded', 0.0);
-    _Runtime.setField(internal, 'paused', false);
-    _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
-    _Runtime.setField(internal, 'reports', cast ([] : Array<Dynamic>));
-    _Runtime.setField(internal, 'started', false);
-    _Runtime.setField(internal, 'total', 0.0);
-    _Runtime.setField(internal, 'totalWeight', 0.0);
-    _Runtime.setField(internal, 'weightLoaded', 0.0);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'throttle'), null) : Bool)) {
-      _Runtime.setField(_Runtime.field(internal, 'throttle'), 'tokens', _Runtime.field(_Runtime.field(internal, 'throttle'), 'maxBytesPerSecond'));
-      _Runtime.setField(_Runtime.field(internal, 'throttle'), 'lastRefillMs', _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).cancelled = false);
+    ((cast (cast internal : ResourceLoaderInternal__resourceLoader).dedupeMap : flighthq._internal._Map<String, ResourceLoadHandle<flighthq._internal._Any>>).clear());
+    ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).clear());
+    ((cast internal : ResourceLoaderInternal__resourceLoader).loaded = 0.0);
+    ((cast internal : ResourceLoaderInternal__resourceLoader).paused = false);
+    ((cast internal : ResourceLoaderInternal__resourceLoader).pending = cast ([] : Array<Dynamic>));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).reports = cast ([] : Array<Dynamic>));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).started = false);
+    ((cast internal : ResourceLoaderInternal__resourceLoader).total = 0.0);
+    ((cast internal : ResourceLoaderInternal__resourceLoader).totalWeight = 0.0);
+    ((cast internal : ResourceLoaderInternal__resourceLoader).weightLoaded = 0.0);
+    if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).throttle, null) : Bool)) {
+      ((cast (cast internal : ResourceLoaderInternal__resourceLoader).throttle : TokenBucket__resourceLoader).tokens = (cast (cast internal : ResourceLoaderInternal__resourceLoader).throttle : TokenBucket__resourceLoader).maxBytesPerSecond);
+      ((cast (cast internal : ResourceLoaderInternal__resourceLoader).throttle : TokenBucket__resourceLoader).lastRefillMs = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)));
     }
   }
 
   public static function resumeResourceLoad(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast ((cast !(cast _Runtime.field(internal, 'paused') : Bool) : Bool) || (cast _Runtime.field(internal, 'cancelled') : Bool)) : Bool)) { return; }
-    _Runtime.setField(internal, 'paused', false);
+    if ((cast ((cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).paused : Bool) : Bool) || (cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) : Bool)) { return; }
+    ((cast internal : ResourceLoaderInternal__resourceLoader).paused = false);
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onResume]]), 1);
-    _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
+    _Runtime.voidValue((cast ResourceLoader.drainQueue__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
   }
 
   public static function setResourceLoaderConcurrency(loader:flighthq.types.ResourceLoader, maxConcurrent:Float):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    _Runtime.setField(internal, 'maxConcurrent', maxConcurrent);
-    if ((cast ((cast ((cast _Runtime.field(internal, 'started') : Bool) && (cast !(cast _Runtime.field(internal, 'paused') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(internal, 'cancelled') : Bool) : Bool)) : Bool)) {
-      _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).maxConcurrent = maxConcurrent);
+    if ((cast ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).paused : Bool) : Bool)) : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool) : Bool)) : Bool)) {
+      _Runtime.voidValue((cast ResourceLoader.drainQueue__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
     }
   }
 
   public static function setResourceLoadPriority(loader:flighthq.types.ResourceLoader, key:String, priority:Float):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
+    var entry:Null<PendingEntry__resourceLoader> = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    entry = _Runtime.find(_Runtime.field(internal, 'pending'), function(p:Dynamic) return _Runtime.strictEquals(_Runtime.field(p, 'key'), key));
+    entry = _Runtime.find((cast internal : ResourceLoaderInternal__resourceLoader).pending, function(p:PendingEntry__resourceLoader, __unused9:Float, __unused10:Array<PendingEntry__resourceLoader>):Bool return _Runtime.strictEquals((cast p : PendingEntry__resourceLoader).key, key));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.setField(entry, 'priority', priority);
+      ((cast entry : PendingEntry__resourceLoader).priority = priority);
     }
   }
 
   public static function startResourceLoad(loader:flighthq.types.ResourceLoader):Void {
-    var internal:Dynamic = cast _Runtime.UNDEFINED;
+    var internal:ResourceLoaderInternal__resourceLoader = cast _Runtime.UNDEFINED;
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
-    if ((cast ((cast _Runtime.field(internal, 'started') : Bool) && (cast !(cast _Runtime.field(internal, 'streaming') : Bool) : Bool)) : Bool)) { return; }
-    _Runtime.setField(internal, 'started', true);
-    if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'total'), 0.0) : Bool)) {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [_Runtime.callValue(getResourceLoadProgress, cast ([loader] : Array<Dynamic>))]]), 1);
+    if ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).streaming : Bool) : Bool)) : Bool)) { return; }
+    ((cast internal : ResourceLoaderInternal__resourceLoader).started = true);
+    if ((cast _Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).total, 0.0) : Bool)) {
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [(cast getResourceLoadProgress((cast loader : flighthq.types.ResourceLoader), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : Float)]]), 1);
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [cast ([] : Array<Dynamic>)]]), 1);
       return;
     }
-    _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
+    _Runtime.voidValue((cast ResourceLoader.drainQueue__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
   }
 
   public static function sortPendingByPriority__resourceLoader(pending:Array<PendingEntry__resourceLoader>):Void {
-    _Runtime.sortAndReturn(pending, function(a:Dynamic, b:Dynamic) return _Runtime.subtractNumbers(_Runtime.field(b, 'priority'), _Runtime.field(a, 'priority')));
+    _Runtime.sortAndReturn(pending, function(a:PendingEntry__resourceLoader, b:PendingEntry__resourceLoader) return ((cast b : PendingEntry__resourceLoader).priority - (cast a : PendingEntry__resourceLoader).priority));
   }
 
   public static function drainQueue__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var maxConcurrent:Dynamic = cast _Runtime.UNDEFINED;
-        maxConcurrent = ((cast ((cast _Runtime.field(internal, 'maxConcurrent') : Float) <= (cast 0.0 : Float)) : Bool) ? (cast HxMath.POSITIVE_INFINITY : Dynamic) : (cast _Runtime.field(internal, 'maxConcurrent') : Dynamic));
+        var maxConcurrent:Float = cast _Runtime.UNDEFINED;
+        maxConcurrent = ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).maxConcurrent : Float) <= (cast 0.0 : Float)) : Bool) ? (cast HxMath.POSITIVE_INFINITY : Dynamic) : (cast (cast internal : ResourceLoaderInternal__resourceLoader).maxConcurrent : Dynamic));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-          if (!(cast ((cast ((cast ((cast ((cast _Runtime.field(_Runtime.field(internal, 'pending'), 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast _Runtime.field(internal, 'paused') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(internal, 'cancelled') : Bool) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size : Float) < (cast maxConcurrent : Float)) : Bool)) : Bool)) return flighthq._internal._Async.flowBreak();
+          if (!(cast ((cast ((cast ((cast ((cast _Runtime.field((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).paused : Bool) : Bool)) : Bool) && (cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool) : Bool)) : Bool) && (cast ((cast (cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).size : Float) < (cast maxConcurrent : Float)) : Bool)) : Bool)) return flighthq._internal._Async.flowBreak();
           return flighthq._internal._Async.protect(function():Dynamic {
-            var entry:Dynamic = cast _Runtime.UNDEFINED;
-            _Runtime.callValue(ResourceLoader.sortPendingByPriority__resourceLoader, cast ([_Runtime.field(internal, 'pending')] : Array<Dynamic>));
-            entry = flighthq._internal._StaticIndex.readArray(_Runtime.field(internal, 'pending'), 0.0);
+            var entry:PendingEntry__resourceLoader = cast _Runtime.UNDEFINED;
+            ResourceLoader.sortPendingByPriority__resourceLoader((cast internal : ResourceLoaderInternal__resourceLoader).pending);
+            entry = flighthq._internal._StaticIndex.readArray((cast internal : ResourceLoaderInternal__resourceLoader).pending, 0.0);
             var __flowBranch18:Dynamic;
             if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
@@ -397,17 +399,17 @@ class ResourceLoader {
             }
             return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
               var __flowBranch19:Dynamic;
-              if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'throttle'), null) : Bool) && (cast ((cast _Runtime.field(entry, 'bytesHint') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+              if ((cast ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).throttle, null) : Bool) && (cast ((cast (cast entry : PendingEntry__resourceLoader).bytesHint : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
                 __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
-                  var waitMs:Dynamic = cast _Runtime.UNDEFINED;
-                  waitMs = _Runtime.callValue(ResourceLoader.tokenBucketDelayMs__resourceLoader, cast ([_Runtime.field(internal, 'throttle'), _Runtime.field(entry, 'bytesHint')] : Array<Dynamic>));
+                  var waitMs:Float = cast _Runtime.UNDEFINED;
+                  waitMs = (cast ResourceLoader.tokenBucketDelayMs__resourceLoader((cast internal : ResourceLoaderInternal__resourceLoader).throttle, (cast (cast entry : PendingEntry__resourceLoader).bytesHint : Float)) : Float);
                   var __flowBranch20:Dynamic;
                   if ((cast ((cast waitMs : Float) > (cast 0.0 : Float)) : Bool)) {
                     __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
-                      return flighthq._internal._Async.flatMap(_Runtime.callValue(ResourceLoader.delay__resourceLoader, cast ([waitMs] : Array<Dynamic>)), function(__awaitValue21:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flatMap((cast ResourceLoader.delay__resourceLoader((cast waitMs : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue21:Dynamic):Dynamic {
                         __awaitValue21;
                         var __flowBranch22:Dynamic;
-                        if ((cast ((cast ((cast _Runtime.field(internal, 'paused') : Bool) || (cast _Runtime.field(internal, 'cancelled') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(internal, 'pending'), 'length'), 0.0) : Bool)) : Bool)) {
+                        if ((cast ((cast ((cast (cast internal : ResourceLoaderInternal__resourceLoader).paused : Bool) || (cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'length'), 0.0) : Bool)) : Bool)) {
                           __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
                             return flighthq._internal._Async.flowBreak();
                           });
@@ -423,7 +425,7 @@ class ResourceLoader {
                     __flowBranch20 = flighthq._internal._Async.flowNormal();
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
-                    _Runtime.callValue(ResourceLoader.consumeTokens__resourceLoader, cast ([_Runtime.field(internal, 'throttle'), _Runtime.field(entry, 'bytesHint')] : Array<Dynamic>));
+                    ResourceLoader.consumeTokens__resourceLoader((cast internal : ResourceLoaderInternal__resourceLoader).throttle, (cast (cast entry : PendingEntry__resourceLoader).bytesHint : Float));
                     return flighthq._internal._Async.flowNormal();
                   });
                 });
@@ -431,10 +433,10 @@ class ResourceLoader {
                 __flowBranch19 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
-                _Runtime.callProperty(_Runtime.field(internal, 'pending'), 'shift', cast ([] : Array<Dynamic>));
-                ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).add(entry));
-                _Runtime.setField(entry, 'startedAt', _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)));
-                _Runtime.voidValue(_Runtime.callValue(ResourceLoader.runEntry__resourceLoader, cast ([entry, internal, loader, 0.0] : Array<Dynamic>)));
+                _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'shift', cast ([] : Array<Dynamic>));
+                ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).add(entry));
+                ((cast entry : PendingEntry__resourceLoader).startedAt = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)));
+                _Runtime.voidValue((cast ResourceLoader.runEntry__resourceLoader(entry, internal, (cast loader : flighthq.types.ResourceLoader), (cast 0.0 : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
                 return flighthq._internal._Async.flowNormal();
               });
             });
@@ -446,14 +448,14 @@ class ResourceLoader {
     );
   }
 
-  public static function abortSignalPromise__resourceLoader(signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.create(function(_resolve:Dynamic, reject:Dynamic) {
+  public static function abortSignalPromise__resourceLoader(signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq._internal._Any> {
+    return cast flighthq._internal._Async.create(function(_resolve:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
       if ((cast signal.aborted : Bool)) {
-        _Runtime.callValue(reject, cast ([_Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
+        reject((cast _Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Aborted', 'AbortError'])) : flighthq._internal._Any));
         return;
       }
-      signal.addEventListener('abort', function() {
-        _Runtime.callValue(reject, cast ([_Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Aborted', 'AbortError']))] : Array<Dynamic>));
+      signal.addEventListener('abort', function(__unused11:flighthq._internal.dom.Event):Void {
+        reject((cast _Runtime.coalesce(signal.reason, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Aborted', 'AbortError'])) : flighthq._internal._Any));
       }, { once: true });
     });
     return cast null;
@@ -463,13 +465,13 @@ class ResourceLoader {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var timeoutId:Null<Dynamic> = cast _Runtime.UNDEFINED;
-        var signal:Dynamic = cast _Runtime.UNDEFINED;
-        var live:Dynamic = cast _Runtime.UNDEFINED;
+        var signal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
+        var live:Bool = cast _Runtime.UNDEFINED;
         var reportBytes:ResourceLoadBytesReporter = cast _Runtime.UNDEFINED;
         var __flowBranch23:Dynamic;
-        if ((cast _Runtime.callValue(ResourceLoader._isOrphaned__resourceLoader, cast ([entry, internal] : Array<Dynamic>)) : Bool)) {
+        if ((cast (cast ResourceLoader._isOrphaned__resourceLoader(entry, internal) : Bool) : Bool)) {
           __flowBranch23 = flighthq._internal._Async.protect(function():Dynamic {
-            _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+            ResourceLoader.releasePendingEntry__resourceLoader(entry);
             return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
           });
         } else {
@@ -477,28 +479,28 @@ class ResourceLoader {
         }
         return flighthq._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
           var __flowBranch24:Dynamic;
-          if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
+          if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
             __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
-              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(internal, 'itemSignals').onItemStart], [_Runtime.field(entry, 'key')]]), 1);
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemStart], [(cast entry : PendingEntry__resourceLoader).key]]), 1);
               return flighthq._internal._Async.flowNormal();
             });
           } else {
             __flowBranch24 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
-            signal = (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).signal;
+            signal = (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).signal;
             live = true;
-            reportBytes = function(loaded:Dynamic, total:Dynamic) {
+            reportBytes = function(loaded:Float, total:Null<Float>):Void {
               if ((cast !(cast live : Bool) : Bool)) { return; }
-              _Runtime.setField(entry, 'bytesLoaded', loaded);
-              _Runtime.callOptionalProperty(entry, 'onBytesProgress', cast ([loaded, _Runtime.coalesce(total, function():Dynamic return cast _Runtime.field(entry, 'bytesHint'))] : Array<Dynamic>));
+              ((cast entry : PendingEntry__resourceLoader).bytesLoaded = loaded);
+              _Runtime.callOptionalValue((cast entry : PendingEntry__resourceLoader).onBytesProgress, cast ([loaded, _Runtime.coalesce(total, function():Dynamic return cast (cast entry : PendingEntry__resourceLoader).bytesHint)] : Array<Dynamic>));
             };
             var __flowBranch25:Dynamic;
-            if ((cast ((cast _Runtime.field(entry, 'timeoutMs') : Float) > (cast 0.0 : Float)) : Bool)) {
+            if ((cast ((cast (cast entry : PendingEntry__resourceLoader).timeoutMs : Float) > (cast 0.0 : Float)) : Bool)) {
               __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
-                (timeoutId = cast (_Runtime.setTimeout(function() {
-                  (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Load timed out', 'TimeoutError']));
-                }, _Runtime.field(entry, 'timeoutMs')) : Dynamic));
+                (timeoutId = cast (_Runtime.setTimeout(function():Void {
+                  (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Load timed out', 'TimeoutError']));
+                }, (cast entry : PendingEntry__resourceLoader).timeoutMs) : Dynamic));
                 return flighthq._internal._Async.flowNormal();
               });
             } else {
@@ -506,10 +508,10 @@ class ResourceLoader {
             }
             return flighthq._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                var value:Dynamic = cast _Runtime.UNDEFINED;
-                var elapsedMs:Dynamic = cast _Runtime.UNDEFINED;
+                var value:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+                var elapsedMs:Float = cast _Runtime.UNDEFINED;
                 var report:ResourceLoadReport = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([_Runtime.callProperty(entry, 'wrappedLoad', cast ([signal, reportBytes] : Array<Dynamic>)), _Runtime.callValue(ResourceLoader.abortSignalPromise__resourceLoader, cast ([signal] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue26:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap(flighthq._internal._Async.race(cast ([(cast entry : PendingEntry__resourceLoader).wrappedLoad(signal, reportBytes), (cast ResourceLoader.abortSignalPromise__resourceLoader((cast signal : flighthq._internal.dom.AbortSignal)) : flighthq._internal._Promise<flighthq._internal._Any>)] : Array<Dynamic>)), function(__awaitValue26:Dynamic):Dynamic {
                   value = __awaitValue26;
                   var __flowBranch27:Dynamic;
                   if ((cast !_Runtime.strictEquals(timeoutId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -523,10 +525,10 @@ class ResourceLoader {
                   return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
                     (live = cast (false : Dynamic));
                     var __flowBranch28:Dynamic;
-                    if ((cast _Runtime.callValue(ResourceLoader._isOrphaned__resourceLoader, cast ([entry, internal] : Array<Dynamic>)) : Bool)) {
+                    if ((cast (cast ResourceLoader._isOrphaned__resourceLoader(entry, internal) : Bool) : Bool)) {
                       __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {
-                        ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-                        _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+                        ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+                        ResourceLoader.releasePendingEntry__resourceLoader(entry);
                         return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                       });
                     } else {
@@ -534,33 +536,33 @@ class ResourceLoader {
                     }
                     return flighthq._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
                       var __flowBranch29:Dynamic;
-                      if ((cast _Runtime.field(internal, 'cancelled') : Bool)) {
+                      if ((cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) {
                         __flowBranch29 = flighthq._internal._Async.protect(function():Dynamic {
-                          ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-                          _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-                          _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
-                          _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
+                          ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+                          ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+                          ResourceLoader.releasePendingEntry__resourceLoader(entry);
+                          ResourceLoader.checkCompleteAfterCancel__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader));
                           return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                         });
                       } else {
                         __flowBranch29 = flighthq._internal._Async.flowNormal();
                       }
                       return flighthq._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
-                        elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt'));
-                        report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: elapsedMs, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'loaded' };
-                        _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
-                        _Runtime.callProperty(entry, 'resolve', cast ([value] : Array<Dynamic>));
+                        elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), (cast entry : PendingEntry__resourceLoader).startedAt);
+                        report = { attempts: (attempt + 1.0), bytes: (cast entry : PendingEntry__resourceLoader).bytesLoaded, elapsedMs: elapsedMs, group: (cast entry : PendingEntry__resourceLoader).group, key: (cast entry : PendingEntry__resourceLoader).key, status: 'loaded' };
+                        _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'push', cast ([report] : Array<Dynamic>));
+                        (cast entry : PendingEntry__resourceLoader).resolve(value);
                         var __flowBranch30:Dynamic;
-                        if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
+                        if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
                           __flowBranch30 = flighthq._internal._Async.protect(function():Dynamic {
-                            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(internal, 'itemSignals').onItemComplete], [_Runtime.field(entry, 'key')], [value]]), 1);
+                            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemComplete], [(cast entry : PendingEntry__resourceLoader).key], [value]]), 1);
                             return flighthq._internal._Async.flowNormal();
                           });
                         } else {
                           __flowBranch30 = flighthq._internal._Async.flowNormal();
                         }
                         return flighthq._internal._Async.continueFlow(__flowBranch30, function():Dynamic {
-                          _Runtime.callValue(ResourceLoader.settleEntry__resourceLoader, cast ([entry, internal, loader] : Array<Dynamic>));
+                          ResourceLoader.settleEntry__resourceLoader(entry, internal, (cast loader : flighthq.types.ResourceLoader));
                           return flighthq._internal._Async.flowNormal();
                         });
                       });
@@ -570,8 +572,8 @@ class ResourceLoader {
               }), function(__caughtError:Dynamic):Dynamic {
                 var error:Dynamic = __caughtError;
                 return flighthq._internal._Async.protect(function():Dynamic {
-                  var isAbortOrTimeout:Dynamic = cast _Runtime.UNDEFINED;
-                  var elapsedMs:Dynamic = cast _Runtime.UNDEFINED;
+                  var isAbortOrTimeout:Bool = cast _Runtime.UNDEFINED;
+                  var elapsedMs:Float = cast _Runtime.UNDEFINED;
                   var report:ResourceLoadReport = cast _Runtime.UNDEFINED;
                   var __flowBranch31:Dynamic;
                   if ((cast !_Runtime.strictEquals(timeoutId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -585,10 +587,10 @@ class ResourceLoader {
                   return flighthq._internal._Async.continueFlow(__flowBranch31, function():Dynamic {
                     (live = cast (false : Dynamic));
                     var __flowBranch32:Dynamic;
-                    if ((cast _Runtime.callValue(ResourceLoader._isOrphaned__resourceLoader, cast ([entry, internal] : Array<Dynamic>)) : Bool)) {
+                    if ((cast (cast ResourceLoader._isOrphaned__resourceLoader(entry, internal) : Bool) : Bool)) {
                       __flowBranch32 = flighthq._internal._Async.protect(function():Dynamic {
-                        ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-                        _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+                        ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+                        ResourceLoader.releasePendingEntry__resourceLoader(entry);
                         return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                       });
                     } else {
@@ -596,16 +598,16 @@ class ResourceLoader {
                     }
                     return flighthq._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
                       var __flowBranch33:Dynamic;
-                      if ((cast _Runtime.field(internal, 'cancelled') : Bool)) {
+                      if ((cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) {
                         __flowBranch33 = flighthq._internal._Async.protect(function():Dynamic {
                           var report:ResourceLoadReport = cast _Runtime.UNDEFINED;
-                          report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt')), group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'cancelled' };
-                          _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
-                          _Runtime.callProperty(entry, 'reject', cast ([error] : Array<Dynamic>));
-                          ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-                          _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-                          _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
-                          _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
+                          report = { attempts: (attempt + 1.0), bytes: (cast entry : PendingEntry__resourceLoader).bytesLoaded, elapsedMs: _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), (cast entry : PendingEntry__resourceLoader).startedAt), group: (cast entry : PendingEntry__resourceLoader).group, key: (cast entry : PendingEntry__resourceLoader).key, status: 'cancelled' };
+                          _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'push', cast ([report] : Array<Dynamic>));
+                          (cast entry : PendingEntry__resourceLoader).reject(error);
+                          ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+                          ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+                          ResourceLoader.releasePendingEntry__resourceLoader(entry);
+                          ResourceLoader.checkCompleteAfterCancel__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader));
                           return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                         });
                       } else {
@@ -614,36 +616,36 @@ class ResourceLoader {
                       return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
                         isAbortOrTimeout = ((cast _Runtime.isInstanceOf(error, flighthq._internal._HostValueLut.get('DOMException')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'AbortError'), function():Dynamic return cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'TimeoutError')) : Bool));
                         var __flowBranch34:Dynamic;
-                        if ((cast ((cast ((cast attempt : Float) < (cast _Runtime.field(entry, 'retries') : Float)) : Bool) && (cast !(cast isAbortOrTimeout : Bool) : Bool)) : Bool)) {
+                        if ((cast ((cast ((cast attempt : Float) < (cast (cast entry : PendingEntry__resourceLoader).retries : Float)) : Bool) && (cast !(cast isAbortOrTimeout : Bool) : Bool)) : Bool)) {
                           __flowBranch34 = flighthq._internal._Async.protect(function():Dynamic {
-                            var delayMs:Dynamic = cast _Runtime.UNDEFINED;
-                            delayMs = _Runtime.callValue(ResourceLoader.computeRetryDelay__resourceLoader, cast ([attempt, internal] : Array<Dynamic>));
+                            var delayMs:Float = cast _Runtime.UNDEFINED;
+                            delayMs = (cast ResourceLoader.computeRetryDelay__resourceLoader((cast attempt : Float), internal) : Float);
                             var __flowBranch35:Dynamic;
-                            if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
+                            if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
                               __flowBranch35 = flighthq._internal._Async.protect(function():Dynamic {
-                                _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(internal, 'itemSignals').onItemRetry], [_Runtime.field(entry, 'key')], [(attempt + 1.0)], [delayMs]]), 1);
+                                _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemRetry], [(cast entry : PendingEntry__resourceLoader).key], [(attempt + 1.0)], [delayMs]]), 1);
                                 return flighthq._internal._Async.flowNormal();
                               });
                             } else {
                               __flowBranch35 = flighthq._internal._Async.flowNormal();
                             }
                             return flighthq._internal._Async.continueFlow(__flowBranch35, function():Dynamic {
-                              return flighthq._internal._Async.flatMap(_Runtime.callValue(ResourceLoader.delay__resourceLoader, cast ([delayMs] : Array<Dynamic>)), function(__awaitValue36:Dynamic):Dynamic {
+                              return flighthq._internal._Async.flatMap((cast ResourceLoader.delay__resourceLoader((cast delayMs : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue36:Dynamic):Dynamic {
                                 __awaitValue36;
                                 var __flowBranch37:Dynamic;
-                                if ((cast _Runtime.field(internal, 'cancelled') : Bool)) {
+                                if ((cast (cast internal : ResourceLoaderInternal__resourceLoader).cancelled : Bool)) {
                                   __flowBranch37 = flighthq._internal._Async.protect(function():Dynamic {
-                                    ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-                                    _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-                                    _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
-                                    _Runtime.callValue(ResourceLoader.checkCompleteAfterCancel__resourceLoader, cast ([internal, loader] : Array<Dynamic>));
+                                    ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+                                    ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+                                    ResourceLoader.releasePendingEntry__resourceLoader(entry);
+                                    ResourceLoader.checkCompleteAfterCancel__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader));
                                     return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                                   });
                                 } else {
                                   __flowBranch37 = flighthq._internal._Async.flowNormal();
                                 }
                                 return flighthq._internal._Async.continueFlow(__flowBranch37, function():Dynamic {
-                                  _Runtime.voidValue(_Runtime.callValue(ResourceLoader.runEntry__resourceLoader, cast ([entry, internal, loader, (attempt + 1.0)] : Array<Dynamic>)));
+                                  _Runtime.voidValue((cast ResourceLoader.runEntry__resourceLoader(entry, internal, (cast loader : flighthq.types.ResourceLoader), (cast (attempt + 1.0) : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
                                   return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                                 });
                               });
@@ -653,33 +655,33 @@ class ResourceLoader {
                           __flowBranch34 = flighthq._internal._Async.flowNormal();
                         }
                         return flighthq._internal._Async.continueFlow(__flowBranch34, function():Dynamic {
-                          elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), _Runtime.field(entry, 'startedAt'));
-                          report = { attempts: (attempt + 1.0), bytes: _Runtime.field(entry, 'bytesLoaded'), elapsedMs: elapsedMs, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'failed' };
-                          _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
+                          elapsedMs = _Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), (cast entry : PendingEntry__resourceLoader).startedAt);
+                          report = { attempts: (attempt + 1.0), bytes: (cast entry : PendingEntry__resourceLoader).bytesLoaded, elapsedMs: elapsedMs, group: (cast entry : PendingEntry__resourceLoader).group, key: (cast entry : PendingEntry__resourceLoader).key, status: 'failed' };
+                          _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'push', cast ([report] : Array<Dynamic>));
                           var __flowBranch38:Dynamic;
-                          if ((cast !_Runtime.strictEquals(_Runtime.field(internal, 'itemSignals'), null) : Bool)) {
+                          if ((cast !_Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).itemSignals, null) : Bool)) {
                             __flowBranch38 = flighthq._internal._Async.protect(function():Dynamic {
-                              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(internal, 'itemSignals').onItemError], [_Runtime.field(entry, 'key')], [error], [(attempt + 1.0)]]), 1);
+                              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast internal : ResourceLoaderInternal__resourceLoader).itemSignals.onItemError], [(cast entry : PendingEntry__resourceLoader).key], [error], [(attempt + 1.0)]]), 1);
                               return flighthq._internal._Async.flowNormal();
                             });
                           } else {
                             __flowBranch38 = flighthq._internal._Async.flowNormal();
                           }
                           return flighthq._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
-                            _Runtime.callProperty(entry, 'reject', cast ([error] : Array<Dynamic>));
-                            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onError], [error], [_Runtime.field(entry, 'key')]]), 1);
+                            (cast entry : PendingEntry__resourceLoader).reject(error);
+                            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onError], [error], [(cast entry : PendingEntry__resourceLoader).key]]), 1);
                             var __flowBranch39:Dynamic;
-                            if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'errorPolicy'), 'fail-fast') : Bool)) {
+                            if ((cast _Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).errorPolicy, 'fail-fast') : Bool)) {
                               __flowBranch39 = flighthq._internal._Async.protect(function():Dynamic {
-                                _Runtime.callValue(ResourceLoader.cancelRemainingEntries__resourceLoader, cast ([internal] : Array<Dynamic>));
-                                _Runtime.callValue(ResourceLoader.settleEntry__resourceLoader, cast ([entry, internal, loader] : Array<Dynamic>));
+                                ResourceLoader.cancelRemainingEntries__resourceLoader(internal);
+                                ResourceLoader.settleEntry__resourceLoader(entry, internal, (cast loader : flighthq.types.ResourceLoader));
                                 return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);
                               });
                             } else {
                               __flowBranch39 = flighthq._internal._Async.flowNormal();
                             }
                             return flighthq._internal._Async.continueFlow(__flowBranch39, function():Dynamic {
-                              _Runtime.callValue(ResourceLoader.settleEntry__resourceLoader, cast ([entry, internal, loader] : Array<Dynamic>));
+                              ResourceLoader.settleEntry__resourceLoader(entry, internal, (cast loader : flighthq.types.ResourceLoader));
                               return flighthq._internal._Async.flowNormal();
                             });
                           });
@@ -699,8 +701,8 @@ class ResourceLoader {
   }
 
   public static function _countEntrySettled__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, entry:PendingEntry__resourceLoader):Void {
-    _Runtime.incrementField(internal, 'loaded', 1, true);
-    _Runtime.setField(internal, 'weightLoaded', _Runtime.addNumbers(_Runtime.field(internal, 'weightLoaded'), _Runtime.field(entry, 'weight')));
+    (cast internal : ResourceLoaderInternal__resourceLoader).loaded++;
+    ((cast internal : ResourceLoaderInternal__resourceLoader).weightLoaded += _Runtime.field(entry, 'weight'));
   }
 
   public static function _isOrphaned__resourceLoader(entry:PendingEntry__resourceLoader, internal:ResourceLoaderInternal__resourceLoader):Bool {
@@ -709,31 +711,31 @@ class ResourceLoader {
   }
 
   public static function checkCompleteAfterCancel__resourceLoader(internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
-    if ((cast _Runtime.strictEquals((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).size, 0.0) : Bool)) {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [_Runtime.callValue(getResourceLoadProgress, cast ([loader] : Array<Dynamic>))]]), 1);
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [_Runtime.field(internal, 'reports')]]), 1);
+    if ((cast _Runtime.strictEquals((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).size, 0.0) : Bool)) {
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [(cast getResourceLoadProgress((cast loader : flighthq.types.ResourceLoader), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : Float)]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [(cast internal : ResourceLoaderInternal__resourceLoader).reports]]), 1);
     }
   }
 
   public static function cancelRemainingEntries__resourceLoader(internal:ResourceLoaderInternal__resourceLoader):Void {
-    for (entry in _Runtime.iterable(_Runtime.field(internal, 'pending'))) {
-      (cast _Runtime.field(entry, 'abortController') : flighthq._internal.dom.AbortController).abort();
-      var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: _Runtime.field(entry, 'group'), key: _Runtime.field(entry, 'key'), status: 'skipped' };
-      _Runtime.callProperty(_Runtime.field(internal, 'reports'), 'push', cast ([report] : Array<Dynamic>));
-      _Runtime.callProperty(entry, 'reject', cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Load skipped due to fail-fast error policy', 'AbortError'])] : Array<Dynamic>));
-      _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-      _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
+    for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).pending)) {
+      (cast (cast entry : PendingEntry__resourceLoader).abortController : flighthq._internal.dom.AbortController).abort();
+      var report:ResourceLoadReport = { attempts: 0.0, bytes: 0.0, elapsedMs: 0.0, group: (cast entry : PendingEntry__resourceLoader).group, key: (cast entry : PendingEntry__resourceLoader).key, status: 'skipped' };
+      _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'push', cast ([report] : Array<Dynamic>));
+      (cast entry : PendingEntry__resourceLoader).reject(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['Load skipped due to fail-fast error policy', 'AbortError']));
+      ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+      ResourceLoader.releasePendingEntry__resourceLoader(entry);
     }
-    _Runtime.setField(internal, 'pending', cast ([] : Array<Dynamic>));
+    ((cast internal : ResourceLoaderInternal__resourceLoader).pending = cast ([] : Array<Dynamic>));
   }
 
   public static function computeRetryDelay__resourceLoader(attempt:Float, internal:ResourceLoaderInternal__resourceLoader):Float {
-    var backoff:Dynamic = cast _Runtime.UNDEFINED;
-    var baseMs:Dynamic = cast _Runtime.UNDEFINED;
-    var maxMs:Dynamic = cast _Runtime.UNDEFINED;
-    backoff = _Runtime.coalesce(_Runtime.field(internal, 'options').retryBackoff, function():Dynamic return cast 'none');
-    baseMs = _Runtime.coalesce(_Runtime.field(internal, 'options').retryBaseDelayMs, function():Dynamic return cast 100.0);
-    maxMs = _Runtime.coalesce(_Runtime.field(internal, 'options').retryMaxDelayMs, function():Dynamic return cast 10000.0);
+    var backoff:String = cast _Runtime.UNDEFINED;
+    var baseMs:Float = cast _Runtime.UNDEFINED;
+    var maxMs:Float = cast _Runtime.UNDEFINED;
+    backoff = _Runtime.coalesce((cast internal : ResourceLoaderInternal__resourceLoader).options.retryBackoff, function():Dynamic return cast 'none');
+    baseMs = _Runtime.coalesce((cast internal : ResourceLoaderInternal__resourceLoader).options.retryBaseDelayMs, function():Dynamic return cast 100.0);
+    maxMs = _Runtime.coalesce((cast internal : ResourceLoaderInternal__resourceLoader).options.retryMaxDelayMs, function():Dynamic return cast 10000.0);
     if ((cast _Runtime.strictEquals(backoff, 'none') : Bool)) { return cast 0.0; }
     if ((cast _Runtime.strictEquals(backoff, 'linear') : Bool)) { return cast HxMath.min((baseMs * (attempt + 1.0)), maxMs); }
     return cast HxMath.min(_Runtime.multiplyNumbers(baseMs, HxMath.pow(2.0, attempt)), maxMs);
@@ -742,19 +744,19 @@ class ResourceLoader {
 
   public static function delay__resourceLoader(ms:Float):flighthq._internal._Promise<flighthq._internal._Nothing> {
     if ((cast ((cast ms : Float) <= (cast 0.0 : Float)) : Bool)) { return cast flighthq._internal._Async.resolve(); }
-    return cast flighthq._internal._Async.create(function(resolve:Dynamic) return _Runtime.setTimeout(resolve, ms));
+    return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused12:flighthq._internal._Any):flighthq._internal.dom.Timeout return _Runtime.setTimeout(resolve, ms));
     return cast null;
   }
 
   public static function settleEntry__resourceLoader(entry:PendingEntry__resourceLoader, internal:ResourceLoaderInternal__resourceLoader, loader:flighthq.types.ResourceLoader):Void {
-    ((cast _Runtime.field(internal, 'inFlight') : flighthq._internal._Set).delete_(entry));
-    _Runtime.callValue(ResourceLoader._countEntrySettled__resourceLoader, cast ([internal, entry] : Array<Dynamic>));
-    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [_Runtime.callValue(getResourceLoadProgress, cast ([loader] : Array<Dynamic>))]]), 1);
-    _Runtime.callValue(ResourceLoader.releasePendingEntry__resourceLoader, cast ([entry] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(internal, 'loaded'), _Runtime.field(internal, 'total')) : Bool)) {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [_Runtime.field(internal, 'reports')]]), 1);
+    ((cast (cast internal : ResourceLoaderInternal__resourceLoader).inFlight : flighthq._internal._Set<PendingEntry__resourceLoader>).delete_(entry));
+    ResourceLoader._countEntrySettled__resourceLoader(internal, entry);
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onProgress], [(cast getResourceLoadProgress((cast loader : flighthq.types.ResourceLoader), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : Float)]]), 1);
+    ResourceLoader.releasePendingEntry__resourceLoader(entry);
+    if ((cast _Runtime.strictEquals((cast internal : ResourceLoaderInternal__resourceLoader).loaded, (cast internal : ResourceLoaderInternal__resourceLoader).total) : Bool)) {
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[loader.onComplete], [(cast internal : ResourceLoaderInternal__resourceLoader).reports]]), 1);
       return;
     }
-    _Runtime.voidValue(_Runtime.callValue(ResourceLoader.drainQueue__resourceLoader, cast ([internal, loader] : Array<Dynamic>)));
+    _Runtime.voidValue((cast ResourceLoader.drainQueue__resourceLoader(internal, (cast loader : flighthq.types.ResourceLoader)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
   }
 }

@@ -142,7 +142,10 @@ function auditPackage(
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
     declarations += source.statements.filter(isCandidateDeclaration).length;
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, {
+      expressionTypes: false,
+      inferredTypes: false,
+    });
     lowered += result.accountedDeclarations;
     diagnostics.push(...result.diagnostics);
     staticFacts.push(result.staticFacts);

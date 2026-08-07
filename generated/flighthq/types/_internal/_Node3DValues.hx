@@ -11,7 +11,7 @@ import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
 
 class _Node3DValues {
-  public static final Node3DKind:Dynamic = 'Node3D';
+  public static final Node3DKind:String = 'Node3D';
 
-  public static final Node3DTraitsKey:Dynamic = _Runtime.symbol('Node3DTraits');
+  public static final Node3DTraitsKey:flighthq._internal._Symbol = _Runtime.symbol('Node3DTraits');
 }

@@ -38,7 +38,7 @@ class ImageCodec {
     return cast null;
   }
 
-  public static function detectImageMimeType(data:Dynamic):Null<String> {
+  public static function detectImageMimeType(data:flighthq._internal._Union2<flighthq._internal._UInt8Array, haxe.io.Bytes>):Null<String> {
     return cast Facade_ImageCodec_flighthq_imageCodec_DetectImageMimeType.detectImageMimeType(data);
     return cast null;
   }

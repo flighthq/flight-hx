@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _TurbulenceForceValues {
-  public static final TurbulenceForceKind:Dynamic = 'TurbulenceForce';
+  public static final TurbulenceForceKind:String = 'TurbulenceForce';
 }

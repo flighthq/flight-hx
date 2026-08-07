@@ -8,6 +8,7 @@ import flighthq.collision.TestCollision.setCollisionTestGuard;
 import flighthq.log.Log.logOnce;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionTestExplanation;
+import flighthq.types.Collision.CollisionTestStatus;
 import flighthq.types.Log.LogLevel;
 
 class EnableCollisionGuards {
@@ -17,34 +18,34 @@ class EnableCollisionGuards {
   }
 
   public static function disableCollisionGuards():Void {
-    _Runtime.callValue(setCollisionTestGuard, cast ([null] : Array<Dynamic>));
+    setCollisionTestGuard(null);
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (false : Dynamic));
   }
 
   public static function enableCollisionGuards():Void {
-    _Runtime.callValue(setCollisionTestGuard, cast ([EnableCollisionGuards.warnOnInvalidCollisionShapes__enableCollisionGuards] : Array<Dynamic>));
+    setCollisionTestGuard(EnableCollisionGuards.warnOnInvalidCollisionShapes__enableCollisionGuards);
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (true : Dynamic));
   }
 
   public static function warnOnInvalidCollisionShapes__enableCollisionGuards(a:CollisionShape, b:CollisionShape):Void {
-    var statusA:Dynamic = cast _Runtime.UNDEFINED;
-    var statusB:Dynamic = cast _Runtime.UNDEFINED;
-    statusA = _Runtime.callValue(getCollisionShapeValidationStatus, cast ([a] : Array<Dynamic>));
+    var statusA:Null<String> = cast _Runtime.UNDEFINED;
+    var statusB:Null<String> = cast _Runtime.UNDEFINED;
+    statusA = (cast getCollisionShapeValidationStatus((cast a : CollisionShape)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(statusA, 'degenerate-shape') : Bool) || (cast _Runtime.strictEquals(statusA, 'non-convex-polygon') : Bool)) : Bool)) {
-      _Runtime.callValue(EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards, cast ([{ kind: _Runtime.field(a, 'kind'), overlapping: false, shapeIndex: 0.0, status: statusA }] : Array<Dynamic>));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA } : CollisionTestExplanation));
       return;
     }
-    statusB = _Runtime.callValue(getCollisionShapeValidationStatus, cast ([b] : Array<Dynamic>));
+    statusB = (cast getCollisionShapeValidationStatus((cast b : CollisionShape)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(statusB, 'degenerate-shape') : Bool) || (cast _Runtime.strictEquals(statusB, 'non-convex-polygon') : Bool)) : Bool)) {
-      _Runtime.callValue(EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards, cast ([{ kind: _Runtime.field(b, 'kind'), overlapping: false, shapeIndex: 1.0, status: statusB }] : Array<Dynamic>));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB } : CollisionTestExplanation));
     }
   }
 
   public static function warnOnInvalidCollisionShape__enableCollisionGuards(explanation:CollisionTestExplanation):Void {
-    var message:Dynamic = cast _Runtime.UNDEFINED;
+    var message:String = cast _Runtime.UNDEFINED;
     message = ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'non-convex-polygon') : Bool) ? (cast 'testCollision: a polygon is non-convex and cannot produce a supported manifold — call explainCollisionTest(a, b) and replace the reported shape with a convex polygon.' : Dynamic) : (cast 'testCollision: a shape is degenerate and cannot produce a manifold — call explainCollisionTest(a, b) and replace the reported shape with a finite positive-area collider.' : Dynamic));
-    _Runtime.callValue(logOnce, cast (['collision:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.field(explanation, 'shapeIndex')) + ':' + Std.string(_Runtime.field(explanation, 'kind')) + '', LogLevel.Warn, { kind: _Runtime.field(explanation, 'kind'), message: message, shapeIndex: _Runtime.field(explanation, 'shapeIndex'), status: _Runtime.field(explanation, 'status') }, 'collision'] : Array<Dynamic>));
+    (cast logOnce((cast 'collision:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.field(explanation, 'shapeIndex')) + ':' + Std.string(_Runtime.field(explanation, 'kind')) + '' : String), (cast LogLevel.Warn : LogLevel), { kind: _Runtime.field(explanation, 'kind'), message: message, shapeIndex: _Runtime.field(explanation, 'shapeIndex'), status: _Runtime.field(explanation, 'status') }, (cast 'collision' : Null<String>)) : Bool);
   }
 
-  public static var collisionGuardsEnabled__enableCollisionGuards:Dynamic = false;
+  public static var collisionGuardsEnabled__enableCollisionGuards:Bool = false;
 }

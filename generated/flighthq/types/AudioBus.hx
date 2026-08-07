@@ -14,4 +14,4 @@ typedef AudioMixerOptions = { @:optional var masterGain:Float; @:optional var ma
 
 typedef AudioBusMixerOperation = String;
 
-typedef AudioBusMixerGuard = Dynamic;
+typedef AudioBusMixerGuard = AudioBusMixerOperation->AudioBus->Void;

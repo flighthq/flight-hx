@@ -20,7 +20,7 @@ describe('host toolkit dependency boundary', () => {
 
     expect(audit).toEqual(committed);
     expect(audit.summary.missingEntries).toBe(0);
-    expect(audit.types.find((entry) => entry.key === 'host:AudioBuffer')?.coverage).toBe('dynamic-stub');
+    expect(audit.types.find((entry) => entry.key === 'host:AudioBuffer')?.coverage).toBe('typed');
     expect(audit.values.find((entry) => entry.key === 'global:TextDecoder')?.coverage).toBe('portable');
     expect(audit.values.some((entry) => entry.key === 'global:SHADOW_DEPTH_FORMAT')).toBe(false);
 

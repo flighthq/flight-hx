@@ -14,45 +14,46 @@ import flighthq.types.SpatialIndexing.SpatialDeclineReason;
 import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
 import flighthq.types.SpatialIndexing.SpatialIndexingMode;
+import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
 import flighthq.types.SpatialIndexing.SpatialIndexingReason;
 
-typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:Dynamic; };
+typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:flighthq._internal._Set<SpatialObjectId>; };
 
-typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:Dynamic; var bounds:Dynamic; var overflow:Dynamic; var declined:Dynamic; var minCellX:Float; var minCellY:Float; var maxCellX:Float; var maxCellY:Float; var seen:Dynamic; var pairIds:Array<SpatialObjectId>; };
+typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:flighthq._internal._Map<String, GridCell__uniformGrid>; var bounds:flighthq._internal._Map<SpatialObjectId, SpatialAabb>; var overflow:flighthq._internal._Set<SpatialObjectId>; var declined:flighthq._internal._Map<SpatialObjectId, SpatialDeclineReason>; var minCellX:Float; var minCellY:Float; var maxCellX:Float; var maxCellY:Float; var seen:flighthq._internal._Set<SpatialObjectId>; var pairIds:Array<SpatialObjectId>; };
 
 class UniformGrid {
-  public static final MAX_INDEXED_CELLS_PER_OBJECT:Dynamic = 1024.0;
+  public static final MAX_INDEXED_CELLS_PER_OBJECT:Float = 1024.0;
 
   public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
     var grid:UniformGrid__uniformGrid = cast _Runtime.UNDEFINED;
     grid = { cellSize: cellSize, cells: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), bounds: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), overflow: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), declined: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), minCellX: 0.0, minCellY: 0.0, maxCellX: 0.0, maxCellY: 0.0, seen: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), pairIds: cast ([] : Array<Dynamic>) };
-    return cast { insertSpatialObject: function(id:Dynamic, bounds:Dynamic) {
-      return cast _Runtime.callValue(UniformGrid._insertIntoGrid__uniformGrid, cast ([grid, id, bounds, 'insert'] : Array<Dynamic>));
-    }, updateSpatialObject: function(id:Dynamic, bounds:Dynamic) {
-      return cast _Runtime.callValue(UniformGrid._updateGridObject__uniformGrid, cast ([grid, id, bounds] : Array<Dynamic>));
-    }, removeSpatialObject: function(id:Dynamic) {
-      var wasMissing:Dynamic = cast _Runtime.UNDEFINED;
-      wasMissing = ((cast !(cast ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).has(id)) : Bool) : Bool) && (cast !(cast ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).has(id)) : Bool) : Bool));
-      _Runtime.callValue(UniformGrid._removeFromGrid__uniformGrid, cast ([grid, id] : Array<Dynamic>));
-      if ((cast wasMissing : Bool)) { _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, 'absent', 'remove', 'missing-id', 0.0] : Array<Dynamic>)); }
-    }, clearSpatialIndex: function() {
-      ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).clear());
-      ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).clear());
-      ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).clear());
-      ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).clear());
-      ((cast _Runtime.field(grid, 'seen') : flighthq._internal._Set).clear());
-      _Runtime.setLength(_Runtime.field(grid, 'pairIds'), 0.0);
-    }, explainSpatialIndexing: function(id:Dynamic) {
-      return cast _Runtime.callValue(UniformGrid._explainGridIndexing__uniformGrid, cast ([grid, id] : Array<Dynamic>));
-    }, querySpatialPairs: function(out:Dynamic) {
-      _Runtime.callValue(UniformGrid._queryGridPairs__uniformGrid, cast ([grid, out] : Array<Dynamic>));
-    }, querySpatialRegion: function(region:Dynamic, out:Dynamic) {
-      _Runtime.callValue(UniformGrid._queryGridRegion__uniformGrid, cast ([grid, region, out] : Array<Dynamic>));
-    }, querySpatialPoint: function(x:Dynamic, y:Dynamic, out:Dynamic) {
-      _Runtime.callValue(UniformGrid._queryGridPoint__uniformGrid, cast ([grid, x, y, out] : Array<Dynamic>));
-    }, querySpatialRay: function(x:Dynamic, y:Dynamic, dx:Dynamic, dy:Dynamic, out:Dynamic) {
-      _Runtime.callValue(UniformGrid._queryGridRay__uniformGrid, cast ([grid, x, y, dx, dy, out] : Array<Dynamic>));
+    return cast { insertSpatialObject: function(id:Float, bounds:SpatialAabb):Bool {
+      return cast (cast UniformGrid._insertIntoGrid__uniformGrid(grid, (cast id : Float), (cast bounds : SpatialAabb), (cast 'insert' : SpatialIndexingOperation)) : Bool);
+    }, updateSpatialObject: function(id:Float, bounds:SpatialAabb):Bool {
+      return cast (cast UniformGrid._updateGridObject__uniformGrid(grid, (cast id : Float), (cast bounds : SpatialAabb)) : Bool);
+    }, removeSpatialObject: function(id:Float):Void {
+      var wasMissing:Bool = cast _Runtime.UNDEFINED;
+      wasMissing = ((cast !(cast ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).has(id)) : Bool) : Bool));
+      UniformGrid._removeFromGrid__uniformGrid(grid, (cast id : Float));
+      if ((cast wasMissing : Bool)) { UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast 'absent' : SpatialIndexingMode), (cast 'remove' : SpatialIndexingOperation), (cast 'missing-id' : Null<String>), (cast 0.0 : Float)); }
+    }, clearSpatialIndex: function():Void {
+      ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).clear());
+      ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).clear());
+      ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).clear());
+      ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).clear());
+      ((cast (cast grid : UniformGrid__uniformGrid).seen : flighthq._internal._Set<Float>).clear());
+      _Runtime.setLength((cast grid : UniformGrid__uniformGrid).pairIds, 0.0);
+    }, explainSpatialIndexing: function(id:Float):SpatialIndexingExplanation {
+      return cast (cast UniformGrid._explainGridIndexing__uniformGrid(grid, (cast id : Float)) : SpatialIndexingExplanation);
+    }, querySpatialPairs: function(out:Array<SpatialPair>):Void {
+      UniformGrid._queryGridPairs__uniformGrid(grid, (cast out : Array<SpatialPair>));
+    }, querySpatialRegion: function(region:SpatialAabb, out:Array<Float>):Void {
+      UniformGrid._queryGridRegion__uniformGrid(grid, (cast region : SpatialAabb), (cast out : Array<Float>));
+    }, querySpatialPoint: function(x:Float, y:Float, out:Array<Float>):Void {
+      UniformGrid._queryGridPoint__uniformGrid(grid, (cast x : Float), (cast y : Float), (cast out : Array<Float>));
+    }, querySpatialRay: function(x:Float, y:Float, dx:Float, dy:Float, out:Array<Float>):Void {
+      UniformGrid._queryGridRay__uniformGrid(grid, (cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), (cast out : Array<Float>));
     } };
     return cast null;
   }
@@ -79,70 +80,70 @@ class UniformGrid {
   }
 
   public static function _explainGridIndexing__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):SpatialIndexingExplanation {
-    var declineReason:Dynamic = cast _Runtime.UNDEFINED;
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    declineReason = ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).get(id));
+    var declineReason:Null<String> = cast _Runtime.UNDEFINED;
+    var bounds:Null<SpatialAabb> = cast _Runtime.UNDEFINED;
+    declineReason = ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).get(id));
     if ((cast !_Runtime.strictEquals(declineReason, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'declined', reason: declineReason }; }
-    if ((cast ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).has(id)) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'overflow', reason: null }; }
-    bounds = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
+    if ((cast ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).has(id)) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'overflow', reason: null }; }
+    bounds = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
     if ((cast _Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'absent', reason: null }; }
-    return cast { bucketCount: _Runtime.callValue(UniformGrid._spannedCellCount__uniformGrid, cast ([_Runtime.field(grid, 'cellSize'), bounds] : Array<Dynamic>)), id: id, mode: 'cells', reason: null };
+    return cast { bucketCount: (cast UniformGrid._spannedCellCount__uniformGrid((cast (cast grid : UniformGrid__uniformGrid).cellSize : Float), (cast bounds : SpatialAabb)) : Float), id: id, mode: 'cells', reason: null };
     return cast null;
   }
 
   public static function _insertIntoGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, bounds:SpatialAabb, operation:SpatialIndexingOperation):Bool {
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var copy:Dynamic = cast _Runtime.UNDEFINED;
-    var spanned:Dynamic = cast _Runtime.UNDEFINED;
-    var cx0:Dynamic = cast _Runtime.UNDEFINED;
-    var cx1:Dynamic = cast _Runtime.UNDEFINED;
-    var cy0:Dynamic = cast _Runtime.UNDEFINED;
-    var cy1:Dynamic = cast _Runtime.UNDEFINED;
-    var hadCells:Dynamic = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var copy:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; } = cast _Runtime.UNDEFINED;
+    var spanned:Float = cast _Runtime.UNDEFINED;
+    var cx0:Float = cast _Runtime.UNDEFINED;
+    var cx1:Float = cast _Runtime.UNDEFINED;
+    var cy0:Float = cast _Runtime.UNDEFINED;
+    var cy1:Float = cast _Runtime.UNDEFINED;
+    var hadCells:Bool = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).set(id, 'non-finite-bounds'));
-      _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, 'declined', operation, 'non-finite-bounds', 0.0] : Array<Dynamic>));
+      ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).set(id, 'non-finite-bounds'));
+      UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast 'declined' : SpatialIndexingMode), (cast operation : SpatialIndexingOperation), (cast 'non-finite-bounds' : Null<String>), (cast 0.0 : Float));
       return cast false;
     }
     if ((cast ((cast ((cast bounds.maxX : Float) < (cast bounds.minX : Float)) : Bool) || (cast ((cast bounds.maxY : Float) < (cast bounds.minY : Float)) : Bool)) : Bool)) {
-      ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).set(id, 'inverted-bounds'));
-      _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, 'declined', operation, 'inverted-bounds', 0.0] : Array<Dynamic>));
+      ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).set(id, 'inverted-bounds'));
+      UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast 'declined' : SpatialIndexingMode), (cast operation : SpatialIndexingOperation), (cast 'inverted-bounds' : Null<String>), (cast 0.0 : Float));
       return cast false;
     }
-    cs = _Runtime.field(grid, 'cellSize');
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
     copy = { minX: bounds.minX, minY: bounds.minY, maxX: bounds.maxX, maxY: bounds.maxY };
     if ((cast !(cast _Runtime.andValue(((cast cs : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([cs] : Array<Dynamic>))) : Bool) : Bool)) {
-      ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).set(id, copy));
-      ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).add(id));
-      _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, 'overflow', operation, 'invalid-cell-size', 0.0] : Array<Dynamic>));
+      ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).set(id, copy));
+      ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).add(id));
+      UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast 'overflow' : SpatialIndexingMode), (cast operation : SpatialIndexingOperation), (cast 'invalid-cell-size' : Null<String>), (cast 0.0 : Float));
       return cast true;
     }
-    spanned = _Runtime.callValue(UniformGrid._spannedCellCount__uniformGrid, cast ([cs, copy] : Array<Dynamic>));
+    spanned = (cast UniformGrid._spannedCellCount__uniformGrid((cast cs : Float), (cast copy : SpatialAabb)) : Float);
     if ((cast !(cast _Runtime.compare(spanned, MAX_INDEXED_CELLS_PER_OBJECT, '<=') : Bool) : Bool)) {
-      ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).set(id, copy));
-      ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).add(id));
-      _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, 'overflow', operation, null, spanned] : Array<Dynamic>));
+      ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).set(id, copy));
+      ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).add(id));
+      UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast 'overflow' : SpatialIndexingMode), (cast operation : SpatialIndexingOperation), (cast null : Null<String>), (cast spanned : Float));
       return cast true;
     }
-    cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(copy, 'minX'), cs] : Array<Dynamic>));
-    cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(copy, 'maxX'), cs] : Array<Dynamic>));
-    cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(copy, 'minY'), cs] : Array<Dynamic>));
-    cy1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([_Runtime.field(copy, 'maxY'), cs] : Array<Dynamic>));
-    hadCells = !_Runtime.strictEquals((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).size, 0.0);
-    ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).set(id, copy));
+    cx0 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast copy : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX : Float), (cast cs : Float)) : Float);
+    cx1 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast copy : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX : Float), (cast cs : Float)) : Float);
+    cy0 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast copy : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY : Float), (cast cs : Float)) : Float);
+    cy1 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast copy : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY : Float), (cast cs : Float)) : Float);
+    hadCells = !_Runtime.strictEquals((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).size, 0.0);
+    ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).set(id, copy));
     {
-      var cy:Dynamic = cy0;
+      var cy:Float = cy0;
       while ((cast ((cast cy : Float) <= (cast cy1 : Float)) : Bool)) {
         {
-          var cx:Dynamic = cx0;
+          var cx:Float = cx0;
           while ((cast ((cast cx : Float) <= (cast cx1 : Float)) : Bool)) {
-            var key:Dynamic = _Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>));
-            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(key));
+            var key:String = (cast UniformGrid._cellKey__uniformGrid((cast cx : Float), (cast cy : Float)) : String);
+            var cell:Null<GridCell__uniformGrid> = ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).get(key));
             if ((cast _Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               (cell = cast ({ cx: cx, cy: cy, ids: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) } : Dynamic));
-              ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).set(key, cell));
+              ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).set(key, cell));
             }
-            ((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).add(id));
+            ((cast (cast cell : GridCell__uniformGrid).ids : flighthq._internal._Set<Float>).add(id));
             cx++;
           }
         }
@@ -150,71 +151,71 @@ class UniformGrid {
       }
     }
     if ((cast !(cast hadCells : Bool) : Bool)) {
-      _Runtime.setField(grid, 'minCellX', cx0);
-      _Runtime.setField(grid, 'maxCellX', cx1);
-      _Runtime.setField(grid, 'minCellY', cy0);
-      _Runtime.setField(grid, 'maxCellY', cy1);
+      ((cast grid : UniformGrid__uniformGrid).minCellX = cx0);
+      ((cast grid : UniformGrid__uniformGrid).maxCellX = cx1);
+      ((cast grid : UniformGrid__uniformGrid).minCellY = cy0);
+      ((cast grid : UniformGrid__uniformGrid).maxCellY = cy1);
     } else {
-      if ((cast ((cast cx0 : Float) < (cast _Runtime.field(grid, 'minCellX') : Float)) : Bool)) { _Runtime.setField(grid, 'minCellX', cx0); }
-      if ((cast ((cast cx1 : Float) > (cast _Runtime.field(grid, 'maxCellX') : Float)) : Bool)) { _Runtime.setField(grid, 'maxCellX', cx1); }
-      if ((cast ((cast cy0 : Float) < (cast _Runtime.field(grid, 'minCellY') : Float)) : Bool)) { _Runtime.setField(grid, 'minCellY', cy0); }
-      if ((cast ((cast cy1 : Float) > (cast _Runtime.field(grid, 'maxCellY') : Float)) : Bool)) { _Runtime.setField(grid, 'maxCellY', cy1); }
+      if ((cast ((cast cx0 : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellX : Float)) : Bool)) { ((cast grid : UniformGrid__uniformGrid).minCellX = cx0); }
+      if ((cast ((cast cx1 : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellX : Float)) : Bool)) { ((cast grid : UniformGrid__uniformGrid).maxCellX = cx1); }
+      if ((cast ((cast cy0 : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellY : Float)) : Bool)) { ((cast grid : UniformGrid__uniformGrid).minCellY = cy0); }
+      if ((cast ((cast cy1 : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellY : Float)) : Bool)) { ((cast grid : UniformGrid__uniformGrid).maxCellY = cy1); }
     }
     return cast true;
     return cast null;
   }
 
   public static function _updateGridObject__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    var wasMissing:Dynamic = cast _Runtime.UNDEFINED;
-    var previous:Dynamic = cast _Runtime.UNDEFINED;
-    var inserted:Dynamic = cast _Runtime.UNDEFINED;
-    wasMissing = ((cast !(cast ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).has(id)) : Bool) : Bool) && (cast !(cast ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).has(id)) : Bool) : Bool));
-    previous = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).has(id)) : Bool) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast bounds.minX : Float) <= (cast bounds.maxX : Float)) : Bool)) : Bool) && (cast ((cast bounds.minY : Float) <= (cast bounds.maxY : Float)) : Bool)) : Bool)) {
-      var cs:Dynamic = _Runtime.field(grid, 'cellSize');
-      var spanned:Dynamic = _Runtime.callValue(UniformGrid._spannedCellCount__uniformGrid, cast ([cs, bounds] : Array<Dynamic>));
-      if ((cast ((cast ((cast ((cast ((cast ((cast spanned : Float) <= (cast MAX_INDEXED_CELLS_PER_OBJECT : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([previous.minX, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.minX, cs] : Array<Dynamic>))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([previous.minY, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.minY, cs] : Array<Dynamic>))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([previous.maxX, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.maxX, cs] : Array<Dynamic>))) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([previous.maxY, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.maxY, cs] : Array<Dynamic>))) : Bool)) : Bool)) {
-        (previous.minX = cast (bounds.minX : Dynamic));
-        (previous.minY = cast (bounds.minY : Dynamic));
-        (previous.maxX = cast (bounds.maxX : Dynamic));
-        (previous.maxY = cast (bounds.maxY : Dynamic));
+    var wasMissing:Bool = cast _Runtime.UNDEFINED;
+    var previous:Null<SpatialAabb> = cast _Runtime.UNDEFINED;
+    var inserted:Bool = cast _Runtime.UNDEFINED;
+    wasMissing = ((cast !(cast ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).has(id)) : Bool) : Bool));
+    previous = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).has(id)) : Bool) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bounds.maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast bounds.minX : Float) <= (cast bounds.maxX : Float)) : Bool)) : Bool) && (cast ((cast bounds.minY : Float) <= (cast bounds.maxY : Float)) : Bool)) : Bool)) {
+      var cs:Float = (cast grid : UniformGrid__uniformGrid).cellSize;
+      var spanned:Float = (cast UniformGrid._spannedCellCount__uniformGrid((cast cs : Float), (cast bounds : SpatialAabb)) : Float);
+      if ((cast ((cast ((cast ((cast ((cast ((cast spanned : Float) <= (cast MAX_INDEXED_CELLS_PER_OBJECT : Float)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.minX : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.minY : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : flighthq.types.Spatial.SpatialAabb).maxX : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.maxX : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : flighthq.types.Spatial.SpatialAabb).maxY : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.maxY : Float), (cast cs : Float)) : Float)) : Bool)) : Bool)) {
+        ((cast previous : flighthq.types.Spatial.SpatialAabb).minX = cast (bounds.minX : Dynamic));
+        ((cast previous : flighthq.types.Spatial.SpatialAabb).minY = cast (bounds.minY : Dynamic));
+        ((cast previous : flighthq.types.Spatial.SpatialAabb).maxX = cast (bounds.maxX : Dynamic));
+        ((cast previous : flighthq.types.Spatial.SpatialAabb).maxY = cast (bounds.maxY : Dynamic));
         return cast true;
       }
     }
-    _Runtime.callValue(UniformGrid._removeFromGrid__uniformGrid, cast ([grid, id] : Array<Dynamic>));
-    inserted = _Runtime.callValue(UniformGrid._insertIntoGrid__uniformGrid, cast ([grid, id, bounds, 'update'] : Array<Dynamic>));
+    UniformGrid._removeFromGrid__uniformGrid(grid, (cast id : Float));
+    inserted = (cast UniformGrid._insertIntoGrid__uniformGrid(grid, (cast id : Float), (cast bounds : SpatialAabb), (cast 'update' : SpatialIndexingOperation)) : Bool);
     if ((cast wasMissing : Bool)) {
-      var explanation:Dynamic = _Runtime.callValue(UniformGrid._explainGridIndexing__uniformGrid, cast ([grid, id] : Array<Dynamic>));
-      _Runtime.callValue(UniformGrid._reportGridIndexing__uniformGrid, cast ([grid, id, _Runtime.field(explanation, 'mode'), 'update', 'missing-id', 0.0] : Array<Dynamic>));
+      var explanation:SpatialIndexingExplanation = (cast UniformGrid._explainGridIndexing__uniformGrid(grid, (cast id : Float)) : SpatialIndexingExplanation);
+      UniformGrid._reportGridIndexing__uniformGrid(grid, (cast id : Float), (cast (cast explanation : SpatialIndexingExplanation).mode : SpatialIndexingMode), (cast 'update' : SpatialIndexingOperation), (cast 'missing-id' : Null<String>), (cast 0.0 : Float));
     }
     return cast inserted;
     return cast null;
   }
 
   public static function _isSpatialAabbContainsPoint__uniformGrid(aabb:SpatialAabb, x:Float, y:Float):Bool {
-    _Runtime.callValue(UniformGrid._fillRectFromAabb__uniformGrid, cast ([UniformGrid._scratchRectA__uniformGrid, aabb] : Array<Dynamic>));
-    return cast _Runtime.callValue(containsRectanglePointXY, cast ([UniformGrid._scratchRectA__uniformGrid, x, y] : Array<Dynamic>));
+    UniformGrid._fillRectFromAabb__uniformGrid((cast UniformGrid._scratchRectA__uniformGrid : RectangleLike), (cast aabb : SpatialAabb));
+    return cast (cast containsRectanglePointXY((cast UniformGrid._scratchRectA__uniformGrid : RectangleLike), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   public static function _isSpatialAabbOverlapping__uniformGrid(a:SpatialAabb, b:SpatialAabb):Bool {
-    _Runtime.callValue(UniformGrid._fillRectFromAabb__uniformGrid, cast ([UniformGrid._scratchRectA__uniformGrid, a] : Array<Dynamic>));
-    _Runtime.callValue(UniformGrid._fillRectFromAabb__uniformGrid, cast ([UniformGrid._scratchRectB__uniformGrid, b] : Array<Dynamic>));
-    return cast _Runtime.callValue(intersectsRectangle, cast ([UniformGrid._scratchRectA__uniformGrid, UniformGrid._scratchRectB__uniformGrid] : Array<Dynamic>));
+    UniformGrid._fillRectFromAabb__uniformGrid((cast UniformGrid._scratchRectA__uniformGrid : RectangleLike), (cast a : SpatialAabb));
+    UniformGrid._fillRectFromAabb__uniformGrid((cast UniformGrid._scratchRectB__uniformGrid : RectangleLike), (cast b : SpatialAabb));
+    return cast (cast intersectsRectangle((cast UniformGrid._scratchRectA__uniformGrid : RectangleLike), (cast UniformGrid._scratchRectB__uniformGrid : RectangleLike)) : Bool);
     return cast null;
   }
 
   public static function _rayBoxEntryT__uniformGrid(ox:Float, oy:Float, dx:Float, dy:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Float {
-    var tmin:Dynamic = cast _Runtime.UNDEFINED;
-    var tmax:Dynamic = cast _Runtime.UNDEFINED;
+    var tmin:Float = cast _Runtime.UNDEFINED;
+    var tmax:Float = cast _Runtime.UNDEFINED;
     tmin = -HxMath.POSITIVE_INFINITY;
     tmax = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(dx, 0.0) : Bool)) {
-      var inv:Dynamic = (1.0 / dx);
-      var t1:Dynamic = ((minX - ox) * inv);
-      var t2:Dynamic = ((maxX - ox) * inv);
+      var inv:Float = (1.0 / dx);
+      var t1:Float = ((minX - ox) * inv);
+      var t2:Float = ((maxX - ox) * inv);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-        var t:Dynamic = t1;
+        var t:Float = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (t : Dynamic));
       }
@@ -224,11 +225,11 @@ class UniformGrid {
       return cast -1.0;
     } }
     if ((cast !_Runtime.strictEquals(dy, 0.0) : Bool)) {
-      var inv:Dynamic = (1.0 / dy);
-      var t1:Dynamic = ((minY - oy) * inv);
-      var t2:Dynamic = ((maxY - oy) * inv);
+      var inv:Float = (1.0 / dy);
+      var t1:Float = ((minY - oy) * inv);
+      var t2:Float = ((maxY - oy) * inv);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-        var t:Dynamic = t1;
+        var t:Float = t1;
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (t : Dynamic));
       }
@@ -243,91 +244,91 @@ class UniformGrid {
   }
 
   public static function _removeFromGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):Void {
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var cx0:Dynamic = cast _Runtime.UNDEFINED;
-    var cx1:Dynamic = cast _Runtime.UNDEFINED;
-    var cy0:Dynamic = cast _Runtime.UNDEFINED;
-    var cy1:Dynamic = cast _Runtime.UNDEFINED;
-    ((cast _Runtime.field(grid, 'declined') : flighthq._internal._Map).delete_(id));
-    bounds = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
+    var bounds:Null<SpatialAabb> = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var cx0:Float = cast _Runtime.UNDEFINED;
+    var cx1:Float = cast _Runtime.UNDEFINED;
+    var cy0:Float = cast _Runtime.UNDEFINED;
+    var cy1:Float = cast _Runtime.UNDEFINED;
+    ((cast (cast grid : UniformGrid__uniformGrid).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).delete_(id));
+    bounds = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
     if ((cast _Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).delete_(id)) : Bool)) {
-      ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).delete_(id));
+    if ((cast ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).delete_(id)) : Bool)) {
+      ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).delete_(id));
       return;
     }
-    cs = _Runtime.field(grid, 'cellSize');
-    cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.minX, cs] : Array<Dynamic>));
-    cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.maxX, cs] : Array<Dynamic>));
-    cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.minY, cs] : Array<Dynamic>));
-    cy1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bounds.maxY, cs] : Array<Dynamic>));
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
+    cx0 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast cs : Float)) : Float);
+    cx1 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxX : Float), (cast cs : Float)) : Float);
+    cy0 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast cs : Float)) : Float);
+    cy1 = (cast UniformGrid._cellIndex__uniformGrid((cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxY : Float), (cast cs : Float)) : Float);
     {
-      var cy:Dynamic = cy0;
+      var cy:Float = cy0;
       while ((cast ((cast cy : Float) <= (cast cy1 : Float)) : Bool)) {
         {
-          var cx:Dynamic = cx0;
+          var cx:Float = cx0;
           while ((cast ((cast cx : Float) <= (cast cx1 : Float)) : Bool)) {
-            var key:Dynamic = _Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>));
-            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(key));
+            var key:String = (cast UniformGrid._cellKey__uniformGrid((cast cx : Float), (cast cy : Float)) : String);
+            var cell:Null<GridCell__uniformGrid> = ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).get(key));
             if ((cast _Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { cx++; continue; }
-            ((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).delete_(id));
-            if ((cast _Runtime.strictEquals((cast _Runtime.field(cell, 'ids') : flighthq._internal._Set).size, 0.0) : Bool)) { ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).delete_(key)); }
+            ((cast (cast cell : GridCell__uniformGrid).ids : flighthq._internal._Set<Float>).delete_(id));
+            if ((cast _Runtime.strictEquals((cast (cast cell : GridCell__uniformGrid).ids : flighthq._internal._Set<Float>).size, 0.0) : Bool)) { ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).delete_(key)); }
             cx++;
           }
         }
         cy++;
       }
     }
-    ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).delete_(id));
+    ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).delete_(id));
   }
 
   public static function _queryGridOverflowPairs__uniformGrid(grid:UniformGrid__uniformGrid, out:Array<SpatialPair>):Void {
-    for (id in _Runtime.iterable(_Runtime.field(grid, 'overflow'))) {
-      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
+    for (id in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).overflow)) {
+      var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
       if ((cast _Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      for (__iteration0 in _Runtime.iterable(_Runtime.field(grid, 'bounds'))) {
-        var otherId:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-        var otherBounds:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      for (__iteration0 in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).bounds)) {
+        var otherId:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var otherBounds:SpatialAabb = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         if ((cast _Runtime.strictEquals(otherId, id) : Bool)) { continue; }
-        if ((cast ((cast ((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).has(otherId)) : Bool) && (cast ((cast otherId : Float) < (cast id : Float)) : Bool)) : Bool)) { continue; }
-        if ((cast !(cast _Runtime.callValue(UniformGrid._isSpatialAabbOverlapping__uniformGrid, cast ([bounds, otherBounds] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
+        if ((cast ((cast ((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).has(otherId)) : Bool) && (cast ((cast otherId : Float) < (cast id : Float)) : Bool)) : Bool)) { continue; }
+        if ((cast !(cast (cast UniformGrid._isSpatialAabbOverlapping__uniformGrid((cast bounds : SpatialAabb), (cast otherBounds : SpatialAabb)) : Bool) : Bool) : Bool)) { continue; }
         _Runtime.callProperty(out, 'push', cast ([((cast ((cast id : Float) < (cast otherId : Float)) : Bool) ? (cast { a: id, b: otherId } : Dynamic) : (cast { a: otherId, b: id } : Dynamic))] : Array<Dynamic>));
       }
     }
   }
 
   public static function _queryGridPairs__uniformGrid(grid:UniformGrid__uniformGrid, out:Array<SpatialPair>):Void {
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var list:Dynamic = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var list:Array<Float> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    cs = _Runtime.field(grid, 'cellSize');
-    list = _Runtime.field(grid, 'pairIds');
-    for (cell in _Runtime.iterable(((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).values()))) {
-      var ids:Dynamic = _Runtime.field(cell, 'ids');
-      if ((cast ((cast (cast ids : flighthq._internal._Set).size : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
+    list = (cast grid : UniformGrid__uniformGrid).pairIds;
+    for (cell in _Runtime.iterable(((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).values()))) {
+      var ids:flighthq._internal._Set<Float> = (cast cell : GridCell__uniformGrid).ids;
+      if ((cast ((cast (cast ids : flighthq._internal._Set<Float>).size : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.setLength(list, 0.0);
       for (id in _Runtime.iterable(ids)) {
         _Runtime.callProperty(list, 'push', cast ([id] : Array<Dynamic>));
       }
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(list, 'length') : Float)) : Bool)) {
           {
-            var j:Dynamic = (i + 1.0);
+            var j:Float = (i + 1.0);
             while ((cast ((cast j : Float) < (cast _Runtime.field(list, 'length') : Float)) : Bool)) {
-              var a:Dynamic = flighthq._internal._StaticIndex.readArray(list, i);
-              var b:Dynamic = flighthq._internal._StaticIndex.readArray(list, j);
+              var a:Float = flighthq._internal._StaticIndex.readArray(list, i);
+              var b:Float = flighthq._internal._StaticIndex.readArray(list, j);
               if ((cast ((cast a : Float) > (cast b : Float)) : Bool)) {
-                var t:Dynamic = a;
+                var t:Float = a;
                 (a = cast (b : Dynamic));
                 (b = cast (t : Dynamic));
               }
-              var ab:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(a));
-              var bb:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(b));
+              var ab:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(a));
+              var bb:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(b));
               if ((cast ((cast _Runtime.strictEquals(ab, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bb, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { j++; continue; }
-              var canonicalX:Dynamic = HxMath.max(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([ab.minX, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bb.minX, cs] : Array<Dynamic>)));
-              var canonicalY:Dynamic = HxMath.max(_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([ab.minY, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([bb.minY, cs] : Array<Dynamic>)));
-              if ((cast ((cast _Runtime.strictEquals(_Runtime.field(cell, 'cx'), canonicalX) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(cell, 'cy'), canonicalY) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([{ a: a, b: b }] : Array<Dynamic>)); }
+              var canonicalX:Float = HxMath.max((cast UniformGrid._cellIndex__uniformGrid((cast (cast ab : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast (cast bb : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast cs : Float)) : Float));
+              var canonicalY:Float = HxMath.max((cast UniformGrid._cellIndex__uniformGrid((cast (cast ab : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast (cast bb : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast cs : Float)) : Float));
+              if ((cast ((cast _Runtime.strictEquals((cast cell : GridCell__uniformGrid).cx, canonicalX) : Bool) && (cast _Runtime.strictEquals((cast cell : GridCell__uniformGrid).cy, canonicalY) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([{ a: a, b: b }] : Array<Dynamic>)); }
               j++;
             }
           }
@@ -335,103 +336,103 @@ class UniformGrid {
         }
       }
     }
-    if ((cast !_Runtime.strictEquals((cast _Runtime.field(grid, 'overflow') : flighthq._internal._Set).size, 0.0) : Bool)) { _Runtime.callValue(UniformGrid._queryGridOverflowPairs__uniformGrid, cast ([grid, out] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals((cast (cast grid : UniformGrid__uniformGrid).overflow : flighthq._internal._Set<Float>).size, 0.0) : Bool)) { UniformGrid._queryGridOverflowPairs__uniformGrid(grid, (cast out : Array<SpatialPair>)); }
   }
 
   public static function _reportGridIndexing__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, mode:SpatialIndexingMode, operation:SpatialIndexingOperation, reason:Null<SpatialIndexingReason>, wouldOccupyBucketCount:Float):Void {
     if ((cast _Runtime.strictEquals(UniformGrid._indexingGuard__uniformGrid, null) : Bool)) { return; }
-    _Runtime.callValue(UniformGrid._indexingGuard__uniformGrid, cast ([{ cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount }] : Array<Dynamic>));
+    (cast UniformGrid._indexingGuard__uniformGrid : SpatialIndexingNotice->Void)({ cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount });
   }
 
   public static function _queryGridPoint__uniformGrid(grid:UniformGrid__uniformGrid, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var cell:Dynamic = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var cell:Null<GridCell__uniformGrid> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    cs = _Runtime.field(grid, 'cellSize');
-    cell = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([_Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([x, cs] : Array<Dynamic>)), _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([y, cs] : Array<Dynamic>))] : Array<Dynamic>))));
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
+    cell = ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).get((cast UniformGrid._cellKey__uniformGrid((cast (cast UniformGrid._cellIndex__uniformGrid((cast x : Float), (cast cs : Float)) : Float) : Float), (cast (cast UniformGrid._cellIndex__uniformGrid((cast y : Float), (cast cs : Float)) : Float) : Float)) : String)));
     if ((cast !_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-        var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-        if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(UniformGrid._isSpatialAabbContainsPoint__uniformGrid, cast ([bounds, x, y] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+      for (id in _Runtime.iterable((cast cell : GridCell__uniformGrid).ids)) {
+        var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+        if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid._isSpatialAabbContainsPoint__uniformGrid((cast bounds : SpatialAabb), (cast x : Float), (cast y : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
       }
     }
-    for (id in _Runtime.iterable(_Runtime.field(grid, 'overflow'))) {
-      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(UniformGrid._isSpatialAabbContainsPoint__uniformGrid, cast ([bounds, x, y] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+    for (id in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).overflow)) {
+      var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid._isSpatialAabbContainsPoint__uniformGrid((cast bounds : SpatialAabb), (cast x : Float), (cast y : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
 
   public static function _queryGridRay__uniformGrid(grid:UniformGrid__uniformGrid, ox:Float, oy:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var seen:Dynamic = cast _Runtime.UNDEFINED;
-    var boxMinX:Dynamic = cast _Runtime.UNDEFINED;
-    var boxMinY:Dynamic = cast _Runtime.UNDEFINED;
-    var boxMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var boxMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var tEnter:Dynamic = cast _Runtime.UNDEFINED;
-    var startX:Dynamic = cast _Runtime.UNDEFINED;
-    var startY:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var stepX:Dynamic = cast _Runtime.UNDEFINED;
-    var stepY:Dynamic = cast _Runtime.UNDEFINED;
-    var tMaxX:Dynamic = cast _Runtime.UNDEFINED;
-    var tDeltaX:Dynamic = cast _Runtime.UNDEFINED;
-    var tMaxY:Dynamic = cast _Runtime.UNDEFINED;
-    var tDeltaY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxSteps:Dynamic = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var seen:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
+    var boxMinX:Float = cast _Runtime.UNDEFINED;
+    var boxMinY:Float = cast _Runtime.UNDEFINED;
+    var boxMaxX:Float = cast _Runtime.UNDEFINED;
+    var boxMaxY:Float = cast _Runtime.UNDEFINED;
+    var tEnter:Float = cast _Runtime.UNDEFINED;
+    var startX:Float = cast _Runtime.UNDEFINED;
+    var startY:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var stepX:Float = cast _Runtime.UNDEFINED;
+    var stepY:Float = cast _Runtime.UNDEFINED;
+    var tMaxX:Float = cast _Runtime.UNDEFINED;
+    var tDeltaX:Float = cast _Runtime.UNDEFINED;
+    var tMaxY:Float = cast _Runtime.UNDEFINED;
+    var tDeltaY:Float = cast _Runtime.UNDEFINED;
+    var maxSteps:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    cs = _Runtime.field(grid, 'cellSize');
-    seen = _Runtime.field(grid, 'seen');
-    ((cast seen : flighthq._internal._Set).clear());
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
+    seen = (cast grid : UniformGrid__uniformGrid).seen;
+    ((cast seen : flighthq._internal._Set<Float>).clear());
     if ((cast ((cast _Runtime.strictEquals(dx, 0.0) : Bool) && (cast _Runtime.strictEquals(dy, 0.0) : Bool)) : Bool)) {
-      _Runtime.callValue(UniformGrid._queryGridPoint__uniformGrid, cast ([grid, ox, oy, out] : Array<Dynamic>));
+      UniformGrid._queryGridPoint__uniformGrid(grid, (cast ox : Float), (cast oy : Float), (cast out : Array<Float>));
       return;
     }
-    for (id in _Runtime.iterable(_Runtime.field(grid, 'overflow'))) {
-      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.callValue(UniformGrid._rayBoxEntryT__uniformGrid, cast ([ox, oy, dx, dy, bounds.minX, bounds.minY, bounds.maxX, bounds.maxY] : Array<Dynamic>)) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    for (id in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).overflow)) {
+      var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid._rayBoxEntryT__uniformGrid((cast ox : Float), (cast oy : Float), (cast dx : Float), (cast dy : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxX : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxY : Float)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>));
       }
     }
-    if ((cast _Runtime.strictEquals((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).size, 0.0) : Bool)) { return; }
-    boxMinX = _Runtime.multiplyNumbers(_Runtime.field(grid, 'minCellX'), cs);
-    boxMinY = _Runtime.multiplyNumbers(_Runtime.field(grid, 'minCellY'), cs);
-    boxMaxX = (_Runtime.addNumbers(_Runtime.field(grid, 'maxCellX'), 1.0) * cs);
-    boxMaxY = (_Runtime.addNumbers(_Runtime.field(grid, 'maxCellY'), 1.0) * cs);
-    tEnter = _Runtime.callValue(UniformGrid._rayBoxEntryT__uniformGrid, cast ([ox, oy, dx, dy, boxMinX, boxMinY, boxMaxX, boxMaxY] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).size, 0.0) : Bool)) { return; }
+    boxMinX = ((cast grid : UniformGrid__uniformGrid).minCellX * cs);
+    boxMinY = ((cast grid : UniformGrid__uniformGrid).minCellY * cs);
+    boxMaxX = (((cast grid : UniformGrid__uniformGrid).maxCellX + 1.0) * cs);
+    boxMaxY = (((cast grid : UniformGrid__uniformGrid).maxCellY + 1.0) * cs);
+    tEnter = (cast UniformGrid._rayBoxEntryT__uniformGrid((cast ox : Float), (cast oy : Float), (cast dx : Float), (cast dy : Float), (cast boxMinX : Float), (cast boxMinY : Float), (cast boxMaxX : Float), (cast boxMaxY : Float)) : Float);
     if ((cast ((cast tEnter : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     startX = (ox + (tEnter * dx));
     startY = (oy + (tEnter * dy));
-    cx = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([startX, cs] : Array<Dynamic>));
-    cy = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([startY, cs] : Array<Dynamic>));
-    if ((cast ((cast cx : Float) < (cast _Runtime.field(grid, 'minCellX') : Float)) : Bool)) { (cx = cast (_Runtime.field(grid, 'minCellX') : Dynamic)); } else { if ((cast ((cast cx : Float) > (cast _Runtime.field(grid, 'maxCellX') : Float)) : Bool)) { (cx = cast (_Runtime.field(grid, 'maxCellX') : Dynamic)); } }
-    if ((cast ((cast cy : Float) < (cast _Runtime.field(grid, 'minCellY') : Float)) : Bool)) { (cy = cast (_Runtime.field(grid, 'minCellY') : Dynamic)); } else { if ((cast ((cast cy : Float) > (cast _Runtime.field(grid, 'maxCellY') : Float)) : Bool)) { (cy = cast (_Runtime.field(grid, 'maxCellY') : Dynamic)); } }
+    cx = (cast UniformGrid._cellIndex__uniformGrid((cast startX : Float), (cast cs : Float)) : Float);
+    cy = (cast UniformGrid._cellIndex__uniformGrid((cast startY : Float), (cast cs : Float)) : Float);
+    if ((cast ((cast cx : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellX : Float)) : Bool)) { (cx = cast ((cast grid : UniformGrid__uniformGrid).minCellX : Dynamic)); } else { if ((cast ((cast cx : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellX : Float)) : Bool)) { (cx = cast ((cast grid : UniformGrid__uniformGrid).maxCellX : Dynamic)); } }
+    if ((cast ((cast cy : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellY : Float)) : Bool)) { (cy = cast ((cast grid : UniformGrid__uniformGrid).minCellY : Dynamic)); } else { if ((cast ((cast cy : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellY : Float)) : Bool)) { (cy = cast ((cast grid : UniformGrid__uniformGrid).maxCellY : Dynamic)); } }
     stepX = ((cast ((cast dx : Float) > (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     stepY = ((cast ((cast dy : Float) > (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast ((cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     tMaxX = HxMath.POSITIVE_INFINITY;
     tDeltaX = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(stepX, 0.0) : Bool)) {
-      var boundary:Dynamic = ((cast ((cast stepX : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cx + 1.0) * cs) : Dynamic) : (cast (cx * cs) : Dynamic));
+      var boundary:Float = ((cast ((cast stepX : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cx + 1.0) * cs) : Dynamic) : (cast (cx * cs) : Dynamic));
       (tMaxX = cast (((boundary - ox) / dx) : Dynamic));
       (tDeltaX = cast (_Runtime.divideNumbers(cs, HxMath.abs(dx)) : Dynamic));
     }
     tMaxY = HxMath.POSITIVE_INFINITY;
     tDeltaY = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(stepY, 0.0) : Bool)) {
-      var boundary:Dynamic = ((cast ((cast stepY : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cy + 1.0) * cs) : Dynamic) : (cast (cy * cs) : Dynamic));
+      var boundary:Float = ((cast ((cast stepY : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cy + 1.0) * cs) : Dynamic) : (cast (cy * cs) : Dynamic));
       (tMaxY = cast (((boundary - oy) / dy) : Dynamic));
       (tDeltaY = cast (_Runtime.divideNumbers(cs, HxMath.abs(dy)) : Dynamic));
     }
-    maxSteps = ((_Runtime.subtractNumbers(_Runtime.field(grid, 'maxCellX'), _Runtime.field(grid, 'minCellX')) + _Runtime.subtractNumbers(_Runtime.field(grid, 'maxCellY'), _Runtime.field(grid, 'minCellY'))) + 3.0);
+    maxSteps = ((((cast grid : UniformGrid__uniformGrid).maxCellX - (cast grid : UniformGrid__uniformGrid).minCellX) + ((cast grid : UniformGrid__uniformGrid).maxCellY - (cast grid : UniformGrid__uniformGrid).minCellY)) + 3.0);
     {
-      var step:Dynamic = 0.0;
+      var step:Float = 0.0;
       while ((cast ((cast step : Float) <= (cast maxSteps : Float)) : Bool)) {
-        if ((cast ((cast ((cast ((cast ((cast cx : Float) < (cast _Runtime.field(grid, 'minCellX') : Float)) : Bool) || (cast ((cast cx : Float) > (cast _Runtime.field(grid, 'maxCellX') : Float)) : Bool)) : Bool) || (cast ((cast cy : Float) < (cast _Runtime.field(grid, 'minCellY') : Float)) : Bool)) : Bool) || (cast ((cast cy : Float) > (cast _Runtime.field(grid, 'maxCellY') : Float)) : Bool)) : Bool)) { break; }
-        var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))));
+        if ((cast ((cast ((cast ((cast ((cast cx : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellX : Float)) : Bool) || (cast ((cast cx : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellX : Float)) : Bool)) : Bool) || (cast ((cast cy : Float) < (cast (cast grid : UniformGrid__uniformGrid).minCellY : Float)) : Bool)) : Bool) || (cast ((cast cy : Float) > (cast (cast grid : UniformGrid__uniformGrid).maxCellY : Float)) : Bool)) : Bool)) { break; }
+        var cell:Null<GridCell__uniformGrid> = ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).get((cast UniformGrid._cellKey__uniformGrid((cast cx : Float), (cast cy : Float)) : String)));
         if ((cast !_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-            ((cast seen : flighthq._internal._Set).add(id));
+          for (id in _Runtime.iterable((cast cell : GridCell__uniformGrid).ids)) {
+            ((cast seen : flighthq._internal._Set<Float>).add(id));
           }
         }
         if ((cast ((cast tMaxX : Float) < (cast tMaxY : Float)) : Bool)) {
@@ -445,49 +446,49 @@ class UniformGrid {
       }
     }
     for (id in _Runtime.iterable(seen)) {
-      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.callValue(UniformGrid._rayBoxEntryT__uniformGrid, cast ([ox, oy, dx, dy, bounds.minX, bounds.minY, bounds.maxX, bounds.maxY] : Array<Dynamic>)) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid._rayBoxEntryT__uniformGrid((cast ox : Float), (cast oy : Float), (cast dx : Float), (cast dy : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minX : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).minY : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxX : Float), (cast (cast bounds : flighthq.types.Spatial.SpatialAabb).maxY : Float)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>));
       }
     }
   }
 
   public static function _queryGridRegion__uniformGrid(grid:UniformGrid__uniformGrid, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    var cs:Dynamic = cast _Runtime.UNDEFINED;
-    var seen:Dynamic = cast _Runtime.UNDEFINED;
-    var cx0:Dynamic = cast _Runtime.UNDEFINED;
-    var cx1:Dynamic = cast _Runtime.UNDEFINED;
-    var cy0:Dynamic = cast _Runtime.UNDEFINED;
-    var cy1:Dynamic = cast _Runtime.UNDEFINED;
+    var cs:Float = cast _Runtime.UNDEFINED;
+    var seen:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
+    var cx0:Float = cast _Runtime.UNDEFINED;
+    var cx1:Float = cast _Runtime.UNDEFINED;
+    var cy0:Float = cast _Runtime.UNDEFINED;
+    var cy1:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    cs = _Runtime.field(grid, 'cellSize');
-    seen = _Runtime.field(grid, 'seen');
-    ((cast seen : flighthq._internal._Set).clear());
-    if ((cast !(cast _Runtime.compare(_Runtime.callValue(UniformGrid._spannedCellCount__uniformGrid, cast ([cs, region] : Array<Dynamic>)), (cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).size, '<=') : Bool) : Bool)) {
-      for (__iteration1 in _Runtime.iterable(_Runtime.field(grid, 'bounds'))) {
-        var id:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
-        var bounds:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-        if ((cast _Runtime.callValue(UniformGrid._isSpatialAabbOverlapping__uniformGrid, cast ([bounds, region] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+    cs = (cast grid : UniformGrid__uniformGrid).cellSize;
+    seen = (cast grid : UniformGrid__uniformGrid).seen;
+    ((cast seen : flighthq._internal._Set<Float>).clear());
+    if ((cast !(cast _Runtime.compare((cast UniformGrid._spannedCellCount__uniformGrid((cast cs : Float), (cast region : SpatialAabb)) : Float), (cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).size, '<=') : Bool) : Bool)) {
+      for (__iteration1 in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).bounds)) {
+        var id:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
+        var bounds:SpatialAabb = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+        if ((cast (cast UniformGrid._isSpatialAabbOverlapping__uniformGrid((cast bounds : SpatialAabb), (cast region : SpatialAabb)) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
       }
       return;
     }
-    cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([region.minX, cs] : Array<Dynamic>));
-    cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([region.maxX, cs] : Array<Dynamic>));
-    cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([region.minY, cs] : Array<Dynamic>));
-    cy1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([region.maxY, cs] : Array<Dynamic>));
+    cx0 = (cast UniformGrid._cellIndex__uniformGrid((cast region.minX : Float), (cast cs : Float)) : Float);
+    cx1 = (cast UniformGrid._cellIndex__uniformGrid((cast region.maxX : Float), (cast cs : Float)) : Float);
+    cy0 = (cast UniformGrid._cellIndex__uniformGrid((cast region.minY : Float), (cast cs : Float)) : Float);
+    cy1 = (cast UniformGrid._cellIndex__uniformGrid((cast region.maxY : Float), (cast cs : Float)) : Float);
     {
-      var cy:Dynamic = cy0;
+      var cy:Float = cy0;
       while ((cast ((cast cy : Float) <= (cast cy1 : Float)) : Bool)) {
         {
-          var cx:Dynamic = cx0;
+          var cx:Float = cx0;
           while ((cast ((cast cx : Float) <= (cast cx1 : Float)) : Bool)) {
-            var cell:Dynamic = ((cast _Runtime.field(grid, 'cells') : flighthq._internal._Map).get(_Runtime.callValue(UniformGrid._cellKey__uniformGrid, cast ([cx, cy] : Array<Dynamic>))));
+            var cell:Null<GridCell__uniformGrid> = ((cast (cast grid : UniformGrid__uniformGrid).cells : flighthq._internal._Map<String, GridCell__uniformGrid>).get((cast UniformGrid._cellKey__uniformGrid((cast cx : Float), (cast cy : Float)) : String)));
             if ((cast _Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { cx++; continue; }
-            for (id in _Runtime.iterable(_Runtime.field(cell, 'ids'))) {
-              if ((cast ((cast seen : flighthq._internal._Set).has(id)) : Bool)) { continue; }
-              ((cast seen : flighthq._internal._Set).add(id));
-              var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-              if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(UniformGrid._isSpatialAabbOverlapping__uniformGrid, cast ([bounds, region] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+            for (id in _Runtime.iterable((cast cell : GridCell__uniformGrid).ids)) {
+              if ((cast ((cast seen : flighthq._internal._Set<Float>).has(id)) : Bool)) { continue; }
+              ((cast seen : flighthq._internal._Set<Float>).add(id));
+              var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+              if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid._isSpatialAabbOverlapping__uniformGrid((cast bounds : SpatialAabb), (cast region : SpatialAabb)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
             }
             cx++;
           }
@@ -495,21 +496,21 @@ class UniformGrid {
         cy++;
       }
     }
-    for (id in _Runtime.iterable(_Runtime.field(grid, 'overflow'))) {
-      var bounds:Dynamic = ((cast _Runtime.field(grid, 'bounds') : flighthq._internal._Map).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callValue(UniformGrid._isSpatialAabbOverlapping__uniformGrid, cast ([bounds, region] : Array<Dynamic>)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+    for (id in _Runtime.iterable((cast grid : UniformGrid__uniformGrid).overflow)) {
+      var bounds:Null<SpatialAabb> = ((cast (cast grid : UniformGrid__uniformGrid).bounds : flighthq._internal._Map<Float, SpatialAabb>).get(id));
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid._isSpatialAabbOverlapping__uniformGrid((cast bounds : SpatialAabb), (cast region : SpatialAabb)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
 
   public static function _spannedCellCount__uniformGrid(cellSize:Float, aabb:SpatialAabb):Float {
-    var cx0:Dynamic = cast _Runtime.UNDEFINED;
-    var cx1:Dynamic = cast _Runtime.UNDEFINED;
-    var cy0:Dynamic = cast _Runtime.UNDEFINED;
-    var cy1:Dynamic = cast _Runtime.UNDEFINED;
-    cx0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([aabb.minX, cellSize] : Array<Dynamic>));
-    cx1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([aabb.maxX, cellSize] : Array<Dynamic>));
-    cy0 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([aabb.minY, cellSize] : Array<Dynamic>));
-    cy1 = _Runtime.callValue(UniformGrid._cellIndex__uniformGrid, cast ([aabb.maxY, cellSize] : Array<Dynamic>));
+    var cx0:Float = cast _Runtime.UNDEFINED;
+    var cx1:Float = cast _Runtime.UNDEFINED;
+    var cy0:Float = cast _Runtime.UNDEFINED;
+    var cy1:Float = cast _Runtime.UNDEFINED;
+    cx0 = (cast UniformGrid._cellIndex__uniformGrid((cast aabb.minX : Float), (cast cellSize : Float)) : Float);
+    cx1 = (cast UniformGrid._cellIndex__uniformGrid((cast aabb.maxX : Float), (cast cellSize : Float)) : Float);
+    cy0 = (cast UniformGrid._cellIndex__uniformGrid((cast aabb.minY : Float), (cast cellSize : Float)) : Float);
+    cy1 = (cast UniformGrid._cellIndex__uniformGrid((cast aabb.maxY : Float), (cast cellSize : Float)) : Float);
     return cast (((cx1 - cx0) + 1.0) * ((cy1 - cy0) + 1.0));
     return cast null;
   }

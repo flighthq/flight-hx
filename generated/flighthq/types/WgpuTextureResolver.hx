@@ -7,4 +7,4 @@ import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
-typedef WgpuTextureResolver = Dynamic;
+typedef WgpuTextureResolver = WgpuRenderState->TextureLike->Bool->TextureColorSpace->Null<WgpuTextureEntry>;

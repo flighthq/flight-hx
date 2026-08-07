@@ -12,16 +12,16 @@ typedef NetCredentials = String;
 
 typedef NetRedirect = String;
 
-typedef NetBody = Null<Dynamic>;
+typedef NetBody = Null<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, haxe.io.ArrayBufferView>>;
 
-typedef NetResponseBody = Null<Dynamic>;
+typedef NetResponseBody = Null<flighthq._internal._Any>;
 
-typedef NetRequest = { var method:NetMethod; var url:String; @:optional var headers:Dynamic; @:optional var body:NetBody; @:optional var responseType:NetResponseType; @:optional var timeoutMs:Float; @:optional var credentials:NetCredentials; @:optional var redirect:NetRedirect; };
+typedef NetRequest = { var method:NetMethod; var url:String; @:optional var headers:flighthq._internal._Record<String, String>; @:optional var body:NetBody; @:optional var responseType:NetResponseType; @:optional var timeoutMs:Float; @:optional var credentials:NetCredentials; @:optional var redirect:NetRedirect; };
 
-typedef NetResponse = { var status:Float; var statusText:String; var ok:Bool; var headers:Dynamic; var body:NetResponseBody; var url:String; };
+typedef NetResponse = { var status:Float; var statusText:String; var ok:Bool; var headers:flighthq._internal._Record<String, String>; var body:NetResponseBody; var url:String; };
 
 typedef NetProgress = { var phase:String; var loaded:Float; var total:Float; };
 
-typedef NetRequestOptions = { @:optional var progress:Signal<Dynamic>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
+typedef NetRequestOptions = { @:optional var progress:Signal<NetProgress->Void>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
-typedef NetBackend = { var sendNetRequest:Dynamic; };
+typedef NetBackend = { var sendNetRequest:NetRequest->NetRequestOptions->flighthq._internal._Promise<NetResponse>; };

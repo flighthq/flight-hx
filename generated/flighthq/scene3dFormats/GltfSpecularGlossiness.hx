@@ -5,32 +5,57 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.packLinearToColor;
 import flighthq.materials.PbrMaterials.createSpecularGlossinessPbrMaterial;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
+import flighthq.types.GltfSchema.GltfTextureInfo;
 import flighthq.types.Material.MaterialLike;
+import flighthq.types.Sampler;
+import flighthq.types.Scene3DDocument;
+import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfSpecularGlossiness {
-  public static final GltfSpecularGlossinessExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfSpecularGlossinessExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_pbrSpecularGlossiness');
+        var block:Null<GltfMaterialsPbrSpecularGlossiness> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_pbrSpecularGlossiness');
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var existing:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(context, 'document'), 'materials'), i);
+        var existing:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
-        var standard:Dynamic = (cast (cast existing : Dynamic) : StandardPbrMaterial);
-        var diffuse:Dynamic = _Runtime.coalesce(_Runtime.field(block, 'diffuseFactor'), function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
-        var specular:Dynamic = _Runtime.coalesce(_Runtime.field(block, 'specularFactor'), function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-        var replacement:Dynamic = _Runtime.callValue(createSpecularGlossinessPbrMaterial, cast ([{ diffuse: _Runtime.callValue(packLinearToColor, cast ([cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 2.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 3.0), function():Dynamic return cast 1.0)] : Array<Dynamic>)] : Array<Dynamic>)), diffuseMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'diffuseTexture'), 'srgb'] : Array<Dynamic>)), emissive: _Runtime.field(standard, 'emissive'), emissiveMap: _Runtime.field(standard, 'emissiveMap'), emissiveStrength: _Runtime.field(standard, 'emissiveStrength'), glossiness: _Runtime.coalesce(_Runtime.field(block, 'glossinessFactor'), function():Dynamic return cast 1.0), normalMap: _Runtime.field(standard, 'normalMap'), normalScale: _Runtime.field(standard, 'normalScale'), occlusionMap: _Runtime.field(standard, 'occlusionMap'), occlusionStrength: _Runtime.field(standard, 'occlusionStrength'), specular: _Runtime.callValue(packLinearToColor, cast ([cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>)] : Array<Dynamic>)), specularGlossinessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'specularGlossinessTexture'), 'srgb'] : Array<Dynamic>)) }] : Array<Dynamic>));
-        _Runtime.setField(replacement, 'alphaCutoff', _Runtime.field(standard, 'alphaCutoff'));
-        _Runtime.setField(replacement, 'alphaMode', _Runtime.field(standard, 'alphaMode'));
-        _Runtime.setField(replacement, 'doubleSided', _Runtime.field(standard, 'doubleSided'));
-        _Runtime.setField(replacement, 'name', _Runtime.field(standard, 'name'));
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(_Runtime.field(context, 'document'), 'materials'), i, (cast (cast replacement : Dynamic) : MaterialLike));
+        var standard:StandardPbrMaterial = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
+        var diffuse:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).diffuseFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+        var specular:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).specularFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
+        var replacement:SpecularGlossinessPbrMaterial = (cast createSpecularGlossinessPbrMaterial((cast { diffuse: (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 2.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(diffuse, 3.0), function():Dynamic return cast 1.0)] : Array<Dynamic>) : Array<Float>)) : Null<Float>), diffuseMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).diffuseTexture, 'srgb'] : Array<Dynamic>)), emissive: (cast standard : StandardPbrMaterial).emissive, emissiveMap: (cast standard : StandardPbrMaterial).emissiveMap, emissiveStrength: (cast standard : StandardPbrMaterial).emissiveStrength, glossiness: _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).glossinessFactor, function():Dynamic return cast 1.0), normalMap: (cast standard : StandardPbrMaterial).normalMap, normalScale: (cast standard : StandardPbrMaterial).normalScale, occlusionMap: (cast standard : StandardPbrMaterial).occlusionMap, occlusionStrength: (cast standard : StandardPbrMaterial).occlusionStrength, specular: (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(specular, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>) : Array<Float>)) : Null<Float>), specularGlossinessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).specularGlossinessTexture, 'srgb'] : Array<Dynamic>)) } : Null<flighthq._internal._Any>)) : SpecularGlossinessPbrMaterial);
+        ((cast replacement : SpecularGlossinessPbrMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
+        ((cast replacement : SpecularGlossinessPbrMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
+        ((cast replacement : SpecularGlossinessPbrMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);
+        ((cast replacement : SpecularGlossinessPbrMaterial).name = (cast standard : StandardPbrMaterial).name);
+        flighthq._internal._StaticIndex.writeArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i, (cast (cast replacement : flighthq._internal._Any) : MaterialLike));
         i++;
       }
     }

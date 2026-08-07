@@ -7,5 +7,5 @@ import flighthq.types.Entity;
 import flighthq.types.Matrix;
 
 class _RenderCacheValues {
-  public static final RenderCacheKindValue:Dynamic = 'RenderCache';
+  public static final RenderCacheKindValue:String = 'RenderCache';
 }

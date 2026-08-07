@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Light;
 
 class _HemisphereLightValues {
-  public static final HemisphereLightKind:Dynamic = 'HemisphereLight';
+  public static final HemisphereLightKind:String = 'HemisphereLight';
 }

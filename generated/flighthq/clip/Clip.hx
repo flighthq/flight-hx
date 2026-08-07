@@ -40,7 +40,7 @@ class Clip {
     Facade_Clip_flighthq_clip_ClipRegion.copyClipRegion(out, source);
   }
 
-  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Float):ClipRegion {
     return cast Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromCircle(x, y, radius, tolerance);
     return cast null;
   }
@@ -50,12 +50,12 @@ class Clip {
     return cast null;
   }
 
-  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Float):ClipRegion {
     return cast Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromEllipse(rectangle, tolerance);
     return cast null;
   }
 
-  public static function createClipRegionFromPath(path:Path, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromPath(path:Path, ?tolerance:Float):ClipRegion {
     return cast Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromPath(path, tolerance);
     return cast null;
   }
@@ -65,7 +65,7 @@ class Clip {
     return cast null;
   }
 
-  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Float):ClipRegion {
     return cast Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromRoundedRectangle(rectangle, radius, tolerance);
     return cast null;
   }

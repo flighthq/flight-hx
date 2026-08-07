@@ -9,12 +9,12 @@ import flighthq.types.ColorTransformFunction;
 
 class ColorLutAdjustment {
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
-    var transform:Dynamic = cast _Runtime.UNDEFINED;
-    var matrix:Dynamic = cast _Runtime.UNDEFINED;
+    var transform:Null<ColorTransformFunction> = cast _Runtime.UNDEFINED;
+    var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     transform = _Runtime.field((cast operation : Dynamic), 'transform');
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
-    matrix = _Runtime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment, cast ([matrix] : Array<Dynamic>)) : Dynamic));
+    matrix = (cast getAdjustmentColorMatrix((cast operation : { var kind:String; })) : Null<Array<Float>>);
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment((cast matrix : Array<Float>)) : Null<ColorTransformFunction>) : Dynamic));
     return cast null;
   }
 
@@ -24,7 +24,7 @@ class ColorLutAdjustment {
   }
 
   public static function colorMatrixTransform__colorLutAdjustment(m:Array<Float>):ColorTransformFunction {
-    return cast function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
+    return cast function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.addNumbers(_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 0.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 1.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 2.0), b)), flighthq._internal._StaticIndex.readArray(m, 3.0)), flighthq._internal._StaticIndex.readArray(m, 4.0)));
       flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.addNumbers(_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 5.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 6.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 7.0), b)), flighthq._internal._StaticIndex.readArray(m, 8.0)), flighthq._internal._StaticIndex.readArray(m, 9.0)));
       flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.addNumbers(_Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 10.0), r) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 11.0), g)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(m, 12.0), b)), flighthq._internal._StaticIndex.readArray(m, 13.0)), flighthq._internal._StaticIndex.readArray(m, 14.0)));

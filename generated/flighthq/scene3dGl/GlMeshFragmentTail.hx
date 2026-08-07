@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class GlMeshFragmentTail {
-  public static final GL_MESH_FRAGMENT_TAIL_UNIFORMS:Dynamic = 'uniform float u_objectAlpha;\nuniform float u_alphaIsCoverage;';
+  public static final GL_MESH_FRAGMENT_TAIL_UNIFORMS:String = 'uniform float u_objectAlpha;\nuniform float u_alphaIsCoverage;';
 
-  public static final GL_MESH_FRAGMENT_TAIL:Dynamic = '  fragColor.a = mix(1.0, fragColor.a, u_alphaIsCoverage) * u_objectAlpha;\n  fragColor.rgb *= fragColor.a;';
+  public static final GL_MESH_FRAGMENT_TAIL:String = '  fragColor.a = mix(1.0, fragColor.a, u_alphaIsCoverage) * u_objectAlpha;\n  fragColor.rgb *= fragColor.a;';
 }

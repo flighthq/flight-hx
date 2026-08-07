@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleCollider = Dynamic;
+typedef ParticleCollider = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<CircleCollider, PlaneCollider>, RectangleCollider>, SphereCollider>;

@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Signal<T> = { var data:Null<SignalData<Dynamic>>; var emit:Dynamic; };
+typedef Signal<T> = { var data:Null<SignalData<T>>; var emit:T; };
 
-typedef SignalData<T> = { var slots:Array<Dynamic>; var priorities:Array<Float>; var repeat:Array<Bool>; var cancelled:Bool; };
+typedef SignalData<T> = { var slots:Array<T>; var priorities:Array<Float>; var repeat:Array<Bool>; var cancelled:Bool; };

@@ -8,35 +8,35 @@ import flighthq.types.ShapedRun;
 
 class TextShaperPool {
   public static function acquireShapedRun():ShapedRun {
-    var pooled:Dynamic = cast _Runtime.UNDEFINED;
+    var pooled:Null<ShapedRun> = cast _Runtime.UNDEFINED;
     pooled = _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'pop', cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(pooled, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(createShapedRun, cast ([] : Array<Dynamic>)); }
-    ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).delete_(pooled));
+    if ((cast _Runtime.strictEquals(pooled, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createShapedRun() : ShapedRun); }
+    ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet<ShapedRun>).delete_(pooled));
     return cast pooled;
     return cast null;
   }
 
   public static function releaseShapedRun(run:ShapedRun):Void {
-    if ((cast ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).has(run)) : Bool)) {
+    if ((cast ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet<ShapedRun>).has(run)) : Bool)) {
       _Runtime.callOptionalValue(TextShaperPool._releaseGuard__textShaperPool, cast ([run] : Array<Dynamic>));
       return;
     }
     if ((cast ((cast _Runtime.field(TextShaperPool._pool__textShaperPool, 'length') : Float) < (cast TextShaperPool._POOL_MAX_SIZE__textShaperPool : Float)) : Bool)) {
       _Runtime.callProperty(TextShaperPool._pool__textShaperPool, 'push', cast ([run] : Array<Dynamic>));
-      ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet).add(run));
+      ((cast TextShaperPool._pooled__textShaperPool : flighthq._internal._WeakSet<ShapedRun>).add(run));
     }
   }
 
   @:noCompletion
-  public static function setShapedRunReleaseGuard(guard:Null<Dynamic>):Void {
+  public static function setShapedRunReleaseGuard(guard:Null<ShapedRun->Void>):Void {
     (TextShaperPool._releaseGuard__textShaperPool = cast (guard : Dynamic));
   }
 
-  public static final _POOL_MAX_SIZE__textShaperPool:Dynamic = 64.0;
+  public static final _POOL_MAX_SIZE__textShaperPool:Float = 64.0;
 
   public static final _pool__textShaperPool:Array<ShapedRun> = cast ([] : Array<Dynamic>);
 
-  public static final _pooled__textShaperPool:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+  public static final _pooled__textShaperPool:flighthq._internal._WeakSet<ShapedRun> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
-  public static var _releaseGuard__textShaperPool:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _releaseGuard__textShaperPool:Null<ShapedRun->Void> = _Runtime.explicitNull();
 }

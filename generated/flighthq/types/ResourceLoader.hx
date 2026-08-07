@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ResourceLoader = { var onCancel:Signal<Dynamic>; var onComplete:Signal<Dynamic>; var onError:Signal<Dynamic>; var onPause:Signal<Dynamic>; var onProgress:Signal<Dynamic>; var onResume:Signal<Dynamic>; };
+typedef ResourceLoader = { var onCancel:Signal<Void->Void>; var onComplete:Signal<Array<ResourceLoadReport>->Void>; var onError:Signal<flighthq._internal._Any->String->Void>; var onPause:Signal<Void->Void>; var onProgress:Signal<Float->Void>; var onResume:Signal<Void->Void>; };

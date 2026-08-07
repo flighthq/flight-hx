@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
 class _FogModifierValues {
-  public static final FogModifierModeValue:Dynamic = { Exponential: 'Exponential', Exponential2: 'Exponential2', Linear: 'Linear' };
+  public static final FogModifierModeValue:{ var Exponential:String; var Exponential2:String; var Linear:String; } = { Exponential: 'Exponential', Exponential2: 'Exponential2', Linear: 'Linear' };
 
-  public static final FogModifierKind:Dynamic = 'FogModifier';
+  public static final FogModifierKind:String = 'FogModifier';
 }

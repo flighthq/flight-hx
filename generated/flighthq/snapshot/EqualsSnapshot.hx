@@ -6,16 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
 class EqualsSnapshot {
-  public static function equalsSnapshot<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>):Bool {
-    return cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([a, b] : Array<Dynamic>));
+  public static function equalsSnapshot<T>(a:Snapshot<T>, b:Snapshot<T>):Bool {
+    return cast (cast EqualsSnapshot.snapshotValuesEqual__equalsSnapshot((cast a : flighthq._internal._Any), (cast b : flighthq._internal._Any)) : Bool);
     return cast null;
   }
 
-  public static function snapshotValuesEqual__equalsSnapshot(a:Dynamic, b:Dynamic):Bool {
-    var aIsArray:Dynamic = cast _Runtime.UNDEFINED;
-    var aObject:Dynamic = cast _Runtime.UNDEFINED;
-    var bObject:Dynamic = cast _Runtime.UNDEFINED;
-    var aKeys:Dynamic = cast _Runtime.UNDEFINED;
+  public static function snapshotValuesEqual__equalsSnapshot(a:flighthq._internal._Any, b:flighthq._internal._Any):Bool {
+    var aIsArray:Bool = cast _Runtime.UNDEFINED;
+    var aObject:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var bObject:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var aKeys:Array<String> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(a, b) : Bool)) {
       return cast true;
     }
@@ -27,15 +27,15 @@ class EqualsSnapshot {
       return cast false;
     }
     if ((cast aIsArray : Bool)) {
-      var aArray:Dynamic = (cast a : Array<Dynamic>);
-      var bArray:Dynamic = (cast b : Array<Dynamic>);
+      var aArray:Array<flighthq._internal._Any> = (cast a : Array<flighthq._internal._Any>);
+      var bArray:Array<flighthq._internal._Any> = (cast b : Array<flighthq._internal._Any>);
       if ((cast !_Runtime.strictEquals(_Runtime.field(aArray, 'length'), _Runtime.field(bArray, 'length')) : Bool)) {
         return cast false;
       }
       {
-        var index:Dynamic = 0.0;
+        var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(aArray, 'length') : Float)) : Bool)) {
-          if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([flighthq._internal._StaticIndex.readArray(aArray, index), flighthq._internal._StaticIndex.readArray(bArray, index)] : Array<Dynamic>)) : Bool) : Bool)) {
+          if ((cast !(cast (cast EqualsSnapshot.snapshotValuesEqual__equalsSnapshot((cast flighthq._internal._StaticIndex.readArray(aArray, index) : flighthq._internal._Any), (cast flighthq._internal._StaticIndex.readArray(bArray, index) : flighthq._internal._Any)) : Bool) : Bool) : Bool)) {
             return cast false;
           }
           (index = cast ((index + 1.0) : Dynamic));
@@ -43,8 +43,8 @@ class EqualsSnapshot {
       }
       return cast true;
     }
-    aObject = (cast a : Dynamic);
-    bObject = (cast b : Dynamic);
+    aObject = (cast a : flighthq._internal._Record<String, flighthq._internal._Any>);
+    bObject = (cast b : flighthq._internal._Record<String, flighthq._internal._Any>);
     aKeys = flighthq._internal.DynamicObject.keys(aObject);
     if ((cast !_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(flighthq._internal.DynamicObject.keys(bObject), 'length')) : Bool)) {
       return cast false;
@@ -53,7 +53,7 @@ class EqualsSnapshot {
       if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([bObject, key] : Array<Dynamic>)) : Bool) : Bool)) {
         return cast false;
       }
-      if ((cast !(cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aObject, key), _Runtime.getIndex(bObject, key)] : Array<Dynamic>)) : Bool) : Bool)) {
+      if ((cast !(cast (cast EqualsSnapshot.snapshotValuesEqual__equalsSnapshot((cast _Runtime.getIndex(aObject, key) : flighthq._internal._Any), (cast _Runtime.getIndex(bObject, key) : flighthq._internal._Any)) : Bool) : Bool) : Bool)) {
         return cast false;
       }
     }

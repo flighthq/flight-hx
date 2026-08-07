@@ -7,27 +7,27 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 
 class GetPathSignedArea {
-  public static function getPathContourOrientation(path:Path, tolerance:Dynamic = 0.25):String {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var area:Dynamic = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+  public static function getPathContourOrientation(path:Path, tolerance:Float = 0.25):String {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var area:Float = cast _Runtime.UNDEFINED;
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast 'degenerate'; }
-    area = _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([flighthq._internal._StaticIndex.readArray(contours, 0.0)] : Array<Dynamic>));
+    area = (cast GetPathSignedArea.shoelaceArea__getPathSignedArea((cast flighthq._internal._StaticIndex.readArray(contours, 0.0) : Array<Float>)) : Float);
     if ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'ccw'; }
     if ((cast ((cast area : Float) < (cast 0.0 : Float)) : Bool)) { return cast 'cw'; }
     return cast 'degenerate';
     return cast null;
   }
 
-  public static function getPathSignedArea(path:Path, tolerance:Dynamic = 0.25):Float {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+  public static function getPathSignedArea(path:Path, tolerance:Float = 0.25):Float {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
-      var ci:Dynamic = 0.0;
+      var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + _Runtime.callValue(GetPathSignedArea.shoelaceArea__getPathSignedArea, cast ([flighthq._internal._StaticIndex.readArray(contours, ci)] : Array<Dynamic>))) : Dynamic));
+        (total = cast ((total + (cast GetPathSignedArea.shoelaceArea__getPathSignedArea((cast flighthq._internal._StaticIndex.readArray(contours, ci) : Array<Float>)) : Float)) : Dynamic));
         ci++;
       }
     }
@@ -36,15 +36,15 @@ class GetPathSignedArea {
   }
 
   public static function shoelaceArea__getPathSignedArea(contour:Array<Float>):Float {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var area:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var area:Float = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
     if ((cast ((cast n : Float) < (cast 3.0 : Float)) : Bool)) { return cast 0.0; }
     area = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), n);
+        var j:Float = _Runtime.fmod((i + 1.0), n);
         (area = cast ((area + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0)))) : Dynamic));
         (area = cast ((area - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)))) : Dynamic));
         i++;

@@ -3,25 +3,30 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
+import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
+import flighthq.types.WgpuScene3DRuntime.WgpuScene3DFrameBinding;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuScene3DRuntime {
   @:noCompletion
   public static function getWgpuScene3DRuntime(state:WgpuRenderState):flighthq.types.WgpuScene3DRuntime {
-    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var scene:Null<flighthq.types.WgpuScene3DRuntime> = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);
-    scene = ((cast WgpuScene3DRuntime.sceneRuntimes__wgpuScene3DRuntime : flighthq._internal._WeakMap).get(state));
+    scene = ((cast WgpuScene3DRuntime.sceneRuntimes__wgpuScene3DRuntime : flighthq._internal._WeakMap<WgpuRenderState, flighthq.types.WgpuScene3DRuntime>).get(state));
     if ((cast _Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (scene = cast ({ activeBlendMode: null, activeBlendedRun: false, activeColorAdjustmentRun: false, activeColorMatrixRun: false, activeSkinnedRun: false, activeMeshPipeline: null, blendedDrawList: cast ([] : Array<Dynamic>), blendedPool: cast ([] : Array<Dynamic>), drawBindGroup: null, drawBindGroupLayout: null, customShaderGuard: null, frameBindGroup: null, frameBindGroupLayout: null, frameBuffer: null, frameBindings: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), forwardLightSelectionGuard: null, environmentSourceCube: null, environmentSourceCubeView: null, ibl: null, iblDummyCubeTexture: null, iblDummyCubeView: null, iblDummyLutTexture: null, iblDummyLutView: null, iblSampleBindGroup: null, iblSampleCubeView: null, iblSampleLayout: null, iblSampler: null, iblUniformBuffer: null, materialBindGroups: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), pbrSampleBindGroup: null, pbrSampleIblCubeView: null, pbrSampleLayout: null, pbrSampleShadowView: null, materialRegistry: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), modifierSnippetRegistry: null, modifierSnippetRevision: 0.0, opaqueDrawList: cast ([] : Array<Dynamic>), opaquePool: cast ([] : Array<Dynamic>), pendingDrawOffset: 0.0, pendingUvTransform: new flighthq._internal._Float32Array(cast ([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)), pipelineCache: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), placeholderView: null, shadow: null, shadowComparisonSampler: null, shadowDepthPipeline: null, shadowDepthSkinnedPipeline: null, shadowDummyTexture: null, shadowDummyView: null, shadowSampleBindGroup: null, shadowSampleLayout: null, shadowSampleView: null, shadowUniformBuffer: null, shadedMaterialBindingCache: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), shadedMaterialPlanCache: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), skinDrawBindGroup: null, skinDrawBindGroupLayout: null, skinPaletteCapacity: 0.0, skinPaletteTexture: null, skinPaletteView: null, skinningAdapter: null, uploadCache: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) } : Dynamic));
-      ((cast WgpuScene3DRuntime.sceneRuntimes__wgpuScene3DRuntime : flighthq._internal._WeakMap).set(state, scene));
-      _Runtime.setField(stateRuntime, 'sceneMeshMaterialRegistry', _Runtime.field(scene, 'materialRegistry'));
-      _Runtime.setField(stateRuntime, 'sceneMeshUploadCache', _Runtime.field(scene, 'uploadCache'));
+      ((cast WgpuScene3DRuntime.sceneRuntimes__wgpuScene3DRuntime : flighthq._internal._WeakMap<WgpuRenderState, flighthq.types.WgpuScene3DRuntime>).set(state, scene));
+      ((cast stateRuntime : WgpuRenderStateRuntime).sceneMeshMaterialRegistry = (cast scene : flighthq.types.WgpuScene3DRuntime).materialRegistry);
+      ((cast stateRuntime : WgpuRenderStateRuntime).sceneMeshUploadCache = (cast scene : flighthq.types.WgpuScene3DRuntime).uploadCache);
     }
     return cast scene;
     return cast null;
@@ -29,9 +34,9 @@ class WgpuScene3DRuntime {
 
   @:noCompletion
   public static function getWgpuSkinningAdapter(state:WgpuRenderState):Null<WgpuSkinningAdapter> {
-    return cast (cast _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'skinningAdapter') : Null<WgpuSkinningAdapter>);
+    return cast (cast (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : flighthq.types.WgpuScene3DRuntime) : flighthq.types.WgpuScene3DRuntime).skinningAdapter : Null<WgpuSkinningAdapter>);
     return cast null;
   }
 
-  public static final sceneRuntimes__wgpuScene3DRuntime:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final sceneRuntimes__wgpuScene3DRuntime:flighthq._internal._WeakMap<WgpuRenderState, flighthq.types.WgpuScene3DRuntime> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

@@ -7,14 +7,15 @@ import flighthq.path.FlattenPath.flattenPath;
 import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
 import flighthq.types.Path;
 import flighthq.types.PathBooleanOptions;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class SimplifyPath {
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
-    var fillRule:Dynamic = cast _Runtime.UNDEFINED;
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
+    var fillRule:PathWinding = cast _Runtime.UNDEFINED;
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
-    contours = _Runtime.callValue(flattenPath, cast ([path, ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; })] : Array<Dynamic>));
-    return cast _Runtime.callValue(resolvePathRegions, cast ([contours, fillRule] : Array<Dynamic>));
+    contours = (cast flattenPath((cast path : Path), (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float)) : Array<Array<Float>>);
+    return cast (cast resolvePathRegions(contours, fillRule) : Path);
     return cast null;
   }
 }

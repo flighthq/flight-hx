@@ -5,9 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _TextDirectionValues {
-  public static final TextDirectionLeftToRight:Dynamic = 'LeftToRight';
+  public static final TextDirectionLeftToRight:String = 'LeftToRight';
 
-  public static final TextDirectionRightToLeft:Dynamic = 'RightToLeft';
+  public static final TextDirectionRightToLeft:String = 'RightToLeft';
 
-  public static final TextDirectionTopToBottom:Dynamic = 'TopToBottom';
+  public static final TextDirectionTopToBottom:String = 'TopToBottom';
 }

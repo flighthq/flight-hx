@@ -5,43 +5,52 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.LinearColor;
+import flighthq.types.Sampler;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class PbrMaterials {
   public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
-    var diffuse:Dynamic = cast _Runtime.UNDEFINED;
-    var specular:Dynamic = cast _Runtime.UNDEFINED;
-    var glossiness:Dynamic = cast _Runtime.UNDEFINED;
-    var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
-    var emissive:Dynamic = cast _Runtime.UNDEFINED;
-    var emissiveMap:Dynamic = cast _Runtime.UNDEFINED;
-    var emissiveStrength:Dynamic = cast _Runtime.UNDEFINED;
-    var normalMap:Dynamic = cast _Runtime.UNDEFINED;
-    var normalScale:Dynamic = cast _Runtime.UNDEFINED;
-    var occlusionMap:Dynamic = cast _Runtime.UNDEFINED;
-    var occlusionStrength:Dynamic = cast _Runtime.UNDEFINED;
-    var specLinear:Dynamic = cast _Runtime.UNDEFINED;
-    var specR:Dynamic = cast _Runtime.UNDEFINED;
-    var specG:Dynamic = cast _Runtime.UNDEFINED;
-    var specB:Dynamic = cast _Runtime.UNDEFINED;
-    var specLuma:Dynamic = cast _Runtime.UNDEFINED;
-    var DIELECTRIC_F0:Dynamic = cast _Runtime.UNDEFINED;
-    var metallic:Dynamic = cast _Runtime.UNDEFINED;
-    var diffLinear:Dynamic = cast _Runtime.UNDEFINED;
-    var diffR:Dynamic = cast _Runtime.UNDEFINED;
-    var diffG:Dynamic = cast _Runtime.UNDEFINED;
-    var diffB:Dynamic = cast _Runtime.UNDEFINED;
-    var diffA:Dynamic = cast _Runtime.UNDEFINED;
-    var baseR:Dynamic = cast _Runtime.UNDEFINED;
-    var baseG:Dynamic = cast _Runtime.UNDEFINED;
-    var baseB:Dynamic = cast _Runtime.UNDEFINED;
-    var baseColor:Dynamic = cast _Runtime.UNDEFINED;
+    var diffuse:Float = cast _Runtime.UNDEFINED;
+    var specular:Float = cast _Runtime.UNDEFINED;
+    var glossiness:Float = cast _Runtime.UNDEFINED;
+    var diffuseMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var emissive:Float = cast _Runtime.UNDEFINED;
+    var emissiveMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var emissiveStrength:Float = cast _Runtime.UNDEFINED;
+    var normalMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var normalScale:Float = cast _Runtime.UNDEFINED;
+    var occlusionMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var occlusionStrength:Float = cast _Runtime.UNDEFINED;
+    var specLinear:Array<Float> = cast _Runtime.UNDEFINED;
+    var specR:Float = cast _Runtime.UNDEFINED;
+    var specG:Float = cast _Runtime.UNDEFINED;
+    var specB:Float = cast _Runtime.UNDEFINED;
+    var specLuma:Float = cast _Runtime.UNDEFINED;
+    var DIELECTRIC_F0:Float = cast _Runtime.UNDEFINED;
+    var metallic:Float = cast _Runtime.UNDEFINED;
+    var diffLinear:Array<Float> = cast _Runtime.UNDEFINED;
+    var diffR:Float = cast _Runtime.UNDEFINED;
+    var diffG:Float = cast _Runtime.UNDEFINED;
+    var diffB:Float = cast _Runtime.UNDEFINED;
+    var diffA:Float = cast _Runtime.UNDEFINED;
+    var baseR:Float = cast _Runtime.UNDEFINED;
+    var baseG:Float = cast _Runtime.UNDEFINED;
+    var baseB:Float = cast _Runtime.UNDEFINED;
+    var baseColor:Float = cast _Runtime.UNDEFINED;
     diffuse = _Runtime.field(source, 'diffuse');
     specular = _Runtime.field(source, 'specular');
     glossiness = _Runtime.field(source, 'glossiness');
@@ -54,7 +63,7 @@ class PbrMaterials {
     occlusionMap = _Runtime.field(source, 'occlusionMap');
     occlusionStrength = _Runtime.field(source, 'occlusionStrength');
     specLinear = PbrMaterials.scratchLinear__pbrMaterials;
-    _Runtime.callValue(unpackColorToLinear, cast ([specLinear, specular] : Array<Dynamic>));
+    (cast unpackColorToLinear(specLinear, (cast specular : Float)) : LinearColor);
     specR = flighthq._internal._StaticIndex.readArray(specLinear, 0.0);
     specG = flighthq._internal._StaticIndex.readArray(specLinear, 1.0);
     specB = flighthq._internal._StaticIndex.readArray(specLinear, 2.0);
@@ -62,7 +71,7 @@ class PbrMaterials {
     DIELECTRIC_F0 = 0.04;
     metallic = HxMath.min(1.0, HxMath.max(0.0, ((specLuma - DIELECTRIC_F0) / (1.0 - DIELECTRIC_F0))));
     diffLinear = PbrMaterials.scratchLinear2__pbrMaterials;
-    _Runtime.callValue(unpackColorToLinear, cast ([diffLinear, diffuse] : Array<Dynamic>));
+    (cast unpackColorToLinear(diffLinear, (cast diffuse : Float)) : LinearColor);
     diffR = flighthq._internal._StaticIndex.readArray(diffLinear, 0.0);
     diffG = flighthq._internal._StaticIndex.readArray(diffLinear, 1.0);
     diffB = flighthq._internal._StaticIndex.readArray(diffLinear, 2.0);
@@ -70,82 +79,82 @@ class PbrMaterials {
     baseR = (diffR * (1.0 - (specLuma * (1.0 - metallic))));
     baseG = (diffG * (1.0 - (specLuma * (1.0 - metallic))));
     baseB = (diffB * (1.0 - (specLuma * (1.0 - metallic))));
-    baseColor = _Runtime.callValue(PbrMaterials.packLinear__pbrMaterials, cast ([baseR, baseG, baseB, diffA] : Array<Dynamic>));
-    _Runtime.setField(out, 'alphaMap', null);
-    _Runtime.setField(out, 'baseColor', baseColor);
-    _Runtime.setField(out, 'baseColorMap', diffuseMap);
-    _Runtime.setField(out, 'emissive', emissive);
-    _Runtime.setField(out, 'emissiveMap', emissiveMap);
-    _Runtime.setField(out, 'emissiveStrength', emissiveStrength);
-    _Runtime.setField(out, 'metallic', metallic);
-    _Runtime.setField(out, 'metallicRoughnessMap', null);
-    _Runtime.setField(out, 'normalMap', normalMap);
-    _Runtime.setField(out, 'normalScale', normalScale);
-    _Runtime.setField(out, 'occlusionMap', occlusionMap);
-    _Runtime.setField(out, 'occlusionStrength', occlusionStrength);
-    _Runtime.setField(out, 'roughness', (1.0 - glossiness));
+    baseColor = (cast PbrMaterials.packLinear__pbrMaterials((cast baseR : Float), (cast baseG : Float), (cast baseB : Float), (cast diffA : Float)) : Float);
+    ((cast out : StandardPbrMaterialProperties).alphaMap = null);
+    ((cast out : StandardPbrMaterialProperties).baseColor = baseColor);
+    ((cast out : StandardPbrMaterialProperties).baseColorMap = diffuseMap);
+    ((cast out : StandardPbrMaterialProperties).emissive = emissive);
+    ((cast out : StandardPbrMaterialProperties).emissiveMap = emissiveMap);
+    ((cast out : StandardPbrMaterialProperties).emissiveStrength = emissiveStrength);
+    ((cast out : StandardPbrMaterialProperties).metallic = metallic);
+    ((cast out : StandardPbrMaterialProperties).metallicRoughnessMap = null);
+    ((cast out : StandardPbrMaterialProperties).normalMap = normalMap);
+    ((cast out : StandardPbrMaterialProperties).normalScale = normalScale);
+    ((cast out : StandardPbrMaterialProperties).occlusionMap = occlusionMap);
+    ((cast out : StandardPbrMaterialProperties).occlusionStrength = occlusionStrength);
+    ((cast out : StandardPbrMaterialProperties).roughness = (1.0 - glossiness));
   }
 
   public static function createSpecularGlossinessPbrMaterial(?opts:Dynamic):SpecularGlossinessPbrMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([SpecularGlossinessPbrMaterialKind, opts] : Array<Dynamic>)) : SpecularGlossinessPbrMaterial);
-    _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
-    _Runtime.setField(material, 'emissiveMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'emissiveStrength', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
-    _Runtime.setField(material, 'glossiness', _Runtime.coalesce(_Runtime.optionalField(opts, 'glossiness'), function():Dynamic return cast 1.0));
-    _Runtime.setField(material, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'normalScale', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
-    _Runtime.setField(material, 'occlusionMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'occlusionStrength', _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionStrength'), function():Dynamic return cast 1.0));
-    _Runtime.setField(material, 'specular', _Runtime.coalesce(_Runtime.optionalField(opts, 'specular'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'specularGlossinessMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'specularGlossinessMap'), function():Dynamic return cast null));
+    var material:SpecularGlossinessPbrMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast SpecularGlossinessPbrMaterialKind : String), opts) : SpecularGlossinessPbrMaterial) : SpecularGlossinessPbrMaterial);
+    ((cast material : SpecularGlossinessPbrMaterial).diffuse = _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
+    ((cast material : SpecularGlossinessPbrMaterial).diffuseMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'diffuseMap'), function():Dynamic return cast null));
+    ((cast material : SpecularGlossinessPbrMaterial).emissive = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
+    ((cast material : SpecularGlossinessPbrMaterial).emissiveMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
+    ((cast material : SpecularGlossinessPbrMaterial).emissiveStrength = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
+    ((cast material : SpecularGlossinessPbrMaterial).glossiness = _Runtime.coalesce(_Runtime.optionalField(opts, 'glossiness'), function():Dynamic return cast 1.0));
+    ((cast material : SpecularGlossinessPbrMaterial).normalMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
+    ((cast material : SpecularGlossinessPbrMaterial).normalScale = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
+    ((cast material : SpecularGlossinessPbrMaterial).occlusionMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionMap'), function():Dynamic return cast null));
+    ((cast material : SpecularGlossinessPbrMaterial).occlusionStrength = _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionStrength'), function():Dynamic return cast 1.0));
+    ((cast material : SpecularGlossinessPbrMaterial).specular = _Runtime.coalesce(_Runtime.optionalField(opts, 'specular'), function():Dynamic return cast 4294967295.0));
+    ((cast material : SpecularGlossinessPbrMaterial).specularGlossinessMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'specularGlossinessMap'), function():Dynamic return cast null));
     return cast material;
     return cast null;
   }
 
   public static function createStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([StandardPbrMaterialKind, opts] : Array<Dynamic>)) : StandardPbrMaterial);
-    _Runtime.callValue(PbrMaterials.assignStandardPbrMaterialProperties__pbrMaterials, cast ([material, opts] : Array<Dynamic>));
+    var material:StandardPbrMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast StandardPbrMaterialKind : String), opts) : StandardPbrMaterial) : StandardPbrMaterial);
+    PbrMaterials.assignStandardPbrMaterialProperties__pbrMaterials((cast material : StandardPbrMaterialProperties), (cast opts : Null<flighthq._internal._Any>));
     return cast material;
     return cast null;
   }
 
   public static function createStandardPbrMaterialProperties(?opts:Dynamic):StandardPbrMaterialProperties {
-    var properties:Dynamic = cast _Runtime.UNDEFINED;
+    var properties:StandardPbrMaterialProperties = cast _Runtime.UNDEFINED;
     properties = (cast {  } : StandardPbrMaterialProperties);
-    _Runtime.callValue(PbrMaterials.assignStandardPbrMaterialProperties__pbrMaterials, cast ([properties, opts] : Array<Dynamic>));
+    PbrMaterials.assignStandardPbrMaterialProperties__pbrMaterials((cast properties : StandardPbrMaterialProperties), (cast opts : Null<flighthq._internal._Any>));
     return cast properties;
     return cast null;
   }
 
   public static function assignStandardPbrMaterialProperties__pbrMaterials(target:StandardPbrMaterialProperties, ?opts:Dynamic):Void {
-    _Runtime.setField(target, 'alphaMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'baseColor', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(target, 'baseColorMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
-    _Runtime.setField(target, 'emissiveMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'emissiveStrength', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'metallic', _Runtime.coalesce(_Runtime.optionalField(opts, 'metallic'), function():Dynamic return cast 0.0));
-    _Runtime.setField(target, 'metallicRoughnessMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'metallicRoughnessMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'normalScale', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'occlusionMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionMap'), function():Dynamic return cast null));
-    _Runtime.setField(target, 'occlusionStrength', _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionStrength'), function():Dynamic return cast 1.0));
-    _Runtime.setField(target, 'roughness', _Runtime.coalesce(_Runtime.optionalField(opts, 'roughness'), function():Dynamic return cast 1.0));
+    ((cast target : StandardPbrMaterialProperties).alphaMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).baseColor = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
+    ((cast target : StandardPbrMaterialProperties).baseColorMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).emissive = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
+    ((cast target : StandardPbrMaterialProperties).emissiveMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).emissiveStrength = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
+    ((cast target : StandardPbrMaterialProperties).metallic = _Runtime.coalesce(_Runtime.optionalField(opts, 'metallic'), function():Dynamic return cast 0.0));
+    ((cast target : StandardPbrMaterialProperties).metallicRoughnessMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'metallicRoughnessMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).normalMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).normalScale = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
+    ((cast target : StandardPbrMaterialProperties).occlusionMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionMap'), function():Dynamic return cast null));
+    ((cast target : StandardPbrMaterialProperties).occlusionStrength = _Runtime.coalesce(_Runtime.optionalField(opts, 'occlusionStrength'), function():Dynamic return cast 1.0));
+    ((cast target : StandardPbrMaterialProperties).roughness = _Runtime.coalesce(_Runtime.optionalField(opts, 'roughness'), function():Dynamic return cast 1.0));
   }
 
   public static function linearChannelToSrgb8__pbrMaterials(value:Float):Float {
-    var srgb:Dynamic = cast _Runtime.UNDEFINED;
+    var srgb:Float = cast _Runtime.UNDEFINED;
     srgb = ((cast ((cast value : Float) <= (cast 0.0031308 : Float)) : Bool) ? (cast (value * 12.92) : Dynamic) : (cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055) : Dynamic));
     return cast HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, srgb)), 255.0));
     return cast null;
   }
 
   public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << 8)))) | _Runtime.toInt32(HxMath.round((a * 255.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast PbrMaterials.linearChannelToSrgb8__pbrMaterials((cast r : Float)) : Float)) << 24)) | _Runtime.toInt32((_Runtime.toInt32((cast PbrMaterials.linearChannelToSrgb8__pbrMaterials((cast g : Float)) : Float)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32((cast PbrMaterials.linearChannelToSrgb8__pbrMaterials((cast b : Float)) : Float)) << 8)))) | _Runtime.toInt32(HxMath.round((a * 255.0))))), 0);
     return cast null;
   }
 

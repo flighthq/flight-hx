@@ -6,34 +6,37 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.HalftoneEffect;
+import flighthq.types.RenderEffect;
 
 class GlHalftoneEffect {
   @:noCompletion
   public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 6.0);
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.4);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.halftone', GlHalftoneEffect.HALFTONE_FRAGMENT_SRC__glHalftoneEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.halftone' : String), (cast GlHalftoneEffect.HALFTONE_FRAGMENT_SRC__glHalftoneEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scale'), HxMath.max(1.0, scale));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_angle'), angle);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlHalftoneEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyHalftoneEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : HalftoneEffect)] : Array<Dynamic>));
+  public static final defaultGlHalftoneEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyHalftoneEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : HalftoneEffect) : HalftoneEffect));
   };
 
   public static function registerGlHalftoneEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'HalftoneEffect', defaultGlHalftoneEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'HalftoneEffect' : String), (cast defaultGlHalftoneEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final HALFTONE_FRAGMENT_SRC__glHalftoneEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_scale;\nuniform float u_angle;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  vec2 p = v_texCoord * u_resolution;\n  float s = sin(u_angle), co = cos(u_angle);\n  vec2 rp = vec2(p.x * co - p.y * s, p.x * s + p.y * co);\n  vec2 cell = mod(rp, u_scale) - u_scale * 0.5;\n  float dist = length(cell) / (u_scale * 0.5);\n  float radius = sqrt(1.0 - lum);\n  float dot1 = step(dist, radius);\n  o_color = vec4(c.rgb * dot1, c.a);\n}';
+  public static final HALFTONE_FRAGMENT_SRC__glHalftoneEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_scale;\nuniform float u_angle;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  vec2 p = v_texCoord * u_resolution;\n  float s = sin(u_angle), co = cos(u_angle);\n  vec2 rp = vec2(p.x * co - p.y * s, p.x * s + p.y * co);\n  vec2 cell = mod(rp, u_scale) - u_scale * 0.5;\n  float dist = length(cell) / (u_scale * 0.5);\n  float radius = sqrt(1.0 - lum);\n  float dot1 = step(dist, radius);\n  o_color = vec4(c.rgb * dot1, c.a);\n}';
 }

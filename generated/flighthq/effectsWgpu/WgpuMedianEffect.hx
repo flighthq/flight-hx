@@ -7,36 +7,39 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.MedianEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuMedianEffect {
   @:noCompletion
-  public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Dynamic = 2.0;
+  public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Float = 2.0;
 
-  public static final MAX_SAMPLES__wgpuMedianEffect:Dynamic = (((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0));
+  public static final MAX_SAMPLES__wgpuMedianEffect:Float = (((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0));
 
   @:noCompletion
   public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = HxMath.min(MAX_MEDIAN_EFFECT_WGPU_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.median', WgpuMedianEffect.MEDIAN_WGSL__wgpuMedianEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.median' : String), (cast WgpuMedianEffect.MEDIAN_WGSL__wgpuMedianEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, radius);
-    }] : Array<Dynamic>));
+    } : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuMedianEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyMedianEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : MedianEffect)] : Array<Dynamic>));
+  public static final defaultWgpuMedianEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyMedianEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : MedianEffect) : MedianEffect));
   };
 
   public static function registerWgpuMedianEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'MedianEffect', defaultWgpuMedianEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'MedianEffect' : String), (cast defaultWgpuMedianEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final MEDIAN_WGSL__wgpuMedianEffect:Dynamic = '\nstruct Uniforms {\n  texelSize : vec2f,\n  radius : i32,\n  _pad : i32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sortArr(arr : ptr<function, array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>>, n : i32) {\n  for (var i = 1; i < n; i++) {\n    let key = (*arr)[i];\n    var j = i - 1;\n    loop {\n      if (j < 0 || (*arr)[j] <= key) { break; }\n      (*arr)[j + 1] = (*arr)[j];\n      j -= 1;\n    }\n    (*arr)[j + 1] = key;\n  }\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let r = clamp(uni.radius, 0, ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + ');\n  if (r == 0) { return textureSampleLevel(tex, smp, uv, 0.0); }\n  let n = (2 * r + 1) * (2 * r + 1);\n  var rv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var gv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var bv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var av : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var count = 0;\n  for (var dy = -' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dy <= ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dy++) {\n    for (var dx = -' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dx <= ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dx++) {\n      if (abs(dy) <= r && abs(dx) <= r) {\n        let s = textureSampleLevel(tex, smp, uv + vec2f(f32(dx), f32(dy)) * uni.texelSize, 0.0);\n        rv[count] = s.r;\n        gv[count] = s.g;\n        bv[count] = s.b;\n        av[count] = s.a;\n        count += 1;\n      }\n    }\n  }\n  sortArr(&rv, n);\n  sortArr(&gv, n);\n  sortArr(&bv, n);\n  sortArr(&av, n);\n  let mid = n / 2;\n  return vec4f(rv[mid], gv[mid], bv[mid], av[mid]);\n}';
+  public static final MEDIAN_WGSL__wgpuMedianEffect:String = '\nstruct Uniforms {\n  texelSize : vec2f,\n  radius : i32,\n  _pad : i32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sortArr(arr : ptr<function, array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>>, n : i32) {\n  for (var i = 1; i < n; i++) {\n    let key = (*arr)[i];\n    var j = i - 1;\n    loop {\n      if (j < 0 || (*arr)[j] <= key) { break; }\n      (*arr)[j + 1] = (*arr)[j];\n      j -= 1;\n    }\n    (*arr)[j + 1] = key;\n  }\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let r = clamp(uni.radius, 0, ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + ');\n  if (r == 0) { return textureSampleLevel(tex, smp, uv, 0.0); }\n  let n = (2 * r + 1) * (2 * r + 1);\n  var rv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var gv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var bv : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var av : array<f32, ' + Std.string(WgpuMedianEffect.MAX_SAMPLES__wgpuMedianEffect) + '>;\n  var count = 0;\n  for (var dy = -' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dy <= ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dy++) {\n    for (var dx = -' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dx <= ' + Std.string(MAX_MEDIAN_EFFECT_WGPU_RADIUS) + '; dx++) {\n      if (abs(dy) <= r && abs(dx) <= r) {\n        let s = textureSampleLevel(tex, smp, uv + vec2f(f32(dx), f32(dy)) * uni.texelSize, 0.0);\n        rv[count] = s.r;\n        gv[count] = s.g;\n        bv[count] = s.b;\n        av[count] = s.a;\n        count += 1;\n      }\n    }\n  }\n  sortArr(&rv, n);\n  sortArr(&gv, n);\n  sortArr(&bv, n);\n  sortArr(&av, n);\n  let mid = n / 2;\n  return vec4f(rv[mid], gv[mid], bv[mid], av[mid]);\n}';
 }

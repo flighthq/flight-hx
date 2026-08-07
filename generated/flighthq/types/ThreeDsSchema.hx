@@ -15,81 +15,81 @@ typedef ThreeDsMaterialGroup = { var faces:flighthq._internal._UInt16Array; var 
 typedef ThreeDsMesh = { var faces:flighthq._internal._UInt16Array; var localMatrix:Null<flighthq._internal._Float32Array>; var materialGroups:Array<ThreeDsMaterialGroup>; var name:String; var smoothingGroups:Null<flighthq._internal._UInt32Array>; var uvs:Null<flighthq._internal._Float32Array>; var vertices:flighthq._internal._Float32Array; };
 
 class ThreeDsSchema {
-  public static final THREE_DS_MAIN:Dynamic = 19789.0;
+  public static final THREE_DS_MAIN:Float = 19789.0;
 
-  public static final THREE_DS_EDITOR:Dynamic = 15677.0;
+  public static final THREE_DS_EDITOR:Float = 15677.0;
 
-  public static final THREE_DS_KEYFRAME:Dynamic = 45056.0;
+  public static final THREE_DS_KEYFRAME:Float = 45056.0;
 
-  public static final THREE_DS_KEYFRAME_OBJECT_NODE:Dynamic = 45058.0;
+  public static final THREE_DS_KEYFRAME_OBJECT_NODE:Float = 45058.0;
 
-  public static final THREE_DS_KEYFRAME_NODE_HEADER:Dynamic = 45072.0;
+  public static final THREE_DS_KEYFRAME_NODE_HEADER:Float = 45072.0;
 
-  public static final THREE_DS_KEYFRAME_PIVOT:Dynamic = 45075.0;
+  public static final THREE_DS_KEYFRAME_PIVOT:Float = 45075.0;
 
-  public static final THREE_DS_OBJECT:Dynamic = 16384.0;
+  public static final THREE_DS_OBJECT:Float = 16384.0;
 
-  public static final THREE_DS_TRIMESH:Dynamic = 16640.0;
+  public static final THREE_DS_TRIMESH:Float = 16640.0;
 
-  public static final THREE_DS_VERTICES:Dynamic = 16656.0;
+  public static final THREE_DS_VERTICES:Float = 16656.0;
 
-  public static final THREE_DS_FACES:Dynamic = 16672.0;
+  public static final THREE_DS_FACES:Float = 16672.0;
 
-  public static final THREE_DS_FACE_MATERIAL:Dynamic = 16688.0;
+  public static final THREE_DS_FACE_MATERIAL:Float = 16688.0;
 
-  public static final THREE_DS_UV_COORDS:Dynamic = 16704.0;
+  public static final THREE_DS_UV_COORDS:Float = 16704.0;
 
-  public static final THREE_DS_SMOOTH_GROUP:Dynamic = 16720.0;
+  public static final THREE_DS_SMOOTH_GROUP:Float = 16720.0;
 
-  public static final THREE_DS_TRANSFORM_MATRIX:Dynamic = 16736.0;
+  public static final THREE_DS_TRANSFORM_MATRIX:Float = 16736.0;
 
-  public static final THREE_DS_LIGHT:Dynamic = 17920.0;
+  public static final THREE_DS_LIGHT:Float = 17920.0;
 
-  public static final THREE_DS_LIGHT_SPOT:Dynamic = 17936.0;
+  public static final THREE_DS_LIGHT_SPOT:Float = 17936.0;
 
-  public static final THREE_DS_LIGHT_OFF:Dynamic = 17952.0;
+  public static final THREE_DS_LIGHT_OFF:Float = 17952.0;
 
-  public static final THREE_DS_LIGHT_INNER_RANGE:Dynamic = 18009.0;
+  public static final THREE_DS_LIGHT_INNER_RANGE:Float = 18009.0;
 
-  public static final THREE_DS_LIGHT_OUTER_RANGE:Dynamic = 18010.0;
+  public static final THREE_DS_LIGHT_OUTER_RANGE:Float = 18010.0;
 
-  public static final THREE_DS_LIGHT_MULTIPLIER:Dynamic = 18011.0;
+  public static final THREE_DS_LIGHT_MULTIPLIER:Float = 18011.0;
 
-  public static final THREE_DS_CAMERA:Dynamic = 18176.0;
+  public static final THREE_DS_CAMERA:Float = 18176.0;
 
-  public static final THREE_DS_CAMERA_RANGES:Dynamic = 18208.0;
+  public static final THREE_DS_CAMERA_RANGES:Float = 18208.0;
 
-  public static final THREE_DS_CAMERA_APERTURE_MM:Dynamic = 36.0;
+  public static final THREE_DS_CAMERA_APERTURE_MM:Float = 36.0;
 
-  public static final THREE_DS_MATERIAL:Dynamic = 45055.0;
+  public static final THREE_DS_MATERIAL:Float = 45055.0;
 
-  public static final THREE_DS_MATERIAL_NAME:Dynamic = 40960.0;
+  public static final THREE_DS_MATERIAL_NAME:Float = 40960.0;
 
-  public static final THREE_DS_MATERIAL_AMBIENT:Dynamic = 40976.0;
+  public static final THREE_DS_MATERIAL_AMBIENT:Float = 40976.0;
 
-  public static final THREE_DS_MATERIAL_DIFFUSE:Dynamic = 40992.0;
+  public static final THREE_DS_MATERIAL_DIFFUSE:Float = 40992.0;
 
-  public static final THREE_DS_MATERIAL_SPECULAR:Dynamic = 41008.0;
+  public static final THREE_DS_MATERIAL_SPECULAR:Float = 41008.0;
 
-  public static final THREE_DS_MATERIAL_SHININESS:Dynamic = 41024.0;
+  public static final THREE_DS_MATERIAL_SHININESS:Float = 41024.0;
 
-  public static final THREE_DS_MATERIAL_TRANSPARENCY:Dynamic = 41040.0;
+  public static final THREE_DS_MATERIAL_TRANSPARENCY:Float = 41040.0;
 
-  public static final THREE_DS_MATERIAL_TEXTURE_MAP:Dynamic = 41472.0;
+  public static final THREE_DS_MATERIAL_TEXTURE_MAP:Float = 41472.0;
 
-  public static final THREE_DS_MATERIAL_OPACITY_MAP:Dynamic = 41488.0;
+  public static final THREE_DS_MATERIAL_OPACITY_MAP:Float = 41488.0;
 
-  public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Dynamic = 41728.0;
+  public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Float = 41728.0;
 
-  public static final THREE_DS_MATERIAL_BUMP_MAP:Dynamic = 41520.0;
+  public static final THREE_DS_MATERIAL_BUMP_MAP:Float = 41520.0;
 
-  public static final THREE_DS_COLOR_FLOAT:Dynamic = 16.0;
+  public static final THREE_DS_COLOR_FLOAT:Float = 16.0;
 
-  public static final THREE_DS_COLOR_BYTE:Dynamic = 17.0;
+  public static final THREE_DS_COLOR_BYTE:Float = 17.0;
 
-  public static final THREE_DS_PERCENT_INT:Dynamic = 48.0;
+  public static final THREE_DS_PERCENT_INT:Float = 48.0;
 
-  public static final THREE_DS_PERCENT_FLOAT:Dynamic = 49.0;
+  public static final THREE_DS_PERCENT_FLOAT:Float = 49.0;
 
-  public static final THREE_DS_CHUNK_HEADER_BYTES:Dynamic = 6.0;
+  public static final THREE_DS_CHUNK_HEADER_BYTES:Float = 6.0;
 }

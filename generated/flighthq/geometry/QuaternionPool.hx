@@ -8,8 +8,8 @@ import flighthq.types.Quaternion;
 
 class QuaternionPool {
   public static function acquireIdentityQuaternion():Quaternion {
-    var q:Dynamic = cast _Runtime.UNDEFINED;
-    q = _Runtime.callValue(acquireQuaternion, cast ([] : Array<Dynamic>));
+    var q:Quaternion = cast _Runtime.UNDEFINED;
+    q = (cast acquireQuaternion() : Quaternion);
     (q.x = cast (0.0 : Dynamic));
     (q.y = cast (0.0 : Dynamic));
     (q.z = cast (0.0 : Dynamic));
@@ -23,7 +23,7 @@ class QuaternionPool {
     if ((cast ((cast _Runtime.field(QuaternionPool.pool__quaternionPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
     } else {
-      (q = cast (_Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) : Dynamic));
+      (q = cast ((cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Quaternion) : Dynamic));
     }
     return cast q;
     return cast null;

@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.LottieDocument.LottieImageAsset;
 
-typedef LottieDocumentImportOptions = { @:optional var resolveImageResource:Dynamic; };
+typedef LottieDocumentImportOptions = { @:optional var resolveImageResource:LottieImageAsset->Null<Image>; };
 
 typedef LottieAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
 

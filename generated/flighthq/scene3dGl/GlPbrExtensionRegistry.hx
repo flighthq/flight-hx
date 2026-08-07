@@ -10,30 +10,43 @@ import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
 import flighthq.scene3dGl.GlPbrStandardBlock.isGlTextureReady;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionIssue;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
 import flighthq.types.GlPbrExtensionShaderContribution;
+import flighthq.types.GlPbrTransmissionSceneColor;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Matrix3;
 import flighthq.types.PbrExtension;
+import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class GlPbrExtensionRegistry {
   @:noCompletion
   public static function bindGlPbrExtensions(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, extensions:Array<PbrExtension>):Bool {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry');
-    context = _Runtime.callValue(GlPbrExtensionRegistry.createGlPbrExtensionBindContext__glPbrExtensionRegistry, cast ([state, program] : Array<Dynamic>));
+    var registry:flighthq._internal._Map<String, GlPbrExtensionRegistration> = cast _Runtime.UNDEFINED;
+    var context:GlPbrExtensionBindContext = cast _Runtime.UNDEFINED;
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionRegistry;
+    context = (cast GlPbrExtensionRegistry.createGlPbrExtensionBindContext__glPbrExtensionRegistry((cast state : GlRenderState), (cast program : flighthq._internal.dom.WebGLProgram)) : GlPbrExtensionBindContext);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
-        var registration:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(flighthq._internal._StaticIndex.readArray(extensions, i), 'kind')));
+        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : PbrExtension).kind));
         if ((cast _Runtime.strictEquals(registration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-        _Runtime.callProperty(registration, 'bind', cast ([context, flighthq._internal._StaticIndex.readArray(extensions, i)] : Array<Dynamic>));
+        (cast registration : GlPbrExtensionRegistration).bind(context, flighthq._internal._StaticIndex.readArray(extensions, i));
         i++;
       }
     }
@@ -43,52 +56,52 @@ class GlPbrExtensionRegistry {
 
   public static function explainGlPbrExtensions(state:GlRenderState, extensions:Array<PbrExtension>):Array<GlPbrExtensionIssue> {
     var issues:Array<GlPbrExtensionIssue> = cast _Runtime.UNDEFINED;
-    var kinds:Dynamic = cast _Runtime.UNDEFINED;
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
+    var kinds:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var registry:flighthq._internal._Map<String, GlPbrExtensionRegistration> = cast _Runtime.UNDEFINED;
     var transmissionSceneColorKind:Null<Kind> = cast _Runtime.UNDEFINED;
-    var textureCount:Dynamic = cast _Runtime.UNDEFINED;
-    var shaderContext:Dynamic = cast _Runtime.UNDEFINED;
-    var sceneColor:Dynamic = cast _Runtime.UNDEFINED;
-    var activeTarget:Dynamic = cast _Runtime.UNDEFINED;
+    var textureCount:Float = cast _Runtime.UNDEFINED;
+    var shaderContext:GlPbrExtensionShaderContext = cast _Runtime.UNDEFINED;
+    var sceneColor:Null<GlPbrTransmissionSceneColor> = cast _Runtime.UNDEFINED;
+    var activeTarget:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     issues = cast ([] : Array<Dynamic>);
     kinds = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry');
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionRegistry;
     transmissionSceneColorKind = null;
     textureCount = 0.0;
-    shaderContext = _Runtime.callValue(GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry, cast ([state] : Array<Dynamic>));
+    shaderContext = (cast GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry((cast state : GlRenderState)) : GlPbrExtensionShaderContext);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
-        var extension:Dynamic = flighthq._internal._StaticIndex.readArray(extensions, i);
-        if ((cast ((cast kinds : flighthq._internal._Set).has(_Runtime.field(extension, 'kind'))) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'duplicate-kind', kind: _Runtime.field(extension, 'kind') }] : Array<Dynamic>));
+        var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(extensions, i);
+        if ((cast ((cast kinds : flighthq._internal._Set<String>).has((cast extension : PbrExtension).kind)) : Bool)) {
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'duplicate-kind', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
           i++;
           continue;
         }
-        ((cast kinds : flighthq._internal._Set).add(_Runtime.field(extension, 'kind')));
-        var registration:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(extension, 'kind')));
+        ((cast kinds : flighthq._internal._Set<String>).add((cast extension : PbrExtension).kind));
+        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast extension : PbrExtension).kind));
         if ((cast _Runtime.strictEquals(registration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'missing-registration', kind: _Runtime.field(extension, 'kind') }] : Array<Dynamic>));
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'missing-registration', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
           i++;
           continue;
         }
-        if ((cast !(cast _Runtime.callProperty(registration, 'isSupported', cast ([extension] : Array<Dynamic>)) : Bool) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'unsupported-extension', kind: _Runtime.field(extension, 'kind') }] : Array<Dynamic>));
+        if ((cast !(cast (cast registration : GlPbrExtensionRegistration).isSupported(extension) : Bool) : Bool)) {
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'unsupported-extension', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
           i++;
           continue;
         }
-        var contribution:Dynamic = _Runtime.callProperty(registration, 'createShaderContribution', cast ([shaderContext, extension] : Array<Dynamic>));
-        if ((cast _Runtime.strictEquals(_Runtime.field(contribution, 'samplesTransmissionSceneColor'), true) : Bool)) { (transmissionSceneColorKind = cast (_Runtime.field(extension, 'kind') : Dynamic)); }
-        (textureCount = cast ((textureCount + _Runtime.field(contribution, 'textureCount')) : Dynamic));
+        var contribution:GlPbrExtensionShaderContribution = (cast registration : GlPbrExtensionRegistration).createShaderContribution(shaderContext, extension);
+        if ((cast _Runtime.strictEquals((cast contribution : GlPbrExtensionShaderContribution).samplesTransmissionSceneColor, true) : Bool)) { (transmissionSceneColorKind = cast ((cast extension : PbrExtension).kind : Dynamic)); }
+        (textureCount = cast ((textureCount + (cast contribution : GlPbrExtensionShaderContribution).textureCount) : Dynamic));
         i++;
       }
     }
-    sceneColor = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrTransmissionSceneColor');
-    activeTarget = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentRenderTarget');
-    if ((cast ((cast ((cast !_Runtime.strictEquals(transmissionSceneColorKind, null) : Bool) && (cast !_Runtime.strictEquals(sceneColor, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(_Runtime.optionalField(activeTarget, 'textures'), 'includes', cast ([_Runtime.field(sceneColor, 'texture')] : Array<Dynamic>)), true) : Bool)) : Bool)) {
+    sceneColor = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor;
+    activeTarget = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).currentRenderTarget;
+    if ((cast ((cast ((cast !_Runtime.strictEquals(transmissionSceneColorKind, null) : Bool) && (cast !_Runtime.strictEquals(sceneColor, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(_Runtime.optionalField(activeTarget, 'textures'), 'includes', cast ([(cast sceneColor : GlPbrTransmissionSceneColor).texture] : Array<Dynamic>)), true) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ code: 'framebuffer-feedback', kind: transmissionSceneColorKind }] : Array<Dynamic>));
     }
-    if ((cast ((cast textureCount : Float) > (cast _Runtime.field(_Runtime.callValue(GlPbrExtensionRegistry.getGlPbrExtensionTextureUnits__glPbrExtensionRegistry, cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>)), 'length') : Float)) : Bool)) {
+    if ((cast ((cast textureCount : Float) > (cast _Runtime.field((cast GlPbrExtensionRegistry.getGlPbrExtensionTextureUnits__glPbrExtensionRegistry((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext)) : Array<Float>), 'length') : Float)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ code: 'texture-unit-exhaustion', kind: 'ExtendedPbrMaterial' }] : Array<Dynamic>));
     }
     return cast issues;
@@ -96,30 +109,30 @@ class GlPbrExtensionRegistry {
   }
 
   public static function getGlPbrExtensionRegistration(state:GlRenderState, kind:Kind):Null<GlPbrExtensionRegistration> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionRegistry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlPbrExtension(state:GlRenderState, kind:Kind, registration:GlPbrExtensionRegistration):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.field(runtime, 'pbrExtensionRegistry') : flighthq._internal._Map).set(kind, registration));
-    _Runtime.incrementField(runtime, 'pbrExtensionRegistryVersion', 1, true);
+    var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    ((cast (cast runtime : GlScene3DRuntime).pbrExtensionRegistry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).set(kind, registration));
+    (cast runtime : GlScene3DRuntime).pbrExtensionRegistryVersion++;
   }
 
   @:noCompletion
   public static function resolveGlPbrExtensionContributions(state:GlRenderState, extensions:Array<PbrExtension>):Null<Array<GlPbrExtensionShaderContribution>> {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
+    var registry:flighthq._internal._Map<String, GlPbrExtensionRegistration> = cast _Runtime.UNDEFINED;
+    var context:GlPbrExtensionShaderContext = cast _Runtime.UNDEFINED;
     var contributions:Array<GlPbrExtensionShaderContribution> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(_Runtime.callValue(explainGlPbrExtensions, cast ([state, extensions] : Array<Dynamic>)), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast null; }
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry');
-    context = _Runtime.callValue(GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry, cast ([state] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.field((cast explainGlPbrExtensions((cast state : GlRenderState), (cast extensions : Array<PbrExtension>)) : Array<GlPbrExtensionIssue>), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast null; }
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionRegistry;
+    context = (cast GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry((cast state : GlRenderState)) : GlPbrExtensionShaderContext);
     contributions = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(contributions, 'push', cast ([_Runtime.callProperty(((cast registry : flighthq._internal._Map).get(_Runtime.field(flighthq._internal._StaticIndex.readArray(extensions, i), 'kind'))), 'createShaderContribution', cast ([context, flighthq._internal._StaticIndex.readArray(extensions, i)] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(contributions, 'push', cast ([(cast ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : PbrExtension).kind)) : GlPbrExtensionRegistration).createShaderContribution(context, flighthq._internal._StaticIndex.readArray(extensions, i))] : Array<Dynamic>));
         i++;
       }
     }
@@ -128,61 +141,61 @@ class GlPbrExtensionRegistry {
   }
 
   public static function createGlPbrExtensionShaderContext__glPbrExtensionRegistry(state:GlRenderState):GlPbrExtensionShaderContext {
-    return cast { hasTransmissionSceneColor: function() {
-      return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrTransmissionSceneColor'), null);
-    }, isTextureReady: function(texture:Dynamic) {
-      return cast _Runtime.callValue(isGlTextureReady, cast ([state, texture] : Array<Dynamic>));
+    return cast { hasTransmissionSceneColor: function():Bool {
+      return cast !_Runtime.strictEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor, null);
+    }, isTextureReady: function(texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>):Bool {
+      return cast (cast isGlTextureReady((cast state : GlRenderState), texture) : Bool);
     } };
     return cast null;
   }
 
   public static function createGlPbrExtensionBindContext__glPbrExtensionRegistry(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):GlPbrExtensionBindContext {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var textureUnits:Dynamic = cast _Runtime.UNDEFINED;
-    var textureIndex:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
-    textureUnits = _Runtime.callValue(GlPbrExtensionRegistry.getGlPbrExtensionTextureUnits__glPbrExtensionRegistry, cast ([gl] : Array<Dynamic>));
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var textureUnits:Array<Float> = cast _Runtime.UNDEFINED;
+    var textureIndex:Float = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    textureUnits = (cast GlPbrExtensionRegistry.getGlPbrExtensionTextureUnits__glPbrExtensionRegistry((cast gl : flighthq._internal.dom.WebGL2RenderingContext)) : Array<Float>);
     textureIndex = 0.0;
-    return cast { bindTransmissionSceneColor: function(samplerUniform:Dynamic, maxLodUniform:Dynamic) {
-      var sceneColor:Dynamic = cast _Runtime.UNDEFINED;
-      var unit:Dynamic = cast _Runtime.UNDEFINED;
-      sceneColor = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrTransmissionSceneColor');
+    return cast { bindTransmissionSceneColor: function(samplerUniform:String, maxLodUniform:String):Bool {
+      var sceneColor:Null<GlPbrTransmissionSceneColor> = cast _Runtime.UNDEFINED;
+      var unit:Float = cast _Runtime.UNDEFINED;
+      sceneColor = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor;
       if ((cast _Runtime.strictEquals(sceneColor, null) : Bool)) { return cast false; }
       unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
       if ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(sceneColor, 'texture'));
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast sceneColor : GlPbrTransmissionSceneColor).texture);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, samplerUniform), unit);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, maxLodUniform), HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(sceneColor, 'mipLevelCount'), 1.0)));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, maxLodUniform), HxMath.max(0.0, ((cast sceneColor : GlPbrTransmissionSceneColor).mipLevelCount - 1.0)));
       return cast true;
-    }, bindTexture: function(samplerUniform:Dynamic, uvSetUniform:Dynamic, uvTransformUniform:Dynamic, texture:Dynamic, uvSet:Dynamic) {
-      var unit:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast !(cast _Runtime.callValue(isGlTextureReady, cast ([state, texture] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    }, bindTexture: function(samplerUniform:String, uvSetUniform:String, uvTransformUniform:String, texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>, uvSet:PbrUvSet):Bool {
+      var unit:Float = cast _Runtime.UNDEFINED;
+      if ((cast !(cast (cast isGlTextureReady((cast state : GlRenderState), texture) : Bool) : Bool) : Bool)) { return cast false; }
       unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
       if ((cast ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
-      if ((cast _Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, texture] : Array<Dynamic>)), null) : Bool)) { return cast false; }
+      if ((cast _Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), texture, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, samplerUniform), unit);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uvSetUniform), uvSet);
-      _Runtime.callValue(getTextureUvMatrix, cast ([GlPbrExtensionRegistry.scratchUvMatrix__glPbrExtensionRegistry, texture] : Array<Dynamic>));
+      getTextureUvMatrix(GlPbrExtensionRegistry.scratchUvMatrix__glPbrExtensionRegistry, texture);
       flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uvTransformUniform), false, GlPbrExtensionRegistry.scratchUvMatrix__glPbrExtensionRegistry.m);
       return cast true;
-    }, setFloat: function(uniform:Dynamic, value:Dynamic) {
+    }, setFloat: function(uniform:String, value:Float):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uniform), value);
-    }, setLinearColor: function(uniform:Dynamic, color:Dynamic) {
-      _Runtime.callValue(unpackColorToLinear, cast ([GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, color] : Array<Dynamic>));
+    }, setLinearColor: function(uniform:String, color:Float):Void {
+      (cast unpackColorToLinear((cast GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry : LinearColor), (cast color : Float)) : LinearColor);
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uniform), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 0.0), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 1.0), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 2.0));
     } };
     return cast null;
   }
 
   public static function getGlPbrExtensionTextureUnits__glPbrExtensionRegistry(gl:flighthq._internal.dom.WebGL2RenderingContext):Array<Float> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     var units:Array<Float> = cast _Runtime.UNDEFINED;
     count = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MAX_TEXTURE_IMAGE_UNITS', flighthq._internal.backend.WebGl2Backend.MAX_TEXTURE_IMAGE_UNITS)) : Float);
     units = cast ([] : Array<Dynamic>);
     {
-      var unit:Dynamic = 6.0;
+      var unit:Float = 6.0;
       while ((cast ((cast unit : Float) < (cast count : Float)) : Bool)) {
         if ((cast ((cast ((cast unit : Float) < (cast 8.0 : Float)) : Bool) || (cast ((cast unit : Float) > (cast 12.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(units, 'push', cast ([unit] : Array<Dynamic>)); }
         unit++;
@@ -194,5 +207,5 @@ class GlPbrExtensionRegistry {
 
   public static final scratchRgba__glPbrExtensionRegistry:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final scratchUvMatrix__glPbrExtensionRegistry:Matrix3 = _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>));
+  public static final scratchUvMatrix__glPbrExtensionRegistry:Matrix3 = (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix3);
 }

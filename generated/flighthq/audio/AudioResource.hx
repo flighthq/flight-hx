@@ -21,7 +21,7 @@ class AudioResource {
   }
 
   public static function getAudioResourceByteSize(resource:flighthq.types.AudioResource):Float {
-    var buffer:Dynamic = cast _Runtime.UNDEFINED;
+    var buffer:Null<flighthq._internal.dom.AudioBuffer> = cast _Runtime.UNDEFINED;
     buffer = resource.buffer;
     return cast ((cast !_Runtime.strictEquals(buffer, null) : Bool) ? (cast (_Runtime.multiplyNumbers((cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels, (cast buffer : flighthq._internal.dom.AudioBuffer).length) * 4.0) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
@@ -33,7 +33,7 @@ class AudioResource {
   }
 
   public static function getAudioResourceChannelData(resource:flighthq.types.AudioResource, channel:Float):Null<flighthq._internal._Float32Array> {
-    var buffer:Dynamic = cast _Runtime.UNDEFINED;
+    var buffer:Null<flighthq._internal.dom.AudioBuffer> = cast _Runtime.UNDEFINED;
     buffer = resource.buffer;
     if ((cast ((cast ((cast _Runtime.strictEquals(buffer, null) : Bool) || (cast ((cast channel : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channel : Float) >= (cast (cast buffer : flighthq._internal.dom.AudioBuffer).numberOfChannels : Float)) : Bool)) : Bool)) { return cast null; }
     return cast (cast buffer : flighthq._internal.dom.AudioBuffer).getChannelData(channel);

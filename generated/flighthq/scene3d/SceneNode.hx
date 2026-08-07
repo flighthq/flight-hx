@@ -12,6 +12,8 @@ import flighthq.node.Node.enableNodeSignals;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Node.getNodeSignals;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Node;
+import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Node3D.Node3DTraits;
@@ -24,41 +26,41 @@ import flighthq.types._internal._Node3DValues.Node3DTraitsKey;
 class SceneNode {
   public static function createNode3D(?kind:Kind, ?obj:Dynamic):Node3D {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
-    var node:Dynamic = cast _Runtime.UNDEFINED;
-    node = _Runtime.callValue(createNode, cast ([kind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createNode3DRuntime] : Array<Dynamic>));
-    _Runtime.callValue(initAppearanceTrait, cast ([node, obj] : Array<Dynamic>));
-    _Runtime.callValue(initTransform3DTrait, cast ([node] : Array<Dynamic>));
+    var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
+    node = (cast createNode((cast kind : String), obj, _Runtime.field(_Runtime, 'UNDEFINED'), function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime()) : { >Node<Node3DTraits>, >Node3DTraits, });
+    initAppearanceTrait(node, (cast obj : Null<flighthq._internal._Any>));
+    initTransform3DTrait(node, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>));
     return cast (cast node : Node3D);
     return cast null;
   }
 
   @:noCompletion
   public static function createNode3DRuntime():Node3DRuntime {
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createNodeRuntime, cast ([] : Array<Dynamic>)) : Node3DRuntime);
-    _Runtime.setField(out, 'traits', Node3DTraitsKey);
-    _Runtime.setField(out, 'worldAlpha', null);
-    _Runtime.setField(out, 'worldAlphaUsingAppearanceId', -1.0);
-    _Runtime.setField(out, 'worldAlphaUsingParentAppearanceId', -1.0);
-    _Runtime.setField(out, 'worldAppearanceId', 0.0);
-    _Runtime.callValue(initTransform3DRuntimeTrait, cast ([out] : Array<Dynamic>));
+    var out:Node3DRuntime = cast _Runtime.UNDEFINED;
+    out = (cast (cast createNodeRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : Node3DRuntime) : Node3DRuntime);
+    ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
+    ((cast out : { var worldAlpha:Null<Float>; }).worldAlpha = null);
+    ((cast out : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = -1.0);
+    ((cast out : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId = -1.0);
+    ((cast out : { var worldAppearanceId:Float; }).worldAppearanceId = 0.0);
+    initTransform3DRuntimeTrait(out);
     return cast out;
     return cast null;
   }
 
   public static function enableNode3DSignals(source:Node3D):NodeSignals {
-    return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast enableNodeSignals(source) : NodeSignals);
     return cast null;
   }
 
   @:noCompletion
   public static function getNode3DRuntime(source:Node3D):Node3DRuntime {
-    return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : Node3DRuntime);
+    return cast (cast (cast getNodeRuntime(source) : Node3DRuntime) : Node3DRuntime);
     return cast null;
   }
 
   public static function getNode3DSignals(source:Node3D):Null<NodeSignals> {
-    return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast getNodeSignals(source) : Null<NodeSignals>);
     return cast null;
   }
 }

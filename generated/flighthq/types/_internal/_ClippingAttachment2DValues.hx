@@ -7,5 +7,5 @@ import flighthq.types.Attachment2D;
 import flighthq.types.Skin2D;
 
 class _ClippingAttachment2DValues {
-  public static final ClippingAttachment2DKind:Dynamic = 'ClippingAttachment2D';
+  public static final ClippingAttachment2DKind:String = 'ClippingAttachment2D';
 }

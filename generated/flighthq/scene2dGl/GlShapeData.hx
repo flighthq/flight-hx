@@ -6,58 +6,61 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.createImageResource;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlShapeRendererData;
 import flighthq.types.GlShapeRendererData.GlShapeRasterSurface;
+import flighthq.types.Image;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.TextureSource;
 
 class GlShapeData {
   @:noCompletion
   public static function acquireGlShapeRasterSurface(data:GlShapeRendererData):GlShapeRasterSurface {
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
+    var existing:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:GlShapeRasterSurface = cast _Runtime.UNDEFINED;
-    existing = _Runtime.field(data, 'surface');
+    existing = (cast data : GlShapeRendererData).surface;
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast existing; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
-    surface = { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: _Runtime.callValue(createImageResource, cast ([canvas] : Array<Dynamic>)) };
-    _Runtime.setField(data, 'surface', surface);
+    surface = { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image) };
+    ((cast data : GlShapeRendererData).surface = surface);
     return cast surface;
     return cast null;
   }
 
   @:noCompletion
   public static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
-    return cast _Runtime.callValue(toGlShapeRendererData, cast ([{ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }] : Array<Dynamic>));
+    return cast (cast toGlShapeRendererData((cast { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null } : GlShapeRendererData)) : Null<RendererData>);
     return cast null;
   }
 
   @:noCompletion
   public static function destroyGlShapeData(state:GlRenderState, data:RendererData):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var surface:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    surface = _Runtime.field(_Runtime.callValue(getGlShapeData, cast ([data] : Array<Dynamic>)), 'surface');
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var surface:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
+    var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    surface = (cast (cast getGlShapeData((cast data : RendererData)) : GlShapeRendererData) : GlShapeRendererData).surface;
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return; }
-    entry = ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(surface, 'image')));
+    entry = ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(_Runtime.field(state, 'gl'), _Runtime.field(entry, 'texture'));
-      ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(surface, 'image')));
+      flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture);
+      ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).delete_((cast surface : GlShapeRasterSurface).image));
     }
   }
 
   @:noCompletion
   public static function getGlShapeData(data:RendererData):GlShapeRendererData {
-    return cast (cast (cast data : Dynamic) : GlShapeRendererData);
+    return cast (cast (cast data : flighthq._internal._Any) : GlShapeRendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function toGlShapeRendererData(data:GlShapeRendererData):RendererData {
-    return cast (cast (cast data : Dynamic) : RendererData);
+    return cast (cast (cast data : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 }

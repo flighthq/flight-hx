@@ -4,20 +4,24 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronPowerMonitor;
+import flighthq.types.ElectronApi.ElectronPowerSaveBlocker;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
+import flighthq.types.Power.PowerStatus;
+import flighthq.types.Power.PowerThermalState;
 
 class ElectronPower {
   public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
-    var powerMonitor:Dynamic = cast _Runtime.UNDEFINED;
-    var powerSaveBlocker:Dynamic = cast _Runtime.UNDEFINED;
-    var blockerId:Dynamic = cast _Runtime.UNDEFINED;
-    powerMonitor = _Runtime.field(electron, 'powerMonitor');
-    powerSaveBlocker = _Runtime.field(electron, 'powerSaveBlocker');
+    var powerMonitor:ElectronPowerMonitor = cast _Runtime.UNDEFINED;
+    var powerSaveBlocker:ElectronPowerSaveBlocker = cast _Runtime.UNDEFINED;
+    var blockerId:Float = cast _Runtime.UNDEFINED;
+    powerMonitor = (cast electron : ElectronApi).powerMonitor;
+    powerSaveBlocker = (cast electron : ElectronApi).powerSaveBlocker;
     blockerId = -1.0;
-    return cast { getStatus: function(out:Dynamic) {
-      var onBattery:Dynamic = cast _Runtime.UNDEFINED;
-      onBattery = _Runtime.strictEquals(_Runtime.field(powerMonitor, 'onBatteryPower'), true);
+    return cast { getStatus: function(out:PowerStatus):PowerStatus {
+      var onBattery:Bool = cast _Runtime.UNDEFINED;
+      onBattery = _Runtime.strictEquals((cast powerMonitor : ElectronPowerMonitor).onBatteryPower, true);
       (out.batteryLevel = cast (-1.0 : Dynamic));
       (out.chargingTime = cast (-1.0 : Dynamic));
       (out.dischargingTime = cast (-1.0 : Dynamic));
@@ -27,48 +31,48 @@ class ElectronPower {
       (out.isOnBattery = cast (onBattery : Dynamic));
       (out.thermalState = cast ('Unknown' : Dynamic));
       return cast out;
-    }, getBatteryHealth: function() {
+    }, getBatteryHealth: function():flighthq._internal._Any {
       return cast null;
-    }, getSystemIdleState: function(thresholdSeconds:Dynamic) {
-      return cast _Runtime.callValue(ElectronPower.toIdleState__electronPower, cast ([_Runtime.callProperty(powerMonitor, 'getSystemIdleState', cast ([thresholdSeconds] : Array<Dynamic>))] : Array<Dynamic>));
-    }, getSystemIdleTime: function() {
-      return cast _Runtime.callProperty(powerMonitor, 'getSystemIdleTime', cast ([] : Array<Dynamic>));
-    }, isKeepAwakeActive: function() {
+    }, getSystemIdleState: function(thresholdSeconds:Float):PowerIdleState {
+      return cast (cast ElectronPower.toIdleState__electronPower((cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleState(thresholdSeconds) : String)) : PowerIdleState);
+    }, getSystemIdleTime: function():Float {
+      return cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleTime();
+    }, isKeepAwakeActive: function():Bool {
       return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
-    }, subscribe: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['on-battery', listener] : Array<Dynamic>));
-      _Runtime.callProperty(powerMonitor, 'on', cast (['on-ac', listener] : Array<Dynamic>));
-      return cast function() {
-        _Runtime.callProperty(powerMonitor, 'removeListener', cast (['on-battery', listener] : Array<Dynamic>));
-        _Runtime.callProperty(powerMonitor, 'removeListener', cast (['on-ac', listener] : Array<Dynamic>));
+    }, subscribe: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('on-battery', listener);
+      (cast powerMonitor : ElectronPowerMonitor).on('on-ac', listener);
+      return cast function():Void {
+        (cast powerMonitor : ElectronPowerMonitor).removeListener('on-battery', listener);
+        (cast powerMonitor : ElectronPowerMonitor).removeListener('on-ac', listener);
       };
-    }, subscribeLockScreen: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['lock-screen', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['lock-screen', listener] : Array<Dynamic>));
-    }, subscribeLowPowerModeChange: function() {
-      return cast function() {
+    }, subscribeLockScreen: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('lock-screen', listener);
+      return cast function():Void return (cast powerMonitor : ElectronPowerMonitor).removeListener('lock-screen', listener);
+    }, subscribeLowPowerModeChange: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeResume: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['resume', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['resume', listener] : Array<Dynamic>));
-    }, subscribeSuspend: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['suspend', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['suspend', listener] : Array<Dynamic>));
-    }, subscribeThermalStateChange: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['thermal-state-change', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['thermal-state-change', listener] : Array<Dynamic>));
-    }, subscribeUnlockScreen: function(listener:Dynamic) {
-      _Runtime.callProperty(powerMonitor, 'on', cast (['unlock-screen', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(powerMonitor, 'removeListener', cast (['unlock-screen', listener] : Array<Dynamic>));
-    }, setKeepAwake: function(enabled:Dynamic) {
+    }, subscribeResume: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('resume', listener);
+      return cast function():Void return (cast powerMonitor : ElectronPowerMonitor).removeListener('resume', listener);
+    }, subscribeSuspend: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('suspend', listener);
+      return cast function():Void return (cast powerMonitor : ElectronPowerMonitor).removeListener('suspend', listener);
+    }, subscribeThermalStateChange: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('thermal-state-change', listener);
+      return cast function():Void return (cast powerMonitor : ElectronPowerMonitor).removeListener('thermal-state-change', listener);
+    }, subscribeUnlockScreen: function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : ElectronPowerMonitor).on('unlock-screen', listener);
+      return cast function():Void return (cast powerMonitor : ElectronPowerMonitor).removeListener('unlock-screen', listener);
+    }, setKeepAwake: function(enabled:Bool):Bool {
       try {
         if ((cast ((cast enabled : Bool) && (cast ((cast blockerId : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-          (blockerId = cast (_Runtime.callProperty(powerSaveBlocker, 'start', cast (['prevent-display-sleep'] : Array<Dynamic>)) : Dynamic));
+          (blockerId = cast ((cast powerSaveBlocker : ElectronPowerSaveBlocker).start('prevent-display-sleep') : Dynamic));
           return cast true;
         }
         if ((cast ((cast !(cast enabled : Bool) : Bool) && (cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty(powerSaveBlocker, 'stop', cast ([blockerId] : Array<Dynamic>));
+          (cast powerSaveBlocker : ElectronPowerSaveBlocker).stop(blockerId);
           (blockerId = cast (-1.0 : Dynamic));
           return cast true;
         }

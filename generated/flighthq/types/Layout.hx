@@ -16,9 +16,9 @@ typedef FlexLayoutWrap = String;
 
 typedef FlexLayoutContainerStyle = { @:optional var align:FlexLayoutAlign; @:optional var direction:FlexLayoutDirection; @:optional var gap:Float; @:optional var justify:FlexLayoutJustify; @:optional var paddingBottom:Float; @:optional var paddingLeft:Float; @:optional var paddingRight:Float; @:optional var paddingTop:Float; @:optional var wrap:FlexLayoutWrap; };
 
-typedef FlexLayoutItemStyle = { @:optional var alignSelf:Dynamic; @:optional var basis:Dynamic; @:optional var grow:Float; @:optional var shrink:Float; };
+typedef FlexLayoutItemStyle = { @:optional var alignSelf:flighthq._internal._Union2<FlexLayoutAlign, String>; @:optional var basis:flighthq._internal._Union2<Float, String>; @:optional var grow:Float; @:optional var shrink:Float; };
 
-typedef GridLayoutTrack = Dynamic;
+typedef GridLayoutTrack = flighthq._internal._Union2<flighthq._internal._Union2<{ var kind:String; }, { var kind:String; var size:Float; }>, { var fraction:Float; var kind:String; }>;
 
 typedef GridLayoutContainerStyle = { @:optional var columnGap:Float; var columns:Array<GridLayoutTrack>; @:optional var paddingBottom:Float; @:optional var paddingLeft:Float; @:optional var paddingRight:Float; @:optional var paddingTop:Float; @:optional var rowGap:Float; var rows:Array<GridLayoutTrack>; };
 
@@ -28,22 +28,22 @@ typedef LayoutNode<ContainerStyle, ItemStyle> = { var containerStyle:Null<Contai
 
 typedef LayoutTree = { var nodes:Array<LayoutNode<Dynamic, Dynamic>>; };
 
-typedef LayoutResolutionFailureKind = Dynamic;
+typedef LayoutResolutionFailureKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef LayoutResolutionExplanation = { var actualLength:Float; var kind:LayoutResolutionFailureKind; var nodeIndex:Float; var parentIndex:Float; var requiredLength:Float; var resolverKind:Null<String>; };
 
-typedef LayoutResolver = Dynamic;
+typedef LayoutResolver = flighthq._internal._Float32Array->LayoutTree->flighthq._internal._ArrayLike<Float>->Float->Float->Null<LayoutResolutionFailureKind>;
 
-typedef LayoutResolutionGuard = Dynamic;
+typedef LayoutResolutionGuard = LayoutResolutionExplanation->Void;
 
-typedef LayoutState = { var guard:Null<LayoutResolutionGuard>; var lastFailureActualLength:Float; var lastFailureKind:Null<LayoutResolutionFailureKind>; var lastFailureNodeIndex:Float; var lastFailureParentIndex:Float; var lastFailureRequiredLength:Float; var lastFailureResolverKind:Null<String>; var resolvers:Dynamic; };
+typedef LayoutState = { var guard:Null<LayoutResolutionGuard>; var lastFailureActualLength:Float; var lastFailureKind:Null<LayoutResolutionFailureKind>; var lastFailureNodeIndex:Float; var lastFailureParentIndex:Float; var lastFailureRequiredLength:Float; var lastFailureResolverKind:Null<String>; var resolvers:flighthq._internal._Map<String, LayoutResolver>; };
 
 class Layout {
-  public static final AnchorLayoutKind:Dynamic = 'AnchorLayout';
+  public static final AnchorLayoutKind:String = 'AnchorLayout';
 
-  public static final FlexLayoutKind:Dynamic = 'FlexLayout';
+  public static final FlexLayoutKind:String = 'FlexLayout';
 
-  public static final GridLayoutKind:Dynamic = 'GridLayout';
+  public static final GridLayoutKind:String = 'GridLayout';
 
-  public static final LayoutResolutionFailureKindValue:Dynamic = { IntrinsicSizesTooSmall: 'IntrinsicSizesTooSmall', InvalidContainerStyle: 'InvalidContainerStyle', InvalidHierarchy: 'InvalidHierarchy', InvalidItemStyle: 'InvalidItemStyle', OutputTooSmall: 'OutputTooSmall', UnregisteredKind: 'UnregisteredKind' };
+  public static final LayoutResolutionFailureKindValue:{ var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; } = { IntrinsicSizesTooSmall: 'IntrinsicSizesTooSmall', InvalidContainerStyle: 'InvalidContainerStyle', InvalidHierarchy: 'InvalidHierarchy', InvalidItemStyle: 'InvalidItemStyle', OutputTooSmall: 'OutputTooSmall', UnregisteredKind: 'UnregisteredKind' };
 }

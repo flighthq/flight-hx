@@ -4,20 +4,21 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 import flighthq.types.GradientSpread;
 
 class BitmapGradientFill {
   public static function fillBitmapLinearGradient(dest:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
-    var dw:Dynamic = cast _Runtime.UNDEFINED;
-    var dh:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var axisX:Dynamic = cast _Runtime.UNDEFINED;
-    var axisY:Dynamic = cast _Runtime.UNDEFINED;
-    var lenSq:Dynamic = cast _Runtime.UNDEFINED;
-    var invLen:Dynamic = cast _Runtime.UNDEFINED;
+    var dw:Float = cast _Runtime.UNDEFINED;
+    var dh:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var axisX:Float = cast _Runtime.UNDEFINED;
+    var axisY:Float = cast _Runtime.UNDEFINED;
+    var lenSq:Float = cast _Runtime.UNDEFINED;
+    var invLen:Float = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
     data = _Runtime.field(dest, 'bitmap').data;
@@ -28,19 +29,19 @@ class BitmapGradientFill {
     lenSq = ((axisX * axisX) + (axisY * axisY));
     invLen = ((cast ((cast lenSq : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / lenSq) : Dynamic) : (cast 0.0 : Dynamic));
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var t:Dynamic = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
-            var idx:Dynamic = _Runtime.callValue(BitmapGradientFill.spreadIndex__bitmapGradientFill, cast ([t, spread] : Array<Dynamic>));
-            var ri:Dynamic = (idx * 4.0);
-            var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
+            var t:Float = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread : GradientSpread)) : Float);
+            var ri:Float = (idx * 4.0);
+            var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
@@ -51,20 +52,20 @@ class BitmapGradientFill {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapRadialGradient(dest:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
     if (focalX == null) focalX = cast (cx : Dynamic);
     if (focalY == null) focalY = cast (cy : Dynamic);
-    var dw:Dynamic = cast _Runtime.UNDEFINED;
-    var dh:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var invRadius:Dynamic = cast _Runtime.UNDEFINED;
-    var fdx:Dynamic = cast _Runtime.UNDEFINED;
-    var fdy:Dynamic = cast _Runtime.UNDEFINED;
+    var dw:Float = cast _Runtime.UNDEFINED;
+    var dh:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var invRadius:Float = cast _Runtime.UNDEFINED;
+    var fdx:Float = cast _Runtime.UNDEFINED;
+    var fdy:Float = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
     data = _Runtime.field(dest, 'bitmap').data;
@@ -74,21 +75,21 @@ class BitmapGradientFill {
     fdx = (focalX - cx);
     fdy = (focalY - cy);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast dh : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast dw : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var dx:Dynamic = (px - focalX);
-            var dy:Dynamic = (py - focalY);
-            var t:Dynamic = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
-            var idx:Dynamic = _Runtime.callValue(BitmapGradientFill.spreadIndex__bitmapGradientFill, cast ([t, spread] : Array<Dynamic>));
-            var ri:Dynamic = (idx * 4.0);
-            var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
+            var dx:Float = (px - focalX);
+            var dy:Float = (py - focalY);
+            var t:Float = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread : GradientSpread)) : Float);
+            var ri:Float = (idx * 4.0);
+            var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 1.0)));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, (ri + 2.0)));
@@ -99,7 +100,7 @@ class BitmapGradientFill {
         py++;
       }
     }
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function spreadIndex__bitmapGradientFill(t:Float, spread:GradientSpread):Float {
@@ -113,7 +114,7 @@ class BitmapGradientFill {
       }
       else if (__switchValue == 'reflect') {
         {
-          var wrapped:Dynamic = (t - _Runtime.multiplyNumbers(HxMath.floor((t / 2.0)), 2.0));
+          var wrapped:Float = (t - _Runtime.multiplyNumbers(HxMath.floor((t / 2.0)), 2.0));
           (s = cast (((cast ((cast wrapped : Float) <= (cast 1.0 : Float)) : Bool) ? (cast wrapped : Dynamic) : (cast (2.0 - wrapped) : Dynamic)) : Dynamic));
         }
       }

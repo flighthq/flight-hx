@@ -6,39 +6,42 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.LensFlareEffect;
+import flighthq.types.RenderEffect;
 
 class GlLensFlareEffect {
   @:noCompletion
   public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
-    var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var ghosts:Dynamic = cast _Runtime.UNDEFINED;
-    var halo:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var threshold:Float = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var ghosts:Float = cast _Runtime.UNDEFINED;
+    var halo:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     ghosts = _Runtime.coalesce(_Runtime.field(effect, 'ghosts'), function():Dynamic return cast 4.0);
     halo = _Runtime.coalesce(_Runtime.field(effect, 'halo'), function():Dynamic return cast 0.5);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.lensFlare', GlLensFlareEffect.LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.lensFlare' : String), (cast GlLensFlareEffect.LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_ghosts'), ghosts);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_halo'), halo);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlLensFlareEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyLensFlareEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensFlareEffect)] : Array<Dynamic>));
+  public static final defaultGlLensFlareEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyLensFlareEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : LensFlareEffect) : LensFlareEffect));
   };
 
   public static function registerGlLensFlareEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'LensFlareEffect', defaultGlLensFlareEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'LensFlareEffect' : String), (cast defaultGlLensFlareEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nuniform float u_intensity;\nuniform float u_ghosts;\nuniform float u_halo;\nout vec4 o_color;\nvec3 brightPass(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return vec3(0.0);\n  vec3 c = texture(u_texture0, uv).rgb;\n  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));\n  return c * max(0.0, l - u_threshold);\n}\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  // Single-pass approximation of a flare: walk ghost samples along the vector toward the optical\n  // center and add a halo ring, all from the bright pass of the scene itself (no separate buffer).\n  vec2 toCenter = (vec2(0.5) - v_texCoord);\n  vec3 flare = vec3(0.0);\n  int count = int(clamp(u_ghosts, 0.0, 8.0));\n  for (int i = 0; i < 8; i++) {\n    if (i >= count) break;\n    float t = (float(i) + 1.0) / (float(count) + 1.0);\n    vec2 uv = v_texCoord + toCenter * (2.0 * t);\n    flare += brightPass(uv);\n  }\n  vec2 haloDir = normalize(toCenter + vec2(1e-5));\n  flare += brightPass(v_texCoord + haloDir * u_halo) * u_halo;\n  o_color = vec4(scene.rgb + flare * u_intensity, scene.a);\n}';
+  public static final LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nuniform float u_intensity;\nuniform float u_ghosts;\nuniform float u_halo;\nout vec4 o_color;\nvec3 brightPass(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return vec3(0.0);\n  vec3 c = texture(u_texture0, uv).rgb;\n  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));\n  return c * max(0.0, l - u_threshold);\n}\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  // Single-pass approximation of a flare: walk ghost samples along the vector toward the optical\n  // center and add a halo ring, all from the bright pass of the scene itself (no separate buffer).\n  vec2 toCenter = (vec2(0.5) - v_texCoord);\n  vec3 flare = vec3(0.0);\n  int count = int(clamp(u_ghosts, 0.0, 8.0));\n  for (int i = 0; i < 8; i++) {\n    if (i >= count) break;\n    float t = (float(i) + 1.0) / (float(count) + 1.0);\n    vec2 uv = v_texCoord + toCenter * (2.0 * t);\n    flare += brightPass(uv);\n  }\n  vec2 haloDir = normalize(toCenter + vec2(1e-5));\n  flare += brightPass(v_texCoord + haloDir * u_halo) * u_halo;\n  o_color = vec4(scene.rgb + flare * u_intensity, scene.a);\n}';
 }

@@ -9,6 +9,7 @@ import flighthq.textureFormats.ByteReader.readByteReaderU16;
 import flighthq.textureFormats.ByteReader.readByteReaderU24;
 import flighthq.textureFormats.ByteReader.readByteReaderU32;
 import flighthq.textureFormats.ByteReader.readByteReaderU8;
+import flighthq.types.ByteReader;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -19,65 +20,65 @@ typedef ParseFailure__parseBasis = { var reason:Null<TextureContainerParseFailur
 class ParseBasis {
   public static function getBasisParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseBasis = cast _Runtime.UNDEFINED;
-    var container:Dynamic = cast _Runtime.UNDEFINED;
+    var container:Null<TextureContainer> = cast _Runtime.UNDEFINED;
     failure = { reason: null };
-    container = _Runtime.callValue(ParseBasis.parseBasisInternal__parseBasis, cast ([bytes, failure] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast _Runtime.field(failure, 'reason') : Dynamic) : (cast null : Dynamic));
+    container = (cast ParseBasis.parseBasisInternal__parseBasis((cast bytes : flighthq._internal._UInt8Array), failure) : Null<TextureContainer>);
+    return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast (cast failure : ParseFailure__parseBasis).reason : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast _Runtime.callValue(ParseBasis.parseBasisInternal__parseBasis, cast ([bytes] : Array<Dynamic>));
+    return cast (cast ParseBasis.parseBasisInternal__parseBasis((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<TextureContainer>);
     return cast null;
   }
 
   public static function parseBasisInternal__parseBasis(bytes:flighthq._internal._UInt8Array, ?failure:ParseFailure__parseBasis):Null<TextureContainer> {
-    var header:Dynamic = cast _Runtime.UNDEFINED;
-    var totalSlices:Dynamic = cast _Runtime.UNDEFINED;
-    var totalImages:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
-    var shape:Dynamic = cast _Runtime.UNDEFINED;
-    var sliceDescReader:Dynamic = cast _Runtime.UNDEFINED;
-    var sliceDescOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var table:Dynamic = cast _Runtime.UNDEFINED;
+    var header:ByteReader = cast _Runtime.UNDEFINED;
+    var totalSlices:Float = cast _Runtime.UNDEFINED;
+    var totalImages:Float = cast _Runtime.UNDEFINED;
+    var format:TextureContainerFormat = cast _Runtime.UNDEFINED;
+    var shape:Null<{ var depth:Float; var faces:Float; var layers:Float; }> = cast _Runtime.UNDEFINED;
+    var sliceDescReader:ByteReader = cast _Runtime.UNDEFINED;
+    var sliceDescOffset:Float = cast _Runtime.UNDEFINED;
+    var table:ByteReader = cast _Runtime.UNDEFINED;
     var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;
-    var baseWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var baseHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var maxLevel:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !(cast _Runtime.callValue(ParseBasis.hasBasisSignature__parseBasis, cast ([bytes] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'container-unrecognized'] : Array<Dynamic>)); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'header-truncated'] : Array<Dynamic>)); }
-    header = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisTotalSlicesOffset__parseBasis] : Array<Dynamic>));
-    totalSlices = _Runtime.callValue(readByteReaderU24, cast ([header] : Array<Dynamic>));
-    totalImages = _Runtime.callValue(readByteReaderU24, cast ([header] : Array<Dynamic>));
+    var baseWidth:Float = cast _Runtime.UNDEFINED;
+    var baseHeight:Float = cast _Runtime.UNDEFINED;
+    var maxLevel:Float = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast ParseBasis.hasBasisSignature__parseBasis((cast bytes : flighthq._internal._UInt8Array)) : Bool) : Bool) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'container-unrecognized' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    header = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisTotalSlicesOffset__parseBasis : Float)) : ByteReader);
+    totalSlices = (cast readByteReaderU24(header) : Float);
+    totalImages = (cast readByteReaderU24(header) : Float);
     format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
-    if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'structure-invalid'] : Array<Dynamic>)); }
-    shape = _Runtime.callValue(ParseBasis.getBasisTextureShape__parseBasis, cast ([flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexTypeOffset__parseBasis), totalImages] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'format-unsupported'] : Array<Dynamic>)); }
-    sliceDescReader = _Runtime.callValue(createByteReader, cast ([bytes, ParseBasis.basisSliceDescOffsetField__parseBasis] : Array<Dynamic>));
-    sliceDescOffset = _Runtime.callValue(readByteReaderU32, cast ([sliceDescReader] : Array<Dynamic>));
-    table = _Runtime.callValue(createByteReader, cast ([bytes, sliceDescOffset] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(hasByteReaderBytes, cast ([table, (totalSlices * ParseBasis.basisSliceDescSize__parseBasis)] : Array<Dynamic>)) : Bool) : Bool)) {
-      return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'structure-invalid' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    shape = (cast ParseBasis.getBasisTextureShape__parseBasis((cast flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexTypeOffset__parseBasis) : Float), (cast totalImages : Float)) : Null<{ var depth:Float; var faces:Float; var layers:Float; }>);
+    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    sliceDescReader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisSliceDescOffsetField__parseBasis : Float)) : ByteReader);
+    sliceDescOffset = (cast readByteReaderU32(sliceDescReader) : Float);
+    table = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast sliceDescOffset : Float)) : ByteReader);
+    if ((cast !(cast (cast hasByteReaderBytes(table, (cast (totalSlices * ParseBasis.basisSliceDescSize__parseBasis) : Float)) : Bool) : Bool) : Bool)) {
+      return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
     }
     levels = cast ([] : Array<Dynamic>);
     baseWidth = 0.0;
     baseHeight = 0.0;
     maxLevel = 0.0;
     {
-      var slice:Dynamic = 0.0;
+      var slice:Float = 0.0;
       while ((cast ((cast slice : Float) < (cast totalSlices : Float)) : Bool)) {
-        var imageIndex:Dynamic = _Runtime.callValue(readByteReaderU24, cast ([table] : Array<Dynamic>));
-        var levelIndex:Dynamic = _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
-        _Runtime.callValue(readByteReaderU8, cast ([table] : Array<Dynamic>));
-        var width:Dynamic = _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        var height:Dynamic = _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        var byteOffset:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([table] : Array<Dynamic>));
-        var byteLength:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([table] : Array<Dynamic>));
-        _Runtime.callValue(readByteReaderU16, cast ([table] : Array<Dynamic>));
-        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast _Runtime.callValue(ParseBasis.reject__parseBasis, cast ([failure, 'level-range-out-of-bounds'] : Array<Dynamic>)); }
+        var imageIndex:Float = (cast readByteReaderU24(table) : Float);
+        var levelIndex:Float = (cast readByteReaderU8(table) : Float);
+        (cast readByteReaderU8(table) : Float);
+        var width:Float = (cast readByteReaderU16(table) : Float);
+        var height:Float = (cast readByteReaderU16(table) : Float);
+        (cast readByteReaderU16(table) : Float);
+        (cast readByteReaderU16(table) : Float);
+        var byteOffset:Float = (cast readByteReaderU32(table) : Float);
+        var byteLength:Float = (cast readByteReaderU32(table) : Float);
+        (cast readByteReaderU16(table) : Float);
+        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
         if ((cast ((cast _Runtime.strictEquals(imageIndex, 0.0) : Bool) && (cast _Runtime.strictEquals(levelIndex, 0.0) : Bool)) : Bool)) {
           (baseWidth = cast (width : Dynamic));
           (baseHeight = cast (height : Dynamic));
@@ -87,18 +88,18 @@ class ParseBasis {
         (slice = cast ((slice + 1.0) : Dynamic));
       }
     }
-    return cast { depth: _Runtime.field(shape, 'depth'), faces: _Runtime.field(shape, 'faces'), format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: _Runtime.field(shape, 'layers'), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
+    return cast { depth: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).depth, faces: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).faces, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(({ final __structural0 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : TextureContainerLevel).height; }), function():Dynamic return cast 0.0)), layers: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).layers, levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(({ final __structural1 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : TextureContainerLevel).width; }), function():Dynamic return cast 0.0)) };
     return cast null;
   }
 
   public static function reject__parseBasis(failure:Null<ParseFailure__parseBasis>, reason:TextureContainerParseFailureReason):Dynamic {
-    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(failure, 'reason', reason); }
+    if ((cast !_Runtime.strictEquals(failure, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast failure : ParseFailure__parseBasis).reason = reason); }
     return cast null;
     return cast null;
   }
 
   public static function getBasisTextureShape__parseBasis(textureType:Float, totalImages:Float):Null<{ var depth:Float; var faces:Float; var layers:Float; }> {
-    var images:Dynamic = cast _Runtime.UNDEFINED;
+    var images:Float = cast _Runtime.UNDEFINED;
     images = HxMath.max(1.0, totalImages);
     {
       var __switchValue = textureType;
@@ -127,27 +128,27 @@ class ParseBasis {
     return cast null;
   }
 
-  public static final basisTotalSlicesOffset__parseBasis:Dynamic = 14.0;
+  public static final basisTotalSlicesOffset__parseBasis:Float = 14.0;
 
-  public static final basisTexFormatOffset__parseBasis:Dynamic = 20.0;
+  public static final basisTexFormatOffset__parseBasis:Float = 20.0;
 
-  public static final basisTexTypeOffset__parseBasis:Dynamic = 23.0;
+  public static final basisTexTypeOffset__parseBasis:Float = 23.0;
 
-  public static final basisSliceDescOffsetField__parseBasis:Dynamic = 63.0;
+  public static final basisSliceDescOffsetField__parseBasis:Float = 63.0;
 
-  public static final basisHeaderMinSize__parseBasis:Dynamic = 67.0;
+  public static final basisHeaderMinSize__parseBasis:Float = 67.0;
 
-  public static final basisSliceDescSize__parseBasis:Dynamic = 23.0;
+  public static final basisSliceDescSize__parseBasis:Float = 23.0;
 
-  public static final basisTextureType2d__parseBasis:Dynamic = 0.0;
+  public static final basisTextureType2d__parseBasis:Float = 0.0;
 
-  public static final basisTextureType2dArray__parseBasis:Dynamic = 1.0;
+  public static final basisTextureType2dArray__parseBasis:Float = 1.0;
 
-  public static final basisTextureTypeCubemapArray__parseBasis:Dynamic = 2.0;
+  public static final basisTextureTypeCubemapArray__parseBasis:Float = 2.0;
 
-  public static final basisTextureTypeVideoFrames__parseBasis:Dynamic = 3.0;
+  public static final basisTextureTypeVideoFrames__parseBasis:Float = 3.0;
 
-  public static final basisTextureTypeVolume__parseBasis:Dynamic = 4.0;
+  public static final basisTextureTypeVolume__parseBasis:Float = 4.0;
 
-  public static final basisTexFormat__parseBasis:Dynamic = _Runtime.objectFromPairs([{ key: '0', value: 'etc1s' }, { key: '1', value: 'uastc' }]);
+  public static final basisTexFormat__parseBasis:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '0', value: 'etc1s' }, { key: '1', value: 'uastc' }]);
 }

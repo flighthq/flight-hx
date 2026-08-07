@@ -8,4 +8,4 @@ typedef DeviceInfo = { var arch:String; var availableMemory:Float; var boardName
 
 typedef SafeAreaInsets = { var top:Float; var right:Float; var bottom:Float; var left:Float; };
 
-typedef DeviceBackend = { var getCapabilities:Dynamic; var getDisplayMetrics:Dynamic; var getId:Dynamic; var getInfo:Dynamic; var getSafeAreaInsets:Dynamic; };
+typedef DeviceBackend = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; };

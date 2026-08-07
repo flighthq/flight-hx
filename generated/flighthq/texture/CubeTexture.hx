@@ -10,43 +10,48 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.texture.Texture.equalsTexture;
 import flighthq.types.CreateCubeTextureOptions;
 import flighthq.types.CubeTexture;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
 
 class CubeTexture {
   public static function getCubeSources__cubeTexture(texture:flighthq.types.CubeTexture):TextureSourceCubeFaces {
-    return cast _Runtime.field(texture, 'sources');
+    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
     return cast null;
   }
 
   public static function cloneCubeTexture(source:flighthq.types.CubeTexture):flighthq.types.CubeTexture {
-    return cast (cast _Runtime.callValue(cloneTexture, cast ([source] : Array<Dynamic>)) : flighthq.types.CubeTexture);
+    return cast (cast (cast cloneTexture(source) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.CubeTexture);
     return cast null;
   }
 
   public static function copyCubeTexture(out:flighthq.types.CubeTexture, source:flighthq.types.CubeTexture):Void {
-    _Runtime.callValue(copyTexture, cast ([out, source] : Array<Dynamic>));
+    copyTexture(out, source);
   }
 
   public static function createCubeTexture(?opts:CreateCubeTextureOptions):flighthq.types.CubeTexture {
-    return cast (cast _Runtime.callValue(createTexture, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(_Runtime.optionalField(opts, 'sources'), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) }] : Array<Dynamic>)) : flighthq.types.CubeTexture);
+    return cast (cast (cast createTexture({ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast (cast cloneSampler(_Runtime.field(opts, 'sampler')) : Null<Sampler>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(_Runtime.optionalField(opts, 'sources'), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) }) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.CubeTexture);
     return cast null;
   }
 
   public static function equalsCubeTexture(a:Null<flighthq.types.CubeTexture>, b:Null<flighthq.types.CubeTexture>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.callValue(equalsTexture, cast ([a, b] : Array<Dynamic>));
+    return cast (cast equalsTexture(a, b) : Bool);
     return cast null;
   }
 
   public static function getCubeTextureFaceSize(cube:flighthq.types.CubeTexture):Float {
-    var sources:Dynamic = cast _Runtime.UNDEFINED;
-    sources = _Runtime.callValue(CubeTexture.getCubeSources__cubeTexture, cast ([cube] : Array<Dynamic>));
+    var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
+    sources = (cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
-        var face:Dynamic = flighthq._internal._StaticIndex.readArray(sources, i);
-        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast _Runtime.field(face, 'width'); }
+        var face:Null<TextureSource> = flighthq._internal._StaticIndex.readArray(sources, i);
+        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast (cast face : TextureSource).width; }
         i++;
       }
     }
@@ -55,15 +60,15 @@ class CubeTexture {
   }
 
   public static function isCubeTextureComplete(cube:flighthq.types.CubeTexture):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(CubeTexture.getCubeSources__cubeTexture, cast ([cube] : Array<Dynamic>)), 'every', cast ([function(face:Dynamic) return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
+    return cast _Runtime.callProperty((cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces), 'every', cast ([function(face:Null<TextureSource>, __unused0:Float, __unused1:Array<Null<TextureSource>>):Bool return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function setCubeTextureFace(cube:flighthq.types.CubeTexture, faceIndex:Float, source:Null<TextureSource>):Void {
-    var sources:Dynamic = cast _Runtime.UNDEFINED;
-    sources = _Runtime.callValue(CubeTexture.getCubeSources__cubeTexture, cast ([cube] : Array<Dynamic>));
+    var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
+    sources = (cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces);
     if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(sources, faceIndex), source) : Bool)) { return; }
-    flighthq._internal._StaticIndex.writeArray((cast (cast sources : Dynamic) : Array<Null<TextureSource>>), faceIndex, source);
-    _Runtime.setField(cube, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(cube, 'version'), 1.0)), 0));
+    flighthq._internal._StaticIndex.writeArray((cast (cast sources : flighthq._internal._Any) : Array<Null<TextureSource>>), faceIndex, source);
+    ((cast cube : { var version:Float; }).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast cube : { var version:Float; }).version + 1.0)), 0));
   }
 }

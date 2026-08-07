@@ -4,26 +4,28 @@ package flighthq.skeleton2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.skeleton2d.Skeleton2dAnimationTarget.getSkeleton2DAnimationTargetBinder;
+import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationTarget;
+import flighthq.types.Skeleton2DAnimationTargetBinder;
 
 class ApplyAnimationClipToSkeleton2D {
   public static function applyAnimationClipToSkeleton2D(clip:AnimationClip, setup:Skeleton2D, pose:Skeleton2D, time:Float):Void {
-    var channels:Dynamic = cast _Runtime.UNDEFINED;
+    var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(setup, pose) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyAnimationClipToSkeleton2D: setup and pose must be distinct skeletons — pass a cloneSkeleton2D(setup) as pose'));
     }
     channels = clip.channels;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
-        var channel:Dynamic = flighthq._internal._StaticIndex.readArray(channels, i);
-        var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<Skeleton2DAnimationTarget>);
+        var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray(channels, i);
+        var target:Null<Skeleton2DAnimationTarget> = (cast (cast channel : AnimationChannel).targetRef : Null<Skeleton2DAnimationTarget>);
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) { i++; continue; }
-        var bind:Dynamic = _Runtime.callValue(getSkeleton2DAnimationTargetBinder, cast ([_Runtime.field(target, 'kind')] : Array<Dynamic>));
+        var bind:Null<Skeleton2DAnimationTargetBinder> = (cast getSkeleton2DAnimationTargetBinder((cast (cast target : Skeleton2DAnimationTarget).kind : String)) : Null<Skeleton2DAnimationTargetBinder>);
         if ((cast _Runtime.strictEquals(bind, null) : Bool)) { i++; continue; }
-        _Runtime.callValue(bind, cast ([channel, setup, pose, target, time] : Array<Dynamic>));
+        bind(channel, (cast setup : Skeleton2D), (cast pose : Skeleton2D), (cast target : flighthq._internal._Any), (cast time : Float));
         i++;
       }
     }

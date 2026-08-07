@@ -185,26 +185,7 @@ class _HostValueLut {
   }
 
   static function createAudioBuffer(?options:Dynamic):Dynamic {
-    final length = Std.int(_Runtime.field(options, 'length'));
-    final channelCount = Std.int(_Runtime.field(options, 'numberOfChannels'));
-    final channels = [for (_ in 0...channelCount) new _Float32Array(length)];
-    return {
-      length: length,
-      numberOfChannels: channelCount,
-      sampleRate: _Runtime.field(options, 'sampleRate'),
-      duration: sampleRate(options, length),
-      getChannelData: function(index:Dynamic):Dynamic return channels[Std.int(index)],
-      copyToChannel: function(source:Dynamic, index:Dynamic, ?startInChannel:Dynamic):Dynamic {
-        final channel:_Float32Array = channels[Std.int(index)];
-        channel.set(source, startInChannel == null ? 0 : (startInChannel : Float));
-        return null;
-      },
-    };
-  }
-
-  static function sampleRate(options:Dynamic, length:Int):Float {
-    final rate:Float = _Runtime.field(options, 'sampleRate');
-    return rate > 0 ? length / rate : 0;
+    return new flighthq._internal.backend.NativeAudioBuffer(options);
   }
 
   static var numberNamespaceValue:Dynamic = null;

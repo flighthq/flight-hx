@@ -10,9 +10,9 @@ import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
 import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 
-typedef RiveFieldType = Dynamic;
+typedef RiveFieldType = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
-typedef RiveValue = Dynamic;
+typedef RiveValue = flighthq._internal._Union2<flighthq._internal._Union2<Float, String>, flighthq._internal._UInt8Array>;
 
 typedef RiveProperty = { var key:Float; var type:RiveFieldType; var value:RiveValue; };
 
@@ -36,13 +36,13 @@ typedef RiveStateMachineState = { var animationId:Float; var kind:String; var tr
 
 typedef RiveStateMachineLayer = { var name:String; var states:Array<RiveStateMachineState>; };
 
-typedef RiveStateMachineInput = { var kind:String; var name:String; var value:Null<Dynamic>; };
+typedef RiveStateMachineInput = { var kind:String; var name:String; var value:Null<flighthq._internal._Union2<Bool, Float>>; };
 
 typedef RiveStateMachineDescriptor = { var inputs:Array<RiveStateMachineInput>; var layers:Array<RiveStateMachineLayer>; var name:String; };
 
 typedef RiveAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
 
-typedef RiveAnimationLoop = Dynamic;
+typedef RiveAnimationLoop = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef RiveSkeleton2DImport = { var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
 
@@ -52,7 +52,7 @@ typedef RiveLayoutImport = { var targets:Array<DisplayObject>; var tree:LayoutTr
 
 typedef RiveArtboardImport = { var advancedBlends:Array<RiveAdvancedBlend>; var animations:Array<RiveAnimationClip>; var stateMachines:Array<RiveStateMachineDescriptor>; var height:Float; var layouts:Array<RiveLayoutImport>; var name:String; var root:DisplayObject; var skeleton:Null<RiveSkeleton2DImport>; var width:Float; };
 
-typedef RiveWeightedPointKind = Dynamic;
+typedef RiveWeightedPointKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
 
 typedef RiveWeightedPoint = { var kind:RiveWeightedPointKind; var vertex:Float; var x:Float; var y:Float; };
 

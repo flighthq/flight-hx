@@ -5,114 +5,117 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
 import flighthq.types.ElectronApi.ElectronNotification;
+import flighthq.types.ElectronApi.ElectronNotificationConstructor;
+import flighthq.types.Notification.NotificationAction;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
+import flighthq.types.Notification.NotificationRequest;
 
 class ElectronNotification {
   public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
-    var clickListener:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var actionListener:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var dismissListener:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var showListener:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var live:Dynamic = cast _Runtime.UNDEFINED;
-    var nextId:Dynamic = cast _Runtime.UNDEFINED;
+    var clickListener:Null<String->Void> = cast _Runtime.UNDEFINED;
+    var actionListener:Null<String->String->Void> = cast _Runtime.UNDEFINED;
+    var dismissListener:Null<String->Void> = cast _Runtime.UNDEFINED;
+    var showListener:Null<String->Void> = cast _Runtime.UNDEFINED;
+    var live:flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification> = cast _Runtime.UNDEFINED;
+    var nextId:Float = cast _Runtime.UNDEFINED;
     clickListener = null;
     actionListener = null;
     dismissListener = null;
     showListener = null;
     live = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     nextId = 0.0;
-    return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
+    return cast { notify: function(request:NotificationRequest):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        var id:Dynamic = cast _Runtime.UNDEFINED;
-        var actions:Dynamic = cast _Runtime.UNDEFINED;
-        var n:Dynamic = cast _Runtime.UNDEFINED;
-        if ((cast !(cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) : Bool)) { return cast ''; }
+        var id:String = cast _Runtime.UNDEFINED;
+        var actions:Array<NotificationAction> = cast _Runtime.UNDEFINED;
+        var n:flighthq.types.ElectronApi.ElectronNotification = cast _Runtime.UNDEFINED;
+        if ((cast !(cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) : Bool)) { return cast ''; }
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
-        n = _Runtime.construct(_Runtime.field(electron, 'Notification'), [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: _Runtime.callProperty(actions, 'map', cast ([function(a:Dynamic) return { type: 'button', text: a.title }] : Array<Dynamic>)) }]);
-        _Runtime.callProperty(n, 'on', cast (['show', function() return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(n, 'on', cast (['action', _Runtime.haxeRest(function(...args:Dynamic) {
-          var index:Dynamic = cast _Runtime.UNDEFINED;
+        n = _Runtime.construct((cast electron : ElectronApi).Notification, [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: _Runtime.callProperty(actions, 'map', cast ([function(a:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var type:String; var text:String; } return { type: 'button', text: a.title }] : Array<Dynamic>)) }]);
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('show', function():Null<Void> return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('click', function():Null<Void> return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('action', _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+          var index:Float = cast _Runtime.UNDEFINED;
           index = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
           _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
-        }, 0)] : Array<Dynamic>));
-        _Runtime.callProperty(n, 'on', cast (['close', function() {
-          ((cast live : flighthq._internal._Map).delete_(id));
+        }, 0));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('close', function():Void {
+          ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).delete_(id));
           _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
-        }] : Array<Dynamic>));
-        ((cast live : flighthq._internal._Map).set(id, n));
-        _Runtime.callProperty(n, 'show', cast ([] : Array<Dynamic>));
+        });
+        ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).set(id, n));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).show();
         return cast id;
         return cast null;
       }));
     }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
+        return flighthq._internal._Async.resolve(((cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
       }));
-    }, getPermission: function() {
-      return cast ((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
-    }, isSupported: function() {
-      return cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>));
-    }, getCapabilities: function() {
+    }, getPermission: function():NotificationPermission {
+      return cast ((cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
+    }, isSupported: function():Bool {
+      return cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported();
+    }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: true, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
-    }, getLaunchNotification: function():flighthq._internal._Promise<Dynamic> {
+    }, getLaunchNotification: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getActiveNotifications: function():flighthq._internal._Promise<Dynamic> {
+    }, getActiveNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, getPendingNotifications: function():flighthq._internal._Promise<Dynamic> {
+    }, getPendingNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, scheduleNotification: function():flighthq._internal._Promise<Dynamic> {
+    }, scheduleNotification: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('');
       }));
-    }, cancelScheduledNotification: function() {
+    }, cancelScheduledNotification: function():Void {
 
-    }, closeNotification: function(id:Dynamic) {
-      var n:Dynamic = cast _Runtime.UNDEFINED;
-      n = ((cast live : flighthq._internal._Map).get(id));
+    }, closeNotification: function(id:String):Void {
+      var n:Null<flighthq.types.ElectronApi.ElectronNotification> = cast _Runtime.UNDEFINED;
+      n = ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).get(id));
       if ((cast !_Runtime.truthy(n) : Bool)) { return; }
-      _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
-      ((cast live : flighthq._internal._Map).delete_(id));
-    }, closeAllNotifications: function() {
-      for (n in _Runtime.iterable(((cast live : flighthq._internal._Map).values()))) {
-        _Runtime.callProperty(n, 'close', cast ([] : Array<Dynamic>));
+      (cast n : flighthq.types.ElectronApi.ElectronNotification).close();
+      ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).delete_(id));
+    }, closeAllNotifications: function():Void {
+      for (n in _Runtime.iterable(((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).values()))) {
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).close();
       }
-      ((cast live : flighthq._internal._Map).clear());
-    }, updateNotification: function():flighthq._internal._Promise<Dynamic> {
+      ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).clear());
+    }, updateNotification: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, subscribeClick: function(listener:Dynamic) {
+    }, subscribeClick: function(listener:String->Void):Void->Void {
       (clickListener = cast (listener : Dynamic));
-      return cast function() {
+      return cast function():Void {
         if ((cast _Runtime.strictEquals(clickListener, listener) : Bool)) { (clickListener = cast (null : Dynamic)); }
       };
-    }, subscribeAction: function(listener:Dynamic) {
+    }, subscribeAction: function(listener:String->String->Void):Void->Void {
       (actionListener = cast (listener : Dynamic));
-      return cast function() {
+      return cast function():Void {
         if ((cast _Runtime.strictEquals(actionListener, listener) : Bool)) { (actionListener = cast (null : Dynamic)); }
       };
-    }, subscribeDismiss: function(listener:Dynamic) {
+    }, subscribeDismiss: function(listener:String->Void):Void->Void {
       (dismissListener = cast (listener : Dynamic));
-      return cast function() {
+      return cast function():Void {
         if ((cast _Runtime.strictEquals(dismissListener, listener) : Bool)) { (dismissListener = cast (null : Dynamic)); }
       };
-    }, subscribeReply: function() {
-      return cast function() {
+    }, subscribeReply: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeShow: function(listener:Dynamic) {
+    }, subscribeShow: function(listener:String->Void):Void->Void {
       (showListener = cast (listener : Dynamic));
-      return cast function() {
+      return cast function():Void {
         if ((cast _Runtime.strictEquals(showListener, listener) : Bool)) { (showListener = cast (null : Dynamic)); }
       };
     } };

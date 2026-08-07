@@ -10,11 +10,11 @@ import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class GlyphRasterizerBackend {
   public static function createStubGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
-    return cast { rasterize: function(_codepoint:Dynamic, options:Dynamic) {
-      var size:Dynamic = cast _Runtime.UNDEFINED;
-      var width:Dynamic = cast _Runtime.UNDEFINED;
-      var height:Dynamic = cast _Runtime.UNDEFINED;
-      var pixels:Dynamic = cast _Runtime.UNDEFINED;
+    return cast { rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+      var size:Float = cast _Runtime.UNDEFINED;
+      var width:Float = cast _Runtime.UNDEFINED;
+      var height:Float = cast _Runtime.UNDEFINED;
+      var pixels:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
       size = HxMath.max(1.0, HxMath.round(options.fontSize));
       width = HxMath.max(1.0, HxMath.round((size * 0.6)));
       height = HxMath.max(1.0, HxMath.round((size * 0.7)));
@@ -26,31 +26,31 @@ class GlyphRasterizerBackend {
   }
 
   public static function createWebGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
-    return cast { measureMetrics: function(options:Dynamic) {
-      var context:Dynamic = cast _Runtime.UNDEFINED;
-      var metrics:Dynamic = cast _Runtime.UNDEFINED;
-      var ascent:Dynamic = cast _Runtime.UNDEFINED;
-      var descent:Dynamic = cast _Runtime.UNDEFINED;
-      context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
+    return cast { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+      var context:Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
+      var metrics:flighthq._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
+      var ascent:Float = cast _Runtime.UNDEFINED;
+      var descent:Float = cast _Runtime.UNDEFINED;
+      context = (cast GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend() : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>>);
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-      _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
+      GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context : flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>), (cast options : GlyphRasterizeOptions));
       metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast (['Hg'] : Array<Dynamic>));
       ascent = (cast metrics : flighthq._internal.dom.TextMetrics).fontBoundingBoxAscent;
       descent = (cast metrics : flighthq._internal.dom.TextMetrics).fontBoundingBoxDescent;
       if ((cast ((cast !(cast _Runtime.compare(ascent, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(descent, 0.0, '>=') : Bool) : Bool)) : Bool)) { return cast null; }
       return cast { ascent: ascent, descent: descent, lineGap: 0.0 };
-    }, rasterize: function(codepoint:Dynamic, options:Dynamic) {
-      var context:Dynamic = cast _Runtime.UNDEFINED;
-      context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
+    }, rasterize: function(codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+      var context:Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
+      context = (cast GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend() : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>>);
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-      return cast _Runtime.callValue(GlyphRasterizerBackend._rasterizeGlyphOnContext__glyphRasterizerBackend, cast ([context, codepoint, options] : Array<Dynamic>));
+      return cast (cast GlyphRasterizerBackend._rasterizeGlyphOnContext__glyphRasterizerBackend((cast context : flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>), (cast codepoint : Float), (cast options : GlyphRasterizeOptions)) : Null<GlyphRasterizedBitmap>);
     } };
     return cast null;
   }
 
   @:noCompletion
   public static function getGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
-    if ((cast _Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null) : Bool)) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (_Runtime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null) : Bool)) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast ((cast createWebGlyphRasterizerBackend() : Null<flighthq.types.GlyphSource.GlyphRasterizerBackend>) : Dynamic)); }
     return cast GlyphRasterizerBackend._backend__glyphRasterizerBackend;
     return cast null;
   }
@@ -61,14 +61,14 @@ class GlyphRasterizerBackend {
 
   public static var _backend__glyphRasterizerBackend:Null<flighthq.types.GlyphSource.GlyphRasterizerBackend> = _Runtime.explicitNull();
 
-  public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
+  public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>> {
     try {
       if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('OffscreenCanvas'), 'undefined') : Bool)) {
-        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.construct(flighthq._internal._HostValueLut.get('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
+        var context:Null<flighthq._internal.dom.OffscreenCanvasRenderingContext2D> = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.construct(flighthq._internal._HostValueLut.get('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
       if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
-        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
+        var context:Null<flighthq._internal.dom.CanvasRenderingContext2D> = flighthq._internal.backend.CanvasElementBackend.call(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(context, null) : Bool)) { return cast context; }
       }
     } catch (__error:Dynamic) {
@@ -78,21 +78,21 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
-  public static function _rasterizeGlyphOnContext__glyphRasterizerBackend(context:Dynamic, codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
-    var text:Dynamic = cast _Runtime.UNDEFINED;
-    var metrics:Dynamic = cast _Runtime.UNDEFINED;
-    var advance:Dynamic = cast _Runtime.UNDEFINED;
-    var left:Dynamic = cast _Runtime.UNDEFINED;
-    var right:Dynamic = cast _Runtime.UNDEFINED;
-    var ascent:Dynamic = cast _Runtime.UNDEFINED;
-    var descent:Dynamic = cast _Runtime.UNDEFINED;
-    var guard:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var height:Dynamic = cast _Runtime.UNDEFINED;
-    var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    var image:Dynamic = cast _Runtime.UNDEFINED;
+  public static function _rasterizeGlyphOnContext__glyphRasterizerBackend(context:flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>, codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+    var text:String = cast _Runtime.UNDEFINED;
+    var metrics:flighthq._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
+    var advance:Float = cast _Runtime.UNDEFINED;
+    var left:Float = cast _Runtime.UNDEFINED;
+    var right:Float = cast _Runtime.UNDEFINED;
+    var ascent:Float = cast _Runtime.UNDEFINED;
+    var descent:Float = cast _Runtime.UNDEFINED;
+    var guard:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var canvas:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.OffscreenCanvas> = cast _Runtime.UNDEFINED;
+    var image:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
+    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context : flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>), (cast options : GlyphRasterizeOptions));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -108,7 +108,7 @@ class GlyphRasterizerBackend {
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    _Runtime.callValue(GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend, cast ([context, options] : Array<Dynamic>));
+    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context : flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>), (cast options : GlyphRasterizeOptions));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
@@ -119,9 +119,9 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
-  public static function _applyGlyphRasterFont__glyphRasterizerBackend(context:Dynamic, options:GlyphRasterizeOptions):Void {
-    var fontStyle:Dynamic = cast _Runtime.UNDEFINED;
-    var fontWeight:Dynamic = cast _Runtime.UNDEFINED;
+  public static function _applyGlyphRasterFont__glyphRasterizerBackend(context:flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>, options:GlyphRasterizeOptions):Void {
+    var fontStyle:String = cast _Runtime.UNDEFINED;
+    var fontWeight:flighthq._internal._Union2<String, Float> = cast _Runtime.UNDEFINED;
     fontStyle = _Runtime.coalesce(options.fontStyle, function():Dynamic return cast 'normal');
     fontWeight = _Runtime.coalesce(options.fontWeight, function():Dynamic return cast 'normal');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(options.fontSize) + 'px ' + Std.string(options.fontFamily) + '');

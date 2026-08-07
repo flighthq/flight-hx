@@ -28,7 +28,7 @@ class Xml {
     return cast null;
   }
 
-  public static function parseXmlAttributes(attrs:String):Dynamic {
+  public static function parseXmlAttributes(attrs:String):flighthq._internal._Record<String, String> {
     return cast Facade_Xml_flighthq_xml_XmlParse.parseXmlAttributes(attrs);
     return cast null;
   }

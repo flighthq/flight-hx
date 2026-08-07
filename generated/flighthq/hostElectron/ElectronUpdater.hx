@@ -4,6 +4,7 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronAutoUpdater;
 import flighthq.types.Updater.UpdateInfo;
 import flighthq.types.Updater.UpdaterBackend;
 import flighthq.types.Updater.UpdaterConfig;
@@ -11,88 +12,88 @@ import flighthq.types.Updater.UpdaterError;
 
 class ElectronUpdater {
   public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
-    var autoUpdater:Dynamic = cast _Runtime.UNDEFINED;
-    var channel:Dynamic = cast _Runtime.UNDEFINED;
+    var autoUpdater:ElectronAutoUpdater = cast _Runtime.UNDEFINED;
+    var channel:String = cast _Runtime.UNDEFINED;
     var config:UpdaterConfig = cast _Runtime.UNDEFINED;
-    autoUpdater = _Runtime.field(electron, 'autoUpdater');
+    autoUpdater = (cast electron : ElectronApi).autoUpdater;
     channel = '';
     config = { allowPrerelease: false, autoDownload: true, autoInstallOnAppQuit: true };
-    return cast { setFeedUrl: function(url:Dynamic) {
-      _Runtime.callProperty(autoUpdater, 'setFeedUrl', cast ([{ url: url }] : Array<Dynamic>));
-    }, checkForUpdates: function() {
-      _Runtime.callProperty(autoUpdater, 'checkForUpdates', cast ([] : Array<Dynamic>));
-    }, downloadUpdate: function() {
-      _Runtime.callProperty(autoUpdater, 'checkForUpdates', cast ([] : Array<Dynamic>));
-    }, cancelDownload: function() {
+    return cast { setFeedUrl: function(url:String):Void {
+      (cast autoUpdater : ElectronAutoUpdater).setFeedUrl({ url: url });
+    }, checkForUpdates: function():Void {
+      (cast autoUpdater : ElectronAutoUpdater).checkForUpdates();
+    }, downloadUpdate: function():Void {
+      (cast autoUpdater : ElectronAutoUpdater).checkForUpdates();
+    }, cancelDownload: function():Void {
 
-    }, quitAndInstall: function() {
-      _Runtime.callProperty(autoUpdater, 'quitAndInstall', cast ([] : Array<Dynamic>));
-    }, rollback: function() {
+    }, quitAndInstall: function():Void {
+      (cast autoUpdater : ElectronAutoUpdater).quitAndInstall();
+    }, rollback: function():Void {
 
-    }, getChannel: function() {
+    }, getChannel: function():String {
       return cast channel;
-    }, setChannel: function(next:Dynamic) {
+    }, setChannel: function(next:String):Void {
       (channel = cast (next : Dynamic));
-    }, getConfig: function() {
+    }, getConfig: function():UpdaterConfig {
       return cast config;
-    }, setConfig: function(next:Dynamic) {
+    }, setConfig: function(next:UpdaterConfig):Void {
       (config = cast (next : Dynamic));
-    }, setSignatureConfig: function() {
+    }, setSignatureConfig: function():Void {
 
-    }, subscribeChecking: function(listener:Dynamic) {
-      _Runtime.callProperty(autoUpdater, 'on', cast (['checking-for-update', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['checking-for-update', listener] : Array<Dynamic>));
-    }, subscribeUpdateAvailable: function(listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = _Runtime.haxeRest(function(...args:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>)), 0);
-      _Runtime.callProperty(autoUpdater, 'on', cast (['update-available', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-available', handler] : Array<Dynamic>));
-    }, subscribeUpdateNotAvailable: function(listener:Dynamic) {
-      _Runtime.callProperty(autoUpdater, 'on', cast (['update-not-available', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-not-available', listener] : Array<Dynamic>));
-    }, subscribeDownloadProgress: function() {
-      return cast function() {
+    }, subscribeChecking: function(listener:Void->Void):Void->Void {
+      (cast autoUpdater : ElectronAutoUpdater).on('checking-for-update', listener);
+      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('checking-for-update', listener);
+    }, subscribeUpdateAvailable: function(listener:UpdateInfo->Void):Void->Void {
+      var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void return listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args : Array<flighthq._internal._Any>)) : UpdateInfo) : UpdateInfo)), 0) : Array<flighthq._internal._Any>->Void);
+      (cast autoUpdater : ElectronAutoUpdater).on('update-available', handler);
+      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-available', handler);
+    }, subscribeUpdateNotAvailable: function(listener:Void->Void):Void->Void {
+      (cast autoUpdater : ElectronAutoUpdater).on('update-not-available', listener);
+      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-not-available', listener);
+    }, subscribeDownloadProgress: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeUpdateDownloaded: function(listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = _Runtime.haxeRest(function(...args:Dynamic) return _Runtime.callValue(listener, cast ([_Runtime.callValue(ElectronUpdater.toUpdateInfo__electronUpdater, cast ([args] : Array<Dynamic>))] : Array<Dynamic>)), 0);
-      _Runtime.callProperty(autoUpdater, 'on', cast (['update-downloaded', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['update-downloaded', handler] : Array<Dynamic>));
-    }, subscribeError: function(listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      handler = _Runtime.haxeRest(function(...args:Dynamic) {
-        var raw:Dynamic = cast _Runtime.UNDEFINED;
-        var message:Dynamic = cast _Runtime.UNDEFINED;
+    }, subscribeUpdateDownloaded: function(listener:UpdateInfo->Void):Void->Void {
+      var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void return listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args : Array<flighthq._internal._Any>)) : UpdateInfo) : UpdateInfo)), 0) : Array<flighthq._internal._Any>->Void);
+      (cast autoUpdater : ElectronAutoUpdater).on('update-downloaded', handler);
+      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-downloaded', handler);
+    }, subscribeError: function(listener:UpdaterError->Void):Void->Void {
+      var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+        var raw:Null<flighthq._internal._Union2<String, { @:optional var message:Null<String>; }>> = cast _Runtime.UNDEFINED;
+        var message:String = cast _Runtime.UNDEFINED;
         var error:UpdaterError = cast _Runtime.UNDEFINED;
-        raw = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<Dynamic>);
-        message = ((cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool) ? (cast _Runtime.coalesce(_Runtime.optionalField(raw, 'message'), function():Dynamic return cast '') : Dynamic) : (cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')) : Dynamic));
+        raw = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<flighthq._internal._Union2<{ @:optional var message:String; }, String>>);
+        message = ((cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool) ? (cast _Runtime.coalesce(({ final __structural0 = raw; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var message:Null<String>; }).message; }), function():Dynamic return cast '') : Dynamic) : (cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')) : Dynamic));
         error = { kind: 'Network', message: message };
-        _Runtime.callValue(listener, cast ([error] : Array<Dynamic>));
-      }, 0);
-      _Runtime.callProperty(autoUpdater, 'on', cast (['error', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(autoUpdater, 'removeListener', cast (['error', handler] : Array<Dynamic>));
-    }, subscribeUpdateCancelled: function() {
-      return cast function() {
+        listener((cast error : UpdaterError));
+      }, 0) : Array<flighthq._internal._Any>->Void);
+      (cast autoUpdater : ElectronAutoUpdater).on('error', handler);
+      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('error', handler);
+    }, subscribeUpdateCancelled: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeUpdateRolledBack: function() {
-      return cast function() {
+    }, subscribeUpdateRolledBack: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeUpdateStaging: function() {
-      return cast function() {
+    }, subscribeUpdateStaging: function():Void->Void {
+      return cast function():Void {
 
       };
-    }, subscribeUpdateVerified: function() {
-      return cast function() {
+    }, subscribeUpdateVerified: function():Void->Void {
+      return cast function():Void {
 
       };
     } };
     return cast null;
   }
 
-  public static function toUpdateInfo__electronUpdater(args:Array<Dynamic>):UpdateInfo {
+  public static function toUpdateInfo__electronUpdater(args:Array<flighthq._internal._Any>):UpdateInfo {
     return cast { version: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 2.0), function():Dynamic return cast '')), notes: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')), releaseDate: Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 3.0), function():Dynamic return cast '')), deltaFromVersion: null, downloadSizeBytes: -1.0, isMandatory: false, minimumOsVersion: null, sha512: '', stagedRolloutPercent: 100.0 };
     return cast null;
   }

@@ -6,23 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 
 class CanvasRenderEffectRegistry {
   @:noCompletion
   public static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasRenderEffectRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasRenderEffectRegistry'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).has(kind)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'canvasRenderEffectRegistry', (_Runtime.field(runtime, 'canvasRenderEffectRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, runner));
+    var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime);
+    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, runner));
   }
 }

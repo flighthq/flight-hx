@@ -8,18 +8,18 @@ import flighthq.types.Scale9Mapper;
 
 class CanvasScale9Mapper {
   @:noCompletion
-  public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
-    var bounds:Dynamic = cast _Runtime.UNDEFINED;
+  public static function buildScale9Mapper(commands:Array<flighthq._internal._Any>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+    var bounds:Null<{ var width:Float; var height:Float; }> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var bw:Dynamic = cast _Runtime.UNDEFINED;
-    var bh:Dynamic = cast _Runtime.UNDEFINED;
-    var gx:Dynamic = cast _Runtime.UNDEFINED;
-    var gy:Dynamic = cast _Runtime.UNDEFINED;
-    var gw:Dynamic = cast _Runtime.UNDEFINED;
-    var gh:Dynamic = cast _Runtime.UNDEFINED;
+    var bw:Float = cast _Runtime.UNDEFINED;
+    var bh:Float = cast _Runtime.UNDEFINED;
+    var gx:Float = cast _Runtime.UNDEFINED;
+    var gy:Float = cast _Runtime.UNDEFINED;
+    var gw:Float = cast _Runtime.UNDEFINED;
+    var gh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    bounds = _Runtime.callValue(CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper, cast ([commands] : Array<Dynamic>));
-    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast _Runtime.field(bounds, 'width') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    bounds = (cast CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper((cast commands : Array<flighthq._internal._Any>)) : Null<{ var width:Float; var height:Float; }>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');
     bh = _Runtime.field(__destructure0, 'height');
@@ -27,14 +27,14 @@ class CanvasScale9Mapper {
     gy = _Runtime.field(scale9Grid, 'y');
     gw = _Runtime.field(scale9Grid, 'width');
     gh = _Runtime.field(scale9Grid, 'height');
-    return cast { mapX: function(x:Float) return _Runtime.callValue(CanvasScale9Mapper.toScale9Position__canvasScale9Mapper, cast ([x, gx, gw, bw, scaleX] : Array<Dynamic>)), mapY: function(y:Float) return _Runtime.callValue(CanvasScale9Mapper.toScale9Position__canvasScale9Mapper, cast ([y, gy, gh, bh, scaleY] : Array<Dynamic>)) };
+    return cast { mapX: function(x:Float):Float return (cast CanvasScale9Mapper.toScale9Position__canvasScale9Mapper((cast x : Float), (cast gx : Float), (cast gw : Float), (cast bw : Float), (cast scaleX : Float)) : Float), mapY: function(y:Float):Float return (cast CanvasScale9Mapper.toScale9Position__canvasScale9Mapper((cast y : Float), (cast gy : Float), (cast gh : Float), (cast bh : Float), (cast scaleY : Float)) : Float) };
     return cast null;
   }
 
   public static function toScale9Position__canvasScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
-    var scale9End:Dynamic = cast _Runtime.UNDEFINED;
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var center:Dynamic = cast _Runtime.UNDEFINED;
+    var scale9End:Float = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var center:Float = cast _Runtime.UNDEFINED;
     scale9End = ((unscaledSize - scale9Center) - scale9Start);
     size = (unscaledSize * scale);
     center = ((size - scale9Start) - scale9End);
@@ -57,83 +57,83 @@ class CanvasScale9Mapper {
     return cast null;
   }
 
-  public static function computeCommandsBounds__canvasScale9Mapper(commands:Array<Dynamic>):Null<{ var width:Float; var height:Float; }> {
+  public static function computeCommandsBounds__canvasScale9Mapper(commands:Array<flighthq._internal._Any>):Null<{ var width:Float; var height:Float; }> {
     var expand:Float->Float->Void = cast _Runtime.UNDEFINED;
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    expand = function expand(x:Float, y:Float):Void {
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    expand = (cast function expand(x:Float, y:Float):Void {
       if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
       if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
       if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
       if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
-    };
+    } : Float->Float->Void);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var key:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var key:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       {
         var __switchValue = key;
         if (__switchValue == 'moveTo' || __switchValue == 'lineTo') {
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) : Float));
         }
         else if (__switchValue == 'curveTo') {
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) : Float));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float) : Float));
         }
         else if (__switchValue == 'cubicCurveTo') {
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 6.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 7.0)) : Float)] : Array<Dynamic>));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) : Float));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float) : Float));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 6.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 7.0)) : Float) : Float));
         }
         else if (__switchValue == 'drawCircle') {
           {
-            var cx:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float);
-            var cy:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float);
-            var r:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float);
-            _Runtime.callValue(expand, cast ([(cx - r), (cy - r)] : Array<Dynamic>));
-            _Runtime.callValue(expand, cast ([(cx + r), (cy + r)] : Array<Dynamic>));
+            var cx:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float);
+            var cy:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float);
+            var r:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float);
+            expand((cast (cx - r) : Float), (cast (cy - r) : Float));
+            expand((cast (cx + r) : Float), (cast (cy + r) : Float));
           }
         }
         else if (__switchValue == 'drawEllipse' || __switchValue == 'drawRectangle') {
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)), ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) : Float));
+          expand((cast ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)) : Float));
         }
         else if (__switchValue == 'drawRoundRectangle') {
-          _Runtime.callValue(expand, cast ([(cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float)] : Array<Dynamic>));
-          _Runtime.callValue(expand, cast ([((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)), ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float))] : Array<Dynamic>));
+          expand((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) : Float));
+          expand((cast ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 4.0)) : Float)) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Float) + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 5.0)) : Float)) : Float));
         }
         else if (__switchValue == 'drawPath') {
           {
-            var pathCmds:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Array<Float>);
-            var data:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Array<Float>);
-            var di:Dynamic = 0.0;
+            var pathCmds:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 2.0)) : Array<Float>);
+            var data:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Array<Float>);
+            var di:Float = 0.0;
             for (pc in _Runtime.iterable(pathCmds)) {
               {
                 var __switchValue = pc;
                 if (__switchValue == 1.0 || __switchValue == 2.0) {
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 3.0) {
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 4.0 || __switchValue == 5.0) {
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 6.0) {
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
-                  _Runtime.callValue(expand, cast ([flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0))] : Array<Dynamic>));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float));
+                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Float));
                   (di = cast ((di + 6.0) : Dynamic));
                 }
                 else  {

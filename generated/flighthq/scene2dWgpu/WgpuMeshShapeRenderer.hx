@@ -14,85 +14,95 @@ import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.shape.ShapeStroke.getShapeStrokeRegions;
 import flighthq.shape.ShapeStrokeOutline.getShapeStrokeOutlineRegions;
 import flighthq.types.BatchFormat;
+import flighthq.types.Path;
+import flighthq.types.PathMesh;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.Renderable;
+import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
+import flighthq.types.Shape.ShapeData;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.ShapeStrokeRegion;
+import flighthq.types.StrokeStyle;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuShapeMesh;
+import flighthq.types.WgpuShapeRendererData;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 class WgpuMeshShapeRenderer {
   @:noCompletion
   public static function drawWgpuMeshShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Bool {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var strokePathTessellator:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    var meshData:Dynamic = cast _Runtime.UNDEFINED;
-    var version:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) { return cast false; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
-    __destructure0 = _Runtime.field(source, 'data');
+    var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
+    var strokePathTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>> = cast _Runtime.UNDEFINED;
+    var regions:Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> = cast _Runtime.UNDEFINED;
+    var meshData:Null<WgpuShapeRendererData> = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return cast false; }
+    source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
+    __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null) : Bool)) : Bool)) { return cast false; }
-    strokePathTessellator = _Runtime.field(runtime, 'strokeTessellator');
-    regions = _Runtime.callValue(WgpuMeshShapeRenderer.resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer, cast ([commands, !_Runtime.strictEquals(strokePathTessellator, null)] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
+    strokePathTessellator = (cast runtime : WgpuRenderStateRuntime).strokeTessellator;
+    regions = (cast WgpuMeshShapeRenderer.resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer((cast commands : Array<ShapeCommandToken>), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
-    meshData = _Runtime.callValue(getWgpuShapeData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
+    meshData = (cast getWgpuShapeData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(meshData, null) : Bool)) { return cast false; }
-    version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(meshData, 'meshVersion'), version) : Bool)) {
+    version = (cast getNodeLocalContentRevision(source) : Float);
+    if ((cast !_Runtime.strictEquals((cast meshData : WgpuShapeRendererData).meshVersion, version) : Bool)) {
       var meshes:Array<WgpuShapeMesh> = cast ([] : Array<Dynamic>);
-      var supported:Dynamic = true;
+      var supported:Bool = true;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(regions, 'length') : Float)) : Bool)) {
-          var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, i);
-          var mesh:Dynamic = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast _Runtime.callValue(WgpuMeshShapeRenderer.isShapeStrokeRegion__wgpuMeshShapeRenderer, cast ([region] : Array<Dynamic>)) : Bool)) : Bool) ? (cast _Runtime.callValue(strokePathTessellator, cast ([_Runtime.field(region, 'path'), _Runtime.field(region, 'style')] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(tessellatePath, cast ([_Runtime.field(region, 'path')] : Array<Dynamic>)) : Dynamic));
+          var region:flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion> = flighthq._internal._StaticIndex.readArray(regions, i);
+          var mesh:Null<PathMesh> = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast (cast WgpuMeshShapeRenderer.isShapeStrokeRegion__wgpuMeshShapeRenderer((cast region : flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>)) : Bool) : Bool)) : Bool) ? (cast (cast strokePathTessellator((cast region : ShapeStrokeRegion).path, (cast region : ShapeStrokeRegion).style, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<PathMesh>) : Dynamic) : (cast (cast tessellatePath((cast region : { var path:Path; }).path, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : PathMesh) : Dynamic));
           if ((cast _Runtime.strictEquals(mesh, null) : Bool)) {
             (supported = cast (false : Dynamic));
             break;
           }
-          _Runtime.callProperty(meshes, 'push', cast ([{ vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') }] : Array<Dynamic>));
+          _Runtime.callProperty(meshes, 'push', cast ([{ vertices: new flighthq._internal._Float32Array((cast mesh : PathMesh).vertices), indices: new flighthq._internal._UInt16Array((cast mesh : PathMesh).indices), color: (cast region : { var color:Float; }).color, alpha: (cast region : { var alpha:Float; }).alpha }] : Array<Dynamic>));
           i++;
         }
       }
-      _Runtime.setField(meshData, 'meshes', ((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)));
-      _Runtime.setField(meshData, 'meshVersion', version);
+      ((cast meshData : WgpuShapeRendererData).meshes = ((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)));
+      ((cast meshData : WgpuShapeRendererData).meshVersion = version);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(meshData, 'meshes'), null) : Bool)) { return cast false; }
-    _Runtime.callValue(drawWgpuShapeMeshes, cast ([state, renderProxy, _Runtime.field(meshData, 'meshes'), _Runtime.field(meshData, 'meshBuffers')] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast meshData : WgpuShapeRendererData).meshes, null) : Bool)) { return cast false; }
+    drawWgpuShapeMeshes((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D), (cast (cast meshData : WgpuShapeRendererData).meshes : Array<WgpuShapeMesh>), (cast meshData : WgpuShapeRendererData).meshBuffers);
     return cast true;
     return cast null;
   }
 
-  public static final defaultWgpuMeshShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: function(state:WgpuRenderState, renderProxy:RenderProxy2D) {
-    if ((cast _Runtime.callValue(drawWgpuMeshShape, cast ([state, renderProxy] : Array<Dynamic>)) : Bool)) { return; }
-    _Runtime.callOptionalProperty(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'registryMiss', cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+  public static final defaultWgpuMeshShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: function(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+    if ((cast (cast drawWgpuMeshShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
+    _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
   } };
 
-  public static function resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<Dynamic>> {
-    var fillRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var strokeRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Array<Dynamic> = cast _Runtime.UNDEFINED;
-    fillRegions = _Runtime.callValue(getShapeFillRegions, cast ([commands] : Array<Dynamic>));
+  public static function resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> {
+    var fillRegions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
+    var strokeRegions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
+    var regions:Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>> = cast _Runtime.UNDEFINED;
+    fillRegions = (cast getShapeFillRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(fillRegions, null) : Bool)) { return cast null; }
-    strokeRegions = ((cast strokePathTessellatorEnabled : Bool) ? (cast _Runtime.callValue(getShapeStrokeRegions, cast ([commands] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(getShapeStrokeOutlineRegions, cast ([commands] : Array<Dynamic>)) : Dynamic));
+    strokeRegions = ((cast strokePathTessellatorEnabled : Bool) ? (cast (cast getShapeStrokeRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeStrokeRegion>>) : Dynamic) : (cast (cast getShapeStrokeOutlineRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeFillRegion>>) : Dynamic));
     if ((cast _Runtime.strictEquals(strokeRegions, null) : Bool)) { return cast null; }
     regions = _Runtime.concatArrays([_Runtime.toArray(fillRegions), _Runtime.toArray(strokeRegions)]);
     return cast ((cast ((cast _Runtime.field(regions, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast regions : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function isShapeStrokeRegion__wgpuMeshShapeRenderer(region:Dynamic):Bool {
+  public static function isShapeStrokeRegion__wgpuMeshShapeRenderer(region:flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>):Bool {
     return cast _Runtime.hasField(region, 'style');
     return cast null;
   }

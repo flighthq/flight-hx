@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MenuSignals = { var onContextMenuOpen:Signal<Dynamic>; var onContextMenuClose:Signal<Dynamic>; var onMenuItemHighlight:Signal<Dynamic>; var onMenuItemSelect:Signal<Dynamic>; };
+typedef MenuSignals = { var onContextMenuOpen:Signal<Void->Void>; var onContextMenuClose:Signal<Void->Void>; var onMenuItemHighlight:Signal<String->Void>; var onMenuItemSelect:Signal<String->Void>; };

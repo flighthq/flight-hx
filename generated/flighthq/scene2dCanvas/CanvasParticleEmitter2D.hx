@@ -7,28 +7,37 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.Matrix;
 import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 
 class CanvasParticleEmitter2D {
   @:noCompletion
   public static function drawCanvasParticleEmitter2D(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var source:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var atlas:Dynamic = cast _Runtime.UNDEFINED;
-    var alphas:Dynamic = cast _Runtime.UNDEFINED;
-    var ids:Dynamic = cast _Runtime.UNDEFINED;
-    var particleCount:Dynamic = cast _Runtime.UNDEFINED;
-    var transforms:Dynamic = cast _Runtime.UNDEFINED;
-    var imageSource:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Dynamic = cast _Runtime.UNDEFINED;
-    var numRegions:Dynamic = cast _Runtime.UNDEFINED;
-    var nodeAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
-    var context:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothing:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter2D);
+    var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
+    var alphas:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
+    var particleCount:Float = cast _Runtime.UNDEFINED;
+    var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var imageSource:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
+    var numRegions:Float = cast _Runtime.UNDEFINED;
+    var nodeAlpha:Float = cast _Runtime.UNDEFINED;
+    var t:Matrix = cast _Runtime.UNDEFINED;
+    var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var smoothing:Bool = cast _Runtime.UNDEFINED;
+    source = (cast (cast renderProxy : RenderProxy2D).source : ParticleEmitter2D);
     __destructure0 = source.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
     alphas = _Runtime.field(__destructure0, 'alphas');
@@ -36,30 +45,30 @@ class CanvasParticleEmitter2D {
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    imageSource = _Runtime.callValue(resolveCanvasTexture, cast ([_Runtime.callValue(getCanvasRenderStateTextureResolvers, cast ([state] : Array<Dynamic>)), atlas.texture] : Array<Dynamic>));
+    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), atlas.texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(imageSource, null) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    nodeAlpha = _Runtime.field(renderProxy, 'alpha');
-    t = _Runtime.field(renderProxy, 'transform2D');
-    context = _Runtime.field(state, 'context');
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    smoothing = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(atlas.texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
+    nodeAlpha = (cast renderProxy : RenderProxy2D).alpha;
+    t = (cast renderProxy : RenderProxy2D).transform2D;
+    context = (cast state : CanvasRenderState).context;
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast atlas.texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
-        var id:Dynamic = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
-        var region:Dynamic = flighthq._internal._StaticIndex.readArray(regions, id);
+        var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
         if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
-        var tt:Dynamic = (i * 4.0);
-        var px:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
-        var py:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
-        var rotation:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
-        var scale:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
-        var cosR:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
-        var sinR:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
+        var tt:Float = (i * 4.0);
+        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
+        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
+        var rotation:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
+        var scale:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
+        var cosR:Float = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
+        var sinR:Float = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var a:Float = cast _Runtime.UNDEFINED;
         var b:Float = cast _Runtime.UNDEFINED;
         var c:Float = cast _Runtime.UNDEFINED;

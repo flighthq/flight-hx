@@ -9,31 +9,33 @@ import flighthq.scene2dDom.DomTextureResolver.registerDomTextureResolver;
 import flighthq.texture.Texture.getTextureSource;
 import flighthq.types.Bitmap;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Image;
 import flighthq.types.Texture;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
 class DomBitmapTextureResolver {
   public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
-    _Runtime.callValue(registerDomTextureResolver, cast ([state, BitmapTextureSourceKind, DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver] : Array<Dynamic>));
+    registerDomTextureResolver((cast state : DomRenderState), (cast BitmapTextureSourceKind : String), DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver);
   }
 
   public static function resolveDomBitmapTexture__domBitmapTextureResolver(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
-    var bitmap:Dynamic = cast _Runtime.UNDEFINED;
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
-    bitmap = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Bitmap>);
+    var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
+    var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var cache:flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
+    var entry:Null<{ var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
+    bitmap = (cast (cast getTextureSource(texture) : Null<Bitmap>) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    cache = _Runtime.setField(runtime, 'bitmapElementCache', (_Runtime.field(runtime, 'bitmapElementCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])));
-    entry = ((cast cache : flighthq._internal._WeakMap).get(bitmap));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), bitmap.version) : Bool)) : Bool)) {
-      var image:Dynamic = _Runtime.callValue(createImageResourceFromBitmap, cast ([bitmap] : Array<Dynamic>));
-      (entry = cast ({ element: (cast _Runtime.field(image, 'source') : flighthq._internal.dom.HTMLCanvasElement), version: bitmap.version } : Dynamic));
-      ((cast cache : flighthq._internal._WeakMap).set(bitmap, entry));
+    runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
+    cache = ((cast runtime : DomRenderStateRuntime).bitmapElementCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    entry = ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).get(bitmap));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : flighthq.types.Bitmap).version) : Bool)) : Bool)) {
+      var image:Image = (cast createImageResourceFromBitmap((cast bitmap : Bitmap)) : Image);
+      (entry = cast ({ element: (cast (cast image : Image).source : flighthq._internal.dom.HTMLCanvasElement), version: (cast bitmap : flighthq.types.Bitmap).version } : Dynamic));
+      ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).set(bitmap, entry));
     }
-    return cast _Runtime.field(entry, 'element');
+    return cast (cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).element;
     return cast null;
   }
 }

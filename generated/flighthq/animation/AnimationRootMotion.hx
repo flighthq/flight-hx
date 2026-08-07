@@ -5,53 +5,56 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationRootMotionExtractor;
+import flighthq.types.AnimationTrack;
+import flighthq.types.Entity;
 
 class AnimationRootMotion {
   public static function createAnimationRootMotionExtractor(clip:AnimationClip, channelIndex:Float):AnimationRootMotionExtractor {
-    var channel:Dynamic = cast _Runtime.UNDEFINED;
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    var extractor:Dynamic = cast _Runtime.UNDEFINED;
+    var channel:AnimationChannel = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var extractor:{ >Entity, var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flighthq._internal._Float32Array; var fromMotion:flighthq._internal._Float32Array; var fromSample:flighthq._internal._Float32Array; var powerScratch:flighthq._internal._Float32Array; var startSample:flighthq._internal._Float32Array; var toMotion:flighthq._internal._Float32Array; var toSample:flighthq._internal._Float32Array; } = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast _Runtime.field(clip.channels, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
     }
     channel = flighthq._internal._StaticIndex.readArray(clip.channels, channelIndex);
-    width = _Runtime.field(_Runtime.field(channel, 'track'), 'components');
-    if ((cast ((cast _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion') : Bool) && (cast !_Runtime.strictEquals(width, 4.0) : Bool)) : Bool)) {
+    width = (cast (cast channel : AnimationChannel).track : AnimationTrack).components;
+    if ((cast ((cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool) && (cast !_Runtime.strictEquals(width, 4.0) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('AnimationRootMotionExtractor quaternion channel must have four components.'));
     }
-    extractor = _Runtime.callValue(createEntity, cast ([{ channel: channel, channelIndex: channelIndex, clip: clip, cycleDelta: new flighthq._internal._Float32Array(width), fromMotion: new flighthq._internal._Float32Array(width), fromSample: new flighthq._internal._Float32Array(width), powerScratch: new flighthq._internal._Float32Array(width), startSample: new flighthq._internal._Float32Array(width), toMotion: new flighthq._internal._Float32Array(width), toSample: new flighthq._internal._Float32Array(width) }] : Array<Dynamic>));
-    _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(extractor, 'startSample'), _Runtime.field(channel, 'track'), 0.0] : Array<Dynamic>));
-    _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(extractor, 'toSample'), _Runtime.field(channel, 'track'), clip.duration] : Array<Dynamic>));
-    _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion, cast ([_Runtime.field(extractor, 'cycleDelta'), _Runtime.field(extractor, 'startSample'), _Runtime.field(extractor, 'toSample'), _Runtime.field(_Runtime.field(channel, 'track'), 'quaternion')] : Array<Dynamic>));
+    extractor = (cast createEntity({ channel: channel, channelIndex: channelIndex, clip: clip, cycleDelta: new flighthq._internal._Float32Array(width), fromMotion: new flighthq._internal._Float32Array(width), fromSample: new flighthq._internal._Float32Array(width), powerScratch: new flighthq._internal._Float32Array(width), startSample: new flighthq._internal._Float32Array(width), toMotion: new flighthq._internal._Float32Array(width), toSample: new flighthq._internal._Float32Array(width) }) : { >Entity, var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flighthq._internal._Float32Array; var fromMotion:flighthq._internal._Float32Array; var fromSample:flighthq._internal._Float32Array; var powerScratch:flighthq._internal._Float32Array; var startSample:flighthq._internal._Float32Array; var toMotion:flighthq._internal._Float32Array; var toSample:flighthq._internal._Float32Array; });
+    sampleAnimationTrack((cast (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast 0.0 : Float));
+    sampleAnimationTrack((cast (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast clip.duration : Float));
+    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion((cast (cast extractor : { var cycleDelta:flighthq._internal._Float32Array; }).cycleDelta : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample : flighthq._internal._ArrayLike<Float>), (cast (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample : flighthq._internal._ArrayLike<Float>), (cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool));
     return cast extractor;
     return cast null;
   }
 
-  public static function extractAnimationRootMotion(out:Dynamic, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
-    var components:Dynamic = cast _Runtime.UNDEFINED;
+  public static function extractAnimationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
+    var components:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.'));
     }
-    components = _Runtime.field(_Runtime.field(_Runtime.field(extractor, 'channel'), 'track'), 'components');
-    if ((cast ((cast _Runtime.field(out, 'length') : Float) < (cast components : Float)) : Bool)) { return cast false; }
-    _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion, cast ([_Runtime.field(extractor, 'fromMotion'), extractor, startTime, _Runtime.field(extractor, 'fromSample')] : Array<Dynamic>));
-    _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion, cast ([_Runtime.field(extractor, 'toMotion'), extractor, endTime, _Runtime.field(extractor, 'toSample')] : Array<Dynamic>));
-    _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion, cast ([out, _Runtime.field(extractor, 'fromMotion'), _Runtime.field(extractor, 'toMotion'), _Runtime.field(_Runtime.field(_Runtime.field(extractor, 'channel'), 'track'), 'quaternion')] : Array<Dynamic>));
+    components = (cast _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track') : AnimationTrack).components;
+    if ((cast ((cast (cast out : { var length:Float; }).length : Float) < (cast components : Float)) : Bool)) { return cast false; }
+    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast (cast extractor : AnimationRootMotionExtractor).fromMotion : flighthq._internal._Float32Array), (cast extractor : AnimationRootMotionExtractor), (cast startTime : Float), (cast (cast extractor : AnimationRootMotionExtractor).fromSample : flighthq._internal._Float32Array));
+    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast (cast extractor : AnimationRootMotionExtractor).toMotion : flighthq._internal._Float32Array), (cast extractor : AnimationRootMotionExtractor), (cast endTime : Float), (cast (cast extractor : AnimationRootMotionExtractor).toSample : flighthq._internal._Float32Array));
+    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast extractor : AnimationRootMotionExtractor).fromMotion : flighthq._internal._ArrayLike<Float>), (cast (cast extractor : AnimationRootMotionExtractor).toMotion : flighthq._internal._ArrayLike<Float>), (cast (cast _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track') : AnimationTrack).quaternion : Bool));
     return cast true;
     return cast null;
   }
 
-  public static function multiplyAnimationRootMotionQuaternion__animationRootMotion(out:Dynamic, a:Dynamic, b:Dynamic):Void {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var az:Dynamic = cast _Runtime.UNDEFINED;
-    var aw:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var bz:Dynamic = cast _Runtime.UNDEFINED;
-    var bw:Dynamic = cast _Runtime.UNDEFINED;
+  public static function multiplyAnimationRootMotionQuaternion__animationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, a:flighthq._internal._ArrayLike<Float>, b:flighthq._internal._ArrayLike<Float>):Void {
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var aw:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    var bw:Float = cast _Runtime.UNDEFINED;
     ax = _Runtime.getIndex(a, 0.0);
     ay = _Runtime.getIndex(a, 1.0);
     az = _Runtime.getIndex(a, 2.0);
@@ -60,43 +63,43 @@ class AnimationRootMotion {
     by = _Runtime.getIndex(b, 1.0);
     bz = _Runtime.getIndex(b, 2.0);
     bw = _Runtime.getIndex(b, 3.0);
-    _Runtime.callValue(AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion, cast ([out, ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)), ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)), ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)), ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz))] : Array<Dynamic>));
+    AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
   }
 
   public static function writeAnimationRootMotionAt__animationRootMotion(out:flighthq._internal._Float32Array, extractor:AnimationRootMotionExtractor, time:Float, sample:flighthq._internal._Float32Array):Void {
-    var duration:Dynamic = cast _Runtime.UNDEFINED;
-    var track:Dynamic = cast _Runtime.UNDEFINED;
-    var cycle:Dynamic = cast _Runtime.UNDEFINED;
-    var localTime:Dynamic = cast _Runtime.UNDEFINED;
-    duration = _Runtime.field(extractor, 'clip').duration;
-    track = _Runtime.field(_Runtime.field(extractor, 'channel'), 'track');
+    var duration:Float = cast _Runtime.UNDEFINED;
+    var track:AnimationTrack = cast _Runtime.UNDEFINED;
+    var cycle:Float = cast _Runtime.UNDEFINED;
+    var localTime:Float = cast _Runtime.UNDEFINED;
+    duration = (cast extractor : AnimationRootMotionExtractor).clip.duration;
+    track = _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track');
     if ((cast !(cast _Runtime.compare(duration, 0.0, '>') : Bool) : Bool)) {
-      _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion, cast ([out, _Runtime.field(track, 'components'), _Runtime.field(track, 'quaternion')] : Array<Dynamic>));
+      AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast track : AnimationTrack).components : Float), (cast (cast track : AnimationTrack).quaternion : Bool));
       return;
     }
     cycle = HxMath.floor((time / duration));
     localTime = (time - (cycle * duration));
-    _Runtime.callValue(sampleAnimationTrack, cast ([sample, track, localTime] : Array<Dynamic>));
-    if ((cast _Runtime.field(track, 'quaternion') : Bool)) {
-      _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionQuaternionPower__animationRootMotion, cast ([out, extractor, cycle] : Array<Dynamic>));
-      _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion, cast ([_Runtime.field(extractor, 'powerScratch'), _Runtime.field(extractor, 'startSample'), sample, true] : Array<Dynamic>));
-      _Runtime.callValue(AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion, cast ([out, out, _Runtime.field(extractor, 'powerScratch')] : Array<Dynamic>));
+    sampleAnimationTrack((cast sample : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), track, (cast localTime : Float));
+    if ((cast (cast track : AnimationTrack).quaternion : Bool)) {
+      AnimationRootMotion.writeAnimationRootMotionQuaternionPower__animationRootMotion((cast out : flighthq._internal._Float32Array), (cast extractor : AnimationRootMotionExtractor), (cast cycle : Float));
+      AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion((cast (cast extractor : AnimationRootMotionExtractor).powerScratch : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast extractor : AnimationRootMotionExtractor).startSample : flighthq._internal._ArrayLike<Float>), (cast sample : flighthq._internal._ArrayLike<Float>), (cast true : Bool));
+      AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast out : flighthq._internal._ArrayLike<Float>), (cast (cast extractor : AnimationRootMotionExtractor).powerScratch : flighthq._internal._ArrayLike<Float>));
       return;
     }
     {
-      var component:Dynamic = 0.0;
-      while ((cast ((cast component : Float) < (cast _Runtime.field(track, 'components') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, component, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(sample, component), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'startSample'), component)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), component), cycle)));
+      var component:Float = 0.0;
+      while ((cast ((cast component : Float) < (cast (cast track : AnimationTrack).components : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloat32Array(out, component, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(sample, component), flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).startSample, component)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, component), cycle)));
         component++;
       }
     }
   }
 
-  public static function writeAnimationRootMotionDelta__animationRootMotion(out:Dynamic, from:Dynamic, to:Dynamic, quaternion:Bool):Void {
+  public static function writeAnimationRootMotionDelta__animationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, from:flighthq._internal._ArrayLike<Float>, to:flighthq._internal._ArrayLike<Float>, quaternion:Bool):Void {
     if ((cast !(cast quaternion : Bool) : Bool)) {
-      var width:Dynamic = HxMath.min(HxMath.min(_Runtime.field(out, 'length'), _Runtime.field(from, 'length')), _Runtime.field(to, 'length'));
+      var width:Float = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, _Runtime.field(from, 'length')), _Runtime.field(to, 'length'));
       {
-        var component:Dynamic = 0.0;
+        var component:Float = 0.0;
         while ((cast ((cast component : Float) < (cast width : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, _Runtime.subtractNumbers(_Runtime.getIndex(to, component), _Runtime.getIndex(from, component)));
           component++;
@@ -104,14 +107,14 @@ class AnimationRootMotion {
       }
       return;
     }
-    _Runtime.callValue(AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion, cast ([out, (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 0.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 2.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 1.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 1.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 2.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 0.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 2.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 0.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 3.0))), (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 3.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 0.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 2.0)))] : Array<Dynamic>));
+    AnimationRootMotion.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 0.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 2.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 1.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 1.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 2.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 0.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 2.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 0.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 3.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 3.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 0.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 2.0))) : Float));
   }
 
-  public static function writeAnimationRootMotionIdentity__animationRootMotion(out:Dynamic, components:Float, quaternion:Bool):Void {
-    var width:Dynamic = cast _Runtime.UNDEFINED;
-    width = HxMath.min(_Runtime.field(out, 'length'), components);
+  public static function writeAnimationRootMotionIdentity__animationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, components:Float, quaternion:Bool):Void {
+    var width:Float = cast _Runtime.UNDEFINED;
+    width = HxMath.min((cast out : { var length:Float; }).length, components);
     {
-      var component:Dynamic = 0.0;
+      var component:Float = 0.0;
       while ((cast ((cast component : Float) < (cast width : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, 0.0);
         component++;
@@ -121,33 +124,33 @@ class AnimationRootMotion {
   }
 
   public static function writeAnimationRootMotionQuaternionPower__animationRootMotion(out:flighthq._internal._Float32Array, extractor:AnimationRootMotionExtractor, exponent:Float):Void {
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var remaining:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion, cast ([out, 4.0, true] : Array<Dynamic>));
+    var base:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var remaining:Float = cast _Runtime.UNDEFINED;
+    AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast 4.0 : Float), (cast true : Bool));
     if ((cast _Runtime.strictEquals(exponent, 0.0) : Bool)) { return; }
-    base = _Runtime.field(extractor, 'powerScratch');
+    base = (cast extractor : AnimationRootMotionExtractor).powerScratch;
     if ((cast ((cast exponent : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast base : flighthq._internal._Float32Array).set(_Runtime.field(extractor, 'cycleDelta'));
+      (cast base : flighthq._internal._Float32Array).set((cast extractor : AnimationRootMotionExtractor).cycleDelta);
     } else {
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 0.0, -flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 0.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 1.0, -flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 1.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 2.0, -flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 2.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 3.0, flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(extractor, 'cycleDelta'), 3.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(base, 0.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 0.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(base, 1.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 1.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(base, 2.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 2.0));
+      flighthq._internal._StaticIndex.writeFloat32Array(base, 3.0, flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 3.0));
     }
     remaining = HxMath.abs(exponent);
     while ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool)) { _Runtime.callValue(AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion, cast ([out, out, base] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool)) { AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast out : flighthq._internal._ArrayLike<Float>), (cast base : flighthq._internal._ArrayLike<Float>)); }
       (remaining = cast (HxMath.floor((remaining / 2.0)) : Dynamic));
-      if ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion, cast ([base, base, base] : Array<Dynamic>)); }
+      if ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) { AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion((cast base : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast base : flighthq._internal._ArrayLike<Float>), (cast base : flighthq._internal._ArrayLike<Float>)); }
     }
   }
 
-  public static function writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(out:Dynamic, x:Float, y:Float, z:Float, w:Float):Void {
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var inverseLength:Dynamic = cast _Runtime.UNDEFINED;
+  public static function writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, x:Float, y:Float, z:Float, w:Float):Void {
+    var length:Float = cast _Runtime.UNDEFINED;
+    var inverseLength:Float = cast _Runtime.UNDEFINED;
     length = _Runtime.hypot(x, y, z, w);
     if ((cast !(cast _Runtime.compare(length, 0.0, '>') : Bool) : Bool)) {
-      _Runtime.callValue(AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion, cast ([out, 4.0, true] : Array<Dynamic>));
+      AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast 4.0 : Float), (cast true : Bool));
       return;
     }
     inverseLength = (1.0 / length);

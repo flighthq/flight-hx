@@ -8,6 +8,7 @@ import flighthq.textureatlas.TextureAtlasRegion.setTextureAtlasRegionTextureGuar
 import flighthq.types.Log.LogLevel;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
+import flighthq.types.TextureAtlasRegionTextureExplanation.TextureAtlasRegionTextureStatus;
 
 class EnableTextureAtlasGuards {
   public static function areTextureAtlasGuardsEnabled():Bool {
@@ -16,19 +17,19 @@ class EnableTextureAtlasGuards {
   }
 
   public static function disableTextureAtlasGuards():Void {
-    _Runtime.callValue(setTextureAtlasRegionTextureGuard, cast ([null] : Array<Dynamic>));
+    setTextureAtlasRegionTextureGuard(null);
     (EnableTextureAtlasGuards.textureAtlasGuardsEnabled__enableTextureAtlasGuards = cast (false : Dynamic));
   }
 
   public static function enableTextureAtlasGuards():Void {
-    _Runtime.callValue(setTextureAtlasRegionTextureGuard, cast ([EnableTextureAtlasGuards.warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards] : Array<Dynamic>));
+    setTextureAtlasRegionTextureGuard(EnableTextureAtlasGuards.warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards);
     (EnableTextureAtlasGuards.textureAtlasGuardsEnabled__enableTextureAtlasGuards = cast (true : Dynamic));
   }
 
   public static function warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards(atlas:TextureAtlas, regionId:Float, explanation:TextureAtlasRegionTextureExplanation):Void {
     if ((cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'rotated-page') : Bool)) { return; }
-    _Runtime.callValue(logOnce, cast (['textureatlas:region-texture-rotated-page', LogLevel.Warn, { atlas: atlas, message: 'getTextureAtlasRegionTexture: a page Texture with nonzero uvRotation cannot compose a region without shear; use an unrotated page window.', regionId: regionId, status: _Runtime.field(explanation, 'status') }, 'textureatlas'] : Array<Dynamic>));
+    (cast logOnce((cast 'textureatlas:region-texture-rotated-page' : String), (cast LogLevel.Warn : LogLevel), { atlas: atlas, message: 'getTextureAtlasRegionTexture: a page Texture with nonzero uvRotation cannot compose a region without shear; use an unrotated page window.', regionId: regionId, status: _Runtime.field(explanation, 'status') }, (cast 'textureatlas' : Null<String>)) : Bool);
   }
 
-  public static var textureAtlasGuardsEnabled__enableTextureAtlasGuards:Dynamic = false;
+  public static var textureAtlasGuardsEnabled__enableTextureAtlasGuards:Bool = false;
 }

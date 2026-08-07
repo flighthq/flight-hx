@@ -9,5 +9,5 @@ import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 
 class _Scale9ShapeValues {
-  public static final Scale9ShapeKind:Dynamic = 'Scale9Shape';
+  public static final Scale9ShapeKind:String = 'Scale9Shape';
 }

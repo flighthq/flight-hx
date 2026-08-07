@@ -5,42 +5,46 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.render.RenderState.getRenderStateRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderQueue;
 import flighthq.types.RenderQueue.RenderQueueEntry;
 import flighthq.types.RenderQueue.RenderSortKey;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 
 class RenderQueue {
   @:noCompletion
   public static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var renderProxyMap:Dynamic = cast _Runtime.UNDEFINED;
-    var stack:Dynamic = cast _Runtime.UNDEFINED;
-    var stackLength:Dynamic = cast _Runtime.UNDEFINED;
-    var sceneOrder:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(clearRenderQueue, cast ([out] : Array<Dynamic>));
-    runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    renderProxyMap = _Runtime.field(runtime, 'renderProxyMap');
+    var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    var renderProxyMap:flighthq._internal._WeakMap<Renderable, RenderProxy> = cast _Runtime.UNDEFINED;
+    var stack:Array<Renderable> = cast _Runtime.UNDEFINED;
+    var stackLength:Float = cast _Runtime.UNDEFINED;
+    var sceneOrder:Float = cast _Runtime.UNDEFINED;
+    clearRenderQueue((cast out : flighthq.types.RenderQueue));
+    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    renderProxyMap = (cast runtime : RenderStateRuntime).renderProxyMap;
     stack = RenderQueue._buildStack__renderQueue;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(stack, 0.0, source);
     sceneOrder = 0.0;
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
-      var current:Dynamic = flighthq._internal._StaticIndex.readArray(stack, --stackLength);
-      var proxy:Dynamic = ((cast renderProxyMap : flighthq._internal._WeakMap).get(current));
+      var current:Renderable = flighthq._internal._StaticIndex.readArray(stack, --stackLength);
+      var proxy:Null<RenderProxy> = ((cast renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(current));
       if ((cast _Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      if ((cast !(cast _Runtime.field(proxy, 'visible') : Bool) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(proxy, 'renderer'), null) : Bool)) {
-        _Runtime.callValue(pushRenderQueueEntry, cast ([out, proxy, sceneOrder] : Array<Dynamic>));
+      if ((cast !(cast (cast proxy : RenderProxy).visible : Bool) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals((cast proxy : RenderProxy).renderer, null) : Bool)) {
+        pushRenderQueueEntry((cast out : flighthq.types.RenderQueue), (cast proxy : RenderProxy), (cast sceneOrder : Float));
       }
       sceneOrder++;
-      var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : NodeAny)] : Array<Dynamic>)), 'children');
+      var children:Null<Array<Node<flighthq._internal._Any>>> = _Runtime.field((cast getNodeRuntime((cast current : NodeAny)) : NodeRuntime<flighthq._internal._Any>), 'children');
       if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
-          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
+          var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(stack, stackLength++, flighthq._internal._StaticIndex.readArray(children, i));
             i--;
@@ -52,12 +56,12 @@ class RenderQueue {
 
   @:noCompletion
   public static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
-    _Runtime.setField(queue, 'entryCount', 0.0);
+    ((cast queue : flighthq.types.RenderQueue).entryCount = 0.0);
   }
 
   @:noCompletion
   public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
-    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'sortKey'), _Runtime.field(b, 'sortKey'));
+    return cast ((cast a : RenderQueueEntry).sortKey - (cast b : RenderQueueEntry).sortKey);
     return cast null;
   }
 
@@ -69,9 +73,9 @@ class RenderQueue {
 
   @:noCompletion
   public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
-    var layerBits:Dynamic = cast _Runtime.UNDEFINED;
-    var transparentBit:Dynamic = cast _Runtime.UNDEFINED;
-    var depthBits:Dynamic = cast _Runtime.UNDEFINED;
+    var layerBits:Float = cast _Runtime.UNDEFINED;
+    var transparentBit:Float = cast _Runtime.UNDEFINED;
+    var depthBits:Float = cast _Runtime.UNDEFINED;
     layerBits = (_Runtime.toInt32((_Runtime.toInt32(HxMath.max(0.0, HxMath.min(32767.0, (_Runtime.toInt32(layer) | 0)))) & 32767)) << 16);
     transparentBit = ((cast isTransparent : Bool) ? (cast (1 << 15) : Dynamic) : (cast 0.0 : Dynamic));
     depthBits = (_Runtime.toInt32(HxMath.max(0.0, HxMath.min(32767.0, HxMath.round((depth * 32767.0))))) & 32767);
@@ -81,32 +85,32 @@ class RenderQueue {
 
   @:noCompletion
   public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
-    var entry:Dynamic = cast _Runtime.UNDEFINED;
+    var entry:{ var proxy:RenderProxy; var sortKey:Float; } = cast _Runtime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
-    if ((cast ((cast _Runtime.field(queue, 'entryCount') : Float) < (cast _Runtime.field(_Runtime.field(queue, 'entries'), 'length') : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(_Runtime.field(queue, 'entries'), _Runtime.field(queue, 'entryCount'), entry);
+    if ((cast ((cast (cast queue : flighthq.types.RenderQueue).entryCount : Float) < (cast _Runtime.field((cast queue : flighthq.types.RenderQueue).entries, 'length') : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeArray((cast queue : flighthq.types.RenderQueue).entries, (cast queue : flighthq.types.RenderQueue).entryCount, entry);
     } else {
-      _Runtime.callProperty(_Runtime.field(queue, 'entries'), 'push', cast ([entry] : Array<Dynamic>));
+      _Runtime.callProperty((cast queue : flighthq.types.RenderQueue).entries, 'push', cast ([entry] : Array<Dynamic>));
     }
-    _Runtime.incrementField(queue, 'entryCount', 1, true);
+    (cast queue : flighthq.types.RenderQueue).entryCount++;
   }
 
   @:noCompletion
-  public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:Dynamic):Void {
-    var slice:Dynamic = cast _Runtime.UNDEFINED;
-    slice = _Runtime.slice(_Runtime.field(queue, 'entries'), 0.0, _Runtime.field(queue, 'entryCount'));
+  public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:RenderQueueEntry->RenderQueueEntry->Float):Void {
+    var slice:Array<RenderQueueEntry> = cast _Runtime.UNDEFINED;
+    slice = _Runtime.slice((cast queue : flighthq.types.RenderQueue).entries, 0.0, (cast queue : flighthq.types.RenderQueue).entryCount);
     _Runtime.callProperty(slice, 'sort', cast ([_Runtime.coalesce(compare, function():Dynamic return cast RenderQueue.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(slice, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(_Runtime.field(queue, 'entries'), i, flighthq._internal._StaticIndex.readArray(slice, i));
+        flighthq._internal._StaticIndex.writeArray((cast queue : flighthq.types.RenderQueue).entries, i, flighthq._internal._StaticIndex.readArray(slice, i));
         i++;
       }
     }
   }
 
   public static function compareRenderQueueEntriesByKey__renderQueue(a:RenderQueueEntry, b:RenderQueueEntry):Float {
-    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'sortKey'), _Runtime.field(b, 'sortKey'));
+    return cast ((cast a : RenderQueueEntry).sortKey - (cast b : RenderQueueEntry).sortKey);
     return cast null;
   }
 

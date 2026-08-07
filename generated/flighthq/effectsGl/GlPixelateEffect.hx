@@ -6,31 +6,34 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PixelateEffect;
+import flighthq.types.RenderEffect;
 
 class GlPixelateEffect {
   @:noCompletion
   public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
-    var size:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var size:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.pixelate', GlPixelateEffect.PIXELATE_FRAGMENT_SRC__glPixelateEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.pixelate' : String), (cast GlPixelateEffect.PIXELATE_FRAGMENT_SRC__glPixelateEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(1.0, size));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlPixelateEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyPixelateEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PixelateEffect)] : Array<Dynamic>));
+  public static final defaultGlPixelateEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyPixelateEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : PixelateEffect) : PixelateEffect));
   };
 
   public static function registerGlPixelateEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'PixelateEffect', defaultGlPixelateEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'PixelateEffect' : String), (cast defaultGlPixelateEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final PIXELATE_FRAGMENT_SRC__glPixelateEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_size;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 blocks = u_resolution / u_size;\n  vec2 uv = (floor(v_texCoord * blocks) + 0.5) / blocks;\n  o_color = texture(u_texture0, uv);\n}';
+  public static final PIXELATE_FRAGMENT_SRC__glPixelateEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_size;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 blocks = u_resolution / u_size;\n  vec2 uv = (floor(v_texCoord * blocks) + 0.5) / blocks;\n  o_color = texture(u_texture0, uv);\n}';
 }

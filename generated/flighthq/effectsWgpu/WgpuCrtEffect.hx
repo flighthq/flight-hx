@@ -7,6 +7,9 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.CrtEffect;
+import flighthq.types.RenderEffect;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -14,33 +17,33 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuCrtEffect {
   @:noCompletion
   public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
-    var curvature:Dynamic = cast _Runtime.UNDEFINED;
-    var scanlineIntensity:Dynamic = cast _Runtime.UNDEFINED;
-    var vignette:Dynamic = cast _Runtime.UNDEFINED;
-    var aberration:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    var curvature:Float = cast _Runtime.UNDEFINED;
+    var scanlineIntensity:Float = cast _Runtime.UNDEFINED;
+    var vignette:Float = cast _Runtime.UNDEFINED;
+    var aberration:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     curvature = _Runtime.coalesce(_Runtime.field(effect, 'curvature'), function():Dynamic return cast 0.1);
     scanlineIntensity = _Runtime.coalesce(_Runtime.field(effect, 'scanlineIntensity'), function():Dynamic return cast 0.3);
     vignette = _Runtime.coalesce(_Runtime.field(effect, 'vignette'), function():Dynamic return cast 0.3);
     aberration = _Runtime.coalesce(_Runtime.field(effect, 'aberration'), function():Dynamic return cast 0.005);
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.crt', WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.crt' : String), (cast WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, curvature);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, scanlineIntensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, vignette);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, aberration);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuCrtEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyCrtEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CrtEffect)] : Array<Dynamic>));
+  public static final defaultWgpuCrtEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyCrtEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : CrtEffect) : CrtEffect));
   };
 
   public static function registerWgpuCrtEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'CrtEffect', defaultWgpuCrtEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'CrtEffect' : String), (cast defaultWgpuCrtEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final CRT_FRAGMENT_WGSL__wgpuCrtEffect:Dynamic = '\nstruct Uniforms {\n  u_curvature : f32,\n  u_scanlineIntensity : f32,\n  u_vignette : f32,\n  u_aberration : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn barrel(uv : vec2f) -> vec2f {\n  var c = uv * 2.0 - 1.0;\n  c += c * uni.u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\n\n@fragment\nfn fs_main(@location(0) uvIn : vec2f) -> @location(0) vec4f {\n  let uv = barrel(uvIn);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return vec4f(0.0, 0.0, 0.0, 1.0);\n  }\n  let off = vec2f(uni.u_aberration, 0.0);\n  let r = textureSampleLevel(tex, smp, uv + off, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - off, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  var col = vec3f(r, g, b);\n  let line = sin(uv.y * uni.u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - uni.u_scanlineIntensity * (1.0 - line);\n  let vc = uv * 2.0 - 1.0;\n  col *= 1.0 - uni.u_vignette * dot(vc, vc);\n  return vec4f(col, a);\n}';
+  public static final CRT_FRAGMENT_WGSL__wgpuCrtEffect:String = '\nstruct Uniforms {\n  u_curvature : f32,\n  u_scanlineIntensity : f32,\n  u_vignette : f32,\n  u_aberration : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn barrel(uv : vec2f) -> vec2f {\n  var c = uv * 2.0 - 1.0;\n  c += c * uni.u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\n\n@fragment\nfn fs_main(@location(0) uvIn : vec2f) -> @location(0) vec4f {\n  let uv = barrel(uvIn);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return vec4f(0.0, 0.0, 0.0, 1.0);\n  }\n  let off = vec2f(uni.u_aberration, 0.0);\n  let r = textureSampleLevel(tex, smp, uv + off, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - off, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  var col = vec3f(r, g, b);\n  let line = sin(uv.y * uni.u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - uni.u_scanlineIntensity * (1.0 - line);\n  let vc = uv * 2.0 - 1.0;\n  col *= 1.0 - uni.u_vignette * dot(vc, vc);\n  return vec4f(col, a);\n}';
 }

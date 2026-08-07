@@ -16,19 +16,19 @@ import flighthq.types.Texture;
 class GlDebugPrelude {
   @:noCompletion
   public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
     if ((cast !_Runtime.strictEquals(normalMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals(_Runtime.callValue(resolveGlTexture, cast ([state, normalMap] : Array<Dynamic>)), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), normalMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0); }
     }
   }
 
   @:noCompletion
   public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    gl = _Runtime.field(state, 'gl');
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNear'), near);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locFar'), far);
   }
@@ -41,32 +41,32 @@ class GlDebugPrelude {
 
   @:noCompletion
   public static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlDebugVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlDebugFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlDebugVertexSourceForKey((cast key : GlDebugDefineKey)) : String) : String), (cast (cast getGlDebugFragmentSourceForKey((cast key : GlDebugDefineKey)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
-    return cast _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'debug:' + Std.string(_Runtime.callValue(buildGlDebugDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlDebugProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey((cast key : GlDebugDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast key : GlDebugDefineKey)) : GlDebugProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)) : GlDebugProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
-    return cast (_Runtime.callValue(GlDebugPrelude.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
+    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key : GlDebugDefineKey)) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
-    return cast (_Runtime.callValue(GlDebugPrelude.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
+    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key : GlDebugDefineKey)) : String) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;
   }
 
   public static function buildDefineSource__glDebugPrelude(key:GlDebugDefineKey):String {
-    var defines:Dynamic = cast _Runtime.UNDEFINED;
+    var defines:String = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n';
     if ((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool)) { (defines = cast ((defines + '#define DEPTH_MODE\n') : Dynamic)); } else { (defines = cast ((defines + '#define NORMAL_MODE\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'hasNormalMap') : Bool)) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
@@ -74,7 +74,7 @@ class GlDebugPrelude {
     return cast null;
   }
 
-  public static final DEBUG_VERTEX_BODY__glDebugPrelude:Dynamic = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 1) in vec3 a_normal;\nlayout(location = 2) in vec4 a_tangent;\nlayout(location = 3) in vec2 a_uv0;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nuniform mat3 u_normalMatrix;\n\nout vec3 v_worldPosition;\nout vec3 v_normal;\nout vec4 v_tangent;\nout vec2 v_uv0;\n\nvoid main() {\n  vec4 worldPosition = u_model * vec4(a_position, 1.0);\n  v_worldPosition = worldPosition.xyz;\n  v_normal = u_normalMatrix * a_normal;\n  v_tangent = vec4(u_normalMatrix * a_tangent.xyz, a_tangent.w);\n  v_uv0 = a_uv0;\n  gl_Position = u_viewProjection * worldPosition;\n}\n';
+  public static final DEBUG_VERTEX_BODY__glDebugPrelude:String = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 1) in vec3 a_normal;\nlayout(location = 2) in vec4 a_tangent;\nlayout(location = 3) in vec2 a_uv0;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nuniform mat3 u_normalMatrix;\n\nout vec3 v_worldPosition;\nout vec3 v_normal;\nout vec4 v_tangent;\nout vec2 v_uv0;\n\nvoid main() {\n  vec4 worldPosition = u_model * vec4(a_position, 1.0);\n  v_worldPosition = worldPosition.xyz;\n  v_normal = u_normalMatrix * a_normal;\n  v_tangent = vec4(u_normalMatrix * a_tangent.xyz, a_tangent.w);\n  v_uv0 = a_uv0;\n  gl_Position = u_viewProjection * worldPosition;\n}\n';
 
-  public static final DEBUG_FRAGMENT_BODY__glDebugPrelude:Dynamic = '\nprecision highp float;\n\nin vec3 v_worldPosition;\nin vec3 v_normal;\nin vec4 v_tangent;\nin vec2 v_uv0;\n\n#ifdef DEPTH_MODE\nuniform float u_near;\nuniform float u_far;\n#endif\n#ifdef NORMAL_MODE\nuniform float u_normalScale;\n#ifdef HAS_NORMAL_MAP\nuniform sampler2D u_normalMap;\n#endif\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n#ifdef DEPTH_MODE\n  // Linear view-space distance is the perspective w: 1.0 / gl_FragCoord.w == w_clip == eye distance.\n  // This is camera-agnostic (no camera near/far needed); map it across the material\'s [u_near, u_far]\n  // visualization window to grayscale [0, 1].\n  float eyeDepth = 1.0 / gl_FragCoord.w;\n  float d = clamp((eyeDepth - u_near) / max(u_far - u_near, 1e-6), 0.0, 1.0);\n  fragColor = vec4(vec3(d), 1.0);\n#endif\n#ifdef NORMAL_MODE\n  // Visualize the WORLD-space surface normal (the geometric normal carried through u_normalMatrix).\n  vec3 geometricNormal = normalize(v_normal);\n  if (!gl_FrontFacing) geometricNormal = -geometricNormal;\n\n  vec3 normal = geometricNormal;\n#ifdef HAS_NORMAL_MAP\n  vec3 tangent = normalize(v_tangent.xyz);\n  vec3 bitangent = cross(geometricNormal, tangent) * v_tangent.w;\n  vec3 tangentNormal = texture(u_normalMap, v_uv0).xyz * 2.0 - 1.0;\n  tangentNormal.xy *= u_normalScale;\n  mat3 tbn = mat3(tangent, bitangent, geometricNormal);\n  normal = normalize(tbn * tangentNormal);\n#endif\n\n  fragColor = vec4(normal * 0.5 + 0.5, 1.0);\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
+  public static final DEBUG_FRAGMENT_BODY__glDebugPrelude:String = '\nprecision highp float;\n\nin vec3 v_worldPosition;\nin vec3 v_normal;\nin vec4 v_tangent;\nin vec2 v_uv0;\n\n#ifdef DEPTH_MODE\nuniform float u_near;\nuniform float u_far;\n#endif\n#ifdef NORMAL_MODE\nuniform float u_normalScale;\n#ifdef HAS_NORMAL_MAP\nuniform sampler2D u_normalMap;\n#endif\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n#ifdef DEPTH_MODE\n  // Linear view-space distance is the perspective w: 1.0 / gl_FragCoord.w == w_clip == eye distance.\n  // This is camera-agnostic (no camera near/far needed); map it across the material\'s [u_near, u_far]\n  // visualization window to grayscale [0, 1].\n  float eyeDepth = 1.0 / gl_FragCoord.w;\n  float d = clamp((eyeDepth - u_near) / max(u_far - u_near, 1e-6), 0.0, 1.0);\n  fragColor = vec4(vec3(d), 1.0);\n#endif\n#ifdef NORMAL_MODE\n  // Visualize the WORLD-space surface normal (the geometric normal carried through u_normalMatrix).\n  vec3 geometricNormal = normalize(v_normal);\n  if (!gl_FrontFacing) geometricNormal = -geometricNormal;\n\n  vec3 normal = geometricNormal;\n#ifdef HAS_NORMAL_MAP\n  vec3 tangent = normalize(v_tangent.xyz);\n  vec3 bitangent = cross(geometricNormal, tangent) * v_tangent.w;\n  vec3 tangentNormal = texture(u_normalMap, v_uv0).xyz * 2.0 - 1.0;\n  tangentNormal.xy *= u_normalScale;\n  mat3 tbn = mat3(tangent, bitangent, geometricNormal);\n  normal = normalize(tbn * tangentNormal);\n#endif\n\n  fragColor = vec4(normal * 0.5 + 0.5, 1.0);\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
 }

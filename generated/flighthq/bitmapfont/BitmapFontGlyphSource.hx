@@ -8,19 +8,24 @@ import flighthq.bitmapfont.BitmapFont.getBitmapFontKerning;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
 import flighthq.types.BitmapFont;
 import flighthq.types.GlyphSource;
+import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureSource;
 
 class BitmapFontGlyphSource {
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
-    return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
-      var texture:Dynamic = cast _Runtime.UNDEFINED;
+    return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {
+      var texture:Null<Texture2D> = cast _Runtime.UNDEFINED;
       texture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, page); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; });
-      return cast ((cast _Runtime.strictEquals(_Runtime.optionalField(texture, 'dimension'), '2d') : Bool) ? (cast _Runtime.field(texture, 'source') : Dynamic) : (cast null : Dynamic));
-    }, getGlyphEntry: function(codepoint:Dynamic) {
-      return cast _Runtime.callValue(getBitmapFontGlyph, cast ([font, codepoint] : Array<Dynamic>));
-    }, getGlyphKerning: function(left:Dynamic, right:Dynamic) {
-      return cast _Runtime.callValue(getBitmapFontKerning, cast ([font, left, right] : Array<Dynamic>));
-    }, getGlyphMetrics: function() {
-      return cast _Runtime.callValue(getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
+      return cast ((cast _Runtime.strictEquals(_Runtime.optionalField(texture, 'dimension'), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
+    }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
+      return cast (cast getBitmapFontGlyph((cast font : BitmapFont), (cast codepoint : Float)) : Null<GlyphEntry>);
+    }, getGlyphKerning: function(left:Float, right:Float):Float {
+      return cast (cast getBitmapFontKerning((cast font : BitmapFont), (cast left : Float), (cast right : Float)) : Float);
+    }, getGlyphMetrics: function():GlyphMetrics {
+      return cast (cast getBitmapFontMetrics((cast font : BitmapFont)) : GlyphMetrics);
     } };
     return cast null;
   }

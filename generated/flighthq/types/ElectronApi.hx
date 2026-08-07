@@ -6,25 +6,25 @@ import flighthq._internal._Runtime;
 
 typedef ElectronApi = { var app:ElectronApp; var clipboard:ElectronClipboard; var fs:ElectronFs; var shell:ElectronShell; var dialog:ElectronDialog; var globalShortcut:ElectronGlobalShortcut; var screen:ElectronScreen; var powerMonitor:ElectronPowerMonitor; var powerSaveBlocker:ElectronPowerSaveBlocker; var nativeImage:ElectronNativeImageModule; var ipcMain:ElectronIpcMain; var autoUpdater:ElectronAutoUpdater; var BrowserWindow:ElectronBrowserWindowConstructor; var Menu:ElectronMenuConstructor; var Tray:ElectronTrayConstructor; var Notification:ElectronNotificationConstructor; };
 
-typedef ElectronFs = { var existsSync:Dynamic; var readFileSync:Dynamic; var writeFileSync:Dynamic; };
+typedef ElectronFs = { var existsSync:String->Bool; var readFileSync:String->String->String; var writeFileSync:String->String->Void; };
 
-typedef ElectronApp = { var getName:Dynamic; var getVersion:Dynamic; var getLocale:Dynamic; var getSystemLocale:Dynamic; var getPreferredSystemLanguages:Dynamic; var getAppPath:Dynamic; var getPath:Dynamic; var setName:Dynamic; var setAppUserModelId:Dynamic; var setActivationPolicy:Dynamic; var hide:Dynamic; var show:Dynamic; var isHidden:Dynamic; var addRecentDocument:Dynamic; var clearRecentDocuments:Dynamic; var getLoginItemSettings:Dynamic; var setLoginItemSettings:Dynamic; var quit:Dynamic; var exit:Dynamic; var relaunch:Dynamic; var focus:Dynamic; var requestSingleInstanceLock:Dynamic; var hasSingleInstanceLock:Dynamic; var releaseSingleInstanceLock:Dynamic; var setBadgeCount:Dynamic; var setAsDefaultProtocolClient:Dynamic; var removeAsDefaultProtocolClient:Dynamic; var isDefaultProtocolClient:Dynamic; var on:Dynamic; var removeListener:Dynamic; @:optional var dock:ElectronDock; };
+typedef ElectronApp = { var getName:Void->String; var getVersion:Void->String; var getLocale:Void->String; var getSystemLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getAppPath:Void->String; var getPath:String->String; var setName:String->Void; var setAppUserModelId:String->Void; var setActivationPolicy:String->Void; var hide:Void->Void; var show:Void->Void; var isHidden:Void->Bool; var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; var getLoginItemSettings:Void->ElectronLoginItemSettings; var setLoginItemSettings:ElectronLoginItemSettingsLike->Void; var quit:Void->Void; var exit:Float->Void; var relaunch:Void->Void; var focus:Void->Void; var requestSingleInstanceLock:Void->Bool; var hasSingleInstanceLock:Void->Bool; var releaseSingleInstanceLock:Void->Void; var setBadgeCount:Float->Bool; var setAsDefaultProtocolClient:String->Bool; var removeAsDefaultProtocolClient:String->Bool; var isDefaultProtocolClient:String->Bool; var on:String->Array<flighthq._internal._Any>->Void->Void; var removeListener:String->Array<flighthq._internal._Any>->Void->Void; @:optional var dock:ElectronDock; };
 
 typedef ElectronLoginItemSettings = { var openAtLogin:Bool; var openAsHidden:Bool; @:optional var executableWillLaunchAtLogin:Bool; };
 
 typedef ElectronLoginItemSettingsLike = { @:optional var openAtLogin:Bool; @:optional var openAsHidden:Bool; @:optional var path:String; @:optional var args:Array<String>; };
 
-typedef ElectronDock = { var bounce:Dynamic; var cancelBounce:Dynamic; var setBadge:Dynamic; var setMenu:Dynamic; };
+typedef ElectronDock = { var bounce:String->Float; var cancelBounce:Float->Void; var setBadge:String->Void; var setMenu:ElectronMenu->Void; };
 
-typedef ElectronClipboard = { var readText:Dynamic; var writeText:Dynamic; var readHtml:Dynamic; var writeHtml:Dynamic; var readRTF:Dynamic; var writeRTF:Dynamic; var readBookmark:Dynamic; var writeBookmark:Dynamic; var readImage:Dynamic; var writeImage:Dynamic; var read:Dynamic; var write:Dynamic; var has:Dynamic; var availableFormats:Dynamic; var clear:Dynamic; };
+typedef ElectronClipboard = { var readText:Void->String; var writeText:String->Void; var readHtml:Void->String; var writeHtml:String->Void; var readRTF:Void->String; var writeRTF:String->Void; var readBookmark:Void->{ var title:String; var url:String; }; var writeBookmark:String->String->Void; var readImage:Void->ElectronNativeImage; var writeImage:ElectronNativeImage->Void; var read:String->String; var write:ElectronClipboardData->Void; var has:String->Bool; var availableFormats:Void->Array<String>; var clear:Void->Void; };
 
 typedef ElectronClipboardData = { @:optional var text:String; @:optional var html:String; @:optional var rtf:String; @:optional var bookmark:String; @:optional var image:ElectronNativeImage; };
 
-typedef ElectronShell = { var openExternal:Dynamic; var openPath:Dynamic; var showItemInFolder:Dynamic; var trashItem:Dynamic; var beep:Dynamic; var readShortcutLink:Dynamic; var writeShortcutLink:Dynamic; };
+typedef ElectronShell = { var openExternal:String->flighthq._internal._Promise<flighthq._internal._Nothing>; var openPath:String->flighthq._internal._Promise<String>; var showItemInFolder:String->Void; var trashItem:String->flighthq._internal._Promise<flighthq._internal._Nothing>; var beep:Void->Void; var readShortcutLink:String->ElectronShortcutDetails; var writeShortcutLink:String->String->ElectronShortcutDetails->Bool; };
 
 typedef ElectronShortcutDetails = { var target:String; @:optional var appUserModelId:String; @:optional var args:String; @:optional var description:String; @:optional var icon:String; @:optional var iconIndex:Float; @:optional var cwd:String; };
 
-typedef ElectronDialog = { var showOpenDialog:Dynamic; var showSaveDialog:Dynamic; var showMessageBox:Dynamic; };
+typedef ElectronDialog = { var showOpenDialog:Null<ElectronBrowserWindow>->ElectronOpenDialogOptions->flighthq._internal._Promise<{ var canceled:Bool; var filePaths:Array<String>; }>; var showSaveDialog:Null<ElectronBrowserWindow>->ElectronSaveDialogOptions->flighthq._internal._Promise<{ var canceled:Bool; @:optional var filePath:String; }>; var showMessageBox:Null<ElectronBrowserWindow>->ElectronMessageBoxOptions->flighthq._internal._Promise<{ var response:Float; var checkboxChecked:Bool; }>; };
 
 typedef ElectronOpenDialogOptions = { @:optional var title:String; @:optional var defaultPath:String; @:optional var filters:Array<{ var name:String; var extensions:Array<String>; }>; @:optional var properties:Array<String>; };
 
@@ -32,46 +32,46 @@ typedef ElectronSaveDialogOptions = { @:optional var title:String; @:optional va
 
 typedef ElectronMessageBoxOptions = { @:optional var type:String; @:optional var title:String; var message:String; @:optional var detail:String; @:optional var buttons:Array<String>; @:optional var defaultId:Float; @:optional var cancelId:Float; @:optional var checkboxLabel:String; @:optional var checkboxChecked:Bool; };
 
-typedef ElectronGlobalShortcut = { var register:Dynamic; var unregister:Dynamic; var unregisterAll:Dynamic; var isRegistered:Dynamic; };
+typedef ElectronGlobalShortcut = { var register:String->Void->Void->Bool; var unregister:String->Void; var unregisterAll:Void->Void; var isRegistered:String->Bool; };
 
-typedef ElectronScreen = { var getPrimaryDisplay:Dynamic; var getAllDisplays:Dynamic; var getCursorScreenPoint:Dynamic; var on:Dynamic; var removeListener:Dynamic; };
+typedef ElectronScreen = { var getPrimaryDisplay:Void->ElectronDisplay; var getAllDisplays:Void->Array<ElectronDisplay>; var getCursorScreenPoint:Void->{ var x:Float; var y:Float; }; var on:String->Array<flighthq._internal._Any>->Void->Void; var removeListener:String->Array<flighthq._internal._Any>->Void->Void; };
 
 typedef ElectronDisplay = { var id:Float; var bounds:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var workArea:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var scaleFactor:Float; };
 
-typedef ElectronPowerMonitor = { var on:Dynamic; var removeListener:Dynamic; var getSystemIdleState:Dynamic; var getSystemIdleTime:Dynamic; @:optional var onBatteryPower:Bool; };
+typedef ElectronPowerMonitor = { var on:String->Void->Void->Void; var removeListener:String->Void->Void->Void; var getSystemIdleState:Float->String; var getSystemIdleTime:Void->Float; @:optional var onBatteryPower:Bool; };
 
-typedef ElectronPowerSaveBlocker = { var start:Dynamic; var stop:Dynamic; var isStarted:Dynamic; };
+typedef ElectronPowerSaveBlocker = { var start:String->Float; var stop:Float->Void; var isStarted:Float->Bool; };
 
-typedef ElectronNativeImageModule = { var createFromDataUrl:Dynamic; var createFromPath:Dynamic; };
+typedef ElectronNativeImageModule = { var createFromDataUrl:String->ElectronNativeImage; var createFromPath:String->ElectronNativeImage; };
 
-typedef ElectronNativeImage = { var toDataUrl:Dynamic; var isEmpty:Dynamic; };
+typedef ElectronNativeImage = { var toDataUrl:Void->String; var isEmpty:Void->Bool; };
 
-typedef ElectronIpcMain = { var on:Dynamic; var removeListener:Dynamic; var handle:Dynamic; var removeHandler:Dynamic; };
+typedef ElectronIpcMain = { var on:String->flighthq._internal._Any->Array<flighthq._internal._Any>->Void->Void; var removeListener:String->flighthq._internal._Any->Array<flighthq._internal._Any>->Void->Void; var handle:String->flighthq._internal._Any->Array<flighthq._internal._Any>->flighthq._internal._Any->Void; var removeHandler:String->Void; };
 
-typedef ElectronAutoUpdater = { var setFeedUrl:Dynamic; var checkForUpdates:Dynamic; var quitAndInstall:Dynamic; var on:Dynamic; var removeListener:Dynamic; };
+typedef ElectronAutoUpdater = { var setFeedUrl:{ var url:String; }->Void; var checkForUpdates:Void->Void; var quitAndInstall:Void->Void; var on:String->Array<flighthq._internal._Any>->Void->Void; var removeListener:String->Array<flighthq._internal._Any>->Void->Void; };
 
-typedef ElectronBrowserWindowConstructor = { @:optional var __construct:Dynamic; var getAllWindows:Dynamic; var fromId:Dynamic; };
+typedef ElectronBrowserWindowConstructor = { @:optional var __construct:Dynamic; var getAllWindows:Void->Array<ElectronBrowserWindow>; var fromId:Float->Null<ElectronBrowserWindow>; };
 
 typedef ElectronBrowserWindowOptions = { @:optional var title:String; @:optional var x:Float; @:optional var y:Float; @:optional var width:Float; @:optional var height:Float; @:optional var resizable:Bool; @:optional var alwaysOnTop:Bool; @:optional var fullscreen:Bool; @:optional var show:Bool; @:optional var minWidth:Float; @:optional var minHeight:Float; @:optional var maxWidth:Float; @:optional var maxHeight:Float; @:optional var frame:Bool; @:optional var transparent:Bool; };
 
 typedef ElectronRectangle = { var x:Float; var y:Float; var width:Float; var height:Float; };
 
-typedef ElectronBrowserWindow = { var id:Float; var loadURL:Dynamic; var loadFile:Dynamic; var setTitle:Dynamic; var getTitle:Dynamic; var setPosition:Dynamic; var setSize:Dynamic; var getBounds:Dynamic; var setBounds:Dynamic; var minimize:Dynamic; var maximize:Dynamic; var unmaximize:Dynamic; var restore:Dynamic; var isMinimized:Dynamic; var isMaximized:Dynamic; var focus:Dynamic; var show:Dynamic; var hide:Dynamic; var center:Dynamic; var setResizable:Dynamic; var setAlwaysOnTop:Dynamic; var setMinimumSize:Dynamic; var setMaximumSize:Dynamic; var setFullScreen:Dynamic; var isFullScreen:Dynamic; var setIcon:Dynamic; var setOpacity:Dynamic; var setProgressBar:Dynamic; var flashFrame:Dynamic; var setContentProtection:Dynamic; var setHasShadow:Dynamic; var setSkipTaskbar:Dynamic; var setMenuBarVisibility:Dynamic; var setParentWindow:Dynamic; var close:Dynamic; var destroy:Dynamic; var isDestroyed:Dynamic; var on:Dynamic; var removeAllListeners:Dynamic; };
+typedef ElectronBrowserWindow = { var id:Float; var loadURL:String->flighthq._internal._Promise<flighthq._internal._Nothing>; var loadFile:String->flighthq._internal._Promise<flighthq._internal._Nothing>; var setTitle:String->Void; var getTitle:Void->String; var setPosition:Float->Float->Void; var setSize:Float->Float->Void; var getBounds:Void->ElectronRectangle; var setBounds:Dynamic->Void; var minimize:Void->Void; var maximize:Void->Void; var unmaximize:Void->Void; var restore:Void->Void; var isMinimized:Void->Bool; var isMaximized:Void->Bool; var focus:Void->Void; var show:Void->Void; var hide:Void->Void; var center:Void->Void; var setResizable:Bool->Void; var setAlwaysOnTop:Bool->Void; var setMinimumSize:Float->Float->Void; var setMaximumSize:Float->Float->Void; var setFullScreen:Bool->Void; var isFullScreen:Void->Bool; var setIcon:flighthq._internal._Union2<String, ElectronNativeImage>->Void; var setOpacity:Float->Void; var setProgressBar:Float->Void; var flashFrame:Bool->Void; var setContentProtection:Bool->Void; var setHasShadow:Bool->Void; var setSkipTaskbar:Bool->Void; var setMenuBarVisibility:Bool->Void; var setParentWindow:Null<ElectronBrowserWindow>->Void; var close:Void->Void; var destroy:Void->Void; var isDestroyed:Void->Bool; var on:String->Array<flighthq._internal._Any>->Void->Void; var removeAllListeners:String->Void; };
 
-typedef ElectronMenuConstructor = { @:optional var __construct:Dynamic; var buildFromTemplate:Dynamic; var setApplicationMenu:Dynamic; };
+typedef ElectronMenuConstructor = { @:optional var __construct:Dynamic; var buildFromTemplate:Array<ElectronMenuItemOptions>->ElectronMenu; var setApplicationMenu:Null<ElectronMenu>->Void; };
 
-typedef ElectronMenu = { var popup:Dynamic; };
+typedef ElectronMenu = { var popup:{ @:optional var x:Float; @:optional var y:Float; }->Void; };
 
-typedef ElectronMenuItemOptions = { @:optional var id:String; @:optional var label:String; @:optional var type:String; @:optional var role:String; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var click:Dynamic; @:optional var submenu:Array<ElectronMenuItemOptions>; };
+typedef ElectronMenuItemOptions = { @:optional var id:String; @:optional var label:String; @:optional var type:String; @:optional var role:String; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var click:Void->Void; @:optional var submenu:Array<ElectronMenuItemOptions>; };
 
 typedef ElectronTrayConstructor = { @:optional var __construct:Dynamic; };
 
-typedef ElectronTray = { var setToolTip:Dynamic; var setTitle:Dynamic; var setImage:Dynamic; var setPressedImage:Dynamic; var setContextMenu:Dynamic; var popUpContextMenu:Dynamic; var setIgnoreDoubleClickEvents:Dynamic; var displayBalloon:Dynamic; var removeBalloon:Dynamic; var getBounds:Dynamic; var isDestroyed:Dynamic; var on:Dynamic; var destroy:Dynamic; };
+typedef ElectronTray = { var setToolTip:String->Void; var setTitle:String->Void; var setImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; var setPressedImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; var setContextMenu:Null<ElectronMenu>->Void; var popUpContextMenu:ElectronMenu->{ var x:Float; var y:Float; }->Void; var setIgnoreDoubleClickEvents:Bool->Void; var displayBalloon:ElectronTrayBalloonOptions->Void; var removeBalloon:Void->Void; var getBounds:Void->ElectronRectangle; var isDestroyed:Void->Bool; var on:String->Array<flighthq._internal._Any>->Void->Void; var destroy:Void->Void; };
 
-typedef ElectronTrayBalloonOptions = { @:optional var icon:Dynamic; @:optional var iconType:String; var title:String; var content:String; @:optional var largeIcon:Bool; @:optional var noSound:Bool; @:optional var respectQuietTime:Bool; };
+typedef ElectronTrayBalloonOptions = { @:optional var icon:flighthq._internal._Union2<String, ElectronNativeImage>; @:optional var iconType:String; var title:String; var content:String; @:optional var largeIcon:Bool; @:optional var noSound:Bool; @:optional var respectQuietTime:Bool; };
 
-typedef ElectronNotificationConstructor = { @:optional var __construct:Dynamic; var isSupported:Dynamic; };
+typedef ElectronNotificationConstructor = { @:optional var __construct:Dynamic; var isSupported:Void->Bool; };
 
 typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var type:String; var text:String; }>; };
 
-typedef ElectronNotification = { var show:Dynamic; var close:Dynamic; var on:Dynamic; };
+typedef ElectronNotification = { var show:Void->Void; var close:Void->Void; var on:String->Array<flighthq._internal._Any>->Void->Void; };

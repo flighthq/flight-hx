@@ -14,17 +14,17 @@ import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
 class MorphShapeAnimation {
   public static function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
-    _Runtime.callValue(sampleAnimationClip, cast ([MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation, clip, time, applyMorphShapeAnimationSample] : Array<Dynamic>));
+    sampleAnimationClip((cast MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast clip : AnimationClip), (cast time : Float), (cast function(__unused0:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void));
   }
 
-  public static function applyMorphShapeAnimationSample(sampled:Dynamic, channel:AnimationChannel):Bool {
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    var shape:Dynamic = cast _Runtime.UNDEFINED;
+  public static function applyMorphShapeAnimationSample(sampled:flighthq._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
+    var target:Null<MorphShapeAnimationTarget> = cast _Runtime.UNDEFINED;
+    var shape:Null<MorphShape> = cast _Runtime.UNDEFINED;
     target = (cast _Runtime.field(channel, 'targetRef') : Null<MorphShapeAnimationTarget>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'shape'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
-    shape = (cast _Runtime.field(target, 'shape') : Null<MorphShape>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shape, 'kind'), MorphShapeKind) : Bool)) : Bool)) { return cast false; }
-    _Runtime.callValue(setMorphShapeProgress, cast ([shape, _Runtime.getIndex(sampled, 0.0)] : Array<Dynamic>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : MorphShapeAnimationTarget).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
+    shape = (cast (cast target : MorphShapeAnimationTarget).shape : Null<MorphShape>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : MorphShape).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
+    setMorphShapeProgress((cast shape : MorphShape), (cast _Runtime.getIndex(sampled, 0.0) : Float));
     return cast true;
     return cast null;
   }

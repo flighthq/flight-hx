@@ -9,28 +9,29 @@ import flighthq.types.Camera3D.OrthographicProjection;
 import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.OrbitCameraController;
+import flighthq.types.Vector3;
 
 class Framing {
-  public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, padding:Dynamic = 1.0):Bool {
+  public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, padding:Float = 1.0):Bool {
     if ((cast ((cast ((cast !(cast _Runtime.compare(sphere.radius, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(aspect, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(padding, 0.0, '>') : Bool) : Bool)) : Bool)) { return cast false; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool)) {
-      var distance:Dynamic = _Runtime.callValue(getPerspectiveProjectionFrameDistanceToSphere, cast ([projection, sphere.radius, aspect, padding] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
+      var distance:Float = (cast getPerspectiveProjectionFrameDistanceToSphere((cast projection : PerspectiveProjection), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float)) : Float);
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-      _Runtime.setField(controller, 'goalDistance', _Runtime.callValue(clamp, cast ([distance, _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>)));
+      ((cast controller : OrbitCameraController).goalDistance = (cast clamp((cast distance : Float), (cast (cast controller : OrbitCameraController).minDistance : Float), (cast (cast controller : OrbitCameraController).maxDistance : Float)) : Float));
     } else {
-      _Runtime.callValue(setOrthographicProjectionFrameToSphere, cast ([projection, sphere.radius, aspect, padding] : Array<Dynamic>));
+      setOrthographicProjectionFrameToSphere((cast projection : OrthographicProjection), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
     }
-    (_Runtime.field(controller, 'target').x = cast (sphere.center.x : Dynamic));
-    (_Runtime.field(controller, 'target').y = cast (sphere.center.y : Dynamic));
-    (_Runtime.field(controller, 'target').z = cast (sphere.center.z : Dynamic));
+    ((cast controller : OrbitCameraController).target.x = cast (sphere.center.x : Dynamic));
+    ((cast controller : OrbitCameraController).target.y = cast (sphere.center.y : Dynamic));
+    ((cast controller : OrbitCameraController).target.z = cast (sphere.center.z : Dynamic));
     return cast true;
     return cast null;
   }
 
-  public static function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Dynamic = 1.0):Float {
-    var paddedRadius:Dynamic = cast _Runtime.UNDEFINED;
-    var verticalHalfFov:Dynamic = cast _Runtime.UNDEFINED;
-    var horizontalHalfFov:Dynamic = cast _Runtime.UNDEFINED;
+  public static function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Float = 1.0):Float {
+    var paddedRadius:Float = cast _Runtime.UNDEFINED;
+    var verticalHalfFov:Float = cast _Runtime.UNDEFINED;
+    var horizontalHalfFov:Float = cast _Runtime.UNDEFINED;
     paddedRadius = (radius * padding);
     verticalHalfFov = (projection.fovY * 0.5);
     horizontalHalfFov = HxMath.atan(_Runtime.multiplyNumbers(HxMath.tan(verticalHalfFov), aspect));
@@ -38,8 +39,8 @@ class Framing {
     return cast null;
   }
 
-  public static function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Dynamic = 1.0):Void {
-    var paddedRadius:Dynamic = cast _Runtime.UNDEFINED;
+  public static function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Float = 1.0):Void {
+    var paddedRadius:Float = cast _Runtime.UNDEFINED;
     paddedRadius = (radius * padding);
     if ((cast ((cast aspect : Float) >= (cast 1.0 : Float)) : Bool)) {
       (projection.halfHeight = cast (paddedRadius : Dynamic));

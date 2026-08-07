@@ -5,22 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapBlur.blurBitmapPixelsHorizontal;
 import flighthq.bitmap.BitmapBlur.blurBitmapPixelsVertical;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapBevelOptions;
+import flighthq.types.BitmapBevelType;
 import flighthq.types.BitmapRegion;
 
 class BitmapBevel {
   public static function bevelBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetX:Dynamic = cast _Runtime.UNDEFINED;
-    var offsetY:Dynamic = cast _Runtime.UNDEFINED;
-    var type:Dynamic = cast _Runtime.UNDEFINED;
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var highlightColor:Dynamic = cast _Runtime.UNDEFINED;
-    var shadowColor:Dynamic = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var type:BitmapBevelType = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var highlightColor:Float = cast _Runtime.UNDEFINED;
+    var shadowColor:Float = cast _Runtime.UNDEFINED;
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
@@ -32,37 +34,37 @@ class BitmapBevel {
     highlightColor = _Runtime.coalesce(_Runtime.field(options, 'highlightColor'), function():Dynamic return cast 4294967295.0);
     shadowColor = _Runtime.coalesce(_Runtime.field(options, 'shadowColor'), function():Dynamic return cast 255.0);
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var di:Dynamic = (((py * w) + px) * 4.0);
+            var di:Float = (((py * w) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, di, 0.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 1.0), 0.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 2.0), 0.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 3.0), _Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 3.0), (cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source : BitmapRegion), (cast px : Float), (cast py : Float)) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    _Runtime.callValue(BitmapBevel.blurField__bitmapBevel, cast ([scratch, out, w, h, _Runtime.field(options, 'radiusX'), _Runtime.field(options, 'radiusY'), _Runtime.field(options, 'passes')] : Array<Dynamic>));
+    BitmapBevel.blurField__bitmapBevel((cast scratch : flighthq._internal._UInt8ClampedArray), (cast out : flighthq._internal._UInt8ClampedArray), (cast w : Float), (cast h : Float), (cast _Runtime.field(options, 'radiusX') : Null<Float>), (cast _Runtime.field(options, 'radiusY') : Null<Float>), (cast _Runtime.field(options, 'passes') : Null<Float>));
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var di:Dynamic = (((py * w) + px) * 4.0);
-            var lit:Dynamic = _Runtime.callValue(BitmapBevel.sampleField__bitmapBevel, cast ([scratch, w, h, (px - offsetX), (py - offsetY)] : Array<Dynamic>));
-            var shade:Dynamic = _Runtime.callValue(BitmapBevel.sampleField__bitmapBevel, cast ([scratch, w, h, (px + offsetX), (py + offsetY)] : Array<Dynamic>));
-            var gradient:Dynamic = (lit - shade);
-            var color:Dynamic = ((cast ((cast gradient : Float) >= (cast 0.0 : Float)) : Bool) ? (cast highlightColor : Dynamic) : (cast shadowColor : Dynamic));
-            var colorAlpha:Dynamic = ((_Runtime.toInt32(color) & 255) / 255.0);
-            var clip:Dynamic = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)), 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - _Runtime.divideNumbers(_Runtime.callValue(BitmapBevel.readSourceAlpha__bitmapBevel, cast ([source, px, py] : Array<Dynamic>)), 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-            var edgeIntensity:Dynamic = HxMath.min(1.0, _Runtime.multiplyNumbers(HxMath.abs(gradient), intensity));
+            var di:Float = (((py * w) + px) * 4.0);
+            var lit:Float = (cast BitmapBevel.sampleField__bitmapBevel((cast scratch : flighthq._internal._UInt8ClampedArray), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
+            var shade:Float = (cast BitmapBevel.sampleField__bitmapBevel((cast scratch : flighthq._internal._UInt8ClampedArray), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
+            var gradient:Float = (lit - shade);
+            var color:Float = ((cast ((cast gradient : Float) >= (cast 0.0 : Float)) : Bool) ? (cast highlightColor : Dynamic) : (cast shadowColor : Dynamic));
+            var colorAlpha:Float = ((_Runtime.toInt32(color) & 255) / 255.0);
+            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source : BitmapRegion), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source : BitmapRegion), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var edgeIntensity:Float = HxMath.min(1.0, _Runtime.multiplyNumbers(HxMath.abs(gradient), intensity));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
@@ -76,28 +78,28 @@ class BitmapBevel {
   }
 
   public static function blurField__bitmapBevel(field:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
-    var rx:Dynamic = cast _Runtime.UNDEFINED;
-    var ry:Dynamic = cast _Runtime.UNDEFINED;
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var rx:Float = cast _Runtime.UNDEFINED;
+    var ry:Float = cast _Runtime.UNDEFINED;
+    var p:Float = cast _Runtime.UNDEFINED;
+    var a:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var b:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     rx = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusX, function():Dynamic return cast 2.0)));
     ry = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusY, function():Dynamic return cast 2.0)));
     p = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(passes, function():Dynamic return cast 1.0)));
     a = field;
     b = scratch;
     {
-      var pass:Dynamic = 0.0;
+      var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast p : Float)) : Bool)) {
         if ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(blurBitmapPixelsHorizontal, cast ([b, a, w, h, rx] : Array<Dynamic>));
-          var t:Dynamic = a;
+          blurBitmapPixelsHorizontal((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast w : Float), (cast h : Float), (cast rx : Float));
+          var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callValue(blurBitmapPixelsVertical, cast ([b, a, w, h, ry] : Array<Dynamic>));
-          var t:Dynamic = a;
+          blurBitmapPixelsVertical((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast w : Float), (cast h : Float), (cast ry : Float));
+          var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
@@ -108,8 +110,8 @@ class BitmapBevel {
   }
 
   public static function readSourceAlpha__bitmapBevel(source:BitmapRegion, px:Float, py:Float):Float {
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
     sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
     sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { return cast 0.0; }

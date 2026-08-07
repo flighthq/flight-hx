@@ -22,7 +22,7 @@ class TextureatlasFormats {
     return cast null;
   }
 
-  public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
+  public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }> {
     return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.getTextureAtlasFormat(kind);
     return cast null;
   }
@@ -62,7 +62,7 @@ class TextureatlasFormats {
     return cast null;
   }
 
-  public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
+  public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }):Void {
     Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.registerTextureAtlasFormat(kind, entry);
   }
 }

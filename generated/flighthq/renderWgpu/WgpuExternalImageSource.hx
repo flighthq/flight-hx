@@ -30,18 +30,18 @@ class WgpuExternalImageSource {
   }
 
   public static function tryCopyWgpuExternalImageToTexture(queue:flighthq._internal.dom.GPUQueue, source:flighthq._internal.dom.GPUCopyExternalImageSourceInfo, destination:flighthq._internal.dom.GPUCopyExternalImageDestInfo, width:Float, height:Float):Bool {
-    if ((cast !(cast _Runtime.callValue(isWgpuExternalImageSourceReady, cast ([_Runtime.field(source, 'source'), width, height] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast isWgpuExternalImageSourceReady((cast _Runtime.field(source, 'source') : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>, flighthq._internal.dom.ImageData>), (cast width : Float), (cast height : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     try {
       flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'copyExternalImageToTexture', cast ([source, destination, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
       return cast true;
     } catch (error:Dynamic) {
-      if ((cast _Runtime.callValue(WgpuExternalImageSource.isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource, cast ([error] : Array<Dynamic>)) : Bool)) { return cast false; }
+      if ((cast (cast WgpuExternalImageSource.isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource((cast error : flighthq._internal._Any)) : Bool) : Bool)) { return cast false; }
       _Runtime.throwValue(error);
     }
     return cast null;
   }
 
-  public static function isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource(error:Dynamic):Bool {
+  public static function isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource(error:flighthq._internal._Any):Bool {
     if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('DOMException'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(error, flighthq._internal._HostValueLut.get('DOMException')) : Bool)) : Bool)) {
       return cast ((cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'InvalidStateError') : Bool) || (cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'OperationError') : Bool));
     }

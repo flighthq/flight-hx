@@ -8,10 +8,10 @@ import flighthq.types.Collision.CollisionObb;
 
 class ConvexVertices {
   public static function writeAabbVertices(aabb:CollisionAabb, out:flighthq._internal._Float64Array):Void {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
     minX = _Runtime.field(aabb, 'minX');
     minY = _Runtime.field(aabb, 'minY');
     maxX = _Runtime.field(aabb, 'maxX');
@@ -27,16 +27,16 @@ class ConvexVertices {
   }
 
   public static function writeObbVertices(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var halfW:Dynamic = cast _Runtime.UNDEFINED;
-    var halfH:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var wx:Dynamic = cast _Runtime.UNDEFINED;
-    var wy:Dynamic = cast _Runtime.UNDEFINED;
-    var hx:Dynamic = cast _Runtime.UNDEFINED;
-    var hy:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var halfW:Float = cast _Runtime.UNDEFINED;
+    var halfH:Float = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var hx:Float = cast _Runtime.UNDEFINED;
+    var hy:Float = cast _Runtime.UNDEFINED;
     cx = _Runtime.field(obb, 'x');
     cy = _Runtime.field(obb, 'y');
     halfW = _Runtime.field(obb, 'halfW');

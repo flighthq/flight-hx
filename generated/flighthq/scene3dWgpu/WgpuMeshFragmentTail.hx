@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class WgpuMeshFragmentTail {
-  public static final WGPU_MESH_FRAGMENT_TAIL:Dynamic = '\nfn flightMeshCoverage(coverage : f32, objectAlpha : f32, alphaIsCoverage : f32) -> f32 {\n  return mix(1.0, coverage, alphaIsCoverage) * objectAlpha;\n}\n\nfn flightPremultipliedOutput(color : vec4f) -> vec4f {\n  return vec4f(color.rgb * color.a, color.a);\n}\n';
+  public static final WGPU_MESH_FRAGMENT_TAIL:String = '\nfn flightMeshCoverage(coverage : f32, objectAlpha : f32, alphaIsCoverage : f32) -> f32 {\n  return mix(1.0, coverage, alphaIsCoverage) * objectAlpha;\n}\n\nfn flightPremultipliedOutput(color : vec4f) -> vec4f {\n  return vec4f(color.rgb * color.a, color.a);\n}\n';
 }

@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 
 typedef IpcBackendCapabilities = { var canHandle:Bool; var canInvoke:Bool; var canSend:Bool; var canTarget:Bool; };
 
-typedef IpcBackend = { var send:Dynamic; var invoke:Dynamic; var subscribe:Dynamic; @:optional var handle:Dynamic; @:optional var sendTo:Dynamic; @:optional var getCapabilities:Dynamic; };
+typedef IpcBackend = { var send:String->Array<flighthq._internal._Any>->Void; var invoke:String->Array<flighthq._internal._Any>->flighthq._internal._Promise<flighthq._internal._Any>; var subscribe:String->Array<flighthq._internal._Any>->Void->Void->Void; @:optional var handle:String->Array<flighthq._internal._Any>->flighthq._internal._Any->Void->Void; @:optional var sendTo:IpcTarget->String->Array<flighthq._internal._Any>->Void; @:optional var getCapabilities:Void->IpcBackendCapabilities; };
 
 typedef IpcChannel = { var name:String; };
 
-typedef IpcMessageEvent = { var channel:String; var senderId:Float; var args:Array<Dynamic>; var reply:Dynamic; };
+typedef IpcMessageEvent = { var channel:String; var senderId:Float; var args:Array<flighthq._internal._Any>; var reply:Array<flighthq._internal._Any>->Void; };
 
 typedef IpcTarget = { var windowId:Float; };
 
@@ -19,10 +19,10 @@ class IpcTimeoutError extends haxe.Exception {
   public final timeoutMs:Float;
   public var name:String;
   public function new(channel:String, timeoutMs:Float):Void {
-    super('IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms');
+    super((cast 'IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms' : Null<String>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>));
     this.name = 'Error';
-    (this.name = cast ('IpcTimeoutError' : Dynamic));
-    (this.channel = cast (channel : Dynamic));
-    (this.timeoutMs = cast (timeoutMs : Dynamic));
+    ((cast this : IpcTimeoutError).name = 'IpcTimeoutError');
+    ((cast this : IpcTimeoutError).channel = channel);
+    ((cast this : IpcTimeoutError).timeoutMs = timeoutMs);
   }
 }

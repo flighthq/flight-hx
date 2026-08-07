@@ -10,4 +10,4 @@ typedef ShareOptions = { @:optional var chooserTitle:String; @:optional var excl
 
 typedef ShareResult = { var completed:Bool; var activityType:Null<String>; var dismissed:Bool; };
 
-typedef ShareBackend = { var isAvailable:Dynamic; var canShare:Dynamic; var share:Dynamic; var shareWithResult:Dynamic; };
+typedef ShareBackend = { var isAvailable:Void->Bool; var canShare:ShareContent->Bool; var share:ShareContent->ShareOptions->flighthq._internal._Promise<Bool>; var shareWithResult:ShareContent->ShareOptions->flighthq._internal._Promise<ShareResult>; };

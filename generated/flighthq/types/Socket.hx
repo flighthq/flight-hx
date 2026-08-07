@@ -6,26 +6,26 @@ import flighthq._internal._Runtime;
 
 typedef SocketReadyState = String;
 
-typedef SocketMessage = { var data:Dynamic; var binary:Bool; };
+typedef SocketMessage = { var data:flighthq._internal._Union2<String, haxe.io.Bytes>; var binary:Bool; };
 
 typedef SocketOptions = { var url:String; @:optional var protocols:Array<String>; @:optional var binaryType:String; };
 
 typedef SocketCloseInfo = { var code:Float; var reason:String; var wasClean:Bool; };
 
-typedef SocketSignals = { var onSocketOpen:Signal<Dynamic>; var onSocketMessage:Signal<Dynamic>; var onSocketClose:Signal<Dynamic>; var onSocketError:Signal<Dynamic>; };
+typedef SocketSignals = { var onSocketOpen:Signal<Void->Void>; var onSocketMessage:Signal<SocketMessage->Void>; var onSocketClose:Signal<SocketCloseInfo->Void>; var onSocketError:Signal<Void->Void>; };
 
-typedef SocketEventSink = { var handleSocketOpen:Dynamic; var handleSocketMessage:Dynamic; var handleSocketClose:Dynamic; var handleSocketError:Dynamic; };
+typedef SocketEventSink = { var handleSocketOpen:Void->Void; var handleSocketMessage:SocketMessage->Void; var handleSocketClose:SocketCloseInfo->Void; var handleSocketError:Void->Void; };
 
-typedef SocketConnection = { var sendSocketFrame:Dynamic; var closeSocketConnection:Dynamic; };
+typedef SocketConnection = { var sendSocketFrame:flighthq._internal._Union2<String, haxe.io.Bytes>->Bool; var closeSocketConnection:Float->String->Void; };
 
-typedef SocketBackend = { var openSocket:Dynamic; };
+typedef SocketBackend = { var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>; };
 
 typedef SocketRuntime = { var connection:Null<SocketConnection>; var signals:Null<SocketSignals>; var readyState:SocketReadyState; var delivering:Bool; var disposed:Bool; };
 
 typedef Socket = { var url:String; var runtime:SocketRuntime; };
 
-typedef SocketSendFailureExplanation = Dynamic;
+typedef SocketSendFailureExplanation = flighthq._internal._Union2<{ var reason:String; var readyState:String; var url:String; }, { var reason:String; var readyState:SocketReadyState; var url:String; }>;
 
 typedef SocketGuardNotice = { var operation:String; var reason:String; var socket:flighthq.types.Socket; };
 
-typedef SocketGuard = Dynamic;
+typedef SocketGuard = SocketGuardNotice->Void;

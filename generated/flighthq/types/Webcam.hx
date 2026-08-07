@@ -12,4 +12,4 @@ typedef WebcamPhoto = { var dataUrl:String; var width:Float; var height:Float; v
 
 typedef WebcamVideo = { var dataUrl:String; var duration:Float; var format:String; };
 
-typedef WebcamBackend = { var capture:Dynamic; var captureVideo:Dynamic; var requestPermission:Dynamic; };
+typedef WebcamBackend = { var capture:WebcamCaptureOptions->flighthq._internal._Promise<Null<WebcamPhoto>>; var captureVideo:WebcamCaptureOptions->flighthq._internal._Promise<Null<WebcamVideo>>; var requestPermission:Void->flighthq._internal._Promise<Bool>; };

@@ -7,8 +7,8 @@ import flighthq.signals._internal._Internal.nullSignalEmit;
 import flighthq.types.Signal;
 
 class Signal {
-  public static function createSignal<T>():flighthq.types.Signal<Dynamic> {
-    return cast { emit: (cast (cast nullSignalEmit : Dynamic) : Dynamic), data: null };
+  public static function createSignal<T>():flighthq.types.Signal<T> {
+    return cast { emit: (cast (cast nullSignalEmit : flighthq._internal._Any) : T), data: null };
     return cast null;
   }
 }

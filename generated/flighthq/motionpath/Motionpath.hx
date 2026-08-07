@@ -10,7 +10,7 @@ import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
 class Motionpath {
-  public static function createMotionPath(path:Path, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
+  public static function createMotionPath(path:Path, ?speed:Float, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
     return cast Facade_Motionpath_flighthq_motionpath_MotionPath.createMotionPath(path, speed, loopMode, tolerance);
     return cast null;
   }

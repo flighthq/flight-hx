@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Scene3DPickOptions = { @:optional var cullBackfaces:Bool; @:optional var maxDistance:Float; @:optional var predicate:Dynamic; };
+typedef Scene3DPickOptions = { @:optional var cullBackfaces:Bool; @:optional var maxDistance:Float; @:optional var predicate:Mesh->Bool; };

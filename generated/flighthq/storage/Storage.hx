@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.Signal;
 import flighthq.types.Storage.StorageBackend;
 import flighthq.types.Storage.StorageChange;
 import flighthq.types.Storage.StorageMigration;
@@ -16,10 +17,10 @@ import flighthq.types.Storage.StorageSignals;
 class Storage {
   public static var _backend__storage:Null<StorageBackend> = _Runtime.explicitNull();
 
-  public static var _crossTabUnsubscribe__storage:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _crossTabUnsubscribe__storage:Null<Void->Void> = _Runtime.explicitNull();
 
   public static function _emitStorageChange__storage(change:StorageChange):Void {
-    if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Storage._signals__storage.onChange], [change]]), 1); }
+    if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Storage._signals__storage : flighthq.types.Storage.StorageSignals).onChange], [change]]), 1); }
   }
 
   public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {
@@ -29,28 +30,28 @@ class Storage {
 
   public static var _signals__storage:Null<StorageSignals> = _Runtime.explicitNull();
 
-  public static var _signalsActive__storage:Dynamic = false;
+  public static var _signalsActive__storage:Bool = false;
 
   public static function clearStorage():Bool {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'clear', cast ([] : Array<Dynamic>));
+    var result:Bool = cast _Runtime.UNDEFINED;
+    result = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).clear();
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast result : Bool)) : Bool)) {
-      _Runtime.callValue(Storage._emitStorageChange__storage, cast ([{ key: null, oldValue: null, newValue: null }] : Array<Dynamic>));
+      Storage._emitStorageChange__storage((cast { key: null, oldValue: null, newValue: null } : StorageChange));
     }
     return cast result;
     return cast null;
   }
 
   public static function clearStorageNamespace(namespace:StorageNamespace):Bool {
-    var prefix:Dynamic = cast _Runtime.UNDEFINED;
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var success:Dynamic = cast _Runtime.UNDEFINED;
+    var prefix:String = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var success:Bool = cast _Runtime.UNDEFINED;
     prefix = (namespace.prefix + '.');
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
+    backend = (cast getStorageBackend() : StorageBackend);
     success = true;
-    for (key in _Runtime.iterable(_Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable((cast backend : StorageBackend).keys())) {
       if ((cast !(cast StringTools.startsWith(key, prefix) : Bool) : Bool)) { continue; }
-      if ((cast !(cast _Runtime.callProperty(backend, 'removeItem', cast ([key] : Array<Dynamic>)) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
+      if ((cast !(cast (cast backend : StorageBackend).removeItem(key) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
     }
     return cast success;
     return cast null;
@@ -63,18 +64,18 @@ class Storage {
 
   @:noCompletion
   public static function createWebStorageBackend():StorageBackend {
-    return cast { getItem: function(key:Dynamic) {
-      var ls:Dynamic = cast _Runtime.UNDEFINED;
-      ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
+    return cast { getItem: function(key:String):Null<String> {
+      var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
+      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast null; }
       try {
         return cast (cast ls : flighthq._internal.dom.Storage).getItem(key);
       } catch (__error:Dynamic) {
         return cast null;
       }
-    }, setItem: function(key:Dynamic, value:Dynamic) {
-      var ls:Dynamic = cast _Runtime.UNDEFINED;
-      ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
+    }, setItem: function(key:String, value:String):Bool {
+      var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
+      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).setItem(key, value);
@@ -82,9 +83,9 @@ class Storage {
       } catch (__error:Dynamic) {
         return cast false;
       }
-    }, removeItem: function(key:Dynamic) {
-      var ls:Dynamic = cast _Runtime.UNDEFINED;
-      ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
+    }, removeItem: function(key:String):Bool {
+      var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
+      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).removeItem(key);
@@ -92,9 +93,9 @@ class Storage {
       } catch (__error:Dynamic) {
         return cast false;
       }
-    }, clear: function() {
-      var ls:Dynamic = cast _Runtime.UNDEFINED;
-      ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
+    }, clear: function():Bool {
+      var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
+      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).clear();
@@ -102,16 +103,16 @@ class Storage {
       } catch (__error:Dynamic) {
         return cast false;
       }
-    }, keys: function() {
-      var ls:Dynamic = cast _Runtime.UNDEFINED;
-      ls = _Runtime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
+    }, keys: function():Array<String> {
+      var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
+      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
       try {
         var out:Array<String> = cast ([] : Array<Dynamic>);
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast (cast ls : flighthq._internal.dom.Storage).length : Float)) : Bool)) {
-            var key:Dynamic = (cast ls : flighthq._internal.dom.Storage).key(i);
+            var key:Null<String> = (cast ls : flighthq._internal.dom.Storage).key(i);
             if ((cast !_Runtime.strictEquals(key, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([key] : Array<Dynamic>)); }
             (i = cast ((i + 1.0) : Dynamic));
           }
@@ -120,16 +121,16 @@ class Storage {
       } catch (__error:Dynamic) {
         return cast cast ([] : Array<Dynamic>);
       }
-    }, subscribeChanges: function(listener:Dynamic) {
-      var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function() {
+    }, subscribeChanges: function(listener:StorageChange->Void):Void->Void {
+      var handler:flighthq._internal.dom.StorageEvent->Void = cast _Runtime.UNDEFINED;
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
       }; }
-      handler = function(event:flighthq._internal.dom.StorageEvent) {
-        _Runtime.callValue(listener, cast ([{ key: event.key, oldValue: event.oldValue, newValue: event.newValue }] : Array<Dynamic>));
-      };
+      handler = (cast function(event:flighthq._internal.dom.StorageEvent):Void {
+        listener((cast { key: event.key, oldValue: event.oldValue, newValue: event.newValue } : StorageChange));
+      } : flighthq._internal.dom.StorageEvent->Void);
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
-      return cast function() return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
+      return cast function():Void return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -138,43 +139,43 @@ class Storage {
     if ((cast !(cast Storage._signalsActive__storage : Bool) : Bool)) { return; }
     (Storage._signalsActive__storage = cast (false : Dynamic));
     if ((cast !_Runtime.strictEquals(Storage._crossTabUnsubscribe__storage, null) : Bool)) {
-      _Runtime.callValue(Storage._crossTabUnsubscribe__storage, cast ([] : Array<Dynamic>));
+      (cast Storage._crossTabUnsubscribe__storage : Void->Void)();
       (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) {
-      _Runtime.callValue(clearSignal, cast ([Storage._signals__storage.onChange] : Array<Dynamic>));
+      clearSignal((cast Storage._signals__storage : flighthq.types.Storage.StorageSignals).onChange);
       (Storage._signals__storage = cast (null : Dynamic));
     }
   }
 
   public static function enableStorageSignals():StorageSignals {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) : Bool)) { return cast Storage._signals__storage; }
-    (Storage._signals__storage = cast ({ onChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
+    (Storage._signals__storage = cast ({ onChange: (cast createSignal() : Signal<StorageChange->Void>) } : Dynamic));
     (Storage._signalsActive__storage = cast (true : Dynamic));
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'subscribeChanges'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (Storage._crossTabUnsubscribe__storage = cast (_Runtime.callProperty(backend, 'subscribeChanges', cast ([function(change:Dynamic) {
-        _Runtime.callValue(Storage._emitStorageChange__storage, cast ([change] : Array<Dynamic>));
-      }] : Array<Dynamic>)) : Dynamic));
+    backend = (cast getStorageBackend() : StorageBackend);
+    if ((cast !_Runtime.strictEquals((cast backend : StorageBackend).subscribeChanges, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (Storage._crossTabUnsubscribe__storage = cast ((cast backend : StorageBackend).subscribeChanges(function(change:StorageChange):Void {
+        Storage._emitStorageChange__storage((cast change : StorageChange));
+      }) : Dynamic));
     }
     return cast Storage._signals__storage;
     return cast null;
   }
 
   public static function getNamespacedStorageByteSize(namespace:StorageNamespace):Float {
-    var prefix:Dynamic = cast _Runtime.UNDEFINED;
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var keys:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
+    var prefix:String = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var keys:Array<String> = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
     prefix = (namespace.prefix + '.');
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-    keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
+    backend = (cast getStorageBackend() : StorageBackend);
+    keys = (cast backend : StorageBackend).keys();
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast 0.0; }
     total = 0.0;
     for (rawKey in _Runtime.iterable(keys)) {
       if ((cast !(cast StringTools.startsWith(rawKey, prefix) : Bool) : Bool)) { continue; }
-      var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([rawKey] : Array<Dynamic>));
+      var value:Null<String> = (cast backend : StorageBackend).getItem(rawKey);
       if ((cast _Runtime.strictEquals(value, null) : Bool)) { continue; }
       (total = cast ((total + (_Runtime.addNumbers(_Runtime.field(rawKey, 'length'), _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
     }
@@ -183,18 +184,18 @@ class Storage {
   }
 
   public static function getNamespacedStorageEntries(namespace:StorageNamespace):Array<Array<String>> {
-    var prefix:Dynamic = cast _Runtime.UNDEFINED;
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var keys:Dynamic = cast _Runtime.UNDEFINED;
+    var prefix:String = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var keys:Array<String> = cast _Runtime.UNDEFINED;
     var out:Array<Array<String>> = cast _Runtime.UNDEFINED;
     prefix = (namespace.prefix + '.');
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-    keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
+    backend = (cast getStorageBackend() : StorageBackend);
+    keys = (cast backend : StorageBackend).keys();
     out = cast ([] : Array<Dynamic>);
     for (rawKey in _Runtime.iterable(keys)) {
       if ((cast !(cast StringTools.startsWith(rawKey, prefix) : Bool) : Bool)) { continue; }
-      var key:Dynamic = _Runtime.slice(rawKey, _Runtime.field(prefix, 'length'), null);
-      var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([rawKey] : Array<Dynamic>));
+      var key:String = _Runtime.slice(rawKey, _Runtime.field(prefix, 'length'), null);
+      var value:Null<String> = (cast backend : StorageBackend).getItem(rawKey);
       if ((cast !_Runtime.strictEquals(value, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([cast ([key, value] : Array<Dynamic>)] : Array<Dynamic>)); }
     }
     return cast out;
@@ -202,16 +203,16 @@ class Storage {
   }
 
   public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([_Runtime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast Storage._namespacedKey__storage((cast namespace : StorageNamespace), (cast key : String)) : String));
     return cast null;
   }
 
   public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
-    var prefix:Dynamic = cast _Runtime.UNDEFINED;
+    var prefix:String = cast _Runtime.UNDEFINED;
     var out:Array<String> = cast _Runtime.UNDEFINED;
     prefix = (namespace.prefix + '.');
     out = cast ([] : Array<Dynamic>);
-    for (rawKey in _Runtime.iterable(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>)))) {
+    for (rawKey in _Runtime.iterable((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).keys())) {
       if ((cast StringTools.startsWith(rawKey, prefix) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.slice(rawKey, _Runtime.field(prefix, 'length'), null)] : Array<Dynamic>)); }
     }
     return cast out;
@@ -220,14 +221,14 @@ class Storage {
 
   @:noCompletion
   public static function getStorageBackend():StorageBackend {
-    if ((cast _Runtime.strictEquals(Storage._backend__storage, null) : Bool)) { (Storage._backend__storage = cast (_Runtime.callValue(createWebStorageBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Storage._backend__storage, null) : Bool)) { (Storage._backend__storage = cast ((cast createWebStorageBackend() : Null<StorageBackend>) : Dynamic)); }
     return cast Storage._backend__storage;
     return cast null;
   }
 
   public static function getStorageBoolean(key:String):Null<Bool> {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
+    var raw:Null<String> = cast _Runtime.UNDEFINED;
+    raw = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key);
     if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(raw, 'true') : Bool)) { return cast true; }
     if ((cast _Runtime.strictEquals(raw, 'false') : Bool)) { return cast false; }
@@ -236,21 +237,21 @@ class Storage {
   }
 
   public static function getStorageBooleanOr(key:String, fallback:Bool):Bool {
-    return cast _Runtime.coalesce(_Runtime.callValue(getStorageBoolean, cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
+    return cast _Runtime.coalesce((cast getStorageBoolean((cast key : String)) : Bool), function():Dynamic return cast fallback);
     return cast null;
   }
 
   public static function getStorageByteSize():Float {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var keys:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(backend, 'byteSize'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callProperty(backend, 'byteSize', cast ([] : Array<Dynamic>)); }
-    keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var keys:Array<String> = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    backend = (cast getStorageBackend() : StorageBackend);
+    if ((cast !_Runtime.strictEquals((cast backend : StorageBackend).byteSize, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast backend : StorageBackend).byteSize(); }
+    keys = (cast backend : StorageBackend).keys();
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast 0.0; }
     total = 0.0;
     for (key in _Runtime.iterable(keys)) {
-      var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([key] : Array<Dynamic>));
+      var value:Null<String> = (cast backend : StorageBackend).getItem(key);
       if ((cast _Runtime.strictEquals(value, null) : Bool)) { continue; }
       (total = cast ((total + (_Runtime.addNumbers(_Runtime.field(key, 'length'), _Runtime.field(value, 'length')) * 2.0)) : Dynamic));
     }
@@ -259,14 +260,14 @@ class Storage {
   }
 
   public static function getStorageEntries():Array<Array<String>> {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var keys:Dynamic = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var keys:Array<String> = cast _Runtime.UNDEFINED;
     var out:Array<Array<String>> = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-    keys = _Runtime.callProperty(backend, 'keys', cast ([] : Array<Dynamic>));
+    backend = (cast getStorageBackend() : StorageBackend);
+    keys = (cast backend : StorageBackend).keys();
     out = cast ([] : Array<Dynamic>);
     for (key in _Runtime.iterable(keys)) {
-      var value:Dynamic = _Runtime.callProperty(backend, 'getItem', cast ([key] : Array<Dynamic>));
+      var value:Null<String> = (cast backend : StorageBackend).getItem(key);
       if ((cast !_Runtime.strictEquals(value, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([cast ([key, value] : Array<Dynamic>)] : Array<Dynamic>)); }
     }
     return cast out;
@@ -274,29 +275,29 @@ class Storage {
   }
 
   public static function getStorageItem(key:String):Null<String> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key);
     return cast null;
   }
 
   public static function getStorageItemCount():Float {
-    return cast _Runtime.field(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>)), 'length');
+    return cast _Runtime.field((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).keys(), 'length');
     return cast null;
   }
 
   public static function getStorageItemOr(key:String, fallback:String):String {
-    return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
+    return cast _Runtime.coalesce((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key), function():Dynamic return cast fallback);
     return cast null;
   }
 
   public static function getStorageItems(keys:Array<String>):Array<Null<String>> {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
     var out:Array<Null<String>> = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
+    backend = (cast getStorageBackend() : StorageBackend);
     out = _Runtime.createArray(_Runtime.field(keys, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(keys, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(out, i, _Runtime.callProperty(backend, 'getItem', cast ([flighthq._internal._StaticIndex.readArray(keys, i)] : Array<Dynamic>)));
+        flighthq._internal._StaticIndex.writeArray(out, i, (cast backend : StorageBackend).getItem(flighthq._internal._StaticIndex.readArray(keys, i)));
         (i = cast ((i + 1.0) : Dynamic));
       }
     }
@@ -304,24 +305,24 @@ class Storage {
     return cast null;
   }
 
-  public static function getStorageJSON<T>(key:String):Null<Dynamic> {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
+  public static function getStorageJSON<T>(key:String):Null<T> {
+    var raw:Null<String> = cast _Runtime.UNDEFINED;
+    raw = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key);
     if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast null; }
     try {
-      return cast (cast _Runtime.jsonParse(raw) : Dynamic);
+      return cast (cast _Runtime.jsonParse(raw) : T);
     } catch (__error:Dynamic) {
       return cast null;
     }
     return cast null;
   }
 
-  public static function getStorageJSONOr<T>(key:String, fallback:Dynamic):Dynamic {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
+  public static function getStorageJSONOr<T>(key:String, fallback:T):T {
+    var raw:Null<String> = cast _Runtime.UNDEFINED;
+    raw = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key);
     if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast fallback; }
     try {
-      return cast (cast _Runtime.jsonParse(raw) : Dynamic);
+      return cast (cast _Runtime.jsonParse(raw) : T);
     } catch (__error:Dynamic) {
       return cast fallback;
     }
@@ -329,14 +330,14 @@ class Storage {
   }
 
   public static function getStorageKeys():Array<String> {
-    return cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).keys();
     return cast null;
   }
 
   public static function getStorageNumber(key:String):Null<Float> {
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
+    var raw:Null<String> = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    raw = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key);
     if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast null; }
     n = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([raw] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([n] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast n : Dynamic));
@@ -344,14 +345,14 @@ class Storage {
   }
 
   public static function getStorageNumberOr(key:String, fallback:Float):Float {
-    return cast _Runtime.coalesce(_Runtime.callValue(getStorageNumber, cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
+    return cast _Runtime.coalesce((cast getStorageNumber((cast key : String)) : Float), function():Dynamic return cast fallback);
     return cast null;
   }
 
   public static function getStorageQuotaEstimate():flighthq._internal._Promise<Null<StorageQuota>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var storage:Dynamic = cast _Runtime.UNDEFINED;
+        var storage:flighthq._internal._Intersection2<flighthq._internal.dom.StorageManager, { @:optional var estimate:Null<Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>>; }> = cast _Runtime.UNDEFINED;
         var __flowBranch13:Dynamic;
         if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
           __flowBranch13 = flighthq._internal._Async.protect(function():Dynamic {
@@ -361,7 +362,7 @@ class Storage {
           __flowBranch13 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
-          storage = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic), 'storage');
+          storage = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var storage:{ @:optional var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Float; @:optional var quota:Float; }>; }; }>), 'storage');
           var __flowBranch15:Dynamic;
           if ((cast _Runtime.strictEquals(({ final __hostType14 = storage; __hostType14 == null ? _Runtime.UNDEFINED : (cast __hostType14 : flighthq._internal.dom.StorageManager).estimate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
@@ -372,9 +373,9 @@ class Storage {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              var estimate:Dynamic = cast _Runtime.UNDEFINED;
-              var used:Dynamic = cast _Runtime.UNDEFINED;
-              var available:Dynamic = cast _Runtime.UNDEFINED;
+              var estimate:flighthq._internal.dom.StorageEstimate = cast _Runtime.UNDEFINED;
+              var used:Float = cast _Runtime.UNDEFINED;
+              var available:Float = cast _Runtime.UNDEFINED;
               return flighthq._internal._Async.flatMap((cast storage : flighthq._internal.dom.StorageManager).estimate(), function(__awaitValue16:Dynamic):Dynamic {
                 estimate = __awaitValue16;
                 used = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast estimate : flighthq._internal.dom.StorageEstimate).usage), 'number') : Bool) ? (cast (cast estimate : flighthq._internal.dom.StorageEstimate).usage : Dynamic) : (cast -1.0 : Dynamic));
@@ -411,37 +412,37 @@ class Storage {
   }
 
   public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([_Runtime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>)), null);
+    return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast Storage._namespacedKey__storage((cast namespace : StorageNamespace), (cast key : String)) : String)), null);
     return cast null;
   }
 
   public static function hasStorageItem(key:String):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), null);
+    return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key), null);
     return cast null;
   }
 
   public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
-    var versionKey:Dynamic = cast _Runtime.UNDEFINED;
-    var raw:Dynamic = cast _Runtime.UNDEFINED;
-    var currentVersion:Dynamic = cast _Runtime.UNDEFINED;
-    var sorted:Dynamic = cast _Runtime.UNDEFINED;
-    var newVersion:Dynamic = cast _Runtime.UNDEFINED;
+    var versionKey:String = cast _Runtime.UNDEFINED;
+    var raw:Null<String> = cast _Runtime.UNDEFINED;
+    var currentVersion:Float = cast _Runtime.UNDEFINED;
+    var sorted:Array<StorageMigration> = cast _Runtime.UNDEFINED;
+    var newVersion:Float = cast _Runtime.UNDEFINED;
     versionKey = '__flight_storage_version';
-    raw = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast _Runtime.callValue(getNamespacedStorageItem, cast ([namespace, versionKey] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(getStorageItem, cast ([versionKey] : Array<Dynamic>)) : Dynamic));
+    raw = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast getNamespacedStorageItem((cast namespace : StorageNamespace), (cast versionKey : String)) : Null<String>) : Dynamic) : (cast (cast getStorageItem((cast versionKey : String)) : Null<String>) : Dynamic));
     currentVersion = ((cast !_Runtime.strictEquals(raw, null) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([raw, 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:Dynamic, b:Dynamic) return (a.version - b.version));
+    sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:StorageMigration, b:StorageMigration) return (a.version - b.version));
     newVersion = currentVersion;
     for (migration in _Runtime.iterable(sorted)) {
       if ((cast ((cast migration.version : Float) <= (cast currentVersion : Float)) : Bool)) { continue; }
       try {
-        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct19 = namespace; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
+        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct19 = namespace; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : flighthq.types.Storage.StorageNamespace).prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
       } catch (__error:Dynamic) {
         return cast -1.0;
       }
       (newVersion = cast (migration.version : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(newVersion, currentVersion) : Bool)) {
-      var stored:Dynamic = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast _Runtime.callValue(setNamespacedStorageItem, cast ([namespace, versionKey, Std.string(newVersion)] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callValue(setStorageItem, cast ([versionKey, Std.string(newVersion)] : Array<Dynamic>)) : Dynamic));
+      var stored:Bool = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast setNamespacedStorageItem((cast namespace : StorageNamespace), (cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic) : (cast (cast setStorageItem((cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic));
       if ((cast !(cast stored : Bool) : Bool)) { return cast -1.0; }
     }
     return cast newVersion;
@@ -449,98 +450,98 @@ class Storage {
   }
 
   public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'removeItem', cast ([_Runtime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).removeItem((cast Storage._namespacedKey__storage((cast namespace : StorageNamespace), (cast key : String)) : String));
     return cast null;
   }
 
   public static function removeStorageItem(key:String):Bool {
-    var oldValue:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    result = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'removeItem', cast ([key] : Array<Dynamic>));
+    var oldValue:Null<String> = cast _Runtime.UNDEFINED;
+    var result:Bool = cast _Runtime.UNDEFINED;
+    oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key) : Dynamic) : (cast null : Dynamic));
+    result = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).removeItem(key);
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast result : Bool)) : Bool)) {
-      _Runtime.callValue(Storage._emitStorageChange__storage, cast ([{ key: key, oldValue: oldValue, newValue: null }] : Array<Dynamic>));
+      Storage._emitStorageChange__storage((cast { key: key, oldValue: oldValue, newValue: null } : StorageChange));
     }
     return cast result;
     return cast null;
   }
 
   public static function removeStorageItems(keys:Array<String>):Bool {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var success:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var success:Bool = cast _Runtime.UNDEFINED;
+    backend = (cast getStorageBackend() : StorageBackend);
     success = true;
     for (key in _Runtime.iterable(keys)) {
-      if ((cast !(cast _Runtime.callProperty(backend, 'removeItem', cast ([key] : Array<Dynamic>)) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
+      if ((cast !(cast (cast backend : StorageBackend).removeItem(key) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
     }
     return cast success;
     return cast null;
   }
 
   public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
-    return cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'setItem', cast ([_Runtime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>)), value] : Array<Dynamic>));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem((cast Storage._namespacedKey__storage((cast namespace : StorageNamespace), (cast key : String)) : String), value);
     return cast null;
   }
 
   @:noCompletion
   public static function setStorageBackend(backend:Null<StorageBackend>):Void {
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast !_Runtime.strictEquals(Storage._crossTabUnsubscribe__storage, null) : Bool)) : Bool)) {
-      _Runtime.callValue(Storage._crossTabUnsubscribe__storage, cast ([] : Array<Dynamic>));
+      (cast Storage._crossTabUnsubscribe__storage : Void->Void)();
       (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));
     }
     (Storage._backend__storage = cast (backend : Dynamic));
     if ((cast Storage._signalsActive__storage : Bool)) {
-      var b:Dynamic = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(b, 'subscribeChanges'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (Storage._crossTabUnsubscribe__storage = cast (_Runtime.callProperty(b, 'subscribeChanges', cast ([function(change:Dynamic) {
-          _Runtime.callValue(Storage._emitStorageChange__storage, cast ([change] : Array<Dynamic>));
-        }] : Array<Dynamic>)) : Dynamic));
+      var b:StorageBackend = (cast getStorageBackend() : StorageBackend);
+      if ((cast !_Runtime.strictEquals((cast b : StorageBackend).subscribeChanges, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        (Storage._crossTabUnsubscribe__storage = cast ((cast b : StorageBackend).subscribeChanges(function(change:StorageChange):Void {
+          Storage._emitStorageChange__storage((cast change : StorageChange));
+        }) : Dynamic));
       }
     }
   }
 
   public static function setStorageBoolean(key:String, value:Bool):Bool {
-    return cast _Runtime.callValue(setStorageItem, cast ([key, ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))] : Array<Dynamic>));
+    return cast (cast setStorageItem((cast key : String), (cast ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic)) : String)) : Bool);
     return cast null;
   }
 
   public static function setStorageItem(key:String, value:String):Bool {
-    var oldValue:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
-    oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-    result = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'setItem', cast ([key, value] : Array<Dynamic>));
+    var oldValue:Null<String> = cast _Runtime.UNDEFINED;
+    var result:Bool = cast _Runtime.UNDEFINED;
+    oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem(key) : Dynamic) : (cast null : Dynamic));
+    result = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem(key, value);
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast result : Bool)) : Bool)) {
-      _Runtime.callValue(Storage._emitStorageChange__storage, cast ([{ key: key, oldValue: oldValue, newValue: value }] : Array<Dynamic>));
+      Storage._emitStorageChange__storage((cast { key: key, oldValue: oldValue, newValue: value } : StorageChange));
     }
     return cast result;
     return cast null;
   }
 
-  public static function setStorageItems(record:Dynamic):Bool {
-    var backend:Dynamic = cast _Runtime.UNDEFINED;
-    var success:Dynamic = cast _Runtime.UNDEFINED;
-    backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
+  public static function setStorageItems(record:flighthq._internal._Record<String, String>):Bool {
+    var backend:StorageBackend = cast _Runtime.UNDEFINED;
+    var success:Bool = cast _Runtime.UNDEFINED;
+    backend = (cast getStorageBackend() : StorageBackend);
     success = true;
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(record))) {
-      if ((cast !(cast _Runtime.callProperty(backend, 'setItem', cast ([key, _Runtime.getIndex(record, key)] : Array<Dynamic>)) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
+      if ((cast !(cast (cast backend : StorageBackend).setItem(key, _Runtime.getIndex(record, key)) : Bool) : Bool)) { (success = cast (false : Dynamic)); }
     }
     return cast success;
     return cast null;
   }
 
-  public static function setStorageJSON<T>(key:String, value:Dynamic):Bool {
+  public static function setStorageJSON<T>(key:String, value:T):Bool {
     var raw:String = cast _Runtime.UNDEFINED;
     try {
       (raw = cast (_Runtime.jsonStringify(value) : Dynamic));
     } catch (__error:Dynamic) {
       return cast false;
     }
-    return cast _Runtime.callValue(setStorageItem, cast ([key, raw] : Array<Dynamic>));
+    return cast (cast setStorageItem((cast key : String), (cast raw : String)) : Bool);
     return cast null;
   }
 
   public static function setStorageNumber(key:String, value:Float):Bool {
-    return cast _Runtime.callValue(setStorageItem, cast ([key, Std.string(value)] : Array<Dynamic>));
+    return cast (cast setStorageItem((cast key : String), (cast Std.string(value) : String)) : Bool);
     return cast null;
   }
 }

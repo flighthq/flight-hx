@@ -7,7 +7,10 @@ import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.MotionBlurEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -15,53 +18,53 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuMotionBlurEffect {
   @:noCompletion
   public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<flighthq._internal.dom.GPUTexture>, effect:MotionBlurEffect):Void {
-    var intensity:Dynamic = cast _Runtime.UNDEFINED;
-    var samples:Dynamic = cast _Runtime.UNDEFINED;
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var velocitySource:Dynamic = cast _Runtime.UNDEFINED;
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var samples:Float = cast _Runtime.UNDEFINED;
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    var velocitySource:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    pipeline = _Runtime.callValue(WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect, cast ([state] : Array<Dynamic>));
+    pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
-      _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+      drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 0.0);
-      }] : Array<Dynamic>));
+      }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
       return;
     }
     velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
-    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), velocitySource, (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast velocitySource : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 1.0);
-    }] : Array<Dynamic>));
+    }, cast ([__unused4] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyMotionBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect)] : Array<Dynamic>));
+  public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyMotionBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'sceneVelocityTexture') : Null<flighthq._internal.dom.GPUTexture>), (cast (cast effect : MotionBlurEffect) : MotionBlurEffect));
   };
 
   public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'MotionBlurEffect', defaultWgpuMotionBlurEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'MotionBlurEffect' : String), (cast defaultWgpuMotionBlurEffectRunner : WgpuRenderEffectRunner));
   }
 
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).get(state));
+    var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast (_Runtime.callValue(createWgpuDualSourceEffectPipeline, cast ([state, WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect, 'replace'] : Array<Dynamic>)) : Dynamic));
-      ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap).set(state, pipeline));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state : WgpuRenderState), (cast WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect : String), 'replace') : Null<WgpuEffectPipeline>) : Dynamic));
+      ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, pipeline));
     }
     return cast pipeline;
     return cast null;
   }
 
-  public static final _motionBlurPipelines__wgpuMotionBlurEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _motionBlurPipelines__wgpuMotionBlurEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_samples : f32,\n  u_resolution : vec2f,\n  u_hasVelocity : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex0 : texture_2d<f32>;\n@group(1) @binding(1) var smp0 : sampler;\n@group(2) @binding(0) var tex1 : texture_2d<f32>;\n@group(2) @binding(1) var smp1 : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let base = textureSampleLevel(tex0, smp0, uv, 0.0);\n  if (uni.u_hasVelocity < 0.5) {\n    // Sentinel path: no velocity buffer written — passthrough copy.\n    return base;\n  }\n  // Velocity decode: rgba16f buffer stores screen-space velocity in pixels in the RG channels. Convert\n  // to a UV-space smear vector via u_resolution and scale by intensity.\n  let velocityPixels = textureSampleLevel(tex1, smp1, uv, 0.0).rg;\n  let smear = (velocityPixels / uni.u_resolution) * uni.u_intensity;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    // Center the taps on the fragment: t in [-0.5, 0.5] spreads the accumulation along the motion vector.\n    let t = select(0.0, (f32(i) / (count - 1.0)) - 0.5, count > 1.0);\n    let p = uv + smear * t;\n    sum = sum + textureSampleLevel(tex0, smp0, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
+  public static final MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_samples : f32,\n  u_resolution : vec2f,\n  u_hasVelocity : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex0 : texture_2d<f32>;\n@group(1) @binding(1) var smp0 : sampler;\n@group(2) @binding(0) var tex1 : texture_2d<f32>;\n@group(2) @binding(1) var smp1 : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let base = textureSampleLevel(tex0, smp0, uv, 0.0);\n  if (uni.u_hasVelocity < 0.5) {\n    // Sentinel path: no velocity buffer written — passthrough copy.\n    return base;\n  }\n  // Velocity decode: rgba16f buffer stores screen-space velocity in pixels in the RG channels. Convert\n  // to a UV-space smear vector via u_resolution and scale by intensity.\n  let velocityPixels = textureSampleLevel(tex1, smp1, uv, 0.0).rg;\n  let smear = (velocityPixels / uni.u_resolution) * uni.u_intensity;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    // Center the taps on the fragment: t in [-0.5, 0.5] spreads the accumulation along the motion vector.\n    let t = select(0.0, (f32(i) / (count - 1.0)) - 0.5, count > 1.0);\n    let p = uv + smear * t;\n    sum = sum + textureSampleLevel(tex0, smp0, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
 }

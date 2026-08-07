@@ -4,17 +4,19 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlScene3DForwardLightList;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DForwardLightSelectionExplanation;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.SpotLight;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 class ExplainGlScene3DForwardLightSelection {
   @:noCompletion
   public static function explainGlScene3DForwardLightSelection(lights:Scene3DLightsLike, ?selection:GlScene3DForwardLightList):Scene3DForwardLightSelectionExplanation {
-    var pointLightCount:Dynamic = cast _Runtime.UNDEFINED;
-    var spotLightCount:Dynamic = cast _Runtime.UNDEFINED;
-    var selectionPrepared:Dynamic = cast _Runtime.UNDEFINED;
+    var pointLightCount:Float = cast _Runtime.UNDEFINED;
+    var spotLightCount:Float = cast _Runtime.UNDEFINED;
+    var selectionPrepared:Bool = cast _Runtime.UNDEFINED;
     pointLightCount = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0);
     spotLightCount = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0);
     selectionPrepared = !_Runtime.strictEquals(selection, _Runtime.field(_Runtime, 'UNDEFINED'));

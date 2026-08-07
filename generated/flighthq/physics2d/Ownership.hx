@@ -9,22 +9,22 @@ import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
 
 class Ownership {
-  public static final physics2DBodyOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final physics2DBodyOwners:flighthq._internal._WeakMap<RigidBody2D, Physics2DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final physics2DColliderOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final physics2DColliderOwners:flighthq._internal._WeakMap<Physics2DCollider, RigidBody2D> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final physics2DJointOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final physics2DJointOwners:flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final steppingPhysics2DWorlds:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+  public static final steppingPhysics2DWorlds:flighthq._internal._WeakSet<Physics2DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
   public static function assertPhysics2DBodyNotStepping(body:RigidBody2D):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    world = ((cast physics2DBodyOwners : flighthq._internal._WeakMap).get((cast body : RigidBody2D)));
-    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callValue(assertPhysics2DWorldNotStepping, cast ([world] : Array<Dynamic>)); }
+    var world:Null<Physics2DWorld> = cast _Runtime.UNDEFINED;
+    world = ((cast physics2DBodyOwners : flighthq._internal._WeakMap<RigidBody2D, Physics2DWorld>).get((cast body : RigidBody2D)));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { assertPhysics2DWorldNotStepping((cast world : Physics2DWorld)); }
   }
 
   public static function assertPhysics2DWorldNotStepping(world:Physics2DWorld):Void {
-    if ((cast ((cast steppingPhysics2DWorlds : flighthq._internal._WeakSet).has((cast world : Physics2DWorld))) : Bool)) {
+    if ((cast ((cast steppingPhysics2DWorlds : flighthq._internal._WeakSet<Physics2DWorld>).has((cast world : Physics2DWorld))) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Cannot mutate a physics world while it is stepping'));
     }
   }

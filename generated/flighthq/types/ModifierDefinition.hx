@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ModifierDefinition = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Dynamic; };
+typedef ModifierDefinition = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Modifier->String; };

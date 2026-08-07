@@ -6,24 +6,30 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.createBitmapFont;
 import flighthq.texture.Texture.createTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontGlyphData;
 import flighthq.types.GlyphSource.GlyphAtlas;
+import flighthq.types.GlyphSource.GlyphAtlasRuntime;
+import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.TextureAtlas;
 
 class BitmapFontFromGlyphAtlas {
   public static function createBitmapFontFromGlyphAtlas(atlas:GlyphAtlas):BitmapFont {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     var glyphs:Array<BitmapFontGlyphData> = cast _Runtime.UNDEFINED;
-    var page:Dynamic = cast _Runtime.UNDEFINED;
+    var page:TextureAtlas = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     glyphs = cast ([] : Array<Dynamic>);
     for (__iteration0 in _Runtime.iterable(runtime.entries)) {
-      var codepoint:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var entry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var codepoint:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var entry:GlyphEntry = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       _Runtime.callProperty(glyphs, 'push', cast ([{ advance: entry.advance, bearingX: entry.bearingX, bearingY: entry.bearingY, codepoint: codepoint, height: entry.height, page: 0.0, width: entry.width, x: entry.x, y: entry.y }] : Array<Dynamic>));
     }
-    page = _Runtime.callValue(createTextureAtlas, cast ([{ texture: _Runtime.callValue(createTexture, cast ([{ source: runtime.bitmap }] : Array<Dynamic>)) }] : Array<Dynamic>));
-    return cast _Runtime.callValue(createBitmapFont, cast ([{ glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) }] : Array<Dynamic>));
+    page = (cast createTextureAtlas((cast { texture: (cast createTexture({ source: runtime.bitmap }) : Null<Texture2D>) } : Null<flighthq._internal._Any>)) : TextureAtlas);
+    return cast (cast createBitmapFont({ glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) }) : BitmapFont);
     return cast null;
   }
 }

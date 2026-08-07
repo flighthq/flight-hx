@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 
 class _EnvReflectModifierValues {
-  public static final EnvReflectModifierKind:Dynamic = 'EnvReflectModifier';
+  public static final EnvReflectModifierKind:String = 'EnvReflectModifier';
 }

@@ -7,6 +7,7 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
@@ -14,24 +15,24 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class GlMeshMaterialRegistry {
   @:noCompletion
   public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
-    ((cast _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry') : flighthq._internal._Map).set(kind, renderer));
+    ((cast (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).set(kind, renderer));
   }
 
   @:noCompletion
   public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
-    var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
+    var registry:flighthq._internal._Map<String, GlMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
+    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var renderer:Dynamic = ((cast registry : flighthq._internal._Map).get(_Runtime.field(material, 'kind')));
+      var renderer:Null<GlMeshMaterialRenderer> = ((cast registry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(_Runtime.field(material, 'kind')));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }
     }
-    return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map).get(StandardMaterialKindValue)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast registry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(StandardMaterialKindValue)), function():Dynamic return cast null);
     return cast null;
   }
 }

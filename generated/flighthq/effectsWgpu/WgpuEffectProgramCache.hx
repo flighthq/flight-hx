@@ -10,21 +10,21 @@ import flighthq.types.WgpuRenderState;
 class WgpuEffectProgramCache {
   @:noCompletion
   public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
-    var cache:Dynamic = cast _Runtime.UNDEFINED;
-    var existing:Dynamic = cast _Runtime.UNDEFINED;
-    var compiled:Dynamic = cast _Runtime.UNDEFINED;
-    cache = ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).get(state));
+    var cache:Null<flighthq._internal._Map<String, WgpuEffectPipeline>> = cast _Runtime.UNDEFINED;
+    var existing:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    var compiled:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    cache = ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).get(state));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).set(state, cache));
+      ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).set(state, cache));
     }
-    existing = ((cast cache : flighthq._internal._Map).get(key));
+    existing = ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    compiled = _Runtime.callValue(createWgpuEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
-    ((cast cache : flighthq._internal._Map).set(key, compiled));
+    compiled = (cast createWgpuEffectPipeline((cast state : WgpuRenderState), (cast fragmentWGSL : String), blend) : WgpuEffectPipeline);
+    ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).set(key, compiled));
     return cast compiled;
     return cast null;
   }
 
-  public static final _pipelines__wgpuEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _pipelines__wgpuEffectProgramCache:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

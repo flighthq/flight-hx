@@ -8,17 +8,17 @@ import flighthq.types.Path;
 import flighthq.types.PathMesh;
 
 class TessellatePath {
-  public static function tessellatePath(path:Path, tolerance:Dynamic = 0.25):PathMesh {
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
+  public static function tessellatePath(path:Path, tolerance:Float = 0.25):PathMesh {
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
+    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     vertices = cast ([] : Array<Dynamic>);
     indices = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        _Runtime.callValue(TessellatePath.tessellateContour__tessellatePath, cast ([flighthq._internal._StaticIndex.readArray(contours, i), vertices, indices] : Array<Dynamic>));
+        TessellatePath.tessellateContour__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contours, i) : Array<Float>), (cast vertices : Array<Float>), (cast indices : Array<Float>));
         i++;
       }
     }
@@ -28,18 +28,18 @@ class TessellatePath {
 
   public static function tessellateContour__tessellatePath(source:Array<Float>, vertices:Array<Float>, indices:Array<Float>):Void {
     var pts:Array<Float> = cast _Runtime.UNDEFINED;
-    var contour:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var base:Dynamic = cast _Runtime.UNDEFINED;
-    var twiceArea:Dynamic = cast _Runtime.UNDEFINED;
+    var contour:Array<Float> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var base:Float = cast _Runtime.UNDEFINED;
+    var twiceArea:Float = cast _Runtime.UNDEFINED;
     var ring:Array<Float> = cast _Runtime.UNDEFINED;
-    var guard:Dynamic = cast _Runtime.UNDEFINED;
+    var guard:Float = cast _Runtime.UNDEFINED;
     pts = cast ([] : Array<Dynamic>);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        var x:Dynamic = flighthq._internal._StaticIndex.readArray(source, i);
-        var y:Dynamic = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readArray(source, i);
+        var y:Float = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
         if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 2.0)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         _Runtime.pushMany(pts, cast ([x, y] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
@@ -53,7 +53,7 @@ class TessellatePath {
     if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { return; }
     base = (_Runtime.toInt32(_Runtime.field(vertices, 'length')) >> 1);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         i++;
@@ -61,9 +61,9 @@ class TessellatePath {
     }
     twiceArea = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var j:Dynamic = _Runtime.fmod((i + 1.0), count);
+        var j:Float = _Runtime.fmod((i + 1.0), count);
         (twiceArea = cast ((twiceArea + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0))) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))))) : Dynamic));
         i++;
       }
@@ -71,7 +71,7 @@ class TessellatePath {
     ring = cast ([] : Array<Dynamic>);
     if ((cast ((cast twiceArea : Float) < (cast 0.0 : Float)) : Bool)) {
       {
-        var i:Dynamic = (count - 1.0);
+        var i:Float = (count - 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           _Runtime.callProperty(ring, 'push', cast ([i] : Array<Dynamic>));
           i--;
@@ -79,7 +79,7 @@ class TessellatePath {
       }
     } else {
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           _Runtime.callProperty(ring, 'push', cast ([i] : Array<Dynamic>));
           i++;
@@ -88,14 +88,14 @@ class TessellatePath {
     }
     guard = _Runtime.multiplyNumbers(_Runtime.field(ring, 'length'), _Runtime.field(ring, 'length'));
     while ((cast ((cast ((cast _Runtime.field(ring, 'length') : Float) > (cast 3.0 : Float)) : Bool) && (cast ((cast guard-- : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var clipped:Dynamic = false;
+      var clipped:Bool = false;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          var a:Dynamic = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
-          var b:Dynamic = flighthq._internal._StaticIndex.readArray(ring, i);
-          var c:Dynamic = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
-          if ((cast _Runtime.callValue(TessellatePath.isEar__tessellatePath, cast ([contour, ring, a, b, c] : Array<Dynamic>)) : Bool)) {
+          var a:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
+          var b:Float = flighthq._internal._StaticIndex.readArray(ring, i);
+          var c:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
+          if ((cast (cast TessellatePath.isEar__tessellatePath((cast contour : Array<Float>), (cast ring : Array<Float>), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
             (clipped = cast (true : Dynamic));
@@ -112,12 +112,12 @@ class TessellatePath {
   }
 
   public static function isEar__tessellatePath(contour:Array<Float>, ring:Array<Float>, a:Float, b:Float, c:Float):Bool {
-    var ax:Dynamic = cast _Runtime.UNDEFINED;
-    var ay:Dynamic = cast _Runtime.UNDEFINED;
-    var bx:Dynamic = cast _Runtime.UNDEFINED;
-    var by:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
     ax = flighthq._internal._StaticIndex.readArray(contour, (a * 2.0));
     ay = flighthq._internal._StaticIndex.readArray(contour, ((a * 2.0) + 1.0));
     bx = flighthq._internal._StaticIndex.readArray(contour, (b * 2.0));
@@ -126,11 +126,11 @@ class TessellatePath {
     cy = flighthq._internal._StaticIndex.readArray(contour, ((c * 2.0) + 1.0));
     if ((cast ((cast (((bx - ax) * (cy - by)) - ((by - ay) * (cx - bx))) : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-        var p:Dynamic = flighthq._internal._StaticIndex.readArray(ring, i);
+        var p:Float = flighthq._internal._StaticIndex.readArray(ring, i);
         if ((cast ((cast ((cast _Runtime.strictEquals(p, a) : Bool) || (cast _Runtime.strictEquals(p, b) : Bool)) : Bool) || (cast _Runtime.strictEquals(p, c) : Bool)) : Bool)) { i++; continue; }
-        if ((cast _Runtime.callValue(TessellatePath.isPointInTriangle__tessellatePath, cast ([flighthq._internal._StaticIndex.readArray(contour, (p * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((p * 2.0) + 1.0)), ax, ay, bx, by, cx, cy] : Array<Dynamic>)) : Bool)) { return cast false; }
+        if ((cast (cast TessellatePath.isPointInTriangle__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contour, (p * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((p * 2.0) + 1.0)) : Float), (cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast cx : Float), (cast cy : Float)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -139,11 +139,11 @@ class TessellatePath {
   }
 
   public static function isPointInTriangle__tessellatePath(px:Float, py:Float, ax:Float, ay:Float, bx:Float, by:Float, cx:Float, cy:Float):Bool {
-    var d1:Dynamic = cast _Runtime.UNDEFINED;
-    var d2:Dynamic = cast _Runtime.UNDEFINED;
-    var d3:Dynamic = cast _Runtime.UNDEFINED;
-    var hasNegative:Dynamic = cast _Runtime.UNDEFINED;
-    var hasPositive:Dynamic = cast _Runtime.UNDEFINED;
+    var d1:Float = cast _Runtime.UNDEFINED;
+    var d2:Float = cast _Runtime.UNDEFINED;
+    var d3:Float = cast _Runtime.UNDEFINED;
+    var hasNegative:Bool = cast _Runtime.UNDEFINED;
+    var hasPositive:Bool = cast _Runtime.UNDEFINED;
     d1 = (((px - bx) * (ay - by)) - ((ax - bx) * (py - by)));
     d2 = (((px - cx) * (by - cy)) - ((bx - cx) * (py - cy)));
     d3 = (((px - ax) * (cy - ay)) - ((cx - ax) * (py - ay)));

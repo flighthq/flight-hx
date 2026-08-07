@@ -14,6 +14,7 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node3D;
+import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.NodeSignals;
 import flighthq.types.Types.BillboardKind;
 import flighthq.types._internal._BillboardValues.BillboardKind;
@@ -21,8 +22,8 @@ import flighthq.types._internal._BillboardValues.BillboardKind;
 class Billboard {
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
-    var billboard:Dynamic = cast _Runtime.UNDEFINED;
-    billboard = (cast _Runtime.callValue(createNode3D, cast ([kind, obj] : Array<Dynamic>)) : flighthq.types.Billboard);
+    var billboard:flighthq.types.Billboard = cast _Runtime.UNDEFINED;
+    billboard = (cast (cast createNode3D((cast kind : String), (cast obj : Null<flighthq._internal._Any>)) : flighthq.types.Billboard) : flighthq.types.Billboard);
     (billboard.geometry = cast (geometry : Dynamic));
     (billboard.materials = cast (materials : Dynamic));
     (billboard.mode = cast (mode : Dynamic));
@@ -31,23 +32,23 @@ class Billboard {
   }
 
   public static function enableBillboardSignals(source:flighthq.types.Billboard):NodeSignals {
-    return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast enableNodeSignals(source) : NodeSignals);
     return cast null;
   }
 
   @:noCompletion
   public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
-    return cast _Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>));
+    return cast (cast getNode3DRuntime((cast source : Node3D)) : Node3DRuntime);
     return cast null;
   }
 
   public static function getBillboardSignals(source:flighthq.types.Billboard):Null<NodeSignals> {
-    return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast getNodeSignals(source) : Null<NodeSignals>);
     return cast null;
   }
 
   public static function isBillboard(source:Node3D):Bool {
-    var candidate:Dynamic = cast _Runtime.UNDEFINED;
+    var candidate:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     candidate = (cast source : Dynamic);
     return cast ((cast !_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null) : Bool) && (cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null) : Bool));
     return cast null;

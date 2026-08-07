@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextLayout.TextLayoutResult;
 
-typedef GlRichTextOverlay = Dynamic;
+typedef GlRichTextOverlay = flighthq._internal.dom.CanvasRenderingContext2D->RichText->TextLayoutResult->Float->Float->String->Void;

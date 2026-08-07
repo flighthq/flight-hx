@@ -8,38 +8,41 @@ import flighthq.scene2dCanvas.CanvasTextureWindowSource.resolveCanvasTextureWind
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Sampler;
+import flighthq.types.Sampler.TextureFilter;
+import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.ShapeCommand.GradientType;
 import flighthq.types.ShapeCommand.InterpolationMethod;
 import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.Texture;
 
 class CanvasFillPattern {
-  public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
+  public static final GRADIENT_HALF__canvasFillPattern:Float = 819.2;
 
   @:noCompletion
-  public static function createBitmapPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Dynamic = true):Null<flighthq._internal.dom.CanvasPattern> {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var smooth:Dynamic = cast _Runtime.UNDEFINED;
-    source = _Runtime.callValue(resolveCanvasTextureWindowSource, cast ([resolvers, texture] : Array<Dynamic>));
+  public static function createBitmapPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Bool = true):Null<flighthq._internal.dom.CanvasPattern> {
+    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var smooth:Bool = cast _Runtime.UNDEFINED;
+    source = (cast resolveCanvasTextureWindowSource((cast resolvers : CanvasTextureResolvers), (cast texture : Texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    smooth = ((cast allowSmoothing : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool));
-    _Runtime.callValue(CanvasFillPattern.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
-    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, _Runtime.callValue(CanvasFillPattern.getCanvasPatternRepetition__canvasFillPattern, cast ([texture] : Array<Dynamic>))] : Array<Dynamic>));
+    smooth = ((cast allowSmoothing : Bool) && (cast !(cast (cast (cast texture : { var sampler:Sampler; }).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
+    CanvasFillPattern.setSmoothing__canvasFillPattern((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast smooth : Bool));
+    return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, (cast CanvasFillPattern.getCanvasPatternRepetition__canvasFillPattern((cast texture : Texture)) : Null<String>)] : Array<Dynamic>));
     return cast null;
   }
 
   @:noCompletion
-  public static function createGradientPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
-    var mat:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createGradientPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasPattern, flighthq._internal.dom.CanvasGradient>> {
+    var mat:Matrix = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast CanvasFillPattern.IDENTITY__canvasFillPattern);
     if ((cast _Runtime.strictEquals(gradientType, 'radial') : Bool)) {
-      return cast _Runtime.callValue(CanvasFillPattern.createRadialGradient__canvasFillPattern, cast ([context, colors, alphas, ratios, mat, focalPointRatio] : Array<Dynamic>));
+      return cast (cast CanvasFillPattern.createRadialGradient__canvasFillPattern((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>), (cast mat : MatrixLike), (cast focalPointRatio : Float)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
     }
-    return cast _Runtime.callValue(CanvasFillPattern.createLinearGradient__canvasFillPattern, cast ([context, colors, alphas, ratios, mat, spreadMethod] : Array<Dynamic>));
+    return cast (cast CanvasFillPattern.createLinearGradient__canvasFillPattern((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>), (cast mat : MatrixLike), (cast spreadMethod : SpreadMethod)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
     return cast null;
   }
 
-  public static final IDENTITY__canvasFillPattern:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final IDENTITY__canvasFillPattern:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
 
   public static function tp__canvasFillPattern(m:MatrixLike, x:Float, y:Float):Array<Float> {
     return cast cast ([(((m.a * x) + (m.c * y)) + m.tx), (((m.b * x) + (m.d * y)) + m.ty)] : Array<Dynamic>);
@@ -48,80 +51,80 @@ class CanvasFillPattern {
 
   public static function addColorStops__canvasFillPattern(gradient:flighthq._internal.dom.CanvasGradient, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-        var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)));
-        gradient.addColorStop(ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, i), flighthq._internal._StaticIndex.readArray(alphas, i)] : Array<Dynamic>)));
+        var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)));
+        gradient.addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
         i++;
       }
     }
   }
 
   public static function createRadialGradient__canvasFillPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, focalPointRatio:Float):flighthq._internal.dom.CanvasGradient {
-    var clampedFocal:Dynamic = cast _Runtime.UNDEFINED;
+    var clampedFocal:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var fx:Dynamic = cast _Runtime.UNDEFINED;
-    var fy:Dynamic = cast _Runtime.UNDEFINED;
+    var fx:Float = cast _Runtime.UNDEFINED;
+    var fy:Float = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var gradient:Dynamic = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var gradient:flighthq._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
     clampedFocal = HxMath.max(-1.0, HxMath.min(1.0, focalPointRatio));
-    __destructure0 = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, (clampedFocal * CanvasFillPattern.GRADIENT_HALF__canvasFillPattern), 0.0] : Array<Dynamic>));
+    __destructure0 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast (clampedFocal * CanvasFillPattern.GRADIENT_HALF__canvasFillPattern) : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
     fx = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     fy = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
-    __destructure1 = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, 0.0, 0.0] : Array<Dynamic>));
+    __destructure1 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast 0.0 : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
     cx = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     cy = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
-    __destructure2 = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
+    __destructure2 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast CanvasFillPattern.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
     ex = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     ey = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     dx = (ex - cx);
     dy = (ey - cy);
     radius = HxMath.sqrt(((dx * dx) + (dy * dy)));
     gradient = flighthq._internal.backend.Canvas2dBackend.call(context, 'createRadialGradient', cast ([fx, fy, 0.0, cx, cy, radius] : Array<Dynamic>));
-    _Runtime.callValue(CanvasFillPattern.addColorStops__canvasFillPattern, cast ([gradient, colors, alphas, ratios] : Array<Dynamic>));
+    CanvasFillPattern.addColorStops__canvasFillPattern((cast gradient : flighthq._internal.dom.CanvasGradient), (cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>));
     return cast gradient;
     return cast null;
   }
 
-  public static function createLinearGradient__canvasFillPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, spreadMethod:SpreadMethod):Null<Dynamic> {
-    var STEPS:Dynamic = cast _Runtime.UNDEFINED;
-    var step:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createLinearGradient__canvasFillPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, spreadMethod:SpreadMethod):Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>> {
+    var STEPS:Float = cast _Runtime.UNDEFINED;
+    var step:Float = cast _Runtime.UNDEFINED;
     var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
     var __destructure6:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var offscreen:Dynamic = cast _Runtime.UNDEFINED;
-    var octx:Dynamic = cast _Runtime.UNDEFINED;
-    var tiledGradient:Dynamic = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var offscreen:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    var octx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
+    var tiledGradient:flighthq._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(spreadMethod, 'pad') : Bool)) {
-      var __destructure3:Dynamic = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, -CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
-      var x1:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
-      var y1:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
-      var __destructure4:Dynamic = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
-      var x2:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
-      var y2:Dynamic = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
-      var gradient:Dynamic = flighthq._internal.backend.Canvas2dBackend.call(context, 'createLinearGradient', cast ([x1, y1, x2, y2] : Array<Dynamic>));
-      _Runtime.callValue(CanvasFillPattern.addColorStops__canvasFillPattern, cast ([gradient, colors, alphas, ratios] : Array<Dynamic>));
+      var __destructure3 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast -CanvasFillPattern.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
+      var x1:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
+      var y1:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
+      var __destructure4 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast CanvasFillPattern.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
+      var x2:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
+      var y2:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
+      var gradient:flighthq._internal.dom.CanvasGradient = flighthq._internal.backend.Canvas2dBackend.call(context, 'createLinearGradient', cast ([x1, y1, x2, y2] : Array<Dynamic>));
+      CanvasFillPattern.addColorStops__canvasFillPattern((cast gradient : flighthq._internal.dom.CanvasGradient), (cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>));
       return cast gradient;
     }
     STEPS = 25.0;
     step = (1.0 / STEPS);
-    __destructure5 = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, -CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
+    __destructure5 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast -CanvasFillPattern.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
     x1 = flighthq._internal._StaticIndex.readArray(__destructure5, 0.0);
     y1 = flighthq._internal._StaticIndex.readArray(__destructure5, 1.0);
-    __destructure6 = _Runtime.callValue(CanvasFillPattern.tp__canvasFillPattern, cast ([m, CanvasFillPattern.GRADIENT_HALF__canvasFillPattern, 0.0] : Array<Dynamic>));
+    __destructure6 = (cast CanvasFillPattern.tp__canvasFillPattern((cast m : MatrixLike), (cast CanvasFillPattern.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<flighthq._internal._Any>);
     x2 = flighthq._internal._StaticIndex.readArray(__destructure6, 0.0);
     y2 = flighthq._internal._StaticIndex.readArray(__destructure6, 1.0);
     dx = (x2 - x1);
@@ -133,41 +136,41 @@ class CanvasFillPattern {
     if ((cast _Runtime.strictEquals(octx, null) : Bool)) { return cast null; }
     tiledGradient = flighthq._internal.backend.Canvas2dBackend.call(octx, 'createLinearGradient', cast ([(x1 - (dx * ((STEPS - 1.0) / 2.0))), (y1 - (dy * ((STEPS - 1.0) / 2.0))), (x2 + (dx * ((STEPS - 1.0) / 2.0))), (y2 + (dy * ((STEPS - 1.0) / 2.0)))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(spreadMethod, 'reflect') : Bool)) {
-      var t:Dynamic = 0.0;
+      var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) {
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-            var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, i), flighthq._internal._StaticIndex.readArray(alphas, i)] : Array<Dynamic>)));
+            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
             i++;
           }
         }
         (t = cast ((t + step) : Dynamic));
         {
-          var i:Dynamic = _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0);
+          var i:Float = _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            var ratio:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (t + ((1.0 - _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, i), flighthq._internal._StaticIndex.readArray(alphas, i)] : Array<Dynamic>)));
+            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + ((1.0 - _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
             i--;
           }
         }
         (t = cast ((t + step) : Dynamic));
       }
     } else {
-      var t:Dynamic = 0.0;
+      var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast 1.0 : Float)) : Bool)) {
         {
-          var i:Dynamic = 0.0;
+          var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-            var ratio:Dynamic = HxMath.max(0.0, HxMath.min((1.0 - 0.001), (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, i), flighthq._internal._StaticIndex.readArray(alphas, i)] : Array<Dynamic>)));
+            var ratio:Float = HxMath.max(0.0, HxMath.min((1.0 - 0.001), (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
             i++;
           }
         }
-        var seam:Dynamic = HxMath.max(0.0, HxMath.min(1.0, (t + 0.001)));
-        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop((seam - 0.001), _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0)), flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0))] : Array<Dynamic>)));
-        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(seam, _Runtime.callValue(CanvasFillPattern.rgbaString__canvasFillPattern, cast ([flighthq._internal._StaticIndex.readArray(colors, 0.0), flighthq._internal._StaticIndex.readArray(alphas, 0.0)] : Array<Dynamic>)));
+        var seam:Float = HxMath.max(0.0, HxMath.min(1.0, (t + 0.001)));
+        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop((seam - 0.001), (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0)) : Float)) : String));
+        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(seam, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, 0.0) : Float)) : String));
         (t = cast ((t + step) : Dynamic));
       }
     }
@@ -178,10 +181,10 @@ class CanvasFillPattern {
   }
 
   public static function getCanvasPatternRepetition__canvasFillPattern(texture:Texture):String {
-    var repeatX:Dynamic = cast _Runtime.UNDEFINED;
-    var repeatY:Dynamic = cast _Runtime.UNDEFINED;
-    repeatX = !_Runtime.strictEquals(_Runtime.field(texture, 'sampler').wrapU, 'clamp-to-edge');
-    repeatY = !_Runtime.strictEquals(_Runtime.field(texture, 'sampler').wrapV, 'clamp-to-edge');
+    var repeatX:Bool = cast _Runtime.UNDEFINED;
+    var repeatY:Bool = cast _Runtime.UNDEFINED;
+    repeatX = !_Runtime.strictEquals((cast texture : { var sampler:Sampler; }).sampler.wrapU, 'clamp-to-edge');
+    repeatY = !_Runtime.strictEquals((cast texture : { var sampler:Sampler; }).sampler.wrapV, 'clamp-to-edge');
     if ((cast ((cast repeatX : Bool) && (cast repeatY : Bool)) : Bool)) { return cast 'repeat'; }
     if ((cast repeatX : Bool)) { return cast 'repeat-x'; }
     if ((cast repeatY : Bool)) { return cast 'repeat-y'; }
@@ -196,9 +199,9 @@ class CanvasFillPattern {
   }
 
   public static function rgbaString__canvasFillPattern(color:Float, alpha:Float):String {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
     b = (_Runtime.toInt32(color) & 255);

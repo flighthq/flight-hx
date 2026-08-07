@@ -19,4 +19,4 @@ typedef SoftKeyboardEasingLinearKind = Dynamic;
 
 typedef SoftKeyboardEasingKeyboardDefaultKind = Dynamic;
 
-typedef SoftKeyboardEasingKind = Dynamic;
+typedef SoftKeyboardEasingKind = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<SoftKeyboardEasingDefaultKind, SoftKeyboardEasingEaseInKind>, SoftKeyboardEasingEaseOutKind>, SoftKeyboardEasingLinearKind>, SoftKeyboardEasingKeyboardDefaultKind>;

@@ -14,11 +14,15 @@ import flighthq.scene3d.SceneNode.createNode3D;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshDeformer;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MorphTarget;
+import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.NodeSignals;
+import flighthq.types.Skin;
 import flighthq.types.Types.MeshDeformerMorph;
 import flighthq.types.Types.MeshDeformerNone;
 import flighthq.types.Types.MeshDeformerSkeletal;
@@ -30,18 +34,18 @@ import flighthq.types._internal._MeshValues.MeshKind;
 
 class Mesh {
   public static function cloneMesh(source:flighthq.types.Mesh):flighthq.types.Mesh {
-    var hasDeformation:Dynamic = cast _Runtime.UNDEFINED;
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var clone:Dynamic = cast _Runtime.UNDEFINED;
+    var hasDeformation:Bool = cast _Runtime.UNDEFINED;
+    var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
+    var clone:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
     hasDeformation = ((cast !_Runtime.looseEquals(source.skin, null) : Bool) || (cast !_Runtime.looseEquals(source.morph, null) : Bool));
-    geometry = ((cast hasDeformation : Bool) ? (cast _Runtime.callValue(cloneMeshGeometryForDeformation, cast ([source.geometry] : Array<Dynamic>)) : Dynamic) : (cast source.geometry : Dynamic));
-    clone = _Runtime.callValue(createMesh, cast ([geometry, _Runtime.slice(source.materials, 0, null), source.kind, { enabled: source.enabled, name: source.name }] : Array<Dynamic>));
+    geometry = ((cast hasDeformation : Bool) ? (cast (cast cloneMeshGeometryForDeformation((cast source.geometry : MeshGeometry)) : MeshGeometry) : Dynamic) : (cast source.geometry : Dynamic));
+    clone = (cast createMesh((cast geometry : MeshGeometry), (cast _Runtime.slice(source.materials, 0, null) : Array<Null<Material>>), (cast source.kind : String), (cast { enabled: source.enabled, name: source.name } : Null<flighthq._internal._Any>)) : flighthq.types.Mesh);
     (clone.alpha = cast (source.alpha : Dynamic));
-    _Runtime.callValue(setNodeTransform3D, cast ([clone, source] : Array<Dynamic>));
-    if ((cast _Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)) : Bool)) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
+    setNodeTransform3D(clone, source);
+    if ((cast (cast isNodeLocalMatrix4Detached(source) : Bool) : Bool)) { setNodeLocalMatrix4(clone, (cast getNodeLocalMatrix4(source) : Matrix4Like)); }
     if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Dynamic)); }
     if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) {
-      (clone.morph = cast ({ targets: _Runtime.field(source.morph, 'targets'), weights: new flighthq._internal._Float32Array(_Runtime.field(source.morph, 'weights')) } : Dynamic));
+      (clone.morph = cast ({ targets: (cast source.morph : MeshMorph).targets, weights: new flighthq._internal._Float32Array((cast source.morph : MeshMorph).weights) } : Dynamic));
     }
     return cast clone;
     return cast null;
@@ -49,8 +53,8 @@ class Mesh {
 
   public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):flighthq.types.Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
-    var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    mesh = (cast _Runtime.callValue(createNode3D, cast ([kind, obj] : Array<Dynamic>)) : flighthq.types.Mesh);
+    var mesh:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
+    mesh = (cast (cast createNode3D((cast kind : String), (cast obj : Null<flighthq._internal._Any>)) : flighthq.types.Mesh) : flighthq.types.Mesh);
     (mesh.geometry = cast (geometry : Dynamic));
     (mesh.materials = cast (materials : Dynamic));
     return cast mesh;
@@ -58,7 +62,7 @@ class Mesh {
   }
 
   public static function enableMeshSignals(source:flighthq.types.Mesh):NodeSignals {
-    return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast enableNodeSignals(source) : NodeSignals);
     return cast null;
   }
 
@@ -71,16 +75,16 @@ class Mesh {
 
   @:noCompletion
   public static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
-    return cast _Runtime.callValue(getNode3DRuntime, cast ([source] : Array<Dynamic>));
+    return cast (cast getNode3DRuntime(source) : MeshRuntime);
     return cast null;
   }
 
   public static function getMeshSignals(source:flighthq.types.Mesh):Null<NodeSignals> {
-    return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
+    return cast (cast getNodeSignals(source) : Null<NodeSignals>);
     return cast null;
   }
 
-  public static function isMesh(source:Dynamic):Bool {
+  public static function isMesh(source:flighthq._internal._Any):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field((cast source : Dynamic), 'geometry'), null);
     return cast null;
   }

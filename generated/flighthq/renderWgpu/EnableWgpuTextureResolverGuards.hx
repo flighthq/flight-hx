@@ -10,11 +10,11 @@ import flighthq.types.WgpuRenderState;
 class EnableWgpuTextureResolverGuards {
   @:noCompletion
   public static function areWgpuTextureResolverGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast _Runtime.callValue(areRenderRegistryGuardsEnabled, cast ([state] : Array<Dynamic>));
+    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
     return cast null;
   }
 
   public static function enableWgpuTextureResolverGuards(state:WgpuRenderState):Void {
-    _Runtime.callValue(enableRenderRegistryGuards, cast ([state] : Array<Dynamic>));
+    enableRenderRegistryGuards(state);
   }
 }

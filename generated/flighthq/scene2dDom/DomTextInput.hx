@@ -14,66 +14,71 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
+import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.TextInputState;
+import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
-typedef DomTextInputData__domTextInput = Dynamic;
+typedef DomTextInputData__domTextInput = { >RendererData, var div:Null<flighthq._internal.dom.HTMLDivElement>; };
 
 class DomTextInput {
-  public static var _keyframesInjected__domTextInput:Dynamic = false;
+  public static var _keyframesInjected__domTextInput:Bool = false;
 
   @:noCompletion
   public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var input:Dynamic = cast _Runtime.UNDEFINED;
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var selColor:Dynamic = cast _Runtime.UNDEFINED;
-    var selAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var html:Dynamic = cast _Runtime.UNDEFINED;
+    var source:RichText = cast _Runtime.UNDEFINED;
+    var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
+    var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
+    var data:Null<DomTextInputData__domTextInput> = cast _Runtime.UNDEFINED;
+    var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
+    var scrollYOffset:Float = cast _Runtime.UNDEFINED;
+    var scrollXOffset:Float = cast _Runtime.UNDEFINED;
+    var selColor:String = cast _Runtime.UNDEFINED;
+    var selAlpha:Float = cast _Runtime.UNDEFINED;
+    var html:String = cast _Runtime.UNDEFINED;
     if ((cast !(cast DomTextInput._keyframesInjected__domTextInput : Bool) : Bool)) {
-      _Runtime.callValue(DomTextInput.injectCaretBlinkKeyframes__domTextInput, cast ([] : Array<Dynamic>));
+      DomTextInput.injectCaretBlinkKeyframes__domTextInput();
       (DomTextInput._keyframesInjected__domTextInput = cast (true : Dynamic));
     }
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
-    input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
+    source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
+    input = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)), 'textLayout');
-    data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomTextInputData__domTextInput>);
-    if ((cast ((cast ((cast _Runtime.andValue(!(cast _Runtime.field(input, 'focused') : Bool), function():Dynamic return cast !(cast _Runtime.field(input, 'alwaysShowSelection') : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(_Runtime.optionalField(data, 'div'), null) : Bool)) : Bool)) { return; }
-    firstVisibleLine = _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(getRichTextScrollYOffset, cast ([_Runtime.field(layout, 'lineHeights'), firstVisibleLine] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    scrollXOffset = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
-    selColor = _Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'selectionColor')] : Array<Dynamic>));
-    selAlpha = _Runtime.field(input, 'selectionAlpha');
+    layout = _Runtime.field((cast getRichTextRuntime((cast source : RichText)) : RichTextRuntime), 'textLayout');
+    data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomTextInputData__domTextInput>);
+    if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(_Runtime.optionalField(data, 'div'), null) : Bool)) : Bool)) { return; }
+    firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast layout : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
+    selColor = (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : String);
+    selAlpha = (cast input : TextInputState).selectionAlpha;
     html = '';
-    _Runtime.callValue(getTextInputSelectionRectangles, cast ([DomTextInput.selectionRectangles__domTextInput, source, layout] : Array<Dynamic>));
+    getTextInputSelectionRectangles((cast DomTextInput.selectionRectangles__domTextInput : Array<TextSelectionRectangle>), (cast source : RichText), layout);
     for (rect in _Runtime.iterable(DomTextInput.selectionRectangles__domTextInput)) {
-      (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rect, 'x'), scrollXOffset)) + 'px;top:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(rect, 'y'), scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(rect, 'width')) + 'px;height:' + Std.string(_Runtime.field(rect, 'height')) + 'px;background:' + Std.string(selColor) + ';opacity:' + Std.string(selAlpha) + ';pointer-events:none;"></div>') : Dynamic));
+      (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(((cast rect : TextSelectionRectangle).x - scrollXOffset)) + 'px;top:' + Std.string(((cast rect : TextSelectionRectangle).y - scrollYOffset)) + 'px;width:' + Std.string((cast rect : TextSelectionRectangle).width) + 'px;height:' + Std.string((cast rect : TextSelectionRectangle).height) + 'px;background:' + Std.string(selColor) + ';opacity:' + Std.string(selAlpha) + ';pointer-events:none;"></div>') : Dynamic));
     }
-    if ((cast ((cast _Runtime.field(input, 'focused') : Bool) && (cast _Runtime.strictEquals(_Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>))) : Bool)) : Bool)) {
-      _Runtime.callValue(getTextInputCaretRectangle, cast ([DomTextInput.caretRectangle__domTextInput, source, layout] : Array<Dynamic>));
-      (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'x'), scrollXOffset)) + 'px;top:' + Std.string(_Runtime.subtractNumbers(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'y'), scrollYOffset)) + 'px;width:' + Std.string(_Runtime.field(input, 'caretWidth')) + 'px;height:' + Std.string(_Runtime.field(DomTextInput.caretRectangle__domTextInput, 'height')) + 'px;background:' + Std.string(_Runtime.callValue(computeRgbHexString, cast ([_Runtime.field(input, 'caretColor')] : Array<Dynamic>))) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
+    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle((cast DomTextInput.caretRectangle__domTextInput : TextSelectionRectangle), (cast source : RichText), layout);
+      (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast input : TextInputState).caretWidth) + 'px;height:' + Std.string((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string((cast computeRgbHexString((cast (cast input : TextInputState).caretColor : Float)) : String)) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
     }
-    for (el in _Runtime.iterable((cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]'))) {
+    for (el in _Runtime.iterable((cast (cast data : DomTextInputData__domTextInput).div : flighthq._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]'))) {
       (cast el : flighthq._internal.dom.Element).remove();
     }
     if ((cast ((cast _Runtime.field(html, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast _Runtime.field(data, 'div') : flighthq._internal.dom.HTMLDivElement).insertAdjacentHTML('beforeend', html);
+      (cast (cast data : DomTextInputData__domTextInput).div : flighthq._internal.dom.HTMLDivElement).insertAdjacentHTML('beforeend', html);
     }
   }
 
   public static function enableDomTextInput():Void {
-    _Runtime.callValue(registerDomTextInputOverlay, cast ([drawDomTextInputOverlay] : Array<Dynamic>));
+    registerDomTextInputOverlay(drawDomTextInputOverlay);
   }
 
   public static function injectCaretBlinkKeyframes__domTextInput():Void {
-    var id:Dynamic = cast _Runtime.UNDEFINED;
-    var style:Dynamic = cast _Runtime.UNDEFINED;
+    var id:String = cast _Runtime.UNDEFINED;
+    var style:flighthq._internal.dom.HTMLStyleElement = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
     id = 'flight-caret-blink-style';
     if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
@@ -83,7 +88,7 @@ class DomTextInput {
     (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(style);
   }
 
-  public static final caretRectangle__domTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
+  public static final caretRectangle__domTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
 
   public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 }

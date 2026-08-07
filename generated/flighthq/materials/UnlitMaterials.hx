@@ -6,8 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.DepthMaterial;
 import flighthq.types.EmissiveMaterial;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.MatcapMaterial;
 import flighthq.types.NormalMaterial;
+import flighthq.types.Sampler;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
 import flighthq.types.ToonMaterial;
 import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types.Types.EmissiveMaterialKind;
@@ -18,7 +24,9 @@ import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.Types.VertexColorMaterialKind;
 import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.UnlitMaterial;
+import flighthq.types.Vector2;
 import flighthq.types.VertexColorMaterial;
+import flighthq.types.VoxelGrid;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
@@ -31,75 +39,75 @@ import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 class UnlitMaterials {
   public static function createDepthMaterial(?opts:Dynamic):DepthMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([DepthMaterialKind, opts] : Array<Dynamic>)) : DepthMaterial);
-    _Runtime.setField(material, 'far', _Runtime.coalesce(_Runtime.optionalField(opts, 'far'), function():Dynamic return cast 1.0));
-    _Runtime.setField(material, 'near', _Runtime.coalesce(_Runtime.optionalField(opts, 'near'), function():Dynamic return cast 0.0));
+    var material:DepthMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast DepthMaterialKind : String), opts) : DepthMaterial) : DepthMaterial);
+    ((cast material : DepthMaterial).far = _Runtime.coalesce(_Runtime.optionalField(opts, 'far'), function():Dynamic return cast 1.0));
+    ((cast material : DepthMaterial).near = _Runtime.coalesce(_Runtime.optionalField(opts, 'near'), function():Dynamic return cast 0.0));
     return cast material;
     return cast null;
   }
 
   public static function createEmissiveMaterial(?opts:Dynamic):EmissiveMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([EmissiveMaterialKind, opts] : Array<Dynamic>)) : EmissiveMaterial);
-    _Runtime.setField(material, 'emissive', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'emissiveMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'emissiveStrength', _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
+    var material:EmissiveMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast EmissiveMaterialKind : String), opts) : EmissiveMaterial) : EmissiveMaterial);
+    ((cast material : EmissiveMaterial).emissive = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissive'), function():Dynamic return cast 4294967295.0));
+    ((cast material : EmissiveMaterial).emissiveMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveMap'), function():Dynamic return cast null));
+    ((cast material : EmissiveMaterial).emissiveStrength = _Runtime.coalesce(_Runtime.optionalField(opts, 'emissiveStrength'), function():Dynamic return cast 1.0));
     return cast material;
     return cast null;
   }
 
   public static function createMatcapMaterial(?opts:Dynamic):MatcapMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([MatcapMaterialKind, opts] : Array<Dynamic>)) : MatcapMaterial);
-    _Runtime.setField(material, 'matcap', _Runtime.coalesce(_Runtime.optionalField(opts, 'matcap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'tint', _Runtime.coalesce(_Runtime.optionalField(opts, 'tint'), function():Dynamic return cast 4294967295.0));
+    var material:MatcapMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast MatcapMaterialKind : String), opts) : MatcapMaterial) : MatcapMaterial);
+    ((cast material : MatcapMaterial).matcap = _Runtime.coalesce(_Runtime.optionalField(opts, 'matcap'), function():Dynamic return cast null));
+    ((cast material : MatcapMaterial).tint = _Runtime.coalesce(_Runtime.optionalField(opts, 'tint'), function():Dynamic return cast 4294967295.0));
     return cast material;
     return cast null;
   }
 
   public static function createNormalMaterial(?opts:Dynamic):NormalMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([NormalMaterialKind, opts] : Array<Dynamic>)) : NormalMaterial);
-    _Runtime.setField(material, 'normalMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'normalScale', _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
+    var material:NormalMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast NormalMaterialKind : String), opts) : NormalMaterial) : NormalMaterial);
+    ((cast material : NormalMaterial).normalMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
+    ((cast material : NormalMaterial).normalScale = _Runtime.coalesce(_Runtime.optionalField(opts, 'normalScale'), function():Dynamic return cast 1.0));
     return cast material;
     return cast null;
   }
 
   public static function createToonMaterial(?opts:Dynamic):ToonMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([ToonMaterialKind, opts] : Array<Dynamic>)) : ToonMaterial);
-    _Runtime.setField(material, 'baseColor', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'baseColorMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'ramp', _Runtime.coalesce(_Runtime.optionalField(opts, 'ramp'), function():Dynamic return cast null));
-    _Runtime.setField(material, 'steps', _Runtime.coalesce(_Runtime.optionalField(opts, 'steps'), function():Dynamic return cast 3.0));
+    var material:ToonMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast ToonMaterialKind : String), opts) : ToonMaterial) : ToonMaterial);
+    ((cast material : ToonMaterial).baseColor = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
+    ((cast material : ToonMaterial).baseColorMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
+    ((cast material : ToonMaterial).ramp = _Runtime.coalesce(_Runtime.optionalField(opts, 'ramp'), function():Dynamic return cast null));
+    ((cast material : ToonMaterial).steps = _Runtime.coalesce(_Runtime.optionalField(opts, 'steps'), function():Dynamic return cast 3.0));
     return cast material;
     return cast null;
   }
 
   public static function createUnlitMaterial(?opts:Dynamic):UnlitMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([UnlitMaterialKind, opts] : Array<Dynamic>)) : UnlitMaterial);
-    _Runtime.setField(material, 'baseColor', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'baseColorMap', _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
+    var material:UnlitMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast UnlitMaterialKind : String), opts) : UnlitMaterial) : UnlitMaterial);
+    ((cast material : UnlitMaterial).baseColor = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
+    ((cast material : UnlitMaterial).baseColorMap = _Runtime.coalesce(_Runtime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
     return cast material;
     return cast null;
   }
 
   public static function createVertexColorMaterial(?opts:Dynamic):VertexColorMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([VertexColorMaterialKind, opts] : Array<Dynamic>)) : VertexColorMaterial);
-    _Runtime.setField(material, 'tint', _Runtime.coalesce(_Runtime.optionalField(opts, 'tint'), function():Dynamic return cast 4294967295.0));
+    var material:VertexColorMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast VertexColorMaterialKind : String), opts) : VertexColorMaterial) : VertexColorMaterial);
+    ((cast material : VertexColorMaterial).tint = _Runtime.coalesce(_Runtime.optionalField(opts, 'tint'), function():Dynamic return cast 4294967295.0));
     return cast material;
     return cast null;
   }
 
   public static function createWireframeMaterial(?opts:Dynamic):WireframeMaterial {
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([WireframeMaterialKind, opts] : Array<Dynamic>)) : WireframeMaterial);
-    _Runtime.setField(material, 'color', _Runtime.coalesce(_Runtime.optionalField(opts, 'color'), function():Dynamic return cast 4294967295.0));
-    _Runtime.setField(material, 'thickness', _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 1.0));
+    var material:WireframeMaterial = cast _Runtime.UNDEFINED;
+    material = (cast (cast createSurfaceMaterial((cast WireframeMaterialKind : String), opts) : WireframeMaterial) : WireframeMaterial);
+    ((cast material : WireframeMaterial).color = _Runtime.coalesce(_Runtime.optionalField(opts, 'color'), function():Dynamic return cast 4294967295.0));
+    ((cast material : WireframeMaterial).thickness = _Runtime.coalesce(_Runtime.optionalField(opts, 'thickness'), function():Dynamic return cast 1.0));
     return cast material;
     return cast null;
   }

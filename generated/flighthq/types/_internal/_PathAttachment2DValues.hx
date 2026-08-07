@@ -8,5 +8,5 @@ import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.Skin2D;
 
 class _PathAttachment2DValues {
-  public static final PathAttachment2DKind:Dynamic = 'PathAttachment2D';
+  public static final PathAttachment2DKind:String = 'PathAttachment2D';
 }

@@ -29,10 +29,10 @@ class PackColor {
   }
 
   public static function packColor(r:Float, g:Float, b:Float, a:Float):Float {
-    var ri:Dynamic = cast _Runtime.UNDEFINED;
-    var gi:Dynamic = cast _Runtime.UNDEFINED;
-    var bi:Dynamic = cast _Runtime.UNDEFINED;
-    var ai:Dynamic = cast _Runtime.UNDEFINED;
+    var ri:Float = cast _Runtime.UNDEFINED;
+    var gi:Float = cast _Runtime.UNDEFINED;
+    var bi:Float = cast _Runtime.UNDEFINED;
+    var ai:Float = cast _Runtime.UNDEFINED;
     ri = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, r)), 255.0));
     gi = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, g)), 255.0));
     bi = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, b)), 255.0));
@@ -42,13 +42,13 @@ class PackColor {
   }
 
   public static function packLinearToColor(color:LinearColor):Float {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var g:Dynamic = cast _Runtime.UNDEFINED;
-    var b:Dynamic = cast _Runtime.UNDEFINED;
-    var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([flighthq._internal._StaticIndex.readArray(color, 0.0)] : Array<Dynamic>)))), 255.0));
-    g = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([flighthq._internal._StaticIndex.readArray(color, 1.0)] : Array<Dynamic>)))), 255.0));
-    b = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([flighthq._internal._StaticIndex.readArray(color, 2.0)] : Array<Dynamic>)))), 255.0));
+    var r:Float = cast _Runtime.UNDEFINED;
+    var g:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    r = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, (cast linearChannelToSrgb((cast flighthq._internal._StaticIndex.readArray(color, 0.0) : Float)) : Float))), 255.0));
+    g = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, (cast linearChannelToSrgb((cast flighthq._internal._StaticIndex.readArray(color, 1.0) : Float)) : Float))), 255.0));
+    b = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, (cast linearChannelToSrgb((cast flighthq._internal._StaticIndex.readArray(color, 2.0) : Float)) : Float))), 255.0));
     a = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(color, 3.0))), 255.0));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
@@ -60,7 +60,7 @@ class PackColor {
   }
 
   public static function setColorAlpha(color:Float, alpha:Float):Float {
-    var a:Dynamic = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
     a = HxMath.round(_Runtime.multiplyNumbers(HxMath.min(1.0, HxMath.max(0.0, alpha)), 255.0));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(color) & _Runtime.toInt32(4294967040.0))) | _Runtime.toInt32(a))), 0);
     return cast null;
@@ -74,9 +74,9 @@ class PackColor {
   }
 
   public static function unpackColorToLinear(out:LinearColor, color:Float):LinearColor {
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0)] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0)] : Array<Dynamic>)));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, _Runtime.callValue(srgbChannelToLinear, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0)] : Array<Dynamic>)));
+    flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast srgbChannelToLinear((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0) : Float)) : Float));
     flighthq._internal._StaticIndex.writeArray(out, 3.0, ((_Runtime.toInt32(color) & 255) / 255.0));
     return cast out;
     return cast null;

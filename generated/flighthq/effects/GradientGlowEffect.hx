@@ -17,16 +17,16 @@ class GradientGlowEffect {
   }
 
   public static function getGradientGlowEffectPadding(effect:flighthq.types.GradientGlowEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)] : Array<Dynamic>));
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'GradientGlowEffect', GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'GradientGlowEffect' : String), GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect);
   }
 
   public static function resolveGradientGlowEffectPadding__gradientGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGradientGlowEffectPadding, cast ([(cast effect : flighthq.types.GradientGlowEffect)] : Array<Dynamic>));
+    return cast (cast getGradientGlowEffectPadding((cast (cast effect : flighthq.types.GradientGlowEffect) : flighthq.types.GradientGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

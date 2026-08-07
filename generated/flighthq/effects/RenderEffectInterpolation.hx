@@ -12,43 +12,43 @@ class RenderEffectInterpolation {
   }
 
   public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
-    var tc:Dynamic = cast _Runtime.UNDEFINED;
-    var numericKeys:Dynamic = cast _Runtime.UNDEFINED;
-    var booleanKeys:Dynamic = cast _Runtime.UNDEFINED;
-    var stringKeys:Dynamic = cast _Runtime.UNDEFINED;
-    var aRec:Dynamic = cast _Runtime.UNDEFINED;
-    var bRec:Dynamic = cast _Runtime.UNDEFINED;
-    var outRecord:Dynamic = cast _Runtime.UNDEFINED;
+    var tc:Float = cast _Runtime.UNDEFINED;
+    var numericKeys:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var booleanKeys:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var stringKeys:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var aRec:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var bRec:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
+    var outRecord:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
     tc = HxMath.max(0.0, HxMath.min(1.0, t));
     numericKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     booleanKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     stringKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    aRec = (cast a : Dynamic);
-    bRec = (cast b : Dynamic);
+    aRec = (cast a : flighthq._internal._Record<String, flighthq._internal._Any>);
+    bRec = (cast b : flighthq._internal._Record<String, flighthq._internal._Any>);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aRec))) {
       if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
-      var va:Dynamic = _Runtime.getIndex(aRec, key);
-      var vb:Dynamic = _Runtime.getIndex(bRec, key);
+      var va:flighthq._internal._Any = _Runtime.getIndex(aRec, key);
+      var vb:flighthq._internal._Any = _Runtime.getIndex(bRec, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'number') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) : Bool)) {
-        ((cast numericKeys : flighthq._internal._Set).add(key));
+        ((cast numericKeys : flighthq._internal._Set<String>).add(key));
       } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'boolean') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) : Bool)) {
-        ((cast booleanKeys : flighthq._internal._Set).add(key));
+        ((cast booleanKeys : flighthq._internal._Set<String>).add(key));
       } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) : Bool)) {
-        ((cast stringKeys : flighthq._internal._Set).add(key));
+        ((cast stringKeys : flighthq._internal._Set<String>).add(key));
       } } }
     }
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRec))) {
       if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
-      if ((cast ((cast ((cast !(cast ((cast numericKeys : flighthq._internal._Set).has(key)) : Bool) : Bool) && (cast !(cast ((cast booleanKeys : flighthq._internal._Set).has(key)) : Bool) : Bool)) : Bool) && (cast !(cast ((cast stringKeys : flighthq._internal._Set).has(key)) : Bool) : Bool)) : Bool)) {
-        var vb:Dynamic = _Runtime.getIndex(bRec, key);
-        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) { ((cast numericKeys : flighthq._internal._Set).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) { ((cast booleanKeys : flighthq._internal._Set).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) { ((cast stringKeys : flighthq._internal._Set).add(key)); } } }
+      if ((cast ((cast ((cast !(cast ((cast numericKeys : flighthq._internal._Set<String>).has(key)) : Bool) : Bool) && (cast !(cast ((cast booleanKeys : flighthq._internal._Set<String>).has(key)) : Bool) : Bool)) : Bool) && (cast !(cast ((cast stringKeys : flighthq._internal._Set<String>).has(key)) : Bool) : Bool)) : Bool)) {
+        var vb:flighthq._internal._Any = _Runtime.getIndex(bRec, key);
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) { ((cast numericKeys : flighthq._internal._Set<String>).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) { ((cast booleanKeys : flighthq._internal._Set<String>).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) { ((cast stringKeys : flighthq._internal._Set<String>).add(key)); } } }
       }
     }
-    outRecord = (cast (cast out : Dynamic) : Dynamic);
+    outRecord = (cast (cast out : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>);
     for (key in _Runtime.iterable(numericKeys)) {
-      var va:Dynamic = (cast _Runtime.getIndex(aRec, key) : Null<Float>);
-      var vb:Dynamic = (cast _Runtime.getIndex(bRec, key) : Null<Float>);
+      var va:Null<Float> = (cast _Runtime.getIndex(aRec, key) : Null<Float>);
+      var vb:Null<Float> = (cast _Runtime.getIndex(bRec, key) : Null<Float>);
       if ((cast ((cast !_Runtime.strictEquals(va, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(vb, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         _Runtime.setIndex(outRecord, key, (va + ((vb - va) * tc)));
       } else {

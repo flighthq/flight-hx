@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _Skeleton2DAnimationTargetKindValues {
-  public static final Skeleton2DAnimationTargetKindValue:Dynamic = { Bone: 'Skeleton2D.BoneTarget', Constraint: 'Skeleton2D.ConstraintTarget', Deform: 'Skeleton2D.DeformTarget', DrawOrder: 'Skeleton2D.DrawOrderTarget', Slot: 'Skeleton2D.SlotTarget' };
+  public static final Skeleton2DAnimationTargetKindValue:{ var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; } = { Bone: 'Skeleton2D.BoneTarget', Constraint: 'Skeleton2D.ConstraintTarget', Deform: 'Skeleton2D.DeformTarget', DrawOrder: 'Skeleton2D.DrawOrderTarget', Slot: 'Skeleton2D.SlotTarget' };
 }

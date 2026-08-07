@@ -9,18 +9,19 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class BoundingSphere {
   public static function cloneBoundingSphere(source:BoundingSphereLike):flighthq.types.BoundingSphere {
-    return cast _Runtime.callValue(createBoundingSphere, cast ([source.center.x, source.center.y, source.center.z, source.radius] : Array<Dynamic>));
+    return cast (cast createBoundingSphere((cast source.center.x : Null<Float>), (cast source.center.y : Null<Float>), (cast source.center.z : Null<Float>), (cast source.radius : Null<Float>)) : flighthq.types.BoundingSphere);
     return cast null;
   }
 
   public static function containsBoundingSpherePoint(sphere:BoundingSphereLike, point:Vector3Like):Bool {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     dx = (point.x - sphere.center.x);
     dy = (point.y - sphere.center.y);
@@ -37,22 +38,22 @@ class BoundingSphere {
   }
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flighthq.types.BoundingSphere {
-    var center:Dynamic = cast _Runtime.UNDEFINED;
-    center = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(centerX, function():Dynamic return cast 0.0), _Runtime.coalesce(centerY, function():Dynamic return cast 0.0), _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0)] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) }] : Array<Dynamic>));
+    var center:Vector3 = cast _Runtime.UNDEFINED;
+    center = (cast createVector3((cast _Runtime.coalesce(centerX, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(centerY, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0) : Null<Float>)) : Vector3);
+    return cast (cast createEntity({ center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) }) : flighthq.types.BoundingSphere);
     return cast null;
   }
 
   public static function getClosestPointOnBoundingSphere(out:Vector3Like, sphere:BoundingSphereLike, point:Vector3Like):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var r:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
-    var scale:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
     cx = sphere.center.x;
     cy = sphere.center.y;
     cz = sphere.center.z;
@@ -80,11 +81,11 @@ class BoundingSphere {
   }
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var distSq:Dynamic = cast _Runtime.UNDEFINED;
-    var sumR:Dynamic = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var distSq:Float = cast _Runtime.UNDEFINED;
+    var sumR:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     dx = (a.center.x - b.center.x);
     dy = (a.center.y - b.center.y);
@@ -96,20 +97,20 @@ class BoundingSphere {
   }
 
   public static function mergeBoundingSphere(out:BoundingSphereLike, a:BoundingSphereLike, b:BoundingSphereLike):Void {
-    var acx:Dynamic = cast _Runtime.UNDEFINED;
-    var acy:Dynamic = cast _Runtime.UNDEFINED;
-    var acz:Dynamic = cast _Runtime.UNDEFINED;
-    var ar:Dynamic = cast _Runtime.UNDEFINED;
-    var bcx:Dynamic = cast _Runtime.UNDEFINED;
-    var bcy:Dynamic = cast _Runtime.UNDEFINED;
-    var bcz:Dynamic = cast _Runtime.UNDEFINED;
-    var br:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var dz:Dynamic = cast _Runtime.UNDEFINED;
-    var dist:Dynamic = cast _Runtime.UNDEFINED;
-    var newRadius:Dynamic = cast _Runtime.UNDEFINED;
-    var t:Dynamic = cast _Runtime.UNDEFINED;
+    var acx:Float = cast _Runtime.UNDEFINED;
+    var acy:Float = cast _Runtime.UNDEFINED;
+    var acz:Float = cast _Runtime.UNDEFINED;
+    var ar:Float = cast _Runtime.UNDEFINED;
+    var bcx:Float = cast _Runtime.UNDEFINED;
+    var bcy:Float = cast _Runtime.UNDEFINED;
+    var bcz:Float = cast _Runtime.UNDEFINED;
+    var br:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var dist:Float = cast _Runtime.UNDEFINED;
+    var newRadius:Float = cast _Runtime.UNDEFINED;
+    var t:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       (out.center.x = cast (b.center.x : Dynamic));
       (out.center.y = cast (b.center.y : Dynamic));
@@ -166,18 +167,18 @@ class BoundingSphere {
   }
 
   public static function setBoundingSphereFromAabb(out:BoundingSphereLike, aabb:AabbLike):Void {
-    var minX:Dynamic = cast _Runtime.UNDEFINED;
-    var minY:Dynamic = cast _Runtime.UNDEFINED;
-    var minZ:Dynamic = cast _Runtime.UNDEFINED;
-    var maxX:Dynamic = cast _Runtime.UNDEFINED;
-    var maxY:Dynamic = cast _Runtime.UNDEFINED;
-    var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var ex:Dynamic = cast _Runtime.UNDEFINED;
-    var ey:Dynamic = cast _Runtime.UNDEFINED;
-    var ez:Dynamic = cast _Runtime.UNDEFINED;
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var minZ:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    var maxZ:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var ex:Float = cast _Runtime.UNDEFINED;
+    var ey:Float = cast _Runtime.UNDEFINED;
+    var ez:Float = cast _Runtime.UNDEFINED;
     minX = aabb.min.x;
     minY = aabb.min.y;
     minZ = aabb.min.z;
@@ -204,18 +205,18 @@ class BoundingSphere {
   }
 
   public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
-    var cx:Dynamic = cast _Runtime.UNDEFINED;
-    var cy:Dynamic = cast _Runtime.UNDEFINED;
-    var cz:Dynamic = cast _Runtime.UNDEFINED;
-    var radius:Dynamic = cast _Runtime.UNDEFINED;
-    var _m:Dynamic = cast _Runtime.UNDEFINED;
-    var tcx:Dynamic = cast _Runtime.UNDEFINED;
-    var tcy:Dynamic = cast _Runtime.UNDEFINED;
-    var tcz:Dynamic = cast _Runtime.UNDEFINED;
-    var sx:Dynamic = cast _Runtime.UNDEFINED;
-    var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var sz:Dynamic = cast _Runtime.UNDEFINED;
-    var maxScale:Dynamic = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var radius:Float = cast _Runtime.UNDEFINED;
+    var _m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var tcx:Float = cast _Runtime.UNDEFINED;
+    var tcy:Float = cast _Runtime.UNDEFINED;
+    var tcz:Float = cast _Runtime.UNDEFINED;
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var maxScale:Float = cast _Runtime.UNDEFINED;
     cx = sphere.center.x;
     cy = sphere.center.y;
     cz = sphere.center.z;

@@ -4,12 +4,17 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.AmbientLight;
+import flighthq.types.DirectionalLight;
+import flighthq.types.HemisphereLight;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DLights;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.SpotLight;
 
 class SceneLights {
   public static function createScene3DLights(?options:Dynamic):Scene3DLights {
-    return cast _Runtime.callValue(createEntity, cast ([{ ambient: _Runtime.coalesce(_Runtime.optionalField(options, 'ambient'), function():Dynamic return cast null), directional: _Runtime.coalesce(_Runtime.optionalField(options, 'directional'), function():Dynamic return cast null), hemisphere: _Runtime.coalesce(_Runtime.optionalField(options, 'hemisphere'), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: _Runtime.coalesce(_Runtime.optionalField(options, 'point'), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: _Runtime.coalesce(_Runtime.optionalField(options, 'spot'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ ambient: _Runtime.coalesce(_Runtime.optionalField(options, 'ambient'), function():Dynamic return cast null), directional: _Runtime.coalesce(_Runtime.optionalField(options, 'directional'), function():Dynamic return cast null), hemisphere: _Runtime.coalesce(_Runtime.optionalField(options, 'hemisphere'), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: _Runtime.coalesce(_Runtime.optionalField(options, 'point'), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: _Runtime.coalesce(_Runtime.optionalField(options, 'spot'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }) : Scene3DLights);
     return cast null;
   }
 }

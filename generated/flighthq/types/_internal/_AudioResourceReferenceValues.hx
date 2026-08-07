@@ -7,7 +7,7 @@ import flighthq.types.AudioResource;
 import flighthq.types.ResourceResolutionState;
 
 class _AudioResourceReferenceValues {
-  public static final AudioResourceReferenceKindValue:Dynamic = { Embedded: 'Embedded', External: 'External' };
+  public static final AudioResourceReferenceKindValue:{ var Embedded:String; var External:String; } = { Embedded: 'Embedded', External: 'External' };
 
-  public static final AudioResourceFailureKindValue:Dynamic = { Error: 'Error', Unavailable: 'Unavailable' };
+  public static final AudioResourceFailureKindValue:{ var Error:String; var Unavailable:String; } = { Error: 'Error', Unavailable: 'Unavailable' };
 }

@@ -217,7 +217,7 @@ class Textlayout {
     return cast null;
   }
 
-  public static function getTextLineBreakIndex(lineBreaks:Array<Float>, ?startIndex:Dynamic):Float {
+  public static function getTextLineBreakIndex(lineBreaks:Array<Float>, ?startIndex:Float):Float {
     return cast Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreakIndex(lineBreaks, startIndex);
     return cast null;
   }

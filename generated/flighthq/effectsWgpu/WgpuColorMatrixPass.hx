@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
 class WgpuColorMatrixPass {
   @:noCompletion
   public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
-    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'adjustment.colorMatrix', WgpuColorMatrixPass.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'adjustment.colorMatrix' : String), (cast WgpuColorMatrixPass.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 0.0), function():Dynamic return cast 0.0));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 1.0), function():Dynamic return cast 0.0));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 2.0), function():Dynamic return cast 0.0));
@@ -34,8 +35,8 @@ class WgpuColorMatrixPass {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 17.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 9.0), function():Dynamic return cast 0.0));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 18.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 14.0), function():Dynamic return cast 0.0));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 19.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, 19.0), function():Dynamic return cast 0.0));
-    }] : Array<Dynamic>));
+    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
   }
 
-  public static final COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass:Dynamic = '\nstruct Uniforms { u_row_r : vec4f, u_row_g : vec4f, u_row_b : vec4f, u_row_a : vec4f, u_offset : vec4f, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let nr = uni.u_row_r.x * c.r + uni.u_row_r.y * c.g + uni.u_row_r.z * c.b + uni.u_row_r.w * c.a + uni.u_offset.x;\n  let ng = uni.u_row_g.x * c.r + uni.u_row_g.y * c.g + uni.u_row_g.z * c.b + uni.u_row_g.w * c.a + uni.u_offset.y;\n  let nb = uni.u_row_b.x * c.r + uni.u_row_b.y * c.g + uni.u_row_b.z * c.b + uni.u_row_b.w * c.a + uni.u_offset.z;\n  let na = uni.u_row_a.x * c.r + uni.u_row_a.y * c.g + uni.u_row_a.z * c.b + uni.u_row_a.w * c.a + uni.u_offset.w;\n  return vec4f(clamp(vec3f(nr, ng, nb), vec3f(0.0), vec3f(1.0)), na);\n}';
+  public static final COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass:String = '\nstruct Uniforms { u_row_r : vec4f, u_row_g : vec4f, u_row_b : vec4f, u_row_a : vec4f, u_offset : vec4f, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let nr = uni.u_row_r.x * c.r + uni.u_row_r.y * c.g + uni.u_row_r.z * c.b + uni.u_row_r.w * c.a + uni.u_offset.x;\n  let ng = uni.u_row_g.x * c.r + uni.u_row_g.y * c.g + uni.u_row_g.z * c.b + uni.u_row_g.w * c.a + uni.u_offset.y;\n  let nb = uni.u_row_b.x * c.r + uni.u_row_b.y * c.g + uni.u_row_b.z * c.b + uni.u_row_b.w * c.a + uni.u_offset.z;\n  let na = uni.u_row_a.x * c.r + uni.u_row_a.y * c.g + uni.u_row_a.z * c.b + uni.u_row_a.w * c.a + uni.u_offset.w;\n  return vec4f(clamp(vec3f(nr, ng, nb), vec3f(0.0), vec3f(1.0)), na);\n}';
 }

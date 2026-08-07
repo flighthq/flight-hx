@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _PhongMaterialValues {
-  public static final PhongMaterialKind:Dynamic = 'PhongMaterial';
+  public static final PhongMaterialKind:String = 'PhongMaterial';
 }

@@ -25,6 +25,7 @@ import flighthq.skeleton2d.TransformConstraint2D as Facade_Skeleton2d_flighthq_s
 import flighthq.types.AnimationClip;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
+import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
 import flighthq.types.Bone2D;
 import flighthq.types.BoundingBoxAttachment2D;
 import flighthq.types.ClippingAttachment2D;
@@ -48,6 +49,7 @@ import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Skin2D;
 import flighthq.types.Slot2D;
+import flighthq.types.TransformInherit2D;
 import flighthq.types.Vector2.Vector2Like;
 
 class Skeleton2d {
@@ -62,98 +64,98 @@ class Skeleton2d {
   }
 
   public static function cloneSkeleton2D(skeleton:Skeleton2D):Skeleton2D {
-    return cast _Runtime.callValue(createEntity, cast ([{ boneMatrices: _Runtime.slice(_Runtime.field(skeleton, 'boneMatrices'), 0, null), bones: _Runtime.callProperty(_Runtime.field(skeleton, 'bones'), 'map', cast ([function(bone:Dynamic) return _Runtime.mergeObjects([bone])] : Array<Dynamic>)), inverseBindMatrices: _Runtime.slice(_Runtime.field(skeleton, 'inverseBindMatrices'), 0, null), slots: ((cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(skeleton, 'slots') : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(skeleton, 'slots'), 'map', cast ([function(s:Dynamic) return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic)), worldMatrices: _Runtime.slice(_Runtime.field(skeleton, 'worldMatrices'), 0, null) }] : Array<Dynamic>));
+    return cast (cast createEntity({ boneMatrices: _Runtime.slice(_Runtime.field(skeleton, 'boneMatrices'), 0, null), bones: _Runtime.callProperty(_Runtime.field(skeleton, 'bones'), 'map', cast ([function(bone:Bone2D, __unused0:Float, __unused1:Array<Bone2D>):{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; } return _Runtime.mergeObjects([bone])] : Array<Dynamic>)), inverseBindMatrices: _Runtime.slice(_Runtime.field(skeleton, 'inverseBindMatrices'), 0, null), slots: ((cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(skeleton, 'slots') : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(skeleton, 'slots'), 'map', cast ([function(s:Slot2D, __unused2:Float, __unused3:Array<Slot2D>):{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic)), worldMatrices: _Runtime.slice(_Runtime.field(skeleton, 'worldMatrices'), 0, null) }) : Skeleton2D);
     return cast null;
   }
 
   public static function computeSkeleton2DBoneMatrices(skeleton:Skeleton2D):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var invBind:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var invBind:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     world = _Runtime.field(skeleton, 'worldMatrices');
     invBind = _Runtime.field(skeleton, 'inverseBindMatrices');
     out = _Runtime.field(skeleton, 'boneMatrices');
     count = _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        _Runtime.callValue(Skeleton2d.readMatrix__skeleton2d, cast ([Skeleton2d._scratchA__skeleton2d, world, o] : Array<Dynamic>));
-        _Runtime.callValue(Skeleton2d.readMatrix__skeleton2d, cast ([Skeleton2d._scratchB__skeleton2d, invBind, o] : Array<Dynamic>));
-        _Runtime.callValue(multiplyMatrix, cast ([Skeleton2d._scratchC__skeleton2d, Skeleton2d._scratchA__skeleton2d, Skeleton2d._scratchB__skeleton2d] : Array<Dynamic>));
-        _Runtime.callValue(Skeleton2d.writeMatrix__skeleton2d, cast ([out, o, Skeleton2d._scratchC__skeleton2d] : Array<Dynamic>));
+        var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast world : flighthq._internal._Float32Array), (cast o : Float));
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchB__skeleton2d : MatrixLike), (cast invBind : flighthq._internal._Float32Array), (cast o : Float));
+        multiplyMatrix((cast Skeleton2d._scratchC__skeleton2d : MatrixLike), (cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast Skeleton2d._scratchB__skeleton2d : MatrixLike));
+        Skeleton2d.writeMatrix__skeleton2d((cast out : flighthq._internal._Float32Array), (cast o : Float), (cast Skeleton2d._scratchC__skeleton2d : MatrixLike));
         i++;
       }
     }
   }
 
   public static function computeSkeleton2DBoneWorldTransform(skeleton:Skeleton2D, boneIndex:Float):Void {
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
-    var world:Dynamic = cast _Runtime.UNDEFINED;
+    var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     bones = _Runtime.field(skeleton, 'bones');
     world = _Runtime.field(skeleton, 'worldMatrices');
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     {
-      var i:Dynamic = boneIndex;
-      var bone:Dynamic = flighthq._internal._StaticIndex.readArray(bones, i);
-      var rotX:Dynamic = (_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), _Runtime.field(bone, 'shearX')) * DEG_TO_RAD);
-      var rotY:Dynamic = (_Runtime.addNumbers(_Runtime.addNumbers(_Runtime.field(bone, 'rotation'), 90.0), _Runtime.field(bone, 'shearY')) * DEG_TO_RAD);
-      var la:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotX), _Runtime.field(bone, 'scaleX'));
-      var lb:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotX), _Runtime.field(bone, 'scaleX'));
-      var lc:Dynamic = _Runtime.multiplyNumbers(HxMath.cos(rotY), _Runtime.field(bone, 'scaleY'));
-      var ld:Dynamic = _Runtime.multiplyNumbers(HxMath.sin(rotY), _Runtime.field(bone, 'scaleY'));
-      var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-      if ((cast ((cast _Runtime.field(bone, 'parentIndex') : Float) < (cast 0.0 : Float)) : Bool)) {
+      var i:Float = boneIndex;
+      var bone:Bone2D = flighthq._internal._StaticIndex.readArray(bones, i);
+      var rotX:Float = (((cast bone : Bone2D).rotation + (cast bone : Bone2D).shearX) * DEG_TO_RAD);
+      var rotY:Float = ((((cast bone : Bone2D).rotation + 90.0) + (cast bone : Bone2D).shearY) * DEG_TO_RAD);
+      var la:Float = _Runtime.multiplyNumbers(HxMath.cos(rotX), (cast bone : Bone2D).scaleX);
+      var lb:Float = _Runtime.multiplyNumbers(HxMath.sin(rotX), (cast bone : Bone2D).scaleX);
+      var lc:Float = _Runtime.multiplyNumbers(HxMath.cos(rotY), (cast bone : Bone2D).scaleY);
+      var ld:Float = _Runtime.multiplyNumbers(HxMath.sin(rotY), (cast bone : Bone2D).scaleY);
+      var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+      if ((cast ((cast (cast bone : Bone2D).parentIndex : Float) < (cast 0.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32Array(world, o, la);
         flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 1.0), lb);
         flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 2.0), lc);
         flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 3.0), ld);
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), (cast bone : Bone2D).x);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), (cast bone : Bone2D).y);
         return;
       }
-      var p:Dynamic = _Runtime.multiplyNumbers(_Runtime.field(bone, 'parentIndex'), Skeleton2d.MATRIX_STRIDE__skeleton2d);
-      var pa:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, p);
-      var pb:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
-      var pc:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
-      var pd:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
-      var inherit:Dynamic = _Runtime.field(bone, 'transformMode');
-      if ((cast _Runtime.field(inherit, 'translation') : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pa, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pc, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.addNumbers((_Runtime.multiplyNumbers(pb, _Runtime.field(bone, 'x')) + _Runtime.multiplyNumbers(pd, _Runtime.field(bone, 'y'))), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
+      var p:Float = ((cast bone : Bone2D).parentIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+      var pa:Float = flighthq._internal._StaticIndex.readFloat32Array(world, p);
+      var pb:Float = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
+      var pc:Float = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
+      var pd:Float = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
+      var inherit:TransformInherit2D = (cast bone : Bone2D).transformMode;
+      if ((cast (cast inherit : TransformInherit2D).translation : Bool)) {
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.addNumbers(((pa * (cast bone : Bone2D).x) + (pc * (cast bone : Bone2D).y)), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0))));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.addNumbers(((pb * (cast bone : Bone2D).x) + (pd * (cast bone : Bone2D).y)), flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0))));
       } else {
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), _Runtime.field(bone, 'x'));
-        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), _Runtime.field(bone, 'y'));
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 4.0), (cast bone : Bone2D).x);
+        flighthq._internal._StaticIndex.writeFloat32Array(world, (o + 5.0), (cast bone : Bone2D).y);
       }
       var ea:Float = cast _Runtime.UNDEFINED;
       var eb:Float = cast _Runtime.UNDEFINED;
       var ec:Float = cast _Runtime.UNDEFINED;
       var ed:Float = cast _Runtime.UNDEFINED;
-      if ((cast ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'scale') : Bool)) : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
+      if ((cast ((cast ((cast (cast inherit : TransformInherit2D).rotation : Bool) && (cast (cast inherit : TransformInherit2D).scale : Bool)) : Bool) && (cast (cast inherit : TransformInherit2D).reflection : Bool)) : Bool)) {
         (ea = cast (pa : Dynamic));
         (eb = cast (pb : Dynamic));
         (ec = cast (pc : Dynamic));
         (ed = cast (pd : Dynamic));
       } else {
-        var psx:Dynamic = _Runtime.orValue(_Runtime.hypot(pa, pb), function():Dynamic return cast 1.0);
-        var psy:Dynamic = _Runtime.orValue(_Runtime.hypot(pc, pd), function():Dynamic return cast 1.0);
-        var d0x:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
-        var d0y:Dynamic = ((cast _Runtime.field(inherit, 'rotation') : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
+        var psx:Float = _Runtime.orValue(_Runtime.hypot(pa, pb), function():Dynamic return cast 1.0);
+        var psy:Float = _Runtime.orValue(_Runtime.hypot(pc, pd), function():Dynamic return cast 1.0);
+        var d0x:Float = ((cast (cast inherit : TransformInherit2D).rotation : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
+        var d0y:Float = ((cast (cast inherit : TransformInherit2D).rotation : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
         var d1x:Float = cast _Runtime.UNDEFINED;
         var d1y:Float = cast _Runtime.UNDEFINED;
-        if ((cast ((cast _Runtime.field(inherit, 'rotation') : Bool) && (cast _Runtime.field(inherit, 'reflection') : Bool)) : Bool)) {
+        if ((cast ((cast (cast inherit : TransformInherit2D).rotation : Bool) && (cast (cast inherit : TransformInherit2D).reflection : Bool)) : Bool)) {
           (d1x = cast ((pc / psy) : Dynamic));
           (d1y = cast ((pd / psy) : Dynamic));
-        } else { if ((cast _Runtime.field(inherit, 'rotation') : Bool)) {
+        } else { if ((cast (cast inherit : TransformInherit2D).rotation : Bool)) {
           (d1x = cast (-d0y : Dynamic));
           (d1y = cast (d0x : Dynamic));
         } else {
           (d1x = cast (0.0 : Dynamic));
-          (d1y = cast (((cast ((cast _Runtime.field(inherit, 'reflection') : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+          (d1y = cast (((cast ((cast (cast inherit : TransformInherit2D).reflection : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
         } }
-        var sx:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
-        var sy:Dynamic = ((cast _Runtime.field(inherit, 'scale') : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
+        var sx:Float = ((cast (cast inherit : TransformInherit2D).scale : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
+        var sy:Float = ((cast (cast inherit : TransformInherit2D).scale : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
         (ea = cast ((d0x * sx) : Dynamic));
         (eb = cast ((d0y * sx) : Dynamic));
         (ec = cast ((d1x * sy) : Dynamic));
@@ -188,22 +190,22 @@ class Skeleton2d {
   }
 
   public static function computeSkeleton2DWorldTransforms(skeleton:Skeleton2D):Void {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.callValue(computeSkeleton2DBoneWorldTransform, cast ([skeleton, i] : Array<Dynamic>));
+        computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast i : Float));
         i++;
       }
     }
   }
 
-  public static function createSkeleton2D(bones:Array<Bone2D>, ?slots:Dynamic):Skeleton2D {
+  public static function createSkeleton2D(bones:Array<Bone2D>, ?slots:flighthq._internal._IndexedAccess<Skeleton2D, String>):Skeleton2D {
     if (slots == null) slots = cast (null : Dynamic);
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(bones, 'length');
-    return cast _Runtime.callValue(createEntity, cast ([{ boneMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), bones: bones, inverseBindMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), slots: slots, worldMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)) }] : Array<Dynamic>));
+    return cast (cast createEntity({ boneMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), bones: bones, inverseBindMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), slots: slots, worldMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)) }) : Skeleton2D);
     return cast null;
   }
 
@@ -226,19 +228,19 @@ class Skeleton2d {
   }
 
   public static function disposeSkeleton2D(skeleton:Skeleton2D):Void {
-    _Runtime.setField(skeleton, 'bones', cast ([] : Array<Dynamic>));
-    _Runtime.setField(skeleton, 'slots', null);
+    ((cast skeleton : Skeleton2D).bones = cast ([] : Array<Dynamic>));
+    ((cast skeleton : Skeleton2D).slots = null);
   }
 
   public static function equalsSkeleton2D(a:Skeleton2D, b:Skeleton2D):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'bones'), 'length'), _Runtime.field(_Runtime.field(b, 'bones'), 'length')) : Bool)) { return cast false; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'bones'), 'length') : Float)) : Bool)) {
-        var x:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(a, 'bones'), i);
-        var y:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'bones'), i);
-        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(x, 'parentIndex'), _Runtime.field(y, 'parentIndex')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'x'), _Runtime.field(y, 'x')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'y'), _Runtime.field(y, 'y')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'rotation'), _Runtime.field(y, 'rotation')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'scaleX'), _Runtime.field(y, 'scaleX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'scaleY'), _Runtime.field(y, 'scaleY')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'shearX'), _Runtime.field(y, 'shearX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'shearY'), _Runtime.field(y, 'shearY')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(x, 'length'), _Runtime.field(y, 'length')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(x, 'transformMode'), 'rotation'), _Runtime.field(_Runtime.field(y, 'transformMode'), 'rotation')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(x, 'transformMode'), 'scale'), _Runtime.field(_Runtime.field(y, 'transformMode'), 'scale')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(x, 'transformMode'), 'reflection'), _Runtime.field(_Runtime.field(y, 'transformMode'), 'reflection')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(x, 'transformMode'), 'translation'), _Runtime.field(_Runtime.field(y, 'transformMode'), 'translation')) : Bool)) : Bool)) {
+        var x:Bone2D = flighthq._internal._StaticIndex.readArray(_Runtime.field(a, 'bones'), i);
+        var y:Bone2D = flighthq._internal._StaticIndex.readArray(_Runtime.field(b, 'bones'), i);
+        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast x : Bone2D).parentIndex, (cast y : Bone2D).parentIndex) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).x, (cast y : Bone2D).x) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).y, (cast y : Bone2D).y) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).rotation, (cast y : Bone2D).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleX, (cast y : Bone2D).scaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleY, (cast y : Bone2D).scaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearX, (cast y : Bone2D).shearX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearY, (cast y : Bone2D).shearY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).length, (cast y : Bone2D).length) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).rotation, (cast (cast y : Bone2D).transformMode : TransformInherit2D).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).scale, (cast (cast y : Bone2D).transformMode : TransformInherit2D).scale) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).reflection, (cast (cast y : Bone2D).transformMode : TransformInherit2D).reflection) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).translation, (cast (cast y : Bone2D).transformMode : TransformInherit2D).translation) : Bool)) : Bool)) {
           return cast false;
         }
         i++;
@@ -254,12 +256,12 @@ class Skeleton2d {
   }
 
   public static function getSkeleton2DBoneIndexByName(skeleton:Skeleton2D, name:String):Float {
-    var bones:Dynamic = cast _Runtime.UNDEFINED;
+    var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
     bones = _Runtime.field(skeleton, 'bones');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bones, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(bones, i), 'name'), name) : Bool)) { return cast i; }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name, name) : Bool)) { return cast i; }
         i++;
       }
     }
@@ -269,7 +271,7 @@ class Skeleton2d {
 
   public static function getSkeleton2DBoneWorldMatrix(out:MatrixLike, skeleton:Skeleton2D, boneIndex:Float):Bool {
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    _Runtime.callValue(Skeleton2d.readMatrix__skeleton2d, cast ([out, _Runtime.field(skeleton, 'worldMatrices'), (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d)] : Array<Dynamic>));
+    Skeleton2d.readMatrix__skeleton2d((cast out : MatrixLike), (cast _Runtime.field(skeleton, 'worldMatrices') : flighthq._internal._Float32Array), (cast (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d) : Float));
     return cast true;
     return cast null;
   }
@@ -281,11 +283,11 @@ class Skeleton2d {
 
   @:noCompletion
   public static function getSkeleton2DSkin(skeleton:Skeleton2D, name:String):Null<AttachmentSkin2D> {
-    var skins:Dynamic = cast _Runtime.UNDEFINED;
+    var skins:Null<Array<AttachmentSkin2D>> = cast _Runtime.UNDEFINED;
     skins = _Runtime.field(skeleton, 'skins');
     if ((cast ((cast _Runtime.strictEquals(skins, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(skins, null) : Bool)) : Bool)) { return cast null; }
     for (skin in _Runtime.iterable(skins)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(skin, 'name'), name) : Bool)) { return cast skin; }
+      if ((cast _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, name) : Bool)) { return cast skin; }
     }
     return cast null;
     return cast null;
@@ -296,7 +298,7 @@ class Skeleton2d {
     return cast null;
   }
 
-  public static final MATRIX_STRIDE__skeleton2d:Dynamic = 6.0;
+  public static final MATRIX_STRIDE__skeleton2d:Float = 6.0;
 
   public static function readMatrix__skeleton2d(out:MatrixLike, buffer:flighthq._internal._Float32Array, offset:Float):Void {
     (out.a = cast (flighthq._internal._StaticIndex.readFloat32Array(buffer, offset) : Dynamic));
@@ -341,19 +343,19 @@ class Skeleton2d {
   }
 
   public static function setSkeleton2DBindPose(skeleton:Skeleton2D):Void {
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
     world = _Runtime.field(skeleton, 'worldMatrices');
     out = _Runtime.field(skeleton, 'inverseBindMatrices');
     count = _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length');
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var o:Dynamic = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        _Runtime.callValue(Skeleton2d.readMatrix__skeleton2d, cast ([Skeleton2d._scratchA__skeleton2d, world, o] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.callValue(inverseMatrix, cast ([Skeleton2d._scratchB__skeleton2d, Skeleton2d._scratchA__skeleton2d] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.callValue(Skeleton2d.setMatrixIdentityLocal__skeleton2d, cast ([Skeleton2d._scratchB__skeleton2d] : Array<Dynamic>)); }
-        _Runtime.callValue(Skeleton2d.writeMatrix__skeleton2d, cast ([out, o, Skeleton2d._scratchB__skeleton2d] : Array<Dynamic>));
+        var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast world : flighthq._internal._Float32Array), (cast o : Float));
+        if ((cast !(cast (cast inverseMatrix((cast Skeleton2d._scratchB__skeleton2d : MatrixLike), (cast Skeleton2d._scratchA__skeleton2d : MatrixLike)) : Bool) : Bool) : Bool)) { Skeleton2d.setMatrixIdentityLocal__skeleton2d((cast Skeleton2d._scratchB__skeleton2d : MatrixLike)); }
+        Skeleton2d.writeMatrix__skeleton2d((cast out : flighthq._internal._Float32Array), (cast o : Float), (cast Skeleton2d._scratchB__skeleton2d : MatrixLike));
         i++;
       }
     }
@@ -361,15 +363,15 @@ class Skeleton2d {
 
   @:noCompletion
   public static function setSkeleton2DSkin(skeleton:Skeleton2D, skin:AttachmentSkin2D):Void {
-    var slots:Dynamic = cast _Runtime.UNDEFINED;
-    slots = _Runtime.field(skeleton, 'slots');
+    var slots:Null<Array<Slot2D>> = cast _Runtime.UNDEFINED;
+    slots = (cast skeleton : Skeleton2D).slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
     for (entry in _Runtime.iterable(_Runtime.field(skin, 'attachments'))) {
-      if ((cast ((cast ((cast _Runtime.field(entry, 'slotIndex') : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.field(entry, 'slotIndex') : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { _Runtime.setField(flighthq._internal._StaticIndex.readArray(slots, _Runtime.field(entry, 'slotIndex')), 'attachment', _Runtime.field(entry, 'attachment')); }
+      if ((cast ((cast ((cast (cast entry : SkinAttachment2D).slotIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (cast entry : SkinAttachment2D).slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { ((cast flighthq._internal._StaticIndex.readArray(slots, (cast entry : SkinAttachment2D).slotIndex) : Slot2D).attachment = (cast entry : SkinAttachment2D).attachment); }
     }
   }
 
-  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:Dynamic, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
+  public static function setSkeleton2DSlotDeform(slot:Slot2D, attachment:flighthq._internal._IndexedAccess<Skeleton2DSlotDeform, String>, offsets:Null<flighthq._internal._Float32Array>):Null<Skeleton2DSlotDeform> {
     return cast Facade_Skeleton2d_flighthq_skeleton2d_SlotDeform2D.setSkeleton2DSlotDeform(slot, attachment, offsets);
     return cast null;
   }
@@ -379,8 +381,8 @@ class Skeleton2d {
   }
 
   public static function validateSkeleton2D(skeleton:Skeleton2D):Null<String> {
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var expected:Dynamic = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var expected:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length');
     expected = (count * Skeleton2d.MATRIX_STRIDE__skeleton2d);
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(skeleton, 'worldMatrices'), 'length'), expected) : Bool)) { return cast 'worldMatrices length ' + Std.string(_Runtime.field(_Runtime.field(skeleton, 'worldMatrices'), 'length')) + ' != ' + Std.string(expected) + ''; }
@@ -389,9 +391,9 @@ class Skeleton2d {
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(skeleton, 'boneMatrices'), 'length'), expected) : Bool)) { return cast 'boneMatrices length ' + Std.string(_Runtime.field(_Runtime.field(skeleton, 'boneMatrices'), 'length')) + ' != ' + Std.string(expected) + ''; }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var parentIndex:Dynamic = _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'bones'), i), 'parentIndex');
+        var parentIndex:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'bones'), i) : Bone2D).parentIndex;
         if ((cast ((cast parentIndex : Float) >= (cast i : Float)) : Bool)) { return cast 'bone ' + Std.string(i) + ' parentIndex ' + Std.string(parentIndex) + ' is not < its own index (bones must be parent-before-child ordered)'; }
         if ((cast ((cast parentIndex : Float) < (cast -1.0 : Float)) : Bool)) { return cast 'bone ' + Std.string(i) + ' parentIndex ' + Std.string(parentIndex) + ' < -1'; }
         i++;

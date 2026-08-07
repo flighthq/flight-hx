@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleEmitterCallbacks = { @:optional var onDeath:Dynamic; @:optional var onSpawn:Dynamic; };
+typedef ParticleEmitterCallbacks = { @:optional var onDeath:Float->Float->Float->Void; @:optional var onSpawn:Float->Float->Float->Void; };

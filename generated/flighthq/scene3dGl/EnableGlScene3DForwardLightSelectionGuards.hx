@@ -6,22 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.SpotLight;
 
 class EnableGlScene3DForwardLightSelectionGuards {
   @:noCompletion
   public static function areGlScene3DForwardLightSelectionGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard'), null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).forwardLightSelectionGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DForwardLightSelectionGuards(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'forwardLightSelectionGuard', EnableGlScene3DForwardLightSelectionGuards.warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards);
+    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).forwardLightSelectionGuard = EnableGlScene3DForwardLightSelectionGuards.warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards);
   }
 
   public static function warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards(lights:Scene3DLightsLike):Void {
-    _Runtime.callValue(logOnce, cast (['scene-gl:forward-light-selection-required', LogLevel.Warn, { message: 'drawGlScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareGlScene3DForwardLights after prepareScene3DRender and pass its result to drawGlScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) }, 'scene-gl'] : Array<Dynamic>));
+    (cast logOnce((cast 'scene-gl:forward-light-selection-required' : String), (cast LogLevel.Warn : LogLevel), { message: 'drawGlScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareGlScene3DForwardLights after prepareScene3DRender and pass its result to drawGlScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) }, (cast 'scene-gl' : Null<String>)) : Bool);
   }
 }

@@ -7,13 +7,13 @@ import flighthq.types.Bitmap;
 
 class BitmapCoverage {
   public static function getBitmapCoverage(source:Bitmap, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
-    var br:Dynamic = cast _Runtime.UNDEFINED;
-    var bg:Dynamic = cast _Runtime.UNDEFINED;
-    var bb:Dynamic = cast _Runtime.UNDEFINED;
-    var ba:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var totalPixels:Dynamic = cast _Runtime.UNDEFINED;
-    var covered:Dynamic = cast _Runtime.UNDEFINED;
+    var br:Float = cast _Runtime.UNDEFINED;
+    var bg:Float = cast _Runtime.UNDEFINED;
+    var bb:Float = cast _Runtime.UNDEFINED;
+    var ba:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var totalPixels:Float = cast _Runtime.UNDEFINED;
+    var covered:Float = cast _Runtime.UNDEFINED;
     br = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(backgroundColor), 24)) & 255);
     bg = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 16)) & 255);
     bb = (_Runtime.toInt32((_Runtime.toInt32(backgroundColor) >> 8)) & 255);
@@ -23,7 +23,7 @@ class BitmapCoverage {
     if ((cast _Runtime.strictEquals(totalPixels, 0.0) : Bool)) { return cast 0.0; }
     covered = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
         if ((cast ((cast ((cast ((cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), br)) : Float) > (cast channelTolerance : Float)) : Bool) || (cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), bg)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), bb)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool) || (cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0)), ba)) : Float) > (cast channelTolerance : Float)) : Bool)) : Bool)) {
           covered++;

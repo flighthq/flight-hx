@@ -3,6 +3,10 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Collision.CollisionCircle;
+import flighthq.types.Collision.CollisionPoint;
+import flighthq.types.Collision.CollisionPolygon;
+import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.RigidBody2D;
@@ -10,21 +14,21 @@ import flighthq.types.Physics2D.RigidBody2D;
 class ColliderTransform {
   public static function createPhysics2DColliderWorldShape(local:CollisionShape):CollisionShape {
     {
-      var __switchValue = _Runtime.field(local, 'kind');
+      var __switchValue = (cast local : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
-        return cast { kind: 'circle', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y'), radius: _Runtime.field(local, 'radius') };
+        return cast { kind: 'circle', x: (cast local : { >CollisionCircle, var kind:String; }).x, y: (cast local : { >CollisionCircle, var kind:String; }).y, radius: (cast local : { >CollisionCircle, var kind:String; }).radius };
       }
       else if (__switchValue == 'aabb' || __switchValue == 'obb') {
         return cast { kind: 'obb', x: 0.0, y: 0.0, halfW: 0.0, halfH: 0.0, rotation: 0.0 };
       }
       else if (__switchValue == 'polygon') {
-        return cast { kind: 'polygon', points: _Runtime.slice(_Runtime.field(local, 'points'), 0, null) };
+        return cast { kind: 'polygon', points: _Runtime.slice((cast local : { >CollisionPolygon, var kind:String; }).points, 0, null) };
       }
       else if (__switchValue == 'segment') {
-        return cast { kind: 'segment', x0: _Runtime.field(local, 'x0'), y0: _Runtime.field(local, 'y0'), x1: _Runtime.field(local, 'x1'), y1: _Runtime.field(local, 'y1') };
+        return cast { kind: 'segment', x0: (cast local : { >CollisionSegment, var kind:String; }).x0, y0: (cast local : { >CollisionSegment, var kind:String; }).y0, x1: (cast local : { >CollisionSegment, var kind:String; }).x1, y1: (cast local : { >CollisionSegment, var kind:String; }).y1 };
       }
       else if (__switchValue == 'point') {
-        return cast { kind: 'point', x: _Runtime.field(local, 'x'), y: _Runtime.field(local, 'y') };
+        return cast { kind: 'point', x: (cast local : { >CollisionPoint, var kind:String; }).x, y: (cast local : { >CollisionPoint, var kind:String; }).y };
       }
       else  {
         return cast { kind: 'point', x: 0.0, y: 0.0 };
@@ -34,46 +38,46 @@ class ColliderTransform {
   }
 
   public static function updatePhysics2DColliderWorldShape(collider:Physics2DCollider, body:RigidBody2D):Void {
-    var local:Dynamic = cast _Runtime.UNDEFINED;
-    var world:Dynamic = cast _Runtime.UNDEFINED;
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    local = _Runtime.field(collider, 'local');
-    world = _Runtime.field(collider, 'world');
+    var local:CollisionShape = cast _Runtime.UNDEFINED;
+    var world:CollisionShape = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    local = (cast collider : Physics2DCollider).local;
+    world = (cast collider : Physics2DCollider).world;
     cos = HxMath.cos(_Runtime.field(body, 'angle'));
     sin = HxMath.sin(_Runtime.field(body, 'angle'));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'circle') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'circle') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
-      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
-      _Runtime.setField(world, 'radius', _Runtime.field(local, 'radius'));
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'circle') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'circle') : Bool)) : Bool)) {
+      ((cast world : { var x:Float; }).x = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x:Float; }).x * cos)) - ((cast local : { var y:Float; }).y * sin)));
+      ((cast world : { var y:Float; }).y = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x:Float; }).x * sin)) + ((cast local : { var y:Float; }).y * cos)));
+      ((cast world : { var radius:Float; }).radius = (cast local : { var radius:Float; }).radius);
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'aabb') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'obb') : Bool)) : Bool)) {
-      var centerX:Dynamic = (_Runtime.addNumbers(_Runtime.field(local, 'minX'), _Runtime.field(local, 'maxX')) / 2.0);
-      var centerY:Dynamic = (_Runtime.addNumbers(_Runtime.field(local, 'minY'), _Runtime.field(local, 'maxY')) / 2.0);
-      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), (centerX * cos)) - (centerY * sin)));
-      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), (centerX * sin)) + (centerY * cos)));
-      _Runtime.setField(world, 'halfW', (_Runtime.subtractNumbers(_Runtime.field(local, 'maxX'), _Runtime.field(local, 'minX')) / 2.0));
-      _Runtime.setField(world, 'halfH', (_Runtime.subtractNumbers(_Runtime.field(local, 'maxY'), _Runtime.field(local, 'minY')) / 2.0));
-      _Runtime.setField(world, 'rotation', _Runtime.field(body, 'angle'));
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'aabb') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'obb') : Bool)) : Bool)) {
+      var centerX:Float = (((cast local : { var minX:Float; }).minX + (cast local : { var maxX:Float; }).maxX) / 2.0);
+      var centerY:Float = (((cast local : { var minY:Float; }).minY + (cast local : { var maxY:Float; }).maxY) / 2.0);
+      ((cast world : { var x:Float; }).x = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (centerX * cos)) - (centerY * sin)));
+      ((cast world : { var y:Float; }).y = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (centerX * sin)) + (centerY * cos)));
+      ((cast world : { var halfW:Float; }).halfW = (((cast local : { var maxX:Float; }).maxX - (cast local : { var minX:Float; }).minX) / 2.0));
+      ((cast world : { var halfH:Float; }).halfH = (((cast local : { var maxY:Float; }).maxY - (cast local : { var minY:Float; }).minY) / 2.0));
+      ((cast world : { var rotation:Float; }).rotation = _Runtime.field(body, 'angle'));
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'obb') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'obb') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
-      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
-      _Runtime.setField(world, 'halfW', _Runtime.field(local, 'halfW'));
-      _Runtime.setField(world, 'halfH', _Runtime.field(local, 'halfH'));
-      _Runtime.setField(world, 'rotation', _Runtime.addNumbers(_Runtime.field(body, 'angle'), _Runtime.field(local, 'rotation')));
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'obb') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'obb') : Bool)) : Bool)) {
+      ((cast world : { var x:Float; }).x = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x:Float; }).x * cos)) - ((cast local : { var y:Float; }).y * sin)));
+      ((cast world : { var y:Float; }).y = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x:Float; }).x * sin)) + ((cast local : { var y:Float; }).y * cos)));
+      ((cast world : { var halfW:Float; }).halfW = (cast local : { var halfW:Float; }).halfW);
+      ((cast world : { var halfH:Float; }).halfH = (cast local : { var halfH:Float; }).halfH);
+      ((cast world : { var rotation:Float; }).rotation = _Runtime.addNumbers(_Runtime.field(body, 'angle'), (cast local : { var rotation:Float; }).rotation));
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'polygon') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'polygon') : Bool)) : Bool)) {
-      var source:Dynamic = _Runtime.field(local, 'points');
-      var target:Dynamic = (cast _Runtime.field(world, 'points') : Array<Float>);
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'polygon') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'polygon') : Bool)) : Bool)) {
+      var source:Array<Float> = (cast local : { var points:Array<Float>; }).points;
+      var target:Array<Float> = (cast (cast world : { var points:Array<Float>; }).points : Array<Float>);
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-          var x:Dynamic = flighthq._internal._StaticIndex.readArray(source, i);
-          var y:Dynamic = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
+          var x:Float = flighthq._internal._StaticIndex.readArray(source, i);
+          var y:Float = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
           flighthq._internal._StaticIndex.writeArray(target, i, (_Runtime.addNumbers(_Runtime.field(body, 'x'), (x * cos)) - (y * sin)));
           flighthq._internal._StaticIndex.writeArray(target, (i + 1.0), (_Runtime.addNumbers(_Runtime.field(body, 'y'), (x * sin)) + (y * cos)));
           (i = cast ((i + 2.0) : Dynamic));
@@ -81,101 +85,101 @@ class ColliderTransform {
       }
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'segment') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'segment') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x0', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x0'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y0'), sin)));
-      _Runtime.setField(world, 'y0', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x0'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y0'), cos)));
-      _Runtime.setField(world, 'x1', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x1'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y1'), sin)));
-      _Runtime.setField(world, 'y1', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x1'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y1'), cos)));
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'segment') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'segment') : Bool)) : Bool)) {
+      ((cast world : { var x0:Float; }).x0 = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x0:Float; }).x0 * cos)) - ((cast local : { var y0:Float; }).y0 * sin)));
+      ((cast world : { var y0:Float; }).y0 = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x0:Float; }).x0 * sin)) + ((cast local : { var y0:Float; }).y0 * cos)));
+      ((cast world : { var x1:Float; }).x1 = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x1:Float; }).x1 * cos)) - ((cast local : { var y1:Float; }).y1 * sin)));
+      ((cast world : { var y1:Float; }).y1 = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x1:Float; }).x1 * sin)) + ((cast local : { var y1:Float; }).y1 * cos)));
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(local, 'kind'), 'point') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(world, 'kind'), 'point') : Bool)) : Bool)) {
-      _Runtime.setField(world, 'x', (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), sin)));
-      _Runtime.setField(world, 'y', (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(local, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(local, 'y'), cos)));
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'point') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'point') : Bool)) : Bool)) {
+      ((cast world : { var x:Float; }).x = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x:Float; }).x * cos)) - ((cast local : { var y:Float; }).y * sin)));
+      ((cast world : { var y:Float; }).y = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x:Float; }).x * sin)) + ((cast local : { var y:Float; }).y * cos)));
     }
   }
 
   public static function writePhysics2DColliderBounds(collider:Physics2DCollider, out:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }):Void {
-    var shape:Dynamic = cast _Runtime.UNDEFINED;
+    var shape:CollisionShape = cast _Runtime.UNDEFINED;
     shape = _Runtime.field(collider, 'world');
     {
-      var __switchValue = _Runtime.field(shape, 'kind');
+      var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
-        _Runtime.setField(out, 'minX', _Runtime.subtractNumbers(_Runtime.field(shape, 'x'), _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'minY', _Runtime.subtractNumbers(_Runtime.field(shape, 'y'), _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'maxX', _Runtime.addNumbers(_Runtime.field(shape, 'x'), _Runtime.field(shape, 'radius')));
-        _Runtime.setField(out, 'maxY', _Runtime.addNumbers(_Runtime.field(shape, 'y'), _Runtime.field(shape, 'radius')));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = ((cast shape : { var x:Float; }).x - (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = ((cast shape : { var y:Float; }).y - (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = ((cast shape : { var x:Float; }).x + (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = ((cast shape : { var y:Float; }).y + (cast shape : { var radius:Float; }).radius));
         return;
       }
       else if (__switchValue == 'aabb') {
-        _Runtime.setField(out, 'minX', _Runtime.field(shape, 'minX'));
-        _Runtime.setField(out, 'minY', _Runtime.field(shape, 'minY'));
-        _Runtime.setField(out, 'maxX', _Runtime.field(shape, 'maxX'));
-        _Runtime.setField(out, 'maxY', _Runtime.field(shape, 'maxY'));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = (cast shape : { var minX:Float; }).minX);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = (cast shape : { var minY:Float; }).minY);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = (cast shape : { var maxX:Float; }).maxX);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = (cast shape : { var maxY:Float; }).maxY);
         return;
       }
       else if (__switchValue == 'obb') {
         {
-          var cos:Dynamic = HxMath.abs(HxMath.cos(_Runtime.field(shape, 'rotation')));
-          var sin:Dynamic = HxMath.abs(HxMath.sin(_Runtime.field(shape, 'rotation')));
-          var extentX:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(shape, 'halfW'), cos) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfH'), sin));
-          var extentY:Dynamic = (_Runtime.multiplyNumbers(_Runtime.field(shape, 'halfW'), sin) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'halfH'), cos));
-          _Runtime.setField(out, 'minX', _Runtime.subtractNumbers(_Runtime.field(shape, 'x'), extentX));
-          _Runtime.setField(out, 'minY', _Runtime.subtractNumbers(_Runtime.field(shape, 'y'), extentY));
-          _Runtime.setField(out, 'maxX', _Runtime.addNumbers(_Runtime.field(shape, 'x'), extentX));
-          _Runtime.setField(out, 'maxY', _Runtime.addNumbers(_Runtime.field(shape, 'y'), extentY));
+          var cos:Float = HxMath.abs(HxMath.cos((cast shape : { var rotation:Float; }).rotation));
+          var sin:Float = HxMath.abs(HxMath.sin((cast shape : { var rotation:Float; }).rotation));
+          var extentX:Float = (((cast shape : { var halfW:Float; }).halfW * cos) + ((cast shape : { var halfH:Float; }).halfH * sin));
+          var extentY:Float = (((cast shape : { var halfW:Float; }).halfW * sin) + ((cast shape : { var halfH:Float; }).halfH * cos));
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = ((cast shape : { var x:Float; }).x - extentX));
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = ((cast shape : { var y:Float; }).y - extentY));
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = ((cast shape : { var x:Float; }).x + extentX));
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = ((cast shape : { var y:Float; }).y + extentY));
           return;
         }
       }
       else if (__switchValue == 'polygon') {
         {
-          var points:Dynamic = _Runtime.field(shape, 'points');
+          var points:Array<Float> = (cast shape : { var points:Array<Float>; }).points;
           if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) {
-            _Runtime.setField(out, 'minX', 0.0);
-            _Runtime.setField(out, 'minY', 0.0);
-            _Runtime.setField(out, 'maxX', 0.0);
-            _Runtime.setField(out, 'maxY', 0.0);
+            ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = 0.0);
+            ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = 0.0);
+            ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = 0.0);
+            ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = 0.0);
             return;
           }
-          var minX:Dynamic = flighthq._internal._StaticIndex.readArray(points, 0.0);
-          var minY:Dynamic = flighthq._internal._StaticIndex.readArray(points, 1.0);
-          var maxX:Dynamic = minX;
-          var maxY:Dynamic = minY;
+          var minX:Float = flighthq._internal._StaticIndex.readArray(points, 0.0);
+          var minY:Float = flighthq._internal._StaticIndex.readArray(points, 1.0);
+          var maxX:Float = minX;
+          var maxY:Float = minY;
           {
-            var i:Dynamic = 2.0;
+            var i:Float = 2.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-              var x:Dynamic = flighthq._internal._StaticIndex.readArray(points, i);
-              var y:Dynamic = flighthq._internal._StaticIndex.readArray(points, (i + 1.0));
+              var x:Float = flighthq._internal._StaticIndex.readArray(points, i);
+              var y:Float = flighthq._internal._StaticIndex.readArray(points, (i + 1.0));
               if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); } else { if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); } }
               if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); } else { if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); } }
               (i = cast ((i + 2.0) : Dynamic));
             }
           }
-          _Runtime.setField(out, 'minX', minX);
-          _Runtime.setField(out, 'minY', minY);
-          _Runtime.setField(out, 'maxX', maxX);
-          _Runtime.setField(out, 'maxY', maxY);
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = minX);
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = minY);
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = maxX);
+          ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = maxY);
           return;
         }
       }
       else if (__switchValue == 'segment') {
-        _Runtime.setField(out, 'minX', HxMath.min(_Runtime.field(shape, 'x0'), _Runtime.field(shape, 'x1')));
-        _Runtime.setField(out, 'minY', HxMath.min(_Runtime.field(shape, 'y0'), _Runtime.field(shape, 'y1')));
-        _Runtime.setField(out, 'maxX', HxMath.max(_Runtime.field(shape, 'x0'), _Runtime.field(shape, 'x1')));
-        _Runtime.setField(out, 'maxY', HxMath.max(_Runtime.field(shape, 'y0'), _Runtime.field(shape, 'y1')));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = HxMath.min((cast shape : { var x0:Float; }).x0, (cast shape : { var x1:Float; }).x1));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = HxMath.min((cast shape : { var y0:Float; }).y0, (cast shape : { var y1:Float; }).y1));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = HxMath.max((cast shape : { var x0:Float; }).x0, (cast shape : { var x1:Float; }).x1));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = HxMath.max((cast shape : { var y0:Float; }).y0, (cast shape : { var y1:Float; }).y1));
         return;
       }
       else if (__switchValue == 'point') {
-        _Runtime.setField(out, 'minX', _Runtime.field(shape, 'x'));
-        _Runtime.setField(out, 'minY', _Runtime.field(shape, 'y'));
-        _Runtime.setField(out, 'maxX', _Runtime.field(shape, 'x'));
-        _Runtime.setField(out, 'maxY', _Runtime.field(shape, 'y'));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = (cast shape : { var x:Float; }).x);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = (cast shape : { var y:Float; }).y);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = (cast shape : { var x:Float; }).x);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = (cast shape : { var y:Float; }).y);
         return;
       }
       else  {
-        _Runtime.setField(out, 'minX', 0.0);
-        _Runtime.setField(out, 'minY', 0.0);
-        _Runtime.setField(out, 'maxX', 0.0);
-        _Runtime.setField(out, 'maxY', 0.0);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = 0.0);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = 0.0);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = 0.0);
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = 0.0);
       }
     }
   }

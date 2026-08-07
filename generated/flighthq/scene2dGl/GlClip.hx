@@ -8,44 +8,49 @@ import flighthq.scene2dGl.GlClipContours.popGlClipContours;
 import flighthq.scene2dGl.GlClipContours.pushGlClipContours;
 import flighthq.scene2dGl.GlClipRectangle.popGlClipRectangle;
 import flighthq.scene2dGl.GlClipRectangle.pushGlClipRectangle;
+import flighthq.types.ClipRegion;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class GlClip {
   public static function enableGlClipSupport(state:GlRenderState):Void {
-    _Runtime.setField(state, 'displayObjectClipHooks', GlClip.webglClipHooks__glClip);
+    ((cast state : GlRenderState).displayObjectClipHooks = GlClip.webglClipHooks__glClip);
   }
 
   public static function popOneGlClip__glClip(state:GlRenderState):Void {
-    var form:Dynamic = cast _Runtime.UNDEFINED;
-    form = _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'clipForms'), 'pop', cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { _Runtime.callValue(popGlClipContours, cast ([state] : Array<Dynamic>)); } else { _Runtime.callValue(popGlClipRectangle, cast ([state] : Array<Dynamic>)); }
+    var form:Null<String> = cast _Runtime.UNDEFINED;
+    form = _Runtime.callProperty((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).clipForms, 'pop', cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { popGlClipContours((cast state : GlRenderState)); } else { popGlClipRectangle((cast state : GlRenderState)); }
   }
 
-  public static final webglClipHooks__glClip:Scene2DClipHooks = { finalize: function(state:GlRenderState) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callValue(GlClip.popOneGlClip__glClip, cast ([state] : Array<Dynamic>)); }
-  }, popClip: function(state:GlRenderState, data:RenderProxy2D, source:Node2D) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var target:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    while ((cast ((cast _Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length') : Float) > (cast target : Float)) : Bool)) { _Runtime.callValue(GlClip.popOneGlClip__glClip, cast ([state] : Array<Dynamic>)); }
-  }, pushClip: function(state:GlRenderState, data:RenderProxy2D, source:Node2D) {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var clip:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    clip = _Runtime.field(source, 'clip');
+  public static final webglClipHooks__glClip:Scene2DClipHooks = { finalize: function(state:GlRenderState):Void {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    while ((cast ((cast _Runtime.field((cast runtime : GlRenderStateRuntime).clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { GlClip.popOneGlClip__glClip((cast state : GlRenderState)); }
+  }, popClip: function(state:GlRenderState, data:RenderProxy2D, source:Node2D):Void {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    while ((cast ((cast _Runtime.field((cast runtime : GlRenderStateRuntime).clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { GlClip.popOneGlClip__glClip((cast state : GlRenderState)); }
+  }, pushClip: function(state:GlRenderState, data:RenderProxy2D, source:Node2D):Void {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {
-      _Runtime.callValue(pushGlClipRectangle, cast ([state, _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'clipForms'), 'push', cast (['rect'] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
+      pushGlClipRectangle((cast state : GlRenderState), (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
+      _Runtime.callProperty((cast runtime : GlRenderStateRuntime).clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(pushGlClipContours, cast ([state, _Runtime.field(clip, 'contours'), _Runtime.field(clip, 'winding'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(runtime, 'clipForms'), 'push', cast (['contour'] : Array<Dynamic>));
+      pushGlClipContours((cast state : GlRenderState), (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      _Runtime.callProperty((cast runtime : GlRenderStateRuntime).clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
   } };
 }

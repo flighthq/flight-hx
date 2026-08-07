@@ -6,33 +6,34 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 class DashPath {
-  public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Dynamic = 0.25):Void {
-    var totalDashLength:Dynamic = cast _Runtime.UNDEFINED;
-    var contours:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
-    _Runtime.setLength(_Runtime.field(out, 'data'), 0.0);
-    _Runtime.setField(out, 'winding', _Runtime.field(source, 'winding'));
-    totalDashLength = _Runtime.callValue(DashPath.dashTotal__dashPath, cast ([dash] : Array<Dynamic>));
+  public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Float = 0.25):Void {
+    var totalDashLength:Float = cast _Runtime.UNDEFINED;
+    var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
+    _Runtime.setLength((cast out : Path).commands, 0.0);
+    _Runtime.setLength((cast out : Path).data, 0.0);
+    ((cast out : Path).winding = _Runtime.field(source, 'winding'));
+    totalDashLength = (cast DashPath.dashTotal__dashPath((cast dash : Array<Float>)) : Float);
     if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callValue(DashPath.copyCommands__dashPath, cast ([source, out] : Array<Dynamic>));
+      DashPath.copyCommands__dashPath((cast source : Path), (cast out : Path));
       return;
     }
-    contours = _Runtime.callValue(flattenPath, cast ([source, tolerance] : Array<Dynamic>));
+    contours = (cast flattenPath((cast source : Path), (cast tolerance : Float)) : Array<Array<Float>>);
     for (contour in _Runtime.iterable(contours)) {
-      _Runtime.callValue(DashPath.applyDashToContour__dashPath, cast ([contour, dash, dashOffset, totalDashLength, out] : Array<Dynamic>));
+      DashPath.applyDashToContour__dashPath((cast contour : Array<Float>), (cast dash : Array<Float>), (cast dashOffset : Float), (cast totalDashLength : Float), (cast out : Path));
     }
   }
 
   public static function applyDashToContour__dashPath(pts:Array<Float>, dash:Array<Float>, dashOffset:Float, totalDashLength:Float, out:Path):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
-    var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var dashIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var remaining:Dynamic = cast _Runtime.UNDEFINED;
-    var isOn:Dynamic = cast _Runtime.UNDEFINED;
-    var segStarted:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    var dashIndex:Float = cast _Runtime.UNDEFINED;
+    var remaining:Float = cast _Runtime.UNDEFINED;
+    var isOn:Bool = cast _Runtime.UNDEFINED;
+    var segStarted:Bool = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     offset = _Runtime.fmod((_Runtime.fmod(dashOffset, totalDashLength) + totalDashLength), totalDashLength);
@@ -40,9 +41,9 @@ class DashPath {
     remaining = 0.0;
     isOn = true;
     {
-      var acc:Dynamic = 0.0;
+      var acc:Float = 0.0;
       {
-        var i:Dynamic = 0.0;
+        var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
           if ((cast ((cast _Runtime.addNumbers(acc, flighthq._internal._StaticIndex.readArray(dash, i)) : Float) > (cast offset : Float)) : Bool)) {
             (dashIndex = cast (i : Dynamic));
@@ -57,49 +58,49 @@ class DashPath {
     }
     segStarted = false;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
-        var x0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
-        var y0:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
-        var x1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
-        var y1:Dynamic = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
-        var dx:Dynamic = (x1 - x0);
-        var dy:Dynamic = (y1 - y0);
-        var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
+        var x0:Float = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
+        var y0:Float = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
+        var x1:Float = flighthq._internal._StaticIndex.readArray(pts, ((i + 1.0) * 2.0));
+        var y1:Float = flighthq._internal._StaticIndex.readArray(pts, (((i + 1.0) * 2.0) + 1.0));
+        var dx:Float = (x1 - x0);
+        var dy:Float = (y1 - y0);
+        var segLen:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast isOn : Bool) && (cast !(cast segStarted : Bool) : Bool)) : Bool)) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-          _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([x0, y0] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([x0, y0] : Array<Dynamic>));
           (segStarted = cast (true : Dynamic));
         }
-        var consumed:Dynamic = 0.0;
+        var consumed:Float = 0.0;
         while ((cast ((cast consumed : Float) < (cast segLen : Float)) : Bool)) {
-          var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
-          var t:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((consumed + step) / segLen) : Dynamic) : (cast 0.0 : Dynamic));
-          var ix:Dynamic = (x0 + (t * dx));
-          var iy:Dynamic = (y0 + (t * dy));
+          var step:Float = HxMath.min(remaining, (segLen - consumed));
+          var t:Float = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((consumed + step) / segLen) : Dynamic) : (cast 0.0 : Dynamic));
+          var ix:Float = (x0 + (t * dx));
+          var iy:Float = (y0 + (t * dy));
           if ((cast isOn : Bool)) {
             if ((cast !(cast segStarted : Bool) : Bool)) {
-              var tStart:Dynamic = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (consumed / segLen) : Dynamic) : (cast 0.0 : Dynamic));
-              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-              _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([(x0 + (tStart * dx)), (y0 + (tStart * dy))] : Array<Dynamic>));
+              var tStart:Float = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (consumed / segLen) : Dynamic) : (cast 0.0 : Dynamic));
+              _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+              _Runtime.pushMany((cast out : Path).data, cast ([(x0 + (tStart * dx)), (y0 + (tStart * dy))] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
             }
-            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
-            _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([ix, iy] : Array<Dynamic>));
+            _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
+            _Runtime.pushMany((cast out : Path).data, cast ([ix, iy] : Array<Dynamic>));
           }
           (consumed = cast ((consumed + step) : Dynamic));
           (remaining = cast ((remaining - step) : Dynamic));
           if ((cast ((cast remaining : Float) <= (cast 1e-10 : Float)) : Bool)) {
             (dashIndex = cast (_Runtime.fmod((dashIndex + 1.0), _Runtime.field(dash, 'length')) : Dynamic));
             (remaining = cast (flighthq._internal._StaticIndex.readArray(dash, dashIndex) : Dynamic));
-            var wasOn:Dynamic = isOn;
+            var wasOn:Bool = isOn;
             (isOn = cast (_Runtime.strictEquals(_Runtime.fmod(dashIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast wasOn : Bool) && (cast !(cast isOn : Bool) : Bool)) : Bool)) {
               (segStarted = cast (false : Dynamic));
             }
             if ((cast ((cast !(cast wasOn : Bool) : Bool) && (cast isOn : Bool)) : Bool)) {
-              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-              _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([ix, iy] : Array<Dynamic>));
+              _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+              _Runtime.pushMany((cast out : Path).data, cast ([ix, iy] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
             }
           }
@@ -111,26 +112,26 @@ class DashPath {
 
   public static function copyCommands__dashPath(source:Path, out:Path):Void {
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
+        _Runtime.callProperty((cast out : Path).commands, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
         i++;
       }
     }
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(_Runtime.field(out, 'data'), 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
+        _Runtime.callProperty((cast out : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
         i++;
       }
     }
   }
 
   public static function dashTotal__dashPath(dash:Array<Float>):Float {
-    var total:Dynamic = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
     total = 0.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
         (total = cast ((total + flighthq._internal._StaticIndex.readArray(dash, i)) : Dynamic));
         i++;

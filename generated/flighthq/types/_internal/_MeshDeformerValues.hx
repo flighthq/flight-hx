@@ -5,9 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _MeshDeformerValues {
-  public static final MeshDeformerMorph:Dynamic = 'morph';
+  public static final MeshDeformerMorph:String = 'morph';
 
-  public static final MeshDeformerNone:Dynamic = 'none';
+  public static final MeshDeformerNone:String = 'none';
 
-  public static final MeshDeformerSkeletal:Dynamic = 'skeletal';
+  public static final MeshDeformerSkeletal:String = 'skeletal';
 }

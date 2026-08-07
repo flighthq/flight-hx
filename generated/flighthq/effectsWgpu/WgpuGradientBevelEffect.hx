@@ -14,8 +14,11 @@ import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.GradientBevelEffect;
+import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -24,39 +27,39 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuGradientBevelEffect {
   @:noCompletion
   public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
-    var src:Dynamic = cast _Runtime.UNDEFINED;
-    var dst:Dynamic = cast _Runtime.UNDEFINED;
-    var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var s0:Dynamic = cast _Runtime.UNDEFINED;
-    var s1:Dynamic = cast _Runtime.UNDEFINED;
-    var s2:Dynamic = cast _Runtime.UNDEFINED;
-    var angle:Dynamic = cast _Runtime.UNDEFINED;
-    var distance:Dynamic = cast _Runtime.UNDEFINED;
-    var quality:Dynamic = cast _Runtime.UNDEFINED;
-    var strength:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
+    var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var s0:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var s1:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var s2:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var angle:Float = cast _Runtime.UNDEFINED;
+    var distance:Float = cast _Runtime.UNDEFINED;
+    var quality:Float = cast _Runtime.UNDEFINED;
+    var strength:Float = cast _Runtime.UNDEFINED;
+    var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:Dynamic = cast _Runtime.UNDEFINED;
-    var fs:Dynamic = cast _Runtime.UNDEFINED;
-    var dx:Dynamic = cast _Runtime.UNDEFINED;
-    var dy:Dynamic = cast _Runtime.UNDEFINED;
-    var encodePipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var encodeSlot:Dynamic = cast _Runtime.UNDEFINED;
-    var blurredBG:Dynamic = cast _Runtime.UNDEFINED;
-    var encodePass:Dynamic = cast _Runtime.UNDEFINED;
-    var rampTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var rampBG:Dynamic = cast _Runtime.UNDEFINED;
-    var encodedBG:Dynamic = cast _Runtime.UNDEFINED;
-    var sourceBG:Dynamic = cast _Runtime.UNDEFINED;
-    var applyPipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var applySlot:Dynamic = cast _Runtime.UNDEFINED;
-    var applyPass:Dynamic = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var fs:{ var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; } = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var encodePipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    var encodeSlot:Float = cast _Runtime.UNDEFINED;
+    var blurredBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var encodePass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
+    var rampTexture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
+    var rampBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var encodedBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var sourceBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var applyPipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    var applySlot:Float = cast _Runtime.UNDEFINED;
+    var applyPass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    s2 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
+    s0 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    s1 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    s2 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
@@ -64,99 +67,99 @@ class WgpuGradientBevelEffect {
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
-    dx = _Runtime.divideNumbers(_Runtime.multiplyNumbers(HxMath.cos(angle), distance), _Runtime.field(s1, 'width'));
-    dy = -_Runtime.divideNumbers(_Runtime.multiplyNumbers(HxMath.sin(angle), distance), _Runtime.field(s1, 'height'));
-    encodePipeline = _Runtime.callValue(WgpuGradientBevelEffect.getEncodePipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
-    encodeSlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(fs, 'writeSlot', cast ([encodeSlot, function(f32:Dynamic) {
+    fs = (cast getWgpuEffectPassState((cast state : WgpuRenderState)) : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; });
+    applyWgpuEffectTintPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast s0 : WgpuRenderTarget), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyWgpuEffectBoxBlur((cast state : WgpuRenderState), (cast s0 : WgpuRenderTarget), (cast s1 : WgpuRenderTarget), (cast s2 : WgpuRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
+    dx = (_Runtime.multiplyNumbers(HxMath.cos(angle), distance) / (cast s1 : WgpuRenderTarget).width);
+    dy = -(_Runtime.multiplyNumbers(HxMath.sin(angle), distance) / (cast s1 : WgpuRenderTarget).height);
+    encodePipeline = (cast WgpuGradientBevelEffect.getEncodePipeline__wgpuGradientBevelEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
+    encodeSlot = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).acquireSlot();
+    (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).writeSlot(encodeSlot, function(f32:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, dx);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, dy);
-    }] : Array<Dynamic>));
-    blurredBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(s1, 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    encodePass = _Runtime.callProperty(fs, 'beginPass', cast ([s0, 'load'] : Array<Dynamic>));
-    (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(encodePipeline, 'pipeline'));
-    (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([encodeSlot] : Array<Dynamic>));
+    });
+    blurredBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast s1 : WgpuRenderTarget).view }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    encodePass = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).beginPass(s0, 'load');
+    (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast encodePipeline : WgpuEffectPipeline).pipeline);
+    (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBG, cast ([encodeSlot] : Array<Dynamic>));
     (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, blurredBG);
     (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
     (cast encodePass : flighthq._internal.dom.GPURenderPassEncoder).end();
-    rampTexture = _Runtime.callValue(getWgpuEffectGradientRampTexture, cast ([state, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
-    rampBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: (cast rampTexture : flighthq._internal.dom.GPUTexture).createView() }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    encodedBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(s0, 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    sourceBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(src, 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    applyPipeline = _Runtime.callValue(WgpuGradientBevelEffect.getApplyPipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
-    applySlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(fs, 'writeSlot', cast ([applySlot, function() {
+    rampTexture = (cast getWgpuEffectGradientRampTexture((cast state : WgpuRenderState), (cast _Runtime.field(effect, 'colors') : Array<Float>), (cast _Runtime.field(effect, 'alphas') : Array<Float>), (cast _Runtime.field(effect, 'ratios') : Array<Float>)) : flighthq._internal.dom.GPUTexture);
+    rampBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast rampTexture : flighthq._internal.dom.GPUTexture).createView() }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    encodedBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast s0 : WgpuRenderTarget).view }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    sourceBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast src : WgpuRenderTarget).view }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    applyPipeline = (cast WgpuGradientBevelEffect.getApplyPipeline__wgpuGradientBevelEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
+    applySlot = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).acquireSlot();
+    (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).writeSlot(applySlot, function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
 
-    }] : Array<Dynamic>));
-    applyPass = _Runtime.callProperty(fs, 'beginPass', cast ([s1, 'load'] : Array<Dynamic>));
-    (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(applyPipeline, 'pipeline'));
-    (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([applySlot] : Array<Dynamic>));
+    });
+    applyPass = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).beginPass(s1, 'load');
+    (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast applyPipeline : WgpuEffectPipeline).pipeline);
+    (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBG, cast ([applySlot] : Array<Dynamic>));
     (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, encodedBG);
     (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, rampBG);
     (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, sourceBG);
     (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
     (cast applyPass : flighthq._internal.dom.GPURenderPassEncoder).end();
-    _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s1, dst] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { _Runtime.callValue(applyWgpuEffectErasePass, cast ([state, src, dst] : Array<Dynamic>)); }
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s0] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s1] : Array<Dynamic>));
-    _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
+    clearWgpuEffectTarget((cast state : WgpuRenderState), (cast dst : WgpuRenderTarget));
+    if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget)); }
+    applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast s1 : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+    if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) { applyWgpuEffectErasePass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget)); }
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s0 : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s1 : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s2 : WgpuRenderTarget));
   }
 
-  public static final defaultWgpuGradientBevelEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGradientBevelEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect)] : Array<Dynamic>));
+  public static final defaultWgpuGradientBevelEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyGradientBevelEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : GradientBevelEffect) : GradientBevelEffect));
   };
 
   public static function registerWgpuGradientBevelEffect(state:WgpuRenderState):Void {
-    _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GradientBevelEffect', defaultWgpuGradientBevelEffectRunner] : Array<Dynamic>));
+    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'GradientBevelEffect' : String), (cast defaultWgpuGradientBevelEffectRunner : WgpuRenderEffectRunner));
   }
 
-  public static final BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect:Dynamic = '\nstruct Uniforms {\n  offset : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let high = textureSampleLevel(tex, smp, uv - uni.offset, 0.0).a;\n  let low  = textureSampleLevel(tex, smp, uv + uni.offset, 0.0).a;\n  let bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  return vec4f(bevelVal, 0.0, 0.0, 1.0);\n}';
+  public static final BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect:String = '\nstruct Uniforms {\n  offset : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let high = textureSampleLevel(tex, smp, uv - uni.offset, 0.0).a;\n  let low  = textureSampleLevel(tex, smp, uv + uni.offset, 0.0).a;\n  let bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  return vec4f(bevelVal, 0.0, 0.0, 1.0);\n}';
 
-  public static final BEVEL_APPLY_FRAGMENT_WGSL__wgpuGradientBevelEffect:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texEncoded : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texRamp : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n@group(3) @binding(0) var texSource : texture_2d<f32>;\n@group(3) @binding(1) var smp3 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let bevelVal = textureSampleLevel(texEncoded, smp, uv, 0.0).r;\n  let color = textureSampleLevel(texRamp, smp2, vec2f(bevelVal, 0.5), 0.0);\n  let srcAlpha = textureSampleLevel(texSource, smp3, uv, 0.0).a;\n  return color * srcAlpha;\n}';
+  public static final BEVEL_APPLY_FRAGMENT_WGSL__wgpuGradientBevelEffect:String = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texEncoded : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texRamp : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n@group(3) @binding(0) var texSource : texture_2d<f32>;\n@group(3) @binding(1) var smp3 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let bevelVal = textureSampleLevel(texEncoded, smp, uv, 0.0).r;\n  let color = textureSampleLevel(texRamp, smp2, vec2f(bevelVal, 0.5), 0.0);\n  let srcAlpha = textureSampleLevel(texSource, smp3, uv, 0.0).a;\n  return color * srcAlpha;\n}';
 
   public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
+    var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    p = ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
-      var __destructure1:Dynamic = state;
-      var device:Dynamic = _Runtime.field(__destructure1, 'device');
-      var format:Dynamic = _Runtime.field(__destructure1, 'format');
-      var shaderModule:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuGradientBevelEffect.BEVEL_APPLY_FRAGMENT_WGSL__wgpuGradientBevelEffect) }] : Array<Dynamic>));
-      var pipelineLayout:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout'), _Runtime.field(fs, 'textureBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
-      var pipeline:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+      var fs:{ var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; } = (cast getWgpuEffectPassState((cast state : WgpuRenderState)) : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; });
+      var __destructure4 = state;
+      var device:flighthq._internal.dom.GPUDevice = _Runtime.field(__destructure4, 'device');
+      var format:String = _Runtime.field(__destructure4, 'format');
+      var shaderModule:flighthq._internal.dom.GPUShaderModule = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuGradientBevelEffect.BEVEL_APPLY_FRAGMENT_WGSL__wgpuGradientBevelEffect) }] : Array<Dynamic>));
+      var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([(cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBGLayout, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout] : Array<Dynamic>) }] : Array<Dynamic>));
+      var pipeline:flighthq._internal.dom.GPURenderPipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
       (p = cast ({ pipeline: pipeline, blendMode: 'premul' } : Dynamic));
-      ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).set(state, p));
+      ((cast WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, p));
     }
     return cast p;
     return cast null;
   }
 
   public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
-    var p:Dynamic = cast _Runtime.UNDEFINED;
-    p = ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).get(state));
+    var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    p = ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var fs:Dynamic = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
-      var __destructure2:Dynamic = state;
-      var device:Dynamic = _Runtime.field(__destructure2, 'device');
-      var format:Dynamic = _Runtime.field(__destructure2, 'format');
-      var shaderModule:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect) }] : Array<Dynamic>));
-      var pipelineLayout:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
-      var pipeline:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+      var fs:{ var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; } = (cast getWgpuEffectPassState((cast state : WgpuRenderState)) : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; });
+      var __destructure5 = state;
+      var device:flighthq._internal.dom.GPUDevice = _Runtime.field(__destructure5, 'device');
+      var format:String = _Runtime.field(__destructure5, 'format');
+      var shaderModule:flighthq._internal.dom.GPUShaderModule = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect) }] : Array<Dynamic>));
+      var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([(cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBGLayout, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout] : Array<Dynamic>) }] : Array<Dynamic>));
+      var pipeline:flighthq._internal.dom.GPURenderPipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
       (p = cast ({ pipeline: pipeline, blendMode: 'replace' } : Dynamic));
-      ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap).set(state, p));
+      ((cast WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, p));
     }
     return cast p;
     return cast null;
   }
 
-  public static final encodePipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final encodePipelines__wgpuGradientBevelEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final applyPipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final applyPipelines__wgpuGradientBevelEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

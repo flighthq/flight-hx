@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 
 class ColorFromKelvin {
   public static function colorFromKelvin(kelvin:Float):Float {
-    var temp:Dynamic = cast _Runtime.UNDEFINED;
+    var temp:Float = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    var ri:Dynamic = cast _Runtime.UNDEFINED;
-    var gi:Dynamic = cast _Runtime.UNDEFINED;
-    var bi:Dynamic = cast _Runtime.UNDEFINED;
+    var ri:Float = cast _Runtime.UNDEFINED;
+    var gi:Float = cast _Runtime.UNDEFINED;
+    var bi:Float = cast _Runtime.UNDEFINED;
     temp = _Runtime.divideNumbers(HxMath.max(1000.0, HxMath.min(40000.0, kelvin)), 100.0);
     if ((cast ((cast temp : Float) <= (cast 66.0 : Float)) : Bool)) {
       (r = cast (255.0 : Dynamic));

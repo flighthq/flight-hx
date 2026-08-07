@@ -12,6 +12,6 @@ typedef ConnectivityReachability = { var reachable:Bool; var latency:Float; };
 
 typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeout:Float; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
-typedef ConnectivityBackend = { var getStatus:Dynamic; @:optional var detectReachability:Dynamic; var subscribe:Dynamic; };
+typedef ConnectivityBackend = { var getStatus:ConnectivityStatus->ConnectivityStatus; @:optional var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flighthq._internal._Promise<ConnectivityReachability>; var subscribe:Void->Void->Void->Void; };
 
-typedef Connectivity = { var onChange:Signal<Dynamic>; var onConnectionTypeChange:Signal<Dynamic>; var onMeteredChange:Signal<Dynamic>; var onOnline:Signal<Dynamic>; var onOffline:Signal<Dynamic>; };
+typedef Connectivity = { var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOnline:Signal<Void->Void>; var onOffline:Signal<Void->Void>; };

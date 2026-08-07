@@ -7,5 +7,5 @@ import flighthq.types.Modifier;
 import flighthq.types.Texture;
 
 class _DissolveModifierValues {
-  public static final DissolveModifierKind:Dynamic = 'DissolveModifier';
+  public static final DissolveModifierKind:String = 'DissolveModifier';
 }

@@ -5,26 +5,27 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.bitmap.BitmapPaletteMap.applyBitmapPaletteMap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapHistogram;
 import flighthq.types.BitmapRegion;
 
 class BitmapHistogram {
   public static function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
-    var histogram:Dynamic = cast _Runtime.UNDEFINED;
-    var total:Dynamic = cast _Runtime.UNDEFINED;
-    histogram = _Runtime.callValue(getBitmapHistogram, cast ([source] : Array<Dynamic>));
+    var histogram:flighthq.types.BitmapHistogram = cast _Runtime.UNDEFINED;
+    var total:Float = cast _Runtime.UNDEFINED;
+    histogram = (cast getBitmapHistogram((cast source : BitmapRegion)) : flighthq.types.BitmapHistogram);
     total = _Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    _Runtime.callValue(applyBitmapPaletteMap, cast ([dest, source, _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'red'), total] : Array<Dynamic>)), _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'green'), total] : Array<Dynamic>)), _Runtime.callValue(BitmapHistogram.buildEqualizeMap__bitmapHistogram, cast ([_Runtime.field(histogram, 'blue'), total] : Array<Dynamic>)), null] : Array<Dynamic>));
-    _Runtime.callValue(invalidateBitmap, cast ([_Runtime.field(dest, 'bitmap')] : Array<Dynamic>));
+    applyBitmapPaletteMap((cast dest : BitmapRegion), (cast source : BitmapRegion), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).red : Array<Float>), (cast total : Float)) : Null<Array<Float>>) : Null<Array<Float>>), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).green : Array<Float>), (cast total : Float)) : Null<Array<Float>>) : Null<Array<Float>>), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).blue : Array<Float>), (cast total : Float)) : Null<Array<Float>>) : Null<Array<Float>>), (cast null : Null<Array<Float>>));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function getBitmapHistogram(source:BitmapRegion):flighthq.types.BitmapHistogram {
-    var red:Dynamic = cast _Runtime.UNDEFINED;
-    var green:Dynamic = cast _Runtime.UNDEFINED;
-    var blue:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
+    var red:Array<Float> = cast _Runtime.UNDEFINED;
+    var green:Array<Float> = cast _Runtime.UNDEFINED;
+    var blue:Array<Float> = cast _Runtime.UNDEFINED;
+    var alpha:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
     red = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     green = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     blue = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
@@ -32,16 +33,16 @@ class BitmapHistogram {
     data = _Runtime.field(source, 'bitmap').data;
     bitmapWidth = _Runtime.field(source, 'bitmap').width;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var y:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var y:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var x:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var x:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var i:Dynamic = (((y * bitmapWidth) + x) * 4.0);
+            var i:Float = (((y * bitmapWidth) + x) * 4.0);
             _Runtime.incrementIndex(red, flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), 1, true);
             _Runtime.incrementIndex(green, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), 1, true);
             _Runtime.incrementIndex(blue, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), 1, true);
@@ -57,14 +58,14 @@ class BitmapHistogram {
   }
 
   public static function buildEqualizeMap__bitmapHistogram(bins:Array<Float>, total:Float):Array<Float> {
-    var map:Dynamic = cast _Runtime.UNDEFINED;
-    var cdf:Dynamic = cast _Runtime.UNDEFINED;
-    var cdfMin:Dynamic = cast _Runtime.UNDEFINED;
+    var map:Array<Float> = cast _Runtime.UNDEFINED;
+    var cdf:Float = cast _Runtime.UNDEFINED;
+    var cdfMin:Float = cast _Runtime.UNDEFINED;
     map = _Runtime.createArray(256.0);
     cdf = 0.0;
     cdfMin = -1.0;
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         (cdf = cast ((cdf + flighthq._internal._StaticIndex.readArray(bins, i)) : Dynamic));
         if ((cast ((cast ((cast flighthq._internal._StaticIndex.readArray(bins, i) : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(cdfMin, -1.0) : Bool)) : Bool)) { (cdfMin = cast (cdf : Dynamic)); }

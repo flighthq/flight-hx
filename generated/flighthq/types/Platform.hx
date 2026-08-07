@@ -16,4 +16,4 @@ typedef PlatformRuntime = String;
 
 typedef PlatformInfo = { var name:PlatformName; var kind:PlatformKind; var version:String; var arch:String; var locale:String; var isTouch:Bool; var runtime:PlatformRuntime; var engine:PlatformEngine; var engineVersion:String; var endianness:PlatformEndianness; var pointerWidth:Float; var osBuild:String; var distro:String; var distroVersion:String; };
 
-typedef PlatformBackend = { var getInfo:Dynamic; };
+typedef PlatformBackend = { var getInfo:PlatformInfo->PlatformInfo; };

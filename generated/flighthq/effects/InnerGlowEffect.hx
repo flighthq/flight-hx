@@ -18,16 +18,16 @@ class InnerGlowEffect {
   }
 
   public static function getInnerGlowEffectPadding(effect:flighthq.types.InnerGlowEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getGaussianRenderEffectPadding, cast ([_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)] : Array<Dynamic>));
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerInnerGlowEffectPaddingResolver(state:RenderState):Void {
-    _Runtime.callValue(registerRenderEffectPaddingResolver, cast ([state, 'InnerGlowEffect', InnerGlowEffect.resolveInnerGlowEffectPadding__innerGlowEffect] : Array<Dynamic>));
+    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'InnerGlowEffect' : String), InnerGlowEffect.resolveInnerGlowEffectPadding__innerGlowEffect);
   }
 
   public static function resolveInnerGlowEffectPadding__innerGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast _Runtime.callValue(getInnerGlowEffectPadding, cast ([(cast effect : flighthq.types.InnerGlowEffect)] : Array<Dynamic>));
+    return cast (cast getInnerGlowEffectPadding((cast (cast effect : flighthq.types.InnerGlowEffect) : flighthq.types.InnerGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

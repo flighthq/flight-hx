@@ -68,7 +68,7 @@ class Math {
     return cast null;
   }
 
-  public static final DEG_TO_RAD:Dynamic = Facade_Math_flighthq_math_Constants.DEG_TO_RAD;
+  public static final DEG_TO_RAD:Float = Facade_Math_flighthq_math_Constants.DEG_TO_RAD;
 
   public static function degToRad(degrees:Float):Float {
     return cast Facade_Math_flighthq_math_Angle.degToRad(degrees);
@@ -80,7 +80,7 @@ class Math {
     return cast null;
   }
 
-  public static final EPSILON:Dynamic = Facade_Math_flighthq_math_Constants.EPSILON;
+  public static final EPSILON:Float = Facade_Math_flighthq_math_Constants.EPSILON;
 
   public static function euclideanMod(value:Float, divisor:Float):Float {
     return cast Facade_Math_flighthq_math_Rounding.euclideanMod(value, divisor);
@@ -112,7 +112,7 @@ class Math {
     return cast null;
   }
 
-  public static final HALF_PI:Dynamic = Facade_Math_flighthq_math_Constants.HALF_PI;
+  public static final HALF_PI:Float = Facade_Math_flighthq_math_Constants.HALF_PI;
 
   public static function hash2D(x:Float, y:Float):Float {
     return cast Facade_Math_flighthq_math_Hash.hash2D(x, y);
@@ -209,7 +209,7 @@ class Math {
     return cast null;
   }
 
-  public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
+  public static function pick<T>(random:RandomSource, items:Array<T>):Null<T> {
     return cast Facade_Math_flighthq_math_RandomDistributions.pick(random, items);
     return cast null;
   }
@@ -229,7 +229,7 @@ class Math {
     return cast null;
   }
 
-  public static final RAD_TO_DEG:Dynamic = Facade_Math_flighthq_math_Constants.RAD_TO_DEG;
+  public static final RAD_TO_DEG:Float = Facade_Math_flighthq_math_Constants.RAD_TO_DEG;
 
   public static function radToDeg(radians:Float):Float {
     return cast Facade_Math_flighthq_math_Angle.radToDeg(radians);
@@ -317,12 +317,12 @@ class Math {
     return cast null;
   }
 
-  public static function shuffle<T>(random:RandomSource, items:Array<Dynamic>):Array<Dynamic> {
+  public static function shuffle<T>(random:RandomSource, items:Array<T>):Array<T> {
     return cast Facade_Math_flighthq_math_RandomDistributions.shuffle(random, items);
     return cast null;
   }
 
-  public static function shuffleInPlace<T>(random:RandomSource, items:Array<Dynamic>):Void {
+  public static function shuffleInPlace<T>(random:RandomSource, items:Array<T>):Void {
     Facade_Math_flighthq_math_RandomDistributions.shuffleInPlace(random, items);
   }
 
@@ -351,7 +351,7 @@ class Math {
     return cast null;
   }
 
-  public static final TAU:Dynamic = Facade_Math_flighthq_math_Constants.TAU;
+  public static final TAU:Float = Facade_Math_flighthq_math_Constants.TAU;
 
   public static function variance(values:Array<Float>):Float {
     return cast Facade_Math_flighthq_math_Statistics.variance(values);

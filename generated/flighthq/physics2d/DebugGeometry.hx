@@ -4,13 +4,23 @@ package flighthq.physics2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.World.findPhysics2DBody;
+import flighthq.types.Collision.CollisionAabb;
+import flighthq.types.Collision.CollisionCircle;
+import flighthq.types.Collision.CollisionObb;
+import flighthq.types.Collision.CollisionPoint;
+import flighthq.types.Collision.CollisionPolygon;
+import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Physics2D.Physics2DCollider;
+import flighthq.types.Physics2D.Physics2DContact;
+import flighthq.types.Physics2D.Physics2DContactPoint;
 import flighthq.types.Physics2D.Physics2DDebugCircle;
 import flighthq.types.Physics2D.Physics2DDebugFeature;
 import flighthq.types.Physics2D.Physics2DDebugGeometry;
 import flighthq.types.Physics2D.Physics2DDebugGeometryOptions;
 import flighthq.types.Physics2D.Physics2DDebugLine;
 import flighthq.types.Physics2D.Physics2DJoint;
+import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DMouseJoint;
 import flighthq.types.Physics2D.Physics2DPulleyJoint;
 import flighthq.types.Physics2D.Physics2DWorld;
@@ -26,24 +36,24 @@ class DebugGeometry {
 
   public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:Dynamic):Void {
     if (options == null) options = cast ({ drawCentersOfMass: true, drawColliders: true, drawContacts: true, drawJoints: true, centerOfMassRadius: 0.08, contactNormalLength: 0.5, pointRadius: 0.04 } : Dynamic);
-    _Runtime.setField(out, 'lineCount', 0.0);
-    _Runtime.setField(out, 'circleCount', 0.0);
+    ((cast out : Physics2DDebugGeometry).lineCount = 0.0);
+    ((cast out : Physics2DDebugGeometry).circleCount = 0.0);
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawColliders'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawColliders) : Bool)) {
       for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-        for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
-          _Runtime.callValue(DebugGeometry.writeCollider__debugGeometry, cast ([out, _Runtime.field(collider, 'local'), body, options] : Array<Dynamic>));
+        for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
+          DebugGeometry.writeCollider__debugGeometry((cast out : Physics2DDebugGeometry), (cast (cast collider : Physics2DCollider).local : CollisionShape), (cast body : RigidBody2D), (cast options : flighthq._internal._Any));
         }
       }
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawContacts'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawContacts) : Bool)) {
-      var length:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'contactNormalLength'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.contactNormalLength);
+      var length:Float = _Runtime.coalesce(_Runtime.field(options, 'contactNormalLength'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.contactNormalLength);
       for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-        if ((cast !(cast _Runtime.field(contact, 'touching') : Bool) : Bool)) { continue; }
+        if ((cast !(cast (cast contact : Physics2DContact).touching : Bool) : Bool)) { continue; }
         {
-          var i:Dynamic = 0.0;
-          while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
-            var point:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
-            _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'contact-normal', _Runtime.field(contact, 'bodyA'), _Runtime.field(contact, 'bodyB'), _Runtime.field(point, 'x'), _Runtime.field(point, 'y'), _Runtime.addNumbers(_Runtime.field(point, 'x'), _Runtime.multiplyNumbers(_Runtime.field(contact, 'normalX'), length)), _Runtime.addNumbers(_Runtime.field(point, 'y'), _Runtime.multiplyNumbers(_Runtime.field(contact, 'normalY'), length))] : Array<Dynamic>));
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast (cast contact : Physics2DContact).pointCount : Float)) : Bool)) {
+            var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics2DContact).points, i);
+            DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'contact-normal' : Physics2DDebugFeature), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float), (cast (cast point : Physics2DContactPoint).x : Float), (cast (cast point : Physics2DContactPoint).y : Float), (cast ((cast point : Physics2DContactPoint).x + ((cast contact : Physics2DContact).normalX * length)) : Float), (cast ((cast point : Physics2DContactPoint).y + ((cast contact : Physics2DContact).normalY * length)) : Float));
             i++;
           }
         }
@@ -51,64 +61,64 @@ class DebugGeometry {
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawJoints'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawJoints) : Bool)) {
       for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
-        _Runtime.callValue(DebugGeometry.writeJoint__debugGeometry, cast ([out, world, joint] : Array<Dynamic>));
+        DebugGeometry.writeJoint__debugGeometry((cast out : Physics2DDebugGeometry), (cast world : Physics2DWorld), (cast joint : Physics2DJoint));
       }
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawCentersOfMass'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawCentersOfMass) : Bool)) {
-      var radius:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'centerOfMassRadius'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.centerOfMassRadius);
+      var radius:Float = _Runtime.coalesce(_Runtime.field(options, 'centerOfMassRadius'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.centerOfMassRadius);
       for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-        var cos:Dynamic = HxMath.cos(_Runtime.field(body, 'angle'));
-        var sin:Dynamic = HxMath.sin(_Runtime.field(body, 'angle'));
-        _Runtime.callValue(DebugGeometry.writeCircle__debugGeometry, cast ([out, 'center-of-mass', _Runtime.field(body, 'index'), -1.0, (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(body, 'centerX'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(body, 'centerY'), sin)), (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(body, 'centerX'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(body, 'centerY'), cos)), radius] : Array<Dynamic>));
+        var cos:Float = HxMath.cos((cast body : RigidBody2D).angle);
+        var sin:Float = HxMath.sin((cast body : RigidBody2D).angle);
+        DebugGeometry.writeCircle__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'center-of-mass' : Physics2DDebugFeature), (cast (cast body : RigidBody2D).index : Float), (cast -1.0 : Float), (cast (((cast body : RigidBody2D).x + ((cast body : RigidBody2D).centerX * cos)) - ((cast body : RigidBody2D).centerY * sin)) : Float), (cast (((cast body : RigidBody2D).y + ((cast body : RigidBody2D).centerX * sin)) + ((cast body : RigidBody2D).centerY * cos)) : Float), (cast radius : Float));
       }
     }
   }
 
   public static function writeCollider__debugGeometry(out:Physics2DDebugGeometry, shape:CollisionShape, body:RigidBody2D, options:Dynamic):Void {
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(_Runtime.field(body, 'angle'));
     sin = HxMath.sin(_Runtime.field(body, 'angle'));
     {
-      var __switchValue = _Runtime.field(shape, 'kind');
+      var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
         {
-          var x:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), sin));
-          var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), cos));
-          _Runtime.callValue(DebugGeometry.writeCircle__debugGeometry, cast ([out, 'collider', _Runtime.field(body, 'index'), -1.0, x, y, _Runtime.field(shape, 'radius')] : Array<Dynamic>));
+          var x:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { >CollisionCircle, var kind:String; }).x * cos)) - ((cast shape : { >CollisionCircle, var kind:String; }).y * sin));
+          var y:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { >CollisionCircle, var kind:String; }).x * sin)) + ((cast shape : { >CollisionCircle, var kind:String; }).y * cos));
+          DebugGeometry.writeCircle__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x : Float), (cast y : Float), (cast (cast shape : { >CollisionCircle, var kind:String; }).radius : Float));
           return;
         }
       }
       else if (__switchValue == 'aabb') {
         {
-          var centerX:Dynamic = (_Runtime.addNumbers(_Runtime.field(shape, 'minX'), _Runtime.field(shape, 'maxX')) / 2.0);
-          var centerY:Dynamic = (_Runtime.addNumbers(_Runtime.field(shape, 'minY'), _Runtime.field(shape, 'maxY')) / 2.0);
-          _Runtime.callValue(DebugGeometry.writeOrientedBox__debugGeometry, cast ([out, _Runtime.field(body, 'index'), (_Runtime.addNumbers(_Runtime.field(body, 'x'), (centerX * cos)) - (centerY * sin)), (_Runtime.addNumbers(_Runtime.field(body, 'y'), (centerX * sin)) + (centerY * cos)), (_Runtime.subtractNumbers(_Runtime.field(shape, 'maxX'), _Runtime.field(shape, 'minX')) / 2.0), (_Runtime.subtractNumbers(_Runtime.field(shape, 'maxY'), _Runtime.field(shape, 'minY')) / 2.0), _Runtime.field(body, 'angle')] : Array<Dynamic>));
+          var centerX:Float = (((cast shape : { >CollisionAabb, var kind:String; }).minX + (cast shape : { >CollisionAabb, var kind:String; }).maxX) / 2.0);
+          var centerY:Float = (((cast shape : { >CollisionAabb, var kind:String; }).minY + (cast shape : { >CollisionAabb, var kind:String; }).maxY) / 2.0);
+          DebugGeometry.writeOrientedBox__debugGeometry((cast out : Physics2DDebugGeometry), (cast _Runtime.field(body, 'index') : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'x'), (centerX * cos)) - (centerY * sin)) : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'y'), (centerX * sin)) + (centerY * cos)) : Float), (cast (((cast shape : { >CollisionAabb, var kind:String; }).maxX - (cast shape : { >CollisionAabb, var kind:String; }).minX) / 2.0) : Float), (cast (((cast shape : { >CollisionAabb, var kind:String; }).maxY - (cast shape : { >CollisionAabb, var kind:String; }).minY) / 2.0) : Float), (cast _Runtime.field(body, 'angle') : Float));
           return;
         }
       }
       else if (__switchValue == 'obb') {
         {
-          _Runtime.callValue(DebugGeometry.writeOrientedBox__debugGeometry, cast ([out, _Runtime.field(body, 'index'), (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), sin)), (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), cos)), _Runtime.field(shape, 'halfW'), _Runtime.field(shape, 'halfH'), _Runtime.addNumbers(_Runtime.field(body, 'angle'), _Runtime.field(shape, 'rotation'))] : Array<Dynamic>));
+          DebugGeometry.writeOrientedBox__debugGeometry((cast out : Physics2DDebugGeometry), (cast _Runtime.field(body, 'index') : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { >CollisionObb, var kind:String; }).x * cos)) - ((cast shape : { >CollisionObb, var kind:String; }).y * sin)) : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { >CollisionObb, var kind:String; }).x * sin)) + ((cast shape : { >CollisionObb, var kind:String; }).y * cos)) : Float), (cast (cast shape : { >CollisionObb, var kind:String; }).halfW : Float), (cast (cast shape : { >CollisionObb, var kind:String; }).halfH : Float), (cast _Runtime.addNumbers(_Runtime.field(body, 'angle'), (cast shape : { >CollisionObb, var kind:String; }).rotation) : Float));
           return;
         }
       }
       else if (__switchValue == 'polygon') {
         {
-          var points:Dynamic = _Runtime.field(shape, 'points');
+          var points:Array<Float> = (cast shape : { >CollisionPolygon, var kind:String; }).points;
           if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-          var localX:Dynamic = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0));
-          var localY:Dynamic = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0));
-          var previousX:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
-          var previousY:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
+          var localX:Float = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0));
+          var localY:Float = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0));
+          var previousX:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
+          var previousY:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
           {
-            var i:Dynamic = 0.0;
+            var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
               (localX = cast (flighthq._internal._StaticIndex.readArray(points, i) : Dynamic));
               (localY = cast (flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Dynamic));
-              var x:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
-              var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
-              _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', _Runtime.field(body, 'index'), -1.0, previousX, previousY, x, y] : Array<Dynamic>));
+              var x:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
+              var y:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
+              DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast previousX : Float), (cast previousY : Float), (cast x : Float), (cast y : Float));
               (previousX = cast (x : Dynamic));
               (previousY = cast (y : Dynamic));
               (i = cast ((i + 2.0) : Dynamic));
@@ -119,35 +129,35 @@ class DebugGeometry {
       }
       else if (__switchValue == 'segment') {
         {
-          var x0:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x0'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(shape, 'y0'), sin));
-          var y0:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x0'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'y0'), cos));
-          var x1:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x1'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(shape, 'y1'), sin));
-          var y1:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x1'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'y1'), cos));
-          _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', _Runtime.field(body, 'index'), -1.0, x0, y0, x1, y1] : Array<Dynamic>));
+          var x0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { >CollisionSegment, var kind:String; }).x0 * cos)) - ((cast shape : { >CollisionSegment, var kind:String; }).y0 * sin));
+          var y0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { >CollisionSegment, var kind:String; }).x0 * sin)) + ((cast shape : { >CollisionSegment, var kind:String; }).y0 * cos));
+          var x1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { >CollisionSegment, var kind:String; }).x1 * cos)) - ((cast shape : { >CollisionSegment, var kind:String; }).y1 * sin));
+          var y1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { >CollisionSegment, var kind:String; }).x1 * sin)) + ((cast shape : { >CollisionSegment, var kind:String; }).y1 * cos));
+          DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
           return;
         }
       }
       else if (__switchValue == 'point') {
         {
-          var x:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), cos)) - _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), sin));
-          var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(_Runtime.field(shape, 'x'), sin)) + _Runtime.multiplyNumbers(_Runtime.field(shape, 'y'), cos));
-          _Runtime.callValue(DebugGeometry.writeCircle__debugGeometry, cast ([out, 'collider', _Runtime.field(body, 'index'), -1.0, x, y, _Runtime.coalesce(_Runtime.field(options, 'pointRadius'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.pointRadius)] : Array<Dynamic>));
+          var x:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { >CollisionPoint, var kind:String; }).x * cos)) - ((cast shape : { >CollisionPoint, var kind:String; }).y * sin));
+          var y:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { >CollisionPoint, var kind:String; }).x * sin)) + ((cast shape : { >CollisionPoint, var kind:String; }).y * cos));
+          DebugGeometry.writeCircle__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x : Float), (cast y : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'pointRadius'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.pointRadius) : Float));
         }
       }
     }
   }
 
   public static function writeOrientedBox__debugGeometry(out:Physics2DDebugGeometry, bodyIndex:Float, centerX:Float, centerY:Float, halfW:Float, halfH:Float, rotation:Float):Void {
-    var cos:Dynamic = cast _Runtime.UNDEFINED;
-    var sin:Dynamic = cast _Runtime.UNDEFINED;
-    var x0:Dynamic = cast _Runtime.UNDEFINED;
-    var y0:Dynamic = cast _Runtime.UNDEFINED;
-    var x1:Dynamic = cast _Runtime.UNDEFINED;
-    var y1:Dynamic = cast _Runtime.UNDEFINED;
-    var x2:Dynamic = cast _Runtime.UNDEFINED;
-    var y2:Dynamic = cast _Runtime.UNDEFINED;
-    var x3:Dynamic = cast _Runtime.UNDEFINED;
-    var y3:Dynamic = cast _Runtime.UNDEFINED;
+    var cos:Float = cast _Runtime.UNDEFINED;
+    var sin:Float = cast _Runtime.UNDEFINED;
+    var x0:Float = cast _Runtime.UNDEFINED;
+    var y0:Float = cast _Runtime.UNDEFINED;
+    var x1:Float = cast _Runtime.UNDEFINED;
+    var y1:Float = cast _Runtime.UNDEFINED;
+    var x2:Float = cast _Runtime.UNDEFINED;
+    var y2:Float = cast _Runtime.UNDEFINED;
+    var x3:Float = cast _Runtime.UNDEFINED;
+    var y3:Float = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(rotation);
     sin = HxMath.sin(rotation);
     x0 = ((centerX - (halfW * cos)) + (halfH * sin));
@@ -158,46 +168,46 @@ class DebugGeometry {
     y2 = ((centerY + (halfW * sin)) + (halfH * cos));
     x3 = ((centerX - (halfW * cos)) - (halfH * sin));
     y3 = ((centerY - (halfW * sin)) + (halfH * cos));
-    _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', bodyIndex, -1.0, x0, y0, x1, y1] : Array<Dynamic>));
-    _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', bodyIndex, -1.0, x1, y1, x2, y2] : Array<Dynamic>));
-    _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', bodyIndex, -1.0, x2, y2, x3, y3] : Array<Dynamic>));
-    _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'collider', bodyIndex, -1.0, x3, y3, x0, y0] : Array<Dynamic>));
+    DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
+    DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x1 : Float), (cast y1 : Float), (cast x2 : Float), (cast y2 : Float));
+    DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x2 : Float), (cast y2 : Float), (cast x3 : Float), (cast y3 : Float));
+    DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'collider' : Physics2DDebugFeature), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x3 : Float), (cast y3 : Float), (cast x0 : Float), (cast y0 : Float));
   }
 
   public static function writeJoint__debugGeometry(out:Physics2DDebugGeometry, world:Physics2DWorld, joint:Physics2DJoint):Void {
-    var bodyB:Dynamic = cast _Runtime.UNDEFINED;
-    var anchorBX:Dynamic = cast _Runtime.UNDEFINED;
-    var anchorBY:Dynamic = cast _Runtime.UNDEFINED;
-    var bodyA:Dynamic = cast _Runtime.UNDEFINED;
-    var anchorAX:Dynamic = cast _Runtime.UNDEFINED;
-    var anchorAY:Dynamic = cast _Runtime.UNDEFINED;
-    bodyB = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(joint, 'bodyB')] : Array<Dynamic>));
+    var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
+    var anchorBX:Float = cast _Runtime.UNDEFINED;
+    var anchorBY:Float = cast _Runtime.UNDEFINED;
+    var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
+    var anchorAX:Float = cast _Runtime.UNDEFINED;
+    var anchorAY:Float = cast _Runtime.UNDEFINED;
+    bodyB = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast _Runtime.field(joint, 'bodyB') : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyB, null) : Bool)) { return; }
-    anchorBX = _Runtime.callValue(DebugGeometry.jointAnchorX__debugGeometry, cast ([bodyB, _Runtime.field(joint, 'localAnchorBX'), _Runtime.field(joint, 'localAnchorBY')] : Array<Dynamic>));
-    anchorBY = _Runtime.callValue(DebugGeometry.jointAnchorY__debugGeometry, cast ([bodyB, _Runtime.field(joint, 'localAnchorBX'), _Runtime.field(joint, 'localAnchorBY')] : Array<Dynamic>));
+    anchorBX = (cast DebugGeometry.jointAnchorX__debugGeometry((cast bodyB : RigidBody2D), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
+    anchorBY = (cast DebugGeometry.jointAnchorY__debugGeometry((cast bodyB : RigidBody2D), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(joint, 'kind'), 'Mouse') : Bool)) {
-      var mouse:Dynamic = (cast joint : Physics2DMouseJoint);
-      _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'joint', _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'), _Runtime.field(mouse, 'targetX'), _Runtime.field(mouse, 'targetY'), anchorBX, anchorBY] : Array<Dynamic>));
+      var mouse:Physics2DMouseJoint = (cast joint : Physics2DMouseJoint);
+      DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'joint' : Physics2DDebugFeature), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast mouse : Physics2DMouseJoint).targetX : Float), (cast (cast mouse : Physics2DMouseJoint).targetY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.optionalField(((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map).get(_Runtime.field(joint, 'kind'))), 'usesBodyA'), false) : Bool)) { return; }
-    bodyA = _Runtime.callValue(findPhysics2DBody, cast ([world, _Runtime.field(joint, 'bodyA')] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(_Runtime.optionalField(((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get(_Runtime.field(joint, 'kind'))), 'usesBodyA'), false) : Bool)) { return; }
+    bodyA = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast _Runtime.field(joint, 'bodyA') : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyA, null) : Bool)) { return; }
-    anchorAX = _Runtime.callValue(DebugGeometry.jointAnchorX__debugGeometry, cast ([bodyA, _Runtime.field(joint, 'localAnchorAX'), _Runtime.field(joint, 'localAnchorAY')] : Array<Dynamic>));
-    anchorAY = _Runtime.callValue(DebugGeometry.jointAnchorY__debugGeometry, cast ([bodyA, _Runtime.field(joint, 'localAnchorAX'), _Runtime.field(joint, 'localAnchorAY')] : Array<Dynamic>));
+    anchorAX = (cast DebugGeometry.jointAnchorX__debugGeometry((cast bodyA : RigidBody2D), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
+    anchorAY = (cast DebugGeometry.jointAnchorY__debugGeometry((cast bodyA : RigidBody2D), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(joint, 'kind'), 'Pulley') : Bool)) {
-      var pulley:Dynamic = (cast joint : Physics2DPulleyJoint);
-      _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'joint', _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'), _Runtime.field(pulley, 'groundAnchorAX'), _Runtime.field(pulley, 'groundAnchorAY'), anchorAX, anchorAY] : Array<Dynamic>));
-      _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'joint', _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'), _Runtime.field(pulley, 'groundAnchorBX'), _Runtime.field(pulley, 'groundAnchorBY'), anchorBX, anchorBY] : Array<Dynamic>));
-      _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'joint', _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'), _Runtime.field(pulley, 'groundAnchorAX'), _Runtime.field(pulley, 'groundAnchorAY'), _Runtime.field(pulley, 'groundAnchorBX'), _Runtime.field(pulley, 'groundAnchorBY')] : Array<Dynamic>));
+      var pulley:Physics2DPulleyJoint = (cast joint : Physics2DPulleyJoint);
+      DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'joint' : Physics2DDebugFeature), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorAX : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorAY : Float), (cast anchorAX : Float), (cast anchorAY : Float));
+      DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'joint' : Physics2DDebugFeature), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorBX : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorBY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
+      DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'joint' : Physics2DDebugFeature), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorAX : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorAY : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorBX : Float), (cast (cast pulley : Physics2DPulleyJoint).groundAnchorBY : Float));
       return;
     }
-    _Runtime.callValue(DebugGeometry.writeLine__debugGeometry, cast ([out, 'joint', _Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'), anchorAX, anchorAY, anchorBX, anchorBY] : Array<Dynamic>));
+    DebugGeometry.writeLine__debugGeometry((cast out : Physics2DDebugGeometry), (cast 'joint' : Physics2DDebugFeature), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast anchorAX : Float), (cast anchorAY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
   }
 
   public static function jointAnchorX__debugGeometry(body:RigidBody2D, localX:Float, localY:Float):Float {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     x = _Runtime.subtractNumbers(localX, _Runtime.field(body, 'centerX'));
     y = _Runtime.subtractNumbers(localY, _Runtime.field(body, 'centerY'));
     return cast (_Runtime.addNumbers(_Runtime.field(body, 'x'), _Runtime.multiplyNumbers(x, HxMath.cos(_Runtime.field(body, 'angle')))) - _Runtime.multiplyNumbers(y, HxMath.sin(_Runtime.field(body, 'angle'))));
@@ -205,8 +215,8 @@ class DebugGeometry {
   }
 
   public static function jointAnchorY__debugGeometry(body:RigidBody2D, localX:Float, localY:Float):Float {
-    var x:Dynamic = cast _Runtime.UNDEFINED;
-    var y:Dynamic = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     x = _Runtime.subtractNumbers(localX, _Runtime.field(body, 'centerX'));
     y = _Runtime.subtractNumbers(localY, _Runtime.field(body, 'centerY'));
     return cast (_Runtime.addNumbers(_Runtime.field(body, 'y'), _Runtime.multiplyNumbers(x, HxMath.sin(_Runtime.field(body, 'angle')))) + _Runtime.multiplyNumbers(y, HxMath.cos(_Runtime.field(body, 'angle'))));
@@ -215,32 +225,32 @@ class DebugGeometry {
 
   public static function writeLine__debugGeometry(out:Physics2DDebugGeometry, feature:Physics2DDebugFeature, bodyA:Float, bodyB:Float, x0:Float, y0:Float, x1:Float, y1:Float):Void {
     var line:Physics2DDebugLine = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(out, 'lineCount') : Float) < (cast _Runtime.field(_Runtime.field(out, 'lines'), 'length') : Float)) : Bool)) { (line = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(out, 'lines'), _Runtime.field(out, 'lineCount')) : Dynamic)); } else {
+    if ((cast ((cast (cast out : Physics2DDebugGeometry).lineCount : Float) < (cast _Runtime.field((cast out : Physics2DDebugGeometry).lines, 'length') : Float)) : Bool)) { (line = cast (flighthq._internal._StaticIndex.readArray((cast out : Physics2DDebugGeometry).lines, (cast out : Physics2DDebugGeometry).lineCount) : Dynamic)); } else {
       (line = cast ({ bodyA: -1.0, bodyB: -1.0, feature: 'collider', x0: 0.0, x1: 0.0, y0: 0.0, y1: 0.0 } : Dynamic));
-      _Runtime.callProperty(_Runtime.field(out, 'lines'), 'push', cast ([line] : Array<Dynamic>));
+      _Runtime.callProperty((cast out : Physics2DDebugGeometry).lines, 'push', cast ([line] : Array<Dynamic>));
     }
-    _Runtime.incrementField(out, 'lineCount', 1, true);
-    _Runtime.setField(line, 'feature', feature);
-    _Runtime.setField(line, 'bodyA', bodyA);
-    _Runtime.setField(line, 'bodyB', bodyB);
-    _Runtime.setField(line, 'x0', x0);
-    _Runtime.setField(line, 'y0', y0);
-    _Runtime.setField(line, 'x1', x1);
-    _Runtime.setField(line, 'y1', y1);
+    (cast out : Physics2DDebugGeometry).lineCount++;
+    ((cast line : Physics2DDebugLine).feature = feature);
+    ((cast line : Physics2DDebugLine).bodyA = bodyA);
+    ((cast line : Physics2DDebugLine).bodyB = bodyB);
+    ((cast line : Physics2DDebugLine).x0 = x0);
+    ((cast line : Physics2DDebugLine).y0 = y0);
+    ((cast line : Physics2DDebugLine).x1 = x1);
+    ((cast line : Physics2DDebugLine).y1 = y1);
   }
 
   public static function writeCircle__debugGeometry(out:Physics2DDebugGeometry, feature:Physics2DDebugFeature, bodyA:Float, bodyB:Float, x:Float, y:Float, radius:Float):Void {
     var circle:Physics2DDebugCircle = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(out, 'circleCount') : Float) < (cast _Runtime.field(_Runtime.field(out, 'circles'), 'length') : Float)) : Bool)) { (circle = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(out, 'circles'), _Runtime.field(out, 'circleCount')) : Dynamic)); } else {
+    if ((cast ((cast (cast out : Physics2DDebugGeometry).circleCount : Float) < (cast _Runtime.field((cast out : Physics2DDebugGeometry).circles, 'length') : Float)) : Bool)) { (circle = cast (flighthq._internal._StaticIndex.readArray((cast out : Physics2DDebugGeometry).circles, (cast out : Physics2DDebugGeometry).circleCount) : Dynamic)); } else {
       (circle = cast ({ bodyA: -1.0, bodyB: -1.0, feature: 'collider', radius: 0.0, x: 0.0, y: 0.0 } : Dynamic));
-      _Runtime.callProperty(_Runtime.field(out, 'circles'), 'push', cast ([circle] : Array<Dynamic>));
+      _Runtime.callProperty((cast out : Physics2DDebugGeometry).circles, 'push', cast ([circle] : Array<Dynamic>));
     }
-    _Runtime.incrementField(out, 'circleCount', 1, true);
-    _Runtime.setField(circle, 'feature', feature);
-    _Runtime.setField(circle, 'bodyA', bodyA);
-    _Runtime.setField(circle, 'bodyB', bodyB);
-    _Runtime.setField(circle, 'x', x);
-    _Runtime.setField(circle, 'y', y);
-    _Runtime.setField(circle, 'radius', radius);
+    (cast out : Physics2DDebugGeometry).circleCount++;
+    ((cast circle : Physics2DDebugCircle).feature = feature);
+    ((cast circle : Physics2DDebugCircle).bodyA = bodyA);
+    ((cast circle : Physics2DDebugCircle).bodyB = bodyB);
+    ((cast circle : Physics2DDebugCircle).x = x);
+    ((cast circle : Physics2DDebugCircle).y = y);
+    ((cast circle : Physics2DDebugCircle).radius = radius);
   }
 }

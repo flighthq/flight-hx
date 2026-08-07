@@ -16,10 +16,10 @@ import flighthq.types.StrokePathTessellationReason;
 import flighthq.types.StrokeStyle;
 
 class ExplainStrokePathTessellation {
-  public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):StrokePathTessellationExplanation {
-    var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    geometry = _Runtime.callValue(buildStrokePathGeometry, cast ([path, style, tolerance] : Array<Dynamic>));
-    return cast { reason: _Runtime.callValue(ExplainStrokePathTessellation.getReason__explainStrokePathTessellation, cast ([_Runtime.field(geometry, 'issue')] : Array<Dynamic>)), subpath: _Runtime.field(geometry, 'issueSubpath'), supported: _Runtime.strictEquals(_Runtime.field(geometry, 'issue'), StrokePathTessellationIssueNone) };
+  public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float = 0.25):StrokePathTessellationExplanation {
+    var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
+    geometry = (cast buildStrokePathGeometry((cast path : Path), (cast style : StrokeStyle), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
+    return cast { reason: (cast ExplainStrokePathTessellation.getReason__explainStrokePathTessellation((cast (cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue : Float)) : StrokePathTessellationReason), subpath: (cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issueSubpath, supported: _Runtime.strictEquals((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue, StrokePathTessellationIssueNone) };
     return cast null;
   }
 

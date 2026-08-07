@@ -4,40 +4,41 @@ package flighthq.bitmap;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapBlur.boxBlurBitmap;
+import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapSharpenOptions;
 
 class BitmapSharpen {
   public static function sharpenBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    var amount:Dynamic = cast _Runtime.UNDEFINED;
-    var w:Dynamic = cast _Runtime.UNDEFINED;
-    var h:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var bitmapHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var amount:Float = cast _Runtime.UNDEFINED;
+    var w:Float = cast _Runtime.UNDEFINED;
+    var h:Float = cast _Runtime.UNDEFINED;
+    var bitmapWidth:Float = cast _Runtime.UNDEFINED;
+    var bitmapHeight:Float = cast _Runtime.UNDEFINED;
+    var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(options, 'amount'), function():Dynamic return cast 1.0);
-    _Runtime.callValue(boxBlurBitmap, cast ([out, scratch, source, { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }] : Array<Dynamic>));
+    boxBlurBitmap((cast out : flighthq._internal._UInt8ClampedArray), (cast scratch : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) });
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     bitmapWidth = _Runtime.field(source, 'bitmap').width;
     bitmapHeight = _Runtime.field(source, 'bitmap').height;
     data = _Runtime.field(source, 'bitmap').data;
     {
-      var py:Dynamic = 0.0;
+      var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
-          var px:Dynamic = 0.0;
+          var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Dynamic = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Dynamic = (((sy * bitmapWidth) + sx) * 4.0);
-            var di:Dynamic = (((py * w) + px) * 4.0);
-            var r:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, si);
-            var g:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0));
-            var b:Dynamic = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0));
+            var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
+            var di:Float = (((py * w) + px) * 4.0);
+            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, si);
+            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0));
+            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (r + (amount * _Runtime.subtractNumbers(r, flighthq._internal._StaticIndex.readUint8ClampedArray(out, di)))));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (g + (amount * _Runtime.subtractNumbers(g, flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 1.0))))));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (b + (amount * _Runtime.subtractNumbers(b, flighthq._internal._StaticIndex.readUint8ClampedArray(out, (di + 2.0))))));

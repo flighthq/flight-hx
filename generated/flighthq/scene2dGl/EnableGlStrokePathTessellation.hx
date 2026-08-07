@@ -6,9 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.path.TessellateStrokePath.tessellateStrokePath;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.Path;
+import flighthq.types.PathMesh;
+import flighthq.types.StrokeStyle;
 
 class EnableGlStrokePathTessellation {
   public static function enableGlStrokePathTessellation(state:GlRenderState):Void {
-    _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'strokeTessellator', tessellateStrokePath);
+    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).strokeTessellator = tessellateStrokePath);
   }
 }

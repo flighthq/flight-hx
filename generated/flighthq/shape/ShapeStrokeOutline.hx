@@ -18,14 +18,14 @@ class ShapeStrokeOutline {
     var regions:Array<ShapeFillRegion> = cast _Runtime.UNDEFINED;
     var centerline:Null<Path> = cast _Runtime.UNDEFINED;
     var style:Null<StrokeStyle> = cast _Runtime.UNDEFINED;
-    var color:Dynamic = cast _Runtime.UNDEFINED;
-    var alpha:Dynamic = cast _Runtime.UNDEFINED;
-    var penX:Dynamic = cast _Runtime.UNDEFINED;
-    var penY:Dynamic = cast _Runtime.UNDEFINED;
-    var deferred:Dynamic = cast _Runtime.UNDEFINED;
-    var flush:Dynamic = cast _Runtime.UNDEFINED;
-    var i:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.callValue(ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline, cast ([commands] : Array<Dynamic>)) : Bool)) { return cast null; }
+    var color:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    var penX:Float = cast _Runtime.UNDEFINED;
+    var penY:Float = cast _Runtime.UNDEFINED;
+    var deferred:Bool = cast _Runtime.UNDEFINED;
+    var flush:Void->Void = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
+    if ((cast (cast ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast null; }
     regions = cast ([] : Array<Dynamic>);
     centerline = null;
     style = null;
@@ -34,43 +34,43 @@ class ShapeStrokeOutline {
     penX = 0.0;
     penY = 0.0;
     deferred = false;
-    flush = function() {
-      var outline:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(centerline, 'commands'), 'length'), 0.0) : Bool)) : Bool)) { return; }
-      if ((cast _Runtime.callValue(ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline, cast ([centerline] : Array<Dynamic>)) : Bool)) {
+    flush = (cast function():Void {
+      var outline:Path = cast _Runtime.UNDEFINED;
+      if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
+      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline((cast centerline : Path)) : Bool) : Bool)) {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = _Runtime.callValue(compactStrokePath, cast ([centerline, style] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.field(_Runtime.field(outline, 'commands'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
-    };
+      outline = (cast compactStrokePath((cast centerline : Path), (cast style : StrokeStyle), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Path);
+      if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
+    } : Void->Void);
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
-      var argCount:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var a:Dynamic = (i + 2.0);
+      var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
+      var a:Float = (i + 2.0);
       (i = cast ((a + argCount) : Dynamic));
       if ((cast _Runtime.strictEquals(name, 'lineStyle') : Bool)) {
-        _Runtime.callValue(flush, cast ([] : Array<Dynamic>));
-        var thickness:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float);
+        flush();
+        var thickness:Float = (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float);
         if ((cast ((cast thickness : Float) > (cast 0.0 : Float)) : Bool)) {
           (color = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Dynamic));
           (alpha = cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Dynamic));
-          var caps:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : String);
-          var joints:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 6.0)) : String);
-          (style = cast ({ width: thickness, cap: ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : Dynamic) : Dynamic)), join: (cast joints : Dynamic), miterLimit: (cast flighthq._internal._StaticIndex.readArray(commands, (a + 7.0)) : Float) } : Dynamic));
+          var caps:String = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : String);
+          var joints:String = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 6.0)) : String);
+          (style = cast ({ width: thickness, cap: ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : flighthq._internal._IndexedAccess<StrokeStyle, String>) : Dynamic)), join: (cast joints : flighthq._internal._IndexedAccess<StrokeStyle, String>), miterLimit: (cast flighthq._internal._StaticIndex.readArray(commands, (a + 7.0)) : Float) } : Dynamic));
           (centerline = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' } : Dynamic));
         } else {
           (style = cast (null : Dynamic));
           (centerline = cast (null : Dynamic));
         }
-      } else { if ((cast _Runtime.callValue(ShapeStrokeOutline.isShapeGeometryCommand__shapeStrokeOutline, cast ([name] : Array<Dynamic>)) : Bool)) {
+      } else { if ((cast (cast ShapeStrokeOutline.isShapeGeometryCommand__shapeStrokeOutline((cast name : String)) : Bool) : Bool)) {
         if ((cast !_Runtime.strictEquals(centerline, null) : Bool)) {
-          if ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(centerline, 'commands'), 'length'), 0.0) : Bool) && (cast !_Runtime.strictEquals(name, 'moveTo') : Bool)) : Bool)) {
-            _Runtime.callProperty(_Runtime.field(centerline, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
-            _Runtime.pushMany(_Runtime.field(centerline, 'data'), cast ([penX, penY] : Array<Dynamic>));
+          if ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool) && (cast !_Runtime.strictEquals(name, 'moveTo') : Bool)) : Bool)) {
+            _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
+            _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          _Runtime.callValue(appendShapeGeometryCommand, cast ([centerline, name, commands, a] : Array<Dynamic>));
+          appendShapeGeometryCommand((cast centerline : Path), (cast name : String), (cast commands : Array<ShapeCommandToken>), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
@@ -84,16 +84,16 @@ class ShapeStrokeOutline {
         } } }
       } }
     }
-    _Runtime.callValue(flush, cast ([] : Array<Dynamic>));
+    flush();
     return cast ((cast deferred : Bool) ? (cast null : Dynamic) : (cast regions : Dynamic));
     return cast null;
   }
 
   public static function hasNonSolidShapeStroke__shapeStrokeOutline(commands:Array<ShapeCommandToken>):Bool {
-    var i:Dynamic = cast _Runtime.UNDEFINED;
+    var i:Float = cast _Runtime.UNDEFINED;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-      var name:Dynamic = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
+      var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       if ((cast ((cast _Runtime.strictEquals(name, 'lineGradientStyle') : Bool) || (cast _Runtime.strictEquals(name, 'lineTextureStyle') : Bool)) : Bool)) { return cast true; }
       (i = cast ((i + (2.0 + (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float))) : Dynamic));
     }
@@ -103,15 +103,15 @@ class ShapeStrokeOutline {
 
   public static function isCenterlineClosed__shapeStrokeOutline(path:Path):Bool {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var commands:Dynamic = cast _Runtime.UNDEFINED;
-    var data:Dynamic = cast _Runtime.UNDEFINED;
-    var d:Dynamic = cast _Runtime.UNDEFINED;
-    var subStartX:Dynamic = cast _Runtime.UNDEFINED;
-    var subStartY:Dynamic = cast _Runtime.UNDEFINED;
-    var lastX:Dynamic = cast _Runtime.UNDEFINED;
-    var lastY:Dynamic = cast _Runtime.UNDEFINED;
-    var segments:Dynamic = cast _Runtime.UNDEFINED;
-    var subpathReturnsToStart:Dynamic = cast _Runtime.UNDEFINED;
+    var commands:Array<Float> = cast _Runtime.UNDEFINED;
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var subStartX:Float = cast _Runtime.UNDEFINED;
+    var subStartY:Float = cast _Runtime.UNDEFINED;
+    var lastX:Float = cast _Runtime.UNDEFINED;
+    var lastY:Float = cast _Runtime.UNDEFINED;
+    var segments:Float = cast _Runtime.UNDEFINED;
+    var subpathReturnsToStart:Void->Bool = cast _Runtime.UNDEFINED;
     __destructure0 = path;
     commands = _Runtime.field(__destructure0, 'commands');
     data = _Runtime.field(__destructure0, 'data');
@@ -121,15 +121,15 @@ class ShapeStrokeOutline {
     lastX = 0.0;
     lastY = 0.0;
     segments = 0.0;
-    subpathReturnsToStart = function() return ((cast ((cast ((cast segments : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast HxMath.abs((lastX - subStartX)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((lastY - subStartY)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool));
+    subpathReturnsToStart = (cast function():Bool return ((cast ((cast ((cast segments : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast HxMath.abs((lastX - subStartX)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((lastY - subStartY)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Void->Bool);
     {
-      var c:Dynamic = 0.0;
+      var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var verb:Dynamic = flighthq._internal._StaticIndex.readArray(commands, c);
-        if ((cast _Runtime.strictEquals(verb, PathCommandValue.CLOSE) : Bool)) { return cast true; }
-        var n:Dynamic = _Runtime.callValue(getPathCommandOperandCount, cast ([verb] : Array<Dynamic>));
-        if ((cast ((cast _Runtime.strictEquals(verb, PathCommandValue.MOVE_TO) : Bool) || (cast _Runtime.strictEquals(verb, PathCommandValue.WIDE_MOVE_TO) : Bool)) : Bool)) {
-          if ((cast _Runtime.callValue(subpathReturnsToStart, cast ([] : Array<Dynamic>)) : Bool)) { return cast true; }
+        var verb:Float = flighthq._internal._StaticIndex.readArray(commands, c);
+        if ((cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) { return cast true; }
+        var n:Float = (cast getPathCommandOperandCount((cast verb : Float)) : Float);
+        if ((cast ((cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool) || (cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) : Bool)) {
+          if ((cast (cast subpathReturnsToStart() : Bool) : Bool)) { return cast true; }
           (lastX = cast ((subStartX = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 2.0)) : Dynamic)) : Dynamic));
           (lastY = cast ((subStartY = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 1.0)) : Dynamic)) : Dynamic));
           (segments = cast (0.0 : Dynamic));
@@ -142,7 +142,7 @@ class ShapeStrokeOutline {
         c++;
       }
     }
-    return cast _Runtime.callValue(subpathReturnsToStart, cast ([] : Array<Dynamic>));
+    return cast (cast subpathReturnsToStart() : Bool);
     return cast null;
   }
 
@@ -151,5 +151,5 @@ class ShapeStrokeOutline {
     return cast null;
   }
 
-  public static final CLOSE_EPSILON__shapeStrokeOutline:Dynamic = 0.000001;
+  public static final CLOSE_EPSILON__shapeStrokeOutline:Float = 0.000001;
 }

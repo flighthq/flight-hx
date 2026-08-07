@@ -9,34 +9,35 @@ import flighthq.renderGl.GlLinearToSrgbPass.drawGlLinearToSrgbPass;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 
 class GlPresentRenderTarget {
   @:noCompletion
   public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     if (dest == null) dest = cast (null : Dynamic);
     if ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool)) {
-      _Runtime.callValue(drawGlLinearToSrgbPass, cast ([state, target, dest] : Array<Dynamic>));
+      drawGlLinearToSrgbPass((cast state : GlRenderState), (cast target : GlRenderTarget), (cast dest : Null<GlRenderTarget>));
       return;
     }
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, _Runtime.callValue(GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget, cast ([state] : Array<Dynamic>)), cast ([_Runtime.field(target, 'texture')] : Array<Dynamic>), dest, GlPresentRenderTarget.NOOP__glPresentRenderTarget] : Array<Dynamic>));
+    drawGlFullscreenPass((cast state : GlRenderState), (cast (cast GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget((cast state : GlRenderState)) : GlFullscreenProgram) : GlFullscreenProgram), (cast cast ([_Runtime.field(target, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void return GlPresentRenderTarget.NOOP__glPresentRenderTarget() : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
   }
 
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
+    var program:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
+    program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (program = cast (_Runtime.callValue(compileGlFullscreenProgram, cast ([_Runtime.field(state, 'gl'), GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget] : Array<Dynamic>)) : Dynamic));
-      ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), program));
+      (program = cast ((cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget : String)) : Null<GlFullscreenProgram>) : Dynamic));
+      ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, program));
     }
     return cast program;
     return cast null;
   }
 
-  public static final NOOP__glPresentRenderTarget:Dynamic = function() {
+  public static final NOOP__glPresentRenderTarget:Void->Void = function():Void {
 
   };
 
-  public static final _programs__glPresentRenderTarget:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _programs__glPresentRenderTarget:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final COPY_FRAGMENT_SRC__glPresentRenderTarget:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvoid main() {\n  fragColor = texture(u_texture0, v_texCoord);\n}';
+  public static final COPY_FRAGMENT_SRC__glPresentRenderTarget:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvoid main() {\n  fragColor = texture(u_texture0, v_texCoord);\n}';
 }

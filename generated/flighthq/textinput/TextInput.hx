@@ -11,44 +11,44 @@ import flighthq.types.TextInputState.TextInputOptions;
 
 class TextInput {
   public static function disableTextInput(node:RichText):Void {
-    _Runtime.setField((cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime), 'input', null);
+    ((cast (cast (cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).input = null);
   }
 
   public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var state:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime);
-    state = _Runtime.field(runtime, 'input');
+    var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
+    var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
+    runtime = (cast (cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime) : RichTextRuntime);
+    state = (cast runtime : RichTextRuntime).input;
     if ((cast _Runtime.strictEquals(state, null) : Bool)) {
-      (state = cast (_Runtime.callValue(TextInput.createTextInputState__textInput, cast ([options] : Array<Dynamic>)) : Dynamic));
-      _Runtime.setField(runtime, 'input', state);
+      (state = cast ((cast TextInput.createTextInputState__textInput((cast options : Null<TextInputOptions>)) : Null<TextInputState>) : Dynamic));
+      ((cast runtime : RichTextRuntime).input = state);
     } else { if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callValue(TextInput.applyTextInputOptions__textInput, cast ([state, options] : Array<Dynamic>));
+      TextInput.applyTextInputOptions__textInput((cast state : TextInputState), (cast options : TextInputOptions));
     } }
     return cast state;
     return cast null;
   }
 
   public static function getTextInputState(node:RichText):Null<TextInputState> {
-    return cast _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input');
+    return cast _Runtime.field((cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime), 'input');
     return cast null;
   }
 
   public static function hasTextInput(node:RichText):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input'), null);
+    return cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime), 'input'), null);
     return cast null;
   }
 
   public static function applyTextInputOptions__textInput(state:TextInputState, options:TextInputOptions):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'alwaysShowSelection', _Runtime.field(options, 'alwaysShowSelection')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'caretColor', _Runtime.field(options, 'caretColor')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'caretWidth', _Runtime.field(options, 'caretWidth')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'displayAsPassword', _Runtime.field(options, 'displayAsPassword')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'historyLimit', HxMath.max(0.0, _Runtime.field(options, 'historyLimit'))); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'passwordCharacter', _Runtime.field(options, 'passwordCharacter')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'restrict', _Runtime.field(options, 'restrict')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'selectionAlpha', _Runtime.field(options, 'selectionAlpha')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(state, 'selectionColor', _Runtime.field(options, 'selectionColor')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).alwaysShowSelection = _Runtime.field(options, 'alwaysShowSelection')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).caretColor = _Runtime.field(options, 'caretColor')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).caretWidth = _Runtime.field(options, 'caretWidth')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).displayAsPassword = _Runtime.field(options, 'displayAsPassword')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).historyLimit = HxMath.max(0.0, _Runtime.field(options, 'historyLimit'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).passwordCharacter = _Runtime.field(options, 'passwordCharacter')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).restrict = _Runtime.field(options, 'restrict')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).selectionAlpha = _Runtime.field(options, 'selectionAlpha')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).selectionColor = _Runtime.field(options, 'selectionColor')); }
   }
 
   public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {

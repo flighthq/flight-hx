@@ -4,7 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ShortcutKeyName = Dynamic;
+typedef ShortcutKeyName = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<ShortcutDigitKeyName, ShortcutEditingKeyName>, ShortcutFunctionKeyName>, ShortcutLetterKeyName>, ShortcutLockKeyName>, ShortcutMediaKeyName>, ShortcutNavigationKeyName>, ShortcutNumpadKeyName>, ShortcutPunctuationKeyName>;
 
 typedef ShortcutDigitKeyName = String;
 

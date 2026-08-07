@@ -8,13 +8,13 @@ import flighthq.types.WgpuRenderState;
 class WgpuScene3DTime {
   @:noCompletion
   public static function getWgpuScene3DTime(state:WgpuRenderState):Float {
-    return cast _Runtime.coalesce(((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap<WgpuRenderState, Float>).get(state)), function():Dynamic return cast 0.0);
     return cast null;
   }
 
   public static function setWgpuScene3DTime(state:WgpuRenderState, seconds:Float):Void {
-    ((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap).set(state, seconds));
+    ((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap<WgpuRenderState, Float>).set(state, seconds));
   }
 
-  public static final sceneTimes__wgpuScene3DTime:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final sceneTimes__wgpuScene3DTime:flighthq._internal._WeakMap<WgpuRenderState, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

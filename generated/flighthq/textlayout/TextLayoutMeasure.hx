@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaper.getTextShaperBackend;
 import flighthq.textshaper.TextShaper.measureText;
 import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextShaper.TextShaperBackend;
 
 class TextLayoutMeasure {
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
     if ((cast !_Runtime.strictEquals(TextLayoutMeasure._measureProvider__textLayoutMeasure, null) : Bool)) { return cast TextLayoutMeasure._measureProvider__textLayoutMeasure; }
-    if ((cast !_Runtime.strictEquals(_Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>)), null) : Bool)) { return cast measureText; }
+    if ((cast !_Runtime.strictEquals((cast getTextShaperBackend() : Null<TextShaperBackend>), null) : Bool)) { return cast measureText; }
     return cast null;
     return cast null;
   }

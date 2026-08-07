@@ -11,5 +11,5 @@ import flighthq.types.Rectangle;
 import flighthq.types.TextureAtlas;
 
 class _BitmapTextValues {
-  public static final BitmapTextKind:Dynamic = 'BitmapText';
+  public static final BitmapTextKind:String = 'BitmapText';
 }

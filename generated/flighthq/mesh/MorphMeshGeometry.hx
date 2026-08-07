@@ -5,30 +5,32 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshMorphBindPose;
+import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
 
 class MorphMeshGeometry {
   public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var blendedNormals:Dynamic = cast _Runtime.UNDEFINED;
-    var blendedPositions:Dynamic = cast _Runtime.UNDEFINED;
-    var blendedTangents:Dynamic = cast _Runtime.UNDEFINED;
-    var normals:Dynamic = cast _Runtime.UNDEFINED;
-    var positions:Dynamic = cast _Runtime.UNDEFINED;
-    var tangents:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var floats:Dynamic = cast _Runtime.UNDEFINED;
-    var targets:Dynamic = cast _Runtime.UNDEFINED;
-    var weights:Dynamic = cast _Runtime.UNDEFINED;
-    var targetCount:Dynamic = cast _Runtime.UNDEFINED;
+    var blendedNormals:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var blendedPositions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var blendedTangents:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var normals:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var positions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var tangents:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var floats:Float = cast _Runtime.UNDEFINED;
+    var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
+    var weights:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var targetCount:Float = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var positionOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var normalOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentOffset:Dynamic = cast _Runtime.UNDEFINED;
+    var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
+    var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
+    var positionOffset:Float = cast _Runtime.UNDEFINED;
+    var normalOffset:Float = cast _Runtime.UNDEFINED;
+    var tangentOffset:Float = cast _Runtime.UNDEFINED;
     __destructure0 = bindPose;
     blendedNormals = _Runtime.field(__destructure0, 'blendedNormals');
     blendedPositions = _Runtime.field(__destructure0, 'blendedPositions');
@@ -45,17 +47,17 @@ class MorphMeshGeometry {
     weights = _Runtime.field(morph, 'weights');
     targetCount = HxMath.min(_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length'));
     {
-      var t:Dynamic = 0.0;
+      var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast targetCount : Float)) : Bool)) {
-        var weight:Dynamic = flighthq._internal._StaticIndex.readFloat32Array(weights, t);
+        var weight:Float = flighthq._internal._StaticIndex.readFloat32Array(weights, t);
         if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { t++; continue; }
-        var target:Dynamic = flighthq._internal._StaticIndex.readArray(targets, t);
-        _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedPositions, _Runtime.field(target, 'positionDeltas'), weight, floats] : Array<Dynamic>));
-        if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(target, 'normalDeltas'), null) : Bool)) : Bool)) {
-          _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedNormals, _Runtime.field(target, 'normalDeltas'), weight, floats] : Array<Dynamic>));
+        var target:MorphTarget = flighthq._internal._StaticIndex.readArray(targets, t);
+        MorphMeshGeometry.accumulateDeltas__morphMeshGeometry((cast blendedPositions : flighthq._internal._Float32Array), (cast (cast target : MorphTarget).positionDeltas : flighthq._internal._Float32Array), (cast weight : Float), (cast floats : Float));
+        if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals((cast target : MorphTarget).normalDeltas, null) : Bool)) : Bool)) {
+          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry((cast blendedNormals : flighthq._internal._Float32Array), (cast (cast target : MorphTarget).normalDeltas : flighthq._internal._Float32Array), (cast weight : Float), (cast floats : Float));
         }
-        if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(target, 'tangentDeltas'), null) : Bool)) : Bool)) {
-          _Runtime.callValue(MorphMeshGeometry.accumulateDeltas__morphMeshGeometry, cast ([blendedTangents, _Runtime.field(target, 'tangentDeltas'), weight, floats] : Array<Dynamic>));
+        if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals((cast target : MorphTarget).tangentDeltas, null) : Bool)) : Bool)) {
+          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry((cast blendedTangents : flighthq._internal._Float32Array), (cast (cast target : MorphTarget).tangentDeltas : flighthq._internal._Float32Array), (cast weight : Float), (cast floats : Float));
         }
         t++;
       }
@@ -64,14 +66,14 @@ class MorphMeshGeometry {
     layout = _Runtime.field(__destructure1, 'layout');
     vertices = _Runtime.field(__destructure1, 'vertices');
     floatsPerVertex = (layout.stride / 4.0);
-    positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
-    normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
-    tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
+    positionOffset = (cast getVertexAttributeFloatOffset(layout, 'position') : Float);
+    normalOffset = (cast getVertexAttributeFloatOffset(layout, 'normal') : Float);
+    tangentOffset = (cast getVertexAttributeFloatOffset(layout, 'tangent') : Float);
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-        var dst:Dynamic = (v * floatsPerVertex);
-        var s:Dynamic = (v * 3.0);
+        var dst:Float = (v * floatsPerVertex);
+        var s:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, s));
           flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, (s + 1.0)));
@@ -95,32 +97,32 @@ class MorphMeshGeometry {
 
   public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
-    var layout:Dynamic = cast _Runtime.UNDEFINED;
-    var vertices:Dynamic = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
-    var positionOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var normalOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var tangentOffset:Dynamic = cast _Runtime.UNDEFINED;
-    var positions:Dynamic = cast _Runtime.UNDEFINED;
-    var normals:Dynamic = cast _Runtime.UNDEFINED;
-    var tangents:Dynamic = cast _Runtime.UNDEFINED;
+    var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
+    var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
+    var vertexCount:Float = cast _Runtime.UNDEFINED;
+    var positionOffset:Float = cast _Runtime.UNDEFINED;
+    var normalOffset:Float = cast _Runtime.UNDEFINED;
+    var tangentOffset:Float = cast _Runtime.UNDEFINED;
+    var positions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var normals:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var tangents:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     __destructure2 = geometry;
     layout = _Runtime.field(__destructure2, 'layout');
     vertices = _Runtime.field(__destructure2, 'vertices');
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
-    positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
-    normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
-    tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
+    positionOffset = (cast getVertexAttributeFloatOffset(layout, 'position') : Float);
+    normalOffset = (cast getVertexAttributeFloatOffset(layout, 'normal') : Float);
+    tangentOffset = (cast getVertexAttributeFloatOffset(layout, 'tangent') : Float);
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
     normals = ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
     tangents = ((cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
     {
-      var v:Dynamic = 0.0;
+      var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
-        var base:Dynamic = (v * floatsPerVertex);
-        var p:Dynamic = (v * 3.0);
+        var base:Float = (v * floatsPerVertex);
+        var p:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(positions, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + positionOffset)));
           flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 1.0)));
@@ -144,10 +146,10 @@ class MorphMeshGeometry {
   }
 
   public static function accumulateDeltas__morphMeshGeometry(accumulator:flighthq._internal._Float32Array, deltas:flighthq._internal._Float32Array, weight:Float, count:Float):Void {
-    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Float = cast _Runtime.UNDEFINED;
     n = HxMath.min(count, _Runtime.field(deltas, 'length'));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), _Runtime.multiplyNumbers(weight, flighthq._internal._StaticIndex.readFloat32Array(deltas, i)))); });
         i++;

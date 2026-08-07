@@ -7,5 +7,5 @@ import flighthq.types.SurfaceMaterial;
 import flighthq.types.Texture;
 
 class _LambertMaterialValues {
-  public static final LambertMaterialKind:Dynamic = 'LambertMaterial';
+  public static final LambertMaterialKind:String = 'LambertMaterial';
 }

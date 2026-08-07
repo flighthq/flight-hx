@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextLayout.TextLayoutResult;
 
-typedef HandleTextInputKeyboardOptions = { @:optional var clipboardText:String; @:optional var layout:TextLayoutResult; @:optional var onCopy:Dynamic; };
+typedef HandleTextInputKeyboardOptions = { @:optional var clipboardText:String; @:optional var layout:TextLayoutResult; @:optional var onCopy:String->Void; };
 
 typedef ReplaceTextInputOptions = { @:optional var applyInputRules:Bool; @:optional var mergeKind:Null<String>; @:optional var skipHistory:Bool; };

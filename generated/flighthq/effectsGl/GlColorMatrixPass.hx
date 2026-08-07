@@ -5,27 +5,28 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlColorMatrixPass {
   @:noCompletion
   public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(20.0);
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 20.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32Array(m, i, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast 0.0));
         i++;
       }
     }
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'adjustment.colorMatrix', GlColorMatrixPass.COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'adjustment.colorMatrix' : String), (cast GlColorMatrixPass.COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1fv(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_colorMatrix'), m);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_colorMatrix[20];\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float r = c.r, g = c.g, b = c.b, a = c.a;\n  float nr = u_colorMatrix[0] * r + u_colorMatrix[1] * g + u_colorMatrix[2] * b + u_colorMatrix[3] * a + u_colorMatrix[4];\n  float ng = u_colorMatrix[5] * r + u_colorMatrix[6] * g + u_colorMatrix[7] * b + u_colorMatrix[8] * a + u_colorMatrix[9];\n  float nb = u_colorMatrix[10] * r + u_colorMatrix[11] * g + u_colorMatrix[12] * b + u_colorMatrix[13] * a + u_colorMatrix[14];\n  float na = u_colorMatrix[15] * r + u_colorMatrix[16] * g + u_colorMatrix[17] * b + u_colorMatrix[18] * a + u_colorMatrix[19];\n  o_color = vec4(clamp(vec3(nr, ng, nb), 0.0, 1.0), na);\n}';
+  public static final COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_colorMatrix[20];\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float r = c.r, g = c.g, b = c.b, a = c.a;\n  float nr = u_colorMatrix[0] * r + u_colorMatrix[1] * g + u_colorMatrix[2] * b + u_colorMatrix[3] * a + u_colorMatrix[4];\n  float ng = u_colorMatrix[5] * r + u_colorMatrix[6] * g + u_colorMatrix[7] * b + u_colorMatrix[8] * a + u_colorMatrix[9];\n  float nb = u_colorMatrix[10] * r + u_colorMatrix[11] * g + u_colorMatrix[12] * b + u_colorMatrix[13] * a + u_colorMatrix[14];\n  float na = u_colorMatrix[15] * r + u_colorMatrix[16] * g + u_colorMatrix[17] * b + u_colorMatrix[18] * a + u_colorMatrix[19];\n  o_color = vec4(clamp(vec3(nr, ng, nb), 0.0, 1.0), na);\n}';
 }

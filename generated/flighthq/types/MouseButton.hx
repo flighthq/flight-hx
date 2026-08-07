@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._MouseButtonValues.MouseButtonValue;
 
-typedef MouseButton = Dynamic;
+typedef MouseButton = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;

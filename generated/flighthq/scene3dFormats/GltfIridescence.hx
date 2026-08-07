@@ -5,26 +5,50 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.IridescencePbrExtension.createIridescencePbrExtension;
 import flighthq.scene3dFormats.GltfMaterialExtension.attachGltfPbrExtension;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfSchema.GltfMaterial;
+import flighthq.types.GltfSchema.GltfMaterialsAnisotropy;
+import flighthq.types.GltfSchema.GltfMaterialsClearcoat;
+import flighthq.types.GltfSchema.GltfMaterialsEmissiveStrength;
+import flighthq.types.GltfSchema.GltfMaterialsIor;
+import flighthq.types.GltfSchema.GltfMaterialsIridescence;
+import flighthq.types.GltfSchema.GltfMaterialsPbrSpecularGlossiness;
+import flighthq.types.GltfSchema.GltfMaterialsSheen;
+import flighthq.types.GltfSchema.GltfMaterialsSpecular;
+import flighthq.types.GltfSchema.GltfMaterialsTransmission;
+import flighthq.types.GltfSchema.GltfMaterialsVolume;
+import flighthq.types.GltfSchema.GltfTextureInfo;
+import flighthq.types.PbrExtension;
+import flighthq.types.Sampler;
+import flighthq.types.Scene3DDocument;
+import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.TextureSource;
+import flighthq.types.Vector2;
+import flighthq.types.VoxelGrid;
 
 class GltfIridescence {
-  public static final GltfIridescenceExtensionHandler:GltfExtensionHandler = { apply: function(context:Dynamic) {
-    var materials:Dynamic = cast _Runtime.UNDEFINED;
+  public static final GltfIridescenceExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+    var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
-      var i:Dynamic = 0.0;
+      var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Dynamic = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_iridescence');
+        var block:Null<GltfMaterialsIridescence> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_iridescence');
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        _Runtime.callValue(attachGltfPbrExtension, cast ([_Runtime.field(context, 'document'), i, _Runtime.callValue(createIridescencePbrExtension, cast ([{ iridescence: _Runtime.coalesce(_Runtime.field(block, 'iridescenceFactor'), function():Dynamic return cast 0.0), iridescenceIor: _Runtime.coalesce(_Runtime.field(block, 'iridescenceIor'), function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_IOR__gltfIridescence), iridescenceMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'iridescenceTexture'), 'linear'] : Array<Dynamic>)), iridescenceThicknessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([_Runtime.field(block, 'iridescenceThicknessTexture'), 'linear'] : Array<Dynamic>)), iridescenceThicknessMax: _Runtime.coalesce(_Runtime.field(block, 'iridescenceThicknessMaximum'), function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MAX__gltfIridescence), iridescenceThicknessMin: _Runtime.coalesce(_Runtime.field(block, 'iridescenceThicknessMinimum'), function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MIN__gltfIridescence) }] : Array<Dynamic>))] : Array<Dynamic>));
+        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createIridescencePbrExtension((cast { iridescence: _Runtime.coalesce((cast block : GltfMaterialsIridescence).iridescenceFactor, function():Dynamic return cast 0.0), iridescenceIor: _Runtime.coalesce((cast block : GltfMaterialsIridescence).iridescenceIor, function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_IOR__gltfIridescence), iridescenceMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsIridescence).iridescenceTexture, 'linear'] : Array<Dynamic>)), iridescenceThicknessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsIridescence).iridescenceThicknessTexture, 'linear'] : Array<Dynamic>)), iridescenceThicknessMax: _Runtime.coalesce((cast block : GltfMaterialsIridescence).iridescenceThicknessMaximum, function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MAX__gltfIridescence), iridescenceThicknessMin: _Runtime.coalesce((cast block : GltfMaterialsIridescence).iridescenceThicknessMinimum, function():Dynamic return cast GltfIridescence.GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MIN__gltfIridescence) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
         i++;
       }
     }
   }, kind: 'KHR_materials_iridescence' };
 
-  public static final GLTF_DEFAULT_IRIDESCENCE_IOR__gltfIridescence:Dynamic = 1.3;
+  public static final GLTF_DEFAULT_IRIDESCENCE_IOR__gltfIridescence:Float = 1.3;
 
-  public static final GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MAX__gltfIridescence:Dynamic = 400.0;
+  public static final GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MAX__gltfIridescence:Float = 400.0;
 
-  public static final GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MIN__gltfIridescence:Dynamic = 100.0;
+  public static final GLTF_DEFAULT_IRIDESCENCE_THICKNESS_MIN__gltfIridescence:Float = 100.0;
 }

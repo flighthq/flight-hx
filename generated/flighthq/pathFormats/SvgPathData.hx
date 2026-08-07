@@ -12,33 +12,34 @@ import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.Path;
+import flighthq.types.PathSegment;
 
 class SvgPathData {
   public static function appendSvgPathData(path:Path, d:String):Bool {
     var skipSeparators:Void->Void = cast _Runtime.UNDEFINED;
     var readNumber:Void->Null<Float> = cast _Runtime.UNDEFINED;
     var readFlag:Void->Null<Float> = cast _Runtime.UNDEFINED;
-    var length:Dynamic = cast _Runtime.UNDEFINED;
-    var pos:Dynamic = cast _Runtime.UNDEFINED;
-    var currentX:Dynamic = cast _Runtime.UNDEFINED;
-    var currentY:Dynamic = cast _Runtime.UNDEFINED;
-    var startX:Dynamic = cast _Runtime.UNDEFINED;
-    var startY:Dynamic = cast _Runtime.UNDEFINED;
-    var lastControl2X:Dynamic = cast _Runtime.UNDEFINED;
-    var lastControl2Y:Dynamic = cast _Runtime.UNDEFINED;
-    var lastQuadControlX:Dynamic = cast _Runtime.UNDEFINED;
-    var lastQuadControlY:Dynamic = cast _Runtime.UNDEFINED;
-    var lastKind:Dynamic = cast _Runtime.UNDEFINED;
-    skipSeparators = function skipSeparators():Void {
+    var length:Float = cast _Runtime.UNDEFINED;
+    var pos:Float = cast _Runtime.UNDEFINED;
+    var currentX:Float = cast _Runtime.UNDEFINED;
+    var currentY:Float = cast _Runtime.UNDEFINED;
+    var startX:Float = cast _Runtime.UNDEFINED;
+    var startY:Float = cast _Runtime.UNDEFINED;
+    var lastControl2X:Float = cast _Runtime.UNDEFINED;
+    var lastControl2Y:Float = cast _Runtime.UNDEFINED;
+    var lastQuadControlX:Float = cast _Runtime.UNDEFINED;
+    var lastQuadControlY:Float = cast _Runtime.UNDEFINED;
+    var lastKind:String = cast _Runtime.UNDEFINED;
+    skipSeparators = (cast function skipSeparators():Void {
       while ((cast ((cast pos : Float) < (cast length : Float)) : Bool)) {
-        var c:Dynamic = _Runtime.charCodeAt(d, pos);
+        var c:Float = _Runtime.charCodeAt(d, pos);
         if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(c, 32.0) : Bool) || (cast _Runtime.strictEquals(c, 9.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 10.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 13.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 12.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 44.0) : Bool)) : Bool)) { pos++; } else { break; }
       }
-    };
-    readNumber = function readNumber():Null<Float> {
-      var start:Dynamic = cast _Runtime.UNDEFINED;
-      var sawDigit:Dynamic = cast _Runtime.UNDEFINED;
-      _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
+    } : Void->Void);
+    readNumber = (cast function readNumber():Null<Float> {
+      var start:Float = cast _Runtime.UNDEFINED;
+      var sawDigit:Bool = cast _Runtime.UNDEFINED;
+      skipSeparators();
       start = pos;
       if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(d, pos), '+'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), '-')) : Bool)) : Bool)) { pos++; }
       sawDigit = false;
@@ -58,10 +59,10 @@ class SvgPathData {
         return cast null;
       }
       if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(d, pos), 'e'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), 'E')) : Bool)) : Bool)) {
-        var expStart:Dynamic = pos;
+        var expStart:Float = pos;
         pos++;
         if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(d, pos), '+'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), '-')) : Bool)) : Bool)) { pos++; }
-        var expDigit:Dynamic = false;
+        var expDigit:Bool = false;
         while ((cast ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.compare(_Runtime.getIndex(d, pos), '0', '>=') : Bool)) : Bool) && (cast _Runtime.compare(_Runtime.getIndex(d, pos), '9', '<=') : Bool)) : Bool)) {
           pos++;
           (expDigit = cast (true : Dynamic));
@@ -69,9 +70,9 @@ class SvgPathData {
         if ((cast !(cast expDigit : Bool) : Bool)) { (pos = cast (expStart : Dynamic)); }
       }
       return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
-    };
-    readFlag = function readFlag():Null<Float> {
-      _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
+    } : Void->Null<Float>);
+    readFlag = (cast function readFlag():Null<Float> {
+      skipSeparators();
       if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), '0') : Bool)) : Bool)) {
         pos++;
         return cast 0.0;
@@ -81,7 +82,7 @@ class SvgPathData {
         return cast 1.0;
       }
       return cast null;
-    };
+    } : Void->Null<Float>);
     length = _Runtime.field(d, 'length');
     pos = 0.0;
     currentX = 0.0;
@@ -94,143 +95,143 @@ class SvgPathData {
     lastQuadControlY = 0.0;
     lastKind = '';
     while ((cast true : Bool)) {
-      _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
+      skipSeparators();
       if ((cast ((cast pos : Float) >= (cast length : Float)) : Bool)) { break; }
-      var commandLetter:Dynamic = _Runtime.getIndex(d, pos);
-      if ((cast !(cast _Runtime.callValue(SvgPathData.isSvgCommandLetter__svgPathData, cast ([commandLetter] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+      var commandLetter:String = _Runtime.getIndex(d, pos);
+      if ((cast !(cast (cast SvgPathData.isSvgCommandLetter__svgPathData((cast commandLetter : String)) : Bool) : Bool) : Bool)) { return cast false; }
       pos++;
       if ((cast ((cast ((cast _Runtime.strictEquals(lastKind, '') : Bool) && (cast !_Runtime.strictEquals(commandLetter, 'M') : Bool)) : Bool) && (cast !_Runtime.strictEquals(commandLetter, 'm') : Bool)) : Bool)) { return cast false; }
       if ((cast ((cast _Runtime.strictEquals(commandLetter, 'Z') : Bool) || (cast _Runtime.strictEquals(commandLetter, 'z') : Bool)) : Bool)) {
-        _Runtime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
+        appendPathClose((cast path : Path));
         (currentX = cast (startX : Dynamic));
         (currentY = cast (startY : Dynamic));
         (lastKind = cast ('Z' : Dynamic));
         continue;
       }
-      var active:Dynamic = commandLetter;
-      var first:Dynamic = true;
+      var active:String = commandLetter;
+      var first:Bool = true;
       while ((cast true : Bool)) {
         if ((cast !(cast first : Bool) : Bool)) {
-          _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
+          skipSeparators();
           if ((cast ((cast pos : Float) >= (cast length : Float)) : Bool)) { break; }
-          if ((cast _Runtime.callValue(SvgPathData.isSvgCommandLetter__svgPathData, cast ([_Runtime.getIndex(d, pos)] : Array<Dynamic>)) : Bool)) { break; }
+          if ((cast (cast SvgPathData.isSvgCommandLetter__svgPathData((cast _Runtime.getIndex(d, pos) : String)) : Bool) : Bool)) { break; }
         }
-        var relative:Dynamic = _Runtime.compare(active, 'a', '>=');
-        var upper:Dynamic = ((cast relative : Bool) ? (cast _Runtime.callProperty(active, 'toUpperCase', cast ([] : Array<Dynamic>)) : Dynamic) : (cast active : Dynamic));
+        var relative:Bool = _Runtime.compare(active, 'a', '>=');
+        var upper:String = ((cast relative : Bool) ? (cast _Runtime.callProperty(active, 'toUpperCase', cast ([] : Array<Dynamic>)) : Dynamic) : (cast active : Dynamic));
         if ((cast _Runtime.strictEquals(upper, 'M') : Bool)) {
-          var nx:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var ny:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var nx:Null<Float> = (cast readNumber() : Null<Float>);
+          var ny:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast _Runtime.strictEquals(nx, null) : Bool) || (cast _Runtime.strictEquals(ny, null) : Bool)) : Bool)) { return cast false; }
           (currentX = cast (((cast relative : Bool) ? (cast (currentX + nx) : Dynamic) : (cast nx : Dynamic)) : Dynamic));
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
           (startX = cast (currentX : Dynamic));
           (startY = cast (currentY : Dynamic));
-          _Runtime.callValue(appendPathMoveTo, cast ([path, currentX, currentY] : Array<Dynamic>));
+          appendPathMoveTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('M' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'L') : Bool)) {
-          var nx:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var ny:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var nx:Null<Float> = (cast readNumber() : Null<Float>);
+          var ny:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast _Runtime.strictEquals(nx, null) : Bool) || (cast _Runtime.strictEquals(ny, null) : Bool)) : Bool)) { return cast false; }
           (currentX = cast (((cast relative : Bool) ? (cast (currentX + nx) : Dynamic) : (cast nx : Dynamic)) : Dynamic));
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
-          _Runtime.callValue(appendPathLineTo, cast ([path, currentX, currentY] : Array<Dynamic>));
+          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'H') : Bool)) {
-          var nx:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var nx:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast _Runtime.strictEquals(nx, null) : Bool)) { return cast false; }
           (currentX = cast (((cast relative : Bool) ? (cast (currentX + nx) : Dynamic) : (cast nx : Dynamic)) : Dynamic));
-          _Runtime.callValue(appendPathLineTo, cast ([path, currentX, currentY] : Array<Dynamic>));
+          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'V') : Bool)) {
-          var ny:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var ny:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast _Runtime.strictEquals(ny, null) : Bool)) { return cast false; }
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
-          _Runtime.callValue(appendPathLineTo, cast ([path, currentX, currentY] : Array<Dynamic>));
+          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'C') : Bool)) {
-          var x1:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y1:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var x2:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y2:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var x:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var x1:Null<Float> = (cast readNumber() : Null<Float>);
+          var y1:Null<Float> = (cast readNumber() : Null<Float>);
+          var x2:Null<Float> = (cast readNumber() : Null<Float>);
+          var y2:Null<Float> = (cast readNumber() : Null<Float>);
+          var x:Null<Float> = (cast readNumber() : Null<Float>);
+          var y:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(x1, null) : Bool) || (cast _Runtime.strictEquals(y1, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(x2, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y2, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool)) { return cast false; }
-          var c1x:Dynamic = ((cast relative : Bool) ? (cast (currentX + x1) : Dynamic) : (cast x1 : Dynamic));
-          var c1y:Dynamic = ((cast relative : Bool) ? (cast (currentY + y1) : Dynamic) : (cast y1 : Dynamic));
-          var c2x:Dynamic = ((cast relative : Bool) ? (cast (currentX + x2) : Dynamic) : (cast x2 : Dynamic));
-          var c2y:Dynamic = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
-          var ax:Dynamic = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
-          var ay:Dynamic = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          _Runtime.callValue(appendPathCubicCurveTo, cast ([path, c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
+          var c1x:Float = ((cast relative : Bool) ? (cast (currentX + x1) : Dynamic) : (cast x1 : Dynamic));
+          var c1y:Float = ((cast relative : Bool) ? (cast (currentY + y1) : Dynamic) : (cast y1 : Dynamic));
+          var c2x:Float = ((cast relative : Bool) ? (cast (currentX + x2) : Dynamic) : (cast x2 : Dynamic));
+          var c2y:Float = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
+          var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
+          var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
+          appendPathCubicCurveTo((cast path : Path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
           (lastControl2X = cast (c2x : Dynamic));
           (lastControl2Y = cast (c2y : Dynamic));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('C' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'S') : Bool)) {
-          var x2:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y2:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var x:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var x2:Null<Float> = (cast readNumber() : Null<Float>);
+          var y2:Null<Float> = (cast readNumber() : Null<Float>);
+          var x:Null<Float> = (cast readNumber() : Null<Float>);
+          var y:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast ((cast ((cast _Runtime.strictEquals(x2, null) : Bool) || (cast _Runtime.strictEquals(y2, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool)) { return cast false; }
-          var reflect:Dynamic = ((cast _Runtime.strictEquals(lastKind, 'C') : Bool) || (cast _Runtime.strictEquals(lastKind, 'S') : Bool));
-          var c1x:Dynamic = ((cast reflect : Bool) ? (cast ((2.0 * currentX) - lastControl2X) : Dynamic) : (cast currentX : Dynamic));
-          var c1y:Dynamic = ((cast reflect : Bool) ? (cast ((2.0 * currentY) - lastControl2Y) : Dynamic) : (cast currentY : Dynamic));
-          var c2x:Dynamic = ((cast relative : Bool) ? (cast (currentX + x2) : Dynamic) : (cast x2 : Dynamic));
-          var c2y:Dynamic = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
-          var ax:Dynamic = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
-          var ay:Dynamic = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          _Runtime.callValue(appendPathCubicCurveTo, cast ([path, c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
+          var reflect:Bool = ((cast _Runtime.strictEquals(lastKind, 'C') : Bool) || (cast _Runtime.strictEquals(lastKind, 'S') : Bool));
+          var c1x:Float = ((cast reflect : Bool) ? (cast ((2.0 * currentX) - lastControl2X) : Dynamic) : (cast currentX : Dynamic));
+          var c1y:Float = ((cast reflect : Bool) ? (cast ((2.0 * currentY) - lastControl2Y) : Dynamic) : (cast currentY : Dynamic));
+          var c2x:Float = ((cast relative : Bool) ? (cast (currentX + x2) : Dynamic) : (cast x2 : Dynamic));
+          var c2y:Float = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
+          var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
+          var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
+          appendPathCubicCurveTo((cast path : Path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
           (lastControl2X = cast (c2x : Dynamic));
           (lastControl2Y = cast (c2y : Dynamic));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('S' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'Q') : Bool)) {
-          var x1:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y1:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var x:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var x1:Null<Float> = (cast readNumber() : Null<Float>);
+          var y1:Null<Float> = (cast readNumber() : Null<Float>);
+          var x:Null<Float> = (cast readNumber() : Null<Float>);
+          var y:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast ((cast ((cast _Runtime.strictEquals(x1, null) : Bool) || (cast _Runtime.strictEquals(y1, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool)) { return cast false; }
-          var cx:Dynamic = ((cast relative : Bool) ? (cast (currentX + x1) : Dynamic) : (cast x1 : Dynamic));
-          var cy:Dynamic = ((cast relative : Bool) ? (cast (currentY + y1) : Dynamic) : (cast y1 : Dynamic));
-          var ax:Dynamic = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
-          var ay:Dynamic = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          _Runtime.callValue(appendPathCurveTo, cast ([path, cx, cy, ax, ay] : Array<Dynamic>));
+          var cx:Float = ((cast relative : Bool) ? (cast (currentX + x1) : Dynamic) : (cast x1 : Dynamic));
+          var cy:Float = ((cast relative : Bool) ? (cast (currentY + y1) : Dynamic) : (cast y1 : Dynamic));
+          var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
+          var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
+          appendPathCurveTo((cast path : Path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
           (lastQuadControlX = cast (cx : Dynamic));
           (lastQuadControlY = cast (cy : Dynamic));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('Q' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'T') : Bool)) {
-          var x:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var x:Null<Float> = (cast readNumber() : Null<Float>);
+          var y:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast _Runtime.strictEquals(x, null) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool)) { return cast false; }
-          var reflect:Dynamic = ((cast _Runtime.strictEquals(lastKind, 'Q') : Bool) || (cast _Runtime.strictEquals(lastKind, 'T') : Bool));
-          var cx:Dynamic = ((cast reflect : Bool) ? (cast ((2.0 * currentX) - lastQuadControlX) : Dynamic) : (cast currentX : Dynamic));
-          var cy:Dynamic = ((cast reflect : Bool) ? (cast ((2.0 * currentY) - lastQuadControlY) : Dynamic) : (cast currentY : Dynamic));
-          var ax:Dynamic = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
-          var ay:Dynamic = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          _Runtime.callValue(appendPathCurveTo, cast ([path, cx, cy, ax, ay] : Array<Dynamic>));
+          var reflect:Bool = ((cast _Runtime.strictEquals(lastKind, 'Q') : Bool) || (cast _Runtime.strictEquals(lastKind, 'T') : Bool));
+          var cx:Float = ((cast reflect : Bool) ? (cast ((2.0 * currentX) - lastQuadControlX) : Dynamic) : (cast currentX : Dynamic));
+          var cy:Float = ((cast reflect : Bool) ? (cast ((2.0 * currentY) - lastQuadControlY) : Dynamic) : (cast currentY : Dynamic));
+          var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
+          var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
+          appendPathCurveTo((cast path : Path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
           (lastQuadControlX = cast (cx : Dynamic));
           (lastQuadControlY = cast (cy : Dynamic));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('T' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'A') : Bool)) {
-          var rx:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var ry:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var rotationDegrees:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var largeArc:Dynamic = _Runtime.callValue(readFlag, cast ([] : Array<Dynamic>));
-          var sweep:Dynamic = _Runtime.callValue(readFlag, cast ([] : Array<Dynamic>));
-          var x:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
-          var y:Dynamic = _Runtime.callValue(readNumber, cast ([] : Array<Dynamic>));
+          var rx:Null<Float> = (cast readNumber() : Null<Float>);
+          var ry:Null<Float> = (cast readNumber() : Null<Float>);
+          var rotationDegrees:Null<Float> = (cast readNumber() : Null<Float>);
+          var largeArc:Null<Float> = (cast readFlag() : Null<Float>);
+          var sweep:Null<Float> = (cast readFlag() : Null<Float>);
+          var x:Null<Float> = (cast readNumber() : Null<Float>);
+          var y:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(rotationDegrees, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(largeArc, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(sweep, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool)) {
             return cast false;
           }
-          var ax:Dynamic = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
-          var ay:Dynamic = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          _Runtime.callValue(appendPathArcTo, cast ([path, rx, ry, ((rotationDegrees * HxMath.PI) / 180.0), _Runtime.strictEquals(largeArc, 1.0), _Runtime.strictEquals(sweep, 1.0), ax, ay] : Array<Dynamic>));
+          var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
+          var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
+          appendPathArcTo((cast path : Path), (cast rx : Float), (cast ry : Float), (cast ((rotationDegrees * HxMath.PI) / 180.0) : Float), (cast _Runtime.strictEquals(largeArc, 1.0) : Bool), (cast _Runtime.strictEquals(sweep, 1.0) : Bool), (cast ax : Float), (cast ay : Float));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('A' : Dynamic));
@@ -246,37 +247,37 @@ class SvgPathData {
   }
 
   public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
-    var precision:Dynamic = cast _Runtime.UNDEFINED;
+    var precision:Null<Float> = cast _Runtime.UNDEFINED;
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     precision = _Runtime.optionalField(options, 'precision');
     parts = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(forEachPathSegment, cast ([path, function(segment:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'moveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast (['M' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'x'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'y'), precision] : Array<Dynamic>))) + ''] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'lineTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast (['L' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'x'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'y'), precision] : Array<Dynamic>))) + ''] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'curveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast ([('Q' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'controlX'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'controlY'), precision] : Array<Dynamic>))) + ' ' + '' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'x'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'y'), precision] : Array<Dynamic>))) + '')] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'cubicCurveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast ([(('C' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'control1X'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'control1Y'), precision] : Array<Dynamic>))) + ' ' + '' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'control2X'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'control2Y'), precision] : Array<Dynamic>))) + ' ') + '' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'x'), precision] : Array<Dynamic>))) + ' ' + Std.string(_Runtime.callValue(SvgPathData.formatSvgNumber__svgPathData, cast ([_Runtime.field(segment, 'y'), precision] : Array<Dynamic>))) + '')] : Array<Dynamic>));
-      } else { if ((cast _Runtime.strictEquals(_Runtime.field(segment, 'kind'), 'close') : Bool)) {
+    forEachPathSegment((cast path : Path), function(segment:PathSegment):Void {
+      if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
+        _Runtime.callProperty(parts, 'push', cast (['M' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + ''] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'lineTo') : Bool)) {
+        _Runtime.callProperty(parts, 'push', cast (['L' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + ''] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'curveTo') : Bool)) {
+        _Runtime.callProperty(parts, 'push', cast ([('Q' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY : Float), (cast precision : Null<Float>)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + '')] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'cubicCurveTo') : Bool)) {
+        _Runtime.callProperty(parts, 'push', cast ([(('C' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y : Float), (cast precision : Null<Float>)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y : Float), (cast precision : Null<Float>)) : String)) + ' ') + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + '')] : Array<Dynamic>));
+      } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'close') : Bool)) {
         _Runtime.callProperty(parts, 'push', cast (['Z'] : Array<Dynamic>));
       } } } } }
-    }] : Array<Dynamic>));
+    });
     return cast _Runtime.join(parts, '');
     return cast null;
   }
 
   public static function parseSvgPathData(d:String):Null<Path> {
-    var path:Dynamic = cast _Runtime.UNDEFINED;
-    path = _Runtime.callValue(createPath, cast ([] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callValue(appendSvgPathData, cast ([path, d] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    var path:Path = cast _Runtime.UNDEFINED;
+    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    if ((cast !(cast (cast appendSvgPathData((cast path : Path), (cast d : String)) : Bool) : Bool) : Bool)) { return cast null; }
     return cast path;
     return cast null;
   }
 
   public static function formatSvgNumber__svgPathData(value:Float, ?precision:Float):String {
-    var factor:Dynamic = cast _Runtime.UNDEFINED;
+    var factor:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(precision, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast Std.string(value); }
     factor = HxMath.pow(10.0, precision);
     return cast Std.string(_Runtime.divideNumbers(HxMath.round((value * factor)), factor));

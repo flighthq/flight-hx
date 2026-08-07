@@ -10,44 +10,47 @@ import flighthq.types.BlendMode;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlRenderState.GlQuadBatchShader;
+import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderState.GlViewportRect;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.TintMaterialData;
 
 class GlQuadBatchWriter {
-  public static final QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter:Dynamic = 13.0;
+  public static final QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter:Float = 13.0;
 
-  public static final QUAD_BATCH_INSTANCE_STRIDE__glQuadBatchWriter:Dynamic = (GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter * 4.0);
+  public static final QUAD_BATCH_INSTANCE_STRIDE__glQuadBatchWriter:Float = (GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter * 4.0);
 
-  public static final MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter:Dynamic = 8.0;
+  public static final MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter:Float = 8.0;
 
   @:noCompletion
-  public static final QUAD_BATCH_VS:Dynamic = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
+  public static final QUAD_BATCH_VS:String = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
 
-  public static final QUAD_BATCH_FS__glQuadBatchWriter:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord);\n  if (u_straightTextureAlpha) color.rgb *= color.a;\n  color *= clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
+  public static final QUAD_BATCH_FS__glQuadBatchWriter:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord);\n  if (u_straightTextureAlpha) color.rgb *= color.a;\n  color *= clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
 
   public static function compileQuadBatchWriterShader__glQuadBatchWriter(gl:flighthq._internal.dom.WebGL2RenderingContext):GlQuadBatchShader {
-    var program:Dynamic = cast _Runtime.UNDEFINED;
-    program = _Runtime.callValue(createGlProgram, cast ([gl, QUAD_BATCH_VS, GlQuadBatchWriter.QUAD_BATCH_FS__glQuadBatchWriter, 'Sprite-batch'] : Array<Dynamic>));
+    var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
+    program = (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast QUAD_BATCH_VS : String), (cast GlQuadBatchWriter.QUAD_BATCH_FS__glQuadBatchWriter : String), (cast 'Sprite-batch' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { program: program, locCorner: 0.0, locMatAB: 1.0, locMatCD: 2.0, locMatTXTY: 3.0, locSize: 4.0, locUvRect: 5.0, locAlpha: 6.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') };
     return cast null;
   }
 
   @:noCompletion
   public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var stride:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchCornerBuffer'));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var stride:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    gl = (cast state : GlRenderState).gl;
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchCornerBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, locCorner);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 8.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, locCorner, 0.0);
     stride = GlQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__glQuadBatchWriter;
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 1.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 1.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 1.0, 1.0);
@@ -70,89 +73,89 @@ class GlQuadBatchWriter {
 
   @:noCompletion
   public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var cornerData:Dynamic = cast _Runtime.UNDEFINED;
-    var cornerBuf:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchShader'))) { return cast _Runtime.field(runtime, 'quadBatchShader'); }
-    gl = _Runtime.field(state, 'gl');
-    _Runtime.setField(runtime, 'quadBatchShader', _Runtime.callValue(GlQuadBatchWriter.compileQuadBatchWriterShader__glQuadBatchWriter, cast ([gl] : Array<Dynamic>)));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var cornerData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var cornerBuf:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchShader)) { return cast (cast runtime : GlRenderStateRuntime).quadBatchShader; }
+    gl = (cast state : GlRenderState).gl;
+    ((cast runtime : GlRenderStateRuntime).quadBatchShader = (cast GlQuadBatchWriter.compileQuadBatchWriterShader__glQuadBatchWriter((cast gl : flighthq._internal.dom.WebGL2RenderingContext)) : Null<GlQuadBatchShader>));
     cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerBuf);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerData, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
-    _Runtime.setField(runtime, 'quadBatchCornerBuffer', cornerBuf);
-    return cast _Runtime.field(runtime, 'quadBatchShader');
+    ((cast runtime : GlRenderStateRuntime).quadBatchCornerBuffer = cornerBuf);
+    return cast (cast runtime : GlRenderStateRuntime).quadBatchShader;
     return cast null;
   }
 
   @:noCompletion
   public static function flushGlQuadBatchWriter(state:GlRenderState):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var count:Dynamic = cast _Runtime.UNDEFINED;
-    var texture:Dynamic = cast _Runtime.UNDEFINED;
-    var sampler:Dynamic = cast _Runtime.UNDEFINED;
-    var straightAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    var blendMode:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Dynamic = cast _Runtime.UNDEFINED;
-    var renderer:Dynamic = cast _Runtime.UNDEFINED;
-    var floats:Dynamic = cast _Runtime.UNDEFINED;
-    var smoothing:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var ctHandled:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    count = _Runtime.field(runtime, 'quadBatchWriterCount');
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
+    var sampler:Null<SamplerLike> = cast _Runtime.UNDEFINED;
+    var straightAlpha:Bool = cast _Runtime.UNDEFINED;
+    var blendMode:Null<String> = cast _Runtime.UNDEFINED;
+    var material:Null<Material> = cast _Runtime.UNDEFINED;
+    var renderer:GlMaterialRenderer = cast _Runtime.UNDEFINED;
+    var floats:Float = cast _Runtime.UNDEFINED;
+    var smoothing:Null<Bool> = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var ctHandled:Bool = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    count = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return; }
-    texture = _Runtime.field(runtime, 'quadBatchWriterTexture');
-    sampler = _Runtime.field(runtime, 'quadBatchWriterSampler');
-    straightAlpha = _Runtime.field(runtime, 'quadBatchWriterStraightAlpha');
-    blendMode = _Runtime.field(runtime, 'quadBatchWriterBlendMode');
-    material = _Runtime.field(runtime, 'quadBatchWriterMaterial');
-    renderer = _Runtime.field(runtime, 'quadBatchWriterMaterialRenderer');
-    floats = _Runtime.field(runtime, 'quadBatchWriterMaterialFloats');
-    smoothing = _Runtime.field(runtime, 'quadBatchWriterSmoothing');
-    _Runtime.setField(runtime, 'quadBatchWriterCount', 0.0);
-    _Runtime.setField(runtime, 'quadBatchWriterTexture', null);
-    _Runtime.setField(runtime, 'quadBatchWriterSampler', null);
-    _Runtime.setField(runtime, 'quadBatchWriterStraightAlpha', false);
-    _Runtime.setField(runtime, 'quadBatchWriterSmoothing', null);
-    _Runtime.setField(runtime, 'quadBatchWriterBlendMode', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterial', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', null);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', 0.0);
-    gl = _Runtime.field(state, 'gl');
-    if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'), null) : Bool)) {
-      _Runtime.setField(runtime, 'quadBatchWriterInstanceBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+    texture = (cast runtime : GlRenderStateRuntime).quadBatchWriterTexture;
+    sampler = (cast runtime : GlRenderStateRuntime).quadBatchWriterSampler;
+    straightAlpha = (cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha;
+    blendMode = (cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode;
+    material = (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial;
+    renderer = (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer;
+    floats = (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats;
+    smoothing = (cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing;
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount = 0.0);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterTexture = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSampler = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha = false);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer = null);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats = 0.0);
+    gl = (cast state : GlRenderState).gl;
+    if ((cast _Runtime.strictEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer, null) : Bool)) {
+      ((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData, 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
     } else {
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer);
     }
-    flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, _Runtime.field(runtime, 'quadBatchWriterInstanceData'), 0.0, (count * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter));
-    _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData, 0.0, (count * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter));
+    _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, blendMode] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
-    _Runtime.setField(runtime, 'currentTexture', texture);
-    _Runtime.setField(runtime, 'currentTextureStraightAlpha', straightAlpha);
-    _Runtime.callValue(applyGlSamplerState, cast ([state, runtime, texture, sampler, smoothing] : Array<Dynamic>));
-    ctHandled = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'glColorAdjustmentMaterialFeature'), 'flush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
+    ((cast runtime : GlRenderStateRuntime).currentTexture = texture);
+    ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = straightAlpha);
+    applyGlSamplerState((cast state : GlRenderState), runtime, (cast texture : flighthq._internal.dom.WebGLTexture), (cast sampler : Null<SamplerLike>), (cast smoothing : Null<Bool>));
+    ctHandled = _Runtime.coalesce(_Runtime.callOptionalProperty((cast runtime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, 'flush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
     if ((cast !(cast ctHandled : Bool) : Bool)) {
       if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'), null) : Bool)) {
-          _Runtime.setField(runtime, 'quadBatchWriterMaterialBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
-          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+        if ((cast _Runtime.strictEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer, null) : Bool)) {
+          ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer);
+          flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData, 'byteLength'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
         } else {
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer);
         }
-        flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), 0.0, (count * floats));
+        flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData, 0.0, (count * floats));
       }
-      _Runtime.callProperty(renderer, 'bind', cast ([state, material] : Array<Dynamic>));
+      (cast renderer : GlMaterialRenderer).bind(state, material);
     }
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(runtime, 'quadIndexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0, count);
     {
-      var loc:Dynamic = 1.0;
+      var loc:Float = 1.0;
       while ((cast ((cast loc : Float) <= (cast GlQuadBatchWriter.MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter : Float)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, loc, 0.0);
         loc++;
@@ -162,87 +165,87 @@ class GlQuadBatchWriter {
 
   @:noCompletion
   public static function packGlQuadBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var renderer:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    renderer = _Runtime.field(runtime, 'quadBatchWriterMaterialRenderer');
-    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(renderer, 'packInstance'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'quadBatchWriterMaterialData'), _Runtime.multiplyNumbers(instanceIndex, _Runtime.field(runtime, 'quadBatchWriterMaterialFloats'))] : Array<Dynamic>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var renderer:Null<GlMaterialRenderer> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    renderer = (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer;
+    if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals((cast renderer : GlMaterialRenderer).packInstance, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    (cast renderer : GlMaterialRenderer).packInstance(state, materialData, (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData, (instanceIndex * (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats));
   }
 
   @:noCompletion
   public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var floats:Dynamic = cast _Runtime.UNDEFINED;
-    var needed:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'flushPendingDraws', flushGlQuadBatchWriter);
-    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(runtime, 'quadBatchWriterTexture')) : Bool) || (cast !_Runtime.strictEquals(straightAlpha, _Runtime.field(runtime, 'quadBatchWriterStraightAlpha')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(sampler, _Runtime.field(runtime, 'quadBatchWriterSampler')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(blendMode, _Runtime.field(runtime, 'quadBatchWriterBlendMode')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, _Runtime.field(runtime, 'quadBatchWriterMaterial')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(smoothing, _Runtime.field(runtime, 'quadBatchWriterSmoothing')) : Bool)) : Bool)) {
-      _Runtime.callValue(flushGlQuadBatchWriter, cast ([state] : Array<Dynamic>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var floats:Float = cast _Runtime.UNDEFINED;
+    var needed:Float = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    ((cast runtime : GlRenderStateRuntime).flushPendingDraws = flushGlQuadBatchWriter);
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(texture, (cast runtime : GlRenderStateRuntime).quadBatchWriterTexture) : Bool) || (cast !_Runtime.strictEquals(straightAlpha, (cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha) : Bool)) : Bool) || (cast !_Runtime.strictEquals(sampler, (cast runtime : GlRenderStateRuntime).quadBatchWriterSampler) : Bool)) : Bool) || (cast !_Runtime.strictEquals(blendMode, (cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(smoothing, (cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing) : Bool)) : Bool)) {
+      flushGlQuadBatchWriter((cast state : GlRenderState));
     }
-    _Runtime.setField(runtime, 'quadBatchWriterTexture', texture);
-    _Runtime.setField(runtime, 'quadBatchWriterSampler', sampler);
-    _Runtime.setField(runtime, 'quadBatchWriterStraightAlpha', straightAlpha);
-    _Runtime.setField(runtime, 'quadBatchWriterSmoothing', smoothing);
-    _Runtime.setField(runtime, 'quadBatchWriterBlendMode', blendMode);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterial', material);
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialRenderer', materialRenderer);
-    floats = _Runtime.field(materialRenderer, 'instanceFloatCount');
-    _Runtime.setField(runtime, 'quadBatchWriterMaterialFloats', floats);
-    needed = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
-    if ((cast ((cast needed : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length') : Float)) : Bool)) {
-      var newSize:Dynamic = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterInstanceData'), 'length'), 2.0));
-      _Runtime.setField(runtime, 'quadBatchWriterInstanceData', new flighthq._internal._Float32Array(newSize));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'), null) : Bool)) {
-        var gl:Dynamic = _Runtime.field(state, 'gl');
-        flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterInstanceBuffer'));
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterTexture = texture);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSampler = sampler);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha = straightAlpha);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing = smoothing);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode = blendMode);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial = material);
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer = materialRenderer);
+    floats = (cast materialRenderer : GlMaterialRenderer).instanceFloatCount;
+    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats = floats);
+    needed = (((cast runtime : GlRenderStateRuntime).quadBatchWriterCount + maxInstances) * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
+    if ((cast ((cast needed : Float) > (cast _Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData, 'length') : Float)) : Bool)) {
+      var newSize:Float = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData, 'length'), 2.0));
+      ((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData = new flighthq._internal._Float32Array(newSize));
+      if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer, null) : Bool)) {
+        var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+        flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer);
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       }
     }
     if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialNeeded:Dynamic = (_Runtime.addNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), maxInstances) * floats);
-      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length') : Float)) : Bool)) {
-        var newSize:Dynamic = HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field(_Runtime.field(runtime, 'quadBatchWriterMaterialData'), 'length'), 2.0));
-        _Runtime.setField(runtime, 'quadBatchWriterMaterialData', new flighthq._internal._Float32Array(newSize));
-        if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'), null) : Bool)) {
-          var gl:Dynamic = _Runtime.field(state, 'gl');
-          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(runtime, 'quadBatchWriterMaterialBuffer'));
+      var materialNeeded:Float = (((cast runtime : GlRenderStateRuntime).quadBatchWriterCount + maxInstances) * floats);
+      if ((cast ((cast materialNeeded : Float) > (cast _Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData, 'length') : Float)) : Bool)) {
+        var newSize:Float = HxMath.max(materialNeeded, _Runtime.multiplyNumbers(_Runtime.field((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData, 'length'), 2.0));
+        ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData = new flighthq._internal._Float32Array(newSize));
+        if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer, null) : Bool)) {
+          var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+          flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer);
           flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
         }
       }
     }
-    return cast _Runtime.multiplyNumbers(_Runtime.field(runtime, 'quadBatchWriterCount'), GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
+    return cast ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount * GlQuadBatchWriter.QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter);
     return cast null;
   }
 
   @:noCompletion
-  public static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<Dynamic>, instanceIndex:Float):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var fold:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    fold = _Runtime.field(runtime, 'glColorAdjustmentMaterialFeature');
+  public static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    fold = (cast runtime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature;
     if ((cast !_Runtime.looseEquals(fold, null) : Bool)) {
-      _Runtime.callProperty(fold, 'record', cast ([runtime, colorScaleBias, instanceIndex] : Array<Dynamic>));
+      (cast fold : GlColorAdjustmentMaterialFeature).record(runtime, colorScaleBias, instanceIndex);
       return;
     }
-    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalProperty(runtime, 'glColorAdjustmentMaterialFeatureGuard', cast ([state, colorScaleBias] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast runtime : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
   @:noCompletion
   public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:flighthq._internal.dom.WebGLUniformLocation, locTexture:flighthq._internal.dom.WebGLUniformLocation, ?locStraightTextureAlpha:flighthq._internal.dom.WebGLUniformLocation):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    var gl:Dynamic = cast _Runtime.UNDEFINED;
-    var viewport:Dynamic = cast _Runtime.UNDEFINED;
-    var clipW:Dynamic = cast _Runtime.UNDEFINED;
-    var clipH:Dynamic = cast _Runtime.UNDEFINED;
-    var m:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    gl = _Runtime.field(state, 'gl');
-    viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    clipW = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
-    clipH = _Runtime.divideNumbers(2.0, flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
-    m = _Runtime.field(runtime, 'matrixArray');
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var viewport:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, GlViewportRect> = cast _Runtime.UNDEFINED;
+    var clipW:Float = cast _Runtime.UNDEFINED;
+    var clipH:Float = cast _Runtime.UNDEFINED;
+    var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    gl = (cast state : GlRenderState).gl;
+    viewport = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
+    clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
+    clipH = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
+    m = (cast runtime : GlRenderStateRuntime).matrixArray;
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
@@ -255,17 +258,17 @@ class GlQuadBatchWriter {
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, locWorldMatrix, false, m);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, locTexture, 0.0);
     if ((cast !_Runtime.strictEquals(locStraightTextureAlpha, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, locStraightTextureAlpha, ((cast _Runtime.field(runtime, 'currentTextureStraightAlpha') : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, locStraightTextureAlpha, ((cast (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     }
   }
 
   @:noCompletion
   public static function useGlQuadBatchProgram(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):Void {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.useProgram(_Runtime.field(state, 'gl'), program);
-      _Runtime.setField(runtime, 'currentProgram', program);
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).currentProgram, program) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.useProgram((cast state : GlRenderState).gl, program);
+      ((cast runtime : GlRenderStateRuntime).currentProgram = program);
     }
   }
 }

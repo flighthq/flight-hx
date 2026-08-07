@@ -6,30 +6,33 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PosterizeEffect;
+import flighthq.types.RenderEffect;
 
 class GlPosterizeEffect {
   @:noCompletion
   public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
-    var levels:Dynamic = cast _Runtime.UNDEFINED;
-    var program:Dynamic = cast _Runtime.UNDEFINED;
+    var levels:Float = cast _Runtime.UNDEFINED;
+    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
-    program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'colorGrade.posterize', GlPosterizeEffect.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect] : Array<Dynamic>));
-    _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
+    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'colorGrade.posterize' : String), (cast GlPosterizeEffect.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_levels'), levels);
-    }] : Array<Dynamic>));
+    });
   }
 
-  public static final defaultGlPosterizeEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyPosterizeEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PosterizeEffect)] : Array<Dynamic>));
+  public static final defaultGlPosterizeEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyPosterizeEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : PosterizeEffect) : PosterizeEffect));
   };
 
   public static function registerGlPosterizeEffect(state:GlRenderState):Void {
-    _Runtime.callValue(registerGlRenderEffect, cast ([state, 'PosterizeEffect', defaultGlPosterizeEffectRunner] : Array<Dynamic>));
+    registerGlRenderEffect((cast state : GlRenderState), (cast 'PosterizeEffect' : String), (cast defaultGlPosterizeEffectRunner : GlRenderEffectRunner));
   }
 
-  public static final POSTERIZE_FRAGMENT_SRC__glPosterizeEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = floor(c.rgb * u_levels) / (u_levels - 1.0);\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';
+  public static final POSTERIZE_FRAGMENT_SRC__glPosterizeEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = floor(c.rgb * u_levels) / (u_levels - 1.0);\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';
 }
