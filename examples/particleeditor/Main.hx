@@ -168,7 +168,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = new _CairoCanvas(window);
+      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,
@@ -453,35 +453,3 @@ private class _GlCanvas {
 // Canvas adapter presenting the Lime software window's cairo context as the 2D
 // canvas `createCanvasRenderState` expects (the cairo counterpart of _GlCanvas).
 @:keep
-private class _CairoCanvas {
-  public var width:Int = 0;
-  public var height:Int = 0;
-
-  final window:Window;
-  final context:Dynamic;
-
-  public function new(window:Window) {
-    this.window = window;
-    #if (lime && !js && lime_cairo)
-    final cairo = window.context.cairo;
-    if (cairo == null) throw 'The cairo branch requires a software (hardware="false") window.';
-    context = new flighthq._internal.backend.NativeCanvas2dContext(cairo);
-    #else
-    context = null;
-    #end
-    syncSize();
-    window.onResize.add((_, _) -> syncSize());
-  }
-
-  public function getContext(contextId:String, ?attributes:Dynamic):Dynamic {
-    return context;
-  }
-
-  function syncSize():Void {
-    width = Std.int(window.width * window.scale);
-    height = Std.int(window.height * window.scale);
-    #if (lime && !js && lime_cairo)
-    (cast context : flighthq._internal.backend.NativeCanvas2dContext).resize(width, height);
-    #end
-  }
-}

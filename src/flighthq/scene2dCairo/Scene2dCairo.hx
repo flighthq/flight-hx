@@ -133,4 +133,8 @@ class Scene2dCairo {
   static inline function get_defaultCairoTextureShapeCommands():Array<Dynamic> return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextureShapeCommands;
   public static var defaultCairoTilemapRenderer(get, never):SpriteRenderer;
   static inline function get_defaultCairoTilemapRenderer():SpriteRenderer return flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTilemapRenderer;
+  #if lime
+  /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */
+  public static inline function createCairoSurface(window:lime.ui.Window):flighthq.scene2dCairo.CairoSurface { return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window); }
+  #end
 }

@@ -127,6 +127,14 @@ function deriveFacade({ cairoModule, cairoPackage, canvasModule, canvasPackage }
     lines.push(`  static inline function get_${alias}():${type.trim()} return ${qualified}.${name};`);
   }
 
+  if (cairoModule === 'Scene2dCairo') {
+    lines.push('  #if lime');
+    lines.push('  /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */');
+    lines.push(
+      '  public static inline function createCairoSurface(window:lime.ui.Window):flighthq.scene2dCairo.CairoSurface { return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window); }',
+    );
+    lines.push('  #end');
+  }
   if (lines.length === 0) throw new Error(`derive-cairo-aliases: ${canvasModule} yielded no aliases`);
   const module = `${header}package flighthq.${cairoPackage};\n\n${imports}\n\nclass ${cairoModule} {\n${lines.join('\n')}\n}\n`;
   return { content: module, relative: path.join('src', 'flighthq', cairoPackage, `${cairoModule}.hx`) };
@@ -167,7 +175,15 @@ const derived = [...FACADES.map(deriveFacade), ...deriveTypes()];
 const derivedByPath = new Map(derived.map((entry) => [entry.relative, entry.content]));
 
 const OWNED_DIRECTORIES = ['src/flighthq/scene2dCairo', 'src/flighthq/effectsCairo'];
-const ownedFiles = new Set(derivedByPath.keys());
+// Handwritten cairo-native modules living beside the derived aliases: never
+// swept as stale, and a derived name colliding with one is a hard error.
+const HANDWRITTEN = new Set([path.join('src', 'flighthq', 'scene2dCairo', 'CairoSurface.hx')]);
+for (const handwritten of HANDWRITTEN) {
+  if (derivedByPath.has(handwritten)) {
+    throw new Error(`derive-cairo-aliases: derived output collides with handwritten module ${handwritten}`);
+  }
+}
+const ownedFiles = new Set([...derivedByPath.keys(), ...HANDWRITTEN]);
 const stale = [];
 for (const directory of OWNED_DIRECTORIES) {
   let entries = [];
