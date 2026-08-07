@@ -50,10 +50,19 @@ const username = process.env.HAXELIB_USERNAME;
 const password = process.env.HAXELIB_PASSWORD;
 if (!username || !password) fail('HAXELIB_USERNAME and HAXELIB_PASSWORD must be set for a real submit');
 const haxeDirectory = path.join(workspace, '.haxe', '4.3.7');
-const submit = spawnSync(path.join(haxeDirectory, 'haxelib'), ['submit', artifact], {
+const haxelibBinary = path.join(haxeDirectory, 'haxelib');
+const environment = { ...process.env, PATH: `${haxeDirectory}${path.delimiter}${process.env.PATH ?? ''}` };
+// A fresh runner has never configured haxelib; `submit` refuses to start
+// until a repository path exists, so set one up in the build directory.
+const submitRepository = path.join(workspace, 'build', 'package', 'submit-repository');
+run(haxelibBinary, ['setup', submitRepository], environment);
+// The password rides as the positional argument and `--always` answers the
+// confirmation prompts; the stdin lines cover the prompt-order variants
+// (single-contributor submits skip the username question entirely).
+const submit = spawnSync(haxelibBinary, ['submit', artifact, password, '--always'], {
   cwd: workspace,
-  env: { ...process.env, PATH: `${haxeDirectory}${path.delimiter}${process.env.PATH ?? ''}` },
-  input: `${username}\n${password}\n`,
+  env: environment,
+  input: `${username}\n${password}\n${password}\n`,
   encoding: 'utf8',
 });
 process.stdout.write(submit.stdout ?? '');
@@ -61,8 +70,12 @@ process.stderr.write(submit.stderr ?? '');
 if (submit.status !== 0) fail(`haxelib submit exited with status ${String(submit.status)}`);
 process.stdout.write(`Published ${metadata.name} ${metadata.version} to haxelib.\n`);
 
-function run(command, commandArguments) {
-  const result = spawnSync(command, commandArguments, { cwd: workspace, stdio: 'inherit' });
+function run(command, commandArguments, environment) {
+  const result = spawnSync(command, commandArguments, {
+    cwd: workspace,
+    stdio: 'inherit',
+    ...(environment ? { env: environment } : {}),
+  });
   if (result.status !== 0) fail(`${command} ${commandArguments.join(' ')} exited with status ${String(result.status)}`);
 }
 
