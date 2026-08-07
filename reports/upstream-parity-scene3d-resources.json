@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-04T21:00:01.816Z",
-  "failedPackages": 1,
+  "completedAt": "2026-08-07T01:51:45.128Z",
+  "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 558111,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x···x··································································································\n\n Test Files  1 failed | 25 passed (26)\n      Tests  2 failed | 102 passed (104)\n   Start at  13:50:44\n   Duration  557.40s (transform 15.95s, setup 464ms, import 543.59s, tests 10.94s, environment 1.26s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > loadScene3DResources > resolves immediately when there is nothing pending\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:61:56\n     59|     configureResources(scene);\n     60|     const resolver = createBuiltInScene3DResourceResolver({ fetch: asy…\n     61|     await expect(loadScene3DResources(scene, resolver)).resolves.toBeU…\n       |                                                        ^\n     62|     disposeScene3DResourceResolver(resolver);\n     63|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > waitForScene3DResourceResolver > resolves immediately when the resolver has no pending requests\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:132:59\n    130|   it('resolves immediately when the resolver has no pending requests',…\n    131|     const resolver = createBuiltInScene3DResourceResolver();\n    132|     await expect(waitForScene3DResourceResolver(resolver)).resolves.to…\n       |                                                           ^\n    133|     disposeScene3DResourceResolver(resolver);\n    134|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 456501,
+      "exitCode": 0,
       "package": "scene3d-resources",
       "signal": null,
-      "status": "failed",
-      "summary": "2 failed | 102 passed (104)",
-      "testFiles": 26
+      "status": "passed",
+      "summary": "112 passed (112)",
+      "testFiles": 27
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene3d-resources",
-  "startedAt": "2026-08-04T20:50:43.700Z"
+  "startedAt": "2026-08-07T01:44:08.625Z"
 }

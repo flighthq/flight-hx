@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-06T20:24:53.064Z",
-  "failedPackages": 1,
+  "completedAt": "2026-08-07T04:43:23.517Z",
+  "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 806175,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n----------------·····························x··············································································································································································\n\n Test Files  2 failed | 26 passed (28)\n      Tests  1 failed | 203 passed | 16 skipped (220)\n   Start at  13:11:27\n   Duration  805.31s (transform 22.03s, setup 1.04s, import 764.32s, tests 38.16s, environment 932ms)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glShape.test.ts [ upstream/packages/scene2d-gl/src/glShape.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glShape.test.ts:38:1\n     36| scopeModuleMocks(['@flighthq/node']);\n     37|\n     38| beforeAll(async () => {\n       | ^\n     39|   vi.doMock('@flighthq/node/contract', async (importOriginal) => ({\n     40|     ...(await importOriginal<typeof FlightNodeModule>()),\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glClipContours.test.ts > pushGlClipContours > uses the even-odd stencil op for an evenOdd winding\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 7680, 7680, undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   5386,\n  ]\n\n  2nd vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   7680,\n  ]\n\n\nNumber of calls: 2\n\n ❯ upstream/packages/scene2d-gl/src/glClipContours.test.ts:114:26\n    112|     pushGlClipContours(state, SQUARE, 'evenOdd', createMatrix());\n    113|\n    114|     expect(gl.stencilOp).toHaveBeenCalledWith(gl.KEEP, gl.KEEP, gl.INV…\n       |                          ^\n    115|   });\n    116| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 620609,
+      "exitCode": 0,
       "package": "scene2d-gl",
       "signal": null,
-      "status": "failed",
-      "summary": "1 failed | 203 passed | 16 skipped (220)",
+      "status": "passed",
+      "summary": "220 passed (220)",
       "testFiles": 28
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-gl",
-  "startedAt": "2026-08-06T20:11:26.887Z"
+  "startedAt": "2026-08-07T04:33:02.906Z"
 }

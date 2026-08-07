@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-06T17:24:15.587Z",
-  "failedPackages": 7,
+  "completedAt": "2026-08-07T03:31:14.583Z",
+  "failedPackages": 2,
   "jobs": 6,
   "packages": [
     {
-      "durationMs": 95713,
+      "durationMs": 89313,
       "exitCode": 0,
       "package": "abc",
       "signal": null,
@@ -13,7 +13,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 13787,
+      "durationMs": 13039,
       "exitCode": 0,
       "package": "accessibility",
       "signal": null,
@@ -22,7 +22,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 29589,
+      "durationMs": 26687,
       "exitCode": 0,
       "package": "adjustments",
       "signal": null,
@@ -31,7 +31,7 @@
       "testFiles": 19
     },
     {
-      "durationMs": 390837,
+      "durationMs": 373178,
       "exitCode": 0,
       "package": "animation",
       "signal": null,
@@ -40,7 +40,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 15015,
+      "durationMs": 13902,
       "exitCode": 0,
       "package": "app",
       "signal": null,
@@ -49,7 +49,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 61797,
+      "durationMs": 55225,
       "exitCode": 0,
       "package": "application",
       "signal": null,
@@ -58,7 +58,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 14825,
+      "durationMs": 13433,
       "exitCode": 0,
       "package": "application-gl",
       "signal": null,
@@ -67,7 +67,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 16126,
+      "durationMs": 14063,
       "exitCode": 0,
       "package": "assets",
       "signal": null,
@@ -76,7 +76,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 57234,
+      "durationMs": 54235,
       "exitCode": 0,
       "package": "audio",
       "signal": null,
@@ -85,7 +85,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 13831,
+      "durationMs": 11984,
       "exitCode": 0,
       "package": "binpack",
       "signal": null,
@@ -94,7 +94,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 207799,
+      "durationMs": 203543,
       "exitCode": 0,
       "package": "bitmap",
       "signal": null,
@@ -103,7 +103,7 @@
       "testFiles": 42
     },
     {
-      "durationMs": 66826,
+      "durationMs": 67372,
       "exitCode": 0,
       "package": "bitmapfont",
       "signal": null,
@@ -112,7 +112,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 24262,
+      "durationMs": 24471,
       "exitCode": 0,
       "package": "bitmapfont-formats",
       "signal": null,
@@ -121,7 +121,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 66257,
+      "durationMs": 63406,
       "exitCode": 0,
       "package": "bitmaptext",
       "signal": null,
@@ -130,7 +130,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 114523,
+      "durationMs": 110101,
       "exitCode": 0,
       "package": "camera",
       "signal": null,
@@ -139,7 +139,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 136861,
+      "durationMs": 133395,
       "exitCode": 0,
       "package": "camera-controls",
       "signal": null,
@@ -148,7 +148,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 12187,
+      "durationMs": 12222,
       "exitCode": 0,
       "package": "capture",
       "signal": null,
@@ -157,7 +157,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 27063,
+      "durationMs": 26180,
       "exitCode": 0,
       "package": "clip",
       "signal": null,
@@ -166,7 +166,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 52636,
+      "durationMs": 49885,
       "exitCode": 0,
       "package": "clipboard",
       "signal": null,
@@ -175,7 +175,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 14275,
+      "durationMs": 13812,
       "exitCode": 0,
       "package": "clock",
       "signal": null,
@@ -184,7 +184,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 23113,
+      "durationMs": 21682,
       "exitCode": 0,
       "package": "collision",
       "signal": null,
@@ -193,7 +193,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 16136,
+      "durationMs": 15161,
       "exitCode": 0,
       "package": "color",
       "signal": null,
@@ -202,7 +202,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 92826,
+      "durationMs": 87944,
       "exitCode": 0,
       "package": "compression",
       "signal": null,
@@ -211,7 +211,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 17636,
+      "durationMs": 15960,
       "exitCode": 0,
       "package": "connectivity",
       "signal": null,
@@ -220,7 +220,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 99522,
+      "durationMs": 94649,
       "exitCode": 0,
       "package": "debug",
       "signal": null,
@@ -229,7 +229,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 52856,
+      "durationMs": 50766,
       "exitCode": 0,
       "package": "device",
       "signal": null,
@@ -238,7 +238,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 11128,
+      "durationMs": 11032,
       "exitCode": 0,
       "package": "dialog",
       "signal": null,
@@ -247,7 +247,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 26630,
+      "durationMs": 25045,
       "exitCode": 0,
       "package": "easing",
       "signal": null,
@@ -256,7 +256,7 @@
       "testFiles": 21
     },
     {
-      "durationMs": 1127276,
+      "durationMs": 1010160,
       "exitCode": 0,
       "package": "effects",
       "signal": null,
@@ -265,7 +265,7 @@
       "testFiles": 72
     },
     {
-      "durationMs": 215070,
+      "durationMs": 207833,
       "exitCode": 0,
       "package": "effects-canvas",
       "signal": null,
@@ -274,7 +274,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 214495,
+      "durationMs": 206994,
       "exitCode": 0,
       "package": "effects-gl",
       "signal": null,
@@ -283,7 +283,7 @@
       "testFiles": 58
     },
     {
-      "durationMs": 216758,
+      "durationMs": 204497,
       "exitCode": 0,
       "package": "effects-wgpu",
       "signal": null,
@@ -292,7 +292,7 @@
       "testFiles": 56
     },
     {
-      "durationMs": 272186,
+      "durationMs": 260206,
       "exitCode": 0,
       "package": "entity",
       "signal": null,
@@ -301,7 +301,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 13418,
+      "durationMs": 12559,
       "exitCode": 0,
       "package": "filesystem",
       "signal": null,
@@ -310,7 +310,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 14457,
+      "durationMs": 11669,
       "exitCode": 0,
       "package": "flow",
       "signal": null,
@@ -319,7 +319,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 30903,
+      "durationMs": 28235,
       "exitCode": 0,
       "package": "font",
       "signal": null,
@@ -328,7 +328,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 13685,
+      "durationMs": 11901,
       "exitCode": 0,
       "package": "geolocation",
       "signal": null,
@@ -337,7 +337,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 149408,
+      "durationMs": 133081,
       "exitCode": 0,
       "package": "geometry",
       "signal": null,
@@ -346,7 +346,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 79115,
+      "durationMs": 71236,
       "exitCode": 0,
       "package": "glyphatlas",
       "signal": null,
@@ -355,7 +355,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 15439,
+      "durationMs": 12734,
       "exitCode": 0,
       "package": "haptics",
       "signal": null,
@@ -364,7 +364,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 64025,
+      "durationMs": 60001,
       "exitCode": 0,
       "package": "host-capacitor",
       "signal": null,
@@ -373,7 +373,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 23763,
+      "durationMs": 21773,
       "exitCode": 0,
       "package": "host-electron",
       "signal": null,
@@ -382,7 +382,7 @@
       "testFiles": 17
     },
     {
-      "durationMs": 23643,
+      "durationMs": 23471,
       "exitCode": 0,
       "package": "host-tauri",
       "signal": null,
@@ -391,7 +391,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 137042,
+      "durationMs": 121792,
       "exitCode": 0,
       "package": "image",
       "signal": null,
@@ -400,7 +400,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 18581,
+      "durationMs": 15765,
       "exitCode": 0,
       "package": "image-codec",
       "signal": null,
@@ -409,7 +409,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 94521,
+      "durationMs": 83240,
       "exitCode": 0,
       "package": "importdiagnostics",
       "signal": null,
@@ -418,7 +418,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 55482,
+      "durationMs": 49228,
       "exitCode": 0,
       "package": "input",
       "signal": null,
@@ -427,7 +427,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 512357,
+      "durationMs": 429463,
       "exitCode": 0,
       "package": "interaction",
       "signal": null,
@@ -436,7 +436,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 16404,
+      "durationMs": 14286,
       "exitCode": 0,
       "package": "intl",
       "signal": null,
@@ -445,7 +445,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 59993,
+      "durationMs": 50222,
       "exitCode": 0,
       "package": "ipc",
       "signal": null,
@@ -454,7 +454,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 57817,
+      "durationMs": 49897,
       "exitCode": 0,
       "package": "keyboard",
       "signal": null,
@@ -463,7 +463,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 146429,
+      "durationMs": 127192,
       "exitCode": 0,
       "package": "layout",
       "signal": null,
@@ -472,7 +472,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 15256,
+      "durationMs": 12454,
       "exitCode": 0,
       "package": "lifecycle",
       "signal": null,
@@ -481,7 +481,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 459925,
+      "durationMs": 388191,
       "exitCode": 0,
       "package": "lighting",
       "signal": null,
@@ -490,7 +490,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 16622,
+      "durationMs": 16072,
       "exitCode": 0,
       "package": "loader",
       "signal": null,
@@ -499,7 +499,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 56164,
+      "durationMs": 49685,
       "exitCode": 0,
       "package": "log",
       "signal": null,
@@ -508,7 +508,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 742627,
+      "durationMs": 640947,
       "exitCode": 0,
       "package": "materials",
       "signal": null,
@@ -517,7 +517,7 @@
       "testFiles": 20
     },
     {
-      "durationMs": 21887,
+      "durationMs": 18813,
       "exitCode": 0,
       "package": "math",
       "signal": null,
@@ -526,7 +526,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 19907,
+      "durationMs": 16836,
       "exitCode": 0,
       "package": "media",
       "signal": null,
@@ -535,7 +535,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 12990,
+      "durationMs": 11418,
       "exitCode": 0,
       "package": "mediasession",
       "signal": null,
@@ -544,7 +544,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 15040,
+      "durationMs": 13517,
       "exitCode": 0,
       "package": "menu",
       "signal": null,
@@ -553,7 +553,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 147821,
+      "durationMs": 117557,
       "exitCode": 0,
       "package": "mesh",
       "signal": null,
@@ -562,7 +562,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 31267,
+      "durationMs": 24220,
       "exitCode": 0,
       "package": "motionpath",
       "signal": null,
@@ -571,7 +571,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 77412,
+      "durationMs": 59821,
       "exitCode": 0,
       "package": "movieclip",
       "signal": null,
@@ -580,7 +580,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 16826,
+      "durationMs": 12647,
       "exitCode": 0,
       "package": "net",
       "signal": null,
@@ -589,7 +589,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 364625,
+      "durationMs": 323919,
       "exitCode": 0,
       "package": "node",
       "signal": null,
@@ -598,7 +598,7 @@
       "testFiles": 18
     },
     {
-      "durationMs": 16966,
+      "durationMs": 12197,
       "exitCode": 0,
       "package": "notification",
       "signal": null,
@@ -607,7 +607,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 195152,
+      "durationMs": 173886,
       "exitCode": 0,
       "package": "particleemitter",
       "signal": null,
@@ -616,7 +616,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 22208,
+      "durationMs": 23625,
       "exitCode": 0,
       "package": "particles",
       "signal": null,
@@ -625,7 +625,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 405912,
+      "durationMs": 372730,
       "exitCode": 0,
       "package": "particles-formats",
       "signal": null,
@@ -634,7 +634,7 @@
       "testFiles": 14
     },
     {
-      "durationMs": 488213,
+      "durationMs": 440139,
       "exitCode": 0,
       "package": "path",
       "signal": null,
@@ -643,7 +643,7 @@
       "testFiles": 28
     },
     {
-      "durationMs": 75214,
+      "durationMs": 56187,
       "exitCode": 0,
       "package": "path-boolean",
       "signal": null,
@@ -652,7 +652,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 21612,
+      "durationMs": 18225,
       "exitCode": 0,
       "package": "path-formats",
       "signal": null,
@@ -661,7 +661,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 13337,
+      "durationMs": 12923,
       "exitCode": 0,
       "package": "permissions",
       "signal": null,
@@ -670,7 +670,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 37305,
+      "durationMs": 34790,
       "exitCode": 0,
       "package": "physics2d",
       "signal": null,
@@ -679,7 +679,7 @@
       "testFiles": 20
     },
     {
-      "durationMs": 134433,
+      "durationMs": 129732,
       "exitCode": 0,
       "package": "picking",
       "signal": null,
@@ -688,7 +688,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 11603,
+      "durationMs": 11917,
       "exitCode": 0,
       "package": "platform",
       "signal": null,
@@ -697,7 +697,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 14742,
+      "durationMs": 12860,
       "exitCode": 0,
       "package": "power",
       "signal": null,
@@ -706,7 +706,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 15019,
+      "durationMs": 12855,
       "exitCode": 0,
       "package": "protocol",
       "signal": null,
@@ -715,7 +715,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 61903,
+      "durationMs": 61292,
       "exitCode": 0,
       "package": "quadbatch",
       "signal": null,
@@ -724,7 +724,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 497510,
+      "durationMs": 480129,
       "exitCode": 0,
       "package": "render",
       "signal": null,
@@ -733,17 +733,16 @@
       "testFiles": 21
     },
     {
-      "durationMs": 1197125,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n····························xx···········································x···········x···········x·······x·····x··················x····················x·····x·······················································································································································································································\n\n Test Files  5 failed | 24 passed (29)\n      Tests  10 failed | 363 passed (373)\n   Start at  09:11:57\n   Duration  1195.98s (transform 35.12s, setup 488ms, import 1190.76s, tests 2.57s, environment 1.12s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > bindGlTexture > premultiplies alpha on upload for HTMLCanvasElement sources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:386:28\n    384|     const canvas = document.createElement('canvas');\n    385|     bindGlTexture(state, canvas);\n    386|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    387|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    388|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > bindGlTexture > sets premultiply to true for non-canvas image sources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:396:28\n    394|     const img = document.createElement('img');\n    395|     bindGlTexture(state, img);\n    396|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    397|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    398|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glDraw.test.ts > updateGlTexture > sets premultiply alpha before uploading\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 37207, true ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   37207,\n+   37441,\n    true,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/render-gl/src/glDraw.test.ts:904:28\n    902|     getGlRenderStateRuntime(state).currentTexture = texture;\n    903|     updateGlTexture(state, texture, document.createElement('canvas'));\n    904|     expect(gl.pixelStorei).toHaveBeenCalledWith(\n       |                            ^\n    905|       (gl as unknown as { UNPACK_PREMULTIPLY_ALPHA_WEBGL: number }).UN…\n    906|       true,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glFullscreenPass.test.ts > drawGlFullscreenPass > binds each input texture to its sampler unit\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  2nd vi.fn() call:\n\n  [\n-   undefined,\n+   33985,\n  ]\n\n  3rd vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  4th vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n  5th vi.fn() call:\n\n  [\n-   undefined,\n+   33985,\n  ]\n\n  6th vi.fn() call:\n\n  [\n-   undefined,\n+   33984,\n  ]\n\n\nNumber of calls: 6\n\n ❯ upstream/packages/render-gl/src/glFullscreenPass.test.ts:171:30\n    169|     drawGlFullscreenPass(state, program, inputs, null, () => {});\n    170|\n    171|     expect(activeTextureSpy).toHaveBeenCalledWith(gl.TEXTURE0);\n       |                              ^\n    172|     expect(activeTextureSpy).toHaveBeenCalledWith(gl.TEXTURE0 + 1);\n    173|     expect(bindTextureSpy).toHaveBeenCalledWith(gl.TEXTURE_2D, inputs[…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderPass.test.ts > endGlRenderPass > restores depth writes after a nested depth-clearing pass\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ upstream/packages/render-gl/src/glRenderPass.test.ts:292:23\n    290|     endGlRenderPass(state);\n    291|\n    292|     expect(depthMask).toBe(false);\n       |                       ^\n    293|   });\n    294|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderStateBracket.test.ts > popGlRenderState > restores a non-active texture unit binding\nAssertionError: expected null to be { name: 'unit-two-texture' } // Object.is equality\n\n- Expected:\n{\n  \"name\": \"unit-two-texture\",\n}\n\n+ Received:\nnull\n\n ❯ upstream/packages/render-gl/src/glRenderStateBracket.test.ts:154:54\n    152|     popGlRenderState(fixture.state);\n    153|\n    154|     expect(fixture.textureBindings.get(textureUnit)).toBe(texture);\n       |                                                      ^\n    155|     expect(fixture.parameters.get(fixture.gl.ACTIVE_TEXTURE)).toBe(sav…\n    156|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > createGlRenderTarget > retains canonical requested axes separately from effective storage\nAssertionError: expected 1 to be 4 // Object.is equality\n\n- Expected\n+ Received\n\n- 4\n+ 1\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:117:32\n    115|       colorSpace: 'linear',\n    116|     });\n    117|     expect(target.sampleCount).toBe(4);\n       |                                ^\n    118|     expect(target.depth).toBe('depth-stencil');\n    119|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > explainGlRenderTarget > reports every GL capability substitution without losing the request\nAssertionError: expected [ { axis: 'format', …(2) }, …(2) ] to deeply equal [ { axis: 'format', …(2) }, …(3) ]\n\n- Expected\n+ Received\n\n@@ -13,14 +13,9 @@\n        \"rgba16f\",\n      ],\n    },\n    {\n      \"axis\": \"sampleCount\",\n-     \"effective\": 4,\n+     \"effective\": 1,\n      \"requested\": 8,\n-   },\n-   {\n-     \"axis\": \"depth\",\n-     \"effective\": \"depth-stencil\",\n-     \"requested\": \"depth-stencil-sampled\",\n    },\n  ]\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:271:55\n    269|     });\n    270|\n    271|     expect(explainGlRenderTarget(target).differences).toEqual([\n       |                                                       ^\n    272|       { axis: 'format', effective: 'rgba8', requested: 'rgba16f' },\n    273|       { axis: 'colorFormats', effective: ['rgba8'], requested: ['rgba1…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > resizeGlRenderTarget > preserves heterogeneous color formats and sampled depth across resize\nAssertionError: expected [ 32856, 34836, 35056 ] to deeply equal [ 32856, undefined, 35056 ]\n\n- Expected\n+ Received\n\n  [\n    32856,\n-   undefined,\n+   34836,\n    35056,\n  ]\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:374:72\n    372|     expect(target.depth).toBe('depth-stencil-sampled');\n    373|     expect(target.depthTexture).not.toBeNull();\n    374|     expect(vi.mocked(gl.texImage2D).mock.calls.map((call) => call[2]))…\n       |                                                                        ^\n    375|       gl.RGBA8,\n    376|       gl.RGBA32F,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯\n\n FAIL  upstream/packages/render-gl/src/glRenderTarget.test.ts > resolveGlRenderTargetAxes > queries effective axes without allocating target storage\nAssertionError: expected 1 to be 2 // Object.is equality\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ upstream/packages/render-gl/src/glRenderTarget.test.ts:505:30\n    503|     const axes = resolveGlRenderTargetAxes(state, { width: 32, height:…\n    504|\n    505|     expect(axes.sampleCount).toBe(2);\n       |                              ^\n    506|     expect(gl.createFramebuffer).not.toHaveBeenCalled();\n    507|     expect(gl.createTexture).not.toHaveBeenCalled();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯",
+      "durationMs": 1206718,
+      "exitCode": 0,
       "package": "render-gl",
       "signal": null,
-      "status": "failed",
-      "summary": "10 failed | 363 passed (373)",
+      "status": "passed",
+      "summary": "373 passed (373)",
       "testFiles": 29
     },
     {
-      "durationMs": 453886,
+      "durationMs": 443589,
       "exitCode": 0,
       "package": "render-wgpu",
       "signal": null,
@@ -752,7 +751,7 @@
       "testFiles": 24
     },
     {
-      "durationMs": 294477,
+      "durationMs": 268352,
       "exitCode": 0,
       "package": "scene2d",
       "signal": null,
@@ -761,27 +760,25 @@
       "testFiles": 7
     },
     {
-      "durationMs": 1267597,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x················x·····························································································································································································································································\n\n Test Files  2 failed | 37 passed (39)\n      Tests  2 failed | 270 passed (272)\n   Start at  09:13:30\n   Duration  1266.60s (transform 38.34s, setup 577ms, import 1262.79s, tests 1.01s, environment 1.15s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasShape.test.ts > drawCanvasShape > renders MorphShapeKind through the explicit default renderer alias\nAssertionError: expected { …(2) } to be { …(2) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { …(2) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-canvas/src/canvasShape.test.ts:105:45\n    103|     const data = getOrCreateRenderProxy2D(state, shape);\n    104|\n    105|     expect(defaultCanvasMorphShapeRenderer).toBe(defaultCanvasShapeRen…\n       |                                             ^\n    106|     expect(() => drawCanvasShape(state, data)).not.toThrow();\n    107|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasTransform.test.ts > setCanvasTransform > should call setTransform with frounded tx and ty when roundPixels is true\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 1, 2, 3, 4, 5.678899765014648, …(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    1,\n    2,\n    3,\n    4,\n-   5.678899765014648,\n-   9.101099967956543,\n+   6,\n+   9,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene2d-canvas/src/canvasTransform.test.ts:33:40\n     31|     state.roundPixels = true;\n     32|     setCanvasTransform(state, state.context, transform);\n     33|     expect(state.context.setTransform).toHaveBeenCalledWith(\n       |                                        ^\n     34|       transform.a,\n     35|       transform.b,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 1257745,
+      "exitCode": 0,
       "package": "scene2d-canvas",
       "signal": null,
-      "status": "failed",
-      "summary": "2 failed | 270 passed (272)",
+      "status": "passed",
+      "summary": "272 passed (272)",
       "testFiles": 39
     },
     {
-      "durationMs": 967922,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x······x··x··········································································································································································\n\n Test Files  2 failed | 28 passed (30)\n      Tests  3 failed | 179 passed (182)\n   Start at  09:15:30\n   Duration  966.89s (transform 32.38s, setup 510ms, import 962.71s, tests 1.52s, environment 1.32s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domShape.test.ts > defaultDomShapeRenderer > provides the MorphShape renderer alias\nAssertionError: expected { …(2) } to be { …(2) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { …(2) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-dom/src/domShape.test.ts:35:42\n     33|\n     34|   it('provides the MorphShape renderer alias', () => {\n     35|     expect(defaultDomMorphShapeRenderer).toBe(defaultDomShapeRenderer);\n       |                                          ^\n     36|   });\n     37| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domTransform.test.ts > setDomTransform > frounds tx and ty when roundPixels is true\nAssertionError: expected 'matrix(1,0,0,1,6,9)' to be 'matrix(1,0,0,1,5.678899765014648,9.10…' // Object.is equality\n\nExpected: \"matrix(1,0,0,1,5.678899765014648,9.101099967956543)\"\nReceived: \"matrix(1,0,0,1,6,9)\"\n\n ❯ upstream/packages/scene2d-dom/src/domTransform.test.ts:32:32\n     30|     const expectedTx = Math.fround(5.6789);\n     31|     const expectedTy = Math.fround(9.1011);\n     32|     expect(el.style.transform).toBe(`matrix(1,0,0,1,${expectedTx},${ex…\n       |                                ^\n     33|   });\n     34| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯\n\n FAIL  upstream/packages/scene2d-dom/src/domTransform.test.ts > setDomTransformWithOffset > frounds the adjusted tx/ty when roundPixels is true\nAssertionError: expected 'matrix(1,0,0,1,1,1)' to be 'matrix(1,0,0,1,0.6000000238418579,0.6…' // Object.is equality\n\nExpected: \"matrix(1,0,0,1,0.6000000238418579,0.6000000238418579)\"\nReceived: \"matrix(1,0,0,1,1,1)\"\n\n ❯ upstream/packages/scene2d-dom/src/domTransform.test.ts:66:32\n     64|     const expectedTx = Math.fround(0.6);\n     65|     const expectedTy = Math.fround(0.6);\n     66|     expect(el.style.transform).toBe(`matrix(1,0,0,1,${expectedTx},${ex…\n       |                                ^\n     67|   });\n     68| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯",
+      "durationMs": 963297,
+      "exitCode": 0,
       "package": "scene2d-dom",
       "signal": null,
-      "status": "failed",
-      "summary": "3 failed | 179 passed (182)",
+      "status": "passed",
+      "summary": "182 passed (182)",
       "testFiles": 30
     },
     {
-      "durationMs": 779984,
+      "durationMs": 797348,
       "exitCode": 0,
       "package": "scene2d-formats",
       "signal": null,
@@ -790,17 +787,17 @@
       "testFiles": 22
     },
     {
-      "durationMs": 941690,
+      "durationMs": 413449,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\nx···············--------------···············x··············································································································································································\n\n Test Files  3 failed | 25 passed (28)\n      Tests  2 failed | 204 passed | 14 skipped (220)\n   Start at  09:19:20\n   Duration  940.64s (transform 32.28s, setup 603ms, import 900.21s, tests 37.91s, environment 1.01s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glCache.test.ts [ upstream/packages/scene2d-gl/src/glCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glCache.test.ts:42:1\n     40| scopeModuleMocks(['./glQuadBatchWriter', '@flighthq/render-gl', './glN…\n     41|\n     42| beforeAll(async () => {\n       | ^\n     43|   vi.doMock('./glQuadBatchWriter', async (importOriginal) => {\n     44|     const actual = await importOriginal<typeof GlQuadBatchWriterModule…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glClipContours.test.ts > pushGlClipContours > uses the even-odd stencil op for an evenOdd winding\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 7680, 7680, undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   5386,\n  ]\n\n  2nd vi.fn() call:\n\n  [\n    7680,\n    7680,\n-   undefined,\n+   7680,\n  ]\n\n\nNumber of calls: 2\n\n ❯ upstream/packages/scene2d-gl/src/glClipContours.test.ts:114:26\n    112|     pushGlClipContours(state, SQUARE, 'evenOdd', createMatrix());\n    113|\n    114|     expect(gl.stencilOp).toHaveBeenCalledWith(gl.KEEP, gl.KEEP, gl.INV…\n       |                          ^\n    115|   });\n    116| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glShape.test.ts > defaultGlShapeRenderer > provides the MorphShape renderer alias\nAssertionError: expected { format: +0, …(3) } to be { format: +0, …(3) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { format: +0, …(3) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-gl/src/glShape.test.ts:79:41\n     77| describe('defaultGlShapeRenderer', () => {\n     78|   it('provides the MorphShape renderer alias', () => {\n     79|     expect(defaultGlMorphShapeRenderer).toBe(defaultGlShapeRenderer);\n       |                                         ^\n     80|   });\n     81|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n--------------·····································································································\n\n Test Files  1 failed | 9 passed (11)\n      Tests  101 passed | 14 skipped (115)\n     Errors  1 error\n   Start at  19:28:49\n   Duration  412.45s (transform 20.01s, setup 1.50s, import 358.51s, tests 38.94s, environment 1.33s)\n\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-gl/src/glCache.test.ts [ upstream/packages/scene2d-gl/src/glCache.test.ts ]\nError: Hook timed out in 10000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".\n ❯ upstream/packages/scene2d-gl/src/glCache.test.ts:42:1\n     40| scopeModuleMocks(['./glQuadBatchWriter', '@flighthq/render-gl', './glN…\n     41|\n     42| beforeAll(async () => {\n       | ^\n     43|   vi.doMock('./glQuadBatchWriter', async (importOriginal) => {\n     44|     const actual = await importOriginal<typeof GlQuadBatchWriterModule…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
       "package": "scene2d-gl",
       "signal": null,
       "status": "failed",
-      "summary": "2 failed | 204 passed | 14 skipped (220)",
+      "summary": "101 passed | 14 skipped (115)",
       "testFiles": 28
     },
     {
-      "durationMs": 128528,
+      "durationMs": 133534,
       "exitCode": 0,
       "package": "scene2d-resources",
       "signal": null,
@@ -809,17 +806,16 @@
       "testFiles": 8
     },
     {
-      "durationMs": 1045545,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\nx······································································································································································\n\n Test Files  1 failed | 26 passed (28)\n      Tests  1 failed | 166 passed (167)\n     Errors  1 error\n   Start at  09:22:01\n   Duration  1044.76s (transform 36.25s, setup 449ms, import 1002.17s, tests 37.08s, environment 982ms)\n\n\n\n<--- Last few GCs --->\n\n[1843824:0x55c6f0f12000]  1041836 ms: Mark-Compact 4096.2 (4133.0) -> 3981.2 (4017.9) MB, pooled: 7 MB, 122.36 / 0.00 ms  (average mu = 0.598, current mu = 0.446) allocation failure; scavenge might not succeed\n[1843824:0x55c6f0f12000]  1044166 ms: Mark-Compact 4098.8 (4134.9) -> 4098.6 (4134.9) MB, pooled: 6 MB, 144.55 / 0.01 ms  (average mu = 0.900, current mu = 0.938) allocation failure; scavenge might not succeed\n\n\n<--- JS stacktrace --->\n\nFATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory\n----- Native stack trace -----\n\n 1: 0x7fd9daaf3804 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 2: 0x7fd9db21c754 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 3: 0x7fd9db21ca4a v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 4: 0x7fd9db465a9b  [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 5: 0x7fd9db47e54d v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 6: 0x7fd9db4551ab v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 7: 0x7fd9db455878 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 8: 0x7fd9db43070b v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n 9: 0x7fd9db420cb0 v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawArray(int, v8::internal::AllocationType) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n10: 0x7fd9db65199d v8::internal::ClosureFeedbackCellArray::New(v8::internal::Isolate*, v8::internal::Handle<v8::internal::SharedFunctionInfo>, v8::internal::AllocationType) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n11: 0x7fd9db69d880 v8::internal::JSFunction::EnsureClosureFeedbackCellArray(v8::internal::Handle<v8::internal::JSFunction>, bool) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n12: 0x7fd9db69e015 v8::internal::JSFunction::InitializeFeedbackCell(v8::internal::Handle<v8::internal::JSFunction>, v8::internal::IsCompiledScope*, bool) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n13: 0x7fd9db2de1e4 v8::internal::Compiler::Compile(v8::internal::Isolate*, v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Compiler::ClearExceptionFlag, v8::internal::IsCompiledScope*) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n14: 0x7fd9db8c431c v8::internal::Runtime_CompileLazy(int, unsigned long*, v8::internal::Isolate*) [/usr/lib/x86_64-linux-gnu/libnode.so.127]\n15: 0x7fd97b06c476 \n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts > defaultWgpuShapeRenderer > provides the MorphShape renderer alias\nAssertionError: expected { format: +0, …(3) } to be { format: +0, …(3) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { format: +0, …(3) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-wgpu/src/wgpuShape.test.ts:99:43\n     97| describe('defaultWgpuShapeRenderer', () => {\n     98|   it('provides the MorphShape renderer alias', () => {\n     99|     expect(defaultWgpuMorphShapeRenderer).toBe(defaultWgpuShapeRendere…\n       |                                           ^\n    100|   });\n    101|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
+      "durationMs": 1066568,
+      "exitCode": 0,
       "package": "scene2d-wgpu",
       "signal": null,
-      "status": "failed",
-      "summary": "1 failed | 166 passed (167)",
+      "status": "passed",
+      "summary": "173 passed (173)",
       "testFiles": 29
     },
     {
-      "durationMs": 784689,
+      "durationMs": 782748,
       "exitCode": 0,
       "package": "scene3d",
       "signal": null,
@@ -828,7 +824,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 855175,
+      "durationMs": 848898,
       "exitCode": 0,
       "package": "scene3d-formats",
       "signal": null,
@@ -837,7 +833,7 @@
       "testFiles": 23
     },
     {
-      "durationMs": 3141477,
+      "durationMs": 3030709,
       "exitCode": 0,
       "package": "scene3d-gl",
       "signal": null,
@@ -846,17 +842,16 @@
       "testFiles": 62
     },
     {
-      "durationMs": 661511,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x···x··········································································································\n\n Test Files  1 failed | 26 passed (27)\n      Tests  2 failed | 110 passed (112)\n   Start at  09:34:38\n   Duration  660.75s (transform 24.52s, setup 496ms, import 647.50s, tests 10.16s, environment 1.01s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > loadScene3DResources > resolves immediately when there is nothing pending\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:67:56\n     65|     configureResources(scene);\n     66|     const resolver = createBuiltInScene3DResourceResolver({ fetch: asy…\n     67|     await expect(loadScene3DResources(scene, resolver)).resolves.toBeU…\n       |                                                        ^\n     68|     disposeScene3DResourceResolver(resolver);\n     69|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts > waitForScene3DResourceResolver > resolves immediately when the resolver has no pending requests\nAssertionError: expected null to be undefined\n\n- Expected:\nundefined\n\n+ Received:\nnull\n\n ❯ upstream/packages/scene3d-resources/src/loadScene3DResources.test.ts:138:59\n    136|   it('resolves immediately when the resolver has no pending requests',…\n    137|     const resolver = createBuiltInScene3DResourceResolver();\n    138|     await expect(waitForScene3DResourceResolver(resolver)).resolves.to…\n       |                                                           ^\n    139|     disposeScene3DResourceResolver(resolver);\n    140|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 654733,
+      "exitCode": 0,
       "package": "scene3d-resources",
       "signal": null,
-      "status": "failed",
-      "summary": "2 failed | 110 passed (112)",
+      "status": "passed",
+      "summary": "112 passed (112)",
       "testFiles": 27
     },
     {
-      "durationMs": 2299805,
+      "durationMs": 2270456,
       "exitCode": 0,
       "package": "scene3d-wgpu",
       "signal": null,
@@ -865,7 +860,7 @@
       "testFiles": 45
     },
     {
-      "durationMs": 11044,
+      "durationMs": 11424,
       "exitCode": 0,
       "package": "screen",
       "signal": null,
@@ -874,7 +869,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 50909,
+      "durationMs": 48744,
       "exitCode": 0,
       "package": "sdk",
       "signal": null,
@@ -883,7 +878,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 12348,
+      "durationMs": 14130,
       "exitCode": 0,
       "package": "sensors",
       "signal": null,
@@ -892,7 +887,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 489950,
+      "durationMs": 484442,
       "exitCode": 0,
       "package": "shading",
       "signal": null,
@@ -901,7 +896,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 456927,
+      "durationMs": 448632,
       "exitCode": 0,
       "package": "shape",
       "signal": null,
@@ -910,7 +905,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 57270,
+      "durationMs": 60275,
       "exitCode": 0,
       "package": "shape-formats",
       "signal": null,
@@ -919,7 +914,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 12481,
+      "durationMs": 12122,
       "exitCode": 0,
       "package": "share",
       "signal": null,
@@ -928,7 +923,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 10888,
+      "durationMs": 10817,
       "exitCode": 0,
       "package": "shell",
       "signal": null,
@@ -937,7 +932,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 14115,
+      "durationMs": 13801,
       "exitCode": 0,
       "package": "shortcut",
       "signal": null,
@@ -946,7 +941,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 13832,
+      "durationMs": 14360,
       "exitCode": 0,
       "package": "signals",
       "signal": null,
@@ -955,7 +950,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 629634,
+      "durationMs": 625046,
       "exitCode": 0,
       "package": "skeleton2d",
       "signal": null,
@@ -964,7 +959,7 @@
       "testFiles": 21
     },
     {
-      "durationMs": 160743,
+      "durationMs": 158514,
       "exitCode": 0,
       "package": "skeleton2d-formats",
       "signal": null,
@@ -973,7 +968,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 290990,
+      "durationMs": 286586,
       "exitCode": 0,
       "package": "skeleton3d",
       "signal": null,
@@ -982,7 +977,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 15082,
+      "durationMs": 14732,
       "exitCode": 0,
       "package": "snapshot",
       "signal": null,
@@ -991,7 +986,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 14095,
+      "durationMs": 14060,
       "exitCode": 0,
       "package": "socket",
       "signal": null,
@@ -1000,7 +995,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 15029,
+      "durationMs": 15263,
       "exitCode": 0,
       "package": "spatial",
       "signal": null,
@@ -1009,7 +1004,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 17333,
+      "durationMs": 16509,
       "exitCode": 0,
       "package": "spring",
       "signal": null,
@@ -1018,7 +1013,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 22738,
+      "durationMs": 21269,
       "exitCode": 0,
       "package": "spritesheet",
       "signal": null,
@@ -1027,7 +1022,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 56587,
+      "durationMs": 55078,
       "exitCode": 0,
       "package": "spritesheet-formats",
       "signal": null,
@@ -1036,7 +1031,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 121958,
+      "durationMs": 118638,
       "exitCode": 0,
       "package": "statechart",
       "signal": null,
@@ -1045,7 +1040,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 12537,
+      "durationMs": 12731,
       "exitCode": 0,
       "package": "statusbar",
       "signal": null,
@@ -1054,7 +1049,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 11121,
+      "durationMs": 11664,
       "exitCode": 0,
       "package": "storage",
       "signal": null,
@@ -1063,7 +1058,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 200715,
+      "durationMs": 197340,
       "exitCode": 0,
       "package": "swf",
       "signal": null,
@@ -1072,7 +1067,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 168339,
+      "durationMs": 167142,
       "exitCode": 0,
       "package": "text",
       "signal": null,
@@ -1081,7 +1076,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 13741,
+      "durationMs": 13934,
       "exitCode": 0,
       "package": "text-markup",
       "signal": null,
@@ -1090,7 +1085,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 13057,
+      "durationMs": 12715,
       "exitCode": 0,
       "package": "textbidi",
       "signal": null,
@@ -1099,7 +1094,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 135093,
+      "durationMs": 138997,
       "exitCode": 0,
       "package": "textinput",
       "signal": null,
@@ -1108,7 +1103,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 19436,
+      "durationMs": 18989,
       "exitCode": 0,
       "package": "textlayout",
       "signal": null,
@@ -1117,7 +1112,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 12739,
+      "durationMs": 13826,
       "exitCode": 0,
       "package": "textsegment",
       "signal": null,
@@ -1126,7 +1121,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 16669,
+      "durationMs": 17088,
       "exitCode": 0,
       "package": "textshaper",
       "signal": null,
@@ -1135,7 +1130,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 13044,
+      "durationMs": 12968,
       "exitCode": 0,
       "package": "textshaper-canvas",
       "signal": null,
@@ -1144,7 +1139,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 141244,
+      "durationMs": 138689,
       "exitCode": 0,
       "package": "texture",
       "signal": null,
@@ -1153,7 +1148,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 15230,
+      "durationMs": 15381,
       "exitCode": 0,
       "package": "texture-formats",
       "signal": null,
@@ -1162,7 +1157,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 69122,
+      "durationMs": 68926,
       "exitCode": 0,
       "package": "textureatlas",
       "signal": null,
@@ -1171,7 +1166,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 58968,
+      "durationMs": 58394,
       "exitCode": 0,
       "package": "textureatlas-formats",
       "signal": null,
@@ -1180,7 +1175,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 56256,
+      "durationMs": 54963,
       "exitCode": 0,
       "package": "tilemap",
       "signal": null,
@@ -1189,7 +1184,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 15294,
+      "durationMs": 15758,
       "exitCode": 0,
       "package": "tilemap-formats",
       "signal": null,
@@ -1198,7 +1193,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 11466,
+      "durationMs": 10842,
       "exitCode": 0,
       "package": "timeline",
       "signal": null,
@@ -1207,9 +1202,9 @@
       "testFiles": 1
     },
     {
-      "durationMs": 324807,
+      "durationMs": 324198,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·······················································stdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\nstdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\n··········stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n+ work/dom baseline 0.003 ms\n+ work/wasm:dom baseline 0.003 ms\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n✓ work/dom 0.003 ms, 13.5%\n✓ work/wasm:dom 0.003 ms, 0.6%\n\n·stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n[1/1] visual\n  · dom       no fingerprint baseline — skipped\n  · wasm:dom  no fingerprint baseline — skipped\n  ✓ parity    visual:dom·wasm:dom 0.00\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n\n✓ ok   0 regression passed   0 regression failed   1 parity passed   0 parity failed   0 parity uncovered   2 regression uncovered   2 skipped   0 load failures\n  regression uncovered: visual\n\n···············································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x··················································\n\n Test Files  1 failed | 26 passed (27)\n      Tests  1 failed | 165 passed (166)\n   Start at  09:57:44\n   Duration  323.94s (transform 15.42s, setup 375ms, import 310.70s, tests 11.15s, environment 1.20s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-M2L8NR/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-M2L8NR/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-06T17_01_43_474Z-debug-0.log\nstderr | upstream/packages/tool-capture/src/captureWorkflow.test.ts > runCaptureBatch > continues after a subject setup error and aggregates the verdict\nbroken: server did not start\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n······················································stdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\nstdout | upstream/packages/tool-capture/src/captureEyes.e2e.test.ts > capture eyes browser contract > drives static pages and waits for the halt outside the halted animation frame queue\n  ✓ canvas\n\n···········stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n+ work/dom baseline 0.003 ms\n+ work/wasm:dom baseline 0.003 ms\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > benchmarks a registered page target and writes a calibrated baseline/report\n✓ work/dom 0.003 ms, -5.0%\n✓ work/wasm:dom 0.003 ms, -0.3%\n\n·stdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n[1/1] visual\n  · dom       no fingerprint baseline — skipped\n  · wasm:dom  no fingerprint baseline — skipped\n  ✓ parity    visual:dom·wasm:dom 0.00\n\nstdout | upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts > benchmark and generalized parity browser workflow > compares DOM and arbitrary WASM-labelled targets through an explicit visual group\n\n✓ ok   0 regression passed   0 regression failed   1 parity passed   0 parity failed   0 parity uncovered   2 regression uncovered   2 skipped   0 load failures\n  regression uncovered: visual\n\n···············································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x··················································\n\n Test Files  1 failed | 26 passed (27)\n      Tests  1 failed | 165 passed (166)\n   Start at  20:05:13\n   Duration  323.15s (transform 15.10s, setup 400ms, import 309.91s, tests 11.25s, environment 1.08s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-4zzfJu/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-4zzfJu/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-07T03_09_09_474Z-debug-0.log\nstderr | upstream/packages/tool-capture/src/captureWorkflow.test.ts > runCaptureBatch > continues after a subject setup error and aggregates the verdict\nbroken: server did not start\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "tool-capture",
       "signal": null,
       "status": "failed",
@@ -1217,7 +1212,7 @@
       "testFiles": 27
     },
     {
-      "durationMs": 12689,
+      "durationMs": 12229,
       "exitCode": 0,
       "package": "tray",
       "signal": null,
@@ -1226,7 +1221,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 22192,
+      "durationMs": 21423,
       "exitCode": 0,
       "package": "tween",
       "signal": null,
@@ -1235,7 +1230,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 23977,
+      "durationMs": 22888,
       "exitCode": 0,
       "package": "types",
       "signal": null,
@@ -1244,7 +1239,7 @@
       "testFiles": 31
     },
     {
-      "durationMs": 11544,
+      "durationMs": 12347,
       "exitCode": 0,
       "package": "updater",
       "signal": null,
@@ -1253,7 +1248,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 48113,
+      "durationMs": 48402,
       "exitCode": 0,
       "package": "useragent",
       "signal": null,
@@ -1262,7 +1257,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 25571,
+      "durationMs": 26150,
       "exitCode": 0,
       "package": "velocity",
       "signal": null,
@@ -1271,7 +1266,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 12347,
+      "durationMs": 12120,
       "exitCode": 0,
       "package": "video",
       "signal": null,
@@ -1280,7 +1275,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 44602,
+      "durationMs": 44933,
       "exitCode": 0,
       "package": "webcam",
       "signal": null,
@@ -1289,7 +1284,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 12183,
+      "durationMs": 11891,
       "exitCode": 0,
       "package": "xml",
       "signal": null,
@@ -1300,5 +1295,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": null,
-  "startedAt": "2026-08-06T15:48:11.035Z"
+  "startedAt": "2026-08-07T02:00:04.751Z"
 }
