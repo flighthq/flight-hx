@@ -4,9 +4,9 @@
   "license": "MIT",
   "tags": ["cross", "graphics", "flight", "sdk"],
   "description": "A mechanically generated Haxe source port of the Flight SDK.",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "classPath": "src",
-  "releasenote": "Pre-release generated port.",
-  "contributors": ["flighthq"],
+  "releasenote": "Generated port of Flight upstream cad72aa3: 143 packages, 16k upstream tests passing, examples green on neko/hxcpp/html5. Known caveats: Windows/macOS untested, Neko first-frame latency on path-heavy scenes.",
+  "contributors": ["singmajesty"],
   "dependencies": {}
 }
