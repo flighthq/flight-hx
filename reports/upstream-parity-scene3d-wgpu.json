@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-08-07T11:37:04.372Z",
+  "failedPackages": 1,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 1924540,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n··························································································x·······x·········································································································································································································································\n\n Test Files  1 failed | 44 passed (45)\n      Tests  2 failed | 330 passed (332)\n   Start at  04:05:00\n   Duration  1923.84s (transform 34.96s, setup 381ms, import 1921.39s, tests 588ms, environment 986ms)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-wgpu/src/wgpuShadowMap.test.ts > drawWgpuScene3DShadowMap > creates a sampleable depth32float shadow map and stores it on the runtime\nAssertionError: expected undefined to be defined\n ❯ upstream/packages/scene3d-wgpu/src/wgpuShadowMap.test.ts:124:25\n    122|       (c) => c.name === 'createTexture' && (c.args[0] as GPUTextureDes…\n    123|     );\n    124|     expect(depthCreate).toBeDefined();\n       |                         ^\n    125|\n    126|     const runtime = getWgpuScene3DRuntime(state);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-wgpu/src/wgpuShadowMap.test.ts > drawWgpuScene3DShadowMap > reuses the shadow depth texture across frames\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/scene3d-wgpu/src/wgpuShadowMap.test.ts:286:26\n    284|       (c) => c.name === 'createTexture' && (c.args[0] as GPUTextureDes…\n    285|     ).length;\n    286|     expect(depthCreates).toBe(1);\n       |                          ^\n    287|   });\n    288|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "package": "scene3d-wgpu",
+      "signal": null,
+      "status": "failed",
+      "summary": "2 failed | 330 passed (332)",
+      "testFiles": 45
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene3d-wgpu",
+  "startedAt": "2026-08-07T11:04:59.831Z"
+}
