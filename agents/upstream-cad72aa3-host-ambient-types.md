@@ -16,19 +16,21 @@ The same identity rule applies to explicit type references, inferred member rece
 
 ## Member emission and failure behavior
 
-Reads, writes, and calls on an unbound checker-proven host receiver use a target-conditional expression. On JavaScript, an explicitly mapped parameter emits `image.width`, while a host value recovered through a structural `Dynamic` path emits `(cast value : flighthq._internal.dom.HTMLImageElement).width`. The cast makes the real JavaScript extern resolve both the declaration and its member instead of silently accepting another dynamic lookup. Optional access evaluates the receiver once and preserves the existing nullish result. Spread calls use `Reflect.callMethod` only for JavaScript argument-spread semantics; the method value itself is still read as a direct typed field.
+Reads, writes, and calls on an unbound checker-proven host receiver use one target-independent typed expression. An explicitly mapped parameter emits `image.width`, while a host value recovered through a structural `Dynamic` path emits `(cast value : flighthq._internal.dom.HTMLImageElement).width`. The cast makes the maintained declaration resolve both the identity and its member instead of silently accepting another dynamic lookup. Optional access evaluates the receiver once and preserves the existing nullish result. Spread calls use `Reflect.callMethod` only for argument-spread semantics; the method value itself is still read as a direct typed field.
 
-On non-JavaScript targets, the current maintained host declarations are `Dynamic` compatibility stubs rather than concrete implementations. Bare member syntax on those stubs is not equivalent to the established runtime boundary: Neko throws for an absent field instead of returning the nullish sentinel, and bare calls bypass receiver binding and callable-arity adjustment. Every ordinary mapped host site therefore retains `_Runtime.field`/`optionalField`, `setField`, `incrementField`, `deleteField`, and `callProperty`/`callOptionalProperty` in its non-JavaScript branch. A native type may widen the direct condition only when its maintained declaration becomes concrete and owns equivalent semantics.
+On non-JavaScript targets, many maintained host declarations are still `Dynamic` compatibility stubs rather than concrete toolkit implementations. That is deliberately not repaired in generated expressions: tolerant absent-field behavior, call arity adjustment, or a native replacement value belongs in the declaration, value LUT, or named adapter. The transpiler does not route checker-known members through `_Runtime` merely to make an incomplete toolkit compile or execute.
 
-Existing target-semantic host endpoints retain priority over this ordinary conditional route. Canvas2D, canvas-element, DOM-root, WebGL, and selected WebGPU operations still cross their maintained typed backend because that seam owns native portability or observable host semantics. The new mapping replaces the former runtime fallback with validated direct members only where the declaration is real; it does not bypass an already required backend or weaken compatibility-stub semantics.
+Existing target-semantic host endpoints retain priority over ordinary direct emission. Canvas2D, canvas-element, DOM-root, WebGL, and selected WebGPU operations still cross their maintained typed backend because that seam owns native portability or observable host semantics.
 
-No maintained declaration is synthesized by the generator. If the mapped `flighthq._internal.dom.<SameTypeName>` declaration is absent, Haxe compilation fails with that missing type. Likewise, real JavaScript externs can validate their declared member surface. Review owns the maintained declarations: the small real browser extern set under `#if js`, portable `Dynamic` typedef fallbacks, and the mechanically shaped tail stubs.
+No maintained declaration is synthesized by the generator. If the mapped `flighthq._internal.dom.<SameTypeName>` declaration is absent, generation fails with the missing `host:<SameTypeName>` key. Review owns the maintained declarations and adapters: real browser externs, remaining portable `Dynamic` compatibility branches, concrete native types, value LUT entries, and target backends.
 
 Unresolved source type names no longer collapse silently to `Dynamic`. A compile fixture proves that an unresolved `MissingHostType` remains visible in generated Haxe and produces `Type not found : MissingHostType`.
 
 ## Deterministic census
 
 Generation writes [`reports/host-types.json`](../reports/host-types.json) and [`reports/host-types.md`](../reports/host-types.md). The report is derived from actual lowered type/member uses and is descriptive rather than an eligibility table. It records declaration sources, type-reference locations and arities, member names, operations, and locations in stable order.
+
+Generation also writes [`reports/host-toolkit.json`](../reports/host-toolkit.json) and [`reports/host-toolkit.md`](../reports/host-toolkit.md) from the final generated Haxe tree. That manifest joins every emitted host/external type and ambient/module value key to its maintained provider, fails closed on missing entries, and reports `Dynamic` compatibility declarations without crediting them as typed transpiler coverage.
 
 For upstream `cad72aa3ea4e6e76a050918a403dcb10efdfcb0d` with exact `@webgpu/types@0.1.71`, the census is:
 
@@ -56,14 +58,14 @@ Focused lowering fixtures cover:
 - a source-defined host-looking name that is not classified by prefix;
 - checker-routed instance and constructor globals plus an unresolved `GPU*` value that remains visible;
 - an imported local constant typed as `GPUTextureFormat` that remains a local value while ambient `GPUTextureUsage` still routes through its maintained backend;
-- an executable Neko compatibility-stub fixture proving tolerant absent-member reads and receiver-bound, arity-adjusted calls;
+- target-independent host member emission with no native `_Runtime` compensation branch;
+- fail-closed generation for an emitted value key missing from the toolkit;
+- deterministic final-tree toolkit dependency output, including explicit `Dynamic` compatibility debt;
 - deterministic report output under reversed input order; and
 - loud Haxe failure for an unresolved type instead of silent `Dynamic` lowering.
 
 ## Verification
 
-The generated Haxe tree is `1d1d1c59198b78bdcf05fd5851862f83f3594af0a2627de95f53890ab2f94915`. The combined-tree JavaScript bundle is `e88887cfe1e6e26fcecbf5dd6106a27250ad053caaf7430bcee4fed753f25ad8`. The machine-readable host report is `1647eaa52e9cab123c9e13c752d5cb3eeac517719961f91ac90f69d569916fdd`.
-
-`npm run check` and all 129 generator tests pass. With review's exact 194-file maintained declaration census temporarily combined, the full Haxe namespace passes on Eval and JavaScript, and `CoreSmoke` passes on Eval, JavaScript, Python, Neko, and C++/hxcpp. The focused upstream `wgpuShadowMap.test.ts` file passes 18/18; its two former failures came from treating an imported local `SHADOW_DEPTH_FORMAT` constant as an ambient global, not from the maintained GPU flag namespaces. The effects and sound Lime examples compile for Neko with both Cairo and GL paths where applicable. Live window execution is unavailable on this host because it has no Xvfb/video display, while the executable Neko generator fixture covers both native compatibility-stub crash mechanisms directly. The integration gate also made declaration arity and real-JavaScript extern member gaps fail visibly; their exact corrections remain owned by review and are not part of this generator commit.
+Current hashes and verification results are recorded in [`status.md`](status.md). The boundary-specific checks cover target-independent typed emission, deterministic manifest equality, missing-key failure, and the absence of ambient/module value lookup methods from `_Runtime`.
 
 Two complete generation checks are byte-stable. Generated Haxe and audit outputs contain no timestamps, so an upstream/dependency refresh that produces identical bytes does not require recommitting those files; only a changed pin or other source-of-truth metadata must be committed. This change does alter generated bytes because checker-proven host types and members now replace the former dynamic fallback.

@@ -16,7 +16,7 @@ typedef UniqueSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Flo
 
 @:keep
 class DirectedGraph__martinezKernel {
-  private final keys:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  private final keys:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
   private final xs:Array<Float> = cast ([] : Array<Dynamic>);
   private final ys:Array<Float> = cast ([] : Array<Dynamic>);
   private final outgoing:Array<Array<Float>> = cast ([] : Array<Dynamic>);
@@ -473,7 +473,7 @@ class MartinezKernel {
 
   public static function mergeCoincidentSegments__martinezKernel(segments:Array<ArrangementSegment__martinezKernel>):Array<UniqueSegment__martinezKernel> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
-    map = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    map = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (seg in _Runtime.iterable(segments)) {
       var ax:Dynamic = _Runtime.field(seg, 'ax');
       var ay:Dynamic = _Runtime.field(seg, 'ay');

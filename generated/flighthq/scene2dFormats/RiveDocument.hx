@@ -36,7 +36,7 @@ class RiveDocument {
       _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([diagnostics, 'rive.unsupported-version', { major: _Runtime.field(header, 'majorVersion'), supported: RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument }] : Array<Dynamic>));
       return cast null;
     }
-    fieldTypes = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    fieldTypes = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (entry in _Runtime.iterable(_Runtime.field(header, 'tableOfContents'))) {
       ((cast fieldTypes : flighthq._internal._Map).set(_Runtime.field(entry, 'key'), _Runtime.field(entry, 'type')));
     }
@@ -256,7 +256,7 @@ class RiveDocument {
 
   public static final FIELD_TYPE_BITS_PER_WORD__riveDocument:Dynamic = 8.0;
 
-  public static final _floatView__riveDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [4.0])]);
+  public static final _floatView__riveDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [4.0])]);
 
   public static final _floatBytes__riveDocument:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(RiveDocument._floatView__riveDocument, 'buffer'));
 

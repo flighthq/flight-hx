@@ -114,8 +114,8 @@ class RichTextContent {
     return cast _Runtime.replace(value, _Runtime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(_match:Dynamic, entity:String) {
       var lower:Dynamic = cast _Runtime.UNDEFINED;
       lower = _Runtime.callProperty(entity, 'toLowerCase', cast ([] : Array<Dynamic>));
-      if ((cast StringTools.startsWith(lower, '#x') : Bool)) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>))); }
-      if ((cast StringTools.startsWith(lower, '#') : Bool)) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>))); }
+      if ((cast StringTools.startsWith(lower, '#x') : Bool)) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>))); }
+      if ((cast StringTools.startsWith(lower, '#') : Bool)) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>))); }
       return cast _Runtime.coalesce(_Runtime.getIndex(RichTextContent.namedEntities__richTextContent, lower), function():Dynamic return cast '&' + Std.string(entity) + ';');
     }, false);
     return cast null;

@@ -40,7 +40,7 @@ class MeshGeometryIndex {
       }
     }
     sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength'));
-    compactBuffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [(compactCount * stride)]);
+    compactBuffer = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [(compactCount * stride)]);
     compactBytes = new flighthq._internal._UInt8Array(compactBuffer);
     {
       var sourceIndex:Dynamic = 0.0;
@@ -191,7 +191,7 @@ class MeshGeometryIndex {
     sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength'));
     uniqueBytes = new flighthq._internal._UInt8Array(sourceByteLength);
     sourceToUnique = new flighthq._internal._UInt32Array(vertexCount);
-    candidatesByHash = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    candidatesByHash = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     uniqueCount = 0.0;
     {
       var vertex:Dynamic = 0.0;

@@ -134,7 +134,7 @@ class PrepareGlScene3DForwardLights {
     }
   }
 
-  public static final preparedGlScene3DForwardLights__prepareGlScene3DForwardLights:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final preparedGlScene3DForwardLights__prepareGlScene3DForwardLights:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final scratchWorldBounds__prepareGlScene3DForwardLights:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
 

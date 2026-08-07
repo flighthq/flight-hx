@@ -2201,8 +2201,8 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         arguments: [{ kind: 'literal', value: node.expression.text }],
         callee: {
           kind: 'property',
-          name: 'typeofGlobal',
-          object: { kind: 'identifier', name: '_Runtime' },
+          name: 'typeofValue',
+          object: { kind: 'identifier', name: 'flighthq._internal._HostValueLut' },
         },
         kind: 'call',
         typeArguments: [],
@@ -2324,8 +2324,8 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
       ],
       callee: {
         kind: 'property',
-        name: 'externalValue',
-        object: { kind: 'identifier', name: '_Runtime' },
+        name: 'get',
+        object: { kind: 'identifier', name: 'flighthq._internal._HostModuleLut' },
       },
       kind: 'call',
       typeArguments: [],
@@ -2339,8 +2339,8 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
       arguments: [{ kind: 'literal', value: name }],
       callee: {
         kind: 'property',
-        name: 'globalValue',
-        object: { kind: 'identifier', name: '_Runtime' },
+        name: 'get',
+        object: { kind: 'identifier', name: 'flighthq._internal._HostValueLut' },
       },
       kind: 'call',
       typeArguments: [],

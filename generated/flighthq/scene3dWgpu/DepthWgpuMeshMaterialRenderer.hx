@@ -43,7 +43,7 @@ class DepthWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, depth, _Runtime.field(depth, 'near'), _Runtime.field(depth, 'far'), 1.0] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

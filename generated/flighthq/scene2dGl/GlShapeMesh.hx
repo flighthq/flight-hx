@@ -83,7 +83,7 @@ class GlShapeMesh {
 
   public static final FRAGMENT_SOURCE__glShapeMesh:Dynamic = '\nprecision mediump float;\nuniform vec4 u_color;\nvoid main() { gl_FragColor = u_color; }\n';
 
-  public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function compileShapeMeshProgram__glShapeMesh(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, GlShapeMesh.VERTEX_SOURCE__glShapeMesh, GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh, 'Shape-mesh'] : Array<Dynamic>));

@@ -13,7 +13,7 @@ import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {
-      var buf:Dynamic = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [2.0]);
+      var buf:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [2.0]);
       flighthq._internal._StaticIndex.writeUint16Array(new flighthq._internal._UInt16Array(buf), 0.0, 258.0);
       var bytes:Dynamic = new flighthq._internal._UInt8Array(buf);
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 1.0) : Bool)) { return cast 'big'; }

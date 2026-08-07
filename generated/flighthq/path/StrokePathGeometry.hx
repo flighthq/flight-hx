@@ -46,14 +46,14 @@ class StrokePathGeometry {
     width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
     dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
     miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([tolerance] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast tolerance : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([dashOffset] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast miterLimit : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([tolerance] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast tolerance : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dashOffset] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast miterLimit : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast { issue: StrokePathTessellationIssueInvalidStyle, issueSubpath: null, pieces: cast ([] : Array<Dynamic>) };
     }
     dash = _Runtime.coalesce(_Runtime.field(style, 'dash'), function():Dynamic return cast StrokePathGeometry.EMPTY_DASH__strokePathGeometry);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-        if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(dash, i)] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(dash, i) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(dash, i)] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(dash, i) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
           return cast { issue: StrokePathTessellationIssueInvalidStyle, issueSubpath: null, pieces: cast ([] : Array<Dynamic>) };
         }
         i++;
@@ -236,7 +236,7 @@ class StrokePathGeometry {
     if ((cast ((cast _Runtime.strictEquals(leftIntersection, null) : Bool) || (cast _Runtime.strictEquals(rightIntersection, null) : Bool)) : Bool)) { return cast StrokePathTessellationIssueReversingJoin; }
     outerIntersection = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast rightIntersection : Dynamic) : (cast leftIntersection : Dynamic));
     outerDistance = _Runtime.hypot(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 0.0), px), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 1.0), py));
-    if ((cast ((cast ((cast _Runtime.strictEquals(join, 'miter') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast outerDistance : Float) <= (cast _Runtime.multiplyNumbers(halfWidth, HxMath.max(0.0, miterLimit)) : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(join, 'miter') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast outerDistance : Float) <= (cast _Runtime.multiplyNumbers(halfWidth, HxMath.max(0.0, miterLimit)) : Float)) : Bool)) : Bool)) {
       _Runtime.callValue(StrokePathGeometry.appendSection__strokePathGeometry, cast ([piece, flighthq._internal._StaticIndex.readArray(leftIntersection, 0.0), flighthq._internal._StaticIndex.readArray(leftIntersection, 1.0), flighthq._internal._StaticIndex.readArray(rightIntersection, 0.0), flighthq._internal._StaticIndex.readArray(rightIntersection, 1.0)] : Array<Dynamic>));
       return cast StrokePathTessellationIssueNone;
     }
@@ -572,7 +572,7 @@ class StrokePathGeometry {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(points, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(points, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }

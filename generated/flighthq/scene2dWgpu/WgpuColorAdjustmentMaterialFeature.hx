@@ -534,7 +534,7 @@ class WgpuColorAdjustmentMaterialFeature {
     var created:WgpuShapeMeshPipeline = cast _Runtime.UNDEFINED;
     cache = ((cast WgpuColorAdjustmentMaterialFeature._shapeMeshColorScaleBiasPipelines__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast WgpuColorAdjustmentMaterialFeature._shapeMeshColorScaleBiasPipelines__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap).set(_Runtime.field(state, 'device'), cache));
     }
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -555,7 +555,7 @@ class WgpuColorAdjustmentMaterialFeature {
 
   public static final SHAPE_MESH_COLOR_SCALE_BIAS_WGSL__wgpuColorAdjustmentMaterialFeature:Dynamic = '\n' + Std.string(WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature) + '\nstruct ShapeMeshUniforms {\n  matrix : mat3x3f,\n  color : vec4f,\n  colorScale : vec4f,\n  colorBias : vec4f,\n}\n@group(0) @binding(0) var<uniform> u : ShapeMeshUniforms;\n@vertex fn vs_main(@location(0) position : vec2f) -> @builtin(position) vec4f {\n  let p = u.matrix * vec3f(position, 1.0);\n  return vec4f(p.x, p.y, 0.0, 1.0);\n}\n@fragment fn fs_main() -> @location(0) vec4f {\n  if (u.color.a <= 0.0) { discard; }\n  var color = vec4f(u.color.rgb / u.color.a, u.color.a);\n  color = applyFlightColorAdjustment(color, u.colorScale, u.colorBias);\n  return vec4f(color.rgb * color.a, color.a);\n}\n';
 
-  public static final _shapeMeshColorScaleBiasPipelines__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _shapeMeshColorScaleBiasPipelines__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _shapeMeshColorScaleBiasUniformScratch__wgpuColorAdjustmentMaterialFeature:Dynamic = new flighthq._internal._Float32Array(24.0);
 
@@ -565,11 +565,11 @@ class WgpuColorAdjustmentMaterialFeature {
 
   public static final COLOR_MATRIX_WGSL__wgpuColorAdjustmentMaterialFeature:Dynamic = '\n' + Std.string(WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_MATRIX_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature) + '\n@group(3) @binding(0) var<storage, read> ctData : array<f32>;\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) alpha : f32,\n  @location(2) row0 : vec4f,\n  @location(3) row1 : vec4f,\n  @location(4) row2 : vec4f,\n  @location(5) row3 : vec4f,\n  @location(6) offset : vec4f,\n}\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32, @builtin(instance_index) ii : u32) -> VertexOut {\n  let bv = quadBaseVertex(vi, ii);\n  let b = ii * 20u;\n  return VertexOut(\n    bv.position, bv.uv, bv.alpha,\n    vec4f(ctData[b], ctData[b + 1u], ctData[b + 2u], ctData[b + 3u]),\n    vec4f(ctData[b + 4u], ctData[b + 5u], ctData[b + 6u], ctData[b + 7u]),\n    vec4f(ctData[b + 8u], ctData[b + 9u], ctData[b + 10u], ctData[b + 11u]),\n    vec4f(ctData[b + 12u], ctData[b + 13u], ctData[b + 14u], ctData[b + 15u]),\n    vec4f(ctData[b + 16u], ctData[b + 17u], ctData[b + 18u], ctData[b + 19u]),\n  );\n}\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  var color = textureSample(tex, smp, in.uv);\n  if (color.a <= 0.0) { discard; }\n  if (uni.straightTextureAlpha != 0u) { color = vec4f(color.rgb * color.a, color.a); }\n  color = color * clamp(in.alpha, 0.0, 1.0);\n  if (color.a > 0.0) {\n    color = vec4f(color.rgb / color.a, color.a);\n    color = applyFlightColorMatrix(color, in.row0, in.row1, in.row2, in.row3, in.offset);\n    color = vec4f(color.rgb * color.a, color.a);\n  }\n  return color;\n}\n';
 
-  public static final _colorScaleBiasModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _colorScaleBiasModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _packedTintModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _packedTintModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _colorMatrixModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _colorMatrixModules__wgpuColorAdjustmentMaterialFeature:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature:flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature = { fragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, matrixFragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_MATRIX_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, drawShapeMeshes: WgpuColorAdjustmentMaterialFeature.drawWgpuShapeMeshesColorScaleBias__wgpuColorAdjustmentMaterialFeature, record: WgpuColorAdjustmentMaterialFeature.recordWgpuColorAdjustment__wgpuColorAdjustmentMaterialFeature, resolveFlush: WgpuColorAdjustmentMaterialFeature.resolveWgpuColorAdjustmentFlush__wgpuColorAdjustmentMaterialFeature };
 }

@@ -18,11 +18,11 @@ class GlEffectBlitShader {
 
   public static final ERASE_FRAGMENT_SRC__glEffectBlitShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nout vec4 fragColor;\nvoid main() {\n  float a = texture(u_texture, v_texCoord).a;\n  fragColor = vec4(0.0, 0.0, 0.0, a);\n}';
 
-  public static final blitOffsetShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final blitOffsetShaders__glEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final blitShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final blitShaders__glEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {

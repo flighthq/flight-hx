@@ -22,11 +22,11 @@ class TiledColor {
     if ((cast StringTools.startsWith(s, '#') : Bool)) { (s = cast (_Runtime.slice(s, 1.0, null) : Dynamic)); }
     if ((cast !(cast _Runtime.callProperty(_Runtime.regexp('^[0-9a-fA-F]+$$', ''), 'test', cast ([s] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(_Runtime.field(s, 'length'), 6.0) : Bool)) {
-      var rgb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
+      var rgb:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
       return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | 255)), 0);
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(s, 'length'), 8.0) : Bool)) {
-      var argb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
+      var argb:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
       var alpha:Dynamic = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(argb), 24)) & 255);
       var rgb:Dynamic = (_Runtime.toInt32(argb) & 16777215);
       return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | _Runtime.toInt32(alpha))), 0);

@@ -16,12 +16,12 @@ class BitmapFont {
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
     var kerning:Dynamic = cast _Runtime.UNDEFINED;
     pageCount = _Runtime.field(data.pages, 'length');
-    glyphs = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    glyphs = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (glyph in _Runtime.iterable(data.glyphs)) {
       var page:Dynamic = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
       ((cast glyphs : flighthq._internal._Map).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: _Runtime.callValue(BitmapFont.resolveBitmapFontGlyphPage__bitmapFont, cast ([glyph.codepoint, page, pageCount] : Array<Dynamic>)), width: glyph.width, x: glyph.x, y: glyph.y }));
     }
-    kerning = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    kerning = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(data.kerning)) {
         ((cast kerning : flighthq._internal._Map).set(_Runtime.callValue(packBitmapFontKerningKey, cast ([pair.left, pair.right] : Array<Dynamic>)), pair.amount));

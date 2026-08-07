@@ -112,5 +112,5 @@ class WgpuBevelEffect {
     return cast null;
   }
 
-  public static final bevelCompositePipelines__wgpuBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final bevelCompositePipelines__wgpuBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

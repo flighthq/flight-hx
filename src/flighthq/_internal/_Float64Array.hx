@@ -24,7 +24,7 @@ abstract _Float64Array(Dynamic) {
   }
 
   /** Factory for reflective construction sites reached through
-   * `_Runtime.globalValue`; abstracts have no runtime class for
+   * `_HostValueLut`; abstracts have no runtime class for
    * `Type.createInstance`. */
   public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_Float64Array {
     return new _Float64Array(source, byteOffset, length);

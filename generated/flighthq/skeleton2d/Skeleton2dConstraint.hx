@@ -37,5 +37,5 @@ class Skeleton2dConstraint {
     ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map).delete_(kind));
   }
 
-  public static final _solvers__skeleton2dConstraint:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _solvers__skeleton2dConstraint:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

@@ -1180,7 +1180,7 @@ class Joints {
     return cast null;
   }
 
-  public static final jointStateScratch__joints:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final jointStateScratch__joints:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final axisScratch__joints:Dynamic = cast ([0.0, 0.0] : Array<Dynamic>);
 

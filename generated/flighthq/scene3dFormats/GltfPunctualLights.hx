@@ -23,7 +23,7 @@ class GltfPunctualLights {
     var lightDrops:Dynamic = cast _Runtime.UNDEFINED;
     definitions = _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(_Runtime.field(context, 'source').extensions, 'KHR_lights_punctual'), 'lights'), function():Dynamic return cast cast ([] : Array<Dynamic>));
     nodes = _Runtime.coalesce(_Runtime.field(context, 'source').nodes, function():Dynamic return cast cast ([] : Array<Dynamic>));
-    lightDrops = _Runtime.select(_Runtime.field(context, 'diagnostics'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []), function():Dynamic return cast null);
+    lightDrops = _Runtime.select(_Runtime.field(context, 'diagnostics'), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     {
       var node:Dynamic = 0.0;
       while ((cast ((cast node : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {

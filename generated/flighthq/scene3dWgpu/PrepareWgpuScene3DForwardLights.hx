@@ -133,7 +133,7 @@ class PrepareWgpuScene3DForwardLights {
     (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius = cast (0.0 : Dynamic));
   }
 
-  public static final preparedByState__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final preparedByState__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final scratchWorldBounds__prepareWgpuScene3DForwardLights:Dynamic = _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>));
 

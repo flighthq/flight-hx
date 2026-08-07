@@ -20,7 +20,7 @@ class RaycastCollisionShape {
     if (maxFraction == null) maxFraction = cast (HxMath.POSITIVE_INFINITY : Dynamic);
     var directionLengthSquared:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(RaycastCollisionShape.clearRaycastHit__raycastCollisionShape, cast ([out] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast false;
     }
     if ((cast _Runtime.callValue(getCollisionShapeContainsPoint, cast ([shape, originX, originY] : Array<Dynamic>)) : Bool)) {
@@ -67,7 +67,7 @@ class RaycastCollisionShape {
     var normalLength:Dynamic = cast _Runtime.UNDEFINED;
     var normalX:Dynamic = cast _Runtime.UNDEFINED;
     var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([centerX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([centerY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(radius, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([centerX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([centerY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(radius, 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       return cast false;
     }
     mx = (originX - centerX);
@@ -92,7 +92,7 @@ class RaycastCollisionShape {
     var upper:Dynamic = cast _Runtime.UNDEFINED;
     var normalX:Dynamic = cast _Runtime.UNDEFINED;
     var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) : Bool) || (cast ((cast minY : Float) > (cast maxY : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) : Bool) || (cast ((cast minY : Float) > (cast maxY : Float)) : Bool)) : Bool)) {
       return cast false;
     }
     lower = 0.0;
@@ -158,7 +158,7 @@ class RaycastCollisionShape {
     var localDirectionY:Dynamic = cast _Runtime.UNDEFINED;
     var normalX:Dynamic = cast _Runtime.UNDEFINED;
     var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(shape, 'x')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(shape, 'y')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfW'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfW')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfH'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfH')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(shape, 'rotation')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'x')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'y')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfW'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfW')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(shape, 'halfH'), 0.0, '>=') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'halfH')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(shape, 'rotation')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       return cast false;
     }
     cos = HxMath.cos(_Runtime.field(shape, 'rotation'));
@@ -255,7 +255,7 @@ class RaycastCollisionShape {
     var edgeLength:Dynamic = cast _Runtime.UNDEFINED;
     var normalX:Dynamic = cast _Runtime.UNDEFINED;
     var normalY:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y0] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y1] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y0] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y1] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast !(cast _Runtime.callValue(RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape, cast ([x0, y0, x1, y1, originX, originY, directionX, directionY, directionLengthSquared, maxFraction, RaycastCollisionShape.fractionScratch__raycastCollisionShape] : Array<Dynamic>)) : Bool) : Bool)) {
       return cast false;
     }
@@ -316,7 +316,7 @@ class RaycastCollisionShape {
     var hitX:Dynamic = cast _Runtime.UNDEFINED;
     var hitY:Dynamic = cast _Runtime.UNDEFINED;
     var epsilon:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([pointY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([pointX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([pointY] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     offsetX = (pointX - originX);
     offsetY = (pointY - originY);
     fraction = (((offsetX * directionX) + (offsetY * directionY)) / directionLengthSquared);

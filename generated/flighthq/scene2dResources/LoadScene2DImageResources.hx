@@ -25,7 +25,7 @@ class LoadScene2DImageResources {
         var resolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
         var unresolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
         selected = _Runtime.callProperty(_Runtime.field(document, 'imageResources'), 'filter', cast ([function(reference:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
-        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (#if js (cast _Runtime.construct(_Runtime.globalValue('AbortController'), []) : flighthq._internal.dom.AbortController).signal #else _Runtime.field(_Runtime.construct(_Runtime.globalValue('AbortController'), []), 'signal') #end));
+        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
         fetch = _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast LoadScene2DImageResources.rejectExternalImageResource__loadScene2DImageResources);
         loaded = 0.0;
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(selected, 'map', cast ([function(reference:Dynamic):flighthq._internal._Promise<Null<Image>> {

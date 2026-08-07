@@ -14,7 +14,7 @@ class InterpolateSnapshots {
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(a), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(b), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(out, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(out), 'object') : Bool)) : Bool)) {
       return;
     }
-    paths = ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Set'), [schema]) : Dynamic));
+    paths = ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [schema]) : Dynamic));
     _Runtime.callValue(InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots, cast ([(cast out : Dynamic), (cast a : Dynamic), (cast b : Dynamic), _Runtime.callValue(clamp, cast ([t, 0.0, 1.0] : Array<Dynamic>)), paths, ''] : Array<Dynamic>));
   }
 
@@ -62,7 +62,7 @@ class InterpolateSnapshots {
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) {
       return cast value;
     }
-    return cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([value] : Array<Dynamic>));
     return cast null;
   }
 }

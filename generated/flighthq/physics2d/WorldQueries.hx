@@ -37,7 +37,7 @@ class WorldQueries {
 
   public static function queryPhysics2DPoint(world:Physics2DWorld, x:Float, y:Float, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
     _Runtime.setField(out, 'hitCount', 0.0);
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(world, 'index'), 'querySpatialPoint', cast ([x, y, WorldQueries.candidateBodyScratch__worldQueries] : Array<Dynamic>));
     _Runtime.callProperty(WorldQueries.candidateBodyScratch__worldQueries, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
@@ -69,7 +69,7 @@ class WorldQueries {
 
   public static function queryPhysics2DRayInternal__worldQueries(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, maxFraction:Float, filter:Null<Physics2DQueryFilter>, closestOnly:Bool):Void {
     _Runtime.setField(out, 'hitCount', 0.0);
-    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return;
     }
     _Runtime.callValue(synchronizePhysics2DBroadphase, cast ([world] : Array<Dynamic>));
@@ -211,7 +211,7 @@ class WorldQueries {
   }
 
   public static function isValidRegion__worldQueries(region:SpatialAabb):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([region.minX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([region.minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([region.maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([region.maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast region.minX : Float) <= (cast region.maxX : Float)) : Bool)), function():Dynamic return cast ((cast region.minY : Float) <= (cast region.maxY : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([region.minX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([region.minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([region.maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([region.maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast region.minX : Float) <= (cast region.maxX : Float)) : Bool)), function():Dynamic return cast ((cast region.minY : Float) <= (cast region.maxY : Float)));
     return cast null;
   }
 

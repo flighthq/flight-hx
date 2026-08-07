@@ -4,7 +4,7 @@ package flighthq._internal;
 /**
  * Portable stand-in for the JavaScript `WeakMap`, keyed by object identity.
  * JavaScript targets construct the native `WeakMap` instead (see
- * `_Runtime.globalValue`), so this class only serves the other targets, where
+ * `_HostValueLut`), so this class only serves the other targets, where
  * entries are held strongly: Flight removes entries explicitly, and weakness is
  * a collector nicety rather than observable semantics.
  */

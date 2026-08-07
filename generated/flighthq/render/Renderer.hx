@@ -34,9 +34,9 @@ class Renderer {
     sourceRuntime = _Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>));
     _Runtime.setField(targetRuntime, 'colorAdjustmentResolver', _Runtime.field(sourceRuntime, 'colorAdjustmentResolver'));
     sourcePaddingRegistry = _Runtime.field(sourceRuntime, 'renderEffectPaddingResolverRegistry');
-    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourcePaddingRegistry]) : Dynamic)));
+    _Runtime.setField(targetRuntime, 'renderEffectPaddingResolverRegistry', ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourcePaddingRegistry]) : Dynamic)));
     sourceShapeCommands = _Runtime.field(sourceRuntime, 'canvasShapeCommandRegistry');
-    _Runtime.setField(targetRuntime, 'canvasShapeCommandRegistry', ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [sourceShapeCommands]) : Dynamic)));
+    _Runtime.setField(targetRuntime, 'canvasShapeCommandRegistry', ((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceShapeCommands]) : Dynamic)));
   }
 
   @:noCompletion

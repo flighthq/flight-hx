@@ -15,7 +15,7 @@ class SkeletonDetect {
 
   public static function getRegistry__skeletonDetect():Dynamic {
     if ((cast !_Runtime.strictEquals(SkeletonDetect._registry__skeletonDetect, null) : Bool)) { return cast SkeletonDetect._registry__skeletonDetect; }
-    (SkeletonDetect._registry__skeletonDetect = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+    (SkeletonDetect._registry__skeletonDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
     ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map).set('Spine', { detect: SkeletonDetect.detectSpine__skeletonDetect, parse: function(text:Dynamic, diagnostics:Dynamic) return _Runtime.callValue(parseSpineSkeleton, cast ([text, diagnostics] : Array<Dynamic>)) }));
     ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map).set('DragonBones', { detect: SkeletonDetect.detectDragonBones__skeletonDetect, parse: function(text:Dynamic, diagnostics:Dynamic) return _Runtime.callValue(parseDragonBonesSkeleton, cast ([text, diagnostics] : Array<Dynamic>)) }));
     return cast SkeletonDetect._registry__skeletonDetect;

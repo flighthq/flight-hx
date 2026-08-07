@@ -49,5 +49,5 @@ class EnableGlRenderEffectGuards {
     _Runtime.callValue(logOnce, cast (['effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '', LogLevel.Warn, { message: _Runtime.callValue(EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards, cast ([explanation] : Array<Dynamic>)), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') }, 'effects-gl'] : Array<Dynamic>));
   }
 
-  public static final _guardedStates__enableGlRenderEffectGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final _guardedStates__enableGlRenderEffectGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

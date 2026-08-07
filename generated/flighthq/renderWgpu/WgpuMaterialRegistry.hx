@@ -25,7 +25,7 @@ class WgpuMaterialRegistry {
   public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
+    ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
   }
 
   @:noCompletion

@@ -145,5 +145,5 @@ class GlFullscreenPass {
     _Runtime.setField(runtime, 'shaderLoc', _Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'locations'));
   }
 
-  public static final _quadVaos__glFullscreenPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _quadVaos__glFullscreenPass:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

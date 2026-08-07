@@ -11,7 +11,7 @@ class ElectronPlatform {
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
     return cast { getInfo: function(out:Dynamic) {
       var proc:Dynamic = cast _Runtime.UNDEFINED;
-      proc = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('process'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }) : Dynamic) : (cast null : Dynamic));
+      proc = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('process'), 'undefined') : Bool) ? (cast (cast flighthq._internal._HostValueLut.get('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }) : Dynamic) : (cast null : Dynamic));
       (out.name = cast (_Runtime.callValue(ElectronPlatform.toPlatformName__electronPlatform, cast ([_Runtime.optionalField(proc, 'platform')] : Array<Dynamic>)) : Dynamic));
       (out.kind = cast ('desktop' : Dynamic));
       (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalProperty(proc, 'getSystemVersion', cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));

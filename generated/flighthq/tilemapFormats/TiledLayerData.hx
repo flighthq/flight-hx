@@ -38,8 +38,8 @@ class TiledLayerData {
     for (part in _Runtime.iterable(_Runtime.callProperty(text, 'split', cast ([','] : Array<Dynamic>)))) {
       var trimmed:Dynamic = StringTools.trim(Std.string(part));
       if ((cast _Runtime.strictEquals(trimmed, '') : Bool)) { continue; }
-      var n:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([trimmed] : Array<Dynamic>));
-      _Runtime.callProperty(out, 'push', cast ([((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(n), 0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
+      var n:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([trimmed] : Array<Dynamic>));
+      _Runtime.callProperty(out, 'push', cast ([((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(n), 0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
     }
     return cast new flighthq._internal._UInt32Array(out);
     return cast null;

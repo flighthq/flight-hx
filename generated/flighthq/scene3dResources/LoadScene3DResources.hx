@@ -27,7 +27,7 @@ class LoadScene3DResources {
         var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var progress:Dynamic = cast _Runtime.UNDEFINED;
         resources = _Runtime.callValue(updateScene3DResourceStreaming, cast ([scene, resolver, options] : Array<Dynamic>));
-        refs = _Runtime.construct(_Runtime.globalValue('Set'), []);
+        refs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(resources, 'resolved'), 'length') : Float)) : Bool)) {

@@ -17,7 +17,7 @@ class AnisotropyPbrExtension {
   }
 
   public static function isValidAnisotropyPbrExtension(value:flighthq.types.AnisotropyPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'anisotropyStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(value, 'anisotropyRotation')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'anisotropyMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'anisotropyStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'anisotropyRotation')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'anisotropyMapUvSet')] : Array<Dynamic>)));
     return cast null;
   }
 }

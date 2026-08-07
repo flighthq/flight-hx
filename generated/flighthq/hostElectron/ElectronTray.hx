@@ -20,7 +20,7 @@ class ElectronTray {
     var nextId:Dynamic = cast _Runtime.UNDEFINED;
     var eventListener:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var emit:Dynamic = cast _Runtime.UNDEFINED;
-    trays = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    trays = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     nextId = 0.0;
     eventListener = null;
     emit = function(id:Float, type:TrayEventType) {

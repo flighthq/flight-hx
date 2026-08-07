@@ -233,7 +233,7 @@ class WgpuCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast WgpuCache._renderCacheTargets__wgpuCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
@@ -243,9 +243,9 @@ class WgpuCache {
   @:noCompletion
   public static final defaultWgpuRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: WgpuCache.drawWgpuRenderCache__wgpuCache };
 
-  public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _cacheStateScreen__wgpuCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _cacheStateScreen__wgpuCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _bounds__wgpuCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 

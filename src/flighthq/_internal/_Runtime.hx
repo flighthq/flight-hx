@@ -198,62 +198,6 @@ class _Runtime {
     #end
   }
 
-  #if !js
-  /** Minimal namespace stand-in so `globalThis.<Name>` constructor reads keep
-   * working; only names with portable factories are populated. */
-  static var globalThisValue:Dynamic;
-
-  static function globalThisNamespace():Dynamic {
-    if (globalThisValue == null) {
-      globalThisValue = {
-        ArrayBuffer: createArrayBuffer,
-        AudioBuffer: createAudioBuffer,
-        ImageData: createImageData,
-      };
-    }
-    return globalThisValue;
-  }
-
-  /** Portable `new ArrayBuffer(length)` storage shared by typed-array and
-   * DataView fallbacks. */
-  static function createArrayBuffer(?length:Dynamic):haxe.io.Bytes {
-    return haxe.io.Bytes.alloc(Std.int(length == null ? 0 : length));
-  }
-
-  /** Portable `new ImageData(width, height)`: the struct shape the canvas
-   * backend's `getImageData`/`putImageData` already speak. */
-  static function createImageData(?width:Dynamic, ?height:Dynamic):Dynamic {
-    final w = Std.int(width == null ? 0 : width);
-    final h = Std.int(height == null ? 0 : height);
-    return {width: w, height: h, data: new _UInt8ClampedArray(w * h * 4)};
-  }
-
-  /** Portable `new AudioBuffer(options)`: channel storage and accessors only —
-   * playback needs a native audio backend. */
-  static function createAudioBuffer(?options:Dynamic):Dynamic {
-    final length = Std.int(field(options, 'length'));
-    final channelCount = Std.int(field(options, 'numberOfChannels'));
-    final channels = [for (_ in 0...channelCount) new _Float32Array(length)];
-    return {
-      length: length,
-      numberOfChannels: channelCount,
-      sampleRate: field(options, 'sampleRate'),
-      duration: sampleRate_(options, length),
-      getChannelData: function(index:Dynamic):Dynamic return channels[Std.int(index)],
-      copyToChannel: function(source:Dynamic, index:Dynamic, ?startInChannel:Dynamic):Dynamic {
-        final channel:_Float32Array = channels[Std.int(index)];
-        channel.set(source, startInChannel == null ? 0 : (startInChannel : Float));
-        return null;
-      },
-    };
-  }
-
-  static function sampleRate_(options:Dynamic, length:Int):Float {
-    final rate:Float = field(options, 'sampleRate');
-    return rate > 0 ? length / rate : 0;
-  }
-  #end
-
   static function resolveMethod(owner:Dynamic, name:String):Dynamic {
     #if !js
     // Typed-array methods on the pure-eval representation (plain Array): JS
@@ -378,7 +322,7 @@ class _Runtime {
     return js.Syntax.code('globalThis.Reflect.construct({0}, {1})', constructor, arguments);
     #else
     // A null constructor means a JavaScript global with no portable mapping in
-    // `globalValue`. Constructing a placeholder here would silently no-op every
+    // the host toolkit. Constructing a placeholder here would silently no-op every
     // later method call on it, so fail loudly at the construction site instead.
     if (constructor == null) throw 'Runtime: cannot construct a JavaScript global that has no portable implementation on this target';
     // Abstract-typed globals map to factory functions instead of classes.
@@ -498,52 +442,6 @@ class _Runtime {
     return js.Syntax.code('import({0})', specifier);
     #else
     return _Promise.reject(new haxe.Exception('Dynamic imports are unavailable on this target'));
-    #end
-  }
-
-  public static function externalValue(specifier:String, imported:String):Dynamic {
-    #if js
-    final module:Dynamic = js.Syntax.code('require({0})', specifier);
-    if (imported == '*') return module;
-    if (imported == 'default') {
-      final defaultValue = Reflect.field(module, 'default');
-      return defaultValue == null ? module : defaultValue;
-    }
-    return Reflect.field(module, imported);
-    #else
-    return null;
-    #end
-  }
-
-  public static function globalValue(name:String):Dynamic {
-    #if js
-    return js.Syntax.code('globalThis[{0}]', name);
-    #else
-    // Portable JavaScript built-ins map to maintained classes; anything else
-    // stays null so `typeof X` feature checks report the global as absent.
-    return switch (name) {
-      case 'Map': _Map;
-      case 'Set': _Set;
-      case 'WeakMap': _WeakMap;
-      case 'WeakSet': _WeakSet;
-      case 'Uint8ClampedArray': _UInt8ClampedArray.construct;
-      case 'ImageData': createImageData;
-      case 'AudioBuffer': createAudioBuffer;
-      case 'ArrayBuffer': createArrayBuffer;
-      case 'globalThis': globalThisNamespace();
-      case 'Float64Array': _Float64Array.construct;
-      case 'Int32Array': _Int32Array.construct;
-      case 'Int8Array': _Int8Array.construct;
-      case 'TextDecoder': _TextDecoder;
-      case 'Uint32Array': _UInt32Array.construct;
-      case 'DataView': _DataView;
-      case 'Number': numberNamespace();
-      case 'parseFloat': jsParseFloat;
-      case 'parseInt': jsParseInt;
-      case 'isNaN': jsCoercingIsNaN;
-      case 'isFinite': jsCoercingIsFinite;
-      default: null;
-    };
     #end
   }
 
@@ -798,75 +696,6 @@ class _Runtime {
       return [for (_ in 0...Std.int(source)) 0];
     }
     return (cast source : Array<Dynamic>).copy();
-    #end
-  }
-
-  #if !js
-  /** Portable `Number` namespace: the non-coercing static predicates and the
-   * coercing parse functions, matching JavaScript semantics closely enough for
-   * the generated guard patterns (`Number.isFinite(x)` after a typeof check). */
-  static var numberNamespaceValue:Dynamic = null;
-
-  static function numberNamespace():Dynamic {
-    if (numberNamespaceValue == null) {
-      numberNamespaceValue = {
-        isFinite: function(value:Dynamic):Bool {
-          return Std.isOfType(value, Float) && HxMath.isFinite(cast value) && !HxMath.isNaN(cast value);
-        },
-        isInteger: function(value:Dynamic):Bool {
-          if (!Std.isOfType(value, Float)) return false;
-          final number:Float = cast value;
-          return HxMath.isFinite(number) && !HxMath.isNaN(number) && number == HxMath.ffloor(number);
-        },
-        isNaN: function(value:Dynamic):Bool {
-          return Std.isOfType(value, Float) && HxMath.isNaN(cast value);
-        },
-        parseFloat: jsParseFloat,
-        parseInt: jsParseInt,
-      };
-    }
-    return numberNamespaceValue;
-  }
-
-  static function jsParseFloat(value:Dynamic):Float {
-    if (value == null) return HxMath.NaN;
-    final parsed = Std.parseFloat(StringTools.ltrim(Std.string(value)));
-    return parsed;
-  }
-
-  static function jsParseInt(value:Dynamic, ?radix:Dynamic):Float {
-    if (value == null) return HxMath.NaN;
-    var text = StringTools.ltrim(Std.string(value));
-    final radixValue = radix == null ? 10 : Std.int(radix);
-    if (radixValue == 16 && !StringTools.startsWith(text.toLowerCase(), '0x')) text = '0x' + text;
-    final parsed = Std.parseInt(text);
-    return parsed == null ? HxMath.NaN : parsed;
-  }
-
-  static function jsCoercingIsNaN(value:Dynamic):Bool {
-    if (value == null) return false; // Number(null) is 0.
-    if (Std.isOfType(value, Float)) return HxMath.isNaN(cast value);
-    if (Std.isOfType(value, Bool)) return false;
-    return HxMath.isNaN(jsParseFloat(value));
-  }
-
-  static function jsCoercingIsFinite(value:Dynamic):Bool {
-    if (value == null) return true; // Number(null) is 0.
-    if (Std.isOfType(value, Float)) {
-      final number:Float = cast value;
-      return HxMath.isFinite(number) && !HxMath.isNaN(number);
-    }
-    if (Std.isOfType(value, Bool)) return true;
-    final number = jsParseFloat(value);
-    return HxMath.isFinite(number) && !HxMath.isNaN(number);
-  }
-  #end
-
-  public static function typeofGlobal(name:String):String {
-    #if js
-    return js.Syntax.code('typeof globalThis[{0}]', name);
-    #else
-    return globalValue(name) == null ? 'undefined' : 'function';
     #end
   }
 

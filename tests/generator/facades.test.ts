@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { packageBridge } from '../../vitest.upstream.config.ts';
+import { bridgeHookTimeoutMs, packageBridge } from '../../vitest.upstream.config.ts';
 import { contractOnlyDeclarationIdentities } from '../../tools/generator/src/emit/core.ts';
 import type { PackageInventory } from '../../tools/generator/src/model/inventory.ts';
 
@@ -89,6 +89,7 @@ describe('public Haxe facades', () => {
   it('resolves package export lanes to their source bridges', () => {
     const workspace = process.cwd();
 
+    expect(bridgeHookTimeoutMs).toBe(30_000);
     expect(packageBridge('@flighthq/types/contract')).toBe(
       path.join(workspace, 'tests', 'bridges', 'sources', 'types', 'contract.mjs'),
     );

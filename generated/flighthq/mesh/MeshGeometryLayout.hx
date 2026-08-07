@@ -32,8 +32,8 @@ class MeshGeometryLayout {
     dstVertices = new flighthq._internal._Float32Array(((vertexCount * dstStride) / 4.0));
     sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(source.vertices, 'buffer'), _Runtime.field(source.vertices, 'byteOffset'), _Runtime.field(source.vertices, 'byteLength'));
     destinationBytes = new flighthq._internal._UInt8Array(_Runtime.field(dstVertices, 'buffer'));
-    sourceView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
-    destinationView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(destinationBytes, 'buffer')]);
+    sourceView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
+    destinationView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(destinationBytes, 'buffer')]);
     mappings = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(targetLayout.attributes)) {
       var srcAttr:Dynamic = _Runtime.find(source.layout.attributes, function(attribute:Dynamic) return _Runtime.strictEquals(attribute.semantic, dstAttr.semantic));

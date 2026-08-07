@@ -25,5 +25,5 @@ class Decompressor {
     ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map).delete_(compression));
   }
 
-  public static final _decompressors__decompressor:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _decompressors__decompressor:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

@@ -33,7 +33,7 @@ class SceneDocumentSource {
         return flighthq._internal._Async.flatMap(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'arraybuffer', url: url }, _Runtime.callValue(SceneDocumentSource.createScene3DDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
           response = __awaitValue0;
           var __flowBranch1:Dynamic;
-          if ((cast ((cast !(cast _Runtime.field(response, 'ok') : Bool) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(response, 'body'), _Runtime.globalValue('ArrayBuffer')) : Bool) : Bool)) : Bool)) {
+          if ((cast ((cast !(cast _Runtime.field(response, 'ok') : Bool) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(response, 'body'), flighthq._internal._HostValueLut.get('ArrayBuffer')) : Bool) : Bool)) : Bool)) {
             __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });

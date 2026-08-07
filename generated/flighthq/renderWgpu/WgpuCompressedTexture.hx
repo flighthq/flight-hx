@@ -18,7 +18,7 @@ typedef WgpuCompressedFormatInfo__wgpuCompressedTexture = { var blockHeight:Floa
 class WgpuCompressedTexture {
   @:noCompletion
   public static function detectWgpuCompressedTextureSupport(device:flighthq._internal.dom.GPUDevice):WgpuCompressedTextureSupport {
-    return cast { astc: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-astc')), bc: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-bc')), etc2: ((cast (#if js device.features #else _Runtime.field(device, 'features') #end) : flighthq._internal._Set).has('texture-compression-etc2')) };
+    return cast { astc: ((cast device.features : flighthq._internal._Set).has('texture-compression-astc')), bc: ((cast device.features : flighthq._internal._Set).has('texture-compression-bc')), etc2: ((cast device.features : flighthq._internal._Set).has('texture-compression-etc2')) };
     return cast null;
   }
 
@@ -57,7 +57,7 @@ class WgpuCompressedTexture {
     var native:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Array<flighthq._internal._UInt8ClampedArray> = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0), function():Dynamic return cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)) : Bool)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(container, 'levels'), 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(_Runtime.field(container, 'mipLevels'), _Runtime.field(container, 'layers')), _Runtime.field(container, 'faces'))) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0), function():Dynamic return cast !(cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)) : Bool)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(container, 'levels'), 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(_Runtime.field(container, 'mipLevels'), _Runtime.field(container, 'layers')), _Runtime.field(container, 'faces'))) : Bool)) : Bool)) {
       return cast null;
     }
     native = _Runtime.callValue(WgpuCompressedTexture.getWgpuCompressedTextureFormatForColorSpace__wgpuCompressedTexture, cast ([_Runtime.field(state, 'device'), _Runtime.field(container, 'format'), colorSpace] : Array<Dynamic>));
@@ -121,7 +121,7 @@ class WgpuCompressedTexture {
     } : Dynamic));
     texture = _Runtime.callValue(uploadWgpuCompressedTextureContainer, cast ([state, container, compressed.payload, fallback, colorSpace] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast null; }
-    view = (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) #end);
+    view = (cast texture : flighthq._internal.dom.GPUTexture).createView();
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     sampler = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime, 'nearestSampler') : Dynamic));
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(runtime, 'textureBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -155,7 +155,7 @@ class WgpuCompressedTexture {
     if ((cast !(cast StringTools.startsWith(format, 'astc') : Bool) : Bool)) { return cast null; }
     match = _Runtime.callProperty(_Runtime.regexp('^astc(\\d+)x(\\d+)$$', ''), 'exec', cast ([format] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(match, null) : Bool)) { return cast null; }
-    return cast { blockWidth: _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.getIndex(match, 1.0)] : Array<Dynamic>)), blockHeight: _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.getIndex(match, 2.0)] : Array<Dynamic>)), bytesPerBlock: 16.0, format: (cast 'astc-' + Std.string(_Runtime.getIndex(match, 1.0)) + 'x' + Std.string(_Runtime.getIndex(match, 2.0)) + '-unorm' : flighthq._internal.dom.GPUTextureFormat) };
+    return cast { blockWidth: _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.getIndex(match, 1.0)] : Array<Dynamic>)), blockHeight: _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.getIndex(match, 2.0)] : Array<Dynamic>)), bytesPerBlock: 16.0, format: (cast 'astc-' + Std.string(_Runtime.getIndex(match, 1.0)) + 'x' + Std.string(_Runtime.getIndex(match, 2.0)) + '-unorm' : flighthq._internal.dom.GPUTextureFormat) };
     return cast null;
   }
 

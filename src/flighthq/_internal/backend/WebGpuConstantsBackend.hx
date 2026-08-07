@@ -5,7 +5,7 @@ package flighthq._internal.backend;
  * (`GPUBufferUsage`, `GPUTextureUsage`, `GPUShaderStage`, `GPUColorWrite`,
  * `GPUMapMode`).
  *
- * Generated code reads these as `field(globalValue('GPUBufferUsage'), 'COPY_DST')`.
+ * Generated code reads these through the named backend rather than an ambient value lookup.
  * The members are bitflags fixed by the WebGPU specification, so — unlike a live
  * device or context — they carry no per-target behavior: the value of
  * `GPUBufferUsage.COPY_DST` is `8` on every target. This binding returns those

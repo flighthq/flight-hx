@@ -18,7 +18,7 @@ class Guards {
 
   @:noCompletion
   public static function createGuardedEntity<Type>(entity:Type):Type {
-    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
+    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['runtime-slot'] : Array<Dynamic>));
@@ -31,7 +31,7 @@ class Guards {
 
   @:noCompletion
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
-    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
+    if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if ((cast ((cast _Runtime.strictEquals(prop, 'binding') : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
         _Runtime.callOptionalValue(Guards._writeGuard__guards, cast (['binding-slot'] : Array<Dynamic>));
@@ -44,7 +44,7 @@ class Guards {
 
   @:noCompletion
   public static function setEntityRuntimeGuardMode(enabled:Bool):Void {
-    if ((cast ((cast enabled : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined') : Bool)) : Bool)) { return; }
+    if ((cast ((cast enabled : Bool) && (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return; }
     (Guards._guardsEnabled__guards = cast (enabled : Dynamic));
   }
 

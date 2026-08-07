@@ -13,7 +13,7 @@ class AnimationRootMotion {
     var channel:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var extractor:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast _Runtime.field(clip.channels, 'length') : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast _Runtime.field(clip.channels, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
     }
     channel = flighthq._internal._StaticIndex.readArray(clip.channels, channelIndex);
@@ -31,7 +31,7 @@ class AnimationRootMotion {
 
   public static function extractAnimationRootMotion(out:Dynamic, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
     var components:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.'));
     }
     components = _Runtime.field(_Runtime.field(_Runtime.field(extractor, 'channel'), 'track'), 'components');

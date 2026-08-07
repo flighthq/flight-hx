@@ -27,7 +27,7 @@ class TextLayout {
 
   public static final _charAdvances__textLayout:Array<Float> = cast ([] : Array<Dynamic>);
 
-  public static final _paragraphLastLines__textLayout:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+  public static final _paragraphLastLines__textLayout:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static function computeTextLayout(out:TextLayoutResult, params:TextLayoutParams):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

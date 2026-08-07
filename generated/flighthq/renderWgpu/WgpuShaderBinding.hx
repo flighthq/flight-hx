@@ -11,7 +11,7 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuBitmapShader;
 
 class WgpuShaderBinding {
-  public static final _shaderBindings__wgpuShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _shaderBindings__wgpuShaderBinding:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {

@@ -322,11 +322,11 @@ class SceneRender {
 
   public static function resolveScene3DViewportAspect__sceneRender(camera:Camera3D, viewportAspect:Null<Float>):Float {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast !_Runtime.strictEquals(viewportAspect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([viewportAspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast viewportAspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(viewportAspect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([viewportAspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast viewportAspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast viewportAspect;
     }
     projection = camera.projection;
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([projection.aspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast projection.aspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([projection.aspect] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast projection.aspect : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast projection.aspect;
     }
     return cast SceneRender.DEFAULT_VIEWPORT_ASPECT__sceneRender;
@@ -335,7 +335,7 @@ class SceneRender {
 
   public static final DEFAULT_VIEWPORT_ASPECT__sceneRender:Dynamic = 1.0;
 
-  public static final preparedScene3Ds__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final preparedScene3Ds__sceneRender:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final scratchColor__sceneRender:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 

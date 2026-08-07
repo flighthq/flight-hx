@@ -68,7 +68,7 @@ class AssetLibrary {
 
   public static function createAssetLibrary():flighthq.types.Assets.AssetLibrary {
     var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;
-    runtime = { acquireGuard: null, adapters: _Runtime.construct(_Runtime.globalValue('Map'), []), descriptors: _Runtime.construct(_Runtime.globalValue('Map'), []), entries: _Runtime.construct(_Runtime.globalValue('Map'), []), freedIds: _Runtime.construct(_Runtime.globalValue('Set'), []), groups: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    runtime = { acquireGuard: null, adapters: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), descriptors: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), freedIds: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), groups: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     return cast { runtime: runtime };
     return cast null;
   }
@@ -230,7 +230,7 @@ class AssetLibrary {
 
   public static function registerAssetManifest(library:flighthq.types.Assets.AssetLibrary, manifest:AssetManifest):Void {
     var descriptors:Dynamic = cast _Runtime.UNDEFINED;
-    descriptors = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    descriptors = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (descriptor in _Runtime.iterable(manifest)) {
       ((cast descriptors : flighthq._internal._Map).set(descriptor.id, descriptor));
     }
@@ -284,7 +284,7 @@ class AssetLibrary {
   public static function copyAssetDescriptor__assetLibrary(descriptor:AssetDescriptor):AssetDescriptor {
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     groups = descriptor.groups;
-    return cast _Runtime.mergeObjects([{ id: descriptor.id }, { type: descriptor.type }, { url: descriptor.url }, ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { groups: _Runtime.concatArrays([_Runtime.toArray(_Runtime.construct(_Runtime.globalValue('Set'), [groups]))]) } : Dynamic))]);
+    return cast _Runtime.mergeObjects([{ id: descriptor.id }, { type: descriptor.type }, { url: descriptor.url }, ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { groups: _Runtime.concatArrays([_Runtime.toArray(_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [groups]))]) } : Dynamic))]);
     return cast null;
   }
 
@@ -296,8 +296,8 @@ class AssetLibrary {
     if ((cast ((cast ((cast !_Runtime.strictEquals(a.id, b.id) : Bool) || (cast !_Runtime.strictEquals(a.type, b.type) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.url, b.url) : Bool)) : Bool)) { return cast false; }
     aGroups = _Runtime.coalesce(a.groups, function():Dynamic return cast cast ([] : Array<Dynamic>));
     bGroups = _Runtime.coalesce(b.groups, function():Dynamic return cast cast ([] : Array<Dynamic>));
-    aUniqueGroups = _Runtime.construct(_Runtime.globalValue('Set'), [aGroups]);
-    bUniqueGroups = _Runtime.construct(_Runtime.globalValue('Set'), [bGroups]);
+    aUniqueGroups = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [aGroups]);
+    bUniqueGroups = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [bGroups]);
     if ((cast !_Runtime.strictEquals((cast aUniqueGroups : flighthq._internal._Set).size, (cast bUniqueGroups : flighthq._internal._Set).size) : Bool)) { return cast false; }
     {
       var i:Dynamic = 0.0;

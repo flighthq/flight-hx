@@ -71,7 +71,7 @@ class SwfShape {
     var records:Dynamic = cast _Runtime.UNDEFINED;
     hasAlpha = ((cast version : Float) >= (cast 3.0 : Float));
     shape = _Runtime.callValue(createShape, cast ([] : Array<Dynamic>));
-    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(_Runtime.globalValue('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(_Runtime.globalValue('Map'), []), styles: styles, x: 0.0, y: 0.0 };
+    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: styles, x: 0.0, y: 0.0 };
     fillBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     lineBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
@@ -127,7 +127,7 @@ class SwfShape {
     startRecords = _Runtime.callValue(SwfShape.readSwfShapeRecordList__swfShape, cast ([startReader] : Array<Dynamic>));
     endRecords = _Runtime.callValue(SwfShape.readSwfShapeRecordList__swfShape, cast ([endReader] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(startRecords, null) : Bool) || (cast _Runtime.strictEquals(endRecords, null) : Bool)) : Bool)) { return cast null; }
-    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(_Runtime.globalValue('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(_Runtime.globalValue('Map'), []), styles: { fills: cast ([] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, x: 0.0, y: 0.0 };
+    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: { fills: cast ([] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, x: 0.0, y: 0.0 };
     endX = 0.0;
     endY = 0.0;
     startIndex = 0.0;
@@ -211,7 +211,7 @@ class SwfShape {
 
   public static function createSwfMorphSegmentPaths__swfShape(segments:Dynamic):Dynamic {
     var paths:Dynamic = cast _Runtime.UNDEFINED;
-    paths = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    paths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (__iteration0 in _Runtime.iterable(segments)) {
       var index:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var collected:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
@@ -622,7 +622,7 @@ class SwfShape {
     var starts:Dynamic = cast _Runtime.UNDEFINED;
     var used:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Array<SwfShapeSegment__swfShape> = cast _Runtime.UNDEFINED;
-    starts = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    starts = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(segments, 'length') : Float)) : Bool)) {

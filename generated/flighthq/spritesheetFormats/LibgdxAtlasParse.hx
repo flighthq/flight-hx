@@ -22,7 +22,7 @@ class LibgdxAtlasParse {
   public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
     var parts:Dynamic = cast _Runtime.UNDEFINED;
     parts = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-    return cast cast ([_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
+    return cast cast ([_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
@@ -100,7 +100,7 @@ class LibgdxAtlasParse {
               }
             }
             else if (__switchValue == 'index') {
-              _Runtime.setField(currentRegion, 'index', _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([value, 10.0] : Array<Dynamic>)));
+              _Runtime.setField(currentRegion, 'index', _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([value, 10.0] : Array<Dynamic>)));
             }
           }
         } else { if ((cast !_Runtime.strictEquals(currentPage, null) : Bool)) {
@@ -152,7 +152,7 @@ class LibgdxAtlasParse {
   public static function inferAnimations__libgdxAtlasParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    groups = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    groups = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (name in _Runtime.iterable(frameNames)) {
       var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
       var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
@@ -160,7 +160,7 @@ class LibgdxAtlasParse {
       var __destructure5:Dynamic = match;
       var base:Dynamic = _Runtime.getIndex(__destructure5, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure5, 2.0);
-      var index:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
+      var index:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
       var bucket:Dynamic = ((cast groups : flighthq._internal._Map).get(base));
       if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
     }

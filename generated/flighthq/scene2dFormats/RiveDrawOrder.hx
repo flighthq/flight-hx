@@ -23,7 +23,7 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 class RiveDrawOrder {
   public static function applyRiveDrawOrder(nodes:Array<Null<Node2D>>, artboard:RiveArtboardGraph, root:DisplayObject, ?diagnostics:Array<ImportDiagnostic>):Void {
     var lists:Dynamic = cast _Runtime.UNDEFINED;
-    lists = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    lists = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {

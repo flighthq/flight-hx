@@ -33,8 +33,8 @@ class GlRenderState {
     _Runtime.setField(targetRuntime, 'glBlendModeRegistry', _Runtime.callValue(GlRenderState.copyMap__glRenderState, cast ([_Runtime.field(sourceRuntime, 'glBlendModeRegistry')] : Array<Dynamic>)));
     _Runtime.setField(targetRuntime, 'glColorAdjustmentMaterialFeature', _Runtime.field(sourceRuntime, 'glColorAdjustmentMaterialFeature'));
     _Runtime.setField(targetRuntime, 'glColorAdjustmentMaterialFeatureGuard', _Runtime.field(sourceRuntime, 'glColorAdjustmentMaterialFeatureGuard'));
-    _Runtime.setField(targetRuntime, 'materialRendererMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialRendererMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [_Runtime.field(sourceRuntime, 'materialRendererMap')]) : Dynamic)));
-    _Runtime.setField(targetRuntime, 'materialBitmapShaderMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialBitmapShaderMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [_Runtime.field(sourceRuntime, 'materialBitmapShaderMap')]) : Dynamic)));
+    _Runtime.setField(targetRuntime, 'materialRendererMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialRendererMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.field(sourceRuntime, 'materialRendererMap')]) : Dynamic)));
+    _Runtime.setField(targetRuntime, 'materialBitmapShaderMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialBitmapShaderMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.field(sourceRuntime, 'materialBitmapShaderMap')]) : Dynamic)));
     _Runtime.setField(targetRuntime, 'sceneMeshMaterialRegistry', _Runtime.callValue(GlRenderState.copyMap__glRenderState, cast ([_Runtime.field(sourceRuntime, 'sceneMeshMaterialRegistry')] : Array<Dynamic>)));
     _Runtime.setField(targetRuntime, 'webglShaderBindingResolver', _Runtime.field(sourceRuntime, 'webglShaderBindingResolver'));
     _Runtime.setField(targetRuntime, 'glTextureResolverRegistry', _Runtime.callValue(GlRenderState.copyRegistryMap__glRenderState, cast ([_Runtime.field(sourceRuntime, 'glTextureResolverRegistry')] : Array<Dynamic>)));
@@ -117,11 +117,11 @@ class GlRenderState {
     _Runtime.setField(runtime, 'quadBatchWriterSampler', null);
     _Runtime.setField(runtime, 'quadBatchWriterStraightAlpha', false);
     _Runtime.setField(runtime, 'quadBatchWriterSmoothing', null);
-    _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-    _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-    _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-    _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-    _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
     _Runtime.setField(runtime, 'quadVertexBuffer', quadVertexBuffer);
     _Runtime.setField(runtime, 'quadIndexBuffer', quadIndexBuffer);
     _Runtime.setField(runtime, 'quadVertexData', new flighthq._internal._Float32Array(16.0));
@@ -167,7 +167,7 @@ class GlRenderState {
     _Runtime.incrementField(contextRuntime, 'references', -1, true);
     if ((cast !_Runtime.strictEquals(_Runtime.field(contextRuntime, 'references'), 0.0) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');
-    programs = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    programs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     if (_Runtime.truthy(_Runtime.field(runtime, 'shaderLoc'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'shaderLoc'), 'program'))); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'defaultBitmapShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'program'))); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'particleShader'))) { ((cast programs : flighthq._internal._Set).add(_Runtime.field(_Runtime.field(runtime, 'particleShader'), 'program'))); }
@@ -240,7 +240,7 @@ class GlRenderState {
   public static function copyMap__glRenderState<K, V>(source:Null<Dynamic>):Null<Dynamic> {
     if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    return cast _Runtime.construct(_Runtime.globalValue('Map'), [source]);
+    return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [source]);
     return cast null;
   }
 
@@ -266,7 +266,7 @@ class GlRenderState {
 
   public static final GL_CONTEXT_RUNTIME_KEYS__glRenderState:Dynamic = cast (['currentBlendMode', 'currentProgram', 'currentTexture', 'currentTextureStraightAlpha', 'particleShader', 'particleCornerBuffer', 'particleInstanceBuffer', 'quadBatchShader', 'quadBatchCornerBuffer', 'colorScaleBiasInstancedShader', 'colorMatrixInstancedShader', 'colorTintInstancedShader', 'uniformColorScaleBiasShader', 'shapeMeshColorScaleBiasShader', 'shapeMeshColorMatrixShader', 'sceneMeshUploadCache', 'shaderLoc', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourcePremultipliedSrgbTextureCache', 'textureSourceStraightTextureCache', 'textureSourceStraightSrgbTextureCache', 'glExternalTextureCache', 'glRenderTextureCache', 'videoTextureCache', 'videoSrgbTextureCache', 'mipmappedTextures', 'anisotropyExt', 'maxAnisotropy', 'quadVertexBuffer', 'quadIndexBuffer', 'quadBatchWriterInstanceBuffer', 'quadBatchWriterMaterialBuffer', 'quadBatchWriterColorScaleBiasBuffer'] : Array<Dynamic>);
 
-  public static final _contextRuntimeByStateRuntime__glRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _contextRuntimeByStateRuntime__glRenderState:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _destroyedStates__glRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final _destroyedStates__glRenderState:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

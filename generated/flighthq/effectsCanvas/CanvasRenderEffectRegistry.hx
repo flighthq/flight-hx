@@ -23,6 +23,6 @@ class CanvasRenderEffectRegistry {
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'canvasRenderEffectRegistry', (_Runtime.field(runtime, 'canvasRenderEffectRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, runner));
+    ((cast _Runtime.setField(runtime, 'canvasRenderEffectRegistry', (_Runtime.field(runtime, 'canvasRenderEffectRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, runner));
   }
 }

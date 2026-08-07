@@ -10,13 +10,13 @@ import flighthq.types.Accessibility.AccessibilityState;
 
 class Accessibility {
   public static function _applyAccessibilityElementAttributes__accessibility(element:flighthq._internal.dom.HTMLElement, node:AccessibilityNode):Void {
-    (#if js element.setAttribute('role', _Runtime.field(node, 'role')) #else _Runtime.callProperty(element, 'setAttribute', cast (['role', _Runtime.field(node, 'role')] : Array<Dynamic>)) #end);
+    element.setAttribute('role', _Runtime.field(node, 'role'));
     _Runtime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'aria-label', _Runtime.field(node, 'label')] : Array<Dynamic>));
     _Runtime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'aria-description', _Runtime.field(node, 'description')] : Array<Dynamic>));
     _Runtime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'title', _Runtime.field(node, 'description')] : Array<Dynamic>));
     _Runtime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'aria-valuetext', _Runtime.field(node, 'value')] : Array<Dynamic>));
     _Runtime.callValue(Accessibility._setAccessibilityElementValueText__accessibility, cast ([element, _Runtime.field(node, 'value')] : Array<Dynamic>));
-    (#if js element.setAttribute('tabindex', '-1') #else _Runtime.callProperty(element, 'setAttribute', cast (['tabindex', '-1'] : Array<Dynamic>)) #end);
+    element.setAttribute('tabindex', '-1');
     _Runtime.callValue(Accessibility._applyAccessibilityStateAttributes__accessibility, cast ([element, _Runtime.coalesce(_Runtime.field(node, 'states'), function():Dynamic return cast Accessibility._EMPTY_STATE__accessibility)] : Array<Dynamic>));
   }
 
@@ -42,18 +42,18 @@ class Accessibility {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     var style:Dynamic = cast _Runtime.UNDEFINED;
     container = flighthq._internal.backend.DomDocumentBackend.call(doc, 'createElement', cast (['div'] : Array<Dynamic>));
-    (#if js (cast container : flighthq._internal.dom.HTMLDivElement).setAttribute('data-flight-accessibility', 'true') #else _Runtime.callProperty(container, 'setAttribute', cast (['data-flight-accessibility', 'true'] : Array<Dynamic>)) #end);
-    style = (#if js (cast container : flighthq._internal.dom.HTMLDivElement).style #else _Runtime.field(container, 'style') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute') #else _Runtime.setField(style, 'position', 'absolute') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).width = '1px') #else _Runtime.setField(style, 'width', '1px') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).height = '1px') #else _Runtime.setField(style, 'height', '1px') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).margin = '-1px') #else _Runtime.setField(style, 'margin', '-1px') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).padding = '0') #else _Runtime.setField(style, 'padding', '0') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).border = '0') #else _Runtime.setField(style, 'border', '0') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden') #else _Runtime.setField(style, 'overflow', 'hidden') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).clip = 'rect(0 0 0 0)') #else _Runtime.setField(style, 'clip', 'rect(0 0 0 0)') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = 'inset(50%)') #else _Runtime.setField(style, 'clipPath', 'inset(50%)') #end);
-    (#if js ((cast style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'nowrap') #else _Runtime.setField(style, 'whiteSpace', 'nowrap') #end);
+    (cast container : flighthq._internal.dom.HTMLDivElement).setAttribute('data-flight-accessibility', 'true');
+    style = (cast container : flighthq._internal.dom.HTMLDivElement).style;
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).width = '1px');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).height = '1px');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).margin = '-1px');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).padding = '0');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).border = '0');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).clip = 'rect(0 0 0 0)');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = 'inset(50%)');
+    ((cast style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'nowrap');
     return cast container;
     return cast null;
   }
@@ -63,13 +63,13 @@ class Accessibility {
   public static function _getAccessibilityLiveRegion__accessibility(root:flighthq._internal.dom.HTMLElement, liveRegions:Dynamic, liveness:AccessibilityLiveness):flighthq._internal.dom.HTMLElement {
     var region:Dynamic = cast _Runtime.UNDEFINED;
     region = ((cast liveRegions : flighthq._internal._Map).get(liveness));
-    if ((cast ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((#if js (cast region : flighthq._internal.dom.HTMLElement).parentNode #else _Runtime.field(region, 'parentNode') #end), null) : Bool)) : Bool)) {
-      (region = cast (flighthq._internal.backend.DomDocumentBackend.call((#if js root.ownerDocument #else _Runtime.field(root, 'ownerDocument') #end), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
-      (#if js (cast region : flighthq._internal.dom.HTMLElement).setAttribute('aria-live', liveness) #else _Runtime.callProperty(region, 'setAttribute', cast (['aria-live', liveness] : Array<Dynamic>)) #end);
-      (#if js (cast region : flighthq._internal.dom.HTMLElement).setAttribute('aria-atomic', 'true') #else _Runtime.callProperty(region, 'setAttribute', cast (['aria-atomic', 'true'] : Array<Dynamic>)) #end);
-      (#if js (cast region : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-live', liveness) #else _Runtime.callProperty(region, 'setAttribute', cast (['data-flight-accessibility-live', liveness] : Array<Dynamic>)) #end);
+    if ((cast ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast region : flighthq._internal.dom.HTMLElement).parentNode, null) : Bool)) : Bool)) {
+      (region = cast (flighthq._internal.backend.DomDocumentBackend.call(root.ownerDocument, 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
+      (cast region : flighthq._internal.dom.HTMLElement).setAttribute('aria-live', liveness);
+      (cast region : flighthq._internal.dom.HTMLElement).setAttribute('aria-atomic', 'true');
+      (cast region : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-live', liveness);
       ((cast liveRegions : flighthq._internal._Map).set(liveness, region));
-      (#if js root.appendChild(region) #else _Runtime.callProperty(root, 'appendChild', cast ([region] : Array<Dynamic>)) #end);
+      root.appendChild(region);
     }
     return cast region;
     return cast null;
@@ -77,26 +77,26 @@ class Accessibility {
 
   public static function _reflectAccessibilityAttribute__accessibility(element:flighthq._internal.dom.HTMLElement, attribute:String, value:Null<String>):Void {
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (#if js element.removeAttribute(attribute) #else _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>)) #end);
+      element.removeAttribute(attribute);
       return;
     }
-    (#if js element.setAttribute(attribute, value) #else _Runtime.callProperty(element, 'setAttribute', cast ([attribute, value] : Array<Dynamic>)) #end);
+    element.setAttribute(attribute, value);
   }
 
   public static function _reflectAccessibilityBoolean__accessibility(element:flighthq._internal.dom.HTMLElement, attribute:String, value:Null<Bool>):Void {
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (#if js element.removeAttribute(attribute) #else _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>)) #end);
+      element.removeAttribute(attribute);
       return;
     }
-    (#if js element.setAttribute(attribute, ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) #else _Runtime.callProperty(element, 'setAttribute', cast ([attribute, ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))] : Array<Dynamic>)) #end);
+    element.setAttribute(attribute, ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic)));
   }
 
   public static function _reflectAccessibilityNumber__accessibility(element:flighthq._internal.dom.HTMLElement, attribute:String, value:Null<Float>):Void {
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (#if js element.removeAttribute(attribute) #else _Runtime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>)) #end);
+      element.removeAttribute(attribute);
       return;
     }
-    (#if js element.setAttribute(attribute, Std.string(value)) #else _Runtime.callProperty(element, 'setAttribute', cast ([attribute, Std.string(value)] : Array<Dynamic>)) #end);
+    element.setAttribute(attribute, Std.string(value));
   }
 
   public static function _reparentAccessibilityElement__accessibility(element:flighthq._internal.dom.HTMLElement, parentId:Null<String>, elements:Dynamic, root:flighthq._internal.dom.HTMLElement):Void {
@@ -106,21 +106,21 @@ class Accessibility {
       var found:Dynamic = ((cast elements : flighthq._internal._Map).get(parentId));
       if ((cast !_Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (parent = cast (found : Dynamic)); }
     }
-    if ((cast !_Runtime.strictEquals((#if js element.parentNode #else _Runtime.field(element, 'parentNode') #end), parent) : Bool)) { (#if js parent.appendChild(element) #else _Runtime.callProperty(parent, 'appendChild', cast ([element] : Array<Dynamic>)) #end); }
+    if ((cast !_Runtime.strictEquals(element.parentNode, parent) : Bool)) { parent.appendChild(element); }
   }
 
   public static function _setAccessibilityElementValueText__accessibility(element:flighthq._internal.dom.HTMLElement, value:Null<String>):Void {
     var first:Dynamic = cast _Runtime.UNDEFINED;
-    first = (#if js element.firstChild #else _Runtime.field(element, 'firstChild') #end);
+    first = element.firstChild;
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals((#if js (cast first : flighthq._internal.dom.ChildNode).nodeType #else _Runtime.field(first, 'nodeType') #end), Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) { (#if js element.removeChild(first) #else _Runtime.callProperty(element, 'removeChild', cast ([first] : Array<Dynamic>)) #end); }
+      if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals((cast first : flighthq._internal.dom.ChildNode).nodeType, Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) { element.removeChild(first); }
       return;
     }
-    if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals((#if js (cast first : flighthq._internal.dom.ChildNode).nodeType #else _Runtime.field(first, 'nodeType') #end), Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) {
-      (#if js ((cast first : flighthq._internal.dom.ChildNode).nodeValue = value) #else _Runtime.setField(first, 'nodeValue', value) #end);
+    if ((cast ((cast !_Runtime.strictEquals(first, null) : Bool) && (cast _Runtime.strictEquals((cast first : flighthq._internal.dom.ChildNode).nodeType, Accessibility._TEXT_NODE__accessibility) : Bool)) : Bool)) {
+      ((cast first : flighthq._internal.dom.ChildNode).nodeValue = value);
       return;
     }
-    (#if js element.insertBefore(flighthq._internal.backend.DomDocumentBackend.call((#if js element.ownerDocument #else _Runtime.field(element, 'ownerDocument') #end), 'createTextNode', cast ([value] : Array<Dynamic>)), first) #else _Runtime.callProperty(element, 'insertBefore', cast ([flighthq._internal.backend.DomDocumentBackend.call((#if js element.ownerDocument #else _Runtime.field(element, 'ownerDocument') #end), 'createTextNode', cast ([value] : Array<Dynamic>)), first] : Array<Dynamic>)) #end);
+    element.insertBefore(flighthq._internal.backend.DomDocumentBackend.call(element.ownerDocument, 'createTextNode', cast ([value] : Array<Dynamic>)), first);
   }
 
   public static final _TEXT_NODE__accessibility:Dynamic = 3.0;
@@ -143,16 +143,16 @@ class Accessibility {
     getRoot = function getRoot():Null<flighthq._internal.dom.HTMLElement> {
       if ((cast rootResolved : Bool)) { return cast root; }
       (rootResolved = cast (true : Dynamic));
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), null) : Bool)) : Bool)) {
+      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), null) : Bool)) : Bool)) {
         (root = cast (null : Dynamic));
         return cast null;
       }
       (root = cast (_Runtime.callValue(Accessibility._createHiddenAccessibilityContainer__accessibility, cast ([flighthq._internal.backend.DomDocumentBackend.value()] : Array<Dynamic>)) : Dynamic));
-      (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(root) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body'), 'appendChild', cast ([root] : Array<Dynamic>)) #end);
+      (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(root);
       return cast root;
     };
-    elements = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    liveRegions = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    elements = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+    liveRegions = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     root = _Runtime.coalesce(container, function():Dynamic return cast null);
     rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast { setNode: function(node:Dynamic) {
@@ -162,8 +162,8 @@ class Accessibility {
       if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
       element = ((cast elements : flighthq._internal._Map).get(_Runtime.field(node, 'id')));
       if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (element = cast (flighthq._internal.backend.DomDocumentBackend.call((#if js (cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument #else _Runtime.field(overlayRoot, 'ownerDocument') #end), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
-        (#if js (cast element : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-id', _Runtime.field(node, 'id')) #else _Runtime.callProperty(element, 'setAttribute', cast (['data-flight-accessibility-id', _Runtime.field(node, 'id')] : Array<Dynamic>)) #end);
+        (element = cast (flighthq._internal.backend.DomDocumentBackend.call((cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument, 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
+        (cast element : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-id', _Runtime.field(node, 'id'));
         ((cast elements : flighthq._internal._Map).set(_Runtime.field(node, 'id'), element));
       }
       _Runtime.callValue(Accessibility._applyAccessibilityElementAttributes__accessibility, cast ([element, node] : Array<Dynamic>));
@@ -175,15 +175,15 @@ class Accessibility {
       for (__iteration0 in _Runtime.iterable(elements)) {
         var key:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
         var other:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-        if ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).contains(other) #else _Runtime.callProperty(element, 'contains', cast ([other] : Array<Dynamic>)) #end) : Bool)) { ((cast elements : flighthq._internal._Map).delete_(key)); }
+        if ((cast (cast element : flighthq._internal.dom.HTMLElement).contains(other) : Bool)) { ((cast elements : flighthq._internal._Map).delete_(key)); }
       }
-      if ((cast !_Runtime.strictEquals((#if js (cast element : flighthq._internal.dom.HTMLElement).parentNode #else _Runtime.field(element, 'parentNode') #end), null) : Bool)) { (#if js (cast (#if js (cast element : flighthq._internal.dom.HTMLElement).parentNode #else _Runtime.field(element, 'parentNode') #end) : flighthq._internal.dom.ParentNode).removeChild(element) #else _Runtime.callProperty((#if js (cast element : flighthq._internal.dom.HTMLElement).parentNode #else _Runtime.field(element, 'parentNode') #end), 'removeChild', cast ([element] : Array<Dynamic>)) #end); }
+      if ((cast !_Runtime.strictEquals((cast element : flighthq._internal.dom.HTMLElement).parentNode, null) : Bool)) { (cast (cast element : flighthq._internal.dom.HTMLElement).parentNode : flighthq._internal.dom.ParentNode).removeChild(element); }
     }, clear: function() {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
       ((cast elements : flighthq._internal._Map).clear());
       ((cast liveRegions : flighthq._internal._Map).clear());
-      if ((cast !_Runtime.strictEquals(overlayRoot, null) : Bool)) { (#if js (cast overlayRoot : flighthq._internal.dom.HTMLElement).replaceChildren() #else _Runtime.callProperty(overlayRoot, 'replaceChildren', cast ([] : Array<Dynamic>)) #end); }
+      if ((cast !_Runtime.strictEquals(overlayRoot, null) : Bool)) { (cast overlayRoot : flighthq._internal.dom.HTMLElement).replaceChildren(); }
     }, setFocus: function(id:Dynamic) {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var element:Dynamic = cast _Runtime.UNDEFINED;
@@ -191,15 +191,15 @@ class Accessibility {
       if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return cast false; }
       element = ((cast elements : flighthq._internal._Map).get(id));
       if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-      (#if js (cast element : flighthq._internal.dom.HTMLElement).focus() #else _Runtime.callProperty(element, 'focus', cast ([] : Array<Dynamic>)) #end);
-      return cast _Runtime.strictEquals((#if js (cast (#if js (cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument #else _Runtime.field(overlayRoot, 'ownerDocument') #end) : flighthq._internal.dom.Document).activeElement #else _Runtime.field((#if js (cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument #else _Runtime.field(overlayRoot, 'ownerDocument') #end), 'activeElement') #end), element);
+      (cast element : flighthq._internal.dom.HTMLElement).focus();
+      return cast _Runtime.strictEquals((cast (cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument : flighthq._internal.dom.Document).activeElement, element);
     }, announce: function(message:Dynamic, liveness:Dynamic) {
       var overlayRoot:Dynamic = cast _Runtime.UNDEFINED;
       var region:Dynamic = cast _Runtime.UNDEFINED;
       overlayRoot = _Runtime.callValue(getRoot, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
       region = _Runtime.callValue(Accessibility._getAccessibilityLiveRegion__accessibility, cast ([overlayRoot, liveRegions, liveness] : Array<Dynamic>));
-      (#if js ((cast region : flighthq._internal.dom.HTMLElement).textContent = message) #else _Runtime.setField(region, 'textContent', message) #end);
+      ((cast region : flighthq._internal.dom.HTMLElement).textContent = message);
     } };
     return cast null;
   }

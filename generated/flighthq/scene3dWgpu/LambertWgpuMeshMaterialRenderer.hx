@@ -50,7 +50,7 @@ class LambertWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuClassicSurface, cast ([state, pipeline, lambert, LambertWgpuMeshMaterialRenderer._diffuse__lambertWgpuMeshMaterialRenderer, LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer, 32.0, _Runtime.field(lambert, 'alphaCutoff'), _Runtime.field(lambert, 'diffuseMap'), null, null, null] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

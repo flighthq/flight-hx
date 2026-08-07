@@ -67,7 +67,7 @@ class InteractionManager {
     onPointerCancel = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionPointerCancel, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), data] : Array<Dynamic>));
     onPointerDown = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionPointerDown, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), _Runtime.field(data, 'button'), data] : Array<Dynamic>));
     onPointerMove = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionPointerMove, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), _Runtime.field(data, 'button'), data] : Array<Dynamic>));
-    onPointerUp = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionPointerUp, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), _Runtime.field(data, 'button'), _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), data] : Array<Dynamic>));
+    onPointerUp = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionPointerUp, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), _Runtime.field(data, 'button'), _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), data] : Array<Dynamic>));
     onWheel = function(data:InputPointerData) return _Runtime.callValue(dispatchInteractionWheel, cast ([manager, _Runtime.callValue(sx, cast ([_Runtime.field(data, 'x')] : Array<Dynamic>)), _Runtime.callValue(sx, cast ([_Runtime.field(data, 'y')] : Array<Dynamic>)), _Runtime.field(data, 'deltaX'), _Runtime.field(data, 'deltaY'), data] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(input, 'onKeyDown'), onKeyDown] : Array<Dynamic>));
     _Runtime.callValue(connectSignal, cast ([_Runtime.field(input, 'onKeyUp'), onKeyUp] : Array<Dynamic>));
@@ -113,7 +113,7 @@ class InteractionManager {
 
   public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):flighthq.types.InteractionManager<Dynamic> {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast { cursorBackend: _Runtime.coalesce(_Runtime.field(options, 'cursorBackend'), function():Dynamic return cast null), doubleClickDelay: 500.0, enabled: _Runtime.coalesce(_Runtime.field(options, 'enabled'), function():Dynamic return cast true), pointerCaptures: _Runtime.construct(_Runtime.globalValue('Map'), []), pointerStates: _Runtime.construct(_Runtime.globalValue('Map'), []), precise: _Runtime.coalesce(_Runtime.field(options, 'precise'), function():Dynamic return cast false), root: root, spatialIndex: _Runtime.coalesce(_Runtime.field(options, 'spatialIndex'), function():Dynamic return cast null), signalSubscriberCounts: _Runtime.construct(_Runtime.globalValue('Map'), []), trackedSignalSlots: _Runtime.construct(_Runtime.globalValue('Map'), []), trackedSubscribersOnly: _Runtime.coalesce(_Runtime.field(options, 'trackedSubscribersOnly'), function():Dynamic return cast false) };
+    return cast { cursorBackend: _Runtime.coalesce(_Runtime.field(options, 'cursorBackend'), function():Dynamic return cast null), doubleClickDelay: 500.0, enabled: _Runtime.coalesce(_Runtime.field(options, 'enabled'), function():Dynamic return cast true), pointerCaptures: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), pointerStates: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), precise: _Runtime.coalesce(_Runtime.field(options, 'precise'), function():Dynamic return cast false), root: root, spatialIndex: _Runtime.coalesce(_Runtime.field(options, 'spatialIndex'), function():Dynamic return cast null), signalSubscriberCounts: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), trackedSignalSlots: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), trackedSubscribersOnly: _Runtime.coalesce(_Runtime.field(options, 'trackedSubscribersOnly'), function():Dynamic return cast false) };
     return cast null;
   }
 
@@ -211,7 +211,7 @@ class InteractionManager {
   }
 
   public static function dispatchInteractionPointerUp<N>(manager:flighthq.types.InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?time:Float, ?options:InteractionPointerOptions):Void {
-    if (time == null) time = cast (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic);
+    if (time == null) time = cast (_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic);
     var pointerId:Dynamic = cast _Runtime.UNDEFINED;
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var downTarget:Dynamic = cast _Runtime.UNDEFINED;
@@ -505,12 +505,12 @@ class InteractionManager {
     var signalSlots:Dynamic = cast _Runtime.UNDEFINED;
     targetSlots = ((cast _Runtime.field(manager, 'trackedSignalSlots') : flighthq._internal._Map).get(target));
     if ((cast _Runtime.strictEquals(targetSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (targetSlots = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (targetSlots = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast _Runtime.field(manager, 'trackedSignalSlots') : flighthq._internal._Map).set(target, targetSlots));
     }
     signalSlots = ((cast targetSlots : flighthq._internal._Map).get(name));
     if ((cast _Runtime.strictEquals(signalSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (signalSlots = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (signalSlots = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast targetSlots : flighthq._internal._Map).set(name, signalSlots));
     }
     ((cast signalSlots : flighthq._internal._Map).set((cast slot : AnyInteractionSignalSlot), (cast connectedSlot : AnyInteractionSignalSlot)));

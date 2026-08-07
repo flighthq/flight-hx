@@ -61,7 +61,7 @@ class CanvasEffectCompositing {
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     srcCtx = _Runtime.field(source, 'context');
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-    data = (#if js (cast imageData : flighthq._internal.dom.ImageData).data #else _Runtime.field(imageData, 'data') #end);
+    data = (cast imageData : flighthq._internal.dom.ImageData).data;
     pixelCount = (w * h);
     _Runtime.callValue(transform, cast ([data, pixelCount] : Array<Dynamic>));
     dstCtx = _Runtime.field(dest, 'context');

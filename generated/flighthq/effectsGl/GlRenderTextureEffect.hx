@@ -81,5 +81,5 @@ class GlRenderTextureEffect {
     _Runtime.callOptionalValue(((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap).get(state)), cast ([state, explanation] : Array<Dynamic>));
   }
 
-  public static final _guards__glRenderTextureEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _guards__glRenderTextureEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

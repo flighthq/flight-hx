@@ -3,6 +3,7 @@ package;
 import flighthq.math.Math.*;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq._internal._Async;
+import flighthq._internal._HostValueLut;
 import flighthq._internal._Runtime;
 
 class CoreSmoke {
@@ -115,12 +116,12 @@ class CoreSmoke {
     if (emittedTuple != '1,2,4') throw 'signal rest arguments failed';
 
     #if !js
-    final decoder = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+    final decoder = _Runtime.construct(_HostValueLut.get('TextDecoder'), []);
     final decoded = _Runtime.callProperty(decoder, 'decode', [new flighthq._internal._UInt8Array([104, 105])]);
     if (decoded != 'hi') throw 'portable TextDecoder failed';
 
-    final buffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [4]);
-    final view = _Runtime.construct(_Runtime.globalValue('DataView'), [buffer]);
+    final buffer = _Runtime.construct(_HostValueLut.get('ArrayBuffer'), [4]);
+    final view = _Runtime.construct(_HostValueLut.get('DataView'), [buffer]);
     final bytes = new flighthq._internal._UInt8Array(_Runtime.field(view, 'buffer'));
     _Runtime.callProperty(view, 'setUint32', [0, 0x01020304, true]);
     if (flighthq._internal._StaticIndex.readUint8Array(bytes, 0) != 4) {

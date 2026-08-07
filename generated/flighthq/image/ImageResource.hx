@@ -46,9 +46,9 @@ class ImageResource {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'source');
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
-    if ((cast _Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLVideoElement')) : Bool)) {
-      _Runtime.setField(resource, 'width', (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth #else _Runtime.field(element, 'videoWidth') #end));
-      _Runtime.setField(resource, 'height', (#if js (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight #else _Runtime.field(element, 'videoHeight') #end));
+    if ((cast _Runtime.isInstanceOf(element, flighthq._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) {
+      _Runtime.setField(resource, 'width', (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth);
+      _Runtime.setField(resource, 'height', (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight);
     } else {
       var sized:Dynamic = (cast element : Dynamic);
       _Runtime.setField(resource, 'width', flighthq._internal.backend.CanvasElementBackend.field(sized, 'width'));

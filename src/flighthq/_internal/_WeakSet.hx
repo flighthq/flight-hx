@@ -4,7 +4,7 @@ package flighthq._internal;
 /**
  * Portable stand-in for the JavaScript `WeakSet`, keyed by object identity.
  * JavaScript targets construct the native `WeakSet` instead (see
- * `_Runtime.globalValue`); entries are held strongly on the other targets.
+ * `_HostValueLut`); entries are held strongly on the other targets.
  */
 // Constructed through `_Runtime` and used as the typed receiver surface for
 // generated WeakSet operations.

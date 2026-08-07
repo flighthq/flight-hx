@@ -175,7 +175,7 @@ class GltfParse {
     var nodeWorldTransforms:Dynamic = cast _Runtime.UNDEFINED;
     var cameras:Dynamic = cast _Runtime.UNDEFINED;
     var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-    gltfDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []), function():Dynamic return cast null);
+    gltfDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     version = _Runtime.optionalField(doc.asset, 'version');
     if ((cast ((cast _Runtime.strictEquals(version, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.callValue(GltfParse.isSupportedGltfVersion__gltfParse, cast ([version] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.unsupported-version', '', { version: _Runtime.coalesce(version, function():Dynamic return cast '(missing)') }] : Array<Dynamic>));
@@ -341,7 +341,7 @@ class GltfParse {
     var selected:Dynamic = cast _Runtime.UNDEFINED;
     var context:GltfExtensionContext = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(handlers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(handlers, 'length'), 0.0) : Bool)) : Bool)) { return; }
-    selected = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    selected = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (handler in _Runtime.iterable(handlers)) {
       if ((cast ((cast selected : flighthq._internal._Map).has(_Runtime.field(handler, 'kind'))) : Bool)) {
         _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.duplicate-extension-handler', '', { firstKind: _Runtime.field(handler, 'kind') }] : Array<Dynamic>));
@@ -812,7 +812,7 @@ class GltfParse {
   }
 
   public static function isSupportedGltfVersion__gltfParse(version:String):Bool {
-    return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([version, 10.0] : Array<Dynamic>)), 2.0);
+    return cast _Runtime.strictEquals(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([version, 10.0] : Array<Dynamic>)), 2.0);
     return cast null;
   }
 
@@ -822,7 +822,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static final CORE_GLTF_EXTENSIONS__gltfParse:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['KHR_mesh_quantization', 'KHR_texture_transform'] : Array<Dynamic>)]);
+  public static final CORE_GLTF_EXTENSIONS__gltfParse:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['KHR_mesh_quantization', 'KHR_texture_transform'] : Array<Dynamic>)]);
 
   public static function normalizeComponent__gltfParse(componentType:GltfComponentType, value:Float):Float {
     {
@@ -1167,7 +1167,7 @@ class GltfParse {
       if ((cast ((cast baseOffset : Float) < (cast 0.0 : Float)) : Bool)) {
         return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0), fault: { detail: { firstAccessor: accessorIndex }, kind: 'gltf.accessor-invalid-read' } };
       }
-      var dataView:Dynamic = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer')]);
+      var dataView:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer')]);
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast accessor.count : Float)) : Bool)) {
@@ -1217,8 +1217,8 @@ class GltfParse {
       _Runtime.callValue(GltfParse.tallyGltfDrop__gltfParse, cast ([gltfDrops, ImportDiagnosticSeverityValue.Recover, 'gltf.sparse-buffer-not-found', '', {  }] : Array<Dynamic>));
       return;
     }
-    indexView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(indexBytes, 'buffer')]);
-    valueView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(valueBytes, 'buffer')]);
+    indexView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(indexBytes, 'buffer')]);
+    valueView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(valueBytes, 'buffer')]);
     indexSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, _Runtime.field(sparse.indices, 'componentType'));
     valueSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, valueComponentType);
     indexBase = ((cast _Runtime.strictEquals(indicesView.byteStride, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(GltfParse.resolveGltfReadOffset__gltfParse, cast ([indexBytes, indicesView, _Runtime.coalesce(_Runtime.field(sparse.indices, 'byteOffset'), function():Dynamic return cast 0.0), indexSize, indexSize, sparse.count] : Array<Dynamic>)) : Dynamic) : (cast -1.0 : Dynamic));
@@ -1257,7 +1257,7 @@ class GltfParse {
   }
 
   public static function isGltfByteCount__gltfParse(value:Null<Float>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
@@ -1317,7 +1317,7 @@ class GltfParse {
       return cast null;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
-    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if ((cast !_Runtime.strictEquals(_Runtime.callProperty(view, 'getUint32', cast ([0.0, true] : Array<Dynamic>)), GltfParse.GLB_MAGIC__gltfParse) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'glb.wrong-magic', 'readGlbContainer'] : Array<Dynamic>));
       return cast null;
@@ -1342,7 +1342,7 @@ class GltfParse {
       }
       var chunkData:Dynamic = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
       if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(document, null) : Bool)) : Bool)) {
-        var json:Dynamic = (#if js (cast _Runtime.construct(_Runtime.globalValue('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(chunkData) #else _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([chunkData] : Array<Dynamic>)) #end);
+        var json:Dynamic = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(chunkData);
         try {
           (document = cast ((cast _Runtime.jsonParse(json) : GltfDocument) : Dynamic));
         } catch (__error:Dynamic) {
@@ -1365,7 +1365,7 @@ class GltfParse {
   public static function topLevelNodeIndices__gltfParse(nodes:Array<GltfNode>):Array<Float> {
     var referenced:Dynamic = cast _Runtime.UNDEFINED;
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
-    referenced = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    referenced = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (node in _Runtime.iterable(nodes)) {
       if ((cast !_Runtime.strictEquals(node.children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(node.children)) {   ((cast referenced : flighthq._internal._Set).add(c)); } }
     }

@@ -17,7 +17,7 @@ import flighthq._internal._Runtime;
 class DomDocumentBackend {
   /**
    * Typed binding for the bare `document` root. Mirrors the previous
-   * `_Runtime.globalValue('document')` semantics: `undefined` when the global
+   * ambient `document` lookup semantics: `undefined` when the global
    * is absent on JavaScript, `null` on native targets. `call` below already
    * accepts a null root for the native scratch-canvas path.
    */

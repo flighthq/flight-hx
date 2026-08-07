@@ -21,7 +21,7 @@ class Plural {
   public static function getPluralRules__plural(locale:LocaleInput, options:Dynamic):Dynamic {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     key = _Runtime.callValue(getCacheKey, cast (['plural', locale, options] : Array<Dynamic>));
-    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'PluralRules'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'PluralRules'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast null;
   }
 }

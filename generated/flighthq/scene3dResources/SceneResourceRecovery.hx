@@ -19,7 +19,7 @@ class SceneResourceRecovery {
     var reset:Dynamic = cast _Runtime.UNDEFINED;
     textures = cast ([] : Array<Dynamic>);
     _Runtime.callValue(getScene3DResourceTextures, cast ([textures, scene] : Array<Dynamic>));
-    reset = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    reset = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {

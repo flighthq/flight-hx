@@ -79,11 +79,11 @@ class RenderEffectPadding {
   public static function registerRenderEffectPaddingResolver(state:RenderState, kind:Kind, resolver:Null<RenderEffectPaddingResolver>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection5:Dynamic = _Runtime.field(runtime, 'renderEffectPaddingResolverRegistry'); __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map).delete_(kind)); }); } else { ((cast _Runtime.setField(runtime, 'renderEffectPaddingResolverRegistry', (_Runtime.field(runtime, 'renderEffectPaddingResolverRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, resolver)); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection5:Dynamic = _Runtime.field(runtime, 'renderEffectPaddingResolverRegistry'); __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map).delete_(kind)); }); } else { ((cast _Runtime.setField(runtime, 'renderEffectPaddingResolverRegistry', (_Runtime.field(runtime, 'renderEffectPaddingResolverRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, resolver)); }
   }
 
   public static function sanitizePadding__renderEffectPadding(value:Float):Float {
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) ? (cast HxMath.max(0.0, value) : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) ? (cast HxMath.max(0.0, value) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

@@ -41,7 +41,7 @@ class OffsetPath {
         _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
       } else {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { continue; }
-        var caps:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
+        var caps:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
         var loop:Dynamic = _Runtime.callValue(OffsetPath.getOpenContourLoop__offsetPath, cast ([vertices] : Array<Dynamic>));
         var ring:Dynamic = _Runtime.callValue(OffsetPath.buildOffsetRing__offsetPath, cast ([loop, HxMath.abs(delta), caps, join, end, miterLimit, arcTolerance] : Array<Dynamic>));
         if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast _Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([ring] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
@@ -307,7 +307,7 @@ class OffsetPath {
 
   public static final HALF_PI__offsetPath:Dynamic = (HxMath.PI / 2.0);
 
-  public static final NO_CAPS__offsetPath:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+  public static final NO_CAPS__offsetPath:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static final POINT_EPS__offsetPath:Dynamic = 1e-9;
 

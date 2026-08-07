@@ -23,6 +23,6 @@ class GlRenderEffectRegistry {
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'glRenderEffectRegistry', (_Runtime.field(runtime, 'glRenderEffectRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, runner));
+    ((cast _Runtime.setField(runtime, 'glRenderEffectRegistry', (_Runtime.field(runtime, 'glRenderEffectRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, runner));
   }
 }

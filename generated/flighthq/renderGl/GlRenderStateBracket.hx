@@ -123,7 +123,7 @@ class GlRenderStateBracket {
     }
   }
 
-  public static final _renderStateStack__glRenderStateBracket:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _renderStateStack__glRenderStateBracket:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final GL_RENDER_STATE_TEXTURE_UNIT_COUNT__glRenderStateBracket:Dynamic = 3.0;
 }

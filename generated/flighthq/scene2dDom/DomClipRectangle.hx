@@ -39,25 +39,25 @@ class DomClipRectangle {
     if ((cast !_Runtime.strictEquals(contour, null) : Bool)) {
       var mapPoint:Dynamic = _Runtime.callValue(DomClipRectangle.createScene2DToElementPointMapper__domClipRectangle, cast ([element] : Array<Dynamic>));
       var clipPath:Dynamic = _Runtime.callValue(buildDomContourClipPath, cast ([contour, mapPoint] : Array<Dynamic>));
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath) #else _Runtime.setField((#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end), 'clipPath', clipPath) #end);
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic).webkitClipPath = clipPath) #else _Runtime.setField((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic), 'webkitClipPath', clipPath) #end);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = clipPath);
       return;
     }
     rect = _Runtime.callValue(DomClipRectangle.intersectDomScene2DRectangles__domClipRectangle, cast ([(cast entries : Array<DomScene2DRectangle>)] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) {
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).clipPath = '') #else _Runtime.setField((#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end), 'clipPath', '') #end);
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic).webkitClipPath = '') #else _Runtime.setField((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic), 'webkitClipPath', '') #end);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = '');
       return;
     }
     if ((cast ((cast ((cast _Runtime.field(rect, 'right') : Float) <= (cast _Runtime.field(rect, 'left') : Float)) : Bool) || (cast ((cast _Runtime.field(rect, 'bottom') : Float) <= (cast _Runtime.field(rect, 'top') : Float)) : Bool)) : Bool)) {
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).clipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle) #else _Runtime.setField((#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end), 'clipPath', DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle) #end);
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic).webkitClipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle) #else _Runtime.setField((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic), 'webkitClipPath', DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle) #end);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = DomClipRectangle.EMPTY_CLIP_PATH__domClipRectangle);
       return;
     }
     local = _Runtime.callValue(DomClipRectangle.mapScene2DRectangleToElement__domClipRectangle, cast ([rect, element] : Array<Dynamic>));
     clipPath = 'polygon(' + Std.string(_Runtime.field(local, 'left')) + 'px ' + Std.string(_Runtime.field(local, 'top')) + 'px, ' + Std.string(_Runtime.field(local, 'right')) + 'px ' + Std.string(_Runtime.field(local, 'top')) + 'px, ' + Std.string(_Runtime.field(local, 'right')) + 'px ' + Std.string(_Runtime.field(local, 'bottom')) + 'px, ' + Std.string(_Runtime.field(local, 'left')) + 'px ' + Std.string(_Runtime.field(local, 'bottom')) + 'px)';
-    (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath) #else _Runtime.setField((#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end), 'clipPath', clipPath) #end);
-    (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic).webkitClipPath = clipPath) #else _Runtime.setField((cast (#if js (cast element : flighthq._internal.dom.HTMLElement).style #else _Runtime.field(element, 'style') #end) : Dynamic), 'webkitClipPath', clipPath) #end);
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : Dynamic).webkitClipPath = clipPath);
   }
 
   @:noCompletion
@@ -120,12 +120,12 @@ class DomClipRectangle {
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var match:Dynamic = cast _Runtime.UNDEFINED;
     var parts:Dynamic = cast _Runtime.UNDEFINED;
-    transform = (#if js (cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).transform #else _Runtime.field((#if js element.style #else _Runtime.field(element, 'style') #end), 'transform') #end);
+    transform = (cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform;
     match = _Runtime.callProperty(_Runtime.regexp('^matrix\\(([^)]+)\\)$$', ''), 'exec', cast ([transform] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(match, null) : Bool)) {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
-    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(_Runtime.globalValue('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
+    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { a: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 5.0), function():Dynamic return cast 0.0) };
     return cast null;
   }

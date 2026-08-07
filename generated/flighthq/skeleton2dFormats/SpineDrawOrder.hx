@@ -15,9 +15,9 @@ class SpineDrawOrder {
     moved = _Runtime.fill(_Runtime.createArray(slotCount), false, 0, null, 1);
     for (move in _Runtime.iterable(moves)) {
       var slotIndex:Dynamic = _Runtime.field(move, 'slotIndex');
-      if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([slotIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
+      if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
       var destination:Dynamic = _Runtime.addNumbers(slotIndex, _Runtime.field(move, 'offset'));
-      if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([destination] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast destination : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast destination : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
+      if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([destination] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast destination : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast destination : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
       if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(occupants, destination), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool) || (cast flighthq._internal._StaticIndex.readArray(moved, slotIndex) : Bool)) : Bool)) { return cast null; }
       flighthq._internal._StaticIndex.writeArray(occupants, destination, slotIndex);
       flighthq._internal._StaticIndex.writeArray(moved, slotIndex, true);

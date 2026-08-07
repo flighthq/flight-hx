@@ -18,7 +18,7 @@ class Timeline {
   public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    ((cast _Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(resolved, script));
+    ((cast _Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(resolved, script));
   }
 
   public static function advanceFrame__timeline(timeline:flighthq.types.Timeline, deltaTime:Float):Float {

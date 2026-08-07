@@ -30,9 +30,9 @@ class GlGradientBevelEffect {
 
   public static final BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform sampler2D u_ramp;\nuniform sampler2D u_source;\nout vec4 fragColor;\nvoid main() {\n  float bevelVal = texture(u_texture, v_texCoord).r;\n  vec4 color = texture(u_ramp, vec2(bevelVal, 0.5));\n  float srcAlpha = texture(u_source, v_texCoord).a;\n  fragColor = color * srcAlpha;\n}';
 
-  public static final encodeShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final encodeShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final applyShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final applyShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {

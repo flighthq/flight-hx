@@ -37,7 +37,7 @@ class EnableScene3DResourceFailureGuards {
     var failed:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).has(resolver)) : Bool)) { return cast function() return _Runtime.callValue(disableScene3DResourceFailureGuards, cast ([resolver] : Array<Dynamic>)); }
-    warned = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+    warned = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
     signals = _Runtime.callValue(enableScene3DResourceSignals, cast ([resolver] : Array<Dynamic>));
     failed = function(event:Scene3DResourceEvent) {
       var explanation:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,7 +56,7 @@ class EnableScene3DResourceFailureGuards {
     return cast null;
   }
 
-  public static final _guards__enableScene3DResourceFailureGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _guards__enableScene3DResourceFailureGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var _attemptId__enableScene3DResourceFailureGuards:Dynamic = 0.0;
 }

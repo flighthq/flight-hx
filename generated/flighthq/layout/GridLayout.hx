@@ -236,27 +236,27 @@ class GridLayout {
   }
 
   public static function isNonNegativeNumber__gridLayout(value:Dynamic):Bool {
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isPositiveNumber__gridLayout(value:Dynamic):Bool {
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isNonNegativeOptionalInteger__gridLayout(value:Dynamic):Bool {
-    return cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)), function():Dynamic return cast ((cast (cast value : Float) : Float) >= (cast 0.0 : Float))) : Bool));
+    return cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)), function():Dynamic return cast ((cast (cast value : Float) : Float) >= (cast 0.0 : Float))) : Bool));
     return cast null;
   }
 
   public static function isPositiveOptionalInteger__gridLayout(value:Dynamic):Bool {
-    return cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 0.0 : Float))) : Bool));
+    return cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 0.0 : Float))) : Bool));
     return cast null;
   }
 
   public static function finiteSize__gridLayout(value:Float):Float {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

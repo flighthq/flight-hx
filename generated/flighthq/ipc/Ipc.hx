@@ -18,13 +18,13 @@ class Ipc {
 
   public static var _ipcSignals__ipc:Null<IpcSignals> = _Runtime.explicitNull();
 
-  public static final _listeners__ipc:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _listeners__ipc:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static function _trackListener__ipc(channel:String, unsubscribe:Dynamic):Void {
     var set:Dynamic = cast _Runtime.UNDEFINED;
     set = ((cast Ipc._listeners__ipc : flighthq._internal._Map).get(channel));
     if ((cast _Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (set = cast (_Runtime.construct(_Runtime.globalValue('Set'), []) : Dynamic));
+      (set = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) : Dynamic));
       ((cast Ipc._listeners__ipc : flighthq._internal._Map).set(channel, set));
     }
     ((cast set : flighthq._internal._Set).add(unsubscribe));

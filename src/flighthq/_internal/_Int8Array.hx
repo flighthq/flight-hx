@@ -24,7 +24,7 @@ abstract _Int8Array(Dynamic) {
   }
 
   /** Factory for reflective construction sites reached through
-   * `_Runtime.globalValue`; abstracts have no runtime class for
+   * `_HostValueLut`; abstracts have no runtime class for
    * `Type.createInstance`. */
   public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_Int8Array {
     return new _Int8Array(source, byteOffset, length);

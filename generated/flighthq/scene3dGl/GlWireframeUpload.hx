@@ -32,7 +32,7 @@ class GlWireframeUpload {
     meshUpload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
     upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
@@ -93,5 +93,5 @@ class GlWireframeUpload {
     return cast null;
   }
 
-  public static final wireframeUploads__glWireframeUpload:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final wireframeUploads__glWireframeUpload:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

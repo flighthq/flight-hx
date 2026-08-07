@@ -33,5 +33,5 @@ class ImageEncoderRegistry {
     ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map).delete_(mimeType));
   }
 
-  public static final encoders__imageEncoderRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final encoders__imageEncoderRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

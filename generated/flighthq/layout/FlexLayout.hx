@@ -308,12 +308,12 @@ class FlexLayout {
   }
 
   public static function isNonNegativeNumber__flexLayout(value:Dynamic):Bool {
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function finiteSize__flexLayout(value:Float):Float {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

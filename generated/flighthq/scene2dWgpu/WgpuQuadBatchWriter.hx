@@ -53,13 +53,13 @@ class WgpuQuadBatchWriter {
     materialBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     basePipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     materialPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout, materialBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
-    resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('WeakMap'), []) };
+    resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) };
     ((cast WgpuQuadBatchWriter._quadBatchResources__wgpuQuadBatchWriter : flighthq._internal._WeakMap).set(device, resources));
     return cast resources;
     return cast null;
   }
 
-  public static final _quadBatchResources__wgpuQuadBatchWriter:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _quadBatchResources__wgpuQuadBatchWriter:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function flushWgpuQuadBatchWriter(state:WgpuRenderState):Void {
@@ -122,16 +122,16 @@ class WgpuQuadBatchWriter {
     module = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast _Runtime.field(ctFlush, 'module') : Dynamic) : (cast _Runtime.callProperty(renderer, 'getShaderModule', cast ([state] : Array<Dynamic>)) : Dynamic));
     pipeline = _Runtime.callValue(getWgpuQuadBatchPipeline, cast ([state, resources, module, ((cast group3Floats : Float) > (cast 0.0 : Float)), blendMode] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline) #else _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>)) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>)] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, textureBindGroup] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, instanceBindGroup] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup);
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var materialBindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(slot, 'materialBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
-      (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, materialBindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, materialBindGroup] : Array<Dynamic>)) #end);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, materialBindGroup);
     }
-    if ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool)) { (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.field(runtime, 'currentMaskDepth')) #else _Runtime.callProperty(pass, 'setStencilReference', cast ([_Runtime.field(runtime, 'currentMaskDepth')] : Array<Dynamic>)) #end); }
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0, count, 0.0, 0.0) #else _Runtime.callProperty(pass, 'draw', cast ([6.0, count, 0.0, 0.0] : Array<Dynamic>)) #end);
+    if ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(_Runtime.field(runtime, 'currentMaskDepth')); }
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0, count, 0.0, 0.0);
   }
 
   @:noCompletion
@@ -151,7 +151,7 @@ class WgpuQuadBatchWriter {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     perModule = ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).get(module));
     if ((cast _Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (perModule = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (perModule = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast _Runtime.field(resources, 'pipelines') : flighthq._internal._WeakMap).set(module, perModule));
     }
     stencilMode = ((cast _Runtime.field(runtime, 'maskWriteMode') : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast _Runtime.field(runtime, 'currentMaskDepth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));

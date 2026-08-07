@@ -92,7 +92,7 @@ class GlBevelEffect {
 
   public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';
 
-  public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function applyGlBevelCompositePass__glBevelEffect(state:GlRenderState, field:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget, params:BevelCompositeParams__glBevelEffect):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;

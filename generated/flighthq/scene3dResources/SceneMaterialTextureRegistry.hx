@@ -24,7 +24,7 @@ import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 class SceneMaterialTextureRegistry {
   @:noCompletion
   public static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast _Runtime.callValue(createEntity, cast ([{ extensionListers: _Runtime.construct(_Runtime.globalValue('Map'), []), listers: _Runtime.construct(_Runtime.globalValue('Map'), []) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ extensionListers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) }] : Array<Dynamic>));
     return cast null;
   }
 

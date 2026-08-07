@@ -13,7 +13,7 @@ class WgpuEffectGradientRamp {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp : flighthq._internal._WeakMap).set(state, cache));
     }
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
@@ -95,5 +95,5 @@ class WgpuEffectGradientRamp {
     return cast null;
   }
 
-  public static final rampCaches__wgpuEffectGradientRamp:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final rampCaches__wgpuEffectGradientRamp:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

@@ -30,7 +30,7 @@ class CanvasRenderTexturePool {
   }
 
   public static function createCanvasRenderTexturePool():flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool {
-    return cast { destroyed: false, effectTargets: { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) }, free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(_Runtime.globalValue('Set'), []), owner: null };
+    return cast { destroyed: false, effectTargets: { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) }, free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), owner: null };
     return cast null;
   }
 
@@ -38,7 +38,7 @@ class CanvasRenderTexturePool {
     var textures:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { return; }
     _Runtime.callValue(CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
-    textures = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(pool, 'free')), _Runtime.toArray(_Runtime.field(pool, 'leased'))])]);
+    textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(pool, 'free')), _Runtime.toArray(_Runtime.field(pool, 'leased'))])]);
     for (renderTexture in _Runtime.iterable(textures)) {
       _Runtime.callValue(destroyCanvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     }

@@ -112,9 +112,9 @@ class EnableColorAdjustments {
     return cast null;
   }
 
-  public static final inheritedColorScaleBiases__enableColorAdjustments:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final inheritedColorScaleBiases__enableColorAdjustments:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
-  public static final inheritedColorMatrices__enableColorAdjustments:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final inheritedColorMatrices__enableColorAdjustments:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
   public static final parentColorMatrixScratch__enableColorAdjustments:Dynamic = _Runtime.createArray(20.0);
 

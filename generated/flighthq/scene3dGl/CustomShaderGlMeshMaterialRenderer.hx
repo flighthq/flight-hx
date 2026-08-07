@@ -68,7 +68,7 @@ class CustomShaderGlMeshMaterialRenderer {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (registry = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap).set(state, registry));
     }
     ((cast registry : flighthq._internal._Map).set(shaderKey, source));
@@ -142,5 +142,5 @@ class CustomShaderGlMeshMaterialRenderer {
     }
   }
 
-  public static final _customMaterialShaders__customShaderGlMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _customMaterialShaders__customShaderGlMeshMaterialRenderer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

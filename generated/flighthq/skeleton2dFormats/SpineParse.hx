@@ -236,8 +236,8 @@ class SpineParse {
   public static function parseSpineColor__spineParse(value:Dynamic):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'string') : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'length'), 8.0) : Bool)) : Bool)) { return cast 4294967295.0; }
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([value, 16.0] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast 4294967295.0 : Dynamic) : (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(parsed), 0) : Dynamic));
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([value, 16.0] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast 4294967295.0 : Dynamic) : (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(parsed), 0) : Dynamic));
     return cast null;
   }
 
@@ -467,7 +467,7 @@ class SpineParse {
   public static function parseSpineSlotTimelines__spineParse(channels:Array<Dynamic>, raw:Dynamic, slots:Array<Slot2D>, skins:Array<AttachmentSkin2D>, ?diagnostics:Array<ImportDiagnostic>):Void {
     var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return; }
-    unmodeled = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (__iteration6 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : Dynamic)))) {
       var slotName:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
       var timelinesEntry:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
@@ -528,7 +528,7 @@ class SpineParse {
     var track:Dynamic = cast _Runtime.UNDEFINED;
     setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:Dynamic) return _Runtime.strictEquals(_Runtime.field(skin, 'name'), SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
     attachments = cast ([] : Array<Dynamic>);
-    indexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     times = cast ([] : Array<Dynamic>);
     values = cast ([] : Array<Dynamic>);
     for (key in _Runtime.iterable(rawKeys)) {

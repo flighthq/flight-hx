@@ -179,7 +179,7 @@ class TiledJsonParse {
   public static function numField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Float):Float {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(obj, key);
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast fallback : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 

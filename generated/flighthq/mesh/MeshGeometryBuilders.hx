@@ -274,7 +274,7 @@ class MeshGeometryBuilders {
     }] : Array<Dynamic>));
     verts = _Runtime.callProperty(baseVerts, 'map', cast ([function(v:Dynamic) return (cast _Runtime.concatArrays([_Runtime.toArray(v)]) : Array<Float>)] : Array<Dynamic>));
     faces = cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
-    midpointCache = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    midpointCache = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     getMidpoint = function(a:Float, b:Float) {
       var key:Dynamic = cast _Runtime.UNDEFINED;
       var cached:Dynamic = cast _Runtime.UNDEFINED;
@@ -437,7 +437,7 @@ class MeshGeometryBuilders {
     }] : Array<Dynamic>));
     faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Dynamic) return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
     if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
-      var midCache:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+      var midCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
       var getMid:Dynamic = cast _Runtime.UNDEFINED;
       getMid = function(a:Float, b:Float) {
         var key:Dynamic = cast _Runtime.UNDEFINED;

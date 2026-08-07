@@ -75,7 +75,7 @@ class CanvasRenderState {
   }
 
   public static function copyMap__canvasRenderState<K, V>(source:Null<Dynamic>):Null<Dynamic> {
-    return cast ((cast ((cast _Runtime.strictEquals(source, null) : Bool) || (cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [source]) : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(source, null) : Bool) || (cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [source]) : Dynamic));
     return cast null;
   }
 

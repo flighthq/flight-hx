@@ -87,9 +87,9 @@ class RenderRegistryGuards {
     _Runtime.callValue(logOnce, cast (['render:registry-miss:' + Std.string(stateId) + ':' + Std.string(registry) + ':' + Std.string(kind) + '', LogLevel.Warn, { kind: kind, message: _Runtime.callValue(RenderRegistryGuards.getRenderRegistryMissMessage__renderRegistryGuards, cast ([state, registry] : Array<Dynamic>)), registry: registry }, 'render'] : Array<Dynamic>));
   }
 
-  public static final _stateIds__renderRegistryGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _stateIds__renderRegistryGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _stateMisses__renderRegistryGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _stateMisses__renderRegistryGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var _nextStateId__renderRegistryGuards:Dynamic = 0.0;
 }

@@ -17,7 +17,7 @@ import flighthq._internal._Runtime;
 class DomWindowBackend {
   /**
    * Typed binding for the bare `window` root. Mirrors the previous
-   * `_Runtime.globalValue('window')` semantics: `undefined` when the global is
+   * ambient `window` lookup semantics: `undefined` when the global is
    * absent on JavaScript, `null` on native targets (no DOM window), so
    * feature checks and truthy tests keep their existing behavior.
    */

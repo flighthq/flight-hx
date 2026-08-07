@@ -9,7 +9,7 @@ import flighthq.types.Cursor.CursorBackend;
 class CursorBackend {
   public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):flighthq.types.Cursor.CursorBackend {
     return cast { setCursor: function(cursor:Null<Cursor>) {
-      (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).cursor = _Runtime.coalesce(cursor, function():Dynamic return cast '')) #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'cursor', _Runtime.coalesce(cursor, function():Dynamic return cast '')) #end);
+      ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).cursor = _Runtime.coalesce(cursor, function():Dynamic return cast ''));
     } };
     return cast null;
   }

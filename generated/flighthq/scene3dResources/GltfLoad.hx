@@ -101,7 +101,7 @@ class GltfLoad {
         var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
         var entries:Dynamic = cast _Runtime.UNDEFINED;
         var bytes:Dynamic = cast _Runtime.UNDEFINED;
-        uris = _Runtime.construct(_Runtime.globalValue('Set'), []);
+        uris = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         for (buffer in _Runtime.iterable(_Runtime.coalesce(gltf.buffers, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
           var uri:Dynamic = buffer.uri;
           if ((cast ((cast !_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast StringTools.startsWith(uri, 'data:') : Bool) : Bool)) : Bool)) { ((cast uris : flighthq._internal._Set).add(uri)); }

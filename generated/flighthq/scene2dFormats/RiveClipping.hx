@@ -27,7 +27,7 @@ class RiveClipping {
     var relative:Dynamic = cast _Runtime.UNDEFINED;
     var clips:Dynamic = cast _Runtime.UNDEFINED;
     relative = _Runtime.callValue(RiveClipping.createRiveRelativeTransforms__riveClipping, cast ([artboard] : Array<Dynamic>));
-    clips = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    clips = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {

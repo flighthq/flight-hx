@@ -17,22 +17,22 @@ class MaterialValidation {
   }
 
   public static function isValidMaterialClearcoat(value:Float):Bool {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast 1.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast 1.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isValidMaterialIor(value:Float):Bool {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast MaterialValidation.MIN_MATERIAL_IOR__materialValidation : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast MaterialValidation.MAX_MATERIAL_IOR__materialValidation : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast MaterialValidation.MIN_MATERIAL_IOR__materialValidation : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast MaterialValidation.MAX_MATERIAL_IOR__materialValidation : Float)) : Bool));
     return cast null;
   }
 
   public static function isValidMaterialIridescenceThickness(value:Float):Bool {
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
   public static function isValidMaterialWeight(value:Float):Bool {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast 1.0 : Float)) : Bool));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast value : Float) <= (cast 1.0 : Float)) : Bool));
     return cast null;
   }
 

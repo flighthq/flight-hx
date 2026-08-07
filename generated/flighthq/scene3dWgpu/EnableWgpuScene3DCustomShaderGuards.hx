@@ -67,8 +67,8 @@ class EnableWgpuScene3DCustomShaderGuards {
   public static function hasBinding__enableWgpuScene3DCustomShaderGuards(source:String, group:Float, binding:Float):Bool {
     var groupFirst:Dynamic = cast _Runtime.UNDEFINED;
     var bindingFirst:Dynamic = cast _Runtime.UNDEFINED;
-    groupFirst = _Runtime.construct(_Runtime.globalValue('RegExp'), ['@group\\s*\\(\\s*' + Std.string(group) + '\\s*\\)(?:(?!@group|@binding)[\\s\\S]){0,80}@binding\\s*\\(\\s*' + Std.string(binding) + '\\s*\\)']);
-    bindingFirst = _Runtime.construct(_Runtime.globalValue('RegExp'), ['@binding\\s*\\(\\s*' + Std.string(binding) + '\\s*\\)(?:(?!@group|@binding)[\\s\\S]){0,80}@group\\s*\\(\\s*' + Std.string(group) + '\\s*\\)']);
+    groupFirst = _Runtime.construct(flighthq._internal._HostValueLut.get('RegExp'), ['@group\\s*\\(\\s*' + Std.string(group) + '\\s*\\)(?:(?!@group|@binding)[\\s\\S]){0,80}@binding\\s*\\(\\s*' + Std.string(binding) + '\\s*\\)']);
+    bindingFirst = _Runtime.construct(flighthq._internal._HostValueLut.get('RegExp'), ['@binding\\s*\\(\\s*' + Std.string(binding) + '\\s*\\)(?:(?!@group|@binding)[\\s\\S]){0,80}@group\\s*\\(\\s*' + Std.string(group) + '\\s*\\)']);
     return cast ((cast _Runtime.callProperty(groupFirst, 'test', cast ([source] : Array<Dynamic>)) : Bool) || (cast _Runtime.callProperty(bindingFirst, 'test', cast ([source] : Array<Dynamic>)) : Bool));
     return cast null;
   }

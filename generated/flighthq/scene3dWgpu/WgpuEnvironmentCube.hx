@@ -44,7 +44,7 @@ class WgpuEnvironmentCube {
         face++;
       }
     }
-    view = (#if js (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) #else _Runtime.callProperty(texture, 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)) #end);
+    view = (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' });
     _Runtime.setField(scene, 'environmentSourceCube', texture);
     _Runtime.setField(scene, 'environmentSourceCubeView', view);
     return cast view;

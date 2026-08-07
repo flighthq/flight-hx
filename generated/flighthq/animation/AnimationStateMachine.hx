@@ -30,7 +30,7 @@ class AnimationStateMachine {
     var sampleWidth:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine requires at least one state.')); }
     copiedStates = _Runtime.slice(states, 0, null);
-    stateByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    stateByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) {
@@ -41,7 +41,7 @@ class AnimationStateMachine {
       }
     }
     initialStateIndex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(initialState), 'number') : Bool) ? (cast initialState : Dynamic) : (cast _Runtime.coalesce(((cast stateByName : flighthq._internal._Map).get(initialState)), function():Dynamic return cast _Runtime.field(copiedStates, 'length')) : Dynamic));
-    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([initialStateIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast initialStateIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast initialStateIndex : Float) >= (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([initialStateIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast initialStateIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast initialStateIndex : Float) >= (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine initial state "' + Std.string(Std.string(initialState)) + '" does not exist.'));
     }
     channels = _Runtime.callValue(AnimationStateMachine.createAnimationStateMachineChannels__animationStateMachine, cast ([copiedStates] : Array<Dynamic>));
@@ -147,7 +147,7 @@ class AnimationStateMachine {
     var channels:Array<AnimationStateMachineChannel> = cast _Runtime.UNDEFINED;
     var channelByTarget:Dynamic = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
-    channelByTarget = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    channelByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var stateIndex:Dynamic = 0.0;
       while ((cast ((cast stateIndex : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) {
@@ -179,7 +179,7 @@ class AnimationStateMachine {
   }
 
   public static function findAnimationStateMachineStateIndex__animationStateMachine(states:Array<AnimationStateMachineState>, state:Dynamic):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(state), 'number') : Bool)) { return cast ((cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([state] : Array<Dynamic>)) : Bool) && (cast ((cast state : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast state : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) : Bool) ? (cast state : Dynamic) : (cast -1.0 : Dynamic)); }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(state), 'number') : Bool)) { return cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([state] : Array<Dynamic>)) : Bool) && (cast ((cast state : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast state : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) : Bool) ? (cast state : Dynamic) : (cast -1.0 : Dynamic)); }
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) {

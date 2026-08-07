@@ -108,7 +108,7 @@ class SwfText {
     fallback = _Runtime.callValue(SwfText.deriveSwfGlyphOutlineData__swfText, cast ([outlines, _Runtime.callValue(resolveSwfFontUnitsPerEm, cast ([version] : Array<Dynamic>))] : Array<Dynamic>));
     metadata = ((cast _Runtime.strictEquals(version, 1.0) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(SwfText.readSwfFontMetadata__swfText, cast ([reader, version, _Runtime.field(outlines, 'length')] : Array<Dynamic>)) : Dynamic));
     advances = _Runtime.coalesce(_Runtime.optionalField(metadata, 'advances'), function():Dynamic return cast _Runtime.field(fallback, 'advances'));
-    codepointToGlyphIndex = _Runtime.coalesce(_Runtime.optionalField(metadata, 'codepointToGlyphIndex'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []));
+    codepointToGlyphIndex = _Runtime.coalesce(_Runtime.optionalField(metadata, 'codepointToGlyphIndex'), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
     metrics = _Runtime.coalesce(_Runtime.optionalField(metadata, 'metrics'), function():Dynamic return cast _Runtime.field(fallback, 'metrics'));
     return cast { getGlyphOutline: function(out:Dynamic, glyphIndex:Dynamic) {
       var outline:Dynamic = cast _Runtime.UNDEFINED;
@@ -264,7 +264,7 @@ class SwfText {
     codeTableStart = _Runtime.addNumbers(tableStart, flighthq._internal._StaticIndex.readArray(offsets, _Runtime.subtractNumbers(_Runtime.field(offsets, 'length'), 1.0)));
     if ((cast ((cast ((cast codeTableStart : Float) < (cast _Runtime.field(reader, 'pos') : Float)) : Bool) || (cast ((cast codeTableStart : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
     _Runtime.setField(reader, 'pos', codeTableStart);
-    codepointToGlyphIndex = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    codepointToGlyphIndex = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var glyphIndex:Dynamic = 0.0;
       while ((cast ((cast glyphIndex : Float) < (cast glyphCount : Float)) : Bool)) {

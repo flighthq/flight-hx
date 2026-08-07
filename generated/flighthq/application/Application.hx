@@ -23,20 +23,20 @@ import flighthq.types.RenderState;
 typedef LoopState__application = { var fixedAccumulator:Float; var fpsBuffer:Array<Float>; var fpsHead:Float; var frameHandle:Dynamic; var frameRateAccumulated:Float; var lastTime:Float; var maxDeltaTime:Float; };
 
 class Application {
-  public static final _applicationLoopState__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _applicationLoopState__application:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _applicationObservers__application:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function _isApplicationVisible__application():Bool {
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool));
+    return cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool));
     return cast null;
   }
 
-  public static final _lifecycleKeys__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _lifecycleKeys__application:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var _loopBackend__application:Null<LoopBackend> = _Runtime.explicitNull();
 
-  public static final _mainWindows__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _mainWindows__application:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachApplicationExit(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
@@ -152,11 +152,11 @@ class Application {
   @:noCompletion
   public static function createWebLoopBackend():LoopBackend {
     return cast { requestFrame: function(callback:Dynamic) {
-      return cast _Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([callback] : Array<Dynamic>));
+      return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('requestAnimationFrame'), cast ([callback] : Array<Dynamic>));
     }, cancelFrame: function(handle:Dynamic) {
-      _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([(cast handle : Float)] : Array<Dynamic>));
+      _Runtime.callValue(flighthq._internal._HostValueLut.get('cancelAnimationFrame'), cast ([(cast handle : Float)] : Array<Dynamic>));
     }, now: function() {
-      return cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) #end);
+      return cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now();
     } };
     return cast null;
   }
@@ -303,7 +303,7 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).get(app));
     if ((cast _Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (observers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast Application._applicationObservers__application : flighthq._internal._WeakMap).set(app, observers));
     }
     return cast observers;

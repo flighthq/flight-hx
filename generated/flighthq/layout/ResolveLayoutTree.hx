@@ -114,7 +114,7 @@ class ResolveLayoutTree {
   }
 
   public static function finiteSize__resolveLayoutTree(value:Float):Float {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 }

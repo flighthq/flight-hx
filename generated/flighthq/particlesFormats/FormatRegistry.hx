@@ -64,5 +64,5 @@ class FormatRegistry {
     return cast null;
   }
 
-  public static final _registry__formatRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _registry__formatRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

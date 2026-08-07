@@ -21,23 +21,23 @@ class Connectivity {
 
   public static final _scratch__connectivity:ConnectivityStatus = _Runtime.callValue(createConnectivityStatus, cast ([] : Array<Dynamic>));
 
-  public static final _subscriptions__connectivity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__connectivity:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function anyAbortSignal__connectivity(a:flighthq._internal.dom.AbortSignal, b:flighthq._internal.dom.AbortSignal):flighthq._internal.dom.AbortSignal {
     var controller:Dynamic = cast _Runtime.UNDEFINED;
     var onAbort:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('AbortSignal'), 'undefined') : Bool) && (cast _Runtime.hasField(_Runtime.globalValue('AbortSignal'), 'any') : Bool)) : Bool)) {
-      return cast _Runtime.callProperty((cast (cast _Runtime.globalValue('AbortSignal') : Dynamic) : { var any:Dynamic; }), 'any', cast ([cast ([a, b] : Array<Dynamic>)] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('AbortSignal'), 'undefined') : Bool) && (cast _Runtime.hasField(flighthq._internal._HostValueLut.get('AbortSignal'), 'any') : Bool)) : Bool)) {
+      return cast _Runtime.callProperty((cast (cast flighthq._internal._HostValueLut.get('AbortSignal') : Dynamic) : { var any:Dynamic; }), 'any', cast ([cast ([a, b] : Array<Dynamic>)] : Array<Dynamic>));
     }
-    controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
+    controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
     onAbort = function() {
-      (#if js (cast controller : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>)) #end);
-      (#if js a.removeEventListener('abort', onAbort) #else _Runtime.callProperty(a, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)) #end);
-      (#if js b.removeEventListener('abort', onAbort) #else _Runtime.callProperty(b, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)) #end);
+      (cast controller : flighthq._internal.dom.AbortController).abort();
+      a.removeEventListener('abort', onAbort);
+      b.removeEventListener('abort', onAbort);
     };
-    (#if js a.addEventListener('abort', onAbort, { once: true }) #else _Runtime.callProperty(a, 'addEventListener', cast (['abort', onAbort, { once: true }] : Array<Dynamic>)) #end);
-    (#if js b.addEventListener('abort', onAbort, { once: true }) #else _Runtime.callProperty(b, 'addEventListener', cast (['abort', onAbort, { once: true }] : Array<Dynamic>)) #end);
-    return cast (#if js (cast controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(controller, 'signal') #end);
+    a.addEventListener('abort', onAbort, { once: true });
+    b.addEventListener('abort', onAbort, { once: true });
+    return cast (cast controller : flighthq._internal.dom.AbortController).signal;
     return cast null;
   }
 
@@ -90,8 +90,8 @@ class Connectivity {
     return cast { getStatus: function(out:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-      (out.online = cast (_Runtime.coalesce((#if js ({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).onLine; }) #else _Runtime.optionalField(nav, 'onLine') #end), function():Dynamic return cast true) : Dynamic));
+      nav = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
+      (out.online = cast (_Runtime.coalesce(({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).onLine; }), function():Dynamic return cast true) : Dynamic));
       conn = _Runtime.callValue(Connectivity.getWebConnection__connectivity, cast ([] : Array<Dynamic>));
       (out.type = cast (_Runtime.callValue(Connectivity.mapWebConnectionType__connectivity, cast ([_Runtime.optionalField(conn, 'type')] : Array<Dynamic>)) : Dynamic));
       (out.downlink = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlink')), 'number') : Bool) ? (cast _Runtime.field(conn, 'downlink') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
@@ -110,7 +110,7 @@ class Connectivity {
           var combinedSignal:Dynamic = cast _Runtime.UNDEFINED;
           var start:Dynamic = cast _Runtime.UNDEFINED;
           var __flowBranch1:Dynamic;
-          if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined') : Bool)) {
+          if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('fetch'), 'undefined') : Bool)) {
             __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
               (out.reachable = cast (false : Dynamic));
               (out.latency = cast (-1.0 : Dynamic));
@@ -121,17 +121,17 @@ class Connectivity {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
             timeout = _Runtime.coalesce(options.timeout, function():Dynamic return cast 5000.0);
-            controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
-            timerId = _Runtime.setTimeout(function() return (#if js (cast controller : flighthq._internal.dom.AbortController).abort() #else _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>)) #end), timeout);
-            combinedSignal = _Runtime.select(options.signal, function():Dynamic return cast _Runtime.callValue(Connectivity.anyAbortSignal__connectivity, cast ([options.signal, (#if js (cast controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(controller, 'signal') #end)] : Array<Dynamic>)), function():Dynamic return cast (#if js (cast controller : flighthq._internal.dom.AbortController).signal #else _Runtime.field(controller, 'signal') #end));
-            start = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
+            controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
+            timerId = _Runtime.setTimeout(function() return (cast controller : flighthq._internal.dom.AbortController).abort(), timeout);
+            combinedSignal = _Runtime.select(options.signal, function():Dynamic return cast _Runtime.callValue(Connectivity.anyAbortSignal__connectivity, cast ([options.signal, (cast controller : flighthq._internal.dom.AbortController).signal] : Array<Dynamic>)), function():Dynamic return cast (cast controller : flighthq._internal.dom.AbortController).signal);
+            start = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>));
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var response:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([options.url, { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([options.url, { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
                 response = __awaitValue2;
                 _Runtime.clearTimeout(timerId);
-                (out.reachable = cast ((#if js (cast response : flighthq._internal.dom.Response).ok #else _Runtime.field(response, 'ok') #end) : Dynamic));
-                (out.latency = cast (_Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)), start) : Dynamic));
+                (out.reachable = cast ((cast response : flighthq._internal.dom.Response).ok : Dynamic));
+                (out.latency = cast (_Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), start) : Dynamic));
                 return flighthq._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -150,7 +150,7 @@ class Connectivity {
       );
     }, subscribe: function(listener:Dynamic) {
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
@@ -213,7 +213,7 @@ class Connectivity {
 
   public static function getWebConnection__connectivity():Null<WebConnectivityConnection__connectivity> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
     nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic);
     return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'connection'), function():Dynamic return cast null);
     return cast null;

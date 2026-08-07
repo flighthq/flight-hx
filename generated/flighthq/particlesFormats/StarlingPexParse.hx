@@ -123,7 +123,7 @@ class StarlingPexParse {
   public static function extractAttr__starlingPexParse(tag:String, attrName:String):Null<String> {
     var re:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    re = _Runtime.construct(_Runtime.globalValue('RegExp'), ['' + Std.string(attrName) + '\\s*=\\s*["\']([^"\']*)["\']']);
+    re = _Runtime.construct(flighthq._internal._HostValueLut.get('RegExp'), ['' + Std.string(attrName) + '\\s*=\\s*["\']([^"\']*)["\']']);
     m = _Runtime.callProperty(re, 'exec', cast ([tag] : Array<Dynamic>));
     return cast _Runtime.select(m, function():Dynamic return cast _Runtime.getIndex(m, 1.0), function():Dynamic return cast null);
     return cast null;
@@ -155,8 +155,8 @@ class StarlingPexParse {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     v = _Runtime.getIndex(d, key);
     if ((cast _Runtime.strictEquals(v, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast def; }
-    n = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([v] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast def : Dynamic));
+    n = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([v] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 

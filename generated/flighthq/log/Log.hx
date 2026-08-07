@@ -57,9 +57,9 @@ class Log {
     return cast null;
   }
 
-  public static final _bufferedSinkStates__log:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _bufferedSinkStates__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _channelLevels__log:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _channelLevels__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static var _consoleLevel__log:LogLevel = LogLevel.Info;
 
@@ -91,13 +91,13 @@ class Log {
 
   public static var _level__log:LogLevel = LogLevel.Verbose;
 
-  public static final _levelByName__log:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['none', LogLevel.None] : Array<Dynamic>), cast (['error', LogLevel.Error] : Array<Dynamic>), cast (['warn', LogLevel.Warn] : Array<Dynamic>), cast (['info', LogLevel.Info] : Array<Dynamic>), cast (['debug', LogLevel.Debug] : Array<Dynamic>), cast (['verbose', LogLevel.Verbose] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _levelByName__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast (['none', LogLevel.None] : Array<Dynamic>), cast (['error', LogLevel.Error] : Array<Dynamic>), cast (['warn', LogLevel.Warn] : Array<Dynamic>), cast (['info', LogLevel.Info] : Array<Dynamic>), cast (['debug', LogLevel.Debug] : Array<Dynamic>), cast (['verbose', LogLevel.Verbose] : Array<Dynamic>)] : Array<Dynamic>)]);
 
   public static final _levelNames__log:Dynamic = _Runtime.objectFromPairs([{ key: LogLevel.None, value: 'none' }, { key: LogLevel.Error, value: 'error' }, { key: LogLevel.Warn, value: 'warn' }, { key: LogLevel.Info, value: 'info' }, { key: LogLevel.Debug, value: 'debug' }, { key: LogLevel.Verbose, value: 'verbose' }]);
 
   public static var _logSignals__log:Null<LogSignals> = _Runtime.explicitNull();
 
-  public static final _memorySinkStates__log:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _memorySinkStates__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function _mergeContextFields__log(context:LogContext, data:LogData):LogData {
     var __destructure11:Dynamic = cast _Runtime.UNDEFINED;
@@ -123,7 +123,7 @@ class Log {
     return cast null;
   }
 
-  public static final _onceKeys__log:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+  public static final _onceKeys__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static function _passesLevelGate__log(level:LogLevel, channel:Null<String>):Bool {
     var gate:Dynamic = cast _Runtime.UNDEFINED;
@@ -152,14 +152,14 @@ class Log {
     }
   }
 
-  public static final _serializers__log:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _serializers__log:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static final _sinks__log:Array<LogSink> = cast ([] : Array<Dynamic>);
 
   public static final _spanStack__log:Array<LogSpan> = cast ([] : Array<Dynamic>);
 
   public static function _timestamp__log():Float {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool) ? (cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) #end) : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('performance'), 'undefined') : Bool) ? (cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now() : Dynamic) : (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -169,23 +169,23 @@ class Log {
     var __destructure13:Dynamic = cast _Runtime.UNDEFINED;
     var level:Dynamic = cast _Runtime.UNDEFINED;
     var channel:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('console'), 'undefined') : Bool)) { return; }
     __destructure13 = entry;
     level = _Runtime.field(__destructure13, 'level');
     channel = _Runtime.field(__destructure13, 'channel');
-    (#if js (cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>))) #else _Runtime.callProperty(_Runtime.globalValue('console'), 'debug', cast ([_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>))] : Array<Dynamic>)) #end);
+    (cast flighthq._internal._HostValueLut.get('console') : flighthq._internal.dom.Console).debug(_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>)));
     if ((cast ((cast !_Runtime.strictEquals(level, LogLevel.None) : Bool) && (cast ((cast Log._consoleLevel__log : Float) >= (cast level : Float)) : Bool)) : Bool)) {
       var method:Dynamic = _Runtime.getIndex(Log._consoleMethods__log, level);
       var prefix:Dynamic = ((cast !_Runtime.strictEquals(channel, null) : Bool) ? (cast '[' + Std.string(channel) + ']' : Dynamic) : (cast '[flight]' : Dynamic));
       var __destructure14:Dynamic = entry;
       var data:Dynamic = _Runtime.field(__destructure14, 'data');
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) { _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), method), cast (['' + Std.string(prefix) + ' ' + Std.string(data) + ''] : Array<Dynamic>)); } else { _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), method), cast ([prefix, data] : Array<Dynamic>)); }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) { _Runtime.callValue(_Runtime.getIndex(flighthq._internal._HostValueLut.get('console'), method), cast (['' + Std.string(prefix) + ' ' + Std.string(data) + ''] : Array<Dynamic>)); } else { _Runtime.callValue(_Runtime.getIndex(flighthq._internal._HostValueLut.get('console'), method), cast ([prefix, data] : Array<Dynamic>)); }
     }
   }
 
   public static function _writeConsoleLogEntry__log(entry:LogEntry, formatter:LogFormatter):Void {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
-    _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), _Runtime.getIndex(Log._consoleMethods__log, _Runtime.field(entry, 'level'))), cast ([_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))] : Array<Dynamic>));
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('console'), 'undefined') : Bool)) { return; }
+    _Runtime.callValue(_Runtime.getIndex(flighthq._internal._HostValueLut.get('console'), _Runtime.getIndex(Log._consoleMethods__log, _Runtime.field(entry, 'level'))), cast ([_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function addLogSink(sink:LogSink):Void {
@@ -257,7 +257,7 @@ class Log {
     };
     handle = { sink: sink };
     timer = null;
-    if ((cast ((cast ((cast intervalMs : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.typeofGlobal('setInterval'), 'undefined') : Bool)) : Bool)) {
+    if ((cast ((cast ((cast intervalMs : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('setInterval'), 'undefined') : Bool)) : Bool)) {
       (timer = cast (_Runtime.setInterval(flush, intervalMs) : Dynamic));
     }
     ((cast Log._bufferedSinkStates__log : flighthq._internal._WeakMap).set(handle, { buf: cast ([] : Array<Dynamic>), timer: timer, flush: flush }));
@@ -388,7 +388,7 @@ class Log {
     perChannel = _Runtime.defaultUndefined(_Runtime.field(__destructure1, 'perChannel'), function():Dynamic return cast false);
     maxPerInterval = _Runtime.field(__destructure1, 'maxPerInterval');
     intervalMs = _Runtime.field(__destructure1, 'intervalMs');
-    counts = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    counts = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     windowStart = _Runtime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>));
     sink = function(entry:LogEntry) {
       var now:Dynamic = cast _Runtime.UNDEFINED;

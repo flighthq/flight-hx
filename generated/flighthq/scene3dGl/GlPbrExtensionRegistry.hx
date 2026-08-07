@@ -51,7 +51,7 @@ class GlPbrExtensionRegistry {
     var sceneColor:Dynamic = cast _Runtime.UNDEFINED;
     var activeTarget:Dynamic = cast _Runtime.UNDEFINED;
     issues = cast ([] : Array<Dynamic>);
-    kinds = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    kinds = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry');
     transmissionSceneColorKind = null;
     textureCount = 0.0;

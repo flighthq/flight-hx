@@ -58,7 +58,7 @@ class SpritesheetDetect {
 
   public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
     if ((cast !_Runtime.strictEquals(SpritesheetDetect._registry__spritesheetDetect, null) : Bool)) { return cast SpritesheetDetect._registry__spritesheetDetect; }
-    (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+    (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
     ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(ASEPRITE, { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseAsepriteSpritesheet, cast ([text] : Array<Dynamic>)) }));
     ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(COCOS_PLIST, { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseCocosPlistSpritesheet, cast ([text] : Array<Dynamic>)) }));
     ((cast SpritesheetDetect._registry__spritesheetDetect : flighthq._internal._Map).set(TEXTURE_PACKER, { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseTexturePackerSpritesheet, cast ([text] : Array<Dynamic>)) }));

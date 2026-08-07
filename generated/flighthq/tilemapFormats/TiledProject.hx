@@ -31,7 +31,7 @@ class TiledProject {
     data = _Runtime.field(__destructure0, 'data');
     cellCount = (width * height);
     groups = cast ([] : Array<Dynamic>);
-    byFirstGid = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    byFirstGid = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     anyResolved = false;
     {
       var i:Dynamic = 0.0;

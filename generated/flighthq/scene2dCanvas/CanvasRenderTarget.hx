@@ -16,7 +16,7 @@ typedef CanvasRenderStateHandles__canvasRenderTarget = Dynamic;
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; var renderTransform2D:Null<Matrix>; };
 
 class CanvasRenderTarget {
-  public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function beginCanvasRenderPass(state:CanvasRenderState, target:flighthq.types.CanvasRenderTarget, ?preserve:RenderPassPreserve):Void {

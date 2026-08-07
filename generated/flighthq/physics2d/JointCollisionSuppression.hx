@@ -27,7 +27,7 @@ class JointCollisionSuppression {
       var second:Dynamic = HxMath.max(_Runtime.field(joint, 'bodyA'), _Runtime.field(joint, 'bodyB'));
       var seconds:Dynamic = ((cast suppressions : flighthq._internal._Map).get(first));
       if ((cast _Runtime.strictEquals(seconds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (seconds = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+        (seconds = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
         ((cast suppressions : flighthq._internal._Map).set(first, seconds));
       }
       ((cast seconds : flighthq._internal._Map).set(second, _Runtime.addNumbers(_Runtime.coalesce(((cast seconds : flighthq._internal._Map).get(second)), function():Dynamic return cast 0.0), 1.0)));

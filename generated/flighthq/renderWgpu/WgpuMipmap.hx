@@ -29,18 +29,18 @@ class WgpuMipmap {
     {
       var level:Dynamic = 1.0;
       while ((cast ((cast level : Float) < (cast levelCount : Float)) : Bool)) {
-        var srcView:Dynamic = (#if js texture.createView({ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 }) #else _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 }] : Array<Dynamic>)) #end);
-        var dstView:Dynamic = (#if js texture.createView({ baseMipLevel: level, mipLevelCount: 1.0 }) #else _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: level, mipLevelCount: 1.0 }] : Array<Dynamic>)) #end);
+        var srcView:Dynamic = texture.createView({ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 });
+        var dstView:Dynamic = texture.createView({ baseMipLevel: level, mipLevelCount: 1.0 });
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: srcView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-        var pass:Dynamic = (#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }) #else _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }] : Array<Dynamic>)) #end);
-        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline) #else _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>)) #end);
-        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>)) #end);
-        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0) #else _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>)) #end);
-        (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
+        var pass:Dynamic = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
         level++;
       }
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(#if js (cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish() #else _Runtime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>)) #end)] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
   @:noCompletion

@@ -51,7 +51,7 @@ class GlyphOutlineSource {
     path = _Runtime.callValue(createPath, cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.callProperty(source, 'getGlyphOutline', cast ([path, glyphIndex] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     advance = _Runtime.multiplyNumbers(_Runtime.callProperty(source, 'getGlyphOutlineAdvance', cast ([glyphIndex] : Array<Dynamic>)), scale);
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = { height: 0.0, width: 0.0, x: 0.0, y: 0.0 };
     if ((cast ((cast ((cast !(cast _Runtime.callValue(getPathBounds, cast ([path, bounds] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'height'), 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flighthq._internal._UInt8ClampedArray(), width: 0.0 };
@@ -131,7 +131,7 @@ class GlyphOutlineSource {
   }
 
   public static function resolveGlyphOutlineScale__glyphOutlineSource(unitsPerEm:Float, fontSize:Float):Null<Float> {
-    if ((cast ((cast ((cast ((cast !(cast _Runtime.compare(unitsPerEm, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(fontSize, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([unitsPerEm] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([fontSize] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast ((cast !(cast _Runtime.compare(unitsPerEm, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(fontSize, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([unitsPerEm] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([fontSize] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast null; }
     return cast (fontSize / unitsPerEm);
     return cast null;
   }

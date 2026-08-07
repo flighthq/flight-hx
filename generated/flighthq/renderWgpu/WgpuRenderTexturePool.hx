@@ -30,7 +30,7 @@ class WgpuRenderTexturePool {
   }
 
   public static function createWgpuRenderTexturePool():flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool {
-    return cast { device: null, destroyed: false, effectTargets: _Runtime.callValue(createWgpuRenderTargetPool, cast ([] : Array<Dynamic>)), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(_Runtime.globalValue('Set'), []) };
+    return cast { device: null, destroyed: false, effectTargets: _Runtime.callValue(createWgpuRenderTargetPool, cast ([] : Array<Dynamic>)), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
     return cast null;
   }
 
@@ -38,7 +38,7 @@ class WgpuRenderTexturePool {
     var textures:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.field(pool, 'destroyed') : Bool)) { return; }
     _Runtime.callValue(WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool, cast ([state, pool] : Array<Dynamic>));
-    textures = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(pool, 'free')), _Runtime.toArray(_Runtime.field(pool, 'leased'))])]);
+    textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(pool, 'free')), _Runtime.toArray(_Runtime.field(pool, 'leased'))])]);
     for (renderTexture in _Runtime.iterable(textures)) {
       _Runtime.callValue(destroyWgpuRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     }

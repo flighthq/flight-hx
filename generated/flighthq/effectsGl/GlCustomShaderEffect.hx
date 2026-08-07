@@ -77,7 +77,7 @@ class GlCustomShaderEffect {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (registry = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap).set(state, registry));
     }
     ((cast registry : flighthq._internal._Map).set(shaderKey, fragmentSource));
@@ -89,5 +89,5 @@ class GlCustomShaderEffect {
 
   public static final PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';
 
-  public static final _customShaders__glCustomShaderEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _customShaders__glCustomShaderEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

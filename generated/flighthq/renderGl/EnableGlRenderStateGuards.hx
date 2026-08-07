@@ -43,5 +43,5 @@ class EnableGlRenderStateGuards {
     _Runtime.callValue(logOnce, cast (['render-gl:multiple-roots-one-state', LogLevel.Warn, { firstRoot: previous, message: 'prepareScene2DRender: one GlRenderState was used for multiple roots — derive a dedicated pipeline with createGlOffscreenRenderState(screenState)', root: root, state: state }, 'render-gl'] : Array<Dynamic>));
   }
 
-  public static final _firstRoots__enableGlRenderStateGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _firstRoots__enableGlRenderStateGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

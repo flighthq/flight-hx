@@ -37,17 +37,17 @@ class _FontFaceLoad {
   }
 
   public static function _loadFontFacesFromName(family:String):flighthq._internal._Promise<Array<flighthq._internal.dom.FontFace>> {
-    return cast (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).load(_Runtime.callValue(getFontShorthand, cast ([family] : Array<Dynamic>))) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts'), 'load', cast ([_Runtime.callValue(getFontShorthand, cast ([family] : Array<Dynamic>))] : Array<Dynamic>)) #end);
+    return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).load(_Runtime.callValue(getFontShorthand, cast ([family] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function loadAndRegisterFontFace___fontFaceLoad(family:String, source:Dynamic):flighthq._internal._Promise<flighthq._internal.dom.FontFace> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var face:Dynamic = cast _Runtime.UNDEFINED;
-      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, source]);
-      return flighthq._internal._Async.flatMap((#if js (cast face : flighthq._internal.dom.FontFace).load() #else _Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)) #end), function(__awaitValue0:Dynamic):Dynamic {
+      face = _Runtime.construct(flighthq._internal._HostValueLut.get('FontFace'), [family, source]);
+      return flighthq._internal._Async.flatMap((cast face : flighthq._internal.dom.FontFace).load(), function(__awaitValue0:Dynamic):Dynamic {
         __awaitValue0;
-        (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).add(face) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts'), 'add', cast ([face] : Array<Dynamic>)) #end);
+        (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).add(face);
         return flighthq._internal._Async.resolve(face);
       });
     }));

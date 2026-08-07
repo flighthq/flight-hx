@@ -29,5 +29,5 @@ class DomCSSFilterBinding {
     ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap).set(renderProxy, filter));
   }
 
-  public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

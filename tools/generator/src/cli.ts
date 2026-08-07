@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { portConfig } from '../port.config.ts';
 import { auditHostEndpoints } from './analyze/host-endpoints.ts';
+import { auditHostToolkit } from './analyze/host-toolkit.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
 import { auditLowering } from './analyze/lowering.ts';
 import { auditTypedStructClassFeasibility } from './analyze/typed-struct-classes.ts';
@@ -12,6 +13,7 @@ import { generateCoreModules } from './emit/core.ts';
 import {
   createApiReport,
   hostEndpointSummary,
+  hostToolkitSummary,
   hostTypeSummary,
   inventorySummary,
   loweringSummary,
@@ -66,6 +68,9 @@ try {
       writeOrCheck(path.join(reportsDirectory, 'host-endpoints.md'), hostEndpointSummary(hostEndpoints), check);
       writeOrCheck(path.join(reportsDirectory, 'host-types.json'), stableJson(core.hostTypes), check);
       writeOrCheck(path.join(reportsDirectory, 'host-types.md'), hostTypeSummary(core.hostTypes), check);
+      const hostToolkit = auditHostToolkit(workspaceDirectory, core.hostTypes);
+      writeOrCheck(path.join(reportsDirectory, 'host-toolkit.json'), stableJson(hostToolkit), check);
+      writeOrCheck(path.join(reportsDirectory, 'host-toolkit.md'), hostToolkitSummary(hostToolkit), check);
       if (!lowering) throw new Error('Expected lowering audit');
       lowering.summary.staticEmission = core.staticLowering;
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);

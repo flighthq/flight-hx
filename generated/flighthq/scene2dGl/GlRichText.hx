@@ -182,7 +182,7 @@ class GlRichText {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([1.0, 1.0] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast (#if js (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width #else _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)), 'width') #end);
+      return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: formatRanges, width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));

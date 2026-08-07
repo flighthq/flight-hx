@@ -18,7 +18,7 @@ class ExplainBitmapReadback {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 'empty-size'; }
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 'no-canvas'; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'no-canvas'; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);

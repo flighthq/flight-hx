@@ -261,7 +261,7 @@ class GlRenderPass {
     return cast null;
   }
 
-  public static final _passStack__glRenderPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _passStack__glRenderPass:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _clearRgba__glRenderPass:Dynamic = new flighthq._internal._Float32Array(4.0);
 }

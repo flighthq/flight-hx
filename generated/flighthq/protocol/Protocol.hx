@@ -12,11 +12,11 @@ import flighthq.types.Protocol.ProtocolHandler;
 class Protocol {
   public static var _backend__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
 
-  public static final _reservedSchemes__protocol:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
+  public static final _reservedSchemes__protocol:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
 
   public static function _safeDecode__protocol(s:String):String {
     try {
-      return cast _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([_Runtime.replace(s, _Runtime.regexp('\\+', 'g'), ' ', false)] : Array<Dynamic>));
+      return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('decodeURIComponent'), cast ([_Runtime.replace(s, _Runtime.regexp('\\+', 'g'), ' ', false)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast s;
     }
@@ -25,7 +25,7 @@ class Protocol {
 
   public static final _schemePattern__protocol:Dynamic = _Runtime.regexp('^[a-z][a-z0-9+\\-.]*$$', '');
 
-  public static final _subscriptions__protocol:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__protocol:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachProtocolHandler(handler:ProtocolHandler):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -73,7 +73,7 @@ class Protocol {
           var v:Dynamic = cast _Runtime.UNDEFINED;
           k = flighthq._internal._StaticIndex.readArray(__parameter1, 0.0);
           v = flighthq._internal._StaticIndex.readArray(__parameter1, 1.0);
-          return cast '' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
+          return cast '' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
         }] : Array<Dynamic>)), '&');
         (url = cast ((url + '?' + Std.string(qs) + '') : Dynamic));
       }
@@ -88,11 +88,11 @@ class Protocol {
     _registeredSchemes = cast ([] : Array<Dynamic>);
     return cast { register: function(scheme:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
       nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic);
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((#if js (cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler #else _Runtime.field(nav, 'registerProtocolHandler') #end)), 'function') : Bool)) { return cast false; }
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler), 'function') : Bool)) { return cast false; }
       try {
-        (#if js (cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler(scheme, ((#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).origin #else _Runtime.field(_Runtime.globalValue('location'), 'origin') #end) + '/?url=%s')) #else _Runtime.callProperty(nav, 'registerProtocolHandler', cast ([scheme, ((#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).origin #else _Runtime.field(_Runtime.globalValue('location'), 'origin') #end) + '/?url=%s')] : Array<Dynamic>)) #end);
+        (cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler(scheme, ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s'));
         if ((cast !(cast _Runtime.includes(_registeredSchemes, scheme) : Bool) : Bool)) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
         return cast true;
       } catch (__error:Dynamic) {
@@ -114,10 +114,10 @@ class Protocol {
     }, removeAsDefault: function() {
       return cast false;
     }, getLaunchUrl: function() {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) { return cast null; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) { return cast null; }
       try {
-        var params:Dynamic = _Runtime.construct(_Runtime.globalValue('URLSearchParams'), [(#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).search #else _Runtime.field(_Runtime.globalValue('location'), 'search') #end)]);
-        var url:Dynamic = (#if js (cast params : flighthq._internal.dom.URLSearchParams).get('url') #else _Runtime.callProperty(params, 'get', cast (['url'] : Array<Dynamic>)) #end);
+        var params:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('URLSearchParams'), [(cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).search]);
+        var url:Dynamic = (cast params : flighthq._internal.dom.URLSearchParams).get('url');
         return cast _Runtime.select(_Runtime.andValue(url, function():Dynamic return cast ((cast _Runtime.field(url, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast url, function():Dynamic return cast null);
       } catch (__error:Dynamic) {
         return cast null;

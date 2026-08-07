@@ -1536,11 +1536,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('media:Dynamic');
     expect(output).toContain('message:flighthq._internal.dom.MessageEvent<Dynamic>');
     expect(output).toContain('local:HTMLFlightLocal');
-    expect(output).toContain("width = (#if js image.width #else _Runtime.field(image, 'width') #end);");
+    expect(output).toContain('width = image.width;');
     expect(output).toContain('(image.src = url)');
     expect(output).toContain('image.decode()');
-    expect(output).toContain("#else _Runtime.setField(image, 'src', url) #end");
-    expect(output).toContain("#else _Runtime.callProperty(image, 'decode', cast ([] : Array<Dynamic>)) #end");
+    expect(output).not.toContain('#if js image');
+    expect(output).not.toContain("_Runtime.setField(image, 'src'");
+    expect(output).not.toContain("_Runtime.callProperty(image, 'decode'");
     expect(output).toContain('__hostType');
     expect(output).toContain('.height; })');
     expect(output).toContain("_Runtime.field(media, 'src')");
@@ -1549,11 +1550,13 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       "(cast _Runtime.field(streams, 'stream') : flighthq._internal.dom.ReadableStream<Dynamic>).cancel()",
     );
-    expect(output).toContain("(cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(url)");
-    expect(output).toContain("_Runtime.construct(_Runtime.globalValue('DataView')");
-    expect(output).toContain("_Runtime.construct(_Runtime.globalValue('TextDecoder')");
+    expect(output).toContain(
+      "(cast flighthq._internal._HostValueLut.get('console') : flighthq._internal.dom.Console).debug(url)",
+    );
+    expect(output).toContain("_Runtime.construct(flighthq._internal._HostValueLut.get('DataView')");
+    expect(output).toContain("_Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder')");
     expect(output).toContain('unresolvedGpuName = GPUFlightMissing;');
-    expect(output).not.toContain("_Runtime.globalValue('GPUFlightMissing')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('GPUFlightMissing')");
     expect(lowered.hostTypes.map((use) => use.name)).toContain('HTMLImageElement');
     expect(lowered.hostTypes.some((use) => use.kind === 'member' && use.member === 'decode')).toBe(true);
     expect(lowered.hostTypes.some((use) => use.name === 'HTMLFlightLocal')).toBe(false);
@@ -1562,7 +1565,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(audit).toEqual(createHostTypeAudit('fixture', [...lowered.hostTypes].reverse()));
   });
 
-  it('preserves tolerant host-stub reads and receiver-aware calls on Neko', () => {
+  it('keeps checker-known host members target-independent from toolkit compatibility stubs', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/audio/src/hostStub.ts',
       `
@@ -1581,58 +1584,38 @@ describe('TypeScript lowering and Haxe emission', () => {
       name: 'HostStub',
       packageName: '@flighthq/audio',
     });
-    const fixtureDirectory = path.resolve('build/haxe-host-stub-neko-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
-    const nekoOutput = path.join(fixtureDirectory, 'main.n');
-    rmSync(fixtureDirectory, { force: true, recursive: true });
-    mkdirSync(packageDirectory, { recursive: true });
-    writeFileSync(path.join(packageDirectory, 'HostStub.hx'), output);
-    writeFileSync(
-      path.join(fixtureDirectory, 'StubAudioBuffer.hx'),
-      `
-        class StubAudioBuffer {
-          public var calls:Int = 0;
-          public function new() {}
-          public function copyToChannel(_value:Dynamic):Void calls++;
-        }
-      `,
-    );
-    writeFileSync(
-      path.join(fixtureDirectory, 'Main.hx'),
-      `
-        class Main {
-          static function main() {
-            final receiver = new StubAudioBuffer();
-            if (flighthq.HostStub.readMissing(cast receiver) != null) throw 'missing field was not null';
-            flighthq.HostStub.callWithStubArity(cast receiver);
-            if (receiver.calls != 1) throw 'receiver-aware call did not execute exactly once';
-          }
-        }
-      `,
-    );
+    expect(output).toContain('return cast buffer.pattern;');
+    expect(output).toContain('buffer.copyToChannel((cast null : Dynamic), 0.0, 1.0);');
+    expect(output).not.toContain('#if js buffer');
+    expect(output).not.toContain("_Runtime.field(buffer, 'pattern')");
+    expect(output).not.toContain("_Runtime.callProperty(buffer, 'copyToChannel'");
+  });
 
-    expect(output).toContain("#if js buffer.pattern #else _Runtime.field(buffer, 'pattern') #end");
-    expect(output).toContain(
-      "#else _Runtime.callProperty(buffer, 'copyToChannel', cast ([(cast null : Dynamic), 0.0, 1.0] : Array<Dynamic>)) #end",
+  it('routes non-Flight imported values through stable module toolkit keys', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/host/src/external.ts',
+      `
+        import defaultValue, { named as localName } from 'host-package';
+        import * as namespace from 'host-namespace';
+        export function values() { return [defaultValue, localName, namespace]; }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
     );
-    execFileSync(
-      'node',
-      [
-        'tools/haxe.mjs',
-        '-cp',
-        fixtureDirectory,
-        '-cp',
-        'src',
-        '-cp',
-        'generated',
-        '--main',
-        'Main',
-        '-neko',
-        nekoOutput,
-      ],
-      { cwd: path.resolve('.'), stdio: 'pipe' },
-    );
-    execFileSync('neko', [nekoOutput], { cwd: path.resolve('.'), stdio: 'pipe' });
+    const lowered = lowerTypeScriptSource(source, '@flighthq/host', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ExternalValues',
+      packageName: '@flighthq/host',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-package', 'default')");
+    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-package', 'named')");
+    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-namespace', '*')");
+    expect(output).not.toContain('_Runtime.externalValue');
   });
 
   it('does not route an imported host-typed value as an ambient global', () => {
@@ -1666,7 +1649,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(output).toContain('return cast SHADOW_DEPTH_FORMAT;');
-    expect(output).not.toContain("_Runtime.globalValue('SHADOW_DEPTH_FORMAT')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('SHADOW_DEPTH_FORMAT')");
     expect(output).toContain("WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')");
   });
 
@@ -1802,15 +1785,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.hasField(window, 'local')");
     expect(output).toContain("_Runtime.hasField(document, 'local')");
     expect(output).toContain("_Runtime.hasField(navigator, 'local')");
-    expect(output).toContain("_Runtime.typeofGlobal('window')");
-    expect(output).toContain("_Runtime.typeofGlobal('document')");
-    expect(output).toContain("_Runtime.typeofGlobal('navigator')");
+    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('window')");
+    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('document')");
+    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('navigator')");
     expect(output).toContain("_Runtime.hasField(localNavigator, 'share')");
     expect(output).toContain("_Runtime.field(localNavigator, 'share')");
     expect(output).toContain("_Runtime.hasField(mutableNavigator, 'share')");
-    expect(output).not.toContain("_Runtime.globalValue('window')");
-    expect(output).not.toContain("_Runtime.globalValue('document')");
-    expect(output).not.toContain("_Runtime.globalValue('navigator')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('window')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('document')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('navigator')");
     expect(output).not.toContain("DomDocumentBackend.field(document, 'title')");
     expect(output).not.toContain('DomWindowBackend.hasField(window');
     expect(output).not.toContain('DomDocumentBackend.hasField(document');
@@ -1845,7 +1828,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('flighthq._internal.DynamicObject.assign(target, source)');
     expect(output).toContain('flighthq._internal.DynamicObject.keys(target)');
     expect(output).toContain('flighthq._internal.DynamicObject.entries(target)');
-    expect(output).not.toContain("globalValue', cast (['Object']");
+    expect(output).not.toContain("_HostValueLut.get('Object')");
     expect(output).not.toContain('Reflect.fields');
   });
 
@@ -1877,7 +1860,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain("'filter', cast ([_Runtime.truthy]");
-    expect(output).toContain("_Runtime.isInstanceOf(value, _Runtime.globalValue('VideoFrame'))");
+    expect(output).toContain("_Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('VideoFrame'))");
     expect(output).toContain("_Runtime.isInstanceOfName(value, 'TypeError')");
     expect(output).toContain('_Runtime.callValue(Boolean,');
     expect(output).toContain('_Runtime.construct(VideoFrame, [])');
@@ -2671,7 +2654,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       'Uint8Array',
       'Uint8ClampedArray',
     ]) {
-      expect(output).not.toContain(`_Runtime.construct(_Runtime.globalValue('${name}')`);
+      expect(output).not.toContain(`_Runtime.construct(flighthq._internal._HostValueLut.get('${name}')`);
     }
   });
 
@@ -2849,7 +2832,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(emission.typedArraySetCalls).toBe(1);
     expect(emission.typedArraySetReceivers.Uint16ArrayOrUint32Array).toBe(1);
     expect(output).toMatch(
-      /_Runtime\.isInstanceOf\((__typedArraySetTarget\d+), _Runtime\.globalValue\('Uint32Array'\)\).*\(cast \1 : flighthq\._internal\._UInt32Array\)\.set\((__typedArraySetSource\d+)\).*\(cast \1 : flighthq\._internal\._UInt16Array\)\.set\(\2\)/u,
+      /_Runtime\.isInstanceOf\((__typedArraySetTarget\d+), flighthq\._internal\._HostValueLut\.get\('Uint32Array'\)\).*\(cast \1 : flighthq\._internal\._UInt32Array\)\.set\((__typedArraySetSource\d+)\).*\(cast \1 : flighthq\._internal\._UInt16Array\)\.set\(\2\)/u,
     );
     expect(output.match(/_Runtime\.callProperty\(target, 'set'/gu)).toHaveLength(2);
     expect(output).not.toContain('__flight_direct_typed_array_set');
@@ -2875,7 +2858,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('new flighthq._internal._Float32Array(values)');
     expect(output).toContain('new flighthq._internal._UInt16Array(values)');
-    expect(output).not.toContain("callProperty(_Runtime.globalValue('Float32Array'), 'from'");
+    expect(output).not.toContain("callProperty(flighthq._internal._HostValueLut.get('Float32Array'), 'from'");
     expect(output).not.toContain("callProperty(Uint16Array, 'from'");
   });
 
@@ -2932,7 +2915,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('HxMath.NEGATIVE_INFINITY');
     expect(output).toContain('_Runtime.NUMBER_EPSILON');
     expect(output).toContain('_Runtime.MAX_SAFE_INTEGER');
-    expect(output).not.toContain("_Runtime.globalValue('Number')");
+    expect(output).not.toContain("flighthq._internal._HostValueLut.get('Number')");
   });
 
   it('uses JavaScript ToInt32 coercion for bitwise and shift operands', () => {

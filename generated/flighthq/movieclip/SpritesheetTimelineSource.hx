@@ -19,7 +19,7 @@ class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
-    bitmaps = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+    bitmaps = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
     frames = _Runtime.callValue(SpritesheetTimelineSource.materializeSpritesheetTimelineFrames__spritesheetTimelineSource, cast ([animation] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource, null) : Bool)) {
       _Runtime.callValue(SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource, cast ([animation, _Runtime.callValue(explainSpritesheetTimelineSource, cast ([animation] : Array<Dynamic>))] : Array<Dynamic>));

@@ -7,13 +7,13 @@ import flighthq._internal._Runtime;
 class AudioFormat {
   public static function canPlayAudioType(mimeType:String):Bool {
     if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { return cast false; }
-    return cast !_Runtime.strictEquals((#if js (cast _Runtime.construct(_Runtime.globalValue('Audio'), []) : flighthq._internal.dom.HTMLAudioElement).canPlayType(mimeType) #else _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('Audio'), []), 'canPlayType', cast ([mimeType] : Array<Dynamic>)) #end), '');
+    return cast !_Runtime.strictEquals((cast _Runtime.construct(flighthq._internal._HostValueLut.get('Audio'), []) : flighthq._internal.dom.HTMLAudioElement).canPlayType(mimeType), '');
     return cast null;
   }
 
   public static function detectAudioMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = ((cast _Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
+    b = ((cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 82.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 8.0), 87.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 9.0), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 10.0), 86.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 11.0), 69.0) : Bool)) : Bool)) { return cast 'audio/wav'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 102.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 76.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 97.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 67.0) : Bool)) : Bool)) { return cast 'audio/flac'; }

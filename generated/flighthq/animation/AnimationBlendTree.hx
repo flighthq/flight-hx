@@ -33,7 +33,7 @@ class AnimationBlendTree {
     var sampleWidth:Dynamic = cast _Runtime.UNDEFINED;
     copiedInputs = _Runtime.slice(inputs, 0, null);
     channels = cast ([] : Array<Dynamic>);
-    channelByTarget = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    channelByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     players = cast ([] : Array<Dynamic>);
     sampleWidth = 0.0;
     {
@@ -137,7 +137,7 @@ class AnimationBlendTree {
 
   public static function assertUniqueAnimationBlendTreeTargets__animationBlendTree(channels:Array<AnimationChannel>, inputIndex:Float):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    targets = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (channel in _Runtime.iterable(channels)) {
       if ((cast ((cast targets : flighthq._internal._Set).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
         _Runtime.throwValue(_Runtime.typeError('AnimationBlendTree input ' + Std.string(inputIndex) + ' clip contains a duplicate targetRef.'));

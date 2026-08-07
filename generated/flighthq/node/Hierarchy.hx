@@ -173,7 +173,7 @@ class Hierarchy {
     var aAncestors:Dynamic = cast _Runtime.UNDEFINED;
     var cur:Dynamic = cast _Runtime.UNDEFINED;
     var bCur:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
-    aAncestors = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    aAncestors = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     ((cast aAncestors : flighthq._internal._Set).add((cast a : Node<Traits>)));
     cur = _Runtime.callValue(getNodeParent, cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
     while ((cast !_Runtime.strictEquals(cur, null) : Bool)) {

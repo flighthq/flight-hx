@@ -152,7 +152,7 @@ class ShapeJson {
     {
       var __switchValue = type;
       if (__switchValue == 'number') {
-        return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool));
+        return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool));
       }
       else if (__switchValue == 'numbers') {
         return cast _Runtime.callValue(ShapeJson.isFiniteNumberArray__shapeJson, cast ([value] : Array<Dynamic>));
@@ -179,7 +179,7 @@ class ShapeJson {
   public static function isFiniteNumberArray__shapeJson(value:Dynamic):Bool {
     if ((cast !(cast _Runtime.isArray(value) : Bool) : Bool)) { return cast false; }
     for (entry in _Runtime.iterable(value)) {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'number') : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'number') : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([entry] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;

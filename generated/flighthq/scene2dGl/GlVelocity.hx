@@ -269,7 +269,7 @@ class GlVelocity {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (writers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (writers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap).set(state, writers));
     }
     ((cast writers : flighthq._internal._Map).set(kind, writer));
@@ -338,7 +338,7 @@ class GlVelocity {
 
   public static final _scratchVelocity__glVelocity:Velocity2D = { x: 0.0, y: 0.0 };
 
-  public static final _velocityPrograms__glVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _velocityPrograms__glVelocity:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _velocityWriters__glVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _velocityWriters__glVelocity:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

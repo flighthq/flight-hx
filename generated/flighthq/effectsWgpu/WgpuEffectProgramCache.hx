@@ -15,7 +15,7 @@ class WgpuEffectProgramCache {
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap).set(state, cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(key));
@@ -26,5 +26,5 @@ class WgpuEffectProgramCache {
     return cast null;
   }
 
-  public static final _pipelines__wgpuEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _pipelines__wgpuEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

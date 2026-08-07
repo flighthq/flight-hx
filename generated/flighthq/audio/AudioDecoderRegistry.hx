@@ -30,5 +30,5 @@ class AudioDecoderRegistry {
     ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map).delete_(_Runtime.callValue(getAudioMimeTypeEssence, cast ([mimeType] : Array<Dynamic>))));
   }
 
-  public static final decoders__audioDecoderRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final decoders__audioDecoderRegistry:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

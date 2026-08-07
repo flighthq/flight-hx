@@ -39,7 +39,7 @@ class TextMarkup {
   }
 
   public static function codePointToString__textMarkup(code:Float, fallback:String):String {
-    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([code] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast code : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast code : Float) > (cast 1114111.0 : Float)) : Bool)) : Bool)) { return cast fallback; }
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([code] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast code : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast code : Float) > (cast 1114111.0 : Float)) : Bool)) : Bool)) { return cast fallback; }
     return cast _Runtime.fromCodePoint(code);
     return cast null;
   }
@@ -54,8 +54,8 @@ class TextMarkup {
     return cast _Runtime.replace(value, _Runtime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(matched:String, entity:String) {
       var lower:Dynamic = cast _Runtime.UNDEFINED;
       lower = _Runtime.callProperty(entity, 'toLowerCase', cast ([] : Array<Dynamic>));
-      if ((cast StringTools.startsWith(lower, '#x') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
-      if ((cast StringTools.startsWith(lower, '#') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if ((cast StringTools.startsWith(lower, '#x') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if ((cast StringTools.startsWith(lower, '#') : Bool)) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
       return cast _Runtime.coalesce(_Runtime.getIndex(TextMarkup.markupNamedEntities__textMarkup, lower), function():Dynamic return cast matched);
     }, false);
     return cast null;

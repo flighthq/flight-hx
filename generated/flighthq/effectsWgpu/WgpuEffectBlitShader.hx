@@ -77,9 +77,9 @@ class WgpuEffectBlitShader {
     return cast null;
   }
 
-  public static final blitOffsetPipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final blitOffsetPipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final blitPipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final blitPipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final erasePipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final erasePipelines__wgpuEffectBlitShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

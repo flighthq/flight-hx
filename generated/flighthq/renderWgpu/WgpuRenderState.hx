@@ -36,7 +36,7 @@ class WgpuRenderState {
     _Runtime.setField(targetRuntime, 'defaultBitmapShader', _Runtime.field(sourceRuntime, 'defaultBitmapShader'));
     _Runtime.setField(targetRuntime, 'wgpuColorAdjustmentMaterialFeature', _Runtime.field(sourceRuntime, 'wgpuColorAdjustmentMaterialFeature'));
     _Runtime.setField(targetRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard', _Runtime.field(sourceRuntime, 'wgpuColorAdjustmentMaterialFeatureGuard'));
-    _Runtime.setField(targetRuntime, 'materialRendererMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialRendererMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('Map'), [_Runtime.field(sourceRuntime, 'materialRendererMap')]) : Dynamic)));
+    _Runtime.setField(targetRuntime, 'materialRendererMap', ((cast _Runtime.strictEquals(_Runtime.field(sourceRuntime, 'materialRendererMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.field(sourceRuntime, 'materialRendererMap')]) : Dynamic)));
     _Runtime.setField(targetRuntime, 'sceneMeshMaterialRegistry', _Runtime.callValue(WgpuRenderState.copyMap__wgpuRenderState, cast ([_Runtime.field(sourceRuntime, 'sceneMeshMaterialRegistry')] : Array<Dynamic>)));
     _Runtime.setField(targetRuntime, 'webgpuShaderBindingResolver', _Runtime.field(sourceRuntime, 'webgpuShaderBindingResolver'));
     _Runtime.setField(targetRuntime, 'wgpuTextureResolverRegistry', _Runtime.callValue(WgpuRenderState.copyRegistryMap__wgpuRenderState, cast ([_Runtime.field(sourceRuntime, 'wgpuTextureResolverRegistry')] : Array<Dynamic>)));
@@ -101,7 +101,7 @@ class WgpuRenderState {
           __flowBranch0 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
-          return flighthq._internal._Async.flatMap((#if js (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : flighthq._internal.dom.GPU).requestAdapter(((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))) #else _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), 'requestAdapter', cast ([((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)) #end), function(__awaitValue1:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : flighthq._internal.dom.GPU).requestAdapter(((cast !_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null) : Bool) ? (cast { powerPreference: _Runtime.field(options, 'powerPreference') } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))), function(__awaitValue1:Dynamic):Dynamic {
             adapter = __awaitValue1;
             var __flowBranch2:Dynamic;
             if ((cast !_Runtime.truthy(adapter) : Bool)) {
@@ -114,7 +114,7 @@ class WgpuRenderState {
             return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
               requiredLimits = {  };
               var __flowBranch3:Dynamic;
-              if ((cast ((cast flighthq._internal.backend.WebGpuLimitsBackend.field((#if js (cast adapter : flighthq._internal.dom.GPUAdapter).limits #else _Runtime.field(adapter, 'limits') #end), 'maxBindGroups') : Float) >= (cast 5.0 : Float)) : Bool)) {
+              if ((cast ((cast flighthq._internal.backend.WebGpuLimitsBackend.field((cast adapter : flighthq._internal.dom.GPUAdapter).limits, 'maxBindGroups') : Float) >= (cast 5.0 : Float)) : Bool)) {
                 __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
                   _Runtime.setField(requiredLimits, 'maxBindGroups', 5.0);
                   return flighthq._internal._Async.flowNormal();
@@ -123,12 +123,12 @@ class WgpuRenderState {
                 __flowBranch3 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-                requiredFeatures = _Runtime.callProperty((cast cast (['texture-compression-bc', 'texture-compression-etc2', 'texture-compression-astc'] : Array<Dynamic>) : Array<flighthq._internal.dom.GPUFeatureName>), 'filter', cast ([function(feature:Dynamic) return ((cast (#if js (cast adapter : flighthq._internal.dom.GPUAdapter).features #else _Runtime.field(adapter, 'features') #end) : flighthq._internal._Set).has(feature))] : Array<Dynamic>));
+                requiredFeatures = _Runtime.callProperty((cast cast (['texture-compression-bc', 'texture-compression-etc2', 'texture-compression-astc'] : Array<Dynamic>) : Array<flighthq._internal.dom.GPUFeatureName>), 'filter', cast ([function(feature:Dynamic) return ((cast (cast adapter : flighthq._internal.dom.GPUAdapter).features : flighthq._internal._Set).has(feature))] : Array<Dynamic>));
                 deviceDescriptor = {  };
                 var __flowBranch4:Dynamic;
                 if ((cast ((cast _Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
                   __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                    (#if js (deviceDescriptor.requiredLimits = requiredLimits) #else _Runtime.setField(deviceDescriptor, 'requiredLimits', requiredLimits) #end);
+                    (deviceDescriptor.requiredLimits = requiredLimits);
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {
@@ -138,16 +138,16 @@ class WgpuRenderState {
                   var __flowBranch5:Dynamic;
                   if ((cast ((cast _Runtime.field(requiredFeatures, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
                     __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
-                      (#if js (deviceDescriptor.requiredFeatures = requiredFeatures) #else _Runtime.setField(deviceDescriptor, 'requiredFeatures', requiredFeatures) #end);
+                      (deviceDescriptor.requiredFeatures = requiredFeatures);
                       return flighthq._internal._Async.flowNormal();
                     });
                   } else {
                     __flowBranch5 = flighthq._internal._Async.flowNormal();
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
-                    return flighthq._internal._Async.flatMap((#if js (cast adapter : flighthq._internal.dom.GPUAdapter).requestDevice(deviceDescriptor) #else _Runtime.callProperty(adapter, 'requestDevice', cast ([deviceDescriptor] : Array<Dynamic>)) #end), function(__awaitValue6:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap((cast adapter : flighthq._internal.dom.GPUAdapter).requestDevice(deviceDescriptor), function(__awaitValue6:Dynamic):Dynamic {
                       device = __awaitValue6;
-                      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast (#if js (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : flighthq._internal.dom.GPU).getPreferredCanvasFormat() #else _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)) #end));
+                      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : flighthq._internal.dom.GPU).getPreferredCanvasFormat());
                       context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUCanvasContext>);
                       var __flowBranch7:Dynamic;
                       if ((cast !_Runtime.truthy(context) : Bool)) {
@@ -199,16 +199,16 @@ class WgpuRenderState {
                           _Runtime.setField(runtime, 'uniformStride', uniformStride);
                           _Runtime.setField(runtime, 'uniformBindGroup', uniformBindGroup);
                           _Runtime.setField(runtime, 'matrixArray', new flighthq._internal._Float32Array(9.0));
-                          _Runtime.setField(runtime, 'pipelineCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
+                          _Runtime.setField(runtime, 'pipelineCache', _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
                           _Runtime.setField(runtime, 'linearSampler', linearSampler);
                           _Runtime.setField(runtime, 'nearestSampler', nearestSampler);
-                          _Runtime.setField(runtime, 'samplerCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
-                          _Runtime.setField(runtime, 'mipmapPipelineCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
-                          _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-                          _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-                          _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-                          _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
-                          _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+                          _Runtime.setField(runtime, 'samplerCache', _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+                          _Runtime.setField(runtime, 'mipmapPipelineCache', _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+                          _Runtime.setField(runtime, 'textureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourcePremultipliedTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourcePremultipliedSrgbTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourceStraightTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+                          _Runtime.setField(runtime, 'textureSourceStraightSrgbTextureCache', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
                           _Runtime.setField(runtime, 'defaultBitmapShader', null);
                           _Runtime.setField(runtime, 'particleInstanceBuffer', null);
                           _Runtime.setField(runtime, 'particleInstanceData', null);
@@ -281,12 +281,12 @@ class WgpuRenderState {
     ((cast WgpuRenderState._destroyedStates__wgpuRenderState : flighthq._internal._WeakSet).add(state));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(destroyRenderState, cast ([state] : Array<Dynamic>));
-    (#if js ({ final __hostTypeCall11 = _Runtime.field(runtime, 'uniformBuffer'); __hostTypeCall11 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall11 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(runtime, 'uniformBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
-    (#if js ({ final __hostTypeCall12 = _Runtime.field(runtime, 'particleInstanceBuffer'); __hostTypeCall12 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall12 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(runtime, 'particleInstanceBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
-    (#if js ({ final __hostTypeCall13 = _Runtime.field(runtime, 'depthStencilTexture'); __hostTypeCall13 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall13 : flighthq._internal.dom.GPUTexture).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(runtime, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+    ({ final __hostTypeCall11 = _Runtime.field(runtime, 'uniformBuffer'); __hostTypeCall11 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall11 : flighthq._internal.dom.GPUBuffer).destroy(); });
+    ({ final __hostTypeCall12 = _Runtime.field(runtime, 'particleInstanceBuffer'); __hostTypeCall12 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall12 : flighthq._internal.dom.GPUBuffer).destroy(); });
+    ({ final __hostTypeCall13 = _Runtime.field(runtime, 'depthStencilTexture'); __hostTypeCall13 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall13 : flighthq._internal.dom.GPUTexture).destroy(); });
     for (slot in _Runtime.iterable(_Runtime.field(runtime, 'quadBatchWriterBufferPool'))) {
-      (#if js ({ final __hostTypeCall16 = _Runtime.field(slot, 'instanceBuffer'); __hostTypeCall16 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall16 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(slot, 'instanceBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
-      (#if js ({ final __hostTypeCall17 = _Runtime.field(slot, 'materialBuffer'); __hostTypeCall17 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall17 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(slot, 'materialBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+      ({ final __hostTypeCall16 = _Runtime.field(slot, 'instanceBuffer'); __hostTypeCall16 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall16 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      ({ final __hostTypeCall17 = _Runtime.field(slot, 'materialBuffer'); __hostTypeCall17 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall17 : flighthq._internal.dom.GPUBuffer).destroy(); });
     }
     _Runtime.incrementField(_Runtime.callValue(WgpuRenderState.getWgpuDeviceRuntime__wgpuRenderState, cast ([runtime] : Array<Dynamic>)), 'references', -1, true);
   }
@@ -315,8 +315,8 @@ class WgpuRenderState {
     sampler = ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).get(key));
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var descriptor:flighthq._internal.dom.GPUSamplerDescriptor = { minFilter: effectiveMinFilter, magFilter: effectiveMagFilter, addressModeU: wrapU, addressModeV: wrapV };
-      if ((cast !_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (descriptor.mipmapFilter = effectiveMipmapFilter) #else _Runtime.setField(descriptor, 'mipmapFilter', effectiveMipmapFilter) #end); }
-      if ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool)) { (#if js (descriptor.maxAnisotropy = anisotropy) #else _Runtime.setField(descriptor, 'maxAnisotropy', anisotropy) #end); }
+      if ((cast !_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (descriptor.mipmapFilter = effectiveMipmapFilter); }
+      if ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool)) { (descriptor.maxAnisotropy = anisotropy); }
       (sampler = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createSampler', cast ([descriptor] : Array<Dynamic>)) : Dynamic));
       ((cast _Runtime.field(runtime, 'samplerCache') : flighthq._internal._Map).set(key, sampler));
     }
@@ -393,7 +393,7 @@ class WgpuRenderState {
   public static function copyMap__wgpuRenderState<K, V>(source:Null<Dynamic>):Null<Dynamic> {
     if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    return cast _Runtime.construct(_Runtime.globalValue('Map'), [source]);
+    return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [source]);
     return cast null;
   }
 
@@ -419,13 +419,13 @@ class WgpuRenderState {
 
   public static final WGPU_DEVICE_RUNTIME_KEYS__wgpuRenderState:Dynamic = cast (['uniformBindGroupLayout', 'textureBindGroupLayout', 'pipelineCache', 'linearSampler', 'nearestSampler', 'samplerCache', 'mipmapPipelineCache', 'textureCache', 'textureSourcePremultipliedTextureCache', 'textureSourcePremultipliedSrgbTextureCache', 'textureSourceStraightTextureCache', 'textureSourceStraightSrgbTextureCache', 'videoTextureCache', 'videoSrgbTextureCache', 'wgpuExternalTextureCache', 'wgpuRenderTextureCache', 'sceneMeshUploadCache'] : Array<Dynamic>);
 
-  public static final _deviceRuntimeByStateRuntime__wgpuRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _deviceRuntimeByStateRuntime__wgpuRenderState:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _destroyedStates__wgpuRenderState:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final _destroyedStates__wgpuRenderState:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
   @:noCompletion
   public static function isWgpuSupported():Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), null) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu') : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'gpu'), null) : Bool));
     return cast null;
   }
 }

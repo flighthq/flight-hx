@@ -33,7 +33,7 @@ class Skeleton2dDrawOrderTarget {
     keyframes = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
     if ((cast _Runtime.strictEquals(keyframes, 0.0) : Bool)) { return cast null; }
     slotCount = _Runtime.divideNumbers(_Runtime.field(_Runtime.field(timeline, 'orderings'), 'length'), keyframes);
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([slotCount] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(slotCount, 0.0) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotCount] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(slotCount, 0.0) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callValue(createAnimationChannel, cast ([_Runtime.callValue(createAnimationTrack, cast ([{ components: slotCount, interpolation: Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget, times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'orderings') }] : Array<Dynamic>)), _Runtime.callValue(createSkeleton2DDrawOrderAnimationTarget, cast ([nodes, orderList] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

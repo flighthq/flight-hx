@@ -96,7 +96,7 @@ class DragonBonesParse {
 
   public static function buildBoneIndexByName__dragonBonesParse(bones:Array<Bone2D>):Dynamic {
     var byName:Dynamic = cast _Runtime.UNDEFINED;
-    byName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    byName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bones, 'length') : Float)) : Bool)) {
@@ -121,7 +121,7 @@ class DragonBonesParse {
     var unresolvedBones:Dynamic = cast _Runtime.UNDEFINED;
     animations = cast ([] : Array<Dynamic>);
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast animations; }
-    unmodeled = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     blendTrees = 0.0;
     unresolvedBones = 0.0;
     for (entry in _Runtime.iterable(raw)) {
@@ -146,7 +146,7 @@ class DragonBonesParse {
       _Runtime.callValue(DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse, cast ([diagnostics, _Runtime.field(animation, 'ik'), 'dragonbones.ik-timeline-unsupported'] : Array<Dynamic>));
       _Runtime.callValue(DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse, cast ([diagnostics, _Runtime.field(animation, 'zOrder'), 'dragonbones.zorder-timeline-unsupported'] : Array<Dynamic>));
       var duration:Dynamic = _Runtime.divideNumbers(_Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(animation, 'duration'), 0.0] : Array<Dynamic>)), frameRate);
-      _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels, ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast duration : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(animation, 'name')), 'string') : Bool) ? (cast _Runtime.field(animation, 'name') : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse : Dynamic)) }] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([{ clip: _Runtime.callValue(createAnimationClip, cast ([channels, ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast duration : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))] : Array<Dynamic>)), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(animation, 'name')), 'string') : Bool) ? (cast _Runtime.field(animation, 'name') : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse : Dynamic)) }] : Array<Dynamic>));
     }
     if ((cast ((cast blendTrees : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Skip, 'dragonbones.blend-tree-animation-unsupported', 'parseDragonBonesSkeleton', { animations: blendTrees }] : Array<Dynamic>));
@@ -402,9 +402,9 @@ class DragonBonesParse {
     var armatureRate:Dynamic = cast _Runtime.UNDEFINED;
     var documentRate:Dynamic = cast _Runtime.UNDEFINED;
     armatureRate = _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(armature, 'frameRate'), 0.0] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([armatureRate] : Array<Dynamic>)) : Bool) && (cast ((cast armatureRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast armatureRate; }
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([armatureRate] : Array<Dynamic>)) : Bool) && (cast ((cast armatureRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast armatureRate; }
     documentRate = _Runtime.callValue(DragonBonesParse.numberOr__dragonBonesParse, cast ([_Runtime.field(doc, 'frameRate'), 0.0] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([documentRate] : Array<Dynamic>)) : Bool) && (cast ((cast documentRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast documentRate; }
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([documentRate] : Array<Dynamic>)) : Bool) && (cast ((cast documentRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast documentRate; }
     return cast DragonBonesParse.DEFAULT_DRAGONBONES_FRAME_RATE__dragonBonesParse;
     return cast null;
   }
@@ -438,7 +438,7 @@ class DragonBonesParse {
   public static function parseDragonBonesSkins__dragonBonesParse(raw:Dynamic, slotOrder:Dynamic, remapBoneIndex:DragonBonesBoneRemap__dragonBonesParse, ?diagnostics:Array<ImportDiagnostic>):{ var skins:Array<AttachmentSkin2D>; var table:Dynamic; } {
     var table:Dynamic = cast _Runtime.UNDEFINED;
     var skins:Array<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
-    table = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    table = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     skins = cast ([] : Array<Dynamic>);
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast { skins: skins, table: table }; }
     for (rawSkin in _Runtime.iterable(raw)) {
@@ -639,7 +639,7 @@ class DragonBonesParse {
   public static function buildDragonBonesSlotOrder__dragonBonesParse(raw:Dynamic):Dynamic {
     var order:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
-    order = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    order = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast order; }
     index = 0.0;
     for (entry in _Runtime.iterable(raw)) {
@@ -732,7 +732,7 @@ class DragonBonesParse {
       }
     }
     bones = cast ([] : Array<Dynamic>);
-    indexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     advanced = true;
     while ((cast ((cast ((cast _Runtime.field(pending, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast advanced : Bool)) : Bool)) {
       (advanced = cast (false : Dynamic));

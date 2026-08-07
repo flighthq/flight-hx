@@ -28,7 +28,7 @@ class TextSegmenterBackend {
 
   public static var _backend__textSegmenterBackend:Null<flighthq.types.TextSegment.TextSegmenterBackend> = _Runtime.explicitNull();
 
-  public static final _segmenterCache__textSegmenterBackend:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _segmenterCache__textSegmenterBackend:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static final _segmenterCacheCapacity__textSegmenterBackend:Dynamic = 64.0;
 
@@ -36,11 +36,11 @@ class TextSegmenterBackend {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var built:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter')), 'undefined') : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Segmenter')), 'undefined') : Bool)) : Bool)) { return cast null; }
     key = '' + Std.string(_Runtime.coalesce(locale, function():Dynamic return cast '')) + '|' + Std.string(granularity) + '';
     existing = ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    built = _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
+    built = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
     if ((cast ((cast (cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).size : Float) >= (cast TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend : Float)) : Bool)) {
       var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).keys()), 'next', cast ([] : Array<Dynamic>)), 'value');
       if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast TextSegmenterBackend._segmenterCache__textSegmenterBackend : flighthq._internal._Map).delete_(oldest)); }

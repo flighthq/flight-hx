@@ -60,7 +60,7 @@ class CanvasBlendEffect {
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'canvasBlendEffectBackdrops', (_Runtime.field(runtime, 'canvasBlendEffectBackdrops') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(backdropKey, target));
+    ((cast _Runtime.setField(runtime, 'canvasBlendEffectBackdrops', (_Runtime.field(runtime, 'canvasBlendEffectBackdrops') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(backdropKey, target));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {

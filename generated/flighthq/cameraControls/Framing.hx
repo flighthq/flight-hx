@@ -15,7 +15,7 @@ class Framing {
     if ((cast ((cast ((cast !(cast _Runtime.compare(sphere.radius, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(aspect, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(padding, 0.0, '>') : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective') : Bool)) {
       var distance:Dynamic = _Runtime.callValue(getPerspectiveProjectionFrameDistanceToSphere, cast ([projection, sphere.radius, aspect, padding] : Array<Dynamic>));
-      if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       _Runtime.setField(controller, 'goalDistance', _Runtime.callValue(clamp, cast ([distance, _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(setOrthographicProjectionFrameToSphere, cast ([projection, sphere.radius, aspect, padding] : Array<Dynamic>));

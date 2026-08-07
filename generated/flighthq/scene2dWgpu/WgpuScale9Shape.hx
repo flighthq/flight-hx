@@ -50,7 +50,7 @@ class WgpuScale9Shape {
     var shapeData:Dynamic = cast _Runtime.UNDEFINED;
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    (#if js ({ final __hostTypeCall0 = _Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+    ({ final __hostTypeCall0 = _Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
   @:noCompletion
@@ -114,7 +114,7 @@ class WgpuScale9Shape {
       if ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastW'), w) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastH'), h) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastPixelRatio'), pixelRatio) : Bool)) : Bool)) {
         var nextEntry:Dynamic = _Runtime.callValue(createWgpuTextureEntry, cast ([state, pw, ph, _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(nextEntry, null) : Bool)) { return; }
-        (#if js ({ final __hostTypeCall1 = _Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'); __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+        ({ final __hostTypeCall1 = _Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'); __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
         _Runtime.setField(shapeData, 'entry', nextEntry);
       } else {
         _Runtime.callValue(updateWgpuTextureEntry, cast ([state, _Runtime.field(shapeData, 'entry'), _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>));

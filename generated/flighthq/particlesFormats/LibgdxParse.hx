@@ -230,8 +230,8 @@ class LibgdxParse {
     s = _Runtime.padEnd(_Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false), 6.0, 'f');
     channel = function(i:Float) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
-      v = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
-      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+      v = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
+      return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
     };
     return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
@@ -242,8 +242,8 @@ class LibgdxParse {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     v = ((cast section : flighthq._internal._Map).get(key));
     if ((cast _Runtime.strictEquals(v, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast def; }
-    n = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([v] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast def : Dynamic));
+    n = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([v] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 
@@ -254,9 +254,9 @@ class LibgdxParse {
     var current:LibgdxSection__libgdxParse = cast _Runtime.UNDEFINED;
     var header:Dynamic = cast _Runtime.UNDEFINED;
     lines = _Runtime.callProperty(text, 'split', cast ([_Runtime.regexp('\\r?\\n', '')] : Array<Dynamic>));
-    sections = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    sections = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     currentSection = '';
-    current = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    current = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     header = '';
     for (raw in _Runtime.iterable(lines)) {
       var line:Dynamic = StringTools.trim(Std.string(raw));
@@ -267,7 +267,7 @@ class LibgdxParse {
           ((cast sections : flighthq._internal._Map).set(currentSection, current));
         }
         (currentSection = cast (line : Dynamic));
-        (current = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+        (current = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
         if ((cast _Runtime.strictEquals(header, '') : Bool)) { (header = cast (line : Dynamic)); }
       } else {
         var key:Dynamic = StringTools.trim(Std.string(_Runtime.slice(line, 0.0, colonIdx)));
@@ -350,8 +350,8 @@ class LibgdxParse {
     var spawnShape:Dynamic = cast _Runtime.UNDEFINED;
     emitterKey = _Runtime.find(_Runtime.concatArrays([_Runtime.toArray(((cast sections : flighthq._internal._Map).keys()))]), function(k:Dynamic) return ((cast StringTools.startsWith(k, '- ') : Bool) && (cast StringTools.endsWith(Std.string(k), ' -') : Bool)));
     emitterName = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callOptionalProperty(emitterKey, 'slice', cast ([2.0, -2.0] : Array<Dynamic>)), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '');
-    root = _Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(((cast !_Runtime.strictEquals(emitterKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast sections : flighthq._internal._Map).get(emitterKey)) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ((cast sections : flighthq._internal._Map).get('Particle Effect'))), function():Dynamic return cast ((cast sections : flighthq._internal._Map).get(''))), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []));
-    get = function(name:String) return _Runtime.coalesce(((cast sections : flighthq._internal._Map).get(name)), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []));
+    root = _Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(((cast !_Runtime.strictEquals(emitterKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast sections : flighthq._internal._Map).get(emitterKey)) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ((cast sections : flighthq._internal._Map).get('Particle Effect'))), function():Dynamic return cast ((cast sections : flighthq._internal._Map).get(''))), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+    get = function(name:String) return _Runtime.coalesce(((cast sections : flighthq._internal._Map).get(name)), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
     delaySection = _Runtime.callValue(get, cast (['Delay'] : Array<Dynamic>));
     durationSection = _Runtime.callValue(get, cast (['Duration'] : Array<Dynamic>));
     emissionSection = _Runtime.callValue(get, cast (['Emission'] : Array<Dynamic>));

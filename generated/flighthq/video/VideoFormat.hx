@@ -9,13 +9,13 @@ class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
     var probe:Dynamic = cast _Runtime.UNDEFINED;
     probe = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
-    return cast !_Runtime.strictEquals((#if js (cast probe : flighthq._internal.dom.HTMLVideoElement).canPlayType(mimeType) #else _Runtime.callProperty(probe, 'canPlayType', cast ([mimeType] : Array<Dynamic>)) #end), '');
+    return cast !_Runtime.strictEquals((cast probe : flighthq._internal.dom.HTMLVideoElement).canPlayType(mimeType), '');
     return cast null;
   }
 
   public static function detectVideoMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = ((cast _Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
+    b = ((cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(b, 'byteLength') : Float) >= (cast 8.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 4.0), 102.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 5.0), 116.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 6.0), 121.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 7.0), 112.0) : Bool)) : Bool)) { return cast 'video/mp4'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 26.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 223.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 163.0) : Bool)) : Bool)) { return cast 'video/webm'; }

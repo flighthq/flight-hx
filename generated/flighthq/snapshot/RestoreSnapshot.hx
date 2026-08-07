@@ -46,7 +46,7 @@ class RestoreSnapshot {
       _Runtime.callValue(RestoreSnapshot.restoreSnapshotInto__restoreSnapshot, cast ([(cast targetValue : Dynamic), (cast sourceValue : Dynamic)] : Array<Dynamic>));
       return cast targetValue;
     }
-    return cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([sourceValue] : Array<Dynamic>));
+    return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([sourceValue] : Array<Dynamic>));
     return cast null;
   }
 }

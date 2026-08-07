@@ -70,7 +70,7 @@ class UpdateParticleObjects {
     emitterY = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.emitterY; }), function():Dynamic return cast HxMath.NaN);
     emitterVelX = 0.0;
     emitterVelY = 0.0;
-    if ((cast ((cast ((cast !_Runtime.strictEquals(config.velocityInheritance, 0.0) : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([emitterX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(config.velocityInheritance, 0.0) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([emitterX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       (emitterVelX = cast (((emitterX - state.prevX) / deltaTime) : Dynamic));
       (emitterVelY = cast (((emitterY - state.prevY) / deltaTime) : Dynamic));
     }
@@ -165,7 +165,7 @@ class UpdateParticleObjects {
         }
       }
     }
-    if ((cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([emitterX] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([emitterX] : Array<Dynamic>)) : Bool) : Bool)) {
       (state.prevX = cast (emitterX : Dynamic));
       (state.prevY = cast (emitterY : Dynamic));
     }

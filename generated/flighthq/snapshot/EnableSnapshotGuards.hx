@@ -21,8 +21,8 @@ class EnableSnapshotGuards {
     var nonPlain:Dynamic = cast _Runtime.UNDEFINED;
     var cyclic:Dynamic = cast _Runtime.UNDEFINED;
     var visit:Dynamic = cast _Runtime.UNDEFINED;
-    seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    nonPlain = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    seen = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+    nonPlain = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     cyclic = false;
     visit = function(value:Dynamic) {
       var kind:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,12 +57,12 @@ class EnableSnapshotGuards {
   }
 
   public static function nonPlainSnapshotKind__enableSnapshotGuards(value:Dynamic):Null<String> {
-    if ((cast _Runtime.isInstanceOf(value, _Runtime.globalValue('Map')) : Bool)) { return cast 'Map'; }
-    if ((cast _Runtime.isInstanceOf(value, _Runtime.globalValue('Set')) : Bool)) { return cast 'Set'; }
-    if ((cast _Runtime.isInstanceOf(value, _Runtime.globalValue('Date')) : Bool)) { return cast 'Date'; }
-    if ((cast _Runtime.isInstanceOf(value, _Runtime.globalValue('RegExp')) : Bool)) { return cast 'RegExp'; }
-    if ((cast _Runtime.callProperty(_Runtime.globalValue('ArrayBuffer'), 'isView', cast ([value] : Array<Dynamic>)) : Bool)) { return cast 'TypedArray'; }
-    if ((cast _Runtime.isInstanceOf(value, _Runtime.globalValue('ArrayBuffer')) : Bool)) { return cast 'ArrayBuffer'; }
+    if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Map')) : Bool)) { return cast 'Map'; }
+    if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Set')) : Bool)) { return cast 'Set'; }
+    if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('Date')) : Bool)) { return cast 'Date'; }
+    if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('RegExp')) : Bool)) { return cast 'RegExp'; }
+    if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('ArrayBuffer'), 'isView', cast ([value] : Array<Dynamic>)) : Bool)) { return cast 'TypedArray'; }
+    if ((cast _Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('ArrayBuffer')) : Bool)) { return cast 'ArrayBuffer'; }
     return cast null;
     return cast null;
   }

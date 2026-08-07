@@ -130,9 +130,9 @@ class RiveScene2DDocument {
 
   public static final RIVE_IMAGE_ASSET_KIND__riveScene2DDocument:Dynamic = 'ImageAsset';
 
-  public static final _nestedArtboards__riveScene2DDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _nestedArtboards__riveScene2DDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _imageTextures__riveScene2DDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _imageTextures__riveScene2DDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _imageAssetIndices__riveScene2DDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _imageAssetIndices__riveScene2DDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

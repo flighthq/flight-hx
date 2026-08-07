@@ -346,5 +346,5 @@ class SpritesheetPlayer {
 
   public static final playerPool__spritesheetPlayer:Array<flighthq.types.SpritesheetPlayer> = cast ([] : Array<Dynamic>);
 
-  public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

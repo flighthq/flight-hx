@@ -249,7 +249,7 @@ class ResolveBidiLevels {
         k++;
       }
     }
-    runByFirst = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    runByFirst = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var r:Dynamic = 0.0;
       while ((cast ((cast r : Float) < (cast _Runtime.field(runs, 'length') : Float)) : Bool)) {

@@ -17,7 +17,7 @@ import flighthq._internal._Runtime;
 class DomNavigatorBackend {
   /**
    * Typed binding for the bare `navigator` root. Mirrors the previous
-   * `_Runtime.globalValue('navigator')` semantics: `undefined` when the global
+   * ambient `navigator` lookup semantics: `undefined` when the global
    * is absent on JavaScript, `null` on native targets (no DOM navigator).
    */
   public static function value():Dynamic {

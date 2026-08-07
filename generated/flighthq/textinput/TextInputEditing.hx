@@ -632,7 +632,7 @@ class TextInputEditing {
   }
 
   public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
     return cast HxMath.max(0.0, HxMath.min(length, _Runtime.trunc(value)));
     return cast null;
   }

@@ -308,7 +308,7 @@ class ParticleEmitter3D {
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
     var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.field(source, 'data').particleCount;
-    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.callValue(getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>)) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.callValue(getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>)) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
       return cast false;
     }
     matrix = positionToView.m;

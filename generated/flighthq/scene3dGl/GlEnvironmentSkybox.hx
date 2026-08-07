@@ -71,7 +71,7 @@ class GlEnvironmentSkybox {
 
   public static final _quad__glEnvironmentSkybox:Dynamic = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
-  public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final SKYBOX_VERTEX__glEnvironmentSkybox:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_ndc;\nvoid main() {\n  v_ndc = a_position;\n  // Emit at the far plane (z = w) so the backdrop sits behind every drawn fragment.\n  gl_Position = vec4(a_position, 1.0, 1.0);\n}\n';
 

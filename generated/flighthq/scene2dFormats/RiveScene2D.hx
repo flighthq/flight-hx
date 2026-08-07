@@ -83,7 +83,7 @@ class RiveScene2D {
     _Runtime.setField(root, 'pivotY', _Runtime.multiplyNumbers(_Runtime.callValue(RiveScene2D.readRiveNumber__riveScene2D, cast ([source, RiveScene2D.RIVE_ORIGIN_Y__riveScene2D, 0.0] : Array<Dynamic>)), height));
     advancedBlends = cast ([] : Array<Dynamic>);
     nodes = cast ([root] : Array<Dynamic>);
-    shapePaths = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    shapePaths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -110,7 +110,7 @@ class RiveScene2D {
     _Runtime.callValue(applyRiveClipping, cast ([nodes, artboard, shapePaths, diagnostics] : Array<Dynamic>));
     _Runtime.callValue(applyRiveDrawOrder, cast ([nodes, artboard, root, diagnostics] : Array<Dynamic>));
     _Runtime.callValue(applyRiveSolo, cast ([nodes, artboard, diagnostics] : Array<Dynamic>));
-    rebuilds = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    rebuilds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (shapeIndex in _Runtime.iterable(((cast shapePaths : flighthq._internal._Map).keys()))) {
       var shape:Dynamic = flighthq._internal._StaticIndex.readArray(nodes, shapeIndex);
       if ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
@@ -326,7 +326,7 @@ class RiveScene2D {
 
   public static final RIVE_BLEND_SRC_OVER__riveScene2D:Dynamic = 3.0;
 
-  public static final RIVE_FIXED_BLEND_MODES__riveScene2D:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast ([3.0, BlendModeValue.Normal] : Array<Dynamic>), cast ([14.0, BlendModeValue.Screen] : Array<Dynamic>), cast ([16.0, BlendModeValue.Darken] : Array<Dynamic>), cast ([17.0, BlendModeValue.Lighten] : Array<Dynamic>), cast ([24.0, BlendModeValue.Multiply] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final RIVE_FIXED_BLEND_MODES__riveScene2D:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([3.0, BlendModeValue.Normal] : Array<Dynamic>), cast ([14.0, BlendModeValue.Screen] : Array<Dynamic>), cast ([16.0, BlendModeValue.Darken] : Array<Dynamic>), cast ([17.0, BlendModeValue.Lighten] : Array<Dynamic>), cast ([24.0, BlendModeValue.Multiply] : Array<Dynamic>)] : Array<Dynamic>)]);
 
-  public static final RIVE_ADVANCED_BLEND_MODES__riveScene2D:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast ([15.0, AdvancedBlendModeValue.Overlay] : Array<Dynamic>), cast ([18.0, AdvancedBlendModeValue.ColorDodge] : Array<Dynamic>), cast ([19.0, AdvancedBlendModeValue.ColorBurn] : Array<Dynamic>), cast ([20.0, AdvancedBlendModeValue.HardLight] : Array<Dynamic>), cast ([21.0, AdvancedBlendModeValue.SoftLight] : Array<Dynamic>), cast ([22.0, AdvancedBlendModeValue.Difference] : Array<Dynamic>), cast ([23.0, AdvancedBlendModeValue.Exclusion] : Array<Dynamic>), cast ([25.0, AdvancedBlendModeValue.Hue] : Array<Dynamic>), cast ([26.0, AdvancedBlendModeValue.Saturation] : Array<Dynamic>), cast ([27.0, AdvancedBlendModeValue.Color] : Array<Dynamic>), cast ([28.0, AdvancedBlendModeValue.Luminosity] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final RIVE_ADVANCED_BLEND_MODES__riveScene2D:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([15.0, AdvancedBlendModeValue.Overlay] : Array<Dynamic>), cast ([18.0, AdvancedBlendModeValue.ColorDodge] : Array<Dynamic>), cast ([19.0, AdvancedBlendModeValue.ColorBurn] : Array<Dynamic>), cast ([20.0, AdvancedBlendModeValue.HardLight] : Array<Dynamic>), cast ([21.0, AdvancedBlendModeValue.SoftLight] : Array<Dynamic>), cast ([22.0, AdvancedBlendModeValue.Difference] : Array<Dynamic>), cast ([23.0, AdvancedBlendModeValue.Exclusion] : Array<Dynamic>), cast ([25.0, AdvancedBlendModeValue.Hue] : Array<Dynamic>), cast ([26.0, AdvancedBlendModeValue.Saturation] : Array<Dynamic>), cast ([27.0, AdvancedBlendModeValue.Color] : Array<Dynamic>), cast ([28.0, AdvancedBlendModeValue.Luminosity] : Array<Dynamic>)] : Array<Dynamic>)]);
 }

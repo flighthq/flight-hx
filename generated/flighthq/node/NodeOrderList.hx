@@ -234,7 +234,7 @@ class NodeOrderList {
     _Runtime.setField(list, 'entryCount', last);
   }
 
-  public static final _listIndex__nodeOrderList:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _listIndex__nodeOrderList:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static final _members__nodeOrderList:Array<NodeAny> = cast ([] : Array<Dynamic>);
 

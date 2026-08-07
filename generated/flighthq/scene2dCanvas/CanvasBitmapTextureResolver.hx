@@ -23,7 +23,7 @@ class CanvasBitmapTextureResolver {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     bitmap = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
-    cache = _Runtime.setField(resolvers, 'bitmapElementCache', (_Runtime.field(resolvers, 'bitmapElementCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
+    cache = _Runtime.setField(resolvers, 'bitmapElementCache', (_Runtime.field(resolvers, 'bitmapElementCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])));
     entry = ((cast cache : flighthq._internal._WeakMap).get(bitmap));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(entry, 'version'), bitmap.version) : Bool)) : Bool)) {
       var image:Dynamic = _Runtime.callValue(createImageResourceFromBitmap, cast ([bitmap] : Array<Dynamic>));

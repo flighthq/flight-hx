@@ -16,7 +16,7 @@ import flighthq.types.Menu.MenuItemTemplate;
 class App {
   public static var _backend__app:Null<AppBackend> = _Runtime.explicitNull();
 
-  public static final _subscriptions__app:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__app:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function addAppRecentDocument(path:String):Void {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'addRecentDocument', cast ([path] : Array<Dynamic>));
@@ -95,7 +95,7 @@ class App {
     }, clearRecentDocuments: function() {
 
     }, focus: function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
+      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
@@ -110,22 +110,22 @@ class App {
     }, getExecutablePath: function() {
       return cast '';
     }, getLocale: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic) : (cast '' : Dynamic));
+      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic) : (cast '' : Dynamic));
     }, getPreferredSystemLanguages: function() {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages')) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages')) : Bool)) : Bool)) {
         return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages') : Array<String>);
       }
       return cast cast ([] : Array<Dynamic>);
     }, getSystemLocale: function() {
       try {
-        return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
+        return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
       } catch (__error:Dynamic) {
         return cast '';
       }
     }, getLoginItem: function() {
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
     }, getName: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic) : (cast '' : Dynamic));
+      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic) : (cast '' : Dynamic));
     }, getVersion: function() {
       return cast '';
     }, hasSingleInstanceLock: function() {
@@ -135,16 +135,16 @@ class App {
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
+      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, relaunch: function() {
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) {
+      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) {
         try {
-          (#if js (cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).reload() #else _Runtime.callProperty(_Runtime.globalValue('location'), 'reload', cast ([] : Array<Dynamic>)) #end);
+          (cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).reload();
         } catch (__error:Dynamic) {
         }
       }
@@ -157,9 +157,9 @@ class App {
     }, setActivationPolicy: function() {
 
     }, setBadgeCount: function(count:Dynamic) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
-        (#if js (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic).setAppBadge(count) #else _Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic), 'setAppBadge', cast ([count] : Array<Dynamic>)) #end);
+        (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic).setAppBadge(count);
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;

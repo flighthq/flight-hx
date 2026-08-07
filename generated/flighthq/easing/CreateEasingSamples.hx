@@ -10,7 +10,7 @@ class CreateEasingSamples {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var step:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('createEasingSamples: count must be a finite integer >= 1'));
     }
     n = HxMath.floor(count);

@@ -25,7 +25,7 @@ class ExplainUnpackedRectangles {
     usableHeight = _Runtime.subtractNumbers(_Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.maxHeight; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT), (2.0 * border));
     result = _Runtime.callValue(packRectangles, cast ([rectangles, options] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(result, 'unpacked'), 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    unpacked = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.field(result, 'unpacked')]);
+    unpacked = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.field(result, 'unpacked')]);
     explanations = cast ([] : Array<Dynamic>);
     for (rectangle in _Runtime.iterable(rectangles)) {
       if ((cast !(cast ((cast unpacked : flighthq._internal._Set).has(_Runtime.field(rectangle, 'id'))) : Bool) : Bool)) { continue; }

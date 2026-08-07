@@ -64,7 +64,7 @@ class WgpuRenderEffectPipeline {
       _Runtime.setField(pipeline, 'sceneTarget', null);
     }
     _Runtime.callValue(destroyWgpuRenderTargetPool, cast ([state, _Runtime.field(pipeline, 'pool')] : Array<Dynamic>));
-    (#if js ({ final __hostTypeCall0 = _Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+    ({ final __hostTypeCall0 = _Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'texture', null);
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'size', 0.0);
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'lut', null);

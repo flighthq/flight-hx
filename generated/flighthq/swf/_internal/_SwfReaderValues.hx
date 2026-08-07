@@ -9,5 +9,5 @@ class _SwfReaderValues {
 
   public static final FIXED_8_8_ONE__swfReader:Dynamic = 256.0;
 
-  public static final _decoder__swfReader:Dynamic = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+  public static final _decoder__swfReader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

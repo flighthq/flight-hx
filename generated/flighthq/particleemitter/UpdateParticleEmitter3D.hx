@@ -92,7 +92,7 @@ class UpdateParticleEmitter3D {
     emitterVelX = 0.0;
     emitterVelY = 0.0;
     emitterVelZ = 0.0;
-    if ((cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) {
       (emitterVelX = cast (((trackX - state.prevX) / deltaTime) : Dynamic));
       (emitterVelY = cast (((trackY - state.prevY) / deltaTime) : Dynamic));
       (emitterVelZ = cast (((trackZ - state.prevZ) / deltaTime) : Dynamic));
@@ -243,7 +243,7 @@ class UpdateParticleEmitter3D {
       var dirNx:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionX / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
       var dirNy:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionY / dirLen) : Dynamic) : (cast -1.0 : Dynamic));
       var dirNz:Dynamic = ((cast ((cast dirLen : Float) > (cast 0.000001 : Float)) : Bool) ? (cast (config.directionZ / dirLen) : Dynamic) : (cast 0.0 : Dynamic));
-      var doTrail:Dynamic = ((cast !_Runtime.strictEquals(worldM, null) : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
+      var doTrail:Dynamic = ((cast !_Runtime.strictEquals(worldM, null) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
       var prevPathX:Dynamic = ((cast doTrail : Bool) ? (cast state.prevX : Dynamic) : (cast trackX : Dynamic));
       var prevPathY:Dynamic = ((cast doTrail : Bool) ? (cast state.prevY : Dynamic) : (cast trackY : Dynamic));
       var prevPathZ:Dynamic = ((cast doTrail : Bool) ? (cast state.prevZ : Dynamic) : (cast trackZ : Dynamic));
@@ -353,7 +353,7 @@ class UpdateParticleEmitter3D {
             (vy = cast (wvy : Dynamic));
             (vz = cast (wvz : Dynamic));
           }
-          if ((cast ((cast hasVelInherit : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+          if ((cast ((cast hasVelInherit : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
             (vx = cast ((vx + (emitterVelX * config.velocityInheritance)) : Dynamic));
             (vy = cast ((vy + (emitterVelY * config.velocityInheritance)) : Dynamic));
             (vz = cast ((vz + (emitterVelZ * config.velocityInheritance)) : Dynamic));

@@ -19,7 +19,7 @@ class SpritesheetFrom {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var frameNameToIndex:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
-    nameToRegionId = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    nameToRegionId = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast !_Runtime.strictEquals(region.name, null) : Bool)) {
         ((cast nameToRegionId : flighthq._internal._Map).set(region.name, region.id));
@@ -30,7 +30,7 @@ class SpritesheetFrom {
       regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
       return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated }] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    frameNameToIndex = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    frameNameToIndex = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.frames, 'length') : Float)) : Bool)) {

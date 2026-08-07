@@ -53,7 +53,7 @@ class ParticleDesignerSerialize {
       if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean') : Bool)) {
         _Runtime.callProperty(lines, 'push', cast (['	<' + Std.string(((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + '/>'] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
-        if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['	<integer>' + Std.string(value) + '</integer>'] : Array<Dynamic>)); } else { _Runtime.callProperty(lines, 'push', cast (['	<real>' + Std.string(value) + '</real>'] : Array<Dynamic>)); }
+        if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['	<integer>' + Std.string(value) + '</integer>'] : Array<Dynamic>)); } else { _Runtime.callProperty(lines, 'push', cast (['	<real>' + Std.string(value) + '</real>'] : Array<Dynamic>)); }
       } else {
         _Runtime.callProperty(lines, 'push', cast (['	<string>' + Std.string(_Runtime.callValue(ParticleDesignerSerialize.escapeXml__particleDesignerSerialize, cast ([value] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
       } }

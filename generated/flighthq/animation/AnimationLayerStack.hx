@@ -47,7 +47,7 @@ class AnimationLayerStack {
     copiedLayers = _Runtime.slice(layers, 0, null);
     blendTrees = cast ([] : Array<Dynamic>);
     channels = cast ([] : Array<Dynamic>);
-    channelByTarget = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    channelByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     stateMachines = cast ([] : Array<Dynamic>);
     sampleWidth = 0.0;
     {
@@ -162,7 +162,7 @@ class AnimationLayerStack {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(copied, 'length') : Float)) : Bool)) {
         var channelIndex:Dynamic = flighthq._internal._StaticIndex.readArray(copied, index);
-        if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast channelCount : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast channelCount : Float)) : Bool)) : Bool)) {
           _Runtime.throwValue(_Runtime.rangeError('AnimationLayer channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
         }
         if ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(copied, (index - 1.0)), channelIndex) : Bool)) : Bool)) {

@@ -14,9 +14,9 @@ import flighthq.types.Lifecycle.LifecycleBackend;
 class Lifecycle {
   public static var _backend__lifecycle:Null<LifecycleBackend> = _Runtime.explicitNull();
 
-  public static final _savedState__lifecycle:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _savedState__lifecycle:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _subscriptions__lifecycle:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__lifecycle:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachAppLifecycle(app:AppLifecycle):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -65,15 +65,15 @@ class Lifecycle {
   @:noCompletion
   public static function createWebLifecycleBackend():LifecycleBackend {
     var _windowFocused:Dynamic = cast _Runtime.UNDEFINED;
-    _windowFocused = !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined');
+    _windowFocused = !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined');
     return cast { getState: function() {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast 'active'; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'active'; }
       if ((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool)) { return cast 'background'; }
       return cast ((cast _windowFocused : Bool) ? (cast 'active' : Dynamic) : (cast 'inactive' : Dynamic));
     }, subscribe: function(listener:Dynamic) {
       var onFocus:Dynamic = cast _Runtime.UNDEFINED;
       var onBlur:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return cast function() {
+      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) : Bool)) { return cast function() {
 
       }; }
       (_windowFocused = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
@@ -99,20 +99,20 @@ class Lifecycle {
       };
     }, getLaunchKind: function() {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool)) { return cast 'cold'; }
-      entries = (cast (#if js (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') #else _Runtime.callProperty(_Runtime.globalValue('performance'), 'getEntriesByType', cast (['navigation'] : Array<Dynamic>)) #end) : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
-      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((#if js (cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type #else _Runtime.field(flighthq._internal._StaticIndex.readArray(entries, 0.0), 'type') #end), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('performance'), 'undefined') : Bool)) { return cast 'cold'; }
+      entries = (cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
     }, subscribeMemoryWarning: function(listener:Dynamic) {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;
       var onPressureRelieved:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
       onPressure = function(e:flighthq._internal.dom.Event) {
         var detail:Dynamic = cast _Runtime.UNDEFINED;
         var pressure:Dynamic = cast _Runtime.UNDEFINED;
-        detail = (#if js (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail #else _Runtime.field((cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>), 'detail') #end);
+        detail = (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
         pressure = _Runtime.optionalField(detail, 'pressure');
         if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
           _Runtime.callValue(listener, cast (['critical'] : Array<Dynamic>));

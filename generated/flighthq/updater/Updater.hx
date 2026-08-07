@@ -23,9 +23,9 @@ class Updater {
     ((cast Updater._states__updater : flighthq._internal._WeakMap).set(updater, next));
   }
 
-  public static final _states__updater:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _states__updater:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _subscriptions__updater:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__updater:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachAppUpdater(updater:AppUpdater):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;

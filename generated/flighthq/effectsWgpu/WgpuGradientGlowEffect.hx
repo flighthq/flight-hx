@@ -57,7 +57,7 @@ class WgpuGradientGlowEffect {
     _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
     rampTexture = _Runtime.callValue(getWgpuEffectGradientRampTexture, cast ([state, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
-    rampBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: (#if js (cast rampTexture : flighthq._internal.dom.GPUTexture).createView() #else _Runtime.callProperty(rampTexture, 'createView', cast ([] : Array<Dynamic>)) #end) }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
+    rampBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: (cast rampTexture : flighthq._internal.dom.GPUTexture).createView() }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     blurredBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field(s1, 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuGradientGlowEffect.getLookupPipeline__wgpuGradientGlowEffect, cast ([state] : Array<Dynamic>));
     slotOffset = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
@@ -65,12 +65,12 @@ class WgpuGradientGlowEffect {
 
     }] : Array<Dynamic>));
     pass = _Runtime.callProperty(fs, 'beginPass', cast ([s0, 'load'] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>)) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>)] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, blurredBG) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, blurredBG] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, rampBG) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, rampBG] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0) #else _Runtime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end() #else _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, blurredBG);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, rampBG);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBlitPass, cast ([state, s0, dst] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
@@ -111,5 +111,5 @@ class WgpuGradientGlowEffect {
     return cast null;
   }
 
-  public static final lookupPipelines__wgpuGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final lookupPipelines__wgpuGradientGlowEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

@@ -45,8 +45,8 @@ class RiveLayout {
     var imports:Array<RiveLayoutImport> = cast _Runtime.UNDEFINED;
     componentProviders = _Runtime.callValue(RiveLayout.findRiveLayoutComponents__riveLayout, cast ([artboard, nodes, diagnostics] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals((cast componentProviders : flighthq._internal._Map).size, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    providers = _Runtime.construct(_Runtime.globalValue('Map'), [componentProviders]);
-    placements = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    providers = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [componentProviders]);
+    placements = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -73,8 +73,8 @@ class RiveLayout {
         index++;
       }
     }
-    providerParents = _Runtime.construct(_Runtime.globalValue('Map'), []);
-    providerChildren = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    providerParents = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+    providerChildren = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (provider in _Runtime.iterable(((cast providers : flighthq._internal._Map).values()))) {
       var start:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), _Runtime.field(provider, 'sourceIndex'));
       var parent:Dynamic = _Runtime.callValue(RiveLayout.findRiveLayoutParent__riveLayout, cast ([artboard, componentProviders, start, _Runtime.field(provider, 'sourceIndex')] : Array<Dynamic>));
@@ -101,7 +101,7 @@ class RiveLayout {
 
   public static function findRiveLayoutComponents__riveLayout(artboard:RiveArtboardGraph, nodes:Array<Null<DisplayObject>>, diagnostics:Null<Array<ImportDiagnostic>>):Dynamic {
     var providers:Dynamic = cast _Runtime.UNDEFINED;
-    providers = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    providers = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -417,12 +417,12 @@ class RiveLayout {
   }
 
   public static function finiteNonNegative__riveLayout(value:Float):Float {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function positiveInteger__riveLayout(value:Float):Float {
-    return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 1.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 

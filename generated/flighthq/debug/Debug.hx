@@ -76,7 +76,7 @@ class Debug {
 
   public static var _savedGlobalLevel__debug:LogLevel = LogLevel.Verbose;
 
-  public static final _subsystems__debug:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _subsystems__debug:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     return cast Facade_Debug_flighthq_debug_DebugTiming.beginDebugSpan(name, channel);

@@ -16,7 +16,7 @@ class DomTextureResolver {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    registry = _Runtime.setField(runtime, 'domTextureResolverRegistry', (_Runtime.field(runtime, 'domTextureResolverRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
+    registry = _Runtime.setField(runtime, 'domTextureResolverRegistry', (_Runtime.field(runtime, 'domTextureResolverRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])));
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 

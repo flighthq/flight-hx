@@ -135,7 +135,7 @@ class CanvasRenderTexture {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast CanvasRenderTexture._targetsByState__canvasRenderTexture : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast CanvasRenderTexture._targetsByState__canvasRenderTexture : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
@@ -147,5 +147,5 @@ class CanvasRenderTexture {
     return cast null;
   }
 
-  public static final _targetsByState__canvasRenderTexture:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _targetsByState__canvasRenderTexture:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

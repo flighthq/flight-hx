@@ -109,8 +109,8 @@ class BitmapFingerprint {
     var cells:Dynamic = cast _Runtime.UNDEFINED;
     colon = _Runtime.callProperty(text, 'indexOf', cast ([':'] : Array<Dynamic>));
     if ((cast ((cast colon : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
-    gridSize = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(text, 0.0, colon), 10.0] : Array<Dynamic>));
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([gridSize] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast gridSize : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    gridSize = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(text, 0.0, colon), 10.0] : Array<Dynamic>));
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([gridSize] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast gridSize : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
     hex = _Runtime.slice(text, (colon + 1.0), null);
     if ((cast !_Runtime.strictEquals(_Runtime.field(hex, 'length'), (((gridSize * gridSize) * 3.0) * 2.0)) : Bool)) { return cast null; }
     cells = new flighthq._internal._UInt8Array(_Runtime.divideNumbers(_Runtime.field(hex, 'length'), 2.0));

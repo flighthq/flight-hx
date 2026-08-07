@@ -31,16 +31,16 @@ class SwfFrameAction {
     var byClass:Dynamic = cast _Runtime.UNDEFINED;
     file = _Runtime.callValue(readAbcFile, cast ([source] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(file, null) : Bool)) { return cast null; }
-    bodies = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    bodies = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (body in _Runtime.iterable(_Runtime.field(file, 'methodBodies'))) {
       var instructions:Dynamic = _Runtime.callValue(readAbcInstructions, cast ([_Runtime.field(body, 'code')] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(instructions, null) : Bool)) { ((cast bodies : flighthq._internal._Map).set(_Runtime.field(body, 'method'), instructions)); }
     }
-    byClass = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    byClass = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (instance in _Runtime.iterable(_Runtime.field(file, 'instances'))) {
       var constructor:Dynamic = ((cast bodies : flighthq._internal._Map).get(_Runtime.field(instance, 'initializer')));
       if ((cast _Runtime.strictEquals(constructor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      var methodsByName:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+      var methodsByName:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
       for (trait in _Runtime.iterable(_Runtime.field(instance, 'traits'))) {
         if ((cast _Runtime.strictEquals(_Runtime.field(trait, 'kind'), AbcTraitKindValue.Method) : Bool)) { ((cast methodsByName : flighthq._internal._Map).set(_Runtime.callValue(SwfFrameAction.resolveAbcName__swfFrameAction, cast ([file, _Runtime.field(trait, 'name')] : Array<Dynamic>)), _Runtime.field(trait, 'methodIndex'))); }
       }
@@ -130,7 +130,7 @@ class SwfFrameAction {
   public static function readSwfAbcFrameScriptCalls__swfFrameAction(file:AbcFile, constructor:Array<AbcInstruction>, bodies:Dynamic, methodsByName:Dynamic):Dynamic {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Array<SwfAbcValue__swfFrameAction> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    frames = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     stack = cast ([] : Array<Dynamic>);
     for (instruction in _Runtime.iterable(constructor)) {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallPropVoid) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(instruction, 'opcode'), AbcOpcodeValue.CallProperty) : Bool)) : Bool)) {
@@ -239,5 +239,5 @@ class SwfFrameAction {
 
   public static final ADD_FRAME_SCRIPT__swfFrameAction:Dynamic = 'addFrameScript';
 
-  public static final SCAFFOLDING__swfFrameAction:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([AbcOpcodeValue.CoerceAny, AbcOpcodeValue.Debug, AbcOpcodeValue.DebugFile, AbcOpcodeValue.DebugLine, AbcOpcodeValue.FindPropStrict, AbcOpcodeValue.GetLex, AbcOpcodeValue.GetLocal0, AbcOpcodeValue.Pop, AbcOpcodeValue.PushScope, AbcOpcodeValue.ReturnVoid] : Array<Dynamic>)]);
+  public static final SCAFFOLDING__swfFrameAction:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([AbcOpcodeValue.CoerceAny, AbcOpcodeValue.Debug, AbcOpcodeValue.DebugFile, AbcOpcodeValue.DebugLine, AbcOpcodeValue.FindPropStrict, AbcOpcodeValue.GetLex, AbcOpcodeValue.GetLocal0, AbcOpcodeValue.Pop, AbcOpcodeValue.PushScope, AbcOpcodeValue.ReturnVoid] : Array<Dynamic>)]);
 }

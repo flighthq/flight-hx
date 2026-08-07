@@ -17,7 +17,7 @@ import flighthq.types.Vector2.Vector2Like;
 class Tray {
   public static var _animationGuard__tray:Null<Dynamic> = _Runtime.explicitNull();
 
-  public static final _animations__tray:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _animations__tray:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static var _backend__tray:Null<TrayBackend> = _Runtime.explicitNull();
 

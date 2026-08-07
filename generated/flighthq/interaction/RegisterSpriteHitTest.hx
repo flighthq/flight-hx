@@ -74,5 +74,5 @@ class RegisterSpriteHitTest {
 
   public static final bitmapAlphaLocalPoint__registerSpriteHitTest:Dynamic = { x: 0.0, y: 0.0 };
 
-  public static final bitmapCache__registerSpriteHitTest:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final bitmapCache__registerSpriteHitTest:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

@@ -18,8 +18,8 @@ class XmlQuery {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(element.attributes, name);
     if ((cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
-    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
+    parsed = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([value] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

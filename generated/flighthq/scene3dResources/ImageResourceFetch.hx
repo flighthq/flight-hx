@@ -21,7 +21,7 @@ class ImageResourceFetch {
           var error:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch1:Dynamic;
-            if ((cast (#if js signal.aborted #else _Runtime.field(signal, 'aborted') #end) : Bool)) {
+            if ((cast signal.aborted : Bool)) {
               __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.reject(error);
               });

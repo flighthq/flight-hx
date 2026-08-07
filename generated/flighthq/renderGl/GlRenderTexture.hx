@@ -231,7 +231,7 @@ class GlRenderTexture {
   }
 
   public static function getEntries__glRenderTexture(state:GlRenderState):Dynamic {
-    return cast _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderTextureCache', (_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
+    return cast _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderTextureCache', (_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glRenderTextureCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])));
     return cast null;
   }
 

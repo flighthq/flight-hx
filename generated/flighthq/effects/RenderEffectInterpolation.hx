@@ -21,9 +21,9 @@ class RenderEffectInterpolation {
     var outRecord:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
     tc = HxMath.max(0.0, HxMath.min(1.0, t));
-    numericKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    booleanKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
-    stringKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    numericKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+    booleanKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+    stringKeys = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     aRec = (cast a : Dynamic);
     bRec = (cast b : Dynamic);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aRec))) {

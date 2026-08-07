@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 import type { HostEndpointAudit } from '../analyze/host-endpoints.ts';
+import type { HostToolkitAudit } from '../analyze/host-toolkit.ts';
 import type { HostTypeAudit } from '../analyze/host-types.ts';
 import type { TypedStructClassFeasibilityAudit } from '../analyze/typed-struct-classes.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
@@ -136,6 +137,58 @@ export function hostTypeSummary(audit: HostTypeAudit): string {
   for (const type of audit.types) {
     lines.push(
       `| \`${type.name}\` | ${type.declarationSources.map((source) => `\`${source}\``).join('<br>')} | ${type.typeReferences.count} | ${type.arities.join(', ') || '—'} | ${type.members.length} | ${type.members.reduce((total, member) => total + member.reads, 0)} | ${type.members.reduce((total, member) => total + member.writes, 0)} | ${type.members.reduce((total, member) => total + member.calls, 0)} |`,
+    );
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function hostToolkitSummary(audit: HostToolkitAudit): string {
+  const summary = audit.summary;
+  const lines = [
+    '# Host Toolkit Dependency Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Host type keys | ${summary.hostTypeKeys} |`,
+    `| External type keys | ${summary.externalTypeKeys} |`,
+    `| Dynamic compatibility type entries | ${summary.dynamicTypeEntries} |`,
+    `| Global value keys | ${summary.globalValueKeys} |`,
+    `| Portable global value keys | ${summary.portableGlobalValueKeys} |`,
+    `| JavaScript-only global value keys | ${summary.jsOnlyGlobalValueKeys} |`,
+    `| Module value keys | ${summary.moduleValueKeys} |`,
+    `| Type uses | ${summary.typeUses} |`,
+    `| Value uses | ${summary.valueUses} |`,
+    `| Missing toolkit entries | ${summary.missingEntries} |`,
+    '',
+    '## Types',
+    '',
+    '| Key | Kind | Emitted Haxe type | Provider | Coverage | Uses |',
+    '| --- | --- | --- | --- | --- | ---: |',
+  ];
+  for (const entry of audit.types) {
+    lines.push(
+      `| \`${entry.key}\` | \`${entry.kind}\` | \`${entry.haxeType}\` | \`${entry.provider}\` | \`${entry.coverage}\` | ${entry.uses} |`,
+    );
+  }
+  lines.push('', '## Ambient values', '', '| Key | Provider | Coverage | Uses |', '| --- | --- | --- | ---: |');
+  for (const entry of audit.values) {
+    lines.push(`| \`${entry.key}\` | \`${entry.provider}\` | \`${entry.coverage}\` | ${entry.uses} |`);
+  }
+  lines.push(
+    '',
+    '## External module values',
+    '',
+    '| Key | Specifier | Imported binding | Coverage | Uses |',
+    '| --- | --- | --- | --- | ---: |',
+  );
+  for (const entry of audit.moduleValues) {
+    lines.push(
+      `| \`${entry.key}\` | \`${entry.specifier}\` | \`${entry.imported}\` | \`${entry.coverage}\` | ${entry.uses} |`,
     );
   }
   lines.push('');

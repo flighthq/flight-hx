@@ -28,7 +28,7 @@ class Shell {
       }));
     }, openExternal: function(url:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'open')), 'function') : Bool)) : Bool)) { return cast false; }
+        if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'open')), 'function') : Bool)) : Bool)) { return cast false; }
         try {
           return cast !_Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
         } catch (__error:Dynamic) {
@@ -70,7 +70,7 @@ class Shell {
   public static function isShellUrlAllowed(url:String):Bool {
     if ((cast _Runtime.strictEquals(Shell._urlSchemeAllowlist__shell, null) : Bool)) { return cast true; }
     try {
-      var scheme:Dynamic = _Runtime.replace((#if js (cast _Runtime.construct(_Runtime.globalValue('URL'), [url]) : flighthq._internal.dom.URL).protocol #else _Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url]), 'protocol') #end), _Runtime.regexp(':$$', ''), '', false);
+      var scheme:Dynamic = _Runtime.replace((cast _Runtime.construct(flighthq._internal._HostValueLut.get('URL'), [url]) : flighthq._internal.dom.URL).protocol, _Runtime.regexp(':$$', ''), '', false);
       return cast _Runtime.includes(Shell._urlSchemeAllowlist__shell, scheme);
     } catch (__error:Dynamic) {
       return cast false;

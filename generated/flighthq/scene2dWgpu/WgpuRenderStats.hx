@@ -54,5 +54,5 @@ class WgpuRenderStats {
     return cast null;
   }
 
-  public static final _stats__wgpuRenderStats:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _stats__wgpuRenderStats:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

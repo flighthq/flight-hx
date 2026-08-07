@@ -104,11 +104,12 @@ Generated ordinary implementation code should use portable Haxe constructs. A sm
 - promises and async coordination;
 - structural unions and discriminants;
 - object reflection and property presence;
-- platform globals.
 
 Runtime source lives under `src/flighthq/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flighthq._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
 
 The runtime distinguishes ECMAScript `Math.fround` from Haxe's integer-oriented `Math.fround`: the JavaScript operation is one IEEE-754 binary32 round whose result is returned as the target's ordinary `Float`. Async flow also distinguishes normal fallthrough, which fulfills with JavaScript `undefined`, from an explicit `return null`. Once a function enters the async-flow trampoline, a synchronous loop containing a function return remains in that trampoline even when the loop itself has no `await`; the return must cross the loop as a flow outcome rather than an ordinary callback result.
+
+The standard toolkit is a separate maintained layer. `WebExterns.hx` and `_internal/dom/` provide declarations for external type keys; `_HostValueLut.hx` and `_HostModuleLut.hx` provide values for ambient and external-module keys; named backend adapters and public host packages such as `hostLime` provide target capabilities. Adding a JavaScript/TypeScript semantic to `_Runtime` is not a substitute for implementing a toolkit key.
 
 Platform adapters follow these rules:
 
@@ -119,7 +120,9 @@ Platform adapters follow these rules:
 
 WebGL member calls remain typed maintained endpoints. Direct constant reads use the actual JavaScript context's enum surface so wrapped contexts and browser implementations observe the same identity as the TypeScript source; non-JavaScript targets use the fixed WebGL specification values. JavaScript endpoints preserve those context values through dispatch, while native endpoints own the integer coercion required by Lime/OpenGL signatures.
 
-TypeScript host ambient identities map mechanically to `flighthq._internal.dom.<SameTypeName>` from checker-resolved declaration origin, never from a type-name or prefix allowlist. Ordinary members on those values emit as direct typed Haxe fields and methods on JavaScript; a receiver recovered through Dynamic storage is cast back to its mapped host type first so the real JavaScript extern validates the declaration and member. Current non-JavaScript declarations are Dynamic compatibility stubs, so the same sites retain `_Runtime` field/call semantics there: absent reads remain tolerant, calls preserve the receiver and target-specific arity adjustment, and writes/mutations use the legacy runtime boundary. A type may widen the direct condition only when its maintained native declaration becomes concrete. Heterogeneous host unions remain Dynamic because they have no single mapped identity. Existing Canvas, DOM-root, WebGL, and WebGPU backend endpoints keep priority where they own target portability or observable host semantics. The deterministic host-type census records the complete mapped declaration and member surface, while missing maintained declarations fail Haxe compilation by name.
+TypeScript host ambient identities map mechanically to `flighthq._internal.dom.<SameTypeName>` from checker-resolved declaration origin, never from a type-name or prefix allowlist. The transpiler emits ordinary members as the same direct typed Haxe fields and methods on every target; a receiver recovered through Dynamic storage is cast back to its mapped host type first. It does not rewrite a known member to `_Runtime.field` or `_Runtime.callProperty` to compensate for an incomplete native toolkit declaration. Heterogeneous host unions remain Dynamic because they have no single mapped identity. Existing Canvas, DOM-root, WebGL, and WebGPU backend endpoints keep priority where they own target portability or observable host semantics.
+
+External type identities with no generated declaration import a stable `WebExterns` key. Ambient values and non-Flight module values emit fully qualified `_HostValueLut` and `_HostModuleLut` calls. The deterministic host-toolkit manifest records every referenced key, its maintained provider, its use sites, and whether a type provider is concrete or a Dynamic compatibility stub. Generation fails before completion when a key has no provider. Dynamic declarations may remain in the toolkit while a target implementation is unfinished, but that debt cannot change the transpiler's emitted type or member expression. See [`host-toolkit-boundary.md`](host-toolkit-boundary.md).
 
 ## JavaScript and Vitest Bridge
 

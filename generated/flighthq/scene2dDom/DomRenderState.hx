@@ -30,12 +30,12 @@ class DomRenderState {
     _Runtime.setField(runtime, 'domClipHooks', null);
     _Runtime.setField(runtime, 'domClipStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'domCurrentElement', null);
-    _Runtime.setField(runtime, 'domElementMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'domElementMap', _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
     _Runtime.setField(runtime, 'domNextOrderList', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'domOrderLength', -1.0);
     _Runtime.setField(runtime, 'domOrderList', cast ([] : Array<Dynamic>));
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).position = 'relative') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'position', 'relative') #end);
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'overflow', 'hidden') #end);
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'relative');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     return cast state;
     return cast null;
   }

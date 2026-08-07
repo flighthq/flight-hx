@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class NumberTheory {
   public static function factorial(n:Float):Float {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('factorial: n must be a non-negative integer')); }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([n] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast n : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('factorial: n must be a non-negative integer')); }
     if ((cast ((cast _Runtime.strictEquals(n, 0.0) : Bool) || (cast _Runtime.strictEquals(n, 1.0) : Bool)) : Bool)) { return cast 1.0; }
     result = 1.0;
     {

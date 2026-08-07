@@ -36,7 +36,7 @@ class RevealScene3DResourcesOnResolve {
     fadeSeconds = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fadeSeconds; }), function():Dynamic return cast 0.4);
     from = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.from; }), function():Dynamic return cast 0.0);
     tweenOptions = ((cast !_Runtime.strictEquals(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.ease; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: options.ease } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    ownersByTexture = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    ownersByTexture = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     owners = cast ([] : Array<Dynamic>);
     _Runtime.callValue(RevealScene3DResourcesOnResolve.collectPendingTextureOwners__revealScene3DResourcesOnResolve, cast ([scene, resolver, ownersByTexture, owners] : Array<Dynamic>));
     for (owner in _Runtime.iterable(owners)) {
@@ -69,7 +69,7 @@ class RevealScene3DResourcesOnResolve {
     var ownersByNode:Dynamic = cast _Runtime.UNDEFINED;
     var visit:Dynamic = cast _Runtime.UNDEFINED;
     slots = cast ([] : Array<Dynamic>);
-    ownersByNode = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    ownersByNode = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     visit = function(node:Node3D) {
       var owner:Dynamic = cast _Runtime.UNDEFINED;
       var materials:Dynamic = cast _Runtime.UNDEFINED;
@@ -91,7 +91,7 @@ class RevealScene3DResourcesOnResolve {
               if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast _Runtime.callValue(hasTextureSource, cast ([texture] : Array<Dynamic>)) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed) : Bool)) : Bool)) { j++; continue; }
               var ownerState:Dynamic = ((cast ownersByNode : flighthq._internal._Map).get(owner));
               if ((cast _Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                (ownerState = cast ({ node: owner, pending: _Runtime.construct(_Runtime.globalValue('Set'), []) } : Dynamic));
+                (ownerState = cast ({ node: owner, pending: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) } : Dynamic));
                 ((cast ownersByNode : flighthq._internal._Map).set(owner, ownerState));
                 _Runtime.callProperty(owners, 'push', cast ([ownerState] : Array<Dynamic>));
               }

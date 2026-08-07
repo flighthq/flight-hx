@@ -22,7 +22,7 @@ class ValidateParticleEmitterConfig {
     mutable = (cast (cast out : Dynamic) : Dynamic);
     defaultsRec = (cast (cast defaults : Dynamic) : Dynamic);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
-      if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.getIndex(mutable, field)] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.setIndex(mutable, field, _Runtime.getIndex(defaultsRec, field)); }
+      if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.getIndex(mutable, field)] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.setIndex(mutable, field, _Runtime.getIndex(defaultsRec, field)); }
     }
     return cast _Runtime.mergeObjects([out, { alphaCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.alphaCurve] : Array<Dynamic>)) : Bool) ? (cast out.alphaCurve : Dynamic) : (cast null : Dynamic)) }, { colorCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.colorCurve] : Array<Dynamic>)) : Bool) ? (cast out.colorCurve : Dynamic) : (cast null : Dynamic)) }, { scaleCurve: ((cast _Runtime.callValue(ValidateParticleEmitterConfig.isFiniteCurve__validateParticleEmitterConfig, cast ([out.scaleCurve] : Array<Dynamic>)) : Bool) ? (cast out.scaleCurve : Dynamic) : (cast null : Dynamic)) }, { maxParticles: HxMath.max(0.0, HxMath.floor(out.maxParticles)) }, { burstCount: HxMath.max(0.0, HxMath.floor(out.burstCount)) }, { burstInterval: HxMath.max(0.0, out.burstInterval) }, { duration: HxMath.max(0.0, out.duration) }, { frameCount: HxMath.max(1.0, HxMath.floor(out.frameCount)) }, { frameRate: HxMath.max(0.0, out.frameRate) }, { regionIdMin: HxMath.max(0.0, HxMath.floor(out.regionIdMin)) }, { regionIdMax: HxMath.max(HxMath.max(0.0, HxMath.floor(out.regionIdMin)), HxMath.floor(out.regionIdMax)) }, { spawnRate: HxMath.max(0.0, out.spawnRate) }, { lifetimeMin: HxMath.max(0.0, out.lifetimeMin) }, { lifetimeMax: HxMath.max(0.0, out.lifetimeMax) }, { speedMin: HxMath.max(0.0, out.speedMin) }, { speedMax: HxMath.max(0.0, out.speedMax) }, { scaleMin: HxMath.max(0.0, out.scaleMin) }, { scaleMax: HxMath.max(0.0, out.scaleMax) }, { emitterConeAngle: HxMath.max(0.0, out.emitterConeAngle) }, { emitterDepth: HxMath.max(0.0, out.emitterDepth) }, { emitterRadius: HxMath.max(0.0, out.emitterRadius) }, { emitterWidth: HxMath.max(0.0, out.emitterWidth) }, { emitterHeight: HxMath.max(0.0, out.emitterHeight) }]);
     return cast null;
@@ -33,23 +33,23 @@ class ValidateParticleEmitterConfig {
     issues = cast ([] : Array<Dynamic>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
       var value:Dynamic = _Runtime.getIndex(config, field);
-      if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
+      if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must be a finite number (got ' + Std.string(Std.string(value)) + ')', severity: 'error' }] : Array<Dynamic>));
       }
     }
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NON_NEGATIVE_FIELDS__validateParticleEmitterConfig)) {
       var value:Dynamic = _Runtime.getIndex(config, field);
-      if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast ((cast value : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' must not be negative (got ' + Std.string(value) + ')', severity: 'warning' }] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([config.lifetimeMax] : Array<Dynamic>)) : Bool) && (cast ((cast config.lifetimeMax : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.lifetimeMax] : Array<Dynamic>)) : Bool) && (cast ((cast config.lifetimeMax : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'lifetimeMax', message: 'lifetimeMax must be > 0 or particles die instantly', severity: 'warning' }] : Array<Dynamic>));
     }
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([config.maxParticles] : Array<Dynamic>)) : Bool) && (cast ((cast config.maxParticles : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.maxParticles] : Array<Dynamic>)) : Bool) && (cast ((cast config.maxParticles : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'maxParticles', message: 'maxParticles must be >= 1 or nothing ever spawns', severity: 'warning' }] : Array<Dynamic>));
     }
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([config.frameCount] : Array<Dynamic>)) : Bool) && (cast ((cast config.frameCount : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.frameCount] : Array<Dynamic>)) : Bool) && (cast ((cast config.frameCount : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: 'frameCount', message: 'frameCount must be >= 1', severity: 'warning' }] : Array<Dynamic>));
     }
     _Runtime.callValue(ValidateParticleEmitterConfig.reportInvertedRange__validateParticleEmitterConfig, cast ([issues, config, 'lifetimeMin', 'lifetimeMax'] : Array<Dynamic>));
@@ -70,7 +70,7 @@ class ValidateParticleEmitterConfig {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -90,7 +90,7 @@ class ValidateParticleEmitterConfig {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(curve, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
+        if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(curve, i)] : Array<Dynamic>)) : Bool) : Bool)) {
           _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' contains a non-finite sample at index ' + Std.string(i) + '', severity: 'error' }] : Array<Dynamic>));
           break;
         }
@@ -104,7 +104,7 @@ class ValidateParticleEmitterConfig {
     var max:Dynamic = cast _Runtime.UNDEFINED;
     min = _Runtime.getIndex(config, minField);
     max = _Runtime.getIndex(config, maxField);
-    if ((cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([min] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([max] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast min : Float) : Float) > (cast (cast max : Float) : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([min] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([max] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast min : Float) : Float) > (cast (cast max : Float) : Float)) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: minField, message: '' + Std.string(minField) + ' (' + Std.string(min) + ') is greater than ' + Std.string(maxField) + ' (' + Std.string(max) + ')', severity: 'warning' }] : Array<Dynamic>));
     }
   }
@@ -112,7 +112,7 @@ class ValidateParticleEmitterConfig {
   public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(config, field);
-    if ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(((cast (cast value : Float) : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 1.0 : Float))) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(((cast (cast value : Float) : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast value : Float) : Float) > (cast 1.0 : Float))) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' (' + Std.string(value) + ') is outside the expected 0–1 range', severity: 'warning' }] : Array<Dynamic>));
     }
   }

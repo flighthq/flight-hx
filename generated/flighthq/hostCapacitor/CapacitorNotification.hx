@@ -18,7 +18,7 @@ class CapacitorNotification {
     var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
     notifications = _Runtime.field(capacitor, 'localNotifications');
     nextNumericId = 1.0;
-    idByNumber = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    idByNumber = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     cachedPermission = 'default';
     flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(notifications, 'checkPermissions', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
       (cachedPermission = cast (_Runtime.callValue(CapacitorNotification.toNotificationPermission__capacitorNotification, cast ([_Runtime.field(status, 'display')] : Array<Dynamic>)) : Dynamic));
@@ -110,7 +110,7 @@ class CapacitorNotification {
           numericId = nextNumericId++;
           stringId = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
           ((cast idByNumber : flighthq._internal._Map).set(numericId, stringId));
-          schema = { id: numericId, title: request.title, body: request.body, schedule: { at: _Runtime.construct(_Runtime.globalValue('Date'), [schedule.at]) } };
+          schema = { id: numericId, title: request.title, body: request.body, schedule: { at: _Runtime.construct(flighthq._internal._HostValueLut.get('Date'), [schedule.at]) } };
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap(_Runtime.callProperty(notifications, 'schedule', cast ([{ notifications: cast ([schema] : Array<Dynamic>) }] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
@@ -170,8 +170,8 @@ class CapacitorNotification {
       var mapped:Dynamic = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast _Runtime.strictEquals(mapped, stringId) : Bool)) { return cast numericId; }
     }
-    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([stringId] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
+    parsed = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([stringId] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     return cast null;
   }
 

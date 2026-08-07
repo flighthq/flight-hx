@@ -13,7 +13,7 @@ import flighthq.types.ShareFile;
 import flighthq.types.ShareSignals;
 
 class Share {
-  public static final _attachedSignals__share:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+  public static final _attachedSignals__share:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static var _backend__share:Null<ShareBackend> = _Runtime.explicitNull();
 
@@ -29,12 +29,12 @@ class Share {
   @:noCompletion
   public static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function() {
-      return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
+      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
     }, canShare: function(content:Dynamic) {
-      if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        return cast _Runtime.coalesce((#if js ({ final __hostTypeCall0 = flighthq._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare(data); }) #else _Runtime.callOptionalProperty(flighthq._internal.backend.DomNavigatorBackend.value(), 'canShare', cast ([data] : Array<Dynamic>)) #end), function():Dynamic return cast false);
+        return cast _Runtime.coalesce(({ final __hostTypeCall0 = flighthq._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.Navigator).canShare(data); }), function():Dynamic return cast false);
       } catch (__error:Dynamic) {
         return cast false;
       }
@@ -42,7 +42,7 @@ class Share {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch1:Dynamic;
-          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
+          if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
             __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
@@ -72,7 +72,7 @@ class Share {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var __flowBranch3:Dynamic;
-          if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
+          if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
@@ -152,11 +152,11 @@ class Share {
   public static function shareContentToNavigatorData__share(content:ShareContent):flighthq._internal.dom.ShareData {
     var data:flighthq._internal.dom.ShareData = cast _Runtime.UNDEFINED;
     data = {  };
-    if ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.title = content.title) #else _Runtime.setField(data, 'title', content.title) #end); }
-    if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.text = content.text) #else _Runtime.setField(data, 'text', content.text) #end); }
-    if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (data.url = content.url) #else _Runtime.setField(data, 'url', content.url) #end); }
+    if ((cast !_Runtime.strictEquals(content.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.title = content.title); }
+    if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.text = content.text); }
+    if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.url = content.url); }
     if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (#if js (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>))) #else _Runtime.setField(data, 'files', _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>))) #end);
+      (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:Dynamic) return _Runtime.callValue(Share.shareFileToDomFile__share, cast ([f] : Array<Dynamic>))] : Array<Dynamic>)));
     }
     return cast data;
     return cast null;
@@ -204,8 +204,8 @@ class Share {
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');
     if ((cast isBase64 : Bool)) {
-      var binary:Dynamic = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([body] : Array<Dynamic>));
-      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(binary, 'length')])) : Dynamic));
+      var binary:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([body] : Array<Dynamic>));
+      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [_Runtime.field(binary, 'length')])) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
@@ -214,12 +214,12 @@ class Share {
         }
       }
     } else {
-      var decoded:Dynamic = _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([body] : Array<Dynamic>));
-      var encoded:Dynamic = (#if js (cast _Runtime.construct(_Runtime.globalValue('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded) #else _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextEncoder'), []), 'encode', cast ([decoded] : Array<Dynamic>)) #end);
-      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
+      var decoded:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('decodeURIComponent'), cast ([body] : Array<Dynamic>));
+      var encoded:Dynamic = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('TextEncoder'), []) : flighthq._internal.dom.TextEncoder).encode(decoded);
+      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
       (cast bytes : flighthq._internal._UInt8Array).set(encoded);
     }
-    return cast _Runtime.construct(_Runtime.globalValue('File'), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);
+    return cast _Runtime.construct(flighthq._internal._HostValueLut.get('File'), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);
     return cast null;
   }
 

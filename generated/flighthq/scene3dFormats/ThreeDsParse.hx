@@ -152,20 +152,20 @@ class ThreeDsParse {
       return cast document;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
-    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(mainId, THREE_DS_MAIN) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, '3ds.wrong-main-chunk', 'parse3ds', { foundId: mainId }] : Array<Dynamic>));
       return cast document;
     }
-    threeDsDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Map'), []), function():Dynamic return cast null);
-    materials = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    threeDsDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
+    materials = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     meshes = cast ([] : Array<Dynamic>);
     lights = cast ([] : Array<Dynamic>);
     cameras = cast ([] : Array<Dynamic>);
     _Runtime.callValue(ThreeDsParse.collectThreeDsObjects__threeDsParse, cast ([view, 0.0, materials, meshes, lights, cameras, threeDsDrops] : Array<Dynamic>));
     pivots = _Runtime.callValue(ThreeDsParse.collectThreeDsPivots__threeDsParse, cast ([view, 0.0] : Array<Dynamic>));
-    materialIndexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    materialIndexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
@@ -823,7 +823,7 @@ class ThreeDsParse {
     var pivots:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
-    pivots = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    pivots = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     end = HxMath.min(_Runtime.addNumbers(offset, _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength'));
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     while ((cast ((cast (cursor + THREE_DS_CHUNK_HEADER_BYTES) : Float) <= (cast end : Float)) : Bool)) {

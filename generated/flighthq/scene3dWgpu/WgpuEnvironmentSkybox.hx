@@ -50,10 +50,10 @@ class WgpuEnvironmentSkybox {
       _Runtime.setField(sky, 'cubeBindGroup', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(sky, 'cubeBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: _Runtime.callValue(WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>)));
       _Runtime.setField(sky, 'cubeView', cubeView);
     }
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(sky, 'pipeline')) #else _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(sky, 'pipeline')] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(sky, 'uniformBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(sky, 'uniformBindGroup')] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, _Runtime.field(sky, 'cubeBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, _Runtime.field(sky, 'cubeBindGroup')] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0) #else _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(sky, 'pipeline'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(sky, 'uniformBindGroup'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, _Runtime.field(sky, 'cubeBindGroup'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
     _Runtime.voidValue(scene);
   }
 
@@ -70,7 +70,7 @@ class WgpuEnvironmentSkybox {
     var uniformBindGroup:Dynamic = cast _Runtime.UNDEFINED;
     byState = ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (byState = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (byState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap).set(state, byState));
     }
     sky = ((cast byState : flighthq._internal._Map).get(format));
@@ -106,9 +106,9 @@ class WgpuEnvironmentSkybox {
 
   public static final _skyScratch__wgpuEnvironmentSkybox:Dynamic = new flighthq._internal._Float32Array((WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox / 4.0));
 
-  public static final _skyboxes__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _skyboxes__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _skyboxSamplers__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _skyboxSamplers__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final SKYBOX_WGSL__wgpuEnvironmentSkybox:Dynamic = '\nstruct SkyUniform {\n  inverseViewProjection : mat4x4f,\n  params : vec4f,   // x = intensity\n};\n\n@group(0) @binding(0) var<uniform> sky : SkyUniform;\n@group(1) @binding(0) var envCube : texture_cube<f32>;\n@group(1) @binding(1) var envSampler : sampler;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) ndc : vec2f,\n};\n\n@vertex fn vs_main(@builtin(vertex_index) vi : u32) -> VertexOutput {\n  var out : VertexOutput;\n  // Full-screen triangle from the vertex index alone (no vertex buffer).\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  out.ndc = vec2f(x, y);\n  // Emit at the far plane (WebGPU clip z in 0..1) so the backdrop sits at maximum depth.\n  out.clipPosition = vec4f(x, y, 1.0, 1.0);\n  return out;\n}\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  // Reconstruct the world-space ray through this pixel from the near- and far-plane unprojections. The\n  // projection is GL-convention (clip z in -1..1), so unproject at z = -1 (near) and z = +1 (far),\n  // matching scene-gl\'s skybox exactly.\n  let nearW = sky.inverseViewProjection * vec4f(in.ndc, -1.0, 1.0);\n  let farW = sky.inverseViewProjection * vec4f(in.ndc, 1.0, 1.0);\n  let dir = normalize(farW.xyz / farW.w - nearW.xyz / nearW.w);\n  let color = textureSampleLevel(envCube, envSampler, dir, 0.0).rgb * sky.params.x;\n  return vec4f(color, 1.0);\n}\n';
 }

@@ -68,7 +68,7 @@ class SvgPathData {
         }
         if ((cast !(cast expDigit : Bool) : Bool)) { (pos = cast (expStart : Dynamic)); }
       }
-      return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
+      return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
     };
     readFlag = function readFlag():Null<Float> {
       _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));

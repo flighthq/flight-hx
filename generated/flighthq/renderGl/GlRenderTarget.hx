@@ -347,7 +347,7 @@ class GlRenderTarget {
     var colorFormats:Array<RenderTargetFormat> = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     reportedMaxSamples = ((cast ((cast _Runtime.field(requested, 'sampleCount') : Float) > (cast 1.0 : Float)) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MAX_SAMPLES', flighthq._internal.backend.WebGl2Backend.MAX_SAMPLES)) : Dynamic) : (cast 1.0 : Dynamic));
-    maxSamples = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(reportedMaxSamples), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([reportedMaxSamples] : Array<Dynamic>)) : Bool)) : Bool) ? (cast HxMath.max(1.0, HxMath.floor(reportedMaxSamples)) : Dynamic) : (cast 1.0 : Dynamic));
+    maxSamples = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(reportedMaxSamples), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([reportedMaxSamples] : Array<Dynamic>)) : Bool)) : Bool) ? (cast HxMath.max(1.0, HxMath.floor(reportedMaxSamples)) : Dynamic) : (cast 1.0 : Dynamic));
     sampleCount = HxMath.min(_Runtime.field(requested, 'sampleCount'), maxSamples);
     colorFormats = cast ([] : Array<Dynamic>);
     for (format in _Runtime.iterable(_Runtime.field(requested, 'colorFormats'))) {

@@ -91,7 +91,7 @@ class WgpuShadedPrelude {
     binding = ((cast stateBindings : flighthq._internal._WeakMap).get(material));
     sampler = _Runtime.callValue(getWgpuMaterialSampler, cast ([state, _Runtime.field(material, 'diffuseMap')] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(binding, 'layout'), _Runtime.field(pipeline, 'materialBindGroupLayout')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'data'), 'byteLength'), byteLength) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'textures'), 'length'), _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0)) : Bool)) : Bool)) {
-      (#if js ({ final __hostTypeCall0 = _Runtime.optionalField(binding, 'buffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); }) #else _Runtime.callOptionalProperty(_Runtime.optionalField(binding, 'buffer'), 'destroy', cast ([] : Array<Dynamic>)) #end);
+      ({ final __hostTypeCall0 = _Runtime.optionalField(binding, 'buffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); });
       (binding = cast (_Runtime.callValue(WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude, cast ([state, _Runtime.field(pipeline, 'materialBindGroupLayout'), byteLength, _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0), sampler] : Array<Dynamic>)) : Dynamic));
       ((cast stateBindings : flighthq._internal._WeakMap).set(material, binding));
     }
@@ -111,14 +111,14 @@ class WgpuShadedPrelude {
     }
     resourcesChanged = !_Runtime.strictEquals(_Runtime.field(binding, 'sampler'), sampler);
     _Runtime.setField(binding, 'sampler', sampler);
-    (#if js ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), 1.0) : flighthq._internal.dom.GPUBindGroupEntry).resource = sampler) #else _Runtime.setField(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), 1.0), 'resource', sampler) #end);
+    ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), 1.0) : flighthq._internal.dom.GPUBindGroupEntry).resource = sampler);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(binding, 'textures'), 'length') : Float)) : Bool)) {
         var view:Dynamic = _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'textures'), i)] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'views'), i), view) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(_Runtime.field(binding, 'views'), i, view);
-          (#if js ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), _Runtime.callValue(WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude, cast ([i] : Array<Dynamic>))) : flighthq._internal.dom.GPUBindGroupEntry).resource = view) #else _Runtime.setField(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), _Runtime.callValue(WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude, cast ([i] : Array<Dynamic>))), 'resource', view) #end);
+          ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), _Runtime.callValue(WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude, cast ([i] : Array<Dynamic>))) : flighthq._internal.dom.GPUBindGroupEntry).resource = view);
           (resourcesChanged = cast (true : Dynamic));
         }
         i++;
@@ -174,7 +174,7 @@ class WgpuShadedPrelude {
 
   @:noCompletion
   public static function buildWgpuShadedCacheKey(material:ShadedMaterial, ?registry:ModifierRegistry):String {
-    if (registry == null) registry = cast ({ definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) } : Dynamic);
+    if (registry == null) registry = cast ({ definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Dynamic);
     var flags:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
     flags = _Runtime.callValue(getWgpuShadedBaseFlags, cast ([material] : Array<Dynamic>));
@@ -218,7 +218,7 @@ class WgpuShadedPrelude {
 
   @:noCompletion
   public static function getWgpuShadedModuleSource(material:ShadedMaterial, ?registry:ModifierRegistry, skinned:Dynamic = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>, colorMatrix:Dynamic = false):String {
-    if (registry == null) registry = cast ({ definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) } : Dynamic);
+    if (registry == null) registry = cast ({ definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Dynamic);
     if (skinning == null) skinning = cast (null : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var plan:Dynamic = cast _Runtime.UNDEFINED;
@@ -276,7 +276,7 @@ class WgpuShadedPrelude {
     var textureCount:Dynamic = cast _Runtime.UNDEFINED;
     ordered = _Runtime.callValue(orderModifierStack, cast ([modifiers] : Array<Dynamic>));
     snippets = _Runtime.createArray(_Runtime.field(ordered, 'length'));
-    declarations = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    declarations = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     diffuse = '';
     normal = '';
     specular = '';
@@ -573,5 +573,5 @@ class WgpuShadedPrelude {
 
   public static final _color__wgpuShadedPrelude:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude:ModifierRegistry = { definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+  public static final EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude:ModifierRegistry = { definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
 }

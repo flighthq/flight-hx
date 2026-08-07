@@ -113,7 +113,7 @@ class LottieDocument {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'lottie.invalid-document', 'createScene2DFromLottieDocument'] : Array<Dynamic>));
       return cast { advancedBlends: cast ([] : Array<Dynamic>), clip: _Runtime.callValue(createAnimationClip, cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>)), duration: 0.0, frameRate: 0.0, root: root };
     }
-    context = { advancedBlends: cast ([] : Array<Dynamic>), assets: _Runtime.construct(_Runtime.globalValue('Map'), [_Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'assets'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(asset:Dynamic) return cast ([_Runtime.field(asset, 'id'), asset] : Array<Dynamic>)] : Array<Dynamic>))]), channels: cast ([] : Array<Dynamic>), diagnostics: diagnostics, document: document, frameOffset: 0.0, frameScale: 1.0, options: options, resolvingPrecompositions: _Runtime.construct(_Runtime.globalValue('Set'), []) };
+    context = { advancedBlends: cast ([] : Array<Dynamic>), assets: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'assets'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(asset:Dynamic) return cast ([_Runtime.field(asset, 'id'), asset] : Array<Dynamic>)] : Array<Dynamic>))]), channels: cast ([] : Array<Dynamic>), diagnostics: diagnostics, document: document, frameOffset: 0.0, frameScale: 1.0, options: options, resolvingPrecompositions: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
     _Runtime.callValue(LottieDocument.appendLottieLayers__lottieDocument, cast ([root, _Runtime.field(document, 'layers'), context] : Array<Dynamic>));
     duration = HxMath.max(0.0, _Runtime.divideNumbers(_Runtime.subtractNumbers(_Runtime.field(document, 'op'), _Runtime.field(document, 'ip')), _Runtime.field(document, 'fr')));
     events = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'markers'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(marker:Dynamic) return _Runtime.callValue(createAnimationClipEvent, cast ([_Runtime.callValue(LottieDocument.clamp__lottieDocument, cast ([_Runtime.divideNumbers(_Runtime.subtractNumbers(_Runtime.field(marker, 'tm'), _Runtime.field(document, 'ip')), _Runtime.field(document, 'fr')), 0.0, duration] : Array<Dynamic>)), _Runtime.field(marker, 'cm'), { duration: _Runtime.divideNumbers(_Runtime.field(marker, 'dr'), _Runtime.field(document, 'fr')) }] : Array<Dynamic>))] : Array<Dynamic>));
@@ -124,7 +124,7 @@ class LottieDocument {
   public static function appendLottieLayers__lottieDocument(root:DisplayObject, layers:Array<LottieLayer>, context:LottieImportContext__lottieDocument):Void {
     var nodes:Dynamic = cast _Runtime.UNDEFINED;
     var ordered:Array<{ var layer:LottieLayer; var node:DisplayObject; }> = cast _Runtime.UNDEFINED;
-    nodes = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    nodes = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     ordered = cast ([] : Array<Dynamic>);
     for (layer in _Runtime.iterable(layers)) {
       var node:Dynamic = _Runtime.callValue(LottieDocument.createLottieLayerNode__lottieDocument, cast ([layer, context] : Array<Dynamic>));
@@ -892,7 +892,7 @@ class LottieDocument {
   }
 
   public static function isValidLottieDocument__lottieDocument(document:flighthq.types.LottieDocument):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(document, 'fr')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(document, 'fr') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(document, 'ip')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(document, 'op')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(document, 'op') : Float) >= (cast _Runtime.field(document, 'ip') : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(document, 'w')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(document, 'h')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.isArray(_Runtime.field(document, 'layers')));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(document, 'fr')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(document, 'fr') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(document, 'ip')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(document, 'op')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(document, 'op') : Float) >= (cast _Runtime.field(document, 'ip') : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(document, 'w')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(document, 'h')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.isArray(_Runtime.field(document, 'layers')));
     return cast null;
   }
 
@@ -924,8 +924,8 @@ class LottieDocument {
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast components : Float)) : Bool)) {
-        var candidate:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(source, index), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(source, 0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>));
-        flighthq._internal._StaticIndex.writeArray(out, index, ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([candidate] : Array<Dynamic>)) : Bool) ? (cast candidate : Dynamic) : (cast 0.0 : Dynamic)));
+        var candidate:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(source, index), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(source, 0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+        flighthq._internal._StaticIndex.writeArray(out, index, ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([candidate] : Array<Dynamic>)) : Bool) ? (cast candidate : Dynamic) : (cast 0.0 : Dynamic)));
         index++;
       }
     }
@@ -1069,8 +1069,8 @@ class LottieDocument {
 
   public static function parseHexColor__lottieDocument(value:String):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.replace(value, _Runtime.regexp('^#', ''), '', false), 16.0] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast (_Runtime.toInt32(parsed) & 16777215) : Dynamic) : (cast 0.0 : Dynamic));
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.replace(value, _Runtime.regexp('^#', ''), '', false), 16.0] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast (_Runtime.toInt32(parsed) & 16777215) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -1096,7 +1096,7 @@ class LottieDocument {
 
   public static final _holdEasing__lottieDocument:EasingFunction = function() return 0.0;
 
-  public static final _lottieFixedBlendModes__lottieDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast ([0.0, BlendModeValue.Normal] : Array<Dynamic>), cast ([1.0, BlendModeValue.Multiply] : Array<Dynamic>), cast ([2.0, BlendModeValue.Screen] : Array<Dynamic>), cast ([4.0, BlendModeValue.Darken] : Array<Dynamic>), cast ([5.0, BlendModeValue.Lighten] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _lottieFixedBlendModes__lottieDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([0.0, BlendModeValue.Normal] : Array<Dynamic>), cast ([1.0, BlendModeValue.Multiply] : Array<Dynamic>), cast ([2.0, BlendModeValue.Screen] : Array<Dynamic>), cast ([4.0, BlendModeValue.Darken] : Array<Dynamic>), cast ([5.0, BlendModeValue.Lighten] : Array<Dynamic>)] : Array<Dynamic>)]);
 
-  public static final _lottieAdvancedBlendModes__lottieDocument:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast ([3.0, AdvancedBlendModeValue.Overlay] : Array<Dynamic>), cast ([6.0, AdvancedBlendModeValue.ColorDodge] : Array<Dynamic>), cast ([7.0, AdvancedBlendModeValue.ColorBurn] : Array<Dynamic>), cast ([8.0, AdvancedBlendModeValue.HardLight] : Array<Dynamic>), cast ([9.0, AdvancedBlendModeValue.SoftLight] : Array<Dynamic>), cast ([10.0, AdvancedBlendModeValue.Difference] : Array<Dynamic>), cast ([11.0, AdvancedBlendModeValue.Exclusion] : Array<Dynamic>), cast ([12.0, AdvancedBlendModeValue.Hue] : Array<Dynamic>), cast ([13.0, AdvancedBlendModeValue.Saturation] : Array<Dynamic>), cast ([14.0, AdvancedBlendModeValue.Color] : Array<Dynamic>), cast ([15.0, AdvancedBlendModeValue.Luminosity] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _lottieAdvancedBlendModes__lottieDocument:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([3.0, AdvancedBlendModeValue.Overlay] : Array<Dynamic>), cast ([6.0, AdvancedBlendModeValue.ColorDodge] : Array<Dynamic>), cast ([7.0, AdvancedBlendModeValue.ColorBurn] : Array<Dynamic>), cast ([8.0, AdvancedBlendModeValue.HardLight] : Array<Dynamic>), cast ([9.0, AdvancedBlendModeValue.SoftLight] : Array<Dynamic>), cast ([10.0, AdvancedBlendModeValue.Difference] : Array<Dynamic>), cast ([11.0, AdvancedBlendModeValue.Exclusion] : Array<Dynamic>), cast ([12.0, AdvancedBlendModeValue.Hue] : Array<Dynamic>), cast ([13.0, AdvancedBlendModeValue.Saturation] : Array<Dynamic>), cast ([14.0, AdvancedBlendModeValue.Color] : Array<Dynamic>), cast ([15.0, AdvancedBlendModeValue.Luminosity] : Array<Dynamic>)] : Array<Dynamic>)]);
 }

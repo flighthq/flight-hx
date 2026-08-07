@@ -27,7 +27,7 @@ class RiveAssets {
   public static function readRiveBytes__riveAssets(source:RiveCoreObject, key:Float):Null<flighthq._internal._UInt8Array> {
     var property:Dynamic = cast _Runtime.UNDEFINED;
     property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:Dynamic) return _Runtime.strictEquals(_Runtime.field(candidate, 'key'), key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(property, 'value'), _Runtime.globalValue('Uint8Array')) : Bool) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(property, 'value') : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.isInstanceOf(_Runtime.field(property, 'value'), flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(property, 'value') : Dynamic));
     return cast null;
   }
 

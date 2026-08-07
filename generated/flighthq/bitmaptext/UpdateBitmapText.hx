@@ -68,7 +68,7 @@ class UpdateBitmapText {
     lineAdvance = _Runtime.multiplyNumbers(((metrics.ascent + metrics.descent) + metrics.lineGap), _Runtime.field(data, 'lineHeight'));
     lines = _Runtime.callValue(UpdateBitmapText.layoutBitmapTextLines__updateBitmapText, cast ([glyphSource, data] : Array<Dynamic>));
     refWidth = _Runtime.coalesce(_Runtime.field(data, 'wrapWidth'), function():Dynamic return cast _Runtime.callValue(UpdateBitmapText.maxLineWidth__updateBitmapText, cast ([lines] : Array<Dynamic>)));
-    pages = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    pages = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
@@ -206,7 +206,7 @@ class UpdateBitmapText {
     } else {
       _Runtime.callValue(setTextureSource, cast ([_Runtime.field(pageData, 'atlas').texture, image] : Array<Dynamic>));
     }
-    context = { page: pageData, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    context = { page: pageData, regionByCodepoint: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     ((cast pages : flighthq._internal._Map).set(page, context));
     return cast context;
     return cast null;

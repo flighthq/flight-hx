@@ -285,7 +285,7 @@ class GlCompressedTexture {
   }
 
   public static function isSupportedGlCompressedTextureContainerShape__glCompressedTexture(container:TextureContainer):Bool {
-    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(container, 'layers') : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0) : Bool)) { return cast true; }
     return cast ((cast _Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0) : Bool));
     return cast null;

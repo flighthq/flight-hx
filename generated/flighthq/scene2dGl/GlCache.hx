@@ -149,7 +149,7 @@ class GlCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
@@ -159,9 +159,9 @@ class GlCache {
   @:noCompletion
   public static final defaultGlRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache };
 
-  public static final _renderCacheTargets__glCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _renderCacheTargets__glCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _cacheStateScreen__glCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _cacheStateScreen__glCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _bounds__glCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 

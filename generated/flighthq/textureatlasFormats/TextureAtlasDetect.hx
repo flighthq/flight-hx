@@ -28,7 +28,7 @@ class TextureAtlasDetect {
 
   public static function getRegistry__textureAtlasDetect():FormatRegistry__textureAtlasDetect {
     if ((cast !_Runtime.strictEquals(TextureAtlasDetect._registry__textureAtlasDetect, null) : Bool)) { return cast TextureAtlasDetect._registry__textureAtlasDetect; }
-    (TextureAtlasDetect._registry__textureAtlasDetect = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+    (TextureAtlasDetect._registry__textureAtlasDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
     ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindAseprite, { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic) return _Runtime.callValue(parseTextureAtlasAsepriteJson, cast ([content, atlas] : Array<Dynamic>)) }));
     ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindLibgdxAtlas, { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic) return _Runtime.callValue(parseTextureAtlasLibgdxAtlas, cast ([content, atlas] : Array<Dynamic>)) }));
     ((cast TextureAtlasDetect._registry__textureAtlasDetect : flighthq._internal._Map).set(TextureAtlasFormatKindStarling, { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:Dynamic, atlas:Dynamic, options:Dynamic) return _Runtime.callValue(parseTextureAtlasStarlingXml, cast ([content, atlas, options] : Array<Dynamic>)) }));

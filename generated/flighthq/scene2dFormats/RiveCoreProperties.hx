@@ -30,7 +30,7 @@ class RiveCoreProperties {
 
   public static function buildRiveFieldTypeTable__riveCoreProperties():Dynamic {
     var table:Dynamic = cast _Runtime.UNDEFINED;
-    table = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    table = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (key in _Runtime.iterable(RiveCoreProperties.RIVE_UINT_PROPERTY_KEYS__riveCoreProperties)) {
       ((cast table : flighthq._internal._Map).set(key, RiveFieldTypeValue.Uint));
     }

@@ -54,7 +54,7 @@ class Broadphase {
           if ((cast ((cast translationY : Float) < (cast 0.0 : Float)) : Bool)) { (minY = cast ((minY + translationY) : Dynamic)); } else { (maxY = cast ((maxY + translationY) : Dynamic)); }
         }
       }
-      if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast (maxX - minX) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool) || (cast ((cast (maxY - minY) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast (maxX - minX) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool) || (cast ((cast (maxY - minY) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool)) {
         _Runtime.callProperty(_Runtime.field(world, 'index'), 'removeSpatialObject', cast ([_Runtime.field(body, 'index')] : Array<Dynamic>));
         continue;
       }
@@ -69,7 +69,7 @@ class Broadphase {
   public static function paddedUpperBound__broadphase(value:Float):Float {
     var padded:Dynamic = cast _Runtime.UNDEFINED;
     padded = (value + (_Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.abs(value)), _Runtime.NUMBER_EPSILON) * 4.0));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([padded] : Array<Dynamic>)) : Bool) ? (cast padded : Dynamic) : (cast value : Dynamic));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([padded] : Array<Dynamic>)) : Bool) ? (cast padded : Dynamic) : (cast value : Dynamic));
     return cast null;
   }
 

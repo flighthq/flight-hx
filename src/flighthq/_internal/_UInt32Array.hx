@@ -24,7 +24,7 @@ abstract _UInt32Array(Dynamic) {
   }
 
   /** Factory for reflective construction sites reached through
-   * `_Runtime.globalValue`; abstracts have no runtime class for
+   * `_HostValueLut`; abstracts have no runtime class for
    * `Type.createInstance`. */
   public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_UInt32Array {
     return new _UInt32Array(source, byteOffset, length);

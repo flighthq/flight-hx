@@ -28,7 +28,7 @@ class Cache {
     return cast null;
   }
 
-  public static final formatterCache__cache:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final formatterCache__cache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static final cacheCapacity__cache:Dynamic = 256.0;
 }

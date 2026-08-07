@@ -26,7 +26,7 @@ class CanvasTextureResolver {
 
   public static function registerCanvasTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<flighthq.types.CanvasTextureResolver>):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
-    registry = _Runtime.setField(resolvers, 'registry', (_Runtime.field(resolvers, 'registry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
+    registry = _Runtime.setField(resolvers, 'registry', (_Runtime.field(resolvers, 'registry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])));
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 

@@ -92,7 +92,7 @@ class Throttle {
     handler = (cast _Runtime.haxeRest(function(...args:Dynamic) {
       var now:Dynamic = cast _Runtime.UNDEFINED;
       var remaining:Dynamic = cast _Runtime.UNDEFINED;
-      now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
+      now = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>));
       remaining = (intervalMs - (now - lastFiredAt));
       if ((cast ((cast ((cast remaining : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast remaining : Float) > (cast intervalMs : Float)) : Bool)) : Bool)) {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
@@ -106,7 +106,7 @@ class Throttle {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
         (lastArgs = cast (args : Dynamic));
         (trailingTimer = cast (_Runtime.setTimeout(function() {
-          (lastFiredAt = cast (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+          (lastFiredAt = cast (_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
           (trailingTimer = cast (null : Dynamic));
           if ((cast !_Runtime.strictEquals(lastArgs, null) : Bool)) {
             _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));

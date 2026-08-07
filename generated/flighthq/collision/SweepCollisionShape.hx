@@ -22,7 +22,7 @@ class SweepCollisionShape {
     var relativeY:Dynamic = cast _Runtime.UNDEFINED;
     var hit:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(SweepCollisionShape.clearCollisionTimeOfImpact__sweepCollisionShape, cast ([out] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([translationAX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([translationAY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([translationBX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([translationBY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([maxFraction] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionShapeValidationStatus, cast ([shapeA] : Array<Dynamic>)), null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionShapeValidationStatus, cast ([shapeB] : Array<Dynamic>)), null) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([translationAX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([translationAY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([translationBX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([translationBY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxFraction] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionShapeValidationStatus, cast ([shapeA] : Array<Dynamic>)), null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.callValue(getCollisionShapeValidationStatus, cast ([shapeB] : Array<Dynamic>)), null) : Bool)) : Bool)) {
       return cast false;
     }
     if ((cast _Runtime.callValue(collideContactManifold, cast ([shapeA, shapeB, SweepCollisionShape.manifoldScratch__sweepCollisionShape] : Array<Dynamic>)) : Bool)) {
@@ -156,7 +156,7 @@ class SweepCollisionShape {
         i++;
       }
     }
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([bestFraction] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bestFraction] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     _Runtime.setField(out, 'fraction', bestFraction);
     _Runtime.setField(out, 'normalX', bestNormalX);
     _Runtime.setField(out, 'normalY', bestNormalY);

@@ -41,12 +41,12 @@ class Window {
     var onPageHide:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kClose__window)), cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return; }
     onBeforeUnload = function(e:flighthq._internal.dom.BeforeUnloadEvent) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onCloseRequest]]), 1);
       if ((cast _Runtime.strictEquals(({ final __typedStruct0 = win.onCloseRequest.data; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.cancelled; }), true) : Bool)) {
-        (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end);
-        (#if js (e.returnValue = '') #else _Runtime.setField(e, 'returnValue', '') #end);
+        e.preventDefault();
+        (e.returnValue = '');
       }
     };
     onPageHide = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1);
@@ -64,18 +64,18 @@ class Window {
     var onDrop:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kDropFile__window)), cast ([] : Array<Dynamic>));
-    onDragOver = function(e:flighthq._internal.dom.DragEvent) return (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end);
+    onDragOver = function(e:flighthq._internal.dom.DragEvent) return e.preventDefault();
     onDrop = function(e:flighthq._internal.dom.DragEvent) {
-      (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end);
-      for (file in _Runtime.iterable(_Runtime.toArray(_Runtime.coalesce((#if js ({ final __hostType3 = (#if js e.dataTransfer #else _Runtime.field(e, 'dataTransfer') #end); __hostType3 == null ? _Runtime.UNDEFINED : (cast __hostType3 : flighthq._internal.dom.DataTransfer).files; }) #else _Runtime.optionalField((#if js e.dataTransfer #else _Runtime.field(e, 'dataTransfer') #end), 'files') #end), function():Dynamic return cast cast ([] : Array<Dynamic>))))) {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onDropFile], [(#if js (cast file : flighthq._internal.dom.File).name #else _Runtime.field(file, 'name') #end)]]), 1);
+      e.preventDefault();
+      for (file in _Runtime.iterable(_Runtime.toArray(_Runtime.coalesce(({ final __hostType3 = e.dataTransfer; __hostType3 == null ? _Runtime.UNDEFINED : (cast __hostType3 : flighthq._internal.dom.DataTransfer).files; }), function():Dynamic return cast cast ([] : Array<Dynamic>))))) {
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onDropFile], [(cast file : flighthq._internal.dom.File).name]]), 1);
       }
     };
-    (#if js element.addEventListener('dragover', onDragOver) #else _Runtime.callProperty(element, 'addEventListener', cast (['dragover', onDragOver] : Array<Dynamic>)) #end);
-    (#if js element.addEventListener('drop', onDrop) #else _Runtime.callProperty(element, 'addEventListener', cast (['drop', onDrop] : Array<Dynamic>)) #end);
+    element.addEventListener('dragover', onDragOver);
+    element.addEventListener('drop', onDrop);
     ((cast observers : flighthq._internal._Map).set(Window.kDropFile__window, function() {
-      (#if js element.removeEventListener('dragover', onDragOver) #else _Runtime.callProperty(element, 'removeEventListener', cast (['dragover', onDragOver] : Array<Dynamic>)) #end);
-      (#if js element.removeEventListener('drop', onDrop) #else _Runtime.callProperty(element, 'removeEventListener', cast (['drop', onDrop] : Array<Dynamic>)) #end);
+      element.removeEventListener('dragover', onDragOver);
+      element.removeEventListener('drop', onDrop);
     }));
   }
 
@@ -87,11 +87,11 @@ class Window {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kFocus__window)), cast ([] : Array<Dynamic>));
     onFocus = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusIn]]), 1);
     onBlur = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusOut]]), 1);
-    (#if js element.addEventListener('focus', onFocus) #else _Runtime.callProperty(element, 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>)) #end);
-    (#if js element.addEventListener('blur', onBlur) #else _Runtime.callProperty(element, 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>)) #end);
+    element.addEventListener('focus', onFocus);
+    element.addEventListener('blur', onBlur);
     ((cast observers : flighthq._internal._Map).set(Window.kFocus__window, function() {
-      (#if js element.removeEventListener('focus', onFocus) #else _Runtime.callProperty(element, 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>)) #end);
-      (#if js element.removeEventListener('blur', onBlur) #else _Runtime.callProperty(element, 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>)) #end);
+      element.removeEventListener('focus', onFocus);
+      element.removeEventListener('blur', onBlur);
     }));
   }
 
@@ -110,7 +110,7 @@ class Window {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kMove__window)), cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return; }
     handler = function() {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX')), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY')), 'number') : Bool)) : Bool)) {
         var x:Dynamic = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX');
@@ -131,10 +131,10 @@ class Window {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kOrientation__window)), cast ([] : Array<Dynamic>));
-    if ((cast !_Runtime.truthy((#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).orientation #else _Runtime.field(_Runtime.globalValue('screen'), 'orientation') #end)) : Bool)) { return; }
+    if ((cast !_Runtime.truthy((cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).orientation) : Bool)) { return; }
     handler = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onOrientationChanged]]), 1);
-    (#if js (cast (#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).orientation #else _Runtime.field(_Runtime.globalValue('screen'), 'orientation') #end) : flighthq._internal.dom.ScreenOrientation).addEventListener('change', handler) #else _Runtime.callProperty((#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).orientation #else _Runtime.field(_Runtime.globalValue('screen'), 'orientation') #end), 'addEventListener', cast (['change', handler] : Array<Dynamic>)) #end);
-    ((cast observers : flighthq._internal._Map).set(Window.kOrientation__window, function() return (#if js (cast (#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).orientation #else _Runtime.field(_Runtime.globalValue('screen'), 'orientation') #end) : flighthq._internal.dom.ScreenOrientation).removeEventListener('change', handler) #else _Runtime.callProperty((#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).orientation #else _Runtime.field(_Runtime.globalValue('screen'), 'orientation') #end), 'removeEventListener', cast (['change', handler] : Array<Dynamic>)) #end)));
+    (cast (cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).orientation : flighthq._internal.dom.ScreenOrientation).addEventListener('change', handler);
+    ((cast observers : flighthq._internal._Map).set(Window.kOrientation__window, function() return (cast (cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).orientation : flighthq._internal.dom.ScreenOrientation).removeEventListener('change', handler)));
   }
 
   public static function attachWindowRenderContext(win:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
@@ -144,7 +144,7 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kRenderContext__window)), cast ([] : Array<Dynamic>));
     onContextLost = function(e:flighthq._internal.dom.Event) {
-      (#if js e.preventDefault() #else _Runtime.callProperty(e, 'preventDefault', cast ([] : Array<Dynamic>)) #end);
+      e.preventDefault();
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRenderContextLost]]), 1);
     };
     onContextRestored = function() return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRenderContextRestored]]), 1);
@@ -176,16 +176,16 @@ class Window {
     var observer:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map).get(Window.kResize__window)), cast ([] : Array<Dynamic>));
-    observer = _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [function(entries:Dynamic) {
+    observer = _Runtime.construct(flighthq._internal._HostValueLut.get('ResizeObserver'), [function(entries:Dynamic) {
       for (entry in _Runtime.iterable(entries)) {
-        (win.width = cast (HxMath.round((#if js (cast (#if js (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect #else _Runtime.field(entry, 'contentRect') #end) : flighthq._internal.dom.DOMRectReadOnly).width #else _Runtime.field((#if js (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect #else _Runtime.field(entry, 'contentRect') #end), 'width') #end)) : Dynamic));
-        (win.height = cast (HxMath.round((#if js (cast (#if js (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect #else _Runtime.field(entry, 'contentRect') #end) : flighthq._internal.dom.DOMRectReadOnly).height #else _Runtime.field((#if js (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect #else _Runtime.field(entry, 'contentRect') #end), 'height') #end)) : Dynamic));
+        (win.width = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).width) : Dynamic));
+        (win.height = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).height) : Dynamic));
         (win.devicePixelRatio = cast (_Runtime.orValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0) : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       }
     }]);
-    (#if js (cast observer : flighthq._internal.dom.ResizeObserver).observe(element) #else _Runtime.callProperty(observer, 'observe', cast ([element] : Array<Dynamic>)) #end);
-    ((cast observers : flighthq._internal._Map).set(Window.kResize__window, function() return (#if js (cast observer : flighthq._internal.dom.ResizeObserver).disconnect() #else _Runtime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>)) #end)));
+    (cast observer : flighthq._internal.dom.ResizeObserver).observe(element);
+    ((cast observers : flighthq._internal._Map).set(Window.kResize__window, function() return (cast observer : flighthq._internal.dom.ResizeObserver).disconnect()));
   }
 
   public static function attachWindowVisibility(win:ApplicationWindow):Void {
@@ -237,32 +237,32 @@ class Window {
   @:noCompletion
   public static function createWebWindowBackend():WindowBackend {
     return cast { open: function() {
-      return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined');
+      return cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined');
     }, close: function() {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'close')), 'function') : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'close')), 'function') : Bool)) : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, setTitle: function(_win:Dynamic, title:Dynamic) {
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { flighthq._internal.backend.DomDocumentBackend.setField(flighthq._internal.backend.DomDocumentBackend.value(), 'title', title); }
+      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { flighthq._internal.backend.DomDocumentBackend.setField(flighthq._internal.backend.DomDocumentBackend.value(), 'title', title); }
     }, setPosition: function(_win:Dynamic, x:Dynamic, y:Dynamic) {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([x, y] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, setSize: function(_win:Dynamic, width:Dynamic, height:Dynamic) {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'resizeTo')), 'function') : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'resizeTo')), 'function') : Bool)) : Bool)) {
         try {
           flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'resizeTo', cast ([width, height] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, getBounds: function(win:Dynamic, out:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         (out.x = cast (win.x : Dynamic));
         (out.y = cast (win.y : Dynamic));
         (out.width = cast (win.width : Dynamic));
@@ -281,15 +281,15 @@ class Window {
     }, restore: function() {
 
     }, focus: function() {
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'focus')), 'function') : Bool)) : Bool)) { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'focus')), 'function') : Bool)) : Bool)) { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>)); }
     }, show: function() {
 
     }, hide: function() {
 
     }, center: function(win:Dynamic) {
-      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined') : Bool)) : Bool)) { return; }
+      if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('screen'), 'undefined') : Bool)) : Bool)) { return; }
       try {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).availWidth #else _Runtime.field(_Runtime.globalValue('screen'), 'availWidth') #end), win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((#if js (cast _Runtime.globalValue('screen') : flighthq._internal.dom.Screen).availHeight #else _Runtime.field(_Runtime.globalValue('screen'), 'availHeight') #end), win.height) / 2.0))] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).availWidth, win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).availHeight, win.height) / 2.0))] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
     }, setResizable: function() {
@@ -301,21 +301,21 @@ class Window {
     }, setMaximumSize: function() {
 
     }, setFullscreen: function(_win:Dynamic, fullscreen:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
       try {
-        if ((cast fullscreen : Bool)) { _Runtime.voidValue((#if js ({ final __hostTypeCall6 = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement'); (cast __hostTypeCall6 : flighthq._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall6 : flighthq._internal.dom.HTMLElement).requestFullscreen(); }) #else _Runtime.callOptionalProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement'), 'requestFullscreen', cast ([] : Array<Dynamic>)) #end)); } else { _Runtime.voidValue(flighthq._internal.backend.DomDocumentBackend.callOptional(flighthq._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
+        if ((cast fullscreen : Bool)) { _Runtime.voidValue(({ final __hostTypeCall6 = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement'); (cast __hostTypeCall6 : flighthq._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall6 : flighthq._internal.dom.HTMLElement).requestFullscreen(); })); } else { _Runtime.voidValue(flighthq._internal.backend.DomDocumentBackend.callOptional(flighthq._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
       } catch (__error:Dynamic) {
       }
     }, setIcon: function(_win:Dynamic, icon:Dynamic) {
       var link:Dynamic = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
       link = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(link, null) : Bool)) {
         (link = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
-        (#if js ((cast link : flighthq._internal.dom.HTMLLinkElement).rel = 'icon') #else _Runtime.setField(link, 'rel', 'icon') #end);
-        (#if js (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(link) #else _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head'), 'appendChild', cast ([link] : Array<Dynamic>)) #end);
+        ((cast link : flighthq._internal.dom.HTMLLinkElement).rel = 'icon');
+        (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(link);
       }
-      (#if js ((cast link : flighthq._internal.dom.HTMLLinkElement).href = icon) #else _Runtime.setField(link, 'href', icon) #end);
+      ((cast link : flighthq._internal.dom.HTMLLinkElement).href = icon);
     }, setOpacity: function() {
 
     }, setSkipTaskbar: function() {
@@ -423,7 +423,7 @@ class Window {
   }
 
   public static function exitApplicationPointerLock():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'exitPointerLock')), 'function') : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'exitPointerLock')), 'function') : Bool)) : Bool)) {
       return cast flighthq._internal._Async.resolve();
     }
     flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'exitPointerLock', cast ([] : Array<Dynamic>));
@@ -465,8 +465,8 @@ class Window {
 
   public static function lockApplicationPointer(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((#if js element.requestPointerLock #else _Runtime.field(element, 'requestPointerLock') #end)), 'function') : Bool)) { return cast flighthq._internal._Async.resolve(); }
-    result = (#if js element.requestPointerLock() #else _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>)) #end);
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(element.requestPointerLock), 'function') : Bool)) { return cast flighthq._internal._Async.resolve(); }
+    result = element.requestPointerLock();
     return cast (cast ((cast flighthq._internal._Async.isPromise(result) : Bool) ? (cast result : Dynamic) : (cast flighthq._internal._Async.resolve() : Dynamic)) : flighthq._internal._Promise<flighthq._internal._Nothing>);
     return cast null;
   }
@@ -510,17 +510,17 @@ class Window {
   }
 
   public static function prepareElementForInput(element:flighthq._internal.dom.HTMLElement):Void {
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).touchAction = 'none') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'touchAction', 'none') #end);
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).userSelect = 'none') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'userSelect', 'none') #end);
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).webkitUserSelect = 'none') #else _Runtime.setField((#if js element.style #else _Runtime.field(element, 'style') #end), 'webkitUserSelect', 'none') #end);
-    (#if js ((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : Dynamic).webkitTapHighlightColor = 'transparent') #else _Runtime.setField((cast (#if js element.style #else _Runtime.field(element, 'style') #end) : Dynamic), 'webkitTapHighlightColor', 'transparent') #end);
-    if ((cast _Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLCanvasElement')) : Bool)) {
-      (#if js ((cast (#if js (cast element : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(element, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).transform = 'translateZ(0)') #else _Runtime.setField((#if js (cast element : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(element, 'style') #end), 'transform', 'translateZ(0)') #end);
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).touchAction = 'none');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).userSelect = 'none');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).webkitUserSelect = 'none');
+    ((cast element.style : Dynamic).webkitTapHighlightColor = 'transparent');
+    if ((cast _Runtime.isInstanceOf(element, flighthq._internal._HostValueLut.get('HTMLCanvasElement')) : Bool)) {
+      ((cast (cast element : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'translateZ(0)');
     }
   }
 
   public static function requestApplicationFullscreen(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast (#if js element.requestFullscreen() #else _Runtime.callProperty(element, 'requestFullscreen', cast ([] : Array<Dynamic>)) #end);
+    return cast element.requestFullscreen();
     return cast null;
   }
 
@@ -636,7 +636,7 @@ class Window {
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'show', cast ([win] : Array<Dynamic>));
   }
 
-  public static final _applicationWindowObservers__window:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _applicationWindowObservers__window:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var _windowBackend__window:Null<WindowBackend> = _Runtime.explicitNull();
 
@@ -644,7 +644,7 @@ class Window {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = ((cast Window._applicationWindowObservers__window : flighthq._internal._WeakMap).get(win));
     if ((cast _Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (observers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast Window._applicationWindowObservers__window : flighthq._internal._WeakMap).set(win, observers));
     }
     return cast observers;

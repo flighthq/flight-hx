@@ -86,7 +86,7 @@ class UpdateParticleEmitter2D {
     hasVelInherit = !_Runtime.strictEquals(config.velocityInheritance, 0.0);
     emitterVelX = 0.0;
     emitterVelY = 0.0;
-    if ((cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) {
+    if ((cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) {
       (emitterVelX = cast (((trackX - state.prevX) / deltaTime) : Dynamic));
       (emitterVelY = cast (((trackY - state.prevY) / deltaTime) : Dynamic));
     }
@@ -231,7 +231,7 @@ class UpdateParticleEmitter2D {
       var regionIdMin:Dynamic = config.regionIdMin;
       var rotSpeedRange:Dynamic = (config.rotationSpeedMax - config.rotationSpeedMin);
       var hasRotSpeed:Dynamic = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
-      var doTrail:Dynamic = ((cast !_Runtime.strictEquals(worldTransform, null) : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
+      var doTrail:Dynamic = ((cast !_Runtime.strictEquals(worldTransform, null) : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool));
       var prevPathX:Dynamic = ((cast doTrail : Bool) ? (cast state.prevX : Dynamic) : (cast trackX : Dynamic));
       var prevPathY:Dynamic = ((cast doTrail : Bool) ? (cast state.prevY : Dynamic) : (cast trackY : Dynamic));
       var dirLen:Dynamic = HxMath.sqrt((((config.directionX * config.directionX) + (config.directionY * config.directionY)) + (config.directionZ * config.directionZ)));
@@ -339,7 +339,7 @@ class UpdateParticleEmitter2D {
             (vx = cast (wvx : Dynamic));
             (vy = cast (wvy : Dynamic));
           }
-          if ((cast ((cast hasVelInherit : Bool) && (cast !(cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+          if ((cast ((cast hasVelInherit : Bool) && (cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([state.prevX] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
             (vx = cast ((vx + (emitterVelX * config.velocityInheritance)) : Dynamic));
             (vy = cast ((vy + (emitterVelY * config.velocityInheritance)) : Dynamic));
           }

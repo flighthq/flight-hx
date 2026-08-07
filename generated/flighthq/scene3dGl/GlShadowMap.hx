@@ -109,7 +109,7 @@ class GlShadowMap {
   }
 
   public static function normalizeDirectionalShadowPcfRadius__glShadowMap(radius:Float):Float {
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([radius] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
     return cast HxMath.min(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS, HxMath.max(0.0, HxMath.floor(radius)));
     return cast null;
   }

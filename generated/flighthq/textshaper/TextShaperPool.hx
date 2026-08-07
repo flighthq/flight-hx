@@ -36,7 +36,7 @@ class TextShaperPool {
 
   public static final _pool__textShaperPool:Array<ShapedRun> = cast ([] : Array<Dynamic>);
 
-  public static final _pooled__textShaperPool:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final _pooled__textShaperPool:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
   public static var _releaseGuard__textShaperPool:Null<Dynamic> = _Runtime.explicitNull();
 }

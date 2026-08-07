@@ -21,7 +21,7 @@ class WgpuWireframeUpload {
     if ((cast _Runtime.strictEquals(meshUpload, null) : Bool)) { return cast null; }
     perState = ((cast WgpuWireframeUpload.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast WgpuWireframeUpload.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap).set(state, perState));
     }
     upload = ((cast perState : flighthq._internal._WeakMap).get((cast geometry : MeshGeometry)));
@@ -29,7 +29,7 @@ class WgpuWireframeUpload {
       return cast upload;
     }
     device = _Runtime.field(state, 'device');
-    if ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (#if js (cast _Runtime.field(upload, 'lineIndexBuffer') : flighthq._internal.dom.GPUBuffer).destroy() #else _Runtime.callProperty(_Runtime.field(upload, 'lineIndexBuffer'), 'destroy', cast ([] : Array<Dynamic>)) #end); }
+    if ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast _Runtime.field(upload, 'lineIndexBuffer') : flighthq._internal.dom.GPUBuffer).destroy(); }
     lines = _Runtime.callValue(WgpuWireframeUpload.buildLineIndices__wgpuWireframeUpload, cast ([geometry] : Array<Dynamic>));
     lineIndexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuWireframeUpload.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
@@ -76,5 +76,5 @@ class WgpuWireframeUpload {
     return cast null;
   }
 
-  public static final wireframeUploads__wgpuWireframeUpload:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final wireframeUploads__wgpuWireframeUpload:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

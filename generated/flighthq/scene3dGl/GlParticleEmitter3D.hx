@@ -323,5 +323,5 @@ class GlParticleEmitter3D {
 
   public static final emitterScratch__glParticleEmitter3D:Array<ParticleEmitter3D> = cast ([] : Array<Dynamic>);
 
-  public static final shaderCache__glParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final shaderCache__glParticleEmitter3D:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

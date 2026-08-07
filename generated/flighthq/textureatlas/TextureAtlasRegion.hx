@@ -36,7 +36,7 @@ class TextureAtlasRegion {
 
   public static function buildTextureAtlasRegionIndex(atlas:TextureAtlas):Dynamic {
     var index:Dynamic = cast _Runtime.UNDEFINED;
-    index = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    index = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast ((cast !_Runtime.strictEquals(region.name, null) : Bool) && (cast !(cast ((cast index : flighthq._internal._Map).has(region.name)) : Bool) : Bool)) : Bool)) { ((cast index : flighthq._internal._Map).set(region.name, region)); }
     }
@@ -183,7 +183,7 @@ class TextureAtlasRegion {
     page = atlas.texture;
     textures = ((cast TextureAtlasRegion.regionTextureCache__textureAtlasRegion : flighthq._internal._WeakMap).get(atlas));
     if ((cast _Runtime.strictEquals(textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (textures = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (textures = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast TextureAtlasRegion.regionTextureCache__textureAtlasRegion : flighthq._internal._WeakMap).set(atlas, textures));
     }
     texture = ((cast textures : flighthq._internal._WeakMap).get(region));
@@ -398,11 +398,11 @@ class TextureAtlasRegion {
     }
   }
 
-  public static final regionTextureCache__textureAtlasRegion:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final regionTextureCache__textureAtlasRegion:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var textureAtlasRegionTextureGuard__textureAtlasRegion:Null<TextureAtlasRegionTextureGuard> = _Runtime.explicitNull();
 
   public static final sequenceSortKeys__textureAtlasRegion:Array<Float> = cast ([] : Array<Dynamic>);
 
-  public static final nextRegionIdMark__textureAtlasRegion:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final nextRegionIdMark__textureAtlasRegion:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

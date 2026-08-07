@@ -17,7 +17,7 @@ class CapacitorGeolocation {
     var watchIds:Dynamic = cast _Runtime.UNDEFINED;
     geolocation = _Runtime.field(capacitor, 'geolocation');
     nextWatchId = 1.0;
-    watchIds = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    watchIds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     return cast { getCurrentPosition: function(options:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

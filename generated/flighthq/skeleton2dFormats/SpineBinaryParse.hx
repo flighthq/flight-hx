@@ -137,7 +137,7 @@ class SpineBinaryParse {
     var unmodeled:Dynamic = cast _Runtime.UNDEFINED;
     animations = cast ([] : Array<Dynamic>);
     count = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
-    unmodeled = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast ((cast i : Float) < (cast count : Float)) : Bool) && (cast !(cast _Runtime.callValue(isSpineBinaryReaderOverrun, cast ([reader] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
@@ -384,7 +384,7 @@ class SpineBinaryParse {
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var track:Dynamic = cast _Runtime.UNDEFINED;
     attachments = cast ([] : Array<Dynamic>);
-    indexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     times = cast ([] : Array<Dynamic>);
     values = cast ([] : Array<Dynamic>);
     {
@@ -786,7 +786,7 @@ class SpineBinaryParse {
     var defaultSlots:Dynamic = cast _Runtime.UNDEFINED;
     var alternates:Dynamic = cast _Runtime.UNDEFINED;
     skins = cast ([] : Array<Dynamic>);
-    unmodeled = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     defaultSlots = _Runtime.callValue(readSpineBinaryVarint, cast ([reader] : Array<Dynamic>));
     if ((cast ((cast defaultSlots : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(skins, 'push', cast ([{ attachments: _Runtime.callValue(SpineBinaryParse.readSpineBinarySkinBody__spineBinaryParse, cast ([reader, strings, defaultSlots, nonessential, unmodeled] : Array<Dynamic>)), name: SpineBinaryParse.SPINE_BINARY_DEFAULT_SKIN_NAME__spineBinaryParse }] : Array<Dynamic>));

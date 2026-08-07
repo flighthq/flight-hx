@@ -51,7 +51,7 @@ class ParticleDesignerParse {
           (currentKey = cast (_Runtime.orValue(text, function():Dynamic return cast null) : Dynamic));
           (inTag = cast (null : Dynamic));
         } else { if ((cast !_Runtime.strictEquals(currentKey, null) : Bool)) {
-          if ((cast ((cast _Runtime.strictEquals(name, 'integer') : Bool) && (cast _Runtime.strictEquals(inTag, 'integer') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([text, 10.0] : Array<Dynamic>))); } else { if ((cast ((cast _Runtime.strictEquals(name, 'real') : Bool) && (cast _Runtime.strictEquals(inTag, 'real') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([text] : Array<Dynamic>))); } else { if ((cast ((cast _Runtime.strictEquals(name, 'string') : Bool) && (cast _Runtime.strictEquals(inTag, 'string') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(ParticleDesignerParse.unescapeXml__particleDesignerParse, cast ([text] : Array<Dynamic>))); } } }
+          if ((cast ((cast _Runtime.strictEquals(name, 'integer') : Bool) && (cast _Runtime.strictEquals(inTag, 'integer') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([text, 10.0] : Array<Dynamic>))); } else { if ((cast ((cast _Runtime.strictEquals(name, 'real') : Bool) && (cast _Runtime.strictEquals(inTag, 'real') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([text] : Array<Dynamic>))); } else { if ((cast ((cast _Runtime.strictEquals(name, 'string') : Bool) && (cast _Runtime.strictEquals(inTag, 'string') : Bool)) : Bool)) { _Runtime.setIndex(result, currentKey, _Runtime.callValue(ParticleDesignerParse.unescapeXml__particleDesignerParse, cast ([text] : Array<Dynamic>))); } } }
           if ((cast _Runtime.includes(cast (['integer', 'real', 'string'] : Array<Dynamic>), name) : Bool)) {
             (currentKey = cast (null : Dynamic));
             (inTag = cast (null : Dynamic));
@@ -71,7 +71,7 @@ class ParticleDesignerParse {
   public static function num__particleDesignerParse(d:ParticleDesignerRawDict, key:String, def:Dynamic = 0.0):Float {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     v = _Runtime.getIndex(d, key);
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(v), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) : Bool) ? (cast v : Dynamic) : (cast def : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(v), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) : Bool) ? (cast v : Dynamic) : (cast def : Dynamic));
     return cast null;
   }
 

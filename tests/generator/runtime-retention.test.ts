@@ -3,11 +3,11 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-describe('reflective runtime retention', () => {
-  it('keeps every class returned by _Runtime.globalValue', () => {
+describe('reflective host-toolkit retention', () => {
+  it('keeps every class returned by _HostValueLut', () => {
     const workspace = process.cwd();
-    const runtime = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_Runtime.hx'), 'utf8');
-    const reflectiveClasses = [...runtime.matchAll(/case '[^']+': (_[A-Za-z0-9]+);/gu)].map((match) => match[1]!);
+    const toolkit = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_HostValueLut.hx'), 'utf8');
+    const reflectiveClasses = [...toolkit.matchAll(/case '[^']+': (_[A-Za-z0-9]+);/gu)].map((match) => match[1]!);
 
     expect(reflectiveClasses).toEqual(['_Map', '_Set', '_WeakMap', '_WeakSet', '_TextDecoder', '_DataView']);
     for (const className of reflectiveClasses) {

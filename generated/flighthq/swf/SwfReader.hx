@@ -63,7 +63,7 @@ class SwfReader {
       (this.valid = cast (false : Dynamic));
       return cast '';
     }
-    value = (#if js (cast _decoder__swfReader : flighthq._internal.dom.TextDecoder).decode((cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(_Runtime.field(this, 'pos')))) #else _Runtime.callProperty(_decoder__swfReader, 'decode', cast ([(cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(_Runtime.field(this, 'pos')))] : Array<Dynamic>)) #end);
+    value = (cast _decoder__swfReader : flighthq._internal.dom.TextDecoder).decode((cast _Runtime.field(this, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(_Runtime.field(this, 'pos'))));
     _Runtime.incrementField(this, 'pos', 1, true);
     return cast value;
     return cast null;

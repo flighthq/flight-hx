@@ -20,7 +20,7 @@ class CanvasShapeRegistry {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    registry = _Runtime.setField(runtime, 'canvasShapeCommandRegistry', (_Runtime.field(runtime, 'canvasShapeCommandRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
+    registry = _Runtime.setField(runtime, 'canvasShapeCommandRegistry', (_Runtime.field(runtime, 'canvasShapeCommandRegistry') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])));
     ((cast registry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), command));
   }
 

@@ -9,7 +9,7 @@ package flighthq._internal;
  * `littleEndian` flag is true. `haxe.io.Bytes` multi-byte accessors are
  * little-endian on every target, so big-endian requests byte-swap.
  */
-// Reached only reflectively through _Runtime.globalValue, so full DCE must not
+// Reached only reflectively through _HostValueLut, so full DCE must not
 // strip the constructor or members.
 @:keep
 class _DataView {

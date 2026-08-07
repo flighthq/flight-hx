@@ -72,8 +72,8 @@ class SpineParse {
     s = _Runtime.padEnd(_Runtime.replace(hex, '#', '', false), 6.0, 'f');
     channel = function(i:Float) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
-      v = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
-      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+      v = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
+      return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
     };
     return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;

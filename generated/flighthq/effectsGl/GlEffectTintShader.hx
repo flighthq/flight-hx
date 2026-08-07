@@ -16,9 +16,9 @@ class GlEffectTintShader {
 
   public static final INVERT_TINT_FRAGMENT_SRC__glEffectTintShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, (1.0 - texture(u_texture, v_texCoord).a) * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
 
-  public static final tintShaders__glEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final tintShaders__glEffectTintShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final invertTintShaders__glEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final invertTintShaders__glEffectTintShader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {

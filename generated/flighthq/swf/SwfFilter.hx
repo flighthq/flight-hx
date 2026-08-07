@@ -235,7 +235,7 @@ class SwfFilter {
 
   public static final FIXED_16_ONE__swfFilter:Dynamic = 65536.0;
 
-  public static final _floatBuffer__swfFilter:Dynamic = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [4.0]);
+  public static final _floatBuffer__swfFilter:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [4.0]);
 
   public static final _floatBytes__swfFilter:Dynamic = new flighthq._internal._UInt32Array(SwfFilter._floatBuffer__swfFilter);
 

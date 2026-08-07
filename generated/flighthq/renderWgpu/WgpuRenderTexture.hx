@@ -150,7 +150,7 @@ class WgpuRenderTexture {
     format = _Runtime.callValue(WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture, cast ([state, _Runtime.field(requested, 'format')] : Array<Dynamic>));
     colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast _Runtime.field(renderTexture, 'colorSpace'));
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    entries = _Runtime.setField(runtime, 'wgpuRenderTextureCache', (_Runtime.field(runtime, 'wgpuRenderTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
+    entries = _Runtime.setField(runtime, 'wgpuRenderTextureCache', (_Runtime.field(runtime, 'wgpuRenderTextureCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])));
     entry = ((cast entries : flighthq._internal._WeakMap).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var target:Dynamic = _Runtime.callValue(createWgpuRenderTarget, cast ([state, _Runtime.field(requested, 'width'), _Runtime.field(requested, 'height'), format, colorSpace] : Array<Dynamic>));

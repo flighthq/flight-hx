@@ -49,7 +49,7 @@ class MatcapWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuMatcapSurface, cast ([state, pipeline, matcap, MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer, _Runtime.field(matcap, 'alphaCutoff')] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

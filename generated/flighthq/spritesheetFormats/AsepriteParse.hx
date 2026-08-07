@@ -25,7 +25,7 @@ class AsepriteParse {
   }
 
   public static function metaScale__asepriteParse(meta:AsepriteMeta):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
     return cast meta.scale;
     return cast null;
   }
@@ -54,7 +54,7 @@ class AsepriteParse {
     regions = _Runtime.callValue(parseTextureAtlasAsepriteDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([AsepriteParse.frameFromRegion__asepriteParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
-    durationMap = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    durationMap = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast _Runtime.isArray(_Runtime.field(doc, 'frames')) : Bool)) {
       for (entry in _Runtime.iterable((cast _Runtime.field(doc, 'frames') : Array<AsepriteArrayFrame>))) {
         ((cast durationMap : flighthq._internal._Map).set(entry.filename, entry.duration));

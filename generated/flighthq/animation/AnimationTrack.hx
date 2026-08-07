@@ -170,7 +170,7 @@ class AnimationTrack {
 
   public static function cloneNumberBuffer__animationTrack(src:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.isInstanceOf(src, _Runtime.globalValue('Float32Array')) : Bool)) { return cast _Runtime.slice(src, 0, null); }
+    if ((cast _Runtime.isInstanceOf(src, flighthq._internal._HostValueLut.get('Float32Array')) : Bool)) { return cast _Runtime.slice(src, 0, null); }
     out = _Runtime.createArray(_Runtime.field(src, 'length'));
     {
       var i:Dynamic = 0.0;

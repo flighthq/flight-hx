@@ -94,7 +94,7 @@ class Md2Parse {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.header-too-short', 'parseMd2', { byteLength: _Runtime.field(bytes, 'length') }] : Array<Dynamic>));
       return cast _Runtime.callValue(Md2Parse.emptyMd2Document__md2Parse, cast ([] : Array<Dynamic>));
     }
-    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
+    view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
     magic = _Runtime.callProperty(view, 'getInt32', cast ([0.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(magic, MD2_MAGIC) : Bool)) {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'md2.bad-magic', 'parseMd2', { magic: _Runtime.numberToString(_Runtime.unsignedShiftRight(_Runtime.toInt32(magic), 0), 16.0) }] : Array<Dynamic>));
@@ -162,7 +162,7 @@ class Md2Parse {
     }
     frames = _Runtime.callValue(Md2Parse.readMd2Frames__md2Parse, cast ([bytes, view, offFrames, numFrames, numVertices, frameStride, diagnostics] : Array<Dynamic>));
     base = flighthq._internal._StaticIndex.readArray(frames, 0.0);
-    dedup = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    dedup = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     interleavedVertices = cast ([] : Array<Dynamic>);
     sourceVertexIndices = cast ([] : Array<Dynamic>);
     indices = cast ([] : Array<Dynamic>);
@@ -264,7 +264,7 @@ class Md2Parse {
     var frames:Array<Md2Frame__md2Parse> = cast _Runtime.UNDEFINED;
     var outOfRangeNormals:Dynamic = cast _Runtime.UNDEFINED;
     frames = cast ([] : Array<Dynamic>);
-    outOfRangeNormals = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Set'), []), function():Dynamic return cast null);
+    outOfRangeNormals = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), function():Dynamic return cast null);
     {
       var f:Dynamic = 0.0;
       while ((cast ((cast f : Float) < (cast numFrames : Float)) : Bool)) {
@@ -358,7 +358,7 @@ class Md2Parse {
     targetCount = _Runtime.field(_Runtime.field(morph, 'targets'), 'length');
     if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     animations = cast ([] : Array<Dynamic>);
-    usedNames = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    usedNames = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     runStart = 0.0;
     {
       var k:Dynamic = 1.0;

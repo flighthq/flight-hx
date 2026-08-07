@@ -47,7 +47,7 @@ class AbcReader__abcFile {
       (this.valid = cast (false : Dynamic));
       return cast 0.0;
     }
-    value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(_Runtime.field(this, 'source'), 'buffer'), _Runtime.addNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'byteOffset'), _Runtime.field(this, 'pos')), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
+    value = _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(_Runtime.field(this, 'source'), 'buffer'), _Runtime.addNumbers(_Runtime.field(_Runtime.field(this, 'source'), 'byteOffset'), _Runtime.field(this, 'pos')), 8.0]), 'getFloat64', cast ([0.0, true] : Array<Dynamic>));
     (this.pos += 8.0);
     return cast value;
     return cast null;
@@ -59,7 +59,7 @@ class AbcReader__abcFile {
   public function readString():String {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     length = (cast this : AbcReader__abcFile).readVarUint();
-    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast (#if js (cast AbcFile._decoder__abcFile : flighthq._internal.dom.TextDecoder).decode((cast this : AbcReader__abcFile).readBytes(length)) #else _Runtime.callProperty(AbcFile._decoder__abcFile, 'decode', cast ([(cast this : AbcReader__abcFile).readBytes(length)] : Array<Dynamic>)) #end) : Dynamic) : (cast '' : Dynamic));
+    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast (cast AbcFile._decoder__abcFile : flighthq._internal.dom.TextDecoder).decode((cast this : AbcReader__abcFile).readBytes(length)) : Dynamic) : (cast '' : Dynamic));
     return cast null;
   }
   public function readUint8():Float {
@@ -208,7 +208,7 @@ class AbcFile {
     if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, integers, function() return (cast reader : AbcReader__abcFile).readVarInt()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     unsignedIntegers = cast ([0.0] : Array<Dynamic>);
     if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, unsignedIntegers, function() return (cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
-    doubles = cast ([_Runtime.field(_Runtime.globalValue('Number'), 'NaN')] : Array<Dynamic>);
+    doubles = cast ([_Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN')] : Array<Dynamic>);
     if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, doubles, function() return (cast reader : AbcReader__abcFile).readDouble()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     strings = cast ([''] : Array<Dynamic>);
     if ((cast !(cast _Runtime.callValue(AbcFile.readAbcPool__abcFile, cast ([reader, strings, function() return (cast reader : AbcReader__abcFile).readString()] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
@@ -504,5 +504,5 @@ class AbcFile {
 
   public static final VAR_UINT_MAX_BYTES__abcFile:Dynamic = 5.0;
 
-  public static final _decoder__abcFile:Dynamic = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+  public static final _decoder__abcFile:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

@@ -78,7 +78,7 @@ class AnimationCrossfade {
     toChannels = _Runtime.field(to, 'clip').channels;
     _Runtime.callValue(AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade, cast ([fromChannels, 'source'] : Array<Dynamic>));
     _Runtime.callValue(AnimationCrossfade.assertUniqueAnimationCrossfadeTargets__animationCrossfade, cast ([toChannels, 'destination'] : Array<Dynamic>));
-    toByTarget = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    toByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(toChannels, 'length') : Float)) : Bool)) {
@@ -87,7 +87,7 @@ class AnimationCrossfade {
       }
     }
     channels = cast ([] : Array<Dynamic>);
-    matchedTo = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    matchedTo = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
       var fromIndex:Dynamic = 0.0;
       while ((cast ((cast fromIndex : Float) < (cast _Runtime.field(fromChannels, 'length') : Float)) : Bool)) {
@@ -125,7 +125,7 @@ class AnimationCrossfade {
 
   public static function assertUniqueAnimationCrossfadeTargets__animationCrossfade(channels:Array<AnimationChannel>, clipLabel:String):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
-    targets = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    targets = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (channel in _Runtime.iterable(channels)) {
       if ((cast ((cast targets : flighthq._internal._Set).has(_Runtime.field(channel, 'targetRef'))) : Bool)) {
         _Runtime.throwValue(_Runtime.typeError('AnimationCrossfade ' + Std.string(clipLabel) + ' clip contains a duplicate targetRef.'));

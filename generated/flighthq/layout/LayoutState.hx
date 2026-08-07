@@ -8,7 +8,7 @@ import flighthq.types.Layout.LayoutState;
 
 class LayoutState {
   public static function createLayoutState():flighthq.types.Layout.LayoutState {
-    return cast { guard: null, lastFailureActualLength: 0.0, lastFailureKind: null, lastFailureNodeIndex: -1.0, lastFailureParentIndex: -1.0, lastFailureRequiredLength: 0.0, lastFailureResolverKind: null, resolvers: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    return cast { guard: null, lastFailureActualLength: 0.0, lastFailureKind: null, lastFailureNodeIndex: -1.0, lastFailureParentIndex: -1.0, lastFailureRequiredLength: 0.0, lastFailureResolverKind: null, resolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     return cast null;
   }
 

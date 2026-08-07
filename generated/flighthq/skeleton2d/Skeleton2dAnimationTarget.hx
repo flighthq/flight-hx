@@ -156,7 +156,7 @@ class Skeleton2dAnimationTarget {
     return cast null;
   }
 
-  public static final _binders__skeleton2dAnimationTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast ([TargetKind.Bone, Skeleton2dAnimationTarget.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget] : Array<Dynamic>), cast ([TargetKind.Slot, Skeleton2dAnimationTarget.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final _binders__skeleton2dAnimationTarget:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([TargetKind.Bone, Skeleton2dAnimationTarget.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget] : Array<Dynamic>), cast ([TargetKind.Slot, Skeleton2dAnimationTarget.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget] : Array<Dynamic>)] : Array<Dynamic>)]);
 
   public static final _scratch__skeleton2dAnimationTarget:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 

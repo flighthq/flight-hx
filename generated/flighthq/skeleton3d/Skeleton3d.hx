@@ -50,7 +50,7 @@ class Skeleton3d {
     var clonesBySource:Dynamic = cast _Runtime.UNDEFINED;
     sourceJoints = _Runtime.field(skeleton, 'joints');
     joints = _Runtime.createArray(_Runtime.field(sourceJoints, 'length'));
-    clonesBySource = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    clonesBySource = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(sourceJoints, 'length') : Float)) : Bool)) {

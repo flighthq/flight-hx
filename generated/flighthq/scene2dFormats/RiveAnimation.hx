@@ -287,7 +287,7 @@ class RiveAnimation {
 
   public static function collectRiveInterpolators__riveAnimation(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }):Dynamic {
     var interpolators:Dynamic = cast _Runtime.UNDEFINED;
-    interpolators = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    interpolators = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Dynamic = _Runtime.field(range, 'start');
       while ((cast ((cast ((cast index : Float) < (cast _Runtime.field(range, 'end') : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) : Bool)) {
@@ -450,5 +450,5 @@ class RiveAnimation {
 
   public static final _sampleScratch__riveAnimation:Dynamic = _Runtime.fill(_Runtime.createArray(8.0), 0.0, 0, null, 1);
 
-  public static final _pendingRebuilds__riveAnimation:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
+  public static final _pendingRebuilds__riveAnimation:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 }

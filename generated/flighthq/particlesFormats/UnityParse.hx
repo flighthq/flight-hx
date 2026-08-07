@@ -241,7 +241,7 @@ class UnityParse {
     return cast null;
   }
 
-  public static final KNOWN_UNITY_SHAPES__unityParse:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['Sphere', 'Hemisphere', 'Circle', 'Box', 'Rectangle', 'Cone'] : Array<Dynamic>)]);
+  public static final KNOWN_UNITY_SHAPES__unityParse:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['Sphere', 'Hemisphere', 'Circle', 'Box', 'Rectangle', 'Cone'] : Array<Dynamic>)]);
 
   public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;

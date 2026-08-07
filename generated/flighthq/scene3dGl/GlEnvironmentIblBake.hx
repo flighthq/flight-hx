@@ -194,7 +194,7 @@ class GlEnvironmentIblBake {
     gl = _Runtime.field(state, 'gl');
     byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (byState = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (byState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).set(state, byState));
     }
     baked = ((cast byState : flighthq._internal._Map).get(key));
@@ -238,7 +238,7 @@ class GlEnvironmentIblBake {
 
   public static final _quad__glEnvironmentIblBake:Dynamic = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
-  public static final _bakePrograms__glEnvironmentIblBake:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _bakePrograms__glEnvironmentIblBake:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final BAKE_VERTEX__glEnvironmentIblBake:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_uv;\nvoid main() {\n  v_uv = a_position;\n  gl_Position = vec4(a_position, 0.0, 1.0);\n}\n';
 

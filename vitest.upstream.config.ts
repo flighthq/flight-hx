@@ -6,6 +6,7 @@ const repositoryRoot = path.resolve('.');
 const packagesDirectory = path.join(repositoryRoot, 'upstream/packages');
 const bridgesDirectory = path.join(repositoryRoot, 'tests/bridges');
 const selectedPackage = process.env.FLIGHT_UPSTREAM_PACKAGE;
+export const bridgeHookTimeoutMs = 30_000;
 
 export const bridgeHookTimeoutMs = 30_000;
 

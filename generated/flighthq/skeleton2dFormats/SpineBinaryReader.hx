@@ -7,7 +7,7 @@ import flighthq.types.ByteReader;
 
 class SpineBinaryReader {
   public static function createSpineBinaryReader(bytes:flighthq._internal._UInt8Array):ByteReader {
-    return cast { offset: 0.0, view: _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]) };
+    return cast { offset: 0.0, view: _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]) };
     return cast null;
   }
 
@@ -70,7 +70,7 @@ class SpineBinaryReader {
     start = _Runtime.addNumbers(_Runtime.field(reader.view, 'byteOffset'), reader.offset);
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(reader.view, 'buffer'), start, length);
     (reader.offset += length);
-    return cast (#if js (cast SpineBinaryReader._decoder__spineBinaryReader : flighthq._internal.dom.TextDecoder).decode(bytes) #else _Runtime.callProperty(SpineBinaryReader._decoder__spineBinaryReader, 'decode', cast ([bytes] : Array<Dynamic>)) #end);
+    return cast (cast SpineBinaryReader._decoder__spineBinaryReader : flighthq._internal.dom.TextDecoder).decode(bytes);
     return cast null;
   }
 
@@ -124,5 +124,5 @@ class SpineBinaryReader {
     return cast null;
   }
 
-  public static final _decoder__spineBinaryReader:Dynamic = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+  public static final _decoder__spineBinaryReader:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

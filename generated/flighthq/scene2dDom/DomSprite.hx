@@ -52,9 +52,9 @@ class DomSprite {
     textureHeight = _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>));
     sourceRectangle = { height: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, textureHeight)), width: HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').x, textureWidth)), x: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').x, textureWidth), y: _Runtime.multiplyNumbers(_Runtime.field(texture, 'uvOffset').y, textureHeight) };
     isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'x'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'y'), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'width'), textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sourceRectangle, 'height'), textureHeight) : Bool));
-    if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLVideoElement')) : Bool)) : Bool)) {
+    if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) : Bool)) {
       _Runtime.callValue(DomSprite.renderSpriteAsVideo__domSprite, cast ([state, renderProxy, data, source] : Array<Dynamic>));
-    } else { if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLImageElement')) : Bool)) : Bool)) {
+    } else { if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLImageElement')) : Bool)) : Bool)) {
       _Runtime.callValue(DomSprite.renderSpriteAsImage__domSprite, cast ([state, renderProxy, data, source] : Array<Dynamic>));
     } else {
       _Runtime.callValue(DomSprite.renderSpriteAsCanvas__domSprite, cast ([state, renderProxy, data, source, sourceRectangle] : Array<Dynamic>));
@@ -76,8 +76,8 @@ class DomSprite {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'width'), pixelRatio));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'height'), pixelRatio));
-    (#if js ((cast (#if js (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(_Runtime.field(data, 'canvas'), 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px') #else _Runtime.setField((#if js (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(_Runtime.field(data, 'canvas'), 'style') #end), 'width', '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px') #end);
-    (#if js ((cast (#if js (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(_Runtime.field(data, 'canvas'), 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px') #else _Runtime.setField((#if js (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(_Runtime.field(data, 'canvas'), 'style') #end), 'height', '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px') #end);
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px');
     context = _Runtime.field(data, 'context');
     if ((cast !_Runtime.strictEquals(pixelRatio, 1.0) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool)));
@@ -92,10 +92,10 @@ class DomSprite {
     _Runtime.setField(data, 'video', null);
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'image'), null) : Bool)) {
       _Runtime.setField(data, 'image', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
-      (#if js ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous') #else _Runtime.setField(_Runtime.field(data, 'image'), 'crossOrigin', 'anonymous') #end);
+      ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'image')] : Array<Dynamic>));
     }
-    if ((cast !_Runtime.strictEquals((#if js (cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src #else _Runtime.field(_Runtime.field(data, 'image'), 'src') #end), (#if js source.src #else _Runtime.field(source, 'src') #end)) : Bool)) { (#if js ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src = (#if js source.src #else _Runtime.field(source, 'src') #end)) #else _Runtime.setField(_Runtime.field(data, 'image'), 'src', (#if js source.src #else _Runtime.field(source, 'src') #end)) #end); }
+    if ((cast !_Runtime.strictEquals((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src = source.src); }
     _Runtime.callValue(applyDomStyle, cast ([state, _Runtime.field(data, 'image'), renderProxy] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'image')] : Array<Dynamic>));
   }

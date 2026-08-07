@@ -78,7 +78,7 @@ class BuiltInScene2DDocumentImporters {
   }
 
   public static function decodeText__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array):String {
-    return cast (#if js (cast BuiltInScene2DDocumentImporters._decoder__builtInScene2DDocumentImporters : flighthq._internal.dom.TextDecoder).decode(source) #else _Runtime.callProperty(BuiltInScene2DDocumentImporters._decoder__builtInScene2DDocumentImporters, 'decode', cast ([source] : Array<Dynamic>)) #end);
+    return cast (cast BuiltInScene2DDocumentImporters._decoder__builtInScene2DDocumentImporters : flighthq._internal.dom.TextDecoder).decode(source);
     return cast null;
   }
 
@@ -87,5 +87,5 @@ class BuiltInScene2DDocumentImporters {
     return cast null;
   }
 
-  public static final _decoder__builtInScene2DDocumentImporters:Dynamic = _Runtime.construct(_Runtime.globalValue('TextDecoder'), []);
+  public static final _decoder__builtInScene2DDocumentImporters:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder'), []);
 }

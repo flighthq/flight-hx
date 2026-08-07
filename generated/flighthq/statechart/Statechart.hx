@@ -23,7 +23,7 @@ class Statechart {
     var deltaTimeMs:Dynamic = cast _Runtime.UNDEFINED;
     var changedRegions:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var changedRegionCount:Dynamic = cast _Runtime.UNDEFINED;
-    deltaTimeMs = ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([deltaTime] : Array<Dynamic>)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast deltaTime : Dynamic) : (cast 0.0 : Dynamic));
+    deltaTimeMs = ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([deltaTime] : Array<Dynamic>)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast deltaTime : Dynamic) : (cast 0.0 : Dynamic));
     changedRegions = null;
     changedRegionCount = 0.0;
     {
@@ -78,7 +78,7 @@ class Statechart {
       flighthq._internal._StaticIndex.writeInt32Array(_Runtime.field(instance, 'regionTransitions'), regionIndex, transitionIndex);
       flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(instance, 'regionBlend'), regionIndex, 0.0);
     }
-    durationMs = ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(transition, 'durationMs')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(transition, 'durationMs') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(transition, 'durationMs') : Dynamic) : (cast 0.0 : Dynamic));
+    durationMs = ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(transition, 'durationMs')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(transition, 'durationMs') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(transition, 'durationMs') : Dynamic) : (cast 0.0 : Dynamic));
     blend = ((cast _Runtime.strictEquals(durationMs, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast HxMath.min(1.0, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(instance, 'regionBlend'), regionIndex), (deltaTimeMs / durationMs))) : Dynamic));
     flighthq._internal._StaticIndex.writeFloat32Array(_Runtime.field(instance, 'regionBlend'), regionIndex, blend);
     if ((cast ((cast blend : Float) < (cast 1.0 : Float)) : Bool)) { return cast false; }
@@ -334,10 +334,10 @@ class Statechart {
   }
 
   public static function setStatechartRegionDuration(instance:StatechartInstance, regionIndex:Float, duration:Float):Void {
-    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([regionIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast regionIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast regionIndex : Float) >= (cast _Runtime.field(_Runtime.field(instance, 'regionDuration'), 'length') : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([regionIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast regionIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast regionIndex : Float) >= (cast _Runtime.field(_Runtime.field(instance, 'regionDuration'), 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('Statechart region index ' + Std.string(regionIndex) + ' is out of range'));
     }
-    if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast duration : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast duration : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('Statechart region duration must be finite and non-negative'));
     }
     flighthq._internal._StaticIndex.writeFloat64Array(_Runtime.field(instance, 'regionDuration'), regionIndex, duration);
@@ -372,10 +372,10 @@ class Statechart {
               var transitionIndex:Dynamic = 0.0;
               while ((cast ((cast transitionIndex : Float) < (cast _Runtime.field(_Runtime.field(state, 'transitions'), 'length') : Float)) : Bool)) {
                 var transition:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(state, 'transitions'), transitionIndex);
-                if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(transition, 'durationMs')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(transition, 'durationMs') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+                if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(transition, 'durationMs')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(transition, 'durationMs') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
                   _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid duration'));
                 }
-                if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(transition, 'exitTimeRatio')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(transition, 'exitTimeRatio') : Float) < (cast -1.0 : Float)) : Bool)) : Bool)) {
+                if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(transition, 'exitTimeRatio')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(transition, 'exitTimeRatio') : Float) < (cast -1.0 : Float)) : Bool)) : Bool)) {
                   _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid exit time'));
                 }
                 if ((cast ((cast ((cast _Runtime.field(transition, 'targetStateIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(transition, 'targetStateIndex') : Float) >= (cast _Runtime.field(_Runtime.field(region, 'states'), 'length') : Float)) : Bool)) : Bool)) {
@@ -386,7 +386,7 @@ class Statechart {
                   while ((cast ((cast conditionIndex : Float) < (cast _Runtime.field(_Runtime.field(transition, 'conditions'), 'length') : Float)) : Bool)) {
                     var condition:Dynamic = flighthq._internal._StaticIndex.readArray(_Runtime.field(transition, 'conditions'), conditionIndex);
                     var inputIndex:Dynamic = _Runtime.field(condition, 'inputIndex');
-                    if ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([inputIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast inputIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast inputIndex : Float) >= (cast _Runtime.field(_Runtime.field(chart, 'inputs'), 'length') : Float)) : Bool)) : Bool)) {
+                    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([inputIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast inputIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast inputIndex : Float) >= (cast _Runtime.field(_Runtime.field(chart, 'inputs'), 'length') : Float)) : Bool)) : Bool)) {
                       _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid input'));
                     }
                     if ((cast !(cast _Runtime.includes(flighthq._internal.DynamicObject.values(StatechartComparisonValue), _Runtime.field(condition, 'comparison')) : Bool) : Bool)) {

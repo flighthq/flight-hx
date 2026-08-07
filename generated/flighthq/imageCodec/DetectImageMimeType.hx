@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class DetectImageMimeType {
   public static function detectImageMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = ((cast _Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
+    b = ((cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) ? (cast data : Dynamic) : (cast new flighthq._internal._UInt8Array(data) : Dynamic));
     if ((cast ((cast _Runtime.field(b, 'byteLength') : Float) < (cast 4.0 : Float)) : Bool)) { return cast null; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 137.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 80.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 78.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 3.0), 71.0) : Bool)) : Bool)) { return cast 'image/png'; }
     if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 0.0), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 1.0), 216.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(b, 2.0), 255.0) : Bool)) : Bool)) { return cast 'image/jpeg'; }

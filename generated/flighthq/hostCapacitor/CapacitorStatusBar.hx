@@ -79,8 +79,8 @@ class CapacitorStatusBar {
   public static function hexToRgba__capacitorStatusBar(hex:String):Float {
     var digits:Dynamic = cast _Runtime.UNDEFINED;
     digits = _Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false);
-    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), 0); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << 8)) | 255)), 0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), 0); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << 8)) | 255)), 0); }
     return cast 0.0;
     return cast null;
   }

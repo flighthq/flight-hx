@@ -17,7 +17,7 @@ class WrappedDiffusePbrExtension {
   }
 
   public static function isValidWrappedDiffusePbrExtension(value:flighthq.types.WrappedDiffusePbrExtension):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'wrappedDiffuseStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'thicknessMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'wrappedDiffuseMapUvSet')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.callValue(isValidMaterialWeight, cast ([_Runtime.field(value, 'wrappedDiffuseStrength')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(value, 'thickness')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(value, 'thickness') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'thicknessMapUvSet')] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callValue(isValidPbrUvSet, cast ([_Runtime.field(value, 'wrappedDiffuseMapUvSet')] : Array<Dynamic>)));
     return cast null;
   }
 }

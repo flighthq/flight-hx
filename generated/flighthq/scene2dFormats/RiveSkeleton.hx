@@ -33,7 +33,7 @@ class RiveSkeleton {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(components, 'length'), 0.0) : Bool)) { return cast null; }
-    depths = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    depths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (component in _Runtime.iterable(components)) {
       ((cast depths : flighthq._internal._Map).set(component, _Runtime.callValue(RiveSkeleton.toRiveComponentDepth__riveSkeleton, cast ([artboard, component] : Array<Dynamic>))));
     }

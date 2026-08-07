@@ -11,7 +11,7 @@ class GetScene3DResourceTextures {
   public static function getScene3DResourceTextures(out:Array<Texture>, scene:Scene3D):Void {
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    seen = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (resource in _Runtime.iterable(scene.resources)) {
       for (texture in _Runtime.iterable(_Runtime.coalesce(_Runtime.field(resource, 'textures'), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
         if ((cast ((cast seen : flighthq._internal._Set).has(texture)) : Bool)) { continue; }

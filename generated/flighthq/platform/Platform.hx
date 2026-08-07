@@ -35,10 +35,10 @@ class Platform {
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        var aNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(aParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(aParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var bNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(bParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(bParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var aN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([aNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast aNum : Dynamic));
-        var bN:Dynamic = ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([bNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast bNum : Dynamic));
+        var aNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(aParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(aParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var bNum:Dynamic = ((cast ((cast i : Float) < (cast _Runtime.field(bParts, 'length') : Float)) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(bParts, i), 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+        var aN:Dynamic = ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([aNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast aNum : Dynamic));
+        var bN:Dynamic = ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([bNum] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast bNum : Dynamic));
         if ((cast ((cast aN : Float) < (cast bN : Float)) : Bool)) { return cast -1.0; }
         if ((cast ((cast aN : Float) > (cast bN : Float)) : Bool)) { return cast 1.0; }
         i++;
@@ -96,15 +96,15 @@ class Platform {
   public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     var ua:Dynamic = cast _Runtime.UNDEFINED;
-    nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-    ua = _Runtime.coalesce((#if js ({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).userAgent; }) #else _Runtime.optionalField(nav, 'userAgent') #end), function():Dynamic return cast '');
+    nav = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
+    ua = _Runtime.coalesce(({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
     (out.name = cast (_Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)) : Dynamic));
     (out.kind = cast (_Runtime.callValue(parseUserAgentKind, cast ([out.name] : Array<Dynamic>)) : Dynamic));
     (out.version = cast (_Runtime.callValue(parseUserAgentVersion, cast ([ua, out.name] : Array<Dynamic>)) : Dynamic));
     (out.arch = cast (_Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)) : Dynamic));
     (out.locale = cast (_Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'language'), function():Dynamic return cast '') : Dynamic));
-    (out.isTouch = cast (((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)) : Dynamic));
-    (out.runtime = cast (_Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) : Dynamic));
+    (out.isTouch = cast (((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)) : Dynamic));
+    (out.runtime = cast (_Runtime.callValue(parseUserAgentRuntime, cast ([((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic) : Dynamic) : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>)) : Dynamic));
     (out.engine = cast (_Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)) : Dynamic));
     (out.engineVersion = cast (_Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, out.engine] : Array<Dynamic>)) : Dynamic));
     (out.endianness = cast (_Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)) : Dynamic));

@@ -36,11 +36,11 @@ class GlLitProgram {
 
   public static final IBL_BRDF_TEXTURE_UNIT__glLitProgram:Dynamic = 11.0;
 
-  public static final _iblPlaceholders__glLitProgram:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _iblPlaceholders__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uploadedLightVersion__glLitProgram:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _uploadedLightVersion__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uploadedLightBlock__glLitProgram:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _uploadedLightBlock__glLitProgram:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function bindGlMeshLightBlock(state:GlRenderState, program:flighthq.types.GlLitProgram, lights:Scene3DLightBlock):Void {

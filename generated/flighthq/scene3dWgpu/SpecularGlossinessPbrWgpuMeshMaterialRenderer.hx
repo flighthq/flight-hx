@@ -57,7 +57,7 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     _Runtime.fill(out, 0.0, 16.0, null, 2);
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'bindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'bindGroup'));
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

@@ -318,7 +318,7 @@ class ElectronWindow {
     return cast null;
   }
 
-  public static final _windows__electronWindow:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _windows__electronWindow:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _windowsById__electronWindow:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final _windowsById__electronWindow:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

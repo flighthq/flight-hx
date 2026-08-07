@@ -87,7 +87,7 @@ class AnimationClip {
 
   public static function validateAnimationClipEvents__animationClip(events:Array<AnimationClipEvent>):Void {
     for (event in _Runtime.iterable(events)) {
-      if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(event, 'time')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(event, 'time') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(event, 'time')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(event, 'time') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.throwValue(_Runtime.rangeError('AnimationClip event "' + Std.string(_Runtime.field(event, 'name')) + '" time must be a finite non-negative number.'));
       }
     }

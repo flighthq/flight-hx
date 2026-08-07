@@ -9,7 +9,7 @@ class CaptureSnapshot {
   public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callOptionalValue(CaptureSnapshot._captureGuard__captureSnapshot, cast ([source] : Array<Dynamic>));
-    clone = (cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([source] : Array<Dynamic>)) : Dynamic);
+    clone = (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([source] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([clone] : Array<Dynamic>));
     return cast (cast clone : Snapshot<Dynamic>);
     return cast null;

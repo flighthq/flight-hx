@@ -29,7 +29,7 @@ class RiveCoreTypes {
 
   public static function buildRiveCoreTypeTable__riveCoreTypes():Dynamic {
     var table:Dynamic = cast _Runtime.UNDEFINED;
-    table = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    table = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (row in _Runtime.iterable(RiveCoreTypes.RIVE_CORE_TYPES__riveCoreTypes)) {
       ((cast table : flighthq._internal._Map).set(_Runtime.field(row, 'key'), row));
     }

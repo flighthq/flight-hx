@@ -124,7 +124,7 @@ class BitmapFontJson {
   }
 
   public static function readJsonNumber__bitmapFontJson(value:Dynamic):Null<Float> {
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

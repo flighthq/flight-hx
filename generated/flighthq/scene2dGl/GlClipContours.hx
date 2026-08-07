@@ -76,7 +76,7 @@ class GlClipContours {
     _Runtime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
   }
 
-  public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
     return cast ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));

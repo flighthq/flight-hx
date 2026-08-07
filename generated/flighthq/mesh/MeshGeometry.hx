@@ -33,7 +33,7 @@ class MeshGeometry {
       } else {
         (indices = cast (new flighthq._internal._UInt16Array(_Runtime.field(source.indices, 'length')) : Dynamic));
       }
-      ({ final __typedArraySetTarget0:Dynamic = indices; final __typedArraySetSource1:Dynamic = source.indices; if (_Runtime.isInstanceOf(__typedArraySetTarget0, _Runtime.globalValue('Uint32Array'))) { (cast __typedArraySetTarget0 : flighthq._internal._UInt32Array).set(__typedArraySetSource1); } else { (cast __typedArraySetTarget0 : flighthq._internal._UInt16Array).set(__typedArraySetSource1); } });
+      ({ final __typedArraySetTarget0:Dynamic = indices; final __typedArraySetSource1:Dynamic = source.indices; if (_Runtime.isInstanceOf(__typedArraySetTarget0, flighthq._internal._HostValueLut.get('Uint32Array'))) { (cast __typedArraySetTarget0 : flighthq._internal._UInt32Array).set(__typedArraySetSource1); } else { (cast __typedArraySetTarget0 : flighthq._internal._UInt16Array).set(__typedArraySetSource1); } });
     }
     subsets = cast ([] : Array<Dynamic>);
     {

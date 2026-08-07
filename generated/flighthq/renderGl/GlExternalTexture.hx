@@ -25,7 +25,7 @@ class GlExternalTexture {
     source = (cast _Runtime.callValue(createEntity, cast ([{ height: _Runtime.field(options, 'height'), kind: ExternalTextureSourceKind, version: 0.0, width: _Runtime.field(options, 'width') }] : Array<Dynamic>)) : ExternalTexture);
     texture = _Runtime.callValue(createTexture, cast ([{ colorSpace: _Runtime.field(options, 'colorSpace'), sampler: _Runtime.select(_Runtime.field(options, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(options, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: '2d', source: source }] : Array<Dynamic>));
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'glExternalTextureCache', (_Runtime.field(runtime, 'glExternalTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : flighthq._internal._WeakMap).set(source, handle));
+    ((cast _Runtime.setField(runtime, 'glExternalTextureCache', (_Runtime.field(runtime, 'glExternalTextureCache') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []))) : flighthq._internal._WeakMap).set(source, handle));
     _Runtime.callValue(registerGlTextureResolver, cast ([state, ExternalTextureSourceKind, GlExternalTexture.resolveExternalGlTexture__glExternalTexture] : Array<Dynamic>));
     return cast texture;
     return cast null;

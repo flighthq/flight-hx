@@ -99,7 +99,7 @@ class SvgDocument {
       _Runtime.callValue(reportImportDiagnostic, cast ([diagnostics, ImportDiagnosticSeverityValue.Reject, 'svg.invalid-document', 'createScene2DFromSvgDocument'] : Array<Dynamic>));
       return cast out;
     }
-    context = { cssRules: _Runtime.callValue(SvgDocument.collectCssRules__svgDocument, cast ([document] : Array<Dynamic>)), diagnostics: diagnostics, elementsById: _Runtime.construct(_Runtime.globalValue('Map'), []), gradientsById: _Runtime.construct(_Runtime.globalValue('Map'), []), options: options, parentByElement: _Runtime.construct(_Runtime.globalValue('Map'), []), reportedUnsupportedElements: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvingClipUses: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvingClips: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvingGradients: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvingUses: _Runtime.construct(_Runtime.globalValue('Set'), []), resolvedDefinitionStyles: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    context = { cssRules: _Runtime.callValue(SvgDocument.collectCssRules__svgDocument, cast ([document] : Array<Dynamic>)), diagnostics: diagnostics, elementsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), gradientsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), options: options, parentByElement: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), reportedUnsupportedElements: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClipUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClips: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingGradients: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvedDefinitionStyles: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     _Runtime.callValue(SvgDocument.indexSvgDefinitions__svgDocument, cast ([document, context] : Array<Dynamic>));
     viewport = _Runtime.callValue(SvgDocument.createSvgViewportMatrix__svgDocument, cast ([document] : Array<Dynamic>));
     rootStyle = _Runtime.callValue(SvgDocument.applySvgElementAppearance__svgDocument, cast ([out, document, SvgDocument.defaultSvgStyle__svgDocument, context, viewport, true] : Array<Dynamic>));
@@ -587,7 +587,7 @@ class SvgDocument {
   public static function createSvgTextFormat__svgDocument(style:SvgStyle__svgDocument):TextFormat {
     var color:Dynamic = cast _Runtime.UNDEFINED;
     color = _Runtime.coalesce(_Runtime.callValue(SvgDocument.resolveSvgColor__svgDocument, cast ([_Runtime.field(style, 'fill'), _Runtime.field(style, 'color')] : Array<Dynamic>)), function():Dynamic return cast { alpha: 1.0, rgb: 0.0 });
-    return cast { align: ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'middle') : Bool) ? (cast 'center' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'end') : Bool) ? (cast 'right' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), bold: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontWeight'), 'bold') : Bool) || (cast ((cast _Runtime.callValue(_Runtime.globalValue('Number'), cast ([_Runtime.field(style, 'fontWeight')] : Array<Dynamic>)) : Float) >= (cast 600.0 : Float)) : Bool)), color: _Runtime.callValue(packColor, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 16)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 8)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.field(color, 'rgb')) & 255) / 255.0), _Runtime.multiplyNumbers(_Runtime.field(color, 'alpha'), _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>)), font: _Runtime.replace(_Runtime.field(style, 'fontFamily'), _Runtime.regexp('^[\'"]|[\'"]$$', 'g'), '', false), italic: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'italic') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'oblique') : Bool)), size: _Runtime.field(style, 'fontSize') };
+    return cast { align: ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'middle') : Bool) ? (cast 'center' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(style, 'textAnchor'), 'end') : Bool) ? (cast 'right' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), bold: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontWeight'), 'bold') : Bool) || (cast ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.field(style, 'fontWeight')] : Array<Dynamic>)) : Float) >= (cast 600.0 : Float)) : Bool)), color: _Runtime.callValue(packColor, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 16)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(color, 'rgb')), 8)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.field(color, 'rgb')) & 255) / 255.0), _Runtime.multiplyNumbers(_Runtime.field(color, 'alpha'), _Runtime.field(style, 'fillOpacity'))] : Array<Dynamic>)), font: _Runtime.replace(_Runtime.field(style, 'fontFamily'), _Runtime.regexp('^[\'"]|[\'"]$$', 'g'), '', false), italic: ((cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'italic') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'fontStyle'), 'oblique') : Bool)), size: _Runtime.field(style, 'fontSize') };
     return cast null;
   }
 
@@ -891,16 +891,16 @@ class SvgDocument {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, name] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseCssNumber__svgDocument(value:Null<String>, fallback:Float):Float {
     var number:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast fallback; }
-    number = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([number] : Array<Dynamic>)) : Bool) ? (cast number : Dynamic) : (cast fallback : Dynamic));
+    number = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([number] : Array<Dynamic>)) : Bool) ? (cast number : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 
@@ -927,16 +927,16 @@ class SvgDocument {
     if ((cast StringTools.startsWith(normalized, '#') : Bool)) {
       var hex:Dynamic = _Runtime.slice(normalized, 1.0, null);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool)) : Bool)) {
-        var r:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 0.0) + _Runtime.getIndex(hex, 0.0)), 16.0] : Array<Dynamic>));
-        var g:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 1.0) + _Runtime.getIndex(hex, 1.0)), 16.0] : Array<Dynamic>));
-        var b:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 2.0) + _Runtime.getIndex(hex, 2.0)), 16.0] : Array<Dynamic>));
-        var a:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 3.0) + _Runtime.getIndex(hex, 3.0)), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
-        return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([(((r + g) + b) + a)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: a, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) } : Dynamic));
+        var r:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 0.0) + _Runtime.getIndex(hex, 0.0)), 16.0] : Array<Dynamic>));
+        var g:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 1.0) + _Runtime.getIndex(hex, 1.0)), 16.0] : Array<Dynamic>));
+        var b:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 2.0) + _Runtime.getIndex(hex, 2.0)), 16.0] : Array<Dynamic>));
+        var a:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 4.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([(_Runtime.getIndex(hex, 3.0) + _Runtime.getIndex(hex, 3.0)), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+        return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([(((r + g) + b) + a)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: a, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) } : Dynamic));
       }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool)) : Bool)) {
-        var rgb:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(hex, 0.0, 6.0), 16.0] : Array<Dynamic>));
-        var alpha:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(hex, 6.0, null), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
-        return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([(rgb + alpha)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: alpha, rgb: rgb } : Dynamic));
+        var rgb:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 0.0, 6.0), 16.0] : Array<Dynamic>));
+        var alpha:Dynamic = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 8.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(hex, 6.0, null), 16.0] : Array<Dynamic>)), 255.0) : Dynamic) : (cast 1.0 : Dynamic));
+        return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([(rgb + alpha)] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast { alpha: alpha, rgb: rgb } : Dynamic));
       }
     }
     functionMatch = _Runtime.callProperty(_Runtime.regexp('^(rgba?|hsla?)\\((.*)\\)$$', ''), 'exec', cast ([normalized] : Array<Dynamic>));
@@ -947,20 +947,20 @@ class SvgDocument {
         component = function(index:Float) {
           var text:Dynamic = cast _Runtime.UNDEFINED;
           text = flighthq._internal._StaticIndex.readArray(components, index);
-          return cast ((cast StringTools.endsWith(Std.string(text), '%') : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)), 255.0) / 100.0) : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)) : Dynamic));
+          return cast ((cast StringTools.endsWith(Std.string(text), '%') : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)), 255.0) / 100.0) : Dynamic) : (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([text] : Array<Dynamic>)) : Dynamic));
         };
         var r:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([0.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
         var g:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([1.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
         var b:Dynamic = HxMath.round(_Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([_Runtime.callValue(component, cast ([2.0] : Array<Dynamic>)), 0.0, 255.0] : Array<Dynamic>)));
         var alpha:Dynamic = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.parseCssAlpha__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 3.0)] : Array<Dynamic>)) : Dynamic));
-        if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([(((r + g) + b) + alpha)] : Array<Dynamic>)) : Bool)) { return cast { alpha: alpha, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) }; }
+        if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(((r + g) + b) + alpha)] : Array<Dynamic>)) : Bool)) { return cast { alpha: alpha, rgb: (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 16)) | _Runtime.toInt32((_Runtime.toInt32(g) << 8)))) | _Runtime.toInt32(b)) }; }
       }
       if ((cast ((cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'hsl'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(functionMatch, 1.0), 'hsla')) : Bool) && (cast ((cast _Runtime.field(components, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) : Bool)) {
         var hue:Dynamic = _Runtime.callValue(SvgDocument.parseCssHue__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 0.0)] : Array<Dynamic>));
         var saturation:Dynamic = _Runtime.callValue(SvgDocument.parseCssFraction__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 1.0)] : Array<Dynamic>));
         var lightness:Dynamic = _Runtime.callValue(SvgDocument.parseCssFraction__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 2.0)] : Array<Dynamic>));
         var alpha:Dynamic = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(components, 3.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.callValue(SvgDocument.parseCssAlpha__svgDocument, cast ([flighthq._internal._StaticIndex.readArray(components, 3.0)] : Array<Dynamic>)) : Dynamic));
-        if ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([(((hue + saturation) + lightness) + alpha)] : Array<Dynamic>)) : Bool)) {
+        if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(((hue + saturation) + lightness) + alpha)] : Array<Dynamic>)) : Bool)) {
           return cast { alpha: alpha, rgb: _Runtime.callValue(SvgDocument.hslToRgb__svgDocument, cast ([hue, saturation, lightness] : Array<Dynamic>)) };
         }
       }
@@ -1012,32 +1012,32 @@ class SvgDocument {
   public static function parseSvgCoordinate__svgDocument(value:Null<String>, fallback:Float):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast fallback; }
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast fallback; }
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast fallback; }
     return cast ((cast StringTools.endsWith(Std.string(StringTools.trim(Std.string(value))), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic));
     return cast null;
   }
 
   public static function parseCssAlpha__svgDocument(value:String):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'NaN'); }
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
     return cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)), 0.0, 1.0] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseCssFraction__svgDocument(value:String):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'NaN'); }
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
     return cast _Runtime.callValue(SvgDocument.clamp__svgDocument, cast ([((cast StringTools.endsWith(Std.string(value), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic)), 0.0, 1.0] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseCssHue__svgDocument(value:String):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'NaN'); }
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast _Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN'); }
     if ((cast StringTools.endsWith(Std.string(value), 'turn') : Bool)) { return cast (parsed * 360.0); }
     if ((cast StringTools.endsWith(Std.string(value), 'grad') : Bool)) { return cast (parsed * 0.9); }
     if ((cast StringTools.endsWith(Std.string(value), 'rad') : Bool)) { return cast ((parsed * 180.0) / HxMath.PI); }
@@ -1069,23 +1069,23 @@ class SvgDocument {
   public static function parseSvgLength__svgDocument(value:Null<String>, fallback:Float):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast fallback; }
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast fallback : Dynamic));
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 
   public static function parseSvgNumberList__svgDocument(value:String):Array<Float> {
     var matches:Dynamic = cast _Runtime.UNDEFINED;
     matches = _Runtime.match(value, _Runtime.regexp('[+-]?(?:\\d+\\.?\\d*|\\.\\d+)(?:e[+-]?\\d+)?', 'gi'));
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(matches, 'map', cast ([_Runtime.globalValue('Number')] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(matches, 'map', cast ([flighthq._internal._HostValueLut.get('Number')] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function parseSvgOffset__svgDocument(value:Null<String>):Float {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast 0.0; }
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
     return cast ((cast StringTools.endsWith(Std.string(StringTools.trim(Std.string(value))), '%') : Bool) ? (cast (parsed / 100.0) : Dynamic) : (cast parsed : Dynamic));
     return cast null;
   }
@@ -1193,7 +1193,7 @@ class SvgDocument {
       flighthq._internal.DynamicObject.assign(declarations, _Runtime.field(rule, 'declarations'));
     }
     flighthq._internal.DynamicObject.assign(declarations, _Runtime.callValue(SvgDocument.parseStyleDeclarations__svgDocument, cast ([_Runtime.coalesce(_Runtime.callValue(SvgDocument.attribute__svgDocument, cast ([element, 'style'] : Array<Dynamic>)), function():Dynamic return cast '')] : Array<Dynamic>)));
-    inheritedProperties = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    inheritedProperties = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(declarations))) {
       if ((cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(declarations, name))), 'inherit') : Bool)) { continue; }
       ((cast inheritedProperties : flighthq._internal._Set).add(name));

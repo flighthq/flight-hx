@@ -28,8 +28,8 @@ abstract _UInt8ClampedArray(Dynamic) {
     #end
   }
 
-  /** Factory for reflective construction sites (`new Uint8ClampedArray(...)`
-   * reached through `_Runtime.globalValue`); abstracts have no runtime class
+  /** Factory for toolkit construction sites (`new Uint8ClampedArray(...)`
+   * reached through `_HostValueLut`); abstracts have no runtime class
    * for `Type.createInstance`. */
   public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_UInt8ClampedArray {
     return new _UInt8ClampedArray(source, byteOffset, length);

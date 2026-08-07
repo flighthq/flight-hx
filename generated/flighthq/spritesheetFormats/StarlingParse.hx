@@ -48,13 +48,13 @@ class StarlingParse {
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(stRE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       var a:Dynamic = _Runtime.callValue(StarlingParse.parseAttrs__starlingParse, cast ([_Runtime.getIndex(m, 1.0)] : Array<Dynamic>));
       if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
-      var st:StarlingSubTexture = { height: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameWidth = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameHeight = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>)) : Dynamic)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>)) : Dynamic)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>)) : Dynamic)); }
+      var st:StarlingSubTexture = { height: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameX = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameY = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameWidth = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameHeight = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotX = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>)) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.pivotY = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>)) : Dynamic)); }
       if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.rotated = cast (_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true') : Dynamic)); }
       _Runtime.callProperty(subTextures, 'push', cast ([st] : Array<Dynamic>));
     }
@@ -74,7 +74,7 @@ class StarlingParse {
   public static function inferAnimations__starlingParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    groups = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    groups = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (name in _Runtime.iterable(frameNames)) {
       var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
       var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
@@ -82,7 +82,7 @@ class StarlingParse {
       var __destructure0:Dynamic = match;
       var base:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
-      var index:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
+      var index:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
       var bucket:Dynamic = ((cast groups : flighthq._internal._Map).get(base));
       if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
     }

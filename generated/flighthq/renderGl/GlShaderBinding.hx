@@ -12,7 +12,7 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 
 class GlShaderBinding {
-  public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
@@ -30,7 +30,7 @@ class GlShaderBinding {
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    ((cast _Runtime.setField(runtime, 'materialBitmapShaderMap', (_Runtime.field(runtime, 'materialBitmapShaderMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, shader));
+    ((cast _Runtime.setField(runtime, 'materialBitmapShaderMap', (_Runtime.field(runtime, 'materialBitmapShaderMap') ?? _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []))) : flighthq._internal._Map).set(kind, shader));
   }
 
   @:noCompletion

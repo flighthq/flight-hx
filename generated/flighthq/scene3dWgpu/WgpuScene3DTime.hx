@@ -16,5 +16,5 @@ class WgpuScene3DTime {
     ((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap).set(state, seconds));
   }
 
-  public static final sceneTimes__wgpuScene3DTime:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final sceneTimes__wgpuScene3DTime:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

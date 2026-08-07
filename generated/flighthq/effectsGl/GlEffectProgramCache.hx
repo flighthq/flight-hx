@@ -15,7 +15,7 @@ class GlEffectProgramCache {
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).get(_Runtime.field(state, 'gl')));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast GlEffectProgramCache._programs__glEffectProgramCache : flighthq._internal._WeakMap).set(_Runtime.field(state, 'gl'), cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(key));
@@ -33,7 +33,7 @@ class GlEffectProgramCache {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     cache = ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).get(program));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast GlEffectProgramCache._uniformLocations__glEffectProgramCache : flighthq._internal._WeakMap).set(program, cache));
     }
     existing = ((cast cache : flighthq._internal._Map).get(name));
@@ -44,7 +44,7 @@ class GlEffectProgramCache {
     return cast null;
   }
 
-  public static final _programs__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _programs__glEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _uniformLocations__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _uniformLocations__glEffectProgramCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

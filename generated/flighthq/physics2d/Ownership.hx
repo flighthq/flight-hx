@@ -9,13 +9,13 @@ import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
 
 class Ownership {
-  public static final physics2DBodyOwners:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final physics2DBodyOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final physics2DColliderOwners:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final physics2DColliderOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final physics2DJointOwners:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final physics2DJointOwners:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final steppingPhysics2DWorlds:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final steppingPhysics2DWorlds:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 
   public static function assertPhysics2DBodyNotStepping(body:RigidBody2D):Void {
     var world:Dynamic = cast _Runtime.UNDEFINED;

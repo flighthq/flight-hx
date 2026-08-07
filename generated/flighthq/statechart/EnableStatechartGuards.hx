@@ -39,7 +39,7 @@ class EnableStatechartGuards {
     return cast null;
   }
 
-  public static final statechartGuardChartIds__enableStatechartGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final statechartGuardChartIds__enableStatechartGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var nextStatechartGuardChartId__enableStatechartGuards:Dynamic = 1.0;
 }

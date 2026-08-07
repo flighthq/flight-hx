@@ -13,7 +13,7 @@ import flighthq.types.TextFormat.TextFormatListMarker;
 
 class MarkupTagRegistry {
   public static function createMarkupTagRegistry():flighthq.types.MarkupTagRegistry {
-    return cast { handlers: _Runtime.construct(_Runtime.globalValue('Map'), []) };
+    return cast { handlers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     return cast null;
   }
 
@@ -45,15 +45,15 @@ class MarkupTagRegistry {
     if ((cast StringTools.startsWith(color, '#') : Bool)) {
       var hex:Dynamic = _Runtime.slice(color, 1.0, null);
       if ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool)) {
-        var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
-        return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
+        var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
+        return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
       }
-      var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
-      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
+      var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
+      return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     }
     if ((cast StringTools.startsWith(color, '0x') : Bool)) {
-      var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
-      return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
+      var parsed:Dynamic = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
+      return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast null : Dynamic) : (cast parsed : Dynamic));
     }
     return cast null;
     return cast null;
@@ -210,8 +210,8 @@ class MarkupTagRegistry {
 
   public static function parseMarkupNumber__markupTagRegistry(value:String):Null<Float> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
-    return cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
+    parsed = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

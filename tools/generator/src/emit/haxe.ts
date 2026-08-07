@@ -2053,7 +2053,7 @@ function emitTypedArraySet(expression: Extract<IrExpression, { kind: 'call' }>, 
   const offsetTemporary = offset ? `__typedArraySetOffset${String(temporaryIndex++)}` : undefined;
   const offsetDeclaration = offsetTemporary ? ` final ${offsetTemporary}:Dynamic = ${emitExpression(offset!)};` : '';
   const offsetArgument = offsetTemporary ? `, Std.int(${offsetTemporary})` : '';
-  return `${marker}({ final ${targetTemporary}:Dynamic = ${owner}; final ${sourceTemporary}:Dynamic = ${emitExpression(source)};${offsetDeclaration} if (_Runtime.isInstanceOf(${targetTemporary}, _Runtime.globalValue('Uint32Array'))) { (cast ${targetTemporary} : flighthq._internal._UInt32Array).set(${sourceTemporary}${offsetArgument}); } else { (cast ${targetTemporary} : flighthq._internal._UInt16Array).set(${sourceTemporary}${offsetArgument}); } })`;
+  return `${marker}({ final ${targetTemporary}:Dynamic = ${owner}; final ${sourceTemporary}:Dynamic = ${emitExpression(source)};${offsetDeclaration} if (_Runtime.isInstanceOf(${targetTemporary}, flighthq._internal._HostValueLut.get('Uint32Array'))) { (cast ${targetTemporary} : flighthq._internal._UInt32Array).set(${sourceTemporary}${offsetArgument}); } else { (cast ${targetTemporary} : flighthq._internal._UInt16Array).set(${sourceTemporary}${offsetArgument}); } })`;
 }
 
 function emitSyntheticArrayRead(
@@ -2226,11 +2226,7 @@ function emitExpression(expression: IrExpression): string {
                 : ['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)
                   ? `(${field} = ${emitCompoundOperationFromText(field, expression.operator.slice(0, -1), expression.right, right)})`
                   : `(${field} ${expression.operator} ${right})`;
-          const fallback =
-            expression.operator === '='
-              ? `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${right})`
-              : `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperationFromText(`_Runtime.field(${object}, ${quote(expression.left.name)})`, expression.operator.slice(0, -1), expression.right, right, compoundUsesRuntimeNumber(expression))})`;
-          return emitHostTypePlatformExpression(direct, fallback);
+          return direct;
         }
         if (expression.left.typedStructBinding) {
           if (expression.left.optional) {
@@ -2345,7 +2341,7 @@ function emitExpression(expression: IrExpression): string {
         ) {
           return `_Runtime.isInstanceOfName(${emitExpression(expression.left)}, ${quote(expression.right.name)})`;
         }
-        if (emitExpression(expression.right) === "_Runtime.globalValue('Promise')") {
+        if (emitExpression(expression.right) === "flighthq._internal._HostValueLut.get('Promise')") {
           return `flighthq._internal._Async.isPromise(${emitExpression(expression.left)})`;
         }
         if (
@@ -2479,7 +2475,7 @@ function emitExpression(expression: IrExpression): string {
       }
       if (
         (expression.callee.kind === 'identifier' && expression.callee.name === 'Promise') ||
-        emitExpression(expression.callee) === "_Runtime.globalValue('Promise')"
+        emitExpression(expression.callee) === "flighthq._internal._HostValueLut.get('Promise')"
       ) {
         return `flighthq._internal._Async.create(${expression.arguments.map(emitExpression).join(', ')})`;
       }
@@ -2670,10 +2666,7 @@ function emitExpression(expression: IrExpression): string {
         if (expression.operand.kind === 'property' && expression.operand.hostTypeBinding) {
           const owner = emitExpression(expression.operand.object);
           const direct = `Reflect.deleteField(${expression.operand.hostTypeBinding.receiverCast ? `(cast ${owner} : ${expression.operand.hostTypeBinding.haxeType})` : owner}, ${quote(expression.operand.name)})`;
-          return emitHostTypePlatformExpression(
-            direct,
-            `_Runtime.deleteField(${owner}, ${quote(expression.operand.name)})`,
-          );
+          return direct;
         }
         if (expression.operand.kind === 'property')
           return `_Runtime.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
@@ -2702,10 +2695,7 @@ function emitExpression(expression: IrExpression): string {
           const owner = emitExpression(expression.operand.object);
           const field = directHostTypeField(expression.operand, owner);
           const direct = expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
-          return emitHostTypePlatformExpression(
-            direct,
-            `_Runtime.incrementField(${owner}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`,
-          );
+          return direct;
         }
         if (expression.operand.typedStructBinding) {
           if (expression.operand.optional) {
@@ -2792,10 +2782,6 @@ function directHostTypeField(
   return `${typedOwner}.${safeName(expression.name)}`;
 }
 
-function emitHostTypePlatformExpression(direct: string, fallback: string): string {
-  return `(#if js ${direct} #else ${fallback} #end)`;
-}
-
 function emitHostTypeRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
   const owner = emitExpression(expression.object);
   let direct: string;
@@ -2805,10 +2791,7 @@ function emitHostTypeRead(expression: Extract<IrExpression, { kind: 'property' }
     const temporary = `__hostType${String(temporaryIndex++)}`;
     direct = `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directHostTypeField(expression, temporary)}; })`;
   }
-  const fallback = expression.optional
-    ? `_Runtime.optionalField(${owner}, ${quote(expression.name)})`
-    : `_Runtime.field(${owner}, ${quote(expression.name)})`;
-  return emitHostTypePlatformExpression(direct, fallback);
+  return direct;
 }
 
 function emitHostTypeCall(
@@ -2835,12 +2818,7 @@ function emitHostTypeCall(
       ? `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${optionalMethod}; })`
       : `({ final ${temporary} = ${owner}; ${optionalMethod}; })`;
   }
-  const fallbackArguments = spread ? arguments_ : `cast ([${arguments_}] : Array<Dynamic>)`;
-  const fallbackMethod = expression.optional || callee.optional ? 'callOptionalProperty' : 'callProperty';
-  return emitHostTypePlatformExpression(
-    directCall,
-    `_Runtime.${fallbackMethod}(${owner}, ${quote(callee.name)}, ${fallbackArguments})`,
-  );
+  return directCall;
 }
 
 function directTypedStructField(
@@ -2912,7 +2890,22 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   }
   if (
     expression.callee.kind === 'property' &&
-    emitExpression(expression.callee.object) === "_Runtime.globalValue('Promise')" &&
+    expression.callee.object.kind === 'identifier' &&
+    ['flighthq._internal._HostModuleLut', 'flighthq._internal._HostValueLut'].includes(expression.callee.object.name)
+  ) {
+    if (
+      expression.optional ||
+      expression.callee.optional ||
+      expression.haxeRestIndex !== undefined ||
+      expression.arguments.some((argument) => argument.kind === 'spread')
+    ) {
+      throw new Error(`Invalid host toolkit LUT call: ${currentSourceIdentity}`);
+    }
+    return `${emitExpression(expression.callee.object)}.${safeName(expression.callee.name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+  }
+  if (
+    expression.callee.kind === 'property' &&
+    emitExpression(expression.callee.object) === "flighthq._internal._HostValueLut.get('Promise')" &&
     ['all', 'allSettled', 'race', 'reject', 'resolve'].includes(expression.callee.name)
   ) {
     return `flighthq._internal._Async.${expression.callee.name}(${expression.arguments.map(emitExpression).join(', ')})`;
@@ -3297,8 +3290,8 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
       : expression.kind === 'call' &&
           expression.callee.kind === 'property' &&
           expression.callee.object.kind === 'identifier' &&
-          expression.callee.object.name === '_Runtime' &&
-          expression.callee.name === 'globalValue' &&
+          expression.callee.object.name === 'flighthq._internal._HostValueLut' &&
+          expression.callee.name === 'get' &&
           expression.arguments[0]?.kind === 'literal' &&
           typeof expression.arguments[0].value === 'string'
         ? expression.arguments[0].value

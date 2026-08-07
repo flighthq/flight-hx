@@ -27,7 +27,7 @@ class Power {
 
   public static final _scratch__power:PowerStatus = _Runtime.callValue(createPowerStatus, cast ([] : Array<Dynamic>));
 
-  public static final _subscriptions__power:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _subscriptions__power:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static var _wakeLockSentinel__power:Null<WebWakeLockSentinel__power> = _Runtime.explicitNull();
 
@@ -156,7 +156,7 @@ class Power {
       var wakeLock:Dynamic = cast _Runtime.UNDEFINED;
       resolvedMode = _Runtime.coalesce(mode, function():Dynamic return cast 'PreventDisplaySleep');
       if ((cast _Runtime.strictEquals(resolvedMode, 'PreventAppSuspension') : Bool)) { return cast false; }
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast false; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast false; }
       wakeLock = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic), 'wakeLock');
       if ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       try {
@@ -167,11 +167,11 @@ class Power {
           (Power._wakeLockSentinel__power = cast (null : Dynamic));
           return cast true;
         }
-        flighthq._internal._Async.recover(_Runtime.callProperty((#if js (cast wakeLock : flighthq._internal.dom.WakeLock).request('screen') #else _Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)) #end), 'then', cast ([function(sentinel:Dynamic) {
+        flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : flighthq._internal.dom.WakeLock).request('screen'), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
             if ((cast ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool) && (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool)) : Bool)) {
-              flighthq._internal._Async.recover(_Runtime.callProperty((#if js (cast wakeLock : flighthq._internal.dom.WakeLock).request('screen') #else _Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)) #end), 'then', cast ([function(newSentinel:Dynamic) {
+              flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : flighthq._internal.dom.WakeLock).request('screen'), 'then', cast ([function(newSentinel:Dynamic) {
                 if ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool)) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), function() {
 
@@ -253,13 +253,13 @@ class Power {
 
       };
     }, subscribeResume: function(listener:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function() {
 
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
       return cast function() return flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
     }, subscribeSuspend: function(listener:Dynamic) {
-      if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined') : Bool)) { return cast function() {
+      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function() {
 
       }; }
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
@@ -341,7 +341,7 @@ class Power {
 
   public static function getWebBatteryManagerPromise__power():Null<flighthq._internal._Promise<WebBatteryManager__power>> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
     nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic);
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function') : Bool)) { return cast null; }
     try {

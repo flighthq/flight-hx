@@ -71,7 +71,7 @@ class XmlParse {
       var numeric:Dynamic = cast _Runtime.UNDEFINED;
       numeric = _Runtime.coalesce(dec, function():Dynamic return cast hex);
       if ((cast !_Runtime.strictEquals(numeric, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var codepoint:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([numeric, ((cast !_Runtime.strictEquals(dec, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 10.0 : Dynamic) : (cast 16.0 : Dynamic))] : Array<Dynamic>));
+        var codepoint:Dynamic = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numeric, ((cast !_Runtime.strictEquals(dec, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 10.0 : Dynamic) : (cast 16.0 : Dynamic))] : Array<Dynamic>));
         if ((cast ((cast ((cast codepoint : Float) > (cast 1114111.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast codepoint : Float) >= (cast 55296.0 : Float)), function():Dynamic return cast ((cast codepoint : Float) <= (cast 57343.0 : Float))) : Bool)) : Bool)) { return cast reference; }
         return cast _Runtime.fromCodePoint(codepoint);
       }

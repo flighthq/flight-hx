@@ -278,7 +278,7 @@ class MeshGeometryAttributes {
     if ((cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast null; }
     byteOffset = ((vertexIndex * geometry.layout.stride) + attribute.byteOffset);
     if ((cast ((cast (byteOffset + attributeByteLength) : Float) > (cast _Runtime.field(geometry.vertices, 'byteLength') : Float)) : Bool)) { return cast null; }
-    return cast { attribute: attribute, byteOffset: byteOffset, view: _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength')]) };
+    return cast { attribute: attribute, byteOffset: byteOffset, view: _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength')]) };
     return cast null;
   }
 

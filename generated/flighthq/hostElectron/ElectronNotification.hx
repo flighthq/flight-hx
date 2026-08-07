@@ -21,7 +21,7 @@ class ElectronNotification {
     actionListener = null;
     dismissListener = null;
     showListener = null;
-    live = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    live = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     nextId = 0.0;
     return cast { notify: function(request:Dynamic):flighthq._internal._Promise<Dynamic> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
@@ -36,7 +36,7 @@ class ElectronNotification {
         _Runtime.callProperty(n, 'on', cast (['click', function() return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['action', _Runtime.haxeRest(function(...args:Dynamic) {
           var index:Dynamic = cast _Runtime.UNDEFINED;
-          index = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
+          index = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
           _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
         }, 0)] : Array<Dynamic>));
         _Runtime.callProperty(n, 'on', cast (['close', function() {

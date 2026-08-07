@@ -9,7 +9,7 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 
 class CanvasCSSFilterBinding {
-  public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function enableCanvasCssFilter(state:CanvasRenderState):Void {

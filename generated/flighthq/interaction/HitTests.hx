@@ -206,7 +206,7 @@ class HitTests {
 
   public static final hitTestScratchPoint__hitTests:Dynamic = { x: 0.0, y: 0.0 };
 
-  public static final hitTestRegistry__hitTests:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final hitTestRegistry__hitTests:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static final hitTestExactRegistry__hitTests:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
+  public static final hitTestExactRegistry__hitTests:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

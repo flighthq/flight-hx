@@ -155,9 +155,9 @@ class ParseAtf {
 
   public static final atfBaseSlotCount__parseAtf:Dynamic = 3.0;
 
-  public static final atfOpaqueFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([2.0, 3.0, 12.0] : Array<Dynamic>)]);
+  public static final atfOpaqueFormatCodes__parseAtf:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([2.0, 3.0, 12.0] : Array<Dynamic>)]);
 
-  public static final atfAlphaFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([4.0, 5.0, 13.0] : Array<Dynamic>)]);
+  public static final atfAlphaFormatCodes__parseAtf:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([4.0, 5.0, 13.0] : Array<Dynamic>)]);
 
   public static final atfOpaqueSlotFormats__parseAtf:Array<TextureContainerFormat> = cast (['bc1', 'etc1', 'pvrtc4bppRgb', 'etc2Rgb'] : Array<Dynamic>);
 

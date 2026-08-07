@@ -63,8 +63,8 @@ class DomCache {
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     canvas = _Runtime.field(target, 'canvas');
     _Runtime.callValue(setDomTransformWithOffset, cast ([canvas, _Runtime.field(data, 'transform2D'), 0.0, 0.0, _Runtime.field(domState, 'roundPixels')] : Array<Dynamic>));
-    (#if js ((cast (#if js (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(canvas, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic))) #else _Runtime.setField((#if js (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(canvas, 'style') #end), 'opacity', ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic))) #end);
-    (#if js ((cast (#if js (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(canvas, 'style') #end) : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic))) #else _Runtime.setField((#if js (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style #else _Runtime.field(canvas, 'style') #end), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic))) #end);
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(domState, 'applyBlendMode', cast ([canvas, _Runtime.field(data, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
   }
@@ -73,7 +73,7 @@ class DomCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast DomCache._renderCacheTargets__domCache : flighthq._internal._WeakMap).set(state, targets));
     }
     return cast targets;
@@ -83,5 +83,5 @@ class DomCache {
   @:noCompletion
   public static final defaultDomRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache };
 
-  public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

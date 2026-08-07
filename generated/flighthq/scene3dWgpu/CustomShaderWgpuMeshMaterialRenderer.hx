@@ -79,8 +79,8 @@ class CustomShaderWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'uniformBindGroup')) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'uniformBindGroup')] : Array<Dynamic>)) #end);
-    (#if js (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, textureBindGroup) #else _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, textureBindGroup] : Array<Dynamic>)) #end);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'uniformBindGroup'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, textureBindGroup);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
@@ -95,7 +95,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialShaders__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
+      (registry = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialShaders__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap).set(state, registry));
     }
     ((cast registry : flighthq._internal._Map).set(shaderKey, wgslSource));
@@ -140,7 +140,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
     var uniformBuffer:Dynamic = cast _Runtime.UNDEFINED;
     stateBindings = ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialBindings__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(stateBindings, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (stateBindings = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
+      (stateBindings = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
       ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialBindings__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap).set(state, stateBindings));
     }
     binding = ((cast stateBindings : flighthq._internal._WeakMap).get(material));
@@ -260,11 +260,11 @@ class CustomShaderWgpuMeshMaterialRenderer {
     }
   }
 
-  public static final _customMaterialShaders__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _customMaterialShaders__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _customMaterialLayouts__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _customMaterialLayouts__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _customMaterialBindings__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final _customMaterialBindings__customShaderWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _uniformScratch__customShaderWgpuMeshMaterialRenderer:Dynamic = new flighthq._internal._Float32Array((WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY * 4.0));
 

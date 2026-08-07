@@ -9,7 +9,7 @@ import flighthq.types.WgpuRenderState;
 class _WgpuTestHelper {
   public static function installWgpuConstants__wgpuTestHelper():Void {
     var g:Dynamic = cast _Runtime.UNDEFINED;
-    g = (cast _Runtime.globalValue('globalThis') : Dynamic);
+    g = (cast flighthq._internal._HostValueLut.get('globalThis') : Dynamic);
     if ((cast !_Runtime.truthy(_Runtime.getIndex(g, 'GPUBufferUsage')) : Bool)) {
       _Runtime.setIndex(g, 'GPUBufferUsage', { MAP_READ: 1.0, MAP_WRITE: 2.0, COPY_SRC: 4.0, COPY_DST: 8.0, INDEX: 16.0, VERTEX: 32.0, UNIFORM: 64.0, STORAGE: 128.0, INDIRECT: 256.0, QUERY_RESOLVE: 512.0 });
     }
@@ -96,7 +96,7 @@ class _WgpuTestHelper {
   }
 
   public static function makeDevice__wgpuTestHelper():flighthq._internal.dom.GPUDevice {
-    return cast (cast (cast { features: _Runtime.construct(_Runtime.globalValue('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroup__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBindGroupLayout: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBuffer: function() return _Runtime.callValue(_WgpuTestHelper.makeBuffer__wgpuTestHelper, cast ([] : Array<Dynamic>)), createCommandEncoder: function() return _Runtime.callValue(_WgpuTestHelper.makeCommandEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), createPipelineLayout: function() return _Runtime.callValue(_WgpuTestHelper.makePipelineLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor) return _Runtime.callValue(_WgpuTestHelper.makePipeline__wgpuTestHelper, cast ([descriptor] : Array<Dynamic>)), createSampler: function() return _Runtime.callValue(_WgpuTestHelper.makeSampler__wgpuTestHelper, cast ([] : Array<Dynamic>)), createShaderModule: function() return _Runtime.callValue(_WgpuTestHelper.makeShaderModule__wgpuTestHelper, cast ([] : Array<Dynamic>)), createTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)), queue: { copyExternalImageToTexture: function() {
+    return cast (cast (cast { features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroup__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBindGroupLayout: function() return _Runtime.callValue(_WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBuffer: function() return _Runtime.callValue(_WgpuTestHelper.makeBuffer__wgpuTestHelper, cast ([] : Array<Dynamic>)), createCommandEncoder: function() return _Runtime.callValue(_WgpuTestHelper.makeCommandEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), createPipelineLayout: function() return _Runtime.callValue(_WgpuTestHelper.makePipelineLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor) return _Runtime.callValue(_WgpuTestHelper.makePipeline__wgpuTestHelper, cast ([descriptor] : Array<Dynamic>)), createSampler: function() return _Runtime.callValue(_WgpuTestHelper.makeSampler__wgpuTestHelper, cast ([] : Array<Dynamic>)), createShaderModule: function() return _Runtime.callValue(_WgpuTestHelper.makeShaderModule__wgpuTestHelper, cast ([] : Array<Dynamic>)), createTexture: function() return _Runtime.callValue(_WgpuTestHelper.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)), queue: { copyExternalImageToTexture: function() {
 
     }, submit: function() {
 
@@ -109,7 +109,7 @@ class _WgpuTestHelper {
   }
 
   public static function makeAdapter__wgpuTestHelper():flighthq._internal.dom.GPUAdapter {
-    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, features: _Runtime.construct(_Runtime.globalValue('Set'), []), requestDevice: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : flighthq._internal.dom.GPUAdapter);
+    return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), requestDevice: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : flighthq._internal.dom.GPUAdapter);
     return cast null;
   }
 
@@ -117,8 +117,8 @@ class _WgpuTestHelper {
   public static function createReadyImageElementForTest(width:Dynamic = 1.0, height:Dynamic = 1.0):flighthq._internal.dom.HTMLImageElement {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>));
-    (#if js ((cast image : flighthq._internal.dom.HTMLImageElement).width = width) #else _Runtime.setField(image, 'width', width) #end);
-    (#if js ((cast image : flighthq._internal.dom.HTMLImageElement).height = height) #else _Runtime.setField(image, 'height', height) #end);
+    ((cast image : flighthq._internal.dom.HTMLImageElement).width = width);
+    ((cast image : flighthq._internal.dom.HTMLImageElement).height = height);
     flighthq._internal.DynamicObject.defineProperties(image, { complete: { configurable: true, value: true }, naturalHeight: { configurable: true, value: height }, naturalWidth: { configurable: true, value: width } });
     return cast image;
     return cast null;
@@ -141,12 +141,12 @@ class _WgpuTestHelper {
     var origGetContext:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(_WgpuTestHelper.installWgpuConstants__wgpuTestHelper, cast ([] : Array<Dynamic>));
     gpu = (cast (cast { getPreferredCanvasFormat: function() return (cast 'bgra8unorm' : flighthq._internal.dom.GPUTextureFormat), requestAdapter: function() return flighthq._internal._Async.resolve(_Runtime.callValue(_WgpuTestHelper.makeAdapter__wgpuTestHelper, cast ([] : Array<Dynamic>))) } : Dynamic) : flighthq._internal.dom.GPU);
-    if ((cast _Runtime.looseEquals(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), null) : Bool)) {
-      flighthq._internal.DynamicObject.defineProperty(_Runtime.globalValue('globalThis'), 'navigator', { value: {  }, configurable: true, writable: true });
+    if ((cast _Runtime.looseEquals(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'navigator'), null) : Bool)) {
+      flighthq._internal.DynamicObject.defineProperty(flighthq._internal._HostValueLut.get('globalThis'), 'navigator', { value: {  }, configurable: true, writable: true });
     }
-    flighthq._internal.DynamicObject.defineProperty(_Runtime.field(_Runtime.globalValue('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
-    origGetContext = (#if js (cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : flighthq._internal.dom.HTMLCanvasElement).getContext #else _Runtime.field(_Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype'), 'getContext') #end);
-    _Runtime.setField((cast _Runtime.field(_Runtime.globalValue('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
+    flighthq._internal.DynamicObject.defineProperty(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
+    origGetContext = (cast _Runtime.field(flighthq._internal._HostValueLut.get('HTMLCanvasElement'), 'prototype') : flighthq._internal.dom.HTMLCanvasElement).getContext;
+    _Runtime.setField((cast _Runtime.field(flighthq._internal._HostValueLut.get('HTMLCanvasElement'), 'prototype') : { var getContext:Dynamic; }), 'getContext', function(contextId:String, ?options:Dynamic) {
       var __thisValue0:Dynamic = _Runtime.thisValue();
       if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {
         return cast (cast (cast { configure: function() {

@@ -26,7 +26,7 @@ typedef GradientLookupLocations__glGradientGlowEffect = Dynamic;
 class GlGradientGlowEffect {
   public static final GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform sampler2D u_ramp;\nout vec4 fragColor;\nvoid main() {\n  float alpha = texture(u_texture, v_texCoord).a;\n  fragColor = texture(u_ramp, vec2(alpha, 0.5));\n}';
 
-  public static final lookupShaders__glGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
+  public static final lookupShaders__glGradientGlowEffect:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {

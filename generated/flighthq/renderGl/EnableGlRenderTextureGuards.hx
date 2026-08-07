@@ -37,5 +37,5 @@ class EnableGlRenderTextureGuards {
     _Runtime.callValue(logOnce, cast (['render-gl:render-texture-' + Std.string(_Runtime.field(explanation, 'status')) + '', LogLevel.Warn, { height: _Runtime.field(explanation, 'height'), message: ((cast writing : Bool) ? (cast 'bindGlRenderTexture: the render Texture is still bound for writing; sampling it would be a read-after-write feedback hazard.' : Dynamic) : (cast 'bindGlRenderTexture: the render Texture has not completed renderIntoGlRenderTexture; sampling uses the empty sentinel.' : Dynamic)), renderTexture: renderTexture, status: _Runtime.field(explanation, 'status'), width: _Runtime.field(explanation, 'width') }, 'render-gl'] : Array<Dynamic>));
   }
 
-  public static final _guardedContexts__enableGlRenderTextureGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
+  public static final _guardedContexts__enableGlRenderTextureGuards:Dynamic = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 }

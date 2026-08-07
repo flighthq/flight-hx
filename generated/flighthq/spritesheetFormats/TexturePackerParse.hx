@@ -29,7 +29,7 @@ class TexturePackerParse {
   }
 
   public static function metaScale__texturePackerParse(meta:TexturePackerMeta):Float {
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(meta.scale), 'string') : Bool)) { return cast _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([meta.scale] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
     return cast meta.scale;
     return cast null;
   }

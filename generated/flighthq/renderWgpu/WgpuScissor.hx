@@ -23,7 +23,7 @@ class WgpuScissor {
     y = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'y')));
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'width')));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'height')));
-    (#if js pass.setScissorRect(x, y, w, h) #else _Runtime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>)) #end);
+    pass.setScissorRect(x, y, w, h);
   }
 
   @:noCompletion

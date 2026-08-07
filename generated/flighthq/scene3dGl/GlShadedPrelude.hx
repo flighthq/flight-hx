@@ -124,7 +124,7 @@ class GlShadedPrelude {
   public static function dedupeGlShadedDeclarations__glShadedPrelude(declarations:String):String {
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    seen = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     result = '';
     for (line in _Runtime.iterable(_Runtime.callProperty(declarations, 'split', cast (['\n'] : Array<Dynamic>)))) {
       var trimmed:Dynamic = StringTools.trim(Std.string(line));

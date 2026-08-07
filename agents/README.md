@@ -7,6 +7,7 @@ This directory records the durable design and execution context for the Flight H
 - [`patches.md`](patches.md): semantic patch model, operations, validation, and audit requirements.
 - [`quality.md`](quality.md): implemented npm scripts, checks, test layers, and completion gates.
 - [`non-html5.md`](non-html5.md): verified cross-target compile status and remaining native Lime renderer boundaries.
+- [`host-toolkit-boundary.md`](host-toolkit-boundary.md): strict transpiler/runtime/toolkit ownership and deterministic external dependency keys.
 - [`typed-struct-model.md`](typed-struct-model.md): approved direct structural field-lowering model, audit gates, and optional/dynamic escape semantics.
 - [`typed-struct-class-design.md`](typed-struct-class-design.md): cpp target-conditional class feasibility, census, migration gates, and benchmark policy.
 - [`typed-struct-provenance-audit.md`](typed-struct-provenance-audit.md): required-field containment, dynamic/JSON roots, generic construction gaps, and Gate-5 closure policy.

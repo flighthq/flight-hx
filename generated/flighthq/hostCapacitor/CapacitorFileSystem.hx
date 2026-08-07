@@ -357,7 +357,7 @@ class CapacitorFileSystem {
   public static function base64ToBytes__capacitorFileSystem(base64:String):flighthq._internal._UInt8Array {
     var binary:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
+    binary = _Runtime.callValue(flighthq._internal._HostValueLut.get('atob'), cast ([base64] : Array<Dynamic>));
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
       var i:Dynamic = 0.0;
@@ -380,7 +380,7 @@ class CapacitorFileSystem {
         i++;
       }
     }
-    return cast _Runtime.callValue(_Runtime.globalValue('btoa'), cast ([binary] : Array<Dynamic>));
+    return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('btoa'), cast ([binary] : Array<Dynamic>));
     return cast null;
   }
 }

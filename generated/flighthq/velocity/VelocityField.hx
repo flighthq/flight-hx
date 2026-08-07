@@ -65,7 +65,7 @@ class VelocityField {
   }
 
   public static function createVelocityField():flighthq.types.Velocity.VelocityField {
-    return cast { samples: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), frameId: 0.0 };
+    return cast { samples: _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []), frameId: 0.0 };
     return cast null;
   }
 
