@@ -4,4 +4,4 @@
 // HTMLCanvasElement.hx for the model.
 package flighthq._internal.dom;
 
-typedef WritableStreamDefaultWriter = Dynamic;
+typedef WritableStreamDefaultWriter<T> = Dynamic;
