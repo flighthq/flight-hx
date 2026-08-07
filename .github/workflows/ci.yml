@@ -1,37 +1,76 @@
-name: CI
-
+# Parallel CI: each gate is an independent job so pass/fail is visible
+# per-check instead of only at the first failure of a sequential chain.
+# The heavyweight gates (full upstream parity sweep, native example matrix)
+# live in parity.yml on a schedule; this workflow is the per-push signal.
+name: ci
 on:
-  pull_request:
   push:
-    branches: [main]
-
-permissions:
-  contents: read
-
+    branches: ['**']
+  pull_request:
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  test:
+  check:
+    # generate:check + typecheck + lint + format + api accounting; pure Node,
+    # but drift verification regenerates from the pinned upstream submodule.
     runs-on: ubuntu-latest
-    timeout-minutes: 45
     steps:
-      - name: Check out sources and upstream
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
-          submodules: recursive
-
-      - name: Use Node.js 22
-        uses: actions/setup-node@v7
+          submodules: true
+      - uses: ./.github/actions/toolchain
         with:
-          cache: npm
-          node-version: 22
+          haxe: 'false'
+      - run: npm run check
+  generator-tests:
+    # Generator unit suite; lowering fixtures execute through Haxe Eval and
+    # the checker census reads the upstream submodule.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: ./.github/actions/toolchain
+      - run: npm run test:generator
+  haxe-suite:
+    # Full-namespace CoreSmoke on the Haxe interpreter.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+      - run: npm run test:haxe:all
+  portable:
+    # One job per portable target so a target-specific regression is visible
+    # by name; cpp compiles the full corpus and is the long pole.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [eval, js, python, cpp]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+      - run: npm run test:portable:${{ matrix.target }}
+  neko-smoke:
+    # Neko is not part of test:portable; run CoreSmoke on it explicitly.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+        with:
+          neko: 'true'
+      - run: >
+          node tools/haxe.mjs -cp src -cp generated -cp tests/haxe --main CoreSmoke --macro "include('flighthq')" --neko build/neko-smoke/core.n
 
-      - name: Install host target tools
-        run: sudo apt-get update && sudo apt-get install -y g++ neko
 
-      - name: Install npm dependencies
-        run: npm ci
-
-      - name: Install repository-local Haxe
-        run: npm run setup
-
-      - name: Run the complete quality surface
-        run: npm run ci
+      - run: neko build/neko-smoke/core.n
+  package:
+    # Haxelib artifact build + isolated install + consumer compile/run.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+        with:
+          neko: 'true'
+      - run: npm run package

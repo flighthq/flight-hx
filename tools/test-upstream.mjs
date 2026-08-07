@@ -22,6 +22,20 @@ function argValue(flag) {
 }
 
 const selectedPackage = argValue('--package');
+// `--shard i/n` deterministically partitions the sorted package list so CI can
+// split the sweep across parallel jobs; every package lands in exactly one
+// shard, so nothing is silently skipped.
+const shardSpec = argValue('--shard');
+const shardMatch = shardSpec ? /^([1-9]\d*)\/([1-9]\d*)$/u.exec(shardSpec) : null;
+if (shardSpec && !shardMatch) {
+  process.stderr.write('Expected --shard i/n with 1 <= i <= n.\n');
+  process.exit(2);
+}
+const shard = shardMatch ? { index: Number(shardMatch[1]), total: Number(shardMatch[2]) } : null;
+if (shard && shard.index > shard.total) {
+  process.stderr.write('Expected --shard i/n with 1 <= i <= n.\n');
+  process.exit(2);
+}
 const serial = process.argv.includes('--serial');
 const requestedJobs = Number(argValue('--jobs'));
 const jobs = serial
@@ -33,7 +47,11 @@ const jobs = serial
 const reportFile = path.join(
   repositoryRoot,
   'reports',
-  selectedPackage ? `upstream-parity-${selectedPackage}.json` : 'upstream-parity.json',
+  selectedPackage
+    ? `upstream-parity-${selectedPackage}.json`
+    : shard
+      ? `upstream-parity-shard-${String(shard.index)}-of-${String(shard.total)}.json`
+      : 'upstream-parity.json',
 );
 
 if (process.argv.includes('--package') && !selectedPackage) {
@@ -60,7 +78,8 @@ const packageNames = readdirSync(packagesDirectory, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .filter((name) => !selectedPackage || name === selectedPackage)
-  .sort();
+  .sort()
+  .filter((name, index) => !shard || index % shard.total === shard.index - 1);
 
 if (selectedPackage && packageNames.length === 0) {
   process.stderr.write(`Unknown upstream package: ${selectedPackage}\n`);

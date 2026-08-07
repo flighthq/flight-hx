@@ -1,0 +1,38 @@
+# Shared toolchain setup for CI jobs: Node with npm cache, the pinned Haxe
+# toolchain restored from cache when available, and optionally Neko (needed
+# only by jobs that invoke the haxelib executable).
+name: toolchain
+description: Install Node dependencies and the pinned Haxe toolchain.
+inputs:
+  haxe:
+    description: Install the pinned Haxe toolchain (npm run setup).
+    default: 'true'
+  neko:
+    description: Install Neko (required for haxelib operations).
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+    - name: Install Neko
+      if: inputs.neko == 'true'
+      shell: bash
+      run: sudo apt-get update && sudo apt-get install -y neko
+    - name: Restore Haxe toolchain cache
+      if: inputs.haxe == 'true'
+      uses: actions/cache@v4
+      with:
+        path: |
+          .haxe
+          .haxelib
+        key: haxe-${{ runner.os }}-${{ hashFiles('package-lock.json', '.haxerc', 'haxe_libraries/**') }}
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+    - name: Install pinned Haxe toolchain
+      if: inputs.haxe == 'true'
+      shell: bash
+      run: npm run setup
