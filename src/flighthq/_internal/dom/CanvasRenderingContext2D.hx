@@ -58,6 +58,7 @@ extern class CanvasRenderingContext2D {
   function getImageData(x:Float, y:Float, w:Float, h:Float):ImageData;
   function putImageData(imageData:ImageData, x:Float, y:Float):Void;
   function createImageData(width:Int, height:Int):ImageData;
+  function getContextAttributes():Dynamic;
   function setLineDash(segments:Array<Float>):Void;
   function getLineDash():Array<Float>;
 }

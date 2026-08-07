@@ -14,8 +14,18 @@ extern class HTMLVideoElement {
   var loop:Bool;
   var playbackRate:Float;
   var src:String;
+  var srcObject:Dynamic;
+  var volume:Float;
+  var preload:String;
+  var crossOrigin:String;
+  var playsInline:Bool;
   function play():Dynamic;
   function pause():Void;
+  function load():Void;
+  function canPlayType(type:String):String;
+  function removeAttribute(name:String):Void;
+  function addEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
+  function removeEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
 }
 #else
 typedef HTMLVideoElement = Dynamic;

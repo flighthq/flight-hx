@@ -11,8 +11,11 @@ package flighthq._internal.dom;
 extern class HTMLCanvasElement {
   var width:Int;
   var height:Int;
+  var style(default, never):CSSStyleDeclaration;
   function getContext(contextId:String, ?attributes:Dynamic):Dynamic;
   function toDataURL(?type:String, ?quality:Dynamic):String;
+  function addEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
+  function removeEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
 }
 #else
 typedef HTMLCanvasElement = Dynamic;

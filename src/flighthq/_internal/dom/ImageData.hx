@@ -7,6 +7,7 @@ extern class ImageData {
   var width(default, never):Int;
   var height(default, never):Int;
   var data(default, never):flighthq._internal._UInt8ClampedArray;
+  var colorSpace(default, never):String;
   function new(width:Int, height:Int);
 }
 #else

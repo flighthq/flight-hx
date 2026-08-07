@@ -8,6 +8,7 @@ extern class OffscreenCanvas {
   var height:Int;
   function new(width:Int, height:Int);
   function getContext(contextId:String, ?attributes:Dynamic):Dynamic;
+  function convertToBlob(?options:Dynamic):Dynamic;
 }
 #else
 typedef OffscreenCanvas = Dynamic;
