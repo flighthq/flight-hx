@@ -15,19 +15,19 @@ import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
 class ExplainCanvasScene2DCoverage {
   @:noCompletion
-  public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:Dynamic, usage:Scene2DKindUsage):Void {
+  public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage):Void {
     _Runtime.callValue(explainScene2DCoverage, cast ([out, state, usage] : Array<Dynamic>));
     _Runtime.callValue(ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage, cast ([out, state, usage, false] : Array<Dynamic>));
   }
 
   @:noCompletion
-  public static function hasCanvasScene2DCoverage(state:Dynamic, usage:Scene2DKindUsage):Bool {
+  public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
     if ((cast !(cast _Runtime.callValue(hasScene2DCoverage, cast ([state, usage] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     return cast !(cast _Runtime.callValue(ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage, cast ([null, state, usage, true] : Array<Dynamic>)) : Bool);
     return cast null;
   }
 
-  public static function collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(out:Null<Array<SceneCoverageEntry>>, state:Dynamic, usage:Scene2DKindUsage, stopAtFirst:Bool):Bool {
+  public static function collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(out:Null<Array<SceneCoverageEntry>>, state:CanvasRenderState, usage:Scene2DKindUsage, stopAtFirst:Bool):Bool {
     var found:Dynamic = cast _Runtime.UNDEFINED;
     found = false;
     {

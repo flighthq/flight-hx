@@ -69,7 +69,7 @@ class AudioResourceReference {
     return cast null;
   }
 
-  public static function resolveAudioResourceReference(ref:flighthq.types.AudioResourceReference, context:Null<Dynamic>, fetch:AudioResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<AudioResource>> {
+  public static function resolveAudioResourceReference(ref:flighthq.types.AudioResourceReference, context:Null<flighthq._internal.dom.AudioContext>, fetch:AudioResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<AudioResource>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         _Runtime.setField(ref, 'failure', null);
@@ -119,7 +119,7 @@ class AudioResourceReference {
           var cause:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch4:Dynamic;
-            if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
+            if ((cast signal.aborted : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
                 _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
                 return flighthq._internal._Async.reject(cause);
@@ -140,7 +140,7 @@ class AudioResourceReference {
     );
   }
 
-  public static function decodeAudioResourceBytes__audioResourceReference(ref:EmbeddedAudioResourceReference, context:Null<Dynamic>, signal:Dynamic):flighthq._internal._Promise<Null<AudioResource>> {
+  public static function decodeAudioResourceBytes__audioResourceReference(ref:EmbeddedAudioResourceReference, context:Null<flighthq._internal.dom.AudioContext>, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<AudioResource>> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var decoder:Dynamic = cast _Runtime.UNDEFINED;
       decoder = ((cast _Runtime.strictEquals(_Runtime.field(ref, 'mimeType'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(getAudioDecoder, cast ([_Runtime.field(ref, 'mimeType')] : Array<Dynamic>)) : Dynamic));

@@ -12,6 +12,7 @@ import { generateCoreModules } from './emit/core.ts';
 import {
   createApiReport,
   hostEndpointSummary,
+  hostTypeSummary,
   inventorySummary,
   loweringSummary,
   stableJson,
@@ -63,6 +64,8 @@ try {
       writeOrCheck(path.join(reportsDirectory, 'inventory.md'), inventorySummary(inventory), check);
       writeOrCheck(path.join(reportsDirectory, 'host-endpoints.json'), stableJson(hostEndpoints), check);
       writeOrCheck(path.join(reportsDirectory, 'host-endpoints.md'), hostEndpointSummary(hostEndpoints), check);
+      writeOrCheck(path.join(reportsDirectory, 'host-types.json'), stableJson(core.hostTypes), check);
+      writeOrCheck(path.join(reportsDirectory, 'host-types.md'), hostTypeSummary(core.hostTypes), check);
       if (!lowering) throw new Error('Expected lowering audit');
       lowering.summary.staticEmission = core.staticLowering;
       writeOrCheck(path.join(reportsDirectory, 'lowering.json'), stableJson(lowering), check);

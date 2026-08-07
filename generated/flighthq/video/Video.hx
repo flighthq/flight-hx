@@ -16,12 +16,12 @@ class Video {
     return cast null;
   }
 
-  public static function createVideoResource(?element:Dynamic, ?objectUrl:String):VideoResource {
+  public static function createVideoResource(?element:flighthq._internal.dom.HTMLVideoElement, ?objectUrl:String):VideoResource {
     return cast Facade_Video_flighthq_video_VideoResource.createVideoResource(element, objectUrl);
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
+  public static function createVideoResourceFromMediaStream(stream:flighthq._internal.dom.MediaStream):VideoResource {
     return cast Facade_Video_flighthq_video_VideoResourceFrom.createVideoResourceFromMediaStream(stream);
     return cast null;
   }
@@ -70,17 +70,17 @@ class Video {
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromBlob(blob:flighthq._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromBlob(blob, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrl(url, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrls(sources, options, signal);
     return cast null;
   }

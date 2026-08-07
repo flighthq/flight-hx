@@ -18,7 +18,7 @@ import flighthq.types.Types.ExternalTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
 class GlExternalTexture {
-  public static function createExternalGlTexture(state:GlRenderState, handle:Dynamic, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalGlTexture(state:GlRenderState, handle:flighthq._internal.dom.WebGLTexture, options:CreateExternalTextureOptions):Texture {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +38,7 @@ class GlExternalTexture {
     return cast null;
   }
 
-  public static function resolveExternalGlTexture__glExternalTexture(state:GlRenderState, texture:TextureLike):Null<Dynamic> {
+  public static function resolveExternalGlTexture__glExternalTexture(state:GlRenderState, texture:TextureLike):Null<flighthq._internal.dom.WebGLTexture> {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var handle:Dynamic = cast _Runtime.UNDEFINED;

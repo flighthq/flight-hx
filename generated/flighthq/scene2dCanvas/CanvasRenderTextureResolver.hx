@@ -13,7 +13,7 @@ import flighthq.types.Types.RenderTargetTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
 class CanvasRenderTextureResolver {
-  public static function registerCanvasRenderTextureResolver(resolvers:Dynamic, state:Dynamic):Void {
+  public static function registerCanvasRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasTextureResolver, cast ([resolvers, RenderTargetTextureSourceKind, function(_resolvers:Dynamic, texture:Texture) return _Runtime.callValue(bindCanvasRenderTexture, cast ([state, (cast texture : RenderTexture)] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

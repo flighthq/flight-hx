@@ -78,14 +78,14 @@ class DomScale9Shape {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', HxMath.ceil((w * pixelRatio)));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', HxMath.ceil((h * pixelRatio)));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(w) + 'px');
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(h) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(w) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = _Runtime.field(data, 'context');
     _Runtime.callValue(mapScale9ShapeCommands, cast ([DomScale9Shape._remappedCommands__domScale9Shape, commands, mapper] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
     _Runtime.callValue(rasterizer, cast ([ctx, DomScale9Shape._remappedCommands__domScale9Shape, state] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(DomScale9Shape.setStrippedDomTransform__domScale9Shape, cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(source, 'scaleX'), _Runtime.field(source, 'scaleY'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'canvas')] : Array<Dynamic>));
@@ -93,7 +93,7 @@ class DomScale9Shape {
 
   public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = { createData: createDomScale9ShapeData, submit: drawDomScale9Shape };
 
-  public static function setStrippedDomTransform__domScale9Shape(element:Dynamic, transform:MatrixLike, scaleX:Float, scaleY:Float, roundPixels:Bool):Void {
+  public static function setStrippedDomTransform__domScale9Shape(element:flighthq._internal.dom.HTMLElement, transform:MatrixLike, scaleX:Float, scaleY:Float, roundPixels:Bool):Void {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;
@@ -106,6 +106,6 @@ class DomScale9Shape {
     d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (transform.d / scaleY) : Dynamic) : (cast transform.d : Dynamic));
     tx = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
     ty = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 }

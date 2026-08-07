@@ -206,7 +206,7 @@ class EffectsGl {
     Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffect(state);
   }
 
-  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flighthq._internal.dom.WebGLTexture):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop(state, backdropKey, texture);
   }
 
@@ -390,7 +390,7 @@ class EffectsGl {
     Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect.registerGlWhiteBalanceEffect(state);
   }
 
-  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<flighthq._internal.dom.WebGLTexture>):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture(pipeline, texture);
   }
 }

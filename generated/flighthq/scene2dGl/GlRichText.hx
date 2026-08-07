@@ -32,12 +32,12 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
-typedef GlRichTextData__glRichText = { var texture:Null<Dynamic>; };
+typedef GlRichTextData__glRichText = { var texture:Null<flighthq._internal.dom.WebGLTexture>; };
 
 class GlRichText {
-  public static var _offscreenCanvas__glRichText:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _offscreenCanvas__glRichText:Null<flighthq._internal.dom.HTMLCanvasElement> = _Runtime.explicitNull();
 
-  public static var _offscreenCtx__glRichText:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _offscreenCtx__glRichText:Null<flighthq._internal.dom.CanvasRenderingContext2D> = _Runtime.explicitNull();
 
   public static var _webglTextInputOverlay__glRichText:Null<GlRichTextOverlay> = _Runtime.explicitNull();
 
@@ -128,7 +128,7 @@ class GlRichText {
 
   public static final defaultGlRichTextRenderer:Scene2DRenderer = { createData: createGlRichTextData, destroyData: destroyGlRichTextData, submit: drawGlRichText };
 
-  public static function drawRichTextToCanvas__glRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__glRichText(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -182,7 +182,7 @@ class GlRichText {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([1.0, 1.0] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)), 'width');
+      return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: formatRanges, width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));
@@ -190,7 +190,7 @@ class GlRichText {
     return cast null;
   }
 
-  public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.CanvasRenderingContext2D {
     var pw:Dynamic = cast _Runtime.UNDEFINED;
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(GlRichText._offscreenCanvas__glRichText) : Bool)) {

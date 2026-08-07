@@ -17,7 +17,7 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.WgpuRenderState;
 
-typedef WgpuParticleResources__wgpuParticleEmitter2D = { var pipelines:Dynamic; var pipelineLayout:Dynamic; var module:Dynamic; var instanceBindGroupLayout:Dynamic; };
+typedef WgpuParticleResources__wgpuParticleEmitter2D = { var pipelines:Dynamic; var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var module:flighthq._internal.dom.GPUShaderModule; var instanceBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; };
 
 class WgpuParticleEmitter2D {
   public static final INSTANCE_FLOATS__wgpuParticleEmitter2D:Dynamic = 14.0;
@@ -57,7 +57,7 @@ class WgpuParticleEmitter2D {
     return cast null;
   }
 
-  public static function getParticlePipeline__wgpuParticleEmitter2D(state:WgpuRenderState, resources:WgpuParticleResources__wgpuParticleEmitter2D):Dynamic {
+  public static function getParticlePipeline__wgpuParticleEmitter2D(state:WgpuRenderState, resources:WgpuParticleResources__wgpuParticleEmitter2D):flighthq._internal.dom.GPURenderPipeline {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -185,7 +185,7 @@ class WgpuParticleEmitter2D {
     if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     __destructure3 = state;
     device = _Runtime.field(__destructure3, 'device');
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer'), 0.0, _Runtime.field(instanceData, 'buffer'), 0.0, (drawCount * WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer'), 0.0, _Runtime.field(instanceData, 'buffer'), 0.0, (drawCount * WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D)] : Array<Dynamic>));
     uniformOffset = _Runtime.field(runtime, 'uniformOffset');
     floatBase = (_Runtime.toInt32(uniformOffset) >> 2);
     __destructure4 = runtime;
@@ -244,11 +244,11 @@ class WgpuParticleEmitter2D {
     _Runtime.setField(runtime, 'uniformOffset', _Runtime.addNumbers(_Runtime.field(runtime, 'uniformOffset'), _Runtime.field(runtime, 'uniformStride')));
     instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: _Runtime.field(resources, 'instanceBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(runtime, 'particleInstanceBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = _Runtime.field(runtime, 'renderPass');
-    _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.callValue(WgpuParticleEmitter2D.getParticlePipeline__wgpuParticleEmitter2D, cast ([state, resources] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>)] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, textureBindGroup] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, instanceBindGroup] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'draw', cast ([6.0, drawCount, 0.0, 0.0] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.callValue(WgpuParticleEmitter2D.getParticlePipeline__wgpuParticleEmitter2D, cast ([state, resources] : Array<Dynamic>)));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(runtime, 'uniformBindGroup'), cast ([uniformOffset] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0, drawCount, 0.0, 0.0);
   }
 
   public static final defaultWgpuParticleEmitter2DRenderer:SpriteRenderer = { createData: noopRendererData, submit: function(state:WgpuRenderState, node:RenderProxy2D) {

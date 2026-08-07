@@ -43,26 +43,26 @@ class DomNativeText {
     }
     _Runtime.callValue(DomNativeText.applyNativeTextStyle__domNativeText, cast ([element, _Runtime.field(data, 'style')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool)) {
-      _Runtime.setField(_Runtime.field(element, 'style'), 'whiteSpace', 'normal');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'width', '' + Std.string(_Runtime.field(data, 'width')) + 'px');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'height', '' + Std.string(_Runtime.field(data, 'height')) + 'px');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'overflow', 'hidden');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'display', 'flex');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'flexDirection', 'column');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'justifyContent', _Runtime.callValue(DomNativeText._verticalAlignToJustifyContent__domNativeText, cast ([_Runtime.field(data, 'verticalAlign')] : Array<Dynamic>)));
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'normal');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(data, 'width')) + 'px');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(data, 'height')) + 'px');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'flex');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).flexDirection = 'column');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = _Runtime.callValue(DomNativeText._verticalAlignToJustifyContent__domNativeText, cast ([_Runtime.field(data, 'verticalAlign')] : Array<Dynamic>)));
     } else {
-      _Runtime.setField(_Runtime.field(element, 'style'), 'whiteSpace', 'nowrap');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'width', '');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'height', '');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'overflow', '');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'display', '');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'flexDirection', '');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'justifyContent', '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'nowrap');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).flexDirection = '');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = '');
     }
-    _Runtime.setField(element, 'textContent', _Runtime.field(data, 'text'));
-    rect = _Runtime.callProperty(element, 'getBoundingClientRect', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'measuredWidth', _Runtime.field(rect, 'width'));
-    _Runtime.setField(runtime, 'measuredHeight', _Runtime.field(rect, 'height'));
+    ((cast element : flighthq._internal.dom.HTMLElement).textContent = _Runtime.field(data, 'text'));
+    rect = (cast element : flighthq._internal.dom.HTMLElement).getBoundingClientRect();
+    _Runtime.setField(runtime, 'measuredWidth', (cast rect : flighthq._internal.dom.DOMRect).width);
+    _Runtime.setField(runtime, 'measuredHeight', (cast rect : flighthq._internal.dom.DOMRect).height);
     _Runtime.callValue(applyDomStyle, cast ([state, element, renderProxy] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
@@ -90,7 +90,7 @@ class DomNativeText {
     return cast null;
   }
 
-  public static function applyNativeTextStyle__domNativeText(element:Dynamic, style:NativeTextStyle):Void {
+  public static function applyNativeTextStyle__domNativeText(element:flighthq._internal.dom.HTMLElement, style:NativeTextStyle):Void {
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var family:Dynamic = cast _Runtime.UNDEFINED;
     var weight:Dynamic = cast _Runtime.UNDEFINED;
@@ -99,9 +99,9 @@ class DomNativeText {
     family = _Runtime.coalesce(_Runtime.field(style, 'font'), function():Dynamic return cast 'sans-serif');
     weight = _Runtime.select(_Runtime.field(style, 'bold'), function():Dynamic return cast 'bold ', function():Dynamic return cast '');
     slant = _Runtime.select(_Runtime.field(style, 'italic'), function():Dynamic return cast 'italic ', function():Dynamic return cast '');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'font', '' + Std.string(slant) + '' + Std.string(weight) + '' + Std.string(size) + 'px ' + Std.string(family) + '');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'color', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'textAlign', _Runtime.field(style, 'align')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'lineHeight', '' + Std.string(_Runtime.addNumbers(size, _Runtime.field(style, 'leading'))) + 'px'); }
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).font = '' + Std.string(slant) + '' + Std.string(weight) + '' + Std.string(size) + 'px ' + Std.string(family) + '');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).color = _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).textAlign = _Runtime.field(style, 'align')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).lineHeight = '' + Std.string(_Runtime.addNumbers(size, _Runtime.field(style, 'leading'))) + 'px'); }
   }
 }

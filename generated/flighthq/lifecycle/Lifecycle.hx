@@ -100,8 +100,8 @@ class Lifecycle {
     }, getLaunchKind: function() {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool)) { return cast 'cold'; }
-      entries = (cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'getEntriesByType', cast (['navigation'] : Array<Dynamic>)) : Array<Dynamic>);
-      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(entries, 0.0), 'type'), 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
+      entries = (cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
     }, subscribeMemoryWarning: function(listener:Dynamic) {
       var onPressure:Dynamic = cast _Runtime.UNDEFINED;
@@ -109,10 +109,10 @@ class Lifecycle {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
-      onPressure = function(e:Dynamic) {
+      onPressure = function(e:flighthq._internal.dom.Event) {
         var detail:Dynamic = cast _Runtime.UNDEFINED;
         var pressure:Dynamic = cast _Runtime.UNDEFINED;
-        detail = _Runtime.field((cast e : Dynamic), 'detail');
+        detail = (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
         pressure = _Runtime.optionalField(detail, 'pressure');
         if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
           _Runtime.callValue(listener, cast (['critical'] : Array<Dynamic>));

@@ -12,7 +12,7 @@ import flighthq.types.ScanlinesEffect;
 
 class CanvasScanlinesEffect {
   @:noCompletion
-  public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,11 +47,11 @@ class CanvasScanlinesEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasScanlinesEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyScanlinesEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasScanlinesEffect(state:Dynamic):Void {
+  public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'ScanlinesEffect', defaultCanvasScanlinesEffectRunner] : Array<Dynamic>));
   }
 }

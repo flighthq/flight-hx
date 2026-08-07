@@ -422,7 +422,7 @@ class MeshGeometryCompute {
       }
       (targetVertices = cast (expanded : Dynamic));
       (out.vertices = cast (expanded : Dynamic));
-      var needsUint32:Dynamic = ((cast ((cast _Runtime.isInstanceOf(sourceIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast _Runtime.isInstanceOf(out.indices, _Runtime.globalValue('Uint32Array')) : Bool)) : Bool) || (cast ((cast outputVertexCount : Float) > (cast MeshGeometryCompute.UINT16_MAX__meshGeometryCompute : Float)) : Bool));
+      var needsUint32:Dynamic = ((cast ((cast _Runtime.isInstanceOfName(sourceIndices, 'Uint32Array') : Bool) || (cast _Runtime.isInstanceOfName(out.indices, 'Uint32Array') : Bool)) : Bool) || (cast ((cast outputVertexCount : Float) > (cast MeshGeometryCompute.UINT16_MAX__meshGeometryCompute : Float)) : Bool));
       var remappedIndices:Dynamic = ((cast needsUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(elementCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(elementCount) : Dynamic));
       {
         var element:Dynamic = 0.0;

@@ -39,14 +39,14 @@ class EnableScene3DResourceFailureGuards {
     if ((cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap).has(resolver)) : Bool)) { return cast function() return _Runtime.callValue(disableScene3DResourceFailureGuards, cast ([resolver] : Array<Dynamic>)); }
     warned = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
     signals = _Runtime.callValue(enableScene3DResourceSignals, cast ([resolver] : Array<Dynamic>));
-    failed = function(event:Dynamic) {
+    failed = function(event:Scene3DResourceEvent) {
       var explanation:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast warned : flighthq._internal._WeakMap).has(event.ref)) : Bool) && (cast _Runtime.strictEquals(((cast warned : flighthq._internal._WeakMap).get(event.ref)), _Runtime.field(event.ref, 'failure')) : Bool)) : Bool)) { return; }
       ((cast warned : flighthq._internal._WeakMap).set(event.ref, _Runtime.field(event.ref, 'failure')));
       explanation = _Runtime.callValue(explainImageResourceReferenceResolution, cast ([event.ref] : Array<Dynamic>));
       _Runtime.callValue(logOnce, cast (['scene-resources:image-resource-resolution-failed:' + Std.string(++EnableScene3DResourceFailureGuards._attemptId__enableScene3DResourceFailureGuards) + '', LogLevel.Warn, { failureKind: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'kind'), function():Dynamic return cast null), failureName: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'name'), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(explanation, 'failure'), 'message'), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: _Runtime.field(explanation, 'kind') }, 'scene-resources'] : Array<Dynamic>));
     };
-    resolved = function(event:Dynamic) {
+    resolved = function(event:Scene3DResourceEvent) {
       ((cast warned : flighthq._internal._WeakMap).delete_(event.ref));
     };
     _Runtime.callValue(connectSignal, cast ([signals.onResourceFailed, failed] : Array<Dynamic>));

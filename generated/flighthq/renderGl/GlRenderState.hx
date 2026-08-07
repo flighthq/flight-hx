@@ -51,8 +51,8 @@ class GlRenderState {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), backgroundColor: _Runtime.field(screenState, 'backgroundColor'), backgroundColorRgba: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(screenState, 'backgroundColorRgba'))]), backgroundColorString: _Runtime.field(screenState, 'backgroundColorString'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderAlpha: _Runtime.field(screenState, 'renderAlpha'), renderBlendMode: _Runtime.field(screenState, 'renderBlendMode'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.GlRenderState);
     _Runtime.setField(state, 'applyBlendMode', _Runtime.field(screenState, 'applyBlendMode'));
-    _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', _Runtime.field(screenState, 'canvas'));
-    _Runtime.setField((cast state : { var gl:Dynamic; }), 'gl', _Runtime.field(screenState, 'gl'));
+    _Runtime.setField((cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }), 'canvas', _Runtime.field(screenState, 'canvas'));
+    _Runtime.setField((cast state : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }), 'gl', _Runtime.field(screenState, 'gl'));
     screenRuntime = _Runtime.callValue(getGlRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
     runtime = _Runtime.callValue(createGlRenderStateRuntime, cast ([screenRuntime] : Array<Dynamic>));
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
@@ -63,9 +63,9 @@ class GlRenderState {
     return cast null;
   }
 
-  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):flighthq.types.GlRenderState {
+  public static function createGlRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlRenderOptions):flighthq.types.GlRenderState {
     if (options == null) options = cast ({  } : Dynamic);
-    var contextAttribs:Dynamic = cast _Runtime.UNDEFINED;
+    var contextAttribs:flighthq._internal.dom.WebGLContextAttributes = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var shaderLoc:Dynamic = cast _Runtime.UNDEFINED;
     var matrixArray:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,7 +75,7 @@ class GlRenderState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     contextAttribs = _Runtime.mergeObjects([{ alpha: true }, { antialias: _Runtime.coalesce(_Runtime.field(options, 'antialias'), function():Dynamic return cast true) }, { powerPreference: _Runtime.coalesce(_Runtime.field(options, 'powerPreference'), function():Dynamic return cast 'default') }, { stencil: true }, _Runtime.field(options, 'contextAttributes')]);
-    gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
+    gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<flighthq._internal.dom.WebGL2RenderingContext>);
     if ((cast !_Runtime.truthy(gl) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get WebGL2 context.')); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
     matrixArray = new flighthq._internal._Float32Array(9.0);
@@ -88,8 +88,8 @@ class GlRenderState {
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 64.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.GlRenderState);
     _Runtime.setField(state, 'applyBlendMode', null);
-    _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
-    _Runtime.setField((cast state : { var gl:Dynamic; }), 'gl', gl);
+    _Runtime.setField((cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }), 'canvas', canvas);
+    _Runtime.setField((cast state : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }), 'gl', gl);
     if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
     runtime = _Runtime.callValue(createGlRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);

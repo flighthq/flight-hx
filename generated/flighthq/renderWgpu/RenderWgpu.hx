@@ -64,12 +64,12 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:Dynamic, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuExternalTexture.createExternalWgpuTexture(state, handle, options);
     return cast null;
   }
 
-  public static function createWgpuCanvasElement(width:Float, height:Float, ?pixelRatio:Float):Dynamic {
+  public static function createWgpuCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuElement.createWgpuCanvasElement(width, height, pixelRatio);
     return cast null;
   }
@@ -79,12 +79,12 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
+  public static function createWgpuRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderState.createWgpuRenderState(canvas, options);
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic, ?colorSpace:RenderTargetColorSpace):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace):WgpuRenderTarget {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace);
     return cast null;
   }
@@ -186,7 +186,7 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuBackground.renderWgpuBackground(state);
   }
 
-  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):Dynamic {
+  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuDraw.resolveWgpuSmoothingBindGroup(state, entry, smoothing);
     return cast null;
   }

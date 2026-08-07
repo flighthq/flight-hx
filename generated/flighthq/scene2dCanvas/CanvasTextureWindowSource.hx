@@ -11,7 +11,7 @@ import flighthq.types.Texture;
 
 class CanvasTextureWindowSource {
   @:noCompletion
-  public static function resolveCanvasTextureWindowSource(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
+  public static function resolveCanvasTextureWindowSource(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var uvOffsetX:Dynamic = cast _Runtime.UNDEFINED;

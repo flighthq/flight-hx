@@ -166,7 +166,7 @@ class Ipc {
     backend = _Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>));
     signals = Ipc._ipcSignals__ipc;
     unsubscribe = _Runtime.callProperty(backend, 'subscribe', cast ([name, function(args:Dynamic) {
-      var event:Dynamic = cast _Runtime.UNDEFINED;
+      var event:IpcMessageEvent = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChannelMessage], [name]]), 1); }
       event = { channel: name, senderId: -1.0, args: args, reply: _Runtime.haxeRest(function(...replyArgs:Dynamic) {
         var __thisValue0:Dynamic = _Runtime.thisValue();

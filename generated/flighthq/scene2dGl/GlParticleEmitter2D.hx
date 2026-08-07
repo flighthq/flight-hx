@@ -27,7 +27,7 @@ class GlParticleEmitter2D {
 
   public static final PARTICLE_FS__glParticleEmitter2D:Dynamic = '#version 300 es\nprecision mediump float;\n\nin vec2 v_uv;\nin vec4 v_color;\n\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\n\nout vec4 fragColor;\n\nvoid main() {\n  vec4 tex = texture(u_texture, v_uv);\n  if (u_straightTextureAlpha) tex.rgb *= tex.a;\n  fragColor = vec4(tex.rgb * v_color.rgb, tex.a) * v_color.a;\n  if (fragColor.a <= 0.0) discard;\n}';
 
-  public static function compileParticleShader__glParticleEmitter2D(gl:Dynamic):GlParticleShader {
+  public static function compileParticleShader__glParticleEmitter2D(gl:flighthq._internal.dom.WebGL2RenderingContext):GlParticleShader {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlParticleEmitter2D.PARTICLE_VS__glParticleEmitter2D, GlParticleEmitter2D.PARTICLE_FS__glParticleEmitter2D, 'Particle emitter'] : Array<Dynamic>));
     return cast { program: program, locCorner: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_corner'), locPos: 1.0, locCosScale: 2.0, locSinScale: 3.0, locColor: 4.0, locUvRect: 5.0, locSize: 6.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') };

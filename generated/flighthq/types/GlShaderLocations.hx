@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlShaderLocations = { var program:Dynamic; var locPosition:Float; var locTexCoord:Float; var locMatrix:Dynamic; var locAlpha:Dynamic; @:optional var locColorScale:Dynamic; @:optional var locColorBias:Dynamic; @:optional var locHasColorScaleBias:Dynamic; var locTexture:Dynamic; };
+typedef GlShaderLocations = { var program:flighthq._internal.dom.WebGLProgram; var locPosition:Float; var locTexCoord:Float; var locMatrix:flighthq._internal.dom.WebGLUniformLocation; var locAlpha:flighthq._internal.dom.WebGLUniformLocation; @:optional var locColorScale:flighthq._internal.dom.WebGLUniformLocation; @:optional var locColorBias:flighthq._internal.dom.WebGLUniformLocation; @:optional var locHasColorScaleBias:flighthq._internal.dom.WebGLUniformLocation; var locTexture:flighthq._internal.dom.WebGLUniformLocation; };
 
-typedef GlBitmapShader = { var program:Dynamic; var bind:Dynamic; var locations:GlShaderLocations; };
+typedef GlBitmapShader = { var program:flighthq._internal.dom.WebGLProgram; var bind:Dynamic; var locations:GlShaderLocations; };

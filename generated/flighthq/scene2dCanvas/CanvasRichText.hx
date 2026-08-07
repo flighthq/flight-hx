@@ -30,7 +30,7 @@ import flighthq.types.TextSelectionRectangle;
 
 class CanvasRichText {
   @:noCompletion
-  public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(CanvasRichText.drawCanvasRichTextField__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null) : Bool)) : Bool)) {
       _Runtime.callValue(CanvasRichText._canvasTextInputOverlay__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
@@ -38,11 +38,11 @@ class CanvasRichText {
   }
 
   @:noCompletion
-  public static function drawCanvasRichTextMask(state:Dynamic, data:RenderProxy2D):Void {
+  public static function drawCanvasRichTextMask(state:CanvasRenderState, data:RenderProxy2D):Void {
     _Runtime.callValue(drawCanvasScene2D, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function drawCanvasRichTextField__canvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRichTextField__canvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,7 +72,7 @@ class CanvasRichText {
     text = _Runtime.field(__destructure0, 'text');
     measure = function(t:String, fmt:TextFormat) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: _Runtime.field(content, 'formatRanges'), width: _Runtime.field(data, 'width'), height: _Runtime.field(data, 'height'), measure: measure, multiline: _Runtime.field(data, 'multiline'), verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));
@@ -116,7 +116,7 @@ class CanvasRichText {
       var y:Dynamic = (_Runtime.addNumbers(_Runtime.field(group, 'offsetY'), _Runtime.field(group, 'ascent')) - scrollYOffset);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(_Runtime.field(group, 'format'), 'bullet'), function():Dynamic return cast !(cast ((cast bulletLines : flighthq._internal._Set).has(_Runtime.field(group, 'lineIndex'))) : Bool)))) {
         ((cast bulletLines : flighthq._internal._Set).add(_Runtime.field(group, 'lineIndex')));
-        var bulletW:Dynamic = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([CanvasRichText.BULLET_CHAR__canvasRichText] : Array<Dynamic>)), 'width');
+        var bulletW:Dynamic = (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([CanvasRichText.BULLET_CHAR__canvasRichText] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([CanvasRichText.BULLET_CHAR__canvasRichText, ((x - bulletW) - CanvasRichText.BULLET_GAP__canvasRichText), y] : Array<Dynamic>));
       }
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
@@ -143,7 +143,7 @@ class CanvasRichText {
   }
 
   @:noCompletion
-  public static function registerCanvasTextInputOverlay(overlay:Dynamic):Void {
+  public static function registerCanvasTextInputOverlay(overlay:CanvasTextInputOverlay):Void {
     (CanvasRichText._canvasTextInputOverlay__canvasRichText = cast (overlay : Dynamic));
   }
 
@@ -157,7 +157,7 @@ class CanvasRichText {
 
   public static final _richTextSelectionRectangles__canvasRichText:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 
-  public static var _canvasTextInputOverlay__canvasRichText:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _canvasTextInputOverlay__canvasRichText:Null<CanvasTextInputOverlay> = _Runtime.explicitNull();
 
   public static final defaultCanvasRichTextRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasRichText };
 }

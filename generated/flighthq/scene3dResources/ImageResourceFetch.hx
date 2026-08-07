@@ -8,7 +8,7 @@ import flighthq.types.Image;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 
 class ImageResourceFetch {
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var url:Dynamic = cast _Runtime.UNDEFINED;
@@ -21,7 +21,7 @@ class ImageResourceFetch {
           var error:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch1:Dynamic;
-            if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
+            if ((cast signal.aborted : Bool)) {
               __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.reject(error);
               });

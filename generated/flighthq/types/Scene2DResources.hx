@@ -22,7 +22,7 @@ typedef Scene2DDocumentImporterEntry = { var importDocument:Scene2DDocumentImpor
 
 typedef Scene2DDocumentImporterRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var entries:Array<Scene2DDocumentImporterEntry>; };
 
-typedef Scene2DDocumentLoadOptions = { @:optional var mimeType:Null<String>; @:optional var progress:Signal<Dynamic>; @:optional var signal:Dynamic; };
+typedef Scene2DDocumentLoadOptions = { @:optional var mimeType:Null<String>; @:optional var progress:Signal<Dynamic>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
 typedef Scene2DSlotContentResolver = Dynamic;
 
@@ -36,10 +36,10 @@ typedef Scene2DImageResourceLoadProgress = { var loaded:Float; var reference:Ima
 
 typedef Scene2DImageResources = { var document:Scene2DDocument; var resolved:Array<ImageResourceReference>; var unresolved:Array<ImageResourceReference>; };
 
-typedef LoadScene2DImageResourcesOptions = { @:optional var fetch:ImageResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:Dynamic; };
+typedef LoadScene2DImageResourcesOptions = { @:optional var fetch:ImageResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
 typedef Scene2DAudioResourceLoadProgress = { var loaded:Float; var reference:AudioResourceReference; var total:Float; };
 
 typedef Scene2DAudioResources = { var document:Scene2DDocument; var resolved:Array<AudioResourceReference>; var unresolved:Array<AudioResourceReference>; };
 
-typedef LoadScene2DAudioResourcesOptions = { @:optional var context:Null<Dynamic>; @:optional var fetch:AudioResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:Dynamic; };
+typedef LoadScene2DAudioResourcesOptions = { @:optional var context:Null<flighthq._internal.dom.AudioContext>; @:optional var fetch:AudioResourceFetch; @:optional var progress:Signal<Dynamic>; @:optional var select:Dynamic; @:optional var signal:flighthq._internal.dom.AbortSignal; };

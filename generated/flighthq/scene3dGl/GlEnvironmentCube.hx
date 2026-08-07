@@ -19,7 +19,7 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class GlEnvironmentCube {
   @:noCompletion
-  public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<flighthq._internal.dom.WebGLTexture> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var sources:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,7 +55,7 @@ class GlEnvironmentCube {
   }
 
   @:noCompletion
-  public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
+  public static function getGlCubeFaceTarget(gl:flighthq._internal.dom.WebGL2RenderingContext, face:Float):Float {
     return cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP_POSITIVE_X) + face);
     return cast null;
   }
@@ -92,13 +92,13 @@ class GlEnvironmentCube {
     return cast null;
   }
 
-  public static function uploadGlEnvironmentImage__glEnvironmentCube(gl:Dynamic, target:Float, image:TextureSource, ?internalFormat:Float):Void {
+  public static function uploadGlEnvironmentImage__glEnvironmentCube(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, image:TextureSource, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
       var bitmap:Dynamic = (cast image : Bitmap);
       _Runtime.callValue(uploadGlTextureData, cast ([gl, target, bitmap.width, bitmap.height, bitmap.data, internalFormat] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(uploadGlTextureImageResource, cast ([gl, target, (cast image : Dynamic), internalFormat] : Array<Dynamic>));
+      _Runtime.callValue(uploadGlTextureImageResource, cast ([gl, target, (cast image : Image), internalFormat] : Array<Dynamic>));
     }
   }
 }

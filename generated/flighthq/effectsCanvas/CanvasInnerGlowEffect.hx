@@ -19,23 +19,23 @@ import flighthq.types.InnerGlowEffect;
 
 class CanvasInnerGlowEffect {
   @:noCompletion
-  public static function applyInnerGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:InnerGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerGlowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasInnerGlowEffect.applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasInnerGlowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyInnerGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasInnerGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasInnerGlowEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'InnerGlowEffect', defaultCanvasInnerGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerGlowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var glow:Dynamic = cast _Runtime.UNDEFINED;
     var strength:Dynamic = cast _Runtime.UNDEFINED;

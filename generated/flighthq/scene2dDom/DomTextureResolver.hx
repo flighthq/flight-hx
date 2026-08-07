@@ -21,7 +21,7 @@ class DomTextureResolver {
   }
 
   @:noCompletion
-  public static function resolveDomTexture(state:DomRenderState, texture:Texture):Null<Dynamic> {
+  public static function resolveDomTexture(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;

@@ -27,7 +27,7 @@ import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.velocity.VelocityField.getVelocity;
 
-typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:Dynamic; var uniformBuffer:Dynamic; var bindGroup:Dynamic; var cursor:Float; var scratch:flighthq._internal._Float32Array; };
+typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var uniformBuffer:flighthq._internal.dom.GPUBuffer; var bindGroup:flighthq._internal.dom.GPUBindGroup; var cursor:Float; var scratch:flighthq._internal._Float32Array; };
 
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
@@ -265,9 +265,9 @@ class WgpuVelocity {
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 3.0, clipHeight);
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 4.0, _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')));
     flighthq._internal._StaticIndex.writeFloat32Array(scratch, 5.0, _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(_Runtime.field(ctx, 'state'), 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(pipeline, 'uniformBuffer'), slot, _Runtime.field(scratch, 'buffer'), 0.0, WgpuVelocity.UNIFORM_BYTES__wgpuVelocity] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(active, 'pass'), 'setBindGroup', cast ([0.0, _Runtime.field(pipeline, 'bindGroup'), cast ([slot] : Array<Dynamic>)] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(active, 'pass'), 'draw', cast ([6.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(_Runtime.field(ctx, 'state'), 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(pipeline, 'uniformBuffer'), slot, _Runtime.field(scratch, 'buffer'), 0.0, WgpuVelocity.UNIFORM_BYTES__wgpuVelocity] : Array<Dynamic>));
+    (cast _Runtime.field(active, 'pass') : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, _Runtime.field(pipeline, 'bindGroup'), cast ([slot] : Array<Dynamic>));
+    (cast _Runtime.field(active, 'pass') : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
   }
 
   @:noCompletion
@@ -296,18 +296,18 @@ class WgpuVelocity {
       _Runtime.throwValue(_Runtime.error('No active command encoder — call renderWgpuBackground before renderWgpuVelocity.'));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
+      (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end();
       _Runtime.setField(runtime, 'renderPass', null);
     }
     pipeline = _Runtime.callValue(WgpuVelocity.ensureWgpuVelocityPipeline__wgpuVelocity, cast ([state] : Array<Dynamic>));
     _Runtime.setField(pipeline, 'cursor', 0.0);
-    pass = _Runtime.callProperty(_Runtime.field(runtime, 'commandEncoder'), 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: _Runtime.field(target, 'view'), loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), 0.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>));
+    pass = (cast _Runtime.field(runtime, 'commandEncoder') : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: _Runtime.field(target, 'view'), loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), 0.0, 1.0);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline'));
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap).set(state, { pass: pass, pipeline: pipeline }));
     ctx = { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: _Runtime.field(state, 'pixelRatio') };
     _Runtime.callValue(WgpuVelocity.visitWgpuVelocity__wgpuVelocity, cast ([ctx, root] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap).delete_(state));
   }
 

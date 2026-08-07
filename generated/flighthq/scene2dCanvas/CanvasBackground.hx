@@ -9,7 +9,7 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 class CanvasBackground {
-  public static function renderCanvasBackground(state:Dynamic):Void {
+  public static function renderCanvasBackground(state:CanvasRenderState):Void {
     flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', 'source-over');
     _Runtime.setField(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', BlendModeValue.Normal);
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(state, 'context'), 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));

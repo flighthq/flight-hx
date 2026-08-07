@@ -13,25 +13,25 @@ import flighthq.types.Texture;
 import flighthq.types.TextureSourceKind;
 
 class CanvasTextureResolver {
-  public static function connectCanvasTextureResolverMisses(resolvers:Dynamic, state:RenderState):Void {
+  public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(resolvers, 'registryMiss', function(registry:Dynamic, kind:Dynamic) return _Runtime.callOptionalProperty(runtime, 'registryMiss', cast ([registry, kind] : Array<Dynamic>)));
   }
 
-  public static function createCanvasTextureResolvers():Dynamic {
+  public static function createCanvasTextureResolvers():CanvasTextureResolvers {
     return cast { registry: null, registryMiss: null };
     return cast null;
   }
 
-  public static function registerCanvasTextureResolver(resolvers:Dynamic, sourceKind:TextureSourceKind, resolver:Null<Dynamic>):Void {
+  public static function registerCanvasTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<flighthq.types.CanvasTextureResolver>):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.setField(resolvers, 'registry', (_Runtime.field(resolvers, 'registry') ?? _Runtime.construct(_Runtime.globalValue('Map'), [])));
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map).set(sourceKind, resolver)); }
   }
 
   @:noCompletion
-  public static function resolveCanvasTexture(resolvers:Dynamic, texture:Texture):Null<Dynamic> {
+  public static function resolveCanvasTexture(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var sourceKind:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(texture, 'dimension'), '2d') : Bool)) { return cast null; }

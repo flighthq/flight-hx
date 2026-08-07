@@ -21,23 +21,23 @@ import flighthq.types.GradientBevelEffect;
 
 class CanvasGradientBevelEffect {
   @:noCompletion
-  public static function applyGradientBevelEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:GradientBevelEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientBevelEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasGradientBevelEffect.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasGradientBevelEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGradientBevelEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasGradientBevelEffect(state:Dynamic):Void {
+  public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'GradientBevelEffect', defaultCanvasGradientBevelEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientBevelEffect):Void {
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var lit:Dynamic = cast _Runtime.UNDEFINED;
     var shade:Dynamic = cast _Runtime.UNDEFINED;

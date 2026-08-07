@@ -3,6 +3,13 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { auditStaticFacts } from '../analyze/static-facts.ts';
+import {
+  hostTypeIdentity,
+  hostTypeIdentityForExpression,
+  hostTypeIdentityForTypeNode,
+  hostTypeIdentityForValueSymbol,
+  type HostTypeIdentity,
+} from '../analyze/host-types.ts';
 import type { TypedStructRegistry } from '../analyze/typed-structs.ts';
 import {
   hostEndpointBinding,
@@ -18,6 +25,7 @@ import type {
   IrExpression,
   IrExpressionStaticFacts,
   IrFunctionDeclaration,
+  IrHostTypeBinding,
   IrHostEndpointBinding,
   IrIndexedReceiver,
   IrParameter,
@@ -28,6 +36,7 @@ import type {
   IrVariable,
   LoweringDiagnostic,
   LoweringResult,
+  HostTypeUse,
   SourceOrigin,
 } from '../model/ir.ts';
 
@@ -70,121 +79,24 @@ const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ...typedArrayTypeReferenceMap,
 };
 
-const platformDynamicTypes = new Set([
-  'AbortController',
-  'AbortSignal',
-  'ArrayBuffer',
-  'AudioBuffer',
-  'AudioBufferSourceNode',
-  'AudioContext',
-  'AudioNode',
+const standardDynamicTypes = new Set([
   'AsyncIterable',
   'AsyncIterableIterator',
-  'Blob',
-  'Buffer',
-  'BufferSource',
-  'CanvasFillRule',
-  'CanvasGradient',
-  'CanvasImageSource',
-  'CanvasPattern',
-  'CanvasRenderingContext2D',
-  'CanvasRenderingContext2DSettings',
-  'DOMRect',
-  'DOMRectReadOnly',
   'DataView',
-  'DOMException',
-  'Document',
-  'Element',
-  'Event',
-  'EventTarget',
-  'EXT_texture_filter_anisotropic',
-  'File',
-  'FileSystemDirectoryHandle',
-  'FileSystemFileHandle',
-  'FileSystemHandle',
-  'FocusEvent',
-  'FontFace',
-  'FrameRequestCallback',
-  'GlobalCompositeOperation',
-  'GainNode',
-  'Gamepad',
-  'GamepadButton',
-  'GamepadEvent',
-  'GeolocationCoordinates',
-  'GeolocationPosition',
-  'GeolocationPositionError',
-  'PositionOptions',
-  'HTMLCanvasElement',
-  'HTMLImageElement',
-  'HTMLInputElement',
-  'HTMLTextAreaElement',
-  'HTMLElement',
-  'HTMLVideoElement',
-  'Image',
-  'Headers',
-  'ImageData',
-  'ImageBitmap',
-  'ImageBitmapOptions',
-  'ImageSmoothingQuality',
-  'KeyboardEvent',
-  'Float64Array',
-  'Int32Array',
-  'Int8Array',
   'Iterable',
   'IterableIterator',
   'Iterator',
   'Map',
-  'MediaDeviceInfo',
-  'MediaDevices',
-  'MediaStream',
-  'MediaStreamConstraints',
-  'MediaStreamTrack',
-  'MediaTrackConstraints',
-  'MediaElementAudioSourceNode',
-  'Navigator',
-  'Notification',
-  'NotificationOptions',
-  'NotificationPermission',
-  'OffscreenCanvas',
-  'PointerEvent',
-  'PermissionDescriptor',
-  'PermissionStatus',
-  'Permissions',
-  'ReadableStream',
-  'TextDecoder',
   'RegExp',
   'ReadonlyMap',
   'ReadonlySet',
-  'Request',
-  'RequestInit',
-  'Response',
-  'RenderingContext',
   'Set',
-  'ShareData',
-  'StereoPannerNode',
-  'StorageManager',
-  'TexImageSource',
-  'URL',
-  'URLSearchParams',
-  'Window',
-  'WheelEvent',
-  'Uint32Array',
-  'Uint8Array',
-  'Uint8ClampedArray',
-  'WebGL2RenderingContext',
-  'WebGLBuffer',
-  'WebGLContextAttributes',
-  'WebGLFramebuffer',
-  'WebGLPowerPreference',
-  'WebGLProgram',
-  'WebGLRenderbuffer',
-  'WebGLTexture',
-  'WebGLUniformLocation',
-  'WritableStream',
   'WeakMap',
   'WeakRef',
   'WeakSet',
 ]);
+
+const standardGlobalValues = new Set(['DataView', 'Map', 'RegExp', 'Set', 'WeakMap', 'WeakRef', 'WeakSet']);
 
 const platformGlobalValues = new Set([
   'AbortController',
@@ -262,6 +174,7 @@ export function lowerTypeScriptSource(
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
+  const hostTypes = new Map<string, HostTypeUse>();
   let accountedDeclarations = 0;
   const erasedLocalTypes = new Set<string>();
   const collectLocalTypes = (node: ts.Node): void => {
@@ -334,6 +247,7 @@ export function lowerTypeScriptSource(
     externalTypes,
     externalValues,
     erasedLocalTypes,
+    hostTypes,
     packageName,
     scopeBindings: new WeakMap(),
     sourceFile,
@@ -432,7 +346,27 @@ export function lowerTypeScriptSource(
     }
   }
 
-  return { accountedDeclarations, declarations, diagnostics, staticFacts: auditStaticFacts(declarations) };
+  return {
+    accountedDeclarations,
+    declarations,
+    diagnostics,
+    hostTypes: [...hostTypes.values()].sort((left, right) =>
+      [left.name, left.source, left.line, left.column, left.kind, left.member ?? '', left.operation ?? '']
+        .join(':')
+        .localeCompare(
+          [
+            right.name,
+            right.source,
+            right.line,
+            right.column,
+            right.kind,
+            right.member ?? '',
+            right.operation ?? '',
+          ].join(':'),
+        ),
+    ),
+    staticFacts: auditStaticFacts(declarations),
+  };
 }
 
 function collectPlatformBindingNames(
@@ -827,6 +761,7 @@ interface LoweringContext {
   externalTypes: ReadonlySet<string>;
   externalValues: ReadonlyMap<string, { imported: string; specifier: string }>;
   erasedLocalTypes: ReadonlySet<string>;
+  hostTypes: Map<string, HostTypeUse>;
   packageName: string;
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
@@ -1071,6 +1006,88 @@ function lowerParameterList(
   return { parameters, prefix };
 }
 
+function recordHostType(
+  identity: HostTypeIdentity,
+  node: ts.Node,
+  context: LoweringContext,
+  use:
+    | { arity: number; kind: 'type-reference' }
+    | { kind: 'member'; member: string; operation: 'call' | 'read' | 'write' },
+): void {
+  const position = context.sourceFile.getLineAndCharacterOfPosition(node.getStart(context.sourceFile));
+  const record: HostTypeUse = {
+    arity: use.kind === 'type-reference' ? use.arity : identity.arity,
+    column: position.character + 1,
+    declarationSources: identity.declarationSources,
+    kind: use.kind,
+    line: position.line + 1,
+    ...(use.kind === 'member' ? { member: use.member, operation: use.operation } : {}),
+    name: identity.name,
+    source: path.relative(context.workspaceDirectory, context.sourceFile.fileName).split(path.sep).join('/'),
+  };
+  const key = [
+    record.name,
+    record.source,
+    record.line,
+    record.column,
+    record.kind,
+    record.member ?? '',
+    record.operation ?? '',
+    record.arity,
+  ].join(':');
+  context.hostTypes.set(key, record);
+}
+
+function staticallyEmittedHostTypeIdentity(
+  node: ts.Expression,
+  context: LoweringContext,
+): HostTypeIdentity | undefined {
+  if (ts.isParenthesizedExpression(node) || ts.isNonNullExpression(node) || ts.isSatisfiesExpression(node)) {
+    return staticallyEmittedHostTypeIdentity(node.expression, context);
+  }
+  if (ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)) {
+    return hostTypeIdentityForTypeNode(node.type, context.checker);
+  }
+  if (ts.isIdentifier(node) && !isLexicallyBound(node, context)) return undefined;
+  // Only an identifier with an explicit mapped declaration is guaranteed to
+  // retain its static host type in emitted Haxe. A property can have a host
+  // type in TypeScript while its containing structural object is lowered
+  // through `_Runtime.field`, so the resulting Haxe expression is Dynamic and
+  // still needs a cast before direct member access.
+  const symbol = ts.isIdentifier(node) ? context.checker?.getSymbolAtLocation(node) : undefined;
+  const declaration = symbol?.valueDeclaration;
+  const declaredType =
+    declaration &&
+    (ts.isParameter(declaration) ||
+      ts.isVariableDeclaration(declaration) ||
+      ts.isPropertyDeclaration(declaration) ||
+      ts.isPropertySignature(declaration))
+      ? declaration.type
+      : undefined;
+  return declaredType ? hostTypeIdentityForTypeNode(declaredType, context.checker) : undefined;
+}
+
+function hostTypeMemberBinding(
+  node: ts.PropertyAccessExpression,
+  context: LoweringContext,
+): IrHostTypeBinding | undefined {
+  const identity = hostTypeIdentityForExpression(node.expression, context.checker);
+  if (!identity) return undefined;
+  recordHostType(identity, node, context, {
+    kind: 'member',
+    member: node.name.text,
+    operation: hostPropertyOperation(node),
+  });
+  return {
+    haxeType:
+      identity.arity > 0
+        ? `${identity.haxeType}<${Array.from({ length: identity.arity }, () => 'Dynamic').join(', ')}>`
+        : identity.haxeType,
+    name: identity.name,
+    receiverCast: staticallyEmittedHostTypeIdentity(node.expression, context)?.name !== identity.name,
+  };
+}
+
 function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
   switch (node.kind) {
     case ts.SyntaxKind.AnyKeyword:
@@ -1117,21 +1134,11 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (portableType) return { arguments: [], kind: 'named', name: portableType };
     if (context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
     if (
-      platformDynamicTypes.has(name) ||
-      name.startsWith('GPU') ||
-      name.startsWith('HTML') ||
+      standardDynamicTypes.has(name) ||
       name.startsWith('Intl.') ||
-      name.startsWith('SVG') ||
-      name.startsWith('WebGL') ||
       name.startsWith('globalThis.') ||
-      name.startsWith('Canvas') ||
-      name.startsWith('FileSystem') ||
-      name.startsWith('Offscreen') ||
-      name.startsWith('Performance') ||
-      name.endsWith('Event') ||
-      name.endsWith('EventListener') ||
       /^[A-Z]$/u.test(name) ||
-      ['BodyInit', 'CSSStyleDeclaration', 'RegExpExecArray', 'TextEncoder', 'WindowEventMap'].includes(name)
+      name === 'RegExpExecArray'
     ) {
       return { kind: 'dynamic' };
     }
@@ -1155,6 +1162,13 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       return { element: arguments_[0] ?? { kind: 'dynamic' }, kind: 'array' };
     }
     if (name === 'Record') return { kind: 'dynamic' };
+    const hostType = hostTypeIdentityForTypeNode(node, context.checker);
+    if (hostType) {
+      const hostArguments = [...arguments_];
+      while (hostArguments.length < hostType.arity) hostArguments.push({ kind: 'dynamic' });
+      recordHostType(hostType, node, context, { arity: hostArguments.length, kind: 'type-reference' });
+      return { arguments: hostArguments, kind: 'named', name: hostType.haxeType };
+    }
     return { arguments: arguments_, kind: 'named', name };
   }
   if (ts.isUnionTypeNode(node)) {
@@ -1233,10 +1247,19 @@ function lowerTypeMembers(members: ts.NodeArray<ts.TypeElement>, context: Loweri
 function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, context: LoweringContext): IrType {
   const name = node.expression.getText(context.sourceFile);
   const arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
-  if (platformDynamicTypes.has(name) || context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
+  if (standardDynamicTypes.has(name) || context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
   if (name === 'Omit' || name === 'Partial' || name === 'Pick') return { kind: 'dynamic' };
   if (name === 'Readonly' && arguments_[0]) {
     return arguments_[0];
+  }
+  const hostType = context.checker
+    ? hostTypeIdentity(context.checker.getTypeAtLocation(node), context.checker)
+    : undefined;
+  if (hostType) {
+    const hostArguments = [...arguments_];
+    while (hostArguments.length < hostType.arity) hostArguments.push({ kind: 'dynamic' });
+    recordHostType(hostType, node, context, { arity: hostArguments.length, kind: 'type-reference' });
+    return { arguments: hostArguments, kind: 'named', name: hostType.haxeType };
   }
   return {
     arguments: arguments_,
@@ -2005,7 +2028,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
           };
   }
   if (node.kind === ts.SyntaxKind.SuperKeyword) return { kind: 'identifier', name: 'super' };
-  if (ts.isIdentifier(node)) return lowerIdentifier(node.text, context, isLexicallyBound(node, context));
+  if (ts.isIdentifier(node)) return lowerIdentifier(node, context, isLexicallyBound(node, context));
   if (ts.isNumericLiteral(node)) return { kind: 'literal', value: Number(node.text) };
   if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node))
     return { kind: 'literal', value: node.text };
@@ -2042,7 +2065,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
           return {
             kind: 'property' as const,
             name: property.name.text,
-            value: lowerIdentifier(property.name.text, context, isLexicallyBound(property.name, context)),
+            value: lowerIdentifier(property.name, context, isLexicallyBound(property.name, context)),
           };
         }
         if (ts.isPropertyAssignment(property)) {
@@ -2126,12 +2149,14 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
     const generatedClass = generatedClassBinding(node.expression, context);
+    const hostTypeBinding = hostTypeMemberBinding(node, context);
     const typedStructBinding = typedStructPropertyBinding(node, context);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
         : (objectHostBinding ?? objectIsCollection ?? (objectIsGlobalObject ? 'DynamicObject' : objectIsTypedArray)),
       generatedClass,
+      hostTypeBinding,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace
@@ -2277,7 +2302,8 @@ function promiseOfDynamic(): IrType {
   };
 }
 
-function lowerIdentifier(name: string, context: LoweringContext, locallyBound = false): IrExpression {
+function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyBound = false): IrExpression {
+  const name = node.text;
   if (name === 'Math') return { kind: 'identifier', name: 'HxMath' };
   if (name === 'Boolean' && !locallyBound) {
     return { kind: 'identifier', name: '_Runtime.truthy' };
@@ -2307,7 +2333,10 @@ function lowerIdentifier(name: string, context: LoweringContext, locallyBound = 
   }
   const domRootBinding = locallyBound ? undefined : domRootBindings[name as keyof typeof domRootBindings];
   if (domRootBinding) return { domRootBinding, kind: 'identifier', name };
-  if (!locallyBound && (platformGlobalValues.has(name) || platformDynamicTypes.has(name) || name.startsWith('GPU'))) {
+  const checkerHostGlobal = locallyBound
+    ? undefined
+    : (hostTypeIdentityForExpression(node, context.checker) ?? hostTypeIdentityForValueSymbol(node, context.checker));
+  if (!locallyBound && (platformGlobalValues.has(name) || standardGlobalValues.has(name) || checkerHostGlobal)) {
     return {
       arguments: [{ kind: 'literal', value: name }],
       callee: {

@@ -9,6 +9,7 @@ import flighthq.image.ImageResourceReference as Facade_Image_flighthq_image_Imag
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
@@ -17,7 +18,7 @@ import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
 
 class Image {
-  public static function cloneImageResource(resource:Dynamic):Dynamic {
+  public static function cloneImageResource(resource:flighthq.types.Image):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResource.cloneImageResource(resource);
     return cast null;
   }
@@ -37,7 +38,7 @@ class Image {
     return cast null;
   }
 
-  public static function createImageResource(image:Dynamic):Dynamic {
+  public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResource.createImageResource(image);
     return cast null;
   }
@@ -47,22 +48,22 @@ class Image {
     return cast null;
   }
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):Dynamic {
+  public static function createImageResourceFromBitmap(bitmap:Bitmap):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromBitmap(bitmap);
     return cast null;
   }
 
-  public static function createImageResourceFromCanvas(canvas:Dynamic):Dynamic {
+  public static function createImageResourceFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromCanvas(canvas);
     return cast null;
   }
 
-  public static function createImageResourceFromImageBitmap(bitmap:Dynamic):Dynamic {
+  public static function createImageResourceFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageBitmap(bitmap);
     return cast null;
   }
 
-  public static function createImageResourceFromImageElement(img:Dynamic):Dynamic {
+  public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement(img);
     return cast null;
   }
@@ -72,7 +73,7 @@ class Image {
     return cast null;
   }
 
-  public static function isImageResourceEmpty(resource:Dynamic):Bool {
+  public static function isImageResourceEmpty(resource:flighthq.types.Image):Bool {
     return cast Facade_Image_flighthq_image_ImageResource.isImageResourceEmpty(resource);
     return cast null;
   }
@@ -82,22 +83,22 @@ class Image {
     return cast null;
   }
 
-  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq.types.Image> {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBase64(base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq.types.Image> {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBlob(blob, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq.types.Image> {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes(bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq.types.Image> {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl(url, crossOrigin, signal);
     return cast null;
   }
@@ -107,7 +108,7 @@ class Image {
     return cast null;
   }
 
-  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<flighthq.types.Image>> {
     return cast Facade_Image_flighthq_image_ImageResourceReference.resolveImageResourceReference(ref, fetch, signal);
     return cast null;
   }

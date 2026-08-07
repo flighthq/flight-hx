@@ -9,7 +9,7 @@ import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 class WgpuScissor {
   @:noCompletion
-  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
+  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:flighthq._internal.dom.GPURenderPassEncoder):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var rect:Dynamic = cast _Runtime.UNDEFINED;
     var x:Dynamic = cast _Runtime.UNDEFINED;
@@ -23,7 +23,7 @@ class WgpuScissor {
     y = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'y')));
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'width')));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'height')));
-    _Runtime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>));
+    pass.setScissorRect(x, y, w, h);
   }
 
   @:noCompletion

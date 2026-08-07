@@ -13,7 +13,7 @@ import flighthq.types.SpriteRenderer;
 
 class CanvasParticleEmitter2D {
   @:noCompletion
-  public static function drawCanvasParticleEmitter2D(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasParticleEmitter2D(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;

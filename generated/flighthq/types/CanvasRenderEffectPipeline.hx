@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 
-typedef CanvasRenderEffectContext = { var state:Dynamic; var source:Dynamic; var dest:Dynamic; var pool:Dynamic; };
+typedef CanvasRenderEffectContext = { var state:CanvasRenderState; var source:CanvasRenderTarget; var dest:CanvasRenderTarget; var pool:CanvasRenderTargetPool; };
 
 typedef CanvasRenderEffectRunner = Dynamic;
 
-typedef CanvasRenderTargetPool = { var free:Array<Dynamic>; var inUse:Array<Dynamic>; };
+typedef CanvasRenderTargetPool = { var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
 
-typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<Dynamic>; var pool:Dynamic; var lutCache:ColorLutCache; };
+typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<CanvasRenderTarget>; var pool:CanvasRenderTargetPool; var lutCache:ColorLutCache; };

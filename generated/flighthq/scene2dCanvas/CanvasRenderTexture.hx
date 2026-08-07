@@ -16,14 +16,14 @@ import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
 import flighthq.types.RenderTexture;
 
 class CanvasRenderTexture {
-  public static function bindCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Null<Dynamic> {
+  public static function bindCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flighthq._internal.dom.HTMLCanvasElement> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(_Runtime.optionalField(entry, 'status'), 'ready') : Bool) ? (cast _Runtime.field(_Runtime.field(entry, 'target'), 'canvas') : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function destroyCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Void {
+  public static function destroyCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(CanvasRenderTexture.getTargets__canvasRenderTexture, cast ([_Runtime.callValue(getCanvasRenderCacheScreenState, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
@@ -33,7 +33,7 @@ class CanvasRenderTexture {
     ((cast targets : flighthq._internal._WeakMap).delete_(renderTexture));
   }
 
-  public static function explainCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Dynamic {
+  public static function explainCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     return cast { height: _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(entry, 'target'), 'height'), function():Dynamic return cast _Runtime.field(_Runtime.field(renderTexture, 'source'), 'height')), status: _Runtime.coalesce(_Runtime.optionalField(entry, 'status'), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(entry, 'target'), 'width'), function():Dynamic return cast _Runtime.field(_Runtime.field(renderTexture, 'source'), 'width')) };
@@ -41,7 +41,7 @@ class CanvasRenderTexture {
   }
 
   @:noCompletion
-  public static function getCanvasRenderTextureTarget(state:Dynamic, renderTexture:RenderTexture):Null<Dynamic> {
+  public static function getCanvasRenderTextureTarget(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTarget> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(_Runtime.optionalField(entry, 'status'), 'ready') : Bool) ? (cast _Runtime.field(entry, 'target') : Dynamic) : (cast null : Dynamic));
@@ -49,19 +49,19 @@ class CanvasRenderTexture {
   }
 
   @:noCompletion
-  public static function invalidateCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
+  public static function invalidateCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(entry, 'status', status); }
   }
 
   @:noCompletion
-  public static function isCanvasRenderTextureReady(state:Dynamic, renderTexture:RenderTexture):Bool {
+  public static function isCanvasRenderTextureReady(state:CanvasRenderState, renderTexture:RenderTexture):Bool {
     return cast _Runtime.strictEquals(_Runtime.optionalField(_Runtime.callValue(CanvasRenderTexture.getEntry__canvasRenderTexture, cast ([state, renderTexture] : Array<Dynamic>)), 'status'), 'ready');
     return cast null;
   }
 
-  public static function renderIntoCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture, callback:Dynamic):Void {
+  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:Dynamic):Void {
     _Runtime.callValue(writeCanvasRenderTextureTarget, cast ([state, renderTexture, function(target:Dynamic) {
       _Runtime.callValue(beginCanvasRenderPass, cast ([state, target] : Array<Dynamic>));
       try {
@@ -81,7 +81,7 @@ class CanvasRenderTexture {
   }
 
   @:noCompletion
-  public static function writeCanvasRenderTextureTarget<T>(state:Dynamic, renderTexture:RenderTexture, callback:Dynamic):Dynamic {
+  public static function writeCanvasRenderTextureTarget<T>(state:CanvasRenderState, renderTexture:RenderTexture, callback:Dynamic):Dynamic {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var previousStatus:Dynamic = cast _Runtime.UNDEFINED;
     var rendered:Dynamic = cast _Runtime.UNDEFINED;
@@ -114,7 +114,7 @@ class CanvasRenderTexture {
     return cast null;
   }
 
-  public static function ensureEntry__canvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Dynamic {
+  public static function ensureEntry__canvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureEntry {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +131,7 @@ class CanvasRenderTexture {
     return cast null;
   }
 
-  public static function getTargets__canvasRenderTexture(state:Dynamic):Dynamic {
+  public static function getTargets__canvasRenderTexture(state:CanvasRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast CanvasRenderTexture._targetsByState__canvasRenderTexture : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -142,7 +142,7 @@ class CanvasRenderTexture {
     return cast null;
   }
 
-  public static function getEntry__canvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Null<Dynamic> {
+  public static function getEntry__canvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTextureEntry> {
     return cast ((cast _Runtime.callValue(CanvasRenderTexture.getTargets__canvasRenderTexture, cast ([_Runtime.callValue(getCanvasRenderCacheScreenState, cast ([state] : Array<Dynamic>))] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(renderTexture));
     return cast null;
   }

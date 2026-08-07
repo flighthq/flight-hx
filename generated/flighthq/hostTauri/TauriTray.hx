@@ -129,7 +129,7 @@ class TauriTray {
     return cast null;
   }
 
-  public static function toTrayEventType__tauriTray(event:Dynamic):Null<TrayEventType> {
+  public static function toTrayEventType__tauriTray(event:TauriTrayIconEvent):Null<TrayEventType> {
     if ((cast _Runtime.strictEquals(_Runtime.field(event, 'type'), 'DoubleClick') : Bool)) { return cast 'doubleClick'; }
     if ((cast _Runtime.strictEquals(_Runtime.field(event, 'type'), 'Click') : Bool)) { return cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'button'), 'Right') : Bool) ? (cast 'rightClick' : Dynamic) : (cast 'click' : Dynamic)); }
     return cast null;

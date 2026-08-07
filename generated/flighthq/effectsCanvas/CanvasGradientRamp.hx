@@ -7,7 +7,7 @@ import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasGradientRamp {
-  public static function applyCanvasGradientRampLookup(dest:Dynamic, source:Dynamic, ramp:flighthq._internal._UInt8ClampedArray, bias:Dynamic = 0.0, scale:Dynamic = 1.0):Void {
+  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, bias:Dynamic = 0.0, scale:Dynamic = 1.0):Void {
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       {
         var i:Dynamic = 0.0;

@@ -6,22 +6,22 @@ This reporting-only audit tests nominal-identity closure for the clean required-
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 730 |
+| Clean required-field candidates | 729 |
 | Nominally closed candidates | 548 |
-| Blocked candidates | 182 |
-| Normalization-provenance blockers only | 118 |
+| Blocked candidates | 181 |
+| Normalization-provenance blockers only | 117 |
 | Container-transfer blockers only | 48 |
 | Both blocker classes | 16 |
 | Normalization roots (all eligible schemas) | 393 |
 | JSON.parse roots | 10 |
 | Containment edges (all eligible schemas) | 1776 |
-| Candidates blocked by normalization provenance | 134 |
+| Candidates blocked by normalization provenance | 133 |
 | Candidates blocked by container transfers | 64 |
 | Candidates with anonymous container transfers | 43 |
 | Candidates with cross-schema container transfers | 8 |
 | Candidates with dynamic container transfers | 19 |
-| Candidates exposed through bridge inputs | 457 |
-| Candidates exposed through bridge outputs | 492 |
+| Candidates exposed through bridge inputs | 456 |
+| Candidates exposed through bridge outputs | 491 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
@@ -706,7 +706,6 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | 0 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTexturePool` | 0 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuSavedPassState` | 0 | 7 | 1 | 2 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuScene3DDrawEntry` | 0 | 10 | 4 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |

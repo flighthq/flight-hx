@@ -50,6 +50,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@types/node": "22.19.7",
     "@vitest/coverage-v8": "4.1.10",
+    "@webgpu/types": "0.1.71",
     "jsdom": "^27.4.0",
     "lix": "16.0.2",
     "oxfmt": "0.57.0",

@@ -24,7 +24,7 @@ class DomCache {
   }
 
   @:noCompletion
-  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>));
@@ -41,7 +41,7 @@ class DomCache {
   }
 
   @:noCompletion
-  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
+  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
@@ -63,8 +63,8 @@ class DomCache {
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     canvas = _Runtime.field(target, 'canvas');
     _Runtime.callValue(setDomTransformWithOffset, cast ([canvas, _Runtime.field(data, 'transform2D'), 0.0, 0.0, _Runtime.field(domState, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'opacity', ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(data, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(data, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalProperty(domState, 'applyBlendMode', cast ([canvas, _Runtime.field(data, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
   }

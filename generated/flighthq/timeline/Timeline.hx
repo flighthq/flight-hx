@@ -106,7 +106,7 @@ class Timeline {
     var current:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    var frameEvent:Dynamic = cast _Runtime.UNDEFINED;
+    var frameEvent:TimelineFrameEvent = cast _Runtime.UNDEFINED;
     previous = _Runtime.field(timeline, 'lastFrameUpdate');
     current = _Runtime.field(timeline, 'currentFrame');
     if ((cast _Runtime.strictEquals(current, previous) : Bool)) { return cast false; }

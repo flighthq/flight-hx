@@ -51,10 +51,10 @@ class WgpuCache {
     _Runtime.setIndex(cacheState, EntityRuntimeKey, cacheRuntime);
     _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
     _Runtime.setField(cacheState, 'applyBlendMode', _Runtime.field(screenState, 'applyBlendMode'));
-    _Runtime.setField((cast cacheState : { var canvas:Dynamic; }), 'canvas', _Runtime.field(screenState, 'canvas'));
-    _Runtime.setField((cast cacheState : { var context:Dynamic; }), 'context', _Runtime.field(screenState, 'context'));
-    _Runtime.setField((cast cacheState : { var device:Dynamic; }), 'device', _Runtime.field(screenState, 'device'));
-    _Runtime.setField((cast cacheState : { var format:Dynamic; }), 'format', _Runtime.field(screenState, 'format'));
+    _Runtime.setField((cast cacheState : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }), 'canvas', _Runtime.field(screenState, 'canvas'));
+    _Runtime.setField((cast cacheState : { var context:flighthq._internal.dom.GPUCanvasContext; }), 'context', _Runtime.field(screenState, 'context'));
+    _Runtime.setField((cast cacheState : { var device:flighthq._internal.dom.GPUDevice; }), 'device', _Runtime.field(screenState, 'device'));
+    _Runtime.setField((cast cacheState : { var format:flighthq._internal.dom.GPUTextureFormat; }), 'format', _Runtime.field(screenState, 'format'));
     _Runtime.setField(cacheRuntime, 'uniformBindGroupLayout', _Runtime.field(screenRuntime, 'uniformBindGroupLayout'));
     _Runtime.setField(cacheRuntime, 'textureBindGroupLayout', _Runtime.field(screenRuntime, 'textureBindGroupLayout'));
     _Runtime.setField(cacheRuntime, 'uniformBuffer', _Runtime.field(screenRuntime, 'uniformBuffer'));

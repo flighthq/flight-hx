@@ -13035,7 +13035,7 @@
       "module": "flighthq.xml.XmlQuery"
     }
   ],
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "staticLowering": {
     "booleanAndExpressions": 2019,
     "booleanConditionalExpressions": 2829,
@@ -13190,7 +13190,7 @@
         "writes": 379
       }
     },
-    "numericRelations": 6108,
+    "numericRelations": 6109,
     "syntheticArrayReads": {
       "highArityArguments": 27,
       "iterationBindings": 138

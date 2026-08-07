@@ -25,7 +25,7 @@ import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_POINT_STRID
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-typedef GlIblPlaceholders__glLitProgram = { var cube:Dynamic; var lut:Dynamic; };
+typedef GlIblPlaceholders__glLitProgram = { var cube:flighthq._internal.dom.WebGLTexture; var lut:flighthq._internal.dom.WebGLTexture; };
 
 class GlLitProgram {
   public static final SHADOW_MAP_TEXTURE_UNIT__glLitProgram:Dynamic = 8.0;
@@ -144,7 +144,7 @@ class GlLitProgram {
   }
 
   @:noCompletion
-  public static function resolveGlLitLocations(gl:Dynamic, program:Dynamic):Dynamic {
+  public static function resolveGlLitLocations(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram):Dynamic {
     return cast { locAmbientCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientCount'), locAmbientRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientRadiance'), locCameraPosition: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_cameraPosition'), locDirectional: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directional'), locDirectionalCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalCount'), locDirectionalRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalRadiance'), locHemisphereCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereCount'), locHemisphereLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereLights'), locIblBrdf: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblBrdf'), locIblEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblEnabled'), locIblIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIntensity'), locIblIrradiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIrradiance'), locIblMaxMip: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblMaxMip'), locIblPrefiltered: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblPrefiltered'), locPointCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointCount'), locPointLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointLights'), locShadowBias: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowBias'), locShadowEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowEnabled'), locShadowMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMap'), locShadowMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMatrix'), locShadowNormalBiasWorld: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowNormalBiasWorld'), locShadowPcfRadius: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowPcfRadius'), locSpotCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotCount'), locSpotLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotLights') };
     return cast null;
   }

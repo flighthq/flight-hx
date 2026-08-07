@@ -21,7 +21,7 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 
 class CanvasTextLabel {
   @:noCompletion
-  public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasTextLabel(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var text:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,7 +41,7 @@ class CanvasTextLabel {
     _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
     measure = function(t:String, format:TextFormat) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));

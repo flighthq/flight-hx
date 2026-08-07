@@ -30,7 +30,7 @@ class GlClassicPrelude {
   }
 
   @:noCompletion
-  public static function compileGlClassicProgram(gl:Dynamic, key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlClassicProgram {
+  public static function compileGlClassicProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlClassicProgram {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var vertexSource:Dynamic = cast _Runtime.UNDEFINED;
     var fragmentSource:Dynamic = cast _Runtime.UNDEFINED;

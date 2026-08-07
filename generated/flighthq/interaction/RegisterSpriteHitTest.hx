@@ -58,7 +58,7 @@ class RegisterSpriteHitTest {
     var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) { return cast (cast image : Bitmap); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(image, 'kind'), ImageTextureSourceKind) : Bool)) { return cast null; }
-    resource = (cast image : Dynamic);
+    resource = (cast image : Image);
     cached = ((cast RegisterSpriteHitTest.bitmapCache__registerSpriteHitTest : flighthq._internal._WeakMap).get(resource));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     bitmap = null;

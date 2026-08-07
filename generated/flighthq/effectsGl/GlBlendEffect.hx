@@ -28,7 +28,7 @@ class GlBlendEffect {
     modeIndex = _Runtime.callValue(getBlendEffectModeIndex, cast ([_Runtime.field(effect, 'mode')] : Array<Dynamic>));
     opacity = _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    inputs = cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : Dynamic) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>);
+    inputs = cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>);
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
       var modeLoc:Dynamic = cast _Runtime.UNDEFINED;
       var opacityLoc:Dynamic = cast _Runtime.UNDEFINED;
@@ -53,7 +53,7 @@ class GlBlendEffect {
   }
 
   @:noCompletion
-  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<flighthq._internal.dom.WebGLTexture> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
@@ -63,7 +63,7 @@ class GlBlendEffect {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlendEffect', defaultGlBlendEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flighthq._internal.dom.WebGLTexture):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

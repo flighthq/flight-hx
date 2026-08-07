@@ -67,6 +67,7 @@ import flighthq.types.BitmapResizeMode;
 import flighthq.types.BitmapSharpenOptions;
 import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
 import flighthq.types.GradientSpread;
+import flighthq.types.Image;
 import flighthq.types.ImageChannel;
 import flighthq.types.ImageFormat;
 import flighthq.types.PixelOrder;
@@ -162,7 +163,7 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapColorMatrix.buildBitmapSepiaColorMatrix(out);
   }
 
-  public static function captureBitmapFromImageResource(resource:Dynamic):flighthq.types.Bitmap {
+  public static function captureBitmapFromImageResource(resource:Image):flighthq.types.Bitmap {
     return cast Facade_Bitmap_flighthq_bitmap_BitmapFrom.captureBitmapFromImageResource(resource);
     return cast null;
   }
@@ -290,12 +291,12 @@ class Bitmap {
     return cast null;
   }
 
-  public static function createBitmapFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flighthq.types.Bitmap {
+  public static function createBitmapFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flighthq.types.Bitmap {
     return cast Facade_Bitmap_flighthq_bitmap_BitmapFrom.createBitmapFromCanvas(canvas, x, y, width, height);
     return cast null;
   }
 
-  public static function createBitmapFromImageSource(source:Dynamic, width:Float, height:Float):Null<flighthq.types.Bitmap> {
+  public static function createBitmapFromImageSource(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):Null<flighthq.types.Bitmap> {
     return cast Facade_Bitmap_flighthq_bitmap_BitmapFrom.createBitmapFromImageSource(source, width, height);
     return cast null;
   }
@@ -323,7 +324,7 @@ class Bitmap {
     return cast null;
   }
 
-  public static function drawBitmap(dest:Dynamic, source:BitmapRegion, x:Float, y:Float):Void {
+  public static function drawBitmap(dest:flighthq._internal.dom.HTMLCanvasElement, source:BitmapRegion, x:Float, y:Float):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapDraw.drawBitmap(dest, source, x, y);
   }
 
@@ -344,7 +345,7 @@ class Bitmap {
     Facade_Bitmap_flighthq_bitmap_BitmapMorphological.erodeBitmap(out, source, radius);
   }
 
-  public static function explainBitmapReadback(source:Dynamic, width:Float, height:Float):BitmapReadbackExplanation {
+  public static function explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
     return cast Facade_Bitmap_flighthq_bitmap_ExplainBitmapReadback.explainBitmapReadback(source, width, height);
     return cast null;
   }

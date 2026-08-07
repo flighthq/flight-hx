@@ -27,7 +27,7 @@ import flighthq.types.WgpuSkinningAdapter;
 
 class WgpuClassicPrelude {
   @:noCompletion
-  public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>, alphaMap:Null<Texture>):Dynamic {
+  public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>, alphaMap:Null<Texture>):flighthq._internal.dom.GPUBindGroup {
     var binding:Dynamic = cast _Runtime.UNDEFINED;
     flighthq._internal._StaticIndex.writeArray(WgpuClassicPrelude._samplerScratch__wgpuClassicPrelude, 0.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, diffuseMap] : Array<Dynamic>)));
     flighthq._internal._StaticIndex.writeArray(WgpuClassicPrelude._samplerScratch__wgpuClassicPrelude, 1.0, _Runtime.callValue(getWgpuMaterialSampler, cast ([state, specularMap] : Array<Dynamic>)));
@@ -50,7 +50,7 @@ class WgpuClassicPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 9.0, alphaCutoff);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 10.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 11.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 'buffer'), 0.0, WgpuClassicPrelude.CLASSIC_UNIFORM_BYTES__wgpuClassicPrelude] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuClassicPrelude._scratch__wgpuClassicPrelude, 'buffer'), 0.0, WgpuClassicPrelude.CLASSIC_UNIFORM_BYTES__wgpuClassicPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, diffuseMap] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
@@ -65,7 +65,7 @@ class WgpuClassicPrelude {
   }
 
   @:noCompletion
-  public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuClassicPipeline {
+  public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuClassicPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -78,7 +78,7 @@ class WgpuClassicPrelude {
   }
 
   @:noCompletion
-  public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
+  public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuClassicPipeline {
     var fullKey:WgpuClassicDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasColorAdjustment: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorAdjustmentRun') }, { hasColorMatrix: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorMatrixRun') }]);
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'classic:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuClassicDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(blended:Dynamic, skinned:Dynamic) return _Runtime.callValue(compileWgpuClassicPipeline, cast ([state, fullKey, format, blended, skinned, _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeature'), function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));

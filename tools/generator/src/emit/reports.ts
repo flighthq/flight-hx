@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 import type { HostEndpointAudit } from '../analyze/host-endpoints.ts';
+import type { HostTypeAudit } from '../analyze/host-types.ts';
 import type { TypedStructClassFeasibilityAudit } from '../analyze/typed-struct-classes.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import type { TypedStructAudit } from '../analyze/typed-structs.ts';
@@ -107,6 +108,35 @@ export function hostEndpointSummary(audit: HostEndpointAudit): string {
         `| \`${issue.binding}\` | \`${issue.member}\` | \`${issue.operation}\` | \`${issue.kind}\` | \`${issue.runtimePath}\` |`,
       );
     }
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function hostTypeSummary(audit: HostTypeAudit): string {
+  const lines = [
+    '# Host Type Census',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    'Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flighthq._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.',
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Host types | ${audit.summary.types} |`,
+    `| Type references | ${audit.summary.typeReferences} |`,
+    `| Member accesses | ${audit.summary.memberAccesses} |`,
+    `| Reads | ${audit.summary.reads} |`,
+    `| Writes | ${audit.summary.writes} |`,
+    `| Calls | ${audit.summary.calls} |`,
+    '',
+    '| Host type | Ambient declarations | Type refs | Arities | Members | Reads | Writes | Calls |',
+    '| --- | --- | ---: | --- | ---: | ---: | ---: | ---: |',
+  ];
+  for (const type of audit.types) {
+    lines.push(
+      `| \`${type.name}\` | ${type.declarationSources.map((source) => `\`${source}\``).join('<br>')} | ${type.typeReferences.count} | ${type.arities.join(', ') || '—'} | ${type.members.length} | ${type.members.reduce((total, member) => total + member.reads, 0)} | ${type.members.reduce((total, member) => total + member.writes, 0)} | ${type.members.reduce((total, member) => total + member.calls, 0)} |`,
+    );
   }
   lines.push('');
   return lines.join('\n');

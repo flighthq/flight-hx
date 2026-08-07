@@ -12,7 +12,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
 class CanvasRenderTextureEffect {
-  public static function applyCanvasRenderEffectsToRenderTexture(state:Dynamic, pool:Dynamic, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+  public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     var sourceTarget:Dynamic = cast _Runtime.UNDEFINED;
     var operations:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;

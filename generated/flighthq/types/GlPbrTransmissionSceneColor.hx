@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlPbrTransmissionSceneColor = { var height:Float; var mipLevelCount:Float; var texture:Dynamic; var width:Float; };
+typedef GlPbrTransmissionSceneColor = { var height:Float; var mipLevelCount:Float; var texture:flighthq._internal.dom.WebGLTexture; var width:Float; };

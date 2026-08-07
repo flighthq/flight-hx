@@ -13,7 +13,7 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 class CanvasMaterialRegistry {
   @:noCompletion
-  public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
+  public static function applyCanvasMaterial(state:CanvasRenderState, material:Null<Material>):Bool {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     var drawState:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,20 +30,20 @@ class CanvasMaterialRegistry {
   }
 
   @:noCompletion
-  public static function getCanvasMaterialRenderer(state:Dynamic, kind:Kind):Null<Dynamic> {
+  public static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
-  public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
+  public static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ((cast _Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(kind, renderer));
   }
 
   @:noCompletion
-  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
+  public static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
     map = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
     if ((cast _Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }

@@ -40,7 +40,7 @@ class GlDebugPrelude {
   }
 
   @:noCompletion
-  public static function compileGlDebugProgram(gl:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
+  public static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlDebugVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlDebugFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };

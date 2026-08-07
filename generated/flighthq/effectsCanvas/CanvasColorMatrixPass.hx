@@ -8,7 +8,7 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasColorMatrixPass {
   @:noCompletion
-  public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, matrix:Array<Float>):Void {
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
       _Runtime.callValue(applyColorMatrixToImageDataBytes, cast ([data, pixelCount, matrix] : Array<Dynamic>));
     }] : Array<Dynamic>));

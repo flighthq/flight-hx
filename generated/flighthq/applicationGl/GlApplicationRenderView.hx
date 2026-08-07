@@ -19,7 +19,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
 class GlApplicationRenderView {
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:Dynamic, ?options:GlApplicationRenderViewOptions):flighthq.types.ApplicationRenderView.GlApplicationRenderView {
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):flighthq.types.ApplicationRenderView.GlApplicationRenderView {
     if (options == null) options = cast ({  } : Dynamic);
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,7 +55,7 @@ class GlApplicationRenderView {
     }
   }
 
-  public static function synchronizeGlCanvasBackingStore__glApplicationRenderView(canvas:Dynamic, width:Float, height:Float):Bool {
+  public static function synchronizeGlCanvasBackingStore__glApplicationRenderView(canvas:flighthq._internal.dom.HTMLCanvasElement, width:Float, height:Float):Bool {
     var changed:Dynamic = cast _Runtime.UNDEFINED;
     changed = false;
     if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width'), width) : Bool)) {

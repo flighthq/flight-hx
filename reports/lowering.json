@@ -1905,7 +1905,7 @@
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 51,
+        "numericRelations": 52,
         "typedArraySetCalls": 0
       }
     },
@@ -3428,7 +3428,7 @@
           "writes": 379
         }
       },
-      "numericRelations": 6108,
+      "numericRelations": 6109,
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 138
@@ -3522,7 +3522,7 @@
           "writes": 379
         }
       },
-      "numericRelations": 6108,
+      "numericRelations": 6109,
       "typedArraySetCalls": 74,
       "typedArraySetReceivers": {
         "Float32Array": 37,

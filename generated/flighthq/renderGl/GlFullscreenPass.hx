@@ -31,9 +31,9 @@ class GlFullscreenPass {
   }
 
   @:noCompletion
-  public static function compileGlFullscreenProgram(gl:Dynamic, fragmentSource:String):GlFullscreenProgram {
+  public static function compileGlFullscreenProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSource:String):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    var textures:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var textures:Array<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var single:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlFullscreenPass.FULLSCREEN_VERTEX_SRC__glFullscreenPass, fragmentSource, 'Fullscreen pass'] : Array<Dynamic>));
     textures = cast ([] : Array<Dynamic>);
@@ -52,7 +52,7 @@ class GlFullscreenPass {
   }
 
   @:noCompletion
-  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
+  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flighthq._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var destFramebuffer:Dynamic = cast _Runtime.UNDEFINED;

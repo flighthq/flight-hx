@@ -23,7 +23,7 @@ import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Texture.TextureColorSpace;
 
 class GlRenderTexture {
-  public static function bindGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, ?sampler:Null<SamplerLike>):Null<Dynamic> {
+  public static function bindGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, ?sampler:Null<SamplerLike>):Null<flighthq._internal.dom.WebGLTexture> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

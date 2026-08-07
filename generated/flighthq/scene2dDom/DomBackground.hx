@@ -8,9 +8,9 @@ import flighthq.types.DomRenderState;
 class DomBackground {
   public static function renderDomBackground(state:DomRenderState):Void {
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field(state, 'backgroundColor')) & 255), 0.0) : Bool)) {
-      _Runtime.setField(_Runtime.field(_Runtime.field(state, 'element'), 'style'), 'backgroundColor', _Runtime.field(state, 'backgroundColorString'));
+      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = _Runtime.field(state, 'backgroundColorString'));
     } else {
-      _Runtime.setField(_Runtime.field(_Runtime.field(state, 'element'), 'style'), 'backgroundColor', '');
+      ((cast (cast _Runtime.field(state, 'element') : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).backgroundColor = '');
     }
   }
 }

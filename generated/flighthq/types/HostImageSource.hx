@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef HostImageSource = Dynamic;
+typedef HostImageSource = flighthq._internal.dom.CanvasImageSource;

@@ -15,7 +15,7 @@ import flighthq.types.FilmGrainEffect;
 
 class CanvasFilmGrainEffect {
   @:noCompletion
-  public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var seed:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,11 +72,11 @@ class CanvasFilmGrainEffect {
     _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, noise] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasFilmGrainEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyFilmGrainEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : FilmGrainEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasFilmGrainEffect(state:Dynamic):Void {
+  public static function registerCanvasFilmGrainEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'FilmGrainEffect', defaultCanvasFilmGrainEffectRunner] : Array<Dynamic>));
   }
 }

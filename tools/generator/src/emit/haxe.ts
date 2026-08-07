@@ -2183,6 +2183,20 @@ function emitExpression(expression: IrExpression): string {
                 );
           return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
         }
+        if (expression.left.hostTypeBinding) {
+          if (expression.left.optional) {
+            throw new Error(`Optional host-type assignment is not supported: ${expression.left.name}`);
+          }
+          const field = directHostTypeField(expression.left, object);
+          if (expression.operator === '=') return `(${field} = ${emitExpression(expression.right)})`;
+          if (expression.operator === '%=') {
+            return `(${field} = ${emitArithmeticOperation(field, '%', emitExpression(expression.right))})`;
+          }
+          if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
+            return `(${field} = ${emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right)})`;
+          }
+          return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
+        }
         if (expression.left.typedStructBinding) {
           if (expression.left.optional) {
             throw new Error(`Optional typed-struct assignment is not supported: ${expression.left.name}`);
@@ -2564,6 +2578,7 @@ function emitExpression(expression: IrExpression): string {
         requireHostEndpoint(expression.binding as IrHostEndpointBinding, 'read', expression.name);
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
+      if (expression.hostTypeBinding) return emitHostTypeRead(expression);
       if (expression.typedStructBinding) return emitTypedStructRead(expression);
       if (
         expression.object.kind === 'identifier' &&
@@ -2617,6 +2632,10 @@ function emitExpression(expression: IrExpression): string {
           }
           return `flighthq._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
+        if (expression.operand.kind === 'property' && expression.operand.hostTypeBinding) {
+          const owner = emitExpression(expression.operand.object);
+          return `Reflect.deleteField(${expression.operand.hostTypeBinding.receiverCast ? `(cast ${owner} : ${expression.operand.hostTypeBinding.haxeType})` : owner}, ${quote(expression.operand.name)})`;
+        }
         if (expression.operand.kind === 'property')
           return `_Runtime.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         return `_Runtime.deleteValue(${emitExpression(expression.operand)})`;
@@ -2636,6 +2655,13 @@ function emitExpression(expression: IrExpression): string {
       if (expression.operand.kind === 'property' && (expression.operator === '++' || expression.operator === '--')) {
         if (expression.operand.binding === 'WebGl2Backend') {
           throw new Error(`WebGL2 property mutation has no typed backend endpoint: ${expression.operand.name}`);
+        }
+        if (expression.operand.hostTypeBinding) {
+          if (expression.operand.optional) {
+            throw new Error(`Optional host-type mutation is not supported: ${expression.operand.name}`);
+          }
+          const field = directHostTypeField(expression.operand);
+          return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
         }
         if (expression.operand.typedStructBinding) {
           if (expression.operand.optional) {
@@ -2710,6 +2736,45 @@ function emitPendingFinalizers(): string[] {
     currentFinallyStack = pending;
   }
   return lines;
+}
+
+function directHostTypeField(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+  owner = emitExpression(expression.object),
+): string {
+  const binding = expression.hostTypeBinding;
+  if (!binding) throw new Error(`Missing host-type field binding: ${currentSourceIdentity}:${expression.name}`);
+  const typedOwner = binding.receiverCast ? `(cast ${owner} : ${binding.haxeType})` : owner;
+  return `${typedOwner}.${safeName(expression.name)}`;
+}
+
+function emitHostTypeRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
+  const owner = emitExpression(expression.object);
+  if (!expression.optional) return directHostTypeField(expression, owner);
+  const temporary = `__hostType${String(temporaryIndex++)}`;
+  return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directHostTypeField(expression, temporary)}; })`;
+}
+
+function emitHostTypeCall(
+  expression: Extract<IrExpression, { kind: 'call' }>,
+  callee: Extract<IrExpression, { kind: 'property' }>,
+  arguments_: string,
+  spread = false,
+): string {
+  const owner = emitExpression(callee.object);
+  const call = (target: string): string => {
+    const field = directHostTypeField(callee, target);
+    return spread ? `Reflect.callMethod(${target}, ${field}, ${arguments_})` : `${field}(${arguments_})`;
+  };
+  if (!expression.optional && !callee.optional) return call(owner);
+  const temporary = `__hostTypeCall${String(temporaryIndex++)}`;
+  const direct = call(temporary);
+  const optionalMethod = expression.optional
+    ? `${directHostTypeField(callee, temporary)} == null ? _Runtime.UNDEFINED : ${direct}`
+    : direct;
+  return callee.optional
+    ? `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${optionalMethod}; })`
+    : `({ final ${temporary} = ${owner}; ${optionalMethod}; })`;
 }
 
 function directTypedStructField(
@@ -2832,6 +2897,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', expression.callee.name);
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
+      if (expression.callee.hostTypeBinding) {
+        return emitHostTypeCall(expression, expression.callee, `_Runtime.concatArrays([${chunks.join(', ')}])`, true);
+      }
       if (expression.callee.typedStructBinding) {
         const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'apply';
         return `_Runtime.${method}(${emitTypedStructRead(expression.callee)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
@@ -2886,6 +2954,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    }
+    if (expression.callee.hostTypeBinding) {
+      return emitHostTypeCall(expression, expression.callee, expression.arguments.map(emitExpression).join(', '));
     }
     if (expression.callee.typedStructBinding) {
       const method = expression.optional || expression.callee.optional ? 'callOptionalValue' : 'callValue';

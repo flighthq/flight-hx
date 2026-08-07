@@ -35,7 +35,7 @@ import flighthq.types.TextureResolutionExplanation;
 import flighthq.types.TextureSourceKind;
 
 class Scene2dDom {
-  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
+  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):DomRenderState {
     return cast Facade_Scene2dDom_flighthq_scene2dDom_DomRenderState.createDomRenderState(element, options);
     return cast null;
   }

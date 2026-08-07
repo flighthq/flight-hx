@@ -25,6 +25,7 @@ import flighthq.scene2dWgpu.WgpuTextInput as Facade_Scene2dWgpu_flighthq_scene2d
 import flighthq.scene2dWgpu.WgpuTextLabel as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTextLabel;
 import flighthq.scene2dWgpu.WgpuTilemap as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTilemap;
 import flighthq.scene2dWgpu.WgpuVelocity as Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuVelocity;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Node2D;
@@ -73,7 +74,7 @@ class Scene2dWgpu {
 
   public static final defaultWgpuScene2DRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuNode2D.defaultWgpuScene2DRenderer;
 
-  public static final defaultWgpuShapeCommands:Array<Dynamic> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuShape.defaultWgpuShapeRenderer;
 
@@ -81,7 +82,7 @@ class Scene2dWgpu {
 
   public static final defaultWgpuTextLabelRenderer:Scene2DRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTextLabel.defaultWgpuTextLabelRenderer;
 
-  public static final defaultWgpuTextureShapeCommands:Array<Dynamic> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultWgpuTilemapRenderer:SpriteRenderer = Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuTilemap.defaultWgpuTilemapRenderer;
 
@@ -119,7 +120,7 @@ class Scene2dWgpu {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuColorAdjustmentMaterialFeature.registerWgpuColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 

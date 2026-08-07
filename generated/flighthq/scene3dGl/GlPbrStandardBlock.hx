@@ -70,7 +70,7 @@ class GlPbrStandardBlock {
   }
 
   @:noCompletion
-  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
+  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<flighthq._internal.dom.WebGLUniformLocation>, unit:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return; }
     gl = _Runtime.field(state, 'gl');

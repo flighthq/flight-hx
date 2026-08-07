@@ -7,8 +7,8 @@ import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 
 typedef CanvasRenderTextureStatus = String;
 
-typedef CanvasRenderTextureExplanation = { var height:Float; var status:Dynamic; var width:Float; };
+typedef CanvasRenderTextureExplanation = { var height:Float; var status:CanvasRenderTextureStatus; var width:Float; };
 
-typedef CanvasRenderTextureEntry = { var status:Dynamic; var target:Dynamic; };
+typedef CanvasRenderTextureEntry = { var status:CanvasRenderTextureStatus; var target:CanvasRenderTarget; };
 
-typedef CanvasRenderTexturePool = { var destroyed:Bool; var effectTargets:Dynamic; var free:Array<RenderTexture>; var leased:Dynamic; var owner:Null<Dynamic>; };
+typedef CanvasRenderTexturePool = { var destroyed:Bool; var effectTargets:CanvasRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; var owner:Null<CanvasRenderState>; };

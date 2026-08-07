@@ -33,7 +33,7 @@ class WireframeWgpuMeshMaterialRenderer {
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var group:Dynamic = cast _Runtime.UNDEFINED;
+    var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
@@ -48,7 +48,7 @@ class WireframeWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuWireframeColor, cast ([state, pipeline, wireframe, WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer, _Runtime.field(wireframe, 'alphaCutoff')] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,10 +66,10 @@ class WireframeWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
     flighthq._internal._StaticIndex.writeUint32Array(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'drawIndexed', cast ([(subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, _Runtime.field(upload, 'vertexBuffer'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(_Runtime.field(upload, 'lineIndexBuffer'), _Runtime.field(upload, 'indexFormat'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0);
   } };
 
   public static function registerWgpuWireframeMaterial(state:WgpuRenderState):Void {

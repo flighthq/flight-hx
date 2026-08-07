@@ -25,6 +25,7 @@ import flighthq.scene2dGl.GlTextInput as Facade_Scene2dGl_flighthq_scene2dGl_GlT
 import flighthq.scene2dGl.GlTextLabel as Facade_Scene2dGl_flighthq_scene2dGl_GlTextLabel;
 import flighthq.scene2dGl.GlTilemap as Facade_Scene2dGl_flighthq_scene2dGl_GlTilemap;
 import flighthq.scene2dGl.GlVelocity as Facade_Scene2dGl_flighthq_scene2dGl_GlVelocity;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
@@ -71,7 +72,7 @@ class Scene2dGl {
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlScale9Shape.defaultGlScale9ShapeRenderer;
 
-  public static final defaultGlShapeCommands:Array<Dynamic> = Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultGlShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlShape.defaultGlShapeRenderer;
 
@@ -79,7 +80,7 @@ class Scene2dGl {
 
   public static final defaultGlTextLabelRenderer:Scene2DRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlTextLabel.defaultGlTextLabelRenderer;
 
-  public static final defaultGlTextureShapeCommands:Array<Dynamic> = Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultGlTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = Facade_Scene2dGl_flighthq_scene2dGl_GlTilemap.defaultGlTilemapRenderer;
 
@@ -117,7 +118,7 @@ class Scene2dGl {
     Facade_Scene2dGl_flighthq_scene2dGl_GlColorAdjustmentMaterialFeature.registerGlColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerGlShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerGlShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 

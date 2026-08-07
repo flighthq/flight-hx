@@ -85,7 +85,7 @@ class GlShapeMesh {
 
   public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static function compileShapeMeshProgram__glShapeMesh(gl:Dynamic):Dynamic {
+  public static function compileShapeMeshProgram__glShapeMesh(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, GlShapeMesh.VERTEX_SOURCE__glShapeMesh, GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh, 'Shape-mesh'] : Array<Dynamic>));
     return cast null;
   }

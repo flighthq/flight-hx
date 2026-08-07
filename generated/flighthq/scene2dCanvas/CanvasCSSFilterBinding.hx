@@ -12,7 +12,7 @@ class CanvasCSSFilterBinding {
   public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   @:noCompletion
-  public static function enableCanvasCssFilter(state:Dynamic):Void {
+  public static function enableCanvasCssFilter(state:CanvasRenderState):Void {
     _Runtime.setField(state, 'canvasCssFilterResolver', resolveCanvasCssFilter);
   }
 
@@ -23,13 +23,13 @@ class CanvasCSSFilterBinding {
   }
 
   @:noCompletion
-  public static function resolveCanvasCssFilter(_state:Dynamic, renderProxy:RenderProxy2D):Null<String> {
+  public static function resolveCanvasCssFilter(_state:CanvasRenderState, renderProxy:RenderProxy2D):Null<String> {
     return cast _Runtime.coalesce(((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap).get(renderProxy)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
-  public static function setCanvasCssFilter(state:Dynamic, node:Node2D, filter:Null<String>):Void {
+  public static function setCanvasCssFilter(state:CanvasRenderState, node:Node2D, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {

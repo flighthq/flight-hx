@@ -798,7 +798,7 @@ class Awd2Parse {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.callProperty((cast view : Dynamic), 'getUint16', cast ([offset, true] : Array<Dynamic>));
     stringBytes = (cast (cast source : flighthq._internal._UInt8Array) : flighthq._internal._UInt8Array).subarray(Std.int((offset + 2.0)), Std.int(((offset + 2.0) + length)));
-    value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([stringBytes] : Array<Dynamic>));
+    value = (cast _Runtime.construct(_Runtime.globalValue('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(stringBytes);
     return cast { end: ((offset + 2.0) + length), value: value };
     return cast null;
   }

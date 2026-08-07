@@ -19,23 +19,23 @@ import flighthq.types.InnerShadowEffect;
 
 class CanvasInnerShadowEffect {
   @:noCompletion
-  public static function applyInnerShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:InnerShadowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerShadowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasInnerShadowEffect.applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasInnerShadowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasInnerShadowEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyInnerShadowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasInnerShadowEffect(state:Dynamic):Void {
+  public static function registerCanvasInnerShadowEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'InnerShadowEffect', defaultCanvasInnerShadowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerShadowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;

@@ -15,7 +15,7 @@ class CapacitorNotification {
     var notifications:Dynamic = cast _Runtime.UNDEFINED;
     var nextNumericId:Dynamic = cast _Runtime.UNDEFINED;
     var idByNumber:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedPermission:Dynamic = cast _Runtime.UNDEFINED;
+    var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
     notifications = _Runtime.field(capacitor, 'localNotifications');
     nextNumericId = 1.0;
     idByNumber = _Runtime.construct(_Runtime.globalValue('Map'), []);
@@ -48,7 +48,7 @@ class CapacitorNotification {
           });
         })
       );
-    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+    }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
@@ -175,7 +175,7 @@ class CapacitorNotification {
     return cast null;
   }
 
-  public static function toNotificationPermission__capacitorNotification(display:String):Dynamic {
+  public static function toNotificationPermission__capacitorNotification(display:String):NotificationPermission {
     if ((cast _Runtime.strictEquals(display, 'granted') : Bool)) { return cast 'granted'; }
     if ((cast _Runtime.strictEquals(display, 'denied') : Bool)) { return cast 'denied'; }
     return cast 'default';

@@ -10,7 +10,7 @@ typedef ConnectivityStatus = { var online:Bool; var type:ConnectivityConnectionT
 
 typedef ConnectivityReachability = { var reachable:Bool; var latency:Float; };
 
-typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeout:Float; @:optional var signal:Dynamic; };
+typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeout:Float; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
 typedef ConnectivityBackend = { var getStatus:Dynamic; @:optional var detectReachability:Dynamic; var subscribe:Dynamic; };
 

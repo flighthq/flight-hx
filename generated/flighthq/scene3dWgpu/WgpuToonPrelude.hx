@@ -22,7 +22,7 @@ import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 
 class WgpuToonPrelude {
   @:noCompletion
-  public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
+  public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):flighthq._internal.dom.GPUBindGroup {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -43,7 +43,7 @@ class WgpuToonPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 5.0, alphaCutoff);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 6.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuToonPrelude._scratch__wgpuToonPrelude, 7.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuToonPrelude._scratch__wgpuToonPrelude, 'buffer'), 0.0, WgpuToonPrelude.TOON_UNIFORM_BYTES__wgpuToonPrelude] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuToonPrelude._scratch__wgpuToonPrelude, 'buffer'), 0.0, WgpuToonPrelude.TOON_UNIFORM_BYTES__wgpuToonPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
@@ -56,7 +56,7 @@ class WgpuToonPrelude {
   }
 
   @:noCompletion
-  public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false):WgpuToonPipeline {
+  public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Dynamic = false, skinned:Dynamic = false):WgpuToonPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -68,7 +68,7 @@ class WgpuToonPrelude {
   }
 
   @:noCompletion
-  public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
+  public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuToonPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'toon:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuToonDefineKey, cast ([key] : Array<Dynamic>))) + '', function(blended:Dynamic, skinned:Dynamic) return _Runtime.callValue(compileWgpuToonPipeline, cast ([state, key, format, blended, skinned] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

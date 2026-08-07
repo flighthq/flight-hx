@@ -34,7 +34,7 @@ class GlMatcapPrelude {
   }
 
   @:noCompletion
-  public static function compileGlMatcapProgram(gl:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
+  public static function compileGlMatcapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlMatcapVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlMatcapFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locMatcap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matcap'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locTint: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_tint'), locView: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_view'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };

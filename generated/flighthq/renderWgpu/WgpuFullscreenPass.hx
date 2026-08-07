@@ -10,12 +10,12 @@ import flighthq.types.WgpuRenderTarget;
 
 class WgpuFullscreenPass {
   @:noCompletion
-  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
+  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:flighthq._internal.dom.GPUTextureFormat):WgpuFullscreenPipeline {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
-    var textureBindGroupLayouts:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var textureBindGroupLayouts:Array<flighthq._internal.dom.GPUBindGroupLayout> = cast _Runtime.UNDEFINED;
     var pipelineLayout:Dynamic = cast _Runtime.UNDEFINED;
     var vsModule:Dynamic = cast _Runtime.UNDEFINED;
     var fsModule:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,10 +51,10 @@ class WgpuFullscreenPass {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast _Runtime.field(runtime, 'renderPass') : Dynamic) : (cast _Runtime.field(runtime, 'renderPass') : Dynamic));
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
-    _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(wgpuPipeline, 'pipeline')] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(wgpuPipeline, 'pipeline'));
     if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
       var uniformBindGroup:Dynamic = _Runtime.callValue(setUniforms, cast ([state, _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, uniformBindGroup] : Array<Dynamic>));
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, uniformBindGroup);
     }
     runtime2 = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     {
@@ -65,11 +65,11 @@ class WgpuFullscreenPass {
         if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var sampler:Dynamic = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast _Runtime.field(runtime2, 'linearSampler') : Dynamic) : (cast _Runtime.field(runtime2, 'nearestSampler') : Dynamic));
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: _Runtime.field(input, 'view') }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-        _Runtime.callProperty(pass, 'setBindGroup', cast ([(1.0 + i), bindGroup] : Array<Dynamic>));
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup((1.0 + i), bindGroup);
         i++;
       }
     }
-    _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
   }
 
   public static final FULLSCREEN_VERTEX_WGSL__wgpuFullscreenPass:Dynamic = '\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> @builtin(position) vec4f {\n  // Full-screen triangle: three vertices covering the clip rect.\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  return vec4f(x, y, 0.0, 1.0);\n}\n';

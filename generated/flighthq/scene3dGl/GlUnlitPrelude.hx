@@ -38,7 +38,7 @@ class GlUnlitPrelude {
   }
 
   @:noCompletion
-  public static function compileGlUnlitProgram(gl:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
+  public static function compileGlUnlitProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlUnlitVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlUnlitFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorMap'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };

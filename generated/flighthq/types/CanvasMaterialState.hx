@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CanvasMaterialState = { @:optional var composite:Dynamic; @:optional var filter:String; };
+typedef CanvasMaterialState = { @:optional var composite:flighthq._internal.dom.GlobalCompositeOperation; @:optional var filter:String; };

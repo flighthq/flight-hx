@@ -25,7 +25,7 @@ class LoadScene2DAudioResources {
         var resolved:Array<AudioResourceReference> = cast _Runtime.UNDEFINED;
         var unresolved:Array<AudioResourceReference> = cast _Runtime.UNDEFINED;
         selected = _Runtime.callProperty(_Runtime.field(document, 'audioResources'), 'filter', cast ([function(reference:Dynamic) return ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
-        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast _Runtime.field(_Runtime.construct(_Runtime.globalValue('AbortController'), []), 'signal'));
+        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(_Runtime.globalValue('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
         context = _Runtime.coalesce(_Runtime.optionalField(options, 'context'), function():Dynamic return cast null);
         fetch = _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast LoadScene2DAudioResources.rejectExternalAudioResource__loadScene2DAudioResources);
         loaded = 0.0;

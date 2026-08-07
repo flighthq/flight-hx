@@ -23,9 +23,9 @@ class EnableGlRenderStateGuards {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'bindingCacheGuard', EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards);
   }
 
-  public static function warnOnForeignGlBinding__enableGlRenderStateGuards(state:GlRenderState, expectedProgram:Dynamic):Void {
+  public static function warnOnForeignGlBinding__enableGlRenderStateGuards(state:GlRenderState, expectedProgram:flighthq._internal.dom.WebGLProgram):Void {
     var actual:Dynamic = cast _Runtime.UNDEFINED;
-    actual = (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(state, 'gl'), 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<Dynamic>);
+    actual = (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), flighthq._internal.backend.WebGl2Backend.contextConstant(_Runtime.field(state, 'gl'), 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>);
     if ((cast _Runtime.strictEquals(actual, expectedProgram) : Bool)) { return; }
     _Runtime.callValue(logOnce, cast (['render-gl:foreign-gl-binding', LogLevel.Warn, { message: (('useGlProgram: the GL program actually bound is not the one render-gl cached, so a guest renderer ' + 'wrote GL state without restoring it. Call invalidateGlRenderStateCache(state) before returning ') + 'control to render-gl, or the next draw skips a bind it needs and GL rejects a later uniform.'), state: state }, 'render-gl'] : Array<Dynamic>));
   }

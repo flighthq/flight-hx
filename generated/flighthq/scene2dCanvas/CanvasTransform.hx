@@ -8,7 +8,7 @@ import flighthq.types.Matrix;
 
 class CanvasTransform {
   @:noCompletion
-  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
+  public static function setCanvasTransform(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, transform:Matrix):Void {
     if ((cast _Runtime.field(state, 'roundPixels') : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, _Runtime.fround(transform.tx), _Runtime.fround(transform.ty)] : Array<Dynamic>));
     } else {

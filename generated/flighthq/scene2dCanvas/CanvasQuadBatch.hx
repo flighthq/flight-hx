@@ -18,7 +18,7 @@ import flighthq.types.SpriteRenderer;
 
 class CanvasQuadBatch {
   @:noCompletion
-  public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
+  public static function drawCanvasQuadBatch(state:CanvasRenderState, quadBatch:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

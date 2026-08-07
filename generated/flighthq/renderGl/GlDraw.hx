@@ -44,7 +44,7 @@ class GlDraw {
   }
 
   @:noCompletion
-  public static function applyGlSamplerState(state:GlRenderState, runtime:GlRenderStateRuntime, texture:Dynamic, sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>):Void {
+  public static function applyGlSamplerState(state:GlRenderState, runtime:GlRenderStateRuntime, texture:flighthq._internal.dom.WebGLTexture, sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>):Void {
     if (smoothingOverride == null) smoothingOverride = cast (null : Dynamic);
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var useMips:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,7 +67,7 @@ class GlDraw {
     ext = _Runtime.callValue(GlDraw.ensureGlAnisotropyExt__glDraw, cast ([state, runtime] : Array<Dynamic>));
     if (_Runtime.truthy(ext)) {
       var level:Dynamic = HxMath.max(1.0, HxMath.min(sampler.anisotropy, _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)));
-      flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(ext, 'TEXTURE_MAX_ANISOTROPY_EXT'), level);
+      flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).TEXTURE_MAX_ANISOTROPY_EXT, level);
     }
     if ((cast useMips : Bool)) {
       var mipped:Dynamic = _Runtime.setField(runtime, 'mipmappedTextures', (_Runtime.field(runtime, 'mipmappedTextures') ?? _Runtime.construct(_Runtime.globalValue('WeakSet'), [])));
@@ -79,23 +79,23 @@ class GlDraw {
   }
 
   @:noCompletion
-  public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+  public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
     return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, bitmap, sampler, smoothingOverride, premultiply, false, colorSpace, GlDraw.uploadGlBitmap__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
   @:noCompletion
-  public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+  public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
     return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, false, true, colorSpace, GlDraw.uploadGlCompressedImage__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):Dynamic {
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Dynamic = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
     return cast _Runtime.callValue(GlDraw.bindGlTextureSourceTexture__glDraw, cast ([state, image, sampler, smoothingOverride, premultiply, false, colorSpace, GlDraw.uploadGlImageResource__glDraw] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlTextureSourceTexture__glDraw(state:GlRenderState, image:TextureSource, sampler:Null<SamplerLike>, smoothingOverride:Null<Bool>, premultiply:Bool, straightAlpha:Bool, colorSpace:TextureColorSpace, upload:GlTextureSourceUpload__glDraw):Dynamic {
+  public static function bindGlTextureSourceTexture__glDraw(state:GlRenderState, image:TextureSource, sampler:Null<SamplerLike>, smoothingOverride:Null<Bool>, premultiply:Bool, straightAlpha:Bool, colorSpace:TextureColorSpace, upload:GlTextureSourceUpload__glDraw):flighthq._internal.dom.WebGLTexture {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
@@ -120,7 +120,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlTexture(state:GlRenderState, imageSource:flighthq._internal.dom.CanvasImageSource, ?sampler:Null<SamplerLike>):flighthq._internal.dom.WebGLTexture {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var textureCache:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,7 +133,7 @@ class GlDraw {
       (texture = cast (flighthq._internal.backend.WebGl2Backend.createTexture(gl) : Dynamic));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
       flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true);
-      flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), (cast imageSource : Dynamic));
+      flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), (cast imageSource : flighthq._internal.dom.TexImageSource));
       ((cast textureCache : flighthq._internal._WeakMap).set(imageSource, texture));
       _Runtime.setField(runtime, 'currentTexture', texture);
       _Runtime.setField(runtime, 'currentTextureStraightAlpha', false);
@@ -148,13 +148,13 @@ class GlDraw {
   }
 
   @:noCompletion
-  public static function bindGlVideoTexture(state:GlRenderState, texture:TextureLike, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlVideoTexture(state:GlRenderState, texture:TextureLike, ?sampler:Null<SamplerLike>):flighthq._internal.dom.WebGLTexture {
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
-    image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Dynamic);
+    image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Image);
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     cache = ((cast _Runtime.strictEquals(_Runtime.field(texture, 'colorSpace'), 'srgb') : Bool) ? (cast _Runtime.setField(runtime, 'videoSrgbTextureCache', (_Runtime.field(runtime, 'videoSrgbTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : Dynamic) : (cast _Runtime.setField(runtime, 'videoTextureCache', (_Runtime.field(runtime, 'videoTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), []))) : Dynamic));
@@ -174,7 +174,7 @@ class GlDraw {
   }
 
   @:noCompletion
-  public static function createGlTexture(state:GlRenderState):Dynamic {
+  public static function createGlTexture(state:GlRenderState):flighthq._internal.dom.WebGLTexture {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var filter:Dynamic = cast _Runtime.UNDEFINED;
@@ -270,7 +270,7 @@ class GlDraw {
   }
 
   @:noCompletion
-  public static function updateGlTexture(state:GlRenderState, texture:Dynamic, canvas:Dynamic):Void {
+  public static function updateGlTexture(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -303,7 +303,7 @@ class GlDraw {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'premultiplied') : Bool)));
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast _Runtime.field((cast image : Dynamic), 'source') : Dynamic), ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic))] : Array<Dynamic>));
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast _Runtime.field((cast image : Image), 'source') : flighthq._internal.dom.TexImageSource), ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic))] : Array<Dynamic>));
   }
 
   public static function convertRgba8AlphaEncoding__glDraw(data:flighthq._internal._UInt8ClampedArray, toPremultiplied:Bool):flighthq._internal._UInt8ClampedArray {
@@ -342,24 +342,24 @@ class GlDraw {
     _Runtime.callOptionalProperty(runtime, 'bindingCacheGuard', cast ([state, program] : Array<Dynamic>));
   }
 
-  public static function ensureGlAnisotropyExt__glDraw(state:GlRenderState, runtime:GlRenderStateRuntime):Null<Dynamic> {
+  public static function ensureGlAnisotropyExt__glDraw(state:GlRenderState, runtime:GlRenderStateRuntime):Null<flighthq._internal.dom.EXT_texture_filter_anisotropic> {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     ext = _Runtime.field(runtime, 'anisotropyExt');
     if ((cast _Runtime.strictEquals(ext, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (ext = cast (flighthq._internal.backend.WebGl2Backend.getExtension(_Runtime.field(state, 'gl'), 'EXT_texture_filter_anisotropic') : Dynamic));
       _Runtime.setField(runtime, 'anisotropyExt', ext);
-      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), _Runtime.field(ext, 'MAX_TEXTURE_MAX_ANISOTROPY_EXT')) : Float), function():Dynamic return cast 1.0));
+      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast flighthq._internal.backend.WebGl2Backend.getParameter(_Runtime.field(state, 'gl'), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).MAX_TEXTURE_MAX_ANISOTROPY_EXT) : Float), function():Dynamic return cast 1.0));
     }
     return cast ext;
     return cast null;
   }
 
-  public static function glMagFilterValue__glDraw(gl:Dynamic, filter:TextureFilter):Float {
+  public static function glMagFilterValue__glDraw(gl:flighthq._internal.dom.WebGL2RenderingContext, filter:TextureFilter):Float {
     return cast ((cast StringTools.startsWith(filter, 'nearest') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic));
     return cast null;
   }
 
-  public static function glMinFilterValue__glDraw(gl:Dynamic, filter:TextureFilter, useMips:Bool):Float {
+  public static function glMinFilterValue__glDraw(gl:flighthq._internal.dom.WebGL2RenderingContext, filter:TextureFilter, useMips:Bool):Float {
     if ((cast !(cast useMips : Bool) : Bool)) { return cast ((cast StringTools.startsWith(filter, 'nearest') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic)); }
     {
       var __switchValue = filter;
@@ -390,7 +390,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function glTextureWrapValue__glDraw(gl:Dynamic, wrap:TextureWrap):Float {
+  public static function glTextureWrapValue__glDraw(gl:flighthq._internal.dom.WebGL2RenderingContext, wrap:TextureWrap):Float {
     if ((cast _Runtime.strictEquals(wrap, 'repeat') : Bool)) { return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'REPEAT', flighthq._internal.backend.WebGl2Backend.REPEAT); }
     if ((cast _Runtime.strictEquals(wrap, 'mirror-repeat') : Bool)) { return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MIRRORED_REPEAT', flighthq._internal.backend.WebGl2Backend.MIRRORED_REPEAT); }
     return cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE);

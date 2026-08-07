@@ -7,7 +7,7 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasEffectCompositing {
   @:noCompletion
-  public static function drawCanvasAccumulationPass(dest:Dynamic, source:Dynamic, samples:Float, perSampleTransform:Dynamic):Void {
+  public static function drawCanvasAccumulationPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, samples:Float, perSampleTransform:Dynamic):Void {
     var clampedSamples:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     clampedSamples = HxMath.max(1.0, HxMath.round(samples));
@@ -32,7 +32,7 @@ class CanvasEffectCompositing {
   }
 
   @:noCompletion
-  public static function drawCanvasEffectPass(dest:Dynamic, source:Dynamic, filter:String, compositeOperation:Dynamic = 'source-over'):Void {
+  public static function drawCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, filter:String, compositeOperation:flighthq._internal.dom.GlobalCompositeOperation = 'source-over'):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -48,7 +48,7 @@ class CanvasEffectCompositing {
   }
 
   @:noCompletion
-  public static function drawCanvasImageDataPass(dest:Dynamic, source:Dynamic, transform:Dynamic):Void {
+  public static function drawCanvasImageDataPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, transform:Dynamic):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var srcCtx:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,7 +61,7 @@ class CanvasEffectCompositing {
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     srcCtx = _Runtime.field(source, 'context');
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-    data = _Runtime.field(imageData, 'data');
+    data = (cast imageData : flighthq._internal.dom.ImageData).data;
     pixelCount = (w * h);
     _Runtime.callValue(transform, cast ([data, pixelCount] : Array<Dynamic>));
     dstCtx = _Runtime.field(dest, 'context');
@@ -76,7 +76,7 @@ class CanvasEffectCompositing {
   }
 
   @:noCompletion
-  public static function passthroughCanvasEffectPass(dest:Dynamic, source:Dynamic):Void {
+  public static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
   }
 }

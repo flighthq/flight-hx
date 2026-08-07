@@ -119,6 +119,8 @@ Platform adapters follow these rules:
 
 WebGL member calls remain typed maintained endpoints. Direct constant reads use the actual JavaScript context's enum surface so wrapped contexts and browser implementations observe the same identity as the TypeScript source; non-JavaScript targets use the fixed WebGL specification values. JavaScript endpoints preserve those context values through dispatch, while native endpoints own the integer coercion required by Lime/OpenGL signatures.
 
+TypeScript host ambient identities map mechanically to `flighthq._internal.dom.<SameTypeName>` from checker-resolved declaration origin, never from a type-name or prefix allowlist. Ordinary members on those values emit as direct typed Haxe fields and methods; a receiver recovered through Dynamic storage is cast back to its mapped host type first so Haxe validates the declaration and member. Heterogeneous host unions remain Dynamic because they have no single mapped identity. Existing Canvas, DOM-root, WebGL, and WebGPU backend endpoints keep priority where they own target portability or observable host semantics. The deterministic host-type census records the complete mapped declaration and member surface, while missing maintained declarations fail Haxe compilation by name.
+
 ## JavaScript and Vitest Bridge
 
 Behavioral parity is tested by compiling Haxe to JavaScript and generating ESM modules that match upstream npm package identities:

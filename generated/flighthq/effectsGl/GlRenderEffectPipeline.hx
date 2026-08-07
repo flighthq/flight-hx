@@ -139,7 +139,7 @@ class GlRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
   }
 
-  public static function setGlRenderEffectVelocityTexture(pipeline:flighthq.types.GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:flighthq.types.GlRenderEffectPipeline, texture:Null<flighthq._internal.dom.WebGLTexture>):Void {
     _Runtime.setField(pipeline, 'velocityTexture', texture);
   }
 

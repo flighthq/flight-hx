@@ -351,7 +351,7 @@ class EffectsWgpu {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.registerWgpuWhiteBalanceEffect(state);
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 }

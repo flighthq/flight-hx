@@ -10,7 +10,7 @@ import flighthq.types.Camera3D;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
 
-typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<Dynamic>; var locInverseViewProjection:Null<Dynamic>; var locIntensity:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
+typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<flighthq._internal.dom.WebGLUniformLocation>; var locInverseViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIntensity:Null<flighthq._internal.dom.WebGLUniformLocation>; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
 class GlEnvironmentSkybox {
   public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
@@ -64,7 +64,7 @@ class GlEnvironmentSkybox {
     return cast null;
   }
 
-  public static function linkGlSkyboxProgram__glEnvironmentSkybox(gl:Dynamic):Dynamic {
+  public static function linkGlSkyboxProgram__glEnvironmentSkybox(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, GlEnvironmentSkybox.SKYBOX_VERTEX__glEnvironmentSkybox, GlEnvironmentSkybox.SKYBOX_FRAGMENT__glEnvironmentSkybox, 'Skybox'] : Array<Dynamic>));
     return cast null;
   }

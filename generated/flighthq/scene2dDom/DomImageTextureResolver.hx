@@ -16,8 +16,8 @@ class DomImageTextureResolver {
     _Runtime.callValue(registerDomTextureResolver, cast ([state, ImageTextureSourceKind, DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver] : Array<Dynamic>));
   }
 
-  public static function resolveDomImageTexture__domImageTextureResolver(_state:DomRenderState, texture:Texture):Null<Dynamic> {
-    return cast _Runtime.coalesce(_Runtime.optionalField((cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Dynamic>), 'source'), function():Dynamic return cast null);
+  public static function resolveDomImageTexture__domImageTextureResolver(_state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
+    return cast _Runtime.coalesce(_Runtime.optionalField((cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Image>), 'source'), function():Dynamic return cast null);
     return cast null;
   }
 }

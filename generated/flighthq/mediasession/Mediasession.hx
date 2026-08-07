@@ -3,7 +3,6 @@ package flighthq.mediasession;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.MediaSession;
 import flighthq.types.MediaSession.MediaSessionAction;
 import flighthq.types.MediaSession.MediaSessionActionDetails;
 import flighthq.types.MediaSession.MediaSessionBackend;
@@ -33,27 +32,27 @@ class Mediasession {
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       if ((cast _Runtime.strictEquals(metadata, null) : Bool)) {
-        _Runtime.setField(session, 'metadata', null);
+        ((cast session : flighthq._internal.dom.MediaSession).metadata = null);
         return;
       }
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('MediaMetadata'), 'undefined') : Bool)) { return; }
-      _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }]));
+      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: metadata.title, artist: metadata.artist, album: metadata.album, artwork: _Runtime.concatArrays([_Runtime.toArray(metadata.artwork)]) }]));
     }, setPlaybackState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
-      _Runtime.setField(session, 'playbackState', state);
+      ((cast session : flighthq._internal.dom.MediaSession).playbackState = state);
     }, setPositionState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
-      if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(session, 'setPositionState')), 'function') : Bool)) : Bool)) { return; }
-      _Runtime.callProperty(session, 'setPositionState', cast ([_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+      if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flighthq._internal.dom.MediaSession).setPositionState), 'function') : Bool)) : Bool)) { return; }
+      (cast session : flighthq._internal.dom.MediaSession).setPositionState(_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }, setActionHandler: function(action:Dynamic, handler:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        _Runtime.callProperty(session, 'setActionHandler', cast ([action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null)] : Array<Dynamic>));
+        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:Dynamic) return _Runtime.callValue(handler, cast ([(cast details : MediaSessionActionDetails)] : Array<Dynamic>)), function():Dynamic return cast null));
       } catch (__error:Dynamic) {
       }
     } };
@@ -67,7 +66,7 @@ class Mediasession {
     return cast null;
   }
 
-  public static function getWebMediaSession__mediasession():Null<MediaSession> {
+  public static function getWebMediaSession__mediasession():Null<flighthq._internal.dom.MediaSession> {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'mediaSession') : Bool) : Bool)) : Bool)) { return cast null; }
     return cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'mediaSession');
     return cast null;

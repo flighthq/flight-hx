@@ -89,10 +89,10 @@ class Protocol {
     return cast { register: function(scheme:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
-      nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : { @:optional var registerProtocolHandler:Dynamic; });
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(nav, 'registerProtocolHandler')), 'function') : Bool)) { return cast false; }
+      nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic);
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler), 'function') : Bool)) { return cast false; }
       try {
-        _Runtime.callProperty(nav, 'registerProtocolHandler', cast ([scheme, (_Runtime.field(_Runtime.globalValue('location'), 'origin') + '/?url=%s')] : Array<Dynamic>));
+        (cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler(scheme, ((cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).origin + '/?url=%s'));
         if ((cast !(cast _Runtime.includes(_registeredSchemes, scheme) : Bool) : Bool)) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
         return cast true;
       } catch (__error:Dynamic) {
@@ -116,8 +116,8 @@ class Protocol {
     }, getLaunchUrl: function() {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined') : Bool)) { return cast null; }
       try {
-        var params:Dynamic = _Runtime.construct(_Runtime.globalValue('URLSearchParams'), [_Runtime.field(_Runtime.globalValue('location'), 'search')]);
-        var url:Dynamic = _Runtime.callProperty(params, 'get', cast (['url'] : Array<Dynamic>));
+        var params:Dynamic = _Runtime.construct(_Runtime.globalValue('URLSearchParams'), [(cast _Runtime.globalValue('location') : flighthq._internal.dom.Location).search]);
+        var url:Dynamic = (cast params : flighthq._internal.dom.URLSearchParams).get('url');
         return cast _Runtime.select(_Runtime.andValue(url, function():Dynamic return cast ((cast _Runtime.field(url, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast url, function():Dynamic return cast null);
       } catch (__error:Dynamic) {
         return cast null;

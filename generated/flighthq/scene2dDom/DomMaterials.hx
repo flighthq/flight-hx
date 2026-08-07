@@ -16,8 +16,8 @@ class DomMaterials {
   public static final DOM_BLEND_MODE_FIDELITY__domMaterials:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: 'approximate' }, { key: BlendModeValue.Darken, value: 'exact' }, { key: BlendModeValue.Lighten, value: 'exact' }, { key: BlendModeValue.Multiply, value: 'exact' }, { key: BlendModeValue.Normal, value: 'exact' }, { key: BlendModeValue.Screen, value: 'exact' }, { key: AdvancedBlendModeValue.Color, value: 'exact' }, { key: AdvancedBlendModeValue.ColorBurn, value: 'exact' }, { key: AdvancedBlendModeValue.ColorDodge, value: 'exact' }, { key: AdvancedBlendModeValue.Difference, value: 'exact' }, { key: AdvancedBlendModeValue.Exclusion, value: 'exact' }, { key: AdvancedBlendModeValue.HardLight, value: 'exact' }, { key: AdvancedBlendModeValue.Hue, value: 'exact' }, { key: AdvancedBlendModeValue.Luminosity, value: 'exact' }, { key: AdvancedBlendModeValue.Overlay, value: 'exact' }, { key: AdvancedBlendModeValue.Saturation, value: 'exact' }, { key: AdvancedBlendModeValue.SoftLight, value: 'exact' }]);
 
   @:noCompletion
-  public static function applyDomBlendMode(element:Dynamic, value:Null<BlendMode>):Void {
-    _Runtime.setField(_Runtime.field(element, 'style'), 'mixBlendMode', _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ''));
+  public static function applyDomBlendMode(element:flighthq._internal.dom.HTMLElement, value:Null<BlendMode>):Void {
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).mixBlendMode = _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ''));
   }
 
   public static function enableDomBlendModeSupport(state:DomRenderState):Void {

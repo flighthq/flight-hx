@@ -13,7 +13,7 @@ import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureS
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class ImageResource {
-  public static function cloneImageResource(resource:Dynamic):Dynamic {
+  public static function cloneImageResource(resource:Image):Image {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
     return cast null;
   }
@@ -23,8 +23,8 @@ class ImageResource {
     return cast null;
   }
 
-  public static function createImageResource(image:Dynamic):Dynamic {
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):Image {
+    var resource:Image = cast _Runtime.UNDEFINED;
     resource = _Runtime.callValue(createEntity, cast ([{ alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }] : Array<Dynamic>));
     _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
     return cast resource;
@@ -32,23 +32,23 @@ class ImageResource {
   }
 
   @:noCompletion
-  public static function invalidateImageResource(resource:Dynamic):Void {
+  public static function invalidateImageResource(resource:Image):Void {
     _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>));
     _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.addNumbers(_Runtime.field(resource, 'version'), 1.0)), 0));
   }
 
-  public static function isImageResourceEmpty(resource:Dynamic):Bool {
+  public static function isImageResourceEmpty(resource:Image):Bool {
     return cast ((cast ((cast _Runtime.field(resource, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(resource, 'height') : Float) <= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
-  public static function updateImageResourceSize__imageResource(resource:Dynamic):Void {
+  public static function updateImageResourceSize__imageResource(resource:Image):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'source');
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
     if ((cast _Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLVideoElement')) : Bool)) {
-      _Runtime.setField(resource, 'width', _Runtime.field(element, 'videoWidth'));
-      _Runtime.setField(resource, 'height', _Runtime.field(element, 'videoHeight'));
+      _Runtime.setField(resource, 'width', (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth);
+      _Runtime.setField(resource, 'height', (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight);
     } else {
       var sized:Dynamic = (cast element : Dynamic);
       _Runtime.setField(resource, 'width', flighthq._internal.backend.CanvasElementBackend.field(sized, 'width'));

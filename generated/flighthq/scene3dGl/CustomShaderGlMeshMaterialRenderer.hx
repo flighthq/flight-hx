@@ -83,14 +83,14 @@ class CustomShaderGlMeshMaterialRenderer {
     return cast null;
   }
 
-  public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:Dynamic, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
+  public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:flighthq._internal.dom.WebGL2RenderingContext, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
     var linked:Dynamic = cast _Runtime.UNDEFINED;
     linked = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.field(source, 'vertex'), _Runtime.field(source, 'fragment')] : Array<Dynamic>));
     return cast { locCameraPosition: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_cameraPosition'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_model'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_normalMatrix'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_viewProjection'), program: linked };
     return cast null;
   }
 
-  public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:Dynamic, program:Dynamic, material:CustomShaderMaterial):Void {
+  public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram, material:CustomShaderMaterial):Void {
     var uniforms:Dynamic = cast _Runtime.UNDEFINED;
     uniforms = _Runtime.field(material, 'uniforms');
     if ((cast _Runtime.strictEquals(uniforms, null) : Bool)) { return; }
@@ -123,7 +123,7 @@ class CustomShaderGlMeshMaterialRenderer {
     }
   }
 
-  public static function uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer(state:GlRenderState, program:Dynamic, material:CustomShaderMaterial):Void {
+  public static function uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, material:CustomShaderMaterial):Void {
     var textures:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var unit:Dynamic = cast _Runtime.UNDEFINED;

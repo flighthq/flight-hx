@@ -34,7 +34,7 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.WgpuRenderState;
 
-typedef WgpuTextLabelData__wgpuTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; var lastPW:Float; var lastPH:Float; };
+typedef WgpuTextLabelData__wgpuTextLabel = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var image:Image; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; var lastPW:Float; var lastPH:Float; };
 
 class WgpuTextLabel {
   public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
@@ -57,7 +57,7 @@ class WgpuTextLabel {
     if ((cast _Runtime.strictEquals(textLabelData, null) : Bool)) { return; }
     entry = ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).get(_Runtime.field(textLabelData, 'image')));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
+      (cast _Runtime.field(entry, 'texture') : flighthq._internal.dom.GPUTexture).destroy();
       ((cast _Runtime.field(runtime, 'textureSourcePremultipliedTextureCache') : flighthq._internal._WeakMap).delete_(_Runtime.field(textLabelData, 'image')));
     }
   }
@@ -97,14 +97,14 @@ class WgpuTextLabel {
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     textData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(textData, null) : Bool)) { return; }
-    maxTexDim = _Runtime.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     if ((cast ((cast !_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio')) : Bool)) : Bool)) {
       var measure:Dynamic = cast _Runtime.UNDEFINED;
       measure = function(t:String, format:TextFormat) {
         flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(textData, 'ctx'), 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-        return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+        return cast (cast flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       };
       var result:Dynamic = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
       _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));

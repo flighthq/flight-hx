@@ -9,7 +9,7 @@ import flighthq.types.ApplicationRenderView.GlApplicationRenderViewOptions;
 import flighthq.types.ApplicationWindow;
 
 class ApplicationGl {
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:Dynamic, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
     return cast Facade_ApplicationGl_flighthq_applicationGl_GlApplicationRenderView.createGlApplicationRenderView(window, canvas, options);
     return cast null;
   }

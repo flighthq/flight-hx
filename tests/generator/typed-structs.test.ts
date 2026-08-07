@@ -485,7 +485,7 @@ describe('typed struct analysis', () => {
     });
     expect(classAudit.summary.schemas).toBe(1_513);
     expect(provenance.summary).toMatchObject({
-      candidateSchemas: 731,
+      candidateSchemas: 730,
       closedSchemas: 548,
       containmentEdges: 1_776,
     });

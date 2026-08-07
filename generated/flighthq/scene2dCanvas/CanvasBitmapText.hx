@@ -16,7 +16,7 @@ import flighthq.types.SpriteRenderer;
 
 class CanvasBitmapText {
   @:noCompletion
-  public static function drawCanvasSpriteText(state:Dynamic, node:RenderProxy2D):Void {
+  public static function drawCanvasSpriteText(state:CanvasRenderState, node:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var pages:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;

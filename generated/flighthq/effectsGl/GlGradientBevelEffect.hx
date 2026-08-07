@@ -92,7 +92,7 @@ class GlGradientBevelEffect {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'GradientBevelEffect', defaultGlGradientBevelEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:Dynamic, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientBevelEffect.getApplyShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(encoded, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {

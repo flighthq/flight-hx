@@ -21,7 +21,7 @@ import flighthq.types.OuterGlowEffect;
 
 class CanvasOuterGlowEffect {
   @:noCompletion
-  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var css:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,19 +31,19 @@ class CanvasOuterGlowEffect {
       _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, css] : Array<Dynamic>));
       return;
     }
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasOuterGlowEffect.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasOuterGlowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyOuterGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasOuterGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'OuterGlowEffect', defaultCanvasOuterGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:OuterGlowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var strength:Dynamic = cast _Runtime.UNDEFINED;

@@ -48,7 +48,7 @@ class ElectronNotification {
         return cast id;
         return cast null;
       }));
-    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+    }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(((cast _Runtime.callProperty(_Runtime.field(electron, 'Notification'), 'isSupported', cast ([] : Array<Dynamic>)) : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
       }));

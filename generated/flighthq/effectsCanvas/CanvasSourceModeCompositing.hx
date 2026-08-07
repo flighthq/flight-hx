@@ -7,7 +7,7 @@ import flighthq.types.CanvasEffectSourceMode;
 import flighthq.types.CanvasRenderTarget;
 
 class CanvasSourceModeCompositing {
-  public static function clearCanvasTarget(dest:Dynamic):Void {
+  public static function clearCanvasTarget(dest:CanvasRenderTarget):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -19,7 +19,7 @@ class CanvasSourceModeCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function compositeCanvasImage(dest:Dynamic, source:Dynamic, dx:Dynamic = 0.0, dy:Dynamic = 0.0, compositeOperation:Dynamic = 'source-over'):Void {
+  public static function compositeCanvasImage(dest:CanvasRenderTarget, source:CanvasRenderTarget, dx:Dynamic = 0.0, dy:Dynamic = 0.0, compositeOperation:flighthq._internal.dom.GlobalCompositeOperation = 'source-over'):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -31,12 +31,12 @@ class CanvasSourceModeCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function compositeCanvasSourceMode(dest:Dynamic, source:Dynamic, sourceMode:Dynamic):Void {
+  public static function compositeCanvasSourceMode(dest:CanvasRenderTarget, source:CanvasRenderTarget, sourceMode:CanvasEffectSourceMode):Void {
     if ((cast _Runtime.strictEquals(sourceMode, 'hide') : Bool)) { return; }
     _Runtime.callValue(compositeCanvasImage, cast ([dest, source, 0.0, 0.0, ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic))] : Array<Dynamic>));
   }
 
-  public static function drawCanvasInvertedTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float, offsetX:Dynamic = 0.0, offsetY:Dynamic = 0.0):Void {
+  public static function drawCanvasInvertedTintedAlphaMask(dest:CanvasRenderTarget, source:CanvasRenderTarget, color:Float, alpha:Float, strength:Float, offsetX:Dynamic = 0.0, offsetY:Dynamic = 0.0):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -52,7 +52,7 @@ class CanvasSourceModeCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawCanvasTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float):Void {
+  public static function drawCanvasTintedAlphaMask(dest:CanvasRenderTarget, source:CanvasRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));

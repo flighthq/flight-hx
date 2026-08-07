@@ -52,7 +52,7 @@ class ImageResourceReference {
     return cast null;
   }
 
-  public static function resolveImageResourceReference(ref:flighthq.types.ImageResourceReference, fetch:ImageResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveImageResourceReference(ref:flighthq.types.ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         _Runtime.setField(ref, 'failure', null);
@@ -100,7 +100,7 @@ class ImageResourceReference {
           var cause:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
             var __flowBranch4:Dynamic;
-            if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
+            if ((cast signal.aborted : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
                 _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
                 return flighthq._internal._Async.reject(cause);

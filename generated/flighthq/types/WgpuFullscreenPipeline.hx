@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuFullscreenPipeline = { var pipeline:Dynamic; var pipelineLayout:Dynamic; var uniformBindGroupLayout:Dynamic; var textureBindGroupLayouts:Array<Dynamic>; };
+typedef WgpuFullscreenPipeline = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var textureBindGroupLayouts:Array<flighthq._internal.dom.GPUBindGroupLayout>; };

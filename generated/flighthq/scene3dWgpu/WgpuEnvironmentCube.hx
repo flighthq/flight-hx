@@ -19,13 +19,13 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class WgpuEnvironmentCube {
   @:noCompletion
-  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<flighthq._internal.dom.GPUTextureView> {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var sources:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
-    var format:Dynamic = cast _Runtime.UNDEFINED;
+    var format:flighthq._internal.dom.GPUTextureFormat = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -44,7 +44,7 @@ class WgpuEnvironmentCube {
         face++;
       }
     }
-    view = _Runtime.callProperty(texture, 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>));
+    view = (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' });
     _Runtime.setField(scene, 'environmentSourceCube', texture);
     _Runtime.setField(scene, 'environmentSourceCubeView', view);
     return cast view;
@@ -77,12 +77,12 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
-  public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:Dynamic, texture:Dynamic, face:Float, image:TextureSource):Void {
+  public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, face:Float, image:TextureSource):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
       var bitmap:Dynamic = (cast image : Bitmap);
       _Runtime.callValue(uploadWgpuTextureData, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), bitmap.width, bitmap.height, bitmap.data] : Array<Dynamic>));
     } else {
-      _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), (cast image : Dynamic)] : Array<Dynamic>));
+      _Runtime.callValue(uploadWgpuTextureImageResource, cast ([device, texture, cast ([0.0, 0.0, face] : Array<Dynamic>), (cast image : Image)] : Array<Dynamic>));
     }
   }
 }

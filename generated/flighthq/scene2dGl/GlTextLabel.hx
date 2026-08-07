@@ -30,7 +30,7 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
-typedef GlTextLabelData__glTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
+typedef GlTextLabelData__glTextLabel = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var image:Image; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
 
 class GlTextLabel {
   public static function getGlTextLabelData__glTextLabel(data:RendererData):GlTextLabelData__glTextLabel {
@@ -108,7 +108,7 @@ class GlTextLabel {
       var measure:Dynamic = cast _Runtime.UNDEFINED;
       measure = function(t:String, format:TextFormat) {
         flighthq._internal.backend.Canvas2dBackend.setField(_Runtime.field(textData, 'ctx'), 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-        return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+        return cast (cast flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       };
       var result:Dynamic = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
       _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)) }] : Array<Dynamic>));

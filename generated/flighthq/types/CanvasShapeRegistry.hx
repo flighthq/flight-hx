@@ -7,4 +7,4 @@ import flighthq.types.ShapeCommand.ShapeCommandKey;
 
 typedef CanvasShapeHandler = Dynamic;
 
-typedef CanvasShapeCommand<K> = { var key:Dynamic; var draw:Dynamic; };
+typedef CanvasShapeCommand<K> = { var key:Dynamic; var draw:CanvasShapeHandler; };

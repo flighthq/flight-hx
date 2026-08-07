@@ -19,6 +19,7 @@ import flighthq.scene3dResources.SceneResourceRecovery as Facade_Scene3dResource
 import flighthq.scene3dResources.SceneResourceResolver as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver;
 import flighthq.scene3dResources.SceneResourceSignals as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals;
 import flighthq.scene3dResources.ThreeDsLoad as Facade_Scene3dResources_flighthq_scene3dResources_ThreeDsLoad;
+import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
@@ -70,7 +71,7 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_ImageResourceFetch.fetchWebImageResource(ref, signal);
     return cast null;
   }
@@ -144,7 +145,7 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_ResolveScene3DResources.resolveOneScene3DResourceTexture(resolver, ref, signal);
     return cast null;
   }

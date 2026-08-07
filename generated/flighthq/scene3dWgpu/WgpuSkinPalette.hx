@@ -19,7 +19,7 @@ class WgpuSkinPalette {
   public static function destroyWgpuSkinPalette(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callOptionalProperty(_Runtime.field(runtime, 'skinPaletteTexture'), 'destroy', cast ([] : Array<Dynamic>));
+    ({ final __hostTypeCall0 = _Runtime.field(runtime, 'skinPaletteTexture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
     _Runtime.setField(runtime, 'skinPaletteTexture', null);
     _Runtime.setField(runtime, 'skinPaletteView', null);
     _Runtime.setField(runtime, 'skinPaletteCapacity', 0.0);
@@ -27,7 +27,7 @@ class WgpuSkinPalette {
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Dynamic {
+  public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var previousView:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +44,7 @@ class WgpuSkinPalette {
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(scene, 'skinDrawBindGroupLayout'), null) : Bool)) {
@@ -59,7 +59,7 @@ class WgpuSkinPalette {
   }
 
   @:noCompletion
-  public static function uploadWgpuSkinPalette(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Dynamic {
+  public static function uploadWgpuSkinPalette(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUTextureView {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,13 +67,13 @@ class WgpuSkinPalette {
     jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0);
     width = (jointCount * 4.0);
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'skinPaletteTexture'), null) : Bool) || (cast ((cast jointCount : Float) > (cast _Runtime.field(runtime, 'skinPaletteCapacity') : Float)) : Bool)) : Bool)) {
-      _Runtime.callOptionalProperty(_Runtime.field(runtime, 'skinPaletteTexture'), 'destroy', cast ([] : Array<Dynamic>));
+      ({ final __hostTypeCall1 = _Runtime.field(runtime, 'skinPaletteTexture'); __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
       _Runtime.setField(runtime, 'skinPaletteTexture', flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([width, 1.0, 1.0] : Array<Dynamic>), format: 'rgba32float', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>)));
-      _Runtime.setField(runtime, 'skinPaletteView', _Runtime.callProperty(_Runtime.field(runtime, 'skinPaletteTexture'), 'createView', cast ([] : Array<Dynamic>)));
+      _Runtime.setField(runtime, 'skinPaletteView', (cast _Runtime.field(runtime, 'skinPaletteTexture') : flighthq._internal.dom.GPUTexture).createView());
       _Runtime.setField(runtime, 'skinPaletteCapacity', jointCount);
       _Runtime.setField(runtime, 'skinDrawBindGroup', null);
     }
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: _Runtime.field(runtime, 'skinPaletteTexture') }, (cast jointMatrices : flighthq._internal._Float32Array), { bytesPerRow: (width * 16.0) }, cast ([width, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: _Runtime.field(runtime, 'skinPaletteTexture') }, (cast jointMatrices : flighthq._internal._Float32Array), { bytesPerRow: (width * 16.0) }, cast ([width, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     return cast _Runtime.field(runtime, 'skinPaletteView');
     return cast null;
   }

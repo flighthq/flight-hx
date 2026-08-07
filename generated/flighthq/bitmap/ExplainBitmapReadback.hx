@@ -7,14 +7,14 @@ import flighthq.types.BitmapReadback.BitmapReadbackBlockReason;
 import flighthq.types.BitmapReadback.BitmapReadbackExplanation;
 
 class ExplainBitmapReadback {
-  public static function explainBitmapReadback(source:Dynamic, width:Float, height:Float):BitmapReadbackExplanation {
+  public static function explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
     var reason:Dynamic = cast _Runtime.UNDEFINED;
     reason = _Runtime.callValue(ExplainBitmapReadback._blockReason__explainBitmapReadback, cast ([source, width, height] : Array<Dynamic>));
     return cast { readable: _Runtime.strictEquals(reason, 'ok'), reason: reason };
     return cast null;
   }
 
-  public static function _blockReason__explainBitmapReadback(source:Dynamic, width:Float, height:Float):BitmapReadbackBlockReason {
+  public static function _blockReason__explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackBlockReason {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 'empty-size'; }

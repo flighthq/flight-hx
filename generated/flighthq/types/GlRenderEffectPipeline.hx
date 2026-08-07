@@ -7,7 +7,7 @@ import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderTarget.RenderTargetDepth;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
-typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };
+typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<flighthq._internal.dom.WebGLTexture>; var sceneVelocityTexture:Null<flighthq._internal.dom.WebGLTexture>; };
 
 typedef GlRenderEffectRunner = Dynamic;
 
@@ -19,4 +19,4 @@ typedef GlRenderEffectApplicationGuard = Dynamic;
 
 typedef RenderEffectPipelineOptions = { @:optional var sampleCount:Float; @:optional var format:RenderTargetFormat; @:optional var depth:RenderTargetDepth; };
 
-typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<Dynamic>; };
+typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<flighthq._internal.dom.WebGLTexture>; };

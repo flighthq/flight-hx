@@ -16,7 +16,7 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) : Bool)) { return cast channel.currentTime; }
-    return cast _Runtime.multiplyNumbers(_Runtime.field(element, 'currentTime'), 1000.0);
+    return cast _Runtime.multiplyNumbers((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime, 1000.0);
     return cast null;
   }
 
@@ -28,14 +28,14 @@ class VideoChannel {
   public static function getVideoChannelHeight(channel:flighthq.types.VideoResource.VideoChannel):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast _Runtime.field(element, 'videoHeight') : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoChannelWidth(channel:flighthq.types.VideoResource.VideoChannel):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
-    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast _Runtime.field(element, 'videoWidth') : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -51,7 +51,7 @@ class VideoChannel {
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
     (channel.currentTime = cast (_Runtime.callValue(getVideoChannelCurrentTime, cast ([channel] : Array<Dynamic>)) : Dynamic));
     (channel.state = cast ('paused' : Dynamic));
-    _Runtime.callProperty(element, 'pause', cast ([] : Array<Dynamic>));
+    (cast element : flighthq._internal.dom.HTMLVideoElement).pause();
   }
 
   public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<flighthq.types.VideoResource.VideoChannel> {
@@ -63,16 +63,16 @@ class VideoChannel {
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast null; }
     runtime = ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap).get(element));
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(element, 'removeEventListener', cast (['ended', _Runtime.field(runtime, 'onEnded')] : Array<Dynamic>));
+      (cast element : flighthq._internal.dom.HTMLVideoElement).removeEventListener('ended', _Runtime.field(runtime, 'onEnded'));
     }
-    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(element, 'duration')] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.field(element, 'duration'), 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    channel = { currentTime: _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([(cast element : flighthq._internal.dom.HTMLVideoElement).duration] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers((cast element : flighthq._internal.dom.HTMLVideoElement).duration, 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     onEnded = function() return _Runtime.callValue(VideoChannel.completeVideoChannel__videoChannel, cast ([channel] : Array<Dynamic>));
     ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap).set(element, { loopsRemaining: channel.loops, onEnded: onEnded }));
-    _Runtime.setField(element, 'currentTime', (channel.currentTime / 1000.0));
-    _Runtime.setField(element, 'volume', channel.gain);
-    _Runtime.setField(element, 'playbackRate', channel.playbackRate);
-    _Runtime.setField(element, 'loop', false);
-    _Runtime.callProperty(element, 'addEventListener', cast (['ended', onEnded] : Array<Dynamic>));
+    ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0));
+    ((cast element : flighthq._internal.dom.HTMLVideoElement).volume = channel.gain);
+    ((cast element : flighthq._internal.dom.HTMLVideoElement).playbackRate = channel.playbackRate);
+    ((cast element : flighthq._internal.dom.HTMLVideoElement).loop = false);
+    (cast element : flighthq._internal.dom.HTMLVideoElement).addEventListener('ended', onEnded);
     _Runtime.callValue(VideoChannel.startVideoChannel__videoChannel, cast ([channel] : Array<Dynamic>));
     return cast channel;
     return cast null;
@@ -87,7 +87,7 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     (channel.currentTime = cast (_Runtime.callValue(VideoChannel.clamp__videoChannel, cast ([value, 0.0, channel.length] : Array<Dynamic>)) : Dynamic));
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { _Runtime.setField(element, 'currentTime', (channel.currentTime / 1000.0)); }
+    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0)); }
     return cast channel.currentTime;
     return cast null;
   }
@@ -96,7 +96,7 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     (channel.gain = cast (value : Dynamic));
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { _Runtime.setField(element, 'volume', value); }
+    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).volume = value); }
     return cast channel.gain;
     return cast null;
   }
@@ -105,7 +105,7 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     (channel.playbackRate = cast (value : Dynamic));
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { _Runtime.setField(element, 'playbackRate', value); }
+    if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).playbackRate = value); }
     return cast channel.playbackRate;
     return cast null;
   }
@@ -115,9 +115,9 @@ class VideoChannel {
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) {
       var runtime:Dynamic = ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap).get(element));
-      if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(element, 'removeEventListener', cast (['ended', _Runtime.field(runtime, 'onEnded')] : Array<Dynamic>)); }
-      _Runtime.callProperty(element, 'pause', cast ([] : Array<Dynamic>));
-      _Runtime.setField(element, 'currentTime', 0.0);
+      if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast element : flighthq._internal.dom.HTMLVideoElement).removeEventListener('ended', _Runtime.field(runtime, 'onEnded')); }
+      (cast element : flighthq._internal.dom.HTMLVideoElement).pause();
+      ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = 0.0);
     }
     (channel.currentTime = cast (0.0 : Dynamic));
     (channel.state = cast ('stopped' : Dynamic));
@@ -125,8 +125,8 @@ class VideoChannel {
 
   public static final videoChannelRuntimes__videoChannel:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static function getVideoElement__videoChannel(resource:VideoResource):Null<Dynamic> {
-    return cast (cast resource.element : Null<Dynamic>);
+  public static function getVideoElement__videoChannel(resource:VideoResource):Null<flighthq._internal.dom.HTMLVideoElement> {
+    return cast (cast resource.element : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast null;
   }
 
@@ -156,9 +156,9 @@ class VideoChannel {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.callValue(VideoChannel.getVideoElement__videoChannel, cast ([channel.source] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
-    _Runtime.setField(element, 'currentTime', (channel.currentTime / 1000.0));
+    ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0));
     (channel.state = cast ('playing' : Dynamic));
-    flighthq._internal._Async.recover(_Runtime.callProperty(element, 'play', cast ([] : Array<Dynamic>)), function() {
+    flighthq._internal._Async.recover((cast element : flighthq._internal.dom.HTMLVideoElement).play(), function() {
       if ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool)) { (channel.state = cast ('stopped' : Dynamic)); }
     });
   }

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.Permission.PermissionName;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Screen.ScreenBackend;
 import flighthq.types.Screen.ScreenInfo;
@@ -105,9 +104,9 @@ class Screen {
     ensureCursorTracking = function ensureCursorTracking():Void {
       if ((cast ((cast _cursorTracking : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) : Bool)) { return; }
       (_cursorTracking = cast (true : Dynamic));
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pointermove', function(e:Dynamic) {
-        (_cursorX = cast (_Runtime.field(e, 'screenX') : Dynamic));
-        (_cursorY = cast (_Runtime.field(e, 'screenY') : Dynamic));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pointermove', function(e:flighthq._internal.dom.PointerEvent) {
+        (_cursorX = cast (e.screenX : Dynamic));
+        (_cursorY = cast (e.screenY : Dynamic));
       }] : Array<Dynamic>));
     };
     upgradeToScreenDetails = function upgradeToScreenDetails(details:ScreenDetails__screen):Void {
@@ -159,17 +158,17 @@ class Screen {
       (out.id = cast (0.0 : Dynamic));
       (out.x = cast (0.0 : Dynamic));
       (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (_Runtime.field(s, 'width') : Dynamic));
-      (out.height = cast (_Runtime.field(s, 'height') : Dynamic));
-      (out.workWidth = cast (_Runtime.field(s, 'availWidth') : Dynamic));
-      (out.workHeight = cast (_Runtime.field(s, 'availHeight') : Dynamic));
+      (out.width = cast ((cast s : flighthq._internal.dom.Screen).width : Dynamic));
+      (out.height = cast ((cast s : flighthq._internal.dom.Screen).height : Dynamic));
+      (out.workWidth = cast ((cast s : flighthq._internal.dom.Screen).availWidth : Dynamic));
+      (out.workHeight = cast ((cast s : flighthq._internal.dom.Screen).availHeight : Dynamic));
       (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
       (out.isPrimary = cast (true : Dynamic));
       (out.rotation = cast (_Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
       (out.orientation = cast (_Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)) : Dynamic));
       (out.refreshRate = cast (-1.0 : Dynamic));
-      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'colorDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'colorDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'pixelDepth')), 'number') : Bool) ? (cast _Runtime.field(s, 'pixelDepth') : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).colorDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).pixelDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
       (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
       (out.isHdr = cast (_Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)) : Dynamic));
@@ -522,9 +521,9 @@ class Screen {
         return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var status:Dynamic = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), function(__awaitValue11:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), function(__awaitValue11:Dynamic):Dynamic {
               status = __awaitValue11;
-              return flighthq._internal._Async.flowReturn((cast _Runtime.field(status, 'state') : String));
+              return flighthq._internal._Async.flowReturn((cast (cast status : flighthq._internal.dom.PermissionStatus).state : String));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -640,15 +639,15 @@ class Screen {
 
   public static function getWebColorSpace__screen():ScreenColorSpace {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia')), 'function') : Bool)) : Bool)) { return cast 'srgb'; }
-    if ((cast _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)), 'matches') : Bool)) { return cast 'rec2020'; }
-    if ((cast _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)), 'matches') : Bool)) { return cast 'display-p3'; }
+    if ((cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'rec2020'; }
+    if ((cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'display-p3'; }
     return cast 'srgb';
     return cast null;
   }
 
   public static function getWebIsHdr__screen():Bool {
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia')), 'function') : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.field(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)), 'matches');
+    return cast (cast flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches;
     return cast null;
   }
 
@@ -678,7 +677,7 @@ class Screen {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) { return cast null; }
     s = (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen') : Dynamic);
-    return cast _Runtime.coalesce(_Runtime.field(s, 'orientation'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast s : flighthq._internal.dom.Screen).orientation, function():Dynamic return cast null);
     return cast null;
   }
 
@@ -688,7 +687,7 @@ class Screen {
   }
 
   public static function onScreenDetailPermissionChange(listener:Dynamic):Dynamic {
-    var status:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var status:Null<flighthq._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
     var cancelled:Dynamic = cast _Runtime.UNDEFINED;
     var handleChange:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) { return cast function() {
@@ -697,18 +696,18 @@ class Screen {
     status = null;
     cancelled = false;
     handleChange = function() {
-      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { _Runtime.callValue(listener, cast ([(cast _Runtime.field(status, 'state') : String)] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { _Runtime.callValue(listener, cast ([(cast status.state : String)] : Array<Dynamic>)); }
     };
-    flighthq._internal._Async.recover(_Runtime.callProperty(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast 'window-management' : flighthq._internal.dom.PermissionName) }), 'then', cast ([function(s:Dynamic) {
       if ((cast cancelled : Bool)) { return; }
       (status = cast (s : Dynamic));
-      _Runtime.callProperty(s, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
+      (cast s : flighthq._internal.dom.PermissionStatus).addEventListener('change', handleChange);
     }] : Array<Dynamic>)), function() {
 
     });
     return cast function() {
       (cancelled = cast (true : Dynamic));
-      _Runtime.callOptionalProperty(status, 'removeEventListener', cast (['change', handleChange] : Array<Dynamic>));
+      ({ final __hostTypeCall20 = status; __hostTypeCall20 == null ? _Runtime.UNDEFINED : __hostTypeCall20.removeEventListener('change', handleChange); });
     };
     return cast null;
   }
@@ -720,30 +719,30 @@ class Screen {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var win:Dynamic = cast _Runtime.UNDEFINED;
-        var __flowBranch20:Dynamic;
+        var __flowBranch21:Dynamic;
         if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) {
-          __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch20 = flighthq._internal._Async.flowNormal();
+          __flowBranch21 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
-          win = (cast flighthq._internal.backend.DomWindowBackend.value() : { @:optional var getScreenDetails:Dynamic; });
-          var __flowBranch21:Dynamic;
+        return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
+          win = (cast flighthq._internal.backend.DomWindowBackend.value() : Dynamic);
+          var __flowBranch22:Dynamic;
           if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(win, 'getScreenDetails')), 'function') : Bool)) {
-            __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch21 = flighthq._internal._Async.flowNormal();
+            __flowBranch22 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch22, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var details:Dynamic = cast _Runtime.UNDEFINED;
               var b:Dynamic = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
-                details = __awaitValue22;
+              return flighthq._internal._Async.flatMap(flighthq._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue23:Dynamic):Dynamic {
+                details = __awaitValue23;
                 b = (cast _Runtime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic);
                 _Runtime.callOptionalProperty(b, '_upgrade', cast ([details] : Array<Dynamic>));
                 return flighthq._internal._Async.flowReturn(true);

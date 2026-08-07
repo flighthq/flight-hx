@@ -10,7 +10,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Matrix;
 import flighthq.types.ShapeCommand.PathWinding;
 
-typedef ClipProgram__glClipContours = { var program:Dynamic; var buffer:Dynamic; var positionLocation:Float; var worldMatrixLocation:Null<Dynamic>; var projectionLocation:Null<Dynamic>; };
+typedef ClipProgram__glClipContours = { var program:flighthq._internal.dom.WebGLProgram; var buffer:flighthq._internal.dom.WebGLBuffer; var positionLocation:Float; var worldMatrixLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; var projectionLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; };
 
 class GlClipContours {
   public static final VERTEX_SOURCE__glClipContours:Dynamic = '\nattribute vec2 a_position;\nuniform mat3 u_worldMatrix;   // node world transform2D (a,b,c,d,tx,ty) lifted to mat3\nuniform mat3 u_projection;    // device pixels -> clip space (same one the sprite/shape shaders use)\nvoid main() {\n  vec3 clip = u_projection * (u_worldMatrix * vec3(a_position, 1.0));\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n}\n';
@@ -92,7 +92,7 @@ class GlClipContours {
     ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap).set(gl, { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') }));
   }
 
-  public static function compileProgram__glClipContours(gl:Dynamic, vertex:String, fragment:String):Dynamic {
+  public static function compileProgram__glClipContours(gl:flighthq._internal.dom.WebGL2RenderingContext, vertex:String, fragment:String):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, vertex, fragment, 'Clip-contours'] : Array<Dynamic>));
     return cast null;
   }

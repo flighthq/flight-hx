@@ -27,7 +27,7 @@ class GlEffectProgramCache {
   }
 
   @:noCompletion
-  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
+  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<flighthq._internal.dom.WebGLUniformLocation> {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var loc:Dynamic = cast _Runtime.UNDEFINED;

@@ -12,7 +12,7 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuRenderTargetPool {
   @:noCompletion
-  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; @:optional var colorSpace:RenderTargetColorSpace; }):WgpuRenderTarget {
+  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:flighthq._internal.dom.GPUTextureFormat; @:optional var colorSpace:RenderTargetColorSpace; }):WgpuRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;

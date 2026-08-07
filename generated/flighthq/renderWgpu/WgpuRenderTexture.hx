@@ -179,7 +179,7 @@ class WgpuRenderTexture {
     return cast null;
   }
 
-  public static function getWgpuRenderTextureFormat__wgpuRenderTexture(state:WgpuRenderState, format:Null<RenderTargetFormat>):Dynamic {
+  public static function getWgpuRenderTextureFormat__wgpuRenderTexture(state:WgpuRenderState, format:Null<RenderTargetFormat>):flighthq._internal.dom.GPUTextureFormat {
     if ((cast _Runtime.strictEquals(format, 'rgba16f') : Bool)) { return cast 'rgba16float'; }
     if ((cast _Runtime.strictEquals(format, 'rgba32f') : Bool)) { return cast 'rgba32float'; }
     return cast ((cast _Runtime.strictEquals(format, 'rgba8') : Bool) ? (cast 'rgba8unorm' : Dynamic) : (cast _Runtime.field(state, 'format') : Dynamic));

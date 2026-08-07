@@ -70,11 +70,11 @@ typedef ShadedModifierPlan__wgpuShadedPrelude = { var diffuse:String; var effect
 
 typedef CachedShadedPlan__wgpuShadedPrelude = { var defineKey:String; var modifiers:Array<Modifier>; var plan:ShadedModifierPlan__wgpuShadedPrelude; var registry:ModifierRegistry; };
 
-typedef ShadedBinding__wgpuShadedPrelude = { var bindGroup:Dynamic; var buffer:Dynamic; var data:flighthq._internal._Float32Array; var entries:Array<Dynamic>; var layout:Dynamic; var sampler:Dynamic; var textures:Array<Null<Texture>>; var views:Array<Dynamic>; };
+typedef ShadedBinding__wgpuShadedPrelude = { var bindGroup:flighthq._internal.dom.GPUBindGroup; var buffer:flighthq._internal.dom.GPUBuffer; var data:flighthq._internal._Float32Array; var entries:Array<flighthq._internal.dom.GPUBindGroupEntry>; var layout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var textures:Array<Null<Texture>>; var views:Array<flighthq._internal.dom.GPUTextureView>; };
 
 class WgpuShadedPrelude {
   @:noCompletion
-  public static function bindWgpuShadedSurface(state:WgpuRenderState, pipeline:WgpuMeshPipeline, material:ShadedMaterial, diffuse:LinearColor, specular:LinearColor):Dynamic {
+  public static function bindWgpuShadedSurface(state:WgpuRenderState, pipeline:WgpuMeshPipeline, material:ShadedMaterial, diffuse:LinearColor, specular:LinearColor):flighthq._internal.dom.GPUBindGroup {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var plan:Dynamic = cast _Runtime.UNDEFINED;
     var byteLength:Dynamic = cast _Runtime.UNDEFINED;
@@ -91,7 +91,7 @@ class WgpuShadedPrelude {
     binding = ((cast stateBindings : flighthq._internal._WeakMap).get(material));
     sampler = _Runtime.callValue(getWgpuMaterialSampler, cast ([state, _Runtime.field(material, 'diffuseMap')] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(binding, 'layout'), _Runtime.field(pipeline, 'materialBindGroupLayout')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'data'), 'byteLength'), byteLength) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'textures'), 'length'), _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0)) : Bool)) : Bool)) {
-      _Runtime.callOptionalProperty(_Runtime.optionalField(binding, 'buffer'), 'destroy', cast ([] : Array<Dynamic>));
+      ({ final __hostTypeCall0 = _Runtime.optionalField(binding, 'buffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); });
       (binding = cast (_Runtime.callValue(WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude, cast ([state, _Runtime.field(pipeline, 'materialBindGroupLayout'), byteLength, _Runtime.addNumbers(_Runtime.field(plan, 'textureCount'), 3.0), sampler] : Array<Dynamic>)) : Dynamic));
       ((cast stateBindings : flighthq._internal._WeakMap).set(material, binding));
     }
@@ -111,14 +111,14 @@ class WgpuShadedPrelude {
     }
     resourcesChanged = !_Runtime.strictEquals(_Runtime.field(binding, 'sampler'), sampler);
     _Runtime.setField(binding, 'sampler', sampler);
-    _Runtime.setField(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), 1.0), 'resource', sampler);
+    ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), 1.0) : flighthq._internal.dom.GPUBindGroupEntry).resource = sampler);
     {
       var i:Dynamic = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(binding, 'textures'), 'length') : Float)) : Bool)) {
         var view:Dynamic = _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'textures'), i)] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'views'), i), view) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(_Runtime.field(binding, 'views'), i, view);
-          _Runtime.setField(flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), _Runtime.callValue(WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude, cast ([i] : Array<Dynamic>))), 'resource', view);
+          ((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(binding, 'entries'), _Runtime.callValue(WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude, cast ([i] : Array<Dynamic>))) : flighthq._internal.dom.GPUBindGroupEntry).resource = view);
           (resourcesChanged = cast (true : Dynamic));
         }
         i++;
@@ -136,13 +136,13 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(data, 10.0, _Runtime.callValue(getWgpuScene3DTime, cast ([state] : Array<Dynamic>)));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 11.0, _Runtime.field(material, 'normalScale'));
     _Runtime.callValue(WgpuShadedPrelude.writeModifierUniforms__wgpuShadedPrelude, cast ([data, 12.0, plan] : Array<Dynamic>));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(data, 'buffer'), 0.0, byteLength] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(data, 'buffer'), 0.0, byteLength] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, _Runtime.field(material, 'diffuseMap')] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
   }
 
-  public static function createShadedBinding__wgpuShadedPrelude(state:WgpuRenderState, layout:Dynamic, byteLength:Float, textureCount:Float, sampler:Dynamic):ShadedBinding__wgpuShadedPrelude {
+  public static function createShadedBinding__wgpuShadedPrelude(state:WgpuRenderState, layout:flighthq._internal.dom.GPUBindGroupLayout, byteLength:Float, textureCount:Float, sampler:flighthq._internal.dom.GPUSampler):ShadedBinding__wgpuShadedPrelude {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     var textures:Dynamic = cast _Runtime.UNDEFINED;
     var placeholder:Dynamic = cast _Runtime.UNDEFINED;
@@ -184,7 +184,7 @@ class WgpuShadedPrelude {
   }
 
   @:noCompletion
-  public static function ensureWgpuShadedPipeline(state:WgpuRenderState, material:ShadedMaterial, format:Dynamic):WgpuMeshPipeline {
+  public static function ensureWgpuShadedPipeline(state:WgpuRenderState, material:ShadedMaterial, format:flighthq._internal.dom.GPUTextureFormat):WgpuMeshPipeline {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var defineKey:Dynamic = cast _Runtime.UNDEFINED;
     var plan:Dynamic = cast _Runtime.UNDEFINED;
@@ -198,7 +198,7 @@ class WgpuShadedPrelude {
     colorMatrix = _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorMatrixRun');
     key = '' + Std.string(defineKey) + '|registry:' + Std.string(_Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRevision')) + '|' + Std.string(format) + '|' + Std.string(((cast colorMatrix : Bool) ? (cast 'color-matrix' : Dynamic) : (cast ((cast colorAdjusted : Bool) ? (cast 'color-adjusted' : Dynamic) : (cast 'base' : Dynamic)) : Dynamic))) + '';
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, key, function(blended:Dynamic, skinned:Dynamic) {
-      var entries:Array<Dynamic> = cast _Runtime.UNDEFINED;
+      var entries:Array<flighthq._internal.dom.GPUBindGroupLayoutEntry> = cast _Runtime.UNDEFINED;
       var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
       var module:Dynamic = cast _Runtime.UNDEFINED;
       entries = _Runtime.concatArrays([[{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }], [{ binding: 1.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), sampler: { type: 'filtering' } }], _Runtime.toArray(_Runtime.callProperty(cast ([2.0, 3.0, 4.0] : Array<Dynamic>), 'map', cast ([function(binding:Dynamic) return { binding: binding, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>))), [{ binding: 5.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }]]);
@@ -360,8 +360,8 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'scroll').x);
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.field(value, 'scroll').y);
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'strength'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct0 = _Runtime.field(value, 'secondaryScroll'); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct1 = _Runtime.field(value, 'secondaryScroll'); __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct1 = _Runtime.field(value, 'secondaryScroll'); __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.x; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct2 = _Runtime.field(value, 'secondaryScroll'); __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.y; }), function():Dynamic return cast 0.0));
   }, contribution: function(modifier:Dynamic, _index:Dynamic, context:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
@@ -516,12 +516,12 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'amplitude'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'frequency'), function():Dynamic return cast 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'speed'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct2 = _Runtime.field(value, 'axis'); __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct3 = _Runtime.field(value, 'axis'); __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(({ final __typedStruct4 = _Runtime.field(value, 'axis'); __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.z; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 8.0), _Runtime.coalesce(({ final __typedStruct5 = _Runtime.field(value, 'direction'); __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.x; }), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 9.0), _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'direction'); __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 10.0), _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'direction'); __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.z; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct3 = _Runtime.field(value, 'axis'); __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.x; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct4 = _Runtime.field(value, 'axis'); __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(({ final __typedStruct5 = _Runtime.field(value, 'axis'); __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.z; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 8.0), _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'direction'); __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.x; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 9.0), _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'direction'); __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 10.0), _Runtime.coalesce(({ final __typedStruct8 = _Runtime.field(value, 'direction'); __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.z; }), function():Dynamic return cast 0.0));
   }, contribution: function(modifier:Dynamic, _index:Dynamic, context:Dynamic) {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;

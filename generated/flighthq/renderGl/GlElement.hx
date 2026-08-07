@@ -5,11 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class GlElement {
-  public static function createGlCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function createGlCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.HTMLCanvasElement {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'width', '' + Std.string(width) + 'px');
-    _Runtime.setField(_Runtime.field(canvas, 'style'), 'height', '' + Std.string(height) + 'px');
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
+    ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(height) + 'px');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', (height * pixelRatio));
     return cast canvas;

@@ -11,7 +11,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 
 class CanvasImageSource {
   @:noCompletion
-  public static function explainCanvasImageSource(image:Dynamic):Dynamic {
+  public static function explainCanvasImageSource(image:Dynamic):CanvasImageSourceKind {
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) { return cast 'data'; }
     return cast 'element';
     return cast null;

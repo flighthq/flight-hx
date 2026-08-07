@@ -16,7 +16,7 @@ import flighthq.types.WgpuWireframePipeline;
 
 class WgpuWireframePrelude {
   @:noCompletion
-  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor, alphaCutoff:Dynamic = 0.5):Dynamic {
+  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor, alphaCutoff:Dynamic = 0.5):flighthq._internal.dom.GPUBindGroup {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -35,14 +35,14 @@ class WgpuWireframePrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 5.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 6.0, 0.0);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 7.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 'buffer'), 0.0, WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuWireframePrelude._scratch__wgpuWireframePrelude, 'buffer'), 0.0, WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
   }
 
   @:noCompletion
-  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, blended:Dynamic = false, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
+  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat, blended:Dynamic = false, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,7 +54,7 @@ class WgpuWireframePrelude {
   }
 
   @:noCompletion
-  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
+  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat, alphaMaskEnabled:Dynamic = false):WgpuWireframePipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'wireframe:' + Std.string(format) + '|' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuWireframePipeline, cast ([state, format, blended, alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

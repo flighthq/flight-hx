@@ -159,7 +159,7 @@ class Log {
   public static final _spanStack__log:Array<LogSpan> = cast ([] : Array<Dynamic>);
 
   public static function _timestamp__log():Float {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool) ? (cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('performance'), 'undefined') : Bool) ? (cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now() : Dynamic) : (cast _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }
 
@@ -173,19 +173,19 @@ class Log {
     __destructure13 = entry;
     level = _Runtime.field(__destructure13, 'level');
     channel = _Runtime.field(__destructure13, 'channel');
-    _Runtime.console('debug', [_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>))]);
+    (cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(_Runtime.callValue(envelopeFormatter, cast ([entry] : Array<Dynamic>)));
     if ((cast ((cast !_Runtime.strictEquals(level, LogLevel.None) : Bool) && (cast ((cast Log._consoleLevel__log : Float) >= (cast level : Float)) : Bool)) : Bool)) {
       var method:Dynamic = _Runtime.getIndex(Log._consoleMethods__log, level);
       var prefix:Dynamic = ((cast !_Runtime.strictEquals(channel, null) : Bool) ? (cast '[' + Std.string(channel) + ']' : Dynamic) : (cast '[flight]' : Dynamic));
       var __destructure14:Dynamic = entry;
       var data:Dynamic = _Runtime.field(__destructure14, 'data');
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) { _Runtime.console(Std.string(method), ['' + Std.string(prefix) + ' ' + Std.string(data) + '']); } else { _Runtime.console(Std.string(method), [prefix, data]); }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) { _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), method), cast (['' + Std.string(prefix) + ' ' + Std.string(data) + ''] : Array<Dynamic>)); } else { _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), method), cast ([prefix, data] : Array<Dynamic>)); }
     }
   }
 
   public static function _writeConsoleLogEntry__log(entry:LogEntry, formatter:LogFormatter):Void {
     if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined') : Bool)) { return; }
-    _Runtime.console(Std.string(_Runtime.getIndex(Log._consoleMethods__log, _Runtime.field(entry, 'level'))), [_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))]);
+    _Runtime.callValue(_Runtime.getIndex(_Runtime.globalValue('console'), _Runtime.getIndex(Log._consoleMethods__log, _Runtime.field(entry, 'level'))), cast ([_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function addLogSink(sink:LogSink):Void {

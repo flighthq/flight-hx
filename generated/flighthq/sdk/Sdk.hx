@@ -154,6 +154,8 @@ import flighthq.debug.Debug as Facade_Sdk_flighthq_debug_Debug;
 import flighthq.debug.DebugTiming as Facade_Sdk_flighthq_debug_DebugTiming;
 import flighthq.device.Device as Facade_Sdk_flighthq_device_Device;
 import flighthq.dialog.Dialog as Facade_Sdk_flighthq_dialog_Dialog;
+import flighthq.dialog.Dialog.FileSystemDirectoryHandle__dialog;
+import flighthq.dialog.Dialog.FileSystemFileHandle__dialog;
 import flighthq.easing.CreateEasingSamples as Facade_Sdk_flighthq_easing_CreateEasingSamples;
 import flighthq.easing.EaseBack as Facade_Sdk_flighthq_easing_EaseBack;
 import flighthq.easing.EaseBounce as Facade_Sdk_flighthq_easing_EaseBounce;
@@ -1092,6 +1094,7 @@ import flighthq.types.AnimationBlendTree;
 import flighthq.types.AnimationBlendTree.AnimationBlendTreeInput;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationClipEvent;
 import flighthq.types.AnimationCrossfade;
 import flighthq.types.AnimationCrossfade.AnimationCrossfadeOptions;
 import flighthq.types.AnimationInterpolation;
@@ -1211,6 +1214,15 @@ import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.Camera3DOptions;
 import flighthq.types.CameraMotionBlurEffect;
+import flighthq.types.CanvasRenderEffectPipeline;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderTarget;
+import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
+import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
+import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
+import flighthq.types.CanvasTextureResolver;
+import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
 import flighthq.types.CaptureBaseline;
@@ -1315,6 +1327,8 @@ import flighthq.types.FileLogSink;
 import flighthq.types.FileSystem.FileEntry;
 import flighthq.types.FileSystem.FilePermissions;
 import flighthq.types.FileSystem.FileStat;
+import flighthq.types.FileSystem.FileSystemPathKind;
+import flighthq.types.FileSystem.FileSystemUsage;
 import flighthq.types.FileSystem.FileWalkOptions;
 import flighthq.types.FilmEmulationEffect;
 import flighthq.types.FilmGrainEffect;
@@ -1403,6 +1417,7 @@ import flighthq.types.HslColor;
 import flighthq.types.HsvColor;
 import flighthq.types.HtmlView;
 import flighthq.types.HueSaturationAdjustment;
+import flighthq.types.Image;
 import flighthq.types.ImageChannel;
 import flighthq.types.ImageDecodeFailureExplanation;
 import flighthq.types.ImageDecoder;
@@ -1551,6 +1566,7 @@ import flighthq.types.NodeSignals;
 import flighthq.types.NormalMaterial;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationChannel;
+import flighthq.types.Notification.NotificationPermission;
 import flighthq.types.Notification.NotificationRequest;
 import flighthq.types.Notification.NotificationSchedule;
 import flighthq.types.Notification.ScheduledNotification;
@@ -2209,7 +2225,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function acquireCanvasRenderTexture(state:Dynamic, pool:Dynamic, descriptor:RenderTargetDescriptor):RenderTexture {
+  public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool.acquireCanvasRenderTexture(state, pool, descriptor);
     return cast null;
   }
@@ -2782,11 +2798,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function applyCanvasGradientRampLookup(dest:Dynamic, source:Dynamic, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void {
+  public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, ?bias:Dynamic, ?scale:Dynamic):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasGradientRamp.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
   }
 
-  public static function applyCanvasRenderEffectsToRenderTexture(state:Dynamic, pool:Dynamic, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+  public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasRenderTextureEffect.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
     return cast null;
   }
@@ -2987,15 +3003,15 @@ class Sdk {
     Facade_Sdk_flighthq_connectivity_Connectivity.attachConnectivity(net);
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:InputManager, target:flighthq._internal.dom.Window, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachGamepadInput(manager, target, options);
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:InputManager, target:flighthq._internal.dom.EventTarget, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachKeyboardInput(manager, target, options);
   }
 
-  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachPointerInput(manager, element, options);
   }
 
@@ -3007,7 +3023,7 @@ class Sdk {
     Facade_Sdk_flighthq_protocol_Protocol.attachProtocolHandler(handler);
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachRelativePointerInput(manager, element, options);
   }
 
@@ -3035,11 +3051,11 @@ class Sdk {
     Facade_Sdk_flighthq_statusbar_Statusbar.attachStatusBar(bar);
   }
 
-  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachTextInput(manager, element, options);
   }
 
-  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Sdk_flighthq_input_InputManager.attachWheelInput(manager, element, options);
   }
 
@@ -3047,11 +3063,11 @@ class Sdk {
     Facade_Sdk_flighthq_application_Window.attachWindowClose(win);
   }
 
-  public static function attachWindowDropFile(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowDropFile(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_application_Window.attachWindowDropFile(win, element);
   }
 
-  public static function attachWindowFocus(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowFocus(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_application_Window.attachWindowFocus(win, element);
   }
 
@@ -3067,15 +3083,15 @@ class Sdk {
     Facade_Sdk_flighthq_application_Window.attachWindowOrientation(win);
   }
 
-  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
+  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     Facade_Sdk_flighthq_application_Window.attachWindowRenderContext(win, canvas);
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     Facade_Sdk_flighthq_application_Window.attachWindowRenderState(win, state, canvas);
   }
 
-  public static function attachWindowResize(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowResize(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_application_Window.attachWindowResize(win, element);
   }
 
@@ -3107,7 +3123,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dWgpu_WgpuEnvironmentIblBake.bakeWgpuEnvironmentIbl(state, environment);
   }
 
-  public static function beginCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
+  public static function beginCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectPipeline.beginCanvasRenderEffectPipeline(state, pipeline);
   }
 
@@ -3154,22 +3170,22 @@ class Sdk {
 
   public static final BillboardKind:Dynamic = Facade_Sdk_flighthq_types__internal__BillboardValues.BillboardKind;
 
-  public static function bindCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Null<Dynamic> {
+  public static function bindCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flighthq._internal.dom.HTMLCanvasElement> {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexture.bindCanvasRenderTexture(state, renderTexture);
     return cast null;
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Dynamic, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic, ?colorSpace:TextureColorSpace):Dynamic {
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Dynamic, ?colorSpace:TextureColorSpace):flighthq._internal.dom.WebGLTexture {
     return cast Facade_Sdk_flighthq_renderGl_GlDraw.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
     return cast null;
   }
 
-  public static function bindGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, ?sampler:Null<SamplerLike>):Null<Dynamic> {
+  public static function bindGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, ?sampler:Null<SamplerLike>):Null<flighthq._internal.dom.WebGLTexture> {
     return cast Facade_Sdk_flighthq_renderGl_GlRenderTexture.bindGlRenderTexture(state, renderTexture, sampler);
     return cast null;
   }
 
-  public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlTexture(state:GlRenderState, imageSource:flighthq._internal.dom.CanvasImageSource, ?sampler:Null<SamplerLike>):flighthq._internal.dom.WebGLTexture {
     return cast Facade_Sdk_flighthq_renderGl_GlDraw.bindGlTexture(state, imageSource, sampler);
     return cast null;
   }
@@ -3391,7 +3407,7 @@ class Sdk {
 
   public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = Facade_Sdk_flighthq_capture_CaptureComparison.CAPTURE_REGRESSION_TOLERANCE;
 
-  public static function captureBitmapFromImageResource(resource:Dynamic):Bitmap {
+  public static function captureBitmapFromImageResource(resource:Image):Bitmap {
     return cast Facade_Sdk_flighthq_bitmap_BitmapFrom.captureBitmapFromImageResource(resource);
     return cast null;
   }
@@ -3690,7 +3706,7 @@ class Sdk {
 
   public static final ClipboardFormatUriList:Dynamic = Facade_Sdk_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
 
-  public static function clipCanvasBevelBand(band:Dynamic, source:Dynamic, bevelType:Dynamic):Void {
+  public static function clipCanvasBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:Dynamic):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.clipCanvasBevelBand(band, source, bevelType);
   }
 
@@ -3791,7 +3807,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function cloneImageResource(resource:Dynamic):Dynamic {
+  public static function cloneImageResource(resource:Image):Image {
     return cast Facade_Sdk_flighthq_image_ImageResource.cloneImageResource(resource);
     return cast null;
   }
@@ -4576,11 +4592,11 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Quaternion.conjugateQuaternion(out, source);
   }
 
-  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
+  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:flighthq._internal.dom.AudioNode):Void {
     Facade_Sdk_flighthq_media_AudioChannel.connectAudioChannelToNode(channel, destinationNode);
   }
 
-  public static function connectCanvasTextureResolverMisses(resolvers:Dynamic, state:RenderState):Void {
+  public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasTextureResolver.connectCanvasTextureResolverMisses(resolvers, state);
   }
 
@@ -4737,7 +4753,7 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_BoundingSphere.copyBoundingSphere(out, source);
   }
 
-  public static function copyCanvasRenderStateRegistrations(target:Dynamic, source:Dynamic):Void {
+  public static function copyCanvasRenderStateRegistrations(target:CanvasRenderState, source:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderState.copyCanvasRenderStateRegistrations(target, source);
   }
 
@@ -4932,12 +4948,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<Dynamic>):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<AnimationClipEvent>):AnimationClip {
     return cast Facade_Sdk_flighthq_animation_AnimationClip.createAnimationClip(channels, duration, events);
     return cast null;
   }
 
-  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):Dynamic {
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):AnimationClipEvent {
     return cast Facade_Sdk_flighthq_animation_AnimationClip.createAnimationClipEvent(time, name, payload);
     return cast null;
   }
@@ -5047,12 +5063,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
+  public static function createAudioMixer(context:flighthq._internal.dom.AudioContext, ?options:AudioMixerOptions):AudioMixer {
     return cast Facade_Sdk_flighthq_media_AudioMixer.createAudioMixer(context, options);
     return cast null;
   }
 
-  public static function createAudioResource(?buffer:Dynamic):AudioResource {
+  public static function createAudioResource(?buffer:flighthq._internal.dom.AudioBuffer):AudioResource {
     return cast Facade_Sdk_flighthq_audio_AudioResource.createAudioResource(buffer);
     return cast null;
   }
@@ -5112,12 +5128,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Bitmap {
+  public static function createBitmapFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Bitmap {
     return cast Facade_Sdk_flighthq_bitmap_BitmapFrom.createBitmapFromCanvas(canvas, x, y, width, height);
     return cast null;
   }
 
-  public static function createBitmapFromImageSource(source:Dynamic, width:Float, height:Float):Null<Bitmap> {
+  public static function createBitmapFromImageSource(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
     return cast Facade_Sdk_flighthq_bitmap_BitmapFrom.createBitmapFromImageSource(source, width, height);
     return cast null;
   }
@@ -5207,42 +5223,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
+  public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasCache.createCanvasCacheState(screenState);
     return cast null;
   }
 
-  public static function createCanvasElement(width:Float, height:Float, ?pixelRatio:Float):Dynamic {
+  public static function createCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasElement.createCanvasElement(width, height, pixelRatio);
     return cast null;
   }
 
-  public static function createCanvasOffscreenRenderState(screenState:Dynamic):Dynamic {
+  public static function createCanvasOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasCache.createCanvasOffscreenRenderState(screenState);
     return cast null;
   }
 
-  public static function createCanvasRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
+  public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectPipeline.createCanvasRenderEffectPipeline(_state, options);
     return cast null;
   }
 
-  public static function createCanvasRenderState(canvas:Dynamic, ?options:Dynamic):Dynamic {
+  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:Dynamic):CanvasRenderState {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderState.createCanvasRenderState(canvas, options);
     return cast null;
   }
 
-  public static function createCanvasRenderTexturePool():Dynamic {
+  public static function createCanvasRenderTexturePool():CanvasRenderTexturePool {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool.createCanvasRenderTexturePool();
     return cast null;
   }
 
-  public static function createCanvasShapeRasterizer(resolvers:Dynamic):ShapeRasterizer {
+  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeRasterizer.createCanvasShapeRasterizer(resolvers);
     return cast null;
   }
 
-  public static function createCanvasTextureResolvers():Dynamic {
+  public static function createCanvasTextureResolvers():CanvasTextureResolvers {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasTextureResolver.createCanvasTextureResolvers();
     return cast null;
   }
@@ -5542,7 +5558,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
+  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):DomRenderState {
     return cast Facade_Sdk_flighthq_scene2dDom_DomRenderState.createDomRenderState(element, options);
     return cast null;
   }
@@ -5602,7 +5618,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExternalGlTexture(state:GlRenderState, handle:Dynamic, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalGlTexture(state:GlRenderState, handle:flighthq._internal.dom.WebGLTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_Sdk_flighthq_renderGl_GlExternalTexture.createExternalGlTexture(state, handle, options);
     return cast null;
   }
@@ -5612,7 +5628,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:Dynamic, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuExternalTexture.createExternalWgpuTexture(state, handle, options);
     return cast null;
   }
@@ -5697,7 +5713,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:Dynamic, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
     return cast Facade_Sdk_flighthq_applicationGl_GlApplicationRenderView.createGlApplicationRenderView(window, canvas, options);
     return cast null;
   }
@@ -5712,7 +5728,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlCanvasElement(width:Float, height:Float, ?pixelRatio:Float):Dynamic {
+  public static function createGlCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement {
     return cast Facade_Sdk_flighthq_renderGl_GlElement.createGlCanvasElement(width, height, pixelRatio);
     return cast null;
   }
@@ -5732,7 +5748,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):GlRenderState {
+  public static function createGlRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlRenderOptions):GlRenderState {
     return cast Facade_Sdk_flighthq_renderGl_GlRenderState.createGlRenderState(canvas, options);
     return cast null;
   }
@@ -5847,7 +5863,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createImageResource(image:Dynamic):Dynamic {
+  public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):Image {
     return cast Facade_Sdk_flighthq_image_ImageResource.createImageResource(image);
     return cast null;
   }
@@ -5857,22 +5873,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):Dynamic {
+  public static function createImageResourceFromBitmap(bitmap:Bitmap):Image {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromBitmap(bitmap);
     return cast null;
   }
 
-  public static function createImageResourceFromCanvas(canvas:Dynamic):Dynamic {
+  public static function createImageResourceFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):Image {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromCanvas(canvas);
     return cast null;
   }
 
-  public static function createImageResourceFromImageBitmap(bitmap:Dynamic):Dynamic {
+  public static function createImageResourceFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):Image {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromImageBitmap(bitmap);
     return cast null;
   }
 
-  public static function createImageResourceFromImageElement(img:Dynamic):Dynamic {
+  public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):Image {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement(img);
     return cast null;
   }
@@ -6941,7 +6957,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):TextureAtlas {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromCanvas(canvas);
     return cast null;
   }
@@ -6951,17 +6967,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):TextureAtlas {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageBitmap(bitmap);
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageElement(img:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageElement(img:flighthq._internal.dom.HTMLImageElement):TextureAtlas {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageElement(img);
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageResource(resource:Image):TextureAtlas {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageResource(resource);
     return cast null;
   }
@@ -7131,12 +7147,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVideoResource(?element:Dynamic, ?objectUrl:String):VideoResource {
+  public static function createVideoResource(?element:flighthq._internal.dom.HTMLVideoElement, ?objectUrl:String):VideoResource {
     return cast Facade_Sdk_flighthq_video_VideoResource.createVideoResource(element, objectUrl);
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
+  public static function createVideoResourceFromMediaStream(stream:flighthq._internal.dom.MediaStream):VideoResource {
     return cast Facade_Sdk_flighthq_video_VideoResourceFrom.createVideoResourceFromMediaStream(stream);
     return cast null;
   }
@@ -7166,7 +7182,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:Dynamic):CursorBackend {
+  public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {
     return cast Facade_Sdk_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
     return cast null;
   }
@@ -7181,7 +7197,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuCanvasElement(width:Float, height:Float, ?pixelRatio:Float):Dynamic {
+  public static function createWgpuCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuElement.createWgpuCanvasElement(width, height, pixelRatio);
     return cast null;
   }
@@ -7196,12 +7212,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
+  public static function createWgpuRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuRenderState.createWgpuRenderState(canvas, options);
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic, ?colorSpace:RenderTargetColorSpace):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace):WgpuRenderTarget {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace);
     return cast null;
   }
@@ -7321,65 +7337,65 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Transform2d.decomposeMatrixToTransform2D(out, source);
   }
 
-  public static final defaultCanvasBeginFill:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasBeginFill;
+  public static final defaultCanvasBeginFill:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasBeginFill;
 
-  public static final defaultCanvasBeginGradientFill:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasBeginGradientFill;
+  public static final defaultCanvasBeginGradientFill:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasBeginGradientFill;
 
-  public static final defaultCanvasBevelEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.defaultCanvasBevelEffectRunner;
+  public static final defaultCanvasBevelEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.defaultCanvasBevelEffectRunner;
 
   public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasBitmapText.defaultCanvasBitmapTextRenderer;
 
-  public static final defaultCanvasBlendEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.defaultCanvasBlendEffectRunner;
+  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.defaultCanvasBlendEffectRunner;
 
-  public static final defaultCanvasBloomEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect.defaultCanvasBloomEffectRunner;
+  public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect.defaultCanvasBloomEffectRunner;
 
-  public static final defaultCanvasBlurEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.defaultCanvasBlurEffectRunner;
+  public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.defaultCanvasBlurEffectRunner;
 
-  public static final defaultCanvasCompositeEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.defaultCanvasCompositeEffectRunner;
+  public static final defaultCanvasCompositeEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.defaultCanvasCompositeEffectRunner;
 
-  public static final defaultCanvasCubicCurveTo:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasCubicCurveTo;
+  public static final defaultCanvasCubicCurveTo:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasCubicCurveTo;
 
-  public static final defaultCanvasCurveTo:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasCurveTo;
+  public static final defaultCanvasCurveTo:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasCurveTo;
 
-  public static final defaultCanvasDrawCircle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawCircle;
+  public static final defaultCanvasDrawCircle:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawCircle;
 
-  public static final defaultCanvasDrawEllipse:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawEllipse;
+  public static final defaultCanvasDrawEllipse:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawEllipse;
 
-  public static final defaultCanvasDrawPath:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawPath;
+  public static final defaultCanvasDrawPath:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawPath;
 
-  public static final defaultCanvasDrawRectangle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawRectangle;
+  public static final defaultCanvasDrawRectangle:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawRectangle;
 
-  public static final defaultCanvasDrawRoundRectangle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawRoundRectangle;
+  public static final defaultCanvasDrawRoundRectangle:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasDrawRoundRectangle;
 
-  public static final defaultCanvasDropShadowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect.defaultCanvasDropShadowEffectRunner;
+  public static final defaultCanvasDropShadowEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect.defaultCanvasDropShadowEffectRunner;
 
-  public static final defaultCanvasEndFill:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasEndFill;
+  public static final defaultCanvasEndFill:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasEndFill;
 
-  public static final defaultCanvasFilmGrainEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.defaultCanvasFilmGrainEffectRunner;
+  public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.defaultCanvasFilmGrainEffectRunner;
 
-  public static final defaultCanvasGradientBevelEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect.defaultCanvasGradientBevelEffectRunner;
+  public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect.defaultCanvasGradientBevelEffectRunner;
 
-  public static final defaultCanvasGradientGlowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect.defaultCanvasGradientGlowEffectRunner;
+  public static final defaultCanvasGradientGlowEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect.defaultCanvasGradientGlowEffectRunner;
 
-  public static final defaultCanvasInnerGlowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect.defaultCanvasInnerGlowEffectRunner;
+  public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect.defaultCanvasInnerGlowEffectRunner;
 
-  public static final defaultCanvasInnerShadowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect.defaultCanvasInnerShadowEffectRunner;
+  public static final defaultCanvasInnerShadowEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect.defaultCanvasInnerShadowEffectRunner;
 
-  public static final defaultCanvasLineGradientStyle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineGradientStyle;
+  public static final defaultCanvasLineGradientStyle:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineGradientStyle;
 
-  public static final defaultCanvasLineStyle:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineStyle;
+  public static final defaultCanvasLineStyle:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineStyle;
 
-  public static final defaultCanvasLineTo:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineTo;
+  public static final defaultCanvasLineTo:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasLineTo;
 
   public static final defaultCanvasMorphShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasShape.defaultCanvasMorphShapeRenderer;
 
-  public static final defaultCanvasMoveTo:Dynamic = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasMoveTo;
+  public static final defaultCanvasMoveTo:CanvasShapeCommand<String> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasMoveTo;
 
-  public static final defaultCanvasOuterGlowEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasOuterGlowEffect.defaultCanvasOuterGlowEffectRunner;
+  public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasOuterGlowEffect.defaultCanvasOuterGlowEffectRunner;
 
   public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasParticleEmitter2D.defaultCanvasParticleEmitter2DRenderer;
 
-  public static final defaultCanvasPixelateEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasPixelateEffect.defaultCanvasPixelateEffectRunner;
+  public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasPixelateEffect.defaultCanvasPixelateEffectRunner;
 
   public static final defaultCanvasQuadBatchRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasQuadBatch.defaultCanvasQuadBatchRenderer;
 
@@ -7387,9 +7403,9 @@ class Sdk {
 
   public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasScale9Shape.defaultCanvasScale9ShapeRenderer;
 
-  public static final defaultCanvasScanlinesEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasScanlinesEffect.defaultCanvasScanlinesEffectRunner;
+  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasScanlinesEffect.defaultCanvasScanlinesEffectRunner;
 
-  public static final defaultCanvasShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasShape.defaultCanvasShapeRenderer;
 
@@ -7397,11 +7413,11 @@ class Sdk {
 
   public static final defaultCanvasTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasTextLabel.defaultCanvasTextLabelRenderer;
 
-  public static final defaultCanvasTextureShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultCanvasTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasTilemap.defaultCanvasTilemapRenderer;
 
-  public static final defaultCanvasVignetteEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.defaultCanvasVignetteEffectRunner;
+  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.defaultCanvasVignetteEffectRunner;
 
   public static final defaultDomHtmlViewRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dDom_DomHtmlView.defaultDomHtmlViewRenderer;
 
@@ -7515,7 +7531,7 @@ class Sdk {
 
   public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = Facade_Sdk_flighthq_effectsGl_GlScreenSpaceFogEffect.defaultGlScreenSpaceFogEffectRunner;
 
-  public static final defaultGlShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultGlShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dGl_GlShape.defaultGlShapeRenderer;
 
@@ -7531,7 +7547,7 @@ class Sdk {
 
   public static final defaultGlTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dGl_GlTextLabel.defaultGlTextLabelRenderer;
 
-  public static final defaultGlTextureShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultGlTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dGl_GlTilemap.defaultGlTilemapRenderer;
 
@@ -7637,7 +7653,7 @@ class Sdk {
 
   public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.defaultWgpuScreenSpaceFogEffectRunner;
 
-  public static final defaultWgpuShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuShape.defaultWgpuShapeRenderer;
 
@@ -7653,7 +7669,7 @@ class Sdk {
 
   public static final defaultWgpuTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuTextLabel.defaultWgpuTextLabelRenderer;
 
-  public static final defaultWgpuTextureShapeCommands:Array<Dynamic> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultWgpuTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuTilemap.defaultWgpuTilemapRenderer;
 
@@ -7720,15 +7736,15 @@ class Sdk {
     Facade_Sdk_flighthq_media_AudioMixer.destroyAudioMixer(mixer);
   }
 
-  public static function destroyCanvasRenderState(state:Dynamic):Void {
+  public static function destroyCanvasRenderState(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderState.destroyCanvasRenderState(state);
   }
 
-  public static function destroyCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Void {
+  public static function destroyCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexture.destroyCanvasRenderTexture(state, renderTexture);
   }
 
-  public static function destroyCanvasRenderTexturePool(state:Dynamic, pool:Dynamic):Void {
+  public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool.destroyCanvasRenderTexturePool(state, pool);
   }
 
@@ -7804,15 +7820,15 @@ class Sdk {
     Facade_Sdk_flighthq_connectivity_Connectivity.detachConnectivity(net);
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:InputManager, target:flighthq._internal.dom.Window):Void {
     Facade_Sdk_flighthq_input_InputManager.detachGamepadInput(manager, target);
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:InputManager, target:flighthq._internal.dom.EventTarget):Void {
     Facade_Sdk_flighthq_input_InputManager.detachKeyboardInput(manager, target);
   }
 
-  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_input_InputManager.detachPointerInput(manager, element);
   }
 
@@ -7824,7 +7840,7 @@ class Sdk {
     Facade_Sdk_flighthq_protocol_Protocol.detachProtocolHandler(handler);
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_input_InputManager.detachRelativePointerInput(manager, element);
   }
 
@@ -7852,11 +7868,11 @@ class Sdk {
     Facade_Sdk_flighthq_statusbar_Statusbar.detachStatusBar(bar);
   }
 
-  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_input_InputManager.detachTextInput(manager, element);
   }
 
-  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_input_InputManager.detachWheelInput(manager, element);
   }
 
@@ -8373,7 +8389,7 @@ class Sdk {
 
   public static final DragForceKind:Dynamic = Facade_Sdk_flighthq_types__internal__DragForceValues.DragForceKind;
 
-  public static function drawBitmap(dest:Dynamic, source:BitmapRegion, x:Float, y:Float):Void {
+  public static function drawBitmap(dest:flighthq._internal.dom.HTMLCanvasElement, source:BitmapRegion, x:Float, y:Float):Void {
     Facade_Sdk_flighthq_bitmap_BitmapDraw.drawBitmap(dest, source, x, y);
   }
 
@@ -8602,11 +8618,11 @@ class Sdk {
     Facade_Sdk_flighthq_bitmapfont_EnableBitmapFontGuards.enableBitmapFontGuards();
   }
 
-  public static function enableCanvasBlendMode(state:Dynamic):Void {
+  public static function enableCanvasBlendMode(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasMaterials.enableCanvasBlendMode(state);
   }
 
-  public static function enableCanvasClip(state:Dynamic):Void {
+  public static function enableCanvasClip(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasClip.enableCanvasClip(state);
   }
 
@@ -8618,7 +8634,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasTextInput.enableCanvasTextInput();
   }
 
-  public static function enableCanvasTextureResolverGuards(state:Dynamic):Void {
+  public static function enableCanvasTextureResolverGuards(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards.enableCanvasTextureResolverGuards(state);
   }
 
@@ -8959,7 +8975,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function endCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
+  public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<Dynamic>):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectPipeline.endCanvasRenderEffectPipeline(state, pipeline, operations);
   }
 
@@ -9002,7 +9018,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.ensureWgpuShadowSampleLayout(state);
     return cast null;
   }
@@ -9194,17 +9210,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainBitmapReadback(source:Dynamic, width:Float, height:Float):BitmapReadbackExplanation {
+  public static function explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
     return cast Facade_Sdk_flighthq_bitmap_ExplainBitmapReadback.explainBitmapReadback(source, width, height);
     return cast null;
   }
 
-  public static function explainCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture):Dynamic {
+  public static function explainCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexture.explainCanvasRenderTexture(state, renderTexture);
     return cast null;
   }
 
-  public static function explainCanvasTextureResolution(resolvers:Dynamic, texture:Texture):TextureResolutionExplanation {
+  public static function explainCanvasTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation {
     return cast Facade_Sdk_flighthq_scene2dCanvas_ExplainCanvasTextureResolution.explainCanvasTextureResolution(resolvers, texture);
     return cast null;
   }
@@ -9415,7 +9431,7 @@ class Sdk {
     Facade_Sdk_flighthq_media_AudioChannel.fadeAudioChannelGain(channel, targetGain, durationMs);
   }
 
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast Facade_Sdk_flighthq_scene3dResources_ImageResourceFetch.fetchWebImageResource(ref, signal);
     return cast null;
   }
@@ -9976,12 +9992,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelInputNode(channel:AudioChannel):Null<flighthq._internal.dom.AudioNode> {
     return cast Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelInputNode(channel);
     return cast null;
   }
 
-  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<flighthq._internal.dom.AudioNode> {
     return cast Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelOutputNode(channel);
     return cast null;
   }
@@ -10222,22 +10238,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function getCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.getCanvasBlendEffectBackdrop(state, backdropKey);
     return cast null;
   }
 
-  public static function getCanvasBlendEffectCompositeOperation(mode:AdvancedBlendMode):Dynamic {
+  public static function getCanvasBlendEffectCompositeOperation(mode:AdvancedBlendMode):flighthq._internal.dom.GlobalCompositeOperation {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.getCanvasBlendEffectCompositeOperation(mode);
     return cast null;
   }
 
-  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):Dynamic {
+  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):flighthq._internal.dom.GlobalCompositeOperation {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.getCanvasCompositeEffectOperation(operator_);
     return cast null;
   }
 
-  public static function getCanvasRenderStateTextureResolvers(state:Dynamic):Dynamic {
+  public static function getCanvasRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderState.getCanvasRenderStateTextureResolvers(state);
     return cast null;
   }
@@ -10309,7 +10325,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getCoalescedInputPointerEvents(event:Dynamic, callback:Dynamic):Void {
+  public static function getCoalescedInputPointerEvents(event:flighthq._internal.dom.PointerEvent, callback:Dynamic):Void {
     Facade_Sdk_flighthq_input_InputManager.getCoalescedInputPointerEvents(event, callback);
   }
 
@@ -10477,12 +10493,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getFileSystemPath(kind:Dynamic):String {
+  public static function getFileSystemPath(kind:FileSystemPathKind):String {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.getFileSystemPath(kind);
     return cast null;
   }
 
-  public static function getFileSystemUsage():flighthq._internal._Promise<Null<Dynamic>> {
+  public static function getFileSystemUsage():flighthq._internal._Promise<Null<FileSystemUsage>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.getFileSystemUsage();
     return cast null;
   }
@@ -10695,12 +10711,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getKeyCodeFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyCodeFromDomKeyboardEvent(event:flighthq._internal.dom.KeyboardEvent):Float {
     return cast Facade_Sdk_flighthq_input_InputManager.getKeyCodeFromDomKeyboardEvent(event);
     return cast null;
   }
 
-  public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyModifierFromDomKeyboardEvent(event:flighthq._internal.dom.KeyboardEvent):Float {
     return cast Facade_Sdk_flighthq_input_InputManager.getKeyModifierFromDomKeyboardEvent(event);
     return cast null;
   }
@@ -10916,7 +10932,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
+  public static function getMouseWheelModeFromDomWheelEvent(event:flighthq._internal.dom.WheelEvent):MouseWheelMode {
     return cast Facade_Sdk_flighthq_input_InputManager.getMouseWheelModeFromDomWheelEvent(event);
     return cast null;
   }
@@ -11198,7 +11214,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNotificationPermission():Dynamic {
+  public static function getNotificationPermission():NotificationPermission {
     return cast Facade_Sdk_flighthq_notification_Notification.getNotificationPermission();
     return cast null;
   }
@@ -12624,12 +12640,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<Dynamic> {
+  public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<FileSystemDirectoryHandle__dialog> {
     return cast Facade_Sdk_flighthq_dialog_Dialog.getWebDirectorySystemHandle(handle);
     return cast null;
   }
 
-  public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<Dynamic> {
+  public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<FileSystemFileHandle__dialog> {
     return cast Facade_Sdk_flighthq_dialog_Dialog.getWebFileSystemHandle(handle);
     return cast null;
   }
@@ -13551,7 +13567,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isImageResourceEmpty(resource:Dynamic):Bool {
+  public static function isImageResourceEmpty(resource:Image):Bool {
     return cast Facade_Sdk_flighthq_image_ImageResource.isImageResourceEmpty(resource);
     return cast null;
   }
@@ -14021,27 +14037,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBase64(context:flighthq._internal.dom.AudioContext, base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBase64(context, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBlob(context:flighthq._internal.dom.AudioContext, blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBlob(context, blob, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:flighthq._internal.dom.AudioContext, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes(context, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrl(context:flighthq._internal.dom.AudioContext, url:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrl(context, url, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(context:flighthq._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrls(context, sources, signal);
     return cast null;
   }
@@ -14086,22 +14102,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBase64(base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBlob(blob, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes(bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl(url, crossOrigin, signal);
     return cast null;
   }
@@ -14171,42 +14187,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBase64(base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBlob(blob, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes(bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromUrl(url, crossOrigin, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromBlob(blob:flighthq._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromBlob(blob, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrl(url, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     return cast Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrls(sources, options, signal);
     return cast null;
   }
 
-  public static function lockApplicationPointer(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function lockApplicationPointer(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Sdk_flighthq_application_Window.lockApplicationPointer(element);
     return cast null;
   }
@@ -14788,12 +14804,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function openFileReadStream(path:String):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function openFileReadStream(path:String):flighthq._internal._Promise<Null<flighthq._internal.dom.ReadableStream<flighthq._internal._UInt8Array>>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.openFileReadStream(path);
     return cast null;
   }
 
-  public static function openFileWriteStream(path:String):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function openFileWriteStream(path:String):flighthq._internal._Promise<Null<flighthq._internal.dom.WritableStream<flighthq._internal._UInt8Array>>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.openFileWriteStream(path);
     return cast null;
   }
@@ -15421,7 +15437,7 @@ class Sdk {
     Facade_Sdk_flighthq_animation_AnimationPlayer.playAnimationPlayer(player);
   }
 
-  public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+  public static function playAudioResource(context:flighthq._internal.dom.AudioContext, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
     return cast Facade_Sdk_flighthq_media_AudioChannel.playAudioResource(context, source, options);
     return cast null;
   }
@@ -15475,7 +15491,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function prepareElementForInput(element:Dynamic):Void {
+  public static function prepareElementForInput(element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Sdk_flighthq_application_Window.prepareElementForInput(element);
   }
 
@@ -15829,7 +15845,7 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Vector4.reflectVector4(out, incident, normal);
   }
 
-  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshCanvasRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasCache.refreshCanvasRenderCache(cacheState, cache, source, options);
     return cast null;
   }
@@ -15918,91 +15934,91 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dWgpu_WgpuShadedPrelude.registerBuiltInWgpuModifierSnippets(state);
   }
 
-  public static function registerCanvasBevelEffect(state:Dynamic):Void {
+  public static function registerCanvasBevelEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBevelEffect.registerCanvasBevelEffect(state);
   }
 
-  public static function registerCanvasBitmapTextureResolver(resolvers:Dynamic):Void {
+  public static function registerCanvasBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasBitmapTextureResolver.registerCanvasBitmapTextureResolver(resolvers);
   }
 
-  public static function registerCanvasBlendEffect(state:Dynamic):Void {
+  public static function registerCanvasBlendEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.registerCanvasBlendEffect(state);
   }
 
-  public static function registerCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:String, target:Dynamic):Void {
+  public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.registerCanvasBlendEffectBackdrop(state, backdropKey, target);
   }
 
-  public static function registerCanvasBloomEffect(state:Dynamic):Void {
+  public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect.registerCanvasBloomEffect(state);
   }
 
-  public static function registerCanvasBlurEffect(state:Dynamic):Void {
+  public static function registerCanvasBlurEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.registerCanvasBlurEffect(state);
   }
 
-  public static function registerCanvasCompositeEffect(state:Dynamic):Void {
+  public static function registerCanvasCompositeEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasCompositeEffect.registerCanvasCompositeEffect(state);
   }
 
-  public static function registerCanvasDropShadowEffect(state:Dynamic):Void {
+  public static function registerCanvasDropShadowEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect.registerCanvasDropShadowEffect(state);
   }
 
-  public static function registerCanvasFilmGrainEffect(state:Dynamic):Void {
+  public static function registerCanvasFilmGrainEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.registerCanvasFilmGrainEffect(state);
   }
 
-  public static function registerCanvasGradientBevelEffect(state:Dynamic):Void {
+  public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasGradientBevelEffect.registerCanvasGradientBevelEffect(state);
   }
 
-  public static function registerCanvasGradientGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasGradientGlowEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasGradientGlowEffect.registerCanvasGradientGlowEffect(state);
   }
 
-  public static function registerCanvasImageTextureResolver(resolvers:Dynamic):Void {
+  public static function registerCanvasImageTextureResolver(resolvers:CanvasTextureResolvers):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasImageTextureResolver.registerCanvasImageTextureResolver(resolvers);
   }
 
-  public static function registerCanvasInnerGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasInnerGlowEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasInnerGlowEffect.registerCanvasInnerGlowEffect(state);
   }
 
-  public static function registerCanvasInnerShadowEffect(state:Dynamic):Void {
+  public static function registerCanvasInnerShadowEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasInnerShadowEffect.registerCanvasInnerShadowEffect(state);
   }
 
-  public static function registerCanvasOuterGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasOuterGlowEffect.registerCanvasOuterGlowEffect(state);
   }
 
-  public static function registerCanvasPixelateEffect(state:Dynamic):Void {
+  public static function registerCanvasPixelateEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasPixelateEffect.registerCanvasPixelateEffect(state);
   }
 
-  public static function registerCanvasRenderEffect(state:Dynamic, kind:String, runner:Dynamic):Void {
+  public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistry.registerCanvasRenderEffect(state, kind, runner);
   }
 
-  public static function registerCanvasRenderTextureResolver(resolvers:Dynamic, state:Dynamic):Void {
+  public static function registerCanvasRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTextureResolver.registerCanvasRenderTextureResolver(resolvers, state);
   }
 
-  public static function registerCanvasScanlinesEffect(state:Dynamic):Void {
+  public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasScanlinesEffect.registerCanvasScanlinesEffect(state);
   }
 
-  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 
-  public static function registerCanvasTextureResolver(resolvers:Dynamic, sourceKind:TextureSourceKind, resolver:Null<Dynamic>):Void {
+  public static function registerCanvasTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<CanvasTextureResolver>):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasTextureResolver.registerCanvasTextureResolver(resolvers, sourceKind, resolver);
   }
 
-  public static function registerCanvasVignetteEffect(state:Dynamic):Void {
+  public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.registerCanvasVignetteEffect(state);
   }
 
@@ -16078,7 +16094,7 @@ class Sdk {
     Facade_Sdk_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffect(state);
   }
 
-  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flighthq._internal.dom.WebGLTexture):Void {
     Facade_Sdk_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop(state, backdropKey, texture);
   }
 
@@ -16319,7 +16335,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dGl_ShadedGlMeshMaterialRenderer.registerGlShadedMaterial(state);
   }
 
-  public static function registerGlShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerGlShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 
@@ -16829,7 +16845,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dWgpu_ShadedWgpuMeshMaterialRenderer.registerWgpuShadedMaterial(state);
   }
 
-  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 
@@ -16926,7 +16942,7 @@ class Sdk {
     Facade_Sdk_flighthq_assets_AssetLibrary.releaseAssetGroup(library, name);
   }
 
-  public static function releaseCanvasRenderTexture(state:Dynamic, pool:Dynamic, renderTexture:RenderTexture):Void {
+  public static function releaseCanvasRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, renderTexture:RenderTexture):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool.releaseCanvasRenderTexture(state, pool, renderTexture);
   }
 
@@ -16938,7 +16954,7 @@ class Sdk {
     Facade_Sdk_flighthq_renderGl_GlRenderTexturePool.releaseGlRenderTexture(state, pool, renderTexture);
   }
 
-  public static function releaseInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function releaseInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Sdk_flighthq_input_InputManager.releaseInputPointerCapture(element, pointerId);
   }
 
@@ -17128,11 +17144,11 @@ class Sdk {
 
   public static final RenderCacheKind:Dynamic = Facade_Sdk_flighthq_types__internal__RenderCacheValues.RenderCacheKindValue;
 
-  public static function renderCanvasBackground(state:Dynamic):Void {
+  public static function renderCanvasBackground(state:CanvasRenderState):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasBackground.renderCanvasBackground(state);
   }
 
-  public static function renderCanvasScene2D(state:Dynamic, source:Node2D):Void {
+  public static function renderCanvasScene2D(state:CanvasRenderState, source:Node2D):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasNode2D.renderCanvasScene2D(state, source);
   }
 
@@ -17156,7 +17172,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene2dGl_GlVelocity.renderGlVelocity(state, root, field, target);
   }
 
-  public static function renderIntoCanvasRenderTexture(state:Dynamic, renderTexture:RenderTexture, callback:Dynamic):Void {
+  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:Dynamic):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexture.renderIntoCanvasRenderTexture(state, renderTexture, callback);
   }
 
@@ -17230,7 +17246,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function requestApplicationFullscreen(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function requestApplicationFullscreen(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Sdk_flighthq_application_Window.requestApplicationFullscreen(element);
     return cast null;
   }
@@ -17245,12 +17261,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function requestInputPointerLock(element:Dynamic):flighthq._internal._Promise<Bool> {
+  public static function requestInputPointerLock(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<Bool> {
     return cast Facade_Sdk_flighthq_input_InputManager.requestInputPointerLock(element);
     return cast null;
   }
 
-  public static function requestNotificationPermission():flighthq._internal._Promise<Dynamic> {
+  public static function requestNotificationPermission():flighthq._internal._Promise<NotificationPermission> {
     return cast Facade_Sdk_flighthq_notification_Notification.requestNotificationPermission();
     return cast null;
   }
@@ -17373,7 +17389,7 @@ class Sdk {
     Facade_Sdk_flighthq_tilemap_Tilemap.resizeTilemap(tilemap, columns, rows);
   }
 
-  public static function resolveAudioResourceReference(ref:AudioResourceReference, context:Null<Dynamic>, fetch:AudioResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<AudioResource>> {
+  public static function resolveAudioResourceReference(ref:AudioResourceReference, context:Null<flighthq._internal.dom.AudioContext>, fetch:AudioResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<AudioResource>> {
     return cast Facade_Sdk_flighthq_audio_AudioResourceReference.resolveAudioResourceReference(ref, context, fetch, signal);
     return cast null;
   }
@@ -17403,12 +17419,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<Dynamic> {
+  public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, ?premultiply:Dynamic, ?workingColorSpace:RenderTargetColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
     return cast Facade_Sdk_flighthq_renderGl_GlTextureResolver.resolveGlTexture(state, texture, premultiply, workingColorSpace);
     return cast null;
   }
 
-  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast Facade_Sdk_flighthq_image_ImageResourceReference.resolveImageResourceReference(ref, fetch, signal);
     return cast null;
   }
@@ -17433,7 +17449,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast Facade_Sdk_flighthq_scene3dResources_ResolveScene3DResources.resolveOneScene3DResourceTexture(resolver, ref, signal);
     return cast null;
   }
@@ -17448,7 +17464,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):Dynamic {
+  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuDraw.resolveWgpuSmoothingBindGroup(state, entry, smoothing);
     return cast null;
   }
@@ -18117,7 +18133,7 @@ class Sdk {
     Facade_Sdk_flighthq_camera_Camera.setCamera3DViewMatrix4FromMatrix4(camera, view);
   }
 
-  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+  public static function setCanvasRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void {
     Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTarget.setCanvasRenderTransform2D(state, transform);
   }
 
@@ -18196,7 +18212,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dGl_GlPbrTransmissionSceneColor.setGlPbrTransmissionSceneColor(state, sceneColor);
   }
 
-  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<flighthq._internal.dom.WebGLTexture>):Void {
     Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture(pipeline, texture);
   }
 
@@ -18220,7 +18236,7 @@ class Sdk {
     Facade_Sdk_flighthq_scene2d_HtmlView.setHtmlViewSize(source, width, height);
   }
 
-  public static function setInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function setInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Sdk_flighthq_input_InputManager.setInputPointerCapture(element, pointerId);
   }
 
@@ -19121,7 +19137,7 @@ class Sdk {
     Facade_Sdk_flighthq_texture_VideoTexture.setVideoTextureSource(texture, source);
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
     Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 
@@ -20092,7 +20108,7 @@ class Sdk {
     Facade_Sdk_flighthq_audio_AudioDecoderRegistry.unregisterAudioDecoder(mimeType);
   }
 
-  public static function unregisterCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:String):Bool {
+  public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
     return cast Facade_Sdk_flighthq_effectsCanvas_CanvasBlendEffect.unregisterCanvasBlendEffectBackdrop(state, backdropKey);
     return cast null;
   }
@@ -20265,7 +20281,7 @@ class Sdk {
     Facade_Sdk_flighthq_tween_UpdateTweens.updateTweens(manager, deltaTime);
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     return cast Facade_Sdk_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
     return cast null;
   }
@@ -20447,7 +20463,7 @@ class Sdk {
 
   public static final WireframeMaterialKind:Dynamic = Facade_Sdk_flighthq_types__internal__WireframeMaterialValues.WireframeMaterialKind;
 
-  public static function withCanvasRenderTextures<T>(state:Dynamic, pool:Dynamic, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
+  public static function withCanvasRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Dynamic):Dynamic {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasRenderTexturePool.withCanvasRenderTextures(state, pool, descriptors, callback);
     return cast null;
   }
@@ -20585,7 +20601,7 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Vector4.writeVector4ToFloat32Array(out, offset, source);
   }
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):Dynamic {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.writeWgpuDrawUniform(state, proxy);
     return cast null;
   }

@@ -75,7 +75,7 @@ class MeshGeometryIndex {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Array<Float> = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    useUint32 = _Runtime.select(geometry.indices, function():Dynamic return cast _Runtime.isInstanceOf(geometry.indices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast true);
+    useUint32 = _Runtime.select(geometry.indices, function():Dynamic return cast _Runtime.isInstanceOfName(geometry.indices, 'Uint32Array'), function():Dynamic return cast true);
     if ((cast ((cast !_Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool) && (cast !_Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) : Bool)) {
       return cast ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(0.0) : Dynamic) : (cast new flighthq._internal._UInt16Array(0.0) : Dynamic));
     }

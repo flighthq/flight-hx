@@ -95,7 +95,7 @@ class WgpuTextureResolver {
 
   public static function resolveWgpuImageTexture__wgpuTextureResolver(state:WgpuRenderState, texture:TextureLike, premultiply:Bool, colorSpace:TextureColorSpace):Null<WgpuTextureEntry> {
     var image:Dynamic = cast _Runtime.UNDEFINED;
-    image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Dynamic>);
+    image = (cast _Runtime.callValue(getTextureSource, cast ([texture] : Array<Dynamic>)) : Null<Image>);
     return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, image, _Runtime.field(texture, 'sampler').mipmaps, premultiply, colorSpace] : Array<Dynamic>)) : Dynamic));
     return cast null;
   }

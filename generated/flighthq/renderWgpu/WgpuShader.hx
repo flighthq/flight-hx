@@ -20,12 +20,12 @@ class WgpuShader {
 
   public static final MASK_FRAGMENT_SRC__wgpuShader:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  alpha : f32,\n  hasColorScaleBias : u32,\n  _pad0 : f32,\n  _pad1 : f32,\n  colorScale : vec4f,\n  colorBias : vec4f,\n  x0 : f32, y0 : f32, x1 : f32, y1 : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let x = select(uni.x0, uni.x1, xi);\n  let y = select(uni.y0, uni.y1, yi);\n  let u = select(uni.u0, uni.u1, xi);\n  let v = select(uni.v0, uni.v1, yi);\n  let p = uni.matrix * vec3f(x, y, 1.0);\n  var out : VertexOut;\n  out.position = vec4f(p.x, p.y, 0.0, 1.0);\n  out.uv = vec2f(u, v);\n  return out;\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  let s = textureSample(tex, smp, in.uv);\n  if (s.a <= 0.0) { discard; }\n  return vec4f(0.0);\n}\n';
 
-  public static final NORMAL_BLEND__wgpuShader:Dynamic = _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src-alpha'] : Array<Dynamic>));
+  public static final NORMAL_BLEND__wgpuShader:flighthq._internal.dom.GPUBlendState = _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src-alpha'] : Array<Dynamic>));
 
   public static final BLEND_MODES__wgpuShader:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one'] : Array<Dynamic>)) }, { key: BlendModeValue.Darken, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'min'] : Array<Dynamic>)) }, { key: BlendModeValue.Lighten, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'max'] : Array<Dynamic>)) }, { key: BlendModeValue.Multiply, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['dst', 'one-minus-src-alpha'] : Array<Dynamic>)) }, { key: BlendModeValue.Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: BlendModeValue.Screen, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src'] : Array<Dynamic>)) }]);
 
   @:noCompletion
-  public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
+  public static function createWgpuBindGroupLayouts(device:flighthq._internal.dom.GPUDevice):{ var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var textureBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; } {
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     var textureBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true, minBindingSize: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -35,13 +35,13 @@ class WgpuShader {
   }
 
   @:noCompletion
-  public static function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:Dynamic, textureBindGroupLayout:Dynamic):Dynamic {
+  public static function createWgpuPipelineLayout(device:flighthq._internal.dom.GPUDevice, uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout, textureBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout):flighthq._internal.dom.GPUPipelineLayout {
     return cast flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
 
   @:noCompletion
-  public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
+  public static function getActiveWgpuPipeline(state:WgpuRenderState):flighthq._internal.dom.GPURenderPipeline {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -50,7 +50,7 @@ class WgpuShader {
     return cast null;
   }
 
-  public static function buildStencilFaceState__wgpuShader(stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function buildStencilFaceState__wgpuShader(stencilMode:StencilMode__wgpuShader):flighthq._internal.dom.GPUStencilFaceState {
     if ((cast _Runtime.strictEquals(stencilMode, 'maskwrite') : Bool)) {
       return cast { compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' };
     }
@@ -62,13 +62,13 @@ class WgpuShader {
   }
 
   @:noCompletion
-  public static function getWgpuBlendState(blendMode:Null<BlendMode>):Dynamic {
+  public static function getWgpuBlendState(blendMode:Null<BlendMode>):flighthq._internal.dom.GPUBlendState {
     return cast _Runtime.coalesce(((cast !_Runtime.strictEquals(blendMode, null) : Bool) ? (cast _Runtime.getIndex(WgpuShader.BLEND_MODES__wgpuShader, blendMode) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast WgpuShader.NORMAL_BLEND__wgpuShader);
     return cast null;
   }
 
   @:noCompletion
-  public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):flighthq._internal.dom.GPURenderPipeline {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
@@ -180,8 +180,8 @@ class WgpuShader {
     return cast null;
   }
 
-  public static function createWgpuBlendState__wgpuShader(srcFactor:Dynamic, dstFactor:Dynamic, operation:Dynamic = 'add'):Dynamic {
-    var component:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createWgpuBlendState__wgpuShader(srcFactor:flighthq._internal.dom.GPUBlendFactor, dstFactor:flighthq._internal.dom.GPUBlendFactor, operation:flighthq._internal.dom.GPUBlendOperation = 'add'):flighthq._internal.dom.GPUBlendState {
+    var component:flighthq._internal.dom.GPUBlendComponent = cast _Runtime.UNDEFINED;
     component = { srcFactor: srcFactor, dstFactor: dstFactor, operation: operation };
     return cast { color: component, alpha: component };
     return cast null;

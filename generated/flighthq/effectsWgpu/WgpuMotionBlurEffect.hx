@@ -14,7 +14,7 @@ import flighthq.types.WgpuRenderTarget;
 
 class WgpuMotionBlurEffect {
   @:noCompletion
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<flighthq._internal.dom.GPUTexture>, effect:MotionBlurEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,7 +32,7 @@ class WgpuMotionBlurEffect {
       }] : Array<Dynamic>));
       return;
     }
-    velocitySource = (cast { view: _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) } : WgpuRenderTarget);
+    velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), velocitySource, (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);

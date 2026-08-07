@@ -29,7 +29,7 @@ class DepthWgpuMeshMaterialRenderer {
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    var group:Dynamic = cast _Runtime.UNDEFINED;
+    var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     pass = _Runtime.field(stateRuntime, 'renderPass');
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
@@ -43,7 +43,7 @@ class DepthWgpuMeshMaterialRenderer {
       (group = cast (_Runtime.callValue(bindWgpuDebugSurface, cast ([state, pipeline, depth, _Runtime.field(depth, 'near'), _Runtime.field(depth, 'far'), 1.0] : Array<Dynamic>)) : Dynamic));
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

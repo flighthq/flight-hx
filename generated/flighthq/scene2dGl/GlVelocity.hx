@@ -28,7 +28,7 @@ import flighthq.types.Velocity.VelocityField;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.velocity.VelocityField.getVelocity;
 
-typedef GlVelocityProgram__glVelocity = { var program:Dynamic; var quadBuffer:Dynamic; var locCorner:Float; var locClipRect:Dynamic; var locVelocity:Dynamic; };
+typedef GlVelocityProgram__glVelocity = { var program:flighthq._internal.dom.WebGLProgram; var quadBuffer:flighthq._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flighthq._internal.dom.WebGLUniformLocation; var locVelocity:flighthq._internal.dom.WebGLUniformLocation; };
 
 class GlVelocity {
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {

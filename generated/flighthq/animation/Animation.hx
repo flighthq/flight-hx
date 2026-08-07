@@ -16,6 +16,7 @@ import flighthq.types.AnimationBlendTree;
 import flighthq.types.AnimationBlendTree.AnimationBlendTreeInput;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationClipEvent;
 import flighthq.types.AnimationCrossfade;
 import flighthq.types.AnimationCrossfade.AnimationCrossfadeOptions;
 import flighthq.types.AnimationInterpolation;
@@ -100,12 +101,12 @@ class Animation {
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<Dynamic>):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<AnimationClipEvent>):AnimationClip {
     return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClip(channels, duration, events);
     return cast null;
   }
 
-  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):Dynamic {
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):AnimationClipEvent {
     return cast Facade_Animation_flighthq_animation_AnimationClip.createAnimationClipEvent(time, name, payload);
     return cast null;
   }

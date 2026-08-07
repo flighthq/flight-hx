@@ -45,7 +45,7 @@ class GlMeshProgram {
   }
 
   @:noCompletion
-  public static function bindGlUvTransform(gl:Dynamic, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
+  public static function bindGlUvTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.field(program, 'locUvTransform');
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -58,7 +58,7 @@ class GlMeshProgram {
   }
 
   @:noCompletion
-  public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
+  public static function compileGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, vertexSource, fragmentSource, 'Mesh'] : Array<Dynamic>));
     return cast null;
   }
@@ -153,20 +153,20 @@ class GlMeshProgram {
   }
 
   @:noCompletion
-  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera3D):Void {
+  public static function setGlMeshCameraPosition(gl:flighthq._internal.dom.WebGL2RenderingContext, locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
     _Runtime.callValue(inverseMatrix4, cast ([GlMeshProgram.scratchInverseView__glMeshProgram, camera.view] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([GlMeshProgram.scratchCameraPosition__glMeshProgram, GlMeshProgram.scratchInverseView__glMeshProgram] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'z'));
   }
 
   @:noCompletion
-  public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<Dynamic>, camera:Camera3D):Void {
+  public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([GlMeshProgram.scratchViewProjection__glMeshProgram, camera, _Runtime.callValue(getGlScene3DViewportAspect, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(_Runtime.field(state, 'gl'), locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
   }
 
   @:noCompletion
-  public static function uploadGlMeshDrawAlpha(gl:Dynamic, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
+  public static function uploadGlMeshDrawAlpha(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
     var location:Dynamic = cast _Runtime.UNDEFINED;
     var coverageLocation:Dynamic = cast _Runtime.UNDEFINED;
     location = _Runtime.field(program, 'locObjectAlpha');

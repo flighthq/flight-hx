@@ -12,7 +12,7 @@ import flighthq.types.GlWireframeProgram;
 
 class GlWireframePrelude {
   @:noCompletion
-  public static function compileGlWireframeProgram(gl:Dynamic, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
+  public static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Dynamic = false):GlWireframeProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlWireframeVertexSource, cast ([] : Array<Dynamic>)), _Runtime.callValue(getGlWireframeFragmentSource, cast ([alphaMaskEnabled] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };

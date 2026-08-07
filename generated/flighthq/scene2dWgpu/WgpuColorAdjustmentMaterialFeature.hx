@@ -226,7 +226,7 @@ class WgpuColorAdjustmentMaterialFeature {
     }
   }
 
-  public static function getWgpuQuadBatchWriterColorScaleBiasModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):Dynamic {
+  public static function getWgpuQuadBatchWriterColorScaleBiasModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuColorAdjustmentMaterialFeature._colorScaleBiasModules__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
@@ -237,7 +237,7 @@ class WgpuColorAdjustmentMaterialFeature {
     return cast null;
   }
 
-  public static function getWgpuQuadBatchWriterPackedTintModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):Dynamic {
+  public static function getWgpuQuadBatchWriterPackedTintModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuColorAdjustmentMaterialFeature._packedTintModules__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));
@@ -248,7 +248,7 @@ class WgpuColorAdjustmentMaterialFeature {
     return cast null;
   }
 
-  public static function getWgpuQuadBatchWriterColorMatrixModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):Dynamic {
+  public static function getWgpuQuadBatchWriterColorMatrixModule__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuColorAdjustmentMaterialFeature._colorMatrixModules__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap).get(_Runtime.field(state, 'device')));

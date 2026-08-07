@@ -16,7 +16,7 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasBloomEffect {
   @:noCompletion
-  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
+  public static function applyBloomEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:BloomEffect):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,11 +51,11 @@ class CanvasBloomEffect {
     _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasBloomEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBloomEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasBloomEffect(state:Dynamic):Void {
+  public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BloomEffect', defaultCanvasBloomEffectRunner] : Array<Dynamic>));
   }
 }

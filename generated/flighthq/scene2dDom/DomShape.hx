@@ -63,14 +63,14 @@ class DomShape {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', HxMath.ceil((w * pixelRatio)));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', HxMath.ceil((h * pixelRatio)));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(w) + 'px');
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(h) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(w) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = _Runtime.field(data, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
     _Runtime.callValue(rasterizer, cast ([ctx, commands, state] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
     if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) {
-      _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast ''));
+      ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast ''));
     }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomTransformWithOffset, cast ([_Runtime.field(data, 'canvas'), _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));

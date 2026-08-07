@@ -7,16 +7,16 @@ import flighthq.types.Matrix;
 
 class DomTransform {
   @:noCompletion
-  public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
+  public static function setDomTransform(element:flighthq._internal.dom.HTMLElement, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     tx = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
     ty = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.ty) : Dynamic) : (cast transform.ty : Dynamic));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
   @:noCompletion
-  public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
+  public static function setDomTransformWithOffset(element:flighthq._internal.dom.HTMLElement, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,6 +35,6 @@ class DomTransform {
       (tx = cast (_Runtime.fround(tx) : Dynamic));
       (ty = cast (_Runtime.fround(ty) : Dynamic));
     }
-    _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 }

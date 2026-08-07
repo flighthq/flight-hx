@@ -10,25 +10,25 @@ import flighthq.types.RenderProxy2D;
 
 class DomStyle {
   @:noCompletion
-  public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
+  public static function applyDomStyle(state:DomRenderState, element:flighthq._internal.dom.HTMLElement, node:RenderProxy2D):Void {
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(node, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'imageRendering', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) { _Runtime.setField(_Runtime.field(element, 'style'), 'filter', _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')); }
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(node, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(node, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast _Runtime.field(state, 'allowSmoothing') : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'domCssFilterResolver'), null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce(_Runtime.callProperty(state, 'domCssFilterResolver', cast ([node] : Array<Dynamic>)), function():Dynamic return cast '')); }
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(node, 'blendMode')] : Array<Dynamic>));
   }
 
   @:noCompletion
-  public static function prepareDomElement(element:Dynamic):Void {
-    _Runtime.setField(_Runtime.field(element, 'style'), 'position', 'absolute');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'left', '0');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'top', '0');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'transformOrigin', '0 0');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'pointerEvents', 'none');
+  public static function prepareDomElement(element:flighthq._internal.dom.HTMLElement):Void {
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).left = '0');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transformOrigin = '0 0');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).pointerEvents = 'none');
   }
 
   @:noCompletion
-  public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
+  public static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
     _Runtime.setField(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domCurrentElement', element);
   }
 }

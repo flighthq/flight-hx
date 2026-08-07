@@ -20,23 +20,23 @@ import flighthq.types.GradientGlowEffect;
 
 class CanvasGradientGlowEffect {
   @:noCompletion
-  public static function applyGradientGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:GradientGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientGlowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasGradientGlowEffect.applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasGradientGlowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasGradientGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyGradientGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientGlowEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasGradientGlowEffect(state:Dynamic):Void {
+  public static function registerCanvasGradientGlowEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'GradientGlowEffect', defaultCanvasGradientGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientGlowEffect):Void {
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var glow:Dynamic = cast _Runtime.UNDEFINED;
     var strength:Dynamic = cast _Runtime.UNDEFINED;

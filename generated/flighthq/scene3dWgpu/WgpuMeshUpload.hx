@@ -39,14 +39,14 @@ class WgpuMeshUpload {
     }
     device = _Runtime.field(state, 'device');
     if ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(upload, 'vertexBuffer'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.callOptionalProperty(_Runtime.field(upload, 'indexBuffer'), 'destroy', cast ([] : Array<Dynamic>));
+      (cast _Runtime.field(upload, 'vertexBuffer') : flighthq._internal.dom.GPUBuffer).destroy();
+      ({ final __hostTypeCall0 = _Runtime.field(upload, 'indexBuffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); });
     }
     vertices = ((cast hasSkinBindPose : Bool) ? (cast _Runtime.callProperty(skinning, 'getUploadVertices', cast ([geometry] : Array<Dynamic>)) : Dynamic) : (cast geometry.vertices : Dynamic));
     vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuMeshUpload.alignTo4__wgpuMeshUpload, cast ([_Runtime.field(vertices, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, _Runtime.field(vertices, 'buffer'), _Runtime.field(vertices, 'byteOffset'), _Runtime.field(vertices, 'byteLength')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, _Runtime.field(vertices, 'buffer'), _Runtime.field(vertices, 'byteOffset'), _Runtime.field(vertices, 'byteLength')] : Array<Dynamic>));
     indexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuMeshUpload.alignTo4__wgpuMeshUpload, cast ([_Runtime.field(indices, 'byteLength')] : Array<Dynamic>))), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(indices, 'buffer'), _Runtime.field(indices, 'byteOffset'), _Runtime.field(indices, 'byteLength')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(indices, 'buffer'), _Runtime.field(indices, 'byteOffset'), _Runtime.field(indices, 'byteLength')] : Array<Dynamic>));
     (upload = cast ({ indexBuffer: indexBuffer, indexCount: _Runtime.field(indices, 'length'), indexFormat: ((cast _Runtime.strictEquals(_Runtime.field(indices, 'BYTES_PER_ELEMENT'), 4.0) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), skinBindUploaded: hasSkinBindPose, version: geometry.version, vertexBuffer: vertexBuffer } : Dynamic));
     ((cast cache : flighthq._internal._WeakMap).set(geometry, upload));
     if ((cast !_Runtime.strictEquals(meshRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

@@ -27,7 +27,7 @@ class GlCompositeEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'composite.porterduff', GlCompositeEffect.COMPOSITE_FRAGMENT_SRC__glCompositeEffect] : Array<Dynamic>));
     operatorIndex = _Runtime.callValue(getCompositeEffectOperatorIndex, cast ([_Runtime.field(effect, 'operator')] : Array<Dynamic>));
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    inputs = cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : Dynamic) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>);
+    inputs = cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>);
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
       var operatorLoc:Dynamic = cast _Runtime.UNDEFINED;
       var hasBackdropLoc:Dynamic = cast _Runtime.UNDEFINED;

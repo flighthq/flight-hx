@@ -19,7 +19,7 @@ import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
 
 class GlPbrProgramCache {
   @:noCompletion
-  public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlPbrProgram {
+  public static function compileGlPbrProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlPbrProgram {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var vertexSource:Dynamic = cast _Runtime.UNDEFINED;

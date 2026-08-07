@@ -60,7 +60,7 @@ class GlShadowMap {
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
     rigidProgram = _Runtime.callValue(ensureGlScene3DProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
-    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<Dynamic>);
+    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), _Runtime.field(target, 'framebuffer'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'));
@@ -114,14 +114,14 @@ class GlShadowMap {
     return cast null;
   }
 
-  public static function compileShadowDepthProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
+  public static function compileShadowDepthProgram__glShadowMap(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMeshProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, GlShadowMap.SHADOW_DEPTH_VERTEX__glShadowMap, GlShadowMap.SHADOW_DEPTH_FRAGMENT__glShadowMap] : Array<Dynamic>));
     return cast { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
-  public static function compileShadowDepthSkinnedProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
+  public static function compileShadowDepthSkinnedProgram__glShadowMap(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMeshProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, GlShadowMap.SHADOW_DEPTH_SKINNED_VERTEX__glShadowMap, GlShadowMap.SHADOW_DEPTH_FRAGMENT__glShadowMap] : Array<Dynamic>));
     return cast { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };

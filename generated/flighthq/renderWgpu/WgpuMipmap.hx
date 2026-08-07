@@ -8,7 +8,7 @@ import flighthq.types.WgpuRenderState;
 
 class WgpuMipmap {
   @:noCompletion
-  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
+  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture, width:Float, height:Float, format:flighthq._internal.dom.GPUTextureFormat):Void {
     var levelCount:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,18 +29,18 @@ class WgpuMipmap {
     {
       var level:Dynamic = 1.0;
       while ((cast ((cast level : Float) < (cast levelCount : Float)) : Bool)) {
-        var srcView:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 }] : Array<Dynamic>));
-        var dstView:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([{ baseMipLevel: level, mipLevelCount: 1.0 }] : Array<Dynamic>));
+        var srcView:Dynamic = texture.createView({ baseMipLevel: (level - 1.0), mipLevelCount: 1.0 });
+        var dstView:Dynamic = texture.createView({ baseMipLevel: level, mipLevelCount: 1.0 });
         var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: srcView }, { binding: 1.0, resource: _Runtime.field(runtime, 'linearSampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-        var pass:Dynamic = _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }] : Array<Dynamic>));
-        _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
-        _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>));
-        _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
-        _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
+        var pass:Dynamic = (cast encoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: dstView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
         level++;
       }
     }
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([_Runtime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
   @:noCompletion
@@ -49,7 +49,7 @@ class WgpuMipmap {
     return cast null;
   }
 
-  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):{ var bindGroupLayout:Dynamic; var pipeline:Dynamic; } {
+  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat):{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;

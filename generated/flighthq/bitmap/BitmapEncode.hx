@@ -19,7 +19,7 @@ class BitmapEncode {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', source.width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', source.height);
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [source.width, source.height]);
-    (cast _Runtime.field(domImageData, 'data') : flighthq._internal._UInt8ClampedArray).set(source.data);
+    (cast (cast domImageData : flighthq._internal.dom.ImageData).data : flighthq._internal._UInt8ClampedArray).set(source.data);
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     mimeType = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'image/jpeg' : Dynamic) : (cast 'image/png' : Dynamic));
     dataUrl = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));

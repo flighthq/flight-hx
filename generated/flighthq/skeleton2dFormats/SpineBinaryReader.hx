@@ -70,7 +70,7 @@ class SpineBinaryReader {
     start = _Runtime.addNumbers(_Runtime.field(reader.view, 'byteOffset'), reader.offset);
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(reader.view, 'buffer'), start, length);
     (reader.offset += length);
-    return cast _Runtime.callProperty(SpineBinaryReader._decoder__spineBinaryReader, 'decode', cast ([bytes] : Array<Dynamic>));
+    return cast (cast SpineBinaryReader._decoder__spineBinaryReader : flighthq._internal.dom.TextDecoder).decode(bytes);
     return cast null;
   }
 

@@ -411280,7 +411280,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         }
       ],
       "id": "@flighthq/types:interface#WgpuColorLutTextureCache",
@@ -413351,7 +413351,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUSampler | undefined"
         },
         {
           "name": "samplers",
@@ -413667,7 +413667,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "indexCount",
@@ -414372,7 +414372,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "instanceCapacity",
@@ -414388,7 +414388,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "materialCapacity",
@@ -414458,7 +414458,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "sceneVelocityTexture",
@@ -414466,7 +414466,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "source",
@@ -414568,7 +414568,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         }
       ],
       "id": "@flighthq/types:interface#WgpuRenderEffectPipeline",
@@ -414669,7 +414669,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureFormat | undefined"
         },
         {
           "name": "imageSmoothingEnabled",
@@ -414693,7 +414693,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUPowerPreference | undefined"
         },
         {
           "name": "roundPixels",
@@ -414988,7 +414988,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "canvasViewCleared",
@@ -415044,7 +415044,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUCommandEncoder | null"
         },
         {
           "name": "compressedTextureDecoder",
@@ -415076,7 +415076,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureFormat | undefined"
         },
         {
           "name": "currentFrameId",
@@ -415132,7 +415132,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "depthStencilView",
@@ -415140,7 +415140,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "depthStencilWidth",
@@ -415156,7 +415156,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "frameCaptureBytesPerRow",
@@ -415188,7 +415188,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "frameCaptureWidth",
@@ -415252,7 +415252,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "particleInstanceCapacity",
@@ -415460,7 +415460,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPURenderPassEncoder | null"
         },
         {
           "name": "renderProxyAdapterMap",
@@ -416269,7 +416269,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUDevice | null"
         },
         {
           "name": "effectTargets",
@@ -417057,7 +417057,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "canvasViewCleared",
@@ -417072,8 +417072,8 @@
           "optional": false,
           "readonly": false,
           "receiverSensitive": false,
-          "requiredUndefined": false,
-          "type": "any"
+          "requiredUndefined": true,
+          "type": "GPUTextureFormat | undefined"
         },
         {
           "name": "depthStencilView",
@@ -417081,7 +417081,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "renderTarget",
@@ -417605,7 +417605,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "drawBindGroupLayout",
@@ -417613,7 +417613,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "environmentSourceCube",
@@ -417621,7 +417621,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "environmentSourceCubeView",
@@ -417629,7 +417629,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "forwardLightSelectionGuard",
@@ -417645,7 +417645,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "frameBindGroupLayout",
@@ -417653,7 +417653,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "frameBindings",
@@ -417669,7 +417669,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "ibl",
@@ -417685,7 +417685,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "iblDummyCubeView",
@@ -417693,7 +417693,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "iblDummyLutTexture",
@@ -417701,7 +417701,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "iblDummyLutView",
@@ -417709,7 +417709,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "iblSampleBindGroup",
@@ -417717,7 +417717,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "iblSampleCubeView",
@@ -417725,7 +417725,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "iblSampleLayout",
@@ -417733,7 +417733,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "iblSampler",
@@ -417741,7 +417741,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUSampler | null"
         },
         {
           "name": "iblUniformBuffer",
@@ -417749,7 +417749,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "materialBindGroups",
@@ -417805,7 +417805,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "pbrSampleIblCubeView",
@@ -417813,7 +417813,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "pbrSampleLayout",
@@ -417821,7 +417821,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "pbrSampleShadowView",
@@ -417829,7 +417829,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "pendingDrawOffset",
@@ -417861,7 +417861,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "shadedMaterialBindingCache",
@@ -417893,7 +417893,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUSampler | null"
         },
         {
           "name": "shadowDepthPipeline",
@@ -417901,7 +417901,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPURenderPipeline | null"
         },
         {
           "name": "shadowDepthSkinnedPipeline",
@@ -417909,7 +417909,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPURenderPipeline | null"
         },
         {
           "name": "shadowDummyTexture",
@@ -417917,7 +417917,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "shadowDummyView",
@@ -417925,7 +417925,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "shadowSampleBindGroup",
@@ -417933,7 +417933,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "shadowSampleLayout",
@@ -417941,7 +417941,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "shadowSampleView",
@@ -417949,7 +417949,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "shadowUniformBuffer",
@@ -417957,7 +417957,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBuffer | null"
         },
         {
           "name": "skinDrawBindGroup",
@@ -417965,7 +417965,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | null"
         },
         {
           "name": "skinDrawBindGroupLayout",
@@ -417973,7 +417973,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroupLayout | null"
         },
         {
           "name": "skinningAdapter",
@@ -417997,7 +417997,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTexture | null"
         },
         {
           "name": "skinPaletteView",
@@ -418005,7 +418005,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUTextureView | null"
         },
         {
           "name": "uploadCache",
@@ -418860,7 +418860,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "bindGroupNearest",
@@ -418868,7 +418868,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "straightAlpha",
@@ -418985,7 +418985,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "bindGroupNearest",
@@ -418993,7 +418993,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "straightAlpha",
@@ -419500,7 +419500,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "bindGroupNearest",
@@ -419508,7 +419508,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "any"
+          "type": "GPUBindGroup | undefined"
         },
         {
           "name": "height",

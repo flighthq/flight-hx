@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef FontResource = { var family:String; var face:Null<Dynamic>; };
+typedef FontResource = { var family:String; var face:Null<flighthq._internal.dom.FontFace>; };

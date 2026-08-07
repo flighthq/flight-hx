@@ -13,7 +13,7 @@ import flighthq.types.GlRenderTarget;
 
 class GlBokehDepthOfFieldEffect {
   @:noCompletion
-  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast _Runtime.UNDEFINED;
     var focusDistance:Dynamic = cast _Runtime.UNDEFINED;
     var focusRange:Dynamic = cast _Runtime.UNDEFINED;

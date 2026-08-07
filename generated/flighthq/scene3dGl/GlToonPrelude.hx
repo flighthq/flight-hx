@@ -26,7 +26,7 @@ class GlToonPrelude {
   }
 
   @:noCompletion
-  public static function compileGlToonProgram(gl:Dynamic, key:GlToonDefineKey):GlToonProgram {
+  public static function compileGlToonProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlToonDefineKey):GlToonProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlToonVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlToonFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([_Runtime.callValue(resolveGlLitLocations, cast ([gl, program] : Array<Dynamic>)), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locBaseColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColor') }, { locBaseColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColorMap') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ramp') }, { locSteps: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_steps') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);

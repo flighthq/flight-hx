@@ -16,6 +16,7 @@ import {
 } from '../analyze/inventory.ts';
 import { excludedPackageDirectories } from '../analyze/exclusions.ts';
 import { validateHostEndpointCoverage, type HostEndpointAudit } from '../analyze/host-endpoints.ts';
+import { createHostTypeAudit, type HostTypeAudit } from '../analyze/host-types.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
 import type { TypedStructProvenanceAudit } from '../analyze/typed-struct-provenance.ts';
 import { cppStructInitTypedStructIds, type TypedStructRegistry } from '../analyze/typed-structs.ts';
@@ -24,6 +25,7 @@ import type { ExportRecord, PackageInventory } from '../model/inventory.ts';
 import type {
   IrDeclaration,
   IrExpression,
+  HostTypeUse,
   IrModule,
   IrStatement,
   IrType,
@@ -53,12 +55,13 @@ export interface CoreGenerationReport {
     protectedDeclarationIdentities: number;
   };
   excludedPackages: Array<{ packageName: string; reason: string }>;
+  hostTypes: HostTypeAudit;
   modules: Array<{
     declarations: number;
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 4;
+  schemaVersion: 5;
   staticLowering: StaticLoweringEmissionCounts;
 }
 
@@ -322,6 +325,10 @@ export function generateCoreModules(
       .filter((item) => item.exclusion !== null)
       .map((item) => ({ packageName: item.name, reason: item.exclusion!.reason }))
       .sort((left, right) => left.packageName.localeCompare(right.packageName)),
+    hostTypes: createHostTypeAudit(
+      inventory.upstreamCommit,
+      loweredPackages.flatMap((item) => item.lowered.hostTypes),
+    ),
     modules: modules
       .map((module) => ({
         declarations: module.declarations.length,
@@ -335,10 +342,17 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 4,
+    schemaVersion: 5,
     staticLowering: staticLoweringEmissionCounts(),
   };
-  writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
+  const coreReport: Omit<CoreGenerationReport, 'hostTypes'> = {
+    contractSurface: report.contractSurface,
+    excludedPackages: report.excludedPackages,
+    modules: report.modules,
+    schemaVersion: report.schemaVersion,
+    staticLowering: report.staticLowering,
+  };
+  writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(coreReport), check);
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'patches.json'), stableJson(patchAudit), check);
   return report;
 }
@@ -2069,6 +2083,7 @@ function lowerFiles(
 ) {
   const declarations: IrDeclaration[] = [];
   const diagnostics: LoweringDiagnostic[] = [];
+  const hostTypes: HostTypeUse[] = [];
   const sources: LoweredSource[] = [];
   const { checker, program } = upstreamTypeScriptProgram(workspaceDirectory);
   for (const file of files) {
@@ -2078,9 +2093,10 @@ function lowerFiles(
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);
+    hostTypes.push(...result.hostTypes);
     sources.push({ declarations: result.declarations, diagnostics: result.diagnostics, file });
   }
-  return { declarations, diagnostics, sources };
+  return { declarations, diagnostics, hostTypes, sources };
 }
 
 function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {

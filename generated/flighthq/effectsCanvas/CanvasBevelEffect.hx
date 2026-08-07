@@ -19,15 +19,15 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasBevelEffect {
   @:noCompletion
-  public static function applyBevelEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:BevelEffect):Void {
+  public static function applyBevelEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:BevelEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : BevelEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : Dynamic) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _Runtime.callValue(CanvasBevelEffect.applyBevelEffectToCanvasWithPool__canvasBevelEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function clipCanvasBevelBand(band:Dynamic, source:Dynamic, bevelType:Dynamic):Void {
+  public static function clipCanvasBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:Dynamic):Void {
     if ((cast _Runtime.strictEquals(bevelType, 'outer') : Bool)) {
       _Runtime.callValue(compositeCanvasImage, cast ([band, source, 0.0, 0.0, 'destination-out'] : Array<Dynamic>));
       return;
@@ -35,15 +35,15 @@ class CanvasBevelEffect {
     if ((cast !_Runtime.strictEquals(bevelType, 'full') : Bool)) { _Runtime.callValue(compositeCanvasImage, cast ([band, source, 0.0, 0.0, 'destination-in'] : Array<Dynamic>)); }
   }
 
-  public static final defaultCanvasBevelEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasBevelEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBevelEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasBevelEffect(state:Dynamic):Void {
+  public static function registerCanvasBevelEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BevelEffect', defaultCanvasBevelEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyBevelEffectToCanvasWithPool__canvasBevelEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BevelEffect):Void {
+  public static function applyBevelEffectToCanvasWithPool__canvasBevelEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:BevelEffect):Void {
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var lit:Dynamic = cast _Runtime.UNDEFINED;
     var shade:Dynamic = cast _Runtime.UNDEFINED;

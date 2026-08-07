@@ -22,7 +22,7 @@ class Media {
     Facade_Media_flighthq_media_AudioMixer.addAudioBusToMixer(mixer, bus);
   }
 
-  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
+  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:flighthq._internal.dom.AudioNode):Void {
     Facade_Media_flighthq_media_AudioChannel.connectAudioChannelToNode(channel, destinationNode);
   }
 
@@ -31,7 +31,7 @@ class Media {
     return cast null;
   }
 
-  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
+  public static function createAudioMixer(context:flighthq._internal.dom.AudioContext, ?options:AudioMixerOptions):AudioMixer {
     return cast Facade_Media_flighthq_media_AudioMixer.createAudioMixer(context, options);
     return cast null;
   }
@@ -58,12 +58,12 @@ class Media {
     return cast null;
   }
 
-  public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelInputNode(channel:AudioChannel):Null<flighthq._internal.dom.AudioNode> {
     return cast Facade_Media_flighthq_media_AudioChannel.getAudioChannelInputNode(channel);
     return cast null;
   }
 
-  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<flighthq._internal.dom.AudioNode> {
     return cast Facade_Media_flighthq_media_AudioChannel.getAudioChannelOutputNode(channel);
     return cast null;
   }
@@ -115,7 +115,7 @@ class Media {
     Facade_Media_flighthq_media_VideoChannel.pauseVideoChannel(channel);
   }
 
-  public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+  public static function playAudioResource(context:flighthq._internal.dom.AudioContext, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
     return cast Facade_Media_flighthq_media_AudioChannel.playAudioResource(context, source, options);
     return cast null;
   }

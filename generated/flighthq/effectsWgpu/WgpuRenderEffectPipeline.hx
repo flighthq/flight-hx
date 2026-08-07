@@ -64,7 +64,7 @@ class WgpuRenderEffectPipeline {
       _Runtime.setField(pipeline, 'sceneTarget', null);
     }
     _Runtime.callValue(destroyWgpuRenderTargetPool, cast ([state, _Runtime.field(pipeline, 'pool')] : Array<Dynamic>));
-    _Runtime.callOptionalProperty(_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
+    ({ final __hostTypeCall0 = _Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'texture', null);
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'size', 0.0);
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'lut', null);
@@ -132,7 +132,7 @@ class WgpuRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:flighthq.types.WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:flighthq.types.WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
     _Runtime.setField(pipeline, 'velocityTexture', texture);
   }
 

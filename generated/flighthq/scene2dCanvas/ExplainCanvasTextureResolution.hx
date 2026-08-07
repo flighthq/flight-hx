@@ -9,7 +9,7 @@ import flighthq.types.Texture;
 import flighthq.types.TextureResolutionExplanation;
 
 class ExplainCanvasTextureResolution {
-  public static function explainCanvasTextureResolution(resolvers:Dynamic, texture:Texture):TextureResolutionExplanation {
+  public static function explainCanvasTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     kind = _Runtime.callValue(getTextureSourceKind, cast ([texture] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }

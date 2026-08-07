@@ -7,18 +7,18 @@ import flighthq.types.GlSkinPaletteTexture;
 
 class GlSkinPaletteTexture {
   @:noCompletion
-  public static function createGlSkinPaletteTexture(gl:Dynamic):flighthq.types.GlSkinPaletteTexture {
+  public static function createGlSkinPaletteTexture(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq.types.GlSkinPaletteTexture {
     return cast { jointCapacity: 0.0, texture: flighthq._internal.backend.WebGl2Backend.createTexture(gl) };
     return cast null;
   }
 
   @:noCompletion
-  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture):Void {
+  public static function destroyGlSkinPaletteTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, palette:flighthq.types.GlSkinPaletteTexture):Void {
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, _Runtime.field(palette, 'texture'));
   }
 
   @:noCompletion
-  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
+  public static function uploadGlSkinPaletteTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = (jointCount * 4.0);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(palette, 'texture'));

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlFullscreenProgram = { var program:Dynamic; var locPosition:Float; var locTexCoord:Float; var texture:Dynamic; var textures:Array<Dynamic>; };
+typedef GlFullscreenProgram = { var program:flighthq._internal.dom.WebGLProgram; var locPosition:Float; var locTexCoord:Float; var texture:flighthq._internal.dom.WebGLUniformLocation; var textures:Array<flighthq._internal.dom.WebGLUniformLocation>; };

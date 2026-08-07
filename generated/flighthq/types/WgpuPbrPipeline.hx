@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuPbrPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:Dynamic; var pipeline:Dynamic; var skinned:Bool; };
+typedef WgpuPbrPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
 
 typedef WgpuPbrDefineKey = { var alphaMaskEnabled:Bool; var anisotropyEnabled:Bool; var clearcoatEnabled:Bool; var doubleSided:Bool; var hasAlphaMap:Bool; var hasBaseColorMap:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; var hasEmissiveMap:Bool; var hasMetallicRoughnessMap:Bool; var hasNormalMap:Bool; var hasOcclusionMap:Bool; var iridescenceEnabled:Bool; var sheenEnabled:Bool; var specularEnabled:Bool; var subsurfaceEnabled:Bool; var transmissionEnabled:Bool; };

@@ -24,27 +24,27 @@ class Input {
     Facade_Input_flighthq_input_InputManager.applyGamepadStickDeadZone(out, x, y, deadZone);
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:InputManager, target:flighthq._internal.dom.Window, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachGamepadInput(manager, target, options);
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:InputManager, target:flighthq._internal.dom.EventTarget, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachKeyboardInput(manager, target, options);
   }
 
-  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachPointerInput(manager, element, options);
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachRelativePointerInput(manager, element, options);
   }
 
-  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachTextInput(manager, element, options);
   }
 
-  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     Facade_Input_flighthq_input_InputManager.attachWheelInput(manager, element, options);
   }
 
@@ -68,27 +68,27 @@ class Input {
     return cast null;
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:InputManager, target:flighthq._internal.dom.Window):Void {
     Facade_Input_flighthq_input_InputManager.detachGamepadInput(manager, target);
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:InputManager, target:flighthq._internal.dom.EventTarget):Void {
     Facade_Input_flighthq_input_InputManager.detachKeyboardInput(manager, target);
   }
 
-  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Input_flighthq_input_InputManager.detachPointerInput(manager, element);
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Input_flighthq_input_InputManager.detachRelativePointerInput(manager, element);
   }
 
-  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Input_flighthq_input_InputManager.detachTextInput(manager, element);
   }
 
-  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:InputManager, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Input_flighthq_input_InputManager.detachWheelInput(manager, element);
   }
 
@@ -100,7 +100,7 @@ class Input {
     Facade_Input_flighthq_input_InputManager.exitInputPointerLock();
   }
 
-  public static function getCoalescedInputPointerEvents(event:Dynamic, callback:Dynamic):Void {
+  public static function getCoalescedInputPointerEvents(event:flighthq._internal.dom.PointerEvent, callback:Dynamic):Void {
     Facade_Input_flighthq_input_InputManager.getCoalescedInputPointerEvents(event, callback);
   }
 
@@ -119,17 +119,17 @@ class Input {
     return cast null;
   }
 
-  public static function getKeyCodeFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyCodeFromDomKeyboardEvent(event:flighthq._internal.dom.KeyboardEvent):Float {
     return cast Facade_Input_flighthq_input_InputManager.getKeyCodeFromDomKeyboardEvent(event);
     return cast null;
   }
 
-  public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyModifierFromDomKeyboardEvent(event:flighthq._internal.dom.KeyboardEvent):Float {
     return cast Facade_Input_flighthq_input_InputManager.getKeyModifierFromDomKeyboardEvent(event);
     return cast null;
   }
 
-  public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
+  public static function getMouseWheelModeFromDomWheelEvent(event:flighthq._internal.dom.WheelEvent):MouseWheelMode {
     return cast Facade_Input_flighthq_input_InputManager.getMouseWheelModeFromDomWheelEvent(event);
     return cast null;
   }
@@ -158,16 +158,16 @@ class Input {
     Facade_Input_flighthq_input_InputManager.pollGamepadInput(manager);
   }
 
-  public static function releaseInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function releaseInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Input_flighthq_input_InputManager.releaseInputPointerCapture(element, pointerId);
   }
 
-  public static function requestInputPointerLock(element:Dynamic):flighthq._internal._Promise<Bool> {
+  public static function requestInputPointerLock(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<Bool> {
     return cast Facade_Input_flighthq_input_InputManager.requestInputPointerLock(element);
     return cast null;
   }
 
-  public static function setInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function setInputPointerCapture(element:flighthq._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Input_flighthq_input_InputManager.setInputPointerCapture(element, pointerId);
   }
 

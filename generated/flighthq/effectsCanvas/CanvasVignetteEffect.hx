@@ -12,7 +12,7 @@ import flighthq.types.VignetteEffect;
 
 class CanvasVignetteEffect {
   @:noCompletion
-  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var softness:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,8 +50,8 @@ class CanvasVignetteEffect {
     r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
     b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
-    _Runtime.callProperty(gradient, 'addColorStop', cast ([0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)'] : Array<Dynamic>));
-    _Runtime.callProperty(gradient, 'addColorStop', cast ([1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')'] : Array<Dynamic>));
+    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)');
+    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'multiply');
@@ -61,11 +61,11 @@ class CanvasVignetteEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasVignetteEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyVignetteEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
   };
 
-  public static function registerCanvasVignetteEffect(state:Dynamic):Void {
+  public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'VignetteEffect', defaultCanvasVignetteEffectRunner] : Array<Dynamic>));
   }
 }

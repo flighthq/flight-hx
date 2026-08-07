@@ -42,6 +42,12 @@ export interface IrTypedStructBinding {
   schemaName: string;
 }
 
+export interface IrHostTypeBinding {
+  haxeType: string;
+  name: string;
+  receiverCast?: boolean | undefined;
+}
+
 export interface IrCppStructInitConstruction {
   fieldNames: string[];
   schemaHaxeType: string;
@@ -186,6 +192,7 @@ type IrExpressionNode =
       object: IrExpression;
       optional?: boolean | undefined;
       generatedClass?: string | undefined;
+      hostTypeBinding?: IrHostTypeBinding | undefined;
       typedStructBinding?: IrTypedStructBinding | undefined;
     }
   | { flags: string; kind: 'regexp'; pattern: string }
@@ -362,10 +369,23 @@ export interface LoweringDiagnostic {
   source: string;
 }
 
+export interface HostTypeUse {
+  arity: number;
+  column: number;
+  declarationSources: string[];
+  kind: 'member' | 'type-reference';
+  line: number;
+  member?: string | undefined;
+  name: string;
+  operation?: 'call' | 'read' | 'write' | undefined;
+  source: string;
+}
+
 export interface LoweringResult {
   accountedDeclarations: number;
   declarations: IrDeclaration[];
   diagnostics: LoweringDiagnostic[];
+  hostTypes: HostTypeUse[];
   staticFacts: StaticFactAudit;
 }
 

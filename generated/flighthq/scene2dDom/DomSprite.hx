@@ -61,7 +61,7 @@ class DomSprite {
     } }
   }
 
-  public static function renderSpriteAsCanvas__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:Dynamic, sourceRectangle:{ var x:Float; var y:Float; var width:Float; var height:Float; }):Void {
+  public static function renderSpriteAsCanvas__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.CanvasImageSource, sourceRectangle:{ var x:Float; var y:Float; var width:Float; var height:Float; }):Void {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,8 +76,8 @@ class DomSprite {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'width'), pixelRatio));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', _Runtime.multiplyNumbers(_Runtime.field(sourceRectangle, 'height'), pixelRatio));
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px');
-    _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(sourceRectangle, 'width')) + 'px');
+    ((cast (cast _Runtime.field(data, 'canvas') : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(sourceRectangle, 'height')) + 'px');
     context = _Runtime.field(data, 'context');
     if ((cast !_Runtime.strictEquals(pixelRatio, 1.0) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast _Runtime.field(state, 'allowSmoothing') : Bool) && (cast !(cast StringTools.startsWith(_Runtime.field(texture, 'sampler').magFilter, 'nearest') : Bool) : Bool)));
@@ -86,21 +86,21 @@ class DomSprite {
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'canvas')] : Array<Dynamic>));
   }
 
-  public static function renderSpriteAsImage__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:Dynamic):Void {
+  public static function renderSpriteAsImage__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLImageElement):Void {
     _Runtime.setField(data, 'canvas', null);
     _Runtime.setField(data, 'context', null);
     _Runtime.setField(data, 'video', null);
     if ((cast _Runtime.strictEquals(_Runtime.field(data, 'image'), null) : Bool)) {
       _Runtime.setField(data, 'image', flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
-      _Runtime.setField(_Runtime.field(data, 'image'), 'crossOrigin', 'anonymous');
+      ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'image')] : Array<Dynamic>));
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(data, 'image'), 'src'), _Runtime.field(source, 'src')) : Bool)) { _Runtime.setField(_Runtime.field(data, 'image'), 'src', _Runtime.field(source, 'src')); }
+    if ((cast !_Runtime.strictEquals((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast _Runtime.field(data, 'image') : flighthq._internal.dom.HTMLImageElement).src = source.src); }
     _Runtime.callValue(applyDomStyle, cast ([state, _Runtime.field(data, 'image'), renderProxy] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'image')] : Array<Dynamic>));
   }
 
-  public static function renderSpriteAsVideo__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:Dynamic):Void {
+  public static function renderSpriteAsVideo__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLVideoElement):Void {
     _Runtime.setField(data, 'canvas', null);
     _Runtime.setField(data, 'context', null);
     _Runtime.setField(data, 'image', null);

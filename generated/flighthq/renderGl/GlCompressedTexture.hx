@@ -14,13 +14,13 @@ import flighthq.types.TextureContainerFormat;
 
 class GlCompressedTexture {
   @:noCompletion
-  public static function detectGlCompressedTextureSupport(gl:Dynamic):GlCompressedTextureSupport {
+  public static function detectGlCompressedTextureSupport(gl:flighthq._internal.dom.WebGL2RenderingContext):GlCompressedTextureSupport {
     return cast { astc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc'), null), bptc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_bptc'), null), etc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_etc'), null), pvrtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_pvrtc'), null), rgtc: !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_texture_compression_rgtc'), null), s3tc: ((cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc'), null) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb'), null) : Bool)) };
     return cast null;
   }
 
   @:noCompletion
-  public static function getGlCompressedTextureFormat(gl:Dynamic, format:TextureContainerFormat):Float {
+  public static function getGlCompressedTextureFormat(gl:flighthq._internal.dom.WebGL2RenderingContext, format:TextureContainerFormat):Float {
     var s3tc:Dynamic = cast _Runtime.UNDEFINED;
     var s3tcSrgb:Dynamic = cast _Runtime.UNDEFINED;
     var rgtc:Dynamic = cast _Runtime.UNDEFINED;
@@ -206,7 +206,7 @@ class GlCompressedTexture {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     var uploadFormat:Dynamic = cast _Runtime.UNDEFINED;
     var nativeFormat:Dynamic = cast _Runtime.UNDEFINED;
     var faces:Dynamic = cast _Runtime.UNDEFINED;
@@ -264,7 +264,7 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function getGlAstcSrgbFormat__glCompressedTexture(gl:Dynamic, format:TextureContainerFormat):Float {
+  public static function getGlAstcSrgbFormat__glCompressedTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, format:TextureContainerFormat):Float {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     var match:Dynamic = cast _Runtime.UNDEFINED;
     var value:Dynamic = cast _Runtime.UNDEFINED;
@@ -291,7 +291,7 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function uploadGlCompressedImage__glCompressedTexture(gl:Dynamic, image:CompressedImage, decode:Null<GlCompressedTextureDecoder>, colorSpace:TextureColorSpace = 'linear'):Bool {
+  public static function uploadGlCompressedImage__glCompressedTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, image:CompressedImage, decode:Null<GlCompressedTextureDecoder>, colorSpace:TextureColorSpace = 'linear'):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
     var container:Dynamic = cast _Runtime.UNDEFINED;
     compressed = _Runtime.field(image, 'compressed');

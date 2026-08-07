@@ -389,7 +389,7 @@ class Shortcut {
     var wrappedHandler:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.callValue(Shortcut._normalizeForCommand__shortcut, cast ([accelerator, 'registerGlobalShortcut'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    wrappedHandler = function(event:Dynamic) {
+    wrappedHandler = function(event:ShortcutEvent) {
       _Runtime.callValue(handler, cast ([event] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[Shortcut._signals__shortcut.onTrigger], [event]]), 1); }
     };

@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef WgpuClassicLightingModel = String;
 
-typedef WgpuClassicPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:Dynamic; var pipeline:Dynamic; var skinned:Bool; };
+typedef WgpuClassicPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
 
 typedef WgpuClassicDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; @:optional var hasAlphaMap:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; var lightingModel:WgpuClassicLightingModel; };

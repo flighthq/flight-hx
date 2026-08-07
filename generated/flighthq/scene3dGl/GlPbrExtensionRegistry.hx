@@ -23,7 +23,7 @@ import flighthq.types.PbrExtension;
 
 class GlPbrExtensionRegistry {
   @:noCompletion
-  public static function bindGlPbrExtensions(state:GlRenderState, program:Dynamic, extensions:Array<PbrExtension>):Bool {
+  public static function bindGlPbrExtensions(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, extensions:Array<PbrExtension>):Bool {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>)), 'pbrExtensionRegistry');
@@ -136,7 +136,7 @@ class GlPbrExtensionRegistry {
     return cast null;
   }
 
-  public static function createGlPbrExtensionBindContext__glPbrExtensionRegistry(state:GlRenderState, program:Dynamic):GlPbrExtensionBindContext {
+  public static function createGlPbrExtensionBindContext__glPbrExtensionRegistry(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):GlPbrExtensionBindContext {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var textureUnits:Dynamic = cast _Runtime.UNDEFINED;
     var textureIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -176,7 +176,7 @@ class GlPbrExtensionRegistry {
     return cast null;
   }
 
-  public static function getGlPbrExtensionTextureUnits__glPbrExtensionRegistry(gl:Dynamic):Array<Float> {
+  public static function getGlPbrExtensionTextureUnits__glPbrExtensionRegistry(gl:flighthq._internal.dom.WebGL2RenderingContext):Array<Float> {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var units:Array<Float> = cast _Runtime.UNDEFINED;
     count = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MAX_TEXTURE_IMAGE_UNITS', flighthq._internal.backend.WebGl2Backend.MAX_TEXTURE_IMAGE_UNITS)) : Float);

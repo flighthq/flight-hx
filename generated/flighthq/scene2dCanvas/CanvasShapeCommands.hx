@@ -18,7 +18,7 @@ class CanvasShapeCommands {
   public static final _fillMatrixInverse__canvasShapeCommands:Matrix = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
   @:noCompletion
-  public static final defaultCanvasBeginTextureFill:Dynamic = { key: 'beginTextureFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasBeginTextureFill:CanvasShapeCommand<String> = { key: 'beginTextureFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,7 +40,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'bitmapH', HxMath.abs(_Runtime.multiplyNumbers(_Runtime.field(texture, 'uvScale').y, _Runtime.callValue(getTextureHeight, cast ([texture] : Array<Dynamic>)))));
   } };
 
-  public static final defaultCanvasBeginFill:Dynamic = { key: 'beginFill', draw: function(_ctx:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasBeginFill:CanvasShapeCommand<String> = { key: 'beginFill', draw: function(_ctx:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var color:Dynamic = cast _Runtime.UNDEFINED;
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     color = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
@@ -53,7 +53,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'bitmapSrc', null);
   } };
 
-  public static final defaultCanvasBeginGradientFill:Dynamic = { key: 'beginGradientFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasBeginGradientFill:CanvasShapeCommand<String> = { key: 'beginGradientFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var gradientType:Dynamic = cast _Runtime.UNDEFINED;
     var colors:Dynamic = cast _Runtime.UNDEFINED;
     var alphas:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,7 +80,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'bitmapSrc', null);
   } };
 
-  public static final defaultCanvasCubicCurveTo:Dynamic = { key: 'cubicCurveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasCubicCurveTo:CanvasShapeCommand<String> = { key: 'cubicCurveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var controlX1:Dynamic = cast _Runtime.UNDEFINED;
     var controlY1:Dynamic = cast _Runtime.UNDEFINED;
     var controlX2:Dynamic = cast _Runtime.UNDEFINED;
@@ -101,7 +101,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
-  public static final defaultCanvasCurveTo:Dynamic = { key: 'curveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasCurveTo:CanvasShapeCommand<String> = { key: 'curveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var controlX:Dynamic = cast _Runtime.UNDEFINED;
     var controlY:Dynamic = cast _Runtime.UNDEFINED;
     var anchorX:Dynamic = cast _Runtime.UNDEFINED;
@@ -118,7 +118,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
-  public static final defaultCanvasDrawCircle:Dynamic = { key: 'drawCircle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasDrawCircle:CanvasShapeCommand<String> = { key: 'drawCircle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +131,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
 
-  public static final defaultCanvasDrawEllipse:Dynamic = { key: 'drawEllipse', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasDrawEllipse:CanvasShapeCommand<String> = { key: 'drawEllipse', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -150,7 +150,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
 
-  public static final defaultCanvasDrawPath:Dynamic = { key: 'drawPath', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasDrawPath:CanvasShapeCommand<String> = { key: 'drawPath', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var winding:Dynamic = cast _Runtime.UNDEFINED;
@@ -215,7 +215,7 @@ class CanvasShapeCommands {
     }
   } };
 
-  public static final defaultCanvasDrawRectangle:Dynamic = { key: 'drawRectangle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasDrawRectangle:CanvasShapeCommand<String> = { key: 'drawRectangle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -252,7 +252,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
 
-  public static final defaultCanvasDrawRoundRectangle:Dynamic = { key: 'drawRoundRectangle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasDrawRoundRectangle:CanvasShapeCommand<String> = { key: 'drawRoundRectangle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -280,7 +280,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
 
-  public static final defaultCanvasEndFill:Dynamic = { key: 'endFill', draw: function(_ctx:Dynamic, state:Dynamic) {
+  public static final defaultCanvasEndFill:CanvasShapeCommand<String> = { key: 'endFill', draw: function(_ctx:Dynamic, state:Dynamic) {
     if ((cast _Runtime.field(state, 'hasPendingPath') : Bool)) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
     _Runtime.setField(state, 'hasFill', false);
     _Runtime.setField(state, 'fillMatrix', null);
@@ -289,7 +289,7 @@ class CanvasShapeCommands {
   } };
 
   @:noCompletion
-  public static final defaultCanvasLineTextureStyle:Dynamic = { key: 'lineTextureStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasLineTextureStyle:CanvasShapeCommand<String> = { key: 'lineTextureStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);
@@ -300,7 +300,7 @@ class CanvasShapeCommands {
     }
   } };
 
-  public static final defaultCanvasLineGradientStyle:Dynamic = { key: 'lineGradientStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasLineGradientStyle:CanvasShapeCommand<String> = { key: 'lineGradientStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var gradientType:Dynamic = cast _Runtime.UNDEFINED;
     var colors:Dynamic = cast _Runtime.UNDEFINED;
     var alphas:Dynamic = cast _Runtime.UNDEFINED;
@@ -325,7 +325,7 @@ class CanvasShapeCommands {
     }
   } };
 
-  public static final defaultCanvasLineStyle:Dynamic = { key: 'lineStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasLineStyle:CanvasShapeCommand<String> = { key: 'lineStyle', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var thickness:Dynamic = cast _Runtime.UNDEFINED;
     var color:Dynamic = cast _Runtime.UNDEFINED;
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
@@ -342,13 +342,13 @@ class CanvasShapeCommands {
     if ((cast _Runtime.field(state, 'hasStroke') : Bool)) {
       _Runtime.setField(state, 'strokeWidth', thickness);
       _Runtime.setField(state, 'strokeStyle', _Runtime.callValue(CanvasShapeCommands.rgbaString__canvasShapeCommands, cast ([color, alpha] : Array<Dynamic>)));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineCap', ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : Dynamic) : Dynamic)));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineJoin', (cast joints : Dynamic));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineCap', ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : flighthq._internal.dom.CanvasLineCap) : Dynamic)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineJoin', (cast joints : flighthq._internal.dom.CanvasLineJoin));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'miterLimit', miterLimit);
     }
   } };
 
-  public static final defaultCanvasLineTo:Dynamic = { key: 'lineTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasLineTo:CanvasShapeCommand<String> = { key: 'lineTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     x = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
@@ -361,7 +361,7 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasPendingPath', true);
   } };
 
-  public static final defaultCanvasMoveTo:Dynamic = { key: 'moveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
+  public static final defaultCanvasMoveTo:CanvasShapeCommand<String> = { key: 'moveTo', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     x = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Float);
@@ -371,9 +371,9 @@ class CanvasShapeCommands {
     _Runtime.setField(state, 'hasCurrentPoint', true);
   } };
 
-  public static final defaultCanvasShapeCommands:Array<Dynamic> = cast ([defaultCanvasBeginFill, defaultCanvasBeginGradientFill, defaultCanvasCubicCurveTo, defaultCanvasCurveTo, defaultCanvasDrawCircle, defaultCanvasDrawEllipse, defaultCanvasDrawPath, defaultCanvasDrawRectangle, defaultCanvasDrawRoundRectangle, defaultCanvasEndFill, defaultCanvasLineGradientStyle, defaultCanvasLineStyle, defaultCanvasLineTo, defaultCanvasMoveTo] : Array<Dynamic>);
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<Dynamic>> = cast ([defaultCanvasBeginFill, defaultCanvasBeginGradientFill, defaultCanvasCubicCurveTo, defaultCanvasCurveTo, defaultCanvasDrawCircle, defaultCanvasDrawEllipse, defaultCanvasDrawPath, defaultCanvasDrawRectangle, defaultCanvasDrawRoundRectangle, defaultCanvasEndFill, defaultCanvasLineGradientStyle, defaultCanvasLineStyle, defaultCanvasLineTo, defaultCanvasMoveTo] : Array<Dynamic>);
 
-  public static final defaultCanvasTextureShapeCommands:Array<Dynamic> = cast ([defaultCanvasBeginTextureFill, defaultCanvasLineTextureStyle] : Array<Dynamic>);
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<Dynamic>> = cast ([defaultCanvasBeginTextureFill, defaultCanvasLineTextureStyle] : Array<Dynamic>);
 
   public static function rgbaString__canvasShapeCommands(color:Float, alpha:Float):String {
     var r:Dynamic = cast _Runtime.UNDEFINED;

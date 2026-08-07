@@ -9,7 +9,7 @@ import flighthq.types.FileSystem.FileStat;
 import flighthq.types.FileSystem.FileSystemBackend;
 
 class CapacitorFileSystem {
-  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
+  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
     var filesystem:Dynamic = cast _Runtime.UNDEFINED;
     filesystem = _Runtime.field(capacitor, 'filesystem');
     return cast { readTextFile: function(path:Dynamic):flighthq._internal._Promise<Dynamic> {

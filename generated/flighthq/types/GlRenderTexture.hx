@@ -11,6 +11,6 @@ typedef GlRenderTextureExplanation = { var height:Float; var status:GlRenderText
 
 typedef GlRenderTextureEntry = { var status:GlRenderTextureStatus; var target:GlRenderTarget; };
 
-typedef GlRenderTexturePool = { var context:Null<Dynamic>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; };
+typedef GlRenderTexturePool = { var context:Null<flighthq._internal.dom.WebGL2RenderingContext>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; };
 
 typedef GlRenderTextureGuard = Dynamic;

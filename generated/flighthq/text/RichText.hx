@@ -164,7 +164,7 @@ class RichText {
     if ((cast !_Runtime.strictEquals(url, null) : Bool)) {
       var signals:Dynamic = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
-        var event:Dynamic = { url: url, x: x, y: y };
+        var event:TextFieldLinkEvent = { url: url, x: x, y: y };
         _Runtime.callValue(_Runtime.field(signals, 'onTextFieldLink').emit, cast ([event] : Array<Dynamic>));
       }
     }
@@ -593,7 +593,7 @@ class RichText {
 
   public static function emitTextFieldChange__richText(source:flighthq.types.RichText, previousText:String):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
-    var event:Dynamic = cast _Runtime.UNDEFINED;
+    var event:TextFieldChangeEvent = cast _Runtime.UNDEFINED;
     signals = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousText: previousText, text: _Runtime.field(_Runtime.field(source, 'data'), 'text') };
@@ -602,7 +602,7 @@ class RichText {
 
   public static function emitTextFieldScroll__richText(source:flighthq.types.RichText, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
-    var event:Dynamic = cast _Runtime.UNDEFINED;
+    var event:TextFieldScrollEvent = cast _Runtime.UNDEFINED;
     signals = _Runtime.field((cast _Runtime.callValue(getNode2DRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: _Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), scrollV: _Runtime.field(_Runtime.field(source, 'data'), 'scrollV') };

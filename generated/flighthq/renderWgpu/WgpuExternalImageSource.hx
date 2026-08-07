@@ -5,31 +5,31 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class WgpuExternalImageSource {
-  public static function isWgpuExternalImageSourceReady(source:Dynamic, width:Float, height:Float):Bool {
+  public static function isWgpuExternalImageSourceReady(source:flighthq._internal.dom.GPUCopyExternalImageSource, width:Float, height:Float):Bool {
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([height] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('HTMLCanvasElement'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLCanvasElement')) : Bool)) : Bool)) {
       return cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('HTMLImageElement'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLImageElement')) : Bool)) : Bool)) {
-      return cast ((cast ((cast _Runtime.field(source, 'complete') : Bool) && (cast ((cast _Runtime.field(source, 'naturalWidth') : Float) >= (cast width : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(source, 'naturalHeight') : Float) >= (cast height : Float)) : Bool));
+      return cast ((cast ((cast (cast source : flighthq._internal.dom.HTMLImageElement).complete : Bool) && (cast ((cast (cast source : flighthq._internal.dom.HTMLImageElement).naturalWidth : Float) >= (cast width : Float)) : Bool)) : Bool) && (cast ((cast (cast source : flighthq._internal.dom.HTMLImageElement).naturalHeight : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('HTMLVideoElement'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('HTMLVideoElement')) : Bool)) : Bool)) {
-      return cast ((cast ((cast ((cast _Runtime.field(source, 'readyState') : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast _Runtime.field(source, 'videoWidth') : Float) >= (cast width : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(source, 'videoHeight') : Float) >= (cast height : Float)) : Bool));
+      return cast ((cast ((cast ((cast (cast source : flighthq._internal.dom.HTMLVideoElement).readyState : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast (cast source : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) >= (cast width : Float)) : Bool)) : Bool) && (cast ((cast (cast source : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('ImageBitmap'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('ImageBitmap')) : Bool)) : Bool)) {
-      return cast ((cast ((cast _Runtime.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast _Runtime.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
+      return cast ((cast ((cast (cast source : flighthq._internal.dom.ImageBitmap).width : Float) >= (cast width : Float)) : Bool) && (cast ((cast (cast source : flighthq._internal.dom.ImageBitmap).height : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('OffscreenCanvas')) : Bool)) : Bool)) {
       return cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'width') : Float) >= (cast width : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(source, 'height') : Float) >= (cast height : Float)) : Bool));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('VideoFrame'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(source, _Runtime.globalValue('VideoFrame')) : Bool)) : Bool)) {
-      return cast ((cast ((cast _Runtime.field(source, 'displayWidth') : Float) >= (cast width : Float)) : Bool) && (cast ((cast _Runtime.field(source, 'displayHeight') : Float) >= (cast height : Float)) : Bool));
+      return cast ((cast ((cast (cast source : flighthq._internal.dom.VideoFrame).displayWidth : Float) >= (cast width : Float)) : Bool) && (cast ((cast (cast source : flighthq._internal.dom.VideoFrame).displayHeight : Float) >= (cast height : Float)) : Bool));
     }
     return cast false;
     return cast null;
   }
 
-  public static function tryCopyWgpuExternalImageToTexture(queue:Dynamic, source:Dynamic, destination:Dynamic, width:Float, height:Float):Bool {
+  public static function tryCopyWgpuExternalImageToTexture(queue:flighthq._internal.dom.GPUQueue, source:flighthq._internal.dom.GPUCopyExternalImageSourceInfo, destination:flighthq._internal.dom.GPUCopyExternalImageDestInfo, width:Float, height:Float):Bool {
     if ((cast !(cast _Runtime.callValue(isWgpuExternalImageSourceReady, cast ([_Runtime.field(source, 'source'), width, height] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     try {
       flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'copyExternalImageToTexture', cast ([source, destination, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
@@ -43,7 +43,7 @@ class WgpuExternalImageSource {
 
   public static function isWgpuExternalImageSourceUnavailableError__wgpuExternalImageSource(error:Dynamic):Bool {
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('DOMException'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(error, _Runtime.globalValue('DOMException')) : Bool)) : Bool)) {
-      return cast ((cast _Runtime.strictEquals(_Runtime.field(error, 'name'), 'InvalidStateError') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(error, 'name'), 'OperationError') : Bool));
+      return cast ((cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'InvalidStateError') : Bool) || (cast _Runtime.strictEquals((cast error : flighthq._internal.dom.DOMException).name, 'OperationError') : Bool));
     }
     return cast ((cast _Runtime.isInstanceOfName(error, 'TypeError') : Bool) && (cast StringTools.endsWith(Std.string(_Runtime.field(error, 'message')), 'Failed to copy content from external image.') : Bool));
     return cast null;

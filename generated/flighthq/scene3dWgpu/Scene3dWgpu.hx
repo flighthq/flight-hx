@@ -62,7 +62,7 @@ class Scene3dWgpu {
     Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuShadowMap.drawWgpuScene3DShadowMap(state, scene, shadowCamera, directionalLight);
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     return cast Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuMeshPipeline.ensureWgpuShadowSampleLayout(state);
     return cast null;
   }
@@ -152,7 +152,7 @@ class Scene3dWgpu {
 
   public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_Scene3dWgpu_flighthq_scene3dWgpu_UnlitWgpuMeshMaterialRenderer.unlitWgpuMeshMaterialRenderer;
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):Dynamic {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuMeshPipeline.writeWgpuDrawUniform(state, proxy);
     return cast null;
   }

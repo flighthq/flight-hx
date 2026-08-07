@@ -1342,7 +1342,7 @@ class GltfParse {
       }
       var chunkData:Dynamic = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
       if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_JSON_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(document, null) : Bool)) : Bool)) {
-        var json:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([chunkData] : Array<Dynamic>));
+        var json:Dynamic = (cast _Runtime.construct(_Runtime.globalValue('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(chunkData);
         try {
           (document = cast ((cast _Runtime.jsonParse(json) : GltfDocument) : Dynamic));
         } catch (__error:Dynamic) {

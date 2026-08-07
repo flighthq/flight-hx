@@ -10,7 +10,7 @@ import flighthq.types.ColorLut;
 
 class CanvasColorLutPass {
   @:noCompletion
-  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:ColorLut):Void {
+  public static function applyColorLutPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, lut:ColorLut):Void {
     var rgb:Array<Float> = cast _Runtime.UNDEFINED;
     rgb = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {

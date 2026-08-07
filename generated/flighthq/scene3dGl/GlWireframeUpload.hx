@@ -41,7 +41,7 @@ class GlWireframeUpload {
       return cast upload;
     }
     lineIndices = _Runtime.callValue(GlWireframeUpload.buildLineIndices__glWireframeUpload, cast ([geometry] : Array<Dynamic>));
-    indexType = ((cast _Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
+    indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
       ((cast perState : flighthq._internal._WeakMap).set((cast geometry : MeshGeometry), upload));
@@ -70,7 +70,7 @@ class GlWireframeUpload {
     triangleIndices = geometry.indices;
     triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(triangleIndices, 'length'), 3.0)) : Dynamic) : (cast HxMath.floor(((_Runtime.multiplyNumbers(_Runtime.field(geometry.vertices, 'length'), 4.0) / geometry.layout.stride) / 3.0)) : Dynamic));
     lineCount = (triangleCount * 6.0);
-    useUint32 = ((cast _Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')) : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
+    useUint32 = ((cast _Runtime.isInstanceOfName(triangleIndices, 'Uint32Array') : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
     lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));
     {
       var t:Dynamic = 0.0;

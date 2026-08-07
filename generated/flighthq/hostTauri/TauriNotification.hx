@@ -12,7 +12,7 @@ class TauriNotification {
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
     var notification:Dynamic = cast _Runtime.UNDEFINED;
     var nextId:Dynamic = cast _Runtime.UNDEFINED;
-    var cachedPermission:Dynamic = cast _Runtime.UNDEFINED;
+    var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
     notification = _Runtime.field(tauri, 'notification');
     nextId = 0.0;
     cachedPermission = 'default';
@@ -33,7 +33,7 @@ class TauriNotification {
         }
         return cast null;
       }));
-    }, requestPermission: function():flighthq._internal._Promise<Dynamic> {
+    }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {

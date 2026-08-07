@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef WebcamStreamRuntime = { var binding:Null<Dynamic>; var mediaStream:Null<Dynamic>; var videoElement:Null<Dynamic>; };
+typedef WebcamStreamRuntime = { var binding:Null<Dynamic>; var mediaStream:Null<flighthq._internal.dom.MediaStream>; var videoElement:Null<flighthq._internal.dom.HTMLVideoElement>; };

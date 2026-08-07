@@ -28,7 +28,7 @@ import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
-typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:Dynamic; var indexBuffer:Dynamic; var instanceBuffer:Dynamic; var instanceData:flighthq._internal._Float32Array; var locCameraRight:Dynamic; var locCameraUp:Dynamic; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:Dynamic; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:Dynamic; var locUvRect:Float; var locViewProjection:Dynamic; var program:Dynamic; var vao:Dynamic; };
+typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:flighthq._internal.dom.WebGLBuffer; var indexBuffer:flighthq._internal.dom.WebGLBuffer; var instanceBuffer:flighthq._internal.dom.WebGLBuffer; var instanceData:flighthq._internal._Float32Array; var locCameraRight:flighthq._internal.dom.WebGLUniformLocation; var locCameraUp:flighthq._internal.dom.WebGLUniformLocation; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:flighthq._internal.dom.WebGLUniformLocation; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:flighthq._internal.dom.WebGLUniformLocation; var locUvRect:Float; var locViewProjection:flighthq._internal.dom.WebGLUniformLocation; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
 class GlParticleEmitter3D {
   public static final INSTANCE_FLOATS__glParticleEmitter3D:Dynamic = 16.0;
@@ -41,7 +41,7 @@ class GlParticleEmitter3D {
 
   public static final PARTICLE_3D_FS__glParticleEmitter3D:Dynamic = '#version 300 es\nprecision highp float;\n\nin vec2 v_uv;\nin vec4 v_color;\n\nuniform sampler2D u_texture;\nuniform int u_hasTexture;\n\nout vec4 fragColor;\n\n// Both branches output premultiplied alpha (rgb already scaled by alpha), matching the codebase-wide\n// premultiplied convention the blend funcs in applyGlParticleBlendMode assume. The texture is uploaded\n// premultiplied by bindGlTexture, so tex.rgb is pre-scaled by tex.a; the trailing * v_color.a then\n// premultiplies the tint alpha. The untextured branch premultiplies v_color explicitly.\nvoid main() {\n  if (u_hasTexture != 0) {\n    vec4 tex = texture(u_texture, v_uv);\n    fragColor = vec4(tex.rgb * v_color.rgb, tex.a) * v_color.a;\n  } else {\n    fragColor = vec4(v_color.rgb * v_color.a, v_color.a);\n  }\n  if (fragColor.a <= 0.0) discard;\n}';
 
-  public static function compileParticle3DShader__glParticleEmitter3D(gl:Dynamic):GlParticle3DShader__glParticleEmitter3D {
+  public static function compileParticle3DShader__glParticleEmitter3D(gl:flighthq._internal.dom.WebGL2RenderingContext):GlParticle3DShader__glParticleEmitter3D {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var vao:Dynamic = cast _Runtime.UNDEFINED;
     var cornerData:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +76,7 @@ class GlParticleEmitter3D {
     return cast null;
   }
 
-  public static function ensureInstanceCapacity__glParticleEmitter3D(shader:GlParticle3DShader__glParticleEmitter3D, gl:Dynamic, count:Float):Void {
+  public static function ensureInstanceCapacity__glParticleEmitter3D(shader:GlParticle3DShader__glParticleEmitter3D, gl:flighthq._internal.dom.WebGL2RenderingContext, count:Float):Void {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var newSize:Dynamic = cast _Runtime.UNDEFINED;
     needed = (count * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D);

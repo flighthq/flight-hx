@@ -30,7 +30,7 @@ class GlColorLutPass {
     }] : Array<Dynamic>));
   }
 
-  public static function uploadLutTexture__glColorLutPass(gl:Dynamic, lut:ColorLut, cache:GlColorLutTextureCache):Dynamic {
+  public static function uploadLutTexture__glColorLutPass(gl:flighthq._internal.dom.WebGL2RenderingContext, lut:ColorLut, cache:GlColorLutTextureCache):flighthq._internal.dom.WebGLTexture {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;

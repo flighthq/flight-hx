@@ -11,12 +11,12 @@
 | Proven Boolean conditional conditions | 2830 |
 | Proven Boolean logical-left truthiness uses | 4758 |
 | Proven Boolean logical expressions | 4522 |
-| Proven numeric relations | 6108 |
+| Proven numeric relations | 6109 |
 | Direct Boolean truthiness uses | 12898 |
 | Direct Boolean conditional expressions | 2829 |
 | Direct Boolean `&&` expressions | 2019 |
 | Direct Boolean `\|\|` expressions | 2502 |
-| Direct numeric relations | 6108 |
+| Direct numeric relations | 6109 |
 | Proven indexed expressions | 10114 |
 | Proven indexed reads | 6803 |
 | Proven indexed writes | 3424 |
@@ -173,7 +173,7 @@
 | `@flighthq/quadbatch` | 39 | 39 | 0 | 103 | 74 | 87 | 0 |
 | `@flighthq/render` | 124 | 124 | 0 | 193 | 27 | 130 | 1 |
 | `@flighthq/render-gl` | 227 | 227 | 0 | 251 | 39 | 105 | 0 |
-| `@flighthq/render-wgpu` | 186 | 186 | 0 | 314 | 51 | 93 | 0 |
+| `@flighthq/render-wgpu` | 186 | 186 | 0 | 314 | 52 | 93 | 0 |
 | `@flighthq/scene2d` | 40 | 40 | 0 | 20 | 3 | 22 | 0 |
 | `@flighthq/scene2d-canvas` | 175 | 175 | 0 | 326 | 70 | 170 | 0 |
 | `@flighthq/scene2d-dom` | 122 | 122 | 0 | 185 | 38 | 25 | 0 |

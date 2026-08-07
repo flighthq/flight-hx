@@ -1321,7 +1321,7 @@ class SwfDocument {
     _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     length = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length) : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast ''; }
-    return cast _Runtime.callProperty(SwfDocument._fontNameDecoder__swfDocument, 'decode', cast ([(cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(reader, 'pos')), Std.int(_Runtime.addNumbers(_Runtime.field(reader, 'pos'), length)))] : Array<Dynamic>));
+    return cast (cast SwfDocument._fontNameDecoder__swfDocument : flighthq._internal.dom.TextDecoder).decode((cast _Runtime.field(body, 'source') : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.field(reader, 'pos')), Std.int(_Runtime.addNumbers(_Runtime.field(reader, 'pos'), length))));
     return cast null;
   }
 

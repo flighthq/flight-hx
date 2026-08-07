@@ -39,7 +39,7 @@ class GlShadedPrelude {
   }
 
   @:noCompletion
-  public static function compileGlShadedProgram(gl:Dynamic, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:ModifierRegistry, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlShadedProgram {
+  public static function compileGlShadedProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:ModifierRegistry, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlShadedProgram {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var defineSource:Dynamic = cast _Runtime.UNDEFINED;
     var vertexSource:Dynamic = cast _Runtime.UNDEFINED;

@@ -3,6 +3,7 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { createHostTypeAudit } from '../../tools/generator/src/analyze/host-types.ts';
 import {
   inlineParameterDefaultConstants,
   padContextualObjectFunctionParameters,
@@ -1473,6 +1474,122 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("CanvasElementBackend.field(canvas, 'style')");
     expect(output).not.toContain("Canvas2dBackend.call(canvas, 'getContext'");
     expect(output).not.toContain("_Runtime.callProperty(canvas, 'getContext'");
+  });
+
+  it('maps checker-resolved host types and emits their unbound members directly', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/image/src/hostTypes.ts',
+      `
+        interface HTMLFlightLocal { width: number; }
+        interface ImageBox { image: HTMLImageElement; }
+        interface StreamBox { stream: ReadableStream<Uint8Array>; }
+        export function host(
+          image: HTMLImageElement,
+          nullable: HTMLImageElement | null,
+          media: HTMLImageElement | HTMLVideoElement,
+          local: HTMLFlightLocal,
+          box: ImageBox,
+          streams: StreamBox,
+          message: MessageEvent,
+          url: string,
+        ) {
+          const width = image.width;
+          image.src = url;
+          image.decode();
+          const optional = nullable?.height;
+          const ambiguous = media.src;
+          const localWidth = local.width;
+          const boxedWidth = box.image.width;
+          streams.stream.cancel();
+          console.debug(url);
+          const view = new DataView(new ArrayBuffer(4));
+          const decoder = new TextDecoder();
+          const unresolvedGpuName = GPUFlightMissing;
+          return { width, optional, ambiguous, localWidth, boxedWidth, view, decoder, unresolvedGpuName };
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/image', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'HostTypes',
+      packageName: '@flighthq/image',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('image:flighthq._internal.dom.HTMLImageElement');
+    expect(output).toContain('nullable:Null<flighthq._internal.dom.HTMLImageElement>');
+    expect(output).toContain('media:Dynamic');
+    expect(output).toContain('message:flighthq._internal.dom.MessageEvent<Dynamic>');
+    expect(output).toContain('local:HTMLFlightLocal');
+    expect(output).toContain('width = image.width;');
+    expect(output).toContain('(image.src = url)');
+    expect(output).toContain('image.decode()');
+    expect(output).toContain('__hostType');
+    expect(output).toContain('.height; })');
+    expect(output).toContain("_Runtime.field(media, 'src')");
+    expect(output).toContain("_Runtime.field(local, 'width')");
+    expect(output).toContain("(cast _Runtime.field(box, 'image') : flighthq._internal.dom.HTMLImageElement).width");
+    expect(output).toContain(
+      "(cast _Runtime.field(streams, 'stream') : flighthq._internal.dom.ReadableStream<Dynamic>).cancel()",
+    );
+    expect(output).toContain("(cast _Runtime.globalValue('console') : flighthq._internal.dom.Console).debug(url)");
+    expect(output).toContain("_Runtime.construct(_Runtime.globalValue('DataView')");
+    expect(output).toContain("_Runtime.construct(_Runtime.globalValue('TextDecoder')");
+    expect(output).toContain('unresolvedGpuName = GPUFlightMissing;');
+    expect(output).not.toContain("_Runtime.globalValue('GPUFlightMissing')");
+    expect(output).not.toContain("_Runtime.field(image, 'width')");
+    expect(output).not.toContain("_Runtime.callProperty(image, 'decode'");
+    expect(lowered.hostTypes.map((use) => use.name)).toContain('HTMLImageElement');
+    expect(lowered.hostTypes.some((use) => use.kind === 'member' && use.member === 'decode')).toBe(true);
+    expect(lowered.hostTypes.some((use) => use.name === 'HTMLFlightLocal')).toBe(false);
+    const audit = createHostTypeAudit('fixture', lowered.hostTypes);
+    expect(audit.types.find((type) => type.name === 'ReadableStream')?.arities).toEqual([1]);
+    expect(audit).toEqual(createHostTypeAudit('fixture', [...lowered.hostTypes].reverse()));
+  });
+
+  it('leaves unresolved type names visible so Haxe compilation fails loudly', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/missingHost.ts',
+      'export function identity(value: MissingHostType): MissingHostType { return value; }',
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'MissingHost',
+      packageName: '@flighthq/example',
+    });
+    const fixtureDirectory = path.resolve('build/haxe-missing-host-type-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'MissingHost.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.MissingHost.identity;
+        class Main {
+          static function main() identity(null);
+        }
+      `,
+    );
+
+    expect(output).toContain('value:MissingHostType');
+    expect(output).not.toContain('value:Dynamic');
+    expect(output).not.toContain('flighthq._internal.dom.MissingHostType');
+    let errorText = '';
+    try {
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        { cwd: path.resolve('.'), stdio: 'pipe' },
+      );
+    } catch (error) {
+      errorText = String((error as { stderr?: unknown }).stderr ?? error);
+    }
+    expect(errorText).toMatch(/Type not found.*MissingHostType/su);
   });
 
   it('routes DOM roots and their aliases through bounded typed backends', () => {

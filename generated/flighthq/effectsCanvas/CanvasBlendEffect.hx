@@ -14,7 +14,7 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasBlendEffect {
   @:noCompletion
-  public static function applyBlendEffectToCanvas(state:Dynamic, source:Dynamic, dest:Dynamic, effect:BlendEffect):Void {
+  public static function applyBlendEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var operation:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,32 +38,32 @@ class CanvasBlendEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasBlendEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyBlendEffectToCanvas, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect)] : Array<Dynamic>));
   };
 
-  public static function getCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasBlendEffectBackdrops'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getCanvasBlendEffectCompositeOperation(mode:AdvancedBlendMode):Dynamic {
+  public static function getCanvasBlendEffectCompositeOperation(mode:AdvancedBlendMode):flighthq._internal.dom.GlobalCompositeOperation {
     return cast _Runtime.coalesce(_Runtime.getIndex(CanvasBlendEffect.BLEND_MODE_OPERATION__canvasBlendEffect, mode), function():Dynamic return cast 'source-over');
     return cast null;
   }
 
-  public static function registerCanvasBlendEffect(state:Dynamic):Void {
+  public static function registerCanvasBlendEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'BlendEffect', defaultCanvasBlendEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:String, target:Dynamic):Void {
+  public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     ((cast _Runtime.setField(runtime, 'canvasBlendEffectBackdrops', (_Runtime.field(runtime, 'canvasBlendEffectBackdrops') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))) : flighthq._internal._Map).set(backdropKey, target));
   }
 
-  public static function unregisterCanvasBlendEffectBackdrop(state:Dynamic, backdropKey:String):Bool {
+  public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
     return cast _Runtime.coalesce(({ final __collection1:Dynamic = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasBlendEffectBackdrops'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }

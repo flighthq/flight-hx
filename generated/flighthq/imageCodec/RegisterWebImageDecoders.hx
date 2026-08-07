@@ -26,13 +26,13 @@ class RegisterWebImageDecoders {
         var data:Dynamic = cast _Runtime.UNDEFINED;
         return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('createImageBitmap'), cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           bitmap = __awaitValue2;
-          width = _Runtime.field(bitmap, 'width');
-          height = _Runtime.field(bitmap, 'height');
+          width = (cast bitmap : flighthq._internal.dom.ImageBitmap).width;
+          height = (cast bitmap : flighthq._internal.dom.ImageBitmap).height;
           canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
-          context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-          _Runtime.callProperty(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
-          _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
-          data = _Runtime.field(_Runtime.callProperty(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
+          context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : flighthq._internal.dom.OffscreenCanvasRenderingContext2D);
+          (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).drawImage(bitmap, 0.0, 0.0);
+          (cast bitmap : flighthq._internal.dom.ImageBitmap).close();
+          data = (cast (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).getImageData(0.0, 0.0, width, height) : flighthq._internal.dom.ImageData).data;
           var __flowBranch3:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true) : Bool)) {
             __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {

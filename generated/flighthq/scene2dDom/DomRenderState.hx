@@ -14,7 +14,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class DomRenderState {
-  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):flighthq.types.DomRenderState {
+  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -22,7 +22,7 @@ class DomRenderState {
     if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField(state, 'domCssFilterResolver', null);
-    _Runtime.setField((cast state : { var element:Dynamic; }), 'element', element);
+    _Runtime.setField((cast state : { var element:flighthq._internal.dom.HTMLElement; }), 'element', element);
     _Runtime.setField(state, 'allowSmoothing', _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
     runtime = _Runtime.callValue(createDomRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
@@ -34,8 +34,8 @@ class DomRenderState {
     _Runtime.setField(runtime, 'domNextOrderList', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'domOrderLength', -1.0);
     _Runtime.setField(runtime, 'domOrderList', cast ([] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'position', 'relative');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'overflow', 'hidden');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'relative');
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     return cast state;
     return cast null;
   }

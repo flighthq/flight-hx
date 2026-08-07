@@ -10,7 +10,7 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
 
-typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:Dynamic; var locEnvCube:Null<Dynamic>; var locFaceForward:Null<Dynamic>; var locFaceRight:Null<Dynamic>; var locFaceUp:Null<Dynamic>; var locRoughness:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
+typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:flighthq._internal.dom.WebGLBuffer; var locEnvCube:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceForward:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceRight:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceUp:Null<flighthq._internal.dom.WebGLUniformLocation>; var locRoughness:Null<flighthq._internal.dom.WebGLUniformLocation>; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
 class GlEnvironmentIblBake {
   public static function bakeGlEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
@@ -33,7 +33,7 @@ class GlEnvironmentIblBake {
     runtime = _Runtime.callValue(getGlScene3DRuntime, cast ([state] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(runtime, 'iblBakeFramebuffer'), null) : Bool)) { _Runtime.setField(runtime, 'iblBakeFramebuffer', flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
     fbo = _Runtime.field(runtime, 'iblBakeFramebuffer');
-    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<Dynamic>);
+    prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
@@ -64,7 +64,7 @@ class GlEnvironmentIblBake {
     ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap).delete_(state));
   }
 
-  public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
+  public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, sourceCube:flighthq._internal.dom.WebGLTexture):flighthq._internal.dom.WebGLTexture {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -79,7 +79,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):{ var prefilteredCube:Dynamic; var prefilteredMipCount:Float; } {
+  public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, sourceCube:flighthq._internal.dom.WebGLTexture):{ var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; } {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -105,7 +105,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic):Dynamic {
+  public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer):flighthq._internal.dom.WebGLTexture {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -127,7 +127,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float):Void {
+  public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:flighthq._internal.dom.WebGLFramebuffer, program:GlBakeProgram__glEnvironmentIblBake, cube:flighthq._internal.dom.WebGLTexture, size:Float, mipLevel:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, size, size);
@@ -146,7 +146,7 @@ class GlEnvironmentIblBake {
     _Runtime.voidValue(fbo);
   }
 
-  public static function createGlBakeCube__glEnvironmentIblBake(gl:Dynamic, size:Float, mipped:Bool):Dynamic {
+  public static function createGlBakeCube__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, size:Float, mipped:Bool):flighthq._internal.dom.WebGLTexture {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var minFilter:Dynamic = cast _Runtime.UNDEFINED;
@@ -178,7 +178,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bindGlBakeSourceCube__glEnvironmentIblBake(gl:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, sourceCube:Dynamic):Void {
+  public static function bindGlBakeSourceCube__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlBakeProgram__glEnvironmentIblBake, sourceCube:flighthq._internal.dom.WebGLTexture):Void {
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), sourceCube);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locEnvCube'), 0.0);
@@ -221,7 +221,7 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLE_STRIP', flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP), 0.0, 4.0);
   }
 
-  public static function linkGlBakeProgram__glEnvironmentIblBake(gl:Dynamic, fragment:String):Dynamic {
+  public static function linkGlBakeProgram__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, fragment:String):flighthq._internal.dom.WebGLProgram {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, GlEnvironmentIblBake.BAKE_VERTEX__glEnvironmentIblBake, fragment, 'IBL bake'] : Array<Dynamic>));
     return cast null;
   }

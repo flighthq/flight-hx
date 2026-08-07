@@ -32,15 +32,15 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
 
-typedef CanvasRenderStateHandles__canvasCache = { var canvas:Dynamic; var context:Dynamic; };
+typedef CanvasRenderStateHandles__canvasCache = Dynamic;
 
 class CanvasCache {
-  public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
+  public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
     return cast _Runtime.callValue(createCanvasOffscreenRenderState, cast ([screenState] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCanvasOffscreenRenderState(screenState:Dynamic):Dynamic {
+  public static function createCanvasOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState {
     var screen:Dynamic = cast _Runtime.UNDEFINED;
     var cacheState:Dynamic = cast _Runtime.UNDEFINED;
     screen = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
@@ -56,7 +56,7 @@ class CanvasCache {
   }
 
   @:noCompletion
-  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
+  public static function destroyCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -75,7 +75,7 @@ class CanvasCache {
   }
 
   @:noCompletion
-  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -91,18 +91,18 @@ class CanvasCache {
   }
 
   @:noCompletion
-  public static function getCanvasRenderCacheScreenState(state:Dynamic):Dynamic {
+  public static function getCanvasRenderCacheScreenState(state:CanvasRenderState):CanvasRenderState {
     return cast _Runtime.coalesce(((cast CanvasCache._cacheStateScreen__canvasCache : flighthq._internal._WeakMap).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
   @:noCompletion
-  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
+  public static function getCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
     return cast _Runtime.coalesce(((cast _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshCanvasRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast _Runtime.UNDEFINED;
     var padding:Dynamic = cast _Runtime.UNDEFINED;
     var minWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -129,7 +129,7 @@ class CanvasCache {
     target = _Runtime.callValue(ensureCanvasRenderCacheTarget, cast ([screenState, cache, width, height] : Array<Dynamic>));
     _Runtime.callValue(computeScene2DRenderTargetTransform, cast ([CanvasCache._renderTransform__canvasCache, source, CanvasCache._bounds__canvasCache, padding, padding] : Array<Dynamic>));
     _Runtime.callValue(computeRenderCacheTransform, cast ([_Runtime.field(cache, 'transform'), CanvasCache._bounds__canvasCache, padding, padding] : Array<Dynamic>));
-    handles = (cast cacheState : Dynamic);
+    handles = (cast cacheState : CanvasRenderStateHandles__canvasCache);
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([cacheState] : Array<Dynamic>));
     _Runtime.setField(handles, 'canvas', _Runtime.field(target, 'canvas'));
     _Runtime.setField(handles, 'context', _Runtime.field(target, 'context'));
@@ -146,7 +146,7 @@ class CanvasCache {
   }
 
   @:noCompletion
-  public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
+  public static function releaseCanvasRenderCache(state:CanvasRenderState, cache:RenderCache):Void {
     ((cast _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)) : flighthq._internal._WeakMap).delete_(cache));
   }
 
@@ -156,14 +156,14 @@ class CanvasCache {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
-    canvasState = (cast state : Dynamic);
+    canvasState = (cast state : CanvasRenderState);
     target = ((cast _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([canvasState] : Array<Dynamic>)) : flighthq._internal._WeakMap).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.callValue(setCanvasTransform, cast ([canvasState, _Runtime.field(canvasState, 'context'), _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(_Runtime.field(canvasState, 'context'), 'drawImage', cast ([_Runtime.field(target, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function getTargets__canvasCache(state:Dynamic):Dynamic {
+  public static function getTargets__canvasCache(state:CanvasRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = ((cast CanvasCache._renderCacheTargets__canvasCache : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

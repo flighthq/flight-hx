@@ -97,7 +97,7 @@ class Platform {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     var ua:Dynamic = cast _Runtime.UNDEFINED;
     nav = ((cast !_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-    ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
+    ua = _Runtime.coalesce(({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
     (out.name = cast (_Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)) : Dynamic));
     (out.kind = cast (_Runtime.callValue(parseUserAgentKind, cast ([out.name] : Array<Dynamic>)) : Dynamic));
     (out.version = cast (_Runtime.callValue(parseUserAgentVersion, cast ([ua, out.name] : Array<Dynamic>)) : Dynamic));

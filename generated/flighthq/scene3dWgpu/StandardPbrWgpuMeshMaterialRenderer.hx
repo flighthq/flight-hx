@@ -70,7 +70,7 @@ class StandardPbrWgpuMeshMaterialRenderer {
 
   @:noCompletion
   public static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
   }
 
   @:noCompletion
@@ -135,7 +135,7 @@ class StandardPbrWgpuMeshMaterialRenderer {
     _Runtime.fill(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 0.0, 16.0, null, 2);
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, _Runtime.field(binding, 'bindGroup'));
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };

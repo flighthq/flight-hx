@@ -22,7 +22,7 @@ typedef Scene3DResourceResolver = { @:optional var __EntityRuntimeKey:Null<Entit
 
 typedef Scene3DResourceResolverOptions = { @:optional var fetch:ImageResourceFetch; @:optional var maxConcurrent:Float; @:optional var registry:Scene3DMaterialTextureRegistry; };
 
-typedef Scene3DResourceInFlight = { var controller:Dynamic; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; var subscribers:Dynamic; };
+typedef Scene3DResourceInFlight = { var controller:flighthq._internal.dom.AbortController; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; var subscribers:Dynamic; };
 
 typedef Scene3DResourceResolverRuntime = { var inFlight:Dynamic; var loader:ResourceLoader; var resolved:Dynamic; var signals:Null<Scene3DResourceSignals>; };
 
@@ -30,7 +30,7 @@ typedef Scene3DResourceResolverWithRuntime = { @:optional var __EntityRuntimeKey
 
 typedef Scene3DDocumentLoadProgress = { var loaded:Float; var phase:String; var total:Float; var url:String; };
 
-typedef Scene3DDocumentLoadOptions = { @:optional var progress:Signal<Dynamic>; @:optional var signal:Dynamic; };
+typedef Scene3DDocumentLoadOptions = { @:optional var progress:Signal<Dynamic>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
 
 typedef Scene3DResourceLoadProgress = { var loaded:Float; var total:Float; };
 
@@ -38,7 +38,7 @@ typedef LoadScene3DResourcesOptions = { @:optional var select:Dynamic; @:optiona
 
 typedef ResolveScene3DResourcesOptions = { @:optional var select:Dynamic; };
 
-typedef Scene3DResourceResolution = { var ref:ImageResourceReference; var textures:Array<Texture>; var image:Dynamic; };
+typedef Scene3DResourceResolution = { var ref:ImageResourceReference; var textures:Array<Texture>; var image:Image; };
 
 typedef Scene3DResources = { var resolved:Array<Scene3DResourceResolution>; var scene:Scene3D; var unresolved:Array<Scene3DResourceWorkingSet>; };
 

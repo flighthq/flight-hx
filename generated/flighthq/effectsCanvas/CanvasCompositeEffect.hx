@@ -14,7 +14,7 @@ import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue 
 
 class CanvasCompositeEffect {
   @:noCompletion
-  public static function applyCompositeEffectToCanvas(state:Dynamic, source:Dynamic, dest:Dynamic, effect:CompositeEffect):Void {
+  public static function applyCompositeEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:CompositeEffect):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -32,16 +32,16 @@ class CanvasCompositeEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasCompositeEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
+  public static final defaultCanvasCompositeEffectRunner:CanvasRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
     _Runtime.callValue(applyCompositeEffectToCanvas, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CompositeEffect)] : Array<Dynamic>));
   };
 
-  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):Dynamic {
+  public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):flighthq._internal.dom.GlobalCompositeOperation {
     return cast _Runtime.coalesce(_Runtime.getIndex(CanvasCompositeEffect.COMPOSITE_OPERATOR_OPERATION__canvasCompositeEffect, operator_), function():Dynamic return cast 'source-over');
     return cast null;
   }
 
-  public static function registerCanvasCompositeEffect(state:Dynamic):Void {
+  public static function registerCanvasCompositeEffect(state:CanvasRenderState):Void {
     _Runtime.callValue(registerCanvasRenderEffect, cast ([state, 'CompositeEffect', defaultCanvasCompositeEffectRunner] : Array<Dynamic>));
   }
 

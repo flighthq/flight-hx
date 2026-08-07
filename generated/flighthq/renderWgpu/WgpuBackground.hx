@@ -16,10 +16,10 @@ class WgpuBackground {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilTexture'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilWidth'), width) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(runtime, 'depthStencilHeight'), height) : Bool)) : Bool)) {
       return;
     }
-    _Runtime.callOptionalProperty(_Runtime.field(runtime, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
+    ({ final __hostTypeCall0 = _Runtime.field(runtime, 'depthStencilTexture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([HxMath.max(1.0, width), HxMath.max(1.0, height), 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'depthStencilTexture', texture);
-    _Runtime.setField(runtime, 'depthStencilView', _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)));
+    _Runtime.setField(runtime, 'depthStencilView', (cast texture : flighthq._internal.dom.GPUTexture).createView());
     _Runtime.setField(runtime, 'depthStencilWidth', width);
     _Runtime.setField(runtime, 'depthStencilHeight', height);
   }
@@ -48,11 +48,11 @@ class WgpuBackground {
     var canvasTexture:Dynamic = cast _Runtime.UNDEFINED;
     var canvasView:Dynamic = cast _Runtime.UNDEFINED;
     var rgba:Dynamic = cast _Runtime.UNDEFINED;
-    var clearValue:Dynamic = cast _Runtime.UNDEFINED;
+    var clearValue:flighthq._internal.dom.GPUColor = cast _Runtime.UNDEFINED;
     var renderPass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null) : Bool)) {
-      _Runtime.callProperty(_Runtime.field(runtime, 'renderPass'), 'end', cast ([] : Array<Dynamic>));
+      (cast _Runtime.field(runtime, 'renderPass') : flighthq._internal.dom.GPURenderPassEncoder).end();
       _Runtime.setField(runtime, 'renderPass', null);
     }
     _Runtime.callValue(beginWgpuFrame, cast ([state] : Array<Dynamic>));
@@ -62,15 +62,15 @@ class WgpuBackground {
     height = flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height');
     _Runtime.callValue(WgpuBackground.ensureWgpuDepthStencil__wgpuBackground, cast ([state, width, height] : Array<Dynamic>));
     canvasTexture = _Runtime.coalesce(_Runtime.callValue(acquireWgpuFrameCaptureTexture, cast ([state] : Array<Dynamic>)), function():Dynamic return cast flighthq._internal.backend.WebGpuCanvasContextBackend.call(context, 'getCurrentTexture', cast ([] : Array<Dynamic>)));
-    canvasView = _Runtime.callProperty(canvasTexture, 'createView', cast ([] : Array<Dynamic>));
+    canvasView = (cast canvasTexture : flighthq._internal.dom.GPUTexture).createView();
     _Runtime.setField(runtime, 'canvasTextureView', canvasView);
     _Runtime.setField(runtime, 'canvasViewCleared', true);
     _Runtime.setField(runtime, 'currentColorFormat', _Runtime.field(state, 'format'));
     _Runtime.setField(runtime, 'renderTargetViewport', null);
     rgba = _Runtime.field(state, 'backgroundColorRgba');
     clearValue = ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { r: flighthq._internal._StaticIndex.readArray(rgba, 0.0), g: flighthq._internal._StaticIndex.readArray(rgba, 1.0), b: flighthq._internal._StaticIndex.readArray(rgba, 2.0), a: flighthq._internal._StaticIndex.readArray(rgba, 3.0) } : Dynamic) : (cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic));
-    renderPass = _Runtime.callProperty(_Runtime.field(runtime, 'commandEncoder'), 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: canvasView, clearValue: clearValue, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(runtime, 'depthStencilView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } }] : Array<Dynamic>));
-    _Runtime.callProperty(renderPass, 'setViewport', cast ([0.0, 0.0, width, height, 0.0, 1.0] : Array<Dynamic>));
+    renderPass = (cast _Runtime.field(runtime, 'commandEncoder') : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: canvasView, clearValue: clearValue, loadOp: 'clear', storeOp: 'store' }] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(runtime, 'depthStencilView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'discard', stencilClearValue: 0.0, stencilLoadOp: 'clear', stencilStoreOp: 'discard' } });
+    (cast renderPass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, width, height, 0.0, 1.0);
     _Runtime.setField(runtime, 'renderPass', renderPass);
   }
 
@@ -92,22 +92,22 @@ class WgpuBackground {
     uniformOffset = _Runtime.field(__destructure0, 'uniformOffset');
     device = _Runtime.field(state, 'device');
     if ((cast !_Runtime.strictEquals(renderPass, null) : Bool)) {
-      _Runtime.callProperty(renderPass, 'end', cast ([] : Array<Dynamic>));
+      (cast renderPass : flighthq._internal.dom.GPURenderPassEncoder).end();
       _Runtime.setField(runtime, 'renderPass', null);
     }
     if ((cast !_Runtime.strictEquals(commandEncoder, null) : Bool)) {
       if ((cast ((cast uniformOffset : Float) > (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([uniformBuffer, 0.0, _Runtime.field(uniformData, 'buffer'), 0.0, uniformOffset] : Array<Dynamic>));
+        flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([uniformBuffer, 0.0, _Runtime.field(uniformData, 'buffer'), 0.0, uniformOffset] : Array<Dynamic>));
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'canvasTextureView'), null) : Bool)) { _Runtime.callValue(encodeWgpuFrameCapture, cast ([state, commandEncoder] : Array<Dynamic>)); }
-      _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([_Runtime.callProperty(commandEncoder, 'finish', cast ([] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast commandEncoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
       _Runtime.setField(runtime, 'commandEncoder', null);
       var retired:Dynamic = _Runtime.field(runtime, 'retiredBuffers');
       if ((cast ((cast !_Runtime.strictEquals(retired, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(retired, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         {
           var i:Dynamic = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(retired, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(retired, i), 'destroy', cast ([] : Array<Dynamic>));
+            (cast flighthq._internal._StaticIndex.readArray(retired, i) : flighthq._internal.dom.GPUBuffer).destroy();
             i++;
           }
         }

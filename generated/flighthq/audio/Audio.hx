@@ -29,7 +29,7 @@ class Audio {
     return cast null;
   }
 
-  public static function createAudioResource(?buffer:Dynamic):AudioResource {
+  public static function createAudioResource(?buffer:flighthq._internal.dom.AudioBuffer):AudioResource {
     return cast Facade_Audio_flighthq_audio_AudioResource.createAudioResource(buffer);
     return cast null;
   }
@@ -138,27 +138,27 @@ class Audio {
     return cast null;
   }
 
-  public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBase64(context:flighthq._internal.dom.AudioContext, base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBase64(context, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBlob(context:flighthq._internal.dom.AudioContext, blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBlob(context, blob, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:flighthq._internal.dom.AudioContext, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes(context, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrl(context:flighthq._internal.dom.AudioContext, url:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrl(context, url, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(context:flighthq._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrls(context, sources, signal);
     return cast null;
   }
@@ -172,7 +172,7 @@ class Audio {
     return cast null;
   }
 
-  public static function resolveAudioResourceReference(ref:AudioResourceReference, context:Null<Dynamic>, fetch:AudioResourceFetch, signal:Dynamic):flighthq._internal._Promise<Null<AudioResource>> {
+  public static function resolveAudioResourceReference(ref:AudioResourceReference, context:Null<flighthq._internal.dom.AudioContext>, fetch:AudioResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<AudioResource>> {
     return cast Facade_Audio_flighthq_audio_AudioResourceReference.resolveAudioResourceReference(ref, context, fetch, signal);
     return cast null;
   }

@@ -13,13 +13,13 @@ import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
 class CanvasClip {
-  public static function enableCanvasClip(state:Dynamic):Void {
+  public static function enableCanvasClip(state:CanvasRenderState):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', CanvasClip.canvasClipHooks__canvasClip);
   }
 
   public static final canvasClipHooks__canvasClip:Scene2DClipHooks = { finalize: function(state:RenderState) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
-    s = (cast state : Dynamic);
+    s = (cast state : CanvasRenderState);
     while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);
@@ -27,7 +27,7 @@ class CanvasClip {
   }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    s = (cast state : Dynamic);
+    s = (cast state : CanvasRenderState);
     target = _Runtime.subtractNumbers(_Runtime.field(data, 'clipDepth'), ((cast !_Runtime.looseEquals(_Runtime.field(source, 'clip'), null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast _Runtime.field(s, 'currentClipDepth') : Float) > (cast target : Float)) : Bool)) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
@@ -36,7 +36,7 @@ class CanvasClip {
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var clip:Dynamic = cast _Runtime.UNDEFINED;
-    s = (cast state : Dynamic);
+    s = (cast state : CanvasRenderState);
     clip = _Runtime.field(source, 'clip');
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) {

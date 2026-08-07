@@ -17,7 +17,7 @@ import flighthq.types.TextSelectionRectangle;
 
 class GlTextInput {
   @:noCompletion
-  public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawGlTextInputOverlay(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;

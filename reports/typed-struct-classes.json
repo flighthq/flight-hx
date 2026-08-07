@@ -85048,7 +85048,7 @@
       "directAccesses": 0,
       "fields": {
         "optional": 0,
-        "requiredUndefined": 0,
+        "requiredUndefined": 1,
         "total": 7
       },
       "id": "@flighthq/types:interface#WgpuSavedPassState",
@@ -89414,7 +89414,7 @@
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
     "productionObjectSpreads": 100,
-    "requiredUndefinedFields": 1,
+    "requiredUndefinedFields": 2,
     "schemas": 1513,
     "testObjectLiterals": 5235
   },

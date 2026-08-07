@@ -22,6 +22,7 @@ import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Device.DeviceBackend;
 import flighthq.types.Dialog.DialogBackend;
+import flighthq.types.FileSystem.FileSystemBackend;
 import flighthq.types.Geolocation.GeolocationBackend;
 import flighthq.types.Haptics.HapticsBackend;
 import flighthq.types.Keyboard.SoftKeyboardBackend;
@@ -55,7 +56,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
+  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
     return cast Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorFileSystem.createCapacitorFileSystemBackend(capacitor);
     return cast null;
   }

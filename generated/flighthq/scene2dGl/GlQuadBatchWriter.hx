@@ -28,7 +28,7 @@ class GlQuadBatchWriter {
 
   public static final QUAD_BATCH_FS__glQuadBatchWriter:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord);\n  if (u_straightTextureAlpha) color.rgb *= color.a;\n  color *= clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
 
-  public static function compileQuadBatchWriterShader__glQuadBatchWriter(gl:Dynamic):GlQuadBatchShader {
+  public static function compileQuadBatchWriterShader__glQuadBatchWriter(gl:flighthq._internal.dom.WebGL2RenderingContext):GlQuadBatchShader {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, QUAD_BATCH_VS, GlQuadBatchWriter.QUAD_BATCH_FS__glQuadBatchWriter, 'Sprite-batch'] : Array<Dynamic>));
     return cast { program: program, locCorner: 0.0, locMatAB: 1.0, locMatCD: 2.0, locMatTXTY: 3.0, locSize: 4.0, locUvRect: 5.0, locAlpha: 6.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') };
@@ -171,7 +171,7 @@ class GlQuadBatchWriter {
   }
 
   @:noCompletion
-  public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:Dynamic, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
+  public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var floats:Dynamic = cast _Runtime.UNDEFINED;
@@ -230,7 +230,7 @@ class GlQuadBatchWriter {
   }
 
   @:noCompletion
-  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic, ?locStraightTextureAlpha:Dynamic):Void {
+  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:flighthq._internal.dom.WebGLUniformLocation, locTexture:flighthq._internal.dom.WebGLUniformLocation, ?locStraightTextureAlpha:flighthq._internal.dom.WebGLUniformLocation):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
@@ -260,7 +260,7 @@ class GlQuadBatchWriter {
   }
 
   @:noCompletion
-  public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
+  public static function useGlQuadBatchProgram(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program) : Bool)) {

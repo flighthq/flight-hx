@@ -26,7 +26,7 @@ import flighthq.types.RenderEffect;
 
 class CanvasRenderEffectPipeline {
   @:noCompletion
-  public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
+  public static function acquireCanvasRenderTarget(pool:CanvasRenderTargetPool, width:Float, height:Float):CanvasRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +39,7 @@ class CanvasRenderEffectPipeline {
     return cast null;
   }
 
-  public static function beginCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
+  public static function beginCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
@@ -52,20 +52,20 @@ class CanvasRenderEffectPipeline {
     _Runtime.callValue(beginCanvasRenderPass, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
   }
 
-  public static function createCanvasRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
+  public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.CanvasRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { options: _Runtime.mergeObjects([options]), sceneTarget: null, pool: _Runtime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)), lutCache: _Runtime.callValue(createColorLutCache, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
   @:noCompletion
-  public static function createCanvasRenderTargetPool():Dynamic {
+  public static function createCanvasRenderTargetPool():CanvasRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
   @:noCompletion
-  public static function destroyCanvasRenderEffectPipeline(_state:Dynamic, pipeline:Dynamic):Void {
+  public static function destroyCanvasRenderEffectPipeline(_state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
     _Runtime.setField(pipeline, 'sceneTarget', null);
     _Runtime.setLength(_Runtime.field(_Runtime.field(pipeline, 'pool'), 'free'), 0.0);
     _Runtime.setLength(_Runtime.field(_Runtime.field(pipeline, 'pool'), 'inUse'), 0.0);
@@ -73,12 +73,12 @@ class CanvasRenderEffectPipeline {
     _Runtime.setField(_Runtime.field(pipeline, 'lutCache'), 'lut', null);
   }
 
-  public static function endCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
+  public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline, operations:Array<Dynamic>):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var scratchA:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var scratchB:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var source:CanvasRenderTarget = cast _Runtime.UNDEFINED;
+    var scratchA:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    var scratchB:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var pending:Array<Adjustment> = cast _Runtime.UNDEFINED;
     var ensureScratch:Dynamic = cast _Runtime.UNDEFINED;
     var flushAdjustments:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,14 +131,14 @@ class CanvasRenderEffectPipeline {
   }
 
   @:noCompletion
-  public static function releaseCanvasRenderTarget(pool:Dynamic, target:Dynamic):Void {
+  public static function releaseCanvasRenderTarget(pool:CanvasRenderTargetPool, target:CanvasRenderTarget):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.callProperty(_Runtime.field(pool, 'inUse'), 'indexOf', cast ([target] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.splice(_Runtime.field(pool, 'inUse'), Std.int(index), Std.int(1.0), []); }
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }
 
-  public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
+  public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:CanvasRenderState, source:CanvasRenderTarget):Void {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     context = _Runtime.field(state, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));

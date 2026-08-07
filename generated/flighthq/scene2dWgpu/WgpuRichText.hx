@@ -39,9 +39,9 @@ import flighthq.types.WgpuRichTextOverlay;
 typedef WgpuRichTextData__wgpuRichText = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
 class WgpuRichText {
-  public static var _offscreenCanvas__wgpuRichText:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _offscreenCanvas__wgpuRichText:Null<flighthq._internal.dom.HTMLCanvasElement> = _Runtime.explicitNull();
 
-  public static var _offscreenCtx__wgpuRichText:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _offscreenCtx__wgpuRichText:Null<flighthq._internal.dom.CanvasRenderingContext2D> = _Runtime.explicitNull();
 
   public static var _webgpuTextInputOverlay__wgpuRichText:Null<WgpuRichTextOverlay> = _Runtime.explicitNull();
 
@@ -56,7 +56,7 @@ class WgpuRichText {
     var richData:Dynamic = cast _Runtime.UNDEFINED;
     richData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(richData, null) : Bool)) { return; }
-    _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(richData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
+    ({ final __hostTypeCall0 = _Runtime.optionalField(_Runtime.field(richData, 'entry'), 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
   @:noCompletion
@@ -95,7 +95,7 @@ class WgpuRichText {
     _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
     if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0) : Bool) && (cast !(cast _Runtime.field(data, 'background') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(data, 'border') : Bool) : Bool)) : Bool)) { return; }
     result = _Runtime.callValue(WgpuRichText.layoutRichText__wgpuRichText, cast ([source, richTextRuntime, _Runtime.field(content, 'text'), _Runtime.field(content, 'formatRanges'), state] : Array<Dynamic>));
-    maxTexDim = _Runtime.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     maxLogical = HxMath.floor((maxTexDim / pixelRatio));
     fieldW = HxMath.min(HxMath.ceil(_Runtime.callValue(computeTextBoundsWidth, cast ([data, result] : Array<Dynamic>))), maxLogical);
@@ -126,7 +126,7 @@ class WgpuRichText {
     if ((cast ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(richData, 'w'), pw) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(richData, 'h'), ph) : Bool)) : Bool)) {
       var nextEntry:Dynamic = _Runtime.callValue(createWgpuTextureEntry, cast ([state, pw, ph, WgpuRichText._offscreenCanvas__wgpuRichText] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(nextEntry, null) : Bool)) { return; }
-      _Runtime.callOptionalProperty(_Runtime.optionalField(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
+      ({ final __hostTypeCall1 = _Runtime.optionalField(entry, 'texture'); __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
       (entry = cast (nextEntry : Dynamic));
       _Runtime.setField(richData, 'entry', nextEntry);
       _Runtime.setField(richData, 'w', pw);
@@ -145,7 +145,7 @@ class WgpuRichText {
 
   public static final defaultWgpuRichTextRenderer:Scene2DRenderer = { createData: createWgpuRichTextData, destroyData: destroyWgpuRichTextData, submit: drawWgpuRichText };
 
-  public static function drawRichTextToCanvas__wgpuRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__wgpuRichText(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -190,7 +190,7 @@ class WgpuRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function getOffscreenCanvas__wgpuRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function getOffscreenCanvas__wgpuRichText(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.CanvasRenderingContext2D {
     var pw:Dynamic = cast _Runtime.UNDEFINED;
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(WgpuRichText._offscreenCanvas__wgpuRichText) : Bool)) {
@@ -212,13 +212,13 @@ class WgpuRichText {
     var measure:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    maxTexDim = _Runtime.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     maxLogical = HxMath.floor(_Runtime.divideNumbers(maxTexDim, _Runtime.field(state, 'pixelRatio')));
     measure = function(value:String, format:TextFormat) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(WgpuRichText.getOffscreenCanvas__wgpuRichText, cast ([1.0, 1.0] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)), 'width');
+      return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { formatRanges: formatRanges, height: HxMath.min(_Runtime.field(data, 'height'), maxLogical), measure: measure, multiline: _Runtime.field(data, 'multiline'), text: text, verticalAlign: ((cast _Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none') : Bool) ? (cast _Runtime.field(data, 'verticalAlign') : Dynamic) : (cast 'top' : Dynamic)), width: HxMath.min(((cast _Runtime.field(data, 'wordWrap') : Bool) ? (cast _Runtime.field(data, 'width') : Dynamic) : (cast 10000.0 : Dynamic)), maxLogical), wordWrap: _Runtime.field(data, 'wordWrap') }] : Array<Dynamic>));

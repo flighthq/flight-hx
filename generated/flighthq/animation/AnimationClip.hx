@@ -29,7 +29,7 @@ class AnimationClip {
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<Dynamic>):flighthq.types.AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float, ?events:Array<AnimationClipEvent>):flighthq.types.AnimationClip {
     if (events == null) events = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var copiedEvents:Dynamic = cast _Runtime.UNDEFINED;
     var computedDuration:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,7 +43,7 @@ class AnimationClip {
     return cast null;
   }
 
-  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):Dynamic {
+  public static function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):AnimationClipEvent {
     if (payload == null) payload = cast (null : Dynamic);
     return cast _Runtime.callValue(createEntity, cast ([{ name: name, payload: payload, time: time }] : Array<Dynamic>));
     return cast null;
@@ -80,12 +80,12 @@ class AnimationClip {
     return cast null;
   }
 
-  public static function computeAnimationClipEventsDuration__animationClip(events:Array<Dynamic>):Float {
+  public static function computeAnimationClipEventsDuration__animationClip(events:Array<AnimationClipEvent>):Float {
     return cast ((cast ((cast _Runtime.field(events, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(events, _Runtime.subtractNumbers(_Runtime.field(events, 'length'), 1.0)), 'time') : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
-  public static function validateAnimationClipEvents__animationClip(events:Array<Dynamic>):Void {
+  public static function validateAnimationClipEvents__animationClip(events:Array<AnimationClipEvent>):Void {
     for (event in _Runtime.iterable(events)) {
       if ((cast ((cast !(cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([_Runtime.field(event, 'time')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(event, 'time') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.throwValue(_Runtime.rangeError('AnimationClip event "' + Std.string(_Runtime.field(event, 'name')) + '" time must be a finite non-negative number.'));

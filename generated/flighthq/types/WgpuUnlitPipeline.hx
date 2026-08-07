@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef WgpuUnlitDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasColorMap:Bool; };
 
-typedef WgpuUnlitPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:Dynamic; var pipeline:Dynamic; var skinned:Bool; };
+typedef WgpuUnlitPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };

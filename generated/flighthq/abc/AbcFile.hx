@@ -59,7 +59,7 @@ class AbcReader__abcFile {
   public function readString():String {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     length = (cast this : AbcReader__abcFile).readVarUint();
-    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast _Runtime.callProperty(AbcFile._decoder__abcFile, 'decode', cast ([(cast this : AbcReader__abcFile).readBytes(length)] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic));
+    return cast ((cast _Runtime.field(this, 'valid') : Bool) ? (cast (cast AbcFile._decoder__abcFile : flighthq._internal.dom.TextDecoder).decode((cast this : AbcReader__abcFile).readBytes(length)) : Dynamic) : (cast '' : Dynamic));
     return cast null;
   }
   public function readUint8():Float {

@@ -4,6 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuWireframePipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:Dynamic; var pipeline:Dynamic; var skinned:Bool; };
+typedef WgpuWireframePipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
 
-typedef WgpuWireframeUpload = { var indexFormat:Dynamic; var lineIndexBuffer:Dynamic; var version:Float; var vertexBuffer:Dynamic; };
+typedef WgpuWireframeUpload = { var indexFormat:flighthq._internal.dom.GPUIndexFormat; var lineIndexBuffer:flighthq._internal.dom.GPUBuffer; var version:Float; var vertexBuffer:flighthq._internal.dom.GPUBuffer; };

@@ -8,7 +8,7 @@ import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.ShapeRasterizer;
 
 class CanvasShapeRasterizer {
-  public static function createCanvasShapeRasterizer(resolvers:Dynamic):ShapeRasterizer {
+  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
     return cast function(context:Dynamic, commands:Dynamic, state:Dynamic) {
       _Runtime.callValue(renderCanvasShapeCommands, cast ([context, state, (cast commands : Array<Dynamic>), resolvers] : Array<Dynamic>));
     };

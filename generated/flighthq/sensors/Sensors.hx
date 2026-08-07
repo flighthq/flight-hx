@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.Permission.PermissionName;
 import flighthq.types.Sensors;
 import flighthq.types.Sensors.AmbientLightReading;
 import flighthq.types.Sensors.MotionReading;
@@ -444,7 +443,7 @@ class Sensors {
         } catch (__error:Dynamic) {
         }
       }
-      handler = function(event:Dynamic) {
+      handler = function(event:WebDeviceOrientationEvent__sensors) {
         (Sensors._absoluteOrientation__sensors.alpha = cast (_Runtime.coalesce(_Runtime.field(event, 'alpha'), function():Dynamic return cast 0.0) : Dynamic));
         (Sensors._absoluteOrientation__sensors.beta = cast (_Runtime.coalesce(_Runtime.field(event, 'beta'), function():Dynamic return cast 0.0) : Dynamic));
         (Sensors._absoluteOrientation__sensors.gamma = cast (_Runtime.coalesce(_Runtime.field(event, 'gamma'), function():Dynamic return cast 0.0) : Dynamic));
@@ -454,9 +453,9 @@ class Sensors {
         (Sensors._absoluteOrientation__sensors.timestamp = cast (-1.0 : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._absoluteOrientation__sensors] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientationabsolute', (cast handler : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientationabsolute', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function() {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientationabsolute', (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientationabsolute', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       };
     }, subscribeAmbientLight: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
@@ -494,7 +493,7 @@ class Sensors {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
-      handler = function(event:Dynamic) {
+      handler = function(event:WebDeviceMotionEvent__sensors) {
         var withGravity:Dynamic = cast _Runtime.UNDEFINED;
         var linearAccel:Dynamic = cast _Runtime.UNDEFINED;
         withGravity = _Runtime.field(event, 'accelerationIncludingGravity');
@@ -507,16 +506,16 @@ class Sensors {
         (Sensors._gravity__sensors.timestamp = cast (-1.0 : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._gravity__sensors] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function() {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       };
     }, subscribeLinearAcceleration: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
-      handler = function(event:Dynamic) {
+      handler = function(event:WebDeviceMotionEvent__sensors) {
         var accel:Dynamic = cast _Runtime.UNDEFINED;
         accel = _Runtime.field(event, 'acceleration');
         if ((cast !_Runtime.truthy(accel) : Bool)) { return; }
@@ -527,9 +526,9 @@ class Sensors {
         (Sensors._linearAcceleration__sensors.timestamp = cast (-1.0 : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._linearAcceleration__sensors] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function() {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       };
     }, subscribeMagnetometer: function(listener:Dynamic, ?options:SensorSubscribeOptions) {
       var ctor:Dynamic = cast _Runtime.UNDEFINED;
@@ -565,7 +564,7 @@ class Sensors {
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
-      handler = function(event:Dynamic) {
+      handler = function(event:WebDeviceMotionEvent__sensors) {
         var accel:Dynamic = cast _Runtime.UNDEFINED;
         var rate:Dynamic = cast _Runtime.UNDEFINED;
         accel = _Runtime.field(event, 'accelerationIncludingGravity');
@@ -582,16 +581,16 @@ class Sensors {
         (Sensors._motionRotationRate__sensors.timestamp = cast (-1.0 : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._motionAcceleration__sensors, Sensors._motionRotationRate__sensors] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function() {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       };
     }, subscribeOrientation: function(listener:Dynamic, ?_options:SensorSubscribeOptions) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined') : Bool)) { return cast function() {
 
       }; }
-      handler = function(event:Dynamic) {
+      handler = function(event:WebDeviceOrientationEvent__sensors) {
         var heading:Dynamic = cast _Runtime.UNDEFINED;
         (Sensors._orientation__sensors.alpha = cast (_Runtime.coalesce(_Runtime.field(event, 'alpha'), function():Dynamic return cast 0.0) : Dynamic));
         (Sensors._orientation__sensors.beta = cast (_Runtime.coalesce(_Runtime.field(event, 'beta'), function():Dynamic return cast 0.0) : Dynamic));
@@ -603,9 +602,9 @@ class Sensors {
         (Sensors._orientation__sensors.heading = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(heading), 'number') : Bool) ? (cast heading : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
         _Runtime.callValue(listener, cast ([Sensors._orientation__sensors] : Array<Dynamic>));
       };
-      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientation', (cast handler : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientation', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function() {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientation', (cast handler : Dynamic)] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientation', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
       };
     }, subscribeProximity: function(_listener:Dynamic, ?_options:SensorSubscribeOptions) {
       return cast function() {
@@ -719,10 +718,10 @@ class Sensors {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
                 var status:Dynamic = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions'), 'query', cast ([{ name: (cast permissionName : PermissionName) }] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions') : flighthq._internal.dom.Permissions).query({ name: (cast permissionName : flighthq._internal.dom.PermissionName) }), function(__awaitValue8:Dynamic):Dynamic {
                   status = __awaitValue8;
                   var __flowBranch9:Dynamic;
-                  if ((cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted') : Bool)) {
+                  if ((cast _Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'granted') : Bool)) {
                     __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.flowReturn('granted');
                     });
@@ -731,7 +730,7 @@ class Sensors {
                   }
                   return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
                     var __flowBranch10:Dynamic;
-                    if ((cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'denied') : Bool)) {
+                    if ((cast _Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'denied') : Bool)) {
                       __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
                         return flighthq._internal._Async.flowReturn('denied');
                       });

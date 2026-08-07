@@ -64,17 +64,17 @@ class Socket {
       var ws:Dynamic = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.typeofGlobal('WebSocket'), 'undefined') : Bool)) { return cast null; }
       ws = ((cast !_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]) : Dynamic) : (cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url')]) : Dynamic));
-      _Runtime.setField(ws, 'binaryType', _Runtime.coalesce(_Runtime.field(options, 'binaryType'), function():Dynamic return cast 'arraybuffer'));
-      _Runtime.setField(ws, 'onopen', function() return _Runtime.callProperty(events, 'handleSocketOpen', cast ([] : Array<Dynamic>)));
-      _Runtime.setField(ws, 'onmessage', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketMessage', cast ([_Runtime.callValue(Socket.toSocketMessage__socket, cast ([_Runtime.field(event, 'data')] : Array<Dynamic>))] : Array<Dynamic>)));
-      _Runtime.setField(ws, 'onclose', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketClose', cast ([{ code: _Runtime.field(event, 'code'), reason: _Runtime.field(event, 'reason'), wasClean: _Runtime.field(event, 'wasClean') }] : Array<Dynamic>)));
-      _Runtime.setField(ws, 'onerror', function() return _Runtime.callProperty(events, 'handleSocketError', cast ([] : Array<Dynamic>)));
+      ((cast ws : flighthq._internal.dom.WebSocket).binaryType = _Runtime.coalesce(_Runtime.field(options, 'binaryType'), function():Dynamic return cast 'arraybuffer'));
+      ((cast ws : flighthq._internal.dom.WebSocket).onopen = function() return _Runtime.callProperty(events, 'handleSocketOpen', cast ([] : Array<Dynamic>)));
+      ((cast ws : flighthq._internal.dom.WebSocket).onmessage = function(event:flighthq._internal.dom.MessageEvent<Dynamic>) return _Runtime.callProperty(events, 'handleSocketMessage', cast ([_Runtime.callValue(Socket.toSocketMessage__socket, cast ([event.data] : Array<Dynamic>))] : Array<Dynamic>)));
+      ((cast ws : flighthq._internal.dom.WebSocket).onclose = function(event:flighthq._internal.dom.CloseEvent) return _Runtime.callProperty(events, 'handleSocketClose', cast ([{ code: event.code, reason: event.reason, wasClean: event.wasClean }] : Array<Dynamic>)));
+      ((cast ws : flighthq._internal.dom.WebSocket).onerror = function() return _Runtime.callProperty(events, 'handleSocketError', cast ([] : Array<Dynamic>)));
       return cast { sendSocketFrame: function(data:Dynamic) {
-        if ((cast !_Runtime.strictEquals(_Runtime.field(ws, 'readyState'), _Runtime.field(_Runtime.globalValue('WebSocket'), 'OPEN')) : Bool)) { return cast false; }
-        _Runtime.callProperty(ws, 'send', cast ([data] : Array<Dynamic>));
+        if ((cast !_Runtime.strictEquals((cast ws : flighthq._internal.dom.WebSocket).readyState, _Runtime.field(_Runtime.globalValue('WebSocket'), 'OPEN')) : Bool)) { return cast false; }
+        (cast ws : flighthq._internal.dom.WebSocket).send(data);
         return cast true;
       }, closeSocketConnection: function(code:Dynamic, reason:Dynamic) {
-        _Runtime.callProperty(ws, 'close', cast ([code, reason] : Array<Dynamic>));
+        (cast ws : flighthq._internal.dom.WebSocket).close(code, reason);
       } };
     } };
     return cast null;

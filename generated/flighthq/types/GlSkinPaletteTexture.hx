@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlSkinPaletteTexture = { var jointCapacity:Float; var texture:Dynamic; };
+typedef GlSkinPaletteTexture = { var jointCapacity:Float; var texture:flighthq._internal.dom.WebGLTexture; };

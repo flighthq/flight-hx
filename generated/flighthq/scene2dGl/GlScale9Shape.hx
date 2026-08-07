@@ -29,7 +29,7 @@ import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
-typedef GlScale9ShapeData__glScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var texture:Dynamic; };
+typedef GlScale9ShapeData__glScale9Shape = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var texture:flighthq._internal.dom.WebGLTexture; };
 
 class GlScale9Shape {
   public static final _remappedCommands__glScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
@@ -141,7 +141,7 @@ class GlScale9Shape {
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = { createData: createGlScale9ShapeData, destroyData: destroyGlScale9ShapeData, submit: drawGlScale9Shape };
 
-  public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:Dynamic, loc:Dynamic, m:flighthq._internal._Float32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
+  public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:Dynamic, m:flighthq._internal._Float32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;

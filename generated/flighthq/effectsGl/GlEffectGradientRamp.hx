@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 class GlEffectGradientRamp {
   @:noCompletion
-  public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function createGlEffectGradientRampTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.WebGLTexture {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.callValue(GlEffectGradientRamp.buildRampData__glEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));

@@ -76,7 +76,7 @@ class GlGradientGlowEffect {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'GradientGlowEffect', defaultGlGradientGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:Dynamic, dest:GlRenderTarget):Void {
+  public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientGlowEffect.getLookupShader__glGradientGlowEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {

@@ -8,15 +8,15 @@ import flighthq.types.Image;
 
 class GlTextureVideoUpload {
   @:noCompletion
-  public static function uploadGlTextureVideoFrame(gl:Dynamic, image:Dynamic, uploadedVersion:Float, ?internalFormat:Float):Float {
+  public static function uploadGlTextureVideoFrame(gl:flighthq._internal.dom.WebGL2RenderingContext, image:Image, uploadedVersion:Float, ?internalFormat:Float):Float {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     var element:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'version'), uploadedVersion) : Bool)) { return cast uploadedVersion; }
-    element = (cast _Runtime.field(image, 'source') : Null<Dynamic>);
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast _Runtime.field(element, 'readyState') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoWidth') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(element, 'videoHeight') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    element = (cast _Runtime.field(image, 'source') : Null<flighthq._internal.dom.HTMLVideoElement>);
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast uploadedVersion;
     }
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast (cast element : Dynamic) : Dynamic), internalFormat] : Array<Dynamic>));
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast (cast element : Dynamic) : flighthq._internal.dom.TexImageSource), internalFormat] : Array<Dynamic>));
     return cast _Runtime.field(image, 'version');
     return cast null;
   }

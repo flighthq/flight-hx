@@ -21,7 +21,7 @@ class CanvasScale9Shape {
   public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
 
   @:noCompletion
-  public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasScale9Shape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,7 +56,7 @@ class CanvasScale9Shape {
 
   public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasScale9Shape };
 
-  public static function applyStrippedTransform__canvasScale9Shape(state:Dynamic, context:Dynamic, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
+  public static function applyStrippedTransform__canvasScale9Shape(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var c:Dynamic = cast _Runtime.UNDEFINED;

@@ -10,13 +10,13 @@ import flighthq.types.ShapeCommand.ShapeCommandKey;
 
 class CanvasShapeRegistry {
   @:noCompletion
-  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<Dynamic> {
+  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<Dynamic>> {
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'canvasShapeCommandRegistry'); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map).get(key)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
-  public static function registerCanvasShapeCommand<K>(state:RenderState, command:Dynamic):Void {
+  public static function registerCanvasShapeCommand<K>(state:RenderState, command:CanvasShapeCommand<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -24,7 +24,7 @@ class CanvasShapeRegistry {
     ((cast registry : flighthq._internal._Map).set(_Runtime.field(command, 'key'), command));
   }
 
-  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<Dynamic>):Void {
+  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
     for (command in _Runtime.iterable(commands)) {
       _Runtime.callValue(registerCanvasShapeCommand, cast ([state, command] : Array<Dynamic>));
     }

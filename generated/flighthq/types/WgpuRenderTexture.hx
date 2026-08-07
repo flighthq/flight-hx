@@ -11,6 +11,6 @@ typedef WgpuRenderTextureExplanation = { var height:Float; var status:WgpuRender
 
 typedef WgpuRenderTextureEntry = { var status:WgpuRenderTextureStatus; var target:WgpuRenderTarget; };
 
-typedef WgpuRenderTexturePool = { var device:Null<Dynamic>; var destroyed:Bool; var effectTargets:WgpuRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; };
+typedef WgpuRenderTexturePool = { var device:Null<flighthq._internal.dom.GPUDevice>; var destroyed:Bool; var effectTargets:WgpuRenderTargetPool; var free:Array<RenderTexture>; var leased:Dynamic; };
 
 typedef WgpuRenderTextureGuard = Dynamic;

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlShapeMeshBinding = { var program:Dynamic; var vertexBuffer:Dynamic; var indexBuffer:Dynamic; var positionLocation:Float; var matrixLocation:Null<Dynamic>; var colorLocation:Null<Dynamic>; };
+typedef GlShapeMeshBinding = { var program:flighthq._internal.dom.WebGLProgram; var vertexBuffer:flighthq._internal.dom.WebGLBuffer; var indexBuffer:flighthq._internal.dom.WebGLBuffer; var positionLocation:Float; var matrixLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; var colorLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; };

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WgpuSkinningAdapter = { var extendMeshPrelude:Dynamic; var extendShadowDepthPrelude:Dynamic; var getDrawBindGroup:Dynamic; var getDrawLayout:Dynamic; var getUploadVertices:Dynamic; var hasBindPose:Dynamic; var isGpuSkinned:Dynamic; var vertexBufferLayouts:Array<Dynamic>; };
+typedef WgpuSkinningAdapter = { var extendMeshPrelude:Dynamic; var extendShadowDepthPrelude:Dynamic; var getDrawBindGroup:Dynamic; var getDrawLayout:Dynamic; var getUploadVertices:Dynamic; var hasBindPose:Dynamic; var isGpuSkinned:Dynamic; var vertexBufferLayouts:Array<flighthq._internal.dom.GPUVertexBufferLayout>; };

@@ -18,7 +18,7 @@ import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 
 class WgpuPbrPipelineCache {
   @:noCompletion
-  public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuPbrPipeline {
+  public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Dynamic = false, skinned:Dynamic = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuPbrPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,7 +31,7 @@ class WgpuPbrPipelineCache {
   }
 
   @:noCompletion
-  public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
+  public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuPbrPipeline {
     var fullKey:WgpuPbrDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasColorAdjustment: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorAdjustmentRun') }, { hasColorMatrix: _Runtime.field(_Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>)), 'activeColorMatrixRun') }]);
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'pbr:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuPbrDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(blended:Dynamic, skinned:Dynamic) return _Runtime.callValue(compileWgpuPbrPipeline, cast ([state, fullKey, format, blended, skinned, _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentMaterialFeature'), function():Dynamic return cast null)] : Array<Dynamic>))] : Array<Dynamic>));

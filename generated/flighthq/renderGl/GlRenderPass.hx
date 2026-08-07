@@ -15,7 +15,7 @@ import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 import flighthq.types.Viewport;
 
-typedef SavedGlPassState__glRenderPass = { var clipForms:Array<String>; var currentMaskDepth:Float; var framebuffer:Null<Dynamic>; var renderTarget:Null<GlRenderTarget>; var renderTargetViewport:Null<GlViewportRect>; var renderTransform2D:Null<Matrix>; var scissorRect:Null<GlScissorRect>; var scissorStack:Array<GlScissorRect>; };
+typedef SavedGlPassState__glRenderPass = { var clipForms:Array<String>; var currentMaskDepth:Float; var framebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var renderTarget:Null<GlRenderTarget>; var renderTargetViewport:Null<GlViewportRect>; var renderTransform2D:Null<Matrix>; var scissorRect:Null<GlScissorRect>; var scissorStack:Array<GlScissorRect>; };
 
 typedef GlPassStackEntry__glRenderPass = { var depthMask:Bool; var owner:GlRenderState; var ownerState:SavedGlPassState__glRenderPass; var previousOwner:GlRenderState; var previousState:SavedGlPassState__glRenderPass; var stencil:Null<SavedGlStencil__glRenderPass>; };
 
@@ -188,7 +188,7 @@ class GlRenderPass {
     _Runtime.setField(state, 'renderTransform2D', _Runtime.field(saved, 'renderTransform2D'));
   }
 
-  public static function applyGlScissor__glRenderPass(gl:Dynamic, rect:Null<GlScissorRect>):Void {
+  public static function applyGlScissor__glRenderPass(gl:flighthq._internal.dom.WebGL2RenderingContext, rect:Null<GlScissorRect>):Void {
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
       return;
@@ -197,12 +197,12 @@ class GlRenderPass {
     flighthq._internal.backend.WebGl2Backend.scissor(gl, _Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height'));
   }
 
-  public static function captureGlStencil__glRenderPass(gl:Dynamic):SavedGlStencil__glRenderPass {
+  public static function captureGlStencil__glRenderPass(gl:flighthq._internal.dom.WebGL2RenderingContext):SavedGlStencil__glRenderPass {
     return cast { fail: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_FAIL', flighthq._internal.backend.WebGl2Backend.STENCIL_FAIL)) : Float), func: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_FUNC', flighthq._internal.backend.WebGl2Backend.STENCIL_FUNC)) : Float), passDepthFail: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_PASS_DEPTH_FAIL', flighthq._internal.backend.WebGl2Backend.STENCIL_PASS_DEPTH_FAIL)) : Float), passDepthPass: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_PASS_DEPTH_PASS', flighthq._internal.backend.WebGl2Backend.STENCIL_PASS_DEPTH_PASS)) : Float), ref: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_REF', flighthq._internal.backend.WebGl2Backend.STENCIL_REF)) : Float), valueMask: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_VALUE_MASK', flighthq._internal.backend.WebGl2Backend.STENCIL_VALUE_MASK)) : Float), writeMask: (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_WRITEMASK', flighthq._internal.backend.WebGl2Backend.STENCIL_WRITEMASK)) : Float) };
     return cast null;
   }
 
-  public static function restoreGlStencil__glRenderPass(gl:Dynamic, saved:Null<SavedGlStencil__glRenderPass>):Void {
+  public static function restoreGlStencil__glRenderPass(gl:flighthq._internal.dom.WebGL2RenderingContext, saved:Null<SavedGlStencil__glRenderPass>):Void {
     if ((cast _Runtime.strictEquals(saved, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_TEST', flighthq._internal.backend.WebGl2Backend.STENCIL_TEST));
       return;

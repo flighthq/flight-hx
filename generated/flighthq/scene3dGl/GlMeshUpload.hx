@@ -62,7 +62,7 @@ class GlMeshUpload {
       if ((cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { _Runtime.setField(upload, 'indexBuffer', flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
       flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(upload, 'indexBuffer'));
       flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), geometry.indices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
-      _Runtime.setField(upload, 'indexType', ((cast _Runtime.isInstanceOf(geometry.indices, _Runtime.globalValue('Uint32Array')) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic)));
+      _Runtime.setField(upload, 'indexType', ((cast _Runtime.isInstanceOfName(geometry.indices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic)));
       _Runtime.setField(upload, 'indexCount', _Runtime.field(geometry.indices, 'length'));
     } else {
       if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
@@ -75,7 +75,7 @@ class GlMeshUpload {
     return cast null;
   }
 
-  public static function getGlPrimitiveMode__glMeshUpload(gl:Dynamic, topology:PrimitiveTopology):Float {
+  public static function getGlPrimitiveMode__glMeshUpload(gl:flighthq._internal.dom.WebGL2RenderingContext, topology:PrimitiveTopology):Float {
     {
       var __switchValue = topology;
       if (__switchValue == 'line-list') {
@@ -152,7 +152,7 @@ class GlMeshUpload {
 
   public static final ATTRIBUTE_LOCATION__glMeshUpload:Dynamic = { color0: 4.0, joints0: 6.0, normal: 1.0, position: 0.0, tangent: 2.0, uv0: 3.0, uv1: 5.0, weights0: 7.0 };
 
-  public static function bindGlVertexAttribute__glMeshUpload(gl:Dynamic, attribute:VertexAttribute, stride:Float):Void {
+  public static function bindGlVertexAttribute__glMeshUpload(gl:flighthq._internal.dom.WebGL2RenderingContext, attribute:VertexAttribute, stride:Float):Void {
     var location:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
@@ -168,7 +168,7 @@ class GlMeshUpload {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, location, size, type, normalized, stride, attribute.byteOffset);
   }
 
-  public static function resolveGlVertexFormat__glMeshUpload(gl:Dynamic, format:String):Array<Dynamic> {
+  public static function resolveGlVertexFormat__glMeshUpload(gl:flighthq._internal.dom.WebGL2RenderingContext, format:String):Array<Dynamic> {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2') {

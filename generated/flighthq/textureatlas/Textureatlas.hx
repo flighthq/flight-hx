@@ -9,6 +9,7 @@ import flighthq.textureatlas.TextureAtlasFrom as Facade_Textureatlas_flighthq_te
 import flighthq.textureatlas.TextureAtlasGrid as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasGrid;
 import flighthq.textureatlas.TextureAtlasRegion as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion;
 import flighthq.types.GridSliceOptions;
+import flighthq.types.Image;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
@@ -52,7 +53,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromCanvas(canvas);
     return cast null;
   }
@@ -62,17 +63,17 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageBitmap(bitmap);
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageElement(img:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageElement(img:flighthq._internal.dom.HTMLImageElement):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageElement(img);
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageResource(resource:Image):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageResource(resource);
     return cast null;
   }
@@ -159,22 +160,22 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBase64(base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBlob(blob, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes(bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromUrl(url, crossOrigin, signal);
     return cast null;
   }

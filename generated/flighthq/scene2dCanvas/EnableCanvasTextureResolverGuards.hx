@@ -9,12 +9,12 @@ import flighthq.types.CanvasRenderState;
 
 class EnableCanvasTextureResolverGuards {
   @:noCompletion
-  public static function areCanvasTextureResolverGuardsEnabled(state:Dynamic):Bool {
+  public static function areCanvasTextureResolverGuardsEnabled(state:CanvasRenderState):Bool {
     return cast _Runtime.callValue(areRenderRegistryGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableCanvasTextureResolverGuards(state:Dynamic):Void {
+  public static function enableCanvasTextureResolverGuards(state:CanvasRenderState):Void {
     _Runtime.callValue(enableRenderRegistryGuards, cast ([state] : Array<Dynamic>));
   }
 }

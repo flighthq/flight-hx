@@ -10,6 +10,6 @@ typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float
 
 typedef AudioPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
 
-typedef AudioResource = { var buffer:Null<Dynamic>; };
+typedef AudioResource = { var buffer:Null<flighthq._internal.dom.AudioBuffer>; };
 
 typedef AudioResourceUrl = { var url:String; @:optional var type:String; };

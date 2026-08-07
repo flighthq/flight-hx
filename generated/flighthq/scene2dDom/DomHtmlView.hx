@@ -21,17 +21,17 @@ class DomHtmlView {
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(data, 'element');
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(element, 'style'), 'position'), 'absolute') : Bool)) {
-      _Runtime.setField(_Runtime.field(element, 'style'), 'left', '0');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'overflow', 'hidden');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'position', 'absolute');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'top', '0');
-      _Runtime.setField(_Runtime.field(element, 'style'), 'transformOrigin', '0 0');
+    if ((cast !_Runtime.strictEquals((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).position, 'absolute') : Bool)) {
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).left = '0');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).transformOrigin = '0 0');
     }
-    _Runtime.setField(_Runtime.field(element, 'style'), 'width', '' + Std.string(_Runtime.field(data, 'width')) + 'px');
-    _Runtime.setField(_Runtime.field(element, 'style'), 'height', '' + Std.string(_Runtime.field(data, 'height')) + 'px');
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(_Runtime.field(data, 'width')) + 'px');
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(_Runtime.field(data, 'height')) + 'px');
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(renderProxy, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
-    _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
+    ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast _Runtime.field(renderProxy, 'alpha') : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string(_Runtime.field(renderProxy, 'alpha')) : Dynamic) : (cast '' : Dynamic)));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([element, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }

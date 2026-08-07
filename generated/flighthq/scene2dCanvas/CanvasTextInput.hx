@@ -22,7 +22,7 @@ import flighthq.types.TextSelectionRectangle;
 
 class CanvasTextInput {
   @:noCompletion
-  public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasTextInputOverlay(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var input:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
@@ -83,9 +83,9 @@ class CanvasTextInput {
     var wasFocused:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
     wasFocused = _Runtime.coalesce(((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast false);
-    if ((cast ((cast !(cast wasFocused : Bool) : Bool) && (cast focused : Bool)) : Bool)) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).set(source, _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)))); }
+    if ((cast ((cast !(cast wasFocused : Bool) : Bool) && (cast focused : Bool)) : Bool)) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).set(source, (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now())); }
     ((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap).set(source, focused));
-    elapsed = _Runtime.subtractNumbers(_Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>)), _Runtime.coalesce(((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>))));
+    elapsed = _Runtime.subtractNumbers((cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now(), _Runtime.coalesce(((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap).get(source)), function():Dynamic return cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now()));
     return cast ((cast _Runtime.fmod(elapsed, (CanvasTextInput.CARET_BLINK_MS__canvasTextInput * 2.0)) : Float) < (cast CanvasTextInput.CARET_BLINK_MS__canvasTextInput : Float));
     return cast null;
   }

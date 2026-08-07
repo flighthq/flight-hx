@@ -84,11 +84,11 @@ class Application {
     Facade_Application_flighthq_application_Window.attachWindowClose(win);
   }
 
-  public static function attachWindowDropFile(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowDropFile(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Application_flighthq_application_Window.attachWindowDropFile(win, element);
   }
 
-  public static function attachWindowFocus(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowFocus(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Application_flighthq_application_Window.attachWindowFocus(win, element);
   }
 
@@ -104,15 +104,15 @@ class Application {
     Facade_Application_flighthq_application_Window.attachWindowOrientation(win);
   }
 
-  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
+  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     Facade_Application_flighthq_application_Window.attachWindowRenderContext(win, canvas);
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     Facade_Application_flighthq_application_Window.attachWindowRenderState(win, state, canvas);
   }
 
-  public static function attachWindowResize(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowResize(win:ApplicationWindow, element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Application_flighthq_application_Window.attachWindowResize(win, element);
   }
 
@@ -156,7 +156,7 @@ class Application {
     }, cancelFrame: function(handle:Dynamic) {
       _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([(cast handle : Float)] : Array<Dynamic>));
     }, now: function() {
-      return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>));
+      return cast (cast _Runtime.globalValue('performance') : flighthq._internal.dom.Performance).now();
     } };
     return cast null;
   }
@@ -347,7 +347,7 @@ class Application {
 
   public static final kPaused__application:Dynamic = _Runtime.symbol();
 
-  public static function lockApplicationPointer(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function lockApplicationPointer(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Application_flighthq_application_Window.lockApplicationPointer(element);
     return cast null;
   }
@@ -375,7 +375,7 @@ class Application {
     }));
   }
 
-  public static function prepareElementForInput(element:Dynamic):Void {
+  public static function prepareElementForInput(element:flighthq._internal.dom.HTMLElement):Void {
     Facade_Application_flighthq_application_Window.prepareElementForInput(element);
   }
 
@@ -393,7 +393,7 @@ class Application {
     _Runtime.callProperty(app.windows, 'push', cast ([win] : Array<Dynamic>));
   }
 
-  public static function requestApplicationFullscreen(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function requestApplicationFullscreen(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Application_flighthq_application_Window.requestApplicationFullscreen(element);
     return cast null;
   }

@@ -20,7 +20,7 @@ class Net {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) { return cast buffer; }
     if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) { return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buffer] : Array<Dynamic>)]); }
-    text = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([buffer] : Array<Dynamic>));
+    text = (cast _Runtime.construct(_Runtime.globalValue('TextDecoder'), []) : flighthq._internal.dom.TextDecoder).decode(buffer);
     if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
       try {
         return cast (cast _Runtime.jsonParse(text) : Dynamic);
@@ -32,10 +32,10 @@ class Net {
     return cast null;
   }
 
-  public static function _netContentLength__net(headers:Dynamic):Float {
+  public static function _netContentLength__net(headers:flighthq._internal.dom.Headers):Float {
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    raw = _Runtime.callProperty(headers, 'get', cast (['content-length'] : Array<Dynamic>));
+    raw = headers.get('content-length');
     if ((cast _Runtime.strictEquals(raw, null) : Bool)) { return cast -1.0; }
     parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([raw] : Array<Dynamic>));
     return cast ((cast ((cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)) : Bool) && (cast ((cast parsed : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast parsed : Dynamic) : (cast -1.0 : Dynamic));
@@ -44,11 +44,11 @@ class Net {
 
   public static final _netTimeoutReason__net:Dynamic = { flightNetTimeout: true };
 
-  public static function _netTransportFailure__net(url:String, signal:Dynamic, error:Dynamic):NetResponse {
+  public static function _netTransportFailure__net(url:String, signal:flighthq._internal.dom.AbortSignal, error:Dynamic):NetResponse {
     var statusText:Dynamic = cast _Runtime.UNDEFINED;
     statusText = 'network error';
-    if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
-      (statusText = cast (((cast _Runtime.strictEquals(_Runtime.field(signal, 'reason'), Net._netTimeoutReason__net) : Bool) ? (cast 'timeout' : Dynamic) : (cast 'aborted' : Dynamic)) : Dynamic));
+    if ((cast signal.aborted : Bool)) {
+      (statusText = cast (((cast _Runtime.strictEquals(signal.reason, Net._netTimeoutReason__net) : Bool) ? (cast 'timeout' : Dynamic) : (cast 'aborted' : Dynamic)) : Dynamic));
     } else { if ((cast ((cast _Runtime.isError(error) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(error, 'message'), '') : Bool)) : Bool)) {
       (statusText = cast (_Runtime.field(error, 'message') : Dynamic));
     } }
@@ -56,7 +56,7 @@ class Net {
     return cast null;
   }
 
-  public static function _readNetResponseBody__net(response:Dynamic, responseType:NetResponseType, progress:Null<Signal<Dynamic>>):flighthq._internal._Promise<NetResponseBody> {
+  public static function _readNetResponseBody__net(response:flighthq._internal.dom.Response, responseType:NetResponseType, progress:Null<Signal<Dynamic>>):flighthq._internal._Promise<NetResponseBody> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var __flowBranch0:Dynamic;
@@ -75,7 +75,7 @@ class Net {
           var __flowBranch2:Dynamic;
           if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) {
             __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue3:Dynamic):Dynamic {
                 return flighthq._internal._Async.flowReturn(__awaitValue3);
               });
             });
@@ -86,7 +86,7 @@ class Net {
             var __flowBranch4:Dynamic;
             if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) {
               __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap(response.blob(), function(__awaitValue5:Dynamic):Dynamic {
                   return flighthq._internal._Async.flowReturn(__awaitValue5);
                 });
               });
@@ -98,7 +98,7 @@ class Net {
               if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
                 __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'json', cast ([] : Array<Dynamic>)), function(__awaitValue7:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap(response.json(), function(__awaitValue7:Dynamic):Dynamic {
                       return flighthq._internal._Async.flowReturn((cast __awaitValue7 : Dynamic));
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
@@ -114,7 +114,7 @@ class Net {
                 __flowBranch6 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'text', cast ([] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap(response.text(), function(__awaitValue8:Dynamic):Dynamic {
                   return flighthq._internal._Async.flowReturn(__awaitValue8);
                 });
               });
@@ -125,17 +125,17 @@ class Net {
     );
   }
 
-  public static function _readNetResponseHeaders__net(headers:Dynamic):Dynamic {
+  public static function _readNetResponseHeaders__net(headers:flighthq._internal.dom.Headers):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = {  };
-    _Runtime.callProperty(headers, 'forEach', cast ([function(value:Dynamic, key:Dynamic) {
+    headers.forEach(function(value:Dynamic, key:Dynamic) {
       _Runtime.setIndex(out, key, value);
-    }] : Array<Dynamic>));
+    });
     return cast out;
     return cast null;
   }
 
-  public static function _readNetResponseWithProgress__net(response:Dynamic, progress:Signal<Dynamic>):flighthq._internal._Promise<haxe.io.Bytes> {
+  public static function _readNetResponseWithProgress__net(response:flighthq._internal.dom.Response, progress:Signal<Dynamic>):flighthq._internal._Promise<haxe.io.Bytes> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var total:Dynamic = cast _Runtime.UNDEFINED;
@@ -145,13 +145,13 @@ class Net {
         var loaded:Dynamic = cast _Runtime.UNDEFINED;
         var out:Dynamic = cast _Runtime.UNDEFINED;
         var offset:Dynamic = cast _Runtime.UNDEFINED;
-        total = _Runtime.callValue(Net._netContentLength__net, cast ([_Runtime.field(response, 'headers')] : Array<Dynamic>));
-        stream = _Runtime.field(response, 'body');
+        total = _Runtime.callValue(Net._netContentLength__net, cast ([response.headers] : Array<Dynamic>));
+        stream = response.body;
         var __flowBranch11:Dynamic;
-        if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(stream, 'getReader')), 'function') : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast stream : flighthq._internal.dom.ReadableStream<Dynamic>).getReader), 'function') : Bool)) : Bool)) {
           __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:Dynamic = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue12:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue12:Dynamic):Dynamic {
               buffer = __awaitValue12;
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast _Runtime.field(buffer, 'byteLength') : Dynamic)) }]]), 1);
               return flighthq._internal._Async.flowReturn(buffer);
@@ -161,7 +161,7 @@ class Net {
           __flowBranch11 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
-          reader = _Runtime.callProperty(stream, 'getReader', cast ([] : Array<Dynamic>));
+          reader = (cast stream : flighthq._internal.dom.ReadableStream<Dynamic>).getReader();
           chunks = cast ([] : Array<Dynamic>);
           loaded = 0.0;
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.protect(function():Dynamic {
@@ -171,7 +171,7 @@ class Net {
                 var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
                 var done:Dynamic = cast _Runtime.UNDEFINED;
                 var value:Dynamic = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(reader, 'read', cast ([] : Array<Dynamic>)), function(__awaitValue13:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast reader : flighthq._internal.dom.ReadableStreamDefaultReader<Dynamic>).read(), function(__awaitValue13:Dynamic):Dynamic {
                   __destructure0 = __awaitValue13;
                   done = _Runtime.field(__destructure0, 'done');
                   value = _Runtime.field(__destructure0, 'value');
@@ -218,36 +218,36 @@ class Net {
     );
   }
 
-  public static function _toNetFetchInit__net(request:NetRequest, signal:Dynamic):Dynamic {
-    var init:Dynamic = cast _Runtime.UNDEFINED;
+  public static function _toNetFetchInit__net(request:NetRequest, signal:flighthq._internal.dom.AbortSignal):flighthq._internal.dom.RequestInit {
+    var init:flighthq._internal.dom.RequestInit = cast _Runtime.UNDEFINED;
     init = { method: _Runtime.field(request, 'method'), signal: signal };
-    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'headers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'headers', _Runtime.mergeObjects([_Runtime.field(request, 'headers')])); }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), null) : Bool)) : Bool)) { _Runtime.setField(init, 'body', (cast _Runtime.field(request, 'body') : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'credentials'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'credentials', _Runtime.field(request, 'credentials')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'redirect'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(init, 'redirect', _Runtime.field(request, 'redirect')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'headers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (init.headers = _Runtime.mergeObjects([_Runtime.field(request, 'headers')])); }
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), null) : Bool)) : Bool)) { (init.body = (cast _Runtime.field(request, 'body') : flighthq._internal.dom.BodyInit)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'credentials'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (init.credentials = _Runtime.field(request, 'credentials')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'redirect'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (init.redirect = _Runtime.field(request, 'redirect')); }
     return cast init;
     return cast null;
   }
 
-  public static function _wireNetAbort__net(controller:Dynamic, timeoutMs:Null<Float>, signal:Null<Dynamic>):Dynamic {
+  public static function _wireNetAbort__net(controller:flighthq._internal.dom.AbortController, timeoutMs:Null<Float>, signal:Null<flighthq._internal.dom.AbortSignal>):Dynamic {
     var timer:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var onAbort:Null<Dynamic> = cast _Runtime.UNDEFINED;
     timer = null;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(timeoutMs), 'number') : Bool) && (cast ((cast timeoutMs : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (timer = cast (_Runtime.setTimeout(function() return _Runtime.callProperty(controller, 'abort', cast ([Net._netTimeoutReason__net] : Array<Dynamic>)), timeoutMs) : Dynamic));
+      (timer = cast (_Runtime.setTimeout(function() return controller.abort(Net._netTimeoutReason__net), timeoutMs) : Dynamic));
     }
     onAbort = null;
     if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      if ((cast _Runtime.field(signal, 'aborted') : Bool)) {
-        _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>));
+      if ((cast signal.aborted : Bool)) {
+        controller.abort(signal.reason);
       } else {
-        (onAbort = cast (function() return _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)) : Dynamic));
-        _Runtime.callProperty(signal, 'addEventListener', cast (['abort', onAbort] : Array<Dynamic>));
+        (onAbort = cast (function() return controller.abort(signal.reason) : Dynamic));
+        signal.addEventListener('abort', onAbort);
       }
     }
     return cast function() {
       if ((cast !_Runtime.strictEquals(timer, null) : Bool)) { _Runtime.clearTimeout(timer); }
-      if ((cast ((cast !_Runtime.strictEquals(onAbort, null) : Bool) && (cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { _Runtime.callProperty(signal, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(onAbort, null) : Bool) && (cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { signal.removeEventListener('abort', onAbort); }
     };
     return cast null;
   }
@@ -265,18 +265,18 @@ class Net {
             var response:Dynamic = cast _Runtime.UNDEFINED;
             var headers:Dynamic = cast _Runtime.UNDEFINED;
             var body:Dynamic = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(request, 'url'), _Runtime.callValue(Net._toNetFetchInit__net, cast ([request, _Runtime.field(controller, 'signal')] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue18:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(request, 'url'), _Runtime.callValue(Net._toNetFetchInit__net, cast ([request, (cast controller : flighthq._internal.dom.AbortController).signal] : Array<Dynamic>))] : Array<Dynamic>)), function(__awaitValue18:Dynamic):Dynamic {
               response = __awaitValue18;
-              headers = _Runtime.callValue(Net._readNetResponseHeaders__net, cast ([_Runtime.field(response, 'headers')] : Array<Dynamic>));
+              headers = _Runtime.callValue(Net._readNetResponseHeaders__net, cast ([(cast response : flighthq._internal.dom.Response).headers] : Array<Dynamic>));
               return flighthq._internal._Async.flatMap(_Runtime.callValue(Net._readNetResponseBody__net, cast ([response, _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text'), _Runtime.optionalField(options, 'progress')] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
                 body = __awaitValue19;
-                return flighthq._internal._Async.flowReturn({ status: _Runtime.field(response, 'status'), statusText: _Runtime.field(response, 'statusText'), ok: _Runtime.field(response, 'ok'), headers: headers, body: body, url: ((cast !_Runtime.strictEquals(_Runtime.field(response, 'url'), '') : Bool) ? (cast _Runtime.field(response, 'url') : Dynamic) : (cast _Runtime.field(request, 'url') : Dynamic)) });
+                return flighthq._internal._Async.flowReturn({ status: (cast response : flighthq._internal.dom.Response).status, statusText: (cast response : flighthq._internal.dom.Response).statusText, ok: (cast response : flighthq._internal.dom.Response).ok, headers: headers, body: body, url: ((cast !_Runtime.strictEquals((cast response : flighthq._internal.dom.Response).url, '') : Bool) ? (cast (cast response : flighthq._internal.dom.Response).url : Dynamic) : (cast _Runtime.field(request, 'url') : Dynamic)) });
               });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var error:Dynamic = __caughtError;
             return flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callValue(Net._netTransportFailure__net, cast ([_Runtime.field(request, 'url'), _Runtime.field(controller, 'signal'), error] : Array<Dynamic>)));
+              return flighthq._internal._Async.flowReturn(_Runtime.callValue(Net._netTransportFailure__net, cast ([_Runtime.field(request, 'url'), (cast controller : flighthq._internal.dom.AbortController).signal, error] : Array<Dynamic>)));
             });
           }), function():Dynamic {
             _Runtime.callValue(teardownAbort, cast ([] : Array<Dynamic>));

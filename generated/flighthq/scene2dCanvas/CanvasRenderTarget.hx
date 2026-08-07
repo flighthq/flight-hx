@@ -11,21 +11,21 @@ import flighthq.types.CanvasRenderTarget;
 import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 
-typedef CanvasRenderStateHandles__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; };
+typedef CanvasRenderStateHandles__canvasRenderTarget = Dynamic;
 
-typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Matrix>; };
+typedef SavedCanvasState__canvasRenderTarget = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; var renderTransform2D:Null<Matrix>; };
 
 class CanvasRenderTarget {
   public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   @:noCompletion
-  public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
+  public static function beginCanvasRenderPass(state:CanvasRenderState, target:flighthq.types.CanvasRenderTarget, ?preserve:RenderPassPreserve):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
     var preserveColor:Dynamic = cast _Runtime.UNDEFINED;
     var preserved:Dynamic = cast _Runtime.UNDEFINED;
-    handles = (cast state : Dynamic);
+    handles = (cast state : CanvasRenderStateHandles__canvasRenderTarget);
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     stack = ((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap).get(state));
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -43,7 +43,7 @@ class CanvasRenderTarget {
   }
 
   @:noCompletion
-  public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
+  public static function createCanvasRenderTarget(width:Float, height:Float):flighthq.types.CanvasRenderTarget {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -55,7 +55,7 @@ class CanvasRenderTarget {
   }
 
   @:noCompletion
-  public static function destroyCanvasRenderTarget(target:Dynamic):Void {
+  public static function destroyCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
     _Runtime.setField(target, 'width', 0.0);
@@ -63,10 +63,10 @@ class CanvasRenderTarget {
   }
 
   @:noCompletion
-  public static function endCanvasRenderPass(state:Dynamic):Void {
+  public static function endCanvasRenderPass(state:CanvasRenderState):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var saved:Dynamic = cast _Runtime.UNDEFINED;
-    handles = (cast state : Dynamic);
+    handles = (cast state : CanvasRenderStateHandles__canvasRenderTarget);
     saved = _Runtime.callOptionalProperty(((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap).get(state)), 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.setField(handles, 'canvas', _Runtime.field(saved, 'canvas'));
@@ -75,17 +75,17 @@ class CanvasRenderTarget {
   }
 
   @:noCompletion
-  public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
+  public static function resizeCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget, width:Float, height:Float):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', HxMath.max(1.0, HxMath.ceil(width)));
     flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', HxMath.max(1.0, HxMath.ceil(height)));
     _Runtime.setField(target, 'width', flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'width'));
     _Runtime.setField(target, 'height', flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'height'));
   }
 
-  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+  public static function setCanvasRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
-    handles = (cast state : Dynamic);
+    handles = (cast state : CanvasRenderStateHandles__canvasRenderTarget);
     next = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(copyMatrix, cast ([next, transform] : Array<Dynamic>));
     _Runtime.setField(handles, 'renderTransform2D', next);

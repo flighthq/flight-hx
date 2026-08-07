@@ -18,7 +18,7 @@ import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
 class WgpuDebugPrelude {
   @:noCompletion
-  public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
+  public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):flighthq._internal.dom.GPUBindGroup {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuScene3DRuntime, cast ([state] : Array<Dynamic>));
@@ -34,7 +34,7 @@ class WgpuDebugPrelude {
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 2.0, normalScale);
     flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 3.0, 0.0);
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
@@ -47,7 +47,7 @@ class WgpuDebugPrelude {
   }
 
   @:noCompletion
-  public static function compileWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic, blended:Dynamic = false, doubleSided:Dynamic = false):WgpuDebugPipeline {
+  public static function compileWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Dynamic = false, doubleSided:Dynamic = false):WgpuDebugPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +59,7 @@ class WgpuDebugPrelude {
   }
 
   @:noCompletion
-  public static function ensureWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic, doubleSided:Dynamic = false):WgpuDebugPipeline {
+  public static function ensureWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:flighthq._internal.dom.GPUTextureFormat, doubleSided:Dynamic = false):WgpuDebugPipeline {
     return cast _Runtime.callValue(ensureWgpuScene3DPipeline, cast ([state, 'debug:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuDebugDefineKey, cast ([key] : Array<Dynamic>))) + '|' + Std.string(((cast doubleSided : Bool) ? (cast 'double' : Dynamic) : (cast 'single' : Dynamic))) + '', function(blended:Dynamic) return _Runtime.callValue(compileWgpuDebugPipeline, cast ([state, key, format, blended, doubleSided] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

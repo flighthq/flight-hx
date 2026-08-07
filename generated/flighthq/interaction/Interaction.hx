@@ -86,7 +86,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:Dynamic):CursorBackend {
+  public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {
     return cast Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
     return cast null;
   }
