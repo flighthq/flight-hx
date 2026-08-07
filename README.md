@@ -2,7 +2,7 @@
 
 `flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API under source-derived `flighthq.*` packages and uses `flight` as the Haxelib name.
 
-The current generation accounts for all 131 upstream packages, 1,898 source files, 9,122 candidate declarations, 12,149 public exports, and 1,166 upstream test files. Lowering has zero diagnostics, and all 131 package suites pass through compiled Haxe JavaScript bridges.
+The current generation accounts for all 143 upstream packages, 32,998 public exports, and 1,419 upstream test files. Lowering has zero diagnostics, and every translated package suite passes through compiled Haxe JavaScript bridges (the Node-only `tool-capture` CLI is the one recorded exclusion).
 
 ## API shape
 
@@ -54,3 +54,12 @@ npm run ci             # complete release-quality surface
 ```
 
 Generated Haxe under `generated/` is disposable. Maintained runtime and host integration live under `src/`; generator code and semantic patches live under `tools/generator/`. Change those sources instead of editing generated output. See [AGENTS.md](AGENTS.md) and [agents/architecture.md](agents/architecture.md) for the durable design.
+
+## Porting to native targets
+
+Native rendering uses the same generated code as the web, with two rules that are easy to miss:
+
+- **Mark adapter classes `@:keep`.** Objects you hand to Flight (renderers, canvas/surface adapters, texture resolvers, media sources) are currently reached reflectively, so dead-code elimination will silently strip members the compiler cannot see being used, and Haxe properties (`get`/`set`) reflect as absent — use plain physical fields for values Flight reads (for example a surface's `width`/`height`). `flighthq.scene2dCairo.CairoSurface` is the reference adapter. Typed protocol access is planned, which will turn these rules into ordinary compile-time contracts.
+- **On Neko, callbacks must match arity exactly.** Neko dispatch requires the declared parameter count, including trailing optionals; JavaScript's drop-or-pad tolerance does not apply. Prefer callbacks without optional parameters, and call optional-arity Flight endpoints with every argument supplied. C++ (`hxcpp`) is the primary native target and does not have this restriction; Neko remains supported as the fast-iteration target.
+
+The examples under `examples/` are working Lime applications demonstrating the full wiring, including the per-frame present-skip (`window.onRender.cancel()`) that avoids double-buffer flicker when a scene is unchanged.
