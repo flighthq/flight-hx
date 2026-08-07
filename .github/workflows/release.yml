@@ -1,4 +1,4 @@
-# Tag-triggered haxelib release: push a tag `v<version>` whose version equals
+# Tag-triggered haxelib release: push a tag `<version>` or `v<version>` whose version equals
 # the committed haxelib.json version, and this job re-runs the release gate,
 # builds + validates the zip, publishes it to lib.haxe.org, and attaches the
 # artifact to a GitHub release. Prereleases (`v0.1.0-rc.1`) follow the same
@@ -10,7 +10,8 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - 'v[0-9]*'
+      - '[0-9]*'
 jobs:
   haxelib:
     runs-on: ubuntu-latest

@@ -1,20 +1,19 @@
 {
-  "completedAt": "2026-08-04T20:09:56.872Z",
-  "failedPackages": 1,
+  "completedAt": "2026-08-07T00:06:10.716Z",
+  "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 931462,
-      "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·································x··························································································································································································································x···········\n\n Test Files  2 failed | 36 passed (38)\n      Tests  2 failed | 262 passed (264)\n   Start at  12:54:26\n   Duration  930.58s (transform 20.21s, setup 401ms, import 927.75s, tests 669ms, environment 1.15s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasShape.test.ts > drawCanvasShape > renders MorphShapeKind through the explicit default renderer alias\nAssertionError: expected { …(2) } to be { …(2) } // Object.is equality\n\nIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\n\nExpected: { …(2) }\nReceived: serializes to the same string\n\n\nCompared values have no visual difference.\n\n ❯ upstream/packages/scene2d-canvas/src/canvasShape.test.ts:105:45\n    103|     const data = getOrCreateRenderProxy2D(state, shape);\n    104|\n    105|     expect(defaultCanvasMorphShapeRenderer).toBe(defaultCanvasShapeRen…\n       |                                             ^\n    106|     expect(() => drawCanvasShape(state, data)).not.toThrow();\n    107|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene2d-canvas/src/canvasTransform.test.ts > setCanvasTransform > should call setTransform with frounded tx and ty when roundPixels is true\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 1, 2, 3, 4, 5.678899765014648, …(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    1,\n    2,\n    3,\n    4,\n-   5.678899765014648,\n-   9.101099967956543,\n+   6,\n+   9,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene2d-canvas/src/canvasTransform.test.ts:33:40\n     31|     state.roundPixels = true;\n     32|     setCanvasTransform(state, state.context, transform);\n     33|     expect(state.context.setTransform).toHaveBeenCalledWith(\n       |                                        ^\n     34|       transform.a,\n     35|       transform.b,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "durationMs": 839784,
+      "exitCode": 0,
       "package": "scene2d-canvas",
       "signal": null,
-      "status": "failed",
-      "summary": "2 failed | 262 passed (264)",
-      "testFiles": 38
+      "status": "passed",
+      "summary": "272 passed (272)",
+      "testFiles": 39
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-canvas",
-  "startedAt": "2026-08-04T19:54:25.409Z"
+  "startedAt": "2026-08-06T23:52:10.931Z"
 }

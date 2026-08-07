@@ -26,13 +26,14 @@ const argValue = (flag) => {
 const dryRun = args.includes('--dry-run');
 const tag = argValue('--tag') ?? process.env.GITHUB_REF_NAME;
 
-if (!tag) fail('no tag: pass --tag v<version> or set GITHUB_REF_NAME');
+if (!tag) fail('no tag: pass --tag <version> (with or without a leading v) or set GITHUB_REF_NAME');
 const metadata = JSON.parse(readFileSync(path.join(workspace, 'haxelib.json'), 'utf8'));
-const expected = `v${metadata.version}`;
-if (tag !== expected) {
+// Both `0.3.0` and `v0.3.0` tag styles are accepted; the version itself must
+// already be committed in haxelib.json so the artifact is reproducible.
+const tagVersion = tag.replace(/^v/u, '');
+if (tagVersion !== metadata.version) {
   fail(
-    `tag ${tag} does not match haxelib.json version ${metadata.version} (expected tag ${expected}); ` +
-      'commit the version bump before tagging',
+    `tag ${tag} does not match haxelib.json version ${metadata.version}; ` + 'commit the version bump before tagging',
   );
 }
 
