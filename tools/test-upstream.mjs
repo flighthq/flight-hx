@@ -90,7 +90,15 @@ function runPackage(packageName, files) {
       ],
       {
         cwd: repositoryRoot,
-        env: { ...process.env, FLIGHT_UPSTREAM_PACKAGE: packageName },
+        env: {
+          ...process.env,
+          FLIGHT_UPSTREAM_PACKAGE: packageName,
+          // The heaviest suites (scene2d-wgpu) pass every test and then hit the
+          // default V8 heap ceiling during teardown, turning a green run into
+          // exit 1. Give vitest workers explicit headroom; an existing
+          // NODE_OPTIONS wins so callers can still override.
+          NODE_OPTIONS: process.env.NODE_OPTIONS ?? '--max-old-space-size=6144',
+        },
       },
     );
     let stdout = '';
