@@ -19,6 +19,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # generate:check regenerates from the pinned upstream submodule to
+          # prove the committed tree has no drift, so the submodule is required.
+          submodules: true
       - uses: actions/setup-node@v4
         with:
           node-version: 22
