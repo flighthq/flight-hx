@@ -110,16 +110,34 @@ class GltfLoad {
         entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadScene3DDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
           bytes = __awaitValue11;
-          {
-            var i:Dynamic = 0.0;
-            while ((cast ((cast i : Float) < (cast _Runtime.field(entries, 'length') : Float)) : Bool)) {
-              var value:Dynamic = flighthq._internal._StaticIndex.readArray(bytes, i);
-              if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
-              _Runtime.setIndex(externalBuffers, flighthq._internal._StaticIndex.readArray(entries, i), value);
-              i++;
-            }
-          }
-          return flighthq._internal._Async.flowReturn(externalBuffers);
+          return flighthq._internal._Async.continueFlow(flighthq._internal._Async.protect(function():Dynamic {
+            var i:Dynamic = cast _Runtime.UNDEFINED;
+            i = 0.0;
+            return flighthq._internal._Async.repeatFlow(function():Dynamic {
+              if (!(cast ((cast i : Float) < (cast _Runtime.field(entries, 'length') : Float)) : Bool)) return flighthq._internal._Async.flowBreak();
+              return flighthq._internal._Async.continueIteration(flighthq._internal._Async.protect(function():Dynamic {
+                var value:Dynamic = cast _Runtime.UNDEFINED;
+                value = flighthq._internal._StaticIndex.readArray(bytes, i);
+                var __flowBranch12:Dynamic;
+                if ((cast _Runtime.strictEquals(value, null) : Bool)) {
+                  __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flowReturn(null);
+                  });
+                } else {
+                  __flowBranch12 = flighthq._internal._Async.flowNormal();
+                }
+                return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
+                  _Runtime.setIndex(externalBuffers, flighthq._internal._StaticIndex.readArray(entries, i), value);
+                  return flighthq._internal._Async.flowNormal();
+                });
+              }), function():Dynamic {
+                i++;
+                return flighthq._internal._Async.flowNormal();
+              });
+            });
+          }), function():Dynamic {
+            return flighthq._internal._Async.flowReturn(externalBuffers);
+          });
         });
       })
     );

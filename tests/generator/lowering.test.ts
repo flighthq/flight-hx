@@ -890,6 +890,109 @@ describe('TypeScript lowering and Haxe emission', () => {
     ).not.toThrow();
   });
 
+  it('preserves explicit null returns from synchronous loops after an await', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function returnFromFor(values: number[], pending: Promise<void>): Promise<number | null> {
+          await pending;
+          for (let index = 0; index < values.length; index++) {
+            if (values[index] === 0) return null;
+          }
+          return 1;
+        }
+        export async function returnFromWhile(values: number[], pending: Promise<void>): Promise<number | null> {
+          await pending;
+          let index = 0;
+          while (index < values.length) {
+            if (values[index] === 0) return null;
+            index++;
+          }
+          return 1;
+        }
+        export async function returnFromForOf(values: number[], pending: Promise<void>): Promise<number | null> {
+          await pending;
+          for (const value of values) {
+            if (value === 0) return null;
+          }
+          return 1;
+        }
+        export async function returnFromForIn(values: Record<string, number>, pending: Promise<void>): Promise<number | null> {
+          await pending;
+          for (const key in values) {
+            if (values[key] === 0) return null;
+          }
+          return 1;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncSyncLoopReturnFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output.match(/_Async\.repeatFlow/gu)).toHaveLength(4);
+    expect(output.match(/_Async\.flowReturn\(null\)/gu)).toHaveLength(4);
+    expect(output).not.toContain('if ((cast _Runtime.strictEquals(value, 0.0) : Bool)) { return cast null; }');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-sync-loop-return-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const javaScript = path.join(fixtureDirectory, 'main.cjs');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncSyncLoopReturnFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.AsyncSyncLoopReturnFixture.returnFromFor;
+        import flighthq.AsyncSyncLoopReturnFixture.returnFromForIn;
+        import flighthq.AsyncSyncLoopReturnFixture.returnFromForOf;
+        import flighthq.AsyncSyncLoopReturnFixture.returnFromWhile;
+        import flighthq._internal._Async;
+        class Main {
+          static function expectNull(promise:Dynamic, label:String):Void {
+            promise.then(function(value) {
+              if (js.Syntax.code('{0} !== null', value)) throw label;
+              return value;
+            });
+          }
+          static function main() {
+            final pending = cast _Async.resolve(null);
+            expectNull(returnFromFor([1, 0], pending), 'for return lost');
+            expectNull(returnFromWhile([1, 0], pending), 'while return lost');
+            expectNull(returnFromForOf([1, 0], pending), 'for-of return lost');
+            expectNull(returnFromForIn({ first: 1, second: 0 }, pending), 'for-in return lost');
+          }
+        }
+      `,
+    );
+    execFileSync(
+      'node',
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '--main',
+        'Main',
+        '--js',
+        javaScript,
+      ],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    expect(() => execFileSync('node', [javaScript], { cwd: path.resolve('.'), stdio: 'pipe' })).not.toThrow();
+  });
+
   it('preserves computed object keys as runtime values', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/entity/src/sample.ts',

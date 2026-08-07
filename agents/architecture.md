@@ -108,7 +108,7 @@ Generated ordinary implementation code should use portable Haxe constructs. A sm
 
 Runtime source lives under `src/flighthq/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flighthq._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
 
-The runtime distinguishes ECMAScript `Math.fround` from Haxe's integer-oriented `Math.fround`: the JavaScript operation is one IEEE-754 binary32 round whose result is returned as the target's ordinary `Float`. Async flow also distinguishes normal fallthrough, which fulfills with JavaScript `undefined`, from an explicit `return null`.
+The runtime distinguishes ECMAScript `Math.fround` from Haxe's integer-oriented `Math.fround`: the JavaScript operation is one IEEE-754 binary32 round whose result is returned as the target's ordinary `Float`. Async flow also distinguishes normal fallthrough, which fulfills with JavaScript `undefined`, from an explicit `return null`. Once a function enters the async-flow trampoline, a synchronous loop containing a function return remains in that trampoline even when the loop itself has no `await`; the return must cross the loop as a flow outcome rather than an ordinary callback result.
 
 Platform adapters follow these rules:
 

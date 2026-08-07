@@ -769,7 +769,9 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         return lines;
       });
     case 'while': {
-      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
+        return [...emitStatement(statement), ...continuation()];
+      }
       const iteration = [
         'function():Dynamic {',
         ...indent(
@@ -783,7 +785,9 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       return emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation);
     }
     case 'for': {
-      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
+        return [...emitStatement(statement), ...continuation()];
+      }
       const advance = statement.increment
         ? emitAwaitedExpression(statement.increment, (value) => [
             `${value};`,
@@ -820,7 +824,9 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       return emitFlowThenContinue(flow, continuation);
     }
     case 'forOf':
-      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
+        return [...emitStatement(statement), ...continuation()];
+      }
       return emitAwaitedExpression(statement.iterable, (iterable) => {
         const iterator = `__flowIterator${String(temporaryIndex++)}`;
         const indexName = `__flowIndex${String(temporaryIndex++)}`;
@@ -855,7 +861,9 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         return lines;
       });
     case 'forIn':
-      if (!statementContainsAwait(statement)) return [...emitStatement(statement), ...continuation()];
+      if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
+        return [...emitStatement(statement), ...continuation()];
+      }
       return emitAwaitedExpression(statement.object, (object) => {
         const keys = `__flowKeys${String(temporaryIndex++)}`;
         const indexName = `__flowIndex${String(temporaryIndex++)}`;
