@@ -21,9 +21,12 @@ import lime.ui.Window;
  */
 @:keep
 class CairoSurface {
-  /** Allocation entry point, Flight-style: `createCairoSurface(window)`. */
-  public static function createCairoSurface(window:Window):CairoSurface {
-    return new CairoSurface(window);
+  /** Allocation entry point, Flight-style: `createCairoSurface(window)`.
+   * The return is typed as the host canvas: on js the adapter never runs, and
+   * on native the host type currently erases to `Dynamic`, so the adapter is
+   * accepted as-is. */
+  public static function createCairoSurface(window:Window):flighthq._internal.dom.HTMLCanvasElement {
+    return cast new CairoSurface(window);
   }
 
   public var width:Int = 0;

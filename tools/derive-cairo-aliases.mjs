@@ -131,7 +131,7 @@ function deriveFacade({ cairoModule, cairoPackage, canvasModule, canvasPackage }
     lines.push('  #if lime');
     lines.push('  /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */');
     lines.push(
-      '  public static inline function createCairoSurface(window:lime.ui.Window):flighthq.scene2dCairo.CairoSurface { return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window); }',
+      '  public static inline function createCairoSurface(window:lime.ui.Window):flighthq._internal.dom.HTMLCanvasElement { return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window); }',
     );
     lines.push('  #end');
   }

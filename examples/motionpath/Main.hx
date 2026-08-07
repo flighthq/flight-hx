@@ -79,7 +79,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = new _GlCanvas(window);
+      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
@@ -290,49 +290,3 @@ class Main extends Application {
     return s;
   }
 }
-
-// Minimal GL canvas adapter over the Lime window, matching the shape `createGlRenderState` expects.
-// @:keep — Flight reaches this adapter only reflectively (getContext/width/height via Reflect),
-// so full DCE would strip those members and reflective access would crash. Retain the whole adapter.
-@:keep
-private class _GlCanvas {
-  // Flight's GL renderer reads `canvas.width`/`canvas.height` reflectively (`Reflect.field`) to build
-  // both the GL viewport and the pixel->clip projection. A Haxe `(get, never)` property compiles to
-  // `get_width()` with no reflectable `width` field, so the reflective read returns `undefined`, the
-  // viewport becomes 0x0 and the projection `2 / undefined` becomes NaN — every draw is discarded while
-  // the (viewport/projection-independent) background clear still shows. So expose plain physical fields
-  // and keep them in sync with the backing buffer size (device pixels = window size * scale).
-  public var width:Int = 0;
-  public var height:Int = 0;
-
-  final window:Window;
-  final context:Dynamic;
-
-  public function new(window:Window) {
-    this.window = window;
-    context = resolveContext(window);
-    if (context == null) throw 'Flight examples require a hardware OpenGL/WebGL window.';
-    syncSize();
-    window.onResize.add((_, _) -> syncSize());
-  }
-
-  public function getContext(contextId:String, ?attributes:Dynamic):Dynamic {
-    return context;
-  }
-
-  function syncSize():Void {
-    width = Std.int(window.width * window.scale);
-    height = Std.int(window.height * window.scale);
-  }
-
-  static function resolveContext(window:Window):Dynamic {
-    final renderContext:Dynamic = window.context;
-    if (renderContext == null) return null;
-    final webgl2 = renderContext.webgl2;
-    return webgl2 == null ? renderContext.webgl : webgl2;
-  }
-}
-
-// Canvas adapter presenting the Lime software window's cairo context as the 2D
-// canvas `createCanvasRenderState` expects (the cairo counterpart of _GlCanvas).
-@:keep
