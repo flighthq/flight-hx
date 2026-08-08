@@ -4,8 +4,8 @@ package flighthq._internal.dom;
 #if js
 @:native('HTMLImageElement')
 extern class HTMLImageElement {
-  var width:Int;
-  var height:Int;
+  var width:Float;
+  var height:Float;
   var naturalWidth(default, never):Int;
   var naturalHeight(default, never):Int;
   var src:String;
