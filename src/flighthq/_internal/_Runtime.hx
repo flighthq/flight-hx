@@ -7,6 +7,11 @@ class _Runtime {
   public static inline final MAX_SAFE_INTEGER:Float = 9007199254740991.0;
   public static inline final NUMBER_EPSILON:Float = 2.220446049250313e-16;
 
+  #if !js
+  static final haxeArityCallables:Array<Dynamic> = [];
+  static final haxeArities:Array<Int> = [];
+  #end
+
   #if !(js || python)
   // Neko function values cannot key ObjectMap. Preserve source-declared rest
   // provenance by closure identity so untyped calls pack only genuine Haxe-rest
@@ -68,6 +73,24 @@ class _Runtime {
       }
       haxeRestCallables.push(callable);
       haxeRestIndices.push(restIndex);
+    }
+    #end
+    return callable;
+  }
+
+  public static function haxeArity(callable:Dynamic, arity:Int):Dynamic {
+    #if !js
+    if (callable != null) {
+      var index = haxeArityCallables.length;
+      while (index > 0) {
+        index--;
+        if (Reflect.compareMethods(haxeArityCallables[index], callable)) {
+          haxeArities[index] = arity;
+          return callable;
+        }
+      }
+      haxeArityCallables.push(callable);
+      haxeArities.push(arity);
     }
     #end
     return callable;
@@ -143,7 +166,8 @@ class _Runtime {
    * JavaScript calls tolerate arity mismatches: extra arguments are dropped and
    * missing ones become undefined. Neko instead over-applies (calling the
    * result) or rejects the call, so dynamic dispatch matches the callee's real
-   * arity here. Other targets keep the arguments untouched.
+   * arity here. Generated callback provenance supplies the same arity on other
+   * native targets where the callable cannot be inspected portably.
    */
   static function adjustArguments(callable:Dynamic, arguments:Array<Dynamic>):Array<Dynamic> {
     #if !(js || python)
@@ -156,6 +180,24 @@ class _Runtime {
           final packed = arguments.slice(0, restIndex);
           packed.push(arguments.slice(restIndex));
           return packed;
+        }
+      }
+    }
+    #end
+    #if !js
+    if (callable != null) {
+      var index = haxeArityCallables.length;
+      while (index > 0) {
+        index--;
+        if (Reflect.compareMethods(haxeArityCallables[index], callable)) {
+          final arity = haxeArities[index];
+          if (arguments.length > arity) return arguments.slice(0, arity);
+          if (arguments.length < arity) {
+            final padded = arguments.copy();
+            while (padded.length < arity) padded.push(null);
+            return padded;
+          }
+          return arguments;
         }
       }
     }
@@ -216,6 +258,14 @@ class _Runtime {
             if (at < 0) at += values.length;
             return at < 0 || at >= values.length ? UNDEFINED : values[at];
           };
+        case 'filter':
+          return function(predicate:Dynamic, ?thisArg:Dynamic):Dynamic return filterArray(values, predicate, thisArg);
+        case 'flatMap':
+          return function(mapper:Dynamic, ?thisArg:Dynamic):Dynamic return flatMapArray(values, mapper, thisArg);
+        case 'forEach':
+          return function(callback:Dynamic, ?thisArg:Dynamic):Void forEachArray(values, callback, thisArg);
+        case 'map':
+          return function(mapper:Dynamic, ?thisArg:Dynamic):Dynamic return mapArray(values, mapper, thisArg);
         // JS iteration methods absent from Haxe's Array: callbacks receive
         // (value, index, array) and results follow JS truthiness.
         case 'every':
@@ -673,6 +723,58 @@ class _Runtime {
     final values = iterable(value);
     if (map == null) return values;
     return [for (index in 0...values.length) Reflect.callMethod(thisArg, map, adjustArguments(map, [values[index], index]))];
+  }
+
+  public static function filterArray<T>(values:Array<T>, predicate:Dynamic, thisArg:Dynamic):Array<T> {
+    #if js
+    return cast js.Syntax.code('{0}.filter({1}, {2})', values, predicate, thisArg);
+    #else
+    final output:Array<T> = [];
+    for (index in 0...values.length) {
+      if (truthy(Reflect.callMethod(thisArg, predicate, adjustArguments(predicate, [values[index], index, values])))) {
+        output.push(values[index]);
+      }
+    }
+    return output;
+    #end
+  }
+
+  public static function flatMapArray<T, R>(values:Array<T>, mapper:Dynamic, thisArg:Dynamic):Array<R> {
+    #if js
+    return cast js.Syntax.code('{0}.flatMap({1}, {2})', values, mapper, thisArg);
+    #else
+    final output:Array<R> = [];
+    for (index in 0...values.length) {
+      final mapped = Reflect.callMethod(thisArg, mapper, adjustArguments(mapper, [values[index], index, values]));
+      if (Std.isOfType(mapped, Array)) {
+        for (item in (cast mapped : Array<Dynamic>)) output.push(cast item);
+      } else {
+        output.push(cast mapped);
+      }
+    }
+    return output;
+    #end
+  }
+
+  public static function forEachArray<T>(values:Array<T>, callback:Dynamic, thisArg:Dynamic):Void {
+    #if js
+    js.Syntax.code('{0}.forEach({1}, {2})', values, callback, thisArg);
+    #else
+    for (index in 0...values.length) {
+      Reflect.callMethod(thisArg, callback, adjustArguments(callback, [values[index], index, values]));
+    }
+    #end
+  }
+
+  public static function mapArray<T, R>(values:Array<T>, mapper:Dynamic, thisArg:Dynamic):Array<R> {
+    #if js
+    return cast js.Syntax.code('{0}.map({1}, {2})', values, mapper, thisArg);
+    #else
+    return [
+      for (index in 0...values.length)
+        cast Reflect.callMethod(thisArg, mapper, adjustArguments(mapper, [values[index], index, values]))
+    ];
+    #end
   }
 
   public static function truthy(value:Dynamic):Bool {

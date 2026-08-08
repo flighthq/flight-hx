@@ -100,7 +100,7 @@ class ElectronApp {
       _Runtime.callOptionalValue(({ final __structural4 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var setBadge:String->Void; }).setBadge; }), cast ([text] : Array<Dynamic>));
     }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
       if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApi.ElectronApp).dock) : Bool)) { return; }
-      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast _Runtime.callProperty(items, 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))))));
+      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))))));
     }, setLoginItem: function(settings:AppLoginItemLike):Bool {
       (cast app : flighthq.types.ElectronApi.ElectronApp).setLoginItemSettings((cast { openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }));
       return cast true;
@@ -165,7 +165,7 @@ class ElectronApp {
   public static function toMenuItemOptions__electronApp(item:MenuItemTemplate):ElectronMenuItemOptions {
     var out:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
     out = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
-    if (_Runtime.truthy(item.submenu)) { ((cast out : ElectronMenuItemOptions).submenu = _Runtime.callProperty(item.submenu, 'map', cast ([ElectronApp.toMenuItemOptions__electronApp] : Array<Dynamic>))); }
+    if (_Runtime.truthy(item.submenu)) { ((cast out : ElectronMenuItemOptions).submenu = (cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))); }
     return cast out;
     return cast null;
   }

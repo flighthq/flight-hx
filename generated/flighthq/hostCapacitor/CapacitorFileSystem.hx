@@ -226,7 +226,7 @@ class CapacitorFileSystem {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readdir((cast { path: path })), function(__awaitValue12:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(_Runtime.callProperty((cast __awaitValue12 : CapacitorFilesystemReaddirResult).files, 'map', cast ([function(file:CapacitorFileInfo, __unused0:Float, __unused1:Array<CapacitorFileInfo>):FileEntry return (cast CapacitorFileSystem.toFileEntry__capacitorFileSystem((cast (cast file : CapacitorFileInfo).name : String), (cast (cast file : CapacitorFileInfo).uri : String), (cast (cast file : CapacitorFileInfo).type : String)) : FileEntry)] : Array<Dynamic>)));
+              return flighthq._internal._Async.flowReturn((cast _Runtime.mapArray((cast (cast __awaitValue12 : CapacitorFilesystemReaddirResult).files : Array<CapacitorFileInfo>), function(file:CapacitorFileInfo, __unused0:Float, __unused1:Array<CapacitorFileInfo>):FileEntry return (cast CapacitorFileSystem.toFileEntry__capacitorFileSystem((cast (cast file : CapacitorFileInfo).name : String), (cast (cast file : CapacitorFileInfo).uri : String), (cast (cast file : CapacitorFileInfo).type : String)) : FileEntry), _Runtime.UNDEFINED)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;

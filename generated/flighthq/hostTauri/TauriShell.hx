@@ -90,7 +90,7 @@ class TauriShell {
       }));
     }, moveItemsToTrash: function(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(_Runtime.callProperty(paths, 'map', cast ([function(__unused0:String, __unused1:Float, __unused2:Array<String>):Bool return false] : Array<Dynamic>)));
+        return flighthq._internal._Async.resolve((cast _Runtime.mapArray((cast paths : Array<String>), function(__unused0:String, __unused1:Float, __unused2:Array<String>):Bool return false, _Runtime.UNDEFINED)));
       }));
     }, readShortcutLink: function():flighthq._internal._Promise<Null<ShellShortcutLink>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {

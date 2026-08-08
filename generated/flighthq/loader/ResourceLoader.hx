@@ -211,8 +211,8 @@ class ResourceLoader {
     internal = (cast loader : ResourceLoaderInternal__resourceLoader);
     if ((cast !(cast (cast internal : ResourceLoaderInternal__resourceLoader).started : Bool) : Bool)) { return cast 0.0; }
     if ((cast !_Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var groupReports:Array<ResourceLoadReport> = _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).reports, 'filter', cast ([function(r:ResourceLoadReport, __unused4:Float, __unused5:Array<ResourceLoadReport>):Bool return _Runtime.strictEquals(r.group, group)] : Array<Dynamic>));
-      var groupPending:Array<PendingEntry__resourceLoader> = _Runtime.callProperty((cast internal : ResourceLoaderInternal__resourceLoader).pending, 'filter', cast ([function(p:PendingEntry__resourceLoader, __unused6:Float, __unused7:Array<PendingEntry__resourceLoader>):Bool return _Runtime.strictEquals((cast p : PendingEntry__resourceLoader).group, group)] : Array<Dynamic>));
+      var groupReports:Array<ResourceLoadReport> = (cast _Runtime.filterArray((cast (cast internal : ResourceLoaderInternal__resourceLoader).reports : Array<ResourceLoadReport>), function(r:ResourceLoadReport, __unused4:Float, __unused5:Array<ResourceLoadReport>):Bool return _Runtime.strictEquals(r.group, group), _Runtime.UNDEFINED));
+      var groupPending:Array<PendingEntry__resourceLoader> = (cast _Runtime.filterArray((cast (cast internal : ResourceLoaderInternal__resourceLoader).pending : Array<PendingEntry__resourceLoader>), function(p:PendingEntry__resourceLoader, __unused6:Float, __unused7:Array<PendingEntry__resourceLoader>):Bool return _Runtime.strictEquals((cast p : PendingEntry__resourceLoader).group, group), _Runtime.UNDEFINED));
       var groupInFlight:Float = 0.0;
       for (entry in _Runtime.iterable((cast internal : ResourceLoaderInternal__resourceLoader).inFlight)) {
         if ((cast _Runtime.strictEquals((cast entry : PendingEntry__resourceLoader).group, group) : Bool)) { groupInFlight++; }

@@ -30,12 +30,12 @@ class GlRenderTextureEffect {
       _Runtime.throwValue(_Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
     sourceTarget = (cast getGlRenderTextureTarget((cast state), (cast source)) : Null<GlRenderTarget>);
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }>> {
+    operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }>> {
       var runner:Null<GlRenderEffectRunner> = cast _Runtime.UNDEFINED;
       runner = (cast getGlRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect((cast state), (cast (cast explainGlRenderEffectApplication((cast state), (cast effects), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture((cast state), (cast dest)) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation)));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
@@ -73,7 +73,7 @@ class GlRenderTextureEffect {
       return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));
       return cast _Runtime.UNDEFINED;
     });
-    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null)] : Array<Dynamic>)), 'map', cast ([function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
+    unregisteredKinds = (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null), _Runtime.UNDEFINED)) : Array<RenderEffect>), function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind'), _Runtime.UNDEFINED));
     requestedCount = _Runtime.field(effects, 'length');
     registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
     return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: (cast getStatus() : GlRenderEffectApplicationStatus), unregisteredKinds: unregisteredKinds };

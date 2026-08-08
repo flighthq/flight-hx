@@ -120,7 +120,7 @@ class Tray {
   }
 
   public static function getTrayIcons():Array<TrayIcon> {
-    return cast _Runtime.callProperty((cast (cast getTrayBackend() : TrayBackend) : TrayBackend).listIds(), 'map', cast ([function(id:Float, __unused0:Float, __unused1:Array<Float>):{ var id:Float; } return { id: id }] : Array<Dynamic>));
+    return cast (cast _Runtime.mapArray((cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).listIds() : Array<Float>), function(id:Float, __unused0:Float, __unused1:Array<Float>):{ var id:Float; } return { id: id }, _Runtime.UNDEFINED));
     return cast null;
   }
 

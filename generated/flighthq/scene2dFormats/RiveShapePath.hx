@@ -174,7 +174,7 @@ class RiveShapePath {
     var bottom:Float = cast _Runtime.UNDEFINED;
     var k:Float = cast _Runtime.UNDEFINED;
     limit = _Runtime.divideNumbers(HxMath.min(width, height), 2.0);
-    __destructure2 = _Runtime.callProperty(radii, 'map', cast ([function(radius:Float, __unused3:Float, __unused4:Array<Float>):Float return HxMath.max(0.0, HxMath.min(radius, limit))] : Array<Dynamic>));
+    __destructure2 = (cast _Runtime.mapArray((cast radii : Array<Float>), function(radius:Float, __unused3:Float, __unused4:Array<Float>):Float return HxMath.max(0.0, HxMath.min(radius, limit)), _Runtime.UNDEFINED));
     tl = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     tr = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     bl = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);

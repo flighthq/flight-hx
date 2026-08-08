@@ -205,7 +205,7 @@ class Screen {
             i++;
           }
         }
-        (_cachedScreens = cast (_Runtime.callProperty(_Runtime.slice(out, 0.0, _Runtime.field(screens, 'length')), 'map', cast ([function(s:ScreenInfo, __unused4:Float, __unused5:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
+        (_cachedScreens = cast ((cast _Runtime.mapArray((cast _Runtime.slice(out, 0.0, _Runtime.field(screens, 'length')) : Array<ScreenInfo>), function(s:ScreenInfo, __unused4:Float, __unused5:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s]), _Runtime.UNDEFINED)) : Dynamic));
         return cast out;
       }
       _Runtime.setLength(out, 1.0);
@@ -251,13 +251,13 @@ class Screen {
           var details:ScreenDetails__screen = _screenDetails;
           var screens:Array<ScreenDetailed__screen> = (cast details : ScreenDetails__screen).screens;
           var primaryIndex:Float = _Runtime.findIndex(screens, function(s:ScreenDetailed__screen, __unused8:Float, __unused9:Array<ScreenDetailed__screen>):Bool return _Runtime.coalesce((cast s : ScreenDetailed__screen).isPrimary, function():Dynamic return cast false));
-          var newInfos:Array<ScreenInfo> = _Runtime.callProperty(screens, 'map', cast ([function(sd:ScreenDetailed__screen, i:Float, __unused10:Array<ScreenDetailed__screen>):ScreenInfo {
+          var newInfos:Array<ScreenInfo> = (cast _Runtime.mapArray((cast screens : Array<ScreenDetailed__screen>), function(sd:ScreenDetailed__screen, i:Float, __unused10:Array<ScreenDetailed__screen>):ScreenInfo {
             var info:ScreenInfo = cast _Runtime.UNDEFINED;
             info = (cast createScreenInfo() : ScreenInfo);
             buildScreenInfoFromDetailed((cast sd), (cast i : Float), (cast primaryIndex : Float), (cast info));
             return cast info;
             return cast _Runtime.UNDEFINED;
-          }] : Array<Dynamic>));
+          }, _Runtime.UNDEFINED));
           var prevCache:Array<ScreenInfo> = _Runtime.coalesce(_cachedScreens, function():Dynamic return cast cast ([] : Array<Dynamic>));
           for (prev in _Runtime.iterable(prevCache)) {
             var stillPresent:Bool = _Runtime.callProperty(newInfos, 'some', cast ([function(n:ScreenInfo, __unused11:Float, __unused12:Array<ScreenInfo>):Bool return _Runtime.strictEquals(n.id, prev.id)] : Array<Dynamic>));
@@ -276,7 +276,7 @@ class Screen {
               }
             }
           }
-          (_cachedScreens = cast (_Runtime.callProperty(newInfos, 'map', cast ([function(s:ScreenInfo, __unused15:Float, __unused16:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic));
+          (_cachedScreens = cast ((cast _Runtime.mapArray((cast newInfos : Array<ScreenInfo>), function(s:ScreenInfo, __unused15:Float, __unused16:Array<ScreenInfo>):{ var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; } return _Runtime.mergeObjects([s]), _Runtime.UNDEFINED)) : Dynamic));
           return;
         }
         scratch = (cast createScreenInfo() : ScreenInfo);

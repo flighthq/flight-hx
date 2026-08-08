@@ -10,14 +10,14 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 class OrderModifierStack {
   public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
     var indexed:Array<{ var index:Float; var modifier:Modifier; }> = cast _Runtime.UNDEFINED;
-    indexed = _Runtime.callProperty(stack, 'map', cast ([function(modifier:Modifier, index:Float, __unused0:Array<Modifier>):{ var index:Float; var modifier:Modifier; } return { index: index, modifier: modifier }] : Array<Dynamic>));
+    indexed = (cast _Runtime.mapArray((cast stack : Array<Modifier>), function(modifier:Modifier, index:Float, __unused0:Array<Modifier>):{ var index:Float; var modifier:Modifier; } return { index: index, modifier: modifier }, _Runtime.UNDEFINED));
     _Runtime.callProperty(indexed, 'sort', cast ([function(a:{ var index:Float; var modifier:Modifier; }, b:{ var index:Float; var modifier:Modifier; }):Float {
       var rankDelta:Float = cast _Runtime.UNDEFINED;
       rankDelta = ((cast OrderModifierStack.getModifierSlotRank__orderModifierStack((cast (cast (cast a : { var index:Float; var modifier:Modifier; }).modifier : Modifier).slot : String)) : Float) - (cast OrderModifierStack.getModifierSlotRank__orderModifierStack((cast (cast (cast b : { var index:Float; var modifier:Modifier; }).modifier : Modifier).slot : String)) : Float));
       return cast ((cast !_Runtime.strictEquals(rankDelta, 0.0) : Bool) ? (cast rankDelta : Dynamic) : (cast ((cast a : { var index:Float; var modifier:Modifier; }).index - (cast b : { var index:Float; var modifier:Modifier; }).index) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
-    return cast _Runtime.callProperty(indexed, 'map', cast ([function(entry:{ var index:Float; var modifier:Modifier; }, __unused1:Float, __unused2:Array<{ var index:Float; var modifier:Modifier; }>):Modifier return (cast entry : { var index:Float; var modifier:Modifier; }).modifier] : Array<Dynamic>));
+    return cast (cast _Runtime.mapArray((cast indexed : Array<{ var index:Float; var modifier:Modifier; }>), function(entry:{ var index:Float; var modifier:Modifier; }, __unused1:Float, __unused2:Array<{ var index:Float; var modifier:Modifier; }>):Modifier return (cast entry : { var index:Float; var modifier:Modifier; }).modifier, _Runtime.UNDEFINED));
     return cast null;
   }
 

@@ -23,7 +23,7 @@ class _FontFaceLoad {
 
   public static function _loadFontFaceFromUrls(family:String, sources:Array<FontUrl>):flighthq._internal._Promise<flighthq._internal.dom.FontFace> {
     var source:String = cast _Runtime.UNDEFINED;
-    source = _Runtime.join(_Runtime.callProperty(sources, 'map', cast ([function(__parameter0:FontUrl, __unused1:Float, __unused2:Array<FontUrl>):String {
+    source = _Runtime.join((cast _Runtime.mapArray((cast sources : Array<FontUrl>), function(__parameter0:FontUrl, __unused1:Float, __unused2:Array<FontUrl>):String {
       var url:String = cast _Runtime.UNDEFINED;
       var format:Null<String> = cast _Runtime.UNDEFINED;
       var resolvedFormat:Null<String> = cast _Runtime.UNDEFINED;
@@ -32,7 +32,7 @@ class _FontFaceLoad {
       resolvedFormat = _Runtime.coalesce(format, function():Dynamic return cast (cast inferFontFormatFromUrl((cast url : String)) : Null<String>));
       return cast ((cast !_Runtime.strictEquals(resolvedFormat, null) : Bool) ? (cast 'url(' + Std.string(url) + ') format(\'' + Std.string(resolvedFormat) + '\')' : Dynamic) : (cast 'url(' + Std.string(url) + ')' : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>)), ', ');
+    }, _Runtime.UNDEFINED)), ', ');
     return cast (cast _FontFaceLoad.loadAndRegisterFontFace___fontFaceLoad((cast family : String), (cast source)) : flighthq._internal._Promise<flighthq._internal.dom.FontFace>);
     return cast null;
   }

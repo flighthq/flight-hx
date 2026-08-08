@@ -63,21 +63,21 @@ class Protocol {
     normalizedPath = _Runtime.select(_Runtime.andValue(path, function():Dynamic return cast !(cast StringTools.startsWith(path, '/') : Bool)), function():Dynamic return cast '/' + Std.string(path) + '', function():Dynamic return cast path);
     url = '' + Std.string(scheme) + ':' + Std.string(authority) + '' + Std.string(normalizedPath) + '';
     if (_Runtime.truthy(query)) {
-      var entries:Array<Array<String>> = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(query), 'filter', cast ([function(__parameter0:Array<String>, __unused1:Float, __unused2:Array<Array<String>>):Bool {
+      var entries:Array<Array<String>> = (cast _Runtime.filterArray((cast flighthq._internal.DynamicObject.entries(query) : Array<Array<String>>), function(__parameter0:Array<String>, __unused1:Float, __unused2:Array<Array<String>>):Bool {
         var k:String = cast _Runtime.UNDEFINED;
         k = flighthq._internal._StaticIndex.readArray(__parameter0, 0.0);
         return cast ((cast _Runtime.field(k, 'length') : Float) > (cast 0.0 : Float));
         return cast _Runtime.UNDEFINED;
-      }] : Array<Dynamic>));
+      }, _Runtime.UNDEFINED));
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        var qs:String = _Runtime.join(_Runtime.callProperty(entries, 'map', cast ([function(__parameter3:Array<String>, __unused4:Float, __unused5:Array<Array<String>>):String {
+        var qs:String = _Runtime.join((cast _Runtime.mapArray((cast entries : Array<Array<String>>), function(__parameter3:Array<String>, __unused4:Float, __unused5:Array<Array<String>>):String {
           var k:String = cast _Runtime.UNDEFINED;
           var v:String = cast _Runtime.UNDEFINED;
           k = flighthq._internal._StaticIndex.readArray(__parameter3, 0.0);
           v = flighthq._internal._StaticIndex.readArray(__parameter3, 1.0);
           return cast '' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
           return cast _Runtime.UNDEFINED;
-        }] : Array<Dynamic>)), '&');
+        }, _Runtime.UNDEFINED)), '&');
         (url = cast ((url + '?' + Std.string(qs) + '') : Dynamic));
       }
     }

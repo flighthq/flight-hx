@@ -65,7 +65,7 @@ class AnimationLayerStack {
           _Runtime.callProperty(stateMachines, 'push', cast ([(cast layer : AnimationLayer).stateMachine] : Array<Dynamic>));
         } }
         var sourceChannels:Array<{ var channel:AnimationChannel; }> = (cast AnimationLayerStack.getAnimationLayerChannels__animationLayerStack((cast layer)) : Array<{ var channel:AnimationChannel; }>);
-        var channelIndices:Array<Float> = _Runtime.coalesce((cast layer : AnimationLayer).channelIndices, function():Dynamic return cast _Runtime.callProperty(sourceChannels, 'map', cast ([function(_:{ var channel:AnimationChannel; }, index:Float, __unused0:Array<{ var channel:AnimationChannel; }>):Float return index] : Array<Dynamic>)));
+        var channelIndices:Array<Float> = _Runtime.coalesce((cast layer : AnimationLayer).channelIndices, function():Dynamic return cast (cast _Runtime.mapArray((cast sourceChannels : Array<{ var channel:AnimationChannel; }>), function(_:{ var channel:AnimationChannel; }, index:Float, __unused0:Array<{ var channel:AnimationChannel; }>):Float return index, _Runtime.UNDEFINED)));
         for (channelIndex in _Runtime.iterable(channelIndices)) {
           var channel:AnimationChannel = (cast flighthq._internal._StaticIndex.readArray(sourceChannels, channelIndex) : { var channel:AnimationChannel; }).channel;
           (sampleWidth = cast (HxMath.max(sampleWidth, (cast _Runtime.field(channel, 'track') : AnimationTrack).components) : Dynamic));

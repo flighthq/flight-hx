@@ -117,6 +117,39 @@ class CoreSmoke {
     flighthq.signals.Signals.emitSignal(tupleSignal, 1, 2, 4);
     if (emittedTuple != '1,2,4') throw 'signal rest arguments failed';
 
+    final tweenTarget:{var x:Float;} = {x: 0.0};
+    final tween = flighthq.tween.Tween.makeTween__tween(
+      tweenTarget,
+      1.0,
+      cast {x: 2.0},
+      null,
+      function(value:Float):Float return value
+    );
+    if (tween.properties.length != 1 || tween.properties[0].key != 'x') {
+      throw 'Array map callback ABI lost Tween properties';
+    }
+    final dynamicMapped:Array<String> = cast _Runtime.callProperty(
+      cast ['one', 'two'],
+      'map',
+      [_Runtime.haxeArity(function(value:String):String return value.toUpperCase(), 1)]
+    );
+    if (dynamicMapped.join(',') != 'ONE,TWO') throw 'dynamic Array map callback ABI failed';
+
+    final endFillState:flighthq.types.CanvasShapeDrawState = cast {
+      bitmapSrc: null,
+      fillMatrix: null,
+      fillMatrixInverse: null,
+      hasFill: true,
+      hasPendingPath: false,
+    };
+    flighthq.scene2dCanvas.CanvasShapeCommands.defaultCanvasEndFill.draw(
+      cast null,
+      endFillState,
+      cast [],
+      0.0
+    );
+    if (endFillState.hasFill) throw 'Canvas shape handler arity normalization failed';
+
     #if !js
     final decoder = _Runtime.construct(_HostValueLut.get('TextDecoder'), []);
     final decoded = _Runtime.callProperty(decoder, 'decode', [new flighthq._internal._UInt8Array([104, 105])]);

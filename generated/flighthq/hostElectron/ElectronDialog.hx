@@ -52,7 +52,7 @@ class ElectronDialog {
               return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { title: options.title, defaultPath: options.defaultPath, filters: options.filters, properties: properties })), function(__awaitValue2:Dynamic):Dynamic {
                 r = __awaitValue2;
                 kind = _Runtime.select(options.directory, function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
-                return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty((cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths, 'map', cast ([function(path:String, __unused0:Float, __unused1:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast kind : String)) : FileDialogHandle)] : Array<Dynamic>)) : Dynamic)));
+                return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast (cast _Runtime.mapArray((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths : Array<String>), function(path:String, __unused0:Float, __unused1:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast kind : String)) : FileDialogHandle), _Runtime.UNDEFINED)) : Dynamic)));
               });
             });
           });
@@ -76,7 +76,7 @@ class ElectronDialog {
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { title: options.title, properties: properties })), function(__awaitValue4:Dynamic):Dynamic {
               r = __awaitValue4;
-              return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty((cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths, 'map', cast ([function(path:String, __unused2:Float, __unused3:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast 'Directory' : String)) : FileDialogHandle)] : Array<Dynamic>)) : Dynamic)));
+              return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast (cast _Runtime.mapArray((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths : Array<String>), function(path:String, __unused2:Float, __unused3:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast 'Directory' : String)) : FileDialogHandle), _Runtime.UNDEFINED)) : Dynamic)));
             });
           });
         })

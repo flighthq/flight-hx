@@ -361,7 +361,7 @@ class ObjParse {
       _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field((cast bucket : MaterialBucket__objParse).indices, 'length'), indexOffset: indexOffset }] : Array<Dynamic>));
       _Runtime.callProperty(materials, 'push', cast ([(cast ObjParse.resolveObjMaterial__objParse((cast materialName : String), (cast library), (cast resolvedMaterials), (cast document), (cast diagnostics)) : Float)] : Array<Dynamic>));
     }
-    ObjParse.appendObjTopologyMesh__objParse((cast _Runtime.callProperty(lineElements, 'flatMap', cast ([ObjParse.toObjLineSegments__objParse] : Array<Dynamic>))), (cast sourcePositions), (cast 'line-list'), (cast name), (cast document));
+    ObjParse.appendObjTopologyMesh__objParse((cast (cast _Runtime.flatMapArray((cast lineElements : Array<Array<Float>>), ObjParse.toObjLineSegments__objParse, _Runtime.UNDEFINED))), (cast sourcePositions), (cast 'line-list'), (cast name), (cast document));
     ObjParse.appendObjTopologyMesh__objParse((cast pointElements), (cast sourcePositions), (cast 'point-list'), (cast name), (cast document));
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = (cast createMeshGeometry((cast { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) })) : MeshGeometry);

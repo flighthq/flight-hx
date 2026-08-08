@@ -92,7 +92,7 @@ class Statusbar {
     if ((cast ((cast _Runtime.strictEquals(content, null) : Bool) || (cast !(cast StringTools.startsWith(content, '#') : Bool) : Bool)) : Bool)) { return cast 0.0; }
     hex = _Runtime.slice(content, 1.0, null);
     if ((cast !(cast _Runtime.callProperty(_Runtime.regexp('^(?:[\\da-f]{3}|[\\da-f]{6})$$', 'i'), 'test', cast ([hex] : Array<Dynamic>)) : Bool) : Bool)) { return cast 0.0; }
-    expandedHex = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool) ? (cast _Runtime.join(_Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(hex)]), 'map', cast ([function(digit:String, __unused4:Float, __unused5:Array<String>):String return (digit + digit)] : Array<Dynamic>)), '') : Dynamic) : (cast hex : Dynamic));
+    expandedHex = ((cast _Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0) : Bool) ? (cast _Runtime.join((cast _Runtime.mapArray((cast _Runtime.concatArrays([_Runtime.toArray(hex)]) : Array<Dynamic>), function(digit:String, __unused4:Float, __unused5:Array<String>):String return (digit + digit), _Runtime.UNDEFINED)), '') : Dynamic) : (cast hex : Dynamic));
     rgb = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([expandedHex, 16.0] : Array<Dynamic>));
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(rgb) << 8)) | 255)), 0);
     return cast null;

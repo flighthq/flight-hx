@@ -68,8 +68,8 @@ class RiveScene2D {
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast { artboards: cast ([] : Array<Dynamic>), assets: cast ([] : Array<Dynamic>) }; }
     graph = (cast createRiveObjectGraph((cast document), (cast diagnostics)) : RiveObjectGraph);
     assets = (cast createRiveFileAssets((cast (cast document : RiveDocument).objects)) : Array<RiveFileAsset>);
-    fontNames = _Runtime.callProperty(assets, 'map', cast ([function(asset:RiveFileAsset, __unused0:Float, __unused1:Array<RiveFileAsset>):String return (cast asset : RiveFileAsset).name] : Array<Dynamic>));
-    return cast { artboards: _Runtime.callProperty((cast graph : RiveObjectGraph).artboards, 'map', cast ([function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D((cast artboard), (cast (cast document : RiveDocument).objects), (cast fontNames), (cast diagnostics)) : RiveArtboardImport)] : Array<Dynamic>)), assets: assets };
+    fontNames = (cast _Runtime.mapArray((cast assets : Array<RiveFileAsset>), function(asset:RiveFileAsset, __unused0:Float, __unused1:Array<RiveFileAsset>):String return (cast asset : RiveFileAsset).name, _Runtime.UNDEFINED));
+    return cast { artboards: (cast _Runtime.mapArray((cast (cast graph : RiveObjectGraph).artboards : Array<RiveArtboardGraph>), function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D((cast artboard), (cast (cast document : RiveDocument).objects), (cast fontNames), (cast diagnostics)) : RiveArtboardImport), _Runtime.UNDEFINED)), assets: assets };
     return cast null;
   }
 
@@ -167,7 +167,7 @@ class RiveScene2D {
   public static function rebuildRiveShape__riveScene2D(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>):Void {
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
     records = (cast cast ([] : Array<Dynamic>));
-    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(_Runtime.callOptionalProperty(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)), 'map', cast ([function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return (cast record : RivePathRecord).pathIndex] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(({ final __collection4:Dynamic = ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)); __collection4 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection4 : Array<RivePathRecord>), function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return (cast record : RivePathRecord).pathIndex, _Runtime.UNDEFINED)); }), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
       var record:Null<RivePathRecord> = (cast RiveScene2D.createRivePathRecord__riveScene2D((cast artboard), (cast pathIndex : Float)) : Null<RivePathRecord>);
       if ((cast !_Runtime.strictEquals(record, null) : Bool)) { _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>)); }
     }

@@ -1516,6 +1516,17 @@ export function padContextualObjectFunctionParameters(declarations: IrDeclaratio
     const definition = definitions.get(type.name);
     return definition ? fieldsForType(definition, new Set([...stack, type.name])) : [];
   };
+  const functionParametersForType = (
+    type: IrType | undefined,
+    stack: ReadonlySet<string> = new Set(),
+  ): IrType[] | undefined => {
+    if (!type) return undefined;
+    if (type.kind === 'function') return type.parameters;
+    if (type.kind === 'nullable') return functionParametersForType(type.inner, stack);
+    if (type.kind !== 'named' || stack.has(type.name)) return undefined;
+    const definition = definitions.get(type.name);
+    return definition ? functionParametersForType(definition, new Set([...stack, type.name])) : undefined;
+  };
   const isType = (value: unknown): value is IrType =>
     Boolean(
       value &&
@@ -1541,14 +1552,24 @@ export function padContextualObjectFunctionParameters(declarations: IrDeclaratio
       const fields = new Map(fieldsForType(record.type).map((field) => [field.name, field]));
       for (const property of initializer.properties) {
         if (property.kind !== 'property' || property.value.kind !== 'function') continue;
-        const contextual = fields.get(property.name)?.contextualParameters;
+        const field = fields.get(property.name);
+        const contextualTypes = functionParametersForType(field?.type);
+        const contextual =
+          field?.contextualParameters ??
+          contextualTypes?.map((type, index) => ({
+            name: `__unused${String(index)}`,
+            optional: false,
+            rest: false,
+            type,
+          }));
         if (!contextual || property.value.parameters.length >= contextual.length) continue;
-        property.value.parameters.push(
-          ...contextual.slice(property.value.parameters.length).map((parameter) => ({
-            ...parameter,
-            initializer: undefined,
-          })),
-        );
+        const names = new Set(property.value.parameters.map((parameter) => parameter.name));
+        for (const parameter of contextual.slice(property.value.parameters.length)) {
+          let name = parameter.name;
+          while (names.has(name)) name += '_';
+          names.add(name);
+          property.value.parameters.push({ ...parameter, initializer: undefined, name });
+        }
       }
     }
     Object.values(record).forEach(visit);

@@ -147,14 +147,14 @@ class CocosPlistParse {
     var __destructure8:Dynamic = cast _Runtime.UNDEFINED;
     var imageWidth:Float = cast _Runtime.UNDEFINED;
     var imageHeight:Float = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(doc.frames), 'map', cast ([function(__parameter5:Array<flighthq._internal._Union2<String, CocosPlistFrame>>, __unused6:Float, __unused7:Array<Array<flighthq._internal._Union2<String, CocosPlistFrame>>>):SpritesheetFrameData {
+    frames = (cast _Runtime.mapArray((cast flighthq._internal.DynamicObject.entries(doc.frames) : Array<Array<flighthq._internal._Union2<String, CocosPlistFrame>>>), function(__parameter5:Array<flighthq._internal._Union2<String, CocosPlistFrame>>, __unused6:Float, __unused7:Array<Array<flighthq._internal._Union2<String, CocosPlistFrame>>>):SpritesheetFrameData {
       var name:String = cast _Runtime.UNDEFINED;
       var pf:CocosPlistFrame = cast _Runtime.UNDEFINED;
       name = flighthq._internal._StaticIndex.readArray(__parameter5, 0.0);
       pf = flighthq._internal._StaticIndex.readArray(__parameter5, 1.0);
       return cast (cast CocosPlistParse.plistFrameToData__cocosPlistParse((cast name : String), (cast pf)) : SpritesheetFrameData);
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     __destructure8 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast (cast doc.metadata : { var size:String; }).size : String)) : Array<Float>);
     imageWidth = flighthq._internal._StaticIndex.readArray(__destructure8, 0.0);
     imageHeight = flighthq._internal._StaticIndex.readArray(__destructure8, 1.0);

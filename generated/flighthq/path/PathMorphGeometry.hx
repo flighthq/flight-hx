@@ -386,7 +386,7 @@ class PathMorphGeometry {
       return cast segments;
     }
     partCounts = _Runtime.fill(_Runtime.createArray(_Runtime.field(source, 'length')), 1.0, 0, null, 1);
-    lengths = _Runtime.callProperty(source, 'map', cast ([PathMorphGeometry.cubicControlPolygonLength__pathMorphGeometry] : Array<Dynamic>));
+    lengths = (cast _Runtime.mapArray((cast source : Array<CubicSegment__pathMorphGeometry>), PathMorphGeometry.cubicControlPolygonLength__pathMorphGeometry, _Runtime.UNDEFINED));
     {
       var total:Float = _Runtime.field(source, 'length');
       while ((cast ((cast total : Float) < (cast targetCount : Float)) : Bool)) {

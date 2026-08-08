@@ -877,7 +877,7 @@ class Filesystem {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch87, function():Dynamic {
             re = Filesystem.globToRegExp__filesystem((cast pattern : String));
-            return flighthq._internal._Async.flowReturn(_Runtime.callProperty(all, 'filter', cast ([function(entry:FileEntry, __unused2:Float, __unused3:Array<FileEntry>):Bool return ((cast _Runtime.callProperty(re, 'test', cast ([entry.name] : Array<Dynamic>)) : Bool) || (cast _Runtime.callProperty(re, 'test', cast ([entry.path] : Array<Dynamic>)) : Bool))] : Array<Dynamic>)));
+            return flighthq._internal._Async.flowReturn((cast _Runtime.filterArray((cast all : Array<FileEntry>), function(entry:FileEntry, __unused2:Float, __unused3:Array<FileEntry>):Bool return ((cast _Runtime.callProperty(re, 'test', cast ([entry.name] : Array<Dynamic>)) : Bool) || (cast _Runtime.callProperty(re, 'test', cast ([entry.path] : Array<Dynamic>)) : Bool)), _Runtime.UNDEFINED)));
           });
         });
       })
@@ -1313,7 +1313,7 @@ class Filesystem {
   }
 
   public static function splitWebPath__filesystem(path:String):Array<String> {
-    return cast _Runtime.callProperty(_Runtime.callProperty(path, 'split', cast (['/'] : Array<Dynamic>)), 'filter', cast ([function(segment:String, __unused5:Float, __unused6:Array<String>):Bool return ((cast !_Runtime.strictEquals(segment, '') : Bool) && (cast !_Runtime.strictEquals(segment, '.') : Bool))] : Array<Dynamic>));
+    return cast (cast _Runtime.filterArray((cast _Runtime.callProperty(path, 'split', cast (['/'] : Array<Dynamic>)) : Array<String>), function(segment:String, __unused5:Float, __unused6:Array<String>):Bool return ((cast !_Runtime.strictEquals(segment, '') : Bool) && (cast !_Runtime.strictEquals(segment, '.') : Bool)), _Runtime.UNDEFINED));
     return cast null;
   }
 

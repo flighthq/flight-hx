@@ -267,7 +267,7 @@ class BitmapWarp {
     var aug:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var x:Array<Float> = cast _Runtime.UNDEFINED;
     n = 8.0;
-    aug = _Runtime.callProperty(M, 'map', cast ([function(row:Array<Float>, i:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.concatArrays([_Runtime.toArray(row), [-flighthq._internal._StaticIndex.readArray(b, i)]])] : Array<Dynamic>));
+    aug = (cast _Runtime.mapArray((cast M : Array<Array<Float>>), function(row:Array<Float>, i:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.concatArrays([_Runtime.toArray(row), [-flighthq._internal._StaticIndex.readArray(b, i)]]), _Runtime.UNDEFINED));
     {
       var col:Float = 0.0;
       while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {

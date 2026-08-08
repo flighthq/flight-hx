@@ -97,7 +97,7 @@ class ElectronShell {
       );
     }, moveItemsToTrash: function(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(flighthq._internal._Async.all(_Runtime.callProperty(paths, 'map', cast ([function(path:String, __unused0:Float, __unused1:Array<String>):flighthq._internal._Promise<Bool> {
+        return flighthq._internal._Async.resolve(flighthq._internal._Async.all((cast _Runtime.mapArray((cast paths : Array<String>), function(path:String, __unused0:Float, __unused1:Array<String>):flighthq._internal._Promise<Bool> {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
@@ -115,7 +115,7 @@ class ElectronShell {
               });
             })
           );
-        }] : Array<Dynamic>))));
+        }, _Runtime.UNDEFINED))));
       }));
     }, readShortcutLink: function(shortcutPath:String):flighthq._internal._Promise<Null<ShellShortcutLink>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {

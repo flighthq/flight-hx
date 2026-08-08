@@ -408,7 +408,7 @@ class Md5Parse {
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(rest, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(rest, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
       Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5mesh.malformed-joint' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;
@@ -532,7 +532,7 @@ class Md5Parse {
     var startWeight:Float = cast _Runtime.UNDEFINED;
     var countWeights:Float = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
       Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5mesh.malformed-vert' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;
@@ -564,7 +564,7 @@ class Md5Parse {
     var v1:Float = cast _Runtime.UNDEFINED;
     var v2:Float = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 5.0 : Float)) : Bool)) {
       Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5mesh.malformed-tri' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;
@@ -593,7 +593,7 @@ class Md5Parse {
     var positionY:Float = cast _Runtime.UNDEFINED;
     var positionZ:Float = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused6:Float, __unused7:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused6:Float, __unused7:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
       Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5mesh.malformed-weight' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;

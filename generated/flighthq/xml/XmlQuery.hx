@@ -32,7 +32,7 @@ class XmlQuery {
   }
 
   public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
-    return cast _Runtime.callProperty(element.children, 'filter', cast ([function(child:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(child.name, name)] : Array<Dynamic>));
+    return cast (cast _Runtime.filterArray((cast element.children : Array<XmlElement>), function(child:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(child.name, name), _Runtime.UNDEFINED));
     return cast null;
   }
 }

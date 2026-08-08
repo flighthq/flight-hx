@@ -163,7 +163,7 @@ class Menu {
     var clone:MenuItemTemplate = cast _Runtime.UNDEFINED;
     clone = (cast _Runtime.mergeObjects([template]));
     if ((cast !_Runtime.strictEquals(template.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (clone.submenu = cast (_Runtime.callProperty(template.submenu, 'map', cast ([cloneMenuTemplate] : Array<Dynamic>)) : Dynamic));
+      (clone.submenu = cast ((cast _Runtime.mapArray((cast template.submenu : Array<MenuItemTemplate>), cloneMenuTemplate, _Runtime.UNDEFINED)) : Dynamic));
     }
     return cast clone;
     return cast null;
@@ -203,7 +203,7 @@ class Menu {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = (cast _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]));
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (item.submenu = cast (_Runtime.callProperty(item.submenu, 'map', cast ([function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate((cast child)) : MenuItemTemplate)] : Array<Dynamic>)) : Dynamic));
+      (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate((cast child)) : MenuItemTemplate), _Runtime.UNDEFINED)) : Dynamic));
     }
     return cast item;
     return cast null;
@@ -309,7 +309,7 @@ class Menu {
         items = (cast (cast _Runtime.toArray(focusableItems) : Array<flighthq._internal.dom.HTMLElement>) : Array<flighthq._internal.dom.HTMLElement>);
         if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return; }
         (focusIndex = cast (((cast _Runtime.strictEquals(focusIndex, -1.0) : Bool) ? (cast ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(items, 'length'), 1.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic) : (cast _Runtime.fmod(_Runtime.addNumbers((focusIndex + delta), _Runtime.field(items, 'length')), _Runtime.field(items, 'length')) : Dynamic)) : Dynamic));
-        _Runtime.callProperty(items, 'forEach', cast ([function(el:flighthq._internal.dom.HTMLElement, i:Float, __unused4:Array<flighthq._internal.dom.HTMLElement>):Void {
+        _Runtime.forEachArray((cast items : Array<flighthq._internal.dom.HTMLElement>), function(el:flighthq._internal.dom.HTMLElement, i:Float, __unused4:Array<flighthq._internal.dom.HTMLElement>):Void {
           if ((cast _Runtime.strictEquals(i, focusIndex) : Bool)) {
             (cast el : flighthq._internal.dom.HTMLElement).setAttribute('data-focused', 'true');
             ((cast (cast el : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).background = '#0066cc');
@@ -319,7 +319,7 @@ class Menu {
             ((cast (cast el : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).background = '');
             ((cast (cast el : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = '#111');
           }
-        }] : Array<Dynamic>));
+        }, _Runtime.UNDEFINED);
         if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
           var focused:flighthq._internal.dom.HTMLElement = flighthq._internal._StaticIndex.readArray(items, focusIndex);
           var itemId:Null<String> = _Runtime.optionalIndex(({ final __hostType7 = focused; __hostType7 == null ? _Runtime.UNDEFINED : (cast __hostType7 : flighthq._internal.dom.HTMLElement).dataset; }), 'itemId');

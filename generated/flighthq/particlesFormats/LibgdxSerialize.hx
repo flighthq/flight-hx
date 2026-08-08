@@ -156,7 +156,7 @@ class LibgdxSerialize {
     _Runtime.callProperty(lines, 'push', cast (['Tint'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['colors: ' + Std.string(_Runtime.join((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, ',')) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline, 'forEach', cast ([function(v:Float, i:Float, __unused0:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
+    _Runtime.forEachArray((cast (cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline : Array<Float>), function(v:Float, i:Float, __unused0:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }, _Runtime.UNDEFINED);
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Transparency' : String), (cast doc.transparency), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
@@ -179,9 +179,9 @@ class LibgdxSerialize {
     _Runtime.callProperty(lines, 'push', cast (['highMax: ' + Std.string(r.highMax) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['relative: ' + Std.string(r.relative) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['scalingCount: ' + Std.string(_Runtime.field(r.scaling, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(r.scaling, 'forEach', cast ([function(v:Float, i:Float, __unused1:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
+    _Runtime.forEachArray((cast r.scaling : Array<Float>), function(v:Float, i:Float, __unused1:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }, _Runtime.UNDEFINED);
     _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(r.timeline, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(r.timeline, 'forEach', cast ([function(v:Float, i:Float, __unused2:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
+    _Runtime.forEachArray((cast r.timeline : Array<Float>), function(v:Float, i:Float, __unused2:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }, _Runtime.UNDEFINED);
     return cast lines;
     return cast null;
   }

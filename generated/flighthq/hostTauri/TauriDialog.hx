@@ -27,7 +27,7 @@ class TauriDialog {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:Null<flighthq._internal._Union2<String, Array<String>>> = cast _Runtime.UNDEFINED;
         var kind:String = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, defaultPath: options.defaultPath, multiple: options.multiple, directory: options.directory, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) })), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, defaultPath: options.defaultPath, multiple: options.multiple, directory: options.directory, filters: ({ final __collection1:Dynamic = options.filters; __collection1 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection1 : Array<FileDialogFilter>), TauriDialog.toTauriFilter__tauriDialog, _Runtime.UNDEFINED)); }) })), function(__awaitValue0:Dynamic):Dynamic {
           result = __awaitValue0;
           kind = _Runtime.select(options.directory, function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
           return flighthq._internal._Async.resolve((cast TauriDialog.toHandles__tauriDialog((cast result), (cast kind : String)) : Array<FileDialogHandle>));
@@ -36,23 +36,23 @@ class TauriDialog {
     }, openDirectory: function(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:Null<flighthq._internal._Union2<String, Array<String>>> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, multiple: options.multiple, directory: true })), function(__awaitValue1:Dynamic):Dynamic {
-          result = __awaitValue1;
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, multiple: options.multiple, directory: true })), function(__awaitValue2:Dynamic):Dynamic {
+          result = __awaitValue2;
           return flighthq._internal._Async.resolve((cast TauriDialog.toHandles__tauriDialog((cast result), (cast 'Directory' : String)) : Array<FileDialogHandle>));
         });
       }));
     }, saveFile: function(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var path:Null<String> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).save((cast { title: options.title, defaultPath: options.defaultPath, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) })), function(__awaitValue2:Dynamic):Dynamic {
-          path = __awaitValue2;
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).save((cast { title: options.title, defaultPath: options.defaultPath, filters: ({ final __collection4:Dynamic = options.filters; __collection4 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection4 : Array<FileDialogFilter>), TauriDialog.toTauriFilter__tauriDialog, _Runtime.UNDEFINED)); }) })), function(__awaitValue3:Dynamic):Dynamic {
+          path = __awaitValue3;
           return flighthq._internal._Async.resolve(((cast _Runtime.strictEquals(path, null) : Bool) ? (cast null : Dynamic) : (cast (cast TauriDialog.toFileHandle__tauriDialog((cast path : String), (cast 'File' : String)) : FileDialogHandle) : Dynamic)));
         });
       }));
     }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).message((cast options.message : String), (cast { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind)) : String) })), function(__awaitValue3:Dynamic):Dynamic {
-          __awaitValue3;
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).message((cast options.message : String), (cast { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind)) : String) })), function(__awaitValue5:Dynamic):Dynamic {
+          __awaitValue5;
           return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
         });
       }));
@@ -77,7 +77,7 @@ class TauriDialog {
     var paths:Array<String> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     paths = ((cast _Runtime.isArray(result) : Bool) ? (cast result : Dynamic) : (cast cast ([result] : Array<Dynamic>) : Dynamic));
-    return cast _Runtime.callProperty(paths, 'map', cast ([function(path:String, __unused0:Float, __unused1:Array<String>):FileDialogHandle return (cast TauriDialog.toFileHandle__tauriDialog((cast path : String), (cast kind : String)) : FileDialogHandle)] : Array<Dynamic>));
+    return cast (cast _Runtime.mapArray((cast paths : Array<String>), function(path:String, __unused0:Float, __unused1:Array<String>):FileDialogHandle return (cast TauriDialog.toFileHandle__tauriDialog((cast path : String), (cast kind : String)) : FileDialogHandle), _Runtime.UNDEFINED));
     return cast null;
   }
 

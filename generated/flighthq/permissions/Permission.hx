@@ -91,7 +91,7 @@ class Permission {
   }
 
   public static function getPermissionStates(names:Array<PermissionName>):flighthq._internal._Promise<Array<PermissionState>> {
-    return cast flighthq._internal._Async.all(_Runtime.callProperty(names, 'map', cast ([function(name:PermissionName, __unused0:Float, __unused1:Array<PermissionName>):flighthq._internal._Promise<PermissionState> return (cast getPermissionState((cast name)) : flighthq._internal._Promise<PermissionState>)] : Array<Dynamic>)));
+    return cast flighthq._internal._Async.all((cast _Runtime.mapArray((cast names : Array<PermissionName>), function(name:PermissionName, __unused0:Float, __unused1:Array<PermissionName>):flighthq._internal._Promise<PermissionState> return (cast getPermissionState((cast name)) : flighthq._internal._Promise<PermissionState>), _Runtime.UNDEFINED)));
     return cast null;
   }
 

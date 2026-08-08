@@ -123,7 +123,7 @@ class RiveShapePaint {
     var closed:Bool = cast _Runtime.UNDEFINED;
     length = (cast RiveShapePaint.getRivePolylineLength__riveShapePaint((cast contour)) : Float);
     if ((cast ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(dash, 'lengths'), 'length'), 0.0) : Bool)) : Bool)) { return; }
-    pattern = _Runtime.callProperty(_Runtime.field(dash, 'lengths'), 'map', cast ([function(entry:RiveDashLength__riveShapePaint, __unused0:Float, __unused1:Array<RiveDashLength__riveShapePaint>):Float return HxMath.min(length, HxMath.max(0.0, (cast RiveShapePaint.toRiveDashLength__riveShapePaint((cast entry), (cast length : Float)) : Float)))] : Array<Dynamic>));
+    pattern = (cast _Runtime.mapArray((cast _Runtime.field(dash, 'lengths') : Array<RiveDashLength__riveShapePaint>), function(entry:RiveDashLength__riveShapePaint, __unused0:Float, __unused1:Array<RiveDashLength__riveShapePaint>):Float return HxMath.min(length, HxMath.max(0.0, (cast RiveShapePaint.toRiveDashLength__riveShapePaint((cast entry), (cast length : Float)) : Float))), _Runtime.UNDEFINED));
     if ((cast !(cast _Runtime.callProperty(pattern, 'some', cast ([function(value:Float, __unused2:Float, __unused3:Array<Float>):Bool return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) : Bool)) { return; }
     distance = (cast RiveShapePaint.wrapRiveDashOffset__riveShapePaint((cast (cast RiveShapePaint.toRiveDashLength__riveShapePaint((cast _Runtime.field(dash, 'offset')), (cast length : Float)) : Float) : Float), (cast length : Float)) : Float);
     travelled = 0.0;
@@ -230,9 +230,9 @@ class RiveShapePaint {
     begin = _Runtime.fmod((_Runtime.fmod(_Runtime.addNumbers(_Runtime.field(trim, 'start'), _Runtime.field(trim, 'offset')), 1.0) + 1.0), 1.0);
     windows = ((cast ((cast (begin + visible) : Float) <= (cast 1.0 : Float)) : Bool) ? (cast cast ([cast ([begin, (begin + visible)] : Array<Dynamic>)] : Array<Dynamic>) : Dynamic) : (cast cast ([cast ([begin, 1.0] : Array<Dynamic>), cast ([0.0, ((begin + visible) - 1.0)] : Array<Dynamic>)] : Array<Dynamic>) : Dynamic));
     if ((cast !(cast _Runtime.field(trim, 'sequential') : Bool) : Bool)) {
-      return cast _Runtime.callProperty(paths, 'flatMap', cast ([function(path:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):flighthq._internal._Union2<RivePathRecord, Array<RivePathRecord>> return (cast RiveShapePaint.trimRivePathToWindows__riveShapePaint((cast path), (cast 0.0 : Float), (cast 1.0 : Float), (cast windows)) : Array<RivePathRecord>)] : Array<Dynamic>));
+      return cast (cast _Runtime.flatMapArray((cast paths : Array<RivePathRecord>), function(path:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):flighthq._internal._Union2<RivePathRecord, Array<RivePathRecord>> return (cast RiveShapePaint.trimRivePathToWindows__riveShapePaint((cast path), (cast 0.0 : Float), (cast 1.0 : Float), (cast windows)) : Array<RivePathRecord>), _Runtime.UNDEFINED));
     }
-    lengths = _Runtime.callProperty(paths, 'map', cast ([function(path:RivePathRecord, __unused6:Float, __unused7:Array<RivePathRecord>):Float return (cast getPathLength((cast (cast RiveShapePaint.toRivePath__riveShapePaint((cast path)) : Path)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Float)] : Array<Dynamic>));
+    lengths = (cast _Runtime.mapArray((cast paths : Array<RivePathRecord>), function(path:RivePathRecord, __unused6:Float, __unused7:Array<RivePathRecord>):Float return (cast getPathLength((cast (cast RiveShapePaint.toRivePath__riveShapePaint((cast path)) : Path)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Float), _Runtime.UNDEFINED));
     total = _Runtime.reduce(lengths, function(sum:Float, length:Float, __unused8:Float, __unused9:Array<Float>):Float return (sum + length), 0.0);
     if ((cast ((cast total : Float) <= (cast 0.0 : Float)) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     results = (cast cast ([] : Array<Dynamic>));

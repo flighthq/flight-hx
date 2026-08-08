@@ -1485,6 +1485,47 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callProperty(dynamic_, 'get'");
   });
 
+  it('routes typed Array callbacks through JS-arity collection endpoints', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/tween/src/tween.ts',
+      `
+        interface Mapper {
+          map(callback: (value: string) => string): string[];
+        }
+        export function makeTweenProperties(keys: string[]) {
+          return keys.map((key) => ({ change: 0, key, start: 0 }));
+        }
+        export function indexed(keys: readonly string[], out: string[]) {
+          keys.forEach((key, index) => out.push(key + index));
+          return keys.filter((key) => key.length > 0);
+        }
+        export function dynamicMap(values: any) {
+          return values.map((value: any) => value);
+        }
+        export function structuralMap(mapper: Mapper) {
+          return mapper.map((value) => value);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/tween', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ArrayCallbackFixture',
+      packageName: '@flighthq/tween',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('_Runtime.mapArray((cast keys : Array<String>)');
+    expect(output).toContain('_Runtime.forEachArray((cast keys : Array<String>)');
+    expect(output).toContain('_Runtime.filterArray((cast keys : Array<String>)');
+    expect(output).toContain('function(key:String, __unused0:Float, __unused1:Array<String>)');
+    expect(output).toContain("_Runtime.callProperty(values, 'map'");
+    expect(output).toContain('_Runtime.haxeArity(function(value:flighthq._internal._Any)');
+    expect(output).toContain('(cast mapper : Mapper).map');
+    expect(output).not.toContain('_Runtime.mapArray((cast mapper');
+  });
+
   it('emits direct calls for generated class receivers and retains internal-class fallbacks', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/internalClass.ts',
@@ -2065,7 +2106,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("'filter', cast ([_Runtime.truthy]");
+    expect(output).toContain(
+      '_Runtime.filterArray((cast values : Array<String>), _Runtime.truthy, _Runtime.UNDEFINED)',
+    );
     expect(output).toContain("_Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('VideoFrame'))");
     expect(output).toContain("_Runtime.isInstanceOfName(value, 'TypeError')");
     expect(output).toContain('Boolean((cast 1.0 : flighthq._internal._Any))');
@@ -3329,10 +3372,17 @@ describe('TypeScript lowering and Haxe emission', () => {
           bind(state: number, material: string | null): void;
           pack: (state: number, offset: number) => void;
         }
+        type CanvasShapeHandler = (ctx: object, state: object, buf: unknown[], i: number) => void;
+        interface CanvasShapeCommand {
+          readonly draw: CanvasShapeHandler;
+        }
         export const renderer: Renderer = {
           finish(state: number) {},
           bind(state: number) {},
           pack: (state: number) => {},
+        };
+        export const defaultCanvasEndFill: CanvasShapeCommand = {
+          draw(_ctx, state) { void state; },
         };
       `,
       ts.ScriptTarget.Latest,
@@ -3352,6 +3402,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('finish: function(state:Float, result:String)');
     expect(output).toContain('bind: function(state:Float, material:Null<String>)');
     expect(output).toContain('pack: function(state:Float, offset:Float)');
+    expect(output).toContain(
+      'draw: function(_ctx:Dynamic, state:Dynamic, __unused2:Array<flighthq._internal._Any>, __unused3:Float)',
+    );
   });
 
   it('preserves negative-zero normalization and fractional sort comparators', () => {

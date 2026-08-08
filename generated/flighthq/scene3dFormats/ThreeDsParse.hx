@@ -741,7 +741,7 @@ class ThreeDsParse {
       return cast _Runtime.UNDEFINED;
     });
     faceGroup = _Runtime.fill(new flighthq._internal._Int32Array(faceCount), -1.0, 0, null, 1);
-    _Runtime.callProperty(mesh.materialGroups, 'forEach', cast ([function(group:ThreeDsMaterialGroup, groupIndex:Float, __unused4:Array<ThreeDsMaterialGroup>):Void {
+    _Runtime.forEachArray((cast mesh.materialGroups : Array<ThreeDsMaterialGroup>), function(group:ThreeDsMaterialGroup, groupIndex:Float, __unused4:Array<ThreeDsMaterialGroup>):Void {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field((cast group : ThreeDsMaterialGroup).faces, 'length') : Float)) : Bool)) {
@@ -749,7 +749,7 @@ class ThreeDsParse {
           i++;
         }
       }
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED);
     indices = (cast cast ([] : Array<Dynamic>));
     subsets = (cast cast ([] : Array<Dynamic>));
     meshMaterials = (cast cast ([] : Array<Dynamic>));
@@ -771,9 +771,9 @@ class ThreeDsParse {
         _Runtime.callProperty(meshMaterials, 'push', cast ([materialIndex] : Array<Dynamic>));
       }
     });
-    _Runtime.callProperty(mesh.materialGroups, 'forEach', cast ([function(group:ThreeDsMaterialGroup, groupIndex:Float, __unused5:Array<ThreeDsMaterialGroup>):Void {
+    _Runtime.forEachArray((cast mesh.materialGroups : Array<ThreeDsMaterialGroup>), function(group:ThreeDsMaterialGroup, groupIndex:Float, __unused5:Array<ThreeDsMaterialGroup>):Void {
       emitSubset((cast function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32Array(faceGroup, f), groupIndex)), (cast (cast ThreeDsParse.resolveThreeDsMaterial__threeDsParse((cast (cast group : ThreeDsMaterialGroup).name : String), (cast materials), (cast materialIndexByName), (cast document), (cast threeDsDrops)) : Float) : Float));
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED);
     emitSubset((cast function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32Array(faceGroup, f), -1.0)), (cast -1.0 : Float));
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = (cast createMeshGeometry((cast { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(outVertices) })) : MeshGeometry);

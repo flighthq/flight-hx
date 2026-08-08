@@ -126,7 +126,7 @@ class DomClipRectangle {
     if ((cast _Runtime.strictEquals(match, null) : Bool)) {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
-    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:String, __unused2:Float, __unused3:Array<String>):Float return _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
+    parts = (cast _Runtime.mapArray((cast _Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)) : Array<String>), function(value:String, __unused2:Float, __unused3:Array<String>):Float return _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>)), _Runtime.UNDEFINED));
     return cast { a: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 5.0), function():Dynamic return cast 0.0) };
     return cast null;
   }

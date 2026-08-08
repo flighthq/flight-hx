@@ -69,7 +69,7 @@ class TiledTmxFormat {
   }
 
   public static function formatPoints__tiledTmxFormat(points:Array<{ var x:Float; var y:Float; }>):String {
-    return cast _Runtime.join(_Runtime.callProperty(points, 'map', cast ([function(p:{ var x:Float; var y:Float; }, __unused0:Float, __unused1:Array<{ var x:Float; var y:Float; }>):String return '' + Std.string((cast p : { var x:Float; var y:Float; }).x) + ',' + Std.string((cast p : { var x:Float; var y:Float; }).y) + ''] : Array<Dynamic>)), ' ');
+    return cast _Runtime.join((cast _Runtime.mapArray((cast points : Array<{ var x:Float; var y:Float; }>), function(p:{ var x:Float; var y:Float; }, __unused0:Float, __unused1:Array<{ var x:Float; var y:Float; }>):String return '' + Std.string((cast p : { var x:Float; var y:Float; }).x) + ',' + Std.string((cast p : { var x:Float; var y:Float; }).y) + '', _Runtime.UNDEFINED)), ' ');
     return cast null;
   }
 

@@ -31,7 +31,7 @@ class Spritesheet {
 
   public static function cloneSpritesheet(spritesheet:flighthq.types.Spritesheet):flighthq.types.Spritesheet {
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated })) : SpritesheetFrame)] : Array<Dynamic>));
+    frames = (cast _Runtime.mapArray((cast spritesheet.frames : Array<SpritesheetFrame>), function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated })) : SpritesheetFrame), _Runtime.UNDEFINED));
     return cast (cast createEntity((cast { atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames })) : { >Entity, var atlas:Null<TextureAtlas>; var animations:{  }; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }

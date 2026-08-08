@@ -30,12 +30,12 @@ class SpritesheetFrom {
         ((cast nameToRegionId : flighthq._internal._Map<String, Float>).set(region.name, (cast region.id)));
       }
     }
-    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(fd:SpritesheetFrameData, index:Float, __unused0:Array<SpritesheetFrameData>):SpritesheetFrame {
+    frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(fd:SpritesheetFrameData, index:Float, __unused0:Array<SpritesheetFrameData>):SpritesheetFrame {
       var regionId:Float = cast _Runtime.UNDEFINED;
       regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flighthq._internal._Map<String, Float>).get(fd.name)), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
       return cast (cast createSpritesheetFrame((cast { id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated })) : SpritesheetFrame);
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     frameNameToIndex = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Float = 0.0;
@@ -49,7 +49,7 @@ class SpritesheetFrom {
     }
     animations = (cast {  });
     for (ad in _Runtime.iterable(data.animations)) {
-      var resolvedFrames:Array<Float> = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Runtime.callProperty(ad.frameNames, 'map', cast ([function(n:String, __unused1:Float, __unused2:Array<String>):Null<Float> return ((cast frameNameToIndex : flighthq._internal._Map<String, Float>).get(n))] : Array<Dynamic>)), 'filter', cast ([function(i:Null<Float>, __unused3:Float, __unused4:Array<Null<Float>>):Bool return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : (cast (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:flighthq._internal._Any, i:Float):Float return i) : Array<Float>) : Dynamic));
+      var resolvedFrames:Array<Float> = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast ad.frameNames : Array<String>), function(n:String, __unused1:Float, __unused2:Array<String>):Null<Float> return ((cast frameNameToIndex : flighthq._internal._Map<String, Float>).get(n)), _Runtime.UNDEFINED)) : Array<Null<Float>>), function(i:Null<Float>, __unused3:Float, __unused4:Array<Null<Float>>):Bool return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.UNDEFINED)) : Dynamic) : (cast (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:flighthq._internal._Any, i:Float):Float return i) : Array<Float>) : Dynamic));
       _Runtime.setIndex(animations, ad.name, (cast createSpritesheetAnimation((cast { direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount })) : SpritesheetAnimation));
     }
     return cast (cast createSpritesheet((cast { animations: animations, atlas: atlas, frames: frames })) : Spritesheet);
@@ -60,7 +60,7 @@ class SpritesheetFrom {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
     atlas = (cast createTextureAtlasFromGrid((cast options), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas);
-    frames = _Runtime.callProperty(atlas.regions, 'map', cast ([function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: region.id })) : SpritesheetFrame)] : Array<Dynamic>));
+    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: region.id })) : SpritesheetFrame), _Runtime.UNDEFINED));
     return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames })) : Spritesheet);
     return cast null;
   }

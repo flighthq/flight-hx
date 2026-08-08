@@ -25,12 +25,12 @@ class CanvasRenderTextureEffect {
     }
     sourceTarget = (cast getCanvasRenderTextureTarget((cast state), (cast source)) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }>> {
+    operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }>> {
       var runner:Null<CanvasRenderEffectRunner> = cast _Runtime.UNDEFINED;
       runner = (cast getCanvasRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
     current = sourceTarget;
     {

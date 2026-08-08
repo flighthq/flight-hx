@@ -93,6 +93,7 @@ const typedArraySetReceiverNames = [
 ] as const satisfies readonly IrTypedArraySetReceiver[];
 
 const collectionBindingTypes = {
+  ArrayCollection: 'Array<Dynamic>',
   MapCollection: 'flighthq._internal._Map<Dynamic, Dynamic>',
   SetCollection: 'flighthq._internal._Set<Dynamic>',
   WeakMapCollection: 'flighthq._internal._WeakMap<Dynamic, Dynamic>',
@@ -3197,6 +3198,22 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
       const collectionType = collectionReceiverType(expression.callee);
+      if (expression.callee.binding === 'ArrayCollection') {
+        const helper = `${name}Array`;
+        const arguments_ = expression.arguments.map((argument, index) =>
+          index === 0 ? emitArrayCallbackArgument(argument) : emitExpression(argument),
+        );
+        if (arguments_.length === 1) arguments_.push(`_Runtime.UNDEFINED`);
+        const call = (target: string) => {
+          const direct = `_Runtime.${helper}((cast ${target} : ${collectionType}), ${arguments_.join(', ')})`;
+          return name !== 'forEach' && expression.type && expression.type.kind !== 'dynamic'
+            ? `(cast ${direct})`
+            : direct;
+        };
+        if (!(expression.optional || expression.callee.optional)) return call(owner);
+        const temporary = `__collection${String(temporaryIndex++)}`;
+        return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
+      }
       const method = expression.callee.name === 'delete' ? 'delete_' : safeName(expression.callee.name);
       const collectionBinding = expression.callee.binding;
       const collectionName = expression.callee.name;
@@ -3248,7 +3265,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
     }
     if (expression.callee.optional) {
-      return `_Runtime.callOptionalProperty(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+      return `_Runtime.callOptionalProperty(${owner}, ${quote(name)}, cast ([${expression.arguments
+        .map((argument, index) =>
+          index === 0 && ['filter', 'flatMap', 'forEach', 'map'].includes(name)
+            ? emitArrayCallbackArgument(argument)
+            : emitExpression(argument),
+        )
+        .join(', ')}] : Array<Dynamic>))`;
     }
     if (owner === '_Runtime' && name === 'thisValue') return '_Runtime.thisValue()';
     if (owner === '_Runtime') {
@@ -3425,11 +3448,30 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     return `super(${expression.arguments.map(emitExpression).join(', ')})`;
   }
   if (expression.callee.kind === 'property') {
+    const propertyName = expression.callee.name;
     const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
-    return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(propertyName)}, cast ([${expression.arguments
+      .map((argument, index) =>
+        index === 0 && ['filter', 'flatMap', 'forEach', 'map'].includes(propertyName)
+          ? emitArrayCallbackArgument(argument)
+          : emitExpression(argument),
+      )
+      .join(', ')}] : Array<Dynamic>))`;
   }
   const method = expression.optional ? 'callOptionalValue' : 'callValue';
   return `_Runtime.${method}(${emitExpression(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+}
+
+function emitArrayCallbackArgument(argument: IrExpression): string {
+  const emitted = emitExpression(argument);
+  const arity =
+    argument.kind === 'function'
+      ? argument.parameters.length
+      : argument.type?.kind === 'function'
+        ? argument.type.parameters.length
+        : undefined;
+  const rest = argument.kind === 'function' && argument.parameters.some((parameter) => parameter.rest);
+  return arity === undefined || arity === 3 || rest ? emitted : `_Runtime.haxeArity(${emitted}, ${String(arity)})`;
 }
 
 function emitCheckedCallArgument(

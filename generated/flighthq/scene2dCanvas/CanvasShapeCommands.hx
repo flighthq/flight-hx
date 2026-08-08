@@ -288,7 +288,7 @@ class CanvasShapeCommands {
     ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
   } });
 
-  public static final defaultCanvasEndFill:CanvasShapeCommand<String> = (cast { key: 'endFill', draw: function(_ctx:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState):Void {
+  public static final defaultCanvasEndFill:CanvasShapeCommand<String> = (cast { key: 'endFill', draw: function(_ctx:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, __unused2:Array<flighthq._internal._Any>, __unused3:Float):Void {
     if ((cast (cast state : CanvasShapeDrawState).hasPendingPath : Bool)) { (cast state : CanvasShapeDrawState).flush(); }
     ((cast state : CanvasShapeDrawState).hasFill = false);
     ((cast state : CanvasShapeDrawState).fillMatrix = null);

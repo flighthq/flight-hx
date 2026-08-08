@@ -55,7 +55,7 @@ class StarlingSerialize {
 
   public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<StarlingDocument>):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
-    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural2 = existing; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(data.frames, 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) });
+    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural2 = existing; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), StarlingSerialize.frameToSubTexture__starlingSerialize, _Runtime.UNDEFINED)) });
     return cast (cast StarlingSerialize.documentToXml__starlingSerialize((cast doc)) : String);
     return cast null;
   }

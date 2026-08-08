@@ -26,7 +26,7 @@ class SpritesheetValidation {
     animations = _Runtime.field(__destructure0, 'animations');
     frames = _Runtime.field(__destructure0, 'frames');
     if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-      var regionIds:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.callProperty(atlas.regions, 'map', cast ([function(r:TextureAtlasRegion, __unused1:Float, __unused2:Array<TextureAtlasRegion>):Float return r.id] : Array<Dynamic>))]);
+      var regionIds:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [(cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(r:TextureAtlasRegion, __unused1:Float, __unused2:Array<TextureAtlasRegion>):Float return r.id, _Runtime.UNDEFINED))]);
       {
         var fi:Float = 0.0;
         while ((cast ((cast fi : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {

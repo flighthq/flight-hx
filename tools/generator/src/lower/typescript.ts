@@ -44,6 +44,7 @@ import type {
 const fingerprintPrinter = ts.createPrinter({ removeComments: true });
 
 const collectionMembers = {
+  ArrayCollection: new Set(['filter', 'flatMap', 'forEach', 'map']),
   MapCollection: new Set(['clear', 'delete', 'entries', 'forEach', 'get', 'has', 'keys', 'set', 'size', 'values']),
   SetCollection: new Set(['add', 'clear', 'delete', 'entries', 'forEach', 'has', 'keys', 'size', 'values']),
   WeakMapCollection: new Set(['delete', 'get', 'has', 'set']),
@@ -680,6 +681,7 @@ function collectionBinding(
   const checker = context.checker;
   if (!type || !checker) return undefined;
   const candidates: Array<[CollectionBinding, ReadonlySet<string>, ReadonlySet<string>]> = [
+    ['ArrayCollection', new Set(['Array', 'ReadonlyArray']), collectionMembers.ArrayCollection],
     ['MapCollection', new Set(['Map', 'ReadonlyMap']), collectionMembers.MapCollection],
     ['SetCollection', new Set(['ReadonlySet', 'Set']), collectionMembers.SetCollection],
     ['WeakMapCollection', new Set(['WeakMap']), collectionMembers.WeakMapCollection],

@@ -40,7 +40,7 @@ class ElectronMenu {
   }
 
   public static function toElectronTemplate__electronMenu(items:Array<MenuItemTemplate>, ?onSelect:String->Void):Array<ElectronMenuItemOptions> {
-    return cast _Runtime.callProperty(items, 'map', cast ([function(item:MenuItemTemplate, __unused1:Float, __unused2:Array<MenuItemTemplate>):ElectronMenuItemOptions {
+    return cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), function(item:MenuItemTemplate, __unused1:Float, __unused2:Array<MenuItemTemplate>):ElectronMenuItemOptions {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
       options = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
       if (_Runtime.truthy(item.submenu)) {
@@ -50,7 +50,7 @@ class ElectronMenu {
       } }
       return cast options;
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     return cast null;
   }
 }

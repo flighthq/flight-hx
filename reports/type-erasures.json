@@ -5445,12 +5445,12 @@
     {
       "byReason": {
         "source-never": 12,
-        "source-unknown": 76,
+        "source-unknown": 77,
         "standard-toolkit-boundary": 43
       },
       "module": "flighthq.scene2dCanvas.CanvasShapeCommands",
       "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
-      "total": 131
+      "total": 132
     },
     {
       "byReason": {
@@ -9516,12 +9516,12 @@
       "source-never": 110,
       "source-null": 74,
       "source-undefined": 264,
-      "source-unknown": 3796,
+      "source-unknown": 3797,
       "standard-toolkit-boundary": 17920,
       "unclassified": 365
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1116,
-    "total": 24143
+    "total": 24144
   }
 }

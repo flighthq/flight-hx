@@ -36,7 +36,7 @@ class RenderRegistryGuards {
   public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {
     var misses:Array<RenderRegistryMiss> = cast _Runtime.UNDEFINED;
     misses = _Runtime.coalesce(((cast RenderRegistryGuards._stateMisses__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Array<RenderRegistryMiss>>).get(state)), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    return cast { misses: _Runtime.callProperty(misses, 'map', cast ([function(miss:RenderRegistryMiss, __unused0:Float, __unused1:Array<RenderRegistryMiss>):{ var kind:String; var registry:RenderRegistry; } return { kind: (cast miss : RenderRegistryMiss).kind, registry: (cast miss : RenderRegistryMiss).registry }] : Array<Dynamic>)), status: ((cast _Runtime.strictEquals(_Runtime.field(misses, 'length'), 0.0) : Bool) ? (cast 'complete' : Dynamic) : (cast 'misses-recorded' : Dynamic)) };
+    return cast { misses: (cast _Runtime.mapArray((cast misses : Array<RenderRegistryMiss>), function(miss:RenderRegistryMiss, __unused0:Float, __unused1:Array<RenderRegistryMiss>):{ var kind:String; var registry:RenderRegistry; } return { kind: (cast miss : RenderRegistryMiss).kind, registry: (cast miss : RenderRegistryMiss).registry }, _Runtime.UNDEFINED)), status: ((cast _Runtime.strictEquals(_Runtime.field(misses, 'length'), 0.0) : Bool) ? (cast 'complete' : Dynamic) : (cast 'misses-recorded' : Dynamic)) };
     return cast null;
   }
 

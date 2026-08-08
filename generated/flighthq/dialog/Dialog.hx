@@ -60,7 +60,7 @@ class Dialog {
     types = (cast cast ([] : Array<Dynamic>));
     for (filter in _Runtime.iterable(filters)) {
       var accept:flighthq._internal._Record<String, Array<String>> = (cast {  });
-      var extensions:Array<String> = _Runtime.callProperty(_Runtime.callProperty(filter.extensions, 'filter', cast ([function(e:String, __unused0:Float, __unused1:Array<String>):Bool return !_Runtime.strictEquals(e, '*')] : Array<Dynamic>)), 'map', cast ([function(e:String, __unused2:Float, __unused3:Array<String>):String return ((cast StringTools.startsWith(e, '.') : Bool) ? (cast e : Dynamic) : (cast '.' + Std.string(e) + '' : Dynamic))] : Array<Dynamic>));
+      var extensions:Array<String> = (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast filter.extensions : Array<String>), function(e:String, __unused0:Float, __unused1:Array<String>):Bool return !_Runtime.strictEquals(e, '*'), _Runtime.UNDEFINED)) : Array<String>), function(e:String, __unused2:Float, __unused3:Array<String>):String return ((cast StringTools.startsWith(e, '.') : Bool) ? (cast e : Dynamic) : (cast '.' + Std.string(e) + '' : Dynamic)), _Runtime.UNDEFINED));
       if ((cast ((cast _Runtime.field(extensions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var mime:String = _Runtime.select(_Runtime.andValue(filter.mimeTypes, function():Dynamic return cast ((cast _Runtime.field(filter.mimeTypes, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(filter.mimeTypes, 0.0), function():Dynamic return cast 'application/octet-stream');
         _Runtime.setIndex(accept, mime, extensions);

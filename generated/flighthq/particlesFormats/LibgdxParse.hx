@@ -375,11 +375,11 @@ class LibgdxParse {
     tintTimeline = (cast cast ([] : Array<Dynamic>));
     rawColors = (cast LibgdxParse.strKey__libgdxParse((cast tintSection), (cast 'colors' : String), (cast '' : String)) : String);
     if (_Runtime.truthy(rawColors)) {
-      _Runtime.callProperty(_Runtime.callProperty(rawColors, 'split', cast ([','] : Array<Dynamic>)), 'forEach', cast ([function(c:String, __unused16:Float, __unused17:Array<String>):Void {
+      _Runtime.forEachArray((cast _Runtime.callProperty(rawColors, 'split', cast ([','] : Array<Dynamic>)) : Array<String>), function(c:String, __unused16:Float, __unused17:Array<String>):Void {
         var trimmed:String = cast _Runtime.UNDEFINED;
         trimmed = StringTools.trim(Std.string(c));
         if (_Runtime.truthy(trimmed)) { _Runtime.callProperty(tintColors, 'push', cast ([trimmed] : Array<Dynamic>)); }
-      }] : Array<Dynamic>));
+      }, _Runtime.UNDEFINED);
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(tintColors, 'length'), 0.0) : Bool)) { _Runtime.callProperty(tintColors, 'push', cast (['ffffff'] : Array<Dynamic>)); }
     tintTlCount = _Runtime.orValue((_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse((cast tintSection), (cast 'timelineCount' : String), (cast 1.0 : Float)) : Float)) | 0), function():Dynamic return cast 1.0);

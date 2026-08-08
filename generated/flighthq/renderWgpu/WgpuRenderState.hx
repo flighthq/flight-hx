@@ -156,7 +156,7 @@ class WgpuRenderState {
                 __flowBranch3 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-                requiredFeatures = _Runtime.callProperty((cast cast (['texture-compression-bc', 'texture-compression-etc2', 'texture-compression-astc'] : Array<Dynamic>) : Array<flighthq._internal.dom.GPUFeatureName>), 'filter', cast ([function(feature:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast (cast adapter : flighthq._internal.dom.GPUAdapter).features : flighthq._internal.dom.GPUSupportedFeatures).has(feature))] : Array<Dynamic>));
+                requiredFeatures = (cast _Runtime.filterArray((cast (cast cast (['texture-compression-bc', 'texture-compression-etc2', 'texture-compression-astc'] : Array<Dynamic>) : Array<flighthq._internal.dom.GPUFeatureName>) : Array<flighthq._internal.dom.GPUFeatureName>), function(feature:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast (cast adapter : flighthq._internal.dom.GPUAdapter).features : flighthq._internal.dom.GPUSupportedFeatures).has(feature)), _Runtime.UNDEFINED));
                 deviceDescriptor = {  };
                 var __flowBranch4:Dynamic;
                 if ((cast ((cast _Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {

@@ -109,7 +109,7 @@ class GltfLoad {
         }
         externalBuffers = {  };
         entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(entries, 'map', cast ([function(uri:String, __unused0:Float, __unused1:Array<String>):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> return (cast loadScene3DDocumentBytesFromUrl((cast (cast GltfLoad.resolveGltfBufferUrl__gltfLoad((cast uri : String), (cast basePath)) : String) : String), (cast options)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>)] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all((cast _Runtime.mapArray((cast entries : Array<String>), function(uri:String, __unused0:Float, __unused1:Array<String>):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> return (cast loadScene3DDocumentBytesFromUrl((cast (cast GltfLoad.resolveGltfBufferUrl__gltfLoad((cast uri : String), (cast basePath)) : String) : String), (cast options)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), _Runtime.UNDEFINED))), function(__awaitValue11:Dynamic):Dynamic {
           bytes = __awaitValue11;
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.protect(function():Dynamic {
             var i:Float = cast _Runtime.UNDEFINED;

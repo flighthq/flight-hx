@@ -159,7 +159,7 @@ class Share {
     if ((cast !_Runtime.strictEquals(content.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.text = content.text); }
     if ((cast !_Runtime.strictEquals(content.url, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.url = content.url); }
     if ((cast ((cast !_Runtime.strictEquals(content.files, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(content.files, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (data.files = _Runtime.callProperty(content.files, 'map', cast ([function(f:ShareFile, __unused0:Float, __unused1:Array<ShareFile>):flighthq._internal.dom.File return (cast Share.shareFileToDomFile__share((cast f)) : flighthq._internal.dom.File)] : Array<Dynamic>)));
+      (data.files = (cast _Runtime.mapArray((cast content.files : Array<ShareFile>), function(f:ShareFile, __unused0:Float, __unused1:Array<ShareFile>):flighthq._internal.dom.File return (cast Share.shareFileToDomFile__share((cast f)) : flighthq._internal.dom.File), _Runtime.UNDEFINED)));
     }
     return cast data;
     return cast null;

@@ -188,6 +188,7 @@ type IrExpressionNode =
     }
   | {
       binding?:
+        | 'ArrayCollection'
         | IrHostEndpointBinding
         | 'Float32Array'
         | 'Float64Array'

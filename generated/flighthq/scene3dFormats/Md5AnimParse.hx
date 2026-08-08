@@ -269,7 +269,7 @@ class Md5AnimParse {
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
-    tokens = _Runtime.callProperty(_Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
       Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-hierarchy' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;
@@ -309,7 +309,7 @@ class Md5AnimParse {
     var orientationX:Float = cast _Runtime.UNDEFINED;
     var orientationY:Float = cast _Runtime.UNDEFINED;
     var orientationZ:Float = cast _Runtime.UNDEFINED;
-    tokens = _Runtime.callProperty(_Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+    tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
       Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-baseframe' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
       return cast null;
@@ -336,7 +336,7 @@ class Md5AnimParse {
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var tokens:Array<String> = _Runtime.callProperty(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 'filter', cast ([function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>));
+      var tokens:Array<String> = (cast _Runtime.filterArray((cast _Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
       for (token in _Runtime.iterable(tokens)) {
         var value:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([token] : Array<Dynamic>));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {

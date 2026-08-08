@@ -264,7 +264,7 @@ class MeshGeometryBuilders {
     subs = HxMath.max(0.0, HxMath.min(subdivisions, 6.0));
     phi = (_Runtime.addNumbers(1.0, HxMath.sqrt(5.0)) * 0.5);
     scale = _Runtime.divideNumbers(1.0, HxMath.sqrt((1.0 + (phi * phi))));
-    baseVerts = _Runtime.callProperty((cast cast ([cast ([-1.0, phi, 0.0] : Array<Dynamic>), cast ([1.0, phi, 0.0] : Array<Dynamic>), cast ([-1.0, -phi, 0.0] : Array<Dynamic>), cast ([1.0, -phi, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, phi] : Array<Dynamic>), cast ([0.0, 1.0, phi] : Array<Dynamic>), cast ([0.0, -1.0, -phi] : Array<Dynamic>), cast ([0.0, 1.0, -phi] : Array<Dynamic>), cast ([phi, 0.0, -1.0] : Array<Dynamic>), cast ([phi, 0.0, 1.0] : Array<Dynamic>), cast ([-phi, 0.0, -1.0] : Array<Dynamic>), cast ([-phi, 0.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>) : Array<Array<Float>>), 'map', cast ([function(__parameter0:Array<Float>, __unused1:Float, __unused2:Array<Array<Float>>):Array<Float> {
+    baseVerts = (cast _Runtime.mapArray((cast (cast cast ([cast ([-1.0, phi, 0.0] : Array<Dynamic>), cast ([1.0, phi, 0.0] : Array<Dynamic>), cast ([-1.0, -phi, 0.0] : Array<Dynamic>), cast ([1.0, -phi, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, phi] : Array<Dynamic>), cast ([0.0, 1.0, phi] : Array<Dynamic>), cast ([0.0, -1.0, -phi] : Array<Dynamic>), cast ([0.0, 1.0, -phi] : Array<Dynamic>), cast ([phi, 0.0, -1.0] : Array<Dynamic>), cast ([phi, 0.0, 1.0] : Array<Dynamic>), cast ([-phi, 0.0, -1.0] : Array<Dynamic>), cast ([-phi, 0.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>) : Array<Array<Float>>) : Array<Array<Float>>), function(__parameter0:Array<Float>, __unused1:Float, __unused2:Array<Array<Float>>):Array<Float> {
       var x:Float = cast _Runtime.UNDEFINED;
       var y:Float = cast _Runtime.UNDEFINED;
       var z:Float = cast _Runtime.UNDEFINED;
@@ -273,8 +273,8 @@ class MeshGeometryBuilders {
       z = flighthq._internal._StaticIndex.readArray(__parameter0, 2.0);
       return cast (cast cast ([(x * scale), (y * scale), (z * scale)] : Array<Dynamic>) : Array<Float>);
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
-    verts = _Runtime.callProperty(baseVerts, 'map', cast ([function(v:Array<Float>, __unused3:Float, __unused4:Array<Array<Float>>):Array<Float> return (cast _Runtime.concatArrays([_Runtime.toArray(v)]) : Array<Float>)] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
+    verts = (cast _Runtime.mapArray((cast baseVerts : Array<Array<Float>>), function(v:Array<Float>, __unused3:Float, __unused4:Array<Array<Float>>):Array<Float> return (cast _Runtime.concatArrays([_Runtime.toArray(v)]) : Array<Float>), _Runtime.UNDEFINED));
     faces = (cast cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     midpointCache = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     getMidpoint = (cast function(a:Float, b:Float):Float {
@@ -427,7 +427,7 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var flatIndices:Array<Float> = cast _Runtime.UNDEFINED;
     subs = HxMath.max(0.0, HxMath.min(detail, 5.0));
-    verts = _Runtime.callProperty(vertexPositions, 'map', cast ([function(__parameter7:Array<Float>, __unused8:Float, __unused9:Array<Array<Float>>):Array<Float> {
+    verts = (cast _Runtime.mapArray((cast vertexPositions : Array<Array<Float>>), function(__parameter7:Array<Float>, __unused8:Float, __unused9:Array<Array<Float>>):Array<Float> {
       var x:Float = cast _Runtime.UNDEFINED;
       var y:Float = cast _Runtime.UNDEFINED;
       var z:Float = cast _Runtime.UNDEFINED;
@@ -438,8 +438,8 @@ class MeshGeometryBuilders {
       len = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
       return cast cast ([(x / len), (y / len), (z / len)] : Array<Dynamic>);
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
-    faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Array<Float>, __unused10:Float, __unused11:Array<Array<Float>>):Array<Float> return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
+    faces = (cast _Runtime.mapArray((cast faceIndices : Array<Array<Float>>), function(f:Array<Float>, __unused10:Float, __unused11:Array<Array<Float>>):Array<Float> return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>), _Runtime.UNDEFINED));
     if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
       var midCache:flighthq._internal._Map<String, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
       var getMid:Float->Float->Float = cast _Runtime.UNDEFINED;

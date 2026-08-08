@@ -20,7 +20,7 @@ class AnimationClip {
     for (channel in _Runtime.iterable(clip.channels)) {
       _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast (cast cloneAnimationTrack((cast (cast channel : AnimationChannel).track)) : AnimationTrack)), (cast (cast channel : AnimationChannel).targetRef : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
     }
-    events = _Runtime.callProperty(clip.events, 'map', cast ([function(event:AnimationClipEvent, __unused0:Float, __unused1:Array<AnimationClipEvent>):AnimationClipEvent return (cast createAnimationClipEvent((cast (cast event : AnimationClipEvent).time : Float), (cast (cast event : AnimationClipEvent).name : String), (cast (cast event : AnimationClipEvent).payload : flighthq._internal._Any)) : AnimationClipEvent)] : Array<Dynamic>));
+    events = (cast _Runtime.mapArray((cast clip.events : Array<AnimationClipEvent>), function(event:AnimationClipEvent, __unused0:Float, __unused1:Array<AnimationClipEvent>):AnimationClipEvent return (cast createAnimationClipEvent((cast (cast event : AnimationClipEvent).time : Float), (cast (cast event : AnimationClipEvent).name : String), (cast (cast event : AnimationClipEvent).payload : flighthq._internal._Any)) : AnimationClipEvent), _Runtime.UNDEFINED));
     return cast (cast createEntity((cast { channels: channels, duration: clip.duration, events: events })) : { >Entity, var channels:Array<AnimationChannel>; var duration:Float; var events:Array<AnimationClipEvent>; });
     return cast null;
   }

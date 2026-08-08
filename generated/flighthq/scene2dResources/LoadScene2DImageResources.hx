@@ -29,11 +29,11 @@ class LoadScene2DImageResources {
         var images:Array<Null<Image>> = cast _Runtime.UNDEFINED;
         var resolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
         var unresolved:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
-        selected = _Runtime.callProperty((cast document : Scene2DDocument).imageResources, 'filter', cast ([function(reference:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast _Runtime.strictEquals(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var select:Null<ImageResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
+        selected = (cast _Runtime.filterArray((cast (cast document : Scene2DDocument).imageResources : Array<ImageResourceReference>), function(reference:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast _Runtime.strictEquals(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var select:Null<ImageResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool)), _Runtime.UNDEFINED));
         signal = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
         fetch = _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var fetch:Null<ImageResourceFetch>; }).fetch; }), function():Dynamic return cast LoadScene2DImageResources.rejectExternalImageResource__loadScene2DImageResources);
         loaded = 0.0;
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(selected, 'map', cast ([function(reference:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):flighthq._internal._Promise<Null<Image>> {
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.all((cast _Runtime.mapArray((cast selected : Array<ImageResourceReference>), function(reference:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):flighthq._internal._Promise<Null<Image>> {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
@@ -59,7 +59,7 @@ class LoadScene2DImageResources {
               });
             })
           );
-        }] : Array<Dynamic>))), function(__awaitValue9:Dynamic):Dynamic {
+        }, _Runtime.UNDEFINED))), function(__awaitValue9:Dynamic):Dynamic {
           images = __awaitValue9;
           resolved = cast ([] : Array<Dynamic>);
           unresolved = cast ([] : Array<Dynamic>);

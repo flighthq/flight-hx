@@ -171,7 +171,7 @@ class LibgdxAtlasParse {
       var entries:Array<{ var name:String; var index:Float; }> = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:{ var name:String; var index:Float; }, b:{ var name:String; var index:Float; }) return ((cast a : { var name:String; var index:Float; }).index - (cast b : { var name:String; var index:Float; }).index));
-      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused7:Float, __unused8:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 })) : SpritesheetAnimationData)] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: (cast _Runtime.mapArray((cast entries : Array<{ var name:String; var index:Float; }>), function(e:{ var name:String; var index:Float; }, __unused7:Float, __unused8:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name, _Runtime.UNDEFINED)), name: base, repeatCount: -1.0 })) : SpritesheetAnimationData)] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -197,8 +197,8 @@ class LibgdxAtlasParse {
     imageWidth = _Runtime.coalesce(({ final __structural8 = firstPage; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : LibgdxPage__libgdxAtlasParse).width; }), function():Dynamic return cast 0.0);
     imageHeight = _Runtime.coalesce(({ final __structural9 = firstPage; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : LibgdxPage__libgdxAtlasParse).height; }), function():Dynamic return cast 0.0);
     regions = (cast (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
-    frames = _Runtime.callProperty(regions, 'map', cast ([LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:SpritesheetFrameData, __unused10:Float, __unused11:Array<SpritesheetFrameData>):String return f.name] : Array<Dynamic>));
+    frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse, _Runtime.UNDEFINED));
+    frameNames = (cast _Runtime.mapArray((cast frames : Array<SpritesheetFrameData>), function(f:SpritesheetFrameData, __unused10:Float, __unused11:Array<SpritesheetFrameData>):String return f.name, _Runtime.UNDEFINED));
     animations = (cast LibgdxAtlasParse.inferAnimations__libgdxAtlasParse((cast frameNames), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
     return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 })) : SpritesheetData);
     return cast null;

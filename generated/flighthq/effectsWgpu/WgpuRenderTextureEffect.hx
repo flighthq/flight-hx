@@ -25,12 +25,12 @@ class WgpuRenderTextureEffect {
     }
     sourceTarget = (cast getWgpuRenderTextureTarget((cast state), (cast source)) : Null<WgpuRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }>> {
+    operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }>> {
       var runner:Null<WgpuRenderEffectRunner> = cast _Runtime.UNDEFINED;
       runner = (cast getWgpuRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
     current = sourceTarget;
     {

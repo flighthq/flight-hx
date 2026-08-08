@@ -40,7 +40,7 @@ class AsepriteParse {
     var firstDuration:Float = cast _Runtime.UNDEFINED;
     var uniform:Bool = cast _Runtime.UNDEFINED;
     tagFrameNames = _Runtime.slice(frameNames, tag.from, (tag.to + 1.0));
-    durations = _Runtime.callProperty(tagFrameNames, 'map', cast ([function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map<String, Float>).get(n)), function():Dynamic return cast 100.0)] : Array<Dynamic>));
+    durations = (cast _Runtime.mapArray((cast tagFrameNames : Array<String>), function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map<String, Float>).get(n)), function():Dynamic return cast 100.0), _Runtime.UNDEFINED));
     firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(durations, 0.0), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Float, __unused2:Float, __unused3:Array<Float>):Bool return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
     return cast (cast createSpritesheetAnimationData((cast { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, name: tag.name, repeatCount: -1.0 })) : SpritesheetAnimationData);
@@ -56,8 +56,8 @@ class AsepriteParse {
     var meta:AsepriteMeta = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     regions = (cast (cast parseTextureAtlasAsepriteDocument((cast doc), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
-    frames = _Runtime.callProperty(regions, 'map', cast ([AsepriteParse.frameFromRegion__asepriteParse] : Array<Dynamic>));
-    frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:TextureAtlasRegion, __unused4:Float, __unused5:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast '')] : Array<Dynamic>));
+    frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), AsepriteParse.frameFromRegion__asepriteParse, _Runtime.UNDEFINED));
+    frameNames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused4:Float, __unused5:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast ''), _Runtime.UNDEFINED));
     durationMap = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast _Runtime.isArray((cast doc : { var frames:flighthq._internal._Union2<Array<AsepriteArrayFrame>, flighthq._internal._Record<String, AsepriteBaseFrame>>; }).frames) : Bool)) {
       for (entry in _Runtime.iterable((cast (cast doc : { var frames:flighthq._internal._Union2<Array<AsepriteArrayFrame>, flighthq._internal._Record<String, AsepriteBaseFrame>>; }).frames : Array<AsepriteArrayFrame>))) {
@@ -72,7 +72,7 @@ class AsepriteParse {
     }
     __destructure7 = doc;
     meta = _Runtime.field(__destructure7, 'meta');
-    animations = ((cast _Runtime.andValue(meta.frameTags, function():Dynamic return cast ((cast _Runtime.field(meta.frameTags, 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast _Runtime.callProperty(meta.frameTags, 'map', cast ([function(tag:AsepriteFrameTag, __unused8:Float, __unused9:Array<AsepriteFrameTag>):SpritesheetAnimationData return (cast AsepriteParse.animationFromTag__asepriteParse((cast tag), (cast frameNames), (cast durationMap)) : SpritesheetAnimationData)] : Array<Dynamic>)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    animations = ((cast _Runtime.andValue(meta.frameTags, function():Dynamic return cast ((cast _Runtime.field(meta.frameTags, 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast (cast _Runtime.mapArray((cast meta.frameTags : Array<AsepriteFrameTag>), function(tag:AsepriteFrameTag, __unused8:Float, __unused9:Array<AsepriteFrameTag>):SpritesheetAnimationData return (cast AsepriteParse.animationFromTag__asepriteParse((cast tag), (cast frameNames), (cast durationMap)) : SpritesheetAnimationData), _Runtime.UNDEFINED)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: meta.image, imageHeight: (cast meta.size : { var h:Float; }).h, imageWidth: (cast meta.size : { var w:Float; }).w, scale: (cast AsepriteParse.metaScale__asepriteParse((cast meta)) : Float) })) : SpritesheetData);
     return cast null;
   }

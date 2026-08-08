@@ -145,13 +145,13 @@ class ElectronTray {
   }
 
   public static function toElectronTemplate__electronTray(items:Array<MenuItemTemplate>):Array<ElectronMenuItemOptions> {
-    return cast _Runtime.callProperty(items, 'map', cast ([function(item:MenuItemTemplate, __unused3:Float, __unused4:Array<MenuItemTemplate>):ElectronMenuItemOptions {
+    return cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), function(item:MenuItemTemplate, __unused3:Float, __unused4:Array<MenuItemTemplate>):ElectronMenuItemOptions {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
       options = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
       if (_Runtime.truthy(item.submenu)) { ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronTray.toElectronTemplate__electronTray((cast item.submenu)) : Array<ElectronMenuItemOptions>)); }
       return cast options;
       return cast _Runtime.UNDEFINED;
-    }] : Array<Dynamic>));
+    }, _Runtime.UNDEFINED));
     return cast null;
   }
 }
