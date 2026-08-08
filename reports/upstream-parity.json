@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-08T05:09:30.372Z",
-  "failedPackages": 12,
+  "completedAt": "2026-08-08T11:12:18.729Z",
+  "failedPackages": 13,
   "jobs": 6,
   "packages": [
     {
-      "durationMs": 95974,
+      "durationMs": 91808,
       "exitCode": 0,
       "package": "abc",
       "signal": null,
@@ -13,7 +13,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 13807,
+      "durationMs": 12046,
       "exitCode": 0,
       "package": "accessibility",
       "signal": null,
@@ -22,7 +22,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 30126,
+      "durationMs": 28623,
       "exitCode": 0,
       "package": "adjustments",
       "signal": null,
@@ -31,7 +31,7 @@
       "testFiles": 19
     },
     {
-      "durationMs": 393053,
+      "durationMs": 395031,
       "exitCode": 0,
       "package": "animation",
       "signal": null,
@@ -40,7 +40,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 15145,
+      "durationMs": 13176,
       "exitCode": 0,
       "package": "app",
       "signal": null,
@@ -49,7 +49,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 64659,
+      "durationMs": 57659,
       "exitCode": 0,
       "package": "application",
       "signal": null,
@@ -58,7 +58,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 14907,
+      "durationMs": 13958,
       "exitCode": 0,
       "package": "application-gl",
       "signal": null,
@@ -67,7 +67,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 16913,
+      "durationMs": 17186,
       "exitCode": 0,
       "package": "assets",
       "signal": null,
@@ -76,7 +76,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 58101,
+      "durationMs": 54530,
       "exitCode": 0,
       "package": "audio",
       "signal": null,
@@ -85,7 +85,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 11302,
+      "durationMs": 11095,
       "exitCode": 0,
       "package": "binpack",
       "signal": null,
@@ -94,7 +94,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 212073,
+      "durationMs": 223507,
       "exitCode": 0,
       "package": "bitmap",
       "signal": null,
@@ -103,7 +103,7 @@
       "testFiles": 42
     },
     {
-      "durationMs": 71349,
+      "durationMs": 77189,
       "exitCode": 0,
       "package": "bitmapfont",
       "signal": null,
@@ -112,7 +112,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 23886,
+      "durationMs": 24921,
       "exitCode": 0,
       "package": "bitmapfont-formats",
       "signal": null,
@@ -121,7 +121,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 68586,
+      "durationMs": 84739,
       "exitCode": 0,
       "package": "bitmaptext",
       "signal": null,
@@ -130,7 +130,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 119496,
+      "durationMs": 133859,
       "exitCode": 0,
       "package": "camera",
       "signal": null,
@@ -139,7 +139,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 143481,
+      "durationMs": 161676,
       "exitCode": 0,
       "package": "camera-controls",
       "signal": null,
@@ -148,7 +148,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 12261,
+      "durationMs": 15051,
       "exitCode": 0,
       "package": "capture",
       "signal": null,
@@ -157,7 +157,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 27393,
+      "durationMs": 30966,
       "exitCode": 0,
       "package": "clip",
       "signal": null,
@@ -166,7 +166,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 58894,
+      "durationMs": 62827,
       "exitCode": 0,
       "package": "clipboard",
       "signal": null,
@@ -175,7 +175,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 16838,
+      "durationMs": 16780,
       "exitCode": 0,
       "package": "clock",
       "signal": null,
@@ -184,7 +184,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 23466,
+      "durationMs": 29037,
       "exitCode": 0,
       "package": "collision",
       "signal": null,
@@ -193,7 +193,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 19027,
+      "durationMs": 20133,
       "exitCode": 0,
       "package": "color",
       "signal": null,
@@ -202,7 +202,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 110476,
+      "durationMs": 106054,
       "exitCode": 0,
       "package": "compression",
       "signal": null,
@@ -211,7 +211,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 13956,
+      "durationMs": 16670,
       "exitCode": 0,
       "package": "connectivity",
       "signal": null,
@@ -220,7 +220,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 116399,
+      "durationMs": 107438,
       "exitCode": 0,
       "package": "debug",
       "signal": null,
@@ -229,7 +229,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 71192,
+      "durationMs": 63062,
       "exitCode": 0,
       "package": "device",
       "signal": null,
@@ -238,7 +238,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 11662,
+      "durationMs": 14630,
       "exitCode": 0,
       "package": "dialog",
       "signal": null,
@@ -247,7 +247,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 35475,
+      "durationMs": 31177,
       "exitCode": 0,
       "package": "easing",
       "signal": null,
@@ -256,7 +256,7 @@
       "testFiles": 21
     },
     {
-      "durationMs": 1124970,
+      "durationMs": 889914,
       "exitCode": 0,
       "package": "effects",
       "signal": null,
@@ -265,9 +265,9 @@
       "testFiles": 72
     },
     {
-      "durationMs": 206491,
+      "durationMs": 179075,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·····························································································x······x·······································································\n\n Test Files  2 failed | 24 passed (26)\n      Tests  2 failed | 170 passed (172)\n   Start at  20:18:25\n   Duration  204.45s (transform 14.12s, setup 845ms, import 197.74s, tests 859ms, environment 3.64s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts > applyDropShadowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(3px 3px 4px rgba(0,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts:50:34\n     48|     applyDropShadowEffectToCanvas(source, dest, { kind: 'DropShadowEff…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts > applyOuterGlowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(0px 0px 6px rgba(255,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts:50:34\n     48|     applyOuterGlowEffectToCanvas(source, dest, { kind: 'OuterGlowEffec…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·····························································································x······x·······································································\n\n Test Files  2 failed | 24 passed (26)\n      Tests  2 failed | 170 passed (172)\n   Start at  02:54:25\n   Duration  177.86s (transform 11.31s, setup 616ms, import 173.81s, tests 729ms, environment 1.98s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts > applyDropShadowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(3px 3px 4px rgba(0,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts:50:34\n     48|     applyDropShadowEffectToCanvas(source, dest, { kind: 'DropShadowEff…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts > applyOuterGlowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(0px 0px 6px rgba(255,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts:50:34\n     48|     applyOuterGlowEffectToCanvas(source, dest, { kind: 'OuterGlowEffec…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "effects-canvas",
       "signal": null,
       "status": "failed",
@@ -275,7 +275,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 199874,
+      "durationMs": 173481,
       "exitCode": 0,
       "package": "effects-gl",
       "signal": null,
@@ -284,7 +284,7 @@
       "testFiles": 58
     },
     {
-      "durationMs": 190924,
+      "durationMs": 166936,
       "exitCode": 0,
       "package": "effects-wgpu",
       "signal": null,
@@ -293,7 +293,7 @@
       "testFiles": 56
     },
     {
-      "durationMs": 249173,
+      "durationMs": 219732,
       "exitCode": 0,
       "package": "entity",
       "signal": null,
@@ -302,7 +302,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 11865,
+      "durationMs": 10842,
       "exitCode": 0,
       "package": "filesystem",
       "signal": null,
@@ -311,7 +311,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 11744,
+      "durationMs": 9905,
       "exitCode": 0,
       "package": "flow",
       "signal": null,
@@ -320,7 +320,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 25581,
+      "durationMs": 24207,
       "exitCode": 0,
       "package": "font",
       "signal": null,
@@ -329,7 +329,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 14531,
+      "durationMs": 10031,
       "exitCode": 0,
       "package": "geolocation",
       "signal": null,
@@ -338,7 +338,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 142570,
+      "durationMs": 120405,
       "exitCode": 0,
       "package": "geometry",
       "signal": null,
@@ -347,7 +347,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 70450,
+      "durationMs": 67217,
       "exitCode": 0,
       "package": "glyphatlas",
       "signal": null,
@@ -356,9 +356,9 @@
       "testFiles": 8
     },
     {
-      "durationMs": 12922,
+      "durationMs": 10975,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·············x·················\n\n Test Files  1 failed (1)\n      Tests  1 failed | 30 passed (31)\n   Start at  20:22:01\n   Duration  11.76s (transform 5.72s, setup 322ms, import 7.96s, tests 1.37s, environment 1.48s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/haptics/src/haptics.test.ts > prepareHaptics > calls prepare on backends that provide it\nTypeError: Cannot read properties of null (reading 'prepared')\n ❯ prepare upstream/packages/haptics/src/haptics.test.ts:81:7\n     79|     },\n     80|     prepare() {\n     81|       this.prepared += 1;\n       |       ^\n     82|     },\n     83|     selection() {\n ❯ prepareHaptics build/haxe-js/flight.cjs?import:54250:13\n ❯ upstream/packages/haptics/src/haptics.test.ts:206:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·············x·················\n\n Test Files  1 failed (1)\n      Tests  1 failed | 30 passed (31)\n   Start at  02:57:39\n   Duration  10.00s (transform 5.00s, setup 291ms, import 6.94s, tests 1.19s, environment 1.13s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/haptics/src/haptics.test.ts > prepareHaptics > calls prepare on backends that provide it\nTypeError: Cannot read properties of null (reading 'prepared')\n ❯ prepare upstream/packages/haptics/src/haptics.test.ts:81:7\n     79|     },\n     80|     prepare() {\n     81|       this.prepared += 1;\n       |       ^\n     82|     },\n     83|     selection() {\n ❯ prepareHaptics build/haxe-js/flight.cjs?import:54265:13\n ❯ upstream/packages/haptics/src/haptics.test.ts:206:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "haptics",
       "signal": null,
       "status": "failed",
@@ -366,7 +366,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 68495,
+      "durationMs": 58203,
       "exitCode": 0,
       "package": "host-capacitor",
       "signal": null,
@@ -375,9 +375,9 @@
       "testFiles": 13
     },
     {
-      "durationMs": 22064,
+      "durationMs": 21718,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n··········x··x······················································\n\n Test Files  2 failed | 15 passed (17)\n      Tests  2 failed | 66 passed (68)\n   Start at  20:22:14\n   Duration  20.98s (transform 6.62s, setup 447ms, import 18.53s, tests 97ms, environment 1.36s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/host-electron/src/electronApp.test.ts > createElectronAppBackend > subscribes to activate and unsubscribes\nAssertionError: expected [ [Function] ] to have a length of +0 but got 1\n\n- Expected\n+ Received\n\n- 0\n+ 1\n\n ❯ upstream/packages/host-electron/src/electronApp.test.ts:123:44\n    121|     expect(count).toBe(1);\n    122|     off();\n    123|     expect(fake.listeners.get('activate')).toHaveLength(0);\n       |                                            ^\n    124|   });\n    125|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/host-electron/src/electronUpdater.test.ts > createElectronUpdaterBackend > subscribeChecking and subscribeUpdateNotAvailable forward bare events\nAssertionError: expected 2 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 2\n\n ❯ upstream/packages/host-electron/src/electronUpdater.test.ts:66:22\n     64|     unsubB();\n     65|     emit(listeners, 'checking-for-update');\n     66|     expect(checking).toBe(1);\n       |                      ^\n     67|   });\n     68|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n··········x··x······················································\n\n Test Files  2 failed | 15 passed (17)\n      Tests  2 failed | 66 passed (68)\n   Start at  02:57:50\n   Duration  20.76s (transform 7.68s, setup 455ms, import 18.51s, tests 82ms, environment 1.12s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/host-electron/src/electronApp.test.ts > createElectronAppBackend > subscribes to activate and unsubscribes\nAssertionError: expected [ [Function] ] to have a length of +0 but got 1\n\n- Expected\n+ Received\n\n- 0\n+ 1\n\n ❯ upstream/packages/host-electron/src/electronApp.test.ts:123:44\n    121|     expect(count).toBe(1);\n    122|     off();\n    123|     expect(fake.listeners.get('activate')).toHaveLength(0);\n       |                                            ^\n    124|   });\n    125|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/host-electron/src/electronUpdater.test.ts > createElectronUpdaterBackend > subscribeChecking and subscribeUpdateNotAvailable forward bare events\nAssertionError: expected 2 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 2\n\n ❯ upstream/packages/host-electron/src/electronUpdater.test.ts:66:22\n     64|     unsubB();\n     65|     emit(listeners, 'checking-for-update');\n     66|     expect(checking).toBe(1);\n       |                      ^\n     67|   });\n     68|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "host-electron",
       "signal": null,
       "status": "failed",
@@ -385,9 +385,9 @@
       "testFiles": 17
     },
     {
-      "durationMs": 22797,
+      "durationMs": 21142,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n····xxxx······xx··························\n\n Test Files  2 failed | 9 passed (11)\n      Tests  6 failed | 36 passed (42)\n   Start at  20:22:36\n   Duration  21.77s (transform 6.48s, setup 408ms, import 18.52s, tests 886ms, environment 1.40s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriMenu.test.ts > createTauriMenuBackend > installs an application menu and routes item clicks to the select listener\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriMenu.test.ts:73:30\n     71|     // Let the async build + setAsAppMenu settle.\n     72|     await flush();\n     73|     expect(state.appMenuSet).toBe(1);\n       |                              ^\n     74|     expect(state.predefined).toBe(1);\n     75|     state.actions.get('open')!('open');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriMenu.test.ts > createTauriMenuBackend > resolves popupContextMenu with the clicked item id\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriMenu.test.ts:84:26\n     82|     const pending = backend.popupContextMenu([{ id: 'cut', label: 'Cut…\n     83|     await flush();\n     84|     expect(state.popups).toBe(1);\n       |                          ^\n     85|     state.actions.get('cut')!('cut');\n     86|     expect(await pending).toBe('cut');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > allocates a numeric id synchronously and builds the tray asynchronously\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58904:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:73:24\n     71|     const { tauri, state } = fakeTauri();\n     72|     const backend = createTauriTrayBackend(tauri);\n     73|     const id = backend.create({ title: 'Flight', tooltip: 'tip' });\n       |                        ^\n     74|     expect(typeof id).toBe('number');\n     75|     expect(backend.getTitle(id)).toBe('Flight');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > forwards clicks as tray events, discriminating left/right\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58904:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:87:24\n     85|     const events: string[] = [];\n     86|     backend.subscribe((event) => events.push(event.type));\n     87|     const id = backend.create({});\n       |                        ^\n     88|     await flush();\n     89|     state.action!({ type: 'Click', button: 'Left' });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > applies title/icon changes and a context menu to the resolved handle\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58904:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:100:24\n     98|     const { tauri, state } = fakeTauri();\n     99|     const backend = createTauriTrayBackend(tauri);\n    100|     const id = backend.create({});\n       |                        ^\n    101|     await flush();\n    102|     backend.setTitle(id, 'New');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > destroys the tray and reports sentinels for unsupported surface\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58904:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:115:24\n    113|     const { tauri, state } = fakeTauri();\n    114|     const backend = createTauriTrayBackend(tauri);\n    115|     const id = backend.create({});\n       |                        ^\n    116|     await flush();\n    117|     expect(backend.getBounds(id)).toBeNull();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n····xxxx······xx··························\n\n Test Files  2 failed | 9 passed (11)\n      Tests  6 failed | 36 passed (42)\n   Start at  02:58:11\n   Duration  19.98s (transform 5.72s, setup 299ms, import 17.01s, tests 1.01s, environment 1.13s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriMenu.test.ts > createTauriMenuBackend > installs an application menu and routes item clicks to the select listener\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriMenu.test.ts:73:30\n     71|     // Let the async build + setAsAppMenu settle.\n     72|     await flush();\n     73|     expect(state.appMenuSet).toBe(1);\n       |                              ^\n     74|     expect(state.predefined).toBe(1);\n     75|     state.actions.get('open')!('open');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriMenu.test.ts > createTauriMenuBackend > resolves popupContextMenu with the clicked item id\nAssertionError: expected +0 to be 1 // Object.is equality\n\n- Expected\n+ Received\n\n- 1\n+ 0\n\n ❯ upstream/packages/host-tauri/src/tauriMenu.test.ts:84:26\n     82|     const pending = backend.popupContextMenu([{ id: 'cut', label: 'Cut…\n     83|     await flush();\n     84|     expect(state.popups).toBe(1);\n       |                          ^\n     85|     state.actions.get('cut')!('cut');\n     86|     expect(await pending).toBe('cut');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > allocates a numeric id synchronously and builds the tray asynchronously\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58919:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:73:24\n     71|     const { tauri, state } = fakeTauri();\n     72|     const backend = createTauriTrayBackend(tauri);\n     73|     const id = backend.create({ title: 'Flight', tooltip: 'tip' });\n       |                        ^\n     74|     expect(typeof id).toBe('number');\n     75|     expect(backend.getTitle(id)).toBe('Flight');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > forwards clicks as tray events, discriminating left/right\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58919:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:87:24\n     85|     const events: string[] = [];\n     86|     backend.subscribe((event) => events.push(event.type));\n     87|     const id = backend.create({});\n       |                        ^\n     88|     await flush();\n     89|     state.action!({ type: 'Click', button: 'Left' });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > applies title/icon changes and a context menu to the resolved handle\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58919:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:100:24\n     98|     const { tauri, state } = fakeTauri();\n     99|     const backend = createTauriTrayBackend(tauri);\n    100|     const id = backend.create({});\n       |                        ^\n    101|     await flush();\n    102|     backend.setTitle(id, 'New');\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯\n\n FAIL  upstream/packages/host-tauri/src/tauriTray.test.ts > createTauriTrayBackend > destroys the tray and reports sentinels for unsupported surface\nTypeError: trayModule.TrayIcon.new_ is not a function\n ❯ Object.create build/haxe-js/flight.cjs?import:58919:60\n ❯ upstream/packages/host-tauri/src/tauriTray.test.ts:115:24\n    113|     const { tauri, state } = fakeTauri();\n    114|     const backend = createTauriTrayBackend(tauri);\n    115|     const id = backend.create({});\n       |                        ^\n    116|     await flush();\n    117|     expect(backend.getBounds(id)).toBeNull();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯",
       "package": "host-tauri",
       "signal": null,
       "status": "failed",
@@ -395,7 +395,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 151100,
+      "durationMs": 110550,
       "exitCode": 0,
       "package": "image",
       "signal": null,
@@ -404,9 +404,9 @@
       "testFiles": 3
     },
     {
-      "durationMs": 28769,
+      "durationMs": 15688,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·············x···x···································\n\n Test Files  1 failed | 8 passed (9)\n      Tests  2 failed | 51 passed (53)\n   Start at  20:23:02\n   Duration  26.41s (transform 11.76s, setup 1.27s, import 20.53s, tests 90ms, environment 3.32s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/image-codec/src/decodeImage.test.ts > decodeImage > auto-detects the MIME type when omitted and dispatches to the registered decoder\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ Array(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -7,6 +7,7 @@\n      13,\n      10,\n      26,\n      10,\n    ],\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/image-codec/src/decodeImage.test.ts:24:21\n     22|     const result = await decodeImage(pngBytes);\n     23|     expect(result).toEqual(fakeDecoded());\n     24|     expect(decoder).toHaveBeenCalledWith(pngBytes);\n       |                     ^\n     25|   });\n     26|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/image-codec/src/decodeImage.test.ts > decodeImage > does not request premultiplied output\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ Array(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -7,6 +7,7 @@\n      13,\n      10,\n      26,\n      10,\n    ],\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/image-codec/src/decodeImage.test.ts:46:21\n     44|     registerImageDecoder('image/png', decoder);\n     45|     await decodeImage(pngBytes);\n     46|     expect(decoder).toHaveBeenCalledWith(pngBytes);\n       |                     ^\n     47|   });\n     48| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·············x···x···································\n\n Test Files  1 failed | 8 passed (9)\n      Tests  2 failed | 51 passed (53)\n   Start at  02:58:33\n   Duration  14.24s (transform 5.42s, setup 319ms, import 11.92s, tests 52ms, environment 1.20s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/image-codec/src/decodeImage.test.ts > decodeImage > auto-detects the MIME type when omitted and dispatches to the registered decoder\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ Array(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -7,6 +7,7 @@\n      13,\n      10,\n      26,\n      10,\n    ],\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/image-codec/src/decodeImage.test.ts:24:21\n     22|     const result = await decodeImage(pngBytes);\n     23|     expect(result).toEqual(fakeDecoded());\n     24|     expect(decoder).toHaveBeenCalledWith(pngBytes);\n       |                     ^\n     25|   });\n     26|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/image-codec/src/decodeImage.test.ts > decodeImage > does not request premultiplied output\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ Array(1) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -7,6 +7,7 @@\n      13,\n      10,\n      26,\n      10,\n    ],\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/image-codec/src/decodeImage.test.ts:46:21\n     44|     registerImageDecoder('image/png', decoder);\n     45|     await decodeImage(pngBytes);\n     46|     expect(decoder).toHaveBeenCalledWith(pngBytes);\n       |                     ^\n     47|   });\n     48| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "image-codec",
       "signal": null,
       "status": "failed",
@@ -414,7 +414,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 103328,
+      "durationMs": 75556,
       "exitCode": 0,
       "package": "importdiagnostics",
       "signal": null,
@@ -423,7 +423,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 57943,
+      "durationMs": 44551,
       "exitCode": 0,
       "package": "input",
       "signal": null,
@@ -432,7 +432,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 495004,
+      "durationMs": 388626,
       "exitCode": 0,
       "package": "interaction",
       "signal": null,
@@ -441,7 +441,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 16106,
+      "durationMs": 12371,
       "exitCode": 0,
       "package": "intl",
       "signal": null,
@@ -450,9 +450,9 @@
       "testFiles": 7
     },
     {
-      "durationMs": 66607,
+      "durationMs": 46334,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n········································x··\n\n Test Files  1 failed (1)\n      Tests  1 failed | 42 passed (43)\n   Start at  20:24:00\n   Duration  65.55s (transform 14.49s, setup 276ms, import 60.36s, tests 3.08s, environment 1.30s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/ipc/src/ipc.test.ts > sendIpcMessageTo > forwards target, channel, and args to backend.sendTo\nTypeError: Cannot read properties of null (reading 'sentTo')\n ❯ sendTo upstream/packages/ipc/src/ipc.test.ts:62:12\n     60|     },\n     61|     sendTo(target, channel, args) {\n     62|       this.sentTo.push({ target, channel, args });\n       |            ^\n     63|     },\n     64|     getCapabilities(): Readonly<IpcBackendCapabilities> {\n ❯ sendIpcMessageTo build/haxe-js/flight.cjs?import:63360:13\n ❯ upstream/packages/ipc/src/ipc.test.ts:477:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n········································x··\n\n Test Files  1 failed (1)\n      Tests  1 failed | 42 passed (43)\n   Start at  02:59:23\n   Duration  45.47s (transform 8.49s, setup 227ms, import 41.37s, tests 2.33s, environment 1.11s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/ipc/src/ipc.test.ts > sendIpcMessageTo > forwards target, channel, and args to backend.sendTo\nTypeError: Cannot read properties of null (reading 'sentTo')\n ❯ sendTo upstream/packages/ipc/src/ipc.test.ts:62:12\n     60|     },\n     61|     sendTo(target, channel, args) {\n     62|       this.sentTo.push({ target, channel, args });\n       |            ^\n     63|     },\n     64|     getCapabilities(): Readonly<IpcBackendCapabilities> {\n ❯ sendIpcMessageTo build/haxe-js/flight.cjs?import:63375:13\n ❯ upstream/packages/ipc/src/ipc.test.ts:477:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "ipc",
       "signal": null,
       "status": "failed",
@@ -460,9 +460,9 @@
       "testFiles": 1
     },
     {
-      "durationMs": 64773,
+      "durationMs": 47435,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···········································x··x·x·x··x·x·x··\n\n Test Files  1 failed (1)\n      Tests  7 failed | 53 passed (60)\n   Start at  20:24:22\n   Duration  63.84s (transform 16.10s, setup 407ms, import 60.16s, tests 967ms, environment 1.77s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > getSoftKeyboardResizeMode > delegates to backend getResizeMode\nTypeError: Cannot read properties of null (reading 'resizeMode')\n ❯ getResizeMode upstream/packages/keyboard/src/keyboard.test.ts:83:19\n     81|     },\n     82|     getResizeMode(): SoftKeyboardResizeMode {\n     83|       return this.resizeMode as SoftKeyboardResizeMode;\n       |                   ^\n     84|     },\n     85|     setResizeMode(mode) {\n ❯ getSoftKeyboardResizeMode build/haxe-js/flight.cjs?import:63507:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:727:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > isSoftKeyboardAccessoryBarVisible > delegates to backend getAccessoryBarVisible\nTypeError: Cannot read properties of null (reading 'accessoryBarVisible')\n ❯ getAccessoryBarVisible upstream/packages/keyboard/src/keyboard.test.ts:92:19\n     90|     },\n     91|     getAccessoryBarVisible() {\n     92|       return this.accessoryBarVisible;\n       |                   ^\n     93|     },\n     94|     setAccessoryBarVisible(v) {\n ❯ isSoftKeyboardAccessoryBarVisible build/haxe-js/flight.cjs?import:63550:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:760:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > isSoftKeyboardScrollAssistEnabled > delegates to backend getScrollAssistEnabled\nTypeError: Cannot read properties of null (reading 'scrollAssistEnabled')\n ❯ getScrollAssistEnabled upstream/packages/keyboard/src/keyboard.test.ts:98:19\n     96|     },\n     97|     getScrollAssistEnabled() {\n     98|       return this.scrollAssistEnabled;\n       |                   ^\n     99|     },\n    100|     setScrollAssistEnabled(v) {\n ❯ isSoftKeyboardScrollAssistEnabled build/haxe-js/flight.cjs?import:63555:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:784:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardAccessoryBarVisible > delegates to backend setAccessoryBarVisible\nTypeError: Cannot set properties of null (setting 'accessoryBarVisible')\n ❯ setAccessoryBarVisible upstream/packages/keyboard/src/keyboard.test.ts:95:12\n     93|     },\n     94|     setAccessoryBarVisible(v) {\n     95|       this.accessoryBarVisible = v;\n       |            ^\n     96|     },\n     97|     getScrollAssistEnabled() {\n ❯ setSoftKeyboardAccessoryBarVisible build/haxe-js/flight.cjs?import:63561:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:807:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardResizeMode > delegates to backend setResizeMode\nTypeError: Cannot set properties of null (setting 'resizeMode')\n ❯ setResizeMode upstream/packages/keyboard/src/keyboard.test.ts:86:12\n     84|     },\n     85|     setResizeMode(mode) {\n     86|       this.resizeMode = mode;\n       |            ^\n     87|     },\n     88|     setStyle(s) {\n ❯ setSoftKeyboardResizeMode build/haxe-js/flight.cjs?import:63570:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:841:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardScrollAssistEnabled > delegates to backend setScrollAssistEnabled\nTypeError: Cannot set properties of null (setting 'scrollAssistEnabled')\n ❯ setScrollAssistEnabled upstream/packages/keyboard/src/keyboard.test.ts:101:12\n     99|     },\n    100|     setScrollAssistEnabled(v) {\n    101|       this.scrollAssistEnabled = v;\n       |            ^\n    102|     },\n    103|     fire(phase: SoftKeyboardPhase = 'did', durationSeconds = 0) {\n ❯ setSoftKeyboardScrollAssistEnabled build/haxe-js/flight.cjs?import:63576:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:865:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardStyle > delegates to backend setStyle\nTypeError: Cannot set properties of null (setting 'style')\n ❯ setStyle upstream/packages/keyboard/src/keyboard.test.ts:89:12\n     87|     },\n     88|     setStyle(s) {\n     89|       this.style = s;\n       |            ^\n     90|     },\n     91|     getAccessoryBarVisible() {\n ❯ setSoftKeyboardStyle build/haxe-js/flight.cjs?import:63582:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:891:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···········································x··x·x·x··x·x·x··\n\n Test Files  1 failed (1)\n      Tests  7 failed | 53 passed (60)\n   Start at  02:59:33\n   Duration  46.54s (transform 8.83s, setup 267ms, import 43.70s, tests 1.00s, environment 1.12s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > getSoftKeyboardResizeMode > delegates to backend getResizeMode\nTypeError: Cannot read properties of null (reading 'resizeMode')\n ❯ getResizeMode upstream/packages/keyboard/src/keyboard.test.ts:83:19\n     81|     },\n     82|     getResizeMode(): SoftKeyboardResizeMode {\n     83|       return this.resizeMode as SoftKeyboardResizeMode;\n       |                   ^\n     84|     },\n     85|     setResizeMode(mode) {\n ❯ getSoftKeyboardResizeMode build/haxe-js/flight.cjs?import:63522:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:727:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > isSoftKeyboardAccessoryBarVisible > delegates to backend getAccessoryBarVisible\nTypeError: Cannot read properties of null (reading 'accessoryBarVisible')\n ❯ getAccessoryBarVisible upstream/packages/keyboard/src/keyboard.test.ts:92:19\n     90|     },\n     91|     getAccessoryBarVisible() {\n     92|       return this.accessoryBarVisible;\n       |                   ^\n     93|     },\n     94|     setAccessoryBarVisible(v) {\n ❯ isSoftKeyboardAccessoryBarVisible build/haxe-js/flight.cjs?import:63565:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:760:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > isSoftKeyboardScrollAssistEnabled > delegates to backend getScrollAssistEnabled\nTypeError: Cannot read properties of null (reading 'scrollAssistEnabled')\n ❯ getScrollAssistEnabled upstream/packages/keyboard/src/keyboard.test.ts:98:19\n     96|     },\n     97|     getScrollAssistEnabled() {\n     98|       return this.scrollAssistEnabled;\n       |                   ^\n     99|     },\n    100|     setScrollAssistEnabled(v) {\n ❯ isSoftKeyboardScrollAssistEnabled build/haxe-js/flight.cjs?import:63570:85\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:784:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardAccessoryBarVisible > delegates to backend setAccessoryBarVisible\nTypeError: Cannot set properties of null (setting 'accessoryBarVisible')\n ❯ setAccessoryBarVisible upstream/packages/keyboard/src/keyboard.test.ts:95:12\n     93|     },\n     94|     setAccessoryBarVisible(v) {\n     95|       this.accessoryBarVisible = v;\n       |            ^\n     96|     },\n     97|     getScrollAssistEnabled() {\n ❯ setSoftKeyboardAccessoryBarVisible build/haxe-js/flight.cjs?import:63576:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:807:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardResizeMode > delegates to backend setResizeMode\nTypeError: Cannot set properties of null (setting 'resizeMode')\n ❯ setResizeMode upstream/packages/keyboard/src/keyboard.test.ts:86:12\n     84|     },\n     85|     setResizeMode(mode) {\n     86|       this.resizeMode = mode;\n       |            ^\n     87|     },\n     88|     setStyle(s) {\n ❯ setSoftKeyboardResizeMode build/haxe-js/flight.cjs?import:63585:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:841:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardScrollAssistEnabled > delegates to backend setScrollAssistEnabled\nTypeError: Cannot set properties of null (setting 'scrollAssistEnabled')\n ❯ setScrollAssistEnabled upstream/packages/keyboard/src/keyboard.test.ts:101:12\n     99|     },\n    100|     setScrollAssistEnabled(v) {\n    101|       this.scrollAssistEnabled = v;\n       |            ^\n    102|     },\n    103|     fire(phase: SoftKeyboardPhase = 'did', durationSeconds = 0) {\n ❯ setSoftKeyboardScrollAssistEnabled build/haxe-js/flight.cjs?import:63591:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:865:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯\n\n FAIL  upstream/packages/keyboard/src/keyboard.test.ts > setSoftKeyboardStyle > delegates to backend setStyle\nTypeError: Cannot set properties of null (setting 'style')\n ❯ setStyle upstream/packages/keyboard/src/keyboard.test.ts:89:12\n     87|     },\n     88|     setStyle(s) {\n     89|       this.style = s;\n       |            ^\n     90|     },\n     91|     getAccessoryBarVisible() {\n ❯ setSoftKeyboardStyle build/haxe-js/flight.cjs?import:63597:13\n ❯ upstream/packages/keyboard/src/keyboard.test.ts:891:5\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯",
       "package": "keyboard",
       "signal": null,
       "status": "failed",
@@ -470,7 +470,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 142156,
+      "durationMs": 115980,
       "exitCode": 0,
       "package": "layout",
       "signal": null,
@@ -479,7 +479,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 13666,
+      "durationMs": 12477,
       "exitCode": 0,
       "package": "lifecycle",
       "signal": null,
@@ -488,7 +488,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 440547,
+      "durationMs": 353415,
       "exitCode": 0,
       "package": "lighting",
       "signal": null,
@@ -497,7 +497,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 14895,
+      "durationMs": 13468,
       "exitCode": 0,
       "package": "loader",
       "signal": null,
@@ -506,7 +506,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 52353,
+      "durationMs": 47301,
       "exitCode": 0,
       "package": "log",
       "signal": null,
@@ -515,7 +515,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 734467,
+      "durationMs": 579514,
       "exitCode": 0,
       "package": "materials",
       "signal": null,
@@ -524,7 +524,7 @@
       "testFiles": 20
     },
     {
-      "durationMs": 24686,
+      "durationMs": 16393,
       "exitCode": 0,
       "package": "math",
       "signal": null,
@@ -533,7 +533,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 22784,
+      "durationMs": 15308,
       "exitCode": 0,
       "package": "media",
       "signal": null,
@@ -542,7 +542,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 17238,
+      "durationMs": 9716,
       "exitCode": 0,
       "package": "mediasession",
       "signal": null,
@@ -551,7 +551,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 20319,
+      "durationMs": 11556,
       "exitCode": 0,
       "package": "menu",
       "signal": null,
@@ -560,7 +560,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 164443,
+      "durationMs": 106867,
       "exitCode": 0,
       "package": "mesh",
       "signal": null,
@@ -569,7 +569,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 42828,
+      "durationMs": 21985,
       "exitCode": 0,
       "package": "motionpath",
       "signal": null,
@@ -578,7 +578,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 87153,
+      "durationMs": 55237,
       "exitCode": 0,
       "package": "movieclip",
       "signal": null,
@@ -587,7 +587,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 12394,
+      "durationMs": 11004,
       "exitCode": 0,
       "package": "net",
       "signal": null,
@@ -596,7 +596,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 335448,
+      "durationMs": 281067,
       "exitCode": 0,
       "package": "node",
       "signal": null,
@@ -605,7 +605,7 @@
       "testFiles": 18
     },
     {
-      "durationMs": 12383,
+      "durationMs": 10905,
       "exitCode": 0,
       "package": "notification",
       "signal": null,
@@ -614,7 +614,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 171971,
+      "durationMs": 157248,
       "exitCode": 0,
       "package": "particleemitter",
       "signal": null,
@@ -623,7 +623,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 26428,
+      "durationMs": 20114,
       "exitCode": 0,
       "package": "particles",
       "signal": null,
@@ -632,9 +632,9 @@
       "testFiles": 10
     },
     {
-      "durationMs": 418066,
+      "durationMs": 329578,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···············x···············································································································································································································································\n\n Test Files  1 failed | 13 passed (14)\n      Tests  1 failed | 254 passed (255)\n   Start at  20:32:11\n   Duration  416.61s (transform 18.46s, setup 514ms, import 413.45s, tests 719ms, environment 1.28s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/particles-formats/src/unityParse.test.ts > parseUnityParticle > lightweight, returns config directly > maps burst count and interval\nAssertionError: expected true to be 2 // Object.is equality\n\n- Expected:\n2\n\n+ Received:\ntrue\n\n ❯ upstream/packages/particles-formats/src/unityParse.test.ts:200:31\n    198|       const c = parseUnityParticle(json, { pixelsPerUnit: PPU });\n    199|       expect(c.burstCount).toBe(25);\n    200|       expect(c.burstInterval).toBe(2);\n       |                               ^\n    201|     });\n    202|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···············x···············································································································································································································································\n\n Test Files  1 failed | 13 passed (14)\n      Tests  1 failed | 254 passed (255)\n   Start at  03:05:47\n   Duration  328.56s (transform 15.20s, setup 360ms, import 326.20s, tests 353ms, environment 1.13s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/particles-formats/src/unityParse.test.ts > parseUnityParticle > lightweight, returns config directly > maps burst count and interval\nAssertionError: expected true to be 2 // Object.is equality\n\n- Expected:\n2\n\n+ Received:\ntrue\n\n ❯ upstream/packages/particles-formats/src/unityParse.test.ts:200:31\n    198|       const c = parseUnityParticle(json, { pixelsPerUnit: PPU });\n    199|       expect(c.burstCount).toBe(25);\n    200|       expect(c.burstInterval).toBe(2);\n       |                               ^\n    201|     });\n    202|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "particles-formats",
       "signal": null,
       "status": "failed",
@@ -642,7 +642,7 @@
       "testFiles": 14
     },
     {
-      "durationMs": 502095,
+      "durationMs": 385836,
       "exitCode": 0,
       "package": "path",
       "signal": null,
@@ -651,7 +651,7 @@
       "testFiles": 28
     },
     {
-      "durationMs": 57277,
+      "durationMs": 49743,
       "exitCode": 0,
       "package": "path-boolean",
       "signal": null,
@@ -660,7 +660,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 23426,
+      "durationMs": 16961,
       "exitCode": 0,
       "package": "path-formats",
       "signal": null,
@@ -669,7 +669,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 21582,
+      "durationMs": 11038,
       "exitCode": 0,
       "package": "permissions",
       "signal": null,
@@ -678,7 +678,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 49484,
+      "durationMs": 29927,
       "exitCode": 0,
       "package": "physics2d",
       "signal": null,
@@ -687,7 +687,7 @@
       "testFiles": 20
     },
     {
-      "durationMs": 153650,
+      "durationMs": 115859,
       "exitCode": 0,
       "package": "picking",
       "signal": null,
@@ -696,7 +696,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 19439,
+      "durationMs": 10762,
       "exitCode": 0,
       "package": "platform",
       "signal": null,
@@ -705,7 +705,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 22995,
+      "durationMs": 10809,
       "exitCode": 0,
       "package": "power",
       "signal": null,
@@ -714,7 +714,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 17973,
+      "durationMs": 10693,
       "exitCode": 0,
       "package": "protocol",
       "signal": null,
@@ -723,7 +723,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 69773,
+      "durationMs": 56601,
       "exitCode": 0,
       "package": "quadbatch",
       "signal": null,
@@ -732,7 +732,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 572916,
+      "durationMs": 418502,
       "exitCode": 0,
       "package": "render",
       "signal": null,
@@ -741,16 +741,17 @@
       "testFiles": 21
     },
     {
-      "durationMs": 1564215,
-      "exitCode": 0,
+      "durationMs": 733119,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·············································································································································································································································································································································\n\n Test Files  18 passed (19)\n      Tests  333 passed (333)\n     Errors  1 error\n   Start at  03:09:51\n   Duration  732.28s (transform 24.44s, setup 345ms, import 721.29s, tests 2.45s, environment 1.09s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
       "package": "render-gl",
       "signal": null,
-      "status": "passed",
-      "summary": "373 passed (373)",
+      "status": "failed",
+      "summary": "333 passed (333)",
       "testFiles": 29
     },
     {
-      "durationMs": 546338,
+      "durationMs": 382853,
       "exitCode": 0,
       "package": "render-wgpu",
       "signal": null,
@@ -759,7 +760,7 @@
       "testFiles": 24
     },
     {
-      "durationMs": 308444,
+      "durationMs": 230682,
       "exitCode": 0,
       "package": "scene2d",
       "signal": null,
@@ -768,7 +769,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 1733853,
+      "durationMs": 1124516,
       "exitCode": 0,
       "package": "scene2d-canvas",
       "signal": null,
@@ -777,7 +778,7 @@
       "testFiles": 39
     },
     {
-      "durationMs": 1287203,
+      "durationMs": 864216,
       "exitCode": 0,
       "package": "scene2d-dom",
       "signal": null,
@@ -786,7 +787,7 @@
       "testFiles": 30
     },
     {
-      "durationMs": 1104895,
+      "durationMs": 705984,
       "exitCode": 0,
       "package": "scene2d-formats",
       "signal": null,
@@ -795,7 +796,7 @@
       "testFiles": 22
     },
     {
-      "durationMs": 1371985,
+      "durationMs": 859383,
       "exitCode": 0,
       "package": "scene2d-gl",
       "signal": null,
@@ -804,7 +805,7 @@
       "testFiles": 28
     },
     {
-      "durationMs": 225653,
+      "durationMs": 121407,
       "exitCode": 0,
       "package": "scene2d-resources",
       "signal": null,
@@ -813,7 +814,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 1490835,
+      "durationMs": 940298,
       "exitCode": 0,
       "package": "scene2d-wgpu",
       "signal": null,
@@ -822,7 +823,7 @@
       "testFiles": 29
     },
     {
-      "durationMs": 1036701,
+      "durationMs": 702069,
       "exitCode": 0,
       "package": "scene3d",
       "signal": null,
@@ -831,9 +832,9 @@
       "testFiles": 16
     },
     {
-      "durationMs": 1130637,
+      "durationMs": 757032,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n··········································································································································································································································································································································································································x·····································································································································································································································································································\n\n Test Files  1 failed | 22 passed (23)\n      Tests  1 failed | 687 passed (688)\n   Start at  21:02:30\n   Duration  1129.36s (transform 40.14s, setup 697ms, import 1122.35s, tests 3.39s, environment 1.60s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-formats/src/md5Parse.test.ts > importMd5Mesh > composes the .md5mesh and .md5anim into one scene with the clip bound to the mesh skeleton\nAssertionError: expected [ 'default_' ] to deeply equal [ 'default' ]\n\n- Expected\n+ Received\n\n  [\n-   \"default\",\n+   \"default_\",\n  ]\n\n ❯ upstream/packages/scene3d-formats/src/md5Parse.test.ts:1090:43\n    1088|   it('composes the .md5mesh and .md5anim into one scene with the clip …\n    1089|     const scene = importMd5Mesh(SINGLE_TRIANGLE, SINGLE_JOINT_ANIM);\n    1090|     expect(Object.keys(scene.animations)).toEqual(['default']);\n       |                                           ^\n    1091|\n    1092|     const mesh = getNodeChildren(scene.root).find((c) => isMesh(c as N…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n··········································································································································································································································································································································································································x·····································································································································································································································································································\n\n Test Files  1 failed | 22 passed (23)\n      Tests  1 failed | 687 passed (688)\n   Start at  03:25:51\n   Duration  756.20s (transform 26.42s, setup 501ms, import 751.72s, tests 1.54s, environment 1.19s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-formats/src/md5Parse.test.ts > importMd5Mesh > composes the .md5mesh and .md5anim into one scene with the clip bound to the mesh skeleton\nAssertionError: expected [ 'default_' ] to deeply equal [ 'default' ]\n\n- Expected\n+ Received\n\n  [\n-   \"default\",\n+   \"default_\",\n  ]\n\n ❯ upstream/packages/scene3d-formats/src/md5Parse.test.ts:1090:43\n    1088|   it('composes the .md5mesh and .md5anim into one scene with the clip …\n    1089|     const scene = importMd5Mesh(SINGLE_TRIANGLE, SINGLE_JOINT_ANIM);\n    1090|     expect(Object.keys(scene.animations)).toEqual(['default']);\n       |                                           ^\n    1091|\n    1092|     const mesh = getNodeChildren(scene.root).find((c) => isMesh(c as N…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
       "package": "scene3d-formats",
       "signal": null,
       "status": "failed",
@@ -841,7 +842,7 @@
       "testFiles": 23
     },
     {
-      "durationMs": 3936324,
+      "durationMs": 2715178,
       "exitCode": 0,
       "package": "scene3d-gl",
       "signal": null,
@@ -850,9 +851,9 @@
       "testFiles": 62
     },
     {
-      "durationMs": 823530,
+      "durationMs": 590095,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n······························································································x···x·············\n\n Test Files  2 failed | 25 passed (27)\n      Tests  2 failed | 110 passed (112)\n   Start at  21:08:05\n   Duration  820.43s (transform 44.54s, setup 1.82s, import 796.37s, tests 12.21s, environment 7.77s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/md5Load.test.ts > loadScene3DDocumentFromMd5MeshUrl > fetches text and returns the parsed CPU document without resolving resources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 'MD5Version 10' ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    \"MD5Version 10\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene3d-resources/src/md5Load.test.ts:60:26\n     58|     const loaded = await loadScene3DDocumentFromMd5MeshUrl('model.md5m…\n     59|\n     60|     expect(parseMd5Mesh).toHaveBeenCalledWith('MD5Version 10');\n       |                          ^\n     61|     expect(loaded).toBe(document);\n     62|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/objLoad.test.ts > loadScene3DDocumentFromObjUrl > fetches text and returns the parsed CPU document without resolving resources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 'v 0 0 0', undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    \"v 0 0 0\",\n    undefined,\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene3d-resources/src/objLoad.test.ts:60:22\n     58|     const loaded = await loadScene3DDocumentFromObjUrl('model.obj');\n     59|\n     60|     expect(parseObj).toHaveBeenCalledWith('v 0 0 0', undefined);\n       |                      ^\n     61|     expect(loaded).toBe(document);\n     62|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n······························································································x···x·············\n\n Test Files  2 failed | 25 passed (27)\n      Tests  2 failed | 110 passed (112)\n   Start at  03:30:01\n   Duration  589.23s (transform 21.65s, setup 515ms, import 578.48s, tests 7.77s, environment 1.14s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/scene3d-resources/src/md5Load.test.ts > loadScene3DDocumentFromMd5MeshUrl > fetches text and returns the parsed CPU document without resolving resources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 'MD5Version 10' ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    \"MD5Version 10\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene3d-resources/src/md5Load.test.ts:60:26\n     58|     const loaded = await loadScene3DDocumentFromMd5MeshUrl('model.md5m…\n     59|\n     60|     expect(parseMd5Mesh).toHaveBeenCalledWith('MD5Version 10');\n       |                          ^\n     61|     expect(loaded).toBe(document);\n     62|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/scene3d-resources/src/objLoad.test.ts > loadScene3DDocumentFromObjUrl > fetches text and returns the parsed CPU document without resolving resources\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ 'v 0 0 0', undefined ]\n\nReceived:\n\n  1st vi.fn() call:\n\n  [\n    \"v 0 0 0\",\n    undefined,\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/scene3d-resources/src/objLoad.test.ts:60:22\n     58|     const loaded = await loadScene3DDocumentFromObjUrl('model.obj');\n     59|\n     60|     expect(parseObj).toHaveBeenCalledWith('v 0 0 0', undefined);\n       |                      ^\n     61|     expect(loaded).toBe(document);\n     62|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "scene3d-resources",
       "signal": null,
       "status": "failed",
@@ -860,7 +861,7 @@
       "testFiles": 27
     },
     {
-      "durationMs": 2879921,
+      "durationMs": 2030085,
       "exitCode": 0,
       "package": "scene3d-wgpu",
       "signal": null,
@@ -869,7 +870,7 @@
       "testFiles": 45
     },
     {
-      "durationMs": 11886,
+      "durationMs": 9794,
       "exitCode": 0,
       "package": "screen",
       "signal": null,
@@ -878,7 +879,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 49364,
+      "durationMs": 42766,
       "exitCode": 0,
       "package": "sdk",
       "signal": null,
@@ -887,7 +888,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 13097,
+      "durationMs": 11430,
       "exitCode": 0,
       "package": "sensors",
       "signal": null,
@@ -896,7 +897,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 568923,
+      "durationMs": 436414,
       "exitCode": 0,
       "package": "shading",
       "signal": null,
@@ -905,7 +906,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 553282,
+      "durationMs": 411658,
       "exitCode": 0,
       "package": "shape",
       "signal": null,
@@ -914,7 +915,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 61487,
+      "durationMs": 53841,
       "exitCode": 0,
       "package": "shape-formats",
       "signal": null,
@@ -923,7 +924,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 13889,
+      "durationMs": 10970,
       "exitCode": 0,
       "package": "share",
       "signal": null,
@@ -932,7 +933,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 11609,
+      "durationMs": 9936,
       "exitCode": 0,
       "package": "shell",
       "signal": null,
@@ -941,7 +942,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 14737,
+      "durationMs": 12374,
       "exitCode": 0,
       "package": "shortcut",
       "signal": null,
@@ -950,7 +951,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 15287,
+      "durationMs": 13943,
       "exitCode": 0,
       "package": "signals",
       "signal": null,
@@ -959,7 +960,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 790417,
+      "durationMs": 559644,
       "exitCode": 0,
       "package": "skeleton2d",
       "signal": null,
@@ -968,7 +969,7 @@
       "testFiles": 21
     },
     {
-      "durationMs": 227669,
+      "durationMs": 141416,
       "exitCode": 0,
       "package": "skeleton2d-formats",
       "signal": null,
@@ -977,7 +978,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 323657,
+      "durationMs": 257009,
       "exitCode": 0,
       "package": "skeleton3d",
       "signal": null,
@@ -986,7 +987,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 18239,
+      "durationMs": 13362,
       "exitCode": 0,
       "package": "snapshot",
       "signal": null,
@@ -995,7 +996,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 18387,
+      "durationMs": 12748,
       "exitCode": 0,
       "package": "socket",
       "signal": null,
@@ -1004,7 +1005,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 19034,
+      "durationMs": 13250,
       "exitCode": 0,
       "package": "spatial",
       "signal": null,
@@ -1013,7 +1014,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 20408,
+      "durationMs": 15102,
       "exitCode": 0,
       "package": "spring",
       "signal": null,
@@ -1022,7 +1023,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 24367,
+      "durationMs": 18928,
       "exitCode": 0,
       "package": "spritesheet",
       "signal": null,
@@ -1031,7 +1032,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 64796,
+      "durationMs": 48888,
       "exitCode": 0,
       "package": "spritesheet-formats",
       "signal": null,
@@ -1040,7 +1041,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 136371,
+      "durationMs": 108812,
       "exitCode": 0,
       "package": "statechart",
       "signal": null,
@@ -1049,7 +1050,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 16362,
+      "durationMs": 10728,
       "exitCode": 0,
       "package": "statusbar",
       "signal": null,
@@ -1058,7 +1059,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 12617,
+      "durationMs": 9670,
       "exitCode": 0,
       "package": "storage",
       "signal": null,
@@ -1067,7 +1068,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 266518,
+      "durationMs": 178134,
       "exitCode": 0,
       "package": "swf",
       "signal": null,
@@ -1076,7 +1077,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 242040,
+      "durationMs": 149920,
       "exitCode": 0,
       "package": "text",
       "signal": null,
@@ -1085,9 +1086,9 @@
       "testFiles": 5
     },
     {
-      "durationMs": 17748,
+      "durationMs": 12131,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···············································x·xxx····\n\n Test Files  1 failed | 3 passed (4)\n      Tests  4 failed | 52 passed (56)\n   Start at  21:31:47\n   Duration  15.90s (transform 6.86s, setup 446ms, import 12.87s, tests 83ms, environment 1.81s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > styles a span by its class after being registered\nAssertionError: expected {} to deeply equal { bold: true, color: 16711680 }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n-   \"color\": 16711680,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:22:34\n     20|     const content = parseTextMarkup('<span class=\"warn\">x</span>', reg…\n     21|     expect(content.text).toBe('x');\n     22|     expect(formatAt(content, 0)).toEqual({ bold: true, color: 0xff0000…\n       |                                  ^\n     23|   });\n     24|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > merges several space-separated classes left to right\nAssertionError: expected {} to deeply equal { Object (bold, color, ...) }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n-   \"color\": 3355443,\n-   \"size\": 24,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:43:93\n     41|     });\n     42|     // `loud` then `quiet` both name color; the later `quiet` wins the…\n     43|     expect(formatAt(parseTextMarkup('<span class=\"big loud quiet\">x</s…\n       |                                                                                             ^\n     44|       bold: true,\n     45|       color: 0x333333,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > matches class names case-sensitively\nAssertionError: expected {} to deeply equal { bold: true }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:55:83\n     53|     registerMarkupClassStyles(registry, { Warn: { bold: true } });\n     54|     expect(formatAt(parseTextMarkup('<span class=\"warn\">x</span>', reg…\n     55|     expect(formatAt(parseTextMarkup('<span class=\"Warn\">x</span>', reg…\n       |                                                                                   ^\n     56|   });\n     57|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > is last-write-wins over a previously installed class resolver\nAssertionError: expected {} to deeply equal { italic: true }\n\n- Expected\n+ Received\n\n- {\n-   \"italic\": true,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:63:82\n     61|     registerMarkupClassStyles(registry, { tag: { bold: true } });\n     62|     registerMarkupClassStyles(registry, { tag: { italic: true } });\n     63|     expect(formatAt(parseTextMarkup('<span class=\"tag\">x</span>', regi…\n       |                                                                                  ^\n     64|   });\n     65| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n···············································x·xxx····\n\n Test Files  1 failed | 3 passed (4)\n      Tests  4 failed | 52 passed (56)\n   Start at  03:45:47\n   Duration  11.10s (transform 5.08s, setup 259ms, import 9.18s, tests 56ms, environment 1.13s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > styles a span by its class after being registered\nAssertionError: expected {} to deeply equal { bold: true, color: 16711680 }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n-   \"color\": 16711680,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:22:34\n     20|     const content = parseTextMarkup('<span class=\"warn\">x</span>', reg…\n     21|     expect(content.text).toBe('x');\n     22|     expect(formatAt(content, 0)).toEqual({ bold: true, color: 0xff0000…\n       |                                  ^\n     23|   });\n     24|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > merges several space-separated classes left to right\nAssertionError: expected {} to deeply equal { Object (bold, color, ...) }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n-   \"color\": 3355443,\n-   \"size\": 24,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:43:93\n     41|     });\n     42|     // `loud` then `quiet` both name color; the later `quiet` wins the…\n     43|     expect(formatAt(parseTextMarkup('<span class=\"big loud quiet\">x</s…\n       |                                                                                             ^\n     44|       bold: true,\n     45|       color: 0x333333,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > matches class names case-sensitively\nAssertionError: expected {} to deeply equal { bold: true }\n\n- Expected\n+ Received\n\n- {\n-   \"bold\": true,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:55:83\n     53|     registerMarkupClassStyles(registry, { Warn: { bold: true } });\n     54|     expect(formatAt(parseTextMarkup('<span class=\"warn\">x</span>', reg…\n     55|     expect(formatAt(parseTextMarkup('<span class=\"Warn\">x</span>', reg…\n       |                                                                                   ^\n     56|   });\n     57|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯\n\n FAIL  upstream/packages/text-markup/src/markupClassStyles.test.ts > registerMarkupClassStyles > is last-write-wins over a previously installed class resolver\nAssertionError: expected {} to deeply equal { italic: true }\n\n- Expected\n+ Received\n\n- {\n-   \"italic\": true,\n- }\n+ {}\n\n ❯ upstream/packages/text-markup/src/markupClassStyles.test.ts:63:82\n     61|     registerMarkupClassStyles(registry, { tag: { bold: true } });\n     62|     registerMarkupClassStyles(registry, { tag: { italic: true } });\n     63|     expect(formatAt(parseTextMarkup('<span class=\"tag\">x</span>', regi…\n       |                                                                                  ^\n     64|   });\n     65| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯",
       "package": "text-markup",
       "signal": null,
       "status": "failed",
@@ -1095,7 +1096,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 30955,
+      "durationMs": 11015,
       "exitCode": 0,
       "package": "textbidi",
       "signal": null,
@@ -1104,7 +1105,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 194412,
+      "durationMs": 121685,
       "exitCode": 0,
       "package": "textinput",
       "signal": null,
@@ -1113,7 +1114,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 30737,
+      "durationMs": 16829,
       "exitCode": 0,
       "package": "textlayout",
       "signal": null,
@@ -1122,7 +1123,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 16543,
+      "durationMs": 11070,
       "exitCode": 0,
       "package": "textsegment",
       "signal": null,
@@ -1131,7 +1132,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 21598,
+      "durationMs": 15689,
       "exitCode": 0,
       "package": "textshaper",
       "signal": null,
@@ -1140,7 +1141,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 14774,
+      "durationMs": 11684,
       "exitCode": 0,
       "package": "textshaper-canvas",
       "signal": null,
@@ -1149,7 +1150,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 143866,
+      "durationMs": 125388,
       "exitCode": 0,
       "package": "texture",
       "signal": null,
@@ -1158,7 +1159,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 16143,
+      "durationMs": 14279,
       "exitCode": 0,
       "package": "texture-formats",
       "signal": null,
@@ -1167,7 +1168,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 75946,
+      "durationMs": 64430,
       "exitCode": 0,
       "package": "textureatlas",
       "signal": null,
@@ -1176,7 +1177,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 63667,
+      "durationMs": 52407,
       "exitCode": 0,
       "package": "textureatlas-formats",
       "signal": null,
@@ -1185,7 +1186,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 61741,
+      "durationMs": 51438,
       "exitCode": 0,
       "package": "tilemap",
       "signal": null,
@@ -1194,7 +1195,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 16041,
+      "durationMs": 14478,
       "exitCode": 0,
       "package": "tilemap-formats",
       "signal": null,
@@ -1203,7 +1204,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 12797,
+      "durationMs": 9852,
       "exitCode": 0,
       "package": "timeline",
       "signal": null,
@@ -1212,9 +1213,9 @@
       "testFiles": 1
     },
     {
-      "durationMs": 157983,
+      "durationMs": 128197,
       "exitCode": 1,
-      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·······························································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x···································\n\n Test Files  11 failed | 16 passed (27)\n      Tests  1 failed | 100 passed (101)\n   Start at  21:36:52\n   Duration  156.41s (transform 13.10s, setup 376ms, import 140.98s, tests 1.00s, environment 1.50s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-Ejhxf0/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-Ejhxf0/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-08T04_39_24_600Z-debug-0.log\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 10 ⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBrowser.test.ts [ upstream/packages/tool-capture/src/captureBrowser.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEntry.test.ts [ upstream/packages/tool-capture/src/captureEntry.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEyes.e2e.test.ts [ upstream/packages/tool-capture/src/captureEyes.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureRenderTarget.test.ts [ upstream/packages/tool-capture/src/captureRenderTarget.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureSuite.test.ts [ upstream/packages/tool-capture/src/captureSuite.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureWorkflow.test.ts [ upstream/packages/tool-capture/src/captureWorkflow.test.ts ]\n FAIL  upstream/packages/tool-capture/src/referenceCapture.test.ts [ upstream/packages/tool-capture/src/referenceCapture.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n ❯ fetchModule node_modules/vite/dist/node/chunks/node.js:33584:15\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯\n\n FAIL  upstream/packages/tool-capture/src/captureValidation.test.ts [ upstream/packages/tool-capture/src/captureValidation.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯",
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·······························································stdout | upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nBuilding tools/examples…\n\n··x···································\n\n Test Files  11 failed | 16 passed (27)\n      Tests  1 failed | 100 passed (101)\n   Start at  03:49:19\n   Duration  127.36s (transform 11.46s, setup 422ms, import 113.93s, tests 790ms, environment 1.06s)\n\n\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path /tmp/capture-static-HiSVRH/package.json\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '/tmp/capture-static-HiSVRH/package.json'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/agent/.npm/_logs/2026-08-08T10_51_23_886Z-debug-0.log\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 10 ⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBenchmark.test.ts [ upstream/packages/tool-capture/src/captureBenchmark.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureBrowser.test.ts [ upstream/packages/tool-capture/src/captureBrowser.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEntry.test.ts [ upstream/packages/tool-capture/src/captureEntry.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureEyes.e2e.test.ts [ upstream/packages/tool-capture/src/captureEyes.e2e.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureRenderTarget.test.ts [ upstream/packages/tool-capture/src/captureRenderTarget.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureSuite.test.ts [ upstream/packages/tool-capture/src/captureSuite.test.ts ]\n FAIL  upstream/packages/tool-capture/src/captureWorkflow.test.ts [ upstream/packages/tool-capture/src/captureWorkflow.test.ts ]\n FAIL  upstream/packages/tool-capture/src/referenceCapture.test.ts [ upstream/packages/tool-capture/src/referenceCapture.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n ❯ fetchModule node_modules/vite/dist/node/chunks/node.js:33584:15\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯\n\n FAIL  upstream/packages/tool-capture/src/captureValidation.test.ts [ upstream/packages/tool-capture/src/captureValidation.test.ts ]\nError: Failed to resolve import \"@playwright/test\" from \"upstream/packages/tool-capture/src/captureBrowser.ts\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo/upstream/packages/tool-capture/src/captureBrowser.ts:21:36\n  1  |  import { getCaptureTimeoutMs } from \"./captureTimeout.js\";\n  2  |  export async function launchBrowser(options = {}) {\n  3  |  \tconst { chromium } = await import(\"@playwright/test\");\n     |                                     ^\n  4  |  \t// Headless Chromium exposes navigator.gpu but withholds a Wgpu adapter on a software-only,\n  5  |  \t// \"untrusted\" config unless --enable-unsafe-webgpu is set; with it, Dawn falls back to the\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30416:39\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30413:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27438:18\n ❯ node_modules/vite/dist/node/chunks/node.js:27506:30\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27474:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30201:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20124:26\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/tool-capture/src/captureServer.test.ts > resolveStaticServer > uses npm rather than treating an inherited npx CLI as the npm CLI\nError: Build failed. Run \"npm run build:examples\" to debug.\n ❯ Module.resolveStaticServer upstream/packages/tool-capture/src/captureServer.ts:102:29\n    100|     const result = runNpm(args, root);\n    101|     if (result.status !== 0) {\n    102|       return Promise.reject(new Error(`Build failed. Run \"npm run buil…\n       |                             ^\n    103|     }\n    104|   }\n ❯ upstream/packages/tool-capture/src/captureServer.test.ts:49:22\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯",
       "package": "tool-capture",
       "signal": null,
       "status": "failed",
@@ -1222,7 +1223,7 @@
       "testFiles": 27
     },
     {
-      "durationMs": 11488,
+      "durationMs": 10344,
       "exitCode": 0,
       "package": "tray",
       "signal": null,
@@ -1231,7 +1232,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 21457,
+      "durationMs": 19148,
       "exitCode": 0,
       "package": "tween",
       "signal": null,
@@ -1240,7 +1241,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 23658,
+      "durationMs": 20206,
       "exitCode": 0,
       "package": "types",
       "signal": null,
@@ -1249,7 +1250,7 @@
       "testFiles": 31
     },
     {
-      "durationMs": 12067,
+      "durationMs": 10582,
       "exitCode": 0,
       "package": "updater",
       "signal": null,
@@ -1258,7 +1259,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 51552,
+      "durationMs": 43650,
       "exitCode": 0,
       "package": "useragent",
       "signal": null,
@@ -1267,7 +1268,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 27034,
+      "durationMs": 22208,
       "exitCode": 0,
       "package": "velocity",
       "signal": null,
@@ -1276,7 +1277,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 11985,
+      "durationMs": 10677,
       "exitCode": 0,
       "package": "video",
       "signal": null,
@@ -1285,7 +1286,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 49952,
+      "durationMs": 39789,
       "exitCode": 0,
       "package": "webcam",
       "signal": null,
@@ -1294,7 +1295,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 13063,
+      "durationMs": 10814,
       "exitCode": 0,
       "package": "xml",
       "signal": null,
@@ -1305,5 +1306,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": null,
-  "startedAt": "2026-08-08T03:13:44.057Z"
+  "startedAt": "2026-08-08T09:49:39.639Z"
 }

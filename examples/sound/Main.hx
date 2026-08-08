@@ -232,7 +232,7 @@ class Main extends Application {
     registerDefaultHitTests();
     final canvasElement = canvasAdapter;
     interactionManager = createInteractionManager(root, {
-      cursorBackend: createWebCursorBackend(canvasElement),
+      cursorBackend: flighthq.hostLime.LimeCursor.createLimeCursorBackend(window),
     });
     // Upstream feeds the manager from a DOM pointer source (createInputManager/attachPointerInput/
     // connectInputToInteraction). Lime's onMouseDown/onMouseMove/onMouseUp dispatch into the manager
