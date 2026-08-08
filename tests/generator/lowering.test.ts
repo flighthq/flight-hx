@@ -1980,6 +1980,33 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('Array<TextFormat>');
   });
 
+  it('lowers defensive nullish assignment on structural primitive fields portably', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/nullishField.ts',
+      `
+        interface Counter { value: number; }
+        export function initialize(counter: Counter): number {
+          return counter.value ??= 0;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NullishFieldFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __nullishValue1:Null<Float>');
+    expect(output).toContain(
+      '__nullishValue1 == null ? ((cast __nullishOwner0 : Counter).value = (cast 0.0 : Float)) : (cast __nullishValue1 : Float)',
+    );
+    expect(output).not.toContain('counter.value ??=');
+    expect(output).not.toContain('Dynamic = cast (cast __nullishOwner0 : Counter).value');
+  });
+
   it('lowers portable callbacks and guarded platform constructors without capturing locals', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/sample.ts',
@@ -2013,6 +2040,57 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('Boolean((cast 1.0 : flighthq._internal._Any))');
     expect(output).not.toContain('_Runtime.callValue(Boolean,');
     expect(output).toContain('_Runtime.construct(VideoFrame, [])');
+  });
+
+  it('uses the typed no-value carrier for contextual void callback parameters', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/voidCallback.ts',
+      `
+        export function settled(result: Promise<void>): Promise<boolean> {
+          return result.then(() => true);
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'VoidCallbackFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function(__unused0:flighthq._internal._Nothing):Bool return true');
+    expect(output).not.toContain('function(__unused0:Void)');
+  });
+
+  it('routes string aliases through portable methods without capturing structural lookalikes', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/stringAlias.ts',
+      `
+        type Format = 'astc-rgba' | 'bc-rgba';
+        interface Matcher { startsWith(prefix: string): boolean; }
+        export function matches(format: Format): boolean {
+          return format.startsWith('astc') && format.endsWith('rgba') && format.includes('-');
+        }
+        export function structural(matcher: Matcher): boolean {
+          return matcher.startsWith('astc');
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'StringAliasFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("StringTools.startsWith(format, 'astc')");
+    expect(output).toContain("StringTools.endsWith(Std.string(format), 'rgba')");
+    expect(output).toContain("_Runtime.includes(format, '-')");
+    expect(output).toContain("(cast matcher : Matcher).startsWith((cast 'astc' : String))");
   });
 
   it('uses runtime construction for constructor values while preserving nominal classes', () => {

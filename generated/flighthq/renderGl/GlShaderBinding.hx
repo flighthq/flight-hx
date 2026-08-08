@@ -34,7 +34,7 @@ class GlShaderBinding {
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    ((cast ((cast runtime : GlRenderStateRuntime).materialBitmapShaderMap ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast shader)));
+    ((cast ({ final __nullishOwner3 = runtime; final __nullishValue4:Null<flighthq._internal._Map<String, GlBitmapShader>> = cast (cast __nullishOwner3 : GlRenderStateRuntime).materialBitmapShaderMap; __nullishValue4 == null ? ((cast __nullishOwner3 : GlRenderStateRuntime).materialBitmapShaderMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlBitmapShader>>)) : (cast __nullishValue4 : Null<flighthq._internal._Map<String, GlBitmapShader>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast shader)));
   }
 
   @:noCompletion
@@ -50,7 +50,7 @@ class GlShaderBinding {
     }
     material = (cast renderProxy : RenderProxy2D).material;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var shader:Null<GlBitmapShader> = ({ final __collection1:Dynamic = (cast runtime : GlRenderStateRuntime).materialBitmapShaderMap; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, GlBitmapShader>).get((cast material : Material).kind)); });
+      var shader:Null<GlBitmapShader> = ({ final __collection5:Dynamic = (cast runtime : GlRenderStateRuntime).materialBitmapShaderMap; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, GlBitmapShader>).get((cast material : Material).kind)); });
       if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
     return cast (cast runtime : GlRenderStateRuntime).defaultBitmapShader;

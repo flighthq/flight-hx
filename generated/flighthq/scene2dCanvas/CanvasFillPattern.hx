@@ -25,7 +25,7 @@ class CanvasFillPattern {
     var smooth:Bool = cast _Runtime.UNDEFINED;
     source = (cast resolveCanvasTextureWindowSource((cast resolvers), (cast texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    smooth = ((cast allowSmoothing : Bool) && (cast !(cast (cast (cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool));
+    smooth = ((cast allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     CanvasFillPattern.setSmoothing__canvasFillPattern((cast context), (cast smooth : Bool));
     return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, (cast CanvasFillPattern.getCanvasPatternRepetition__canvasFillPattern((cast texture)) : String)] : Array<Dynamic>));
     return cast null;

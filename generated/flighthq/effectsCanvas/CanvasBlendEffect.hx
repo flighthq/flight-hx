@@ -63,11 +63,11 @@ class CanvasBlendEffect {
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime);
-    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasBlendEffectBackdrops ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
+    ((cast ({ final __nullishOwner3 = runtime; final __nullishValue4:Null<flighthq._internal._Map<String, CanvasRenderTarget>> = cast (cast __nullishOwner3 : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __nullishValue4 == null ? ((cast __nullishOwner3 : CanvasRenderStateRuntime).canvasBlendEffectBackdrops = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderTarget>>)) : (cast __nullishValue4 : Null<flighthq._internal._Map<String, CanvasRenderTarget>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection5:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 

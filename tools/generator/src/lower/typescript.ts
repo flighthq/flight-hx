@@ -50,6 +50,8 @@ const collectionMembers = {
   WeakSetCollection: new Set(['add', 'delete', 'has']),
 } as const;
 
+const standardStringMembers = new Set(['endsWith', 'includes', 'startsWith']);
+
 type CollectionBinding = keyof typeof collectionMembers;
 
 const domRootBindings = {
@@ -698,6 +700,17 @@ function typedArrayBinding(
   return (Object.keys(typedArrayTypeReferenceMap) as TypedArrayBinding[]).find((name) =>
     typeIncludesNamed(type, checker, new Set([name])),
   );
+}
+
+function standardStringBinding(node: ts.Expression, member: string, context: LoweringContext): 'String' | undefined {
+  const type = context.checker?.getTypeAtLocation(node);
+  const checker = context.checker;
+  return type &&
+    checker &&
+    standardStringMembers.has(member) &&
+    typeOnlyHasFlags(type, checker, ts.TypeFlags.StringLike)
+    ? 'String'
+    : undefined;
 }
 
 /** Preserve the nominal receiver for methods on classes generated from this source file. */
@@ -2928,6 +2941,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       : undefined;
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
+    const objectIsString = standardStringBinding(node.expression, node.name.text, context);
     const generatedClass = generatedClassBinding(node.expression, context);
     const hostTypeBinding = hostTypeMemberBinding(node, context);
     const typedStructBinding = typedStructPropertyBinding(node, context);
@@ -2938,7 +2952,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
-        : (objectHostBinding ?? objectIsCollection ?? (objectIsGlobalObject ? 'DynamicObject' : objectIsTypedArray)),
+        : (objectHostBinding ??
+          objectIsCollection ??
+          (objectIsGlobalObject ? 'DynamicObject' : (objectIsTypedArray ?? objectIsString))),
       generatedClass,
       hostTypeBinding,
       kind: 'property',

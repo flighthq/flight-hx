@@ -242,12 +242,12 @@ class GlRenderTexture {
   }
 
   public static function getEntries__glRenderTexture(state:GlRenderState):flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry> {
-    return cast ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    return cast ({ final __nullishOwner17 = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime); final __nullishValue18:Null<flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry>> = cast (cast __nullishOwner17 : GlRenderStateRuntime).glRenderTextureCache; __nullishValue18 == null ? ((cast __nullishOwner17 : GlRenderStateRuntime).glRenderTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry>>)) : (cast __nullishValue18 : Null<flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry>>); });
     return cast null;
   }
 
   public static function getEntry__glRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Null<GlRenderTextureEntry> {
-    return cast ({ final __collection17:Dynamic = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderTextureCache; __collection17 == null ? _Runtime.UNDEFINED : ((cast __collection17 : flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry>).get(renderTexture)); });
+    return cast ({ final __collection19:Dynamic = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderTextureCache; __collection19 == null ? _Runtime.UNDEFINED : ((cast __collection19 : flighthq._internal._WeakMap<RenderTexture, GlRenderTextureEntry>).get(renderTexture)); });
     return cast null;
   }
 

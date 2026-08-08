@@ -255,7 +255,7 @@ class Node {
   public static function enableNodeSignals<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeSignals {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime((cast source)) : NodeRuntime<Traits>);
-    return cast ((cast runtime : NodeRuntime<Traits>).nodeSignals ??= (cast createNodeSignals() : NodeSignals));
+    return cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<NodeSignals> = cast (cast __nullishOwner4 : NodeRuntime<Traits>).nodeSignals; __nullishValue5 == null ? ((cast __nullishOwner4 : NodeRuntime<Traits>).nodeSignals = (cast (cast createNodeSignals() : NodeSignals) : Null<NodeSignals>)) : (cast __nullishValue5 : Null<NodeSignals>); });
     return cast null;
   }
 

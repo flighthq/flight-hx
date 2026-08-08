@@ -34,8 +34,8 @@ class WgpuCompressedTexture {
     info = (cast WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture((cast format)) : Null<WgpuCompressedFormatInfo__wgpuCompressedTexture>);
     if ((cast _Runtime.strictEquals(info, null) : Bool)) { return cast null; }
     support = (cast detectWgpuCompressedTextureSupport((cast device)) : WgpuCompressedTextureSupport);
-    if ((cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'bc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast ((cast (cast support : WgpuCompressedTextureSupport).bc : Bool) ? (cast (cast info : WgpuCompressedFormatInfo__wgpuCompressedTexture).format : Dynamic) : (cast null : Dynamic)); }
-    if ((cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast ((cast (cast support : WgpuCompressedTextureSupport).astc : Bool) ? (cast (cast info : WgpuCompressedFormatInfo__wgpuCompressedTexture).format : Dynamic) : (cast null : Dynamic)); }
+    if ((cast StringTools.startsWith(format, 'bc') : Bool)) { return cast ((cast (cast support : WgpuCompressedTextureSupport).bc : Bool) ? (cast (cast info : WgpuCompressedFormatInfo__wgpuCompressedTexture).format : Dynamic) : (cast null : Dynamic)); }
+    if ((cast StringTools.startsWith(format, 'astc') : Bool)) { return cast ((cast (cast support : WgpuCompressedTextureSupport).astc : Bool) ? (cast (cast info : WgpuCompressedFormatInfo__wgpuCompressedTexture).format : Dynamic) : (cast null : Dynamic)); }
     return cast ((cast (cast support : WgpuCompressedTextureSupport).etc2 : Bool) ? (cast (cast info : WgpuCompressedFormatInfo__wgpuCompressedTexture).format : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -43,8 +43,8 @@ class WgpuCompressedTexture {
   @:noCompletion
   public static function hasWgpuCompressedTextureFormat(support:WgpuCompressedTextureSupport, format:TextureContainerFormat):Bool {
     if ((cast _Runtime.strictEquals((cast WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture((cast format)) : Null<WgpuCompressedFormatInfo__wgpuCompressedTexture>), null) : Bool)) { return cast false; }
-    if ((cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'bc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast _Runtime.field(support, 'bc'); }
-    if ((cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast _Runtime.field(support, 'astc'); }
+    if ((cast StringTools.startsWith(format, 'bc') : Bool)) { return cast _Runtime.field(support, 'bc'); }
+    if ((cast StringTools.startsWith(format, 'astc') : Bool)) { return cast _Runtime.field(support, 'astc'); }
     return cast _Runtime.field(support, 'etc2');
     return cast null;
   }
@@ -158,7 +158,7 @@ class WgpuCompressedTexture {
     var match:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     fixed = _Runtime.getIndex(WgpuCompressedTexture.FIXED_FORMATS__wgpuCompressedTexture, format);
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast fixed; }
-    if ((cast !(cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast StringTools.startsWith(format, 'astc') : Bool) : Bool)) { return cast null; }
     match = _Runtime.callProperty(_Runtime.regexp('^astc(\\d+)x(\\d+)$$', ''), 'exec', cast ([format] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(match, null) : Bool)) { return cast null; }
     return cast { blockWidth: _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.getIndex(match, 1.0)] : Array<Dynamic>)), blockHeight: _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([_Runtime.getIndex(match, 2.0)] : Array<Dynamic>)), bytesPerBlock: 16.0, format: (cast 'astc-' + Std.string(_Runtime.getIndex(match, 1.0)) + 'x' + Std.string(_Runtime.getIndex(match, 2.0)) + '-unorm' : flighthq._internal.dom.GPUTextureFormat) };
@@ -170,7 +170,7 @@ class WgpuCompressedTexture {
     var native:Null<String> = cast _Runtime.UNDEFINED;
     resolved = ((cast _Runtime.strictEquals(colorSpace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast format : Dynamic) : (cast (cast WgpuCompressedTexture.getTextureContainerFormatForColorSpace__wgpuCompressedTexture((cast format), (cast colorSpace)) : TextureContainerFormat) : Dynamic));
     native = (cast getWgpuCompressedTextureFormat((cast device), (cast resolved)) : Null<String>);
-    if ((cast ((cast ((cast !_Runtime.strictEquals(native, null) : Bool) && (cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool)) : Bool) && (cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(native, null) : Bool) && (cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool)) : Bool) && (cast StringTools.startsWith(format, 'astc') : Bool)) : Bool)) {
       return cast (cast '' + Std.string(native) + '-srgb' : flighthq._internal.dom.GPUTextureFormat);
     }
     return cast native;

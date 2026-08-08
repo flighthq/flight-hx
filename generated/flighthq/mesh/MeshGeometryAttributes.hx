@@ -98,7 +98,7 @@ class MeshGeometryAttributes {
       while ((cast ((cast i : Float) < (cast _Runtime.field(attrs, 'length') : Float)) : Bool)) {
         var attr:VertexAttribute = flighthq._internal._StaticIndex.readArray(attrs, i);
         if ((cast _Runtime.strictEquals(attr.semantic, semantic) : Bool)) {
-          if ((cast !(cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'float32' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool)) { return cast -1.0; }
+          if ((cast !(cast StringTools.startsWith(attr.format, 'float32') : Bool) : Bool)) { return cast -1.0; }
           return cast (attr.byteOffset / 4.0);
         }
         i++;

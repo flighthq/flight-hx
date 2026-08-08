@@ -185,7 +185,7 @@ class RichText {
   public static function enableTextFieldSignals(source:flighthq.types.RichText):TextFieldSignals {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime((cast source)) : RichTextRuntime);
-    return cast ((cast runtime : RichTextRuntime).textFieldSignals ??= (cast createTextFieldSignals() : TextFieldSignals));
+    return cast ({ final __nullishOwner17 = runtime; final __nullishValue18:Null<TextFieldSignals> = cast (cast __nullishOwner17 : RichTextRuntime).textFieldSignals; __nullishValue18 == null ? ((cast __nullishOwner17 : RichTextRuntime).textFieldSignals = (cast (cast createTextFieldSignals() : TextFieldSignals) : Null<TextFieldSignals>)) : (cast __nullishValue18 : Null<TextFieldSignals>); });
     return cast null;
   }
 

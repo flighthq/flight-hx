@@ -24,6 +24,6 @@ class CanvasRenderEffectRegistry {
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime);
-    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
+    ((cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>> = cast (cast __nullishOwner4 : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __nullishValue5 == null ? ((cast __nullishOwner4 : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
   }
 }

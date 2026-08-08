@@ -17,15 +17,15 @@ import flighthq.types.ViewportScaleMode;
 
 class StageFit {
   public static function computeScene2DFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
-    if ((cast (cast align : { var includes:flighthq._internal._Any; }).includes((cast 'left' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast 0.0; }
-    if ((cast (cast align : { var includes:flighthq._internal._Any; }).includes((cast 'right' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast (viewWidth - scaledContentWidth); }
+    if ((cast _Runtime.includes(align, 'left') : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.includes(align, 'right') : Bool)) { return cast (viewWidth - scaledContentWidth); }
     return cast ((viewWidth - scaledContentWidth) / 2.0);
     return cast null;
   }
 
   public static function computeScene2DFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
-    if ((cast (cast align : { var includes:flighthq._internal._Any; }).includes((cast 'top' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast 0.0; }
-    if ((cast (cast align : { var includes:flighthq._internal._Any; }).includes((cast 'bottom' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) { return cast (viewHeight - scaledContentHeight); }
+    if ((cast _Runtime.includes(align, 'top') : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.includes(align, 'bottom') : Bool)) { return cast (viewHeight - scaledContentHeight); }
     return cast ((viewHeight - scaledContentHeight) / 2.0);
     return cast null;
   }

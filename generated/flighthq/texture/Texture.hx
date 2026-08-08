@@ -203,7 +203,7 @@ class Texture {
     }
     resource = ({ final __structural10 = opts; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; });
     if ((cast !_Runtime.looseEquals(resource, null) : Bool)) {
-      _Runtime.callProperty(((cast resource : { @:optional var textures:Null<Array<flighthq.types.Texture>>; }).textures ??= cast ([] : Array<Dynamic>)), 'push', cast ([texture] : Array<Dynamic>));
+      _Runtime.callProperty(({ final __nullishOwner15 = resource; final __nullishValue16:Null<Array<flighthq.types.Texture>> = cast (cast __nullishOwner15 : { @:optional var textures:Null<Array<flighthq.types.Texture>>; }).textures; __nullishValue16 == null ? ((cast __nullishOwner15 : { @:optional var textures:Null<Array<flighthq.types.Texture>>; }).textures = (cast cast ([] : Array<Dynamic>) : Null<Array<flighthq.types.Texture>>)) : (cast __nullishValue16 : Null<Array<flighthq.types.Texture>>); }), 'push', cast ([texture] : Array<Dynamic>));
     }
     return cast texture;
     return cast null;
@@ -269,7 +269,7 @@ class Texture {
   }
 
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __structural11 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __structural17 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
@@ -289,7 +289,7 @@ class Texture {
   }
 
   public static function getTextureSourceKind(texture:TextureLike):Null<TextureSourceKind> {
-    return cast _Runtime.coalesce(({ final __structural12 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var kind:String; }).kind; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural18 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { var kind:String; }).kind; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -330,7 +330,7 @@ class Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __structural13 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __structural19 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 

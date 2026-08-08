@@ -654,7 +654,7 @@ function emitParameters(parameters: IrParameter[], packedRest = false): string {
       const initializer = constantInitializer ? ` = ${emitExpression(parameter.initializer!)}` : '';
       const type =
         parameter.rest && !packedRest && parameter.type.kind === 'array' ? parameter.type.element : parameter.type;
-      return `${prefix}${safeName(parameter.name)}:${emitType(type)}${initializer}`;
+      return `${prefix}${safeName(parameter.name)}:${emitValueType(type)}${initializer}`;
     })
     .join(', ');
 }
@@ -2270,6 +2270,16 @@ function emitExpression(expression: IrExpression): string {
           if (expression.left.optional) {
             throw new Error(`Optional typed-struct assignment is not supported: ${expression.left.name}`);
           }
+          if (expression.operator === '??=') {
+            const left = expression.left;
+            const binding = left.typedStructBinding!;
+            return emitDirectNullishAssignment(
+              expression,
+              object,
+              (owner) => directTypedStructField(left, owner),
+              left.type ?? binding.field.type,
+            );
+          }
           const field = directTypedStructField(expression.left, object);
           if (expression.operator === '=') {
             return `(${field} = cast (${emitExpression(expression.right)} : Dynamic))`;
@@ -2285,6 +2295,15 @@ function emitExpression(expression: IrExpression): string {
         if (expression.left.structuralReceiverType) {
           if (expression.left.optional) {
             throw new Error(`Optional structural assignment is not supported: ${expression.left.name}`);
+          }
+          if (expression.operator === '??=') {
+            const left = expression.left;
+            return emitDirectNullishAssignment(
+              expression,
+              object,
+              (owner) => directStructuralField(left, owner),
+              left.type,
+            );
           }
           const field = directStructuralField(expression.left, object);
           const emittedRight = emitExpression(expression.right);
@@ -2878,6 +2897,21 @@ function directHostTypeField(
   return `${typedOwner}.${safeName(expression.name)}`;
 }
 
+function emitDirectNullishAssignment(
+  expression: Extract<IrExpression, { kind: 'assignment' }>,
+  object: string,
+  fieldForOwner: (owner: string) => string,
+  targetType: IrType | undefined,
+): string {
+  const targetHaxeType = targetType ? emitType(targetType) : 'Dynamic';
+  const nullableHaxeType = targetType?.kind === 'nullable' ? targetHaxeType : `Null<${targetHaxeType}>`;
+  const ownerTemporary = `__nullishOwner${String(temporaryIndex++)}`;
+  const valueTemporary = `__nullishValue${String(temporaryIndex++)}`;
+  const field = fieldForOwner(ownerTemporary);
+  const right = `(cast ${emitExpression(expression.right)} : ${targetHaxeType})`;
+  return `({ final ${ownerTemporary} = ${object}; final ${valueTemporary}:${nullableHaxeType} = cast ${field}; ${valueTemporary} == null ? (${field} = ${right}) : (cast ${valueTemporary} : ${targetHaxeType}); })`;
+}
+
 function directGeneratedClassField(
   expression: Extract<IrExpression, { kind: 'property' }>,
   owner = emitExpression(expression.object),
@@ -3145,6 +3179,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (expression.callee.binding === 'DynamicObject') {
       return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
+    if (expression.callee.binding === 'String') {
+      const argument = expression.arguments[0] ? emitExpression(expression.arguments[0]) : "''";
+      if (name === 'startsWith') return `StringTools.startsWith(${owner}, ${argument})`;
+      if (name === 'endsWith') return `StringTools.endsWith(Std.string(${owner}), ${argument})`;
+      if (name === 'includes') return `_Runtime.includes(${owner}, ${argument})`;
+      throw new Error(`Unknown standard String binding: ${name}`);
     }
     if (expression.callee.binding === 'WebGl2Backend') {
       if (expression.optional || expression.callee.optional) {
@@ -3562,7 +3603,9 @@ export function emitType(type: IrType): string {
         type.parameters.length === 0
           ? 'Void'
           : type.parameters
-              .map((parameter) => (parameter.kind === 'function' ? `(${emitType(parameter)})` : emitType(parameter)))
+              .map((parameter) =>
+                parameter.kind === 'function' ? `(${emitType(parameter)})` : emitValueType(parameter),
+              )
               .join('->')
       }->${type.returns.kind === 'function' ? `(${emitType(type.returns)})` : emitType(type.returns)}`;
     case 'named': {
@@ -3585,6 +3628,10 @@ export function emitType(type: IrType): string {
           emitType(type.alternatives[0] ?? { kind: 'dynamic' }),
         );
   }
+}
+
+function emitValueType(type: IrType): string {
+  return isVoidType(type) ? 'flighthq._internal._Nothing' : emitType(type);
 }
 
 function quote(value: string): string {

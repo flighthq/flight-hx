@@ -600,7 +600,7 @@ class InputManager {
     try {
       var result:flighthq._internal._Promise<flighthq._internal._Nothing> = element.requestPointerLock();
       if ((cast flighthq._internal._Async.isPromise(result) : Bool)) {
-        return cast _Runtime.callProperty(result, 'then', cast ([function(__unused1:Void):Bool return true, function(__unused2:flighthq._internal._Any):Bool return false] : Array<Dynamic>));
+        return cast _Runtime.callProperty(result, 'then', cast ([function(__unused1:flighthq._internal._Nothing):Bool return true, function(__unused2:flighthq._internal._Any):Bool return false] : Array<Dynamic>));
       }
       return cast flighthq._internal._Async.resolve(true);
     } catch (__error:Dynamic) {

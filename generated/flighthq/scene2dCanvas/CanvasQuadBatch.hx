@@ -67,7 +67,7 @@ class CanvasQuadBatch {
     quadTransform = (cast acquireMatrix() : Matrix);
     stride = ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast quadBatch : RenderProxy2D).alpha);
-    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool));
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }

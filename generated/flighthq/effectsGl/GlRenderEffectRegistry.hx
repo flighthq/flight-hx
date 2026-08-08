@@ -24,6 +24,6 @@ class GlRenderEffectRegistry {
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    ((cast ((cast runtime : GlRenderStateRuntime).glRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
+    ((cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, GlRenderEffectRunner>> = cast (cast __nullishOwner4 : GlRenderStateRuntime).glRenderEffectRegistry; __nullishValue5 == null ? ((cast __nullishOwner4 : GlRenderStateRuntime).glRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
   }
 }

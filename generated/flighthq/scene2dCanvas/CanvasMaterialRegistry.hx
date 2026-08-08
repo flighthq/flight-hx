@@ -41,7 +41,7 @@ class CanvasMaterialRegistry {
   public static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime);
-    ((cast ((cast runtime : CanvasRenderStateRuntime).materialRendererMap ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
+    ((cast ({ final __nullishOwner3 = runtime; final __nullishValue4:Null<flighthq._internal._Map<String, CanvasMaterialRenderer>> = cast (cast __nullishOwner3 : CanvasRenderStateRuntime).materialRendererMap; __nullishValue4 == null ? ((cast __nullishOwner3 : CanvasRenderStateRuntime).materialRendererMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>)) : (cast __nullishValue4 : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
   }
 
   @:noCompletion

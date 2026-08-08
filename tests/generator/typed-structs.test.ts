@@ -617,6 +617,29 @@ describe('typed struct analysis', () => {
     expect(output).not.toContain('maxDeltaTime: _Runtime.UNDEFINED');
   });
 
+  it('lowers defensive nullish assignment on required primitive fields portably', () => {
+    const result = lowerFixture(`
+      export interface Vector2 { x: number; y: number; }
+      export function initialize(value: Vector2): number {
+        return value.x ??= 0;
+      }
+    `);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __nullishValue1:Null<Float>');
+    expect(output).toContain(
+      '__nullishValue1 == null ? (__nullishOwner0.x = (cast 0.0 : Float)) : (cast __nullishValue1 : Float)',
+    );
+    expect(output).not.toContain('value.x ??=');
+    expect(output).not.toContain('Dynamic = cast __nullishOwner0.x');
+  });
+
   it('writes result records directly inside a plain anonymous backend', () => {
     const result = lowerFixture(`
       export interface Vector2 {

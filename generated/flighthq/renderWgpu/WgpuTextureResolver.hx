@@ -62,7 +62,7 @@ class WgpuTextureResolver {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
-    registry = ((cast runtime : WgpuRenderStateRuntime).wgpuTextureResolverRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+    registry = ({ final __nullishOwner0 = runtime; final __nullishValue1:Null<flighthq._internal._Map<String, flighthq.types.WgpuTextureResolver>> = cast (cast __nullishOwner0 : WgpuRenderStateRuntime).wgpuTextureResolverRegistry; __nullishValue1 == null ? ((cast __nullishOwner0 : WgpuRenderStateRuntime).wgpuTextureResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, flighthq.types.WgpuTextureResolver>>)) : (cast __nullishValue1 : Null<flighthq._internal._Map<String, flighthq.types.WgpuTextureResolver>>); });
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
@@ -73,7 +73,7 @@ class WgpuTextureResolver {
     sourceKind = (cast getTextureSourceKind((cast texture)) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
-    resolver = ({ final __collection0:Dynamic = (cast runtime : WgpuRenderStateRuntime).wgpuTextureResolverRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, flighthq.types.WgpuTextureResolver>).get(sourceKind)); });
+    resolver = ({ final __collection2:Dynamic = (cast runtime : WgpuRenderStateRuntime).wgpuTextureResolverRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, flighthq.types.WgpuTextureResolver>).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue((cast runtime : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;

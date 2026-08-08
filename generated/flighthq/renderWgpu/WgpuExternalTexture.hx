@@ -39,7 +39,7 @@ class WgpuExternalTexture {
     view = handle.createView();
     sampler = (cast WgpuExternalTexture.getExternalWgpuSampler__wgpuExternalTexture((cast state), (cast texture)) : flighthq._internal.dom.GPUSampler);
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-    ((cast ((cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])) : flighthq._internal._WeakMap<Dynamic, Dynamic>).set(source, (cast { bindGroup: bindGroup, texture: handle, view: view })));
+    ((cast ({ final __nullishOwner2 = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime); final __nullishValue3:Null<flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>> = cast (cast __nullishOwner2 : WgpuRenderStateRuntime).wgpuExternalTextureCache; __nullishValue3 == null ? ((cast __nullishOwner2 : WgpuRenderStateRuntime).wgpuExternalTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>>)) : (cast __nullishValue3 : Null<flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>>); }) : flighthq._internal._WeakMap<Dynamic, Dynamic>).set(source, (cast { bindGroup: bindGroup, texture: handle, view: view })));
     registerWgpuTextureResolver((cast state), (cast ExternalTextureSourceKind : String), (cast function(__unused0:WgpuRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:TextureColorSpace):Null<WgpuTextureEntry> return WgpuExternalTexture.resolveExternalWgpuTexture__wgpuExternalTexture(__unused0, __unused1)));
     return cast texture;
     return cast null;
@@ -48,7 +48,7 @@ class WgpuExternalTexture {
   public static function disposeExternalWgpuTexture(state:WgpuRenderState, texture:Texture):Bool {
     var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
     source = (cast WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture((cast texture)) : Null<ExternalTexture>);
-    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection4:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
     return cast null;
   }
 
@@ -58,9 +58,9 @@ class WgpuExternalTexture {
     var magFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<flighthq._internal.dom.GPUMipmapFilterMode> = cast _Runtime.UNDEFINED;
     sampler = (cast texture : { var sampler:Sampler; }).sampler;
-    minFilter = ((cast (cast sampler.minFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    magFilter = ((cast (cast sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
-    mipmapFilter = ((cast sampler.mipmaps : Bool) ? (cast ((cast (cast sampler.minFilter : { var endsWith:flighthq._internal._Any; }).endsWith((cast 'mipmap-nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast 'nearest' : Dynamic) : (cast ((cast (cast sampler.minFilter : { var endsWith:flighthq._internal._Any; }).endsWith((cast 'mipmap-linear' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast 'linear' : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
+    mipmapFilter = ((cast sampler.mipmaps : Bool) ? (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast ((cast StringTools.endsWith(Std.string(sampler.minFilter), 'mipmap-linear') : Bool) ? (cast 'linear' : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     return cast (cast getWgpuSampler((cast state), (cast minFilter : String), (cast magFilter : String), (cast sampler.wrapU), (cast sampler.wrapV), (cast mipmapFilter), (cast sampler.anisotropy : Float)) : flighthq._internal.dom.GPUSampler);
     return cast null;
   }
@@ -68,12 +68,12 @@ class WgpuExternalTexture {
   public static function resolveExternalWgpuTexture__wgpuExternalTexture(state:WgpuRenderState, texture:TextureLike):Null<WgpuTextureEntry> {
     var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
     source = (cast WgpuExternalTexture.getExternalTextureSource__wgpuExternalTexture((cast texture)) : Null<ExternalTexture>);
-    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).get(source)); }), function():Dynamic return cast null) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection5:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuExternalTextureCache; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._WeakMap<ExternalTexture, WgpuTextureEntry>).get(source)); }), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }
 
   public static function getExternalTextureSource__wgpuExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __structural2 = _Runtime.field(texture, 'source'); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __structural6 = _Runtime.field(texture, 'source'); __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
     return cast (cast _Runtime.field(texture, 'source') : ExternalTexture);
     return cast null;
   }

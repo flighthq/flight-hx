@@ -221,7 +221,7 @@ class App {
       return cast _Runtime.UNDEFINED;
     }, subscribeReady: function(listener:Void->Void):Void->Void {
       var id:flighthq._internal._Promise<flighthq._internal._Nothing> = cast _Runtime.UNDEFINED;
-      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function(__unused0:Void):Void { listener(); }] : Array<Dynamic>));
+      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function(__unused0:flighthq._internal._Nothing):Void { listener(); }] : Array<Dynamic>));
       _Runtime.voidValue(id);
       return cast function():Void {
 

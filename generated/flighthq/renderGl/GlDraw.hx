@@ -77,7 +77,7 @@ class GlDraw {
       flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).TEXTURE_MAX_ANISOTROPY_EXT, level);
     }
     if ((cast useMips : Bool)) {
-      var mipped:flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture> = ((cast runtime : GlRenderStateRuntime).mipmappedTextures ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []));
+      var mipped:flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture> = ({ final __nullishOwner1 = runtime; final __nullishValue2:Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>> = cast (cast __nullishOwner1 : GlRenderStateRuntime).mipmappedTextures; __nullishValue2 == null ? ((cast __nullishOwner1 : GlRenderStateRuntime).mipmappedTextures = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []) : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>)) : (cast __nullishValue2 : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>); });
       if ((cast !(cast ((cast mipped : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)) : Bool) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D));
         ((cast mipped : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).add(texture));
@@ -164,7 +164,7 @@ class GlDraw {
     image = (cast getTextureSource((cast texture)) : Image);
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    cache = ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast ((cast runtime : GlRenderStateRuntime).videoSrgbTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])) : Dynamic) : (cast ((cast runtime : GlRenderStateRuntime).videoTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), [])) : Dynamic));
+    cache = ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast ({ final __nullishOwner3 = runtime; final __nullishValue4:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast (cast __nullishOwner3 : GlRenderStateRuntime).videoSrgbTextureCache; __nullishValue4 == null ? ((cast __nullishOwner3 : GlRenderStateRuntime).videoSrgbTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue4 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic) : (cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast (cast __nullishOwner5 : GlRenderStateRuntime).videoTextureCache; __nullishValue6 == null ? ((cast __nullishOwner5 : GlRenderStateRuntime).videoTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue6 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic));
     entry = ((cast cache : flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>).get(image));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ texture: flighthq._internal.backend.WebGl2Backend.createTexture(gl), uploadedVersion: -1.0 } : Dynamic));
@@ -249,7 +249,7 @@ class GlDraw {
 
   @:noCompletion
   public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glBlendModeRegistry; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, GlBlendRealization>).has(blendMode)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection7:Dynamic = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glBlendModeRegistry; __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, GlBlendRealization>).has(blendMode)); }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -266,7 +266,7 @@ class GlDraw {
   public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    ((cast ((cast runtime : GlRenderStateRuntime).glBlendModeRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(blendMode, (cast realization)));
+    ((cast ({ final __nullishOwner12 = runtime; final __nullishValue13:Null<flighthq._internal._Map<String, GlBlendRealization>> = cast (cast __nullishOwner12 : GlRenderStateRuntime).glBlendModeRegistry; __nullishValue13 == null ? ((cast __nullishOwner12 : GlRenderStateRuntime).glBlendModeRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlBlendRealization>>)) : (cast __nullishValue13 : Null<flighthq._internal._Map<String, GlBlendRealization>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(blendMode, (cast realization)));
   }
 
   @:noCompletion
@@ -287,7 +287,7 @@ class GlDraw {
     ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true);
     flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), canvas);
-    if (_Runtime.truthy(({ final __collection4:Dynamic = (cast runtime : GlRenderStateRuntime).mipmappedTextures; __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)); }))) { flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D)); }
+    if (_Runtime.truthy(({ final __collection14:Dynamic = (cast runtime : GlRenderStateRuntime).mipmappedTextures; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)); }))) { flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D)); }
   }
 
   public static function uploadGlBitmap__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
@@ -362,12 +362,12 @@ class GlDraw {
   }
 
   public static function glMagFilterValue__glDraw(gl:flighthq._internal.dom.WebGL2RenderingContext, filter:TextureFilter):Float {
-    return cast ((cast (cast filter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic));
+    return cast ((cast StringTools.startsWith(filter, 'nearest') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic));
     return cast null;
   }
 
   public static function glMinFilterValue__glDraw(gl:flighthq._internal.dom.WebGL2RenderingContext, filter:TextureFilter, useMips:Bool):Float {
-    if ((cast !(cast useMips : Bool) : Bool)) { return cast ((cast (cast filter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic)); }
+    if ((cast !(cast useMips : Bool) : Bool)) { return cast ((cast StringTools.startsWith(filter, 'nearest') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic)); }
     {
       var __switchValue = filter;
       if (__switchValue == 'linear-mipmap-linear') {

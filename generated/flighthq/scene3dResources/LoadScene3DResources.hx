@@ -61,7 +61,7 @@ class LoadScene3DResources {
           }
           var entry:Null<Scene3DResourceInFlight> = ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
           if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : { var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; }).promise, 'then', cast ([function(__unused0:Void):Void {
+          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : { var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; }).promise, 'then', cast ([function(__unused0:flighthq._internal._Nothing):Void {
             loaded++;
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));

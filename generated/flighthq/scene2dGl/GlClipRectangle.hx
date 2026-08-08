@@ -86,7 +86,7 @@ class GlClipRectangle {
   public static function getScissorStack__glClipRectangle(state:GlRenderState):Array<GlScissorRect> {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    ((cast runtime : GlRenderStateRuntime).scissorStack ??= cast ([] : Array<Dynamic>));
+    ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<Array<GlScissorRect>> = cast (cast __nullishOwner4 : GlRenderStateRuntime).scissorStack; __nullishValue5 == null ? ((cast __nullishOwner4 : GlRenderStateRuntime).scissorStack = (cast cast ([] : Array<Dynamic>) : Null<Array<GlScissorRect>>)) : (cast __nullishValue5 : Null<Array<GlScissorRect>>); });
     return cast (cast runtime : GlRenderStateRuntime).scissorStack;
     return cast null;
   }

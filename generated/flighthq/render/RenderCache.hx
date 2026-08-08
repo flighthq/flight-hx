@@ -51,7 +51,7 @@ class RenderCache {
 
   @:noCompletion
   public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
-    ((cast adapter : { var signals:Null<RenderCacheAdapterSignals>; }).signals ??= { onPrepare: (cast createSignal() : Signal<Void->Void>) });
+    ({ final __nullishOwner4 = adapter; final __nullishValue5:Null<RenderCacheAdapterSignals> = cast (cast __nullishOwner4 : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __nullishValue5 == null ? ((cast __nullishOwner4 : { var signals:Null<RenderCacheAdapterSignals>; }).signals = (cast { onPrepare: (cast createSignal() : Signal<Void->Void>) } : Null<RenderCacheAdapterSignals>)) : (cast __nullishValue5 : Null<RenderCacheAdapterSignals>); });
   }
 
   @:noCompletion

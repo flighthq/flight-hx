@@ -231,7 +231,7 @@ class MeshGeometryOperations {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, 'length') : Float)) : Bool)) {
         var attr:VertexAttribute = flighthq._internal._StaticIndex.readArray((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, i);
-        if ((cast ((cast _Runtime.strictEquals(attr.semantic, 'position') : Bool) && (cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'float32' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(attr.semantic, 'position') : Bool) && (cast StringTools.startsWith(attr.format, 'float32') : Bool)) : Bool)) {
           (posOffset = cast ((attr.byteOffset / 4.0) : Dynamic));
           break;
         }

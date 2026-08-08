@@ -21,7 +21,7 @@ class CanvasShapeRegistry {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<String, CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
-    registry = ((cast runtime : RenderStateRuntime).canvasShapeCommandRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+    registry = ({ final __nullishOwner1 = runtime; final __nullishValue2:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast (cast __nullishOwner1 : RenderStateRuntime).canvasShapeCommandRegistry; __nullishValue2 == null ? ((cast __nullishOwner1 : RenderStateRuntime).canvasShapeCommandRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>)) : (cast __nullishValue2 : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>); });
     ((cast registry : flighthq._internal._Map<String, CanvasShapeCommand<String>>).set((cast command : CanvasShapeCommand<K>).key, (cast command)));
   }
 

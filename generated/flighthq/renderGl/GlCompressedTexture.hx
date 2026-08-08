@@ -265,7 +265,7 @@ class GlCompressedTexture {
   }
 
   public static function isAstcFormat__glCompressedTexture(format:TextureContainerFormat):Bool {
-    return cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    return cast StringTools.startsWith(format, 'astc');
     return cast null;
   }
 

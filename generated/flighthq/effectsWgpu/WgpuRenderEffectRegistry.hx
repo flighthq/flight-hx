@@ -24,6 +24,6 @@ class WgpuRenderEffectRegistry {
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
-    ((cast ((cast runtime : WgpuRenderStateRuntime).wgpuRenderEffectRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
+    ((cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, WgpuRenderEffectRunner>> = cast (cast __nullishOwner4 : WgpuRenderStateRuntime).wgpuRenderEffectRegistry; __nullishValue5 == null ? ((cast __nullishOwner4 : WgpuRenderStateRuntime).wgpuRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuRenderEffectRunner>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, WgpuRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
   }
 }

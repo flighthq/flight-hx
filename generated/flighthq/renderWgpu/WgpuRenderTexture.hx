@@ -158,7 +158,7 @@ class WgpuRenderTexture {
     format = (cast WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture((cast state), (cast (cast requested : ResolvedRenderTargetDescriptor).format)) : String);
     colorSpace = _Runtime.coalesce((cast descriptor : RenderTarget).colorSpace, function():Dynamic return cast _Runtime.field(renderTexture, 'colorSpace'));
     runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
-    entries = ((cast runtime : WgpuRenderStateRuntime).wgpuRenderTextureCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
+    entries = ({ final __nullishOwner12 = runtime; final __nullishValue13:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>> = cast (cast __nullishOwner12 : WgpuRenderStateRuntime).wgpuRenderTextureCache; __nullishValue13 == null ? ((cast __nullishOwner12 : WgpuRenderStateRuntime).wgpuRenderTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>)) : (cast __nullishValue13 : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>); });
     entry = ((cast entries : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var target:WgpuRenderTarget = (cast createWgpuRenderTarget((cast state), (cast (cast requested : ResolvedRenderTargetDescriptor).width : Float), (cast (cast requested : ResolvedRenderTargetDescriptor).height : Float), (cast format : String), (cast colorSpace)) : WgpuRenderTarget);
@@ -183,7 +183,7 @@ class WgpuRenderTexture {
   }
 
   public static function getWgpuRenderTextureEntry__wgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):Null<WgpuRenderTextureEntry> {
-    return cast ({ final __collection12:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuRenderTextureCache; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
+    return cast ({ final __collection14:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuRenderTextureCache; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
     return cast null;
   }
 

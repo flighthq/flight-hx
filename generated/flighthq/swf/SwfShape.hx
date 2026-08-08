@@ -193,15 +193,15 @@ class SwfShape {
       ((cast edge : SwfShapeEdge__swfShape).controlY = (_Runtime.addNumbers(fromY, _Runtime.field(startEdge, 'toY')) / 2.0));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner0 = state; final __nullishValue1:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner0 : SwfShapeState__swfShape).fill0Segment; __nullishValue1 == null ? ((cast __nullishOwner0 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue1 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner2 = state; final __nullishValue3:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner2 : SwfShapeState__swfShape).fill1Segment; __nullishValue3 == null ? ((cast __nullishOwner2 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue3 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner4 = state; final __nullishValue5:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner4 : SwfShapeState__swfShape).lineSegment; __nullishValue5 == null ? ((cast __nullishOwner4 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue5 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     ((cast state : SwfShapeState__swfShape).x = _Runtime.field(startEdge, 'toX'));
@@ -409,15 +409,15 @@ class SwfShape {
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast false; }
     edge = (cast { controlX: (cast record : SwfShapeEdgeRecord__swfShape).controlX, controlY: (cast record : SwfShapeEdgeRecord__swfShape).controlY, curved: (cast record : SwfShapeEdgeRecord__swfShape).curved, toX: (cast record : SwfShapeEdgeRecord__swfShape).toX, toY: (cast record : SwfShapeEdgeRecord__swfShape).toY });
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner20 = state; final __nullishValue21:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner20 : SwfShapeState__swfShape).fill1Segment; __nullishValue21 == null ? ((cast __nullishOwner20 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue21 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner22 = state; final __nullishValue23:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner22 : SwfShapeState__swfShape).fill0Segment; __nullishValue23 == null ? ((cast __nullishOwner22 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue23 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
+      ({ final __nullishOwner24 = state; final __nullishValue25:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner24 : SwfShapeState__swfShape).lineSegment; __nullishValue25 == null ? ((cast __nullishOwner24 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue25 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     return cast true;

@@ -101,7 +101,7 @@ class Scene2d {
   public static function enableScene2DSignals(source:Scene2D):Scene2DSignals {
     var runtime:Scene2DRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast Scene2d.ensureScene2DRuntime__scene2d((cast source)) : Scene2DRuntime);
-    return cast ((cast runtime : Scene2DRuntime).scene2dSignals ??= (cast createScene2DSignals() : Scene2DSignals));
+    return cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<Scene2DSignals> = cast (cast __nullishOwner5 : Scene2DRuntime).scene2dSignals; __nullishValue6 == null ? ((cast __nullishOwner5 : Scene2DRuntime).scene2dSignals = (cast (cast createScene2DSignals() : Scene2DSignals) : Null<Scene2DSignals>)) : (cast __nullishValue6 : Null<Scene2DSignals>); });
     return cast null;
   }
 
@@ -132,7 +132,7 @@ class Scene2d {
   public static function getScene2DSignals(source:Scene2D):Null<Scene2DSignals> {
     var runtime:Null<Scene2DRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<Scene2DRuntime>);
-    return cast _Runtime.coalesce(({ final __structural5 = runtime; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var scene2dSignals:Null<Scene2DSignals>; }).scene2dSignals; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural7 = runtime; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var scene2dSignals:Null<Scene2DSignals>; }).scene2dSignals; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -155,6 +155,6 @@ class Scene2d {
     ((cast source : Scene2D).scene2dWidth = width);
     ((cast source : Scene2D).scene2dHeight = height);
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<Scene2DRuntime>);
-    if (_Runtime.truthy(({ final __structural6 = runtime; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var scene2dSignals:Null<Scene2DSignals>; }).scene2dSignals; }))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : Scene2DRuntime).scene2dSignals : Scene2DSignals).onResize]]), 1); }
+    if (_Runtime.truthy(({ final __structural8 = runtime; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var scene2dSignals:Null<Scene2DSignals>; }).scene2dSignals; }))) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : Scene2DRuntime).scene2dSignals : Scene2DSignals).onResize]]), 1); }
   }
 }

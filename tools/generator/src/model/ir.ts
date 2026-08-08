@@ -197,6 +197,7 @@ type IrExpressionNode =
         | 'MapCollection'
         | 'DynamicObject'
         | 'SetCollection'
+        | 'String'
         | 'Uint16Array'
         | 'Uint32Array'
         | 'Uint8Array'

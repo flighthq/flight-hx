@@ -55,7 +55,7 @@ class WgpuUnlitPrelude {
     } else { if ((cast ((cast ((cast !_Runtime.strictEquals((cast binding : WgpuMaterialBinding).sampler, sampler) : Bool) || (cast !_Runtime.strictEquals(_Runtime.optionalIndex((cast binding : WgpuMaterialBinding).views, 0.0), view) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.optionalField((cast binding : WgpuMaterialBinding).views, 'length'), function():Dynamic return cast 0.0), 1.0) : Bool)) : Bool)) {
       ((cast binding : WgpuMaterialBinding).bindGroup = (cast WgpuUnlitPrelude.createWgpuUnlitBindGroup__wgpuUnlitPrelude((cast state), (cast pipeline), (cast (cast binding : WgpuMaterialBinding).buffer), (cast sampler), (cast view)) : flighthq._internal.dom.GPUBindGroup));
       ((cast binding : WgpuMaterialBinding).sampler = sampler);
-      ((cast binding : WgpuMaterialBinding).views ??= cast ([view] : Array<Dynamic>));
+      ({ final __nullishOwner0 = binding; final __nullishValue1:Null<Array<flighthq._internal.dom.GPUTextureView>> = cast (cast __nullishOwner0 : WgpuMaterialBinding).views; __nullishValue1 == null ? ((cast __nullishOwner0 : WgpuMaterialBinding).views = (cast cast ([view] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUTextureView>>)) : (cast __nullishValue1 : Null<Array<flighthq._internal.dom.GPUTextureView>>); });
       flighthq._internal._StaticIndex.writeArray((cast binding : WgpuMaterialBinding).views, 0.0, view);
       _Runtime.setLength((cast binding : WgpuMaterialBinding).views, 1.0);
     } }

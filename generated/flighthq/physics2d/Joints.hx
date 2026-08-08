@@ -362,7 +362,7 @@ class Joints {
     ((cast prismatic : Physics2DPrismaticJoint).localAxisAY = ((axisX * sin) - (axisY * cos)));
     ((cast prismatic : Physics2DPrismaticJoint).referenceAngle = -(cast prismatic : Physics2DPrismaticJoint).referenceAngle);
     ((cast joint : Physics2DJoint).impulse1 = -_Runtime.coalesce((cast joint : Physics2DJoint).impulse1, function():Dynamic return cast 0.0));
-    ((cast prismatic : Physics2DPrismaticJoint).motorImpulse ??= 0.0);
+    ({ final __nullishOwner0 = prismatic; final __nullishValue1:Null<Float> = cast (cast __nullishOwner0 : Physics2DPrismaticJoint).motorImpulse; __nullishValue1 == null ? ((cast __nullishOwner0 : Physics2DPrismaticJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue1 : Float); });
     return cast true;
     return cast _Runtime.UNDEFINED;
   }, prepare: function(world:Physics2DWorld, joint:Physics2DJoint, dt:Float):Void {
@@ -431,7 +431,7 @@ class Joints {
     flighthq._internal._StaticIndex.writeArray(state, 14.0, (Joints.BAUMGARTE__joints / dt));
     flighthq._internal._StaticIndex.writeArray(state, 15.0, HxMath.max(0.0, (dt * (cast prismatic : Physics2DPrismaticJoint).maxMotorForce)));
     flighthq._internal._StaticIndex.writeArray(state, 16.0, ((distanceX * axisX) + (distanceY * axisY)));
-    ((cast prismatic : Physics2DPrismaticJoint).motorImpulse ??= 0.0);
+    ({ final __nullishOwner2 = prismatic; final __nullishValue3:Null<Float> = cast (cast __nullishOwner2 : Physics2DPrismaticJoint).motorImpulse; __nullishValue3 == null ? ((cast __nullishOwner2 : Physics2DPrismaticJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue3 : Float); });
     if ((cast (cast prismatic : Physics2DPrismaticJoint).enableMotor : Bool)) {
       ((cast prismatic : Physics2DPrismaticJoint).motorImpulse = HxMath.min(HxMath.max((cast prismatic : Physics2DPrismaticJoint).motorImpulse, -flighthq._internal._StaticIndex.readArray(state, 15.0)), flighthq._internal._StaticIndex.readArray(state, 15.0)));
     } else {
@@ -692,7 +692,7 @@ class Joints {
     errorY = (((cast bodyB : RigidBody2D).y + (cast joint : Physics2DJoint).rBY) - ((cast bodyA : RigidBody2D).y + (cast joint : Physics2DJoint).rAY));
     inverseInertiaSum = ((cast bodyA : RigidBody2D).inverseInertia + (cast bodyB : RigidBody2D).inverseInertia);
     angularMass = ((cast ((cast inverseInertiaSum : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / inverseInertiaSum) : Dynamic) : (cast 0.0 : Dynamic));
-    ((cast revolute : Physics2DRevoluteJoint).motorImpulse ??= 0.0);
+    ({ final __nullishOwner4 = revolute; final __nullishValue5:Null<Float> = cast (cast __nullishOwner4 : Physics2DRevoluteJoint).motorImpulse; __nullishValue5 == null ? ((cast __nullishOwner4 : Physics2DRevoluteJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue5 : Float); });
     revoluteState = (cast Joints.beginJointSolve__joints((cast joint), (cast 7.0 : Float)) : Array<Float>);
     flighthq._internal._StaticIndex.writeArray(revoluteState, 0.0, (errorX * (Joints.BAUMGARTE__joints / dt)));
     flighthq._internal._StaticIndex.writeArray(revoluteState, 1.0, (errorY * (Joints.BAUMGARTE__joints / dt)));
@@ -935,7 +935,7 @@ class Joints {
     flighthq._internal._StaticIndex.writeArray(state, 12.0, springBias);
     flighthq._internal._StaticIndex.writeArray(state, 13.0, ((cast ((cast inverseInertia : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / inverseInertia) : Dynamic) : (cast 0.0 : Dynamic)));
     flighthq._internal._StaticIndex.writeArray(state, 14.0, HxMath.max(0.0, (dt * (cast wheel : Physics2DWheelJoint).maxMotorTorque)));
-    ((cast wheel : Physics2DWheelJoint).motorImpulse ??= 0.0);
+    ({ final __nullishOwner6 = wheel; final __nullishValue7:Null<Float> = cast (cast __nullishOwner6 : Physics2DWheelJoint).motorImpulse; __nullishValue7 == null ? ((cast __nullishOwner6 : Physics2DWheelJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue7 : Float); });
     if ((cast (cast wheel : Physics2DWheelJoint).enableMotor : Bool)) {
       ((cast wheel : Physics2DWheelJoint).motorImpulse = HxMath.min(HxMath.max((cast wheel : Physics2DWheelJoint).motorImpulse, -flighthq._internal._StaticIndex.readArray(state, 14.0)), flighthq._internal._StaticIndex.readArray(state, 14.0)));
     } else {
@@ -1175,9 +1175,9 @@ class Joints {
 
   public static function beginJointSolve__joints(joint:Physics2DJoint, length:Float):Array<Float> {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    ((cast joint : Physics2DJoint).impulse0 ??= 0.0);
-    ((cast joint : Physics2DJoint).impulse1 ??= 0.0);
-    ((cast joint : Physics2DJoint).impulse2 ??= 0.0);
+    ({ final __nullishOwner8 = joint; final __nullishValue9:Null<Float> = cast (cast __nullishOwner8 : Physics2DJoint).impulse0; __nullishValue9 == null ? ((cast __nullishOwner8 : Physics2DJoint).impulse0 = (cast 0.0 : Float)) : (cast __nullishValue9 : Float); });
+    ({ final __nullishOwner10 = joint; final __nullishValue11:Null<Float> = cast (cast __nullishOwner10 : Physics2DJoint).impulse1; __nullishValue11 == null ? ((cast __nullishOwner10 : Physics2DJoint).impulse1 = (cast 0.0 : Float)) : (cast __nullishValue11 : Float); });
+    ({ final __nullishOwner12 = joint; final __nullishValue13:Null<Float> = cast (cast __nullishOwner12 : Physics2DJoint).impulse2; __nullishValue13 == null ? ((cast __nullishOwner12 : Physics2DJoint).impulse2 = (cast 0.0 : Float)) : (cast __nullishValue13 : Float); });
     state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (state = cast (cast ([] : Array<Dynamic>) : Dynamic));

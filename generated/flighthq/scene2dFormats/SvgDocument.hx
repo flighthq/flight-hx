@@ -730,7 +730,7 @@ class SvgDocument {
     text = _Runtime.replace(_Runtime.replace(_Runtime.replace(source, _Runtime.regexp('[\\n\\r]', 'g'), '', false), _Runtime.regexp('\\t', 'g'), ' ', false), _Runtime.regexp(' +', 'g'), ' ', false);
     if ((cast _Runtime.strictEquals(_Runtime.field(out, 'length'), 0.0) : Bool)) { (text = cast (_Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)) : Dynamic)); }
     previous = flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(({ final __structural20 = previous; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : SvgTextRun__svgDocument).text; }), 'endsWith', cast ([' '] : Array<Dynamic>)), true) : Bool) && (cast StringTools.startsWith(text, ' ') : Bool)) : Bool)) { (text = cast (_Runtime.slice(text, 1.0, null) : Dynamic)); }
+    if ((cast ((cast _Runtime.strictEquals(StringTools.endsWith(Std.string(({ final __structural20 = previous; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : SvgTextRun__svgDocument).text; })), ' '), true) : Bool) && (cast StringTools.startsWith(text, ' ') : Bool)) : Bool)) { (text = cast (_Runtime.slice(text, 1.0, null) : Dynamic)); }
     if ((cast !_Runtime.strictEquals(text, '') : Bool)) { _Runtime.callProperty(out, 'push', cast ([{ style: style, text: text }] : Array<Dynamic>)); }
   }
 
