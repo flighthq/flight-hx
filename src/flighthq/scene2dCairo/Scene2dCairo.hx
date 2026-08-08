@@ -32,6 +32,7 @@ import flighthq.scene2dCanvas.CanvasTextureResolver as Facade_Scene2dCanvas_flig
 import flighthq.scene2dCanvas.CanvasTilemap as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap;
 import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Scene2dCanvas_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards;
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Scene2dCanvas_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
+import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
@@ -60,7 +61,7 @@ class Scene2dCairo {
   public static inline function createCairoCacheState(screenState:CanvasRenderState):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasCacheState(screenState); }
   public static inline function createCairoElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasElement(width, height, pixelRatio); }
   public static inline function createCairoOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasOffscreenRenderState(screenState); }
-  public static inline function createCairoRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:Dynamic):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderState(canvas, options); }
+  public static inline function createCairoRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderState(canvas, options); }
   public static inline function createCairoRenderTexturePool():CanvasRenderTexturePool { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderTexturePool(); }
   public static inline function createCairoShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasShapeRasterizer(resolvers); }
   public static inline function createCairoTextureResolvers():CanvasTextureResolvers { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasTextureResolvers(); }
