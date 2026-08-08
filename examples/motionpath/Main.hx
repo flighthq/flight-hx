@@ -7,6 +7,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.MotionPath;
 import flighthq.types.MotionPath.MotionPathLoopMode;
 import flighthq.types.Path;
@@ -41,9 +42,9 @@ class Main extends Application {
   final ARROW_HALF_WIDTH = 8;
   var arrow:Shape;
 
-  var speedLabel:DisplayObject;
-  var modeLabel:DisplayObject;
-  var progressLabel:DisplayObject;
+  var speedLabel:TextLabel;
+  var modeLabel:TextLabel;
+  var progressLabel:TextLabel;
 
   // Scratch vectors for position and tangent sampling (no per-frame allocation).
   final pointOut:Dynamic = {x: 0.0, y: 0.0};
@@ -191,7 +192,7 @@ class Main extends Application {
   }
 
   // HUD labels for speed, loop mode, and progress.
-  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):DisplayObject {
+  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):TextLabel {
     final label = createTextLabel();
     label.data.text = text;
     label.data.textFormat = {size: size, color: color};
@@ -201,7 +202,7 @@ class Main extends Application {
     return label;
   }
 
-  function updateLabel(label:DisplayObject, text:String):Void {
+  function updateLabel(label:TextLabel, text:String):Void {
     label.data.text = text;
     invalidateNodeAppearance(label);
   }

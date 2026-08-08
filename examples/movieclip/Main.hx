@@ -7,6 +7,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.MovieClip;
 import flighthq.types.Shape;
 import lime.app.Application;
@@ -35,12 +36,12 @@ class Main extends Application {
   // Frame scripts at labeled frames update the frame-script status text.
   var lastFrameScriptMessage = '';
 
-  var titleLabel:DisplayObject;
-  var frameLabel:DisplayObject;
-  var labelLabel:DisplayObject;
-  var statusLabel:DisplayObject;
-  var scriptLabel:DisplayObject;
-  var controlsLabel:DisplayObject;
+  var titleLabel:TextLabel;
+  var frameLabel:TextLabel;
+  var labelLabel:TextLabel;
+  var statusLabel:TextLabel;
+  var scriptLabel:TextLabel;
+  var controlsLabel:TextLabel;
 
   public function new() {
     super();
@@ -176,15 +177,15 @@ class Main extends Application {
     addNodeChild(root, clip);
     setMovieClipSource(clip, timelineSource);
 
-    addMovieClipFrameScript(clip, 'intro', function():Void {
+    addMovieClipFrameScript(clip, 'intro', function(_, _):Void {
       lastFrameScriptMessage = 'Frame script: entered "intro"';
     });
 
-    addMovieClipFrameScript(clip, 'loop', function():Void {
+    addMovieClipFrameScript(clip, 'loop', function(_, _):Void {
       lastFrameScriptMessage = 'Frame script: entered "loop"';
     });
 
-    addMovieClipFrameScript(clip, 'outro', function():Void {
+    addMovieClipFrameScript(clip, 'outro', function(_, _):Void {
       lastFrameScriptMessage = 'Frame script: entered "outro"';
     });
 
@@ -214,7 +215,7 @@ class Main extends Application {
   }
 
   // HUD labels.
-  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):DisplayObject {
+  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):TextLabel {
     final label = createTextLabel();
     label.data.text = text;
     label.data.textFormat = {size: size, color: color};
@@ -224,7 +225,7 @@ class Main extends Application {
     return label;
   }
 
-  function updateLabel(label:DisplayObject, text:String):Void {
+  function updateLabel(label:TextLabel, text:String):Void {
     label.data.text = text;
     invalidateNodeAppearance(label);
   }

@@ -10,6 +10,7 @@ import flighthq.sdk.Sdk.*;
 import flighthq.types.Camera2D;
 
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Rectangle;
 import flighthq.types.Shape;
 import flighthq.types.Vector2;
@@ -101,8 +102,8 @@ class Main extends Application {
   var playerShape:Shape;
   var visibleBoundsShape:Shape;
 
-  var cameraLabel:DisplayObject;
-  var playerLabel:DisplayObject;
+  var cameraLabel:TextLabel;
+  var playerLabel:TextLabel;
 
   var viewMatrix:Dynamic = {a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0};
   var visibleBounds:Rectangle;

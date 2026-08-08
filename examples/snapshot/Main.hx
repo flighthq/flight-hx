@@ -7,6 +7,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Shape;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -48,9 +49,9 @@ class Main extends Application {
   var playerShape:Shape;
   var itemShapes:Array<Shape>;
   var uiOverlay:Shape;
-  var scoreLabel:DisplayObject;
-  var helpLabel:DisplayObject;
-  var statusLabel:DisplayObject;
+  var scoreLabel:TextLabel;
+  var helpLabel:TextLabel;
+  var statusLabel:TextLabel;
 
   // `performance.now()`-style absolute milliseconds, accumulated from Lime's per-frame delta.
   var nowMs:Float = 0;

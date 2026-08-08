@@ -8,6 +8,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.Clock;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Shape;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -38,14 +39,14 @@ class Main extends Application {
   final CHILD_B_X = 580;
   final CHILD_B_Y = 300;
 
-  var rootInfoLabel:DisplayObject;
-  var childANameLabel:DisplayObject;
-  var childAInfoLabel:DisplayObject;
-  var childBNameLabel:DisplayObject;
-  var childBInfoLabel:DisplayObject;
-  var rootPausedLabel:DisplayObject;
-  var childAPausedLabel:DisplayObject;
-  var childBPausedLabel:DisplayObject;
+  var rootInfoLabel:TextLabel;
+  var childANameLabel:TextLabel;
+  var childAInfoLabel:TextLabel;
+  var childBNameLabel:TextLabel;
+  var childBInfoLabel:TextLabel;
+  var rootPausedLabel:TextLabel;
+  var childAPausedLabel:TextLabel;
+  var childBPausedLabel:TextLabel;
 
   public function new() {
     super();
@@ -219,7 +220,7 @@ class Main extends Application {
     appendShapeLineTo(shape, radius, 0);
   }
 
-  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):DisplayObject {
+  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):TextLabel {
     final label = createTextLabel();
     label.data.text = text;
     label.data.textFormat = {size: size, color: color};
@@ -229,7 +230,7 @@ class Main extends Application {
     return label;
   }
 
-  function updateLabel(label:DisplayObject, text:String):Void {
+  function updateLabel(label:TextLabel, text:String):Void {
     label.data.text = text;
     invalidateNodeAppearance(label);
   }

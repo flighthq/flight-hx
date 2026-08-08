@@ -7,6 +7,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Flow.FlowState;
 import flighthq.types.Flow.FlowStack;
 import lime.app.Application;
@@ -42,8 +43,8 @@ class Main extends Application {
   final stateContainers = new Map<FlowState, DisplayObject>();
 
   // State definitions. Each builds its visual layer in onEnter and drops it in onExit.
-  var playScoreLabel:DisplayObject;
-  var playTimerLabel:DisplayObject;
+  var playScoreLabel:TextLabel;
+  var playTimerLabel:TextLabel;
 
   var bootState:FlowState;
   var menuState:FlowState;
@@ -53,9 +54,9 @@ class Main extends Application {
 
   // HUD: a separate display container drawn on top every frame, not a flow state.
   var hud:DisplayObject;
-  var hudDepthLabel:DisplayObject;
-  var hudActiveLabel:DisplayObject;
-  var hudStackLabel:DisplayObject;
+  var hudDepthLabel:TextLabel;
+  var hudActiveLabel:TextLabel;
+  var hudStackLabel:TextLabel;
 
   public function new() {
     super();
@@ -236,7 +237,7 @@ class Main extends Application {
     return bg;
   }
 
-  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):DisplayObject {
+  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):TextLabel {
     final label = createTextLabel();
     label.data.text = text;
     label.data.textFormat = {size: size, color: color};
@@ -246,7 +247,7 @@ class Main extends Application {
     return label;
   }
 
-  function updateLabel(label:DisplayObject, text:String):Void {
+  function updateLabel(label:TextLabel, text:String):Void {
     label.data.text = text;
     invalidateNodeAppearance(label);
   }

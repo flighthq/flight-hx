@@ -237,6 +237,6 @@ class Main extends Application {
     flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     drawGlScene3D(renderState, scene, camera, lights);
-    endGlRenderEffectPipeline(renderState, pipeline, ([] : Array<Dynamic>));
+    endGlRenderEffectPipeline(renderState, pipeline, cast []);
   }
 }

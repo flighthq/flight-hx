@@ -151,7 +151,7 @@ class Main extends Application {
   override public function update(deltaTime:Int):Void {
     if (!ready) return;
 
-    final count:Int = quadBatch.data.instanceCount;
+    final count:Int = Std.int(quadBatch.data.instanceCount);
     final transforms:flighthq._internal._Float32Array = quadBatch.data.transforms;
 
     for (i in 0...count) {

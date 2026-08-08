@@ -10,6 +10,7 @@ import flighthq.types.Camera2D;
 import flighthq.types.Collision.CollisionAabb;
 import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Matrix;
 import flighthq.types.Shape;
 import lime.app.Application;
@@ -63,9 +64,9 @@ class Main extends Application {
 
   var platforms:Array<Platform> = [];
 
-  var titleLabel:DisplayObject;
-  var subtitleLabel:DisplayObject;
-  var gameOverLabel:DisplayObject;
+  var titleLabel:TextLabel;
+  var subtitleLabel:TextLabel;
+  var gameOverLabel:TextLabel;
 
   var gameState:String = 'title';
 

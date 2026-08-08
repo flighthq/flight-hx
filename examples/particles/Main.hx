@@ -9,6 +9,7 @@ import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Bitmap;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleForce;
@@ -42,7 +43,7 @@ class Main extends Application {
   var snowForces:Array<ParticleForce>;
   var snowSimState:Dynamic;
 
-  var countLabel:DisplayObject;
+  var countLabel:TextLabel;
 
   // Mouse tracking for the fire emitter.
   var mouseX:Float;
@@ -232,7 +233,7 @@ class Main extends Application {
     snowForces = ([
       {kind: 'DragForce', strength: 0.3},
       {kind: 'TurbulenceForce', strength: 30 * scale, scale: 0.005},
-      {kind: 'WindForce', x: 15 * scale, y: 0},
+      {kind: 'WindForce', x: 15 * scale, y: 0.0},
     ] : Array<ParticleForce>);
 
     snowSimState = createParticleEmitterState();

@@ -418,12 +418,12 @@ class Main extends Application {
 
     // Wire interaction signals for sound buttons.
     for (btn in buttons) {
-      connectInteractionSignal(interactionManager, btn.shape, 'onPointerOver', function() {
+      connectInteractionSignal(interactionManager, btn.shape, 'onPointerOver', function(_) {
         hoveredButtonsAdd(btn);
         drawButton(btn);
       });
 
-      connectInteractionSignal(interactionManager, btn.shape, 'onPointerOut', function() {
+      connectInteractionSignal(interactionManager, btn.shape, 'onPointerOut', function(_) {
         hoveredButtonsDelete(btn);
         drawButton(btn);
       });

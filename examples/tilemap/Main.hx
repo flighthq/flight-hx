@@ -145,11 +145,11 @@ class Main extends Application {
     }));
     if (tiledMap == null) throw 'Unable to parse bundled terrain.tmj';
 
-    final tilemapLayers = buildTilemapLayersFromTiled(tiledMap, 0, () -> ({
+    final tilemapLayers = buildTilemapLayersFromTiled(tiledMap, 0, _ -> cast {
       atlas: atlas,
       tileHeight: TILE_SIZE,
       tileWidth: TILE_SIZE,
-    } : Dynamic));
+    });
     if (tilemapLayers == null || tilemapLayers.length != 1) {
       throw 'Unable to project terrain.tmj into a Flight tilemap';
     }

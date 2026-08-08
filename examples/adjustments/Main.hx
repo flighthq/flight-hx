@@ -8,6 +8,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Shape;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -76,7 +77,7 @@ class Main extends Application {
     return {value: initial};
   }
 
-  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):DisplayObject {
+  function createLabel(text:String, x:Float, y:Float, size:Float, color:Int):TextLabel {
     final label = createTextLabel();
     label.data.text = text;
     label.data.textFormat = {size: size, color: color};
@@ -86,7 +87,7 @@ class Main extends Application {
     return label;
   }
 
-  function updateLabel(label:DisplayObject, text:String):Void {
+  function updateLabel(label:TextLabel, text:String):Void {
     label.data.text = text;
     invalidateNodeAppearance(label);
   }

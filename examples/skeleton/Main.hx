@@ -153,7 +153,7 @@ class Main extends Application {
     }
 
     geometry = createMeshGeometry({
-      indices: indices,
+      indices: cast indices,
       layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT,
       vertices: vertices,
     });

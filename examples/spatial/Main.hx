@@ -7,6 +7,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Shape;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialIndex;
@@ -45,8 +46,8 @@ class Main extends Application {
   var objects:Array<SpatialObject> = [];
 
   var queryOverlay:Shape;
-  var hudLabel:DisplayObject;
-  var modeLabel:DisplayObject;
+  var hudLabel:TextLabel;
+  var modeLabel:TextLabel;
 
   // Interaction state.
   var mouseX:Float;

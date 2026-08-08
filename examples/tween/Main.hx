@@ -154,7 +154,7 @@ class Main extends Application {
     connectSignal(app.onUpdate, function(delta) {
       updateTweens(manager, delta);
     });
-    connectSignal(app.onRender, function(_) {
+    connectSignal(app.onRender, function() {
       // Upstream calls `render(root)` here; the actual GL draw happens in Lime's `render(context)`.
     });
 
@@ -164,11 +164,11 @@ class Main extends Application {
   function startTween(circle:Shape, startX:Float, endX:Float, ease:EasingFunction):Void {
     circle.x = startX;
     invalidateNodeLocalTransform(circle);
-    final tween = createTween(manager, circle, TWEEN_DURATION, {x: endX}, {ease: ease});
-    connectSignal(tween.onComplete, function(_) {
+    final tween = createTween(manager, circle, TWEEN_DURATION, cast {x: endX}, {ease: ease});
+    connectSignal(tween.onComplete, function() {
       startTween(circle, startX, endX, ease);
     });
-    connectSignal(tween.onUpdate, function(_) {
+    connectSignal(tween.onUpdate, function() {
       invalidateNodeRender(circle);
     });
   }

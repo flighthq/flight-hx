@@ -10,6 +10,7 @@ import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
+import flighthq.types.TextLabel;
 import flighthq.types.Bitmap;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
@@ -41,7 +42,7 @@ class Main extends Application {
 
   var atlas:TextureAtlas;
   var emitter:ParticleEmitter2D;
-  var countLabel:DisplayObject;
+  var countLabel:TextLabel;
 
   // Editable config values — these drive `createParticleEmitterConfig` each time a slider changes.
   final editable:Dynamic = {
