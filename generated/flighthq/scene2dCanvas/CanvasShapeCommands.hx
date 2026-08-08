@@ -379,9 +379,9 @@ class CanvasShapeCommands {
     ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
   } });
 
-  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = (cast cast ([defaultCanvasBeginFill, defaultCanvasBeginGradientFill, defaultCanvasCubicCurveTo, defaultCanvasCurveTo, defaultCanvasDrawCircle, defaultCanvasDrawEllipse, defaultCanvasDrawPath, defaultCanvasDrawRectangle, defaultCanvasDrawRoundRectangle, defaultCanvasEndFill, defaultCanvasLineGradientStyle, defaultCanvasLineStyle, defaultCanvasLineTo, defaultCanvasMoveTo] : Array<Dynamic>));
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<String>> = (cast cast ([defaultCanvasBeginFill, defaultCanvasBeginGradientFill, defaultCanvasCubicCurveTo, defaultCanvasCurveTo, defaultCanvasDrawCircle, defaultCanvasDrawEllipse, defaultCanvasDrawPath, defaultCanvasDrawRectangle, defaultCanvasDrawRoundRectangle, defaultCanvasEndFill, defaultCanvasLineGradientStyle, defaultCanvasLineStyle, defaultCanvasLineTo, defaultCanvasMoveTo] : Array<Dynamic>));
 
-  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = (cast cast ([defaultCanvasBeginTextureFill, defaultCanvasLineTextureStyle] : Array<Dynamic>));
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<String>> = (cast cast ([defaultCanvasBeginTextureFill, defaultCanvasLineTextureStyle] : Array<Dynamic>));
 
   public static function rgbaString__canvasShapeCommands(color:Float, alpha:Float):String {
     var r:Float = cast _Runtime.UNDEFINED;

@@ -1316,6 +1316,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (symbol && context.checker && (symbol.flags & ts.SymbolFlags.Alias) !== 0) {
       symbol = context.checker.getAliasedSymbol(symbol);
     }
+    arguments_ = lowerConstrainedAnyTypeArguments(node, symbol, arguments_, context);
     const operatorBound = symbol?.declarations?.some(
       (declaration) =>
         ts.isTypeParameterDeclaration(declaration) &&
@@ -1498,6 +1499,47 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     }
   }
   return unsupported(node, context, `type ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function lowerConstrainedAnyTypeArguments(
+  node: ts.TypeReferenceNode,
+  symbol: ts.Symbol | undefined,
+  loweredArguments: readonly IrType[],
+  context: LoweringContext,
+): IrType[] {
+  const checker = context.checker;
+  if (!checker || !node.typeArguments) return [...loweredArguments];
+  return loweredArguments.map((lowered, index) => {
+    if (node.typeArguments?.[index]?.kind !== ts.SyntaxKind.AnyKeyword) return lowered;
+    const declaration = (symbol?.declarations ?? []).find(
+      (declaration) =>
+        (ts.isTypeAliasDeclaration(declaration) ||
+          ts.isInterfaceDeclaration(declaration) ||
+          ts.isClassDeclaration(declaration)) &&
+        declaration.typeParameters?.[index]?.constraint,
+    );
+    if (
+      !declaration ||
+      (!ts.isTypeAliasDeclaration(declaration) &&
+        !ts.isInterfaceDeclaration(declaration) &&
+        !ts.isClassDeclaration(declaration))
+    ) {
+      return lowered;
+    }
+    const constraintNode = declaration.typeParameters?.[index]?.constraint;
+    if (!constraintNode) return lowered;
+    const constraintType = checker.getTypeFromTypeNode(constraintNode);
+    if (typeOnlyHasFlags(constraintType, checker, ts.TypeFlags.BooleanLike)) {
+      return { kind: 'primitive', name: 'Bool' };
+    }
+    if (typeOnlyHasFlags(constraintType, checker, ts.TypeFlags.NumberLike)) {
+      return { kind: 'primitive', name: 'Float' };
+    }
+    if (typeOnlyHasFlags(constraintType, checker, ts.TypeFlags.StringLike)) {
+      return { kind: 'primitive', name: 'String' };
+    }
+    return lowered;
+  });
 }
 
 function inferredType(node: ts.Node, context: LoweringContext): IrType | undefined {

@@ -147,7 +147,7 @@ class Scene2dCanvas {
 
   public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasScale9Shape.defaultCanvasScale9ShapeRenderer;
 
-  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShape.defaultCanvasShapeRenderer;
 
@@ -155,7 +155,7 @@ class Scene2dCanvas {
 
   public static final defaultCanvasTextLabelRenderer:Scene2DRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTextLabel.defaultCanvasTextLabelRenderer;
 
-  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultCanvasTilemapRenderer:SpriteRenderer = Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap.defaultCanvasTilemapRenderer;
 

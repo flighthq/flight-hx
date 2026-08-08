@@ -16,6 +16,8 @@ class CoreSmoke {
     if (flighthq.scene2dCairo.Scene2dCairo.defaultCairoShapeCommands != flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands) {
       throw 'cairo alias lost reference identity';
     }
+    final shapeCommandRegistrarTypecheck:flighthq.types.RenderState->Void = typecheckShapeCommandRegistrars;
+    if (shapeCommandRegistrarTypecheck == null) throw 'shape command registrar typecheck failed';
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();
@@ -152,5 +154,19 @@ class CoreSmoke {
     var result = value;
     for (_ in 0...2) result /= 2;
     return result;
+  }
+
+  static function typecheckShapeCommandRegistrars(state:flighthq.types.RenderState):Void {
+    flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands);
+    flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextureShapeCommands);
+    flighthq.scene2dGl.Scene2dGl.registerGlShapeCommands(state, flighthq.scene2dGl.Scene2dGl.defaultGlShapeCommands);
+    flighthq.scene2dGl.Scene2dGl.registerGlShapeCommands(state, flighthq.scene2dGl.Scene2dGl.defaultGlTextureShapeCommands);
+    flighthq.scene2dWgpu.Scene2dWgpu.registerWgpuShapeCommands(state, flighthq.scene2dWgpu.Scene2dWgpu.defaultWgpuShapeCommands);
+    flighthq.scene2dWgpu.Scene2dWgpu.registerWgpuShapeCommands(state, flighthq.scene2dWgpu.Scene2dWgpu.defaultWgpuTextureShapeCommands);
+    flighthq.scene2dCairo.Scene2dCairo.registerCairoShapeCommands(state, flighthq.scene2dCairo.Scene2dCairo.defaultCairoShapeCommands);
+    flighthq.scene2dCairo.Scene2dCairo.registerCairoShapeCommands(state, flighthq.scene2dCairo.Scene2dCairo.defaultCairoTextureShapeCommands);
+    flighthq.sdk.Sdk.registerCanvasShapeCommands(state, flighthq.sdk.Sdk.defaultCanvasShapeCommands);
+    flighthq.sdk.Sdk.registerGlShapeCommands(state, flighthq.sdk.Sdk.defaultGlShapeCommands);
+    flighthq.sdk.Sdk.registerWgpuShapeCommands(state, flighthq.sdk.Sdk.defaultWgpuShapeCommands);
   }
 }

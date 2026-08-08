@@ -157,6 +157,37 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(sample, 'value')");
   });
 
+  it('uses primitive generic constraints for explicit any without guessing ambiguous constraints', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/constrainedAny.ts',
+      `
+        export type CommandKey = 'begin' | 'end';
+        export interface Command<K extends CommandKey = CommandKey> { readonly key: K; }
+        export interface Payload<T> { readonly value: T; }
+        export interface Mixed<T extends string | number> { readonly value: T; }
+        export const constrainedDefaults: Command<any>[] = [];
+        export const unconstrainedDefaults: Payload<any>[] = [];
+        export const ambiguousDefaults: Mixed<any>[] = [];
+        export function register(commands: readonly Command[]): void { void commands; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ConstrainedAnyFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('constrainedDefaults:Array<Command<String>>');
+    expect(output).toContain('function register(commands:Array<Command<CommandKey>>):Void');
+    expect(output).toContain('unconstrainedDefaults:Array<Payload<flighthq._internal._Any>>');
+    expect(output).toContain('ambiguousDefaults:Array<Mixed<flighthq._internal._Any>>');
+    expect(output).not.toContain('constrainedDefaults:Array<Command<flighthq._internal._Any>>');
+    expect(output).not.toContain('function register(commands:Array<Command<flighthq._internal._Any>>):Void');
+  });
+
   it('lowers ECMAScript Math.fround to the portable binary32 runtime operation', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/fround.ts',

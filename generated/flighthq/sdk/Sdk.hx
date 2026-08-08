@@ -7438,7 +7438,7 @@ class Sdk {
 
   public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = Facade_Sdk_flighthq_effectsCanvas_CanvasScanlinesEffect.defaultCanvasScanlinesEffectRunner;
 
-  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultCanvasShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultCanvasShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasShape.defaultCanvasShapeRenderer;
 
@@ -7446,7 +7446,7 @@ class Sdk {
 
   public static final defaultCanvasTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasTextLabel.defaultCanvasTextLabelRenderer;
 
-  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultCanvasTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultCanvasTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dCanvas_CanvasTilemap.defaultCanvasTilemapRenderer;
 
@@ -7564,7 +7564,7 @@ class Sdk {
 
   public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = Facade_Sdk_flighthq_effectsGl_GlScreenSpaceFogEffect.defaultGlScreenSpaceFogEffectRunner;
 
-  public static final defaultGlShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultGlShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dGl_GlShape.defaultGlShapeRenderer;
 
@@ -7580,7 +7580,7 @@ class Sdk {
 
   public static final defaultGlTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dGl_GlTextLabel.defaultGlTextLabelRenderer;
 
-  public static final defaultGlTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultGlTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dGl_GlTilemap.defaultGlTilemapRenderer;
 
@@ -7686,7 +7686,7 @@ class Sdk {
 
   public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.defaultWgpuScreenSpaceFogEffectRunner;
 
-  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
+  public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasShapeCommands;
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuShape.defaultWgpuShapeRenderer;
 
@@ -7702,7 +7702,7 @@ class Sdk {
 
   public static final defaultWgpuTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuTextLabel.defaultWgpuTextLabelRenderer;
 
-  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<flighthq._internal._Any>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
+  public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Sdk_flighthq_scene2dCanvas_CanvasShapeCommands.defaultCanvasTextureShapeCommands;
 
   public static final defaultWgpuTilemapRenderer:SpriteRenderer = Facade_Sdk_flighthq_scene2dWgpu_WgpuTilemap.defaultWgpuTilemapRenderer;
 
