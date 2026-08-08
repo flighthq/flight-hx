@@ -457,7 +457,7 @@ describe('typed struct analysis', () => {
       'typedef ParticleEmitter2D = { var data:ParticleEmitterData;',
     );
     expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
-      'typedef ParticleEmitter3D = { var data:Null<NodeData>;',
+      'typedef ParticleEmitter3D = { var data:ParticleEmitterData;',
     );
     expect(readFileSync('generated/flighthq/types/Node.hx', 'utf8')).toContain(
       'typedef NodeData = flighthq._internal._Object;',
@@ -710,7 +710,9 @@ describe('typed struct analysis', () => {
     expect(output).toContain('(value.callback)((cast value.y : Float))');
     expect(output).toContain('(cast value : Vector2).method()');
     expect(output).toContain('final __typedStruct0 = (cast factory() : Null<Vector2>)');
-    expect(output).toContain('__typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.optional');
+    expect(output).toContain(
+      '__typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { @:optional var optional:Null<Float>; }).optional',
+    );
     expect(output).not.toContain("_Runtime.field(value, '");
     expect(output).not.toContain("_Runtime.setField(value, '");
     expect(output).not.toContain("_Runtime.incrementField(value, '");

@@ -52,7 +52,8 @@ describe('Haxe emitter indentation', () => {
         '    handler = (cast function():Float {',
         '      if (_Runtime.truthy(true)) { return cast 4.0; }',
         '      return cast 5.0;',
-        '    } : Void->Float);',
+        '      return cast _Runtime.UNDEFINED;',
+        '    });',
       ].join('\n'),
     );
   });
@@ -78,6 +79,7 @@ describe('Haxe emitter indentation', () => {
         '          var nested:Void->Float = cast _Runtime.UNDEFINED;',
         '          nested = function():Float {',
         '            return cast 7.0;',
+        '            return cast _Runtime.UNDEFINED;',
         '          };',
         '          return flighthq._internal._Async.resolve(_Runtime.callValue(nested, cast ([] : Array<Dynamic>)));',
         '        }));',

@@ -43,7 +43,7 @@ describe('public Haxe facades', () => {
     ).toBe(true);
     expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Contract.hx'))).toBe(false);
     expect(existsSync(path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'))).toBe(true);
-    expect(precedingLine(entity, 'public static function createEntity<Type>')).toBe('@:noCompletion');
+    expect(precedingLine(entity, 'public static function createEntity<Type:')).toBe('@:noCompletion');
     expect(precedingLine(renderCacheAdapter, 'typedef RenderCacheAdapter =')).toBe('@:noCompletion');
     expect(precedingLine(vector2, 'public static function createVector2(')).not.toBe('@:noCompletion');
   });
